@@ -385,6 +385,8 @@ namespace ntrbase
                 txtLog.Clear();
                 string pkmfrom = @Application.StartupPath + "\\" + namePkx.Text + ".pkx";
                 string pkmto = @Application.StartupPath + "\\Pokemon\\" + namePkx.Text + ".pkx";
+                System.IO.FileInfo folder = new System.IO.FileInfo(@Application.StartupPath + "\\Pokemon\\");
+                folder.Directory.Create();
                 if (File.Exists(pkmto))
                 {
                         MessageBox.Show("That file already exists, please select a different filename.", "File Already Exists");
