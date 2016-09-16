@@ -259,7 +259,18 @@ namespace ntrbase
 			netStream.Write(buf, 0, buf.Length);
 		}
 
-		public void sendHeartbeatPacket()
+        public void sendWriteMemPacketByte(UInt32 addr, UInt32 pid, byte buf)
+        {
+            UInt32[] args = new UInt32[16];
+            args[0] = pid;
+            args[1] = addr;
+            args[2] = (UInt32)1;
+            sendPacket(1, 10, args, args[2]);
+            netStream.WriteByte(buf);
+        }
+
+
+        public void sendHeartbeatPacket()
         {
 			if (tcp != null)
             {

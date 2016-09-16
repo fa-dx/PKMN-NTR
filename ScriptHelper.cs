@@ -105,7 +105,13 @@ namespace ntrbase
 			Program.ntrClient.sendWriteMemPacket(addr, (uint)pid, buf);
 		}
 
-		public void sendfile(String localPath, String remotePath)
+        public void writebyte(uint addr, byte buf, int pid = -1)
+        {
+            Program.ntrClient.sendWriteMemPacketByte(addr, (uint)pid, buf);
+        }
+
+
+        public void sendfile(String localPath, String remotePath)
         {
 			FileStream fs = new FileStream(localPath, FileMode.Open);
 			byte[] buf = new byte[fs.Length];

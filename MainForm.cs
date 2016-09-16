@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ntrbase
@@ -25,7 +26,7 @@ namespace ntrbase
         public byte[] items;
         public string selectedPkx;
         public int numofItems;
-        public int test = 2;
+        public string nameoff;
 
         public string[] itemList = { "None", "Master Ball", "Ultra Ball", "Great Ball", "Poke Ball", "Safari Ball", "Net Ball", "Dive Ball", "Nest Ball", "Repeat Ball", "Timer Ball", "Luxury Ball", "Premier Ball", "Dusk Ball", "Heal Ball", "Quick Ball", "Cherish Ball", "Potion", "Antidote", "Burn Heal", "Ice Heal", "Awakening", "Paralyze Heal", "Full Restore", "Max Potion", "Hyper Potion", "Super Potion", "Full Heal", "Revive", "Max Revive", "Fresh Water", "Soda Pop", "Lemonade", "Moomoo Milk", "Energy Powder", "Energy Root", "Heal Powder", "Revival Herb", "Ether", "Max Ether", "Elixir", "Max Elixir", "Lava Cookie", "Berry Juice", "Sacred Ash", "HP Up", "Protein", "Iron", "Carbos", "Calcium", "Rare Candy", "PP Up", "Zinc", "PP Max", "Old Gateau", "Guard Spec.", "Dire Hit", "X Attack", "X Defense", "X Speed", "X Accuracy", "X Sp. Atk", "X Sp. Def", "Poke Doll", "Fluffy Tail", "Blue Flute", "Yellow Flute", "Red Flute", "Black Flute", "White Flute", "Shoal Salt", "Shoal Shell", "Red Shard", "Blue Shard", "Yellow Shard", "Green Shard", "Super Repel", "Max Repel", "Escape Rope", "Repel", "Sun Stone", "Moon Stone", "Fire Stone", "Thunder Stone", "Water Stone", "Leaf Stone", "Tiny Mushroom", "Big Mushroom", "Pearl", "Big Pearl", "Stardust", "Star Piece", "Nugget", "Heart Scale", "Honey", "Growth Mulch", "Damp Mulch", "Stable Mulch", "Gooey Mulch", "Root Fossil", "Claw Fossil", "Helix Fossil", "Dome Fossil", "Old Amber", "Armor Fossil", "Skull Fossil", "Rare Bone", "Shiny Stone", "Dusk Stone", "Dawn Stone", "Oval Stone", "Odd Keystone", "Griseous Orb", "???", "???", "???", "Douse Drive", "Shock Drive", "Burn Drive", "Chill Drive", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "Sweet Heart", "Adamant Orb", "Lustrous Orb", "Greet Mail", "Favored Mail", "RSVP Mail", "Thanks Mail", "Inquiry Mail", "Like Mail", "Reply Mail", "Bridge Mail S", "Bridge Mail D", "Bridge Mail T", "Bridge Mail V", "Bridge Mail M", "Cheri Berry", "Chesto Berry", "Pecha Berry", "Rawst Berry", "Aspear Berry", "Leppa Berry", "Oran Berry", "Persim Berry", "Lum Berry", "Sitrus Berry", "Figy Berry", "Wiki Berry", "Mago Berry", "Aguav Berry", "Iapapa Berry", "Razz Berry", "Bluk Berry", "Nanab Berry", "Wepear Berry", "Pinap Berry", "Pomeg Berry", "Kelpsy Berry", "Qualot Berry", "Hondew Berry", "Grepa Berry", "Tamato Berry", "Cornn Berry", "Magost Berry", "Rabuta Berry", "Nomel Berry", "Spelon Berry", "Pamtre Berry", "Watmel Berry", "Durin Berry", "Belue Berry", "Occa Berry", "Passho Berry", "Wacan Berry", "Rindo Berry", "Yache Berry", "Chople Berry", "Kebai Berry", "Shuca Berry", "Coba Berry", "Payapa Berry", "Tanga Berry", "Charti Berry", "Kasib Berry", "Haban Berry", "Colbur Berry", "Babiri Berry", "Chilan Berry", "Liechi Berry", "Ganlon Berry", "Salac Berry", "Petaya Berry", "Apicot Berry", "Lansat Berry", "Starf Berry", "Enigma Berry", "Micle Berry", "Custap Berry", "Jaboca Berry", "Rowap Berry", "Bright Powder", "White Herb", "Macho Brace", "Exp. Share", "Quick Claw", "Soothe Bell", "Mental Herb", "Choice Band", "King's Rock", "Silver Powder", "Amulet Coin", "Cleanse Tag", "Soul Dew", "Deep Sea Tooth", "Deep Sea Scale", "Smoke Ball", "Everstone", "Focus Band", "Lucky Egg", "Scope Lens", "Metal Coat", "Leftovers", "Dragon Scale", "Light Ball", "Soft Sand", "Hard Stone", "Miracle Seed", "Black Glasses", "Black Belt", "Magnet", "Mystic Water", "Sharp Beak", "Poison Barb", "Never-Melt Ice", "Spell Tag", "Twisted Spoon", "Charcoal", "Dragon Fang", "Silk Scarf", "Up-Grade", "Shell Bell", "Sea Incense", "Lax Incense", "Lucky Punch", "Metal Powder", "Thick Club", "Stick", "Red Scarf", "Blue Scarf", "Pink Scarf", "Green Scarf", "Yellow Scarf", "Wide Lens", "Muscle Band", "Wise Glasses", "Expert Belt", "Light Clay", "Life Orb", "Power Herb", "Toxic Orb", "Flame Orb", "Quick Powder", "Focus Sash", "Zoom Lens", "Metronome", "Iron Ball", "Lagging Tail", "Destiny Knot", "Black Sludge", "Icy Rock", "Smooth Rock", "Heat Rock", "Damp Rock", "Grip Claw", "Choice Scarf", "Sticky Barb", "Power Bracer", "Power Belt", "Power Lens", "Power Band", "Power Anklet", "Power Weight", "Shed Shell", "Big Root", "Choice Specs", "Flame Plate", "Splash Plate", "Zap Plate", "Meadow Plate", "Icicle Plate", "Fist Plate", "Toxic Plate", "Earth Plate", "Sky Plate", "Mind Plate", "Insect Plate", "Stone Plate", "Spooky Plate", "Draco Plate", "Dread Plate", "Iron Plate", "Odd Incense", "Rock Incense", "Full Incense", "Wave Incense", "Rose Incense", "Luck Incense", "Pure Incense", "Protector", "Electrizer", "Magmarizer", "Dubious Disc", "Reaper Cloth", "Razor Claw", "Razor Fang", "Hone Claws", "Dragon Claw", "Psyshock", "Calm Mind", "Roar", "Toxic", "Hail", "Bulk Up", "Venoshock", "Hidden Power", "Sunny Day", "Taunt", "Ice Beam", "Blizzard", "Hyper Beam", "Light Screen", "Protect", "Rain Dance", "Roost", "Safeguard", "Frustration", "Solar Beam", "Smack Down", "Thunderbolt", "Thunder", "Earthquake", "Return", "Dig", "Psychic", "Shadow Ball", "Brick Break", "Double Team", "Reflect", "Sludge Wave", "Flamethrower", "Sludge Bomb", "Sandstorm", "Fire Blast", "Rock Tomb", "Aerial Ace", "Torment", "Facade", "Flame Charge", "Rest", "Attract", "Thief", "Low Sweep", "Round", "Echoed Voice", "Overheat", "Steel Wing", "Focus Blast", "Energy Ball", "False Swipe", "Scald", "Fling", "Charge Beam", "Sky Drop", "Incinerate", "Quash", "Will-O-Wisp", "Acrobatics", "Embargo", "Explosion", "Shadow Claw", "Payback", "Retaliate", "Giga Impact", "Rock Polish", "Flash", "Stone Edge", "Volt Switch", "Thunder Wave", "Gyro Ball", "Swords Dance", "Struggle Bug", "Psych Up", "Bulldoze", "Frost Breath", "Rock Slide", "X-Scissor", "Dragon Tail", "Infestation", "Poison Jab", "Dream Eater", "Grass Knot", "Swagger", "Sleep Talk", "U-turn", "Substitute", "Flash Cannon", "Trick Room", "Cut", "Fly", "Surf", "Strength", "Waterfall", "Rock Smash", "???", "???", "Explorer Kit", "Loot Sack", "Rule Book", "Poke Radar", "Point Card", "Journal", "Seal Case", "Fashion Case", "Seal Bag", "Pal Pad", "Works key", "Old Charm", "Galactic Key", "Red Chain", "Town Map", "Vs. Seeker", "Coin Case", "Old Rod", "Good Rod", "Super Rod", "Sprayduck", "Poffin Case", "Bike", "Suite Key", "Oak's Letter", "Lunar Wing", "Member Card", "Azure Flute", "S.S. Ticket", "Contest Pass", "Magma Stone", "Parcel", "Coupon 1", "Coupon 2", "Coupon 3", "Storage Key", "Secret Potion", "Vs. Recorder", "Gracidea", "Secret Key", "Apricorn Box", "Unown Report", "Berry Pots", "Dowsing Machine", "Blue Card", "Slowpoke Tail", "Clear Bell", "Card Key", "Basement Key", "Squirt Bottle", "Red Scale", "Lost Item", "Pass", "Machine Part", "Silver Wing", "Rainbow Wing", "Mystery Egg", "Red Apricorn", "Blue Apricorn", "Yellow Apricorn", "Green Apricorn", "Pink Apricorn", "White Apricorn", "Black Apricorn", "Fast Ball", "Level Ball", "Lure Ball", "Heavy Ball", "Love Ball", "Friend Ball", "Moon Ball", "Sport Ball", "Park Ball", "Photo Album", "GB Sounds", "Tidal Bell", "Rage Candy Bar", "Data Card 01", "Data Card 02", "Data Card 03", "Data Card 04", "Data Card 05", "Data Card 06", "Data Card 07", "Data Card 08", "Data Card 09", "Data Card 10", "Data Card 11", "Data Card 12", "Data Card 13", "Data Card 14", "Data Card 15", "Data Card 16", "Data Card 17", "Data Card 18", "Data Card 19", "Data Card 20", "Data Card 21", "Data Card 22", "Data Card 23", "Data Card 24", "Data Card 25", "Data Card 26", "Data Card 27", "Jade Orb", "Lock Capsule", "Red Orb", "Blue Orb", "Enigma Stone", "Prism Scale", "Eviolite", "Float Stone", "Rocky Helmet", "Air Balloon", "Red Card", "Ring Target", "Binding Band", "Absorb Bulb", "Cell Battery", "Eject Button", "Fire Gem", "Water Gem", "Electric Gem", "Grass Gem", "Ice Gem", "Fighting Gem", "Poison Gem", "Ground Gem", "Flying Gem", "Psychic Gem", "Bug Gem", "Rock Gem", "Ghost Gem", "Dragon Gem", "Dark Gem", "Steel Gem", "Normal Gem", "Health Wing", "Muscle Wing", "Resist Wing", "Genius Wing", "Clever Wing", "Swift Wing", "Pretty Wing", "Cover Fossil", "Plume Fossil", "Libery Pass", "Pass Orb", "Dream Ball", "Poke Toy", "Prop Case", "Dragon Skull", "Balm Mushroom", "Big Nugget", "Pearl String", "Comet Shard", "Relic Copper", "Relic Silver", "Relic Gold", "Relic Vase", "Relic Band", "Relic Statue", "Relic Crown", "Casteliacone", "Dire Hit 2", "X Speed 2", "X Sp. Atk 2", "X Sp. Def 2", "X Defense 2", "X Attack 2", "X Accuracy 2", "X Speed 3", "X Sp. Atk 3", "X Sp. Def 3", "X Defense 3", "X Attack 3", "X Accuracy 3", "X Speed 6", "X Sp. Atk 6", "X Sp. Def 6", "X Defense 6", "X Attack 6", "X Accuracy 6", "Ability Urge", "Item Drop", "Item Urge", "Reset Urge", "Dire Hit 3", "Light Stone", "Dark Stone", "Wild Charge", "Secret Power", "Snarl", "Xtransceiver(Male)", "???", "Gram 1", "Gram 2", "Gram 3", "Xtransceiver(Female)", "Medal Box", "DNA Splicers(Fuses)", "DNA Splicers(Seperates)", "Permit", "Oval Charm", "Shiny Charm", "Plasma Card", "Grubby Hanky", "Colress Machine", "Dropped Item (Xtransceiver Male)", "Dropped Item (Xtransceiver Female)", "Reveal Glass", "Weakness Policy", "Assault Vest", "Holo Caster", "Prof's Letter", "Roller Skates", "Pixie Plate", "Ability Capsule", "Whipped Dream", "Sachet", "Luminous Moss", "Snowball", "Safety Goggles", "Poke Flute", "Rich Mulch", "Surprise Mulch", "Boost Mulch", "Amaze Mulch", "Gengarite", "Gardevoirite", "Ampharosite", "Venusaurite", "Charizardite X", "Blastoisinite", "Mewtwonite X", "Mewtwonite Y", "Blazikenite", "Medichamite", "Houndoominite", "Aggronite", "Banettite", "Tyranitarite", "Scizorite", "Pinsirite", "Aerodactylite", "Lucarionite", "Abomasite", "Kangaskhanite", "Gyaradosite", "Absolite", "Charizardite Y", "Alakazite", "Heracronite", "Mawilite", "Manectite", "Garchompite", "Latiasite", "Latiosite", "Roseli Berry", "Kee Berry", "Maranga Berry", "Sprinklotad", "Nature Power", "Dark Pulse", "Power-Up Punch", "Dazzling Gleam", "Confide", "Power Plant Pass", "Mega Ring", "Intruiging Stone", "Common Stone", "Discount Coupon", "Elevator Key", "TMV Pass", "Honor of Kalos", "Adventure Rules", "Strange Souvenir", "Lens Case", "Travel Trunk (Silver)", "Travel Trunk (Gold)", "Lumiose Galette", "Shalour Sable", "Jaw Fossil", "Sail Fossil", "Looker Ticket", "Bike", "Holo Caster", "Fairy Gem", "Mega Charm", "Mega Glove", "Mach Bike", "Acro Bike", "Wailmer Pail", "Devon Parts", "Soot Sack", "Basement Key", "Pokeblock Kit", "Letter", "Eon Ticket", "Scanner", "Go-Goggles", "Meteorite (originally found)", "Key to Room 1", "Key to Room 2", "Key to Room 4", "Key to Room 6", "Storage Key", "Devon Scope", "S.S. Ticket", "Dive", "Devon Scuba Gear", "Contest Costume (Male)", "Contest Costume (Female)", "Magma Suit", "Aqua Suit", "Pair of Tickets", "Mega Bracelet", "Mega Pendant", "Mega Glasses", "Mega Anchor", "Mega Stickpin", "Mega Tiara", "Mega Anklet", "Meteorite (faint glow)", "Swampertite", "Sceptilite", "Sablenite", "Altarianite", "Galladite", "Audinite", "Metagrossite", "Sharpedonite", "Slowbronite", "Steelixite", "Pidgeotite", "Glalitite", "Diancite", "Prison Bottle", "Mega Cuff", "Cameruptite", "Lopunnite", "Salamencite", "Beedrillite", "Meteorite (1)", "Meteorite (2)", "Key Stone", "Meteorite Shard", "Eon Flute" };
 
@@ -232,6 +233,11 @@ namespace ntrbase
             runCmd("disconnect()");
         }
 
+        public void listprocesses()
+        {
+            runCmd("listprocess()");
+        }
+
 
 
         public void connectCheck()
@@ -240,7 +246,7 @@ namespace ntrbase
             if (txtLog.Text.Contains("Server connected"))
             {
                 buttonConnect.Text = "Connected";
-                runCmd("listprocess()");
+                listprocesses();
                 buttonConnect.Enabled = false;
                 buttonDisconnect.Enabled = true;
                 pokeMoney.Enabled = true;
@@ -259,6 +265,8 @@ namespace ntrbase
                 dumpBoxes.Enabled = true;
                 radioBoxes.Enabled = true;
                 radioDaycare.Enabled = true;
+                pokeName.Enabled = true;
+                playerName.Enabled = true;
                 Settings.Default.IP = host.Text;
                 Settings.Default.Save();
             }
@@ -281,6 +289,7 @@ namespace ntrbase
                     d1off = "0x8C7FF4C";
                     d2off = "0x8C8003C";
                     itemsoff = "0x8C6EC70"; //UPDATE
+                    nameoff = "0x8C79C84";
                     dumpMoney();
                 }
 
@@ -298,6 +307,7 @@ namespace ntrbase
                     d1off = "0x8C7FF4C";
                     d2off = "0x8C8003C";
                     itemsoff = "0x8C6EC70"; //UPDATE
+                    nameoff = "0x8C79C84";
                     dumpMoney();
             }
 
@@ -315,6 +325,7 @@ namespace ntrbase
                     d1off = "0x8C88370";
                     d2off = "0x8C88460";
                     itemsoff = "0x8C6EC70";
+                    nameoff = "0x8C81388";
                     dumpMoney();
             }
 
@@ -332,6 +343,7 @@ namespace ntrbase
                     d1off = "0x8C88370";
                     d2off = "0x8C88460";
                     itemsoff = "0x8C6EC70";
+                    nameoff = "0x8C81388";
                     dumpMoney();
             }
         }
@@ -340,6 +352,12 @@ namespace ntrbase
         {
             string dumpItems = "data(" + itemsoff + ", 0x640, filename='items.temp', pid=" + pid + ")";
             runCmd(dumpItems);
+        }
+
+        public void dumpName()
+        {
+            string dumpName = "data(" + nameoff + ", 0x18, filename='name.temp', pid=" + pid + ")";
+            runCmd(dumpName);
         }
 
         public void dumpMoney()
@@ -408,6 +426,19 @@ namespace ntrbase
                     byte[] item2amnt = items.Skip(6).Take(2).ToArray();
                     int items2Amount = BitConverter.ToInt16(item2amnt, 0);
                     itemsNum2.Value = items2Amount;
+                }
+            }
+        }
+
+        public void readName()
+        {
+            const string dumpedName = "name.temp";
+            if (File.Exists(dumpedName))
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(dumpedName, FileMode.Open)))
+                {
+                    byte[] nameBytes = reader.ReadBytes(24);
+                    playerName.Text = Encoding.Unicode.GetString(nameBytes);
                 }
             }
         }
@@ -533,7 +564,7 @@ namespace ntrbase
                 if (firstcheck == false)
                 {
                     readBP();
-                    dumpItems();
+                    dumpName();
                     txtLog.Clear();
                 }
                 else
@@ -546,13 +577,13 @@ namespace ntrbase
             }
         }
 
-        public void isItemsDumped()
+        public void isNameDumped()
         {
-            if (txtLog.Text.Contains("items.temp successfully"))
+            if (txtLog.Text.Contains("name.temp successfully"))
             {
                 if (firstcheck == false)
                 {
-                    readItems();
+                    readName();
                     firstcheck = true;
                     txtLog.Clear();
                     RMTemp();
@@ -560,24 +591,46 @@ namespace ntrbase
                 else
                 if (firstcheck == true)
                 {
-                    readItems();
+                    readName();
                     RMTemp();
                     txtLog.Clear();
                 }
             }
         }
 
+        //public void isItemsDumped()
+        //{
+        //    if (txtLog.Text.Contains("items.temp successfully"))
+        //    {
+        //        if (firstcheck == false)
+        //        {
+        //            readItems();
+        //            firstcheck = true;
+        //            txtLog.Clear();
+        //            RMTemp();
+        //        }
+        //        else
+        //       if (firstcheck == true)
+        //        {
+        //            readItems();
+        //            RMTemp();
+        //            txtLog.Clear();
+        //        }
+        //    }
+        //}
+
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             txtLog.Clear();
             runCmd("connect('" + host.Text + "',8000)");
-            Delay.Add(connectCheck, 1);
-            Delay.Add(getGame, 2);
+            Delay.Add(connectCheck, 2);
+            Delay.Add(getGame, 3);
         }
 
 
         private void buttonDisconnect_Click(object sender, EventArgs e)
         {
+            txtLog.Clear();
             runCmd("disconnect()");
             buttonConnect.Text = "Connect";
             firstcheck = false;
@@ -600,6 +653,8 @@ namespace ntrbase
             dumpBoxes.Enabled = false;
             radioBoxes.Enabled = false;
             radioDaycare.Enabled = false;
+            pokeName.Enabled = false;
+            playerName.Enabled = false;
         }
 
         private void txtLog_TextChanged(object sender, EventArgs e)
@@ -607,7 +662,7 @@ namespace ntrbase
             isMoneyDumped();
             isMilesDumped();
             isBPDumped();
-            isItemsDumped();
+            isNameDumped();
             movePkx();
         }
 
@@ -775,5 +830,37 @@ namespace ntrbase
             }
         }
 
+        private void pokeBoxName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pokeName_Click(object sender, EventArgs e)
+        {
+            if (playerName.Text.Length < 12)
+            {
+                string nameS = playerName.Text.PadRight(12, ' ');
+                byte[] namebyte = Encoding.Unicode.GetBytes(nameS);
+                string namer = ", 0x";
+                string name = BitConverter.ToString(namebyte).Replace("-", namer);
+                string pokeName = "write(" + nameoff + ", (0x" + name + "), pid=" + pid + ")";
+                runCmd(pokeName);
+            }
+
+            if (playerName.Text.Length == 12)
+            {
+                string nameS = playerName.Text;
+                byte[] namebyte = Encoding.Unicode.GetBytes(nameS);
+                string namer = ", 0x";
+                string name = BitConverter.ToString(namebyte).Replace("-", namer);
+                string pokeName = "write(" + nameoff + ", (0x" + name + "), pid=" + pid + ")";
+                runCmd(pokeName);
+            }
+
+            if (playerName.Text.Length > 12)
+            {
+                MessageBox.Show("That name is too long, please choose a trainer name of 12 character or less.", "Name too long!");
+            }
+        }
     }
 }

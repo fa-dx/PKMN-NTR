@@ -56,6 +56,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pokeName = new System.Windows.Forms.Button();
+            this.playerName = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabItems = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -68,6 +70,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -88,13 +92,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsNum2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsNum1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
             // 
             this.txtLog.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(871, 362);
+            this.txtLog.Location = new System.Drawing.Point(897, 297);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
@@ -149,7 +154,7 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(387, 119);
+            this.groupBox1.Location = new System.Drawing.Point(511, 119);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 74);
             this.groupBox1.TabIndex = 6;
@@ -548,7 +553,7 @@
             // 
             this.tabMain.Controls.Add(this.tabPage1);
             this.tabMain.Controls.Add(this.tabPage2);
-            this.tabMain.Location = new System.Drawing.Point(364, 310);
+            this.tabMain.Location = new System.Drawing.Point(552, 223);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(878, 449);
@@ -565,6 +570,25 @@
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // pokeName
+            // 
+            this.pokeName.Enabled = false;
+            this.pokeName.Location = new System.Drawing.Point(114, 32);
+            this.pokeName.Name = "pokeName";
+            this.pokeName.Size = new System.Drawing.Size(54, 23);
+            this.pokeName.TabIndex = 23;
+            this.pokeName.Text = "Write";
+            this.pokeName.UseVisualStyleBackColor = true;
+            this.pokeName.Click += new System.EventHandler(this.pokeName_Click);
+            // 
+            // playerName
+            // 
+            this.playerName.Enabled = false;
+            this.playerName.Location = new System.Drawing.Point(8, 35);
+            this.playerName.Name = "playerName";
+            this.playerName.Size = new System.Drawing.Size(100, 20);
+            this.playerName.TabIndex = 22;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tabItems);
@@ -580,10 +604,10 @@
             // 
             this.tabItems.Controls.Add(this.tabPage3);
             this.tabItems.Controls.Add(this.tabPage4);
-            this.tabItems.Location = new System.Drawing.Point(0, 0);
+            this.tabItems.Location = new System.Drawing.Point(-2, 1);
             this.tabItems.Name = "tabItems";
             this.tabItems.SelectedIndex = 0;
-            this.tabItems.Size = new System.Drawing.Size(874, 427);
+            this.tabItems.Size = new System.Drawing.Size(885, 426);
             this.tabItems.TabIndex = 0;
             // 
             // tabPage3
@@ -597,7 +621,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(866, 401);
+            this.tabPage3.Size = new System.Drawing.Size(877, 400);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Items";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -2215,7 +2239,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(866, 401);
+            this.tabPage4.Size = new System.Drawing.Size(877, 400);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Medicine";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -2228,19 +2252,41 @@
             // 
             this.Amount.Name = "Amount";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.pokeName);
+            this.groupBox2.Controls.Add(this.playerName);
+            this.groupBox2.Location = new System.Drawing.Point(492, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(173, 62);
+            this.groupBox2.TabIndex = 24;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Edit Trainer";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(11, 17);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(38, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Name:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(546, 197);
+            this.ClientSize = new System.Drawing.Size(677, 202);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.tabMain);
             this.Controls.Add(this.editMoney);
             this.Controls.Add(this.writeBox);
-            this.Controls.Add(this.tabMain);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtLog);
+            this.Controls.Add(this.editMiles);
             this.Controls.Add(this.dumpBox);
             this.Controls.Add(this.editBP);
-            this.Controls.Add(this.editMiles);
+            this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -2276,6 +2322,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsNum2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsNum1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2333,6 +2381,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button pokeName;
+        private System.Windows.Forms.TextBox playerName;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label10;
     }
 }
 
