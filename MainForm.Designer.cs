@@ -2346,7 +2346,7 @@
             this.hourNum.Enabled = false;
             this.hourNum.Location = new System.Drawing.Point(8, 131);
             this.hourNum.Maximum = new decimal(new int[] {
-            65535,
+            999,
             0,
             0,
             0});
