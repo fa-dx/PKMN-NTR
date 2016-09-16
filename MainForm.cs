@@ -300,10 +300,10 @@ namespace ntrbase
                     d2off = "0x8C8003C";
                     itemsoff = "0x8C6EC70"; //UPDATE
                     nameoff = "0x8C79C84";
-                    tidoff = "0x8C81340"; //UPDATE
-                    hroff = "0x8CFBD88"; //UPDATE
-                    minoff = "0x8CFBD8A"; //UPDATE
-                    secoff = "0x8CFBD8B"; //UPDATE
+                    tidoff = "0x8C79C3C";
+                    hroff = "0x8CE2814";
+                    minoff = "0x8CE2816";
+                    secoff = "0x8CE2817";
                     dumpMoney();
                 }
 
@@ -322,10 +322,10 @@ namespace ntrbase
                     d2off = "0x8C8003C";
                     itemsoff = "0x8C6EC70"; //UPDATE
                     nameoff = "0x8C79C84";
-                    tidoff = "0x8C81340"; //UPDATE
-                    hroff = "0x8CFBD88"; //UPDATE
-                    minoff = "0x8CFBD8A"; //UPDATE
-                    secoff = "0x8CFBD8B"; //UPDATE
+                    tidoff = "0x8C79C3C";
+                    hroff = "0x8CE2814";
+                    minoff = "0x8CE2816";
+                    secoff = "0x8CE2817";
                     dumpMoney();
             }
 
