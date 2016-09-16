@@ -497,6 +497,11 @@
             0,
             0,
             0});
+            this.boxDump.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.boxDump.Name = "boxDump";
             this.boxDump.Size = new System.Drawing.Size(40, 20);
             this.boxDump.TabIndex = 24;

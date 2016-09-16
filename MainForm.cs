@@ -738,22 +738,6 @@ namespace ntrbase
 
         }
 
-        private void radioOpponent_CheckedChanged(object sender, EventArgs e)
-        {
-            label7.Visible = false;
-            label8.Visible = false;
-            dumpBoxes.Visible = false;
-            label9.Visible = true;
-            namePkx.Visible = true;
-            label9.Location = new System.Drawing.Point(6, 16);
-            namePkx.Location = new System.Drawing.Point(6, 35);
-            namePkx.Size = new System.Drawing.Size(197, 23);
-            dumpPkx.Size = new System.Drawing.Size(197, 23);
-            dumpBoxes.Location = new System.Drawing.Point(98, 61);
-            dumpPkx.Location = new System.Drawing.Point(6, 61);
-            dumpPkx.Text = "Dump";
-        }
-
         private void radioDaycare_CheckedChanged(object sender, EventArgs e)
         {
             label7.Visible = false;
