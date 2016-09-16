@@ -72,6 +72,16 @@
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.TIDNum = new System.Windows.Forms.NumericUpDown();
+            this.pokeTID = new System.Windows.Forms.Button();
+            this.pokeTime = new System.Windows.Forms.Button();
+            this.hourNum = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.minNum = new System.Windows.Forms.NumericUpDown();
+            this.secNum = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -93,13 +103,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.itemsNum2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsNum1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TIDNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hourNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secNum)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
             // 
             this.txtLog.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(897, 297);
+            this.txtLog.Location = new System.Drawing.Point(500, 199);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
@@ -154,7 +168,7 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(511, 119);
+            this.groupBox1.Location = new System.Drawing.Point(272, 284);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 74);
             this.groupBox1.TabIndex = 6;
@@ -180,7 +194,7 @@
             0,
             0});
             this.moneyNum.Name = "moneyNum";
-            this.moneyNum.Size = new System.Drawing.Size(82, 20);
+            this.moneyNum.Size = new System.Drawing.Size(71, 20);
             this.moneyNum.TabIndex = 7;
             // 
             // milesNum
@@ -193,7 +207,7 @@
             0,
             0});
             this.milesNum.Name = "milesNum";
-            this.milesNum.Size = new System.Drawing.Size(82, 20);
+            this.milesNum.Size = new System.Drawing.Size(71, 20);
             this.milesNum.TabIndex = 8;
             // 
             // bpNum
@@ -206,15 +220,15 @@
             0,
             0});
             this.bpNum.Name = "bpNum";
-            this.bpNum.Size = new System.Drawing.Size(82, 20);
+            this.bpNum.Size = new System.Drawing.Size(71, 20);
             this.bpNum.TabIndex = 9;
             // 
             // pokeMoney
             // 
             this.pokeMoney.Enabled = false;
-            this.pokeMoney.Location = new System.Drawing.Point(94, 33);
+            this.pokeMoney.Location = new System.Drawing.Point(83, 33);
             this.pokeMoney.Name = "pokeMoney";
-            this.pokeMoney.Size = new System.Drawing.Size(54, 23);
+            this.pokeMoney.Size = new System.Drawing.Size(45, 23);
             this.pokeMoney.TabIndex = 10;
             this.pokeMoney.Text = "Write";
             this.pokeMoney.UseVisualStyleBackColor = true;
@@ -223,9 +237,9 @@
             // pokeMiles
             // 
             this.pokeMiles.Enabled = false;
-            this.pokeMiles.Location = new System.Drawing.Point(94, 33);
+            this.pokeMiles.Location = new System.Drawing.Point(83, 33);
             this.pokeMiles.Name = "pokeMiles";
-            this.pokeMiles.Size = new System.Drawing.Size(54, 23);
+            this.pokeMiles.Size = new System.Drawing.Size(45, 23);
             this.pokeMiles.TabIndex = 11;
             this.pokeMiles.Text = "Write";
             this.pokeMiles.UseVisualStyleBackColor = true;
@@ -234,9 +248,9 @@
             // pokeBP
             // 
             this.pokeBP.Enabled = false;
-            this.pokeBP.Location = new System.Drawing.Point(94, 33);
+            this.pokeBP.Location = new System.Drawing.Point(83, 33);
             this.pokeBP.Name = "pokeBP";
-            this.pokeBP.Size = new System.Drawing.Size(54, 23);
+            this.pokeBP.Size = new System.Drawing.Size(45, 23);
             this.pokeBP.TabIndex = 12;
             this.pokeBP.Text = "Write BP";
             this.pokeBP.UseVisualStyleBackColor = true;
@@ -247,9 +261,9 @@
             this.editMoney.Controls.Add(this.label2);
             this.editMoney.Controls.Add(this.moneyNum);
             this.editMoney.Controls.Add(this.pokeMoney);
-            this.editMoney.Location = new System.Drawing.Point(12, 12);
+            this.editMoney.Location = new System.Drawing.Point(12, 8);
             this.editMoney.Name = "editMoney";
-            this.editMoney.Size = new System.Drawing.Size(154, 62);
+            this.editMoney.Size = new System.Drawing.Size(134, 62);
             this.editMoney.TabIndex = 13;
             this.editMoney.TabStop = false;
             this.editMoney.Text = "Edit Money";
@@ -268,9 +282,9 @@
             this.editMiles.Controls.Add(this.pokeMiles);
             this.editMiles.Controls.Add(this.milesNum);
             this.editMiles.Controls.Add(this.label3);
-            this.editMiles.Location = new System.Drawing.Point(332, 12);
+            this.editMiles.Location = new System.Drawing.Point(292, 8);
             this.editMiles.Name = "editMiles";
-            this.editMiles.Size = new System.Drawing.Size(154, 62);
+            this.editMiles.Size = new System.Drawing.Size(134, 62);
             this.editMiles.TabIndex = 14;
             this.editMiles.TabStop = false;
             this.editMiles.Text = "Edit Poké Miles";
@@ -289,9 +303,9 @@
             this.editBP.Controls.Add(this.label4);
             this.editBP.Controls.Add(this.pokeBP);
             this.editBP.Controls.Add(this.bpNum);
-            this.editBP.Location = new System.Drawing.Point(172, 12);
+            this.editBP.Location = new System.Drawing.Point(152, 8);
             this.editBP.Name = "editBP";
-            this.editBP.Size = new System.Drawing.Size(154, 62);
+            this.editBP.Size = new System.Drawing.Size(134, 62);
             this.editBP.TabIndex = 15;
             this.editBP.TabStop = false;
             this.editBP.Text = "Edit BP";
@@ -524,7 +538,7 @@
             this.writeBox.Controls.Add(this.pokePkm);
             this.writeBox.Controls.Add(this.box);
             this.writeBox.Controls.Add(this.slot);
-            this.writeBox.Location = new System.Drawing.Point(227, 103);
+            this.writeBox.Location = new System.Drawing.Point(227, 80);
             this.writeBox.Name = "writeBox";
             this.writeBox.Size = new System.Drawing.Size(154, 90);
             this.writeBox.TabIndex = 21;
@@ -553,7 +567,7 @@
             // 
             this.tabMain.Controls.Add(this.tabPage1);
             this.tabMain.Controls.Add(this.tabPage2);
-            this.tabMain.Location = new System.Drawing.Point(552, 223);
+            this.tabMain.Location = new System.Drawing.Point(595, 338);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(878, 449);
@@ -573,9 +587,9 @@
             // pokeName
             // 
             this.pokeName.Enabled = false;
-            this.pokeName.Location = new System.Drawing.Point(114, 32);
+            this.pokeName.Location = new System.Drawing.Point(94, 33);
             this.pokeName.Name = "pokeName";
-            this.pokeName.Size = new System.Drawing.Size(54, 23);
+            this.pokeName.Size = new System.Drawing.Size(45, 23);
             this.pokeName.TabIndex = 23;
             this.pokeName.Text = "Write";
             this.pokeName.UseVisualStyleBackColor = true;
@@ -586,7 +600,7 @@
             this.playerName.Enabled = false;
             this.playerName.Location = new System.Drawing.Point(8, 35);
             this.playerName.Name = "playerName";
-            this.playerName.Size = new System.Drawing.Size(100, 20);
+            this.playerName.Size = new System.Drawing.Size(80, 20);
             this.playerName.TabIndex = 22;
             // 
             // tabPage2
@@ -2254,12 +2268,22 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.pokeTID);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.TIDNum);
+            this.groupBox2.Controls.Add(this.secNum);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.minNum);
             this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.pokeTime);
             this.groupBox2.Controls.Add(this.pokeName);
+            this.groupBox2.Controls.Add(this.hourNum);
             this.groupBox2.Controls.Add(this.playerName);
-            this.groupBox2.Location = new System.Drawing.Point(492, 12);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Location = new System.Drawing.Point(12, 199);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(173, 62);
+            this.groupBox2.Size = new System.Drawing.Size(209, 159);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit Trainer";
@@ -2273,11 +2297,121 @@
             this.label10.TabIndex = 25;
             this.label10.Text = "Name:";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(11, 66);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "TID:";
+            // 
+            // TIDNum
+            // 
+            this.TIDNum.Enabled = false;
+            this.TIDNum.Location = new System.Drawing.Point(8, 83);
+            this.TIDNum.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.TIDNum.Name = "TIDNum";
+            this.TIDNum.Size = new System.Drawing.Size(80, 20);
+            this.TIDNum.TabIndex = 29;
+            // 
+            // pokeTID
+            // 
+            this.pokeTID.Enabled = false;
+            this.pokeTID.Location = new System.Drawing.Point(95, 80);
+            this.pokeTID.Name = "pokeTID";
+            this.pokeTID.Size = new System.Drawing.Size(45, 23);
+            this.pokeTID.TabIndex = 30;
+            this.pokeTID.Text = "Write";
+            this.pokeTID.UseVisualStyleBackColor = true;
+            this.pokeTID.Click += new System.EventHandler(this.pokeTID_Click);
+            // 
+            // pokeTime
+            // 
+            this.pokeTime.Enabled = false;
+            this.pokeTime.Location = new System.Drawing.Point(155, 128);
+            this.pokeTime.Name = "pokeTime";
+            this.pokeTime.Size = new System.Drawing.Size(45, 23);
+            this.pokeTime.TabIndex = 33;
+            this.pokeTime.Text = "Write";
+            this.pokeTime.UseVisualStyleBackColor = true;
+            this.pokeTime.Click += new System.EventHandler(this.pokeTime_Click);
+            // 
+            // hourNum
+            // 
+            this.hourNum.Enabled = false;
+            this.hourNum.Location = new System.Drawing.Point(8, 131);
+            this.hourNum.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.hourNum.Name = "hourNum";
+            this.hourNum.Size = new System.Drawing.Size(59, 20);
+            this.hourNum.TabIndex = 32;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(11, 115);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(38, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Hours:";
+            // 
+            // minNum
+            // 
+            this.minNum.Enabled = false;
+            this.minNum.Location = new System.Drawing.Point(73, 131);
+            this.minNum.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.minNum.Name = "minNum";
+            this.minNum.Size = new System.Drawing.Size(35, 20);
+            this.minNum.TabIndex = 34;
+            // 
+            // secNum
+            // 
+            this.secNum.Enabled = false;
+            this.secNum.Location = new System.Drawing.Point(114, 131);
+            this.secNum.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.secNum.Name = "secNum";
+            this.secNum.Size = new System.Drawing.Size(35, 20);
+            this.secNum.TabIndex = 35;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(73, 115);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(32, 13);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Mins:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(114, 115);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(34, 13);
+            this.label14.TabIndex = 37;
+            this.label14.Text = "Secs:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 202);
+            this.ClientSize = new System.Drawing.Size(435, 365);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.editMoney);
@@ -2324,6 +2458,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.itemsNum1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TIDNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hourNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secNum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2385,6 +2523,16 @@
         private System.Windows.Forms.TextBox playerName;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown TIDNum;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button pokeTID;
+        private System.Windows.Forms.Button pokeTime;
+        private System.Windows.Forms.NumericUpDown hourNum;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown minNum;
+        private System.Windows.Forms.NumericUpDown secNum;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }
 
