@@ -54,34 +54,35 @@
             this.writeBox = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.tabMain = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pokeName = new System.Windows.Forms.Button();
             this.playerName = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabItems = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.itemsNum2 = new System.Windows.Forms.NumericUpDown();
-            this.items2 = new System.Windows.Forms.ComboBox();
-            this.itemsNum1 = new System.Windows.Forms.NumericUpDown();
-            this.items1 = new System.Windows.Forms.ComboBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.TIDNum = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
             this.pokeTID = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.TIDNum = new System.Windows.Forms.NumericUpDown();
+            this.secNum = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.minNum = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.pokeTime = new System.Windows.Forms.Button();
             this.hourNum = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
-            this.minNum = new System.Windows.Forms.NumericUpDown();
-            this.secNum = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.showKeys = new System.Windows.Forms.Button();
+            this.showBerries = new System.Windows.Forms.Button();
+            this.showTMs = new System.Windows.Forms.Button();
+            this.showMedicine = new System.Windows.Forms.Button();
+            this.showItems = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.itemAdd = new System.Windows.Forms.Button();
+            this.itemWrite = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -95,25 +96,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).BeginInit();
             this.writeBox.SuspendLayout();
-            this.tabMain.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabItems.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsNum2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsNum1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TIDNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hourNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.minNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hourNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
             // 
             this.txtLog.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(500, 199);
+            this.txtLog.Location = new System.Drawing.Point(837, 419);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
@@ -168,7 +168,7 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(272, 284);
+            this.groupBox1.Location = new System.Drawing.Point(7, 1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 74);
             this.groupBox1.TabIndex = 6;
@@ -261,7 +261,7 @@
             this.editMoney.Controls.Add(this.label2);
             this.editMoney.Controls.Add(this.moneyNum);
             this.editMoney.Controls.Add(this.pokeMoney);
-            this.editMoney.Location = new System.Drawing.Point(12, 8);
+            this.editMoney.Location = new System.Drawing.Point(7, 97);
             this.editMoney.Name = "editMoney";
             this.editMoney.Size = new System.Drawing.Size(134, 62);
             this.editMoney.TabIndex = 13;
@@ -282,7 +282,7 @@
             this.editMiles.Controls.Add(this.pokeMiles);
             this.editMiles.Controls.Add(this.milesNum);
             this.editMiles.Controls.Add(this.label3);
-            this.editMiles.Location = new System.Drawing.Point(292, 8);
+            this.editMiles.Location = new System.Drawing.Point(7, 226);
             this.editMiles.Name = "editMiles";
             this.editMiles.Size = new System.Drawing.Size(134, 62);
             this.editMiles.TabIndex = 14;
@@ -303,7 +303,7 @@
             this.editBP.Controls.Add(this.label4);
             this.editBP.Controls.Add(this.pokeBP);
             this.editBP.Controls.Add(this.bpNum);
-            this.editBP.Location = new System.Drawing.Point(152, 8);
+            this.editBP.Location = new System.Drawing.Point(7, 161);
             this.editBP.Name = "editBP";
             this.editBP.Size = new System.Drawing.Size(134, 62);
             this.editBP.TabIndex = 15;
@@ -322,7 +322,7 @@
             // selectPkx
             // 
             this.selectPkx.Enabled = false;
-            this.selectPkx.Location = new System.Drawing.Point(6, 62);
+            this.selectPkx.Location = new System.Drawing.Point(6, 58);
             this.selectPkx.Name = "selectPkx";
             this.selectPkx.Size = new System.Drawing.Size(66, 23);
             this.selectPkx.TabIndex = 16;
@@ -333,7 +333,7 @@
             // pokePkm
             // 
             this.pokePkm.Enabled = false;
-            this.pokePkm.Location = new System.Drawing.Point(82, 62);
+            this.pokePkm.Location = new System.Drawing.Point(82, 58);
             this.pokePkm.Name = "pokePkm";
             this.pokePkm.Size = new System.Drawing.Size(66, 23);
             this.pokePkm.TabIndex = 17;
@@ -394,7 +394,7 @@
             this.dumpBox.Controls.Add(this.slotDump);
             this.dumpBox.Controls.Add(this.label8);
             this.dumpBox.Controls.Add(this.boxDump);
-            this.dumpBox.Location = new System.Drawing.Point(12, 80);
+            this.dumpBox.Location = new System.Drawing.Point(167, 1);
             this.dumpBox.Name = "dumpBox";
             this.dumpBox.Size = new System.Drawing.Size(209, 113);
             this.dumpBox.TabIndex = 20;
@@ -430,7 +430,7 @@
             // dumpBoxes
             // 
             this.dumpBoxes.Enabled = false;
-            this.dumpBoxes.Location = new System.Drawing.Point(98, 61);
+            this.dumpBoxes.Location = new System.Drawing.Point(98, 57);
             this.dumpBoxes.Name = "dumpBoxes";
             this.dumpBoxes.Size = new System.Drawing.Size(105, 23);
             this.dumpBoxes.TabIndex = 31;
@@ -458,7 +458,7 @@
             // dumpPkx
             // 
             this.dumpPkx.Enabled = false;
-            this.dumpPkx.Location = new System.Drawing.Point(6, 61);
+            this.dumpPkx.Location = new System.Drawing.Point(6, 57);
             this.dumpPkx.Name = "dumpPkx";
             this.dumpPkx.Size = new System.Drawing.Size(86, 23);
             this.dumpPkx.TabIndex = 28;
@@ -538,9 +538,9 @@
             this.writeBox.Controls.Add(this.pokePkm);
             this.writeBox.Controls.Add(this.box);
             this.writeBox.Controls.Add(this.slot);
-            this.writeBox.Location = new System.Drawing.Point(227, 80);
+            this.writeBox.Location = new System.Drawing.Point(382, 1);
             this.writeBox.Name = "writeBox";
-            this.writeBox.Size = new System.Drawing.Size(154, 90);
+            this.writeBox.Size = new System.Drawing.Size(154, 86);
             this.writeBox.TabIndex = 21;
             this.writeBox.TabStop = false;
             this.writeBox.Text = "Write Pokémon";
@@ -563,26 +563,20 @@
             this.label5.TabIndex = 22;
             this.label5.Text = "Box:";
             // 
-            // tabMain
+            // dataGridView1
             // 
-            this.tabMain.Controls.Add(this.tabPage1);
-            this.tabMain.Controls.Add(this.tabPage2);
-            this.tabMain.Location = new System.Drawing.Point(595, 338);
-            this.tabMain.Name = "tabMain";
-            this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(878, 449);
-            this.tabMain.TabIndex = 22;
-            this.tabMain.Visible = false;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(870, 423);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Main";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Enabled = false;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.Size = new System.Drawing.Size(191, 177);
+            this.dataGridView1.TabIndex = 32;
             // 
             // pokeName
             // 
@@ -602,1661 +596,6 @@
             this.playerName.Name = "playerName";
             this.playerName.Size = new System.Drawing.Size(80, 20);
             this.playerName.TabIndex = 22;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.tabItems);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(870, 423);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Items";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabItems
-            // 
-            this.tabItems.Controls.Add(this.tabPage3);
-            this.tabItems.Controls.Add(this.tabPage4);
-            this.tabItems.Location = new System.Drawing.Point(-2, 1);
-            this.tabItems.Name = "tabItems";
-            this.tabItems.SelectedIndex = 0;
-            this.tabItems.Size = new System.Drawing.Size(885, 426);
-            this.tabItems.TabIndex = 0;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.textBox1);
-            this.tabPage3.Controls.Add(this.dataGridView1);
-            this.tabPage3.Controls.Add(this.itemsNum2);
-            this.tabPage3.Controls.Add(this.items2);
-            this.tabPage3.Controls.Add(this.itemsNum1);
-            this.tabPage3.Controls.Add(this.items1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(877, 400);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Items";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(7, 295);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(828, 20);
-            this.textBox1.TabIndex = 33;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(342, 85);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(191, 150);
-            this.dataGridView1.TabIndex = 32;
-            // 
-            // itemsNum2
-            // 
-            this.itemsNum2.Location = new System.Drawing.Point(133, 33);
-            this.itemsNum2.Name = "itemsNum2";
-            this.itemsNum2.Size = new System.Drawing.Size(52, 20);
-            this.itemsNum2.TabIndex = 3;
-            // 
-            // items2
-            // 
-            this.items2.FormattingEnabled = true;
-            this.items2.Items.AddRange(new object[] {
-            "None",
-            "Master Ball",
-            "Ultra Ball",
-            "Great Ball",
-            "Poke Ball",
-            "Safari Ball",
-            "Net Ball",
-            "Dive Ball",
-            "Nest Ball",
-            "Repeat Ball",
-            "Timer Ball",
-            "Luxury Ball",
-            "Premier Ball",
-            "Dusk Ball",
-            "Heal Ball",
-            "Quick Ball",
-            "Cherish Ball",
-            "Potion",
-            "Antidote",
-            "Burn Heal",
-            "Ice Heal",
-            "Awakening",
-            "Paralyze Heal",
-            "Full Restore",
-            "Max Potion",
-            "Hyper Potion",
-            "Super Potion",
-            "Full Heal",
-            "Revive",
-            "Max Revive",
-            "Fresh Water",
-            "Soda Pop",
-            "Lemonade",
-            "Moomoo Milk",
-            "Energy Powder",
-            "Energy Root",
-            "Heal Powder",
-            "Revival Herb",
-            "Ether",
-            "Max Ether",
-            "Elixir",
-            "Max Elixir",
-            "Lava Cookie",
-            "Berry Juice",
-            "Sacred Ash",
-            "HP Up",
-            "Protein",
-            "Iron",
-            "Carbos",
-            "Calcium",
-            "Rare Candy",
-            "PP Up",
-            "Zinc",
-            "PP Max",
-            "Old Gateau",
-            "Guard Spec.",
-            "Dire Hit",
-            "X Attack",
-            "X Defense",
-            "X Speed",
-            "X Accuracy",
-            "X Sp. Atk",
-            "X Sp. Def",
-            "Poke Doll",
-            "Fluffy Tail",
-            "Blue Flute",
-            "Yellow Flute",
-            "Red Flute",
-            "Black Flute",
-            "White Flute",
-            "Shoal Salt",
-            "Shoal Shell",
-            "Red Shard",
-            "Blue Shard",
-            "Yellow Shard",
-            "Green Shard",
-            "Super Repel",
-            "Max Repel",
-            "Escape Rope",
-            "Repel",
-            "Sun Stone",
-            "Moon Stone",
-            "Fire Stone",
-            "Thunder Stone",
-            "Water Stone",
-            "Leaf Stone",
-            "Tiny Mushroom",
-            "Big Mushroom",
-            "Pearl",
-            "Big Pearl",
-            "Stardust",
-            "Star Piece",
-            "Nugget",
-            "Heart Scale",
-            "Honey",
-            "Growth Mulch",
-            "Damp Mulch",
-            "Stable Mulch",
-            "Gooey Mulch",
-            "Root Fossil",
-            "Claw Fossil",
-            "Helix Fossil",
-            "Dome Fossil",
-            "Old Amber",
-            "Armor Fossil",
-            "Skull Fossil",
-            "Rare Bone",
-            "Shiny Stone",
-            "Dusk Stone",
-            "Dawn Stone",
-            "Oval Stone",
-            "Odd Keystone",
-            "Griseous Orb",
-            "???",
-            "???",
-            "???",
-            "Douse Drive",
-            "Shock Drive",
-            "Burn Drive",
-            "Chill Drive",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "Sweet Heart",
-            "Adamant Orb",
-            "Lustrous Orb",
-            "Greet Mail",
-            "Favored Mail",
-            "RSVP Mail",
-            "Thanks Mail",
-            "Inquiry Mail",
-            "Like Mail",
-            "Reply Mail",
-            "Bridge Mail S",
-            "Bridge Mail D",
-            "Bridge Mail T",
-            "Bridge Mail V",
-            "Bridge Mail M",
-            "Cheri Berry",
-            "Chesto Berry",
-            "Pecha Berry",
-            "Rawst Berry",
-            "Aspear Berry",
-            "Leppa Berry",
-            "Oran Berry",
-            "Persim Berry",
-            "Lum Berry",
-            "Sitrus Berry",
-            "Figy Berry",
-            "Wiki Berry",
-            "Mago Berry",
-            "Aguav Berry",
-            "Iapapa Berry",
-            "Razz Berry",
-            "Bluk Berry",
-            "Nanab Berry",
-            "Wepear Berry",
-            "Pinap Berry",
-            "Pomeg Berry",
-            "Kelpsy Berry",
-            "Qualot Berry",
-            "Hondew Berry",
-            "Grepa Berry",
-            "Tamato Berry",
-            "Cornn Berry",
-            "Magost Berry",
-            "Rabuta Berry",
-            "Nomel Berry",
-            "Spelon Berry",
-            "Pamtre Berry",
-            "Watmel Berry",
-            "Durin Berry",
-            "Belue Berry",
-            "Occa Berry",
-            "Passho Berry",
-            "Wacan Berry",
-            "Rindo Berry",
-            "Yache Berry",
-            "Chople Berry",
-            "Kebai Berry",
-            "Shuca Berry",
-            "Coba Berry",
-            "Payapa Berry",
-            "Tanga Berry",
-            "Charti Berry",
-            "Kasib Berry",
-            "Haban Berry",
-            "Colbur Berry",
-            "Babiri Berry",
-            "Chilan Berry",
-            "Liechi Berry",
-            "Ganlon Berry",
-            "Salac Berry",
-            "Petaya Berry",
-            "Apicot Berry",
-            "Lansat Berry",
-            "Starf Berry",
-            "Enigma Berry",
-            "Micle Berry",
-            "Custap Berry",
-            "Jaboca Berry",
-            "Rowap Berry",
-            "Bright Powder",
-            "White Herb",
-            "Macho Brace",
-            "Exp. Share",
-            "Quick Claw",
-            "Soothe Bell",
-            "Mental Herb",
-            "Choice Band",
-            "King\'s Rock",
-            "Silver Powder",
-            "Amulet Coin",
-            "Cleanse Tag",
-            "Soul Dew",
-            "Deep Sea Tooth",
-            "Deep Sea Scale",
-            "Smoke Ball",
-            "Everstone",
-            "Focus Band",
-            "Lucky Egg",
-            "Scope Lens",
-            "Metal Coat",
-            "Leftovers",
-            "Dragon Scale",
-            "Light Ball",
-            "Soft Sand",
-            "Hard Stone",
-            "Miracle Seed",
-            "Black Glasses",
-            "Black Belt",
-            "Magnet",
-            "Mystic Water",
-            "Sharp Beak",
-            "Poison Barb",
-            "Never-Melt Ice",
-            "Spell Tag",
-            "Twisted Spoon",
-            "Charcoal",
-            "Dragon Fang",
-            "Silk Scarf",
-            "Up-Grade",
-            "Shell Bell",
-            "Sea Incense",
-            "Lax Incense",
-            "Lucky Punch",
-            "Metal Powder",
-            "Thick Club",
-            "Stick",
-            "Red Scarf",
-            "Blue Scarf",
-            "Pink Scarf",
-            "Green Scarf",
-            "Yellow Scarf",
-            "Wide Lens",
-            "Muscle Band",
-            "Wise Glasses",
-            "Expert Belt",
-            "Light Clay",
-            "Life Orb",
-            "Power Herb",
-            "Toxic Orb",
-            "Flame Orb",
-            "Quick Powder",
-            "Focus Sash",
-            "Zoom Lens",
-            "Metronome",
-            "Iron Ball",
-            "Lagging Tail",
-            "Destiny Knot",
-            "Black Sludge",
-            "Icy Rock",
-            "Smooth Rock",
-            "Heat Rock",
-            "Damp Rock",
-            "Grip Claw",
-            "Choice Scarf",
-            "Sticky Barb",
-            "Power Bracer",
-            "Power Belt",
-            "Power Lens",
-            "Power Band",
-            "Power Anklet",
-            "Power Weight",
-            "Shed Shell",
-            "Big Root",
-            "Choice Specs",
-            "Flame Plate",
-            "Splash Plate",
-            "Zap Plate",
-            "Meadow Plate",
-            "Icicle Plate",
-            "Fist Plate",
-            "Toxic Plate",
-            "Earth Plate",
-            "Sky Plate",
-            "Mind Plate",
-            "Insect Plate",
-            "Stone Plate",
-            "Spooky Plate",
-            "Draco Plate",
-            "Dread Plate",
-            "Iron Plate",
-            "Odd Incense",
-            "Rock Incense",
-            "Full Incense",
-            "Wave Incense",
-            "Rose Incense",
-            "Luck Incense",
-            "Pure Incense",
-            "Protector",
-            "Electrizer",
-            "Magmarizer",
-            "Dubious Disc",
-            "Reaper Cloth",
-            "Razor Claw",
-            "Razor Fang",
-            "Hone Claws",
-            "Dragon Claw",
-            "Psyshock",
-            "Calm Mind",
-            "Roar",
-            "Toxic",
-            "Hail",
-            "Bulk Up",
-            "Venoshock",
-            "Hidden Power",
-            "Sunny Day",
-            "Taunt",
-            "Ice Beam",
-            "Blizzard",
-            "Hyper Beam",
-            "Light Screen",
-            "Protect",
-            "Rain Dance",
-            "Roost",
-            "Safeguard",
-            "Frustration",
-            "Solar Beam",
-            "Smack Down",
-            "Thunderbolt",
-            "Thunder",
-            "Earthquake",
-            "Return",
-            "Dig",
-            "Psychic",
-            "Shadow Ball",
-            "Brick Break",
-            "Double Team",
-            "Reflect",
-            "Sludge Wave",
-            "Flamethrower",
-            "Sludge Bomb",
-            "Sandstorm",
-            "Fire Blast",
-            "Rock Tomb",
-            "Aerial Ace",
-            "Torment",
-            "Facade",
-            "Flame Charge",
-            "Rest",
-            "Attract",
-            "Thief",
-            "Low Sweep",
-            "Round",
-            "Echoed Voice",
-            "Overheat",
-            "Steel Wing",
-            "Focus Blast",
-            "Energy Ball",
-            "False Swipe",
-            "Scald",
-            "Fling",
-            "Charge Beam",
-            "Sky Drop",
-            "Incinerate",
-            "Quash",
-            "Will-O-Wisp",
-            "Acrobatics",
-            "Embargo",
-            "Explosion",
-            "Shadow Claw",
-            "Payback",
-            "Retaliate",
-            "Giga Impact",
-            "Rock Polish",
-            "Flash",
-            "Stone Edge",
-            "Volt Switch",
-            "Thunder Wave",
-            "Gyro Ball",
-            "Swords Dance",
-            "Struggle Bug",
-            "Psych Up",
-            "Bulldoze",
-            "Frost Breath",
-            "Rock Slide",
-            "X-Scissor",
-            "Dragon Tail",
-            "Infestation",
-            "Poison Jab",
-            "Dream Eater",
-            "Grass Knot",
-            "Swagger",
-            "Sleep Talk",
-            "U-turn",
-            "Substitute",
-            "Flash Cannon",
-            "Trick Room",
-            "Cut",
-            "Fly",
-            "Surf",
-            "Strength",
-            "Waterfall",
-            "Rock Smash",
-            "???",
-            "???",
-            "Explorer Kit",
-            "Loot Sack",
-            "Rule Book",
-            "Poke Radar",
-            "Point Card",
-            "Journal",
-            "Seal Case",
-            "Fashion Case",
-            "Seal Bag",
-            "Pal Pad",
-            "Works key",
-            "Old Charm",
-            "Galactic Key",
-            "Red Chain",
-            "Town Map",
-            "Vs. Seeker",
-            "Coin Case",
-            "Old Rod",
-            "Good Rod",
-            "Super Rod",
-            "Sprayduck",
-            "Poffin Case",
-            "Bike",
-            "Suite Key",
-            "Oak\'s Letter",
-            "Lunar Wing",
-            "Member Card",
-            "Azure Flute",
-            "S.S. Ticket",
-            "Contest Pass",
-            "Magma Stone",
-            "Parcel",
-            "Coupon 1",
-            "Coupon 2",
-            "Coupon 3",
-            "Storage Key",
-            "Secret Potion",
-            "Vs. Recorder",
-            "Gracidea",
-            "Secret Key",
-            "Apricorn Box",
-            "Unown Report",
-            "Berry Pots",
-            "Dowsing Machine",
-            "Blue Card",
-            "Slowpoke Tail",
-            "Clear Bell",
-            "Card Key",
-            "Basement Key",
-            "Squirt Bottle",
-            "Red Scale",
-            "Lost Item",
-            "Pass",
-            "Machine Part",
-            "Silver Wing",
-            "Rainbow Wing",
-            "Mystery Egg",
-            "Red Apricorn",
-            "Blue Apricorn",
-            "Yellow Apricorn",
-            "Green Apricorn",
-            "Pink Apricorn",
-            "White Apricorn",
-            "Black Apricorn",
-            "Fast Ball",
-            "Level Ball",
-            "Lure Ball",
-            "Heavy Ball",
-            "Love Ball",
-            "Friend Ball",
-            "Moon Ball",
-            "Sport Ball",
-            "Park Ball",
-            "Photo Album",
-            "GB Sounds",
-            "Tidal Bell",
-            "Rage Candy Bar",
-            "Data Card 01",
-            "Data Card 02",
-            "Data Card 03",
-            "Data Card 04",
-            "Data Card 05",
-            "Data Card 06",
-            "Data Card 07",
-            "Data Card 08",
-            "Data Card 09",
-            "Data Card 10",
-            "Data Card 11",
-            "Data Card 12",
-            "Data Card 13",
-            "Data Card 14",
-            "Data Card 15",
-            "Data Card 16",
-            "Data Card 17",
-            "Data Card 18",
-            "Data Card 19",
-            "Data Card 20",
-            "Data Card 21",
-            "Data Card 22",
-            "Data Card 23",
-            "Data Card 24",
-            "Data Card 25",
-            "Data Card 26",
-            "Data Card 27",
-            "Jade Orb",
-            "Lock Capsule",
-            "Red Orb",
-            "Blue Orb",
-            "Enigma Stone",
-            "Prism Scale",
-            "Eviolite",
-            "Float Stone",
-            "Rocky Helmet",
-            "Air Balloon",
-            "Red Card",
-            "Ring Target",
-            "Binding Band",
-            "Absorb Bulb",
-            "Cell Battery",
-            "Eject Button",
-            "Fire Gem",
-            "Water Gem",
-            "Electric Gem",
-            "Grass Gem",
-            "Ice Gem",
-            "Fighting Gem",
-            "Poison Gem",
-            "Ground Gem",
-            "Flying Gem",
-            "Psychic Gem",
-            "Bug Gem",
-            "Rock Gem",
-            "Ghost Gem",
-            "Dragon Gem",
-            "Dark Gem",
-            "Steel Gem",
-            "Normal Gem",
-            "Health Wing",
-            "Muscle Wing",
-            "Resist Wing",
-            "Genius Wing",
-            "Clever Wing",
-            "Swift Wing",
-            "Pretty Wing",
-            "Cover Fossil",
-            "Plume Fossil",
-            "Libery Pass",
-            "Pass Orb",
-            "Dream Ball",
-            "Poke Toy",
-            "Prop Case",
-            "Dragon Skull",
-            "Balm Mushroom",
-            "Big Nugget",
-            "Pearl String",
-            "Comet Shard",
-            "Relic Copper",
-            "Relic Silver",
-            "Relic Gold",
-            "Relic Vase",
-            "Relic Band",
-            "Relic Statue",
-            "Relic Crown",
-            "Casteliacone",
-            "Dire Hit 2",
-            "X Speed 2",
-            "X Sp. Atk 2",
-            "X Sp. Def 2",
-            "X Defense 2",
-            "X Attack 2",
-            "X Accuracy 2",
-            "X Speed 3",
-            "X Sp. Atk 3",
-            "X Sp. Def 3",
-            "X Defense 3",
-            "X Attack 3",
-            "X Accuracy 3",
-            "X Speed 6",
-            "X Sp. Atk 6",
-            "X Sp. Def 6",
-            "X Defense 6",
-            "X Attack 6",
-            "X Accuracy 6",
-            "Ability Urge",
-            "Item Drop",
-            "Item Urge",
-            "Reset Urge",
-            "Dire Hit 3",
-            "Light Stone",
-            "Dark Stone",
-            "Wild Charge",
-            "Secret Power",
-            "Snarl",
-            "Xtransceiver(Male)",
-            "???",
-            "Gram 1",
-            "Gram 2",
-            "Gram 3",
-            "Xtransceiver(Female)",
-            "Medal Box",
-            "DNA Splicers(Fuses)",
-            "DNA Splicers(Seperates)",
-            "Permit",
-            "Oval Charm",
-            "Shiny Charm",
-            "Plasma Card",
-            "Grubby Hanky",
-            "Colress Machine",
-            "Dropped Item (Xtransceiver Male)",
-            "Dropped Item (Xtransceiver Female)",
-            "Reveal Glass",
-            "Weakness Policy",
-            "Assault Vest",
-            "Holo Caster",
-            "Prof\'s Letter",
-            "Roller Skates",
-            "Pixie Plate",
-            "Ability Capsule",
-            "Whipped Dream",
-            "Sachet",
-            "Luminous Moss",
-            "Snowball",
-            "Safety Goggles",
-            "Poke Flute",
-            "Rich Mulch",
-            "Surprise Mulch",
-            "Boost Mulch",
-            "Amaze Mulch",
-            "Gengarite",
-            "Gardevoirite",
-            "Ampharosite",
-            "Venusaurite",
-            "Charizardite X",
-            "Blastoisinite",
-            "Mewtwonite X",
-            "Mewtwonite Y",
-            "Blazikenite",
-            "Medichamite",
-            "Houndoominite",
-            "Aggronite",
-            "Banettite",
-            "Tyranitarite",
-            "Scizorite",
-            "Pinsirite",
-            "Aerodactylite",
-            "Lucarionite",
-            "Abomasite",
-            "Kangaskhanite",
-            "Gyaradosite",
-            "Absolite",
-            "Charizardite Y",
-            "Alakazite",
-            "Heracronite",
-            "Mawilite",
-            "Manectite",
-            "Garchompite",
-            "Latiasite",
-            "Latiosite",
-            "Roseli Berry",
-            "Kee Berry",
-            "Maranga Berry",
-            "Sprinklotad",
-            "Nature Power",
-            "Dark Pulse",
-            "Power-Up Punch",
-            "Dazzling Gleam",
-            "Confide",
-            "Power Plant Pass",
-            "Mega Ring",
-            "Intruiging Stone",
-            "Common Stone",
-            "Discount Coupon",
-            "Elevator Key",
-            "TMV Pass",
-            "Honor of Kalos",
-            "Adventure Rules",
-            "Strange Souvenir",
-            "Lens Case",
-            "Travel Trunk (Silver)",
-            "Travel Trunk (Gold)",
-            "Lumiose Galette",
-            "Shalour Sable",
-            "Jaw Fossil",
-            "Sail Fossil",
-            "Looker Ticket",
-            "Bike",
-            "Holo Caster",
-            "Fairy Gem",
-            "Mega Charm",
-            "Mega Glove",
-            "Mach Bike",
-            "Acro Bike",
-            "Wailmer Pail",
-            "Devon Parts",
-            "Soot Sack",
-            "Basement Key",
-            "Pokeblock Kit",
-            "Letter",
-            "Eon Ticket",
-            "Scanner",
-            "Go-Goggles",
-            "Meteorite (originally found)",
-            "Key to Room 1",
-            "Key to Room 2",
-            "Key to Room 4",
-            "Key to Room 6",
-            "Storage Key",
-            "Devon Scope",
-            "S.S. Ticket",
-            "Dive",
-            "Devon Scuba Gear",
-            "Contest Costume (Male)",
-            "Contest Costume (Female)",
-            "Magma Suit",
-            "Aqua Suit",
-            "Pair of Tickets",
-            "Mega Bracelet",
-            "Mega Pendant",
-            "Mega Glasses",
-            "Mega Anchor",
-            "Mega Stickpin",
-            "Mega Tiara",
-            "Mega Anklet",
-            "Meteorite (faint glow)",
-            "Swampertite",
-            "Sceptilite",
-            "Sablenite",
-            "Altarianite",
-            "Galladite",
-            "Audinite",
-            "Metagrossite",
-            "Sharpedonite",
-            "Slowbronite",
-            "Steelixite",
-            "Pidgeotite",
-            "Glalitite",
-            "Diancite",
-            "Prison Bottle",
-            "Mega Cuff",
-            "Cameruptite",
-            "Lopunnite",
-            "Salamencite",
-            "Beedrillite",
-            "Meteorite (1)",
-            "Meteorite (2)",
-            "Key Stone",
-            "Meteorite Shard",
-            "Eon Flute"});
-            this.items2.Location = new System.Drawing.Point(6, 33);
-            this.items2.Name = "items2";
-            this.items2.Size = new System.Drawing.Size(121, 21);
-            this.items2.TabIndex = 2;
-            this.items2.Text = "None";
-            // 
-            // itemsNum1
-            // 
-            this.itemsNum1.Location = new System.Drawing.Point(133, 6);
-            this.itemsNum1.Name = "itemsNum1";
-            this.itemsNum1.Size = new System.Drawing.Size(52, 20);
-            this.itemsNum1.TabIndex = 1;
-            // 
-            // items1
-            // 
-            this.items1.FormattingEnabled = true;
-            this.items1.Items.AddRange(new object[] {
-            "None",
-            "Master Ball",
-            "Ultra Ball",
-            "Great Ball",
-            "Poke Ball",
-            "Safari Ball",
-            "Net Ball",
-            "Dive Ball",
-            "Nest Ball",
-            "Repeat Ball",
-            "Timer Ball",
-            "Luxury Ball",
-            "Premier Ball",
-            "Dusk Ball",
-            "Heal Ball",
-            "Quick Ball",
-            "Cherish Ball",
-            "Potion",
-            "Antidote",
-            "Burn Heal",
-            "Ice Heal",
-            "Awakening",
-            "Paralyze Heal",
-            "Full Restore",
-            "Max Potion",
-            "Hyper Potion",
-            "Super Potion",
-            "Full Heal",
-            "Revive",
-            "Max Revive",
-            "Fresh Water",
-            "Soda Pop",
-            "Lemonade",
-            "Moomoo Milk",
-            "Energy Powder",
-            "Energy Root",
-            "Heal Powder",
-            "Revival Herb",
-            "Ether",
-            "Max Ether",
-            "Elixir",
-            "Max Elixir",
-            "Lava Cookie",
-            "Berry Juice",
-            "Sacred Ash",
-            "HP Up",
-            "Protein",
-            "Iron",
-            "Carbos",
-            "Calcium",
-            "Rare Candy",
-            "PP Up",
-            "Zinc",
-            "PP Max",
-            "Old Gateau",
-            "Guard Spec.",
-            "Dire Hit",
-            "X Attack",
-            "X Defense",
-            "X Speed",
-            "X Accuracy",
-            "X Sp. Atk",
-            "X Sp. Def",
-            "Poke Doll",
-            "Fluffy Tail",
-            "Blue Flute",
-            "Yellow Flute",
-            "Red Flute",
-            "Black Flute",
-            "White Flute",
-            "Shoal Salt",
-            "Shoal Shell",
-            "Red Shard",
-            "Blue Shard",
-            "Yellow Shard",
-            "Green Shard",
-            "Super Repel",
-            "Max Repel",
-            "Escape Rope",
-            "Repel",
-            "Sun Stone",
-            "Moon Stone",
-            "Fire Stone",
-            "Thunder Stone",
-            "Water Stone",
-            "Leaf Stone",
-            "Tiny Mushroom",
-            "Big Mushroom",
-            "Pearl",
-            "Big Pearl",
-            "Stardust",
-            "Star Piece",
-            "Nugget",
-            "Heart Scale",
-            "Honey",
-            "Growth Mulch",
-            "Damp Mulch",
-            "Stable Mulch",
-            "Gooey Mulch",
-            "Root Fossil",
-            "Claw Fossil",
-            "Helix Fossil",
-            "Dome Fossil",
-            "Old Amber",
-            "Armor Fossil",
-            "Skull Fossil",
-            "Rare Bone",
-            "Shiny Stone",
-            "Dusk Stone",
-            "Dawn Stone",
-            "Oval Stone",
-            "Odd Keystone",
-            "Griseous Orb",
-            "???",
-            "???",
-            "???",
-            "Douse Drive",
-            "Shock Drive",
-            "Burn Drive",
-            "Chill Drive",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "???",
-            "Sweet Heart",
-            "Adamant Orb",
-            "Lustrous Orb",
-            "Greet Mail",
-            "Favored Mail",
-            "RSVP Mail",
-            "Thanks Mail",
-            "Inquiry Mail",
-            "Like Mail",
-            "Reply Mail",
-            "Bridge Mail S",
-            "Bridge Mail D",
-            "Bridge Mail T",
-            "Bridge Mail V",
-            "Bridge Mail M",
-            "Cheri Berry",
-            "Chesto Berry",
-            "Pecha Berry",
-            "Rawst Berry",
-            "Aspear Berry",
-            "Leppa Berry",
-            "Oran Berry",
-            "Persim Berry",
-            "Lum Berry",
-            "Sitrus Berry",
-            "Figy Berry",
-            "Wiki Berry",
-            "Mago Berry",
-            "Aguav Berry",
-            "Iapapa Berry",
-            "Razz Berry",
-            "Bluk Berry",
-            "Nanab Berry",
-            "Wepear Berry",
-            "Pinap Berry",
-            "Pomeg Berry",
-            "Kelpsy Berry",
-            "Qualot Berry",
-            "Hondew Berry",
-            "Grepa Berry",
-            "Tamato Berry",
-            "Cornn Berry",
-            "Magost Berry",
-            "Rabuta Berry",
-            "Nomel Berry",
-            "Spelon Berry",
-            "Pamtre Berry",
-            "Watmel Berry",
-            "Durin Berry",
-            "Belue Berry",
-            "Occa Berry",
-            "Passho Berry",
-            "Wacan Berry",
-            "Rindo Berry",
-            "Yache Berry",
-            "Chople Berry",
-            "Kebai Berry",
-            "Shuca Berry",
-            "Coba Berry",
-            "Payapa Berry",
-            "Tanga Berry",
-            "Charti Berry",
-            "Kasib Berry",
-            "Haban Berry",
-            "Colbur Berry",
-            "Babiri Berry",
-            "Chilan Berry",
-            "Liechi Berry",
-            "Ganlon Berry",
-            "Salac Berry",
-            "Petaya Berry",
-            "Apicot Berry",
-            "Lansat Berry",
-            "Starf Berry",
-            "Enigma Berry",
-            "Micle Berry",
-            "Custap Berry",
-            "Jaboca Berry",
-            "Rowap Berry",
-            "Bright Powder",
-            "White Herb",
-            "Macho Brace",
-            "Exp. Share",
-            "Quick Claw",
-            "Soothe Bell",
-            "Mental Herb",
-            "Choice Band",
-            "King\'s Rock",
-            "Silver Powder",
-            "Amulet Coin",
-            "Cleanse Tag",
-            "Soul Dew",
-            "Deep Sea Tooth",
-            "Deep Sea Scale",
-            "Smoke Ball",
-            "Everstone",
-            "Focus Band",
-            "Lucky Egg",
-            "Scope Lens",
-            "Metal Coat",
-            "Leftovers",
-            "Dragon Scale",
-            "Light Ball",
-            "Soft Sand",
-            "Hard Stone",
-            "Miracle Seed",
-            "Black Glasses",
-            "Black Belt",
-            "Magnet",
-            "Mystic Water",
-            "Sharp Beak",
-            "Poison Barb",
-            "Never-Melt Ice",
-            "Spell Tag",
-            "Twisted Spoon",
-            "Charcoal",
-            "Dragon Fang",
-            "Silk Scarf",
-            "Up-Grade",
-            "Shell Bell",
-            "Sea Incense",
-            "Lax Incense",
-            "Lucky Punch",
-            "Metal Powder",
-            "Thick Club",
-            "Stick",
-            "Red Scarf",
-            "Blue Scarf",
-            "Pink Scarf",
-            "Green Scarf",
-            "Yellow Scarf",
-            "Wide Lens",
-            "Muscle Band",
-            "Wise Glasses",
-            "Expert Belt",
-            "Light Clay",
-            "Life Orb",
-            "Power Herb",
-            "Toxic Orb",
-            "Flame Orb",
-            "Quick Powder",
-            "Focus Sash",
-            "Zoom Lens",
-            "Metronome",
-            "Iron Ball",
-            "Lagging Tail",
-            "Destiny Knot",
-            "Black Sludge",
-            "Icy Rock",
-            "Smooth Rock",
-            "Heat Rock",
-            "Damp Rock",
-            "Grip Claw",
-            "Choice Scarf",
-            "Sticky Barb",
-            "Power Bracer",
-            "Power Belt",
-            "Power Lens",
-            "Power Band",
-            "Power Anklet",
-            "Power Weight",
-            "Shed Shell",
-            "Big Root",
-            "Choice Specs",
-            "Flame Plate",
-            "Splash Plate",
-            "Zap Plate",
-            "Meadow Plate",
-            "Icicle Plate",
-            "Fist Plate",
-            "Toxic Plate",
-            "Earth Plate",
-            "Sky Plate",
-            "Mind Plate",
-            "Insect Plate",
-            "Stone Plate",
-            "Spooky Plate",
-            "Draco Plate",
-            "Dread Plate",
-            "Iron Plate",
-            "Odd Incense",
-            "Rock Incense",
-            "Full Incense",
-            "Wave Incense",
-            "Rose Incense",
-            "Luck Incense",
-            "Pure Incense",
-            "Protector",
-            "Electrizer",
-            "Magmarizer",
-            "Dubious Disc",
-            "Reaper Cloth",
-            "Razor Claw",
-            "Razor Fang",
-            "Hone Claws",
-            "Dragon Claw",
-            "Psyshock",
-            "Calm Mind",
-            "Roar",
-            "Toxic",
-            "Hail",
-            "Bulk Up",
-            "Venoshock",
-            "Hidden Power",
-            "Sunny Day",
-            "Taunt",
-            "Ice Beam",
-            "Blizzard",
-            "Hyper Beam",
-            "Light Screen",
-            "Protect",
-            "Rain Dance",
-            "Roost",
-            "Safeguard",
-            "Frustration",
-            "Solar Beam",
-            "Smack Down",
-            "Thunderbolt",
-            "Thunder",
-            "Earthquake",
-            "Return",
-            "Dig",
-            "Psychic",
-            "Shadow Ball",
-            "Brick Break",
-            "Double Team",
-            "Reflect",
-            "Sludge Wave",
-            "Flamethrower",
-            "Sludge Bomb",
-            "Sandstorm",
-            "Fire Blast",
-            "Rock Tomb",
-            "Aerial Ace",
-            "Torment",
-            "Facade",
-            "Flame Charge",
-            "Rest",
-            "Attract",
-            "Thief",
-            "Low Sweep",
-            "Round",
-            "Echoed Voice",
-            "Overheat",
-            "Steel Wing",
-            "Focus Blast",
-            "Energy Ball",
-            "False Swipe",
-            "Scald",
-            "Fling",
-            "Charge Beam",
-            "Sky Drop",
-            "Incinerate",
-            "Quash",
-            "Will-O-Wisp",
-            "Acrobatics",
-            "Embargo",
-            "Explosion",
-            "Shadow Claw",
-            "Payback",
-            "Retaliate",
-            "Giga Impact",
-            "Rock Polish",
-            "Flash",
-            "Stone Edge",
-            "Volt Switch",
-            "Thunder Wave",
-            "Gyro Ball",
-            "Swords Dance",
-            "Struggle Bug",
-            "Psych Up",
-            "Bulldoze",
-            "Frost Breath",
-            "Rock Slide",
-            "X-Scissor",
-            "Dragon Tail",
-            "Infestation",
-            "Poison Jab",
-            "Dream Eater",
-            "Grass Knot",
-            "Swagger",
-            "Sleep Talk",
-            "U-turn",
-            "Substitute",
-            "Flash Cannon",
-            "Trick Room",
-            "Cut",
-            "Fly",
-            "Surf",
-            "Strength",
-            "Waterfall",
-            "Rock Smash",
-            "???",
-            "???",
-            "Explorer Kit",
-            "Loot Sack",
-            "Rule Book",
-            "Poke Radar",
-            "Point Card",
-            "Journal",
-            "Seal Case",
-            "Fashion Case",
-            "Seal Bag",
-            "Pal Pad",
-            "Works key",
-            "Old Charm",
-            "Galactic Key",
-            "Red Chain",
-            "Town Map",
-            "Vs. Seeker",
-            "Coin Case",
-            "Old Rod",
-            "Good Rod",
-            "Super Rod",
-            "Sprayduck",
-            "Poffin Case",
-            "Bike",
-            "Suite Key",
-            "Oak\'s Letter",
-            "Lunar Wing",
-            "Member Card",
-            "Azure Flute",
-            "S.S. Ticket",
-            "Contest Pass",
-            "Magma Stone",
-            "Parcel",
-            "Coupon 1",
-            "Coupon 2",
-            "Coupon 3",
-            "Storage Key",
-            "Secret Potion",
-            "Vs. Recorder",
-            "Gracidea",
-            "Secret Key",
-            "Apricorn Box",
-            "Unown Report",
-            "Berry Pots",
-            "Dowsing Machine",
-            "Blue Card",
-            "Slowpoke Tail",
-            "Clear Bell",
-            "Card Key",
-            "Basement Key",
-            "Squirt Bottle",
-            "Red Scale",
-            "Lost Item",
-            "Pass",
-            "Machine Part",
-            "Silver Wing",
-            "Rainbow Wing",
-            "Mystery Egg",
-            "Red Apricorn",
-            "Blue Apricorn",
-            "Yellow Apricorn",
-            "Green Apricorn",
-            "Pink Apricorn",
-            "White Apricorn",
-            "Black Apricorn",
-            "Fast Ball",
-            "Level Ball",
-            "Lure Ball",
-            "Heavy Ball",
-            "Love Ball",
-            "Friend Ball",
-            "Moon Ball",
-            "Sport Ball",
-            "Park Ball",
-            "Photo Album",
-            "GB Sounds",
-            "Tidal Bell",
-            "Rage Candy Bar",
-            "Data Card 01",
-            "Data Card 02",
-            "Data Card 03",
-            "Data Card 04",
-            "Data Card 05",
-            "Data Card 06",
-            "Data Card 07",
-            "Data Card 08",
-            "Data Card 09",
-            "Data Card 10",
-            "Data Card 11",
-            "Data Card 12",
-            "Data Card 13",
-            "Data Card 14",
-            "Data Card 15",
-            "Data Card 16",
-            "Data Card 17",
-            "Data Card 18",
-            "Data Card 19",
-            "Data Card 20",
-            "Data Card 21",
-            "Data Card 22",
-            "Data Card 23",
-            "Data Card 24",
-            "Data Card 25",
-            "Data Card 26",
-            "Data Card 27",
-            "Jade Orb",
-            "Lock Capsule",
-            "Red Orb",
-            "Blue Orb",
-            "Enigma Stone",
-            "Prism Scale",
-            "Eviolite",
-            "Float Stone",
-            "Rocky Helmet",
-            "Air Balloon",
-            "Red Card",
-            "Ring Target",
-            "Binding Band",
-            "Absorb Bulb",
-            "Cell Battery",
-            "Eject Button",
-            "Fire Gem",
-            "Water Gem",
-            "Electric Gem",
-            "Grass Gem",
-            "Ice Gem",
-            "Fighting Gem",
-            "Poison Gem",
-            "Ground Gem",
-            "Flying Gem",
-            "Psychic Gem",
-            "Bug Gem",
-            "Rock Gem",
-            "Ghost Gem",
-            "Dragon Gem",
-            "Dark Gem",
-            "Steel Gem",
-            "Normal Gem",
-            "Health Wing",
-            "Muscle Wing",
-            "Resist Wing",
-            "Genius Wing",
-            "Clever Wing",
-            "Swift Wing",
-            "Pretty Wing",
-            "Cover Fossil",
-            "Plume Fossil",
-            "Libery Pass",
-            "Pass Orb",
-            "Dream Ball",
-            "Poke Toy",
-            "Prop Case",
-            "Dragon Skull",
-            "Balm Mushroom",
-            "Big Nugget",
-            "Pearl String",
-            "Comet Shard",
-            "Relic Copper",
-            "Relic Silver",
-            "Relic Gold",
-            "Relic Vase",
-            "Relic Band",
-            "Relic Statue",
-            "Relic Crown",
-            "Casteliacone",
-            "Dire Hit 2",
-            "X Speed 2",
-            "X Sp. Atk 2",
-            "X Sp. Def 2",
-            "X Defense 2",
-            "X Attack 2",
-            "X Accuracy 2",
-            "X Speed 3",
-            "X Sp. Atk 3",
-            "X Sp. Def 3",
-            "X Defense 3",
-            "X Attack 3",
-            "X Accuracy 3",
-            "X Speed 6",
-            "X Sp. Atk 6",
-            "X Sp. Def 6",
-            "X Defense 6",
-            "X Attack 6",
-            "X Accuracy 6",
-            "Ability Urge",
-            "Item Drop",
-            "Item Urge",
-            "Reset Urge",
-            "Dire Hit 3",
-            "Light Stone",
-            "Dark Stone",
-            "Wild Charge",
-            "Secret Power",
-            "Snarl",
-            "Xtransceiver(Male)",
-            "???",
-            "Gram 1",
-            "Gram 2",
-            "Gram 3",
-            "Xtransceiver(Female)",
-            "Medal Box",
-            "DNA Splicers(Fuses)",
-            "DNA Splicers(Seperates)",
-            "Permit",
-            "Oval Charm",
-            "Shiny Charm",
-            "Plasma Card",
-            "Grubby Hanky",
-            "Colress Machine",
-            "Dropped Item (Xtransceiver Male)",
-            "Dropped Item (Xtransceiver Female)",
-            "Reveal Glass",
-            "Weakness Policy",
-            "Assault Vest",
-            "Holo Caster",
-            "Prof\'s Letter",
-            "Roller Skates",
-            "Pixie Plate",
-            "Ability Capsule",
-            "Whipped Dream",
-            "Sachet",
-            "Luminous Moss",
-            "Snowball",
-            "Safety Goggles",
-            "Poke Flute",
-            "Rich Mulch",
-            "Surprise Mulch",
-            "Boost Mulch",
-            "Amaze Mulch",
-            "Gengarite",
-            "Gardevoirite",
-            "Ampharosite",
-            "Venusaurite",
-            "Charizardite X",
-            "Blastoisinite",
-            "Mewtwonite X",
-            "Mewtwonite Y",
-            "Blazikenite",
-            "Medichamite",
-            "Houndoominite",
-            "Aggronite",
-            "Banettite",
-            "Tyranitarite",
-            "Scizorite",
-            "Pinsirite",
-            "Aerodactylite",
-            "Lucarionite",
-            "Abomasite",
-            "Kangaskhanite",
-            "Gyaradosite",
-            "Absolite",
-            "Charizardite Y",
-            "Alakazite",
-            "Heracronite",
-            "Mawilite",
-            "Manectite",
-            "Garchompite",
-            "Latiasite",
-            "Latiosite",
-            "Roseli Berry",
-            "Kee Berry",
-            "Maranga Berry",
-            "Sprinklotad",
-            "Nature Power",
-            "Dark Pulse",
-            "Power-Up Punch",
-            "Dazzling Gleam",
-            "Confide",
-            "Power Plant Pass",
-            "Mega Ring",
-            "Intruiging Stone",
-            "Common Stone",
-            "Discount Coupon",
-            "Elevator Key",
-            "TMV Pass",
-            "Honor of Kalos",
-            "Adventure Rules",
-            "Strange Souvenir",
-            "Lens Case",
-            "Travel Trunk (Silver)",
-            "Travel Trunk (Gold)",
-            "Lumiose Galette",
-            "Shalour Sable",
-            "Jaw Fossil",
-            "Sail Fossil",
-            "Looker Ticket",
-            "Bike",
-            "Holo Caster",
-            "Fairy Gem",
-            "Mega Charm",
-            "Mega Glove",
-            "Mach Bike",
-            "Acro Bike",
-            "Wailmer Pail",
-            "Devon Parts",
-            "Soot Sack",
-            "Basement Key",
-            "Pokeblock Kit",
-            "Letter",
-            "Eon Ticket",
-            "Scanner",
-            "Go-Goggles",
-            "Meteorite (originally found)",
-            "Key to Room 1",
-            "Key to Room 2",
-            "Key to Room 4",
-            "Key to Room 6",
-            "Storage Key",
-            "Devon Scope",
-            "S.S. Ticket",
-            "Dive",
-            "Devon Scuba Gear",
-            "Contest Costume (Male)",
-            "Contest Costume (Female)",
-            "Magma Suit",
-            "Aqua Suit",
-            "Pair of Tickets",
-            "Mega Bracelet",
-            "Mega Pendant",
-            "Mega Glasses",
-            "Mega Anchor",
-            "Mega Stickpin",
-            "Mega Tiara",
-            "Mega Anklet",
-            "Meteorite (faint glow)",
-            "Swampertite",
-            "Sceptilite",
-            "Sablenite",
-            "Altarianite",
-            "Galladite",
-            "Audinite",
-            "Metagrossite",
-            "Sharpedonite",
-            "Slowbronite",
-            "Steelixite",
-            "Pidgeotite",
-            "Glalitite",
-            "Diancite",
-            "Prison Bottle",
-            "Mega Cuff",
-            "Cameruptite",
-            "Lopunnite",
-            "Salamencite",
-            "Beedrillite",
-            "Meteorite (1)",
-            "Meteorite (2)",
-            "Key Stone",
-            "Meteorite Shard",
-            "Eon Flute"});
-            this.items1.Location = new System.Drawing.Point(6, 6);
-            this.items1.Name = "items1";
-            this.items1.Size = new System.Drawing.Size(121, 21);
-            this.items1.TabIndex = 0;
-            this.items1.Text = "None";
-            this.items1.SelectedIndexChanged += new System.EventHandler(this.items1_SelectedIndexChanged);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(877, 400);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Medicine";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // Item
             // 
@@ -2281,30 +620,41 @@
             this.groupBox2.Controls.Add(this.hourNum);
             this.groupBox2.Controls.Add(this.playerName);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Location = new System.Drawing.Point(12, 199);
+            this.groupBox2.Location = new System.Drawing.Point(167, 129);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(209, 159);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit Trainer";
             // 
-            // label10
+            // label14
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 17);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(38, 13);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "Name:";
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(114, 115);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(34, 13);
+            this.label14.TabIndex = 37;
+            this.label14.Text = "Secs:";
             // 
-            // label11
+            // pokeTID
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 66);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(28, 13);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "TID:";
+            this.pokeTID.Enabled = false;
+            this.pokeTID.Location = new System.Drawing.Point(95, 80);
+            this.pokeTID.Name = "pokeTID";
+            this.pokeTID.Size = new System.Drawing.Size(45, 23);
+            this.pokeTID.TabIndex = 30;
+            this.pokeTID.Text = "Write";
+            this.pokeTID.UseVisualStyleBackColor = true;
+            this.pokeTID.Click += new System.EventHandler(this.pokeTID_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(73, 115);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(32, 13);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Mins:";
             // 
             // TIDNum
             // 
@@ -2319,16 +669,49 @@
             this.TIDNum.Size = new System.Drawing.Size(80, 20);
             this.TIDNum.TabIndex = 29;
             // 
-            // pokeTID
+            // secNum
             // 
-            this.pokeTID.Enabled = false;
-            this.pokeTID.Location = new System.Drawing.Point(95, 80);
-            this.pokeTID.Name = "pokeTID";
-            this.pokeTID.Size = new System.Drawing.Size(45, 23);
-            this.pokeTID.TabIndex = 30;
-            this.pokeTID.Text = "Write";
-            this.pokeTID.UseVisualStyleBackColor = true;
-            this.pokeTID.Click += new System.EventHandler(this.pokeTID_Click);
+            this.secNum.Enabled = false;
+            this.secNum.Location = new System.Drawing.Point(114, 131);
+            this.secNum.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.secNum.Name = "secNum";
+            this.secNum.Size = new System.Drawing.Size(35, 20);
+            this.secNum.TabIndex = 35;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(11, 66);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "TID:";
+            // 
+            // minNum
+            // 
+            this.minNum.Enabled = false;
+            this.minNum.Location = new System.Drawing.Point(73, 131);
+            this.minNum.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.minNum.Name = "minNum";
+            this.minNum.Size = new System.Drawing.Size(35, 20);
+            this.minNum.TabIndex = 34;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(11, 17);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(38, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Name:";
             // 
             // pokeTime
             // 
@@ -2363,57 +746,176 @@
             this.label12.TabIndex = 31;
             this.label12.Text = "Hours:";
             // 
-            // minNum
+            // showKeys
             // 
-            this.minNum.Enabled = false;
-            this.minNum.Location = new System.Drawing.Point(73, 131);
-            this.minNum.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.minNum.Name = "minNum";
-            this.minNum.Size = new System.Drawing.Size(35, 20);
-            this.minNum.TabIndex = 34;
+            this.showKeys.Enabled = false;
+            this.showKeys.Location = new System.Drawing.Point(199, 134);
+            this.showKeys.Name = "showKeys";
+            this.showKeys.Size = new System.Drawing.Size(115, 26);
+            this.showKeys.TabIndex = 33;
+            this.showKeys.Text = "KEY ITEMS";
+            this.showKeys.UseVisualStyleBackColor = true;
+            this.showKeys.Click += new System.EventHandler(this.showKeys_Click);
             // 
-            // secNum
+            // showBerries
             // 
-            this.secNum.Enabled = false;
-            this.secNum.Location = new System.Drawing.Point(114, 131);
-            this.secNum.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.secNum.Name = "secNum";
-            this.secNum.Size = new System.Drawing.Size(35, 20);
-            this.secNum.TabIndex = 35;
+            this.showBerries.Enabled = false;
+            this.showBerries.Location = new System.Drawing.Point(199, 105);
+            this.showBerries.Name = "showBerries";
+            this.showBerries.Size = new System.Drawing.Size(115, 26);
+            this.showBerries.TabIndex = 34;
+            this.showBerries.Text = "BERRIES";
+            this.showBerries.UseVisualStyleBackColor = true;
+            this.showBerries.Click += new System.EventHandler(this.showBerries_Click);
             // 
-            // label13
+            // showTMs
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(73, 115);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(32, 13);
-            this.label13.TabIndex = 36;
-            this.label13.Text = "Mins:";
+            this.showTMs.Enabled = false;
+            this.showTMs.Location = new System.Drawing.Point(199, 76);
+            this.showTMs.Name = "showTMs";
+            this.showTMs.Size = new System.Drawing.Size(115, 26);
+            this.showTMs.TabIndex = 35;
+            this.showTMs.Text = "TMs && HMs";
+            this.showTMs.UseVisualStyleBackColor = true;
+            this.showTMs.Click += new System.EventHandler(this.showTMs_Click);
             // 
-            // label14
+            // showMedicine
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(114, 115);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(34, 13);
-            this.label14.TabIndex = 37;
-            this.label14.Text = "Secs:";
+            this.showMedicine.Enabled = false;
+            this.showMedicine.Location = new System.Drawing.Point(199, 47);
+            this.showMedicine.Name = "showMedicine";
+            this.showMedicine.Size = new System.Drawing.Size(115, 26);
+            this.showMedicine.TabIndex = 36;
+            this.showMedicine.Text = "MEDICINE";
+            this.showMedicine.UseVisualStyleBackColor = true;
+            this.showMedicine.Click += new System.EventHandler(this.showMedicine_Click);
+            // 
+            // showItems
+            // 
+            this.showItems.Enabled = false;
+            this.showItems.ForeColor = System.Drawing.Color.Green;
+            this.showItems.Location = new System.Drawing.Point(199, 18);
+            this.showItems.Name = "showItems";
+            this.showItems.Size = new System.Drawing.Size(115, 26);
+            this.showItems.TabIndex = 37;
+            this.showItems.Text = "ITEMS";
+            this.showItems.UseVisualStyleBackColor = true;
+            this.showItems.Click += new System.EventHandler(this.showItems_Click);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToResizeColumns = false;
+            this.dataGridView2.AllowUserToResizeRows = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Enabled = false;
+            this.dataGridView2.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.ShowEditingIcon = false;
+            this.dataGridView2.Size = new System.Drawing.Size(191, 177);
+            this.dataGridView2.TabIndex = 38;
+            this.dataGridView2.Visible = false;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.AllowUserToResizeColumns = false;
+            this.dataGridView3.AllowUserToResizeRows = false;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Enabled = false;
+            this.dataGridView3.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowHeadersVisible = false;
+            this.dataGridView3.ShowEditingIcon = false;
+            this.dataGridView3.Size = new System.Drawing.Size(191, 177);
+            this.dataGridView3.TabIndex = 39;
+            this.dataGridView3.Visible = false;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.AllowUserToAddRows = false;
+            this.dataGridView4.AllowUserToDeleteRows = false;
+            this.dataGridView4.AllowUserToResizeColumns = false;
+            this.dataGridView4.AllowUserToResizeRows = false;
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Enabled = false;
+            this.dataGridView4.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.RowHeadersVisible = false;
+            this.dataGridView4.ShowEditingIcon = false;
+            this.dataGridView4.Size = new System.Drawing.Size(191, 177);
+            this.dataGridView4.TabIndex = 40;
+            this.dataGridView4.Visible = false;
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.AllowUserToAddRows = false;
+            this.dataGridView5.AllowUserToDeleteRows = false;
+            this.dataGridView5.AllowUserToResizeColumns = false;
+            this.dataGridView5.AllowUserToResizeRows = false;
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Enabled = false;
+            this.dataGridView5.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.RowHeadersVisible = false;
+            this.dataGridView5.ShowEditingIcon = false;
+            this.dataGridView5.Size = new System.Drawing.Size(191, 177);
+            this.dataGridView5.TabIndex = 41;
+            this.dataGridView5.Visible = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dataGridView5);
+            this.groupBox3.Controls.Add(this.itemAdd);
+            this.groupBox3.Controls.Add(this.dataGridView1);
+            this.groupBox3.Controls.Add(this.dataGridView4);
+            this.groupBox3.Controls.Add(this.showKeys);
+            this.groupBox3.Controls.Add(this.itemWrite);
+            this.groupBox3.Controls.Add(this.dataGridView3);
+            this.groupBox3.Controls.Add(this.showBerries);
+            this.groupBox3.Controls.Add(this.dataGridView2);
+            this.groupBox3.Controls.Add(this.showTMs);
+            this.groupBox3.Controls.Add(this.showItems);
+            this.groupBox3.Controls.Add(this.showMedicine);
+            this.groupBox3.Location = new System.Drawing.Point(382, 86);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(318, 202);
+            this.groupBox3.TabIndex = 42;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Edit Items";
+            // 
+            // itemAdd
+            // 
+            this.itemAdd.Enabled = false;
+            this.itemAdd.Location = new System.Drawing.Point(257, 173);
+            this.itemAdd.Name = "itemAdd";
+            this.itemAdd.Size = new System.Drawing.Size(57, 23);
+            this.itemAdd.TabIndex = 46;
+            this.itemAdd.Text = "Add Item";
+            this.itemAdd.UseVisualStyleBackColor = true;
+            this.itemAdd.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // itemWrite
+            // 
+            this.itemWrite.Enabled = false;
+            this.itemWrite.Location = new System.Drawing.Point(199, 173);
+            this.itemWrite.Name = "itemWrite";
+            this.itemWrite.Size = new System.Drawing.Size(57, 23);
+            this.itemWrite.TabIndex = 43;
+            this.itemWrite.Text = "Write";
+            this.itemWrite.UseVisualStyleBackColor = true;
+            this.itemWrite.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 365);
+            this.ClientSize = new System.Drawing.Size(706, 292);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.tabMain);
             this.Controls.Add(this.editMoney);
             this.Controls.Add(this.writeBox);
             this.Controls.Add(this.txtLog);
@@ -2448,20 +950,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).EndInit();
             this.writeBox.ResumeLayout(false);
             this.writeBox.PerformLayout();
-            this.tabMain.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabItems.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsNum2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsNum1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TIDNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hourNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.minNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hourNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2505,20 +1005,9 @@
         private System.Windows.Forms.Button dumpBoxes;
         private System.Windows.Forms.RadioButton radioDaycare;
         private System.Windows.Forms.RadioButton radioBoxes;
-        private System.Windows.Forms.TabControl tabMain;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabControl tabItems;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.NumericUpDown itemsNum1;
-        private System.Windows.Forms.ComboBox items1;
-        private System.Windows.Forms.NumericUpDown itemsNum2;
-        private System.Windows.Forms.ComboBox items2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button pokeName;
         private System.Windows.Forms.TextBox playerName;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -2533,6 +1022,18 @@
         private System.Windows.Forms.NumericUpDown secNum;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button showKeys;
+        private System.Windows.Forms.Button showBerries;
+        private System.Windows.Forms.Button showTMs;
+        private System.Windows.Forms.Button showMedicine;
+        private System.Windows.Forms.Button showItems;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button itemWrite;
+        private System.Windows.Forms.Button itemAdd;
     }
 }
 
