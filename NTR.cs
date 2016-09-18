@@ -181,15 +181,23 @@ namespace ntrbase
             {
 				disconnect();
 			}
-			tcp = new TcpClient();
-			tcp.NoDelay = true;
-			tcp.Connect(host, port);
-			currentSeq = 0;
-			netStream = tcp.GetStream();
-			heartbeatSendable = 1;
-			packetRecvThread = new Thread(new ThreadStart(packetRecvThreadStart));
-			packetRecvThread.Start();
-			log("Server connected.");
+            try
+            {
+                tcp = new TcpClient();
+                tcp.NoDelay = true;
+                tcp.Connect(host, port);
+                currentSeq = 0;
+                netStream = tcp.GetStream();
+                heartbeatSendable = 1;
+                packetRecvThread = new Thread(new ThreadStart(packetRecvThreadStart));
+                packetRecvThread.Start();
+                log("Server connected.");
+            }
+            catch
+            {
+                MessageBox.Show("Could not connect, make sure the IP is correct, you're running NTR and you're online in-game!", "Connection Failed");
+            }
+
 		}
 
 		public void disconnect(bool waitPacketThread = true)

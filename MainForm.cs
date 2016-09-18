@@ -13,6 +13,8 @@ namespace ntrbase
 
     public partial class MainForm : Form
     {
+        public int tradedumpcount;
+        public string tradeoffrg;
         public string moneyoff;
         public string milesoff;
         public string bpoff;
@@ -458,6 +460,7 @@ namespace ntrbase
                 hroff = "0x8CE2814";
                 minoff = "0x8CE2816";
                 secoff = "0x8CE2817";
+                tradeoffrg = "0x8500000";
                 dumpMoney();
                 }
 
@@ -484,6 +487,7 @@ namespace ntrbase
                 hroff = "0x8CE2814";
                 minoff = "0x8CE2816";
                 secoff = "0x8CE2817";
+                tradeoffrg = "0x8500000";
                 dumpMoney();
             }
 
@@ -510,6 +514,7 @@ namespace ntrbase
                 hroff = "0x8CFBD88";
                 minoff = "0x8CFBD8A";
                 secoff = "0x8CFBD8B";
+                tradeoffrg = "0x8520000";
                 dumpMoney();
             }
 
@@ -536,14 +541,21 @@ namespace ntrbase
                 hroff = "0x8CFBD88";
                 minoff = "0x8CFBD8A";
                 secoff = "0x8CFBD8B";
+                tradeoffrg = "0x8520000";
                 dumpMoney();
             }
         }
 
         public void dumprealoppOff()
         {
-            string dumpRealoppoff = "data(0x8800000, 0xFFFF, filename='getoppoff.temp', pid=" + pid + ")";
+            string dumpRealoppoff = "data(0x8800000, 0x1FFFF, filename='getoppoff.temp', pid=" + pid + ")";
             runCmd(dumpRealoppoff);
+        }
+
+        public void dumprealtradeOff()
+        {
+            string dumpRealtradeoff = "data(" + tradeoffrg + ", 0xFFFF, filename='gettradeoff.temp', pid=" + pid + ")";
+            runCmd(dumpRealtradeoff);
         }
 
         public void dumpItems()
@@ -811,7 +823,6 @@ namespace ntrbase
 
                         foreach (int occurence in occurences)
                         {
-                            Console.WriteLine(occurence);
                             int realoffsetint = 142606336 + occurence + 637;
                             string realoppoffset = "0x" + realoffsetint.ToString("X");
                             string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
@@ -827,7 +838,6 @@ namespace ntrbase
 
                         foreach (int occurence in occurences)
                         {
-                            Console.WriteLine(occurence);
                             int realoffsetint = 142606336 + occurence + 673;
                             string realoppoffset = "0x" + realoffsetint.ToString("X");
                             string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
@@ -838,6 +848,45 @@ namespace ntrbase
             }
         }
 
+        private void gettradeOff()
+        {
+            const string dumpedtradeOff = "gettradeoff.temp";
+            if (File.Exists(dumpedtradeOff))
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
+                {
+                        tradedumpcount = 1;
+                        byte[] relativePattern = { 0xC4, 0x03, 0x00, 0x00, 0x44, 0x55, 0x00, 0x00, 0x40, 0x10 };
+                        byte[] dumptradeBytes = reader.ReadBytes(131070);
+                        List<int> occurences = findOccurences(dumptradeBytes, relativePattern);
+
+
+                             if (moneyoff == "0x8C6A6AC")
+                        {
+
+                        foreach (int occurence in occurences)
+                        {
+                            int realtradeoffsetint = 139460608 + occurence + 4777;
+                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
+                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + namePkx.Text + tradedumpcount.ToString("000") + "_.pkx', pid=" + pid + ")";
+                            runCmd(dumpTrade);
+                        }
+                        }
+
+                            if (moneyoff == "0x8C71DC0")
+                        {
+
+                        foreach (int occurence in occurences)
+                        {
+                            int realtradeoffsetint = 139591680 + occurence + 4777;
+                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
+                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + namePkx.Text + tradedumpcount.ToString("000") + "_.pkx', pid=" + pid + ")";
+                            runCmd(dumpTrade);
+                        }
+                        }
+                    }
+                }
+            }
 
 
         public void readName()
@@ -959,7 +1008,7 @@ namespace ntrbase
 
         public void movePkx()
         {
-            if (txtLog.Text.Contains(".pkx successfully"))
+            if (txtLog.Text.Contains(namePkx.Text + ".pkx successfully"))
             {
                 txtLog.Clear();
                 string pkmfrom = @Application.StartupPath + "\\" + namePkx.Text + ".pkx";
@@ -975,6 +1024,28 @@ namespace ntrbase
                 if (!File.Exists(pkmto))
                 {
                         File.Move(pkmfrom, pkmto);
+                }
+            }
+        }
+
+        private void movePkx_()
+        {
+            if (txtLog.Text.Contains(namePkx.Text + tradedumpcount.ToString("000") + "_.pkx successfully"))
+            {
+                txtLog.Clear();
+                string pkmfrom = @Application.StartupPath + "\\" + namePkx.Text + tradedumpcount.ToString("000") + "_.pkx";
+                string pkmto = @Application.StartupPath + "\\Pokemon\\" + namePkx.Text + "_.pkx";
+                System.IO.FileInfo folder = new System.IO.FileInfo(@Application.StartupPath + "\\Pokemon\\");
+                folder.Directory.Create();
+                if (File.Exists(pkmto))
+                {
+                    MessageBox.Show("That file already exists, please select a different filename.", "File Already Exists");
+                    File.Delete(pkmfrom);
+                }
+                else
+                if (!File.Exists(pkmto))
+                {
+                    File.Move(pkmfrom, pkmto);
                 }
             }
         }
@@ -1238,6 +1309,15 @@ namespace ntrbase
             }
         }
 
+        public void istradeDumped()
+        {
+            if (txtLog.Text.Contains("gettradeoff.temp successfully"))
+            {
+                gettradeOff();
+                RMTemp();
+                txtLog.Clear();
+            }
+        }
 
         public void isoppDumped()
         {
@@ -1330,9 +1410,11 @@ namespace ntrbase
             isTMsDumped();
             isMedsDumped();
             isBersDumped();
+            istradeDumped();
             isoppDumped();
             isItemsDumped();
             movePkx();
+            movePkx_();
         }
 
         private void pokeMoney_Click(object sender, EventArgs e)
@@ -1813,6 +1895,9 @@ namespace ntrbase
             }
         }
 
-
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+                dumprealtradeOff();
+        }
     }
 }

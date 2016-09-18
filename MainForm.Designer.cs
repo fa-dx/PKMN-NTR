@@ -41,6 +41,7 @@
             this.box = new System.Windows.Forms.NumericUpDown();
             this.slot = new System.Windows.Forms.NumericUpDown();
             this.dumpBox = new System.Windows.Forms.GroupBox();
+            this.radioOpponent = new System.Windows.Forms.RadioButton();
             this.radioDaycare = new System.Windows.Forms.RadioButton();
             this.radioBoxes = new System.Windows.Forms.RadioButton();
             this.dumpBoxes = new System.Windows.Forms.Button();
@@ -83,7 +84,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
-            this.radioOpponent = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -402,6 +403,19 @@
             this.dumpBox.TabIndex = 20;
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump Pokémon";
+            // 
+            // radioOpponent
+            // 
+            this.radioOpponent.AutoSize = true;
+            this.radioOpponent.Enabled = false;
+            this.radioOpponent.Location = new System.Drawing.Point(133, 90);
+            this.radioOpponent.Name = "radioOpponent";
+            this.radioOpponent.Size = new System.Drawing.Size(72, 17);
+            this.radioOpponent.TabIndex = 34;
+            this.radioOpponent.TabStop = true;
+            this.radioOpponent.Text = "Opponent";
+            this.radioOpponent.UseVisualStyleBackColor = true;
+            this.radioOpponent.CheckedChanged += new System.EventHandler(this.radioOpponent_CheckedChanged);
             // 
             // radioDaycare
             // 
@@ -911,24 +925,23 @@
             this.itemWrite.UseVisualStyleBackColor = true;
             this.itemWrite.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // radioOpponent
+            // button1
             // 
-            this.radioOpponent.AutoSize = true;
-            this.radioOpponent.Enabled = false;
-            this.radioOpponent.Location = new System.Drawing.Point(133, 90);
-            this.radioOpponent.Name = "radioOpponent";
-            this.radioOpponent.Size = new System.Drawing.Size(72, 17);
-            this.radioOpponent.TabIndex = 34;
-            this.radioOpponent.TabStop = true;
-            this.radioOpponent.Text = "Opponent";
-            this.radioOpponent.UseVisualStyleBackColor = true;
-            this.radioOpponent.CheckedChanged += new System.EventHandler(this.radioOpponent_CheckedChanged);
+            this.button1.Location = new System.Drawing.Point(581, 33);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(709, 295);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.editMoney);
@@ -1050,6 +1063,7 @@
         private System.Windows.Forms.Button itemWrite;
         private System.Windows.Forms.Button itemAdd;
         private System.Windows.Forms.RadioButton radioOpponent;
+        private System.Windows.Forms.Button button1;
     }
 }
 
