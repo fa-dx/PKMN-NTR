@@ -9,8 +9,6 @@ using System.Windows.Forms;
 namespace ntrbase
 {
 
-
-
     public partial class MainForm : Form
     {
         public int tradedumpcount = 0;
@@ -1339,6 +1337,131 @@ namespace ntrbase
             }
         }
 
+        public void isPkmDumped()
+        {
+            if (txtLog.Text.Contains(nameek6.Text + ".ek6 successfully"))
+            {
+                string dumpedek6 = @Application.StartupPath + "\\" + nameek6.Text + ".ek6";
+                byte[] pkm = System.IO.File.ReadAllBytes(dumpedek6);
+                byte[] pkm2 = PKHeX.decryptArray(pkm);
+                uint IV32 = BitConverter.ToUInt32(pkm2, 0x74);
+                uint IV_HP = (IV32 >> 00) & 31;
+                uint IV_ATK = (IV32 >> 05) & 31;
+                uint IV_DEF = (IV32 >> 10) & 31;
+                uint IV_SPE = (IV32 >> 15) & 31;
+                uint IV_SPA = (IV32 >> 20) & 31;
+                uint IV_SPD = (IV32 >> 25) & 31;
+                ivHP.Text = Convert.ToString(IV_HP);
+                ivATK.Text = Convert.ToString(IV_ATK);
+                ivDEF.Text = Convert.ToString(IV_DEF);
+                ivSPA.Text = Convert.ToString(IV_SPA);
+                ivSPD.Text = Convert.ToString(IV_SPD);
+                ivSPE.Text = Convert.ToString(IV_SPE);
+
+                uint nature = Convert.ToUInt16(pkm2[28]);
+                if (nature == 0)
+                {
+                    Nature.Text = "Hardy";
+                }
+                if (nature == 1)
+                {
+                    Nature.Text = "Lonely";
+                }
+                if (nature == 2)
+                {
+                    Nature.Text = "Brave";
+                }
+                if (nature == 3)
+                {
+                    Nature.Text = "Adamant";
+                }
+                if (nature == 4)
+                {
+                    Nature.Text = "Naughty";
+                }
+                if (nature == 5)
+                {
+                    Nature.Text = "Bold";
+                }
+                if (nature == 6)
+                {
+                    Nature.Text = "Docile";
+                }
+                if (nature == 7)
+                {
+                    Nature.Text = "Relaxed";
+                }
+                if (nature == 8)
+                {
+                    Nature.Text = "Impish";
+                }
+                if (nature == 9)
+                {
+                    Nature.Text = "Lax";
+                }
+                if (nature == 10)
+                {
+                    Nature.Text = "Timid";
+                }
+                if (nature == 11)
+                {
+                    Nature.Text = "Hasty";
+                }
+                if (nature == 12)
+                {
+                    Nature.Text = "Serious";
+                }
+                if (nature == 13)
+                {
+                    Nature.Text = "Jolly";
+                }
+                if (nature == 14)
+                {
+                    Nature.Text = "Naive";
+                }
+                if (nature == 15)
+                {
+                    Nature.Text = "Modest";
+                }
+                if (nature == 16)
+                {
+                    Nature.Text = "Mild";
+                }
+                if (nature == 17)
+                {
+                    Nature.Text = "Quiet";
+                }
+                if (nature == 18)
+                {
+                    Nature.Text = "Bashful";
+                }
+                if (nature == 19)
+                {
+                    Nature.Text = "Rash";
+                }
+                if (nature == 20)
+                {
+                    Nature.Text = "Calm";
+                }
+                if (nature == 21)
+                {
+                    Nature.Text = "Gentle";
+                }
+                if (nature == 22)
+                {
+                    Nature.Text = "Sassy";
+                }
+                if (nature == 23)
+                {
+                    Nature.Text = "Careful";
+                }
+                if (nature == 24)
+                {
+                    Nature.Text = "Quirky";
+                }
+            }
+        }
+
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             txtLog.Clear();
@@ -1426,6 +1549,7 @@ namespace ntrbase
             isBersDumped();
             istradeDumped();
             isoppDumped();
+            isPkmDumped();
             isItemsDumped();
             moveek6();
         }
@@ -1953,5 +2077,22 @@ namespace ntrbase
             runCmd(pokeSID);
         }
 
+
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            OpenFileDialog selectek6Dialog = new OpenFileDialog();
+            selectek6Dialog.Title = "Select an EKX file";
+            selectek6Dialog.Filter = "EKX files|*.ek6;*.ekx|All Files (*.*)|*.*";
+            string path = @Application.StartupPath + "\\Pokemon";
+            selectek6Dialog.InitialDirectory = path;
+            if (selectek6Dialog.ShowDialog() == DialogResult.OK)
+            {
+                selectedek6 = selectek6Dialog.FileName;
+                
+
+
+            }
+        }
     }
 }
