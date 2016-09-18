@@ -36,7 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.editBP = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.selectPkx = new System.Windows.Forms.Button();
+            this.selectek6 = new System.Windows.Forms.Button();
             this.pokePkm = new System.Windows.Forms.Button();
             this.box = new System.Windows.Forms.NumericUpDown();
             this.slot = new System.Windows.Forms.NumericUpDown();
@@ -46,8 +46,8 @@
             this.radioBoxes = new System.Windows.Forms.RadioButton();
             this.dumpBoxes = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.namePkx = new System.Windows.Forms.TextBox();
-            this.dumpPkx = new System.Windows.Forms.Button();
+            this.nameek6 = new System.Windows.Forms.TextBox();
+            this.dumpek6 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.slotDump = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -325,16 +325,16 @@
             this.label4.TabIndex = 13;
             this.label4.Text = "Battle Points:";
             // 
-            // selectPkx
+            // selectek6
             // 
-            this.selectPkx.Enabled = false;
-            this.selectPkx.Location = new System.Drawing.Point(6, 58);
-            this.selectPkx.Name = "selectPkx";
-            this.selectPkx.Size = new System.Drawing.Size(66, 23);
-            this.selectPkx.TabIndex = 16;
-            this.selectPkx.Text = "Browse";
-            this.selectPkx.UseVisualStyleBackColor = true;
-            this.selectPkx.Click += new System.EventHandler(this.selectPkx_Click);
+            this.selectek6.Enabled = false;
+            this.selectek6.Location = new System.Drawing.Point(6, 58);
+            this.selectek6.Name = "selectek6";
+            this.selectek6.Size = new System.Drawing.Size(66, 23);
+            this.selectek6.TabIndex = 16;
+            this.selectek6.Text = "Browse";
+            this.selectek6.UseVisualStyleBackColor = true;
+            this.selectek6.Click += new System.EventHandler(this.selectek6_Click);
             // 
             // pokePkm
             // 
@@ -396,8 +396,8 @@
             this.dumpBox.Controls.Add(this.radioBoxes);
             this.dumpBox.Controls.Add(this.dumpBoxes);
             this.dumpBox.Controls.Add(this.label9);
-            this.dumpBox.Controls.Add(this.namePkx);
-            this.dumpBox.Controls.Add(this.dumpPkx);
+            this.dumpBox.Controls.Add(this.nameek6);
+            this.dumpBox.Controls.Add(this.dumpek6);
             this.dumpBox.Controls.Add(this.label7);
             this.dumpBox.Controls.Add(this.slotDump);
             this.dumpBox.Controls.Add(this.label8);
@@ -468,24 +468,24 @@
             this.label9.TabIndex = 30;
             this.label9.Text = "Filename:";
             // 
-            // namePkx
+            // nameek6
             // 
-            this.namePkx.Enabled = false;
-            this.namePkx.Location = new System.Drawing.Point(98, 35);
-            this.namePkx.Name = "namePkx";
-            this.namePkx.Size = new System.Drawing.Size(105, 20);
-            this.namePkx.TabIndex = 29;
+            this.nameek6.Enabled = false;
+            this.nameek6.Location = new System.Drawing.Point(98, 35);
+            this.nameek6.Name = "nameek6";
+            this.nameek6.Size = new System.Drawing.Size(105, 20);
+            this.nameek6.TabIndex = 29;
             // 
-            // dumpPkx
+            // dumpek6
             // 
-            this.dumpPkx.Enabled = false;
-            this.dumpPkx.Location = new System.Drawing.Point(6, 57);
-            this.dumpPkx.Name = "dumpPkx";
-            this.dumpPkx.Size = new System.Drawing.Size(86, 23);
-            this.dumpPkx.TabIndex = 28;
-            this.dumpPkx.Text = "Dump";
-            this.dumpPkx.UseVisualStyleBackColor = true;
-            this.dumpPkx.Click += new System.EventHandler(this.dumpPkx_Click);
+            this.dumpek6.Enabled = false;
+            this.dumpek6.Location = new System.Drawing.Point(6, 57);
+            this.dumpek6.Name = "dumpek6";
+            this.dumpek6.Size = new System.Drawing.Size(86, 23);
+            this.dumpek6.TabIndex = 28;
+            this.dumpek6.Text = "Dump";
+            this.dumpek6.UseVisualStyleBackColor = true;
+            this.dumpek6.Click += new System.EventHandler(this.dumpek6_Click);
             // 
             // label7
             // 
@@ -555,7 +555,7 @@
             // 
             this.writeBox.Controls.Add(this.label6);
             this.writeBox.Controls.Add(this.label5);
-            this.writeBox.Controls.Add(this.selectPkx);
+            this.writeBox.Controls.Add(this.selectek6);
             this.writeBox.Controls.Add(this.pokePkm);
             this.writeBox.Controls.Add(this.box);
             this.writeBox.Controls.Add(this.slot);
@@ -1058,7 +1058,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox editBP;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button selectPkx;
+        private System.Windows.Forms.Button selectek6;
         private System.Windows.Forms.Button pokePkm;
         private System.Windows.Forms.NumericUpDown box;
         private System.Windows.Forms.NumericUpDown slot;
@@ -1066,12 +1066,12 @@
         private System.Windows.Forms.GroupBox writeBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button dumpPkx;
+        private System.Windows.Forms.Button dumpek6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown slotDump;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown boxDump;
-        private System.Windows.Forms.TextBox namePkx;
+        private System.Windows.Forms.TextBox nameek6;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button dumpBoxes;
         private System.Windows.Forms.RadioButton radioDaycare;

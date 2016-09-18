@@ -30,7 +30,7 @@ namespace ntrbase
         public string tmsoff;
         public string bersoff;
         public bool firstcheck = false;
-        public byte[] pkx;
+        public byte[] ek6;
         public int additem = 0;
         private byte[] items2;
         public byte[] items
@@ -49,7 +49,7 @@ namespace ntrbase
         public byte[] meds;
         public byte[] bers;
         public byte[] writeitems;
-        public string selectedPkx;
+        public string selectedek6;
         private int numofItems2;
         public int numofItems
         {
@@ -396,11 +396,11 @@ namespace ntrbase
                 bpNum.Enabled = true;
                 slot.Enabled = true;
                 box.Enabled = true;
-                selectPkx.Enabled = true;
+                selectek6.Enabled = true;
                 slotDump.Enabled = true;
                 boxDump.Enabled = true;
-                namePkx.Enabled = true;
-                dumpPkx.Enabled = true;
+                nameek6.Enabled = true;
+                dumpek6.Enabled = true;
                 dumpBoxes.Enabled = true;
                 radioBoxes.Enabled = true;
                 radioDaycare.Enabled = true;
@@ -839,7 +839,7 @@ namespace ntrbase
                         {
                             int realoffsetint = 142606336 + occurence + 637;
                             string realoppoffset = "0x" + realoffsetint.ToString("X");
-                            string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
+                            string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
                             runCmd(dumpOpp);
                         }
                     }
@@ -854,7 +854,7 @@ namespace ntrbase
                         {
                             int realoffsetint = 142606336 + occurence + 673;
                             string realoppoffset = "0x" + realoffsetint.ToString("X");
-                            string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
+                            string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
                             runCmd(dumpOpp);
                         }
                     }
@@ -881,7 +881,7 @@ namespace ntrbase
                         {
                             int realtradeoffsetint = 139460608 + occurence + 4777;
                             string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
+                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
                             runCmd(dumpTrade);
                         }
                         }
@@ -893,7 +893,7 @@ namespace ntrbase
                         {
                             int realtradeoffsetint = 139591680 + occurence + 4777;
                             string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
+                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
                             runCmd(dumpTrade);
                         }
                         }
@@ -1032,13 +1032,13 @@ namespace ntrbase
                 }
         }
 
-        public void movePkx()
+        public void moveek6()
         {
-            if (txtLog.Text.Contains(namePkx.Text + ".pkx successfully"))
+            if (txtLog.Text.Contains(nameek6.Text + ".ek6 successfully"))
             {
                 txtLog.Clear();
-                string pkmfrom = @Application.StartupPath + "\\" + namePkx.Text + ".pkx";
-                string pkmto = @Application.StartupPath + "\\Pokemon\\" + namePkx.Text + ".pkx";
+                string pkmfrom = @Application.StartupPath + "\\" + nameek6.Text + ".ek6";
+                string pkmto = @Application.StartupPath + "\\Pokemon\\" + nameek6.Text + ".ek6";
                 System.IO.FileInfo folder = new System.IO.FileInfo(@Application.StartupPath + "\\Pokemon\\");
                 folder.Directory.Create();
                 if (File.Exists(pkmto))
@@ -1380,11 +1380,11 @@ namespace ntrbase
             slot.Enabled = false;
             box.Enabled = false;
             pokePkm.Enabled = false;
-            selectPkx.Enabled = false;
+            selectek6.Enabled = false;
             slotDump.Enabled = false;
             boxDump.Enabled = false;
-            namePkx.Enabled = false;
-            dumpPkx.Enabled = false;
+            nameek6.Enabled = false;
+            dumpek6.Enabled = false;
             dumpBoxes.Enabled = false;
             radioBoxes.Enabled = false;
             radioDaycare.Enabled = false;
@@ -1442,7 +1442,7 @@ namespace ntrbase
             istradeDumped();
             isoppDumped();
             isItemsDumped();
-            movePkx();
+            moveek6();
         }
 
         private void pokeMoney_Click(object sender, EventArgs e)
@@ -1472,22 +1472,22 @@ namespace ntrbase
             runCmd(pokeBP);
         }
 
-        public void selectPkx_Click(object sender, EventArgs e)
+        public void selectek6_Click(object sender, EventArgs e)
         {
-            OpenFileDialog selectPkxDialog = new OpenFileDialog();
-            selectPkxDialog.Title = "Select a PKX file";
-            selectPkxDialog.Filter = "PKX files|*.pk6;*.pkx|All Files (*.*)|*.*";
+            OpenFileDialog selectek6Dialog = new OpenFileDialog();
+            selectek6Dialog.Title = "Select a ek6 file";
+            selectek6Dialog.Filter = "ek6 files|*.pk6;*.ek6|All Files (*.*)|*.*";
             string path = @Application.StartupPath + "\\Pokemon";
-            selectPkxDialog.InitialDirectory = path;
-            if (selectPkxDialog.ShowDialog() == DialogResult.OK)
+            selectek6Dialog.InitialDirectory = path;
+            if (selectek6Dialog.ShowDialog() == DialogResult.OK)
             {
-                selectedPkx = selectPkxDialog.FileName;
-                var size = new FileInfo(selectedPkx).Length;
+                selectedek6 = selectek6Dialog.FileName;
+                var size = new FileInfo(selectedek6).Length;
                 {
                     if (size != 232)
                     {
                         pokePkm.Enabled = false;
-                        MessageBox.Show("Please make sure you are using a valid PKX file.", "Incorrect File Size");
+                        MessageBox.Show("Please make sure you are using a valid ek6 file.", "Incorrect File Size");
                     }
                     else
                     {
@@ -1502,39 +1502,39 @@ namespace ntrbase
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string pkxr = ", 0x";
-            byte[] pkxb = File.ReadAllBytes(selectedPkx);
-            string pkx = BitConverter.ToString(pkxb).Replace("-", pkxr);
+            string ek6r = ", 0x";
+            byte[] ek6b = File.ReadAllBytes(selectedek6);
+            string ek6 = BitConverter.ToString(ek6b).Replace("-", ek6r);
             int ss = (Decimal.ToInt32(box.Value)* 30 - 30) + Decimal.ToInt32(slot.Value) - 1;
             int ssOff = boff + (ss * 232);
             string ssH = ssOff.ToString("X");
-            if (pkx.Length == 1388)
+            if (ek6.Length == 1388)
             {
                 string ssr = "0x";
                 string ssS = ssr + ssH;
-                string pokePkx = "write(0x" + ssH + ", (0x" + pkx + "), pid=" + pid + ")";
-                runCmd(pokePkx);
+                string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
+                runCmd(pokeek6);
                 txtLog.Clear();
             }
             else
             {
-                MessageBox.Show("Please make sure you are using a valid PKX file.", "Incorrect File Size");
+                MessageBox.Show("Please make sure you are using a valid ek6 file.", "Incorrect File Size");
                 txtLog.Clear();
             }
         }
 
-        private void dumpPkx_Click(object sender, EventArgs e)
+        private void dumpek6_Click(object sender, EventArgs e)
         {
             int ssd = (Decimal.ToInt32(boxDump.Value)* 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
             int ssdOff = boff + (ssd * 232);
             string ssdH = ssdOff.ToString("X");
 
-            string dumpPkx = "data(0x" + ssdH + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
-            string dumpDay1 = "data(" + d1off + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
+            string dumpek6 = "data(0x" + ssdH + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
+            string dumpDay1 = "data(" + d1off + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
 
             if (radioBoxes.Checked == true)
             {
-                runCmd(dumpPkx);
+                runCmd(dumpek6);
             }
             if (radioDaycare.Checked == true)
             {
@@ -1555,9 +1555,9 @@ namespace ntrbase
 
         private void dumpBoxes_Click(object sender, EventArgs e)
         {
-            string dumpBoxes = "data(" + boffs + ", 0x34AD0, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
+            string dumpBoxes = "data(" + boffs + ", 0x34AD0, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
 
-            string dumpDay2 = "data(" + d2off + ", 0xE8, filename='" + namePkx.Text + ".pkx', pid=" + pid + ")";
+            string dumpDay2 = "data(" + d2off + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
 
             if (radioBoxes.Checked == true)
             {
@@ -1578,18 +1578,18 @@ namespace ntrbase
             boxDump.Visible = true;
             slotDump.Visible = true;
             dumpBoxes.Visible = true;
-            namePkx.Visible = true;
+            nameek6.Visible = true;
             label7.Visible = true;
             label8.Visible = true;
             label9.Visible = true;
             label9.Location = new System.Drawing.Point(96, 16);
-            namePkx.Location = new System.Drawing.Point(98, 35);
-            namePkx.Size = new System.Drawing.Size(105, 20);
-            dumpPkx.Size = new System.Drawing.Size(86, 23);
+            nameek6.Location = new System.Drawing.Point(98, 35);
+            nameek6.Size = new System.Drawing.Size(105, 20);
+            dumpek6.Size = new System.Drawing.Size(86, 23);
             dumpBoxes.Size = new System.Drawing.Size(105, 23);
             dumpBoxes.Location = new System.Drawing.Point(98, 61);
-            dumpPkx.Location = new System.Drawing.Point(6, 61);
-            dumpPkx.Text = "Dump";
+            dumpek6.Location = new System.Drawing.Point(6, 61);
+            dumpek6.Text = "Dump";
             dumpBoxes.Text = "Dump All Boxes";
 
         }
@@ -1601,16 +1601,16 @@ namespace ntrbase
             label9.Visible = true;
             boxDump.Visible = false;
             slotDump.Visible = false;
-            namePkx.Visible = true;
+            nameek6.Visible = true;
             dumpBoxes.Visible = true;
-            dumpPkx.Location = new System.Drawing.Point(6, 61);
-            namePkx.Location = new System.Drawing.Point(6, 35);
+            dumpek6.Location = new System.Drawing.Point(6, 61);
+            nameek6.Location = new System.Drawing.Point(6, 35);
             label9.Location = new System.Drawing.Point(6, 16);
-            dumpPkx.Size = new System.Drawing.Size(95, 23);
+            dumpek6.Size = new System.Drawing.Size(95, 23);
             dumpBoxes.Size = new System.Drawing.Size(95, 23);
             dumpBoxes.Location = new System.Drawing.Point(108, 61);
-            namePkx.Size = new System.Drawing.Size(197, 23);
-            dumpPkx.Text = "Dump Slot 1";
+            nameek6.Size = new System.Drawing.Size(197, 23);
+            dumpek6.Text = "Dump Slot 1";
             dumpBoxes.Text = "Dump Slot 2";
         }
 
@@ -1621,14 +1621,14 @@ namespace ntrbase
             label9.Visible = true;
             boxDump.Visible = false;
             slotDump.Visible = false;
-            namePkx.Visible = true;
+            nameek6.Visible = true;
             dumpBoxes.Visible = false;
-            dumpPkx.Location = new System.Drawing.Point(6, 61);
-            namePkx.Location = new System.Drawing.Point(6, 35);
+            dumpek6.Location = new System.Drawing.Point(6, 61);
+            nameek6.Location = new System.Drawing.Point(6, 35);
             label9.Location = new System.Drawing.Point(6, 16);
-            dumpPkx.Size = new System.Drawing.Size(197, 23);
-            namePkx.Size = new System.Drawing.Size(197, 23);
-            dumpPkx.Text = "Dump";
+            dumpek6.Size = new System.Drawing.Size(197, 23);
+            nameek6.Size = new System.Drawing.Size(197, 23);
+            dumpek6.Text = "Dump";
         }
 
 
@@ -1934,14 +1934,14 @@ namespace ntrbase
             label9.Visible = true;
             boxDump.Visible = false;
             slotDump.Visible = false;
-            namePkx.Visible = true;
+            nameek6.Visible = true;
             dumpBoxes.Visible = false;
-            dumpPkx.Location = new System.Drawing.Point(6, 61);
-            namePkx.Location = new System.Drawing.Point(6, 35);
+            dumpek6.Location = new System.Drawing.Point(6, 61);
+            nameek6.Location = new System.Drawing.Point(6, 35);
             label9.Location = new System.Drawing.Point(6, 16);
-            dumpPkx.Size = new System.Drawing.Size(197, 23);
-            namePkx.Size = new System.Drawing.Size(197, 23);
-            dumpPkx.Text = "Dump";
+            dumpek6.Size = new System.Drawing.Size(197, 23);
+            nameek6.Size = new System.Drawing.Size(197, 23);
+            dumpek6.Text = "Dump";
         }
 
         private void pokeSID_Click(object sender, EventArgs e)
