@@ -84,7 +84,10 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.radioTrade = new System.Windows.Forms.RadioButton();
+            this.pokeSID = new System.Windows.Forms.Button();
+            this.SIDNum = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -109,13 +112,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
             // 
             this.txtLog.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(391, 406);
+            this.txtLog.Location = new System.Drawing.Point(421, 430);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
@@ -263,7 +267,7 @@
             this.editMoney.Controls.Add(this.label2);
             this.editMoney.Controls.Add(this.moneyNum);
             this.editMoney.Controls.Add(this.pokeMoney);
-            this.editMoney.Location = new System.Drawing.Point(7, 97);
+            this.editMoney.Location = new System.Drawing.Point(167, 12);
             this.editMoney.Name = "editMoney";
             this.editMoney.Size = new System.Drawing.Size(134, 62);
             this.editMoney.TabIndex = 13;
@@ -284,7 +288,7 @@
             this.editMiles.Controls.Add(this.pokeMiles);
             this.editMiles.Controls.Add(this.milesNum);
             this.editMiles.Controls.Add(this.label3);
-            this.editMiles.Location = new System.Drawing.Point(7, 226);
+            this.editMiles.Location = new System.Drawing.Point(447, 12);
             this.editMiles.Name = "editMiles";
             this.editMiles.Size = new System.Drawing.Size(134, 62);
             this.editMiles.TabIndex = 14;
@@ -305,7 +309,7 @@
             this.editBP.Controls.Add(this.label4);
             this.editBP.Controls.Add(this.pokeBP);
             this.editBP.Controls.Add(this.bpNum);
-            this.editBP.Location = new System.Drawing.Point(7, 161);
+            this.editBP.Location = new System.Drawing.Point(307, 12);
             this.editBP.Name = "editBP";
             this.editBP.Size = new System.Drawing.Size(134, 62);
             this.editBP.TabIndex = 15;
@@ -386,6 +390,7 @@
             // 
             // dumpBox
             // 
+            this.dumpBox.Controls.Add(this.radioTrade);
             this.dumpBox.Controls.Add(this.radioOpponent);
             this.dumpBox.Controls.Add(this.radioDaycare);
             this.dumpBox.Controls.Add(this.radioBoxes);
@@ -397,9 +402,9 @@
             this.dumpBox.Controls.Add(this.slotDump);
             this.dumpBox.Controls.Add(this.label8);
             this.dumpBox.Controls.Add(this.boxDump);
-            this.dumpBox.Location = new System.Drawing.Point(167, 1);
+            this.dumpBox.Location = new System.Drawing.Point(7, 81);
             this.dumpBox.Name = "dumpBox";
-            this.dumpBox.Size = new System.Drawing.Size(209, 113);
+            this.dumpBox.Size = new System.Drawing.Size(209, 124);
             this.dumpBox.TabIndex = 20;
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump Pokémon";
@@ -408,7 +413,7 @@
             // 
             this.radioOpponent.AutoSize = true;
             this.radioOpponent.Enabled = false;
-            this.radioOpponent.Location = new System.Drawing.Point(133, 90);
+            this.radioOpponent.Location = new System.Drawing.Point(99, 101);
             this.radioOpponent.Name = "radioOpponent";
             this.radioOpponent.Size = new System.Drawing.Size(72, 17);
             this.radioOpponent.TabIndex = 34;
@@ -421,7 +426,7 @@
             // 
             this.radioDaycare.AutoSize = true;
             this.radioDaycare.Enabled = false;
-            this.radioDaycare.Location = new System.Drawing.Point(63, 90);
+            this.radioDaycare.Location = new System.Drawing.Point(99, 83);
             this.radioDaycare.Name = "radioDaycare";
             this.radioDaycare.Size = new System.Drawing.Size(65, 17);
             this.radioDaycare.TabIndex = 33;
@@ -434,7 +439,7 @@
             this.radioBoxes.AutoSize = true;
             this.radioBoxes.Checked = true;
             this.radioBoxes.Enabled = false;
-            this.radioBoxes.Location = new System.Drawing.Point(6, 90);
+            this.radioBoxes.Location = new System.Drawing.Point(6, 83);
             this.radioBoxes.Name = "radioBoxes";
             this.radioBoxes.Size = new System.Drawing.Size(54, 17);
             this.radioBoxes.TabIndex = 32;
@@ -554,7 +559,7 @@
             this.writeBox.Controls.Add(this.pokePkm);
             this.writeBox.Controls.Add(this.box);
             this.writeBox.Controls.Add(this.slot);
-            this.writeBox.Location = new System.Drawing.Point(382, 1);
+            this.writeBox.Location = new System.Drawing.Point(222, 116);
             this.writeBox.Name = "writeBox";
             this.writeBox.Size = new System.Drawing.Size(154, 86);
             this.writeBox.TabIndex = 21;
@@ -623,6 +628,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.pokeSID);
+            this.groupBox2.Controls.Add(this.SIDNum);
+            this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.pokeTID);
             this.groupBox2.Controls.Add(this.label13);
@@ -636,9 +644,9 @@
             this.groupBox2.Controls.Add(this.hourNum);
             this.groupBox2.Controls.Add(this.playerName);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Location = new System.Drawing.Point(167, 129);
+            this.groupBox2.Location = new System.Drawing.Point(7, 205);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(209, 159);
+            this.groupBox2.Size = new System.Drawing.Size(209, 201);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit Trainer";
@@ -646,7 +654,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(114, 115);
+            this.label14.Location = new System.Drawing.Point(114, 157);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(34, 13);
             this.label14.TabIndex = 37;
@@ -655,7 +663,7 @@
             // pokeTID
             // 
             this.pokeTID.Enabled = false;
-            this.pokeTID.Location = new System.Drawing.Point(95, 80);
+            this.pokeTID.Location = new System.Drawing.Point(94, 79);
             this.pokeTID.Name = "pokeTID";
             this.pokeTID.Size = new System.Drawing.Size(45, 23);
             this.pokeTID.TabIndex = 30;
@@ -666,7 +674,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(73, 115);
+            this.label13.Location = new System.Drawing.Point(73, 157);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 13);
             this.label13.TabIndex = 36;
@@ -675,7 +683,7 @@
             // TIDNum
             // 
             this.TIDNum.Enabled = false;
-            this.TIDNum.Location = new System.Drawing.Point(8, 83);
+            this.TIDNum.Location = new System.Drawing.Point(9, 82);
             this.TIDNum.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -688,7 +696,7 @@
             // secNum
             // 
             this.secNum.Enabled = false;
-            this.secNum.Location = new System.Drawing.Point(114, 131);
+            this.secNum.Location = new System.Drawing.Point(114, 173);
             this.secNum.Maximum = new decimal(new int[] {
             60,
             0,
@@ -701,7 +709,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 66);
+            this.label11.Location = new System.Drawing.Point(12, 65);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
             this.label11.TabIndex = 28;
@@ -710,7 +718,7 @@
             // minNum
             // 
             this.minNum.Enabled = false;
-            this.minNum.Location = new System.Drawing.Point(73, 131);
+            this.minNum.Location = new System.Drawing.Point(73, 173);
             this.minNum.Maximum = new decimal(new int[] {
             60,
             0,
@@ -732,7 +740,7 @@
             // pokeTime
             // 
             this.pokeTime.Enabled = false;
-            this.pokeTime.Location = new System.Drawing.Point(155, 128);
+            this.pokeTime.Location = new System.Drawing.Point(155, 170);
             this.pokeTime.Name = "pokeTime";
             this.pokeTime.Size = new System.Drawing.Size(45, 23);
             this.pokeTime.TabIndex = 33;
@@ -743,7 +751,7 @@
             // hourNum
             // 
             this.hourNum.Enabled = false;
-            this.hourNum.Location = new System.Drawing.Point(8, 131);
+            this.hourNum.Location = new System.Drawing.Point(8, 173);
             this.hourNum.Maximum = new decimal(new int[] {
             999,
             0,
@@ -756,7 +764,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(11, 115);
+            this.label12.Location = new System.Drawing.Point(11, 157);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(38, 13);
             this.label12.TabIndex = 31;
@@ -896,7 +904,7 @@
             this.groupBox3.Controls.Add(this.showTMs);
             this.groupBox3.Controls.Add(this.showItems);
             this.groupBox3.Controls.Add(this.showMedicine);
-            this.groupBox3.Location = new System.Drawing.Point(382, 86);
+            this.groupBox3.Location = new System.Drawing.Point(222, 204);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(318, 202);
             this.groupBox3.TabIndex = 42;
@@ -925,23 +933,57 @@
             this.itemWrite.UseVisualStyleBackColor = true;
             this.itemWrite.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // button1
+            // radioTrade
             // 
-            this.button1.Location = new System.Drawing.Point(581, 33);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 43;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            this.radioTrade.AutoSize = true;
+            this.radioTrade.Enabled = false;
+            this.radioTrade.Location = new System.Drawing.Point(6, 101);
+            this.radioTrade.Name = "radioTrade";
+            this.radioTrade.Size = new System.Drawing.Size(53, 17);
+            this.radioTrade.TabIndex = 43;
+            this.radioTrade.TabStop = true;
+            this.radioTrade.Text = "Trade";
+            this.radioTrade.UseVisualStyleBackColor = true;
+            this.radioTrade.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // pokeSID
+            // 
+            this.pokeSID.Enabled = false;
+            this.pokeSID.Location = new System.Drawing.Point(94, 127);
+            this.pokeSID.Name = "pokeSID";
+            this.pokeSID.Size = new System.Drawing.Size(45, 23);
+            this.pokeSID.TabIndex = 40;
+            this.pokeSID.Text = "Write";
+            this.pokeSID.UseVisualStyleBackColor = true;
+            this.pokeSID.Click += new System.EventHandler(this.pokeSID_Click);
+            // 
+            // SIDNum
+            // 
+            this.SIDNum.Enabled = false;
+            this.SIDNum.Location = new System.Drawing.Point(8, 130);
+            this.SIDNum.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.SIDNum.Name = "SIDNum";
+            this.SIDNum.Size = new System.Drawing.Size(80, 20);
+            this.SIDNum.TabIndex = 39;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(11, 113);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(28, 13);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "SID:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 295);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(586, 411);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.editMoney);
@@ -990,6 +1032,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1063,7 +1106,10 @@
         private System.Windows.Forms.Button itemWrite;
         private System.Windows.Forms.Button itemAdd;
         private System.Windows.Forms.RadioButton radioOpponent;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton radioTrade;
+        private System.Windows.Forms.Button pokeSID;
+        private System.Windows.Forms.NumericUpDown SIDNum;
+        private System.Windows.Forms.Label label15;
     }
 }
 
