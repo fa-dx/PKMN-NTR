@@ -1469,14 +1469,20 @@ namespace ntrbase
                 selectedek6 = selectek6Dialog.FileName;
                 var size = new FileInfo(selectedek6).Length;
                 {
-                    if (size != 232)
+                    if (size == 232)
                     {
-                        pokePkm.Enabled = false;
-                        MessageBox.Show("Please make sure you are using a valid ek6 file.", "Incorrect File Size");
+                        pokePkm.Enabled = true;
+
+                    }
+                    if (size == 260)
+                    {
+                        pokePkm.Enabled = true;
+
                     }
                     else
                     {
-                        pokePkm.Enabled = true;
+                        pokePkm.Enabled = false;
+                        MessageBox.Show("Please make sure you are using a valid ek6 file.", "Incorrect File Size");
                     }
 
                                             
@@ -1498,6 +1504,15 @@ namespace ntrbase
                 string ssr = "0x";
                 string ssS = ssr + ssH;
                 string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
+                runCmd(pokeek6);
+                txtLog.Clear();
+            }
+            if (ek6.Length == 1556)
+            {
+                string ek6short = ek6.Remove(ek6.Length - 28);
+                string ssr = "0x";
+                string ssS = ssr + ssH;
+                string pokeek6 = "write(0x" + ssH + ", (0x" + ek6short + "), pid=" + pid + ")";
                 runCmd(pokeek6);
                 txtLog.Clear();
             }
