@@ -562,7 +562,7 @@ namespace ntrbase
 
         public void dumprealtradeOff()
         {
-            string dumpRealtradeoff = "data(" + tradeoffrg + ", 0xFFFF, filename='gettradeoff.temp', pid=" + pid + ")";
+            string dumpRealtradeoff = "data(" + tradeoffrg + ", 0x1FFFF, filename='gettradeoff.temp', pid=" + pid + ")";
             runCmd(dumpRealtradeoff);
         }
 
@@ -869,34 +869,19 @@ namespace ntrbase
             {
                 using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
                 {
-                        byte[] relativePattern = { 0xC4, 0x03, 0x00, 0x00, 0x44, 0x55, 0x00, 0x00, 0x40, 0x10 };
+                        byte[] relativePattern = { 0x74, 0x69, 0x6D, 0x65, 0x5F, 0x69, 0x63, 0x6F, 0x6E, 0x30, 0x31, 0x2E, 0x62, 0x63, 0x6C, 0x69, 0x6D };
                         byte[] dumptradeBytes = reader.ReadBytes(131070);
                         List<int> occurences = findOccurences(dumptradeBytes, relativePattern);
 
 
-                             if (moneyoff == "0x8C6A6AC")
-                        {
+                    foreach (int occurence in occurences)
+                    {
+                        int realtradeoffsetint = 139460608 + occurence - 2967;
+                        string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
+                        string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
+                        runCmd(dumpTrade);
+                    }
 
-                        foreach (int occurence in occurences)
-                        {
-                            int realtradeoffsetint = 139460608 + occurence + 4777;
-                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpTrade);
-                        }
-                        }
-
-                            if (moneyoff == "0x8C71DC0")
-                        {
-
-                        foreach (int occurence in occurences)
-                        {
-                            int realtradeoffsetint = 139591680 + occurence + 4777;
-                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpTrade);
-                        }
-                        }
                     }
                 }
             }
@@ -1952,5 +1937,6 @@ namespace ntrbase
             string pokeSID = "write(" + sidoff + ", (0x" + sid + "), pid=" + pid + ")";
             runCmd(pokeSID);
         }
+
     }
 }

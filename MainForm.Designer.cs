@@ -41,6 +41,7 @@
             this.box = new System.Windows.Forms.NumericUpDown();
             this.slot = new System.Windows.Forms.NumericUpDown();
             this.dumpBox = new System.Windows.Forms.GroupBox();
+            this.radioTrade = new System.Windows.Forms.RadioButton();
             this.radioOpponent = new System.Windows.Forms.RadioButton();
             this.radioDaycare = new System.Windows.Forms.RadioButton();
             this.radioBoxes = new System.Windows.Forms.RadioButton();
@@ -61,6 +62,9 @@
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pokeSID = new System.Windows.Forms.Button();
+            this.SIDNum = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.pokeTID = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -84,10 +88,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
-            this.radioTrade = new System.Windows.Forms.RadioButton();
-            this.pokeSID = new System.Windows.Forms.Button();
-            this.SIDNum = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -103,6 +103,7 @@
             this.writeBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TIDNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minNum)).BeginInit();
@@ -112,7 +113,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -409,6 +409,19 @@
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump Pokémon";
             // 
+            // radioTrade
+            // 
+            this.radioTrade.AutoSize = true;
+            this.radioTrade.Enabled = false;
+            this.radioTrade.Location = new System.Drawing.Point(6, 101);
+            this.radioTrade.Name = "radioTrade";
+            this.radioTrade.Size = new System.Drawing.Size(53, 17);
+            this.radioTrade.TabIndex = 43;
+            this.radioTrade.TabStop = true;
+            this.radioTrade.Text = "Trade";
+            this.radioTrade.UseVisualStyleBackColor = true;
+            this.radioTrade.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
             // radioOpponent
             // 
             this.radioOpponent.AutoSize = true;
@@ -650,6 +663,39 @@
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit Trainer";
+            // 
+            // pokeSID
+            // 
+            this.pokeSID.Enabled = false;
+            this.pokeSID.Location = new System.Drawing.Point(94, 127);
+            this.pokeSID.Name = "pokeSID";
+            this.pokeSID.Size = new System.Drawing.Size(45, 23);
+            this.pokeSID.TabIndex = 40;
+            this.pokeSID.Text = "Write";
+            this.pokeSID.UseVisualStyleBackColor = true;
+            this.pokeSID.Click += new System.EventHandler(this.pokeSID_Click);
+            // 
+            // SIDNum
+            // 
+            this.SIDNum.Enabled = false;
+            this.SIDNum.Location = new System.Drawing.Point(8, 130);
+            this.SIDNum.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.SIDNum.Name = "SIDNum";
+            this.SIDNum.Size = new System.Drawing.Size(80, 20);
+            this.SIDNum.TabIndex = 39;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(11, 113);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(28, 13);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "SID:";
             // 
             // label14
             // 
@@ -933,52 +979,6 @@
             this.itemWrite.UseVisualStyleBackColor = true;
             this.itemWrite.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // radioTrade
-            // 
-            this.radioTrade.AutoSize = true;
-            this.radioTrade.Enabled = false;
-            this.radioTrade.Location = new System.Drawing.Point(6, 101);
-            this.radioTrade.Name = "radioTrade";
-            this.radioTrade.Size = new System.Drawing.Size(53, 17);
-            this.radioTrade.TabIndex = 43;
-            this.radioTrade.TabStop = true;
-            this.radioTrade.Text = "Trade";
-            this.radioTrade.UseVisualStyleBackColor = true;
-            this.radioTrade.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // pokeSID
-            // 
-            this.pokeSID.Enabled = false;
-            this.pokeSID.Location = new System.Drawing.Point(94, 127);
-            this.pokeSID.Name = "pokeSID";
-            this.pokeSID.Size = new System.Drawing.Size(45, 23);
-            this.pokeSID.TabIndex = 40;
-            this.pokeSID.Text = "Write";
-            this.pokeSID.UseVisualStyleBackColor = true;
-            this.pokeSID.Click += new System.EventHandler(this.pokeSID_Click);
-            // 
-            // SIDNum
-            // 
-            this.SIDNum.Enabled = false;
-            this.SIDNum.Location = new System.Drawing.Point(8, 130);
-            this.SIDNum.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.SIDNum.Name = "SIDNum";
-            this.SIDNum.Size = new System.Drawing.Size(80, 20);
-            this.SIDNum.TabIndex = 39;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(11, 113);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(28, 13);
-            this.label15.TabIndex = 38;
-            this.label15.Text = "SID:";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1023,6 +1023,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TIDNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minNum)).EndInit();
@@ -1032,7 +1033,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
