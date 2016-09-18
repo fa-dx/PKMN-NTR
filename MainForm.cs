@@ -19,6 +19,12 @@ namespace ntrbase
         public int boff;
         public string boffs;
         public string pid;
+        private string pname2;
+        public string pname
+        {
+            get { return pname2; }
+            set { pname2 = value; }
+        }
         public string game;
         public string d1off;
         public string d2off;
@@ -443,6 +449,7 @@ namespace ntrbase
                 {
                 string log = txtLog.Text;
                 string pname = ", pname: kujira-1";
+                pname2 = pname;
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
                 pid = "0x" + splitlog.Substring(0, 2);
                 moneyoff = "0x8C6A6AC";
@@ -471,6 +478,7 @@ namespace ntrbase
                 {
                 string log = txtLog.Text;
                 string pname = ", pname: kujira-2";
+                pname2 = pname;
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
                 pid = "0x" + splitlog.Substring(0, 2);
                 moneyoff = "0x8C6A6AC";
@@ -499,6 +507,7 @@ namespace ntrbase
                 {
                 string log = txtLog.Text;
                 string pname = ", pname:  sango-1";
+                pname2 = pname;
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
                 pid = "0x" + splitlog.Substring(0, 2);
                 moneyoff = "0x8C71DC0";
@@ -527,6 +536,7 @@ namespace ntrbase
                 {
                 string log = txtLog.Text;
                 string pname = ", pname:  sango-2";
+                pname2 = pname;
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
                 pid = "0x" + splitlog.Substring(0, 2);
                 moneyoff = "0x8C71DC0";
@@ -865,23 +875,48 @@ namespace ntrbase
             const string dumpedtradeOff = "gettradeoff.temp";
             if (File.Exists(dumpedtradeOff))
             {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
+                if (moneyoff == "0x8C6A6AC")
                 {
-                        byte[] relativePattern = { 0x74, 0x69, 0x6D, 0x65, 0x5F, 0x69, 0x63, 0x6F, 0x6E, 0x30, 0x31, 0x2E, 0x62, 0x63, 0x6C, 0x69, 0x6D };
+                    using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
+                    {
+                        byte[] relativePattern = { 0x08, 0x1C, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD8, 0xBE, 0x59 };
                         byte[] dumptradeBytes = reader.ReadBytes(131070);
                         List<int> occurences = findOccurences(dumptradeBytes, relativePattern);
 
 
-                    foreach (int occurence in occurences)
-                    {
-                        int realtradeoffsetint = 139460608 + occurence - 2967;
-                        string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                        string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                        runCmd(dumpTrade);
-                    }
+                        foreach (int occurence in occurences)
+                        {
+                            int realtradeoffsetint = 139460608 + occurence + 98;
+                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
+                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
+                            runCmd(dumpTrade);
+                        }
 
                     }
                 }
+
+                if (moneyoff == "0x8C71DC0")
+                {
+                    using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
+                    {
+                        byte[] relativePattern = { 0x08, 0x1E, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9C, 0xE8, 0x5D };
+                        byte[] dumptradeBytes = reader.ReadBytes(131070);
+                        List<int> occurences = findOccurences(dumptradeBytes, relativePattern);
+
+
+                        foreach (int occurence in occurences)
+                        {
+                            int realtradeoffsetint = 139591680 + occurence + 98;
+                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
+                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
+                            runCmd(dumpTrade);
+                        }
+
+                    }
+                }
+
+
+            }
             }
 
 
