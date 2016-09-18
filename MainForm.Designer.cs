@@ -88,7 +88,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -114,7 +113,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -981,24 +979,11 @@
             this.itemWrite.UseVisualStyleBackColor = true;
             this.itemWrite.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(263, 90);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 43;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 411);
-            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.editMoney);
@@ -1048,7 +1033,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1126,7 +1110,6 @@
         private System.Windows.Forms.Button pokeSID;
         private System.Windows.Forms.NumericUpDown SIDNum;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

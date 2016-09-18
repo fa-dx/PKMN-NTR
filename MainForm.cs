@@ -1509,7 +1509,7 @@ namespace ntrbase
             }
             if (ek6.Length == 1556)
             {
-                string ek6short = ek6.Remove(ek6.Length - 28);
+                string ek6short = ek6.Substring(0, 1388);
                 string ssr = "0x";
                 string ssS = ssr + ssH;
                 string pokeek6 = "write(0x" + ssH + ", (0x" + ek6short + "), pid=" + pid + ")";
