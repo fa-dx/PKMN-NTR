@@ -103,6 +103,10 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.heldItem = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.Ability = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -405,6 +409,10 @@
             // 
             // dumpBox
             // 
+            this.dumpBox.Controls.Add(this.label25);
+            this.dumpBox.Controls.Add(this.Ability);
+            this.dumpBox.Controls.Add(this.label24);
+            this.dumpBox.Controls.Add(this.heldItem);
             this.dumpBox.Controls.Add(this.label23);
             this.dumpBox.Controls.Add(this.radioTrade);
             this.dumpBox.Controls.Add(this.radioOpponent);
@@ -434,7 +442,7 @@
             this.dumpBox.Controls.Add(this.ivSPE);
             this.dumpBox.Location = new System.Drawing.Point(7, 80);
             this.dumpBox.Name = "dumpBox";
-            this.dumpBox.Size = new System.Drawing.Size(304, 184);
+            this.dumpBox.Size = new System.Drawing.Size(402, 160);
             this.dumpBox.TabIndex = 20;
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump Pokémon";
@@ -602,7 +610,7 @@
             this.writeBox.Controls.Add(this.pokePkm);
             this.writeBox.Controls.Add(this.box);
             this.writeBox.Controls.Add(this.slot);
-            this.writeBox.Location = new System.Drawing.Point(317, 82);
+            this.writeBox.Location = new System.Drawing.Point(427, 154);
             this.writeBox.Name = "writeBox";
             this.writeBox.Size = new System.Drawing.Size(154, 86);
             this.writeBox.TabIndex = 21;
@@ -687,7 +695,7 @@
             this.groupBox2.Controls.Add(this.hourNum);
             this.groupBox2.Controls.Add(this.playerName);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Location = new System.Drawing.Point(7, 271);
+            this.groupBox2.Location = new System.Drawing.Point(7, 246);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(209, 201);
             this.groupBox2.TabIndex = 24;
@@ -980,7 +988,7 @@
             this.groupBox3.Controls.Add(this.showTMs);
             this.groupBox3.Controls.Add(this.showItems);
             this.groupBox3.Controls.Add(this.showMedicine);
-            this.groupBox3.Location = new System.Drawing.Point(222, 270);
+            this.groupBox3.Location = new System.Drawing.Point(222, 245);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(318, 202);
             this.groupBox3.TabIndex = 42;
@@ -1065,10 +1073,10 @@
             // 
             // Nature
             // 
-            this.Nature.Location = new System.Drawing.Point(246, 157);
+            this.Nature.Location = new System.Drawing.Point(315, 26);
             this.Nature.Name = "Nature";
             this.Nature.ReadOnly = true;
-            this.Nature.Size = new System.Drawing.Size(48, 20);
+            this.Nature.Size = new System.Drawing.Size(81, 20);
             this.Nature.TabIndex = 51;
             // 
             // label16
@@ -1137,17 +1145,51 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(204, 161);
+            this.label23.Location = new System.Drawing.Point(273, 30);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(42, 13);
             this.label23.TabIndex = 59;
             this.label23.Text = "Nature:";
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(285, 82);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(30, 13);
+            this.label24.TabIndex = 61;
+            this.label24.Text = "Item:";
+            // 
+            // heldItem
+            // 
+            this.heldItem.Location = new System.Drawing.Point(315, 78);
+            this.heldItem.Name = "heldItem";
+            this.heldItem.ReadOnly = true;
+            this.heldItem.Size = new System.Drawing.Size(81, 20);
+            this.heldItem.TabIndex = 60;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(278, 56);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(37, 13);
+            this.label25.TabIndex = 63;
+            this.label25.Text = "Ability:";
+            // 
+            // Ability
+            // 
+            this.Ability.Location = new System.Drawing.Point(315, 52);
+            this.Ability.Name = "Ability";
+            this.Ability.ReadOnly = true;
+            this.Ability.Size = new System.Drawing.Size(81, 20);
+            this.Ability.TabIndex = 62;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 484);
+            this.ClientSize = new System.Drawing.Size(587, 451);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.editMoney);
@@ -1289,6 +1331,10 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox heldItem;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox Ability;
     }
 }
 
