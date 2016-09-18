@@ -83,6 +83,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
+            this.radioOpponent = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -113,7 +114,7 @@
             // 
             this.txtLog.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(837, 419);
+            this.txtLog.Location = new System.Drawing.Point(391, 406);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
@@ -384,6 +385,7 @@
             // 
             // dumpBox
             // 
+            this.dumpBox.Controls.Add(this.radioOpponent);
             this.dumpBox.Controls.Add(this.radioDaycare);
             this.dumpBox.Controls.Add(this.radioBoxes);
             this.dumpBox.Controls.Add(this.dumpBoxes);
@@ -405,7 +407,7 @@
             // 
             this.radioDaycare.AutoSize = true;
             this.radioDaycare.Enabled = false;
-            this.radioDaycare.Location = new System.Drawing.Point(99, 90);
+            this.radioDaycare.Location = new System.Drawing.Point(63, 90);
             this.radioDaycare.Name = "radioDaycare";
             this.radioDaycare.Size = new System.Drawing.Size(65, 17);
             this.radioDaycare.TabIndex = 33;
@@ -418,7 +420,7 @@
             this.radioBoxes.AutoSize = true;
             this.radioBoxes.Checked = true;
             this.radioBoxes.Enabled = false;
-            this.radioBoxes.Location = new System.Drawing.Point(38, 90);
+            this.radioBoxes.Location = new System.Drawing.Point(6, 90);
             this.radioBoxes.Name = "radioBoxes";
             this.radioBoxes.Size = new System.Drawing.Size(54, 17);
             this.radioBoxes.TabIndex = 32;
@@ -909,11 +911,24 @@
             this.itemWrite.UseVisualStyleBackColor = true;
             this.itemWrite.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // radioOpponent
+            // 
+            this.radioOpponent.AutoSize = true;
+            this.radioOpponent.Enabled = false;
+            this.radioOpponent.Location = new System.Drawing.Point(133, 90);
+            this.radioOpponent.Name = "radioOpponent";
+            this.radioOpponent.Size = new System.Drawing.Size(72, 17);
+            this.radioOpponent.TabIndex = 34;
+            this.radioOpponent.TabStop = true;
+            this.radioOpponent.Text = "Opponent";
+            this.radioOpponent.UseVisualStyleBackColor = true;
+            this.radioOpponent.CheckedChanged += new System.EventHandler(this.radioOpponent_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 292);
+            this.ClientSize = new System.Drawing.Size(709, 295);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.editMoney);
@@ -1034,6 +1049,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button itemWrite;
         private System.Windows.Forms.Button itemAdd;
+        private System.Windows.Forms.RadioButton radioOpponent;
     }
 }
 
