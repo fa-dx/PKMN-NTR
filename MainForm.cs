@@ -1389,7 +1389,7 @@ namespace ntrbase
             radioBoxes.Enabled = false;
             radioDaycare.Enabled = false;
             radioOpponent.Enabled = false;
-            radioTrade.Enabled = true;
+            radioTrade.Enabled = false;
             pokeName.Enabled = false;
             playerName.Enabled = false;
             pokeTID.Enabled = false;
@@ -1668,7 +1668,7 @@ namespace ntrbase
 
         private void pokeTID_Click(object sender, EventArgs e)
         {
-            byte[] tidbyte = BitConverter.GetBytes(Convert.ToInt32(TIDNum.Value));
+            byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16((double)TIDNum.Value));
             string tidr = ", 0x";
             string tid = BitConverter.ToString(tidbyte).Replace("-", tidr);
             string pokeTID = "write(" + tidoff + ", (0x" + tid + "), pid=" + pid + ")";
@@ -1677,7 +1677,7 @@ namespace ntrbase
 
         private void pokeTime_Click(object sender, EventArgs e)
         {
-            byte[] hrbyte = BitConverter.GetBytes(Convert.ToInt32(hourNum.Value));
+            byte[] hrbyte = BitConverter.GetBytes(Convert.ToUInt16((double)hourNum.Value));
             string hrr = ", 0x";
             string hr = BitConverter.ToString(hrbyte).Replace("-", hrr);
             string pokeHr = "write(" + hroff + ", (0x" + hr + "), pid=" + pid + ")";
@@ -1946,7 +1946,7 @@ namespace ntrbase
 
         private void pokeSID_Click(object sender, EventArgs e)
         {
-            byte[] sidbyte = BitConverter.GetBytes(Convert.ToInt32(SIDNum.Value));
+            byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16((double)SIDNum.Value));
             string sidr = ", 0x";
             string sid = BitConverter.ToString(sidbyte).Replace("-", sidr);
             string pokeSID = "write(" + sidoff + ", (0x" + sid + "), pid=" + pid + ")";
