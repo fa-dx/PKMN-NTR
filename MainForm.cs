@@ -1369,14 +1369,15 @@ namespace ntrbase
             selectPkxDialog.Filter = "PKX files|*.pk6;*.pkx|All Files (*.*)|*.*";
             string path = @Application.StartupPath + "\\Pokemon";
             selectPkxDialog.InitialDirectory = path;
-            selectedPkx = selectPkxDialog.FileName;
             if (selectPkxDialog.ShowDialog() == DialogResult.OK)
             {
-                using (BinaryReader reader = new BinaryReader(File.Open(selectedPkx, FileMode.Open)))
+                selectedPkx = selectPkxDialog.FileName;
+                var size = new FileInfo(selectedPkx).Length;
                 {
-                    if (selectedPkx.Length != 232)
+                    if (size != 232)
                     {
                         pokePkm.Enabled = false;
+                        MessageBox.Show("Please make sure you are using a valid PKX file.", "Incorrect File Size");
                     }
                     else
                     {
