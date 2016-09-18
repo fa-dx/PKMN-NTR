@@ -1460,8 +1460,8 @@ namespace ntrbase
         public void selectek6_Click(object sender, EventArgs e)
         {
             OpenFileDialog selectek6Dialog = new OpenFileDialog();
-            selectek6Dialog.Title = "Select a ek6 file";
-            selectek6Dialog.Filter = "ek6 files|*.pk6;*.ek6|All Files (*.*)|*.*";
+            selectek6Dialog.Title = "Select an EKX file";
+            selectek6Dialog.Filter = "EKX files|*.ek6;*.ekx|All Files (*.*)|*.*";
             string path = @Application.StartupPath + "\\Pokemon";
             selectek6Dialog.InitialDirectory = path;
             if (selectek6Dialog.ShowDialog() == DialogResult.OK)
@@ -1482,7 +1482,7 @@ namespace ntrbase
                     else
                     {
                         pokePkm.Enabled = false;
-                        MessageBox.Show("Please make sure you are using a valid ek6 file.", "Incorrect File Size");
+                        MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
                     }
 
                                             
@@ -1518,7 +1518,7 @@ namespace ntrbase
             }
             else
             {
-                MessageBox.Show("Please make sure you are using a valid ek6 file.", "Incorrect File Size");
+                MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
                 txtLog.Clear();
             }
         }
