@@ -2321,8 +2321,9 @@ namespace ntrbase
             string ssH = ssOff.ToString("X");
             string ssr = "0x";
             string ssS = ssr + ssH;
-            string bakPkm = "data(0x" + ssH + ", " + ", filename='" + deleteBox.Value.ToString() + "_" + deleteSlot.Value.ToString() + ".bak.ek6', pid=" + pid + ")";
+            string bakPkm = "data(0x" + ssH + ", 0xE8, filename='" + deleteBox.Value.ToString() + "_" + deleteSlot.Value.ToString() + ".bak.ek6', pid=" + pid + ")";
             runCmd(bakPkm);
+            textBox1.Text = bakPkm;
         }
 
         private void pokeLang_Click(object sender, EventArgs e)
