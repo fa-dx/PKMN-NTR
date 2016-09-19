@@ -82,5 +82,55 @@ namespace ntrbase
 
             return pkx;
         }
+        public static byte[] encryptArray(byte[] pkx)
+        {
+            // Shuffle
+            uint pv = BitConverter.ToUInt32(pkx, 0);
+            uint sv = (pv >> 0xD & 0x1F) % 24;
+
+            byte[] ekx = (byte[])pkx.Clone();
+
+            ekx = shuffleArray(ekx, blockPositionInvert[sv]);
+
+            uint seed = pv;
+
+            // Encrypt Blocks with RNG Seed
+            for (int i = 8; i < 232; i += 2)
+                BitConverter.GetBytes((ushort)(BitConverter.ToUInt16(ekx, i) ^ LCRNG(ref seed) >> 16)).CopyTo(ekx, i);
+
+            // If no party stats, return.
+            if (ekx.Length <= 232) return ekx;
+
+            // Encrypt the Party Stats
+            seed = pv;
+            for (int i = 232; i < 260; i += 2)
+                BitConverter.GetBytes((ushort)(BitConverter.ToUInt16(ekx, i) ^ LCRNG(ref seed) >> 16)).CopyTo(ekx, i);
+
+            // Done
+            return ekx;
+        }
+
+        public static readonly int[,] hpivs =
+        {
+            { 1, 1, 0, 0, 0, 0 }, // Fighting
+            { 0, 0, 0, 0, 0, 1 }, // Flying
+            { 1, 1, 0, 0, 0, 1 }, // Poison
+            { 1, 1, 1, 0, 0, 1 }, // Ground
+            { 1, 1, 0, 1, 0, 0 }, // Rock
+            { 1, 0, 0, 1, 0, 1 }, // Bug
+            { 1, 0, 1, 1, 0, 1 }, // Ghost
+            { 1, 1, 1, 1, 0, 1 }, // Steel
+            { 1, 0, 1, 0, 1, 0 }, // Fire
+            { 1, 0, 0, 0, 1, 1 }, // Water
+            { 1, 0, 1, 0, 1, 1 }, // Grass
+            { 1, 1, 1, 0, 1, 1 }, // Electric
+            { 1, 0, 1, 1, 1, 0 }, // Psychic
+            { 1, 0, 0, 1, 1, 1 }, // Ice
+            { 1, 0, 1, 1, 1, 1 }, // Dragon
+            { 1, 1, 1, 1, 1, 1 }, // Dark
+        };
+
+
+
     }
 }
