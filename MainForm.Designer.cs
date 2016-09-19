@@ -41,18 +41,37 @@
             this.box = new System.Windows.Forms.NumericUpDown();
             this.slot = new System.Windows.Forms.NumericUpDown();
             this.dumpBox = new System.Windows.Forms.GroupBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.Ability = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.heldItem = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.radioTrade = new System.Windows.Forms.RadioButton();
             this.radioOpponent = new System.Windows.Forms.RadioButton();
+            this.Nature = new System.Windows.Forms.TextBox();
             this.radioDaycare = new System.Windows.Forms.RadioButton();
+            this.label22 = new System.Windows.Forms.Label();
             this.radioBoxes = new System.Windows.Forms.RadioButton();
             this.dumpBoxes = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.nameek6 = new System.Windows.Forms.TextBox();
             this.dumpek6 = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.slotDump = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.boxDump = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.ivSPA = new System.Windows.Forms.TextBox();
+            this.ivATK = new System.Windows.Forms.TextBox();
+            this.ivSPD = new System.Windows.Forms.TextBox();
+            this.ivHP = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.ivDEF = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.ivSPE = new System.Windows.Forms.TextBox();
             this.writeBox = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -88,25 +107,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
-            this.ivHP = new System.Windows.Forms.TextBox();
-            this.ivATK = new System.Windows.Forms.TextBox();
-            this.ivDEF = new System.Windows.Forms.TextBox();
-            this.ivSPE = new System.Windows.Forms.TextBox();
-            this.ivSPA = new System.Windows.Forms.TextBox();
-            this.ivSPD = new System.Windows.Forms.TextBox();
-            this.Nature = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.heldItem = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.Ability = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -132,6 +133,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -447,6 +449,49 @@
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump Pokémon";
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(278, 48);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(37, 13);
+            this.label25.TabIndex = 63;
+            this.label25.Text = "Ability:";
+            // 
+            // Ability
+            // 
+            this.Ability.Location = new System.Drawing.Point(315, 44);
+            this.Ability.Name = "Ability";
+            this.Ability.ReadOnly = true;
+            this.Ability.Size = new System.Drawing.Size(81, 20);
+            this.Ability.TabIndex = 62;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(285, 74);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(30, 13);
+            this.label24.TabIndex = 61;
+            this.label24.Text = "Item:";
+            // 
+            // heldItem
+            // 
+            this.heldItem.Location = new System.Drawing.Point(315, 70);
+            this.heldItem.Name = "heldItem";
+            this.heldItem.ReadOnly = true;
+            this.heldItem.Size = new System.Drawing.Size(81, 20);
+            this.heldItem.TabIndex = 60;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(273, 22);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(42, 13);
+            this.label23.TabIndex = 59;
+            this.label23.Text = "Nature:";
+            // 
             // radioTrade
             // 
             this.radioTrade.AutoSize = true;
@@ -473,6 +518,14 @@
             this.radioOpponent.UseVisualStyleBackColor = true;
             this.radioOpponent.CheckedChanged += new System.EventHandler(this.radioOpponent_CheckedChanged);
             // 
+            // Nature
+            // 
+            this.Nature.Location = new System.Drawing.Point(315, 18);
+            this.Nature.Name = "Nature";
+            this.Nature.ReadOnly = true;
+            this.Nature.Size = new System.Drawing.Size(81, 20);
+            this.Nature.TabIndex = 51;
+            // 
             // radioDaycare
             // 
             this.radioDaycare.AutoSize = true;
@@ -484,6 +537,15 @@
             this.radioDaycare.Text = "Daycare";
             this.radioDaycare.UseVisualStyleBackColor = true;
             this.radioDaycare.CheckedChanged += new System.EventHandler(this.radioDaycare_CheckedChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(214, 135);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(31, 13);
+            this.label22.TabIndex = 58;
+            this.label22.Text = "SPE:";
             // 
             // radioBoxes
             // 
@@ -537,6 +599,15 @@
             this.dumpek6.Text = "Dump";
             this.dumpek6.UseVisualStyleBackColor = true;
             this.dumpek6.Click += new System.EventHandler(this.dumpek6_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(214, 114);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(32, 13);
+            this.label21.TabIndex = 57;
+            this.label21.Text = "SPD:";
             // 
             // label7
             // 
@@ -601,6 +672,105 @@
             0,
             0,
             0});
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(246, 10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(22, 13);
+            this.label16.TabIndex = 52;
+            this.label16.Text = "IVs";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(215, 51);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(31, 13);
+            this.label18.TabIndex = 54;
+            this.label18.Text = "ATK:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(215, 93);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(31, 13);
+            this.label20.TabIndex = 56;
+            this.label20.Text = "SPA:";
+            // 
+            // ivSPA
+            // 
+            this.ivSPA.Location = new System.Drawing.Point(246, 89);
+            this.ivSPA.Name = "ivSPA";
+            this.ivSPA.ReadOnly = true;
+            this.ivSPA.Size = new System.Drawing.Size(20, 20);
+            this.ivSPA.TabIndex = 49;
+            this.ivSPA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // ivATK
+            // 
+            this.ivATK.Location = new System.Drawing.Point(246, 47);
+            this.ivATK.Name = "ivATK";
+            this.ivATK.ReadOnly = true;
+            this.ivATK.Size = new System.Drawing.Size(20, 20);
+            this.ivATK.TabIndex = 46;
+            this.ivATK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // ivSPD
+            // 
+            this.ivSPD.Location = new System.Drawing.Point(246, 110);
+            this.ivSPD.Name = "ivSPD";
+            this.ivSPD.ReadOnly = true;
+            this.ivSPD.Size = new System.Drawing.Size(20, 20);
+            this.ivSPD.TabIndex = 50;
+            this.ivSPD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // ivHP
+            // 
+            this.ivHP.Location = new System.Drawing.Point(246, 26);
+            this.ivHP.Name = "ivHP";
+            this.ivHP.ReadOnly = true;
+            this.ivHP.Size = new System.Drawing.Size(20, 20);
+            this.ivHP.TabIndex = 44;
+            this.ivHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(221, 30);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(25, 13);
+            this.label17.TabIndex = 53;
+            this.label17.Text = "HP:";
+            // 
+            // ivDEF
+            // 
+            this.ivDEF.Location = new System.Drawing.Point(246, 68);
+            this.ivDEF.Name = "ivDEF";
+            this.ivDEF.ReadOnly = true;
+            this.ivDEF.Size = new System.Drawing.Size(20, 20);
+            this.ivDEF.TabIndex = 47;
+            this.ivDEF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(215, 72);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(31, 13);
+            this.label19.TabIndex = 55;
+            this.label19.Text = "DEF:";
+            // 
+            // ivSPE
+            // 
+            this.ivSPE.Location = new System.Drawing.Point(246, 131);
+            this.ivSPE.Name = "ivSPE";
+            this.ivSPE.ReadOnly = true;
+            this.ivSPE.Size = new System.Drawing.Size(20, 20);
+            this.ivSPE.TabIndex = 48;
+            this.ivSPE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // writeBox
             // 
@@ -1017,179 +1187,21 @@
             this.itemWrite.UseVisualStyleBackColor = true;
             this.itemWrite.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // ivHP
+            // pictureBox1
             // 
-            this.ivHP.Location = new System.Drawing.Point(246, 26);
-            this.ivHP.Name = "ivHP";
-            this.ivHP.ReadOnly = true;
-            this.ivHP.Size = new System.Drawing.Size(20, 20);
-            this.ivHP.TabIndex = 44;
-            this.ivHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ivATK
-            // 
-            this.ivATK.Location = new System.Drawing.Point(246, 47);
-            this.ivATK.Name = "ivATK";
-            this.ivATK.ReadOnly = true;
-            this.ivATK.Size = new System.Drawing.Size(20, 20);
-            this.ivATK.TabIndex = 46;
-            this.ivATK.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ivDEF
-            // 
-            this.ivDEF.Location = new System.Drawing.Point(246, 68);
-            this.ivDEF.Name = "ivDEF";
-            this.ivDEF.ReadOnly = true;
-            this.ivDEF.Size = new System.Drawing.Size(20, 20);
-            this.ivDEF.TabIndex = 47;
-            this.ivDEF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ivSPE
-            // 
-            this.ivSPE.Location = new System.Drawing.Point(246, 131);
-            this.ivSPE.Name = "ivSPE";
-            this.ivSPE.ReadOnly = true;
-            this.ivSPE.Size = new System.Drawing.Size(20, 20);
-            this.ivSPE.TabIndex = 48;
-            this.ivSPE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ivSPA
-            // 
-            this.ivSPA.Location = new System.Drawing.Point(246, 89);
-            this.ivSPA.Name = "ivSPA";
-            this.ivSPA.ReadOnly = true;
-            this.ivSPA.Size = new System.Drawing.Size(20, 20);
-            this.ivSPA.TabIndex = 49;
-            this.ivSPA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ivSPD
-            // 
-            this.ivSPD.Location = new System.Drawing.Point(246, 110);
-            this.ivSPD.Name = "ivSPD";
-            this.ivSPD.ReadOnly = true;
-            this.ivSPD.Size = new System.Drawing.Size(20, 20);
-            this.ivSPD.TabIndex = 50;
-            this.ivSPD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Nature
-            // 
-            this.Nature.Location = new System.Drawing.Point(315, 26);
-            this.Nature.Name = "Nature";
-            this.Nature.ReadOnly = true;
-            this.Nature.Size = new System.Drawing.Size(81, 20);
-            this.Nature.TabIndex = 51;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(246, 10);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(22, 13);
-            this.label16.TabIndex = 52;
-            this.label16.Text = "IVs";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(221, 30);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(25, 13);
-            this.label17.TabIndex = 53;
-            this.label17.Text = "HP:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(215, 51);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(31, 13);
-            this.label18.TabIndex = 54;
-            this.label18.Text = "ATK:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(215, 72);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(31, 13);
-            this.label19.TabIndex = 55;
-            this.label19.Text = "DEF:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(215, 93);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(31, 13);
-            this.label20.TabIndex = 56;
-            this.label20.Text = "SPA:";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(214, 114);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(32, 13);
-            this.label21.TabIndex = 57;
-            this.label21.Text = "SPD:";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(214, 135);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(31, 13);
-            this.label22.TabIndex = 58;
-            this.label22.Text = "SPE:";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(273, 30);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(42, 13);
-            this.label23.TabIndex = 59;
-            this.label23.Text = "Nature:";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(285, 82);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(30, 13);
-            this.label24.TabIndex = 61;
-            this.label24.Text = "Item:";
-            // 
-            // heldItem
-            // 
-            this.heldItem.Location = new System.Drawing.Point(315, 78);
-            this.heldItem.Name = "heldItem";
-            this.heldItem.ReadOnly = true;
-            this.heldItem.Size = new System.Drawing.Size(81, 20);
-            this.heldItem.TabIndex = 60;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(278, 56);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(37, 13);
-            this.label25.TabIndex = 63;
-            this.label25.Text = "Ability:";
-            // 
-            // Ability
-            // 
-            this.Ability.Location = new System.Drawing.Point(315, 52);
-            this.Ability.Name = "Ability";
-            this.Ability.ReadOnly = true;
-            this.Ability.Size = new System.Drawing.Size(81, 20);
-            this.Ability.TabIndex = 62;
+            this.pictureBox1.Location = new System.Drawing.Point(936, 389);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(81, 68);
+            this.pictureBox1.TabIndex = 64;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 451);
+            this.ClientSize = new System.Drawing.Size(586, 451);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.editMoney);
@@ -1239,6 +1251,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1335,6 +1348,7 @@
         private System.Windows.Forms.TextBox heldItem;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox Ability;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
