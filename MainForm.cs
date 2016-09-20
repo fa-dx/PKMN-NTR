@@ -1,10 +1,9 @@
 ﻿using ntrbase.Properties;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,16 +12,11 @@ namespace ntrbase
 
     public partial class MainForm : Form
     {
-        private byte[] Data { get; set; }
-        private uint IV32 { get { return BitConverter.ToUInt32(Data, 0x74); } set { BitConverter.GetBytes(value).CopyTo(Data, 0x74); } }
-        public int IV_HP { get { return (int)(IV32 >> 00) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 00)) | (uint)((value > 31 ? 31 : value) << 00)); } }
-        public int IV_ATK { get { return (int)(IV32 >> 05) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 05)) | (uint)((value > 31 ? 31 : value) << 05)); } }
-        public int IV_DEF { get { return (int)(IV32 >> 10) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 10)) | (uint)((value > 31 ? 31 : value) << 10)); } }
-        public int IV_SPE { get { return (int)(IV32 >> 15) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 15)) | (uint)((value > 31 ? 31 : value) << 15)); } }
-        public int IV_SPA { get { return (int)(IV32 >> 20) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 20)) | (uint)((value > 31 ? 31 : value) << 20)); } }
-        public int IV_SPD { get { return (int)(IV32 >> 25) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 25)) | (uint)((value > 31 ? 31 : value) << 25)); } }
-        public bool IsEgg { get { return ((IV32 >> 30) & 1) == 1; } set { IV32 = (uint)((IV32 & ~0x40000000) | (uint)(value ? 0x40000000 : 0)); } }
-        public bool IsNicknamed { get { return ((IV32 >> 31) & 1) == 1; } set { IV32 = (IV32 & 0x7FFFFFFF) | (value ? 0x80000000 : 0); } }
+        PKHeX PKHeX = new PKHeX();
+
+        public string selectedclone { get; set; }
+        public int clonemax { get; set; }
+        public string emptyData = "0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6";
         public int tradedumpcount = 0;
         public string realoppoffset { get; set; }
         public string realtradeoffset { get; set; }
@@ -30,9 +24,10 @@ namespace ntrbase
         public string moneyoff;
         public string milesoff;
         public string bpoff;
-        public int boff;
+        public int partyoff;
+        public static int boff;
         public string boffs;
-        public string pid;
+        public static string pid;
         public string lang;
         public int hpb;
         public int atkb;
@@ -40,12 +35,7 @@ namespace ntrbase
         public int speb;
         public int spab;
         public int spdb;
-        private string pname2;
-        public string pname
-        {
-            get { return pname2; }
-            set { pname2 = value; }
-        }
+        public string pname { get; set; }
         public string game;
         public string d1off;
         public string d2off;
@@ -56,13 +46,9 @@ namespace ntrbase
         public string bersoff;
         public bool firstcheck = false;
         public byte[] ek6;
+        public byte[] ek6b { get; set; }
         public int additem = 0;
-        private byte[] items2;
-        public byte[] items
-        {
-            get { return items2; }
-            set { items2 = value; }
-        }
+        public byte[] items { get; set; }
         private byte[] itemData = new byte[1600];
         private byte[] keyData = new byte[384];
         private byte[] tmData = new byte[432];
@@ -76,12 +62,7 @@ namespace ntrbase
         public byte[] bers;
         public byte[] writeitems;
         public string selectedek6;
-        private int numofItems2;
-        public int numofItems
-        {
-            get { return numofItems2; }
-            set { numofItems2 = value; }
-        }
+        public int numofItems { get; set; }
         public int numofKeys;
         public int numofTMs;
         public int numofMeds;
@@ -161,6 +142,14 @@ namespace ntrbase
             }
         }
 
+        public void isCloneDumped()
+        {
+            if (txtLog.Text.Contains("clone.temp successfully"))
+            {
+                afterCloneDump();
+            }
+        }
+
         public static class Delay
         {
 
@@ -214,22 +203,122 @@ namespace ntrbase
 
 
         public delegate void LogDelegate(string l);
-		public LogDelegate delAddLog;
+        public LogDelegate delAddLog;
 
         public MainForm()
         {
-			delAddLog = new LogDelegate(Addlog);
+            delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
+            writeBox.AllowDrop = true;
+            writeBox.DragEnter += new DragEventHandler(writeBox_DragEnter);
+            writeBox.DragDrop += new DragEventHandler(writeBox_DragDrop);
+
+            clonePkm.AllowDrop = true;
+            clonePkm.DragEnter += new DragEventHandler(clonePkm_DragEnter);
+            clonePkm.DragDrop += new DragEventHandler(clonePkm_DragDrop);
+        }
+
+        public static byte[] ObjectToByteArray(Object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }
+
+        void writeBox_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        void writeBox_DragDrop(object sender, DragEventArgs e)
+        {
+            if (selectek6.Enabled == true)
+            {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length <= 0)
+                return;
+            string file = files[0];
+            byte[] ek6b = File.ReadAllBytes(file);
+            string ek6 = BitConverter.ToString(ek6b).Replace("-", ", 0x");
+            int ss = (Decimal.ToInt32(box.Value) * 30 - 30) + Decimal.ToInt32(slot.Value) - 1;
+            int ssOff = boff + (ss * 232);
+            string ssH = ssOff.ToString("X");
+            if (ek6.Length == 1556 || ek6.Length == 1388)
+            {
+                string ek6short = ek6.Substring(0, 1388);
+                string ssr = "0x";
+                string ssS = ssr + ssH;
+                string pokeek6 = "write(0x" + ssH + ", (0x" + ek6short + "), pid=" + pid + ")";
+                runCmd(pokeek6);
+                txtLog.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
+                txtLog.Clear();
+            }
+
+            }
 
         }
 
 
+
+        void clonePkm_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        void clonePkm_DragDrop(object sender, DragEventArgs e)
+        {
+            if (fromFile.Checked == true)
+            {
+                int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
+                int ssOff = boff + (ss * 232);
+                string ssH = ssOff.ToString("X");
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.Length <= 0)
+                    return;
+                string file = files[0];
+                byte[] ek6b = File.ReadAllBytes(file);
+                string ek6s = BitConverter.ToString(ek6b).Replace("-", ", 0x");
+                byte[] cloneshort = ek6b.Take(232).ToArray();
+                if (ek6s.Length == 1556 || ek6s.Length == 1388)
+                {
+                    int icloneAmount = (int)cloneAmountFF.Value * 232;
+                    byte[] clone = new byte[icloneAmount];
+                    for (int i = 0; i < cloneAmountFF.Value; i++)
+                    {
+                        cloneshort.CopyTo(clone, (i) * 232);
+                    }
+                    string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
+                    string ssr = "0x";
+                    string ssS = ssr + ssH;
+                    string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
+                    runCmd(pokeek6);
+                    txtLog.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
+                    txtLog.Clear();
+                }
+             
+            }
+
+        }
+
+
+
         public void Addlog(string l)
         {
-			if (!l.Contains("\r\n"))
+            if (!l.Contains("\r\n"))
             {
-				l = l.Replace("\n", "\r\n");
-			}
+                l = l.Replace("\n", "\r\n");
+            }
             if (!l.EndsWith("\n"))
             {
                 l += "\r\n";
@@ -237,30 +326,30 @@ namespace ntrbase
             txtLog.AppendText(l);
         }
 
-		void runCmd(String cmd)
+        public void runCmd(String cmd)
         {
-			try
+            try
             {
-				object ret = Program.pyEngine.CreateScriptSourceFromString(cmd).Execute(Program.globalScope);
-			}
-			catch (Exception ex)
+                object ret = Program.pyEngine.CreateScriptSourceFromString(cmd).Execute(Program.globalScope);
+            }
+            catch (Exception ex)
             {
-				Addlog(ex.Message);
-				Addlog(ex.StackTrace);
-			}
-		}
+                Addlog(ex.Message);
+                Addlog(ex.StackTrace);
+            }
+        }
 
-		private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-			try
+            try
             {
-				Program.ntrClient.sendHeartbeatPacket();
-				
-			}
+                Program.ntrClient.sendHeartbeatPacket();
+
+            }
             catch (Exception)
             {
-			}
-		}
+            }
+        }
 
         public DataGridViewComboBoxColumn itemItem;
         public DataGridViewColumn itemAmount;
@@ -372,19 +461,20 @@ namespace ntrbase
                 tmItem.Items.Add(t);
                 medItem.Items.Add(t);
                 berItem.Items.Add(t);
+                heldItem.Items.Add(t);
             }
             host.Text = Settings.Default.IP;
             runCmd("import sys;sys.path.append('.\\python\\Lib')");
-			runCmd("for n in [n for n in dir(nc) if not n.startswith('_')]: globals()[n] = getattr(nc,n)    ");
-			runCmd("repr([n for n in dir(nc) if not n.startswith('_')])");
-		}
+            runCmd("for n in [n for n in dir(nc) if not n.startswith('_')]: globals()[n] = getattr(nc,n)    ");
+            runCmd("repr([n for n in dir(nc) if not n.startswith('_')])");
+        }
 
 
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-			Program.ntrClient.disconnect();
-		}
+            Program.ntrClient.disconnect();
+        }
 
 
         public void startAutoDisconnect()
@@ -473,9 +563,24 @@ namespace ntrbase
                 ivSPANum.Enabled = true;
                 ivSPDNum.Enabled = true;
                 isEgg.Enabled = true;
-                Nickname.Enabled = true;
-                Nature.Enabled = true;
+                nickname.Enabled = true;
+                nature.Enabled = true;
                 button1.Enabled = true;
+                heldItem.Enabled = true;
+                species.Enabled = true;
+                clonefromBoxFB.Enabled = true;
+                clonefromSlotFB.Enabled = true;
+                clonetoBoxFB.Enabled = true;
+                clonetoSlotFB.Enabled = true;
+                cloneAmountFB.Enabled = true;
+                cloneFB.Enabled = true;
+                cloneAmountFF.Enabled = true;
+                cloneFF.Enabled = true;
+                clonetoBoxFF.Enabled = true;
+                clonetoSlotFF.Enabled = true;
+                chooseCloneFF.Enabled = true;
+                fromBoxes.Enabled = true;
+                fromFile.Enabled = true;
                 Settings.Default.IP = host.Text;
                 Settings.Default.Save();
             }
@@ -484,41 +589,10 @@ namespace ntrbase
         public void getGame()
         {
 
-                if (txtLog.Text.Contains("kujira-1"))
-                {
+            if (txtLog.Text.Contains("kujira-1"))
+            {
                 string log = txtLog.Text;
-                string pname = ", pname: kujira-1";
-                pname2 = pname;
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C6A6AC";
-                milesoff = "0x8C82BA0";
-                bpoff = "0x8C6A6E0";
-                boff = 147349960;
-                boffs = "0x8C861C8";
-                d1off = "0x8C7FF4C";
-                d2off = "0x8C8003C";
-                itemsoff = "0x8C67564";
-                medsoff = "0x8C67ECC";
-                keysoff = "0x8C67BA4";
-                tmsoff = "0x8C67D24";
-                bersoff = "0x8C67FCC";
-                nameoff = "0x8C79C84";
-                tidoff = "0x8C79C3C";
-                sidoff = "0x8C79C3E";
-                hroff = "0x8CE2814";
-                minoff = "0x8CE2816";
-                secoff = "0x8CE2817";
-                langoff = "0x8C79C69";
-                tradeoffrg = "0x8500000";
-                dumpMoney();
-                }
-
-                if (txtLog.Text.Contains("kujira-2"))
-                {
-                string log = txtLog.Text;
-                string pname = ", pname: kujira-2";
-                pname2 = pname;
+                pname = ", pname: kujira-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
                 pid = "0x" + splitlog.Substring(0, 2);
                 moneyoff = "0x8C6A6AC";
@@ -544,11 +618,39 @@ namespace ntrbase
                 dumpMoney();
             }
 
-                if (txtLog.Text.Contains("sango-1"))
-                {
+            if (txtLog.Text.Contains("kujira-2"))
+            {
                 string log = txtLog.Text;
-                string pname = ", pname:  sango-1";
-                pname2 = pname;
+                pname = ", pname: kujira-2";
+                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
+                pid = "0x" + splitlog.Substring(0, 2);
+                moneyoff = "0x8C6A6AC";
+                milesoff = "0x8C82BA0";
+                bpoff = "0x8C6A6E0";
+                boff = 147349960;
+                boffs = "0x8C861C8";
+                d1off = "0x8C7FF4C";
+                d2off = "0x8C8003C";
+                itemsoff = "0x8C67564";
+                medsoff = "0x8C67ECC";
+                keysoff = "0x8C67BA4";
+                tmsoff = "0x8C67D24";
+                bersoff = "0x8C67FCC";
+                nameoff = "0x8C79C84";
+                tidoff = "0x8C79C3C";
+                sidoff = "0x8C79C3E";
+                hroff = "0x8CE2814";
+                minoff = "0x8CE2816";
+                secoff = "0x8CE2817";
+                langoff = "0x8C79C69";
+                tradeoffrg = "0x8500000";
+                dumpMoney();
+            }
+
+            if (txtLog.Text.Contains("sango-1"))
+            {
+                string log = txtLog.Text;
+                pname = ", pname:  sango-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
                 pid = "0x" + splitlog.Substring(0, 2);
                 moneyoff = "0x8C71DC0";
@@ -574,11 +676,10 @@ namespace ntrbase
                 dumpMoney();
             }
 
-                if (txtLog.Text.Contains("sango-2"))
-                {
+            if (txtLog.Text.Contains("sango-2"))
+            {
                 string log = txtLog.Text;
-                string pname = ", pname:  sango-2";
-                pname2 = pname;
+                pname = ", pname:  sango-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
                 pid = "0x" + splitlog.Substring(0, 2);
                 moneyoff = "0x8C71DC0";
@@ -731,14 +832,12 @@ namespace ntrbase
                 using (BinaryReader reader = new BinaryReader(File.Open(dumpedItems, FileMode.Open)))
                 {
                     const int itemsLength = 1600;
-                    byte[] items = reader.ReadBytes(itemsLength);
-                    items2 = items;
+                    items = reader.ReadBytes(itemsLength);
                     string itemsstring = BitConverter.ToString(items).Replace("-", "");
                     string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length/(Decimal)8;
+                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
                     decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofItems = Convert.ToInt32(numofItemsRounded);
-                    numofItems2 = numofItems;
+                    numofItems = Convert.ToInt32(numofItemsRounded);
                     if (numofItems == 0)
                     {
 
@@ -749,10 +848,10 @@ namespace ntrbase
                     }
                     for (int i = 0; i < numofItems; i++)
                     {
-                    uint itemsfinal = BitConverter.ToUInt16(items, i*4);
-                    uint amountfinal = BitConverter.ToUInt16(items, (i*4)+2);
-                    dataGridView1.Rows[i].Cells[0].Value = itemList[itemsfinal];
-                    dataGridView1.Rows[i].Cells[1].Value = amountfinal;
+                        uint itemsfinal = BitConverter.ToUInt16(items, i * 4);
+                        uint amountfinal = BitConverter.ToUInt16(items, (i * 4) + 2);
+                        dataGridView1.Rows[i].Cells[0].Value = itemList[itemsfinal];
+                        dataGridView1.Rows[i].Cells[1].Value = amountfinal;
                     }
                 }
             }
@@ -966,7 +1065,7 @@ namespace ntrbase
 
 
             }
-            }
+        }
 
 
         public void readName()
@@ -1217,6 +1316,7 @@ namespace ntrbase
                 }
             }
         }
+
 
 
         public void isMoneyDumped()
@@ -1532,25 +1632,45 @@ namespace ntrbase
         {
             if (txtLog.Text.Contains("getoppoff.temp successfully"))
             {
-                    getoppOff();
-                    RMTemp();
-                    txtLog.Clear();
+                getoppOff();
+                RMTemp();
+                txtLog.Clear();
             }
         }
 
         public void pkmIsBackedUp()
         {
-                string emptyData = "0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6";
-                int ss = (Decimal.ToInt32(deleteBox.Value) * 30 - 30) + Decimal.ToInt32(deleteSlot.Value) - 1;
-                int ssOff = boff + (ss * 232);
-                string ssH = ssOff.ToString("X");
-                string ssr = "0x";
-                string ssS = ssr + ssH;
-                string delPkm = "write(0x" + ssH + ", (" + emptyData + "), pid=" + pid + ")";
-                runCmd(delPkm);
-                txtLog.Clear();
+            int ss = (Decimal.ToInt32(deleteBox.Value) * 30 - 30) + Decimal.ToInt32(deleteSlot.Value) - 1;
+            int ssOff = boff + (ss * 232);
+            string ssH = ssOff.ToString("X");
+            string ssr = "0x";
+            string ssS = ssr + ssH;
+            string delPkm = "write(0x" + ssH + ", (" + emptyData + "), pid=" + pid + ")";
+            runCmd(delPkm);
+            txtLog.Clear();
         }
 
+        public void getHP()
+        {
+            uint hp = (uint)(15 * ((PKHeX.IV_HP & 1) + 2 * (PKHeX.IV_ATK & 1) + 4 * (PKHeX.IV_DEF & 1) + 8 * (PKHeX.IV_SPE & 1) + 16 * (PKHeX.IV_SPA & 1) + 32 * (PKHeX.IV_SPD & 1)) / 63);
+
+            if (hp == 0) { hiddenPower.Text = "Fighting"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(48)))), ((int)(((byte)(40))))); }
+            if (hp == 1) { hiddenPower.Text = "Flying"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(144)))), ((int)(((byte)(240))))); }
+            if (hp == 2) { hiddenPower.Text = "Poison"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(64)))), ((int)(((byte)(160))))); }
+            if (hp == 3) { hiddenPower.Text = "Ground"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(192)))), ((int)(((byte)(104))))); }
+            if (hp == 4) { hiddenPower.Text = "Rock"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(160)))), ((int)(((byte)(56))))); }
+            if (hp == 5) { hiddenPower.Text = "Bug"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(184)))), ((int)(((byte)(32))))); }
+            if (hp == 6) { hiddenPower.Text = "Ghost"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(88)))), ((int)(((byte)(152))))); }
+            if (hp == 7) { hiddenPower.Text = "Steel"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(208))))); }
+            if (hp == 8) { hiddenPower.Text = "Fire"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(128)))), ((int)(((byte)(48))))); }
+            if (hp == 9) { hiddenPower.Text = "Water"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(144)))), ((int)(((byte)(240))))); }
+            if (hp == 10) { hiddenPower.Text = "Grass"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(200)))), ((int)(((byte)(80))))); }
+            if (hp == 11) { hiddenPower.Text = "Electric"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(208)))), ((int)(((byte)(48))))); }
+            if (hp == 12) { hiddenPower.Text = "Psychic"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(88)))), ((int)(((byte)(136))))); }
+            if (hp == 13) { hiddenPower.Text = "Ice"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(216)))), ((int)(((byte)(216))))); }
+            if (hp == 14) { hiddenPower.Text = "Dragon"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(56)))), ((int)(((byte)(248))))); }
+            if (hp == 15) { hiddenPower.Text = "Dark"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(88)))), ((int)(((byte)(72))))); }
+        }
 
         public void isPkmDumped()
         {
@@ -1560,53 +1680,34 @@ namespace ntrbase
                 {
                     string dumpedek6 = @Application.StartupPath + "\\" + nameek6.Text + ".ek6";
                     pkmEncrypted = System.IO.File.ReadAllBytes(dumpedek6);
-                    Data = PKHeX.decryptArray(pkmEncrypted);
-                    ivHPNum.Value = IV_HP;
-                    ivATKNum.Value = IV_ATK;
-                    ivDEFNum.Value = IV_DEF;
-                    ivSPANum.Value = IV_SPA;
-                    ivSPDNum.Value = IV_SPD;
-                    ivSPENum.Value = IV_SPE;
-                    Nickname.Text = Encoding.BigEndianUnicode.GetString(Data.Skip(63).Take(24).ToArray());
-                    uint hp = (uint)(15 * ((IV_HP & 1) + 2 * (IV_ATK & 1) + 4 * (IV_DEF & 1) + 8 * (IV_SPE & 1) + 16 * (IV_SPA & 1) + 32 * (IV_SPD & 1)) / 63);
+                    PKHeX.Data = PKHeX.decryptArray(pkmEncrypted);
+                    ivHPNum.Value = PKHeX.IV_HP;
+                    ivATKNum.Value = PKHeX.IV_ATK;
+                    ivDEFNum.Value = PKHeX.IV_DEF;
+                    ivSPANum.Value = PKHeX.IV_SPA;
+                    ivSPDNum.Value = PKHeX.IV_SPD;
+                    ivSPENum.Value = PKHeX.IV_SPE;
+                    nickname.Text = Encoding.BigEndianUnicode.GetString(PKHeX.Data.Skip(63).Take(24).ToArray());
 
-                    if (hp == 0) { hiddenPower.Text = "Fighting"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(48)))), ((int)(((byte)(40))))); }
-                    if (hp == 1) { hiddenPower.Text = "Flying"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(144)))), ((int)(((byte)(240))))); }
-                    if (hp == 2) { hiddenPower.Text = "Poison"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(64)))), ((int)(((byte)(160))))); }
-                    if (hp == 3) { hiddenPower.Text = "Ground"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(192)))), ((int)(((byte)(104))))); }
-                    if (hp == 4) { hiddenPower.Text = "Rock"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(160)))), ((int)(((byte)(56))))); }
-                    if (hp == 5) { hiddenPower.Text = "Bug"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(184)))), ((int)(((byte)(32))))); }
-                    if (hp == 6) { hiddenPower.Text = "Ghost"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(88)))), ((int)(((byte)(152))))); }
-                    if (hp == 7) { hiddenPower.Text = "Steel"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(208))))); }
-                    if (hp == 8) { hiddenPower.Text = "Fire"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(128)))), ((int)(((byte)(48))))); }
-                    if (hp == 9) { hiddenPower.Text = "Water"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(144)))), ((int)(((byte)(240))))); }
-                    if (hp == 10) { hiddenPower.Text = "Grass"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(200)))), ((int)(((byte)(80))))); }
-                    if (hp == 11) { hiddenPower.Text = "Electric"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(208)))), ((int)(((byte)(48))))); }
-                    if (hp == 12) { hiddenPower.Text = "Psychic"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(88)))), ((int)(((byte)(136))))); }
-                    if (hp == 13) { hiddenPower.Text = "Ice"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(216)))), ((int)(((byte)(216))))); }
-                    if (hp == 14) { hiddenPower.Text = "Dragon"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(56)))), ((int)(((byte)(248))))); }
-                    if (hp == 15) { hiddenPower.Text = "Dark"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(88)))), ((int)(((byte)(72))))); }
+                    getHP();
 
-                    if (IsEgg == true)
+                    if (PKHeX.IsEgg == true)
                     {
                         isEgg.Checked = false;
                     }
-                    if (IsEgg == false)
+                    if (PKHeX.IsEgg == false)
                     {
                         isEgg.Checked = true;
                     }
 
+                    species.SelectedIndex = PKHeX.Species - 1;
 
-                    uint nature = Convert.ToUInt16(Data[28]);
-                  
 
-                    uint itemz = BitConverter.ToUInt16(Data, 10);
-                    heldItem.Text = itemList[itemz];
+                    heldItem.SelectedIndex = PKHeX.HeldItem;
 
-                    uint ability = Convert.ToUInt16(Data[20]);
-                    Ability.Text = abilityList[ability];
+                    ability.Text = abilityList[PKHeX.Ability];
 
-                    Nature.SelectedIndex = (int)nature;
+                    nature.SelectedIndex = (int)PKHeX.Nature;
                 }
             }
         }
@@ -1691,13 +1792,28 @@ namespace ntrbase
             ivSPANum.Enabled = false;
             ivSPDNum.Enabled = false;
             isEgg.Enabled = false;
-            Nickname.Enabled = false;
-            Nature.Enabled = false;
+            nickname.Enabled = false;
+            nature.Enabled = false;
             button1.Enabled = false;
+            heldItem.Enabled = false;
+            species.Enabled = false;
+            clonefromBoxFB.Enabled = false;
+            clonefromSlotFB.Enabled = false;
+            clonetoBoxFB.Enabled = false;
+            clonetoSlotFB.Enabled = false;
+            cloneAmountFB.Enabled = false;
+            cloneFB.Enabled = false;
+            cloneAmountFF.Enabled = false;
+            cloneFF.Enabled = false;
+            clonetoBoxFF.Enabled = false;
+            clonetoSlotFF.Enabled = false;
+            chooseCloneFF.Enabled = false;
+            fromBoxes.Enabled = false;
+            fromFile.Enabled = false;
 
         }
 
-        private void txtLog_TextChanged(object sender, EventArgs e)
+        public void txtLog_TextChanged(object sender, EventArgs e)
         {
             isMoneyDumped();
             isMilesDumped();
@@ -1717,6 +1833,7 @@ namespace ntrbase
             isoppDumped();
             isPkmDumped();
             isItemsDumped();
+            isCloneDumped();
             moveek6();
             movebak();
         }
@@ -1759,7 +1876,7 @@ namespace ntrbase
             {
                 selectedek6 = selectek6Dialog.FileName;
                 string ek6r = ", 0x";
-                byte[] ek6b = File.ReadAllBytes(selectedek6);
+                ek6b = File.ReadAllBytes(selectedek6);
                 string ek6 = BitConverter.ToString(ek6b).Replace("-", ek6r);
                 int ss = (Decimal.ToInt32(box.Value) * 30 - 30) + Decimal.ToInt32(slot.Value) - 1;
                 int ssOff = boff + (ss * 232);
@@ -1783,7 +1900,7 @@ namespace ntrbase
             string ek6r = ", 0x";
             byte[] ek6b = File.ReadAllBytes(selectedek6);
             string ek6 = BitConverter.ToString(ek6b).Replace("-", ek6r);
-            int ss = (Decimal.ToInt32(box.Value)* 30 - 30) + Decimal.ToInt32(slot.Value) - 1;
+            int ss = (Decimal.ToInt32(box.Value) * 30 - 30) + Decimal.ToInt32(slot.Value) - 1;
             int ssOff = boff + (ss * 232);
             string ssH = ssOff.ToString("X");
             if (ek6.Length == 1556 || ek6.Length == 1388)
@@ -1804,12 +1921,12 @@ namespace ntrbase
 
         private void dumpek6_Click(object sender, EventArgs e)
         {
-            int ssd = (Decimal.ToInt32(boxDump.Value)* 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
+            int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
             int ssdOff = boff + (ssd * 232);
             string ssdH = ssdOff.ToString("X");
-
             string dumpek6 = "data(0x" + ssdH + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
             string dumpDay1 = "data(" + d1off + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
+
 
             if (radioBoxes.Checked == true)
             {
@@ -1851,6 +1968,8 @@ namespace ntrbase
 
         private void radioBoxes_CheckedChanged(object sender, EventArgs e)
         {
+            boxDump.Minimum = 1;
+            boxDump.Maximum = 31;
             label8.Text = "Box:";
             label7.Text = "Slot:";
             label9.Text = "Filename:";
@@ -1861,10 +1980,10 @@ namespace ntrbase
             label7.Visible = true;
             label8.Visible = true;
             label9.Visible = true;
-            label9.Location = new System.Drawing.Point(96, 16);
-            nameek6.Location = new System.Drawing.Point(98, 35);
-            nameek6.Size = new System.Drawing.Size(105, 20);
-            dumpek6.Size = new System.Drawing.Size(86, 23);
+            label9.Location = new System.Drawing.Point(97, 20);
+            nameek6.Location = new System.Drawing.Point(100, 39);
+            nameek6.Size = new System.Drawing.Size(103, 20);
+            dumpek6.Size = new System.Drawing.Size(86, 20);
             dumpBoxes.Size = new System.Drawing.Size(105, 23);
             dumpBoxes.Location = new System.Drawing.Point(98, 61);
             dumpek6.Location = new System.Drawing.Point(6, 61);
@@ -1883,8 +2002,8 @@ namespace ntrbase
             nameek6.Visible = true;
             dumpBoxes.Visible = true;
             dumpek6.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 35);
-            label9.Location = new System.Drawing.Point(6, 16);
+            nameek6.Location = new System.Drawing.Point(6, 39);
+            label9.Location = new System.Drawing.Point(6, 20);
             dumpek6.Size = new System.Drawing.Size(95, 23);
             dumpBoxes.Size = new System.Drawing.Size(95, 23);
             dumpBoxes.Location = new System.Drawing.Point(108, 61);
@@ -1903,8 +2022,8 @@ namespace ntrbase
             nameek6.Visible = true;
             dumpBoxes.Visible = false;
             dumpek6.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 35);
-            label9.Location = new System.Drawing.Point(6, 16);
+            nameek6.Location = new System.Drawing.Point(6, 39);
+            label9.Location = new System.Drawing.Point(6, 20);
             dumpek6.Size = new System.Drawing.Size(197, 23);
             nameek6.Size = new System.Drawing.Size(197, 23);
             dumpek6.Text = "Dump";
@@ -2216,8 +2335,8 @@ namespace ntrbase
             nameek6.Visible = true;
             dumpBoxes.Visible = false;
             dumpek6.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 35);
-            label9.Location = new System.Drawing.Point(6, 16);
+            nameek6.Location = new System.Drawing.Point(6, 39);
+            label9.Location = new System.Drawing.Point(6, 20);
             dumpek6.Size = new System.Drawing.Size(197, 23);
             nameek6.Size = new System.Drawing.Size(197, 23);
             dumpek6.Text = "Dump";
@@ -2244,7 +2363,7 @@ namespace ntrbase
             if (selectek6Dialog.ShowDialog() == DialogResult.OK)
             {
                 selectedek6 = selectek6Dialog.FileName;
-                
+
 
 
             }
@@ -2259,6 +2378,7 @@ namespace ntrbase
             string ssS = ssr + ssH;
             string bakPkm = "data(0x" + ssH + ", 0xE8, filename='" + deleteBox.Value.ToString() + "_" + deleteSlot.Value.ToString() + ".bak.ek6', pid=" + pid + ")";
             runCmd(bakPkm);
+
         }
 
         private void pokeLang_Click(object sender, EventArgs e)
@@ -2278,31 +2398,34 @@ namespace ntrbase
 
         private void pokeEkx_Click(object sender, EventArgs e)
         {
-            if (Nickname.Text.Length > 12)
+            if (nickname.Text.Length > 12)
             {
                 MessageBox.Show("Pokemon name length too long! Please use a name with a length of 12 or less.", "Name too long");
             }
-            if (Data == null)
+            if (PKHeX.Data == null)
             {
                 MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
             }
-            if (Data != null)
+            if (PKHeX.Data != null)
             {
-                string nameS = Nickname.Text.PadRight(12, '\0');
-                byte[] name = Encoding.Unicode.GetBytes(nameS);
-                byte[] nature = BitConverter.GetBytes(Nature.SelectedIndex);
-                byte[] pkmToEdit = Data;
-                Array.Copy(name, 0, pkmToEdit, 64, 24);
-                Array.Copy(nature, 0, pkmToEdit, 28, 1);
-                IV_HP = (int)ivHPNum.Value;
-                IV_ATK = (int)ivATKNum.Value;
-                IV_DEF = (int)ivDEFNum.Value;
-                IV_SPE = (int)ivSPENum.Value;
-                IV_SPA = (int)ivSPANum.Value;
-                IV_SPD = (int)ivSPDNum.Value;
-                if (isEgg.Checked == true) { IsEgg = false; }
-                if (isEgg.Checked == false) { IsEgg = true; }
-                Array.Copy(BitConverter.GetBytes(IV32), 0, pkmToEdit, 116, 4);
+                PKHeX.Nickname = nickname.Text.PadRight(12, '\0');
+                byte[] pkmToEdit = PKHeX.Data;
+                Array.Copy(Encoding.Unicode.GetBytes(PKHeX.Nickname), 0, pkmToEdit, 64, 24);
+                Array.Copy(BitConverter.GetBytes(PKHeX.Nature), 0, pkmToEdit, 28, 1);
+                Array.Copy(BitConverter.GetBytes(PKHeX.HeldItem), 0, pkmToEdit, 10, 2);
+                PKHeX.IV_HP = (int)ivHPNum.Value;
+                PKHeX.IV_ATK = (int)ivATKNum.Value;
+                PKHeX.IV_DEF = (int)ivDEFNum.Value;
+                PKHeX.IV_SPE = (int)ivSPENum.Value;
+                PKHeX.IV_SPA = (int)ivSPANum.Value;
+                PKHeX.IV_SPD = (int)ivSPDNum.Value;
+                if (isEgg.Checked == true) { PKHeX.IsEgg = false; }
+                if (isEgg.Checked == false) { PKHeX.IsEgg = true; }
+                PKHeX.Species = (int)species.SelectedIndex + 1;
+                PKHeX.Nature = nature.SelectedIndex;
+                PKHeX.HeldItem = heldItem.SelectedIndex;
+
+                Array.Copy(BitConverter.GetBytes(PKHeX.IV32), 0, pkmToEdit, 116, 4);
                 byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);
                 byte[] chkSum = BitConverter.GetBytes(PKHeX.getCHK(pkmToEdit));
                 Array.Copy(chkSum, 0, pkmEdited, 6, 2);
@@ -2316,7 +2439,9 @@ namespace ntrbase
                     string ekx = BitConverter.ToString(pkmEdited).Replace("-", ekxr);
                     string pokeEkx = "write(0x" + ssdH + ", (0x" + ekx + "), pid=" + pid + ")";
                     runCmd(pokeEkx);
+                    getHP();
                 }
+
 
                 if (radioOpponent.Checked == true)
                 {
@@ -2342,6 +2467,195 @@ namespace ntrbase
             {
                 dumprealoppOff();
             }
+        }
+
+
+        private void radioParty_CheckedChanged(object sender, EventArgs e)
+        {
+            boxDump.Minimum = 1;
+            boxDump.Maximum = 6;
+            label8.Text = "Slot:";
+            label9.Text = "Filename:";
+            boxDump.Visible = true;
+            slotDump.Visible = true;
+            dumpBoxes.Visible = true;
+            nameek6.Visible = true;
+            slotDump.Visible = false;
+            label7.Visible = false;
+            label8.Visible = true;
+            label9.Visible = true;
+            label9.Location = new System.Drawing.Point(50, 20);
+            nameek6.Location = new System.Drawing.Point(54, 39);
+            nameek6.Size = new System.Drawing.Size(149, 20);
+            dumpek6.Size = new System.Drawing.Size(86, 23);
+            dumpBoxes.Size = new System.Drawing.Size(105, 23);
+            dumpBoxes.Location = new System.Drawing.Point(98, 61);
+            dumpek6.Location = new System.Drawing.Point(6, 61);
+            dumpek6.Text = "Dump";
+            dumpBoxes.Text = "Dump All Boxes";
+        }
+
+
+
+        private void chooseCloneFF_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog selectcloneDialog = new OpenFileDialog();
+            selectcloneDialog.Title = "Select an EKX file";
+            selectcloneDialog.Filter = "EKX files|*.ek6;*.ekx|All Files (*.*)|*.*";
+            string path = @Application.StartupPath + "\\Pokemon";
+            selectcloneDialog.InitialDirectory = path;
+            if (selectcloneDialog.ShowDialog() == DialogResult.OK)
+            {
+                MainForm mainForm = new MainForm();
+                selectedclone = selectcloneDialog.FileName;
+                byte[] ek6b = File.ReadAllBytes(selectedclone);
+                string ek6 = BitConverter.ToString(ek6b).Replace("-", ", 0x");
+                int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
+                int ssOff = MainForm.boff + (ss * 232);
+                string ssH = ssOff.ToString("X");
+                if (ek6.Length == 1556 || ek6.Length == 1388)
+                {
+                    chooseCloneFF.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
+                    mainForm.txtLog.Clear();
+                }
+            }
+        }
+
+        public static string ByteArrayToString(byte[] ba)
+        {
+            string hex = BitConverter.ToString(ba);
+            return hex.Replace("-", "");
+        }
+
+
+        private void cloneFF_Click(object sender, EventArgs e)
+        {
+            int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
+            int ssOff = boff + (ss * 232);
+            string ssH = ssOff.ToString("X");
+            byte[] ek6b = File.ReadAllBytes(selectedclone);
+            string ek6s = BitConverter.ToString(ek6b).Replace("-", ", 0x");
+            byte[] cloneshort = ek6b.Take(232).ToArray();
+            if (ek6s.Length == 1556 || ek6s.Length == 1388)
+            {
+                int icloneAmount = (int)cloneAmountFF.Value * 232;
+                byte[] clone = new byte[icloneAmount];
+                for (int i = 0; i < cloneAmountFF.Value; i++)
+                {
+                    cloneshort.CopyTo(clone, (i) * 232);
+                }
+                string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
+                string ssr = "0x";
+                string ssS = ssr + ssH;
+                string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
+                runCmd(pokeek6);
+                txtLog.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
+                txtLog.Clear();
+            }
+        }
+
+        private void clonetoBoxFF_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
+        }
+
+        private void clonetoSlotFF_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
+        }
+
+        private void cloneAmountFF_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
+        }
+
+        public void afterCloneDump()
+        {
+            byte[] selectedclonebytes = File.ReadAllBytes(@Application.StartupPath + "\\clone.temp");
+            int ss = (Decimal.ToInt32(clonetoBoxFB.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFB.Value) - 1;
+            int ssOff = boff + (ss * 232);
+            string ssH = ssOff.ToString("X");
+            int icloneAmount = (int)cloneAmountFB.Value * 232;
+            byte[] clone = new byte[icloneAmount];
+            for (int i = 0; i < cloneAmountFB.Value; i++)
+            {
+                selectedclonebytes.CopyTo(clone, (i) * 232);
+            }
+            string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
+            string ssr = "0x";
+            string ssS = ssr + ssH;
+            string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
+            runCmd(pokeek6);
+            txtLog.Clear();
+            RMTemp();
+        }
+
+        private void cloneFB_Click(object sender, EventArgs e)
+        {
+            int ssd = (Decimal.ToInt32(clonefromBoxFB.Value) * 30 - 30) + Decimal.ToInt32(clonefromSlotFB.Value) - 1;
+            int ssdOff = boff + (ssd * 232);
+            string ssdH = ssdOff.ToString("X");
+            string dumpek6 = "data(0x" + ssdH + ", 0xE8, filename='clone.temp', pid=" + pid + ")";
+            runCmd(dumpek6);
+        }
+
+        private void clonetoBoxFB_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
+        }
+
+        private void clonetoSlotFB_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
+        }
+
+        private void cloneAmountFB_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
+        }
+
+        private void fromBoxes_CheckedChanged(object sender, EventArgs e)
+        {
+            label39.Visible = true;
+            label40.Visible = true;
+            clonefromBoxFB.Visible = true;
+            clonefromSlotFB.Visible = true;
+            clonetoBoxFB.Visible = true;
+            clonetoSlotFB.Visible = true;
+            cloneAmountFB.Visible = true;
+            cloneFB.Visible = true;
+
+            cloneAmountFF.Visible = false;
+            cloneFF.Visible = false;
+            clonetoBoxFF.Visible = false;
+            clonetoSlotFF.Visible = false;
+            chooseCloneFF.Visible = false;
+        }
+
+        private void fromFile_CheckedChanged(object sender, EventArgs e)
+        {
+            cloneAmountFF.Visible = true;
+            cloneFF.Visible = true;
+            clonetoBoxFF.Visible = true;
+            clonetoSlotFF.Visible = true;
+            chooseCloneFF.Visible = true;
+
+            label39.Visible = false;
+            label40.Visible = false;
+            clonefromBoxFB.Visible = false;
+            clonefromSlotFB.Visible = false;
+            clonetoBoxFB.Visible = false;
+            clonetoSlotFB.Visible = false;
+            cloneAmountFB.Visible = false;
+            cloneFB.Visible = false;
         }
     }
 }

@@ -38,14 +38,26 @@
             this.box = new System.Windows.Forms.NumericUpDown();
             this.slot = new System.Windows.Forms.NumericUpDown();
             this.dumpBox = new System.Windows.Forms.GroupBox();
+            this.species = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.heldItem = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.isEgg = new System.Windows.Forms.CheckBox();
+            this.ivSPENum = new System.Windows.Forms.NumericUpDown();
+            this.ivSPDNum = new System.Windows.Forms.NumericUpDown();
+            this.ivSPANum = new System.Windows.Forms.NumericUpDown();
+            this.ivDEFNum = new System.Windows.Forms.NumericUpDown();
+            this.ivATKNum = new System.Windows.Forms.NumericUpDown();
+            this.ivHPNum = new System.Windows.Forms.NumericUpDown();
+            this.nature = new System.Windows.Forms.ComboBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.Nickname = new System.Windows.Forms.TextBox();
+            this.nickname = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.hiddenPower = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.Ability = new System.Windows.Forms.TextBox();
+            this.ability = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.heldItem = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.radioTrade = new System.Windows.Forms.RadioButton();
             this.radioOpponent = new System.Windows.Forms.RadioButton();
@@ -110,16 +122,27 @@
             this.delPkm = new System.Windows.Forms.Button();
             this.deleteBox = new System.Windows.Forms.NumericUpDown();
             this.deleteSlot = new System.Windows.Forms.NumericUpDown();
-            this.label30 = new System.Windows.Forms.Label();
-            this.Nature = new System.Windows.Forms.ComboBox();
-            this.ivHPNum = new System.Windows.Forms.NumericUpDown();
-            this.ivATKNum = new System.Windows.Forms.NumericUpDown();
-            this.ivDEFNum = new System.Windows.Forms.NumericUpDown();
-            this.ivSPANum = new System.Windows.Forms.NumericUpDown();
-            this.ivSPDNum = new System.Windows.Forms.NumericUpDown();
-            this.ivSPENum = new System.Windows.Forms.NumericUpDown();
-            this.isEgg = new System.Windows.Forms.CheckBox();
-            this.label31 = new System.Windows.Forms.Label();
+            this.clonePkm = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.cloneFF = new System.Windows.Forms.Button();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.fromFile = new System.Windows.Forms.RadioButton();
+            this.label39 = new System.Windows.Forms.Label();
+            this.chooseCloneFF = new System.Windows.Forms.Button();
+            this.clonefromSlotFB = new System.Windows.Forms.NumericUpDown();
+            this.cloneAmountFF = new System.Windows.Forms.NumericUpDown();
+            this.clonetoBoxFB = new System.Windows.Forms.NumericUpDown();
+            this.fromBoxes = new System.Windows.Forms.RadioButton();
+            this.clonetoSlotFB = new System.Windows.Forms.NumericUpDown();
+            this.label34 = new System.Windows.Forms.Label();
+            this.cloneAmountFB = new System.Windows.Forms.NumericUpDown();
+            this.clonetoSlotFF = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.clonetoBoxFF = new System.Windows.Forms.NumericUpDown();
+            this.clonefromBoxFB = new System.Windows.Forms.NumericUpDown();
+            this.cloneFB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -127,6 +150,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slot)).BeginInit();
             this.dumpBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSPENum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSPDNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSPANum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivDEFNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivATKNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivHPNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).BeginInit();
             this.writeBox.SuspendLayout();
@@ -145,12 +174,15 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivHPNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivATKNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivDEFNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivSPANum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivSPDNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivSPENum)).BeginInit();
+            this.clonePkm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clonefromSlotFB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneAmountFF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneAmountFB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonefromBoxFB)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -212,7 +244,7 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(681, 251);
+            this.groupBox1.Location = new System.Drawing.Point(680, 349);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 74);
             this.groupBox1.TabIndex = 6;
@@ -358,6 +390,11 @@
             0,
             0,
             0});
+            this.box.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.box.Name = "box";
             this.box.Size = new System.Drawing.Size(66, 20);
             this.box.TabIndex = 18;
@@ -392,6 +429,9 @@
             // 
             // dumpBox
             // 
+            this.dumpBox.Controls.Add(this.species);
+            this.dumpBox.Controls.Add(this.label32);
+            this.dumpBox.Controls.Add(this.heldItem);
             this.dumpBox.Controls.Add(this.label31);
             this.dumpBox.Controls.Add(this.isEgg);
             this.dumpBox.Controls.Add(this.ivSPENum);
@@ -400,16 +440,15 @@
             this.dumpBox.Controls.Add(this.ivDEFNum);
             this.dumpBox.Controls.Add(this.ivATKNum);
             this.dumpBox.Controls.Add(this.ivHPNum);
-            this.dumpBox.Controls.Add(this.Nature);
+            this.dumpBox.Controls.Add(this.nature);
             this.dumpBox.Controls.Add(this.label30);
             this.dumpBox.Controls.Add(this.button1);
-            this.dumpBox.Controls.Add(this.Nickname);
+            this.dumpBox.Controls.Add(this.nickname);
             this.dumpBox.Controls.Add(this.label29);
             this.dumpBox.Controls.Add(this.hiddenPower);
             this.dumpBox.Controls.Add(this.label25);
-            this.dumpBox.Controls.Add(this.Ability);
+            this.dumpBox.Controls.Add(this.ability);
             this.dumpBox.Controls.Add(this.label24);
-            this.dumpBox.Controls.Add(this.heldItem);
             this.dumpBox.Controls.Add(this.label23);
             this.dumpBox.Controls.Add(this.radioTrade);
             this.dumpBox.Controls.Add(this.radioOpponent);
@@ -432,15 +471,905 @@
             this.dumpBox.Controls.Add(this.label19);
             this.dumpBox.Location = new System.Drawing.Point(7, 5);
             this.dumpBox.Name = "dumpBox";
-            this.dumpBox.Size = new System.Drawing.Size(228, 306);
+            this.dumpBox.Size = new System.Drawing.Size(228, 330);
             this.dumpBox.TabIndex = 20;
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump and Edit Pokémon";
             // 
+            // species
+            // 
+            this.species.Enabled = false;
+            this.species.FormattingEnabled = true;
+            this.species.Items.AddRange(new object[] {
+            "Bulbasaur",
+            "Ivysaur",
+            "Venusaur",
+            "Charmander",
+            "Charmeleon",
+            "Charizard",
+            "Squirtle",
+            "Wartortle",
+            "Blastoise",
+            "Caterpie",
+            "Metapod",
+            "Butterfree",
+            "Weedle",
+            "Kakuna",
+            "Beedrill",
+            "Pidgey",
+            "Pidgeotto",
+            "Pidgeot",
+            "Rattata",
+            "Raticate",
+            "Spearow",
+            "Fearow",
+            "Ekans",
+            "Arbok",
+            "Pikachu",
+            "Raichu",
+            "Sandshrew",
+            "Sandslash",
+            "Nidoran♀",
+            "Nidorina",
+            "Nidoqueen",
+            "Nidoran♂",
+            "Nidorino",
+            "Nidoking",
+            "Clefairy",
+            "Clefable",
+            "Vulpix",
+            "Ninetales",
+            "Jigglypuff",
+            "Wigglytuff",
+            "Zubat",
+            "Golbat",
+            "Oddish",
+            "Gloom",
+            "Vileplume",
+            "Paras",
+            "Parasect",
+            "Venonat",
+            "Venomoth",
+            "Diglett",
+            "Dugtrio",
+            "Meowth",
+            "Persian",
+            "Psyduck",
+            "Golduck",
+            "Mankey",
+            "Primeape",
+            "Growlithe",
+            "Arcanine",
+            "Poliwag",
+            "Poliwhirl",
+            "Poliwrath",
+            "Abra",
+            "Kadabra",
+            "Alakazam",
+            "Machop",
+            "Machoke",
+            "Machamp",
+            "Bellsprout",
+            "Weepinbell",
+            "Victreebel",
+            "Tentacool",
+            "Tentacruel",
+            "Geodude",
+            "Graveler",
+            "Golem",
+            "Ponyta",
+            "Rapidash",
+            "Slowpoke",
+            "Slowbro",
+            "Magnemite",
+            "Magneton",
+            "Farfetch’d",
+            "Doduo",
+            "Dodrio",
+            "Seel",
+            "Dewgong",
+            "Grimer",
+            "Muk",
+            "Shellder",
+            "Cloyster",
+            "Gastly",
+            "Haunter",
+            "Gengar",
+            "Onix",
+            "Drowzee",
+            "Hypno",
+            "Krabby",
+            "Kingler",
+            "Voltorb",
+            "Electrode",
+            "Exeggcute",
+            "Exeggutor",
+            "Cubone",
+            "Marowak",
+            "Hitmonlee",
+            "Hitmonchan",
+            "Lickitung",
+            "Koffing",
+            "Weezing",
+            "Rhyhorn",
+            "Rhydon",
+            "Chansey",
+            "Tangela",
+            "Kangaskhan",
+            "Horsea",
+            "Seadra",
+            "Goldeen",
+            "Seaking",
+            "Staryu",
+            "Starmie",
+            "Mr. Mime",
+            "Scyther",
+            "Jynx",
+            "Electabuzz",
+            "Magmar",
+            "Pinsir",
+            "Tauros",
+            "Magikarp",
+            "Gyarados",
+            "Lapras",
+            "Ditto",
+            "Eevee",
+            "Vaporeon",
+            "Jolteon",
+            "Flareon",
+            "Porygon",
+            "Omanyte",
+            "Omastar",
+            "Kabuto",
+            "Kabutops",
+            "Aerodactyl",
+            "Snorlax",
+            "Articuno",
+            "Zapdos",
+            "Moltres",
+            "Dratini",
+            "Dragonair",
+            "Dragonite",
+            "Mewtwo",
+            "Mew",
+            "Chikorita",
+            "Bayleef",
+            "Meganium",
+            "Cyndaquil",
+            "Quilava",
+            "Typhlosion",
+            "Totodile",
+            "Croconaw",
+            "Feraligatr",
+            "Sentret",
+            "Furret",
+            "Hoothoot",
+            "Noctowl",
+            "Ledyba",
+            "Ledian",
+            "Spinarak",
+            "Ariados",
+            "Crobat",
+            "Chinchou",
+            "Lanturn",
+            "Pichu",
+            "Cleffa",
+            "Igglybuff",
+            "Togepi",
+            "Togetic",
+            "Natu",
+            "Xatu",
+            "Mareep",
+            "Flaaffy",
+            "Ampharos",
+            "Bellossom",
+            "Marill",
+            "Azumarill",
+            "Sudowoodo",
+            "Politoed",
+            "Hoppip",
+            "Skiploom",
+            "Jumpluff",
+            "Aipom",
+            "Sunkern",
+            "Sunflora",
+            "Yanma",
+            "Wooper",
+            "Quagsire",
+            "Espeon",
+            "Umbreon",
+            "Murkrow",
+            "Slowking",
+            "Misdreavus",
+            "Unown",
+            "Wobbuffet",
+            "Girafarig",
+            "Pineco",
+            "Forretress",
+            "Dunsparce",
+            "Gligar",
+            "Steelix",
+            "Snubbull",
+            "Granbull",
+            "Qwilfish",
+            "Scizor",
+            "Shuckle",
+            "Heracross",
+            "Sneasel",
+            "Teddiursa",
+            "Ursaring",
+            "Slugma",
+            "Magcargo",
+            "Swinub",
+            "Piloswine",
+            "Corsola",
+            "Remoraid",
+            "Octillery",
+            "Delibird",
+            "Mantine",
+            "Skarmory",
+            "Houndour",
+            "Houndoom",
+            "Kingdra",
+            "Phanpy",
+            "Donphan",
+            "Porygon2",
+            "Stantler",
+            "Smeargle",
+            "Tyrogue",
+            "Hitmontop",
+            "Smoochum",
+            "Elekid",
+            "Magby",
+            "Miltank",
+            "Blissey",
+            "Raikou",
+            "Entei",
+            "Suicune",
+            "Larvitar",
+            "Pupitar",
+            "Tyranitar",
+            "Lugia",
+            "Ho-Oh",
+            "Celebi",
+            "Treecko",
+            "Grovyle",
+            "Sceptile",
+            "Torchic",
+            "Combusken",
+            "Blaziken",
+            "Mudkip",
+            "Marshtomp",
+            "Swampert",
+            "Poochyena",
+            "Mightyena",
+            "Zigzagoon",
+            "Linoone",
+            "Wurmple",
+            "Silcoon",
+            "Beautifly",
+            "Cascoon",
+            "Dustox",
+            "Lotad",
+            "Lombre",
+            "Ludicolo",
+            "Seedot",
+            "Nuzleaf",
+            "Shiftry",
+            "Taillow",
+            "Swellow",
+            "Wingull",
+            "Pelipper",
+            "Ralts",
+            "Kirlia",
+            "Gardevoir",
+            "Surskit",
+            "Masquerain",
+            "Shroomish",
+            "Breloom",
+            "Slakoth",
+            "Vigoroth",
+            "Slaking",
+            "Nincada",
+            "Ninjask",
+            "Shedinja",
+            "Whismur",
+            "Loudred",
+            "Exploud",
+            "Makuhita",
+            "Hariyama",
+            "Azurill",
+            "Nosepass",
+            "Skitty",
+            "Delcatty",
+            "Sableye",
+            "Mawile",
+            "Aron",
+            "Lairon",
+            "Aggron",
+            "Meditite",
+            "Medicham",
+            "Electrike",
+            "Manectric",
+            "Plusle",
+            "Minun",
+            "Volbeat",
+            "Illumise",
+            "Roselia",
+            "Gulpin",
+            "Swalot",
+            "Carvanha",
+            "Sharpedo",
+            "Wailmer",
+            "Wailord",
+            "Numel",
+            "Camerupt",
+            "Torkoal",
+            "Spoink",
+            "Grumpig",
+            "Spinda",
+            "Trapinch",
+            "Vibrava",
+            "Flygon",
+            "Cacnea",
+            "Cacturne",
+            "Swablu",
+            "Altaria",
+            "Zangoose",
+            "Seviper",
+            "Lunatone",
+            "Solrock",
+            "Barboach",
+            "Whiscash",
+            "Corphish",
+            "Crawdaunt",
+            "Baltoy",
+            "Claydol",
+            "Lileep",
+            "Cradily",
+            "Anorith",
+            "Armaldo",
+            "Feebas",
+            "Milotic",
+            "Castform",
+            "Kecleon",
+            "Shuppet",
+            "Banette",
+            "Duskull",
+            "Dusclops",
+            "Tropius",
+            "Chimecho",
+            "Absol",
+            "Wynaut",
+            "Snorunt",
+            "Glalie",
+            "Spheal",
+            "Sealeo",
+            "Walrein",
+            "Clamperl",
+            "Huntail",
+            "Gorebyss",
+            "Relicanth",
+            "Luvdisc",
+            "Bagon",
+            "Shelgon",
+            "Salamence",
+            "Beldum",
+            "Metang",
+            "Metagross",
+            "Regirock",
+            "Regice",
+            "Registeel",
+            "Latias",
+            "Latios",
+            "Kyogre",
+            "Groudon",
+            "Rayquaza",
+            "Jirachi",
+            "Deoxys",
+            "Turtwig",
+            "Grotle",
+            "Torterra",
+            "Chimchar",
+            "Monferno",
+            "Infernape",
+            "Piplup",
+            "Prinplup",
+            "Empoleon",
+            "Starly",
+            "Staravia",
+            "Staraptor",
+            "Bidoof",
+            "Bibarel",
+            "Kricketot",
+            "Kricketune",
+            "Shinx",
+            "Luxio",
+            "Luxray",
+            "Budew",
+            "Roserade",
+            "Cranidos",
+            "Rampardos",
+            "Shieldon",
+            "Bastiodon",
+            "Burmy",
+            "Wormadam",
+            "Mothim",
+            "Combee",
+            "Vespiquen",
+            "Pachirisu",
+            "Buizel",
+            "Floatzel",
+            "Cherubi",
+            "Cherrim",
+            "Shellos",
+            "Gastrodon",
+            "Ambipom",
+            "Drifloon",
+            "Drifblim",
+            "Buneary",
+            "Lopunny",
+            "Mismagius",
+            "Honchkrow",
+            "Glameow",
+            "Purugly",
+            "Chingling",
+            "Stunky",
+            "Skuntank",
+            "Bronzor",
+            "Bronzong",
+            "Bonsly",
+            "Mime Jr.",
+            "Happiny",
+            "Chatot",
+            "Spiritomb",
+            "Gible",
+            "Gabite",
+            "Garchomp",
+            "Munchlax",
+            "Riolu",
+            "Lucario",
+            "Hippopotas",
+            "Hippowdon",
+            "Skorupi",
+            "Drapion",
+            "Croagunk",
+            "Toxicroak",
+            "Carnivine",
+            "Finneon",
+            "Lumineon",
+            "Mantyke",
+            "Snover",
+            "Abomasnow",
+            "Weavile",
+            "Magnezone",
+            "Lickilicky",
+            "Rhyperior",
+            "Tangrowth",
+            "Electivire",
+            "Magmortar",
+            "Togekiss",
+            "Yanmega",
+            "Leafeon",
+            "Glaceon",
+            "Gliscor",
+            "Mamoswine",
+            "Porygon-Z",
+            "Gallade",
+            "Probopass",
+            "Dusknoir",
+            "Froslass",
+            "Rotom",
+            "Uxie",
+            "Mesprit",
+            "Azelf",
+            "Dialga",
+            "Palkia",
+            "Heatran",
+            "Regigigas",
+            "Giratina",
+            "Cresselia",
+            "Phione",
+            "Manaphy",
+            "Darkrai",
+            "Shaymin",
+            "Arceus",
+            "Victini",
+            "Snivy",
+            "Servine",
+            "Serperior",
+            "Tepig",
+            "Pignite",
+            "Emboar",
+            "Oshawott",
+            "Dewott",
+            "Samurott",
+            "Patrat",
+            "Watchog",
+            "Lillipup",
+            "Herdier",
+            "Stoutland",
+            "Purrloin",
+            "Liepard",
+            "Pansage",
+            "Simisage",
+            "Pansear",
+            "Simisear",
+            "Panpour",
+            "Simipour",
+            "Munna",
+            "Musharna",
+            "Pidove",
+            "Tranquill",
+            "Unfezant",
+            "Blitzle",
+            "Zebstrika",
+            "Roggenrola",
+            "Boldore",
+            "Gigalith",
+            "Woobat",
+            "Swoobat",
+            "Drilbur",
+            "Excadrill",
+            "Audino",
+            "Timburr",
+            "Gurdurr",
+            "Conkeldurr",
+            "Tympole",
+            "Palpitoad",
+            "Seismitoad",
+            "Throh",
+            "Sawk",
+            "Sewaddle",
+            "Swadloon",
+            "Leavanny",
+            "Venipede",
+            "Whirlipede",
+            "Scolipede",
+            "Cottonee",
+            "Whimsicott",
+            "Petilil",
+            "Lilligant",
+            "Basculin",
+            "Sandile",
+            "Krokorok",
+            "Krookodile",
+            "Darumaka",
+            "Darmanitan",
+            "Maractus",
+            "Dwebble",
+            "Crustle",
+            "Scraggy",
+            "Scrafty",
+            "Sigilyph",
+            "Yamask",
+            "Cofagrigus",
+            "Tirtouga",
+            "Carracosta",
+            "Archen",
+            "Archeops",
+            "Trubbish",
+            "Garbodor",
+            "Zorua",
+            "Zoroark",
+            "Minccino",
+            "Cinccino",
+            "Gothita",
+            "Gothorita",
+            "Gothitelle",
+            "Solosis",
+            "Duosion",
+            "Reuniclus",
+            "Ducklett",
+            "Swanna",
+            "Vanillite",
+            "Vanillish",
+            "Vanilluxe",
+            "Deerling",
+            "Sawsbuck",
+            "Emolga",
+            "Karrablast",
+            "Escavalier",
+            "Foongus",
+            "Amoonguss",
+            "Frillish",
+            "Jellicent",
+            "Alomomola",
+            "Joltik",
+            "Galvantula",
+            "Ferroseed",
+            "Ferrothorn",
+            "Klink",
+            "Klang",
+            "Klinklang",
+            "Tynamo",
+            "Eelektrik",
+            "Eelektross",
+            "Elgyem",
+            "Beheeyem",
+            "Litwick",
+            "Lampent",
+            "Chandelure",
+            "Axew",
+            "Fraxure",
+            "Haxorus",
+            "Cubchoo",
+            "Beartic",
+            "Cryogonal",
+            "Shelmet",
+            "Accelgor",
+            "Stunfisk",
+            "Mienfoo",
+            "Mienshao",
+            "Druddigon",
+            "Golett",
+            "Golurk",
+            "Pawniard",
+            "Bisharp",
+            "Bouffalant",
+            "Rufflet",
+            "Braviary",
+            "Vullaby",
+            "Mandibuzz",
+            "Heatmor",
+            "Durant",
+            "Deino",
+            "Zweilous",
+            "Hydreigon",
+            "Larvesta",
+            "Volcarona",
+            "Cobalion",
+            "Terrakion",
+            "Virizion",
+            "Tornadus",
+            "Thundurus",
+            "Reshiram",
+            "Zekrom",
+            "Landorus",
+            "Kyurem",
+            "Keldeo",
+            "Meloetta",
+            "Genesect",
+            "Chespin",
+            "Quilladin",
+            "Chesnaught",
+            "Fennekin",
+            "Braixen",
+            "Delphox",
+            "Froakie",
+            "Frogadier",
+            "Greninja",
+            "Bunnelby",
+            "Diggersby",
+            "Fletchling",
+            "Fletchinder",
+            "Talonflame",
+            "Scatterbug",
+            "Spewpa",
+            "Vivillon",
+            "Litleo",
+            "Pyroar",
+            "Flabébé",
+            "Floette",
+            "Florges",
+            "Skiddo",
+            "Gogoat",
+            "Pancham",
+            "Pangoro",
+            "Furfrou",
+            "Espurr",
+            "Meowstic",
+            "Honedge",
+            "Doublade",
+            "Aegislash",
+            "Spritzee",
+            "Aromatisse",
+            "Swirlix",
+            "Slurpuff",
+            "Inkay",
+            "Malamar",
+            "Binacle",
+            "Barbaracle",
+            "Skrelp",
+            "Dragalge",
+            "Clauncher",
+            "Clawitzer",
+            "Helioptile",
+            "Heliolisk",
+            "Tyrunt",
+            "Tyrantrum",
+            "Amaura",
+            "Aurorus",
+            "Sylveon",
+            "Hawlucha",
+            "Dedenne",
+            "Carbink",
+            "Goomy",
+            "Sliggoo",
+            "Goodra",
+            "Klefki",
+            "Phantump",
+            "Trevenant",
+            "Pumpkaboo",
+            "Gourgeist",
+            "Bergmite",
+            "Avalugg",
+            "Noibat",
+            "Noivern",
+            "Xerneas",
+            "Yveltal",
+            "Zygarde",
+            "Diancie",
+            "Hoopa",
+            "Volcanion"});
+            this.species.Location = new System.Drawing.Point(134, 148);
+            this.species.Name = "species";
+            this.species.Size = new System.Drawing.Size(81, 21);
+            this.species.TabIndex = 44;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(80, 151);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(48, 13);
+            this.label32.TabIndex = 43;
+            this.label32.Text = "Species:";
+            // 
+            // heldItem
+            // 
+            this.heldItem.Enabled = false;
+            this.heldItem.FormattingEnabled = true;
+            this.heldItem.Location = new System.Drawing.Point(134, 246);
+            this.heldItem.Name = "heldItem";
+            this.heldItem.Size = new System.Drawing.Size(81, 21);
+            this.heldItem.TabIndex = 43;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(2, 285);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(51, 13);
+            this.label31.TabIndex = 76;
+            this.label31.Text = "Hatched:";
+            // 
+            // isEgg
+            // 
+            this.isEgg.AutoSize = true;
+            this.isEgg.Enabled = false;
+            this.isEgg.Location = new System.Drawing.Point(53, 285);
+            this.isEgg.Name = "isEgg";
+            this.isEgg.Size = new System.Drawing.Size(15, 14);
+            this.isEgg.TabIndex = 74;
+            this.isEgg.UseVisualStyleBackColor = true;
+            // 
+            // ivSPENum
+            // 
+            this.ivSPENum.Enabled = false;
+            this.ivSPENum.Location = new System.Drawing.Point(35, 259);
+            this.ivSPENum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSPENum.Name = "ivSPENum";
+            this.ivSPENum.Size = new System.Drawing.Size(33, 20);
+            this.ivSPENum.TabIndex = 73;
+            // 
+            // ivSPDNum
+            // 
+            this.ivSPDNum.Enabled = false;
+            this.ivSPDNum.Location = new System.Drawing.Point(35, 238);
+            this.ivSPDNum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSPDNum.Name = "ivSPDNum";
+            this.ivSPDNum.Size = new System.Drawing.Size(33, 20);
+            this.ivSPDNum.TabIndex = 72;
+            // 
+            // ivSPANum
+            // 
+            this.ivSPANum.Enabled = false;
+            this.ivSPANum.Location = new System.Drawing.Point(35, 217);
+            this.ivSPANum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSPANum.Name = "ivSPANum";
+            this.ivSPANum.Size = new System.Drawing.Size(33, 20);
+            this.ivSPANum.TabIndex = 71;
+            // 
+            // ivDEFNum
+            // 
+            this.ivDEFNum.Enabled = false;
+            this.ivDEFNum.Location = new System.Drawing.Point(35, 196);
+            this.ivDEFNum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivDEFNum.Name = "ivDEFNum";
+            this.ivDEFNum.Size = new System.Drawing.Size(33, 20);
+            this.ivDEFNum.TabIndex = 70;
+            // 
+            // ivATKNum
+            // 
+            this.ivATKNum.Enabled = false;
+            this.ivATKNum.Location = new System.Drawing.Point(35, 175);
+            this.ivATKNum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivATKNum.Name = "ivATKNum";
+            this.ivATKNum.Size = new System.Drawing.Size(33, 20);
+            this.ivATKNum.TabIndex = 69;
+            // 
+            // ivHPNum
+            // 
+            this.ivHPNum.Enabled = false;
+            this.ivHPNum.Location = new System.Drawing.Point(35, 154);
+            this.ivHPNum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivHPNum.Name = "ivHPNum";
+            this.ivHPNum.Size = new System.Drawing.Size(33, 20);
+            this.ivHPNum.TabIndex = 68;
+            // 
+            // nature
+            // 
+            this.nature.Enabled = false;
+            this.nature.FormattingEnabled = true;
+            this.nature.Items.AddRange(new object[] {
+            "Hardy",
+            "Lonely",
+            "Brave",
+            "Adamant",
+            "Naughty",
+            "Bold",
+            "Docile",
+            "Relaxed",
+            "Impish",
+            "Lax",
+            "Timid",
+            "Hasty",
+            "Serious",
+            "Jolly",
+            "Naive",
+            "Modest",
+            "Mild",
+            "Quiet",
+            "Bashful",
+            "Rash",
+            "Calm",
+            "Gentle",
+            "Sassy",
+            "Careful",
+            "Quirky"});
+            this.nature.Location = new System.Drawing.Point(134, 197);
+            this.nature.Name = "nature";
+            this.nature.Size = new System.Drawing.Size(81, 21);
+            this.nature.TabIndex = 67;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(76, 177);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(58, 13);
+            this.label30.TabIndex = 66;
+            this.label30.Text = "Nickname:";
+            // 
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(145, 274);
+            this.button1.Location = new System.Drawing.Point(140, 297);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 44;
@@ -448,18 +1377,18 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.pokeEkx_Click);
             // 
-            // Nickname
+            // nickname
             // 
-            this.Nickname.Enabled = false;
-            this.Nickname.Location = new System.Drawing.Point(139, 144);
-            this.Nickname.Name = "Nickname";
-            this.Nickname.Size = new System.Drawing.Size(81, 20);
-            this.Nickname.TabIndex = 46;
+            this.nickname.Enabled = false;
+            this.nickname.Location = new System.Drawing.Point(134, 173);
+            this.nickname.Name = "nickname";
+            this.nickname.Size = new System.Drawing.Size(81, 20);
+            this.nickname.TabIndex = 46;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(93, 250);
+            this.label29.Location = new System.Drawing.Point(88, 275);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(77, 13);
             this.label29.TabIndex = 65;
@@ -468,7 +1397,7 @@
             // hiddenPower
             // 
             this.hiddenPower.BackColor = System.Drawing.SystemColors.Control;
-            this.hiddenPower.Location = new System.Drawing.Point(170, 246);
+            this.hiddenPower.Location = new System.Drawing.Point(165, 271);
             this.hiddenPower.Name = "hiddenPower";
             this.hiddenPower.ReadOnly = true;
             this.hiddenPower.Size = new System.Drawing.Size(50, 20);
@@ -478,43 +1407,34 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(102, 198);
+            this.label25.Location = new System.Drawing.Point(97, 226);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(37, 13);
             this.label25.TabIndex = 63;
             this.label25.Text = "Ability:";
             // 
-            // Ability
+            // ability
             // 
-            this.Ability.Location = new System.Drawing.Point(139, 194);
-            this.Ability.Name = "Ability";
-            this.Ability.ReadOnly = true;
-            this.Ability.Size = new System.Drawing.Size(81, 20);
-            this.Ability.TabIndex = 62;
-            this.Ability.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ability.Location = new System.Drawing.Point(134, 222);
+            this.ability.Name = "ability";
+            this.ability.ReadOnly = true;
+            this.ability.Size = new System.Drawing.Size(81, 20);
+            this.ability.TabIndex = 62;
+            this.ability.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(109, 224);
+            this.label24.Location = new System.Drawing.Point(104, 251);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(30, 13);
             this.label24.TabIndex = 61;
             this.label24.Text = "Item:";
             // 
-            // heldItem
-            // 
-            this.heldItem.Location = new System.Drawing.Point(139, 220);
-            this.heldItem.Name = "heldItem";
-            this.heldItem.ReadOnly = true;
-            this.heldItem.Size = new System.Drawing.Size(81, 20);
-            this.heldItem.TabIndex = 60;
-            this.heldItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(97, 172);
+            this.label23.Location = new System.Drawing.Point(92, 201);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(42, 13);
             this.label23.TabIndex = 59;
@@ -537,7 +1457,7 @@
             // 
             this.radioOpponent.AutoSize = true;
             this.radioOpponent.Enabled = false;
-            this.radioOpponent.Location = new System.Drawing.Point(100, 105);
+            this.radioOpponent.Location = new System.Drawing.Point(68, 105);
             this.radioOpponent.Name = "radioOpponent";
             this.radioOpponent.Size = new System.Drawing.Size(72, 17);
             this.radioOpponent.TabIndex = 34;
@@ -550,7 +1470,7 @@
             // 
             this.radioDaycare.AutoSize = true;
             this.radioDaycare.Enabled = false;
-            this.radioDaycare.Location = new System.Drawing.Point(100, 87);
+            this.radioDaycare.Location = new System.Drawing.Point(68, 87);
             this.radioDaycare.Name = "radioDaycare";
             this.radioDaycare.Size = new System.Drawing.Size(65, 17);
             this.radioDaycare.TabIndex = 33;
@@ -561,7 +1481,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(12, 257);
+            this.label22.Location = new System.Drawing.Point(7, 263);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(31, 13);
             this.label22.TabIndex = 58;
@@ -604,9 +1524,9 @@
             // nameek6
             // 
             this.nameek6.Enabled = false;
-            this.nameek6.Location = new System.Drawing.Point(99, 39);
+            this.nameek6.Location = new System.Drawing.Point(100, 39);
             this.nameek6.Name = "nameek6";
-            this.nameek6.Size = new System.Drawing.Size(105, 20);
+            this.nameek6.Size = new System.Drawing.Size(103, 20);
             this.nameek6.TabIndex = 29;
             // 
             // dumpek6
@@ -623,7 +1543,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(11, 236);
+            this.label21.Location = new System.Drawing.Point(6, 242);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(32, 13);
             this.label21.TabIndex = 57;
@@ -696,7 +1616,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(44, 135);
+            this.label16.Location = new System.Drawing.Point(39, 141);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(22, 13);
             this.label16.TabIndex = 52;
@@ -705,7 +1625,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(12, 173);
+            this.label18.Location = new System.Drawing.Point(7, 179);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(31, 13);
             this.label18.TabIndex = 54;
@@ -714,7 +1634,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(12, 215);
+            this.label20.Location = new System.Drawing.Point(7, 221);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(31, 13);
             this.label20.TabIndex = 56;
@@ -723,7 +1643,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(18, 152);
+            this.label17.Location = new System.Drawing.Point(13, 158);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(25, 13);
             this.label17.TabIndex = 53;
@@ -732,7 +1652,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 194);
+            this.label19.Location = new System.Drawing.Point(7, 200);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(31, 13);
             this.label19.TabIndex = 55;
@@ -746,7 +1666,7 @@
             this.writeBox.Controls.Add(this.pokePkm);
             this.writeBox.Controls.Add(this.box);
             this.writeBox.Controls.Add(this.slot);
-            this.writeBox.Location = new System.Drawing.Point(241, 225);
+            this.writeBox.Location = new System.Drawing.Point(7, 337);
             this.writeBox.Name = "writeBox";
             this.writeBox.Size = new System.Drawing.Size(154, 86);
             this.writeBox.TabIndex = 21;
@@ -1209,7 +2129,7 @@
             this.groupBox4.Controls.Add(this.delPkm);
             this.groupBox4.Controls.Add(this.deleteBox);
             this.groupBox4.Controls.Add(this.deleteSlot);
-            this.groupBox4.Location = new System.Drawing.Point(401, 225);
+            this.groupBox4.Location = new System.Drawing.Point(167, 337);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(154, 86);
             this.groupBox4.TabIndex = 24;
@@ -1255,6 +2175,11 @@
             0,
             0,
             0});
+            this.deleteBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.deleteBox.Name = "deleteBox";
             this.deleteBox.Size = new System.Drawing.Size(66, 20);
             this.deleteBox.TabIndex = 18;
@@ -1287,152 +2212,352 @@
             0,
             0});
             // 
-            // label30
+            // clonePkm
             // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(81, 148);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(58, 13);
-            this.label30.TabIndex = 66;
-            this.label30.Text = "Nickname:";
+            this.clonePkm.Controls.Add(this.label37);
+            this.clonePkm.Controls.Add(this.label36);
+            this.clonePkm.Controls.Add(this.cloneFF);
+            this.clonePkm.Controls.Add(this.label40);
+            this.clonePkm.Controls.Add(this.label33);
+            this.clonePkm.Controls.Add(this.fromFile);
+            this.clonePkm.Controls.Add(this.label39);
+            this.clonePkm.Controls.Add(this.chooseCloneFF);
+            this.clonePkm.Controls.Add(this.clonefromSlotFB);
+            this.clonePkm.Controls.Add(this.cloneAmountFF);
+            this.clonePkm.Controls.Add(this.clonetoBoxFB);
+            this.clonePkm.Controls.Add(this.fromBoxes);
+            this.clonePkm.Controls.Add(this.clonetoSlotFB);
+            this.clonePkm.Controls.Add(this.label34);
+            this.clonePkm.Controls.Add(this.cloneAmountFB);
+            this.clonePkm.Controls.Add(this.clonetoSlotFF);
+            this.clonePkm.Controls.Add(this.label35);
+            this.clonePkm.Controls.Add(this.clonetoBoxFF);
+            this.clonePkm.Controls.Add(this.clonefromBoxFB);
+            this.clonePkm.Controls.Add(this.cloneFB);
+            this.clonePkm.Location = new System.Drawing.Point(241, 226);
+            this.clonePkm.Name = "clonePkm";
+            this.clonePkm.Size = new System.Drawing.Size(297, 108);
+            this.clonePkm.TabIndex = 43;
+            this.clonePkm.TabStop = false;
+            this.clonePkm.Text = "Mass Cloning";
             // 
-            // Nature
+            // label37
             // 
-            this.Nature.Enabled = false;
-            this.Nature.FormattingEnabled = true;
-            this.Nature.Items.AddRange(new object[] {
-            "Hardy",
-            "Lonely",
-            "Brave",
-            "Adamant",
-            "Naughty",
-            "Bold",
-            "Docile",
-            "Relaxed",
-            "Impish",
-            "Lax",
-            "Timid",
-            "Hasty",
-            "Serious",
-            "Jolly",
-            "Naive",
-            "Modest",
-            "Mild",
-            "Quiet",
-            "Bashful",
-            "Rash",
-            "Calm",
-            "Gentle",
-            "Sassy",
-            "Careful",
-            "Quirky"});
-            this.Nature.Location = new System.Drawing.Point(139, 168);
-            this.Nature.Name = "Nature";
-            this.Nature.Size = new System.Drawing.Size(81, 21);
-            this.Nature.TabIndex = 67;
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(229, 17);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(64, 13);
+            this.label37.TabIndex = 47;
+            this.label37.Text = "From Game:";
             // 
-            // ivHPNum
+            // label36
             // 
-            this.ivHPNum.Enabled = false;
-            this.ivHPNum.Location = new System.Drawing.Point(40, 148);
-            this.ivHPNum.Maximum = new decimal(new int[] {
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(237, 68);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(52, 13);
+            this.label36.TabIndex = 46;
+            this.label36.Text = "From File:";
+            // 
+            // cloneFF
+            // 
+            this.cloneFF.Location = new System.Drawing.Point(84, 79);
+            this.cloneFF.Name = "cloneFF";
+            this.cloneFF.Size = new System.Drawing.Size(66, 23);
+            this.cloneFF.TabIndex = 30;
+            this.cloneFF.Text = "Clone";
+            this.cloneFF.UseVisualStyleBackColor = true;
+            this.cloneFF.Visible = false;
+            this.cloneFF.Click += new System.EventHandler(this.cloneFF_Click);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(87, 66);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(54, 13);
+            this.label40.TabIndex = 45;
+            this.label40.Text = "From Slot:";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(11, 17);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(28, 13);
+            this.label33.TabIndex = 37;
+            this.label33.Text = "Box:";
+            // 
+            // fromFile
+            // 
+            this.fromFile.AutoSize = true;
+            this.fromFile.Enabled = false;
+            this.fromFile.Location = new System.Drawing.Point(275, 84);
+            this.fromFile.Name = "fromFile";
+            this.fromFile.Size = new System.Drawing.Size(14, 13);
+            this.fromFile.TabIndex = 45;
+            this.fromFile.UseVisualStyleBackColor = true;
+            this.fromFile.CheckedChanged += new System.EventHandler(this.fromFile_CheckedChanged);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(11, 66);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(54, 13);
+            this.label39.TabIndex = 44;
+            this.label39.Text = "From Box:";
+            // 
+            // chooseCloneFF
+            // 
+            this.chooseCloneFF.Enabled = false;
+            this.chooseCloneFF.Location = new System.Drawing.Point(8, 80);
+            this.chooseCloneFF.Name = "chooseCloneFF";
+            this.chooseCloneFF.Size = new System.Drawing.Size(66, 23);
+            this.chooseCloneFF.TabIndex = 0;
+            this.chooseCloneFF.Text = "Browse";
+            this.chooseCloneFF.UseVisualStyleBackColor = true;
+            this.chooseCloneFF.Visible = false;
+            this.chooseCloneFF.Click += new System.EventHandler(this.chooseCloneFF_Click);
+            // 
+            // clonefromSlotFB
+            // 
+            this.clonefromSlotFB.Enabled = false;
+            this.clonefromSlotFB.Location = new System.Drawing.Point(84, 82);
+            this.clonefromSlotFB.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.clonefromSlotFB.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonefromSlotFB.Name = "clonefromSlotFB";
+            this.clonefromSlotFB.Size = new System.Drawing.Size(66, 20);
+            this.clonefromSlotFB.TabIndex = 33;
+            this.clonefromSlotFB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // cloneAmountFF
+            // 
+            this.cloneAmountFF.Location = new System.Drawing.Point(160, 33);
+            this.cloneAmountFF.Maximum = new decimal(new int[] {
+            930,
+            0,
+            0,
+            0});
+            this.cloneAmountFF.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.cloneAmountFF.Name = "cloneAmountFF";
+            this.cloneAmountFF.Size = new System.Drawing.Size(66, 20);
+            this.cloneAmountFF.TabIndex = 31;
+            this.cloneAmountFF.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.cloneAmountFF.Visible = false;
+            this.cloneAmountFF.ValueChanged += new System.EventHandler(this.cloneAmountFF_ValueChanged);
+            // 
+            // clonetoBoxFB
+            // 
+            this.clonetoBoxFB.Enabled = false;
+            this.clonetoBoxFB.Location = new System.Drawing.Point(8, 33);
+            this.clonetoBoxFB.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
-            this.ivHPNum.Name = "ivHPNum";
-            this.ivHPNum.Size = new System.Drawing.Size(33, 20);
-            this.ivHPNum.TabIndex = 68;
+            this.clonetoBoxFB.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonetoBoxFB.Name = "clonetoBoxFB";
+            this.clonetoBoxFB.Size = new System.Drawing.Size(66, 20);
+            this.clonetoBoxFB.TabIndex = 35;
+            this.clonetoBoxFB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonetoBoxFB.ValueChanged += new System.EventHandler(this.clonetoBoxFB_ValueChanged);
             // 
-            // ivATKNum
+            // fromBoxes
             // 
-            this.ivATKNum.Enabled = false;
-            this.ivATKNum.Location = new System.Drawing.Point(40, 169);
-            this.ivATKNum.Maximum = new decimal(new int[] {
+            this.fromBoxes.AutoSize = true;
+            this.fromBoxes.Checked = true;
+            this.fromBoxes.Enabled = false;
+            this.fromBoxes.Location = new System.Drawing.Point(275, 33);
+            this.fromBoxes.Name = "fromBoxes";
+            this.fromBoxes.Size = new System.Drawing.Size(14, 13);
+            this.fromBoxes.TabIndex = 44;
+            this.fromBoxes.TabStop = true;
+            this.fromBoxes.UseVisualStyleBackColor = true;
+            this.fromBoxes.CheckedChanged += new System.EventHandler(this.fromBoxes_CheckedChanged);
+            // 
+            // clonetoSlotFB
+            // 
+            this.clonetoSlotFB.Enabled = false;
+            this.clonetoSlotFB.Location = new System.Drawing.Point(84, 33);
+            this.clonetoSlotFB.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.clonetoSlotFB.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonetoSlotFB.Name = "clonetoSlotFB";
+            this.clonetoSlotFB.Size = new System.Drawing.Size(66, 20);
+            this.clonetoSlotFB.TabIndex = 36;
+            this.clonetoSlotFB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonetoSlotFB.ValueChanged += new System.EventHandler(this.clonetoSlotFB_ValueChanged);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(87, 17);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(28, 13);
+            this.label34.TabIndex = 38;
+            this.label34.Text = "Slot:";
+            // 
+            // cloneAmountFB
+            // 
+            this.cloneAmountFB.Enabled = false;
+            this.cloneAmountFB.Location = new System.Drawing.Point(160, 33);
+            this.cloneAmountFB.Maximum = new decimal(new int[] {
+            930,
+            0,
+            0,
+            0});
+            this.cloneAmountFB.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.cloneAmountFB.Name = "cloneAmountFB";
+            this.cloneAmountFB.Size = new System.Drawing.Size(66, 20);
+            this.cloneAmountFB.TabIndex = 40;
+            this.cloneAmountFB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.cloneAmountFB.ValueChanged += new System.EventHandler(this.cloneAmountFB_ValueChanged);
+            // 
+            // clonetoSlotFF
+            // 
+            this.clonetoSlotFF.Location = new System.Drawing.Point(84, 33);
+            this.clonetoSlotFF.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.clonetoSlotFF.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonetoSlotFF.Name = "clonetoSlotFF";
+            this.clonetoSlotFF.Size = new System.Drawing.Size(66, 20);
+            this.clonetoSlotFF.TabIndex = 25;
+            this.clonetoSlotFF.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonetoSlotFF.Visible = false;
+            this.clonetoSlotFF.ValueChanged += new System.EventHandler(this.clonetoSlotFF_ValueChanged);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(159, 17);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(64, 13);
+            this.label35.TabIndex = 41;
+            this.label35.Text = "# of Clones:";
+            // 
+            // clonetoBoxFF
+            // 
+            this.clonetoBoxFF.Location = new System.Drawing.Point(8, 33);
+            this.clonetoBoxFF.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
-            this.ivATKNum.Name = "ivATKNum";
-            this.ivATKNum.Size = new System.Drawing.Size(33, 20);
-            this.ivATKNum.TabIndex = 69;
+            this.clonetoBoxFF.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonetoBoxFF.Name = "clonetoBoxFF";
+            this.clonetoBoxFF.Size = new System.Drawing.Size(66, 20);
+            this.clonetoBoxFF.TabIndex = 24;
+            this.clonetoBoxFF.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clonetoBoxFF.Visible = false;
+            this.clonetoBoxFF.ValueChanged += new System.EventHandler(this.clonetoBoxFF_ValueChanged);
             // 
-            // ivDEFNum
+            // clonefromBoxFB
             // 
-            this.ivDEFNum.Enabled = false;
-            this.ivDEFNum.Location = new System.Drawing.Point(40, 190);
-            this.ivDEFNum.Maximum = new decimal(new int[] {
+            this.clonefromBoxFB.Enabled = false;
+            this.clonefromBoxFB.Location = new System.Drawing.Point(8, 82);
+            this.clonefromBoxFB.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
-            this.ivDEFNum.Name = "ivDEFNum";
-            this.ivDEFNum.Size = new System.Drawing.Size(33, 20);
-            this.ivDEFNum.TabIndex = 70;
-            // 
-            // ivSPANum
-            // 
-            this.ivSPANum.Enabled = false;
-            this.ivSPANum.Location = new System.Drawing.Point(40, 211);
-            this.ivSPANum.Maximum = new decimal(new int[] {
-            31,
+            this.clonefromBoxFB.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
-            this.ivSPANum.Name = "ivSPANum";
-            this.ivSPANum.Size = new System.Drawing.Size(33, 20);
-            this.ivSPANum.TabIndex = 71;
-            // 
-            // ivSPDNum
-            // 
-            this.ivSPDNum.Enabled = false;
-            this.ivSPDNum.Location = new System.Drawing.Point(40, 232);
-            this.ivSPDNum.Maximum = new decimal(new int[] {
-            31,
+            this.clonefromBoxFB.Name = "clonefromBoxFB";
+            this.clonefromBoxFB.Size = new System.Drawing.Size(66, 20);
+            this.clonefromBoxFB.TabIndex = 32;
+            this.clonefromBoxFB.Value = new decimal(new int[] {
+            1,
             0,
             0,
             0});
-            this.ivSPDNum.Name = "ivSPDNum";
-            this.ivSPDNum.Size = new System.Drawing.Size(33, 20);
-            this.ivSPDNum.TabIndex = 72;
             // 
-            // ivSPENum
+            // cloneFB
             // 
-            this.ivSPENum.Enabled = false;
-            this.ivSPENum.Location = new System.Drawing.Point(40, 253);
-            this.ivSPENum.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivSPENum.Name = "ivSPENum";
-            this.ivSPENum.Size = new System.Drawing.Size(33, 20);
-            this.ivSPENum.TabIndex = 73;
-            // 
-            // isEgg
-            // 
-            this.isEgg.AutoSize = true;
-            this.isEgg.Enabled = false;
-            this.isEgg.Location = new System.Drawing.Point(58, 279);
-            this.isEgg.Name = "isEgg";
-            this.isEgg.Size = new System.Drawing.Size(15, 14);
-            this.isEgg.TabIndex = 74;
-            this.isEgg.UseVisualStyleBackColor = true;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(7, 279);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(51, 13);
-            this.label31.TabIndex = 76;
-            this.label31.Text = "Hatched:";
+            this.cloneFB.Enabled = false;
+            this.cloneFB.Location = new System.Drawing.Point(157, 79);
+            this.cloneFB.Name = "cloneFB";
+            this.cloneFB.Size = new System.Drawing.Size(66, 23);
+            this.cloneFB.TabIndex = 39;
+            this.cloneFB.Text = "Clone";
+            this.cloneFB.UseVisualStyleBackColor = true;
+            this.cloneFB.Click += new System.EventHandler(this.cloneFB_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 330);
+            this.ClientSize = new System.Drawing.Size(842, 428);
+            this.Controls.Add(this.clonePkm);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -1457,6 +2582,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.slot)).EndInit();
             this.dumpBox.ResumeLayout(false);
             this.dumpBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSPENum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSPDNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSPANum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivDEFNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivATKNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivHPNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).EndInit();
             this.writeBox.ResumeLayout(false);
@@ -1478,18 +2609,22 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivHPNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivATKNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivDEFNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivSPANum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivSPDNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivSPENum)).EndInit();
+            this.clonePkm.ResumeLayout(false);
+            this.clonePkm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clonefromSlotFB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneAmountFF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneAmountFB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clonefromBoxFB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        private System.Windows.Forms.TextBox txtLog;
+        public System.Windows.Forms.TextBox txtLog;
 		private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer disconnectTimer;
         private System.Windows.Forms.Button buttonConnect;
@@ -1565,9 +2700,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox heldItem;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox Ability;
+        private System.Windows.Forms.TextBox ability;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
@@ -1581,10 +2715,10 @@
         private System.Windows.Forms.ComboBox Lang;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox hiddenPower;
-        private System.Windows.Forms.TextBox Nickname;
+        private System.Windows.Forms.TextBox nickname;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.ComboBox Nature;
+        private System.Windows.Forms.ComboBox nature;
         private System.Windows.Forms.NumericUpDown ivSPENum;
         private System.Windows.Forms.NumericUpDown ivSPDNum;
         private System.Windows.Forms.NumericUpDown ivSPANum;
@@ -1593,6 +2727,30 @@
         private System.Windows.Forms.NumericUpDown ivHPNum;
         private System.Windows.Forms.CheckBox isEgg;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.ComboBox heldItem;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox species;
+        private System.Windows.Forms.GroupBox clonePkm;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.NumericUpDown clonefromBoxFB;
+        private System.Windows.Forms.NumericUpDown clonefromSlotFB;
+        private System.Windows.Forms.NumericUpDown clonetoBoxFB;
+        private System.Windows.Forms.NumericUpDown clonetoSlotFB;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.NumericUpDown cloneAmountFB;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button cloneFB;
+        private System.Windows.Forms.NumericUpDown clonetoBoxFF;
+        private System.Windows.Forms.Button chooseCloneFF;
+        private System.Windows.Forms.NumericUpDown clonetoSlotFF;
+        private System.Windows.Forms.NumericUpDown cloneAmountFF;
+        private System.Windows.Forms.Button cloneFF;
+        private System.Windows.Forms.RadioButton fromFile;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.RadioButton fromBoxes;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label36;
     }
 }
 
