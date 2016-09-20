@@ -13,7 +13,19 @@ namespace ntrbase
 
     public partial class MainForm : Form
     {
+        private byte[] Data { get; set; }
+        private uint IV32 { get { return BitConverter.ToUInt32(Data, 0x74); } set { BitConverter.GetBytes(value).CopyTo(Data, 0x74); } }
+        public int IV_HP { get { return (int)(IV32 >> 00) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 00)) | (uint)((value > 31 ? 31 : value) << 00)); } }
+        public int IV_ATK { get { return (int)(IV32 >> 05) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 05)) | (uint)((value > 31 ? 31 : value) << 05)); } }
+        public int IV_DEF { get { return (int)(IV32 >> 10) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 10)) | (uint)((value > 31 ? 31 : value) << 10)); } }
+        public int IV_SPE { get { return (int)(IV32 >> 15) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 15)) | (uint)((value > 31 ? 31 : value) << 15)); } }
+        public int IV_SPA { get { return (int)(IV32 >> 20) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 20)) | (uint)((value > 31 ? 31 : value) << 20)); } }
+        public int IV_SPD { get { return (int)(IV32 >> 25) & 0x1F; } set { IV32 = (uint)((IV32 & ~(0x1F << 25)) | (uint)((value > 31 ? 31 : value) << 25)); } }
+        public bool IsEgg { get { return ((IV32 >> 30) & 1) == 1; } set { IV32 = (uint)((IV32 & ~0x40000000) | (uint)(value ? 0x40000000 : 0)); } }
+        public bool IsNicknamed { get { return ((IV32 >> 31) & 1) == 1; } set { IV32 = (IV32 & 0x7FFFFFFF) | (value ? 0x80000000 : 0); } }
         public int tradedumpcount = 0;
+        public string realoppoffset { get; set; }
+        public string realtradeoffset { get; set; }
         public string tradeoffrg;
         public string moneyoff;
         public string milesoff;
@@ -56,6 +68,7 @@ namespace ntrbase
         private byte[] tmData = new byte[432];
         private byte[] medData = new byte[256];
         private byte[] berryData = new byte[288];
+        private byte[] pkmEncrypted { get; set; }
         public byte[] data;
         public byte[] keys;
         public byte[] tms;
@@ -453,6 +466,16 @@ namespace ntrbase
                 deleteSlot.Enabled = true;
                 Lang.Enabled = true;
                 pokeLang.Enabled = true;
+                ivHPNum.Enabled = true;
+                ivATKNum.Enabled = true;
+                ivDEFNum.Enabled = true;
+                ivSPENum.Enabled = true;
+                ivSPANum.Enabled = true;
+                ivSPDNum.Enabled = true;
+                isEgg.Enabled = true;
+                Nickname.Enabled = true;
+                Nature.Enabled = true;
+                button1.Enabled = true;
                 Settings.Default.IP = host.Text;
                 Settings.Default.Save();
             }
@@ -872,7 +895,7 @@ namespace ntrbase
                         foreach (int occurence in occurences)
                         {
                             int realoffsetint = 142606336 + occurence + 637;
-                            string realoppoffset = "0x" + realoffsetint.ToString("X");
+                            realoppoffset = "0x" + realoffsetint.ToString("X");
                             string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
                             runCmd(dumpOpp);
                         }
@@ -913,7 +936,7 @@ namespace ntrbase
                         foreach (int occurence in occurences)
                         {
                             int realtradeoffsetint = 139460608 + occurence + 98;
-                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
+                            realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
                             string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
                             runCmd(dumpTrade);
                         }
@@ -1536,23 +1559,16 @@ namespace ntrbase
                 if (txtLog.Text.Contains(nameek6.Text + ".ek6 successfully"))
                 {
                     string dumpedek6 = @Application.StartupPath + "\\" + nameek6.Text + ".ek6";
-                    byte[] pkm = System.IO.File.ReadAllBytes(dumpedek6);
-                    byte[] pkm2 = PKHeX.decryptArray(pkm);
-                    uint IV32 = BitConverter.ToUInt32(pkm2, 0x74);
-                    uint IV_HP = (IV32 >> 00) & 31;
-                    uint IV_ATK = (IV32 >> 05) & 31;
-                    uint IV_DEF = (IV32 >> 10) & 31;
-                    uint IV_SPE = (IV32 >> 15) & 31;
-                    uint IV_SPA = (IV32 >> 20) & 31;
-                    uint IV_SPD = (IV32 >> 25) & 31;
-                    ivHP.Text = Convert.ToString(IV_HP);
-                    ivATK.Text = Convert.ToString(IV_ATK);
-                    ivDEF.Text = Convert.ToString(IV_DEF);
-                    ivSPA.Text = Convert.ToString(IV_SPA);
-                    ivSPD.Text = Convert.ToString(IV_SPD);
-                    ivSPE.Text = Convert.ToString(IV_SPE);
-
-                    uint hp = 15 * ((IV_HP & 1) + 2 * (IV_ATK & 1) + 4 * (IV_DEF & 1) + 8 * (IV_SPE & 1) + 16 * (IV_SPA & 1) + 32 * (IV_SPD & 1)) / 63;
+                    pkmEncrypted = System.IO.File.ReadAllBytes(dumpedek6);
+                    Data = PKHeX.decryptArray(pkmEncrypted);
+                    ivHPNum.Value = IV_HP;
+                    ivATKNum.Value = IV_ATK;
+                    ivDEFNum.Value = IV_DEF;
+                    ivSPANum.Value = IV_SPA;
+                    ivSPDNum.Value = IV_SPD;
+                    ivSPENum.Value = IV_SPE;
+                    Nickname.Text = Encoding.BigEndianUnicode.GetString(Data.Skip(63).Take(24).ToArray());
+                    uint hp = (uint)(15 * ((IV_HP & 1) + 2 * (IV_ATK & 1) + 4 * (IV_DEF & 1) + 8 * (IV_SPE & 1) + 16 * (IV_SPA & 1) + 32 * (IV_SPD & 1)) / 63);
 
                     if (hp == 0) { hiddenPower.Text = "Fighting"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(48)))), ((int)(((byte)(40))))); }
                     if (hp == 1) { hiddenPower.Text = "Flying"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(144)))), ((int)(((byte)(240))))); }
@@ -1571,117 +1587,26 @@ namespace ntrbase
                     if (hp == 14) { hiddenPower.Text = "Dragon"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(56)))), ((int)(((byte)(248))))); }
                     if (hp == 15) { hiddenPower.Text = "Dark"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(88)))), ((int)(((byte)(72))))); }
 
+                    if (IsEgg == true)
+                    {
+                        isEgg.Checked = false;
+                    }
+                    if (IsEgg == false)
+                    {
+                        isEgg.Checked = true;
+                    }
 
 
-                    uint nature = Convert.ToUInt16(pkm2[28]);
+                    uint nature = Convert.ToUInt16(Data[28]);
                   
 
-                    uint itemz = BitConverter.ToUInt16(pkm2, 10);
+                    uint itemz = BitConverter.ToUInt16(Data, 10);
                     heldItem.Text = itemList[itemz];
 
-                    uint ability = Convert.ToUInt16(pkm2[20]);
+                    uint ability = Convert.ToUInt16(Data[20]);
                     Ability.Text = abilityList[ability];
 
-                    if (nature == 0)
-                    {
-                        Nature.Text = "Hardy";
-                    }
-                    if (nature == 1)
-                    {
-                        Nature.Text = "Lonely";
-                    }
-                    if (nature == 2)
-                    {
-                        Nature.Text = "Brave";
-                    }
-                    if (nature == 3)
-                    {
-                        Nature.Text = "Adamant";
-                    }
-                    if (nature == 4)
-                    {
-                        Nature.Text = "Naughty";
-                    }
-                    if (nature == 5)
-                    {
-                        Nature.Text = "Bold";
-                    }
-                    if (nature == 6)
-                    {
-                        Nature.Text = "Docile";
-                    }
-                    if (nature == 7)
-                    {
-                        Nature.Text = "Relaxed";
-                    }
-                    if (nature == 8)
-                    {
-                        Nature.Text = "Impish";
-                    }
-                    if (nature == 9)
-                    {
-                        Nature.Text = "Lax";
-                    }
-                    if (nature == 10)
-                    {
-                        Nature.Text = "Timid";
-                    }
-                    if (nature == 11)
-                    {
-                        Nature.Text = "Hasty";
-                    }
-                    if (nature == 12)
-                    {
-                        Nature.Text = "Serious";
-                    }
-                    if (nature == 13)
-                    {
-                        Nature.Text = "Jolly";
-                    }
-                    if (nature == 14)
-                    {
-                        Nature.Text = "Naive";
-                    }
-                    if (nature == 15)
-                    {
-                        Nature.Text = "Modest";
-                    }
-                    if (nature == 16)
-                    {
-                        Nature.Text = "Mild";
-                    }
-                    if (nature == 17)
-                    {
-                        Nature.Text = "Quiet";
-                    }
-                    if (nature == 18)
-                    {
-                        Nature.Text = "Bashful";
-                    }
-                    if (nature == 19)
-                    {
-                        Nature.Text = "Rash";
-                    }
-                    if (nature == 20)
-                    {
-                        Nature.Text = "Calm";
-                    }
-                    if (nature == 21)
-                    {
-                        Nature.Text = "Gentle";
-                    }
-                    if (nature == 22)
-                    {
-                        Nature.Text = "Sassy";
-                    }
-                    if (nature == 23)
-                    {
-                        Nature.Text = "Careful";
-                    }
-                    if (nature == 24)
-                    {
-                        Nature.Text = "Quirky";
-                    }
+                    Nature.SelectedIndex = (int)nature;
                 }
             }
         }
@@ -1759,6 +1684,17 @@ namespace ntrbase
             deleteSlot.Enabled = false;
             Lang.Enabled = false;
             pokeLang.Enabled = false;
+            ivHPNum.Enabled = false;
+            ivATKNum.Enabled = false;
+            ivDEFNum.Enabled = false;
+            ivSPENum.Enabled = false;
+            ivSPANum.Enabled = false;
+            ivSPDNum.Enabled = false;
+            isEgg.Enabled = false;
+            Nickname.Enabled = false;
+            Nature.Enabled = false;
+            button1.Enabled = false;
+
         }
 
         private void txtLog_TextChanged(object sender, EventArgs e)
@@ -1842,7 +1778,7 @@ namespace ntrbase
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void pokePkm_Click(object sender, EventArgs e)
         {
             string ek6r = ", 0x";
             byte[] ek6b = File.ReadAllBytes(selectedek6);
@@ -2108,7 +2044,7 @@ namespace ntrbase
         }
 
 
-        public void button1_Click_1(object sender, EventArgs e)
+        public void itemWrite_Click(object sender, EventArgs e)
         {
             itemData = new byte[1600];
             keyData = new byte[384];
@@ -2207,7 +2143,7 @@ namespace ntrbase
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void itemAdd_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Visible == true)
             {
@@ -2314,7 +2250,7 @@ namespace ntrbase
             }
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void delPkm_Click(object sender, EventArgs e)
         {
             int ss = (Decimal.ToInt32(deleteBox.Value) * 30 - 30) + Decimal.ToInt32(deleteSlot.Value) - 1;
             int ssOff = boff + (ss * 232);
@@ -2323,7 +2259,6 @@ namespace ntrbase
             string ssS = ssr + ssH;
             string bakPkm = "data(0x" + ssH + ", 0xE8, filename='" + deleteBox.Value.ToString() + "_" + deleteSlot.Value.ToString() + ".bak.ek6', pid=" + pid + ")";
             runCmd(bakPkm);
-            textBox1.Text = bakPkm;
         }
 
         private void pokeLang_Click(object sender, EventArgs e)
@@ -2339,5 +2274,74 @@ namespace ntrbase
             runCmd(pokeLang);
         }
 
+
+
+        private void pokeEkx_Click(object sender, EventArgs e)
+        {
+            if (Nickname.Text.Length > 12)
+            {
+                MessageBox.Show("Pokemon name length too long! Please use a name with a length of 12 or less.", "Name too long");
+            }
+            if (Data == null)
+            {
+                MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
+            }
+            if (Data != null)
+            {
+                string nameS = Nickname.Text.PadRight(12, '\0');
+                byte[] name = Encoding.Unicode.GetBytes(nameS);
+                byte[] nature = BitConverter.GetBytes(Nature.SelectedIndex);
+                byte[] pkmToEdit = Data;
+                Array.Copy(name, 0, pkmToEdit, 64, 24);
+                Array.Copy(nature, 0, pkmToEdit, 28, 1);
+                IV_HP = (int)ivHPNum.Value;
+                IV_ATK = (int)ivATKNum.Value;
+                IV_DEF = (int)ivDEFNum.Value;
+                IV_SPE = (int)ivSPENum.Value;
+                IV_SPA = (int)ivSPANum.Value;
+                IV_SPD = (int)ivSPDNum.Value;
+                if (isEgg.Checked == true) { IsEgg = false; }
+                if (isEgg.Checked == false) { IsEgg = true; }
+                Array.Copy(BitConverter.GetBytes(IV32), 0, pkmToEdit, 116, 4);
+                byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);
+                byte[] chkSum = BitConverter.GetBytes(PKHeX.getCHK(pkmToEdit));
+                Array.Copy(chkSum, 0, pkmEdited, 6, 2);
+
+                if (radioBoxes.Checked == true)
+                {
+                    int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
+                    int ssdOff = boff + (ssd * 232);
+                    string ssdH = ssdOff.ToString("X");
+                    string ekxr = ", 0x";
+                    string ekx = BitConverter.ToString(pkmEdited).Replace("-", ekxr);
+                    string pokeEkx = "write(0x" + ssdH + ", (0x" + ekx + "), pid=" + pid + ")";
+                    runCmd(pokeEkx);
+                }
+
+                if (radioOpponent.Checked == true)
+                {
+                    MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
+                }
+
+                if (radioDaycare.Checked == true)
+                {
+                    MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
+                }
+
+                if (radioTrade.Checked == true)
+                {
+                    MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
+                }
+            }
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioOpponent.Checked == true)
+            {
+                dumprealoppOff();
+            }
+        }
     }
 }

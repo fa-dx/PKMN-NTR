@@ -110,6 +110,15 @@ namespace ntrbase
             return ekx;
         }
 
+        public static ushort getCHK(byte[] data)
+        {
+            ushort chk = 0;
+            for (int i = 8; i < 232; i += 2) // Loop through the entire PKX
+                chk += BitConverter.ToUInt16(data, i);
+
+            return chk;
+        }
+
         public static readonly int[,] hpivs =
         {
             { 1, 1, 0, 0, 0, 0 }, // Fighting
