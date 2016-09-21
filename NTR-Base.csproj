@@ -129,7 +129,33 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="Pkmn NTR.ico" />
+    <None Include="Resources\Sprites\24.png" />
+    <None Include="Resources\Sprites\23.png" />
+    <None Include="Resources\Sprites\22.png" />
+    <None Include="Resources\Sprites\21.png" />
+    <None Include="Resources\Sprites\20.png" />
+    <None Include="Resources\Sprites\19.png" />
+    <None Include="Resources\Sprites\18.png" />
+    <None Include="Resources\Sprites\17.png" />
+    <None Include="Resources\Sprites\16.png" />
+    <None Include="Resources\Sprites\15.png" />
+    <None Include="Resources\Sprites\14.png" />
+    <None Include="Resources\Sprites\13.png" />
+    <None Include="Resources\Sprites\12.png" />
+    <None Include="Resources\Sprites\11.png" />
+    <None Include="Resources\Sprites\10.png" />
+    <None Include="Resources\Sprites\9.png" />
+    <None Include="Resources\Sprites\8.png" />
+    <None Include="Resources\Sprites\7.png" />
+    <None Include="Resources\Sprites\6.png" />
+    <None Include="Resources\Sprites\5.png" />
+    <None Include="Resources\Sprites\4.png" />
+    <None Include="Resources\Sprites\3.png" />
+    <None Include="Resources\Sprites\2.png" />
+    <None Include="Resources\Sprites\1.png" />
+    <None Include="Resources\Sprites\0.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.1.28.3\build\Fody.targets" Condition="Exists('packages\Fody.1.28.3\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
