@@ -117,6 +117,8 @@
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.deleteAmount = new System.Windows.Forms.NumericUpDown();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.delPkm = new System.Windows.Forms.Button();
@@ -172,6 +174,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).BeginInit();
             this.clonePkm.SuspendLayout();
@@ -2124,6 +2127,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label38);
+            this.groupBox4.Controls.Add(this.deleteAmount);
             this.groupBox4.Controls.Add(this.label26);
             this.groupBox4.Controls.Add(this.label27);
             this.groupBox4.Controls.Add(this.delPkm);
@@ -2131,10 +2136,43 @@
             this.groupBox4.Controls.Add(this.deleteSlot);
             this.groupBox4.Location = new System.Drawing.Point(167, 337);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(154, 86);
+            this.groupBox4.Size = new System.Drawing.Size(230, 86);
             this.groupBox4.TabIndex = 24;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Delete Pokémon";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(161, 20);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(61, 13);
+            this.label38.TabIndex = 25;
+            this.label38.Text = "# to delete:";
+            // 
+            // deleteAmount
+            // 
+            this.deleteAmount.Enabled = false;
+            this.deleteAmount.Location = new System.Drawing.Point(158, 36);
+            this.deleteAmount.Maximum = new decimal(new int[] {
+            930,
+            0,
+            0,
+            0});
+            this.deleteAmount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.deleteAmount.Name = "deleteAmount";
+            this.deleteAmount.Size = new System.Drawing.Size(66, 20);
+            this.deleteAmount.TabIndex = 24;
+            this.deleteAmount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.deleteAmount.ValueChanged += new System.EventHandler(this.deleteAmount_ValueChanged);
             // 
             // label26
             // 
@@ -2160,7 +2198,7 @@
             this.delPkm.ForeColor = System.Drawing.Color.Red;
             this.delPkm.Location = new System.Drawing.Point(6, 58);
             this.delPkm.Name = "delPkm";
-            this.delPkm.Size = new System.Drawing.Size(142, 23);
+            this.delPkm.Size = new System.Drawing.Size(218, 23);
             this.delPkm.TabIndex = 17;
             this.delPkm.Text = "Delete";
             this.delPkm.UseVisualStyleBackColor = true;
@@ -2188,6 +2226,7 @@
             0,
             0,
             0});
+            this.deleteBox.ValueChanged += new System.EventHandler(this.deleteBox_ValueChanged);
             // 
             // deleteSlot
             // 
@@ -2211,6 +2250,7 @@
             0,
             0,
             0});
+            this.deleteSlot.ValueChanged += new System.EventHandler(this.deleteSlot_ValueChanged);
             // 
             // clonePkm
             // 
@@ -2234,7 +2274,7 @@
             this.clonePkm.Controls.Add(this.clonetoBoxFF);
             this.clonePkm.Controls.Add(this.clonefromBoxFB);
             this.clonePkm.Controls.Add(this.cloneFB);
-            this.clonePkm.Location = new System.Drawing.Point(241, 226);
+            this.clonePkm.Location = new System.Drawing.Point(241, 227);
             this.clonePkm.Name = "clonePkm";
             this.clonePkm.Size = new System.Drawing.Size(297, 108);
             this.clonePkm.TabIndex = 43;
@@ -2556,7 +2596,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 428);
+            this.ClientSize = new System.Drawing.Size(840, 428);
             this.Controls.Add(this.clonePkm);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -2607,6 +2647,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).EndInit();
             this.clonePkm.ResumeLayout(false);
@@ -2751,6 +2792,8 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.NumericUpDown deleteAmount;
     }
 }
 

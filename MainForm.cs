@@ -17,6 +17,7 @@ namespace ntrbase
         public string selectedclone { get; set; }
         public int clonemax { get; set; }
         public string emptyData = "0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6";
+        public byte[] emptyDatab = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6 };
         public int tradedumpcount = 0;
         public string realoppoffset { get; set; }
         public string realtradeoffset { get; set; }
@@ -237,29 +238,29 @@ namespace ntrbase
         {
             if (selectek6.Enabled == true)
             {
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            if (files.Length <= 0)
-                return;
-            string file = files[0];
-            byte[] ek6b = File.ReadAllBytes(file);
-            string ek6 = BitConverter.ToString(ek6b).Replace("-", ", 0x");
-            int ss = (Decimal.ToInt32(box.Value) * 30 - 30) + Decimal.ToInt32(slot.Value) - 1;
-            int ssOff = boff + (ss * 232);
-            string ssH = ssOff.ToString("X");
-            if (ek6.Length == 1556 || ek6.Length == 1388)
-            {
-                string ek6short = ek6.Substring(0, 1388);
-                string ssr = "0x";
-                string ssS = ssr + ssH;
-                string pokeek6 = "write(0x" + ssH + ", (0x" + ek6short + "), pid=" + pid + ")";
-                runCmd(pokeek6);
-                txtLog.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
-                txtLog.Clear();
-            }
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.Length <= 0)
+                    return;
+                string file = files[0];
+                byte[] ek6b = File.ReadAllBytes(file);
+                string ek6 = BitConverter.ToString(ek6b).Replace("-", ", 0x");
+                int ss = (Decimal.ToInt32(box.Value) * 30 - 30) + Decimal.ToInt32(slot.Value) - 1;
+                int ssOff = boff + (ss * 232);
+                string ssH = ssOff.ToString("X");
+                if (ek6.Length == 1556 || ek6.Length == 1388)
+                {
+                    string ek6short = ek6.Substring(0, 1388);
+                    string ssr = "0x";
+                    string ssS = ssr + ssH;
+                    string pokeek6 = "write(0x" + ssH + ", (0x" + ek6short + "), pid=" + pid + ")";
+                    runCmd(pokeek6);
+                    txtLog.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
+                    txtLog.Clear();
+                }
 
             }
 
@@ -306,7 +307,7 @@ namespace ntrbase
                     MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
                     txtLog.Clear();
                 }
-             
+
             }
 
         }
@@ -581,6 +582,7 @@ namespace ntrbase
                 chooseCloneFF.Enabled = true;
                 fromBoxes.Enabled = true;
                 fromFile.Enabled = true;
+                deleteAmount.Enabled = true;
                 Settings.Default.IP = host.Text;
                 Settings.Default.Save();
             }
@@ -1275,8 +1277,8 @@ namespace ntrbase
         {
             if (txtLog.Text.Contains(".bak.ek6 successfully"))
             {
-                string pkmfrom = @Application.StartupPath + "\\" + deleteBox.Value.ToString() + "_" + deleteSlot.Value.ToString() + ".bak.ek6";
-                string pkmto = @Application.StartupPath + "\\Pokemon\\Deleted\\" + deleteBox.Value.ToString() + "_" + deleteSlot.Value.ToString() + ".bak.ek6";
+                string pkmfrom = @Application.StartupPath + "\\boxes.bak.ek6";
+                string pkmto = @Application.StartupPath + "\\Pokemon\\Deleted\\boxes.bak.ek6";
                 System.IO.FileInfo folder = new System.IO.FileInfo(@Application.StartupPath + "\\Pokemon\\Deleted\\");
                 folder.Directory.Create();
                 if (File.Exists(pkmto))
@@ -1640,12 +1642,17 @@ namespace ntrbase
 
         public void pkmIsBackedUp()
         {
+            int ideleteAmount = (int)deleteAmount.Value * 232;
+            byte[] delete = new byte[ideleteAmount];
+            for (int i = 0; i < deleteAmount.Value; i++)
+            {
+                emptyDatab.CopyTo(delete, (i) * 232);
+            }
+            string ek6 = BitConverter.ToString(delete).Replace("-", ", 0x");
             int ss = (Decimal.ToInt32(deleteBox.Value) * 30 - 30) + Decimal.ToInt32(deleteSlot.Value) - 1;
             int ssOff = boff + (ss * 232);
             string ssH = ssOff.ToString("X");
-            string ssr = "0x";
-            string ssS = ssr + ssH;
-            string delPkm = "write(0x" + ssH + ", (" + emptyData + "), pid=" + pid + ")";
+            string delPkm = "write(0x" + ssH + ", (" + ek6 + "), pid=" + pid + ")";
             runCmd(delPkm);
             txtLog.Clear();
         }
@@ -1810,7 +1817,7 @@ namespace ntrbase
             chooseCloneFF.Enabled = false;
             fromBoxes.Enabled = false;
             fromFile.Enabled = false;
-
+            deleteAmount.Enabled = false;
         }
 
         public void txtLog_TextChanged(object sender, EventArgs e)
@@ -2371,14 +2378,9 @@ namespace ntrbase
 
         private void delPkm_Click(object sender, EventArgs e)
         {
-            int ss = (Decimal.ToInt32(deleteBox.Value) * 30 - 30) + Decimal.ToInt32(deleteSlot.Value) - 1;
-            int ssOff = boff + (ss * 232);
-            string ssH = ssOff.ToString("X");
-            string ssr = "0x";
-            string ssS = ssr + ssH;
-            string bakPkm = "data(0x" + ssH + ", 0xE8, filename='" + deleteBox.Value.ToString() + "_" + deleteSlot.Value.ToString() + ".bak.ek6', pid=" + pid + ")";
+            string ssH = boff.ToString("X");
+            string bakPkm = "data(0x" + ssH + ", 0x34AD0, filename='boxes.bak.ek6', pid=" + pid + ")";
             runCmd(bakPkm);
-
         }
 
         private void pokeLang_Click(object sender, EventArgs e)
@@ -2549,8 +2551,6 @@ namespace ntrbase
                     cloneshort.CopyTo(clone, (i) * 232);
                 }
                 string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                string ssr = "0x";
-                string ssS = ssr + ssH;
                 string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
                 runCmd(pokeek6);
                 txtLog.Clear();
@@ -2656,6 +2656,21 @@ namespace ntrbase
             clonetoSlotFB.Visible = false;
             cloneAmountFB.Visible = false;
             cloneFB.Visible = false;
+        }
+
+        private void deleteBox_ValueChanged(object sender, EventArgs e)
+        {
+            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
+        }
+
+        private void deleteSlot_ValueChanged(object sender, EventArgs e)
+        {
+            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
+        }
+
+        private void deleteAmount_ValueChanged(object sender, EventArgs e)
+        {
+            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
         }
     }
 }
