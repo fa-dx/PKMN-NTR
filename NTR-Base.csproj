@@ -53,13 +53,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="IronPython">
-      <HintPath>..\..\..\..\Documents\Visual Studio 2015\References\IronPython.dll</HintPath>
+      <HintPath>Resources\DLL\IronPython.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Dynamic">
-      <HintPath>..\..\..\..\Documents\Visual Studio 2015\References\Microsoft.Dynamic.dll</HintPath>
+      <HintPath>Resources\DLL\Microsoft.Dynamic.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Scripting">
-      <HintPath>..\..\..\..\Documents\Visual Studio 2015\References\Microsoft.Scripting.dll</HintPath>
+      <HintPath>Resources\DLL\Microsoft.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -34,6 +34,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dumpBox = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.ball = new System.Windows.Forms.ComboBox();
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
@@ -153,14 +156,13 @@
             this.clonetoBoxFF = new System.Windows.Forms.NumericUpDown();
             this.clonefromBoxFB = new System.Windows.Forms.NumericUpDown();
             this.cloneFB = new System.Windows.Forms.Button();
-            this.ball = new System.Windows.Forms.ComboBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.versionCheck = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bpNum)).BeginInit();
             this.dumpBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPENum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPDNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPANum)).BeginInit();
@@ -200,7 +202,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clonefromBoxFB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -258,13 +259,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.versionCheck);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(718, 347);
+            this.groupBox1.Location = new System.Drawing.Point(718, 324);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(154, 74);
+            this.groupBox1.Size = new System.Drawing.Size(154, 97);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connection";
@@ -443,6 +445,59 @@
             this.dumpBox.TabIndex = 20;
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump and Edit Pokémon";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(86, 386);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(22, 21);
+            this.pictureBox1.TabIndex = 93;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(8, 374);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(27, 13);
+            this.label44.TabIndex = 92;
+            this.label44.Text = "Ball:";
+            // 
+            // ball
+            // 
+            this.ball.Enabled = false;
+            this.ball.FormattingEnabled = true;
+            this.ball.Items.AddRange(new object[] {
+            "Master Ball",
+            "Ultra Ball",
+            "Great Ball",
+            "Poke Ball",
+            "Safari Ball",
+            "Net Ball",
+            "Dive Ball",
+            "Nest Ball",
+            "Repeat Ball",
+            "Timer Ball",
+            "Luxury Ball",
+            "Premier Ball",
+            "Dusk Ball",
+            "Heal Ball",
+            "Quick Ball",
+            "Cherish Ball",
+            "Fast Ball",
+            "Level Ball",
+            "Lure Ball",
+            "Heavy Ball",
+            "Love Ball",
+            "Friend Ball",
+            "Moon Ball",
+            "Sport Ball",
+            "Dream Ball"});
+            this.ball.Location = new System.Drawing.Point(7, 388);
+            this.ball.Name = "ball";
+            this.ball.Size = new System.Drawing.Size(78, 21);
+            this.ball.TabIndex = 44;
+            this.ball.SelectedIndexChanged += new System.EventHandler(this.ball_SelectedIndexChanged);
             // 
             // label42
             // 
@@ -1961,58 +2016,17 @@
             this.cloneFB.UseVisualStyleBackColor = true;
             this.cloneFB.Click += new System.EventHandler(this.cloneFB_Click);
             // 
-            // ball
+            // versionCheck
             // 
-            this.ball.Enabled = false;
-            this.ball.FormattingEnabled = true;
-            this.ball.Items.AddRange(new object[] {
-            "Master Ball",
-            "Ultra Ball",
-            "Great Ball",
-            "Poke Ball",
-            "Safari Ball",
-            "Net Ball",
-            "Dive Ball",
-            "Nest Ball",
-            "Repeat Ball",
-            "Timer Ball",
-            "Luxury Ball",
-            "Premier Ball",
-            "Dusk Ball",
-            "Heal Ball",
-            "Quick Ball",
-            "Cherish Ball",
-            "Fast Ball",
-            "Level Ball",
-            "Lure Ball",
-            "Heavy Ball",
-            "Love Ball",
-            "Friend Ball",
-            "Moon Ball",
-            "Sport Ball",
-            "Dream Ball"});
-            this.ball.Location = new System.Drawing.Point(7, 388);
-            this.ball.Name = "ball";
-            this.ball.Size = new System.Drawing.Size(78, 21);
-            this.ball.TabIndex = 44;
-            this.ball.SelectedIndexChanged += new System.EventHandler(this.ball_SelectedIndexChanged);
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(8, 374);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(27, 13);
-            this.label44.TabIndex = 92;
-            this.label44.Text = "Ball:";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(86, 386);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(22, 21);
-            this.pictureBox1.TabIndex = 93;
-            this.pictureBox1.TabStop = false;
+            this.versionCheck.ForeColor = System.Drawing.Color.Green;
+            this.versionCheck.Location = new System.Drawing.Point(6, 69);
+            this.versionCheck.Name = "versionCheck";
+            this.versionCheck.Size = new System.Drawing.Size(142, 23);
+            this.versionCheck.TabIndex = 44;
+            this.versionCheck.Text = "Update Available";
+            this.versionCheck.UseVisualStyleBackColor = true;
+            this.versionCheck.Visible = false;
+            this.versionCheck.Click += new System.EventHandler(this.versionCheck_Click);
             // 
             // MainForm
             // 
@@ -2041,6 +2055,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bpNum)).EndInit();
             this.dumpBox.ResumeLayout(false);
             this.dumpBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPENum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPDNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPANum)).EndInit();
@@ -2083,7 +2098,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clonefromBoxFB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2229,6 +2243,7 @@
         private System.Windows.Forms.ComboBox ball;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Button versionCheck;
     }
 }
 
