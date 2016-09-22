@@ -465,6 +465,8 @@
             // 
             // ball
             // 
+            this.ball.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.ball.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.ball.Enabled = false;
             this.ball.FormattingEnabled = true;
             this.ball.Items.AddRange(new object[] {
@@ -537,6 +539,8 @@
             // 
             // move4
             // 
+            this.move4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.move4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.move4.Enabled = false;
             this.move4.FormattingEnabled = true;
             this.move4.Location = new System.Drawing.Point(138, 350);
@@ -546,6 +550,8 @@
             // 
             // ability
             // 
+            this.ability.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.ability.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.ability.Enabled = false;
             this.ability.FormattingEnabled = true;
             this.ability.Location = new System.Drawing.Point(177, 217);
@@ -555,6 +561,8 @@
             // 
             // move3
             // 
+            this.move3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.move3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.move3.Enabled = false;
             this.move3.FormattingEnabled = true;
             this.move3.Location = new System.Drawing.Point(7, 350);
@@ -584,6 +592,8 @@
             // 
             // move2
             // 
+            this.move2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.move2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.move2.Enabled = false;
             this.move2.FormattingEnabled = true;
             this.move2.Location = new System.Drawing.Point(138, 310);
@@ -593,6 +603,8 @@
             // 
             // species
             // 
+            this.species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.species.Enabled = false;
             this.species.FormattingEnabled = true;
             this.species.Location = new System.Drawing.Point(177, 143);
@@ -602,6 +614,8 @@
             // 
             // move1
             // 
+            this.move1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.move1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.move1.Enabled = false;
             this.move1.FormattingEnabled = true;
             this.move1.Location = new System.Drawing.Point(7, 310);
@@ -646,6 +660,8 @@
             // 
             // heldItem
             // 
+            this.heldItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.heldItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.heldItem.Enabled = false;
             this.heldItem.FormattingEnabled = true;
             this.heldItem.Location = new System.Drawing.Point(177, 242);
@@ -783,6 +799,8 @@
             // 
             // nature
             // 
+            this.nature.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.nature.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.nature.Enabled = false;
             this.nature.FormattingEnabled = true;
             this.nature.Items.AddRange(new object[] {
