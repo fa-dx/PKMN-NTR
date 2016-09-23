@@ -23,6 +23,7 @@
             this.buttonDisconnect = new System.Windows.Forms.Button();
             this.host = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.versionCheck = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.moneyNum = new System.Windows.Forms.NumericUpDown();
             this.milesNum = new System.Windows.Forms.NumericUpDown();
@@ -34,6 +35,19 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dumpBox = new System.Windows.Forms.GroupBox();
+            this.radioParty = new System.Windows.Forms.RadioButton();
+            this.radioTrade = new System.Windows.Forms.RadioButton();
+            this.radioOpponent = new System.Windows.Forms.RadioButton();
+            this.radioDaycare = new System.Windows.Forms.RadioButton();
+            this.radioBoxes = new System.Windows.Forms.RadioButton();
+            this.dumpBoxes = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nameek6 = new System.Windows.Forms.TextBox();
+            this.dumpek6 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.slotDump = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.boxDump = new System.Windows.Forms.NumericUpDown();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label44 = new System.Windows.Forms.Label();
             this.ball = new System.Windows.Forms.ComboBox();
@@ -72,21 +86,9 @@
             this.ivHPNum = new System.Windows.Forms.NumericUpDown();
             this.hiddenPower = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.radioTrade = new System.Windows.Forms.RadioButton();
             this.nickname = new System.Windows.Forms.TextBox();
-            this.radioOpponent = new System.Windows.Forms.RadioButton();
-            this.radioDaycare = new System.Windows.Forms.RadioButton();
             this.label22 = new System.Windows.Forms.Label();
-            this.radioBoxes = new System.Windows.Forms.RadioButton();
-            this.dumpBoxes = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.nameek6 = new System.Windows.Forms.TextBox();
-            this.dumpek6 = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.slotDump = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.boxDump = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -156,12 +158,23 @@
             this.clonetoBoxFF = new System.Windows.Forms.NumericUpDown();
             this.clonefromBoxFB = new System.Windows.Forms.NumericUpDown();
             this.cloneFB = new System.Windows.Forms.Button();
-            this.versionCheck = new System.Windows.Forms.Button();
+            this.dTIDNum = new System.Windows.Forms.NumericUpDown();
+            this.dSIDNum = new System.Windows.Forms.NumericUpDown();
+            this.dPID = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.otName = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.setShiny = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bpNum)).BeginInit();
             this.dumpBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxDump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPENum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPDNum)).BeginInit();
@@ -175,8 +188,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivDEFNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivATKNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivHPNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxDump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).BeginInit();
@@ -202,13 +213,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clonefromBoxFB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dTIDNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dSIDNum)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
             // 
             this.txtLog.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(779, 463);
+            this.txtLog.Location = new System.Drawing.Point(955, 500);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
@@ -264,12 +278,24 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(718, 324);
+            this.groupBox1.Location = new System.Drawing.Point(718, 418);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 97);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connection";
+            // 
+            // versionCheck
+            // 
+            this.versionCheck.ForeColor = System.Drawing.Color.Green;
+            this.versionCheck.Location = new System.Drawing.Point(6, 69);
+            this.versionCheck.Name = "versionCheck";
+            this.versionCheck.Size = new System.Drawing.Size(142, 23);
+            this.versionCheck.TabIndex = 44;
+            this.versionCheck.Text = "Update Available";
+            this.versionCheck.UseVisualStyleBackColor = true;
+            this.versionCheck.Visible = false;
+            this.versionCheck.Click += new System.EventHandler(this.versionCheck_Click);
             // 
             // label1
             // 
@@ -381,534 +407,38 @@
             // 
             // dumpBox
             // 
-            this.dumpBox.Controls.Add(this.pictureBox1);
-            this.dumpBox.Controls.Add(this.label44);
-            this.dumpBox.Controls.Add(this.ball);
-            this.dumpBox.Controls.Add(this.label42);
-            this.dumpBox.Controls.Add(this.label43);
-            this.dumpBox.Controls.Add(this.label41);
-            this.dumpBox.Controls.Add(this.label6);
-            this.dumpBox.Controls.Add(this.move4);
-            this.dumpBox.Controls.Add(this.ability);
-            this.dumpBox.Controls.Add(this.move3);
-            this.dumpBox.Controls.Add(this.button1);
-            this.dumpBox.Controls.Add(this.label5);
-            this.dumpBox.Controls.Add(this.move2);
-            this.dumpBox.Controls.Add(this.species);
-            this.dumpBox.Controls.Add(this.move1);
-            this.dumpBox.Controls.Add(this.label32);
-            this.dumpBox.Controls.Add(this.evSPENum);
-            this.dumpBox.Controls.Add(this.evSPDNum);
-            this.dumpBox.Controls.Add(this.heldItem);
-            this.dumpBox.Controls.Add(this.evSPANum);
-            this.dumpBox.Controls.Add(this.evDEFNum);
-            this.dumpBox.Controls.Add(this.evATKNum);
-            this.dumpBox.Controls.Add(this.evHPNum);
-            this.dumpBox.Controls.Add(this.label31);
-            this.dumpBox.Controls.Add(this.isEgg);
-            this.dumpBox.Controls.Add(this.ivSPENum);
-            this.dumpBox.Controls.Add(this.label23);
-            this.dumpBox.Controls.Add(this.ivSPDNum);
-            this.dumpBox.Controls.Add(this.label24);
-            this.dumpBox.Controls.Add(this.ivSPANum);
-            this.dumpBox.Controls.Add(this.nature);
-            this.dumpBox.Controls.Add(this.ivDEFNum);
-            this.dumpBox.Controls.Add(this.label25);
-            this.dumpBox.Controls.Add(this.ivATKNum);
-            this.dumpBox.Controls.Add(this.label30);
-            this.dumpBox.Controls.Add(this.ivHPNum);
-            this.dumpBox.Controls.Add(this.hiddenPower);
-            this.dumpBox.Controls.Add(this.label29);
+            this.dumpBox.Controls.Add(this.radioParty);
             this.dumpBox.Controls.Add(this.radioTrade);
-            this.dumpBox.Controls.Add(this.nickname);
             this.dumpBox.Controls.Add(this.radioOpponent);
             this.dumpBox.Controls.Add(this.radioDaycare);
-            this.dumpBox.Controls.Add(this.label22);
             this.dumpBox.Controls.Add(this.radioBoxes);
             this.dumpBox.Controls.Add(this.dumpBoxes);
             this.dumpBox.Controls.Add(this.label9);
             this.dumpBox.Controls.Add(this.nameek6);
             this.dumpBox.Controls.Add(this.dumpek6);
-            this.dumpBox.Controls.Add(this.label21);
             this.dumpBox.Controls.Add(this.label7);
             this.dumpBox.Controls.Add(this.slotDump);
             this.dumpBox.Controls.Add(this.label8);
             this.dumpBox.Controls.Add(this.boxDump);
-            this.dumpBox.Controls.Add(this.label16);
-            this.dumpBox.Controls.Add(this.label18);
-            this.dumpBox.Controls.Add(this.label20);
-            this.dumpBox.Controls.Add(this.label17);
-            this.dumpBox.Controls.Add(this.label19);
             this.dumpBox.Location = new System.Drawing.Point(7, 5);
             this.dumpBox.Name = "dumpBox";
-            this.dumpBox.Size = new System.Drawing.Size(265, 416);
+            this.dumpBox.Size = new System.Drawing.Size(265, 131);
             this.dumpBox.TabIndex = 20;
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump and Edit Pokémon";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(86, 386);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(22, 21);
-            this.pictureBox1.TabIndex = 93;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(8, 374);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(27, 13);
-            this.label44.TabIndex = 92;
-            this.label44.Text = "Ball:";
-            // 
-            // ball
-            // 
-            this.ball.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.ball.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ball.Enabled = false;
-            this.ball.FormattingEnabled = true;
-            this.ball.Items.AddRange(new object[] {
-            "Master Ball",
-            "Ultra Ball",
-            "Great Ball",
-            "Poke Ball",
-            "Safari Ball",
-            "Net Ball",
-            "Dive Ball",
-            "Nest Ball",
-            "Repeat Ball",
-            "Timer Ball",
-            "Luxury Ball",
-            "Premier Ball",
-            "Dusk Ball",
-            "Heal Ball",
-            "Quick Ball",
-            "Cherish Ball",
-            "Fast Ball",
-            "Level Ball",
-            "Lure Ball",
-            "Heavy Ball",
-            "Love Ball",
-            "Friend Ball",
-            "Moon Ball",
-            "Sport Ball",
-            "Dream Ball"});
-            this.ball.Location = new System.Drawing.Point(7, 388);
-            this.ball.Name = "ball";
-            this.ball.Size = new System.Drawing.Size(78, 21);
-            this.ball.TabIndex = 44;
-            this.ball.SelectedIndexChanged += new System.EventHandler(this.ball_SelectedIndexChanged);
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(140, 336);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(46, 13);
-            this.label42.TabIndex = 91;
-            this.label42.Text = "Move 4:";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(8, 336);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(46, 13);
-            this.label43.TabIndex = 90;
-            this.label43.Text = "Move 3:";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(140, 296);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(46, 13);
-            this.label41.TabIndex = 89;
-            this.label41.Text = "Move 2:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 296);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 13);
-            this.label6.TabIndex = 88;
-            this.label6.Text = "Move 1:";
-            // 
-            // move4
-            // 
-            this.move4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.move4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.move4.Enabled = false;
-            this.move4.FormattingEnabled = true;
-            this.move4.Location = new System.Drawing.Point(138, 350);
-            this.move4.Name = "move4";
-            this.move4.Size = new System.Drawing.Size(120, 21);
-            this.move4.TabIndex = 87;
-            // 
-            // ability
-            // 
-            this.ability.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.ability.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ability.Enabled = false;
-            this.ability.FormattingEnabled = true;
-            this.ability.Location = new System.Drawing.Point(177, 217);
-            this.ability.Name = "ability";
-            this.ability.Size = new System.Drawing.Size(81, 21);
-            this.ability.TabIndex = 68;
-            // 
-            // move3
-            // 
-            this.move3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.move3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.move3.Enabled = false;
-            this.move3.FormattingEnabled = true;
-            this.move3.Location = new System.Drawing.Point(7, 350);
-            this.move3.Name = "move3";
-            this.move3.Size = new System.Drawing.Size(120, 21);
-            this.move3.TabIndex = 86;
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(183, 388);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 44;
-            this.button1.Text = "Write";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.pokeEkx_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(78, 131);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(26, 13);
-            this.label5.TabIndex = 83;
-            this.label5.Text = "EVs";
-            // 
-            // move2
-            // 
-            this.move2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.move2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.move2.Enabled = false;
-            this.move2.FormattingEnabled = true;
-            this.move2.Location = new System.Drawing.Point(138, 310);
-            this.move2.Name = "move2";
-            this.move2.Size = new System.Drawing.Size(120, 21);
-            this.move2.TabIndex = 85;
-            // 
-            // species
-            // 
-            this.species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.species.Enabled = false;
-            this.species.FormattingEnabled = true;
-            this.species.Location = new System.Drawing.Point(177, 143);
-            this.species.Name = "species";
-            this.species.Size = new System.Drawing.Size(81, 21);
-            this.species.TabIndex = 44;
-            // 
-            // move1
-            // 
-            this.move1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.move1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.move1.Enabled = false;
-            this.move1.FormattingEnabled = true;
-            this.move1.Location = new System.Drawing.Point(7, 310);
-            this.move1.Name = "move1";
-            this.move1.Size = new System.Drawing.Size(120, 21);
-            this.move1.TabIndex = 84;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(129, 148);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(48, 13);
-            this.label32.TabIndex = 43;
-            this.label32.Text = "Species:";
-            // 
-            // evSPENum
-            // 
-            this.evSPENum.Enabled = false;
-            this.evSPENum.Location = new System.Drawing.Point(74, 249);
-            this.evSPENum.Maximum = new decimal(new int[] {
-            252,
-            0,
-            0,
-            0});
-            this.evSPENum.Name = "evSPENum";
-            this.evSPENum.Size = new System.Drawing.Size(38, 20);
-            this.evSPENum.TabIndex = 82;
-            // 
-            // evSPDNum
-            // 
-            this.evSPDNum.Enabled = false;
-            this.evSPDNum.Location = new System.Drawing.Point(74, 228);
-            this.evSPDNum.Maximum = new decimal(new int[] {
-            252,
-            0,
-            0,
-            0});
-            this.evSPDNum.Name = "evSPDNum";
-            this.evSPDNum.Size = new System.Drawing.Size(38, 20);
-            this.evSPDNum.TabIndex = 81;
-            // 
-            // heldItem
-            // 
-            this.heldItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.heldItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.heldItem.Enabled = false;
-            this.heldItem.FormattingEnabled = true;
-            this.heldItem.Location = new System.Drawing.Point(177, 242);
-            this.heldItem.Name = "heldItem";
-            this.heldItem.Size = new System.Drawing.Size(81, 21);
-            this.heldItem.TabIndex = 43;
-            // 
-            // evSPANum
-            // 
-            this.evSPANum.Enabled = false;
-            this.evSPANum.Location = new System.Drawing.Point(74, 207);
-            this.evSPANum.Maximum = new decimal(new int[] {
-            252,
-            0,
-            0,
-            0});
-            this.evSPANum.Name = "evSPANum";
-            this.evSPANum.Size = new System.Drawing.Size(38, 20);
-            this.evSPANum.TabIndex = 80;
-            // 
-            // evDEFNum
-            // 
-            this.evDEFNum.Enabled = false;
-            this.evDEFNum.Location = new System.Drawing.Point(74, 186);
-            this.evDEFNum.Maximum = new decimal(new int[] {
-            252,
-            0,
-            0,
-            0});
-            this.evDEFNum.Name = "evDEFNum";
-            this.evDEFNum.Size = new System.Drawing.Size(38, 20);
-            this.evDEFNum.TabIndex = 79;
-            // 
-            // evATKNum
-            // 
-            this.evATKNum.Enabled = false;
-            this.evATKNum.Location = new System.Drawing.Point(74, 165);
-            this.evATKNum.Maximum = new decimal(new int[] {
-            252,
-            0,
-            0,
-            0});
-            this.evATKNum.Name = "evATKNum";
-            this.evATKNum.Size = new System.Drawing.Size(38, 20);
-            this.evATKNum.TabIndex = 78;
-            // 
-            // evHPNum
-            // 
-            this.evHPNum.Enabled = false;
-            this.evHPNum.Location = new System.Drawing.Point(74, 144);
-            this.evHPNum.Maximum = new decimal(new int[] {
-            252,
-            0,
-            0,
-            0});
-            this.evHPNum.Name = "evHPNum";
-            this.evHPNum.Size = new System.Drawing.Size(38, 20);
-            this.evHPNum.TabIndex = 77;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(2, 275);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(51, 13);
-            this.label31.TabIndex = 76;
-            this.label31.Text = "Hatched:";
-            // 
-            // isEgg
-            // 
-            this.isEgg.AutoSize = true;
-            this.isEgg.Enabled = false;
-            this.isEgg.Location = new System.Drawing.Point(53, 275);
-            this.isEgg.Name = "isEgg";
-            this.isEgg.Size = new System.Drawing.Size(15, 14);
-            this.isEgg.TabIndex = 74;
-            this.isEgg.UseVisualStyleBackColor = true;
-            // 
-            // ivSPENum
-            // 
-            this.ivSPENum.Enabled = false;
-            this.ivSPENum.Location = new System.Drawing.Point(35, 249);
-            this.ivSPENum.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivSPENum.Name = "ivSPENum";
-            this.ivSPENum.Size = new System.Drawing.Size(33, 20);
-            this.ivSPENum.TabIndex = 73;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(135, 196);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(42, 13);
-            this.label23.TabIndex = 59;
-            this.label23.Text = "Nature:";
-            // 
-            // ivSPDNum
-            // 
-            this.ivSPDNum.Enabled = false;
-            this.ivSPDNum.Location = new System.Drawing.Point(35, 228);
-            this.ivSPDNum.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivSPDNum.Name = "ivSPDNum";
-            this.ivSPDNum.Size = new System.Drawing.Size(33, 20);
-            this.ivSPDNum.TabIndex = 72;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(147, 247);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(30, 13);
-            this.label24.TabIndex = 61;
-            this.label24.Text = "Item:";
-            // 
-            // ivSPANum
-            // 
-            this.ivSPANum.Enabled = false;
-            this.ivSPANum.Location = new System.Drawing.Point(35, 207);
-            this.ivSPANum.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivSPANum.Name = "ivSPANum";
-            this.ivSPANum.Size = new System.Drawing.Size(33, 20);
-            this.ivSPANum.TabIndex = 71;
-            // 
-            // nature
-            // 
-            this.nature.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.nature.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.nature.Enabled = false;
-            this.nature.FormattingEnabled = true;
-            this.nature.Items.AddRange(new object[] {
-            "Hardy",
-            "Lonely",
-            "Brave",
-            "Adamant",
-            "Naughty",
-            "Bold",
-            "Docile",
-            "Relaxed",
-            "Impish",
-            "Lax",
-            "Timid",
-            "Hasty",
-            "Serious",
-            "Jolly",
-            "Naive",
-            "Modest",
-            "Mild",
-            "Quiet",
-            "Bashful",
-            "Rash",
-            "Calm",
-            "Gentle",
-            "Sassy",
-            "Careful",
-            "Quirky"});
-            this.nature.Location = new System.Drawing.Point(177, 192);
-            this.nature.Name = "nature";
-            this.nature.Size = new System.Drawing.Size(81, 21);
-            this.nature.TabIndex = 67;
-            // 
-            // ivDEFNum
-            // 
-            this.ivDEFNum.Enabled = false;
-            this.ivDEFNum.Location = new System.Drawing.Point(35, 186);
-            this.ivDEFNum.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivDEFNum.Name = "ivDEFNum";
-            this.ivDEFNum.Size = new System.Drawing.Size(33, 20);
-            this.ivDEFNum.TabIndex = 70;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(140, 222);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(37, 13);
-            this.label25.TabIndex = 63;
-            this.label25.Text = "Ability:";
-            // 
-            // ivATKNum
-            // 
-            this.ivATKNum.Enabled = false;
-            this.ivATKNum.Location = new System.Drawing.Point(35, 165);
-            this.ivATKNum.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivATKNum.Name = "ivATKNum";
-            this.ivATKNum.Size = new System.Drawing.Size(33, 20);
-            this.ivATKNum.TabIndex = 69;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(119, 172);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(58, 13);
-            this.label30.TabIndex = 66;
-            this.label30.Text = "Nickname:";
-            // 
-            // ivHPNum
-            // 
-            this.ivHPNum.Enabled = false;
-            this.ivHPNum.Location = new System.Drawing.Point(35, 144);
-            this.ivHPNum.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivHPNum.Name = "ivHPNum";
-            this.ivHPNum.Size = new System.Drawing.Size(33, 20);
-            this.ivHPNum.TabIndex = 68;
-            // 
-            // hiddenPower
-            // 
-            this.hiddenPower.BackColor = System.Drawing.SystemColors.Control;
-            this.hiddenPower.Location = new System.Drawing.Point(208, 267);
-            this.hiddenPower.Name = "hiddenPower";
-            this.hiddenPower.ReadOnly = true;
-            this.hiddenPower.Size = new System.Drawing.Size(50, 20);
-            this.hiddenPower.TabIndex = 64;
-            this.hiddenPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(131, 271);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(77, 13);
-            this.label29.TabIndex = 65;
-            this.label29.Text = "Hidden Power:";
+            // radioParty
+            // 
+            this.radioParty.AutoSize = true;
+            this.radioParty.Enabled = false;
+            this.radioParty.Location = new System.Drawing.Point(139, 87);
+            this.radioParty.Name = "radioParty";
+            this.radioParty.Size = new System.Drawing.Size(49, 17);
+            this.radioParty.TabIndex = 94;
+            this.radioParty.Text = "Party";
+            this.radioParty.UseVisualStyleBackColor = true;
+            this.radioParty.Visible = false;
+            this.radioParty.CheckedChanged += new System.EventHandler(this.radioParty_CheckedChanged_1);
             // 
             // radioTrade
             // 
@@ -922,14 +452,6 @@
             this.radioTrade.Text = "Trade";
             this.radioTrade.UseVisualStyleBackColor = true;
             this.radioTrade.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // nickname
-            // 
-            this.nickname.Enabled = false;
-            this.nickname.Location = new System.Drawing.Point(177, 168);
-            this.nickname.Name = "nickname";
-            this.nickname.Size = new System.Drawing.Size(81, 20);
-            this.nickname.TabIndex = 46;
             // 
             // radioOpponent
             // 
@@ -955,15 +477,6 @@
             this.radioDaycare.Text = "Daycare";
             this.radioDaycare.UseVisualStyleBackColor = true;
             this.radioDaycare.CheckedChanged += new System.EventHandler(this.radioDaycare_CheckedChanged);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(7, 253);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(31, 13);
-            this.label22.TabIndex = 58;
-            this.label22.Text = "SPE:";
             // 
             // radioBoxes
             // 
@@ -1017,15 +530,6 @@
             this.dumpek6.Text = "Dump";
             this.dumpek6.UseVisualStyleBackColor = true;
             this.dumpek6.Click += new System.EventHandler(this.dumpek6_Click);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 232);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(32, 13);
-            this.label21.TabIndex = 57;
-            this.label21.Text = "SPD:";
             // 
             // label7
             // 
@@ -1091,10 +595,500 @@
             0,
             0});
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(86, 340);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(22, 21);
+            this.pictureBox1.TabIndex = 93;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(8, 328);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(27, 13);
+            this.label44.TabIndex = 92;
+            this.label44.Text = "Ball:";
+            // 
+            // ball
+            // 
+            this.ball.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.ball.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ball.Enabled = false;
+            this.ball.FormattingEnabled = true;
+            this.ball.Items.AddRange(new object[] {
+            "Master Ball",
+            "Ultra Ball",
+            "Great Ball",
+            "Poke Ball",
+            "Safari Ball",
+            "Net Ball",
+            "Dive Ball",
+            "Nest Ball",
+            "Repeat Ball",
+            "Timer Ball",
+            "Luxury Ball",
+            "Premier Ball",
+            "Dusk Ball",
+            "Heal Ball",
+            "Quick Ball",
+            "Cherish Ball",
+            "Fast Ball",
+            "Level Ball",
+            "Lure Ball",
+            "Heavy Ball",
+            "Love Ball",
+            "Friend Ball",
+            "Moon Ball",
+            "Sport Ball",
+            "Dream Ball"});
+            this.ball.Location = new System.Drawing.Point(7, 342);
+            this.ball.Name = "ball";
+            this.ball.Size = new System.Drawing.Size(78, 21);
+            this.ball.TabIndex = 44;
+            this.ball.SelectedIndexChanged += new System.EventHandler(this.ball_SelectedIndexChanged);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(140, 290);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(46, 13);
+            this.label42.TabIndex = 91;
+            this.label42.Text = "Move 4:";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(8, 290);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(46, 13);
+            this.label43.TabIndex = 90;
+            this.label43.Text = "Move 3:";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(140, 250);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(46, 13);
+            this.label41.TabIndex = 89;
+            this.label41.Text = "Move 2:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 250);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(46, 13);
+            this.label6.TabIndex = 88;
+            this.label6.Text = "Move 1:";
+            // 
+            // move4
+            // 
+            this.move4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.move4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.move4.Enabled = false;
+            this.move4.FormattingEnabled = true;
+            this.move4.Location = new System.Drawing.Point(138, 304);
+            this.move4.Name = "move4";
+            this.move4.Size = new System.Drawing.Size(120, 21);
+            this.move4.TabIndex = 87;
+            // 
+            // ability
+            // 
+            this.ability.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.ability.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ability.Enabled = false;
+            this.ability.FormattingEnabled = true;
+            this.ability.Location = new System.Drawing.Point(177, 173);
+            this.ability.Name = "ability";
+            this.ability.Size = new System.Drawing.Size(81, 21);
+            this.ability.TabIndex = 68;
+            // 
+            // move3
+            // 
+            this.move3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.move3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.move3.Enabled = false;
+            this.move3.FormattingEnabled = true;
+            this.move3.Location = new System.Drawing.Point(7, 304);
+            this.move3.Name = "move3";
+            this.move3.Size = new System.Drawing.Size(120, 21);
+            this.move3.TabIndex = 86;
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(183, 342);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 44;
+            this.button1.Text = "Write";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.pokeEkx_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(75, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(26, 13);
+            this.label5.TabIndex = 83;
+            this.label5.Text = "EVs";
+            // 
+            // move2
+            // 
+            this.move2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.move2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.move2.Enabled = false;
+            this.move2.FormattingEnabled = true;
+            this.move2.Location = new System.Drawing.Point(138, 264);
+            this.move2.Name = "move2";
+            this.move2.Size = new System.Drawing.Size(120, 21);
+            this.move2.TabIndex = 85;
+            // 
+            // species
+            // 
+            this.species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.species.Enabled = false;
+            this.species.FormattingEnabled = true;
+            this.species.Location = new System.Drawing.Point(177, 99);
+            this.species.Name = "species";
+            this.species.Size = new System.Drawing.Size(81, 21);
+            this.species.TabIndex = 44;
+            // 
+            // move1
+            // 
+            this.move1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.move1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.move1.Enabled = false;
+            this.move1.FormattingEnabled = true;
+            this.move1.Location = new System.Drawing.Point(7, 264);
+            this.move1.Name = "move1";
+            this.move1.Size = new System.Drawing.Size(120, 21);
+            this.move1.TabIndex = 84;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(129, 104);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(48, 13);
+            this.label32.TabIndex = 43;
+            this.label32.Text = "Species:";
+            // 
+            // evSPENum
+            // 
+            this.evSPENum.Enabled = false;
+            this.evSPENum.Location = new System.Drawing.Point(71, 135);
+            this.evSPENum.Maximum = new decimal(new int[] {
+            252,
+            0,
+            0,
+            0});
+            this.evSPENum.Name = "evSPENum";
+            this.evSPENum.Size = new System.Drawing.Size(38, 20);
+            this.evSPENum.TabIndex = 82;
+            // 
+            // evSPDNum
+            // 
+            this.evSPDNum.Enabled = false;
+            this.evSPDNum.Location = new System.Drawing.Point(71, 114);
+            this.evSPDNum.Maximum = new decimal(new int[] {
+            252,
+            0,
+            0,
+            0});
+            this.evSPDNum.Name = "evSPDNum";
+            this.evSPDNum.Size = new System.Drawing.Size(38, 20);
+            this.evSPDNum.TabIndex = 81;
+            // 
+            // heldItem
+            // 
+            this.heldItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.heldItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.heldItem.Enabled = false;
+            this.heldItem.FormattingEnabled = true;
+            this.heldItem.Location = new System.Drawing.Point(177, 198);
+            this.heldItem.Name = "heldItem";
+            this.heldItem.Size = new System.Drawing.Size(81, 21);
+            this.heldItem.TabIndex = 43;
+            // 
+            // evSPANum
+            // 
+            this.evSPANum.Enabled = false;
+            this.evSPANum.Location = new System.Drawing.Point(71, 93);
+            this.evSPANum.Maximum = new decimal(new int[] {
+            252,
+            0,
+            0,
+            0});
+            this.evSPANum.Name = "evSPANum";
+            this.evSPANum.Size = new System.Drawing.Size(38, 20);
+            this.evSPANum.TabIndex = 80;
+            // 
+            // evDEFNum
+            // 
+            this.evDEFNum.Enabled = false;
+            this.evDEFNum.Location = new System.Drawing.Point(71, 72);
+            this.evDEFNum.Maximum = new decimal(new int[] {
+            252,
+            0,
+            0,
+            0});
+            this.evDEFNum.Name = "evDEFNum";
+            this.evDEFNum.Size = new System.Drawing.Size(38, 20);
+            this.evDEFNum.TabIndex = 79;
+            // 
+            // evATKNum
+            // 
+            this.evATKNum.Enabled = false;
+            this.evATKNum.Location = new System.Drawing.Point(71, 51);
+            this.evATKNum.Maximum = new decimal(new int[] {
+            252,
+            0,
+            0,
+            0});
+            this.evATKNum.Name = "evATKNum";
+            this.evATKNum.Size = new System.Drawing.Size(38, 20);
+            this.evATKNum.TabIndex = 78;
+            // 
+            // evHPNum
+            // 
+            this.evHPNum.Enabled = false;
+            this.evHPNum.Location = new System.Drawing.Point(71, 30);
+            this.evHPNum.Maximum = new decimal(new int[] {
+            252,
+            0,
+            0,
+            0});
+            this.evHPNum.Name = "evHPNum";
+            this.evHPNum.Size = new System.Drawing.Size(38, 20);
+            this.evHPNum.TabIndex = 77;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(42, 188);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(51, 13);
+            this.label31.TabIndex = 76;
+            this.label31.Text = "Hatched:";
+            // 
+            // isEgg
+            // 
+            this.isEgg.AutoSize = true;
+            this.isEgg.Enabled = false;
+            this.isEgg.Location = new System.Drawing.Point(93, 188);
+            this.isEgg.Name = "isEgg";
+            this.isEgg.Size = new System.Drawing.Size(15, 14);
+            this.isEgg.TabIndex = 74;
+            this.isEgg.UseVisualStyleBackColor = true;
+            // 
+            // ivSPENum
+            // 
+            this.ivSPENum.Enabled = false;
+            this.ivSPENum.Location = new System.Drawing.Point(32, 135);
+            this.ivSPENum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSPENum.Name = "ivSPENum";
+            this.ivSPENum.Size = new System.Drawing.Size(33, 20);
+            this.ivSPENum.TabIndex = 73;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(135, 152);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(42, 13);
+            this.label23.TabIndex = 59;
+            this.label23.Text = "Nature:";
+            // 
+            // ivSPDNum
+            // 
+            this.ivSPDNum.Enabled = false;
+            this.ivSPDNum.Location = new System.Drawing.Point(32, 114);
+            this.ivSPDNum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSPDNum.Name = "ivSPDNum";
+            this.ivSPDNum.Size = new System.Drawing.Size(33, 20);
+            this.ivSPDNum.TabIndex = 72;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(147, 203);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(30, 13);
+            this.label24.TabIndex = 61;
+            this.label24.Text = "Item:";
+            // 
+            // ivSPANum
+            // 
+            this.ivSPANum.Enabled = false;
+            this.ivSPANum.Location = new System.Drawing.Point(32, 93);
+            this.ivSPANum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSPANum.Name = "ivSPANum";
+            this.ivSPANum.Size = new System.Drawing.Size(33, 20);
+            this.ivSPANum.TabIndex = 71;
+            // 
+            // nature
+            // 
+            this.nature.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.nature.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.nature.Enabled = false;
+            this.nature.FormattingEnabled = true;
+            this.nature.Items.AddRange(new object[] {
+            "Hardy",
+            "Lonely",
+            "Brave",
+            "Adamant",
+            "Naughty",
+            "Bold",
+            "Docile",
+            "Relaxed",
+            "Impish",
+            "Lax",
+            "Timid",
+            "Hasty",
+            "Serious",
+            "Jolly",
+            "Naive",
+            "Modest",
+            "Mild",
+            "Quiet",
+            "Bashful",
+            "Rash",
+            "Calm",
+            "Gentle",
+            "Sassy",
+            "Careful",
+            "Quirky"});
+            this.nature.Location = new System.Drawing.Point(177, 148);
+            this.nature.Name = "nature";
+            this.nature.Size = new System.Drawing.Size(81, 21);
+            this.nature.TabIndex = 67;
+            // 
+            // ivDEFNum
+            // 
+            this.ivDEFNum.Enabled = false;
+            this.ivDEFNum.Location = new System.Drawing.Point(32, 72);
+            this.ivDEFNum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivDEFNum.Name = "ivDEFNum";
+            this.ivDEFNum.Size = new System.Drawing.Size(33, 20);
+            this.ivDEFNum.TabIndex = 70;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(140, 178);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(37, 13);
+            this.label25.TabIndex = 63;
+            this.label25.Text = "Ability:";
+            // 
+            // ivATKNum
+            // 
+            this.ivATKNum.Enabled = false;
+            this.ivATKNum.Location = new System.Drawing.Point(32, 51);
+            this.ivATKNum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivATKNum.Name = "ivATKNum";
+            this.ivATKNum.Size = new System.Drawing.Size(33, 20);
+            this.ivATKNum.TabIndex = 69;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(119, 128);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(58, 13);
+            this.label30.TabIndex = 66;
+            this.label30.Text = "Nickname:";
+            // 
+            // ivHPNum
+            // 
+            this.ivHPNum.Enabled = false;
+            this.ivHPNum.Location = new System.Drawing.Point(32, 30);
+            this.ivHPNum.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivHPNum.Name = "ivHPNum";
+            this.ivHPNum.Size = new System.Drawing.Size(33, 20);
+            this.ivHPNum.TabIndex = 68;
+            // 
+            // hiddenPower
+            // 
+            this.hiddenPower.BackColor = System.Drawing.SystemColors.Control;
+            this.hiddenPower.Location = new System.Drawing.Point(208, 223);
+            this.hiddenPower.Name = "hiddenPower";
+            this.hiddenPower.ReadOnly = true;
+            this.hiddenPower.Size = new System.Drawing.Size(50, 20);
+            this.hiddenPower.TabIndex = 64;
+            this.hiddenPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(131, 227);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(77, 13);
+            this.label29.TabIndex = 65;
+            this.label29.Text = "Hidden Power:";
+            // 
+            // nickname
+            // 
+            this.nickname.Enabled = false;
+            this.nickname.Location = new System.Drawing.Point(177, 124);
+            this.nickname.Name = "nickname";
+            this.nickname.Size = new System.Drawing.Size(81, 20);
+            this.nickname.TabIndex = 46;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(1, 139);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(31, 13);
+            this.label22.TabIndex = 58;
+            this.label22.Text = "SPE:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(0, 118);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(32, 13);
+            this.label21.TabIndex = 57;
+            this.label21.Text = "SPD:";
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(39, 131);
+            this.label16.Location = new System.Drawing.Point(36, 17);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(22, 13);
             this.label16.TabIndex = 52;
@@ -1103,7 +1097,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(7, 169);
+            this.label18.Location = new System.Drawing.Point(1, 55);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(31, 13);
             this.label18.TabIndex = 54;
@@ -1112,7 +1106,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(7, 211);
+            this.label20.Location = new System.Drawing.Point(1, 97);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(31, 13);
             this.label20.TabIndex = 56;
@@ -1121,7 +1115,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 148);
+            this.label17.Location = new System.Drawing.Point(7, 34);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(25, 13);
             this.label17.TabIndex = 53;
@@ -1130,7 +1124,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(7, 190);
+            this.label19.Location = new System.Drawing.Point(1, 76);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(31, 13);
             this.label19.TabIndex = 55;
@@ -1256,6 +1250,7 @@
             this.SIDNum.Name = "SIDNum";
             this.SIDNum.Size = new System.Drawing.Size(80, 20);
             this.SIDNum.TabIndex = 39;
+            this.SIDNum.ValueChanged += new System.EventHandler(this.SIDNum_ValueChanged);
             // 
             // label15
             // 
@@ -1307,6 +1302,7 @@
             this.TIDNum.Name = "TIDNum";
             this.TIDNum.Size = new System.Drawing.Size(80, 20);
             this.TIDNum.TabIndex = 29;
+            this.TIDNum.ValueChanged += new System.EventHandler(this.TIDNum_ValueChanged);
             // 
             // secNum
             // 
@@ -1576,7 +1572,7 @@
             this.groupBox4.Controls.Add(this.delPkm);
             this.groupBox4.Controls.Add(this.deleteBox);
             this.groupBox4.Controls.Add(this.deleteSlot);
-            this.groupBox4.Location = new System.Drawing.Point(278, 335);
+            this.groupBox4.Location = new System.Drawing.Point(278, 326);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(230, 86);
             this.groupBox4.TabIndex = 24;
@@ -2034,23 +2030,168 @@
             this.cloneFB.UseVisualStyleBackColor = true;
             this.cloneFB.Click += new System.EventHandler(this.cloneFB_Click);
             // 
-            // versionCheck
+            // dTIDNum
             // 
-            this.versionCheck.ForeColor = System.Drawing.Color.Green;
-            this.versionCheck.Location = new System.Drawing.Point(6, 69);
-            this.versionCheck.Name = "versionCheck";
-            this.versionCheck.Size = new System.Drawing.Size(142, 23);
-            this.versionCheck.TabIndex = 44;
-            this.versionCheck.Text = "Update Available";
-            this.versionCheck.UseVisualStyleBackColor = true;
-            this.versionCheck.Visible = false;
-            this.versionCheck.Click += new System.EventHandler(this.versionCheck_Click);
+            this.dTIDNum.Enabled = false;
+            this.dTIDNum.Location = new System.Drawing.Point(200, 26);
+            this.dTIDNum.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.dTIDNum.Name = "dTIDNum";
+            this.dTIDNum.Size = new System.Drawing.Size(58, 20);
+            this.dTIDNum.TabIndex = 44;
+            this.dTIDNum.ValueChanged += new System.EventHandler(this.dTIDNum_ValueChanged);
+            // 
+            // dSIDNum
+            // 
+            this.dSIDNum.Enabled = false;
+            this.dSIDNum.Location = new System.Drawing.Point(200, 51);
+            this.dSIDNum.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.dSIDNum.Name = "dSIDNum";
+            this.dSIDNum.Size = new System.Drawing.Size(58, 20);
+            this.dSIDNum.TabIndex = 45;
+            this.dSIDNum.ValueChanged += new System.EventHandler(this.dSIDNum_ValueChanged);
+            // 
+            // dPID
+            // 
+            this.dPID.Enabled = false;
+            this.dPID.Location = new System.Drawing.Point(29, 161);
+            this.dPID.Name = "dPID";
+            this.dPID.Size = new System.Drawing.Size(58, 20);
+            this.dPID.TabIndex = 47;
+            this.dPID.TextChanged += new System.EventHandler(this.dPID_TextChanged);
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(1, 165);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(28, 13);
+            this.label45.TabIndex = 49;
+            this.label45.Text = "PID:";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(154, 30);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(46, 13);
+            this.label47.TabIndex = 51;
+            this.label47.Text = "OT TID:";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(154, 55);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(46, 13);
+            this.label48.TabIndex = 52;
+            this.label48.Text = "OT SID:";
+            // 
+            // otName
+            // 
+            this.otName.Enabled = false;
+            this.otName.Location = new System.Drawing.Point(177, 75);
+            this.otName.Name = "otName";
+            this.otName.Size = new System.Drawing.Size(81, 20);
+            this.otName.TabIndex = 53;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(121, 79);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(56, 13);
+            this.label46.TabIndex = 54;
+            this.label46.Text = "OT Name:";
+            // 
+            // setShiny
+            // 
+            this.setShiny.Enabled = false;
+            this.setShiny.Location = new System.Drawing.Point(87, 160);
+            this.setShiny.Name = "setShiny";
+            this.setShiny.Size = new System.Drawing.Size(22, 22);
+            this.setShiny.TabIndex = 55;
+            this.setShiny.Text = "☆";
+            this.setShiny.UseVisualStyleBackColor = true;
+            this.setShiny.Click += new System.EventHandler(this.setShiny_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this.label48);
+            this.groupBox5.Controls.Add(this.setShiny);
+            this.groupBox5.Controls.Add(this.label47);
+            this.groupBox5.Controls.Add(this.pictureBox1);
+            this.groupBox5.Controls.Add(this.dSIDNum);
+            this.groupBox5.Controls.Add(this.label46);
+            this.groupBox5.Controls.Add(this.dTIDNum);
+            this.groupBox5.Controls.Add(this.label45);
+            this.groupBox5.Controls.Add(this.label19);
+            this.groupBox5.Controls.Add(this.otName);
+            this.groupBox5.Controls.Add(this.dPID);
+            this.groupBox5.Controls.Add(this.label44);
+            this.groupBox5.Controls.Add(this.label17);
+            this.groupBox5.Controls.Add(this.ball);
+            this.groupBox5.Controls.Add(this.label20);
+            this.groupBox5.Controls.Add(this.label42);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.label43);
+            this.groupBox5.Controls.Add(this.label21);
+            this.groupBox5.Controls.Add(this.label41);
+            this.groupBox5.Controls.Add(this.label22);
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.nickname);
+            this.groupBox5.Controls.Add(this.move4);
+            this.groupBox5.Controls.Add(this.label29);
+            this.groupBox5.Controls.Add(this.ability);
+            this.groupBox5.Controls.Add(this.hiddenPower);
+            this.groupBox5.Controls.Add(this.move3);
+            this.groupBox5.Controls.Add(this.ivHPNum);
+            this.groupBox5.Controls.Add(this.button1);
+            this.groupBox5.Controls.Add(this.label30);
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.ivATKNum);
+            this.groupBox5.Controls.Add(this.move2);
+            this.groupBox5.Controls.Add(this.label25);
+            this.groupBox5.Controls.Add(this.species);
+            this.groupBox5.Controls.Add(this.ivDEFNum);
+            this.groupBox5.Controls.Add(this.move1);
+            this.groupBox5.Controls.Add(this.nature);
+            this.groupBox5.Controls.Add(this.label32);
+            this.groupBox5.Controls.Add(this.ivSPANum);
+            this.groupBox5.Controls.Add(this.evSPENum);
+            this.groupBox5.Controls.Add(this.label24);
+            this.groupBox5.Controls.Add(this.evSPDNum);
+            this.groupBox5.Controls.Add(this.ivSPDNum);
+            this.groupBox5.Controls.Add(this.heldItem);
+            this.groupBox5.Controls.Add(this.label23);
+            this.groupBox5.Controls.Add(this.evSPANum);
+            this.groupBox5.Controls.Add(this.ivSPENum);
+            this.groupBox5.Controls.Add(this.evDEFNum);
+            this.groupBox5.Controls.Add(this.isEgg);
+            this.groupBox5.Controls.Add(this.evATKNum);
+            this.groupBox5.Controls.Add(this.label31);
+            this.groupBox5.Controls.Add(this.evHPNum);
+            this.groupBox5.Location = new System.Drawing.Point(7, 142);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(265, 373);
+            this.groupBox5.TabIndex = 56;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Edit Dumped Pokémon";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 426);
+            this.ClientSize = new System.Drawing.Size(879, 521);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.clonePkm);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -2073,6 +2214,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bpNum)).EndInit();
             this.dumpBox.ResumeLayout(false);
             this.dumpBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slotDump)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxDump)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPENum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evSPDNum)).EndInit();
@@ -2086,8 +2229,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivDEFNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivATKNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivHPNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slotDump)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxDump)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -2116,6 +2257,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clonefromBoxFB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dTIDNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dSIDNum)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2262,6 +2407,17 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Button versionCheck;
+        private System.Windows.Forms.RadioButton radioParty;
+        private System.Windows.Forms.NumericUpDown dTIDNum;
+        private System.Windows.Forms.NumericUpDown dSIDNum;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox otName;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Button setShiny;
+        public System.Windows.Forms.TextBox dPID;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }
 

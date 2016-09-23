@@ -110,12 +110,17 @@ namespace ntrbase
         public DataGridViewColumn medAmount;
         public DataGridViewComboBoxColumn berItem;
         public DataGridViewColumn berAmount;
+        public System.Windows.Forms.ToolTip ToolTipTSVtt = new System.Windows.Forms.ToolTip();
+        public System.Windows.Forms.ToolTip ToolTipTSVss = new System.Windows.Forms.ToolTip();
+        public System.Windows.Forms.ToolTip ToolTipTSVt = new System.Windows.Forms.ToolTip();
+        public System.Windows.Forms.ToolTip ToolTipTSVs = new System.Windows.Forms.ToolTip();
+        public System.Windows.Forms.ToolTip ToolTipPSV = new System.Windows.Forms.ToolTip();
 
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             groupBox1.Size = new System.Drawing.Size(154, 74);
-            groupBox1.Location = new System.Drawing.Point(718, 347);
+            groupBox1.Location = new System.Drawing.Point(718, 441);
 
             if (PingHost("fadx.co.uk") == true)
             {
@@ -171,7 +176,7 @@ namespace ntrbase
                 if (applicationVersion.CompareTo(newVersion) < 0)
                 {
                     groupBox1.Size = new System.Drawing.Size(154, 97);
-                    groupBox1.Location = new System.Drawing.Point(718, 324);
+                    groupBox1.Location = new System.Drawing.Point(718, 418);
                     versionCheck.Visible = true;
                 }
                 else
@@ -752,6 +757,12 @@ namespace ntrbase
                 move3.Enabled = true;
                 move4.Enabled = true;
                 ball.Enabled = true;
+                radioParty.Enabled = true;
+                dTIDNum.Enabled = true;
+                dSIDNum.Enabled = true;
+                otName.Enabled = true;
+                dPID.Enabled = true;
+                setShiny.Enabled = true;
                 Settings.Default.IP = host.Text;
                 Settings.Default.Save();
             }
@@ -786,6 +797,7 @@ namespace ntrbase
                 secoff = "0x8CE2817";
                 langoff = "0x8C79C69";
                 tradeoffrg = "0x8500000";
+                partyoff = 0;
                 dumpMoney();
             }
 
@@ -815,6 +827,7 @@ namespace ntrbase
                 secoff = "0x8CE2817";
                 langoff = "0x8C79C69";
                 tradeoffrg = "0x8500000";
+                partyoff = 0;
                 dumpMoney();
             }
 
@@ -1871,7 +1884,12 @@ namespace ntrbase
                     evSPENum.Value = PKHeX.EV_SPE;
                     ball.SelectedIndex = PKHeX.Ball - 1;
 
+                    dTIDNum.Value = PKHeX.TID;
+                    dSIDNum.Value = PKHeX.SID;
+                    dPID.Text = PKHeX.PID.ToString("X");
+
                     nickname.Text = Encoding.BigEndianUnicode.GetString(PKHeX.Data.Skip(63).Take(24).ToArray());
+                    otName.Text = Encoding.Unicode.GetString(PKHeX.Data.Skip(176).Take(24).ToArray());
 
                     getHP();
 
@@ -1896,6 +1914,19 @@ namespace ntrbase
                     move2.SelectedIndex = (int)PKHeX.Move2;
                     move3.SelectedIndex = (int)PKHeX.Move3;
                     move4.SelectedIndex = (int)PKHeX.Move4;
+
+                    ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
+                    ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
+                    ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
+
+                    if (PKHeX.isShiny == true)
+                    {
+                        setShiny.Text = "★";
+                    }
+                    if (PKHeX.isShiny == false)
+                    {
+                        setShiny.Text = "☆";
+                    }
 
                 }
             }
@@ -2008,6 +2039,12 @@ namespace ntrbase
             move3.Enabled = false;
             move4.Enabled = false;
             ball.Enabled = false;
+            radioParty.Enabled = false;
+            dTIDNum.Enabled = false;
+            dSIDNum.Enabled = false;
+            otName.Enabled = false;
+            dPID.Enabled = false;
+            setShiny.Enabled = false;
         }
 
         public void txtLog_TextChanged(object sender, EventArgs e)
@@ -2068,8 +2105,13 @@ namespace ntrbase
             int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
             int ssdOff = boff + (ssd * 232);
             string ssdH = ssdOff.ToString("X");
+
+            int pOff = partyoff + ((Decimal.ToInt32(boxDump.Value) - 1) * 484);
+            string pfOff = pOff.ToString("X");
+
             string dumpek6 = "data(0x" + ssdH + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
             string dumpDay1 = "data(" + d1off + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
+            string dumpParty = "data(0x" + pfOff + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
 
 
             if (radioBoxes.Checked == true)
@@ -2087,6 +2129,10 @@ namespace ntrbase
             if (radioTrade.Checked == true)
             {
                 dumprealtradeOff();
+            }
+            if (radioParty.Checked == true)
+            {
+                runCmd(dumpParty);
             }
 
 
@@ -2127,7 +2173,7 @@ namespace ntrbase
             label9.Location = new System.Drawing.Point(97, 20);
             nameek6.Location = new System.Drawing.Point(100, 39);
             nameek6.Size = new System.Drawing.Size(103, 20);
-            dumpek6.Size = new System.Drawing.Size(86, 20);
+            dumpek6.Size = new System.Drawing.Size(86, 23);
             dumpBoxes.Size = new System.Drawing.Size(105, 23);
             dumpBoxes.Location = new System.Drawing.Point(98, 61);
             dumpek6.Location = new System.Drawing.Point(6, 61);
@@ -2557,6 +2603,7 @@ namespace ntrbase
                     if (nickname.Text.Length <= 12)
                     {
                         PKHeX.Nickname = nickname.Text.PadRight(12, '\0');
+                        PKHeX.OT_Name = otName.Text.PadRight(12, '\0');
                         byte[] pkmToEdit = PKHeX.Data;
                         Array.Copy(Encoding.Unicode.GetBytes(PKHeX.Nickname), 0, pkmToEdit, 64, 24);
                         Array.Copy(BitConverter.GetBytes(PKHeX.Nature), 0, pkmToEdit, 28, 1);
@@ -2576,6 +2623,11 @@ namespace ntrbase
                         PKHeX.EV_SPD = (int)evSPDNum.Value;
 
                         PKHeX.Ball = ball.SelectedIndex + 1;
+
+                        PKHeX.SID = (int)dSIDNum.Value;
+                        PKHeX.TID = (int)dTIDNum.Value;
+
+                        PKHeX.PID = PKHeX.getHEXval(dPID.Text);
 
                         if (isEgg.Checked == true) { PKHeX.IsEgg = false; }
                         if (isEgg.Checked == false) { PKHeX.IsEgg = true; }
@@ -2598,13 +2650,21 @@ namespace ntrbase
                             int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
                             int ssdOff = boff + (ssd * 232);
                             string ssdH = ssdOff.ToString("X");
-                            string ekxr = ", 0x";
-                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ekxr);
+                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
                             string pokeEkx = "write(0x" + ssdH + ", (0x" + ekx + "), pid=" + pid + ")";
                             runCmd(pokeEkx);
                             getHP();
                         }
 
+                        if (radioParty.Checked == true)
+                        {
+                            int pOff = partyoff + ((Decimal.ToInt32(boxDump.Value) - 1) * 484);
+                            string pfOff = pOff.ToString("X");
+                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
+                            string pokeEkx = "write(0x" + pfOff + ", (0x" + ekx + "), pid=" + pid + ")";
+                            runCmd(pokeEkx);
+                            getHP();
+                        }
 
                         if (radioOpponent.Checked == true)
                         {
@@ -2977,6 +3037,78 @@ namespace ntrbase
         private void versionCheck_Click(object sender, EventArgs e)
         {
             UpdateCheck();
+        }
+
+        private void radioParty_CheckedChanged_1(object sender, EventArgs e)
+        {
+            boxDump.Minimum = 1;
+            boxDump.Maximum = 6;
+            label8.Text = "Slot:";
+            label9.Text = "Filename:";
+            boxDump.Visible = true;
+            slotDump.Visible = false;
+            dumpBoxes.Visible = false;
+            nameek6.Visible = true;
+            label7.Visible = false;
+            label8.Visible = true;
+            label9.Visible = true;
+            label9.Location = new System.Drawing.Point(50, 20);
+            nameek6.Location = new System.Drawing.Point(53, 39);
+            nameek6.Size = new System.Drawing.Size(150, 20);
+            dumpek6.Size = new System.Drawing.Size(197, 23);
+            dumpBoxes.Size = new System.Drawing.Size(105, 23);
+            dumpBoxes.Location = new System.Drawing.Point(98, 61);
+            dumpek6.Location = new System.Drawing.Point(6, 61);
+            dumpek6.Text = "Dump";
+            dumpBoxes.Text = "Dump All Boxes";
+        }
+
+
+        private void dTIDNum_ValueChanged(object sender, EventArgs e)
+        {
+            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + (((int)dTIDNum.Value ^ (int)dSIDNum.Value) >> 4).ToString());
+            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + (((int)dTIDNum.Value ^ (int)dSIDNum.Value) >> 4).ToString());
+            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
+        }
+
+        private void dSIDNum_ValueChanged(object sender, EventArgs e)
+        {
+            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
+            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
+            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
+        }
+
+        private void dPID_TextChanged(object sender, EventArgs e)
+        {
+            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
+            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
+            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
+        }
+
+        private void setShiny_Click(object sender, EventArgs e)
+        {
+            PKHeX.setShinyPID();
+            dPID.Text = PKHeX.PID.ToString("X");
+            if (PKHeX.isShiny == true)
+            {
+                setShiny.Text = "★";
+            }
+            if (PKHeX.isShiny == false)
+            {
+                setShiny.Text = "☆";
+            }
+        }
+
+        private void TIDNum_ValueChanged(object sender, EventArgs e)
+        {
+            ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
+            ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
+        }
+
+        private void SIDNum_ValueChanged(object sender, EventArgs e)
+        {
+            ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
+            ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
         }
     }
 }

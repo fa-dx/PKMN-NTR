@@ -4,10 +4,8 @@
 /// All code within this class is taken from PKHeX https://github.com/kwsch/PKHeX
 
 
-
-
-
 using System;
+using System.Linq;
 using System.Text;
 
 namespace ntrbase
@@ -510,6 +508,61 @@ namespace ntrbase
         //////////////////////////
         ///End PKHeX PK6 Layout///
         //////////////////////////
+
+        internal static readonly Random rand = new Random();
+        internal static uint rnd32()
+        {
+            return (uint)rand.Next(1 << 30) << 2 | (uint)rand.Next(1 << 2);
+        }
+
+
+
+        public static uint getRandomPID(int species, int cg, int origin, int nature, int form, uint OLDPID)
+        {
+            uint bits = OLDPID & 0x00010001;
+            if (origin >= 24)
+                return rnd32();
+
+            bool g3unown = origin <= 5 && species == 201;
+            while (true) // Loop until we find a suitable PID
+            {
+                uint pid = rnd32();
+
+
+                // Gen 3/4: Nature derived from PID
+                if (origin <= 15 && pid % 25 != nature)
+                    continue;
+
+                // Gen 3 Unown: Letter/form derived from PID
+                if (g3unown)
+                {
+                    uint pidLetter = ((pid & 0x3000000) >> 18 | (pid & 0x30000) >> 12 | (pid & 0x300) >> 6 | pid & 0x3) % 28;
+                    if (pidLetter != form)
+                        continue;
+                }
+                else if (bits != (pid & 0x00010001)) // keep ability bits
+                    continue;
+            }
+        }
+
+        internal static uint getHEXval(string s)
+        {
+            string str = getOnlyHex(s);
+            return string.IsNullOrWhiteSpace(str) ? 0 : Convert.ToUInt32(str, 16);
+        }
+
+        internal static string getOnlyHex(string s)
+        {
+            return string.IsNullOrWhiteSpace(s) ? "0" : s.Select(char.ToUpper).Where("0123456789ABCDEF".Contains).Aggregate("", (str, c) => str + c);
+        }
+
+
+        public virtual bool isShiny => ((TID ^ SID) >> 4) == ((int)((PID >> 16 ^ PID & 0xFFFF) >> 4));
+
+        public void setShinyPID()
+        {
+            do PID = getRandomPID(Species, Gender, Version, Nature, AltForm, PID);  while (!isShiny);
+        }
 
     }
 }
