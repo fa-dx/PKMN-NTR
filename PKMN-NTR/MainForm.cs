@@ -14,6 +14,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Threading;
 
 namespace ntrbase
 {
@@ -451,7 +452,6 @@ namespace ntrbase
 
         public static class Delay
         {
-
             static System.Windows.Forms.Timer runDelegates;
             static Dictionary<MethodInvoker, DateTime> delayedDelegates = new Dictionary<MethodInvoker, DateTime>();
 
@@ -506,13 +506,15 @@ namespace ntrbase
 
         public MainForm()
         {
+            Program.ntrClient.DataReady += handleDataReady;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
         }
 
         void writeTab_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
         }
 
         //Returns 0 on success, other values on failure
@@ -557,8 +559,8 @@ namespace ntrbase
         }
 
         //Returns 0 on success, positive value represents how many copies could not be written.
-        //TODO: przepisać, aby wykonywał jeden zapis - tak jak teraz jest bardzo powolny
-        private int writePokemonToBox(byte[] data, int boxFrom, int count)
+        //TODO: przepisać, aby wykonywał jeden zapis
+        private int writePokemonToBox(byte[] data, uint boxFrom, uint count)
         {
             int i;
             if (data.Length != POKEBYTES)
@@ -572,63 +574,66 @@ namespace ntrbase
                 }
                 uint offset = (uint)(boff + (boxFrom + i) * POKEBYTES);
                 Program.scriptHelper.write(offset, data, pid);
-                txtLog.Clear();
             }
-            return count - i; 
+            return (int)(count - i);
         }
-        /*
-        private int readPokemonFromBox(int boxIndex, byte[] dataOut)
-        {
-            int i;
-            if (data.Length != POKEBYTES)
-                return -1;
-            string dataString = BytesAsNTRString(data);
 
-            for (i = 0; i < count; i++)
-            {
-                if (boxFrom + i >= BOXES * BOXSIZE)
-                {
-                    break;
-                }
-                int offset = boff + (boxFrom + i) * POKEBYTES;
-                string pokeek6 = "write(0x" + offset.ToString("X") + ", " + dataString + ", pid=" + pid + ")";
-                runCmd(pokeek6);
-                txtLog.Clear();
-            }
-            return count - i;
+        #region housekeeping for cloning
+        private uint cloneGetCopies()
+        {
+            return Decimal.ToUInt32(cloneCopiesNo.Value);
         }
-        */
+
+        private uint cloneGetBoxIndexTo()
+        {
+            return Decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
+        }
+
+        private uint cloneGetBoxIndexFrom()
+        {
+            return Decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
+        }
+
+        private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
+        {
+            cloneCopiesNo.Maximum = 930 - cloneGetBoxIndexTo();
+        }
+
+        private void cloneSlotTo_ValueChanged(object sender, EventArgs e)
+        {
+            cloneCopiesNo.Maximum = 930 - cloneGetBoxIndexTo();
+        }
+
+        #endregion housekeeping for cloning
         private void cloneDoIt_Click(object sender, EventArgs e)
         {
-            //TODO: na razie kod testowy
-            UInt32 offset = (UInt32) boff;
-            /*
-            string dumpek6 = "data(0x" + offset.ToString("X") + ", 0xE8, filename='test1.bin', pid=" + pid + ")";
-            runCmd(dumpek6);
-            offset += POKEBYTES;
-            dumpek6 = "data(0x" + offset.ToString("X") + ", 0xE8, filename='test2.bin', pid=" + pid + ")";
-            runCmd(dumpek6);
-            */
-            Program.scriptHelper.data(offset, 0xe8, pid, "test3.bin");
+            uint offset = boff + cloneGetBoxIndexFrom() * POKEBYTES;
+            Program.scriptHelper.data(offset, new DataReadyEventArgs(new byte[POKEBYTES], handleCloneData), POKEBYTES, pid);
+        }
+
+        private void handleCloneData(object data_obj)
+        {
+            byte[] data = (byte[])data_obj;
+            writePokemonToBox(data, cloneGetBoxIndexTo(), cloneGetCopies());
         }
 
         #region housekeeping for write from file
-        private int writeGetCopies()
+        private uint writeGetCopies()
         {
-            return Decimal.ToInt32(writeCopiesNo.Value);
+            return Decimal.ToUInt32(writeCopiesNo.Value);
         }
 
-        private int writeGetBoxIndex()
+        private uint writeGetBoxIndex()
         {
-            return Decimal.ToInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
+            return Decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
         }
 
-        private void writeSetBoxIndex(int index)
+        private void writeSetBoxIndex(uint index)
         {
             if (index >= BOXES * BOXSIZE)
                 index = BOXES * BOXSIZE - 1;
-            int box = index / BOXSIZE;
-            int slot = index % BOXSIZE;
+            uint box = index / BOXSIZE;
+            uint slot = index % BOXSIZE;
             writeBoxTo.Value = box + 1;
             writeSlotTo.Value = slot + 1;
         }
@@ -667,7 +672,7 @@ namespace ntrbase
             }
             int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
             if (ret > 0)
-                MessageBox.Show(ret + " write(s) failed because end of boxes was reached.", "Error");
+                MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
             else if (ret < 0)
                 return; // TODO: obsługa błędów?
             if (writeAutoInc.Checked)
@@ -762,6 +767,32 @@ namespace ntrbase
         }
         */
 
+        //TODO: zupełnie to przeprogramować - ma kopiować pojedyńcze pokemony, po co całego pc
+        private void delPkm_Click(object sender, EventArgs e)
+        {
+            Program.scriptHelper.data(boff, BOXES * BOXSIZE * POKEBYTES, pid, "boxes.bak.ek6");
+        }
+
+        private void deleteBox_ValueChanged(object sender, EventArgs e)
+        {
+            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
+        }
+
+        private void deleteSlot_ValueChanged(object sender, EventArgs e)
+        {
+            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
+        }
+
+        private void deleteAmount_ValueChanged(object sender, EventArgs e)
+        {
+            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
+        }
+
+        private void ball_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pictureBox1.Image = ballImages[ball.SelectedIndex];
+        }
+
         public void Addlog(string l)
         {
             if (!l.Contains("\r\n"))
@@ -774,21 +805,6 @@ namespace ntrbase
             }
             txtLog.AppendText(l);
         }
-
-        /*
-        public void runCmd(String cmd)
-        {
-            try
-            {
-                object ret = Program.pyEngine.CreateScriptSourceFromString(cmd).Execute(Program.globalScope);
-            }
-            catch (Exception ex)
-            {
-                Addlog(ex.Message);
-                Addlog(ex.StackTrace);
-            }
-        }
-        */
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -826,8 +842,6 @@ namespace ntrbase
         {
             Program.scriptHelper.listprocess();
         }
-
-
 
         public void connectCheck()
         {
@@ -883,6 +897,7 @@ namespace ntrbase
                 delPkm.Enabled = true;
                 deleteBox.Enabled = true;
                 deleteSlot.Enabled = true;
+                deleteAmount.Enabled = true;
                 Lang.Enabled = true;
                 pokeLang.Enabled = true;
                 ivHPNum.Enabled = true;
@@ -903,22 +918,6 @@ namespace ntrbase
                 button1.Enabled = true;
                 heldItem.Enabled = true;
                 species.Enabled = true;
-                /*
-                clonefromBoxFB.Enabled = true;
-                clonefromSlotFB.Enabled = true;
-                clonetoBoxFB.Enabled = true;
-                clonetoSlotFB.Enabled = true;
-                cloneAmountFB.Enabled = true;
-                cloneFB.Enabled = true;
-                cloneAmountFF.Enabled = true;
-                cloneFF.Enabled = true;
-                clonetoBoxFF.Enabled = true;
-                clonetoSlotFF.Enabled = true;
-                chooseCloneFF.Enabled = true;
-                fromBoxes.Enabled = true;
-                fromFile.Enabled = true;
-                */
-                deleteAmount.Enabled = true;
                 ability.Enabled = true;
                 move1.Enabled = true;
                 move2.Enabled = true;
@@ -1369,16 +1368,17 @@ namespace ntrbase
                     }
 
                     List<uint> occurences = findOccurences(dumpoppBytes, relativePattern);
+                    int count = 0;
                     foreach (uint occurence in occurences)
                     {
+                        count++;
                         realoppoffset = 142606336 + occurence + offsetAfter;
-                        Program.scriptHelper.data(realoppoffset, POKEBYTES, pid, nameek6.Text + ".ek6");
+                        Program.scriptHelper.data(realoppoffset, POKEBYTES, pid, nameek6.Text + ".ek6" + ((count > 1) ? count.ToString() : ""));
                     }
                 }
             }
         }
 
-        //TODO: to też bo mnie kurwa szlag strzela
         private void gettradeOff()
         {
             const string dumpedtradeOff = "gettradeoff.temp";
@@ -1386,7 +1386,7 @@ namespace ntrbase
             {
                 using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
                 {
-                    byte[] dumpoppBytes = reader.ReadBytes(131070);
+                    byte[] dumptradeBytes = reader.ReadBytes(131070);
                     byte[] relativePattern = null;
                     uint offsetAfter = 0;
 
@@ -1403,16 +1403,20 @@ namespace ntrbase
                         
                     }
 
-                    byte[] dumptradeBytes = reader.ReadBytes(131070);
                     List<uint> occurences = findOccurences(dumptradeBytes, relativePattern);
+                    //TODO: jest taka, możliwość, że zdumpuje więcej niż 1...
+                    //jak to obsłużyć poprawnie?
 
-
+                    //HAHAHA THIS PROGRAM ONLY WORKED BECAUSE THERE WAS A RACE CONDITION IN FILE DUMPING #skisłem
+                    int count = 0;
                     foreach (uint occurence in occurences)
                     {
+                        count++;
+                        if (count != 2) continue;
                         uint realtradeoffset = 139591680 + occurence + offsetAfter;
                         Program.scriptHelper.data(realtradeoffset, POKEBYTES, pid, nameek6.Text + ".ek6");
                     }
-
+                    MessageBox.Show("Counted " + count.ToString());
                 }
             }
         }
@@ -1969,17 +1973,17 @@ namespace ntrbase
             {
                 if (firstcheck == false)
                 {
+                    txtLog.Clear();
                     readItems();
                     firstcheck = true;
-                    txtLog.Clear();
                     RMTemp();
                 }
                 else
                if (firstcheck == true)
                 {
+                    txtLog.Clear();
                     readItems();
                     RMTemp();
-                    txtLog.Clear();
                 }
             }
         }
@@ -1988,6 +1992,7 @@ namespace ntrbase
         {
             if (txtLog.Text.Contains("gettradeoff.temp successfully"))
             {
+                txtLog.Clear();
                 gettradeOff();
                 RMTemp();
                 txtLog.Clear();
@@ -1998,9 +2003,9 @@ namespace ntrbase
         {
             if (txtLog.Text.Contains("getoppoff.temp successfully"))
             {
+                txtLog.Clear();
                 getoppOff();
                 RMTemp();
-                txtLog.Clear();
             }
         }
 
@@ -2292,6 +2297,7 @@ namespace ntrbase
             delPkm.Enabled = false;
             deleteBox.Enabled = false;
             deleteSlot.Enabled = false;
+            deleteAmount.Enabled = false;
             Lang.Enabled = false;
             pokeLang.Enabled = false;
             ivHPNum.Enabled = false;
@@ -2327,7 +2333,6 @@ namespace ntrbase
             fromBoxes.Enabled = false;
             fromFile.Enabled = false;
             */
-            deleteAmount.Enabled = false;
             ability.Enabled = false;
             move1.Enabled = false;
             move2.Enabled = false;
@@ -2547,12 +2552,6 @@ namespace ntrbase
             nameek6.Enabled = true;
             onlyView.Visible = false;
             label50.Visible = false;
-        }
-
-        //TODO: co robi ta funkcja?
-        private void pokeBoxName_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void pokeName_Click(object sender, EventArgs e)
@@ -2839,43 +2838,22 @@ namespace ntrbase
             onlyView.Visible = false;
             label50.Visible = false;
         }
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            OpenFileDialog selectek6Dialog = new OpenFileDialog();
-            selectek6Dialog.Title = "Select an EKX file";
-            selectek6Dialog.Filter = "EKX files|*.ek6;*.ekx|All Files (*.*)|*.*";
-            string path = @Application.StartupPath + "\\Pokemon";
-            selectek6Dialog.InitialDirectory = path;
-            if (selectek6Dialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedek6 = selectek6Dialog.FileName;
-
-
-
-            }
-        }
-
-        //TODO: zupełnie to przeprogramować
-        private void delPkm_Click(object sender, EventArgs e)
-        {
-            Program.scriptHelper.data(boff, BOXES * BOXSIZE * POKEBYTES, pid, "boxes.bak.ek6");
-        }
-
+        
         private void pokeLang_Click(object sender, EventArgs e)
         {
-            if (Lang.SelectedIndex == 0) { lang = 0x01; }
-            if (Lang.SelectedIndex == 1) { lang = 0x02; }
-            if (Lang.SelectedIndex == 2) { lang = 0x03; }
-            if (Lang.SelectedIndex == 3) { lang = 0x04; }
-            if (Lang.SelectedIndex == 4) { lang = 0x05; }
-            if (Lang.SelectedIndex == 5) { lang = 0x07; }
-            if (Lang.SelectedIndex == 6) { lang = 0x08; }
+            switch (Lang.SelectedIndex)
+            { 
+                case 0: lang = 0x01; break;
+                case 1: lang = 0x02; break;
+                case 2: lang = 0x03; break;
+                case 3: lang = 0x04; break;
+                case 4: lang = 0x05; break;
+                case 5: lang = 0x07; break;
+                case 6: lang = 0x08; break;
+            }
             Program.scriptHelper.writebyte(langoff, lang, pid);
         }
-
-
-
+        
         private void pokeEkx_Click(object sender, EventArgs e)
         {
             if (PKHeX.Data == null)
@@ -3000,8 +2978,7 @@ namespace ntrbase
                 dumprealoppOff();
             }
         }
-
-
+        
         private void radioParty_CheckedChanged(object sender, EventArgs e)
         {
             boxDump.Minimum = 1;
@@ -3027,37 +3004,10 @@ namespace ntrbase
             dumpBoxes.Text = "Dump All Boxes";
         }
 
-
-
-        
-
         public static string ByteArrayToString(byte[] ba)
         {
             string hex = BitConverter.ToString(ba);
             return hex.Replace("-", "");
-        }
-        
-        
-        
-
-        private void deleteBox_ValueChanged(object sender, EventArgs e)
-        {
-            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
-        }
-
-        private void deleteSlot_ValueChanged(object sender, EventArgs e)
-        {
-            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
-        }
-
-        private void deleteAmount_ValueChanged(object sender, EventArgs e)
-        {
-            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
-        }
-        
-        private void ball_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            pictureBox1.Image = ballImages[ball.SelectedIndex];
         }
 
         private void versionCheck_Click(object sender, EventArgs e)
@@ -3116,7 +3066,7 @@ namespace ntrbase
             {
                 setShiny.Text = "★";
             }
-            if (PKHeX.isShiny == false)
+            else
             {
                 setShiny.Text = "☆";
             }
@@ -3227,6 +3177,27 @@ namespace ntrbase
         private void button2_Click(object sender, EventArgs e)
         {
             Program.scriptHelper.data(Convert.ToUInt32(offsetzz.Text, 16), 0xFFFFF, pid, "test.bin");
+        }
+
+        static void handleDataReady(object sender, DataReadyEventArgs e)
+        {
+            //We move data processing to a separate thread
+            //This way even if processing takes a long time, the netcode doesn't hang
+            Thread t = new Thread(new ParameterizedThreadStart(e.handler));
+            t.Start(e.data);
+        }
+    }
+
+    public class DataReadyEventArgs : EventArgs
+    {
+        public byte[] data;
+        public delegate void DataHandler(object data);
+        public DataHandler handler;
+
+        public DataReadyEventArgs(byte[] data_, DataHandler handler_)
+        {
+            this.data = data_;
+            this.handler = handler_;
         }
     }
 }

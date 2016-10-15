@@ -13,9 +13,11 @@ namespace ntrbase
     class readMemRequest
     {
         public string fileName;
-        public readMemRequest(string fileName_)
+        public DataReadyEventArgs e;
+        public readMemRequest(string fileName_, DataReadyEventArgs e_)
         {
             this.fileName = fileName_;
+            this.e = e_;
         }
     };
 
@@ -28,10 +30,15 @@ namespace ntrbase
 		public Thread packetRecvThread;
 		private object syncLock = new object();
 		public int heartbeatSendable;
+        public event EventHandler<DataReadyEventArgs> DataReady;
+
+        protected virtual void OnDataReady(DataReadyEventArgs e)
+        {
+            DataReady?.Invoke(this, e);
+        }
 
 
-
-		public delegate void logHandler(string msg);
+        public delegate void logHandler(string msg);
 		public event logHandler onLogArrival;
 		UInt32 currentSeq;
         public Dictionary<UInt32, readMemRequest> pendingReadMem = new Dictionary<UInt32, readMemRequest>();
@@ -159,16 +166,25 @@ namespace ntrbase
             }
             pendingReadMem.Remove(seq);
 			string fileName = requestDetails.fileName;
-            
-			if (fileName != null)
+
+            if (fileName != null)
             {
-				FileStream fs = new FileStream(fileName, FileMode.Create);
-				fs.Write(dataBuf, 0, dataBuf.Length);
-				fs.Close();
-				log("dump saved into " + fileName + " successfully");
-				return;
-			}
-			log(byteToHex(dataBuf, 0));
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                fs.Write(dataBuf, 0, dataBuf.Length);
+                fs.Close();
+                log("dump saved into " + fileName + " successfully");
+                return;
+            }
+            else if (requestDetails.e != null)
+            {
+                //Copies the data, truncates if necessary
+                Array.Copy(dataBuf, requestDetails.e.data, Math.Min(dataBuf.Length,requestDetails.e.data.Length));
+                OnDataReady(requestDetails.e);
+            }
+            else
+            {
+                log(byteToHex(dataBuf, 0));
+            }
 
 		}
 
@@ -265,11 +281,18 @@ namespace ntrbase
 		public void sendReadMemPacket(UInt32 addr, UInt32 size, UInt32 pid, string fileName)
         {
 			sendEmptyPacket(9, pid, addr, size);
-            readMemRequest requestDetails = new readMemRequest(fileName);
+            readMemRequest requestDetails = new readMemRequest(fileName, null);
             pendingReadMem.Add(currentSeq, requestDetails);
 		}
 
-		public void sendWriteMemPacket(UInt32 addr, UInt32 pid, byte[] buf)
+        public void sendReadMemPacket(UInt32 addr, UInt32 size, UInt32 pid, DataReadyEventArgs e)
+        {
+            sendEmptyPacket(9, pid, addr, size);
+            readMemRequest requestDetails = new readMemRequest(null, e);
+            pendingReadMem.Add(currentSeq, requestDetails);
+        }
+
+        public void sendWriteMemPacket(UInt32 addr, UInt32 pid, byte[] buf)
         {
 			UInt32[] args = new UInt32[16];
 			args[0] = pid;

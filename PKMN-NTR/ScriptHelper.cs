@@ -100,6 +100,11 @@ namespace ntrbase
 			Program.ntrClient.sendReadMemPacket(addr, size, (uint) pid, filename);
 		}
 
+        public void data(uint addr, DataReadyEventArgs e, uint size = 0x100, int pid = -1)
+        {
+            Program.ntrClient.sendReadMemPacket(addr, size, (uint)pid, e);
+        }
+
 		public void write(uint addr, byte[] buf, int pid=-1)
         {
 			Program.ntrClient.sendWriteMemPacket(addr, (uint)pid, buf);
