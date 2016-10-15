@@ -101,6 +101,12 @@
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label55 = new System.Windows.Forms.Label();
+            this.offsetzz = new System.Windows.Forms.TextBox();
+            this.shoutoutWrite = new System.Windows.Forms.Button();
+            this.label54 = new System.Windows.Forms.Label();
+            this.shoutoutTextBox = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.pokeLang = new System.Windows.Forms.Button();
@@ -132,7 +138,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label38 = new System.Windows.Forms.Label();
             this.deleteAmount = new System.Windows.Forms.NumericUpDown();
             this.label26 = new System.Windows.Forms.Label();
@@ -140,27 +145,6 @@
             this.delPkm = new System.Windows.Forms.Button();
             this.deleteBox = new System.Windows.Forms.NumericUpDown();
             this.deleteSlot = new System.Windows.Forms.NumericUpDown();
-            this.clonePkm = new System.Windows.Forms.GroupBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.cloneFF = new System.Windows.Forms.Button();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.fromFile = new System.Windows.Forms.RadioButton();
-            this.label39 = new System.Windows.Forms.Label();
-            this.chooseCloneFF = new System.Windows.Forms.Button();
-            this.clonefromSlotFB = new System.Windows.Forms.NumericUpDown();
-            this.cloneAmountFF = new System.Windows.Forms.NumericUpDown();
-            this.clonetoBoxFB = new System.Windows.Forms.NumericUpDown();
-            this.fromBoxes = new System.Windows.Forms.RadioButton();
-            this.clonetoSlotFB = new System.Windows.Forms.NumericUpDown();
-            this.label34 = new System.Windows.Forms.Label();
-            this.cloneAmountFB = new System.Windows.Forms.NumericUpDown();
-            this.clonetoSlotFF = new System.Windows.Forms.NumericUpDown();
-            this.label35 = new System.Windows.Forms.Label();
-            this.clonetoBoxFF = new System.Windows.Forms.NumericUpDown();
-            this.clonefromBoxFB = new System.Windows.Forms.NumericUpDown();
-            this.cloneFB = new System.Windows.Forms.Button();
             this.dTIDNum = new System.Windows.Forms.NumericUpDown();
             this.dSIDNum = new System.Windows.Forms.NumericUpDown();
             this.dPID = new System.Windows.Forms.TextBox();
@@ -182,6 +166,33 @@
             this.OT = new System.Windows.Forms.TabPage();
             this.xp = new System.Windows.Forms.NumericUpDown();
             this.level = new System.Windows.Forms.NumericUpDown();
+            this.cloneWriteTabs = new System.Windows.Forms.TabControl();
+            this.cloneTab = new System.Windows.Forms.TabPage();
+            this.cloneDoIt = new System.Windows.Forms.Button();
+            this.cloneSlotFrom = new System.Windows.Forms.NumericUpDown();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.cloneBoxFrom = new System.Windows.Forms.NumericUpDown();
+            this.label40 = new System.Windows.Forms.Label();
+            this.cloneCopiesNo = new System.Windows.Forms.NumericUpDown();
+            this.label36 = new System.Windows.Forms.Label();
+            this.cloneSlotTo = new System.Windows.Forms.NumericUpDown();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.cloneBoxTo = new System.Windows.Forms.NumericUpDown();
+            this.writeTab = new System.Windows.Forms.TabPage();
+            this.writeDoIt = new System.Windows.Forms.Button();
+            this.writeBrowse = new System.Windows.Forms.Button();
+            this.writeAutoInc = new System.Windows.Forms.CheckBox();
+            this.writeCopiesNo = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.writeSlotTo = new System.Windows.Forms.NumericUpDown();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.writeBoxTo = new System.Windows.Forms.NumericUpDown();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label56 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -214,19 +225,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).BeginInit();
-            this.clonePkm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.clonefromSlotFB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneAmountFF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneAmountFB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonefromBoxFB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dTIDNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dSIDNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.friendship)).BeginInit();
@@ -237,20 +238,31 @@
             this.OT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.level)).BeginInit();
+            this.cloneWriteTabs.SuspendLayout();
+            this.cloneTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneSlotFrom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneBoxFrom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneCopiesNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneSlotTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneBoxTo)).BeginInit();
+            this.writeTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.writeCopiesNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.writeSlotTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
             // 
-            this.txtLog.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLog.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(955, 500);
+            this.txtLog.Location = new System.Drawing.Point(303, 331);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(689, 397);
+            this.txtLog.Size = new System.Drawing.Size(435, 97);
             this.txtLog.TabIndex = 0;
-            this.txtLog.Visible = false;
             this.txtLog.TextChanged += new System.EventHandler(this.txtLog_TextChanged);
             // 
             // timer1
@@ -299,7 +311,7 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(744, 316);
+            this.groupBox1.Location = new System.Drawing.Point(744, 331);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 97);
             this.groupBox1.TabIndex = 6;
@@ -575,6 +587,7 @@
             this.nameek6.Name = "nameek6";
             this.nameek6.Size = new System.Drawing.Size(103, 20);
             this.nameek6.TabIndex = 29;
+            this.nameek6.Text = "pkmn";
             // 
             // dumpek6
             // 
@@ -653,7 +666,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(138, 133);
+            this.pictureBox1.Location = new System.Drawing.Point(146, 135);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(22, 21);
             this.pictureBox1.TabIndex = 93;
@@ -702,7 +715,7 @@
             "Dream Ball"});
             this.ball.Location = new System.Drawing.Point(59, 135);
             this.ball.Name = "ball";
-            this.ball.Size = new System.Drawing.Size(78, 21);
+            this.ball.Size = new System.Drawing.Size(81, 21);
             this.ball.TabIndex = 44;
             this.ball.SelectedIndexChanged += new System.EventHandler(this.ball_SelectedIndexChanged);
             // 
@@ -778,7 +791,7 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(201, 133);
+            this.button1.Location = new System.Drawing.Point(206, 135);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 44;
@@ -929,7 +942,8 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(156, 93);
+            this.label31.Location = new System.Drawing.Point(244, 40);
+            this.label31.Margin = new System.Windows.Forms.Padding(0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(26, 13);
             this.label31.TabIndex = 76;
@@ -939,7 +953,7 @@
             // 
             this.isEgg.AutoSize = true;
             this.isEgg.Enabled = false;
-            this.isEgg.Location = new System.Drawing.Point(162, 109);
+            this.isEgg.Location = new System.Drawing.Point(266, 40);
             this.isEgg.Name = "isEgg";
             this.isEgg.Size = new System.Drawing.Size(15, 14);
             this.isEgg.TabIndex = 74;
@@ -1119,6 +1133,7 @@
             // 
             this.nickname.Enabled = false;
             this.nickname.Location = new System.Drawing.Point(59, 36);
+            this.nickname.MaxLength = 12;
             this.nickname.Name = "nickname";
             this.nickname.Size = new System.Drawing.Size(81, 20);
             this.nickname.TabIndex = 46;
@@ -1211,6 +1226,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.label55);
+            this.groupBox2.Controls.Add(this.offsetzz);
+            this.groupBox2.Controls.Add(this.shoutoutWrite);
+            this.groupBox2.Controls.Add(this.label54);
+            this.groupBox2.Controls.Add(this.shoutoutTextBox);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.pokeMiles);
             this.groupBox2.Controls.Add(this.label2);
@@ -1241,10 +1262,64 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Location = new System.Drawing.Point(629, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(269, 244);
+            this.groupBox2.Size = new System.Drawing.Size(269, 320);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit Trainer";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(38, 291);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 61;
+            this.button2.Text = "dump 1mb";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(118, 296);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(38, 13);
+            this.label55.TabIndex = 49;
+            this.label55.Text = "Offset:";
+            // 
+            // offsetzz
+            // 
+            this.offsetzz.Location = new System.Drawing.Point(162, 293);
+            this.offsetzz.Name = "offsetzz";
+            this.offsetzz.Size = new System.Drawing.Size(100, 20);
+            this.offsetzz.TabIndex = 48;
+            this.offsetzz.Text = "0x8803CF8";
+            // 
+            // shoutoutWrite
+            // 
+            this.shoutoutWrite.Location = new System.Drawing.Point(217, 175);
+            this.shoutoutWrite.Name = "shoutoutWrite";
+            this.shoutoutWrite.Size = new System.Drawing.Size(45, 23);
+            this.shoutoutWrite.TabIndex = 47;
+            this.shoutoutWrite.Text = "Write";
+            this.shoutoutWrite.UseVisualStyleBackColor = true;
+            this.shoutoutWrite.Click += new System.EventHandler(this.pokeShoutout_Click);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(113, 161);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(53, 13);
+            this.label54.TabIndex = 46;
+            this.label54.Text = "Shoutout:";
+            // 
+            // shoutoutTextBox
+            // 
+            this.shoutoutTextBox.Location = new System.Drawing.Point(116, 177);
+            this.shoutoutTextBox.MaxLength = 16;
+            this.shoutoutTextBox.Name = "shoutoutTextBox";
+            this.shoutoutTextBox.Size = new System.Drawing.Size(100, 20);
+            this.shoutoutTextBox.TabIndex = 45;
             // 
             // label28
             // 
@@ -1619,26 +1694,10 @@
             this.itemWrite.UseVisualStyleBackColor = true;
             this.itemWrite.Click += new System.EventHandler(this.itemWrite_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label38);
-            this.groupBox4.Controls.Add(this.deleteAmount);
-            this.groupBox4.Controls.Add(this.label26);
-            this.groupBox4.Controls.Add(this.label27);
-            this.groupBox4.Controls.Add(this.delPkm);
-            this.groupBox4.Controls.Add(this.deleteBox);
-            this.groupBox4.Controls.Add(this.deleteSlot);
-            this.groupBox4.Location = new System.Drawing.Point(7, 327);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(230, 86);
-            this.groupBox4.TabIndex = 24;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Delete Pokémon";
-            // 
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(161, 20);
+            this.label38.Location = new System.Drawing.Point(180, 7);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(61, 13);
             this.label38.TabIndex = 25;
@@ -1647,7 +1706,7 @@
             // deleteAmount
             // 
             this.deleteAmount.Enabled = false;
-            this.deleteAmount.Location = new System.Drawing.Point(158, 36);
+            this.deleteAmount.Location = new System.Drawing.Point(242, 5);
             this.deleteAmount.Maximum = new decimal(new int[] {
             930,
             0,
@@ -1659,7 +1718,7 @@
             0,
             0});
             this.deleteAmount.Name = "deleteAmount";
-            this.deleteAmount.Size = new System.Drawing.Size(66, 20);
+            this.deleteAmount.Size = new System.Drawing.Size(50, 20);
             this.deleteAmount.TabIndex = 24;
             this.deleteAmount.Value = new decimal(new int[] {
             1,
@@ -1671,28 +1730,28 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(85, 20);
+            this.label26.Location = new System.Drawing.Point(93, 7);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(28, 13);
+            this.label26.Size = new System.Drawing.Size(25, 13);
             this.label26.TabIndex = 23;
-            this.label26.Text = "Slot:";
+            this.label26.Text = "Slot";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(6, 20);
+            this.label27.Location = new System.Drawing.Point(6, 7);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(28, 13);
+            this.label27.Size = new System.Drawing.Size(25, 13);
             this.label27.TabIndex = 22;
-            this.label27.Text = "Box:";
+            this.label27.Text = "Box";
             // 
             // delPkm
             // 
             this.delPkm.Enabled = false;
             this.delPkm.ForeColor = System.Drawing.Color.Red;
-            this.delPkm.Location = new System.Drawing.Point(6, 58);
+            this.delPkm.Location = new System.Drawing.Point(228, 66);
             this.delPkm.Name = "delPkm";
-            this.delPkm.Size = new System.Drawing.Size(218, 23);
+            this.delPkm.Size = new System.Drawing.Size(75, 23);
             this.delPkm.TabIndex = 17;
             this.delPkm.Text = "Delete";
             this.delPkm.UseVisualStyleBackColor = true;
@@ -1701,7 +1760,7 @@
             // deleteBox
             // 
             this.deleteBox.Enabled = false;
-            this.deleteBox.Location = new System.Drawing.Point(6, 36);
+            this.deleteBox.Location = new System.Drawing.Point(37, 5);
             this.deleteBox.Maximum = new decimal(new int[] {
             31,
             0,
@@ -1713,7 +1772,7 @@
             0,
             0});
             this.deleteBox.Name = "deleteBox";
-            this.deleteBox.Size = new System.Drawing.Size(66, 20);
+            this.deleteBox.Size = new System.Drawing.Size(50, 20);
             this.deleteBox.TabIndex = 18;
             this.deleteBox.Value = new decimal(new int[] {
             1,
@@ -1725,7 +1784,7 @@
             // deleteSlot
             // 
             this.deleteSlot.Enabled = false;
-            this.deleteSlot.Location = new System.Drawing.Point(82, 36);
+            this.deleteSlot.Location = new System.Drawing.Point(124, 5);
             this.deleteSlot.Maximum = new decimal(new int[] {
             30,
             0,
@@ -1737,7 +1796,7 @@
             0,
             0});
             this.deleteSlot.Name = "deleteSlot";
-            this.deleteSlot.Size = new System.Drawing.Size(66, 20);
+            this.deleteSlot.Size = new System.Drawing.Size(50, 20);
             this.deleteSlot.TabIndex = 19;
             this.deleteSlot.Value = new decimal(new int[] {
             1,
@@ -1745,346 +1804,6 @@
             0,
             0});
             this.deleteSlot.ValueChanged += new System.EventHandler(this.deleteSlot_ValueChanged);
-            // 
-            // clonePkm
-            // 
-            this.clonePkm.Controls.Add(this.label37);
-            this.clonePkm.Controls.Add(this.label36);
-            this.clonePkm.Controls.Add(this.cloneFF);
-            this.clonePkm.Controls.Add(this.label40);
-            this.clonePkm.Controls.Add(this.label33);
-            this.clonePkm.Controls.Add(this.fromFile);
-            this.clonePkm.Controls.Add(this.label39);
-            this.clonePkm.Controls.Add(this.chooseCloneFF);
-            this.clonePkm.Controls.Add(this.clonefromSlotFB);
-            this.clonePkm.Controls.Add(this.cloneAmountFF);
-            this.clonePkm.Controls.Add(this.clonetoBoxFB);
-            this.clonePkm.Controls.Add(this.fromBoxes);
-            this.clonePkm.Controls.Add(this.clonetoSlotFB);
-            this.clonePkm.Controls.Add(this.label34);
-            this.clonePkm.Controls.Add(this.cloneAmountFB);
-            this.clonePkm.Controls.Add(this.clonetoSlotFF);
-            this.clonePkm.Controls.Add(this.label35);
-            this.clonePkm.Controls.Add(this.clonetoBoxFF);
-            this.clonePkm.Controls.Add(this.clonefromBoxFB);
-            this.clonePkm.Controls.Add(this.cloneFB);
-            this.clonePkm.Location = new System.Drawing.Point(301, 217);
-            this.clonePkm.Name = "clonePkm";
-            this.clonePkm.Size = new System.Drawing.Size(297, 108);
-            this.clonePkm.TabIndex = 43;
-            this.clonePkm.TabStop = false;
-            this.clonePkm.Text = "Write/Clone Pokémon";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(229, 17);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(64, 13);
-            this.label37.TabIndex = 47;
-            this.label37.Text = "From Game:";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(237, 68);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(52, 13);
-            this.label36.TabIndex = 46;
-            this.label36.Text = "From File:";
-            // 
-            // cloneFF
-            // 
-            this.cloneFF.Location = new System.Drawing.Point(84, 79);
-            this.cloneFF.Name = "cloneFF";
-            this.cloneFF.Size = new System.Drawing.Size(66, 23);
-            this.cloneFF.TabIndex = 30;
-            this.cloneFF.Text = "Clone";
-            this.cloneFF.UseVisualStyleBackColor = true;
-            this.cloneFF.Visible = false;
-            this.cloneFF.Click += new System.EventHandler(this.cloneFF_Click);
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(87, 66);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(54, 13);
-            this.label40.TabIndex = 45;
-            this.label40.Text = "From Slot:";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(11, 17);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(28, 13);
-            this.label33.TabIndex = 37;
-            this.label33.Text = "Box:";
-            // 
-            // fromFile
-            // 
-            this.fromFile.AutoSize = true;
-            this.fromFile.Enabled = false;
-            this.fromFile.Location = new System.Drawing.Point(275, 84);
-            this.fromFile.Name = "fromFile";
-            this.fromFile.Size = new System.Drawing.Size(14, 13);
-            this.fromFile.TabIndex = 45;
-            this.fromFile.UseVisualStyleBackColor = true;
-            this.fromFile.CheckedChanged += new System.EventHandler(this.fromFile_CheckedChanged);
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(11, 66);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(54, 13);
-            this.label39.TabIndex = 44;
-            this.label39.Text = "From Box:";
-            // 
-            // chooseCloneFF
-            // 
-            this.chooseCloneFF.Enabled = false;
-            this.chooseCloneFF.Location = new System.Drawing.Point(8, 80);
-            this.chooseCloneFF.Name = "chooseCloneFF";
-            this.chooseCloneFF.Size = new System.Drawing.Size(66, 23);
-            this.chooseCloneFF.TabIndex = 0;
-            this.chooseCloneFF.Text = "Browse";
-            this.chooseCloneFF.UseVisualStyleBackColor = true;
-            this.chooseCloneFF.Visible = false;
-            this.chooseCloneFF.Click += new System.EventHandler(this.chooseCloneFF_Click);
-            // 
-            // clonefromSlotFB
-            // 
-            this.clonefromSlotFB.Enabled = false;
-            this.clonefromSlotFB.Location = new System.Drawing.Point(84, 82);
-            this.clonefromSlotFB.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.clonefromSlotFB.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonefromSlotFB.Name = "clonefromSlotFB";
-            this.clonefromSlotFB.Size = new System.Drawing.Size(66, 20);
-            this.clonefromSlotFB.TabIndex = 33;
-            this.clonefromSlotFB.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // cloneAmountFF
-            // 
-            this.cloneAmountFF.Location = new System.Drawing.Point(160, 33);
-            this.cloneAmountFF.Maximum = new decimal(new int[] {
-            930,
-            0,
-            0,
-            0});
-            this.cloneAmountFF.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.cloneAmountFF.Name = "cloneAmountFF";
-            this.cloneAmountFF.Size = new System.Drawing.Size(66, 20);
-            this.cloneAmountFF.TabIndex = 31;
-            this.cloneAmountFF.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.cloneAmountFF.Visible = false;
-            this.cloneAmountFF.ValueChanged += new System.EventHandler(this.cloneAmountFF_ValueChanged);
-            // 
-            // clonetoBoxFB
-            // 
-            this.clonetoBoxFB.Enabled = false;
-            this.clonetoBoxFB.Location = new System.Drawing.Point(8, 33);
-            this.clonetoBoxFB.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.clonetoBoxFB.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonetoBoxFB.Name = "clonetoBoxFB";
-            this.clonetoBoxFB.Size = new System.Drawing.Size(66, 20);
-            this.clonetoBoxFB.TabIndex = 35;
-            this.clonetoBoxFB.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonetoBoxFB.ValueChanged += new System.EventHandler(this.clonetoBoxFB_ValueChanged);
-            // 
-            // fromBoxes
-            // 
-            this.fromBoxes.AutoSize = true;
-            this.fromBoxes.Checked = true;
-            this.fromBoxes.Enabled = false;
-            this.fromBoxes.Location = new System.Drawing.Point(275, 33);
-            this.fromBoxes.Name = "fromBoxes";
-            this.fromBoxes.Size = new System.Drawing.Size(14, 13);
-            this.fromBoxes.TabIndex = 44;
-            this.fromBoxes.TabStop = true;
-            this.fromBoxes.UseVisualStyleBackColor = true;
-            this.fromBoxes.CheckedChanged += new System.EventHandler(this.fromBoxes_CheckedChanged);
-            // 
-            // clonetoSlotFB
-            // 
-            this.clonetoSlotFB.Enabled = false;
-            this.clonetoSlotFB.Location = new System.Drawing.Point(84, 33);
-            this.clonetoSlotFB.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.clonetoSlotFB.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonetoSlotFB.Name = "clonetoSlotFB";
-            this.clonetoSlotFB.Size = new System.Drawing.Size(66, 20);
-            this.clonetoSlotFB.TabIndex = 36;
-            this.clonetoSlotFB.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonetoSlotFB.ValueChanged += new System.EventHandler(this.clonetoSlotFB_ValueChanged);
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(87, 17);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(28, 13);
-            this.label34.TabIndex = 38;
-            this.label34.Text = "Slot:";
-            // 
-            // cloneAmountFB
-            // 
-            this.cloneAmountFB.Enabled = false;
-            this.cloneAmountFB.Location = new System.Drawing.Point(160, 33);
-            this.cloneAmountFB.Maximum = new decimal(new int[] {
-            930,
-            0,
-            0,
-            0});
-            this.cloneAmountFB.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.cloneAmountFB.Name = "cloneAmountFB";
-            this.cloneAmountFB.Size = new System.Drawing.Size(66, 20);
-            this.cloneAmountFB.TabIndex = 40;
-            this.cloneAmountFB.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.cloneAmountFB.ValueChanged += new System.EventHandler(this.cloneAmountFB_ValueChanged);
-            // 
-            // clonetoSlotFF
-            // 
-            this.clonetoSlotFF.Location = new System.Drawing.Point(84, 33);
-            this.clonetoSlotFF.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.clonetoSlotFF.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonetoSlotFF.Name = "clonetoSlotFF";
-            this.clonetoSlotFF.Size = new System.Drawing.Size(66, 20);
-            this.clonetoSlotFF.TabIndex = 25;
-            this.clonetoSlotFF.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonetoSlotFF.Visible = false;
-            this.clonetoSlotFF.ValueChanged += new System.EventHandler(this.clonetoSlotFF_ValueChanged);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(159, 17);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(64, 13);
-            this.label35.TabIndex = 41;
-            this.label35.Text = "# of Clones:";
-            // 
-            // clonetoBoxFF
-            // 
-            this.clonetoBoxFF.Location = new System.Drawing.Point(8, 33);
-            this.clonetoBoxFF.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.clonetoBoxFF.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonetoBoxFF.Name = "clonetoBoxFF";
-            this.clonetoBoxFF.Size = new System.Drawing.Size(66, 20);
-            this.clonetoBoxFF.TabIndex = 24;
-            this.clonetoBoxFF.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonetoBoxFF.Visible = false;
-            this.clonetoBoxFF.ValueChanged += new System.EventHandler(this.clonetoBoxFF_ValueChanged);
-            // 
-            // clonefromBoxFB
-            // 
-            this.clonefromBoxFB.Enabled = false;
-            this.clonefromBoxFB.Location = new System.Drawing.Point(8, 82);
-            this.clonefromBoxFB.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.clonefromBoxFB.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.clonefromBoxFB.Name = "clonefromBoxFB";
-            this.clonefromBoxFB.Size = new System.Drawing.Size(66, 20);
-            this.clonefromBoxFB.TabIndex = 32;
-            this.clonefromBoxFB.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // cloneFB
-            // 
-            this.cloneFB.Enabled = false;
-            this.cloneFB.Location = new System.Drawing.Point(157, 79);
-            this.cloneFB.Name = "cloneFB";
-            this.cloneFB.Size = new System.Drawing.Size(66, 23);
-            this.cloneFB.TabIndex = 39;
-            this.cloneFB.Text = "Clone";
-            this.cloneFB.UseVisualStyleBackColor = true;
-            this.cloneFB.Click += new System.EventHandler(this.cloneFB_Click);
             // 
             // dTIDNum
             // 
@@ -2154,6 +1873,7 @@
             // 
             this.otName.Enabled = false;
             this.otName.Location = new System.Drawing.Point(44, 10);
+            this.otName.MaxLength = 12;
             this.otName.Name = "otName";
             this.otName.Size = new System.Drawing.Size(81, 20);
             this.otName.TabIndex = 53;
@@ -2249,8 +1969,10 @@
             // Main
             // 
             this.Main.BackColor = System.Drawing.SystemColors.Control;
+            this.Main.Controls.Add(this.label56);
             this.Main.Controls.Add(this.button1);
             this.Main.Controls.Add(this.label49);
+            this.Main.Controls.Add(this.xp);
             this.Main.Controls.Add(this.isEgg);
             this.Main.Controls.Add(this.label31);
             this.Main.Controls.Add(this.label51);
@@ -2348,35 +2070,363 @@
             // 
             // xp
             // 
-            this.xp.Location = new System.Drawing.Point(420, 347);
+            this.xp.Location = new System.Drawing.Point(201, 85);
             this.xp.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.xp.Name = "xp";
-            this.xp.Size = new System.Drawing.Size(120, 20);
+            this.xp.Size = new System.Drawing.Size(77, 20);
             this.xp.TabIndex = 58;
-            this.xp.Visible = false;
             // 
             // level
             // 
-            this.level.Location = new System.Drawing.Point(420, 373);
+            this.level.Location = new System.Drawing.Point(130, 327);
             this.level.Name = "level";
             this.level.Size = new System.Drawing.Size(120, 20);
             this.level.TabIndex = 59;
-            this.level.Visible = false;
+            // 
+            // cloneWriteTabs
+            // 
+            this.cloneWriteTabs.Controls.Add(this.cloneTab);
+            this.cloneWriteTabs.Controls.Add(this.writeTab);
+            this.cloneWriteTabs.Controls.Add(this.tabPage1);
+            this.cloneWriteTabs.Location = new System.Drawing.Point(306, 204);
+            this.cloneWriteTabs.Name = "cloneWriteTabs";
+            this.cloneWriteTabs.SelectedIndex = 0;
+            this.cloneWriteTabs.Size = new System.Drawing.Size(317, 121);
+            this.cloneWriteTabs.TabIndex = 60;
+            // 
+            // cloneTab
+            // 
+            this.cloneTab.Controls.Add(this.cloneDoIt);
+            this.cloneTab.Controls.Add(this.cloneSlotFrom);
+            this.cloneTab.Controls.Add(this.label52);
+            this.cloneTab.Controls.Add(this.label53);
+            this.cloneTab.Controls.Add(this.cloneBoxFrom);
+            this.cloneTab.Controls.Add(this.label40);
+            this.cloneTab.Controls.Add(this.cloneCopiesNo);
+            this.cloneTab.Controls.Add(this.label36);
+            this.cloneTab.Controls.Add(this.cloneSlotTo);
+            this.cloneTab.Controls.Add(this.label37);
+            this.cloneTab.Controls.Add(this.label39);
+            this.cloneTab.Controls.Add(this.cloneBoxTo);
+            this.cloneTab.Location = new System.Drawing.Point(4, 22);
+            this.cloneTab.Name = "cloneTab";
+            this.cloneTab.Padding = new System.Windows.Forms.Padding(3);
+            this.cloneTab.Size = new System.Drawing.Size(309, 95);
+            this.cloneTab.TabIndex = 0;
+            this.cloneTab.Text = "Clone";
+            this.cloneTab.UseVisualStyleBackColor = true;
+            // 
+            // cloneDoIt
+            // 
+            this.cloneDoIt.Location = new System.Drawing.Point(228, 66);
+            this.cloneDoIt.Name = "cloneDoIt";
+            this.cloneDoIt.Size = new System.Drawing.Size(75, 23);
+            this.cloneDoIt.TabIndex = 17;
+            this.cloneDoIt.Text = "Clone";
+            this.cloneDoIt.UseVisualStyleBackColor = true;
+            this.cloneDoIt.Click += new System.EventHandler(this.cloneDoIt_Click);
+            // 
+            // cloneSlotFrom
+            // 
+            this.cloneSlotFrom.Location = new System.Drawing.Point(124, 50);
+            this.cloneSlotFrom.Name = "cloneSlotFrom";
+            this.cloneSlotFrom.Size = new System.Drawing.Size(50, 20);
+            this.cloneSlotFrom.TabIndex = 16;
+            this.cloneSlotFrom.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(93, 52);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(25, 13);
+            this.label52.TabIndex = 15;
+            this.label52.Text = "Slot";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(6, 52);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(25, 13);
+            this.label53.TabIndex = 14;
+            this.label53.Text = "Box";
+            // 
+            // cloneBoxFrom
+            // 
+            this.cloneBoxFrom.Location = new System.Drawing.Point(37, 50);
+            this.cloneBoxFrom.Name = "cloneBoxFrom";
+            this.cloneBoxFrom.Size = new System.Drawing.Size(50, 20);
+            this.cloneBoxFrom.TabIndex = 13;
+            this.cloneBoxFrom.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(5, 30);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(33, 13);
+            this.label40.TabIndex = 12;
+            this.label40.Text = "From:";
+            // 
+            // cloneCopiesNo
+            // 
+            this.cloneCopiesNo.Location = new System.Drawing.Point(234, 5);
+            this.cloneCopiesNo.Name = "cloneCopiesNo";
+            this.cloneCopiesNo.Size = new System.Drawing.Size(50, 20);
+            this.cloneCopiesNo.TabIndex = 11;
+            this.cloneCopiesNo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(180, 7);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(48, 13);
+            this.label36.TabIndex = 10;
+            this.label36.Text = "# copies";
+            // 
+            // cloneSlotTo
+            // 
+            this.cloneSlotTo.Location = new System.Drawing.Point(124, 5);
+            this.cloneSlotTo.Name = "cloneSlotTo";
+            this.cloneSlotTo.Size = new System.Drawing.Size(50, 20);
+            this.cloneSlotTo.TabIndex = 9;
+            this.cloneSlotTo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(93, 7);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(25, 13);
+            this.label37.TabIndex = 8;
+            this.label37.Text = "Slot";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(6, 7);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(25, 13);
+            this.label39.TabIndex = 7;
+            this.label39.Text = "Box";
+            // 
+            // cloneBoxTo
+            // 
+            this.cloneBoxTo.Location = new System.Drawing.Point(37, 5);
+            this.cloneBoxTo.Name = "cloneBoxTo";
+            this.cloneBoxTo.Size = new System.Drawing.Size(50, 20);
+            this.cloneBoxTo.TabIndex = 6;
+            this.cloneBoxTo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // writeTab
+            // 
+            this.writeTab.AllowDrop = true;
+            this.writeTab.Controls.Add(this.writeDoIt);
+            this.writeTab.Controls.Add(this.writeBrowse);
+            this.writeTab.Controls.Add(this.writeAutoInc);
+            this.writeTab.Controls.Add(this.writeCopiesNo);
+            this.writeTab.Controls.Add(this.label35);
+            this.writeTab.Controls.Add(this.writeSlotTo);
+            this.writeTab.Controls.Add(this.label34);
+            this.writeTab.Controls.Add(this.label33);
+            this.writeTab.Controls.Add(this.writeBoxTo);
+            this.writeTab.Location = new System.Drawing.Point(4, 22);
+            this.writeTab.Name = "writeTab";
+            this.writeTab.Padding = new System.Windows.Forms.Padding(3);
+            this.writeTab.Size = new System.Drawing.Size(309, 95);
+            this.writeTab.TabIndex = 1;
+            this.writeTab.Text = "Write file";
+            this.writeTab.UseVisualStyleBackColor = true;
+            this.writeTab.DragDrop += new System.Windows.Forms.DragEventHandler(this.writeTab_DragDrop);
+            this.writeTab.DragEnter += new System.Windows.Forms.DragEventHandler(this.writeTab_DragEnter);
+            // 
+            // writeDoIt
+            // 
+            this.writeDoIt.Location = new System.Drawing.Point(228, 66);
+            this.writeDoIt.Name = "writeDoIt";
+            this.writeDoIt.Size = new System.Drawing.Size(75, 23);
+            this.writeDoIt.TabIndex = 8;
+            this.writeDoIt.Text = "Write";
+            this.writeDoIt.UseVisualStyleBackColor = true;
+            this.writeDoIt.Click += new System.EventHandler(this.writeDoIt_Click);
+            // 
+            // writeBrowse
+            // 
+            this.writeBrowse.Location = new System.Drawing.Point(9, 66);
+            this.writeBrowse.Name = "writeBrowse";
+            this.writeBrowse.Size = new System.Drawing.Size(75, 23);
+            this.writeBrowse.TabIndex = 7;
+            this.writeBrowse.Text = "Browse...";
+            this.writeBrowse.UseVisualStyleBackColor = true;
+            this.writeBrowse.Click += new System.EventHandler(this.writeBrowse_Click);
+            // 
+            // writeAutoInc
+            // 
+            this.writeAutoInc.AutoSize = true;
+            this.writeAutoInc.Location = new System.Drawing.Point(9, 31);
+            this.writeAutoInc.Name = "writeAutoInc";
+            this.writeAutoInc.Size = new System.Drawing.Size(97, 17);
+            this.writeAutoInc.TabIndex = 6;
+            this.writeAutoInc.Text = "Auto-increment";
+            this.toolTip1.SetToolTip(this.writeAutoInc, "Automatically go to next slot after writing.\r\nMust be enabled when importing mult" +
+        "iple Pokemon.");
+            this.writeAutoInc.UseVisualStyleBackColor = true;
+            // 
+            // writeCopiesNo
+            // 
+            this.writeCopiesNo.Location = new System.Drawing.Point(234, 5);
+            this.writeCopiesNo.Maximum = new decimal(new int[] {
+            930,
+            0,
+            0,
+            0});
+            this.writeCopiesNo.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.writeCopiesNo.Name = "writeCopiesNo";
+            this.writeCopiesNo.Size = new System.Drawing.Size(50, 20);
+            this.writeCopiesNo.TabIndex = 5;
+            this.writeCopiesNo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(180, 7);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(48, 13);
+            this.label35.TabIndex = 4;
+            this.label35.Text = "# copies";
+            // 
+            // writeSlotTo
+            // 
+            this.writeSlotTo.Location = new System.Drawing.Point(124, 5);
+            this.writeSlotTo.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.writeSlotTo.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.writeSlotTo.Name = "writeSlotTo";
+            this.writeSlotTo.Size = new System.Drawing.Size(50, 20);
+            this.writeSlotTo.TabIndex = 3;
+            this.writeSlotTo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.writeSlotTo.ValueChanged += new System.EventHandler(this.writeSlotTo_ValueChanged);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(93, 7);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(25, 13);
+            this.label34.TabIndex = 2;
+            this.label34.Text = "Slot";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(6, 7);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(25, 13);
+            this.label33.TabIndex = 1;
+            this.label33.Text = "Box";
+            // 
+            // writeBoxTo
+            // 
+            this.writeBoxTo.Location = new System.Drawing.Point(37, 5);
+            this.writeBoxTo.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.writeBoxTo.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.writeBoxTo.Name = "writeBoxTo";
+            this.writeBoxTo.Size = new System.Drawing.Size(50, 20);
+            this.writeBoxTo.TabIndex = 0;
+            this.writeBoxTo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.writeBoxTo.ValueChanged += new System.EventHandler(this.writeBoxTo_ValueChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label38);
+            this.tabPage1.Controls.Add(this.label26);
+            this.tabPage1.Controls.Add(this.deleteBox);
+            this.tabPage1.Controls.Add(this.label27);
+            this.tabPage1.Controls.Add(this.deleteAmount);
+            this.tabPage1.Controls.Add(this.deleteSlot);
+            this.tabPage1.Controls.Add(this.delPkm);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(309, 95);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Delete";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(168, 88);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(31, 13);
+            this.label56.TabIndex = 102;
+            this.label56.Text = "EXP:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 418);
+            this.ClientSize = new System.Drawing.Size(906, 437);
+            this.Controls.Add(this.cloneWriteTabs);
             this.Controls.Add(this.level);
-            this.Controls.Add(this.xp);
             this.Controls.Add(this.DumpedEdit);
-            this.Controls.Add(this.clonePkm);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.txtLog);
@@ -2425,21 +2475,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).EndInit();
-            this.clonePkm.ResumeLayout(false);
-            this.clonePkm.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.clonefromSlotFB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneAmountFF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneAmountFB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonetoSlotFF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonetoBoxFF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clonefromBoxFB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dTIDNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dSIDNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.friendship)).EndInit();
@@ -2454,6 +2492,21 @@
             this.OT.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.level)).EndInit();
+            this.cloneWriteTabs.ResumeLayout(false);
+            this.cloneTab.ResumeLayout(false);
+            this.cloneTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneSlotFrom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneBoxFrom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneCopiesNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneSlotTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloneBoxTo)).EndInit();
+            this.writeTab.ResumeLayout(false);
+            this.writeTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.writeCopiesNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.writeSlotTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2529,7 +2582,6 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button delPkm;
@@ -2557,27 +2609,6 @@
         private System.Windows.Forms.ComboBox heldItem;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.ComboBox species;
-        private System.Windows.Forms.GroupBox clonePkm;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.NumericUpDown clonefromBoxFB;
-        private System.Windows.Forms.NumericUpDown clonefromSlotFB;
-        private System.Windows.Forms.NumericUpDown clonetoBoxFB;
-        private System.Windows.Forms.NumericUpDown clonetoSlotFB;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.NumericUpDown cloneAmountFB;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Button cloneFB;
-        private System.Windows.Forms.NumericUpDown clonetoBoxFF;
-        private System.Windows.Forms.Button chooseCloneFF;
-        private System.Windows.Forms.NumericUpDown clonetoSlotFF;
-        private System.Windows.Forms.NumericUpDown cloneAmountFF;
-        private System.Windows.Forms.Button cloneFF;
-        private System.Windows.Forms.RadioButton fromFile;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.RadioButton fromBoxes;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.NumericUpDown deleteAmount;
         private System.Windows.Forms.Label label5;
@@ -2625,6 +2656,39 @@
         private System.Windows.Forms.RadioButton radioBattleBox;
         private System.Windows.Forms.NumericUpDown xp;
         private System.Windows.Forms.NumericUpDown level;
+        private System.Windows.Forms.TabControl cloneWriteTabs;
+        private System.Windows.Forms.TabPage cloneTab;
+        private System.Windows.Forms.TabPage writeTab;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.NumericUpDown writeBoxTo;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.NumericUpDown writeSlotTo;
+        private System.Windows.Forms.NumericUpDown writeCopiesNo;
+        private System.Windows.Forms.Button writeDoIt;
+        private System.Windows.Forms.Button writeBrowse;
+        private System.Windows.Forms.CheckBox writeAutoInc;
+        private System.Windows.Forms.Button cloneDoIt;
+        private System.Windows.Forms.NumericUpDown cloneSlotFrom;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.NumericUpDown cloneBoxFrom;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.NumericUpDown cloneCopiesNo;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.NumericUpDown cloneSlotTo;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.NumericUpDown cloneBoxTo;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button shoutoutWrite;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.TextBox shoutoutTextBox;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox offsetzz;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label56;
     }
 }
 

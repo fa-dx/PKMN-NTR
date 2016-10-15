@@ -1,4 +1,8 @@
-﻿using ntrbase.Properties;
+﻿/*
+ * TODO: zmienić 930 na BOXES * BOXSIZE
+ * zmienić wszystkie offsety na liczby hex, bo to siara wszystko trzymać w stringach
+ */
+using ntrbase.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,14 +17,13 @@ using System.Xml;
 
 namespace ntrbase
 {
-
-
-
     public partial class MainForm : Form
     {
-
+        public const int BOXES = 31;
+        public const int BOXSIZE = 30;
+        public const int POKEBYTES = 232;
         PKHeX PKHeX = new PKHeX();
-
+   
         public string dumpBattleBox;
         public string dumpEK6;
         public string dumpDay1;
@@ -28,9 +31,8 @@ namespace ntrbase
         public int bboff;
         public bool isEncryptedFF { get; set; }
         public bool isEncryptedFFD { get; set; }
-        public string selectedclone { get; set; }
-        public int clonemax { get; set; }
-        public string emptyData = "0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6";
+        public byte[] selectedCloneData  = new byte[232];
+        public bool   selectedCloneValid = false;
         public byte[] emptyDatab = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6 };
         public int tradedumpcount = 0;
         public string realoppoffset { get; set; }
@@ -44,6 +46,7 @@ namespace ntrbase
         public string boffs;
         public static string pid;
         public string lang;
+        public string opwroff;
         public int hpb;
         public int atkb;
         public int defb;
@@ -89,6 +92,7 @@ namespace ntrbase
         public string minoff;
         public string secoff;
         public string langoff;
+        public int shoutoutOff;
 
         public uint itemsfinal;
         public uint amountfinal;
@@ -105,6 +109,7 @@ namespace ntrbase
         public string[] abilityList = { "Stench", "Drizzle", "Speed Boost", "Battle Armor", "Sturdy", "Damp", "Limber", "Sand Veil", "Static", "Volt Absorb", "Water Absorb", "Oblivious", "Cloud Nine", "Compound Eyes", "Insomnia", "Color Change", "Immunity", "Flash Fire", "Shield Dust", "Own Tempo", "Suction Cups", "Intimidate", "Shadow Tag", "Rough Skin", "Wonder Guard", "Levitate", "Effect Spore", "Synchronize", "Clear Body", "Natural Cure", "Lightning Rod", "Serene Grace", "Swift Swim", "Chlorophyll", "Illuminate", "Trace", "Huge Power", "Poison Point", "Inner Focus", "Magma Armor", "Water Veil", "Magnet Pull", "Soundproof", "Rain Dish", "Sand Stream", "Pressure", "Thick Fat", "Early Bird", "Flame Body", "Run Away", "Keen Eye", "Hyper Cutter", "Pickup", "Truant", "Hustle", "Cute Charm", "Plus", "Minus", "Forecast", "Sticky Hold", "Shed Skin", "Guts", "Marvel Scale", "Liquid Ooze", "Overgrow", "Blaze", "Torrent", "Swarm", "Rock Head", "Drought", "Arena Trap", "Vital Spirit", "White Smoke", "Pure Power", "Shell Armor", "Air Lock", "Tangled Feet", "Motor Drive", "Rivalry", "Steadfast", "Snow Cloak", "Gluttony", "Anger Point", "Unburden", "Heatproof", "Simple", "Dry Skin", "Download", "Iron Fist", "Poison Heal", "Adaptability", "Skill Link", "Hydration", "Solar Power", "Quick Feet", "Normalize", "Sniper", "Magic Guard", "No Guard", "Stall", "Technician", "Leaf Guard", "Klutz", "Mold Breaker", "Super Luck", "Aftermath", "Anticipation", "Forewarn", "Unaware", "Tinted Lens", "Filter", "Slow Start", "Scrappy", "Storm Drain", "Ice Body", "Solid Rock", "Snow Warning", "Honey Gather", "Frisk", "Reckless", "Multitype", "Flower Gift", "Bad Dreams", "Pickpocket", "Sheer Force", "Contrary", "Unnerve", "Defiant", "Defeatist", "Cursed Body", "Healer", "Friend Guard", "Weak Armor", "Heavy Metal", "Light Metal", "Multiscale", "Toxic Boost", "Flare Boost", "Harvest", "Telepathy", "Moody", "Overcoat", "Poison Touch", "Regenerator", "Big Pecks", "Sand Rush", "Wonder Skin", "Analytic", "Illusion", "Imposter", "Infiltrator", "Mummy", "Moxie", "Justified", "Rattled", "Magic Bounce", "Sap Sipper", "Prankster", "Sand Force", "Iron Barbs", "Zen Mode", "Victory Star", "Turboblaze", "Teravolt", "Aroma Veil", "Flower Veil", "Cheek Pouch", "Protean", "Fur Coat", "Magician", "Bulletproof", "Competitive", "Strong Jaw", "Refrigerate", "Sweet Veil", "Stance Change", "Gale Wings", "Mega Launcher", "Grass Pelt", "Symbiosis", "Tough Claws", "Pixilate", "Gooey", "Aerilate", "Parental Bond", "Dark Aura", "Fairy Aura", "Aura Break", "Primordial Sea", "Desolate Land", "Delta Stream" };
         public string[] speciesList = { "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoran♀", "Nidorina", "Nidoqueen", "Nidoran♂", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebel", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetch’d", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "Mr-Mime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew", "Chikorita", "Bayleef", "Meganium", "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr", "Sentret", "Furret", "Hoothoot", "Noctowl", "Ledyba", "Ledian", "Spinarak", "Ariados", "Crobat", "Chinchou", "Lanturn", "Pichu", "Cleffa", "Igglybuff", "Togepi", "Togetic", "Natu", "Xatu", "Mareep", "Flaaffy", "Ampharos", "Bellossom", "Marill", "Azumarill", "Sudowoodo", "Politoed", "Hoppip", "Skiploom", "Jumpluff", "Aipom", "Sunkern", "Sunflora", "Yanma", "Wooper", "Quagsire", "Espeon", "Umbreon", "Murkrow", "Slowking", "Misdreavus", "Unown", "Wobbuffet", "Girafarig", "Pineco", "Forretress", "Dunsparce", "Gligar", "Steelix", "Snubbull", "Granbull", "Qwilfish", "Scizor", "Shuckle", "Heracross", "Sneasel", "Teddiursa", "Ursaring", "Slugma", "Magcargo", "Swinub", "Piloswine", "Corsola", "Remoraid", "Octillery", "Delibird", "Mantine", "Skarmory", "Houndour", "Houndoom", "Kingdra", "Phanpy", "Donphan", "Porygon2", "Stantler", "Smeargle", "Tyrogue", "Hitmontop", "Smoochum", "Elekid", "Magby", "Miltank", "Blissey", "Raikou", "Entei", "Suicune", "Larvitar", "Pupitar", "Tyranitar", "Lugia", "Ho-Oh", "Celebi", "Treecko", "Grovyle", "Sceptile", "Torchic", "Combusken", "Blaziken", "Mudkip", "Marshtomp", "Swampert", "Poochyena", "Mightyena", "Zigzagoon", "Linoone", "Wurmple", "Silcoon", "Beautifly", "Cascoon", "Dustox", "Lotad", "Lombre", "Ludicolo", "Seedot", "Nuzleaf", "Shiftry", "Taillow", "Swellow", "Wingull", "Pelipper", "Ralts", "Kirlia", "Gardevoir", "Surskit", "Masquerain", "Shroomish", "Breloom", "Slakoth", "Vigoroth", "Slaking", "Nincada", "Ninjask", "Shedinja", "Whismur", "Loudred", "Exploud", "Makuhita", "Hariyama", "Azurill", "Nosepass", "Skitty", "Delcatty", "Sableye", "Mawile", "Aron", "Lairon", "Aggron", "Meditite", "Medicham", "Electrike", "Manectric", "Plusle", "Minun", "Volbeat", "Illumise", "Roselia", "Gulpin", "Swalot", "Carvanha", "Sharpedo", "Wailmer", "Wailord", "Numel", "Camerupt", "Torkoal", "Spoink", "Grumpig", "Spinda", "Trapinch", "Vibrava", "Flygon", "Cacnea", "Cacturne", "Swablu", "Altaria", "Zangoose", "Seviper", "Lunatone", "Solrock", "Barboach", "Whiscash", "Corphish", "Crawdaunt", "Baltoy", "Claydol", "Lileep", "Cradily", "Anorith", "Armaldo", "Feebas", "Milotic", "Castform", "Kecleon", "Shuppet", "Banette", "Duskull", "Dusclops", "Tropius", "Chimecho", "Absol", "Wynaut", "Snorunt", "Glalie", "Spheal", "Sealeo", "Walrein", "Clamperl", "Huntail", "Gorebyss", "Relicanth", "Luvdisc", "Bagon", "Shelgon", "Salamence", "Beldum", "Metang", "Metagross", "Regirock", "Regice", "Registeel", "Latias", "Latios", "Kyogre", "Groudon", "Rayquaza", "Jirachi", "Deoxys", "Turtwig", "Grotle", "Torterra", "Chimchar", "Monferno", "Infernape", "Piplup", "Prinplup", "Empoleon", "Starly", "Staravia", "Staraptor", "Bidoof", "Bibarel", "Kricketot", "Kricketune", "Shinx", "Luxio", "Luxray", "Budew", "Roserade", "Cranidos", "Rampardos", "Shieldon", "Bastiodon", "Burmy", "Wormadam", "Mothim", "Combee", "Vespiquen", "Pachirisu", "Buizel", "Floatzel", "Cherubi", "Cherrim", "Shellos", "Gastrodon", "Ambipom", "Drifloon", "Drifblim", "Buneary", "Lopunny", "Mismagius", "Honchkrow", "Glameow", "Purugly", "Chingling", "Stunky", "Skuntank", "Bronzor", "Bronzong", "Bonsly", "Mime-Jr.", "Happiny", "Chatot", "Spiritomb", "Gible", "Gabite", "Garchomp", "Munchlax", "Riolu", "Lucario", "Hippopotas", "Hippowdon", "Skorupi", "Drapion", "Croagunk", "Toxicroak", "Carnivine", "Finneon", "Lumineon", "Mantyke", "Snover", "Abomasnow", "Weavile", "Magnezone", "Lickilicky", "Rhyperior", "Tangrowth", "Electivire", "Magmortar", "Togekiss", "Yanmega", "Leafeon", "Glaceon", "Gliscor", "Mamoswine", "Porygon-Z", "Gallade", "Probopass", "Dusknoir", "Froslass", "Rotom", "Uxie", "Mesprit", "Azelf", "Dialga", "Palkia", "Heatran", "Regigigas", "Giratina", "Cresselia", "Phione", "Manaphy", "Darkrai", "Shaymin", "Arceus", "Victini", "Snivy", "Servine", "Serperior", "Tepig", "Pignite", "Emboar", "Oshawott", "Dewott", "Samurott", "Patrat", "Watchog", "Lillipup", "Herdier", "Stoutland", "Purrloin", "Liepard", "Pansage", "Simisage", "Pansear", "Simisear", "Panpour", "Simipour", "Munna", "Musharna", "Pidove", "Tranquill", "Unfezant", "Blitzle", "Zebstrika", "Roggenrola", "Boldore", "Gigalith", "Woobat", "Swoobat", "Drilbur", "Excadrill", "Audino", "Timburr", "Gurdurr", "Conkeldurr", "Tympole", "Palpitoad", "Seismitoad", "Throh", "Sawk", "Sewaddle", "Swadloon", "Leavanny", "Venipede", "Whirlipede", "Scolipede", "Cottonee", "Whimsicott", "Petilil", "Lilligant", "Basculin", "Sandile", "Krokorok", "Krookodile", "Darumaka", "Darmanitan", "Maractus", "Dwebble", "Crustle", "Scraggy", "Scrafty", "Sigilyph", "Yamask", "Cofagrigus", "Tirtouga", "Carracosta", "Archen", "Archeops", "Trubbish", "Garbodor", "Zorua", "Zoroark", "Minccino", "Cinccino", "Gothita", "Gothorita", "Gothitelle", "Solosis", "Duosion", "Reuniclus", "Ducklett", "Swanna", "Vanillite", "Vanillish", "Vanilluxe", "Deerling", "Sawsbuck", "Emolga", "Karrablast", "Escavalier", "Foongus", "Amoonguss", "Frillish", "Jellicent", "Alomomola", "Joltik", "Galvantula", "Ferroseed", "Ferrothorn", "Klink", "Klang", "Klinklang", "Tynamo", "Eelektrik", "Eelektross", "Elgyem", "Beheeyem", "Litwick", "Lampent", "Chandelure", "Axew", "Fraxure", "Haxorus", "Cubchoo", "Beartic", "Cryogonal", "Shelmet", "Accelgor", "Stunfisk", "Mienfoo", "Mienshao", "Druddigon", "Golett", "Golurk", "Pawniard", "Bisharp", "Bouffalant", "Rufflet", "Braviary", "Vullaby", "Mandibuzz", "Heatmor", "Durant", "Deino", "Zweilous", "Hydreigon", "Larvesta", "Volcarona", "Cobalion", "Terrakion", "Virizion", "Tornadus", "Thundurus", "Reshiram", "Zekrom", "Landorus", "Kyurem", "Keldeo", "Meloetta", "Genesect", "Chespin", "Quilladin", "Chesnaught", "Fennekin", "Braixen", "Delphox", "Froakie", "Frogadier", "Greninja", "Bunnelby", "Diggersby", "Fletchling", "Fletchinder", "Talonflame", "Scatterbug", "Spewpa", "Vivillon", "Litleo", "Pyroar", "Flabebe", "Floette", "Florges", "Skiddo", "Gogoat", "Pancham", "Pangoro", "Furfrou", "Espurr", "Meowstic", "Honedge", "Doublade", "Aegislash", "Spritzee", "Aromatisse", "Swirlix", "Slurpuff", "Inkay", "Malamar", "Binacle", "Barbaracle", "Skrelp", "Dragalge", "Clauncher", "Clawitzer", "Helioptile", "Heliolisk", "Tyrunt", "Tyrantrum", "Amaura", "Aurorus", "Sylveon", "Hawlucha", "Dedenne", "Carbink", "Goomy", "Sliggoo", "Goodra", "Klefki", "Phantump", "Trevenant", "Pumpkaboo", "Gourgeist", "Bergmite", "Avalugg", "Noibat", "Noivern", "Xerneas", "Yveltal", "Zygarde", "Diancie", "Hoopa", "Volcanion", "Egg" };
         public string[] moveList = { "[None]", "Pound", "Karate Chop", "Double Slap", "Comet Punch", "Mega Punch", "Pay Day", "Fire Punch", "Ice Punch", "Thunder Punch", "Scratch", "Vice Grip", "Guillotine", "Razor Wind", "Swords Dance", "Cut", "Gust", "Wing Attack", "Whirlwind", "Fly", "Bind", "Slam", "Vine Whip", "Stomp", "Double Kick", "Mega Kick", "Jump Kick", "Rolling Kick", "Sand Attack", "Headbutt", "Horn Attack", "Fury Attack", "Horn Drill", "Tackle", "Body Slam", "Wrap", "Take Down", "Thrash", "Double-Edge", "Tail Whip", "Poison Sting", "Twineedle", "Pin Missile", "Leer", "Bite", "Growl", "Roar", "Sing", "Supersonic", "Sonic Boom", "Disable", "Acid", "Ember", "Flamethrower", "Mist", "Water Gun", "Hydro Pump", "Surf", "Ice Beam", "Blizzard", "Psybeam", "Bubble Beam", "Aurora Beam", "Hyper Beam", "Peck", "Drill Peck", "Submission", "Low Kick", "Counter", "Seismic Toss", "Strength", "Absorb", "Mega Drain", "Leech Seed", "Growth", "Razor Leaf", "Solar Beam", "Poison Powder", "Stun Spore", "Sleep Powder", "Petal Dance", "String Shot", "Dragon Rage", "Fire Spin", "Thunder Shock", "Thunderbolt", "Thunder Wave", "Thunder", "Rock Throw", "Earthquake", "Fissure", "Dig", "Toxic", "Confusion", "Psychic", "Hypnosis", "Meditate", "Agility", "Quick Attack", "Rage", "Teleport", "Night Shade", "Mimic", "Screech", "Double Team", "Recover", "Harden", "Minimize", "Smokescreen", "Confuse Ray", "Withdraw", "Defense Curl", "Barrier", "Light Screen", "Haze", "Reflect", "Focus Energy", "Bide", "Metronome", "Mirror Move", "Self-Destruct", "Egg Bomb", "Lick", "Smog", "Sludge", "Bone Club", "Fire Blast", "Waterfall", "Clamp", "Swift", "Skull Bash", "Spike Cannon", "Constrict", "Amnesia", "Kinesis", "Soft-Boiled", "High Jump Kick", "Glare", "Dream Eater", "Poison Gas", "Barrage", "Leech Life", "Lovely Kiss", "Sky Attack", "Transform", "Bubble", "Dizzy Punch", "Spore", "Flash", "Psywave", "Splash", "Acid Armor", "Crabhammer", "Explosion", "Fury Swipes", "Bonemerang", "Rest", "Rock Slide", "Hyper Fang", "Sharpen", "Conversion", "Tri Attack", "Super Fang", "Slash", "Substitute", "Struggle", "Sketch", "Triple Kick", "Thief", "Spider Web", "Mind Reader", "Nightmare", "Flame Wheel", "Snore", "Curse", "Flail", "Conversion 2", "Aeroblast", "Cotton Spore", "Reversal", "Spite", "Powder Snow", "Protect", "Mach Punch", "Scary Face", "Feint Attack", "Sweet Kiss", "Belly Drum", "Sludge Bomb", "Mud-Slap", "Octazooka", "Spikes", "Zap Cannon", "Foresight", "Destiny Bond", "Perish Song", "Icy Wind", "Detect", "Bone Rush", "Lock-On", "Outrage", "Sandstorm", "Giga Drain", "Endure", "Charm", "Rollout", "False Swipe", "Swagger", "Milk Drink", "Spark", "Fury Cutter", "Steel Wing", "Mean Look", "Attract", "Sleep Talk", "Heal Bell", "Return", "Present", "Frustration", "Safeguard", "Pain Split", "Sacred Fire", "Magnitude", "Dynamic Punch", "Megahorn", "Dragon Breath", "Baton Pass", "Encore", "Pursuit", "Rapid Spin", "Sweet Scent", "Iron Tail", "Metal Claw", "Vital Throw", "Morning Sun", "Synthesis", "Moonlight", "Hidden Power", "Cross Chop", "Twister", "Rain Dance", "Sunny Day", "Crunch", "Mirror Coat", "Psych Up", "Extreme Speed", "Ancient Power", "Shadow Ball", "Future Sight", "Rock Smash", "Whirlpool", "Beat Up", "Fake Out", "Uproar", "Stockpile", "Spit Up", "Swallow", "Heat Wave", "Hail", "Torment", "Flatter", "Will-O-Wisp", "Memento", "Facade", "Focus Punch", "Smelling Salts", "Follow Me", "Nature Power", "Charge", "Taunt", "Helping Hand", "Trick", "Role Play", "Wish", "Assist", "Ingrain", "Superpower", "Magic Coat", "Recycle", "Revenge", "Brick Break", "Yawn", "Knock Off", "Endeavor", "Eruption", "Skill Swap", "Imprison", "Refresh", "Grudge", "Snatch", "Secret Power", "Dive", "Arm Thrust", "Camouflage", "Tail Glow", "Luster Purge", "Mist Ball", "Feather Dance", "Teeter Dance", "Blaze Kick", "Mud Sport", "Ice Ball", "Needle Arm", "Slack Off", "Hyper Voice", "Poison Fang", "Crush Claw", "Blast Burn", "Hydro Cannon", "Meteor Mash", "Astonish", "Weather Ball", "Aromatherapy", "Fake Tears", "Air Cutter", "Overheat", "Odor Sleuth", "Rock Tomb", "Silver Wind", "Metal Sound", "Grass Whistle", "Tickle", "Cosmic Power", "Water Spout", "Signal Beam", "Shadow Punch", "Extrasensory", "Sky Uppercut", "Sand Tomb", "Sheer Cold", "Muddy Water", "Bullet Seed", "Aerial Ace", "Icicle Spear", "Iron Defense", "Block", "Howl", "Dragon Claw", "Frenzy Plant", "Bulk Up", "Bounce", "Mud Shot", "Poison Tail", "Covet", "Volt Tackle", "Magical Leaf", "Water Sport", "Calm Mind", "Leaf Blade", "Dragon Dance", "Rock Blast", "Shock Wave", "Water Pulse", "Doom Desire", "Psycho Boost", "Roost", "Gravity", "Miracle Eye", "Wake-Up Slap", "Hammer Arm", "Gyro Ball", "Healing Wish", "Brine", "Natural Gift", "Feint", "Pluck", "Tailwind", "Acupressure", "Metal Burst", "U-turn", "Close Combat", "Payback", "Assurance", "Embargo", "Fling", "Psycho Shift", "Trump Card", "Heal Block", "Wring Out", "Power Trick", "Gastro Acid", "Lucky Chant", "Me First", "Copycat", "Power Swap", "Guard Swap", "Punishment", "Last Resort", "Worry Seed", "Sucker Punch", "Toxic Spikes", "Heart Swap", "Aqua Ring", "Magnet Rise", "Flare Blitz", "Force Palm", "Aura Sphere", "Rock Polish", "Poison Jab", "Dark Pulse", "Night Slash", "Aqua Tail", "Seed Bomb", "Air Slash", "X-Scissor", "Bug Buzz", "Dragon Pulse", "Dragon Rush", "Power Gem", "Drain Punch", "Vacuum Wave", "Focus Blast", "Energy Ball", "Brave Bird", "Earth Power", "Switcheroo", "Giga Impact", "Nasty Plot", "Bullet Punch", "Avalanche", "Ice Shard", "Shadow Claw", "Thunder Fang", "Ice Fang", "Fire Fang", "Shadow Sneak", "Mud Bomb", "Psycho Cut", "Zen Headbutt", "Mirror Shot", "Flash Cannon", "Rock Climb", "Defog", "Trick Room", "Draco Meteor", "Discharge", "Lava Plume", "Leaf Storm", "Power Whip", "Rock Wrecker", "Cross Poison", "Gunk Shot", "Iron Head", "Magnet Bomb", "Stone Edge", "Captivate", "Stealth Rock", "Grass Knot", "Chatter", "Judgment", "Bug Bite", "Charge Beam", "Wood Hammer", "Aqua Jet", "Attack Order", "Defend Order", "Heal Order", "Head Smash", "Double Hit", "Roar of Time", "Spacial Rend", "Lunar Dance", "Crush Grip", "Magma Storm", "Dark Void", "Seed Flare", "Ominous Wind", "Shadow Force", "Hone Claws", "Wide Guard", "Guard Split", "Power Split", "Wonder Room", "Psyshock", "Venoshock", "Autotomize", "Rage Powder", "Telekinesis", "Magic Room", "Smack Down", "Storm Throw", "Flame Burst", "Sludge Wave", "Quiver Dance", "Heavy Slam", "Synchronoise", "Electro Ball", "Soak", "Flame Charge", "Coil", "Low Sweep", "Acid Spray", "Foul Play", "Simple Beam", "Entrainment", "After You", "Round", "Echoed Voice", "Chip Away", "Clear Smog", "Stored Power", "Quick Guard", "Ally Switch", "Scald", "Shell Smash", "Heal Pulse", "Hex", "Sky Drop", "Shift Gear", "Circle Throw", "Incinerate", "Quash", "Acrobatics", "Reflect Type", "Retaliate", "Final Gambit", "Bestow", "Inferno", "Water Pledge", "Fire Pledge", "Grass Pledge", "Volt Switch", "Struggle Bug", "Bulldoze", "Frost Breath", "Dragon Tail", "Work Up", "Electroweb", "Wild Charge", "Drill Run", "Dual Chop", "Heart Stamp", "Horn Leech", "Sacred Sword", "Razor Shell", "Heat Crash", "Leaf Tornado", "Steamroller", "Cotton Guard", "Night Daze", "Psystrike", "Tail Slap", "Hurricane", "Head Charge", "Gear Grind", "Searing Shot", "Techno Blast", "Relic Song", "Secret Sword", "Glaciate", "Bolt Strike", "Blue Flare", "Fiery Dance", "Freeze Shock", "Ice Burn", "Snarl", "Icicle Crash", "V-create", "Fusion Flare", "Fusion Bolt", "Flying Press", "Mat Block", "Belch", "Rototiller", "Sticky Web", "Fell Stinger", "Phantom Force", "Trick-or-Treat", "Noble Roar", "Ion Deluge", "Parabolic Charge", "Forest’s Curse", "Petal Blizzard", "Freeze-Dry", "Disarming Voice", "Parting Shot", "Topsy-Turvy", "Draining Kiss", "Crafty Shield", "Flower Shield", "Grassy Terrain", "Misty Terrain", "Electrify", "Play Rough", "Fairy Wind", "Moonblast", "Boomburst", "Fairy Lock", "King’s Shield", "Play Nice", "Confide", "Diamond Storm", "Steam Eruption", "Hyperspace Hole", "Water Shuriken", "Mystical Fire", "Spiky Shield", "Aromatic Mist", "Eerie Impulse", "Venom Drench", "Powder", "Geomancy", "Magnetic Flux", "Happy Hour", "Electric Terrain", "Dazzling Gleam", "Celebrate", "Hold Hands", "Baby-Doll Eyes", "Nuzzle", "Hold Back", "Infestation", "Power-Up Punch", "Oblivion Wing", "Thousand Arrows", "Thousand Waves", "Land’s Wrath", "Light of Ruin", "Origin Pulse", "Precipice Blades", "Dragon Ascent", "Hyperspace Fury" };
+        public Bitmap[] ballImages = {Properties.Resources._0, Properties.Resources._1, Properties.Resources._2, Properties.Resources._3, Properties.Resources._4, Properties.Resources._5, Properties.Resources._6, Properties.Resources._7, Properties.Resources._8, Properties.Resources._9, Properties.Resources._10, Properties.Resources._11, Properties.Resources._12, Properties.Resources._13, Properties.Resources._14, Properties.Resources._15, Properties.Resources._16, Properties.Resources._17, Properties.Resources._18, Properties.Resources._19, Properties.Resources._20, Properties.Resources._21, Properties.Resources._22, Properties.Resources._23, Properties.Resources._24, };
 
         public DataGridViewComboBoxColumn itemItem;
         public DataGridViewColumn itemAmount;
@@ -446,14 +451,6 @@ namespace ntrbase
             }
         }
 
-        public void isCloneDumped()
-        {
-            if (txtLog.Text.Contains("clone.temp successfully"))
-            {
-                afterCloneDump();
-            }
-        }
-
         public static class Delay
         {
 
@@ -513,97 +510,262 @@ namespace ntrbase
         {
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-
-            clonePkm.AllowDrop = true;
-            clonePkm.DragEnter += new DragEventHandler(clonePkm_DragEnter);
-            clonePkm.DragDrop += new DragEventHandler(clonePkm_DragDrop);
         }
 
-        public static byte[] ObjectToByteArray(Object obj)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
-
-
-
-        void clonePkm_DragEnter(object sender, DragEventArgs e)
+        void writeTab_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
 
-        void clonePkm_DragDrop(object sender, DragEventArgs e)
+        //Returns 0 on success, other values on failure
+        private int readPokemonFromFile(string filename, byte[] result)
         {
-            if (fromBoxes.Checked == true)
+            string extension = Path.GetExtension(filename);
+
+            bool isEncrypted = false;
+
+            if (extension == ".pk6" || extension == ".pkx")
+                isEncrypted = false;
+            else if (extension == ".ek6" || extension == ".ekx")
+                isEncrypted = true;
+            else
             {
-                MessageBox.Show("Check \"From File\" to use drag and dropping!", "Error");
-            }
-            if (fromFile.Checked == true)
-            {
-                int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
-                int ssOff = boff + (ss * 232);
-                string ssH = ssOff.ToString("X");
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files.Length <= 0)
-                    return;
-                string file = files[0];
-                byte[] ek6b = File.ReadAllBytes(file);
-                string ek6s = BitConverter.ToString(ek6b).Replace("-", ", 0x");
-                string extension = Path.GetExtension(file);
-                if (extension == ".pk6" || extension == ".pkx")
-                {
-                    byte[] cloneshort = PKHeX.encryptArray(ek6b.Take(232).ToArray());
-                    if (ek6s.Length == 1556 || ek6s.Length == 1388)
-                    {
-                        int icloneAmount = (int)cloneAmountFF.Value * 232;
-                        byte[] clone = new byte[icloneAmount];
-                        for (int i = 0; i < cloneAmountFF.Value; i++)
-                        {
-                            cloneshort.CopyTo(clone, (i) * 232);
-                        }
-                        string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                        string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-                        runCmd(pokeek6);
-                        txtLog.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please make sure you are using a valid PKX file.", "Incorrect File Size");
-                        txtLog.Clear();
-                    }
-                }
-                if (extension == ".ek6" || extension == ".ekx")
-                {
-                    byte[] cloneshort = ek6b.Take(232).ToArray();
-                    if (ek6s.Length == 1556 || ek6s.Length == 1388)
-                    {
-                        int icloneAmount = (int)cloneAmountFF.Value * 232;
-                        byte[] clone = new byte[icloneAmount];
-                        for (int i = 0; i < cloneAmountFF.Value; i++)
-                        {
-                            cloneshort.CopyTo(clone, (i) * 232);
-                        }
-                        string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                        string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-                        runCmd(pokeek6);
-                        txtLog.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
-                        txtLog.Clear();
-                    }
-                }
+                MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
+                txtLog.Clear();
+                return 1;
             }
 
+            byte[] tmpBytes = File.ReadAllBytes(filename);
+
+            if (tmpBytes.Length == 260 || tmpBytes.Length == 232)
+            {
+                //All OK, commit
+                if (isEncrypted)
+                {
+                    tmpBytes.CopyTo(result,0);
+                }
+                else
+                {
+                    PKHeX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result,0);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
+                txtLog.Clear();
+                return 2;
+            }
+            return 0;
         }
 
+        //Returns 0 on success, positive value represents how many copies could not be written.
+        //TODO: przepisać, aby wykonywał jeden zapis - tak jak teraz jest bardzo powolny
+        private int writePokemonToBox(byte[] data, int boxFrom, int count)
+        {
+            int i;
+            if (data.Length != POKEBYTES)
+                return -1;
+            string dataString = BytesAsNTRString(data);
 
+            for (i=0; i<count; i++)
+            {
+                if (boxFrom + i >= BOXES * BOXSIZE)
+                { 
+                    break;
+                }
+                int offset = boff + (boxFrom + i) * POKEBYTES;
+                string pokeek6 = "write(0x" + offset.ToString("X") + ", " + dataString + ", pid=" + pid + ")";
+                runCmd(pokeek6);
+                txtLog.Clear();
+            }
+            return count - i; 
+        }
+        /*
+        private int readPokemonFromBox(int boxIndex, byte[] dataOut)
+        {
+            int i;
+            if (data.Length != POKEBYTES)
+                return -1;
+            string dataString = BytesAsNTRString(data);
 
+            for (i = 0; i < count; i++)
+            {
+                if (boxFrom + i >= BOXES * BOXSIZE)
+                {
+                    break;
+                }
+                int offset = boff + (boxFrom + i) * POKEBYTES;
+                string pokeek6 = "write(0x" + offset.ToString("X") + ", " + dataString + ", pid=" + pid + ")";
+                runCmd(pokeek6);
+                txtLog.Clear();
+            }
+            return count - i;
+        }
+        */
+        private void cloneDoIt_Click(object sender, EventArgs e)
+        {
+            //TODO: na razie kod testowy
+            UInt32 offset = (UInt32) boff;
+            /*
+            string dumpek6 = "data(0x" + offset.ToString("X") + ", 0xE8, filename='test1.bin', pid=" + pid + ")";
+            runCmd(dumpek6);
+            offset += POKEBYTES;
+            dumpek6 = "data(0x" + offset.ToString("X") + ", 0xE8, filename='test2.bin', pid=" + pid + ")";
+            runCmd(dumpek6);
+            */
+            int pid_num = Convert.ToInt32(pid, 16);
+            Program.scriptHelper.data(offset, 0xe8, pid_num, "test3.bin");
+        }
+
+        #region housekeeping for write from file
+        private int writeGetCopies()
+        {
+            return Decimal.ToInt32(writeCopiesNo.Value);
+        }
+
+        private int writeGetBoxIndex()
+        {
+            return Decimal.ToInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
+        }
+
+        private void writeSetBoxIndex(int index)
+        {
+            if (index >= BOXES * BOXSIZE)
+                index = BOXES * BOXSIZE - 1;
+            int box = index / BOXSIZE;
+            int slot = index % BOXSIZE;
+            writeBoxTo.Value = box + 1;
+            writeSlotTo.Value = slot + 1;
+        }
+
+        private void writeBoxTo_ValueChanged(object sender, EventArgs e)
+        {
+            writeCopiesNo.Maximum = 930 - writeGetBoxIndex();
+        }
+
+        private void writeSlotTo_ValueChanged(object sender, EventArgs e)
+        {
+            writeCopiesNo.Maximum = 930 - writeGetBoxIndex();
+        }
+
+        #endregion housekeeping for write from file
+
+        private void writeBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog selectWriteDialog = new OpenFileDialog();
+            selectWriteDialog.Title = "Select an EKX/PKX file";
+            selectWriteDialog.Filter = "EKX/PKX files|*.ek6;*.ekx;*.pk6;*.pkx";
+            string path = @Application.StartupPath + "\\Pokemon";
+            selectWriteDialog.InitialDirectory = path;
+            if (selectWriteDialog.ShowDialog() == DialogResult.OK)
+            {
+                selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, selectedCloneData) == 0);
+            }  
+        }
+
+        private void writeDoIt_Click(object sender, EventArgs e)
+        {
+            if (!selectedCloneValid)
+            {
+                MessageBox.Show("No Pokemon selected!", "Error");
+                return;
+            }
+            int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
+            if (ret > 0)
+                MessageBox.Show(ret + " write(s) failed because end of boxes was reached.", "Error");
+            else if (ret < 0)
+                return; // TODO: obsługa błędów?
+            if (writeAutoInc.Checked)
+            {
+                writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+            }
+        }
+
+        void writeTab_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length <= 0)
+                return;
+            //TODO: może komunikat, jeśli importujemy wiele plików?
+            int fails = 0;
+            foreach (string filename in files)
+            {
+                //MessageBox.Show("Writing " + filename + "...");
+                byte[] data = new byte[POKEBYTES];
+                if (readPokemonFromFile(filename, data) == 0)
+                {
+                    int ret = writePokemonToBox(data, writeGetBoxIndex(), writeGetCopies());
+                    if (ret > 0)
+                        fails += ret;
+                    else if (ret < 0)
+                        return; // TODO: obsługa błędów?
+                }
+
+                if (writeAutoInc.Checked)
+                {
+                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+                }
+            }
+            if (fails > 0)
+            {
+                MessageBox.Show(fails + " write(s) failed because end of boxes was reached.", "Error");
+            }
+        }
+
+        /* 
+        public void isCloneDumped()
+        {
+            if (txtLog.Text.Contains("clone.temp successfully"))
+            {
+                afterCloneDump();
+            }
+        }
+
+        public void afterCloneDump()
+        {
+            byte[] selectedclonebytes = File.ReadAllBytes(@Application.StartupPath + "\\clone.temp");
+            int ss = (Decimal.ToInt32(clonetoBoxFB.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFB.Value) - 1;
+            int ssOff = boff + (ss * 232);
+            string ssH = ssOff.ToString("X");
+            int icloneAmount = (int)cloneAmountFB.Value * 232;
+            byte[] clone = new byte[icloneAmount];
+            for (int i = 0; i < cloneAmountFB.Value; i++)
+            {
+                selectedclonebytes.CopyTo(clone, (i) * 232);
+            }
+            string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
+            string ssr = "0x";
+            string ssS = ssr + ssH;
+            string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
+            runCmd(pokeek6);
+            txtLog.Clear();
+            RMTemp();
+        }
+
+        private void cloneFB_Click(object sender, EventArgs e)
+        {
+            int ssd = (Decimal.ToInt32(clonefromBoxFB.Value) * 30 - 30) + Decimal.ToInt32(clonefromSlotFB.Value) - 1;
+            int ssdOff = boff + (ssd * 232);
+            string ssdH = ssdOff.ToString("X");
+            string dumpek6 = "data(0x" + ssdH + ", 0xE8, filename='clone.temp', pid=" + pid + ")";
+            runCmd(dumpek6);
+        }
+
+        private void clonetoBoxFB_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
+        }
+
+        private void clonetoSlotFB_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
+        }
+
+        private void cloneAmountFB_ValueChanged(object sender, EventArgs e)
+        {
+            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
+        }
+        */
 
         public void Addlog(string l)
         {
@@ -744,6 +906,7 @@ namespace ntrbase
                 button1.Enabled = true;
                 heldItem.Enabled = true;
                 species.Enabled = true;
+                /*
                 clonefromBoxFB.Enabled = true;
                 clonefromSlotFB.Enabled = true;
                 clonetoBoxFB.Enabled = true;
@@ -757,6 +920,7 @@ namespace ntrbase
                 chooseCloneFF.Enabled = true;
                 fromBoxes.Enabled = true;
                 fromFile.Enabled = true;
+                */
                 deleteAmount.Enabled = true;
                 ability.Enabled = true;
                 move1.Enabled = true;
@@ -774,7 +938,6 @@ namespace ntrbase
                 gender.Enabled = true;
                 friendship.Enabled = true;
                 randomPID.Enabled = true;
-                setShiny.Enabled = true;
                 radioBattleBox.Enabled = true;
                 Settings.Default.IP = host.Text;
                 Settings.Default.Save();
@@ -783,7 +946,7 @@ namespace ntrbase
 
         public void getGame()
         {
-
+            //XY
             if (txtLog.Text.Contains("kujira-1"))
             {
                 string log = txtLog.Text;
@@ -793,7 +956,7 @@ namespace ntrbase
                 moneyoff = "0x8C6A6AC";
                 milesoff = "0x8C82BA0";
                 bpoff = "0x8C6A6E0";
-                boff = 147349960;
+                boff = 0x8C861C8;
                 boffs = "0x8C861C8";
                 d1off = "0x8C7FF4C";
                 d2off = "0x8C8003C";
@@ -811,6 +974,8 @@ namespace ntrbase
                 langoff = "0x8C79C69";
                 tradeoffrg = "0x8500000";
                 bboff = 147237932;
+                opwroff = "0x8C7D23E";
+                shoutoutOff = 0x8803CF8;
                 dumpMoney();
             }
 
@@ -823,7 +988,7 @@ namespace ntrbase
                 moneyoff = "0x8C6A6AC";
                 milesoff = "0x8C82BA0";
                 bpoff = "0x8C6A6E0";
-                boff = 147349960;
+                boff = 0x8C861C8;
                 boffs = "0x8C861C8";
                 d1off = "0x8C7FF4C";
                 d2off = "0x8C8003C";
@@ -841,9 +1006,12 @@ namespace ntrbase
                 langoff = "0x8C79C69";
                 tradeoffrg = "0x8500000";
                 bboff = 147237932;
+                opwroff = "0x8C7D23E";
+                shoutoutOff = 0x8803CF8;
                 dumpMoney();
             }
 
+            //Omega Ruby
             if (txtLog.Text.Contains("sango-1"))
             {
                 string log = txtLog.Text;
@@ -853,7 +1021,7 @@ namespace ntrbase
                 moneyoff = "0x8C71DC0";
                 milesoff = "0x8C8B36C";
                 bpoff = "0x8C71DE8";
-                boff = 147448116;
+                boff = 0x8C9E134;
                 boffs = "0x8C9E134";
                 d1off = "0x8C88370";
                 d2off = "0x8C88460";
@@ -871,9 +1039,12 @@ namespace ntrbase
                 langoff = "0x8C8136D";
                 tradeoffrg = "0x8520000";
                 bboff = 147268400;
+                opwroff = "0x8C83D94";
+                shoutoutOff = 0x8803CF8;
                 dumpMoney();
             }
 
+            //Alpha Sapphire
             if (txtLog.Text.Contains("sango-2"))
             {
                 string log = txtLog.Text;
@@ -883,7 +1054,7 @@ namespace ntrbase
                 moneyoff = "0x8C71DC0";
                 milesoff = "0x8C8B36C";
                 bpoff = "0x8C71DE8";
-                boff = 147448116;
+                boff = 0x8C9E134;
                 boffs = "0x8C9E134";
                 d1off = "0x8C88370";
                 d2off = "0x8C88460";
@@ -901,6 +1072,8 @@ namespace ntrbase
                 langoff = "0x8C8136D";
                 tradeoffrg = "0x8520000";
                 bboff = 147268400;
+                opwroff = "0x8C83D94";
+                shoutoutOff = 0x8803CF8;
                 dumpMoney();
             }
         }
@@ -1037,11 +1210,11 @@ namespace ntrbase
                     decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
                     decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
                     numofItems = Convert.ToInt32(numofItemsRounded);
-                    if (numofItems == 0)
+                    if (numofItems <= 0)
                     {
 
                     }
-                    if (numofItems != 0)
+                    else
                     {
                         dataGridView1.Rows.Add(numofItems);
                     }
@@ -1066,7 +1239,10 @@ namespace ntrbase
                     decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
                     decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
                     int numofKeys = Convert.ToInt32(numofItemsRounded);
-                    dataGridView2.Rows.Add(numofKeys);
+                    if (numofKeys > 0)
+                    { 
+                        dataGridView2.Rows.Add(numofKeys);
+                    }
                     for (int i = 0; i < numofKeys; i++)
                     {
                         uint keysfinal = BitConverter.ToUInt16(keys, i * 4);
@@ -1089,7 +1265,10 @@ namespace ntrbase
                     decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
                     decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
                     int numofTMs = Convert.ToInt32(numofItemsRounded);
-                    dataGridView3.Rows.Add(numofTMs);
+                    if (numofTMs > 0)
+                    {
+                        dataGridView3.Rows.Add(numofTMs);
+                    }
                     for (int i = 0; i < numofTMs; i++)
                     {
                         uint tmsfinal = BitConverter.ToUInt16(tms, i * 4);
@@ -1112,7 +1291,10 @@ namespace ntrbase
                     decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
                     decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
                     int numofMeds = Convert.ToInt32(numofItemsRounded);
-                    dataGridView4.Rows.Add(numofMeds);
+                    if (numofMeds > 0)
+                    {
+                        dataGridView4.Rows.Add(numofMeds);
+                    }
                     for (int i = 0; i < numofMeds; i++)
                     {
                         uint medsfinal = BitConverter.ToUInt16(meds, i * 4);
@@ -1135,7 +1317,10 @@ namespace ntrbase
                     decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
                     decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
                     int numofBers = Convert.ToInt32(numofItemsRounded);
-                    dataGridView5.Rows.Add(numofBers);
+                    if (numofBers > 0)
+                    {
+                        dataGridView5.Rows.Add(numofBers);
+                    }
                     for (int i = 0; i < numofBers; i++)
                     {
                         uint bersfinal = BitConverter.ToUInt16(bers, i * 4);
@@ -1190,13 +1375,16 @@ namespace ntrbase
                         byte[] dumpoppBytes = reader.ReadBytes(131070);
                         List<int> occurences = findOccurences(dumpoppBytes, relativePattern);
 
+                        int i = 0;
                         foreach (int occurence in occurences)
                         {
                             int realoffsetint = 142606336 + occurence + 637;
                             realoppoffset = "0x" + realoffsetint.ToString("X");
                             string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
                             runCmd(dumpOpp);
+                            i++;
                         }
+                        MessageBox.Show("Dumped " + i);
                     }
 
                     if (moneyoff == "0x8C71DC0")
@@ -1943,7 +2131,7 @@ namespace ntrbase
                     dSIDNum.Value = PKHeX.SID;
                     dPID.Text = PKHeX.PID.ToString("X");
 
-                    nickname.Text = Encoding.BigEndianUnicode.GetString(PKHeX.Data.Skip(63).Take(24).ToArray());
+                    nickname.Text = Encoding.Unicode.GetString(PKHeX.Data.Skip(64).Take(24).ToArray());
                     otName.Text = Encoding.Unicode.GetString(PKHeX.Data.Skip(176).Take(24).ToArray());
 
                     getHP();
@@ -2032,7 +2220,7 @@ namespace ntrbase
                     dSIDNum.Value = PKHeX.SID;
                     dPID.Text = PKHeX.PID.ToString("X");
 
-                    nickname.Text = Encoding.BigEndianUnicode.GetString(PKHeX.Data.Skip(63).Take(24).ToArray());
+                    nickname.Text = Encoding.Unicode.GetString(PKHeX.Data.Skip(64).Take(24).ToArray());
                     otName.Text = Encoding.Unicode.GetString(PKHeX.Data.Skip(176).Take(24).ToArray());
 
                     getHP();
@@ -2164,6 +2352,7 @@ namespace ntrbase
             button1.Enabled = false;
             heldItem.Enabled = false;
             species.Enabled = false;
+            /*
             clonefromBoxFB.Enabled = false;
             clonefromSlotFB.Enabled = false;
             clonetoBoxFB.Enabled = false;
@@ -2177,6 +2366,7 @@ namespace ntrbase
             chooseCloneFF.Enabled = false;
             fromBoxes.Enabled = false;
             fromFile.Enabled = false;
+            */
             deleteAmount.Enabled = false;
             ability.Enabled = false;
             move1.Enabled = false;
@@ -2194,7 +2384,6 @@ namespace ntrbase
             gender.Enabled = false;
             friendship.Enabled = false;
             randomPID.Enabled = false;
-            setShiny.Enabled = false;
             radioBattleBox.Enabled = false;
         }
 
@@ -2218,38 +2407,66 @@ namespace ntrbase
             isoppDumped();
             isPkmDumped();
             isItemsDumped();
-            isCloneDumped();
+            //isCloneDumped(); TODO: co ta funkcja właściwie robiła?
             moveek6();
             movebak();
+        }
+
+        private string BytesAsNTRString(byte[] bytes)
+        {
+            const string separator = ", 0x";
+            if (bytes.Length == 0)
+                return "";  //TODO: Czy to ma liczyć się jako błąd?
+            else if (bytes.Length == 1)
+                return "0x" + BitConverter.ToString(bytes);
+            else
+                return "(0x" + BitConverter.ToString(bytes).Replace("-", separator) + ")";
         }
 
         private void pokeMoney_Click(object sender, EventArgs e)
         {
             byte[] moneybyte = BitConverter.GetBytes(Convert.ToInt32(moneyNum.Value));
-            string moneyr = ", 0x";
-            string money = BitConverter.ToString(moneybyte).Replace("-", moneyr);
-            string pokeMoney = "write(" + moneyoff + ", (0x" + money + "), pid=" + pid + ")";
-            runCmd(pokeMoney);
+            string pokeString = "write(" + moneyoff + ", " + BytesAsNTRString(moneybyte) + ", pid=" + pid + ")";
+            runCmd(pokeString);
         }
 
         private void pokeMiles_Click(object sender, EventArgs e)
         {
             byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
-            string milesr = ", 0x";
-            string miles = BitConverter.ToString(milesbyte).Replace("-", milesr);
-            string pokeMiles = "write(" + milesoff + ", (0x" + miles + "), pid=" + pid + ")";
-            runCmd(pokeMiles);
+            string pokeString = "write(" + milesoff + ", " + BytesAsNTRString(milesbyte) + ", pid=" + pid + ")";
+            runCmd(pokeString);
         }
 
         private void pokeBP_Click(object sender, EventArgs e)
         {
             byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-            string bpr = ", 0x";
-            string bp = BitConverter.ToString(bpbyte).Replace("-", bpr);
-            string pokeBP = "write(" + bpoff + ", (0x" + bp + "), pid=" + pid + ")";
-            runCmd(pokeBP);
+            string pokeString = "write(" + bpoff + ", " + BytesAsNTRString(bpbyte) + ", pid=" + pid + ")";
+            runCmd(pokeString);
         }
 
+        private void pokeShoutout_Click(object sender, EventArgs e)
+        {
+            //TODO: to tylko debug
+            int shoutoutOff = 0x8818662;
+            if (shoutoutOff == 0)
+                return;
+
+            if (shoutoutTextBox.Text.Length <= 16)
+            {
+                string shoutout = shoutoutTextBox.Text.PadRight(16, '\0');
+                byte[] shoutoutbyte = Encoding.Unicode.GetBytes(shoutout);
+                
+                string pokeShoutout = "write(" + offsetzz.Text + 
+                    ", " + BytesAsNTRString(shoutoutbyte) +
+                    ", pid=" + pid + ")";
+                MessageBox.Show(pokeShoutout);
+                runCmd(pokeShoutout);
+            }
+            else
+            {
+                MessageBox.Show("That shoutout is too long, please choose a trainer name of 12 character or less.", "Name too long!");
+            }
+        }
 
         private void dumpek6_Click(object sender, EventArgs e)
         {
@@ -2445,19 +2662,9 @@ namespace ntrbase
 
         private void pokeName_Click(object sender, EventArgs e)
         {
-            if (playerName.Text.Length < 12)
+            if (playerName.Text.Length <= 12)
             {
                 string nameS = playerName.Text.PadRight(12, '\0');
-                byte[] namebyte = Encoding.Unicode.GetBytes(nameS);
-                string namer = ", 0x";
-                string name = BitConverter.ToString(namebyte).Replace("-", namer);
-                string pokeName = "write(" + nameoff + ", (0x" + name + "), pid=" + pid + ")";
-                runCmd(pokeName);
-            }
-
-            if (playerName.Text.Length == 12)
-            {
-                string nameS = playerName.Text;
                 byte[] namebyte = Encoding.Unicode.GetBytes(nameS);
                 string namer = ", 0x";
                 string name = BitConverter.ToString(namebyte).Replace("-", namer);
@@ -2813,16 +3020,23 @@ namespace ntrbase
             {
                 MessageBox.Show("Pokemon EV count is too high, the sum of all EVs should be 510 or less!", "EVs too high");
             }
+
+            //This shouldn't be possible (length limited by text field), but better leave it
             if (nickname.Text.Length > 12)
             {
                 MessageBox.Show("Pokemon name length too long! Please use a name with a length of 12 or less.", "Name too long");
+            }
+
+            if (otName.Text.Length > 12)
+            {
+                MessageBox.Show("OT name length too long! Please use a name with a length of 12 or less.", "Name too long");
             }
 
             if (PKHeX.Data != null)
             {
                 if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value <= 510)
                 {
-                    if (nickname.Text.Length <= 12)
+                    if (nickname.Text.Length <= 12 && otName.Text.Length <= 12)
                     {
                         PKHeX.Nickname = nickname.Text.PadRight(12, '\0');
                         PKHeX.OT_Name = otName.Text.PadRight(12, '\0');
@@ -2955,199 +3169,16 @@ namespace ntrbase
 
 
 
-        private void chooseCloneFF_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog selectcloneDialog = new OpenFileDialog();
-            selectcloneDialog.Title = "Select an EKX/PKX file";
-            selectcloneDialog.Filter = "EKX/PKX files|*.ek6;*.ekx;*.pk6;*.pkx";
-            string path = @Application.StartupPath + "\\Pokemon";
-            selectcloneDialog.InitialDirectory = path;
-            if (selectcloneDialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedclone = selectcloneDialog.FileName;
-                string extension = Path.GetExtension(selectcloneDialog.FileName);
-                if (extension == ".pk6" || extension == ".pkx")
-                {
-                    isEncryptedFF = false;
-                }
-                if (extension == ".ek6" || extension == ".ekx")
-                {
-                    isEncryptedFF = true;
-                }
-                byte[] ek6b = File.ReadAllBytes(selectedclone);
-                string ek6 = BitConverter.ToString(ek6b).Replace("-", ", 0x");
-                int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
-                int ssOff = MainForm.boff + (ss * 232);
-                string ssH = ssOff.ToString("X");
-                if (ek6.Length == 1556 || ek6.Length == 1388)
-                {
-                    chooseCloneFF.Enabled = true;
-                }
-                else
-                {
-                    MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
-                    txtLog.Clear();
-                }
-            }
-        }
+        
 
         public static string ByteArrayToString(byte[] ba)
         {
             string hex = BitConverter.ToString(ba);
             return hex.Replace("-", "");
         }
-
-
-        private void cloneFF_Click(object sender, EventArgs e)
-        {
-            int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
-            int ssOff = boff + (ss * 232);
-            string ssH = ssOff.ToString("X");
-            byte[] ek6b = File.ReadAllBytes(selectedclone);
-            string ek6s = BitConverter.ToString(ek6b).Replace("-", ", 0x");
-
-            if (isEncryptedFF == true)
-            {
-                byte[] cloneshort = ek6b.Take(232).ToArray();
-                if (ek6s.Length == 1556 || ek6s.Length == 1388)
-                {
-                    int icloneAmount = (int)cloneAmountFF.Value * 232;
-                    byte[] clone = new byte[icloneAmount];
-                    for (int i = 0; i < cloneAmountFF.Value; i++)
-                    {
-                        cloneshort.CopyTo(clone, (i) * 232);
-                    }
-                    string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                    string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-                    runCmd(pokeek6);
-                    txtLog.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
-                    txtLog.Clear();
-                }
-            }
-
-            if (isEncryptedFF == false)
-            {
-                byte[] cloneshort = PKHeX.encryptArray(ek6b.Take(232).ToArray());
-                if (ek6s.Length == 1556 || ek6s.Length == 1388)
-                {
-                    int icloneAmount = (int)cloneAmountFF.Value * 232;
-                    byte[] clone = new byte[icloneAmount];
-                    for (int i = 0; i < cloneAmountFF.Value; i++)
-                    {
-                        cloneshort.CopyTo(clone, (i) * 232);
-                    }
-                    string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                    string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-                    runCmd(pokeek6);
-                    txtLog.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Please make sure you are using a valid PKX file.", "Incorrect File Size");
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        private void clonetoBoxFF_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
-        }
-
-        private void clonetoSlotFF_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
-        }
-
-        private void cloneAmountFF_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
-        }
-
-        public void afterCloneDump()
-        {
-            byte[] selectedclonebytes = File.ReadAllBytes(@Application.StartupPath + "\\clone.temp");
-            int ss = (Decimal.ToInt32(clonetoBoxFB.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFB.Value) - 1;
-            int ssOff = boff + (ss * 232);
-            string ssH = ssOff.ToString("X");
-            int icloneAmount = (int)cloneAmountFB.Value * 232;
-            byte[] clone = new byte[icloneAmount];
-            for (int i = 0; i < cloneAmountFB.Value; i++)
-            {
-                selectedclonebytes.CopyTo(clone, (i) * 232);
-            }
-            string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-            string ssr = "0x";
-            string ssS = ssr + ssH;
-            string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-            runCmd(pokeek6);
-            txtLog.Clear();
-            RMTemp();
-        }
-
-        private void cloneFB_Click(object sender, EventArgs e)
-        {
-            int ssd = (Decimal.ToInt32(clonefromBoxFB.Value) * 30 - 30) + Decimal.ToInt32(clonefromSlotFB.Value) - 1;
-            int ssdOff = boff + (ssd * 232);
-            string ssdH = ssdOff.ToString("X");
-            string dumpek6 = "data(0x" + ssdH + ", 0xE8, filename='clone.temp', pid=" + pid + ")";
-            runCmd(dumpek6);
-        }
-
-        private void clonetoBoxFB_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
-        }
-
-        private void clonetoSlotFB_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
-        }
-
-        private void cloneAmountFB_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
-        }
-
-        private void fromBoxes_CheckedChanged(object sender, EventArgs e)
-        {
-            label39.Visible = true;
-            label40.Visible = true;
-            clonefromBoxFB.Visible = true;
-            clonefromSlotFB.Visible = true;
-            clonetoBoxFB.Visible = true;
-            clonetoSlotFB.Visible = true;
-            cloneAmountFB.Visible = true;
-            cloneFB.Visible = true;
-
-            cloneAmountFF.Visible = false;
-            cloneFF.Visible = false;
-            clonetoBoxFF.Visible = false;
-            clonetoSlotFF.Visible = false;
-            chooseCloneFF.Visible = false;
-        }
-
-        private void fromFile_CheckedChanged(object sender, EventArgs e)
-        {
-            cloneAmountFF.Visible = true;
-            cloneFF.Visible = true;
-            clonetoBoxFF.Visible = true;
-            clonetoSlotFF.Visible = true;
-            chooseCloneFF.Visible = true;
-
-            label39.Visible = false;
-            label40.Visible = false;
-            clonefromBoxFB.Visible = false;
-            clonefromSlotFB.Visible = false;
-            clonetoBoxFB.Visible = false;
-            clonetoSlotFB.Visible = false;
-            cloneAmountFB.Visible = false;
-            cloneFB.Visible = false;
-        }
+        
+        
+        
 
         private void deleteBox_ValueChanged(object sender, EventArgs e)
         {
@@ -3163,109 +3194,10 @@ namespace ntrbase
         {
             deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
         }
-
+        
         private void ball_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ball.SelectedIndex == 0)
-            {
-                pictureBox1.Image = Properties.Resources._0;
-            }
-            if (ball.SelectedIndex == 1)
-            {
-                pictureBox1.Image = Properties.Resources._1;
-            }
-            if (ball.SelectedIndex == 2)
-            {
-                pictureBox1.Image = Properties.Resources._2;
-            }
-            if (ball.SelectedIndex == 3)
-            {
-                pictureBox1.Image = Properties.Resources._3;
-            }
-            if (ball.SelectedIndex == 4)
-            {
-                pictureBox1.Image = Properties.Resources._4;
-            }
-            if (ball.SelectedIndex == 5)
-            {
-                pictureBox1.Image = Properties.Resources._5;
-            }
-            if (ball.SelectedIndex == 6)
-            {
-                pictureBox1.Image = Properties.Resources._6;
-            }
-            if (ball.SelectedIndex == 7)
-            {
-                pictureBox1.Image = Properties.Resources._7;
-            }
-            if (ball.SelectedIndex == 8)
-            {
-                pictureBox1.Image = Properties.Resources._8;
-            }
-            if (ball.SelectedIndex == 9)
-            {
-                pictureBox1.Image = Properties.Resources._9;
-            }
-            if (ball.SelectedIndex == 10)
-            {
-                pictureBox1.Image = Properties.Resources._10;
-            }
-            if (ball.SelectedIndex == 11)
-            {
-                pictureBox1.Image = Properties.Resources._11;
-            }
-            if (ball.SelectedIndex == 12)
-            {
-                pictureBox1.Image = Properties.Resources._12;
-            }
-            if (ball.SelectedIndex == 13)
-            {
-                pictureBox1.Image = Properties.Resources._13;
-            }
-            if (ball.SelectedIndex == 14)
-            {
-                pictureBox1.Image = Properties.Resources._14;
-            }
-            if (ball.SelectedIndex == 15)
-            {
-                pictureBox1.Image = Properties.Resources._15;
-            }
-            if (ball.SelectedIndex == 16)
-            {
-                pictureBox1.Image = Properties.Resources._16;
-            }
-            if (ball.SelectedIndex == 17)
-            {
-                pictureBox1.Image = Properties.Resources._17;
-            }
-            if (ball.SelectedIndex == 18)
-            {
-                pictureBox1.Image = Properties.Resources._18;
-            }
-            if (ball.SelectedIndex == 19)
-            {
-                pictureBox1.Image = Properties.Resources._19;
-            }
-            if (ball.SelectedIndex == 20)
-            {
-                pictureBox1.Image = Properties.Resources._20;
-            }
-            if (ball.SelectedIndex == 21)
-            {
-                pictureBox1.Image = Properties.Resources._21;
-            }
-            if (ball.SelectedIndex == 22)
-            {
-                pictureBox1.Image = Properties.Resources._22;
-            }
-            if (ball.SelectedIndex == 23)
-            {
-                pictureBox1.Image = Properties.Resources._23;
-            }
-            if (ball.SelectedIndex == 24)
-            {
-                pictureBox1.Image = Properties.Resources._24;
-            }
+            pictureBox1.Image = ballImages[ball.SelectedIndex];
         }
 
         private void versionCheck_Click(object sender, EventArgs e)
@@ -3430,6 +3362,12 @@ namespace ntrbase
             dumpek6.Size = new System.Drawing.Size(197, 23);
             dumpek6.Location = new System.Drawing.Point(6, 61);
             dumpek6.Text = "Dump";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string dumpRealoppoff = "data("+offsetzz.Text+", 0xFFFFF, filename='test.bin', pid=" + pid + ")";
+            runCmd(dumpRealoppoff);
         }
     }
 }

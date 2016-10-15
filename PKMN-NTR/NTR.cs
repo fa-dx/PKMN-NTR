@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -8,7 +9,17 @@ using System.Windows.Forms;
 
 namespace ntrbase
 {
-	class NTR
+    //Futureproofing - in case we want something more, like callback functions
+    class readMemRequest
+    {
+        public string fileName;
+        public readMemRequest(string fileName_)
+        {
+            this.fileName = fileName_;
+        }
+    };
+
+    class NTR
     {
 		public String host;
 		public int port;
@@ -23,14 +34,13 @@ namespace ntrbase
 		public delegate void logHandler(string msg);
 		public event logHandler onLogArrival;
 		UInt32 currentSeq;
-		UInt32 lastReadMemSeq;
-		string lastReadMemFileName = null;
-		public volatile int progress = -1;
+        public Dictionary<UInt32, readMemRequest> pendingReadMem = new Dictionary<UInt32, readMemRequest>();
+        public volatile int progress = -1;
 
 
         int readNetworkStream(NetworkStream stream, byte[] buf, int length)
         {
-			int index = 0;
+            int index = 0;
 			bool useProgress = false;
 
 			if (length > 100000)
@@ -141,13 +151,15 @@ namespace ntrbase
 
 		void handleReadMem(UInt32 seq, byte[] dataBuf)
         {
-			if (seq != lastReadMemSeq)
+            readMemRequest requestDetails;
+            if (!pendingReadMem.TryGetValue(seq, out requestDetails))
             {
-				log("seq != lastReadMemSeq, ignored");
-				return;
-			}
-			lastReadMemSeq = 0;
-			string fileName = lastReadMemFileName;
+                log("seq not in pending readmems, ignored");
+                return;
+            }
+            pendingReadMem.Remove(seq);
+			string fileName = requestDetails.fileName;
+            
 			if (fileName != null)
             {
 				FileStream fs = new FileStream(fileName, FileMode.Create);
@@ -253,8 +265,8 @@ namespace ntrbase
 		public void sendReadMemPacket(UInt32 addr, UInt32 size, UInt32 pid, string fileName)
         {
 			sendEmptyPacket(9, pid, addr, size);
-			lastReadMemSeq = currentSeq;
-			lastReadMemFileName = fileName;
+            readMemRequest requestDetails = new readMemRequest(fileName);
+            pendingReadMem.Add(currentSeq, requestDetails);
 		}
 
 		public void sendWriteMemPacket(UInt32 addr, UInt32 pid, byte[] buf)
