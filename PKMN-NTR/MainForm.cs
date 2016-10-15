@@ -19,34 +19,36 @@ namespace ntrbase
 {
     public partial class MainForm : Form
     {
+        public enum GameType {X, Y, OR, AS};
         public const int BOXES = 31;
         public const int BOXSIZE = 30;
         public const int POKEBYTES = 232;
         PKHeX PKHeX = new PKHeX();
-   
+
+        public GameType game;
         public string dumpBattleBox;
         public string dumpEK6;
         public string dumpDay1;
         public string dumpParty;
-        public int bboff;
+        public uint bboff;
         public bool isEncryptedFF { get; set; }
         public bool isEncryptedFFD { get; set; }
         public byte[] selectedCloneData  = new byte[232];
         public bool   selectedCloneValid = false;
         public byte[] emptyDatab = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6 };
         public int tradedumpcount = 0;
-        public string realoppoffset { get; set; }
+        public uint realoppoffset { get; set; }
         public string realtradeoffset { get; set; }
-        public string tradeoffrg;
-        public string moneyoff;
-        public string milesoff;
-        public string bpoff;
-        public int partyoff;
-        public static int boff;
-        public string boffs;
-        public static string pid;
-        public string lang;
-        public string opwroff;
+        public uint tradeoffrg;
+        public uint moneyoff;
+        public uint milesoff;
+        public uint bpoff;
+        public uint partyoff;
+        public static uint boff;
+        public uint boffs;
+        public static int pid;
+        public byte lang;
+        public uint opwroff;
         public int hpb;
         public int atkb;
         public int defb;
@@ -54,14 +56,13 @@ namespace ntrbase
         public int spab;
         public int spdb;
         public string pname { get; set; }
-        public string game;
-        public string d1off;
-        public string d2off;
-        public string itemsoff;
-        public string medsoff;
-        public string keysoff;
-        public string tmsoff;
-        public string bersoff;
+        public uint d1off;
+        public uint d2off;
+        public uint itemsoff;
+        public uint medsoff;
+        public uint keysoff;
+        public uint tmsoff;
+        public uint bersoff;
         public bool firstcheck = false;
         public byte[] ek6;
         public byte[] ek6b { get; set; }
@@ -85,15 +86,15 @@ namespace ntrbase
         public int numofTMs;
         public int numofMeds;
         public int numofBers;
-        public string nameoff;
-        public string tidoff;
-        public string sidoff;
-        public string hroff;
-        public string minoff;
-        public string secoff;
-        public string langoff;
-        public int shoutoutOff;
-
+        public uint nameoff;
+        public uint tidoff;
+        public uint sidoff;
+        public uint hroff;
+        public uint minoff;
+        public uint secoff;
+        public uint langoff;
+        public uint shoutoutOff;
+        
         public uint itemsfinal;
         public uint amountfinal;
         public uint keysfinal;
@@ -302,9 +303,6 @@ namespace ntrbase
                 berItem.Items.Add(t);
             }
             host.Text = Settings.Default.IP;
-            runCmd("import sys;sys.path.append('.\\python\\Lib')");
-            runCmd("for n in [n for n in dir(nc) if not n.startswith('_')]: globals()[n] = getattr(nc,n)    ");
-            runCmd("repr([n for n in dir(nc) if not n.startswith('_')])");
         }
 
         public static bool PingHost(string nameOrAddress)
@@ -565,7 +563,6 @@ namespace ntrbase
             int i;
             if (data.Length != POKEBYTES)
                 return -1;
-            string dataString = BytesAsNTRString(data);
 
             for (i=0; i<count; i++)
             {
@@ -573,9 +570,8 @@ namespace ntrbase
                 { 
                     break;
                 }
-                int offset = boff + (boxFrom + i) * POKEBYTES;
-                string pokeek6 = "write(0x" + offset.ToString("X") + ", " + dataString + ", pid=" + pid + ")";
-                runCmd(pokeek6);
+                uint offset = (uint)(boff + (boxFrom + i) * POKEBYTES);
+                Program.scriptHelper.write(offset, data, pid);
                 txtLog.Clear();
             }
             return count - i; 
@@ -613,8 +609,7 @@ namespace ntrbase
             dumpek6 = "data(0x" + offset.ToString("X") + ", 0xE8, filename='test2.bin', pid=" + pid + ")";
             runCmd(dumpek6);
             */
-            int pid_num = Convert.ToInt32(pid, 16);
-            Program.scriptHelper.data(offset, 0xe8, pid_num, "test3.bin");
+            Program.scriptHelper.data(offset, 0xe8, pid, "test3.bin");
         }
 
         #region housekeeping for write from file
@@ -780,6 +775,7 @@ namespace ntrbase
             txtLog.AppendText(l);
         }
 
+        /*
         public void runCmd(String cmd)
         {
             try
@@ -792,6 +788,7 @@ namespace ntrbase
                 Addlog(ex.StackTrace);
             }
         }
+        */
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -822,12 +819,12 @@ namespace ntrbase
         private void disconnectTimer_Tick(object sender, EventArgs e)
         {
             disconnectTimer.Enabled = false;
-            runCmd("disconnect()");
+            Program.ntrClient.disconnect();
         }
 
         public void listprocesses()
         {
-            runCmd("listprocess()");
+            Program.scriptHelper.listprocess();
         }
 
 
@@ -949,64 +946,66 @@ namespace ntrbase
             //XY
             if (txtLog.Text.Contains("kujira-1"))
             {
+                game = GameType.X;
                 string log = txtLog.Text;
                 pname = ", pname: kujira-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C6A6AC";
-                milesoff = "0x8C82BA0";
-                bpoff = "0x8C6A6E0";
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 2), 16);
+                moneyoff = 0x8C6A6AC;
+                milesoff = 0x8C82BA0;
+                bpoff = 0x8C6A6E0;
                 boff = 0x8C861C8;
-                boffs = "0x8C861C8";
-                d1off = "0x8C7FF4C";
-                d2off = "0x8C8003C";
-                itemsoff = "0x8C67564";
-                medsoff = "0x8C67ECC";
-                keysoff = "0x8C67BA4";
-                tmsoff = "0x8C67D24";
-                bersoff = "0x8C67FCC";
-                nameoff = "0x8C79C84";
-                tidoff = "0x8C79C3C";
-                sidoff = "0x8C79C3E";
-                hroff = "0x8CE2814";
-                minoff = "0x8CE2816";
-                secoff = "0x8CE2817";
-                langoff = "0x8C79C69";
-                tradeoffrg = "0x8500000";
+                boffs = 0x8C861C8;
+                d1off = 0x8C7FF4C;
+                d2off = 0x8C8003C;
+                itemsoff = 0x8C67564;
+                medsoff = 0x8C67ECC;
+                keysoff = 0x8C67BA4;
+                tmsoff = 0x8C67D24;
+                bersoff = 0x8C67FCC;
+                nameoff = 0x8C79C84;
+                tidoff = 0x8C79C3C;
+                sidoff = 0x8C79C3E;
+                hroff = 0x8CE2814;
+                minoff = 0x8CE2816;
+                secoff = 0x8CE2817;
+                langoff = 0x8C79C69;
+                tradeoffrg = 0x8500000;
                 bboff = 147237932;
-                opwroff = "0x8C7D23E";
+                opwroff = 0x8C7D23E;
                 shoutoutOff = 0x8803CF8;
                 dumpMoney();
             }
 
             if (txtLog.Text.Contains("kujira-2"))
             {
+                game = GameType.Y;
                 string log = txtLog.Text;
                 pname = ", pname: kujira-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C6A6AC";
-                milesoff = "0x8C82BA0";
-                bpoff = "0x8C6A6E0";
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 2), 16);
+                moneyoff = 0x8C6A6AC;
+                milesoff = 0x8C82BA0;
+                bpoff = 0x8C6A6E0;
                 boff = 0x8C861C8;
-                boffs = "0x8C861C8";
-                d1off = "0x8C7FF4C";
-                d2off = "0x8C8003C";
-                itemsoff = "0x8C67564";
-                medsoff = "0x8C67ECC";
-                keysoff = "0x8C67BA4";
-                tmsoff = "0x8C67D24";
-                bersoff = "0x8C67FCC";
-                nameoff = "0x8C79C84";
-                tidoff = "0x8C79C3C";
-                sidoff = "0x8C79C3E";
-                hroff = "0x8CE2814";
-                minoff = "0x8CE2816";
-                secoff = "0x8CE2817";
-                langoff = "0x8C79C69";
-                tradeoffrg = "0x8500000";
+                boffs = 0x8C861C8;
+                d1off = 0x8C7FF4C;
+                d2off = 0x8C8003C;
+                itemsoff = 0x8C67564;
+                medsoff = 0x8C67ECC;
+                keysoff = 0x8C67BA4;
+                tmsoff = 0x8C67D24;
+                bersoff = 0x8C67FCC;
+                nameoff = 0x8C79C84;
+                tidoff = 0x8C79C3C;
+                sidoff = 0x8C79C3E;
+                hroff = 0x8CE2814;
+                minoff = 0x8CE2816;
+                secoff = 0x8CE2817;
+                langoff = 0x8C79C69;
+                tradeoffrg = 0x8500000;
                 bboff = 147237932;
-                opwroff = "0x8C7D23E";
+                opwroff = 0x8C7D23E;
                 shoutoutOff = 0x8803CF8;
                 dumpMoney();
             }
@@ -1014,32 +1013,33 @@ namespace ntrbase
             //Omega Ruby
             if (txtLog.Text.Contains("sango-1"))
             {
+                game = GameType.OR;
                 string log = txtLog.Text;
                 pname = ", pname:  sango-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C71DC0";
-                milesoff = "0x8C8B36C";
-                bpoff = "0x8C71DE8";
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 2), 16);
+                moneyoff = 0x8C71DC0;
+                milesoff = 0x8C8B36C;
+                bpoff = 0x8C71DE8;
                 boff = 0x8C9E134;
-                boffs = "0x8C9E134";
-                d1off = "0x8C88370";
-                d2off = "0x8C88460";
-                itemsoff = "0x8C6EC70";
-                medsoff = "0x8C6F5E0";
-                keysoff = "0x8C6F2B0";
-                tmsoff = "0x8C6F430";
-                bersoff = "0x8C6F6E0";
-                nameoff = "0x8C81388";
-                tidoff = "0x8C81340";
-                sidoff = "0x8C81342";
-                hroff = "0x8CFBD88";
-                minoff = "0x8CFBD8A";
-                secoff = "0x8CFBD8B";
-                langoff = "0x8C8136D";
-                tradeoffrg = "0x8520000";
+                boffs = 0x8C9E134;
+                d1off = 0x8C88370;
+                d2off = 0x8C88460;
+                itemsoff = 0x8C6EC70;
+                medsoff = 0x8C6F5E0;
+                keysoff = 0x8C6F2B0;
+                tmsoff = 0x8C6F430;
+                bersoff = 0x8C6F6E0;
+                nameoff = 0x8C81388;
+                tidoff = 0x8C81340;
+                sidoff = 0x8C81342;
+                hroff = 0x8CFBD88;
+                minoff = 0x8CFBD8A;
+                secoff = 0x8CFBD8B;
+                langoff = 0x8C8136D;
+                tradeoffrg = 0x8520000;
                 bboff = 147268400;
-                opwroff = "0x8C83D94";
+                opwroff = 0x8C83D94;
                 shoutoutOff = 0x8803CF8;
                 dumpMoney();
             }
@@ -1047,32 +1047,33 @@ namespace ntrbase
             //Alpha Sapphire
             if (txtLog.Text.Contains("sango-2"))
             {
+                game = GameType.AS;
                 string log = txtLog.Text;
                 pname = ", pname:  sango-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C71DC0";
-                milesoff = "0x8C8B36C";
-                bpoff = "0x8C71DE8";
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 2), 16);
+                moneyoff = 0x8C71DC0;
+                milesoff = 0x8C8B36C;
+                bpoff = 0x8C71DE8;
                 boff = 0x8C9E134;
-                boffs = "0x8C9E134";
-                d1off = "0x8C88370";
-                d2off = "0x8C88460";
-                itemsoff = "0x8C6EC70";
-                medsoff = "0x8C6F5E0";
-                keysoff = "0x8C6F2B0";
-                tmsoff = "0x8C6F430";
-                bersoff = "0x8C6F6E0";
-                nameoff = "0x8C81388";
-                tidoff = "0x8C81340";
-                sidoff = "0x8C81342";
-                hroff = "0x8CFBD88";
-                minoff = "0x8CFBD8A";
-                secoff = "0x8CFBD8B";
-                langoff = "0x8C8136D";
-                tradeoffrg = "0x8520000";
+                boffs = 0x8C9E134;
+                d1off = 0x8C88370;
+                d2off = 0x8C88460;
+                itemsoff = 0x8C6EC70;
+                medsoff = 0x8C6F5E0;
+                keysoff = 0x8C6F2B0;
+                tmsoff = 0x8C6F430;
+                bersoff = 0x8C6F6E0;
+                nameoff = 0x8C81388;
+                tidoff = 0x8C81340;
+                sidoff = 0x8C81342;
+                hroff = 0x8CFBD88;
+                minoff = 0x8CFBD8A;
+                secoff = 0x8CFBD8B;
+                langoff = 0x8C8136D;
+                tradeoffrg = 0x8520000;
                 bboff = 147268400;
-                opwroff = "0x8C83D94";
+                opwroff = 0x8C83D94;
                 shoutoutOff = 0x8803CF8;
                 dumpMoney();
             }
@@ -1080,104 +1081,87 @@ namespace ntrbase
 
         public void dumprealoppOff()
         {
-            string dumpRealoppoff = "data(0x8800000, 0x1FFFF, filename='getoppoff.temp', pid=" + pid + ")";
-            runCmd(dumpRealoppoff);
+            Program.scriptHelper.data(0x8800000, 0x1FFFF, pid, "getoppoff.temp");
         }
 
         public void dumprealtradeOff()
         {
-            string dumpRealtradeoff = "data(" + tradeoffrg + ", 0x1FFFF, filename='gettradeoff.temp', pid=" + pid + ")";
-            runCmd(dumpRealtradeoff);
+            Program.scriptHelper.data(tradeoffrg, 0x1FFFF, pid, "gettradeoff.temp");
         }
 
         public void dumpItems()
         {
-            string dumpItems = "data(" + itemsoff + ", 0x640, filename='items.temp', pid=" + pid + ")";
-            runCmd(dumpItems);
+            Program.scriptHelper.data(itemsoff, 0x640, pid, "items.temp");
         }
 
         public void dumpKeys()
         {
-            string dumpKeys = "data(" + keysoff + ", 0x180, filename='keys.temp', pid=" + pid + ")";
-            runCmd(dumpKeys);
+            Program.scriptHelper.data(keysoff, 0x180, pid, "keys.temp");
         }
 
         public void dumpTMs()
         {
-            string dumpTMs = "data(" + tmsoff + ", 0x1A8, filename='tms.temp', pid=" + pid + ")";
-            runCmd(dumpTMs);
+            Program.scriptHelper.data(tmsoff, 0x1A8, pid, "tms.temp");
         }
 
         public void dumpMeds()
         {
-            string dumpMeds = "data(" + medsoff + ", 0x100, filename='meds.temp', pid=" + pid + ")";
-            runCmd(dumpMeds);
+            Program.scriptHelper.data(medsoff , 0x100, pid, "meds.temp");
         }
 
         public void dumpBers()
         {
-            string dumpBers = "data(" + bersoff + ", 0x120, filename='bers.temp', pid=" + pid + ")";
-            runCmd(dumpBers);
+            Program.scriptHelper.data(bersoff, 0x120, pid, "bers.temp");
         }
 
         public void dumpName()
         {
-            string dumpName = "data(" + nameoff + ", 0x18, filename='name.temp', pid=" + pid + ")";
-            runCmd(dumpName);
+            Program.scriptHelper.data(nameoff, 0x18, pid, "name.temp");
         }
 
         public void dumpTID()
         {
-            string dumpTID = "data(" + tidoff + ", 0x02, filename='tid.temp', pid=" + pid + ")";
-            runCmd(dumpTID);
+            Program.scriptHelper.data(tidoff, 0x02, pid, "tid.temp");
         }
 
         public void dumpSID()
         {
-            string dumpSID = "data(" + sidoff + ", 0x02, filename='sid.temp', pid=" + pid + ")";
-            runCmd(dumpSID);
+            Program.scriptHelper.data(sidoff, 0x02, pid, "sid.temp");
         }
 
         public void dumpHr()
         {
-            string dumpHr = "data(" + hroff + ", 0x02, filename='hour.temp', pid=" + pid + ")";
-            runCmd(dumpHr);
+            Program.scriptHelper.data(hroff, 0x02, pid, "hour.temp");
         }
 
         public void dumpMin()
         {
-            string dumpMin = "data(" + minoff + ", 0x01, filename='min.temp', pid=" + pid + ")";
-            runCmd(dumpMin);
+            Program.scriptHelper.data(minoff, 0x01, pid, "min.temp");
         }
 
         public void dumpSec()
         {
-            string dumpSec = "data(" + secoff + ", 0x01, filename='sec.temp', pid=" + pid + ")";
-            runCmd(dumpSec);
+            Program.scriptHelper.data(secoff, 0x01, pid, "sec.temp");
         }
 
         public void dumpLang()
         {
-            string dumpLang = "data(" + langoff + ", 0x01, filename='lang.temp', pid=" + pid + ")";
-            runCmd(dumpLang);
+            Program.scriptHelper.data(langoff, 0x01, pid, "lang.temp");
         }
 
         public void dumpMoney()
         {
-            string dumpMoney = "data(" + moneyoff + ", 0x04, filename='money.temp', pid=" + pid + ")";
-            runCmd(dumpMoney);
+            Program.scriptHelper.data(moneyoff, 0x04, pid, "money.temp");
         }
 
         public void dumpMiles()
         {
-            string dumpMiles = "data(" + milesoff + ", 0x04, filename='miles.temp', pid=" + pid + ")";
-            runCmd(dumpMiles);
+            Program.scriptHelper.data(milesoff, 0x04, pid, "miles.temp");
         }
 
         public void dumpBP()
         {
-            string dumpBP = "data(" + bpoff + ", 0x04, filename='bp.temp', pid=" + pid + ")";
-            runCmd(dumpBP);
+            Program.scriptHelper.data(bpoff, 0x04, pid, "bp.temp");
         }
 
         public static byte[] StringToByteArray(String hex)
@@ -1333,16 +1317,16 @@ namespace ntrbase
             }
         }
 
-        static List<int> findOccurences(byte[] haystack, byte[] needle)
+        static List<uint> findOccurences(byte[] haystack, byte[] needle)
         {
-            List<int> occurences = new List<int>();
+            List<uint> occurences = new List<uint>();
 
-            for (int i = 0; i < haystack.Length; i++)
+            for (uint i = 0; i < haystack.Length; i++)
             {
                 if (needle[0] == haystack[i])
                 {
                     bool found = true;
-                    int j, k;
+                    uint j, k;
                     for (j = 0, k = i; j < needle.Length; j++, k++)
                     {
                         if (k >= haystack.Length || needle[j] != haystack[k])
@@ -1368,89 +1352,68 @@ namespace ntrbase
             {
                 using (BinaryReader reader = new BinaryReader(File.Open(dumpedoppOff, FileMode.Open)))
                 {
+                    byte[] dumpoppBytes = reader.ReadBytes(131070);
+                    byte[] relativePattern = null;
+                    uint offsetAfter = 0;
 
-                    if (moneyoff == "0x8C6A6AC")
+                    //TODO: może zrobić zmianę tego relativePattern przy znajdowaniu rodzaju gry?
+                    if (game == GameType.X || game == GameType.Y)
                     {
-                        byte[] relativePattern = { 0x60, 0x75, 0xC6, 0x08, 0xDC, 0xA8, 0xC7, 0x08, 0xD0, 0xB6, 0xC7, 0x08 };
-                        byte[] dumpoppBytes = reader.ReadBytes(131070);
-                        List<int> occurences = findOccurences(dumpoppBytes, relativePattern);
-
-                        int i = 0;
-                        foreach (int occurence in occurences)
-                        {
-                            int realoffsetint = 142606336 + occurence + 637;
-                            realoppoffset = "0x" + realoffsetint.ToString("X");
-                            string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpOpp);
-                            i++;
-                        }
-                        MessageBox.Show("Dumped " + i);
+                        relativePattern = new byte[] { 0x60, 0x75, 0xC6, 0x08, 0xDC, 0xA8, 0xC7, 0x08, 0xD0, 0xB6, 0xC7, 0x08 };
+                        offsetAfter = 637;
+                    }
+                    if (game == GameType.OR || game == GameType.AS)
+                    {
+                        relativePattern = new byte[] { 0x60, 0xE7, 0xC6, 0x08, 0x6C, 0xEC, 0xC6, 0x08, 0xE0, 0x1F, 0xC8, 0x08, 0x00, 0x39, 0xC8, 0x08 };
+                        offsetAfter = 673;
                     }
 
-                    if (moneyoff == "0x8C71DC0")
+                    List<uint> occurences = findOccurences(dumpoppBytes, relativePattern);
+                    foreach (uint occurence in occurences)
                     {
-                        byte[] relativePattern = { 0x60, 0xE7, 0xC6, 0x08, 0x6C, 0xEC, 0xC6, 0x08, 0xE0, 0x1F, 0xC8, 0x08, 0x00, 0x39, 0xC8, 0x08 };
-                        byte[] dumpoppBytes = reader.ReadBytes(131070);
-                        List<int> occurences = findOccurences(dumpoppBytes, relativePattern);
-
-                        foreach (int occurence in occurences)
-                        {
-                            int realoffsetint = 142606336 + occurence + 673;
-                            string realoppoffset = "0x" + realoffsetint.ToString("X");
-                            string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpOpp);
-                        }
+                        realoppoffset = 142606336 + occurence + offsetAfter;
+                        Program.scriptHelper.data(realoppoffset, POKEBYTES, pid, nameek6.Text + ".ek6");
                     }
                 }
             }
         }
 
+        //TODO: to też bo mnie kurwa szlag strzela
         private void gettradeOff()
         {
             const string dumpedtradeOff = "gettradeoff.temp";
             if (File.Exists(dumpedtradeOff))
             {
-                if (moneyoff == "0x8C6A6AC")
+                using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
                 {
-                    using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
+                    byte[] dumpoppBytes = reader.ReadBytes(131070);
+                    byte[] relativePattern = null;
+                    uint offsetAfter = 0;
+
+                    if (game == GameType.X || game == GameType.Y)
                     {
-                        byte[] relativePattern = { 0x08, 0x1C, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD8, 0xBE, 0x59 };
-                        byte[] dumptradeBytes = reader.ReadBytes(131070);
-                        List<int> occurences = findOccurences(dumptradeBytes, relativePattern);
-
-
-                        foreach (int occurence in occurences)
-                        {
-                            int realtradeoffsetint = 139460608 + occurence + 98;
-                            realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpTrade);
-                        }
-
+                        relativePattern = new byte[] { 0x08, 0x1C, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD8, 0xBE, 0x59 };
+                        offsetAfter = 98;
                     }
-                }
 
-                if (moneyoff == "0x8C71DC0")
-                {
-                    using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
+                    if (game == GameType.OR || game == GameType.AS)
                     {
-                        byte[] relativePattern = { 0x08, 0x1E, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9C, 0xE8, 0x5D };
-                        byte[] dumptradeBytes = reader.ReadBytes(131070);
-                        List<int> occurences = findOccurences(dumptradeBytes, relativePattern);
-
-
-                        foreach (int occurence in occurences)
-                        {
-                            int realtradeoffsetint = 139591680 + occurence + 98;
-                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpTrade);
-                        }
-
+                        relativePattern = new byte[] { 0x08, 0x1E, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9C, 0xE8, 0x5D };
+                        offsetAfter = 98;
+                        
                     }
+
+                    byte[] dumptradeBytes = reader.ReadBytes(131070);
+                    List<uint> occurences = findOccurences(dumptradeBytes, relativePattern);
+
+
+                    foreach (uint occurence in occurences)
+                    {
+                        uint realtradeoffset = 139591680 + occurence + offsetAfter;
+                        Program.scriptHelper.data(realtradeoffset, POKEBYTES, pid, nameek6.Text + ".ek6");
+                    }
+
                 }
-
-
             }
         }
 
@@ -2049,12 +2012,9 @@ namespace ntrbase
             {
                 emptyDatab.CopyTo(delete, (i) * 232);
             }
-            string ek6 = BitConverter.ToString(delete).Replace("-", ", 0x");
-            int ss = (Decimal.ToInt32(deleteBox.Value) * 30 - 30) + Decimal.ToInt32(deleteSlot.Value) - 1;
-            int ssOff = boff + (ss * 232);
-            string ssH = ssOff.ToString("X");
-            string delPkm = "write(0x" + ssH + ", (" + ek6 + "), pid=" + pid + ")";
-            runCmd(delPkm);
+            uint ss = (Decimal.ToUInt32(deleteBox.Value) * 30 - 30) + Decimal.ToUInt32(deleteSlot.Value) - 1;
+            uint ssOff = boff + (ss * 232);
+            Program.scriptHelper.write(ssOff, delete, pid);
             txtLog.Clear();
         }
 
@@ -2268,7 +2228,7 @@ namespace ntrbase
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             txtLog.Clear();
-            runCmd("connect('" + host.Text + "',8000)");
+            Program.scriptHelper.connect(host.Text, 8000);
             Delay.Add(connectCheck, 2);
             Delay.Add(getGame, 3);
         }
@@ -2277,7 +2237,7 @@ namespace ntrbase
         private void buttonDisconnect_Click(object sender, EventArgs e)
         {
             txtLog.Clear();
-            runCmd("disconnect()");
+            Program.scriptHelper.disconnect();
             buttonConnect.Text = "Connect";
             firstcheck = false;
             buttonConnect.Enabled = true;
@@ -2426,22 +2386,19 @@ namespace ntrbase
         private void pokeMoney_Click(object sender, EventArgs e)
         {
             byte[] moneybyte = BitConverter.GetBytes(Convert.ToInt32(moneyNum.Value));
-            string pokeString = "write(" + moneyoff + ", " + BytesAsNTRString(moneybyte) + ", pid=" + pid + ")";
-            runCmd(pokeString);
+            Program.scriptHelper.write(moneyoff, moneybyte, pid);
         }
 
         private void pokeMiles_Click(object sender, EventArgs e)
         {
             byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
-            string pokeString = "write(" + milesoff + ", " + BytesAsNTRString(milesbyte) + ", pid=" + pid + ")";
-            runCmd(pokeString);
+            Program.scriptHelper.write(milesoff, milesbyte, pid);
         }
 
         private void pokeBP_Click(object sender, EventArgs e)
         {
             byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-            string pokeString = "write(" + bpoff + ", " + BytesAsNTRString(bpbyte) + ", pid=" + pid + ")";
-            runCmd(pokeString);
+            Program.scriptHelper.write(bpoff, bpbyte, pid);
         }
 
         private void pokeShoutout_Click(object sender, EventArgs e)
@@ -2455,12 +2412,9 @@ namespace ntrbase
             {
                 string shoutout = shoutoutTextBox.Text.PadRight(16, '\0');
                 byte[] shoutoutbyte = Encoding.Unicode.GetBytes(shoutout);
-                
-                string pokeShoutout = "write(" + offsetzz.Text + 
-                    ", " + BytesAsNTRString(shoutoutbyte) +
-                    ", pid=" + pid + ")";
-                MessageBox.Show(pokeShoutout);
-                runCmd(pokeShoutout);
+
+                MessageBox.Show("Edit your shoutout now.");
+                Program.scriptHelper.write(Convert.ToUInt32(offsetzz.Text, 16), shoutoutbyte, pid);
             }
             else
             {
@@ -2470,113 +2424,54 @@ namespace ntrbase
 
         private void dumpek6_Click(object sender, EventArgs e)
         {
+            string targetFileName;
+
             if (onlyView.Checked == false)
+                targetFileName = nameek6.Text + ".ek6";
+            else
+                targetFileName = "dump.tempek6";
+
+            uint dumpOff = 0;
+
+            if (radioOpponent.Checked == true)
             {
-                int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
-                int ssdOff = boff + (ssd * 232);
-                string ssdH = ssdOff.ToString("X");
-
-                int pOff = partyoff + ((Decimal.ToInt32(boxDump.Value) - 1) * 484);
-                string pfOff = pOff.ToString("X");
-
-                int bbOff = bboff + ((Decimal.ToInt32(boxDump.Value) - 1) * 232);
-                string bbfOff = bbOff.ToString("X");
-
-                dumpEK6 = "data(0x" + ssdH + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                dumpDay1 = "data(" + d1off + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                dumpParty = "data(0x" + pfOff + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                dumpBattleBox = "data(0x" + bbfOff + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-
-
-                if (radioBattleBox.Checked == true)
-                {
-                    runCmd(dumpBattleBox);
-                }
-
-                if (radioBoxes.Checked == true)
-                {
-                    runCmd(dumpEK6);
-                }
-                if (radioDaycare.Checked == true)
-                {
-                    runCmd(dumpDay1);
-                }
-                if (radioOpponent.Checked == true)
-                {
-                    dumprealoppOff();
-                }
-                if (radioTrade.Checked == true)
-                {
-                    dumprealtradeOff();
-                }
-                if (radioParty.Checked == true)
-                {
-                    runCmd(dumpParty);
-                }
-
-                txtLog.Clear();
+                dumprealoppOff();
             }
-
-            if (onlyView.Checked == true)
+            else if (radioTrade.Checked == true)
             {
-                int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
-                int ssdOff = boff + (ssd * 232);
-                string ssdH = ssdOff.ToString("X");
-
-                int pOff = partyoff + ((Decimal.ToInt32(boxDump.Value) - 1) * 484);
-                string pfOff = pOff.ToString("X");
-
-                int bbOff = bboff + ((Decimal.ToInt32(boxDump.Value) - 1) * 232);
-                string bbfOff = bbOff.ToString("X");
-
-                dumpEK6 = "data(0x" + ssdH + ", 0xE8, filename='dump.tempek6', pid=" + pid + ")";
-                dumpDay1 = "data(" + d1off + ", 0xE8, filename='dump.tempek6', pid=" + pid + ")";
-                dumpParty = "data(0x" + pfOff + ", 0xE8, filename='dump.tempek6', pid=" + pid + ")";
-                dumpBattleBox = "data(0x" + bbfOff + ", 0xE8, filename='dump.tempek6', pid=" + pid + ")";
-
-
-                if (radioBattleBox.Checked == true)
-                {
-                    runCmd(dumpBattleBox);
-                }
-
-                if (radioBoxes.Checked == true)
-                {
-                    runCmd(dumpEK6);
-                }
-                if (radioDaycare.Checked == true)
-                {
-                    runCmd(dumpDay1);
-                }
-                if (radioOpponent.Checked == true)
-                {
-                    dumprealoppOff();
-                }
-                if (radioTrade.Checked == true)
-                {
-                    dumprealtradeOff();
-                }
-                if (radioParty.Checked == true)
-                {
-                    runCmd(dumpParty);
-                }
-                txtLog.Clear();
+                dumprealtradeOff();
             }
+            else { 
+                if (radioBattleBox.Checked == true)
+                    dumpOff = bboff + ((Decimal.ToUInt32(boxDump.Value) - 1) * POKEBYTES);
+                else if (radioBoxes.Checked == true)
+                {
+                    uint ssd = ((Decimal.ToUInt32(boxDump.Value) - 1 ) * BOXSIZE) + Decimal.ToUInt32(slotDump.Value) - 1;
+                    dumpOff = boff + (ssd * POKEBYTES);
+                }
+                else if (radioDaycare.Checked == true)
+                {
+                    dumpOff = d1off;
+                }
+                else if (radioParty.Checked == true)
+                {
+                    dumpOff = partyoff + (Decimal.ToUInt32(boxDump.Value) - 1) * 484;
+                }
+
+                Program.scriptHelper.data(dumpOff, 0xE8, pid, targetFileName);
+            }
+            txtLog.Clear();
         }
 
         private void dumpBoxes_Click(object sender, EventArgs e)
         {
-            string dumpBoxes = "data(" + boffs + ", 0x34AD0, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-
-            string dumpDay2 = "data(" + d2off + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-
             if (radioBoxes.Checked == true)
             {
-                runCmd(dumpBoxes);
+                Program.scriptHelper.data(boffs, BOXES * BOXSIZE * POKEBYTES, pid, nameek6.Text + ".ek6");
             }
-            if (radioDaycare.Checked == true)
+            else if (radioDaycare.Checked == true)
             {
-                runCmd(dumpDay2);
+                Program.scriptHelper.data(d2off, POKEBYTES, pid, nameek6.Text + ".ek6");
             }
             txtLog.Clear();
         }
@@ -2654,7 +2549,7 @@ namespace ntrbase
             label50.Visible = false;
         }
 
-
+        //TODO: co robi ta funkcja?
         private void pokeBoxName_Click(object sender, EventArgs e)
         {
 
@@ -2665,14 +2560,10 @@ namespace ntrbase
             if (playerName.Text.Length <= 12)
             {
                 string nameS = playerName.Text.PadRight(12, '\0');
-                byte[] namebyte = Encoding.Unicode.GetBytes(nameS);
-                string namer = ", 0x";
-                string name = BitConverter.ToString(namebyte).Replace("-", namer);
-                string pokeName = "write(" + nameoff + ", (0x" + name + "), pid=" + pid + ")";
-                runCmd(pokeName);
+                byte[] nameBytes = Encoding.Unicode.GetBytes(nameS);
+                Program.scriptHelper.write(nameoff, nameBytes, pid);
             }
-
-            if (playerName.Text.Length > 12)
+            else
             {
                 MessageBox.Show("That name is too long, please choose a trainer name of 12 character or less.", "Name too long!");
             }
@@ -2681,30 +2572,24 @@ namespace ntrbase
 
         private void pokeTID_Click(object sender, EventArgs e)
         {
-            byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16((double)TIDNum.Value));
-            string tidr = ", 0x";
-            string tid = BitConverter.ToString(tidbyte).Replace("-", tidr);
-            string pokeTID = "write(" + tidoff + ", (0x" + tid + "), pid=" + pid + ")";
-            runCmd(pokeTID);
+            byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16(TIDNum.Value));
+            Program.scriptHelper.write(tidoff, tidbyte, pid);
+        }
+
+        private void pokeSID_Click(object sender, EventArgs e)
+        {
+            byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16(SIDNum.Value));
+            Program.scriptHelper.write(sidoff, sidbyte, pid);
         }
 
         private void pokeTime_Click(object sender, EventArgs e)
         {
-            byte[] hrbyte = BitConverter.GetBytes(Convert.ToUInt16((double)hourNum.Value));
-            string hrr = ", 0x";
-            string hr = BitConverter.ToString(hrbyte).Replace("-", hrr);
-            string pokeHr = "write(" + hroff + ", (0x" + hr + "), pid=" + pid + ")";
-            runCmd(pokeHr);
-
+            byte[] hrbyte = BitConverter.GetBytes(Convert.ToUInt16(hourNum.Value));
             byte[] minbyte = BitConverter.GetBytes(Convert.ToInt32(minNum.Value));
-            string min = BitConverter.ToString(minbyte);
-            string pokeMin = "writebyte(" + minoff + ", 0x" + min + ", pid=" + pid + ")";
-            runCmd(pokeMin);
-
             byte[] secbyte = BitConverter.GetBytes(Convert.ToInt32(secNum.Value));
-            string sec = BitConverter.ToString(secbyte);
-            string pokeSec = "writebyte(" + secoff + ", 0x" + sec + ", pid=" + pid + ")";
-            runCmd(pokeSec);
+            Program.scriptHelper.write(hroff, hrbyte, pid);
+            Program.scriptHelper.writebyte(minoff, minbyte[0], pid);
+            Program.scriptHelper.writebyte(secoff , secbyte[0],pid);
         }
 
         private void showItems_Click(object sender, EventArgs e)
@@ -2780,13 +2665,12 @@ namespace ntrbase
 
         public void itemWrite_Click(object sender, EventArgs e)
         {
-            itemData = new byte[1600];
-            keyData = new byte[384];
-            tmData = new byte[432];
-            medData = new byte[256];
-            berryData = new byte[288];
+            byte[] dataToWrite = new byte[0] { };
+            uint offsetToWrite = 0;
+            
             if (dataGridView1.Visible == true)
             {
+                itemData = new byte[1600];
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
                     string datastring = dataGridView1.Rows[i].Cells[0].Value.ToString();
@@ -2797,14 +2681,13 @@ namespace ntrbase
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
                     BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
                 }
-                string moneyr = ", 0x";
-                string money = BitConverter.ToString(itemData).Replace("-", moneyr);
-                string pokeItems = "write(" + itemsoff + ", (0x" + money + "), pid=" + pid + ")";
-                runCmd(pokeItems);
+                dataToWrite = itemData;
+                offsetToWrite = itemsoff;
             }
 
             if (dataGridView2.Visible == true)
             {
+                keyData = new byte[384];
                 for (int i = 0; i < dataGridView2.RowCount; i++)
                 {
                     string datastring = dataGridView2.Rows[i].Cells[0].Value.ToString();
@@ -2815,14 +2698,13 @@ namespace ntrbase
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
                     BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
                 }
-                string keyr = ", 0x";
-                string key = BitConverter.ToString(keyData).Replace("-", keyr);
-                string pokeKey = "write(" + keysoff + ", (0x" + key + "), pid=" + pid + ")";
-                runCmd(pokeKey);
+                dataToWrite = keyData;
+                offsetToWrite = keysoff;
             }
 
             if (dataGridView3.Visible == true)
             {
+                tmData = new byte[432];
                 for (int i = 0; i < dataGridView3.RowCount; i++)
                 {
                     string datastring = dataGridView3.Rows[i].Cells[0].Value.ToString();
@@ -2833,14 +2715,13 @@ namespace ntrbase
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
                     BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
                 }
-                string tmr = ", 0x";
-                string tm = BitConverter.ToString(tmData).Replace("-", tmr);
-                string pokeTM = "write(" + tmsoff + ", (0x" + tm + "), pid=" + pid + ")";
-                runCmd(pokeTM);
+                dataToWrite = tmData;
+                offsetToWrite = tmsoff;
             }
 
             if (dataGridView4.Visible == true)
             {
+                medData = new byte[256];
                 for (int i = 0; i < dataGridView4.RowCount; i++)
                 {
                     string datastring = dataGridView4.Rows[i].Cells[0].Value.ToString();
@@ -2851,14 +2732,13 @@ namespace ntrbase
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
                     BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
                 }
-                string medr = ", 0x";
-                string med = BitConverter.ToString(medData).Replace("-", medr);
-                string pokeMeds = "write(" + medsoff + ", (0x" + med + "), pid=" + pid + ")";
-                runCmd(pokeMeds);
+                dataToWrite = medData;
+                offsetToWrite = medsoff;
             }
 
             if (dataGridView5.Visible == true)
             {
+                berryData = new byte[288];
                 for (int i = 0; i < dataGridView5.RowCount; i++)
                 {
                     string datastring = dataGridView5.Rows[i].Cells[0].Value.ToString();
@@ -2869,12 +2749,11 @@ namespace ntrbase
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
                     BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
                 }
-                string berryr = ", 0x";
-                string berry = BitConverter.ToString(berryData).Replace("-", berryr);
-                string pokeBerry = "write(" + bersoff + ", (0x" + berry + "), pid=" + pid + ")";
-                runCmd(pokeBerry);
+                dataToWrite = berryData;
+                offsetToWrite = bersoff;
             }
 
+            Program.scriptHelper.write(offsetToWrite, dataToWrite, pid);
         }
 
         private void itemAdd_Click(object sender, EventArgs e)
@@ -2961,17 +2840,6 @@ namespace ntrbase
             label50.Visible = false;
         }
 
-        private void pokeSID_Click(object sender, EventArgs e)
-        {
-            byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16((double)SIDNum.Value));
-            string sidr = ", 0x";
-            string sid = BitConverter.ToString(sidbyte).Replace("-", sidr);
-            string pokeSID = "write(" + sidoff + ", (0x" + sid + "), pid=" + pid + ")";
-            runCmd(pokeSID);
-        }
-
-
-
         private void button1_Click_2(object sender, EventArgs e)
         {
             OpenFileDialog selectek6Dialog = new OpenFileDialog();
@@ -2988,24 +2856,22 @@ namespace ntrbase
             }
         }
 
+        //TODO: zupełnie to przeprogramować
         private void delPkm_Click(object sender, EventArgs e)
         {
-            string ssH = boff.ToString("X");
-            string bakPkm = "data(0x" + ssH + ", 0x34AD0, filename='boxes.bak.ek6', pid=" + pid + ")";
-            runCmd(bakPkm);
+            Program.scriptHelper.data(boff, BOXES * BOXSIZE * POKEBYTES, pid, "boxes.bak.ek6");
         }
 
         private void pokeLang_Click(object sender, EventArgs e)
         {
-            if (Lang.SelectedIndex == 0) { lang = "01"; }
-            if (Lang.SelectedIndex == 1) { lang = "02"; }
-            if (Lang.SelectedIndex == 2) { lang = "03"; }
-            if (Lang.SelectedIndex == 3) { lang = "04"; }
-            if (Lang.SelectedIndex == 4) { lang = "05"; }
-            if (Lang.SelectedIndex == 5) { lang = "07"; }
-            if (Lang.SelectedIndex == 6) { lang = "08"; }
-            string pokeLang = "writebyte(" + langoff + ", 0x" + lang + ", pid=" + pid + ")";
-            runCmd(pokeLang);
+            if (Lang.SelectedIndex == 0) { lang = 0x01; }
+            if (Lang.SelectedIndex == 1) { lang = 0x02; }
+            if (Lang.SelectedIndex == 2) { lang = 0x03; }
+            if (Lang.SelectedIndex == 3) { lang = 0x04; }
+            if (Lang.SelectedIndex == 4) { lang = 0x05; }
+            if (Lang.SelectedIndex == 5) { lang = 0x07; }
+            if (Lang.SelectedIndex == 6) { lang = 0x08; }
+            Program.scriptHelper.writebyte(langoff, lang, pid);
         }
 
 
@@ -3085,32 +2951,26 @@ namespace ntrbase
 
                         if (radioBoxes.Checked == true)
                         {
-                            int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
-                            int ssdOff = boff + (ssd * 232);
-                            string ssdH = ssdOff.ToString("X");
-                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
-                            string pokeEkx = "write(0x" + ssdH + ", (0x" + ekx + "), pid=" + pid + ")";
-                            runCmd(pokeEkx);
+                            uint ssd = (Decimal.ToUInt32(boxDump.Value) * 30 - 30) + Decimal.ToUInt32(slotDump.Value) - 1;
+                            uint ssdOff = boff + (ssd * 232);
+                            Program.scriptHelper.write(ssdOff, pkmEdited, pid);
                             getHP();
                         }
 
                         if (radioBattleBox.Checked == true)
                         {
-                            int bbOff = bboff + ((Decimal.ToInt32(boxDump.Value) - 1) * 232);
-                            string bbfOff = bbOff.ToString("X");
-                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
-                            string pokeEkx = "write(0x" + bbfOff + ", (0x" + ekx + "), pid=" + pid + ")";
-                            runCmd(pokeEkx);
+                            uint bbOff = bboff + ((Decimal.ToUInt32(boxDump.Value) - 1) * 232);
+                            Program.scriptHelper.write(bbOff, pkmEdited, pid);
                             getHP();
                         }
 
                         if (radioParty.Checked == true)
                         {
-                            int pOff = partyoff + ((Decimal.ToInt32(boxDump.Value) - 1) * 484);
+                            uint pOff = partyoff + ((Decimal.ToUInt32(boxDump.Value) - 1) * 484);
                             string pfOff = pOff.ToString("X");
                             string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
-                            string pokeEkx = "write(0x" + pfOff + ", (0x" + ekx + "), pid=" + pid + ")";
-                            runCmd(pokeEkx);
+                            //TODO: czy nie będzie jakiś problemów z tym, że piszemy tylko 232 bajty?
+                            Program.scriptHelper.write(pOff, pkmEdited, pid);
                             getHP();
                         }
 
@@ -3366,8 +3226,7 @@ namespace ntrbase
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string dumpRealoppoff = "data("+offsetzz.Text+", 0xFFFFF, filename='test.bin', pid=" + pid + ")";
-            runCmd(dumpRealoppoff);
+            Program.scriptHelper.data(Convert.ToUInt32(offsetzz.Text, 16), 0xFFFFF, pid, "test.bin");
         }
     }
 }

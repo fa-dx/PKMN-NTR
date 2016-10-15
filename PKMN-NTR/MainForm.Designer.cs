@@ -161,10 +161,11 @@
             this.randomPID = new System.Windows.Forms.Button();
             this.DumpedEdit = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.label56 = new System.Windows.Forms.Label();
+            this.xp = new System.Windows.Forms.NumericUpDown();
             this.Stats = new System.Windows.Forms.TabPage();
             this.Moves = new System.Windows.Forms.TabPage();
             this.OT = new System.Windows.Forms.TabPage();
-            this.xp = new System.Windows.Forms.NumericUpDown();
             this.level = new System.Windows.Forms.NumericUpDown();
             this.cloneWriteTabs = new System.Windows.Forms.TabControl();
             this.cloneTab = new System.Windows.Forms.TabPage();
@@ -192,7 +193,6 @@
             this.writeBoxTo = new System.Windows.Forms.NumericUpDown();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label56 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -233,10 +233,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.friendship)).BeginInit();
             this.DumpedEdit.SuspendLayout();
             this.Main.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xp)).BeginInit();
             this.Stats.SuspendLayout();
             this.Moves.SuspendLayout();
             this.OT.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.level)).BeginInit();
             this.cloneWriteTabs.SuspendLayout();
             this.cloneTab.SuspendLayout();
@@ -254,12 +254,14 @@
             // 
             // txtLog
             // 
+            this.txtLog.BackColor = System.Drawing.SystemColors.Window;
             this.txtLog.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtLog.Location = new System.Drawing.Point(303, 331);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
+            this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtLog.Size = new System.Drawing.Size(435, 97);
             this.txtLog.TabIndex = 0;
@@ -2002,6 +2004,27 @@
             this.Main.TabIndex = 2;
             this.Main.Text = "Main";
             // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(168, 88);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(31, 13);
+            this.label56.TabIndex = 102;
+            this.label56.Text = "EXP:";
+            // 
+            // xp
+            // 
+            this.xp.Location = new System.Drawing.Point(201, 85);
+            this.xp.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.xp.Name = "xp";
+            this.xp.Size = new System.Drawing.Size(77, 20);
+            this.xp.TabIndex = 58;
+            // 
             // Stats
             // 
             this.Stats.BackColor = System.Drawing.SystemColors.Control;
@@ -2067,18 +2090,6 @@
             this.OT.Size = new System.Drawing.Size(284, 160);
             this.OT.TabIndex = 1;
             this.OT.Text = "OT";
-            // 
-            // xp
-            // 
-            this.xp.Location = new System.Drawing.Point(201, 85);
-            this.xp.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.xp.Name = "xp";
-            this.xp.Size = new System.Drawing.Size(77, 20);
-            this.xp.TabIndex = 58;
             // 
             // level
             // 
@@ -2410,15 +2421,6 @@
             this.tabPage1.Text = "Delete";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(168, 88);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(31, 13);
-            this.label56.TabIndex = 102;
-            this.label56.Text = "EXP:";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2484,13 +2486,13 @@
             this.DumpedEdit.ResumeLayout(false);
             this.Main.ResumeLayout(false);
             this.Main.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xp)).EndInit();
             this.Stats.ResumeLayout(false);
             this.Stats.PerformLayout();
             this.Moves.ResumeLayout(false);
             this.Moves.PerformLayout();
             this.OT.ResumeLayout(false);
             this.OT.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.level)).EndInit();
             this.cloneWriteTabs.ResumeLayout(false);
             this.cloneTab.ResumeLayout(false);
