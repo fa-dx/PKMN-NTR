@@ -3,7 +3,7 @@ using System.IO;
 
 namespace ntrbase
 {
-	public class ScriptHelper
+    public class ScriptHelper
     {
         public void bpadd(uint addr, string type = "code.once")
         {
@@ -100,9 +100,9 @@ namespace ntrbase
 			Program.ntrClient.sendReadMemPacket(addr, size, (uint) pid, filename);
 		}
 
-        public void data(uint addr, DataReadyEventArgs e, uint size = 0x100, int pid = -1)
+        public uint data(uint addr, uint size = 0x100, int pid = -1)
         {
-            Program.ntrClient.sendReadMemPacket(addr, size, (uint)pid, e);
+            return Program.ntrClient.sendReadMemPacket(addr, size, (uint)pid);
         }
 
 		public void write(uint addr, byte[] buf, int pid=-1)

@@ -9,17 +9,45 @@ using System.Windows.Forms;
 
 namespace ntrbase
 {
-    //Futureproofing - in case we want something more, like callback functions
     class readMemRequest
     {
         public string fileName;
-        public DataReadyEventArgs e;
-        public readMemRequest(string fileName_, DataReadyEventArgs e_)
+        public bool isCallback;
+
+        public readMemRequest(string fileName_)
         {
             this.fileName = fileName_;
-            this.e = e_;
+            this.isCallback = false;
+        }
+
+        public readMemRequest()
+        {
+            this.fileName = null;
+            this.isCallback = true;
         }
     };
+
+    public class DataReadyEventArgs : EventArgs
+    {
+        public uint seq;
+        public byte[] data;
+
+        public DataReadyEventArgs(uint seq_, byte[] data_)
+        {
+            this.seq = seq_;
+            this.data = data_;
+        }
+    }
+
+    public class InfoReadyEventArgs : EventArgs
+    {
+        public string info;
+
+        public InfoReadyEventArgs(string info_)
+        {
+            this.info = info_;
+        }
+    }
 
     class NTR
     {
@@ -31,10 +59,22 @@ namespace ntrbase
 		private object syncLock = new object();
 		public int heartbeatSendable;
         public event EventHandler<DataReadyEventArgs> DataReady;
+        public event EventHandler Connected;
+        public event EventHandler<InfoReadyEventArgs> InfoReady;
 
         protected virtual void OnDataReady(DataReadyEventArgs e)
         {
             DataReady?.Invoke(this, e);
+        }
+
+        protected virtual void OnConnected(EventArgs e)
+        {
+            Connected?.Invoke(this, e);
+        }
+
+        protected virtual void OnInfoReady(InfoReadyEventArgs e)
+        {
+            InfoReady?.Invoke(this, e);
         }
 
 
@@ -120,7 +160,8 @@ namespace ntrbase
 							byte[] dataBuf = new byte[dataLen];
 							readNetworkStream(stream, dataBuf, dataBuf.Length);
 							string logMsg = Encoding.UTF8.GetString(dataBuf);
-							log(logMsg);
+                            OnInfoReady(new InfoReadyEventArgs(logMsg));
+                            log(logMsg);
 						}
 						lock (syncLock)
                         {
@@ -165,21 +206,23 @@ namespace ntrbase
                 return;
             }
             pendingReadMem.Remove(seq);
-			string fileName = requestDetails.fileName;
 
-            if (fileName != null)
+            if (requestDetails.fileName != null)
             {
+                string fileName = requestDetails.fileName;
                 FileStream fs = new FileStream(fileName, FileMode.Create);
                 fs.Write(dataBuf, 0, dataBuf.Length);
                 fs.Close();
                 log("dump saved into " + fileName + " successfully");
                 return;
             }
-            else if (requestDetails.e != null)
+            else if (requestDetails.isCallback)
             {
                 //Copies the data, truncates if necessary
-                Array.Copy(dataBuf, requestDetails.e.data, Math.Min(dataBuf.Length,requestDetails.e.data.Length));
-                OnDataReady(requestDetails.e);
+                byte[] dataBufCopy = new byte[dataBuf.Length];
+                dataBuf.CopyTo(dataBufCopy, 0);
+                DataReadyEventArgs e = new DataReadyEventArgs(seq, dataBufCopy);
+                OnDataReady(e);
             }
             else
             {
@@ -220,6 +263,7 @@ namespace ntrbase
                 packetRecvThread = new Thread(new ThreadStart(packetRecvThreadStart));
                 packetRecvThread.Start();
                 log("Server connected.");
+                OnConnected(null);
             }
             catch
             {
@@ -281,15 +325,14 @@ namespace ntrbase
 		public void sendReadMemPacket(UInt32 addr, UInt32 size, UInt32 pid, string fileName)
         {
 			sendEmptyPacket(9, pid, addr, size);
-            readMemRequest requestDetails = new readMemRequest(fileName, null);
-            pendingReadMem.Add(currentSeq, requestDetails);
+            pendingReadMem.Add(currentSeq, new readMemRequest(fileName));
 		}
 
-        public void sendReadMemPacket(UInt32 addr, UInt32 size, UInt32 pid, DataReadyEventArgs e)
+        public uint sendReadMemPacket(UInt32 addr, UInt32 size, UInt32 pid)
         {
             sendEmptyPacket(9, pid, addr, size);
-            readMemRequest requestDetails = new readMemRequest(null, e);
-            pendingReadMem.Add(currentSeq, requestDetails);
+            pendingReadMem.Add(currentSeq, new readMemRequest());
+            return currentSeq;
         }
 
         public void sendWriteMemPacket(UInt32 addr, UInt32 pid, byte[] buf)

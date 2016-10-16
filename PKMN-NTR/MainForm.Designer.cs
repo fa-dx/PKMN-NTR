@@ -36,7 +36,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dumpBox = new System.Windows.Forms.GroupBox();
             this.radioBattleBox = new System.Windows.Forms.RadioButton();
-            this.label50 = new System.Windows.Forms.Label();
             this.onlyView = new System.Windows.Forms.CheckBox();
             this.radioParty = new System.Windows.Forms.RadioButton();
             this.radioTrade = new System.Windows.Forms.RadioButton();
@@ -101,12 +100,6 @@
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label55 = new System.Windows.Forms.Label();
-            this.offsetzz = new System.Windows.Forms.TextBox();
-            this.shoutoutWrite = new System.Windows.Forms.Button();
-            this.label54 = new System.Windows.Forms.Label();
-            this.shoutoutTextBox = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.pokeLang = new System.Windows.Forms.Button();
@@ -162,7 +155,7 @@
             this.DumpedEdit = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
             this.label56 = new System.Windows.Forms.Label();
-            this.xp = new System.Windows.Forms.NumericUpDown();
+            this.ExpPoints = new System.Windows.Forms.NumericUpDown();
             this.Stats = new System.Windows.Forms.TabPage();
             this.Moves = new System.Windows.Forms.TabPage();
             this.OT = new System.Windows.Forms.TabPage();
@@ -192,7 +185,9 @@
             this.label33 = new System.Windows.Forms.Label();
             this.writeBoxTo = new System.Windows.Forms.NumericUpDown();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.deleteKeepBackup = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label50 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -233,7 +228,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.friendship)).BeginInit();
             this.DumpedEdit.SuspendLayout();
             this.Main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpPoints)).BeginInit();
             this.Stats.SuspendLayout();
             this.Moves.SuspendLayout();
             this.OT.SuspendLayout();
@@ -343,7 +338,6 @@
             // 
             // moneyNum
             // 
-            this.moneyNum.Enabled = false;
             this.moneyNum.Location = new System.Drawing.Point(140, 36);
             this.moneyNum.Maximum = new decimal(new int[] {
             9999999,
@@ -356,7 +350,6 @@
             // 
             // milesNum
             // 
-            this.milesNum.Enabled = false;
             this.milesNum.Location = new System.Drawing.Point(140, 84);
             this.milesNum.Maximum = new decimal(new int[] {
             9999999,
@@ -369,7 +362,6 @@
             // 
             // bpNum
             // 
-            this.bpNum.Enabled = false;
             this.bpNum.Location = new System.Drawing.Point(140, 130);
             this.bpNum.Maximum = new decimal(new int[] {
             9999999,
@@ -382,7 +374,6 @@
             // 
             // pokeMoney
             // 
-            this.pokeMoney.Enabled = false;
             this.pokeMoney.Location = new System.Drawing.Point(217, 33);
             this.pokeMoney.Name = "pokeMoney";
             this.pokeMoney.Size = new System.Drawing.Size(45, 23);
@@ -393,7 +384,6 @@
             // 
             // pokeMiles
             // 
-            this.pokeMiles.Enabled = false;
             this.pokeMiles.Location = new System.Drawing.Point(217, 81);
             this.pokeMiles.Name = "pokeMiles";
             this.pokeMiles.Size = new System.Drawing.Size(45, 23);
@@ -404,7 +394,6 @@
             // 
             // pokeBP
             // 
-            this.pokeBP.Enabled = false;
             this.pokeBP.Location = new System.Drawing.Point(217, 127);
             this.pokeBP.Name = "pokeBP";
             this.pokeBP.Size = new System.Drawing.Size(45, 23);
@@ -443,7 +432,6 @@
             // dumpBox
             // 
             this.dumpBox.Controls.Add(this.radioBattleBox);
-            this.dumpBox.Controls.Add(this.label50);
             this.dumpBox.Controls.Add(this.onlyView);
             this.dumpBox.Controls.Add(this.radioParty);
             this.dumpBox.Controls.Add(this.radioTrade);
@@ -468,7 +456,6 @@
             // radioBattleBox
             // 
             this.radioBattleBox.AutoSize = true;
-            this.radioBattleBox.Enabled = false;
             this.radioBattleBox.Location = new System.Drawing.Point(139, 87);
             this.radioBattleBox.Name = "radioBattleBox";
             this.radioBattleBox.Size = new System.Drawing.Size(73, 17);
@@ -477,30 +464,22 @@
             this.radioBattleBox.UseVisualStyleBackColor = true;
             this.radioBattleBox.CheckedChanged += new System.EventHandler(this.radioBattleBox_CheckedChanged);
             // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(191, 107);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(52, 13);
-            this.label50.TabIndex = 97;
-            this.label50.Text = "Only Edit:";
-            // 
             // onlyView
             // 
             this.onlyView.AutoSize = true;
-            this.onlyView.Enabled = false;
-            this.onlyView.Location = new System.Drawing.Point(243, 107);
+            this.onlyView.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.onlyView.Location = new System.Drawing.Point(192, 108);
             this.onlyView.Name = "onlyView";
-            this.onlyView.Size = new System.Drawing.Size(15, 14);
+            this.onlyView.Size = new System.Drawing.Size(67, 17);
             this.onlyView.TabIndex = 96;
+            this.onlyView.Text = "Only edit";
+            this.toolTip1.SetToolTip(this.onlyView, "If checked, Pokemon won\'t be dumped to file");
             this.onlyView.UseVisualStyleBackColor = true;
             this.onlyView.CheckedChanged += new System.EventHandler(this.onlyView_CheckedChanged);
             // 
             // radioParty
             // 
             this.radioParty.AutoSize = true;
-            this.radioParty.Enabled = false;
             this.radioParty.Location = new System.Drawing.Point(139, 105);
             this.radioParty.Name = "radioParty";
             this.radioParty.Size = new System.Drawing.Size(49, 17);
@@ -513,7 +492,6 @@
             // radioTrade
             // 
             this.radioTrade.AutoSize = true;
-            this.radioTrade.Enabled = false;
             this.radioTrade.Location = new System.Drawing.Point(7, 105);
             this.radioTrade.Name = "radioTrade";
             this.radioTrade.Size = new System.Drawing.Size(53, 17);
@@ -526,7 +504,6 @@
             // radioOpponent
             // 
             this.radioOpponent.AutoSize = true;
-            this.radioOpponent.Enabled = false;
             this.radioOpponent.Location = new System.Drawing.Point(68, 105);
             this.radioOpponent.Name = "radioOpponent";
             this.radioOpponent.Size = new System.Drawing.Size(72, 17);
@@ -539,7 +516,6 @@
             // radioDaycare
             // 
             this.radioDaycare.AutoSize = true;
-            this.radioDaycare.Enabled = false;
             this.radioDaycare.Location = new System.Drawing.Point(68, 87);
             this.radioDaycare.Name = "radioDaycare";
             this.radioDaycare.Size = new System.Drawing.Size(65, 17);
@@ -552,7 +528,6 @@
             // 
             this.radioBoxes.AutoSize = true;
             this.radioBoxes.Checked = true;
-            this.radioBoxes.Enabled = false;
             this.radioBoxes.Location = new System.Drawing.Point(7, 87);
             this.radioBoxes.Name = "radioBoxes";
             this.radioBoxes.Size = new System.Drawing.Size(54, 17);
@@ -564,7 +539,6 @@
             // 
             // dumpBoxes
             // 
-            this.dumpBoxes.Enabled = false;
             this.dumpBoxes.Location = new System.Drawing.Point(99, 61);
             this.dumpBoxes.Name = "dumpBoxes";
             this.dumpBoxes.Size = new System.Drawing.Size(105, 23);
@@ -584,7 +558,6 @@
             // 
             // nameek6
             // 
-            this.nameek6.Enabled = false;
             this.nameek6.Location = new System.Drawing.Point(100, 39);
             this.nameek6.Name = "nameek6";
             this.nameek6.Size = new System.Drawing.Size(103, 20);
@@ -593,7 +566,6 @@
             // 
             // dumpek6
             // 
-            this.dumpek6.Enabled = false;
             this.dumpek6.Location = new System.Drawing.Point(7, 61);
             this.dumpek6.Name = "dumpek6";
             this.dumpek6.Size = new System.Drawing.Size(86, 23);
@@ -613,7 +585,6 @@
             // 
             // slotDump
             // 
-            this.slotDump.Enabled = false;
             this.slotDump.Location = new System.Drawing.Point(53, 39);
             this.slotDump.Maximum = new decimal(new int[] {
             30,
@@ -645,7 +616,6 @@
             // 
             // boxDump
             // 
-            this.boxDump.Enabled = false;
             this.boxDump.Location = new System.Drawing.Point(7, 39);
             this.boxDump.Maximum = new decimal(new int[] {
             31,
@@ -687,7 +657,6 @@
             // 
             this.ball.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.ball.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ball.Enabled = false;
             this.ball.FormattingEnabled = true;
             this.ball.Items.AddRange(new object[] {
             "Master Ball",
@@ -761,7 +730,6 @@
             // 
             this.move4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.move4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.move4.Enabled = false;
             this.move4.FormattingEnabled = true;
             this.move4.Location = new System.Drawing.Point(6, 128);
             this.move4.Name = "move4";
@@ -772,7 +740,6 @@
             // 
             this.ability.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.ability.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ability.Enabled = false;
             this.ability.FormattingEnabled = true;
             this.ability.Location = new System.Drawing.Point(59, 85);
             this.ability.Name = "ability";
@@ -783,7 +750,6 @@
             // 
             this.move3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.move3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.move3.Enabled = false;
             this.move3.FormattingEnabled = true;
             this.move3.Location = new System.Drawing.Point(6, 92);
             this.move3.Name = "move3";
@@ -792,7 +758,6 @@
             // 
             // button1
             // 
-            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(206, 135);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -814,7 +779,6 @@
             // 
             this.move2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.move2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.move2.Enabled = false;
             this.move2.FormattingEnabled = true;
             this.move2.Location = new System.Drawing.Point(6, 56);
             this.move2.Name = "move2";
@@ -825,7 +789,6 @@
             // 
             this.species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.species.Enabled = false;
             this.species.FormattingEnabled = true;
             this.species.Location = new System.Drawing.Point(59, 11);
             this.species.Name = "species";
@@ -836,7 +799,6 @@
             // 
             this.move1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.move1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.move1.Enabled = false;
             this.move1.FormattingEnabled = true;
             this.move1.Location = new System.Drawing.Point(6, 19);
             this.move1.Name = "move1";
@@ -854,7 +816,6 @@
             // 
             // evSPENum
             // 
-            this.evSPENum.Enabled = false;
             this.evSPENum.Location = new System.Drawing.Point(72, 128);
             this.evSPENum.Maximum = new decimal(new int[] {
             252,
@@ -867,7 +828,6 @@
             // 
             // evSPDNum
             // 
-            this.evSPDNum.Enabled = false;
             this.evSPDNum.Location = new System.Drawing.Point(72, 107);
             this.evSPDNum.Maximum = new decimal(new int[] {
             252,
@@ -882,7 +842,6 @@
             // 
             this.heldItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.heldItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.heldItem.Enabled = false;
             this.heldItem.FormattingEnabled = true;
             this.heldItem.Location = new System.Drawing.Point(59, 110);
             this.heldItem.Name = "heldItem";
@@ -891,7 +850,6 @@
             // 
             // evSPANum
             // 
-            this.evSPANum.Enabled = false;
             this.evSPANum.Location = new System.Drawing.Point(72, 86);
             this.evSPANum.Maximum = new decimal(new int[] {
             252,
@@ -904,7 +862,6 @@
             // 
             // evDEFNum
             // 
-            this.evDEFNum.Enabled = false;
             this.evDEFNum.Location = new System.Drawing.Point(72, 65);
             this.evDEFNum.Maximum = new decimal(new int[] {
             252,
@@ -917,7 +874,6 @@
             // 
             // evATKNum
             // 
-            this.evATKNum.Enabled = false;
             this.evATKNum.Location = new System.Drawing.Point(72, 44);
             this.evATKNum.Maximum = new decimal(new int[] {
             252,
@@ -930,7 +886,6 @@
             // 
             // evHPNum
             // 
-            this.evHPNum.Enabled = false;
             this.evHPNum.Location = new System.Drawing.Point(72, 23);
             this.evHPNum.Maximum = new decimal(new int[] {
             252,
@@ -954,7 +909,6 @@
             // isEgg
             // 
             this.isEgg.AutoSize = true;
-            this.isEgg.Enabled = false;
             this.isEgg.Location = new System.Drawing.Point(266, 40);
             this.isEgg.Name = "isEgg";
             this.isEgg.Size = new System.Drawing.Size(15, 14);
@@ -963,7 +917,6 @@
             // 
             // ivSPENum
             // 
-            this.ivSPENum.Enabled = false;
             this.ivSPENum.Location = new System.Drawing.Point(33, 128);
             this.ivSPENum.Maximum = new decimal(new int[] {
             31,
@@ -985,7 +938,6 @@
             // 
             // ivSPDNum
             // 
-            this.ivSPDNum.Enabled = false;
             this.ivSPDNum.Location = new System.Drawing.Point(33, 107);
             this.ivSPDNum.Maximum = new decimal(new int[] {
             31,
@@ -1007,7 +959,6 @@
             // 
             // ivSPANum
             // 
-            this.ivSPANum.Enabled = false;
             this.ivSPANum.Location = new System.Drawing.Point(33, 86);
             this.ivSPANum.Maximum = new decimal(new int[] {
             31,
@@ -1022,7 +973,6 @@
             // 
             this.nature.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.nature.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.nature.Enabled = false;
             this.nature.FormattingEnabled = true;
             this.nature.Items.AddRange(new object[] {
             "Hardy",
@@ -1057,7 +1007,6 @@
             // 
             // ivDEFNum
             // 
-            this.ivDEFNum.Enabled = false;
             this.ivDEFNum.Location = new System.Drawing.Point(33, 65);
             this.ivDEFNum.Maximum = new decimal(new int[] {
             31,
@@ -1079,7 +1028,6 @@
             // 
             // ivATKNum
             // 
-            this.ivATKNum.Enabled = false;
             this.ivATKNum.Location = new System.Drawing.Point(33, 44);
             this.ivATKNum.Maximum = new decimal(new int[] {
             31,
@@ -1101,7 +1049,6 @@
             // 
             // ivHPNum
             // 
-            this.ivHPNum.Enabled = false;
             this.ivHPNum.Location = new System.Drawing.Point(33, 23);
             this.ivHPNum.Maximum = new decimal(new int[] {
             31,
@@ -1133,7 +1080,6 @@
             // 
             // nickname
             // 
-            this.nickname.Enabled = false;
             this.nickname.Location = new System.Drawing.Point(59, 36);
             this.nickname.MaxLength = 12;
             this.nickname.Name = "nickname";
@@ -1228,12 +1174,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.label55);
-            this.groupBox2.Controls.Add(this.offsetzz);
-            this.groupBox2.Controls.Add(this.shoutoutWrite);
-            this.groupBox2.Controls.Add(this.label54);
-            this.groupBox2.Controls.Add(this.shoutoutTextBox);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.pokeMiles);
             this.groupBox2.Controls.Add(this.label2);
@@ -1269,60 +1209,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit Trainer";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(38, 291);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 61;
-            this.button2.Text = "dump 1mb";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(118, 296);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(38, 13);
-            this.label55.TabIndex = 49;
-            this.label55.Text = "Offset:";
-            // 
-            // offsetzz
-            // 
-            this.offsetzz.Location = new System.Drawing.Point(162, 293);
-            this.offsetzz.Name = "offsetzz";
-            this.offsetzz.Size = new System.Drawing.Size(100, 20);
-            this.offsetzz.TabIndex = 48;
-            this.offsetzz.Text = "0x8803CF8";
-            // 
-            // shoutoutWrite
-            // 
-            this.shoutoutWrite.Location = new System.Drawing.Point(217, 175);
-            this.shoutoutWrite.Name = "shoutoutWrite";
-            this.shoutoutWrite.Size = new System.Drawing.Size(45, 23);
-            this.shoutoutWrite.TabIndex = 47;
-            this.shoutoutWrite.Text = "Write";
-            this.shoutoutWrite.UseVisualStyleBackColor = true;
-            this.shoutoutWrite.Click += new System.EventHandler(this.pokeShoutout_Click);
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(113, 161);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(53, 13);
-            this.label54.TabIndex = 46;
-            this.label54.Text = "Shoutout:";
-            // 
-            // shoutoutTextBox
-            // 
-            this.shoutoutTextBox.Location = new System.Drawing.Point(116, 177);
-            this.shoutoutTextBox.MaxLength = 16;
-            this.shoutoutTextBox.Name = "shoutoutTextBox";
-            this.shoutoutTextBox.Size = new System.Drawing.Size(100, 20);
-            this.shoutoutTextBox.TabIndex = 45;
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
@@ -1334,7 +1220,6 @@
             // 
             // Lang
             // 
-            this.Lang.Enabled = false;
             this.Lang.FormattingEnabled = true;
             this.Lang.Items.AddRange(new object[] {
             "JPN",
@@ -1351,7 +1236,6 @@
             // 
             // pokeLang
             // 
-            this.pokeLang.Enabled = false;
             this.pokeLang.Location = new System.Drawing.Point(59, 174);
             this.pokeLang.Name = "pokeLang";
             this.pokeLang.Size = new System.Drawing.Size(45, 23);
@@ -1362,7 +1246,6 @@
             // 
             // pokeSID
             // 
-            this.pokeSID.Enabled = false;
             this.pokeSID.Location = new System.Drawing.Point(90, 127);
             this.pokeSID.Name = "pokeSID";
             this.pokeSID.Size = new System.Drawing.Size(45, 23);
@@ -1373,7 +1256,6 @@
             // 
             // SIDNum
             // 
-            this.SIDNum.Enabled = false;
             this.SIDNum.Location = new System.Drawing.Point(9, 130);
             this.SIDNum.Maximum = new decimal(new int[] {
             65535,
@@ -1405,7 +1287,6 @@
             // 
             // pokeTID
             // 
-            this.pokeTID.Enabled = false;
             this.pokeTID.Location = new System.Drawing.Point(90, 79);
             this.pokeTID.Name = "pokeTID";
             this.pokeTID.Size = new System.Drawing.Size(45, 23);
@@ -1425,7 +1306,6 @@
             // 
             // TIDNum
             // 
-            this.TIDNum.Enabled = false;
             this.TIDNum.Location = new System.Drawing.Point(9, 82);
             this.TIDNum.Maximum = new decimal(new int[] {
             65535,
@@ -1439,7 +1319,6 @@
             // 
             // secNum
             // 
-            this.secNum.Enabled = false;
             this.secNum.Location = new System.Drawing.Point(114, 215);
             this.secNum.Maximum = new decimal(new int[] {
             60,
@@ -1461,7 +1340,6 @@
             // 
             // minNum
             // 
-            this.minNum.Enabled = false;
             this.minNum.Location = new System.Drawing.Point(73, 215);
             this.minNum.Maximum = new decimal(new int[] {
             60,
@@ -1483,7 +1361,6 @@
             // 
             // pokeTime
             // 
-            this.pokeTime.Enabled = false;
             this.pokeTime.Location = new System.Drawing.Point(150, 212);
             this.pokeTime.Name = "pokeTime";
             this.pokeTime.Size = new System.Drawing.Size(45, 23);
@@ -1494,7 +1371,6 @@
             // 
             // pokeName
             // 
-            this.pokeName.Enabled = false;
             this.pokeName.Location = new System.Drawing.Point(89, 33);
             this.pokeName.Name = "pokeName";
             this.pokeName.Size = new System.Drawing.Size(45, 23);
@@ -1505,7 +1381,6 @@
             // 
             // hourNum
             // 
-            this.hourNum.Enabled = false;
             this.hourNum.Location = new System.Drawing.Point(8, 215);
             this.hourNum.Maximum = new decimal(new int[] {
             999,
@@ -1518,7 +1393,6 @@
             // 
             // playerName
             // 
-            this.playerName.Enabled = false;
             this.playerName.Location = new System.Drawing.Point(8, 35);
             this.playerName.Name = "playerName";
             this.playerName.Size = new System.Drawing.Size(80, 20);
@@ -1535,7 +1409,6 @@
             // 
             // showKeys
             // 
-            this.showKeys.Enabled = false;
             this.showKeys.Location = new System.Drawing.Point(199, 134);
             this.showKeys.Name = "showKeys";
             this.showKeys.Size = new System.Drawing.Size(115, 26);
@@ -1546,7 +1419,6 @@
             // 
             // showBerries
             // 
-            this.showBerries.Enabled = false;
             this.showBerries.Location = new System.Drawing.Point(199, 105);
             this.showBerries.Name = "showBerries";
             this.showBerries.Size = new System.Drawing.Size(115, 26);
@@ -1557,7 +1429,6 @@
             // 
             // showTMs
             // 
-            this.showTMs.Enabled = false;
             this.showTMs.Location = new System.Drawing.Point(199, 76);
             this.showTMs.Name = "showTMs";
             this.showTMs.Size = new System.Drawing.Size(115, 26);
@@ -1568,7 +1439,6 @@
             // 
             // showMedicine
             // 
-            this.showMedicine.Enabled = false;
             this.showMedicine.Location = new System.Drawing.Point(199, 47);
             this.showMedicine.Name = "showMedicine";
             this.showMedicine.Size = new System.Drawing.Size(115, 26);
@@ -1579,7 +1449,6 @@
             // 
             // showItems
             // 
-            this.showItems.Enabled = false;
             this.showItems.ForeColor = System.Drawing.Color.Green;
             this.showItems.Location = new System.Drawing.Point(199, 18);
             this.showItems.Name = "showItems";
@@ -1676,7 +1545,6 @@
             // 
             // itemAdd
             // 
-            this.itemAdd.Enabled = false;
             this.itemAdd.Location = new System.Drawing.Point(257, 173);
             this.itemAdd.Name = "itemAdd";
             this.itemAdd.Size = new System.Drawing.Size(57, 23);
@@ -1687,7 +1555,6 @@
             // 
             // itemWrite
             // 
-            this.itemWrite.Enabled = false;
             this.itemWrite.Location = new System.Drawing.Point(199, 173);
             this.itemWrite.Name = "itemWrite";
             this.itemWrite.Size = new System.Drawing.Size(57, 23);
@@ -1727,7 +1594,6 @@
             0,
             0,
             0});
-            this.deleteAmount.ValueChanged += new System.EventHandler(this.deleteAmount_ValueChanged);
             // 
             // label26
             // 
@@ -1809,7 +1675,6 @@
             // 
             // dTIDNum
             // 
-            this.dTIDNum.Enabled = false;
             this.dTIDNum.Location = new System.Drawing.Point(44, 36);
             this.dTIDNum.Maximum = new decimal(new int[] {
             65535,
@@ -1823,7 +1688,6 @@
             // 
             // dSIDNum
             // 
-            this.dSIDNum.Enabled = false;
             this.dSIDNum.Location = new System.Drawing.Point(44, 62);
             this.dSIDNum.Maximum = new decimal(new int[] {
             65535,
@@ -1837,7 +1701,6 @@
             // 
             // dPID
             // 
-            this.dPID.Enabled = false;
             this.dPID.Location = new System.Drawing.Point(201, 11);
             this.dPID.Name = "dPID";
             this.dPID.Size = new System.Drawing.Size(58, 20);
@@ -1847,7 +1710,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(173, 15);
+            this.label45.Location = new System.Drawing.Point(171, 14);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(28, 13);
             this.label45.TabIndex = 49;
@@ -1873,7 +1736,6 @@
             // 
             // otName
             // 
-            this.otName.Enabled = false;
             this.otName.Location = new System.Drawing.Point(44, 10);
             this.otName.MaxLength = 12;
             this.otName.Name = "otName";
@@ -1891,7 +1753,6 @@
             // 
             // setShiny
             // 
-            this.setShiny.Enabled = false;
             this.setShiny.Location = new System.Drawing.Point(146, 10);
             this.setShiny.Name = "setShiny";
             this.setShiny.Size = new System.Drawing.Size(22, 22);
@@ -1903,7 +1764,7 @@
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(143, 40);
+            this.label51.Location = new System.Drawing.Point(142, 40);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(58, 13);
             this.label51.TabIndex = 99;
@@ -1912,7 +1773,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(156, 65);
+            this.label49.Location = new System.Drawing.Point(155, 64);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(45, 13);
             this.label49.TabIndex = 101;
@@ -1920,7 +1781,6 @@
             // 
             // friendship
             // 
-            this.friendship.Enabled = false;
             this.friendship.Location = new System.Drawing.Point(201, 36);
             this.friendship.Maximum = new decimal(new int[] {
             255,
@@ -1933,7 +1793,6 @@
             // 
             // gender
             // 
-            this.gender.Enabled = false;
             this.gender.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.gender.ForeColor = System.Drawing.Color.Gray;
             this.gender.Location = new System.Drawing.Point(201, 60);
@@ -1946,7 +1805,6 @@
             // 
             // randomPID
             // 
-            this.randomPID.Enabled = false;
             this.randomPID.Location = new System.Drawing.Point(259, 10);
             this.randomPID.Name = "randomPID";
             this.randomPID.Size = new System.Drawing.Size(22, 22);
@@ -1974,7 +1832,7 @@
             this.Main.Controls.Add(this.label56);
             this.Main.Controls.Add(this.button1);
             this.Main.Controls.Add(this.label49);
-            this.Main.Controls.Add(this.xp);
+            this.Main.Controls.Add(this.ExpPoints);
             this.Main.Controls.Add(this.isEgg);
             this.Main.Controls.Add(this.label31);
             this.Main.Controls.Add(this.label51);
@@ -2007,23 +1865,23 @@
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(168, 88);
+            this.label56.Location = new System.Drawing.Point(169, 88);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(31, 13);
             this.label56.TabIndex = 102;
             this.label56.Text = "EXP:";
             // 
-            // xp
+            // ExpPoints
             // 
-            this.xp.Location = new System.Drawing.Point(201, 85);
-            this.xp.Maximum = new decimal(new int[] {
+            this.ExpPoints.Location = new System.Drawing.Point(201, 85);
+            this.ExpPoints.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
-            this.xp.Name = "xp";
-            this.xp.Size = new System.Drawing.Size(77, 20);
-            this.xp.TabIndex = 58;
+            this.ExpPoints.Name = "ExpPoints";
+            this.ExpPoints.Size = new System.Drawing.Size(77, 20);
+            this.ExpPoints.TabIndex = 58;
             // 
             // Stats
             // 
@@ -2093,10 +1951,12 @@
             // 
             // level
             // 
-            this.level.Location = new System.Drawing.Point(130, 327);
+            this.level.Enabled = false;
+            this.level.Location = new System.Drawing.Point(7, 408);
             this.level.Name = "level";
             this.level.Size = new System.Drawing.Size(120, 20);
             this.level.TabIndex = 59;
+            this.level.Visible = false;
             // 
             // cloneWriteTabs
             // 
@@ -2406,6 +2266,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.deleteKeepBackup);
             this.tabPage1.Controls.Add(this.label38);
             this.tabPage1.Controls.Add(this.label26);
             this.tabPage1.Controls.Add(this.deleteBox);
@@ -2421,11 +2282,34 @@
             this.tabPage1.Text = "Delete";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // deleteKeepBackup
+            // 
+            this.deleteKeepBackup.AutoSize = true;
+            this.deleteKeepBackup.Checked = true;
+            this.deleteKeepBackup.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.deleteKeepBackup.Location = new System.Drawing.Point(9, 31);
+            this.deleteKeepBackup.Name = "deleteKeepBackup";
+            this.deleteKeepBackup.Size = new System.Drawing.Size(90, 17);
+            this.deleteKeepBackup.TabIndex = 26;
+            this.deleteKeepBackup.Text = "Keep backup";
+            this.toolTip1.SetToolTip(this.deleteKeepBackup, "Backup to file before deleting");
+            this.deleteKeepBackup.UseVisualStyleBackColor = true;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(463, 431);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(121, 13);
+            this.label50.TabIndex = 61;
+            this.label50.Text = "NTR communication log";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 437);
+            this.ClientSize = new System.Drawing.Size(906, 451);
+            this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
             this.Controls.Add(this.level);
             this.Controls.Add(this.DumpedEdit);
@@ -2486,7 +2370,7 @@
             this.DumpedEdit.ResumeLayout(false);
             this.Main.ResumeLayout(false);
             this.Main.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpPoints)).EndInit();
             this.Stats.ResumeLayout(false);
             this.Stats.PerformLayout();
             this.Moves.ResumeLayout(false);
@@ -2643,7 +2527,6 @@
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Button setShiny;
         public System.Windows.Forms.TextBox dPID;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.CheckBox onlyView;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.NumericUpDown friendship;
@@ -2656,7 +2539,7 @@
         private System.Windows.Forms.TabPage Moves;
         private System.Windows.Forms.TabPage OT;
         private System.Windows.Forms.RadioButton radioBattleBox;
-        private System.Windows.Forms.NumericUpDown xp;
+        private System.Windows.Forms.NumericUpDown ExpPoints;
         private System.Windows.Forms.NumericUpDown level;
         private System.Windows.Forms.TabControl cloneWriteTabs;
         private System.Windows.Forms.TabPage cloneTab;
@@ -2683,14 +2566,10 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.NumericUpDown cloneBoxTo;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button shoutoutWrite;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.TextBox shoutoutTextBox;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox offsetzz;
-        private System.Windows.Forms.Label label55;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.CheckBox deleteKeepBackup;
+        private System.Windows.Forms.Label label50;
     }
 }
 
