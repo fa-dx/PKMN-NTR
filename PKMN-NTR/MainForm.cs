@@ -2,7 +2,7 @@
  * TODO: 
  * * Change magic numbers to constants wherever it's not a pain in the ass
  * * Error handling, error handling, error handling. Wrap file writes in try/catch, handle malformed pokemon, incomplete writes, patterns not found, etc.
- * * Bug - shiny pid calculation hangs on <Gen6 pokemon. The bug is in PKHeX, but we might manage to do it ourselves.
+ * * Bug - shiny pid calculation hangs on < Gen6 pokemon. The bug is in PKHeX, but we might manage to do it ourselves.
  */
 using ntrbase.Properties;
 using System;
@@ -12,12 +12,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Threading;
-using System.ComponentModel;
 
 namespace ntrbase
 {
