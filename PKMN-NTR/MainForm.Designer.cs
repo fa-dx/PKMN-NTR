@@ -45,7 +45,7 @@
             this.dumpBoxes = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.nameek6 = new System.Windows.Forms.TextBox();
-            this.dumpek6 = new System.Windows.Forms.Button();
+            this.dumpPokemon = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.slotDump = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -441,7 +441,7 @@
             this.dumpBox.Controls.Add(this.dumpBoxes);
             this.dumpBox.Controls.Add(this.label9);
             this.dumpBox.Controls.Add(this.nameek6);
-            this.dumpBox.Controls.Add(this.dumpek6);
+            this.dumpBox.Controls.Add(this.dumpPokemon);
             this.dumpBox.Controls.Add(this.label7);
             this.dumpBox.Controls.Add(this.slotDump);
             this.dumpBox.Controls.Add(this.label8);
@@ -564,15 +564,15 @@
             this.nameek6.TabIndex = 29;
             this.nameek6.Text = "pkmn";
             // 
-            // dumpek6
+            // dumpPokemon
             // 
-            this.dumpek6.Location = new System.Drawing.Point(7, 61);
-            this.dumpek6.Name = "dumpek6";
-            this.dumpek6.Size = new System.Drawing.Size(86, 23);
-            this.dumpek6.TabIndex = 28;
-            this.dumpek6.Text = "Dump";
-            this.dumpek6.UseVisualStyleBackColor = true;
-            this.dumpek6.Click += new System.EventHandler(this.dumpek6_Click);
+            this.dumpPokemon.Location = new System.Drawing.Point(7, 61);
+            this.dumpPokemon.Name = "dumpPokemon";
+            this.dumpPokemon.Size = new System.Drawing.Size(86, 23);
+            this.dumpPokemon.TabIndex = 28;
+            this.dumpPokemon.Text = "Dump";
+            this.dumpPokemon.UseVisualStyleBackColor = true;
+            this.dumpPokemon.Click += new System.EventHandler(this.dumpPokemon_Click);
             // 
             // label7
             // 
@@ -2416,7 +2416,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox dumpBox;
-        private System.Windows.Forms.Button dumpek6;
+        private System.Windows.Forms.Button dumpPokemon;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown slotDump;
         private System.Windows.Forms.Label label8;
