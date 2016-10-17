@@ -249,8 +249,9 @@
             // 
             // txtLog
             // 
-            this.txtLog.BackColor = System.Drawing.SystemColors.Window;
+            this.txtLog.BackColor = System.Drawing.Color.Black;
             this.txtLog.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtLog.ForeColor = System.Drawing.Color.LawnGreen;
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtLog.Location = new System.Drawing.Point(303, 331);
             this.txtLog.MaxLength = 32767000;

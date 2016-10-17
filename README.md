@@ -8,3 +8,5 @@ fa-dx [Gathering offsets, creating the tool]
 
 
 Kaphotics [Helping with a few pieces of code(because I'm a coding noob), PKM Encrypt & Decrypt code + variables from the PKM layout from PKHeX, inspiration (most Pokemon Editing features were inspired by his save editing tool PKHeX)]
+
+jackmax - [Doing a large-scale rewrite of the code to make it more robust, readable and maintainable.]
