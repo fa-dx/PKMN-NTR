@@ -188,6 +188,8 @@
             this.deleteKeepBackup = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label50 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.manualA = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -245,6 +247,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.writeSlotTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).BeginInit();
             this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -1205,7 +1208,7 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Location = new System.Drawing.Point(629, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(269, 320);
+            this.groupBox2.Size = new System.Drawing.Size(269, 246);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit Trainer";
@@ -2305,11 +2308,32 @@
             this.label50.TabIndex = 61;
             this.label50.Text = "NTR communication log";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.manualA);
+            this.groupBox4.Location = new System.Drawing.Point(625, 257);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(273, 68);
+            this.groupBox4.TabIndex = 62;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Manual Controls";
+            // 
+            // manualA
+            // 
+            this.manualA.Location = new System.Drawing.Point(244, 16);
+            this.manualA.Name = "manualA";
+            this.manualA.Size = new System.Drawing.Size(22, 23);
+            this.manualA.TabIndex = 0;
+            this.manualA.Text = "A";
+            this.manualA.UseVisualStyleBackColor = true;
+            this.manualA.Click += new System.EventHandler(this.manualA_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 451);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
             this.Controls.Add(this.level);
@@ -2394,6 +2418,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2571,6 +2596,8 @@
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.CheckBox deleteKeepBackup;
         private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button manualA;
     }
 }
 

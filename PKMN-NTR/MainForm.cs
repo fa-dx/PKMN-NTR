@@ -43,6 +43,7 @@ namespace ntrbase
 
         //Game information
         public int pid;
+        public int hid_pid = Convert.ToInt32("0x10", 16);
         public byte lang;
         public string pname;
         public GameType game = GameType.None;
@@ -68,6 +69,8 @@ namespace ntrbase
         public uint daycare1Off;
         public uint daycare2Off;
         public uint battleBoxOff;
+        // Offsets for buttons
+        public uint buttonAOff = 0x10000028;
         //TODO: add opponent data offset (right now it's a constant)
         
         private byte[] itemData = new byte[1600];
@@ -2286,6 +2289,18 @@ namespace ntrbase
             }
         }
         #endregion fucking thread safety
+
+        // Test for remote control
+
+        // A button
+        private void manualA_Click(object sender, EventArgs e)
+        {
+            byte[] buttonByte = BitConverter.GetBytes(1);
+            for (int i = 0; i < 300; i++)
+            {
+                Program.scriptHelper.write(buttonAOff, buttonByte, hid_pid);
+            }
+        }
     }
 
 
