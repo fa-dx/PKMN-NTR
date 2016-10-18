@@ -2299,17 +2299,17 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(463, 431);
+            this.label50.Location = new System.Drawing.Point(173, 334);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(121, 13);
+            this.label50.Size = new System.Drawing.Size(124, 13);
             this.label50.TabIndex = 61;
-            this.label50.Text = "NTR communication log";
+            this.label50.Text = "NTR communication log:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 451);
+            this.ClientSize = new System.Drawing.Size(906, 436);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
             this.Controls.Add(this.level);
