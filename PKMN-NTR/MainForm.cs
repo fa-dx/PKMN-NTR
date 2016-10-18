@@ -68,8 +68,9 @@ namespace ntrbase
         public uint daycare1Off;
         public uint daycare2Off;
         public uint battleBoxOff;
-        //Offsetts for buttons
+        //Offsetts for HID
         public uint buttonsOff = 0x10df20;
+        public uint touchscrOff = 0x10df24;
         public int hid_pid = 0x10;
         //TODO: add opponent data offset (right now it's a constant)
 
@@ -109,7 +110,7 @@ namespace ntrbase
         public static readonly Color[] hiddenPowerColor = { Color.FromArgb(192, 48, 40), Color.FromArgb(168, 144, 240), Color.FromArgb(160, 64, 160), Color.FromArgb(224, 192, 104), Color.FromArgb(184, 160, 56), Color.FromArgb(168, 184, 32), Color.FromArgb(112, 88, 152), Color.FromArgb(184, 184, 208), Color.FromArgb(240, 128, 48), Color.FromArgb(104, 144, 240), Color.FromArgb(120, 200, 80), Color.FromArgb(248, 208, 48), Color.FromArgb(248, 88, 136), Color.FromArgb(152, 216, 216), Color.FromArgb(112, 56, 248), Color.FromArgb(112, 88, 72), };
         public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, };
 
-        //Button codes
+        //HID values
         public static readonly uint nokey = 0xFFF;
         public static readonly uint keyA = 0xFFE;
         public static readonly uint keyB = 0xFFD;
@@ -123,6 +124,7 @@ namespace ntrbase
         public static readonly uint DpadDOWN = 0xF7F;
         public static readonly uint DpadLEFT = 0xFDF;
         public static readonly uint DpadRIGHT = 0xFEF;
+        public static readonly uint notouch = 0x02000000;
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
@@ -147,12 +149,12 @@ namespace ntrbase
         private void MainForm_Load(object sender, EventArgs e)
         {
             groupBox1.Size = new System.Drawing.Size(154, 74);
-            groupBox1.Location = new System.Drawing.Point(744, 383);
+            groupBox1.Location = new System.Drawing.Point(7, 331);
 
             if (UpdateAvailable())
             {
                 groupBox1.Size = new System.Drawing.Size(154, 97);
-                groupBox1.Location = new System.Drawing.Point(744, 383);
+                groupBox1.Location = new System.Drawing.Point(7, 331);
                 versionCheck.Visible = true;
             }
 
@@ -381,7 +383,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2399,10 +2401,43 @@ namespace ntrbase
             timer2.Start();
         }
 
+        // Update touch coordenates
+        public uint gethexcoord(decimal Xvalue, decimal Yvalue)
+        {
+            uint hexX = Convert.ToUInt32(Math.Round(Xvalue * 0xFFF / 319));
+            uint hexY = Convert.ToUInt32(Math.Round(Yvalue * 0xFFF / 239));
+            return 0x01000000 + hexY * 0x1000 + hexX;
+        }
+
+        public void sendTouch(uint coord)
+        {
+            byte[] buttonByte = BitConverter.GetBytes(coord);
+            Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
+        }
+
+        private void touchX_ValueChanged(object sender, EventArgs e)
+        {
+            SetText(touchCoord, "0x" + gethexcoord(touchX.Value, touchY.Value).ToString("X8"));
+        }
+
+        private void touchY_ValueChanged(object sender, EventArgs e)
+        {
+            SetText(touchCoord, "0x" + gethexcoord(touchX.Value, touchY.Value).ToString("X8"));
+        }
+
+        // Send manual touch command
+        private void manualTouch_Click(object sender, EventArgs e)
+        {
+            sendTouch(gethexcoord(touchX.Value, touchY.Value));
+            timer2.Start();
+        }
+
+        // Release buttons and touchscreen
         private void timer2_Tick(object sender, EventArgs e)
         {
             timer2.Stop();
             sendButton(nokey);
+            sendTouch(notouch);
         }
     }
 

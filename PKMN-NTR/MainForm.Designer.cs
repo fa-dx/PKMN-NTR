@@ -189,6 +189,12 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label50 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.manualTouch = new System.Windows.Forms.Button();
+            this.touchCoord = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.touchY = new System.Windows.Forms.NumericUpDown();
+            this.touchX = new System.Windows.Forms.NumericUpDown();
+            this.label54 = new System.Windows.Forms.Label();
             this.manualStart = new System.Windows.Forms.Button();
             this.ManualDDown = new System.Windows.Forms.Button();
             this.manualDRight = new System.Windows.Forms.Button();
@@ -260,6 +266,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -324,7 +332,7 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(740, 383);
+            this.groupBox1.Location = new System.Drawing.Point(7, 331);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 97);
             this.groupBox1.TabIndex = 6;
@@ -1968,7 +1976,7 @@
             // level
             // 
             this.level.Enabled = false;
-            this.level.Location = new System.Drawing.Point(7, 408);
+            this.level.Location = new System.Drawing.Point(179, 331);
             this.level.Name = "level";
             this.level.Size = new System.Drawing.Size(120, 20);
             this.level.TabIndex = 59;
@@ -2322,6 +2330,12 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.manualTouch);
+            this.groupBox4.Controls.Add(this.touchCoord);
+            this.groupBox4.Controls.Add(this.label55);
+            this.groupBox4.Controls.Add(this.touchY);
+            this.groupBox4.Controls.Add(this.touchX);
+            this.groupBox4.Controls.Add(this.label54);
             this.groupBox4.Controls.Add(this.manualStart);
             this.groupBox4.Controls.Add(this.ManualDDown);
             this.groupBox4.Controls.Add(this.manualDRight);
@@ -2336,10 +2350,76 @@
             this.groupBox4.Controls.Add(this.manualB);
             this.groupBox4.Location = new System.Drawing.Point(625, 257);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(273, 108);
+            this.groupBox4.Size = new System.Drawing.Size(273, 164);
             this.groupBox4.TabIndex = 62;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Remote Controls";
+            // 
+            // manualTouch
+            // 
+            this.manualTouch.Location = new System.Drawing.Point(153, 132);
+            this.manualTouch.Name = "manualTouch";
+            this.manualTouch.Size = new System.Drawing.Size(62, 23);
+            this.manualTouch.TabIndex = 74;
+            this.manualTouch.Text = "Touch";
+            this.manualTouch.UseVisualStyleBackColor = true;
+            this.manualTouch.Click += new System.EventHandler(this.manualTouch_Click);
+            // 
+            // touchCoord
+            // 
+            this.touchCoord.Location = new System.Drawing.Point(9, 134);
+            this.touchCoord.Name = "touchCoord";
+            this.touchCoord.ReadOnly = true;
+            this.touchCoord.Size = new System.Drawing.Size(138, 20);
+            this.touchCoord.TabIndex = 73;
+            this.touchCoord.Text = "0x02000000";
+            this.touchCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(221, 108);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(33, 13);
+            this.label55.TabIndex = 72;
+            this.label55.Text = "(X, Y)";
+            // 
+            // touchY
+            // 
+            this.touchY.Location = new System.Drawing.Point(153, 106);
+            this.touchY.Maximum = new decimal(new int[] {
+            239,
+            0,
+            0,
+            0});
+            this.touchY.Name = "touchY";
+            this.touchY.Size = new System.Drawing.Size(62, 20);
+            this.touchY.TabIndex = 71;
+            this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
+            this.touchY.ValueChanged += new System.EventHandler(this.touchY_ValueChanged);
+            // 
+            // touchX
+            // 
+            this.touchX.Location = new System.Drawing.Point(85, 106);
+            this.touchX.Maximum = new decimal(new int[] {
+            319,
+            0,
+            0,
+            0});
+            this.touchX.Name = "touchX";
+            this.touchX.Size = new System.Drawing.Size(62, 20);
+            this.touchX.TabIndex = 70;
+            this.toolTip1.SetToolTip(this.touchX, "X (horizontal) coordinate, from the left part of the screen.");
+            this.touchX.ValueChanged += new System.EventHandler(this.touchX_ValueChanged);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(6, 108);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(73, 13);
+            this.label54.TabIndex = 69;
+            this.label54.Text = "Touchscreen:";
             // 
             // manualStart
             // 
@@ -2470,7 +2550,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 492);
+            this.ClientSize = new System.Drawing.Size(906, 560);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
@@ -2557,6 +2637,9 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2748,6 +2831,12 @@
         private System.Windows.Forms.Button manualDRight;
         private System.Windows.Forms.Button manualDLeft;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.TextBox touchCoord;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.NumericUpDown touchY;
+        private System.Windows.Forms.NumericUpDown touchX;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Button manualTouch;
     }
 }
 
