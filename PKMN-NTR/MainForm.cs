@@ -68,6 +68,9 @@ namespace ntrbase
         public uint daycare1Off;
         public uint daycare2Off;
         public uint battleBoxOff;
+        //Offsetts for buttons
+        public uint buttonsOff = 0x10000028;
+        public int hid_pid = 0x10;
         //TODO: add opponent data offset (right now it's a constant)
 
         private byte[] itemData = new byte[1600];
@@ -106,6 +109,20 @@ namespace ntrbase
         public static readonly Color[] hiddenPowerColor = { Color.FromArgb(192, 48, 40), Color.FromArgb(168, 144, 240), Color.FromArgb(160, 64, 160), Color.FromArgb(224, 192, 104), Color.FromArgb(184, 160, 56), Color.FromArgb(168, 184, 32), Color.FromArgb(112, 88, 152), Color.FromArgb(184, 184, 208), Color.FromArgb(240, 128, 48), Color.FromArgb(104, 144, 240), Color.FromArgb(120, 200, 80), Color.FromArgb(248, 208, 48), Color.FromArgb(248, 88, 136), Color.FromArgb(152, 216, 216), Color.FromArgb(112, 56, 248), Color.FromArgb(112, 88, 72), };
         public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, };
 
+        //Button codes
+        public static readonly uint keyA = 0x01;
+        public static readonly uint keyB = 0x02;
+        public static readonly uint keyX = 0x0400;
+        public static readonly uint keyY = 0x0800;
+        public static readonly uint keyR = 0x0200;
+        public static readonly uint keyL = 0x0100;
+        public static readonly uint keySTART = 0x08;
+        public static readonly uint keySELECT = 0x04;
+        public static readonly uint DpadUP = 0x40;
+        public static readonly uint DpadDOWN = 0x80;
+        public static readonly uint DpadLEFT = 0x20;
+        public static readonly uint DpadRIGHT = 0x10;
+
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
 
@@ -129,12 +146,12 @@ namespace ntrbase
         private void MainForm_Load(object sender, EventArgs e)
         {
             groupBox1.Size = new System.Drawing.Size(154, 74);
-            groupBox1.Location = new System.Drawing.Point(744, 339);
+            groupBox1.Location = new System.Drawing.Point(744, 383);
 
             if (UpdateAvailable())
             {
                 groupBox1.Size = new System.Drawing.Size(154, 97);
-                groupBox1.Location = new System.Drawing.Point(744, 316);
+                groupBox1.Location = new System.Drawing.Point(744, 383);
                 versionCheck.Visible = true;
             }
 
@@ -363,7 +380,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2301,7 +2318,7 @@ namespace ntrbase
             {
                 for (uint j = 0; j < 8; j++)
                 {
-                    Program.scriptHelper.write(0x10000028 + 0x10 * j, buttonByte, 0x10);
+                    Program.scriptHelper.write(buttonsOff + 0x10 * j, buttonByte, hid_pid);
                 }
             }
         }
@@ -2309,15 +2326,71 @@ namespace ntrbase
         // A button
         private void manualA_Click(object sender, EventArgs e)
         {
-            sendButton(0x01);
+            sendButton(keyA);
         }
 
         // B button
         private void manualB_Click(object sender, EventArgs e)
         {
-            sendButton(0x02);
+            sendButton(keyB);
         }
 
+        // X button
+        private void manualX_Click(object sender, EventArgs e)
+        {
+            sendButton(keyX);
+        }
+
+        // Y Button
+        private void manualY_Click(object sender, EventArgs e)
+        {
+            sendButton(keyY);
+        }
+
+        //D-pad
+        private void manualDUp_Click(object sender, EventArgs e)
+        {
+            sendButton(DpadUP);
+        }
+
+        private void ManualDDown_Click(object sender, EventArgs e)
+        {
+            sendButton(DpadDOWN);
+        }
+
+        private void manualDLeft_Click(object sender, EventArgs e)
+        {
+            sendButton(DpadLEFT);
+        }
+
+        private void manualDRight_Click(object sender, EventArgs e)
+        {
+            sendButton(DpadRIGHT);
+        }
+
+        // Start button
+        private void manualStart_Click(object sender, EventArgs e)
+        {
+            sendButton(keySTART);
+        }
+
+        //Select button
+        private void manualSelect_Click(object sender, EventArgs e)
+        {
+            sendButton(keySELECT);
+        }
+
+        //L button
+        private void manualL_Click(object sender, EventArgs e)
+        {
+            sendButton(keyL);
+        }
+
+        //R button
+        private void manualR_Click(object sender, EventArgs e)
+        {
+            sendButton(keyR);
+        }
     }
 
 

@@ -189,9 +189,20 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label50 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.manualB = new System.Windows.Forms.Button();
+            this.manualStart = new System.Windows.Forms.Button();
+            this.ManualDDown = new System.Windows.Forms.Button();
+            this.manualDRight = new System.Windows.Forms.Button();
+            this.manualSelect = new System.Windows.Forms.Button();
+            this.manualR = new System.Windows.Forms.Button();
+            this.manualDLeft = new System.Windows.Forms.Button();
             this.manualA = new System.Windows.Forms.Button();
-            this.HIDText = new System.Windows.Forms.TextBox();
+            this.manualL = new System.Windows.Forms.Button();
+            this.manualY = new System.Windows.Forms.Button();
+            this.manualX = new System.Windows.Forms.Button();
+            this.manualDUp = new System.Windows.Forms.Button();
+            this.manualB = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -258,13 +269,13 @@
             this.txtLog.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtLog.ForeColor = System.Drawing.Color.LawnGreen;
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(303, 331);
+            this.txtLog.Location = new System.Drawing.Point(305, 344);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(435, 97);
+            this.txtLog.Size = new System.Drawing.Size(314, 136);
             this.txtLog.TabIndex = 0;
             this.txtLog.TextChanged += new System.EventHandler(this.txtLog_TextChanged);
             // 
@@ -302,9 +313,9 @@
             // 
             // host
             // 
-            this.host.Location = new System.Drawing.Point(33, 19);
+            this.host.Location = new System.Drawing.Point(29, 19);
             this.host.Name = "host";
-            this.host.Size = new System.Drawing.Size(115, 20);
+            this.host.Size = new System.Drawing.Size(119, 20);
             this.host.TabIndex = 5;
             // 
             // groupBox1
@@ -314,7 +325,7 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(744, 331);
+            this.groupBox1.Location = new System.Drawing.Point(740, 383);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 97);
             this.groupBox1.TabIndex = 6;
@@ -2304,7 +2315,7 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(463, 431);
+            this.label50.Location = new System.Drawing.Point(302, 328);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(121, 13);
             this.label50.TabIndex = 61;
@@ -2312,49 +2323,171 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.HIDText);
-            this.groupBox4.Controls.Add(this.manualB);
+            this.groupBox4.Controls.Add(this.manualStart);
+            this.groupBox4.Controls.Add(this.ManualDDown);
+            this.groupBox4.Controls.Add(this.manualDRight);
+            this.groupBox4.Controls.Add(this.manualSelect);
+            this.groupBox4.Controls.Add(this.manualR);
+            this.groupBox4.Controls.Add(this.manualDLeft);
             this.groupBox4.Controls.Add(this.manualA);
+            this.groupBox4.Controls.Add(this.manualL);
+            this.groupBox4.Controls.Add(this.manualY);
+            this.groupBox4.Controls.Add(this.manualX);
+            this.groupBox4.Controls.Add(this.manualDUp);
+            this.groupBox4.Controls.Add(this.manualB);
             this.groupBox4.Location = new System.Drawing.Point(625, 257);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(273, 68);
+            this.groupBox4.Size = new System.Drawing.Size(273, 108);
             this.groupBox4.TabIndex = 62;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Remote Controls";
             // 
-            // manualB
+            // manualStart
             // 
-            this.manualB.Location = new System.Drawing.Point(38, 19);
-            this.manualB.Name = "manualB";
-            this.manualB.Size = new System.Drawing.Size(24, 23);
-            this.manualB.TabIndex = 1;
-            this.manualB.Text = "B";
-            this.manualB.UseVisualStyleBackColor = true;
-            this.manualB.Click += new System.EventHandler(this.manualB_Click);
+            this.manualStart.Location = new System.Drawing.Point(64, 77);
+            this.manualStart.Name = "manualStart";
+            this.manualStart.Size = new System.Drawing.Size(62, 23);
+            this.manualStart.TabIndex = 68;
+            this.manualStart.Text = "START";
+            this.manualStart.UseVisualStyleBackColor = true;
+            this.manualStart.Click += new System.EventHandler(this.manualStart_Click);
+            // 
+            // ManualDDown
+            // 
+            this.ManualDDown.Location = new System.Drawing.Point(35, 77);
+            this.ManualDDown.Name = "ManualDDown";
+            this.ManualDDown.Size = new System.Drawing.Size(23, 23);
+            this.ManualDDown.TabIndex = 67;
+            this.ManualDDown.Text = "↓";
+            this.ManualDDown.UseVisualStyleBackColor = true;
+            this.ManualDDown.Click += new System.EventHandler(this.ManualDDown_Click);
+            // 
+            // manualDRight
+            // 
+            this.manualDRight.Location = new System.Drawing.Point(64, 48);
+            this.manualDRight.Name = "manualDRight";
+            this.manualDRight.Size = new System.Drawing.Size(23, 23);
+            this.manualDRight.TabIndex = 67;
+            this.manualDRight.Text = "→";
+            this.manualDRight.UseVisualStyleBackColor = true;
+            this.manualDRight.Click += new System.EventHandler(this.manualDRight_Click);
+            // 
+            // manualSelect
+            // 
+            this.manualSelect.Location = new System.Drawing.Point(147, 77);
+            this.manualSelect.Name = "manualSelect";
+            this.manualSelect.Size = new System.Drawing.Size(62, 23);
+            this.manualSelect.TabIndex = 67;
+            this.manualSelect.Text = "SELECT";
+            this.manualSelect.UseVisualStyleBackColor = true;
+            this.manualSelect.Click += new System.EventHandler(this.manualSelect_Click);
+            // 
+            // manualR
+            // 
+            this.manualR.Location = new System.Drawing.Point(147, 19);
+            this.manualR.Name = "manualR";
+            this.manualR.Size = new System.Drawing.Size(23, 23);
+            this.manualR.TabIndex = 64;
+            this.manualR.Text = "R";
+            this.manualR.UseVisualStyleBackColor = true;
+            this.manualR.Click += new System.EventHandler(this.manualR_Click);
+            // 
+            // manualDLeft
+            // 
+            this.manualDLeft.Location = new System.Drawing.Point(6, 48);
+            this.manualDLeft.Name = "manualDLeft";
+            this.manualDLeft.Size = new System.Drawing.Size(23, 23);
+            this.manualDLeft.TabIndex = 67;
+            this.manualDLeft.Text = "←";
+            this.manualDLeft.UseVisualStyleBackColor = true;
+            this.manualDLeft.Click += new System.EventHandler(this.manualDLeft_Click);
             // 
             // manualA
             // 
-            this.manualA.Location = new System.Drawing.Point(6, 19);
+            this.manualA.Location = new System.Drawing.Point(244, 48);
             this.manualA.Name = "manualA";
-            this.manualA.Size = new System.Drawing.Size(22, 23);
+            this.manualA.Size = new System.Drawing.Size(23, 23);
             this.manualA.TabIndex = 0;
             this.manualA.Text = "A";
             this.manualA.UseVisualStyleBackColor = true;
             this.manualA.Click += new System.EventHandler(this.manualA_Click);
             // 
-            // HIDText
+            // manualL
             // 
-            this.HIDText.Location = new System.Drawing.Point(166, 17);
-            this.HIDText.Multiline = true;
-            this.HIDText.Name = "HIDText";
-            this.HIDText.Size = new System.Drawing.Size(100, 43);
-            this.HIDText.TabIndex = 2;
+            this.manualL.Location = new System.Drawing.Point(103, 19);
+            this.manualL.Name = "manualL";
+            this.manualL.Size = new System.Drawing.Size(23, 23);
+            this.manualL.TabIndex = 63;
+            this.manualL.Text = "L";
+            this.manualL.UseVisualStyleBackColor = true;
+            this.manualL.Click += new System.EventHandler(this.manualL_Click);
+            // 
+            // manualY
+            // 
+            this.manualY.Location = new System.Drawing.Point(186, 48);
+            this.manualY.Name = "manualY";
+            this.manualY.Size = new System.Drawing.Size(23, 23);
+            this.manualY.TabIndex = 3;
+            this.manualY.Text = "Y";
+            this.manualY.UseVisualStyleBackColor = true;
+            this.manualY.Click += new System.EventHandler(this.manualY_Click);
+            // 
+            // manualX
+            // 
+            this.manualX.Location = new System.Drawing.Point(215, 19);
+            this.manualX.Name = "manualX";
+            this.manualX.Size = new System.Drawing.Size(23, 23);
+            this.manualX.TabIndex = 2;
+            this.manualX.Text = "X";
+            this.manualX.UseVisualStyleBackColor = true;
+            this.manualX.Click += new System.EventHandler(this.manualX_Click);
+            // 
+            // manualDUp
+            // 
+            this.manualDUp.Location = new System.Drawing.Point(35, 19);
+            this.manualDUp.Name = "manualDUp";
+            this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.manualDUp.Size = new System.Drawing.Size(23, 23);
+            this.manualDUp.TabIndex = 4;
+            this.manualDUp.Text = "↑";
+            this.manualDUp.UseVisualStyleBackColor = true;
+            this.manualDUp.Click += new System.EventHandler(this.manualDUp_Click);
+            // 
+            // manualB
+            // 
+            this.manualB.Location = new System.Drawing.Point(215, 77);
+            this.manualB.Name = "manualB";
+            this.manualB.Size = new System.Drawing.Size(23, 23);
+            this.manualB.TabIndex = 1;
+            this.manualB.Text = "B";
+            this.manualB.UseVisualStyleBackColor = true;
+            this.manualB.Click += new System.EventHandler(this.manualB_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(196, 419);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(23, 23);
+            this.button5.TabIndex = 65;
+            this.button5.Text = "4";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(212, 419);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(23, 23);
+            this.button6.TabIndex = 66;
+            this.button6.Text = "5";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 451);
+            this.ClientSize = new System.Drawing.Size(906, 492);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
@@ -2441,7 +2574,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2622,7 +2754,18 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button manualA;
         private System.Windows.Forms.Button manualB;
-        private System.Windows.Forms.TextBox HIDText;
+        private System.Windows.Forms.Button manualX;
+        private System.Windows.Forms.Button manualY;
+        private System.Windows.Forms.Button manualSelect;
+        private System.Windows.Forms.Button manualDUp;
+        private System.Windows.Forms.Button manualL;
+        private System.Windows.Forms.Button manualR;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button manualStart;
+        private System.Windows.Forms.Button ManualDDown;
+        private System.Windows.Forms.Button manualDRight;
+        private System.Windows.Forms.Button manualDLeft;
     }
 }
 
