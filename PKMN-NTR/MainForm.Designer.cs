@@ -189,7 +189,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label50 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.manualB = new System.Windows.Forms.Button();
             this.manualA = new System.Windows.Forms.Button();
+            this.HIDText = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -2310,23 +2312,43 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.HIDText);
+            this.groupBox4.Controls.Add(this.manualB);
             this.groupBox4.Controls.Add(this.manualA);
             this.groupBox4.Location = new System.Drawing.Point(625, 257);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(273, 68);
             this.groupBox4.TabIndex = 62;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Manual Controls";
+            this.groupBox4.Text = "Remote Controls";
+            // 
+            // manualB
+            // 
+            this.manualB.Location = new System.Drawing.Point(38, 19);
+            this.manualB.Name = "manualB";
+            this.manualB.Size = new System.Drawing.Size(24, 23);
+            this.manualB.TabIndex = 1;
+            this.manualB.Text = "B";
+            this.manualB.UseVisualStyleBackColor = true;
+            this.manualB.Click += new System.EventHandler(this.manualB_Click);
             // 
             // manualA
             // 
-            this.manualA.Location = new System.Drawing.Point(244, 16);
+            this.manualA.Location = new System.Drawing.Point(6, 19);
             this.manualA.Name = "manualA";
             this.manualA.Size = new System.Drawing.Size(22, 23);
             this.manualA.TabIndex = 0;
             this.manualA.Text = "A";
             this.manualA.UseVisualStyleBackColor = true;
             this.manualA.Click += new System.EventHandler(this.manualA_Click);
+            // 
+            // HIDText
+            // 
+            this.HIDText.Location = new System.Drawing.Point(166, 17);
+            this.HIDText.Multiline = true;
+            this.HIDText.Name = "HIDText";
+            this.HIDText.Size = new System.Drawing.Size(100, 43);
+            this.HIDText.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -2419,6 +2441,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2598,6 +2621,8 @@
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button manualA;
+        private System.Windows.Forms.Button manualB;
+        private System.Windows.Forms.TextBox HIDText;
     }
 }
 
