@@ -201,8 +201,6 @@
             this.manualX = new System.Windows.Forms.Button();
             this.manualDUp = new System.Windows.Forms.Button();
             this.manualB = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
@@ -2464,24 +2462,6 @@
             this.manualB.UseVisualStyleBackColor = true;
             this.manualB.Click += new System.EventHandler(this.manualB_Click);
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(196, 419);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(23, 23);
-            this.button5.TabIndex = 65;
-            this.button5.Text = "4";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(212, 419);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(23, 23);
-            this.button6.TabIndex = 66;
-            this.button6.Text = "5";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
             // timer2
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
@@ -2491,8 +2471,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 492);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
@@ -2765,8 +2743,6 @@
         private System.Windows.Forms.Button manualDUp;
         private System.Windows.Forms.Button manualL;
         private System.Windows.Forms.Button manualR;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button manualStart;
         private System.Windows.Forms.Button ManualDDown;
         private System.Windows.Forms.Button manualDRight;

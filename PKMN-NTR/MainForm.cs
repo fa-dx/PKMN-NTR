@@ -69,7 +69,7 @@ namespace ntrbase
         public uint daycare2Off;
         public uint battleBoxOff;
         //Offsetts for buttons
-        public uint buttonsOff = 0x10000028;
+        public uint buttonsOff = 0x10df20;
         public int hid_pid = 0x10;
         //TODO: add opponent data offset (right now it's a constant)
 
@@ -2315,7 +2315,7 @@ namespace ntrbase
         public void sendButton(uint command)
         {
             byte[] buttonByte = BitConverter.GetBytes(command);
-            Program.scriptHelper.write(0x10df20, buttonByte, hid_pid);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
         }
 
         // A button
