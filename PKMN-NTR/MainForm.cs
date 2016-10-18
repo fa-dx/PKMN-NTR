@@ -110,18 +110,19 @@ namespace ntrbase
         public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, };
 
         //Button codes
-        public static readonly uint keyA = 0x01;
-        public static readonly uint keyB = 0x02;
-        public static readonly uint keyX = 0x0400;
-        public static readonly uint keyY = 0x0800;
-        public static readonly uint keyR = 0x0200;
-        public static readonly uint keyL = 0x0100;
-        public static readonly uint keySTART = 0x08;
-        public static readonly uint keySELECT = 0x04;
-        public static readonly uint DpadUP = 0x40;
-        public static readonly uint DpadDOWN = 0x80;
-        public static readonly uint DpadLEFT = 0x20;
-        public static readonly uint DpadRIGHT = 0x10;
+        public static readonly uint nokey = 0xFFF;
+        public static readonly uint keyA = 0xFFE;
+        public static readonly uint keyB = 0xFFD;
+        public static readonly uint keyX = 0xBFF;
+        public static readonly uint keyY = 0x7FF;
+        public static readonly uint keyR = 0xEFF;
+        public static readonly uint keyL = 0xDFF;
+        public static readonly uint keySTART = 0xFF7;
+        public static readonly uint keySELECT = 0xFFB;
+        public static readonly uint DpadUP = 0xFBF;
+        public static readonly uint DpadDOWN = 0xF7F;
+        public static readonly uint DpadLEFT = 0xFDF;
+        public static readonly uint DpadRIGHT = 0xFEF;
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
@@ -2314,82 +2315,94 @@ namespace ntrbase
         public void sendButton(uint command)
         {
             byte[] buttonByte = BitConverter.GetBytes(command);
-            for (uint i = 0; i < 20; i++)
-            {
-                for (uint j = 0; j < 8; j++)
-                {
-                    Program.scriptHelper.write(buttonsOff + 0x10 * j, buttonByte, hid_pid);
-                }
-            }
+            Program.scriptHelper.write(0x10df20, buttonByte, hid_pid);
         }
 
         // A button
         private void manualA_Click(object sender, EventArgs e)
         {
             sendButton(keyA);
+            timer2.Start();
         }
 
         // B button
         private void manualB_Click(object sender, EventArgs e)
         {
             sendButton(keyB);
+            timer2.Start();
         }
 
         // X button
         private void manualX_Click(object sender, EventArgs e)
         {
             sendButton(keyX);
+            timer2.Start();
         }
 
         // Y Button
         private void manualY_Click(object sender, EventArgs e)
         {
             sendButton(keyY);
+            timer2.Start();
         }
 
         //D-pad
         private void manualDUp_Click(object sender, EventArgs e)
         {
             sendButton(DpadUP);
+            timer2.Start();
         }
 
         private void ManualDDown_Click(object sender, EventArgs e)
         {
             sendButton(DpadDOWN);
+            timer2.Start();
         }
 
         private void manualDLeft_Click(object sender, EventArgs e)
         {
             sendButton(DpadLEFT);
+            timer2.Start();
         }
 
         private void manualDRight_Click(object sender, EventArgs e)
         {
             sendButton(DpadRIGHT);
+            timer2.Start();
         }
 
         // Start button
         private void manualStart_Click(object sender, EventArgs e)
         {
             sendButton(keySTART);
+            timer2.Start();
         }
 
         //Select button
         private void manualSelect_Click(object sender, EventArgs e)
         {
             sendButton(keySELECT);
+            timer2.Start();
         }
 
         //L button
         private void manualL_Click(object sender, EventArgs e)
         {
             sendButton(keyL);
+            timer2.Start();
         }
 
         //R button
         private void manualR_Click(object sender, EventArgs e)
         {
             sendButton(keyR);
+            timer2.Start();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            timer2.Stop();
+            sendButton(nokey);
         }
     }
 

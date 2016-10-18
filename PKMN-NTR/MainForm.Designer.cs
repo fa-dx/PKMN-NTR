@@ -203,6 +203,7 @@
             this.manualB = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -2481,6 +2482,10 @@
             this.button6.Text = "5";
             this.button6.UseVisualStyleBackColor = true;
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2766,6 +2771,7 @@
         private System.Windows.Forms.Button ManualDDown;
         private System.Windows.Forms.Button manualDRight;
         private System.Windows.Forms.Button manualDLeft;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 
