@@ -2353,9 +2353,9 @@
             this.label50.AutoSize = true;
             this.label50.Location = new System.Drawing.Point(302, 328);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(121, 13);
+            this.label50.Size = new System.Drawing.Size(124, 13);
             this.label50.TabIndex = 61;
-            this.label50.Text = "NTR communication log";
+            this.label50.Text = "NTR communication log:";
             // 
             // groupBox4
             // 

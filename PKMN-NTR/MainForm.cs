@@ -149,6 +149,116 @@ namespace ntrbase
         public System.Windows.Forms.ToolTip ToolTipTSVs = new System.Windows.Forms.ToolTip();
         public System.Windows.Forms.ToolTip ToolTipPSV = new System.Windows.Forms.ToolTip();
 
+        #region update checking
+        public static bool PingHost(string nameOrAddress)
+        {
+            bool pingable = false;
+            Ping pinger = new Ping();
+            try
+            {
+                PingReply reply = pinger.Send(nameOrAddress);
+                pingable = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+
+            }
+            return pingable;
+        }
+
+        class UpdateDetails
+        {
+            public Version v;
+            public string url;
+            public string about;
+        }
+
+        public bool UpdateAvailable()
+        {
+            Version netVersion = null;
+            string netUrl = "";
+            string netAbout = "";
+            if (PingHost("fadx.co.uk") == true)
+            {
+                string xmlUrl = "http://fadx.co.uk/PKMN-NTR/update.xml";
+                XmlTextReader reader = null;
+                try
+                {
+                    reader = new XmlTextReader(xmlUrl);
+                    reader.MoveToContent();
+                    string elementName = "";
+                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "appinfo"))
+                    {
+                        while (reader.Read())
+                        {
+                            if (reader.NodeType == XmlNodeType.Element)
+                            {
+                                elementName = reader.Name;
+                            }
+                            else
+                            {
+                                if ((reader.NodeType == XmlNodeType.Text) && (reader.HasValue))
+                                    switch (elementName)
+                                    {
+                                        case "version":
+                                            netVersion = new Version(reader.Value);
+                                            break;
+                                        case "url":
+                                            netUrl = reader.Value;
+                                            break;
+                                        case "about":
+                                            netAbout = reader.Value;
+                                            break;
+
+                                    }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occured while checking for updates:\r\n" + ex.Message);
+                }
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                }
+
+                Version applicationVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                if (applicationVersion.CompareTo(netVersion) < 0)
+                {
+                    foundUpdate = new UpdateDetails();
+                    foundUpdate.v = netVersion;
+                    foundUpdate.url = netUrl;
+                    foundUpdate.about = netAbout;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void AskToUpdate()
+        {
+            if (foundUpdate != null)
+            {
+                Version applicationVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                string str = String.Format("Current Version: {0}.\nLatest Vesion: {1}. \n\nWhat's new: {2} ", applicationVersion, foundUpdate.v, foundUpdate.about);
+                if (DialogResult.No != MessageBox.Show(str + "\n\nDownload now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    try
+                    {
+                        Process.Start(foundUpdate.url);
+                    }
+                    catch { }
+                    return;
+                }
+            }
+        }
+        #endregion update checking
+
+        public delegate void LogDelegate(string l);
+        public LogDelegate delAddLog;
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -271,115 +381,6 @@ namespace ntrbase
             host.Text = Settings.Default.IP;
         }
 
-        public static bool PingHost(string nameOrAddress)
-        {
-            bool pingable = false;
-            Ping pinger = new Ping();
-            try
-            {
-                PingReply reply = pinger.Send(nameOrAddress);
-                pingable = reply.Status == IPStatus.Success;
-            }
-            catch (PingException)
-            {
-
-            }
-            return pingable;
-        }
-
-        class UpdateDetails
-        {
-            public Version v;
-            public string url;
-            public string about;
-        }
-
-        public bool UpdateAvailable()
-        {
-            Version netVersion = null;
-            string netUrl = "";
-            string netAbout = "";
-            if (PingHost("fadx.co.uk") == true)
-            {
-                string xmlUrl = "http://fadx.co.uk/PKMN-NTR/update.xml";
-                XmlTextReader reader = null;
-                try
-                {
-                    reader = new XmlTextReader(xmlUrl);
-                    reader.MoveToContent();
-                    string elementName = "";
-                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "appinfo"))
-                    {
-                        while (reader.Read())
-                        {
-                            if (reader.NodeType == XmlNodeType.Element)
-                            {
-                                elementName = reader.Name;
-                            }
-                            else
-                            {
-                                if ((reader.NodeType == XmlNodeType.Text) && (reader.HasValue))
-                                    switch (elementName)
-                                    {
-                                        case "version":
-                                            netVersion = new Version(reader.Value);
-                                            break;
-                                        case "url":
-                                            netUrl = reader.Value;
-                                            break;
-                                        case "about":
-                                            netAbout = reader.Value;
-                                            break;
-
-                                    }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occured while checking for updates:\r\n" + ex.Message);
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
-
-                Version applicationVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                if (applicationVersion.CompareTo(netVersion) < 0)
-                {
-                    foundUpdate = new UpdateDetails();
-                    foundUpdate.v = netVersion;
-                    foundUpdate.url = netUrl;
-                    foundUpdate.about = netAbout;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public void AskToUpdate()
-        {
-            if (foundUpdate != null)
-            {
-                Version applicationVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                string str = String.Format("Current Version: {0}.\nLatest Vesion: {1}. \n\nWhat's new: {2} ", applicationVersion, foundUpdate.v, foundUpdate.about);
-                if (DialogResult.No != MessageBox.Show(str + "\n\nDownload now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                {
-                    try
-                    {
-                        Process.Start(foundUpdate.url);
-                    }
-                    catch { }
-                    return;
-                }
-            }
-        }
-
-        public delegate void LogDelegate(string l);
-        public LogDelegate delAddLog;
-
         public MainForm()
         {
             Program.ntrClient.DataReady += handleDataReady;
@@ -482,7 +483,7 @@ namespace ntrbase
                 hroff = 0x8CE2814;
                 langoff = 0x8C79C69;
                 tradeoffrg = 0x8500000;
-                battleBoxOff = 147237932;
+                battleBoxOff = 0x8C6AC2C;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -510,7 +511,7 @@ namespace ntrbase
                 hroff = 0x8CE2814;
                 langoff = 0x8C79C69;
                 tradeoffrg = 0x8500000;
-                battleBoxOff = 147237932;
+                battleBoxOff = 0x8C6AC2C;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -538,7 +539,7 @@ namespace ntrbase
                 hroff = 0x8CFBD88;
                 langoff = 0x8C8136D;
                 tradeoffrg = 0x8520000;
-                battleBoxOff = 147268400;
+                battleBoxOff = 0x8C72330;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -566,7 +567,7 @@ namespace ntrbase
                 hroff = 0x8CFBD88;
                 langoff = 0x8C8136D;
                 tradeoffrg = 0x8520000;
-                battleBoxOff = 147268400;
+                battleBoxOff = 0x8C72330;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -1194,10 +1195,10 @@ namespace ntrbase
             { //TODO: TEMPORARY HACK, DO PROPER ERROR HANDLING
                 DataReadyWaiting args = (DataReadyWaiting)args_obj;
 
-                //TODO: write it to a different object first, check correctness, then write it to dumpedPKHeX
-                dumpedPKHeX.Data = PKHeX.decryptArray(args.data);
+                PKHeX validator = new PKHeX();
+                validator.Data = PKHeX.decryptArray(args.data); 
 
-                bool dataCorrect = dumpedPKHeX.Species != 0;
+                bool dataCorrect = validator.Species != 0;
                 if (!onlyView.Checked)
                 {
                     DialogResult res = DialogResult.Cancel;
@@ -1211,7 +1212,7 @@ namespace ntrbase
                         string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\";
                         (new System.IO.FileInfo(folderPath)).Directory.Create();
                         string fileName = nameek6.Text + ".pk6";
-                        writePokemonToFile(dumpedPKHeX.Data, folderPath + fileName);
+                        writePokemonToFile(validator.Data, folderPath + fileName);
                     }
                 }
                 else if (!dataCorrect)
@@ -1221,6 +1222,8 @@ namespace ntrbase
 
                 if (!dataCorrect)
                     return;
+
+                dumpedPKHeX.Data = validator.Data;
 
                 SetSelectedIndex(species, dumpedPKHeX.Species - 1);
                 SetValue(ivHPNum, dumpedPKHeX.IV_HP);
@@ -1626,7 +1629,6 @@ namespace ntrbase
             waitingForData.Add(mySeq, myArgs);
         }
 
-        //TODO: don't save empty spaces to file, it's pointless
         private void handleDeleteData(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
