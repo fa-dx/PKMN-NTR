@@ -187,13 +187,13 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.deleteKeepBackup = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.touchY = new System.Windows.Forms.NumericUpDown();
+            this.touchX = new System.Windows.Forms.NumericUpDown();
             this.label50 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.manualTouch = new System.Windows.Forms.Button();
             this.touchCoord = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
-            this.touchY = new System.Windows.Forms.NumericUpDown();
-            this.touchX = new System.Windows.Forms.NumericUpDown();
             this.label54 = new System.Windows.Forms.Label();
             this.manualStart = new System.Windows.Forms.Button();
             this.ManualDDown = new System.Windows.Forms.Button();
@@ -208,6 +208,7 @@
             this.manualDUp = new System.Windows.Forms.Button();
             this.manualB = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.botWonderTrade = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -265,9 +266,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.writeSlotTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).BeginInit();
             this.tabPage1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -2319,6 +2320,34 @@
             this.toolTip1.SetToolTip(this.deleteKeepBackup, "Backup to file before deleting");
             this.deleteKeepBackup.UseVisualStyleBackColor = true;
             // 
+            // touchY
+            // 
+            this.touchY.Location = new System.Drawing.Point(153, 106);
+            this.touchY.Maximum = new decimal(new int[] {
+            239,
+            0,
+            0,
+            0});
+            this.touchY.Name = "touchY";
+            this.touchY.Size = new System.Drawing.Size(62, 20);
+            this.touchY.TabIndex = 71;
+            this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
+            this.touchY.ValueChanged += new System.EventHandler(this.touchY_ValueChanged);
+            // 
+            // touchX
+            // 
+            this.touchX.Location = new System.Drawing.Point(85, 106);
+            this.touchX.Maximum = new decimal(new int[] {
+            319,
+            0,
+            0,
+            0});
+            this.touchX.Name = "touchX";
+            this.touchX.Size = new System.Drawing.Size(62, 20);
+            this.touchX.TabIndex = 70;
+            this.toolTip1.SetToolTip(this.touchX, "X (horizontal) coordinate, from the left part of the screen.");
+            this.touchX.ValueChanged += new System.EventHandler(this.touchX_ValueChanged);
+            // 
             // label50
             // 
             this.label50.AutoSize = true;
@@ -2383,34 +2412,6 @@
             this.label55.Size = new System.Drawing.Size(33, 13);
             this.label55.TabIndex = 72;
             this.label55.Text = "(X, Y)";
-            // 
-            // touchY
-            // 
-            this.touchY.Location = new System.Drawing.Point(153, 106);
-            this.touchY.Maximum = new decimal(new int[] {
-            239,
-            0,
-            0,
-            0});
-            this.touchY.Name = "touchY";
-            this.touchY.Size = new System.Drawing.Size(62, 20);
-            this.touchY.TabIndex = 71;
-            this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
-            this.touchY.ValueChanged += new System.EventHandler(this.touchY_ValueChanged);
-            // 
-            // touchX
-            // 
-            this.touchX.Location = new System.Drawing.Point(85, 106);
-            this.touchX.Maximum = new decimal(new int[] {
-            319,
-            0,
-            0,
-            0});
-            this.touchX.Name = "touchX";
-            this.touchX.Size = new System.Drawing.Size(62, 20);
-            this.touchX.TabIndex = 70;
-            this.toolTip1.SetToolTip(this.touchX, "X (horizontal) coordinate, from the left part of the screen.");
-            this.touchX.ValueChanged += new System.EventHandler(this.touchX_ValueChanged);
             // 
             // label54
             // 
@@ -2546,11 +2547,22 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // botWonderTrade
+            // 
+            this.botWonderTrade.Location = new System.Drawing.Point(625, 427);
+            this.botWonderTrade.Name = "botWonderTrade";
+            this.botWonderTrade.Size = new System.Drawing.Size(273, 23);
+            this.botWonderTrade.TabIndex = 63;
+            this.botWonderTrade.Text = "Wonder Trade Bot";
+            this.botWonderTrade.UseVisualStyleBackColor = true;
+            this.botWonderTrade.Click += new System.EventHandler(this.botWonderTrade_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 560);
+            this.Controls.Add(this.botWonderTrade);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
@@ -2636,10 +2648,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2837,6 +2849,7 @@
         private System.Windows.Forms.NumericUpDown touchX;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Button manualTouch;
+        private System.Windows.Forms.Button botWonderTrade;
     }
 }
 

@@ -16,6 +16,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ntrbase
 {
@@ -109,6 +110,9 @@ namespace ntrbase
         public static readonly string[] hiddenPowerString = { "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fire", "Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", };
         public static readonly Color[] hiddenPowerColor = { Color.FromArgb(192, 48, 40), Color.FromArgb(168, 144, 240), Color.FromArgb(160, 64, 160), Color.FromArgb(224, 192, 104), Color.FromArgb(184, 160, 56), Color.FromArgb(168, 184, 32), Color.FromArgb(112, 88, 152), Color.FromArgb(184, 184, 208), Color.FromArgb(240, 128, 48), Color.FromArgb(104, 144, 240), Color.FromArgb(120, 200, 80), Color.FromArgb(248, 208, 48), Color.FromArgb(248, 88, 136), Color.FromArgb(152, 216, 216), Color.FromArgb(112, 56, 248), Color.FromArgb(112, 88, 72), };
         public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, };
+        // Position in boxes
+        public static readonly uint[] boxXcord = { 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180 };
+        public static readonly uint[] boxYcord = { 60, 60, 60, 60, 60, 60, 90, 90, 90, 90, 90, 90, 120, 120, 120, 120, 120, 120, 150, 150, 150, 150, 150, 150, 180, 180, 180, 180, 180, 180, };
 
         //HID values
         public static readonly uint nokey = 0xFFF;
@@ -383,7 +387,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, botWonderTrade };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2312,6 +2316,8 @@ namespace ntrbase
         }
         #endregion fucking thread safety
 
+        #region Remote control
+
         // Test for remote control
 
         public void sendButton(uint command)
@@ -2439,6 +2445,56 @@ namespace ntrbase
             sendButton(nokey);
             sendTouch(notouch);
         }
+
+        #endregion Remote control
+
+        #region Bots
+
+        public async void autobuttonsend(uint command)
+        {
+            sendButton(command);
+            await Task.Delay(100);
+            sendButton(nokey);
+        }
+
+        public async void autotouchsend(decimal Xvalue, decimal Yvalue)
+        {
+            sendTouch(gethexcoord(Xvalue, Yvalue));
+            await Task.Delay(100);
+            sendTouch(notouch);
+        }
+
+        private async void botWonderTrade_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("This scirpt will Wonder Trade the first pokémon on the active PC box. Do not touch your 3DS until the scirpt is finished. This bot is in early stages so, try it under your own risk." + Environment.NewLine + Environment.NewLine + "Before starting make sure:" + Environment.NewLine + Environment.NewLine + "- The active box is not the Battle Box." + Environment.NewLine + "- There is a pokémon in the first slot of that box." + Environment.NewLine + "- The PSS screen is in the bottom screen." + Environment.NewLine + Environment.NewLine + "Do you want to continue?", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.OK)
+            {
+                foreach (Control c in enableWhenConnected)
+                {
+                    c.Enabled = false;
+                }
+                autobuttonsend(keySTART); // Press Start button
+                await Task.Delay(500);
+                autotouchsend(240, 120); // Press Wonder Trade button
+                await Task.Delay(2000);
+                autobuttonsend(keyA); // Press A button
+                await Task.Delay(4000); // Wait for game save
+                autotouchsend(160, 100); // Press Yes
+                await Task.Delay(3000); // Wait box loading
+                autotouchsend(boxXcord[0], boxYcord[0]); // Select slot 1
+                await Task.Delay(500);
+                autobuttonsend(keyA); // Press A button
+                await Task.Delay(500);
+                autobuttonsend(keyA); // Press A button
+                foreach (Control c in enableWhenConnected)
+                {
+                    c.Enabled = true;
+                }
+                MessageBox.Show("Finished", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        
+        #endregion Bots
     }
 
 
