@@ -190,7 +190,6 @@
             this.touchY = new System.Windows.Forms.NumericUpDown();
             this.touchX = new System.Windows.Forms.NumericUpDown();
             this.label50 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.manualTouch = new System.Windows.Forms.Button();
             this.touchCoord = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
@@ -208,7 +207,16 @@
             this.manualDUp = new System.Windows.Forms.Button();
             this.manualB = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.botWonderTrade = new System.Windows.Forms.Button();
+            this.RunWTbot = new System.Windows.Forms.Button();
+            this.BotTab = new System.Windows.Forms.TabControl();
+            this.RemonteControls = new System.Windows.Forms.TabPage();
+            this.WonderTradeBot = new System.Windows.Forms.TabPage();
+            this.label59 = new System.Windows.Forms.Label();
+            this.WTtradesNo = new System.Windows.Forms.NumericUpDown();
+            this.label57 = new System.Windows.Forms.Label();
+            this.WTBox = new System.Windows.Forms.NumericUpDown();
+            this.WTSlot = new System.Windows.Forms.NumericUpDown();
+            this.label58 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -268,7 +276,12 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            this.BotTab.SuspendLayout();
+            this.RemonteControls.SuspendLayout();
+            this.WonderTradeBot.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -283,7 +296,7 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(314, 136);
+            this.txtLog.Size = new System.Drawing.Size(314, 95);
             this.txtLog.TabIndex = 0;
             this.txtLog.TextChanged += new System.EventHandler(this.txtLog_TextChanged);
             // 
@@ -2322,7 +2335,7 @@
             // 
             // touchY
             // 
-            this.touchY.Location = new System.Drawing.Point(153, 106);
+            this.touchY.Location = new System.Drawing.Point(153, 97);
             this.touchY.Maximum = new decimal(new int[] {
             239,
             0,
@@ -2336,7 +2349,7 @@
             // 
             // touchX
             // 
-            this.touchX.Location = new System.Drawing.Point(85, 106);
+            this.touchX.Location = new System.Drawing.Point(85, 97);
             this.touchX.Maximum = new decimal(new int[] {
             319,
             0,
@@ -2357,36 +2370,9 @@
             this.label50.TabIndex = 61;
             this.label50.Text = "NTR communication log:";
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.manualTouch);
-            this.groupBox4.Controls.Add(this.touchCoord);
-            this.groupBox4.Controls.Add(this.label55);
-            this.groupBox4.Controls.Add(this.touchY);
-            this.groupBox4.Controls.Add(this.touchX);
-            this.groupBox4.Controls.Add(this.label54);
-            this.groupBox4.Controls.Add(this.manualStart);
-            this.groupBox4.Controls.Add(this.ManualDDown);
-            this.groupBox4.Controls.Add(this.manualDRight);
-            this.groupBox4.Controls.Add(this.manualSelect);
-            this.groupBox4.Controls.Add(this.manualR);
-            this.groupBox4.Controls.Add(this.manualDLeft);
-            this.groupBox4.Controls.Add(this.manualA);
-            this.groupBox4.Controls.Add(this.manualL);
-            this.groupBox4.Controls.Add(this.manualY);
-            this.groupBox4.Controls.Add(this.manualX);
-            this.groupBox4.Controls.Add(this.manualDUp);
-            this.groupBox4.Controls.Add(this.manualB);
-            this.groupBox4.Location = new System.Drawing.Point(625, 257);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(273, 164);
-            this.groupBox4.TabIndex = 62;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Remote Controls";
-            // 
             // manualTouch
             // 
-            this.manualTouch.Location = new System.Drawing.Point(153, 132);
+            this.manualTouch.Location = new System.Drawing.Point(153, 123);
             this.manualTouch.Name = "manualTouch";
             this.manualTouch.Size = new System.Drawing.Size(62, 23);
             this.manualTouch.TabIndex = 74;
@@ -2396,7 +2382,7 @@
             // 
             // touchCoord
             // 
-            this.touchCoord.Location = new System.Drawing.Point(9, 134);
+            this.touchCoord.Location = new System.Drawing.Point(9, 125);
             this.touchCoord.Name = "touchCoord";
             this.touchCoord.ReadOnly = true;
             this.touchCoord.Size = new System.Drawing.Size(138, 20);
@@ -2407,7 +2393,7 @@
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(221, 108);
+            this.label55.Location = new System.Drawing.Point(221, 99);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(33, 13);
             this.label55.TabIndex = 72;
@@ -2416,7 +2402,7 @@
             // label54
             // 
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(6, 108);
+            this.label54.Location = new System.Drawing.Point(6, 99);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(73, 13);
             this.label54.TabIndex = 69;
@@ -2424,7 +2410,7 @@
             // 
             // manualStart
             // 
-            this.manualStart.Location = new System.Drawing.Point(64, 77);
+            this.manualStart.Location = new System.Drawing.Point(64, 68);
             this.manualStart.Name = "manualStart";
             this.manualStart.Size = new System.Drawing.Size(62, 23);
             this.manualStart.TabIndex = 68;
@@ -2434,7 +2420,7 @@
             // 
             // ManualDDown
             // 
-            this.ManualDDown.Location = new System.Drawing.Point(35, 77);
+            this.ManualDDown.Location = new System.Drawing.Point(35, 68);
             this.ManualDDown.Name = "ManualDDown";
             this.ManualDDown.Size = new System.Drawing.Size(23, 23);
             this.ManualDDown.TabIndex = 67;
@@ -2444,7 +2430,7 @@
             // 
             // manualDRight
             // 
-            this.manualDRight.Location = new System.Drawing.Point(64, 48);
+            this.manualDRight.Location = new System.Drawing.Point(64, 39);
             this.manualDRight.Name = "manualDRight";
             this.manualDRight.Size = new System.Drawing.Size(23, 23);
             this.manualDRight.TabIndex = 67;
@@ -2454,7 +2440,7 @@
             // 
             // manualSelect
             // 
-            this.manualSelect.Location = new System.Drawing.Point(147, 77);
+            this.manualSelect.Location = new System.Drawing.Point(132, 68);
             this.manualSelect.Name = "manualSelect";
             this.manualSelect.Size = new System.Drawing.Size(62, 23);
             this.manualSelect.TabIndex = 67;
@@ -2464,7 +2450,7 @@
             // 
             // manualR
             // 
-            this.manualR.Location = new System.Drawing.Point(147, 19);
+            this.manualR.Location = new System.Drawing.Point(132, 10);
             this.manualR.Name = "manualR";
             this.manualR.Size = new System.Drawing.Size(23, 23);
             this.manualR.TabIndex = 64;
@@ -2474,7 +2460,7 @@
             // 
             // manualDLeft
             // 
-            this.manualDLeft.Location = new System.Drawing.Point(6, 48);
+            this.manualDLeft.Location = new System.Drawing.Point(6, 39);
             this.manualDLeft.Name = "manualDLeft";
             this.manualDLeft.Size = new System.Drawing.Size(23, 23);
             this.manualDLeft.TabIndex = 67;
@@ -2484,7 +2470,7 @@
             // 
             // manualA
             // 
-            this.manualA.Location = new System.Drawing.Point(244, 48);
+            this.manualA.Location = new System.Drawing.Point(229, 39);
             this.manualA.Name = "manualA";
             this.manualA.Size = new System.Drawing.Size(23, 23);
             this.manualA.TabIndex = 0;
@@ -2494,7 +2480,7 @@
             // 
             // manualL
             // 
-            this.manualL.Location = new System.Drawing.Point(103, 19);
+            this.manualL.Location = new System.Drawing.Point(103, 10);
             this.manualL.Name = "manualL";
             this.manualL.Size = new System.Drawing.Size(23, 23);
             this.manualL.TabIndex = 63;
@@ -2504,7 +2490,7 @@
             // 
             // manualY
             // 
-            this.manualY.Location = new System.Drawing.Point(186, 48);
+            this.manualY.Location = new System.Drawing.Point(171, 39);
             this.manualY.Name = "manualY";
             this.manualY.Size = new System.Drawing.Size(23, 23);
             this.manualY.TabIndex = 3;
@@ -2514,7 +2500,7 @@
             // 
             // manualX
             // 
-            this.manualX.Location = new System.Drawing.Point(215, 19);
+            this.manualX.Location = new System.Drawing.Point(200, 10);
             this.manualX.Name = "manualX";
             this.manualX.Size = new System.Drawing.Size(23, 23);
             this.manualX.TabIndex = 2;
@@ -2524,7 +2510,7 @@
             // 
             // manualDUp
             // 
-            this.manualDUp.Location = new System.Drawing.Point(35, 19);
+            this.manualDUp.Location = new System.Drawing.Point(35, 10);
             this.manualDUp.Name = "manualDUp";
             this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.manualDUp.Size = new System.Drawing.Size(23, 23);
@@ -2535,7 +2521,7 @@
             // 
             // manualB
             // 
-            this.manualB.Location = new System.Drawing.Point(215, 77);
+            this.manualB.Location = new System.Drawing.Point(200, 68);
             this.manualB.Name = "manualB";
             this.manualB.Size = new System.Drawing.Size(23, 23);
             this.manualB.TabIndex = 1;
@@ -2547,23 +2533,165 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // botWonderTrade
+            // RunWTbot
             // 
-            this.botWonderTrade.Location = new System.Drawing.Point(625, 427);
-            this.botWonderTrade.Name = "botWonderTrade";
-            this.botWonderTrade.Size = new System.Drawing.Size(273, 23);
-            this.botWonderTrade.TabIndex = 63;
-            this.botWonderTrade.Text = "Wonder Trade Bot";
-            this.botWonderTrade.UseVisualStyleBackColor = true;
-            this.botWonderTrade.Click += new System.EventHandler(this.botWonderTrade_Click);
+            this.RunWTbot.Location = new System.Drawing.Point(144, 23);
+            this.RunWTbot.Name = "RunWTbot";
+            this.RunWTbot.Size = new System.Drawing.Size(63, 23);
+            this.RunWTbot.TabIndex = 63;
+            this.RunWTbot.Text = "Run";
+            this.RunWTbot.UseVisualStyleBackColor = true;
+            this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click);
+            // 
+            // BotTab
+            // 
+            this.BotTab.Controls.Add(this.RemonteControls);
+            this.BotTab.Controls.Add(this.WonderTradeBot);
+            this.BotTab.Location = new System.Drawing.Point(629, 257);
+            this.BotTab.Name = "BotTab";
+            this.BotTab.SelectedIndex = 0;
+            this.BotTab.Size = new System.Drawing.Size(269, 182);
+            this.BotTab.TabIndex = 75;
+            // 
+            // RemonteControls
+            // 
+            this.RemonteControls.BackColor = System.Drawing.SystemColors.Control;
+            this.RemonteControls.Controls.Add(this.manualDLeft);
+            this.RemonteControls.Controls.Add(this.manualTouch);
+            this.RemonteControls.Controls.Add(this.manualX);
+            this.RemonteControls.Controls.Add(this.manualY);
+            this.RemonteControls.Controls.Add(this.touchCoord);
+            this.RemonteControls.Controls.Add(this.manualDUp);
+            this.RemonteControls.Controls.Add(this.label55);
+            this.RemonteControls.Controls.Add(this.manualL);
+            this.RemonteControls.Controls.Add(this.manualB);
+            this.RemonteControls.Controls.Add(this.touchY);
+            this.RemonteControls.Controls.Add(this.manualA);
+            this.RemonteControls.Controls.Add(this.manualR);
+            this.RemonteControls.Controls.Add(this.touchX);
+            this.RemonteControls.Controls.Add(this.manualSelect);
+            this.RemonteControls.Controls.Add(this.manualDRight);
+            this.RemonteControls.Controls.Add(this.label54);
+            this.RemonteControls.Controls.Add(this.ManualDDown);
+            this.RemonteControls.Controls.Add(this.manualStart);
+            this.RemonteControls.Location = new System.Drawing.Point(4, 22);
+            this.RemonteControls.Name = "RemonteControls";
+            this.RemonteControls.Padding = new System.Windows.Forms.Padding(3);
+            this.RemonteControls.Size = new System.Drawing.Size(261, 156);
+            this.RemonteControls.TabIndex = 0;
+            this.RemonteControls.Text = "Controls";
+            // 
+            // WonderTradeBot
+            // 
+            this.WonderTradeBot.BackColor = System.Drawing.SystemColors.Control;
+            this.WonderTradeBot.Controls.Add(this.label59);
+            this.WonderTradeBot.Controls.Add(this.RunWTbot);
+            this.WonderTradeBot.Controls.Add(this.WTtradesNo);
+            this.WonderTradeBot.Controls.Add(this.label57);
+            this.WonderTradeBot.Controls.Add(this.WTBox);
+            this.WonderTradeBot.Controls.Add(this.WTSlot);
+            this.WonderTradeBot.Controls.Add(this.label58);
+            this.WonderTradeBot.Location = new System.Drawing.Point(4, 22);
+            this.WonderTradeBot.Name = "WonderTradeBot";
+            this.WonderTradeBot.Padding = new System.Windows.Forms.Padding(3);
+            this.WonderTradeBot.Size = new System.Drawing.Size(261, 156);
+            this.WonderTradeBot.TabIndex = 1;
+            this.WonderTradeBot.Text = "Wonder Trade";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(95, 7);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(49, 13);
+            this.label59.TabIndex = 105;
+            this.label59.Text = "# trades:";
+            // 
+            // WTtradesNo
+            // 
+            this.WTtradesNo.Location = new System.Drawing.Point(98, 26);
+            this.WTtradesNo.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.WTtradesNo.Name = "WTtradesNo";
+            this.WTtradesNo.Size = new System.Drawing.Size(40, 20);
+            this.WTtradesNo.TabIndex = 104;
+            this.WTtradesNo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(49, 7);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(28, 13);
+            this.label57.TabIndex = 103;
+            this.label57.Text = "Slot:";
+            // 
+            // WTBox
+            // 
+            this.WTBox.Location = new System.Drawing.Point(6, 26);
+            this.WTBox.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.WTBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.WTBox.Name = "WTBox";
+            this.WTBox.Size = new System.Drawing.Size(40, 20);
+            this.WTBox.TabIndex = 100;
+            this.WTBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // WTSlot
+            // 
+            this.WTSlot.Location = new System.Drawing.Point(52, 26);
+            this.WTSlot.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.WTSlot.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.WTSlot.Name = "WTSlot";
+            this.WTSlot.Size = new System.Drawing.Size(40, 20);
+            this.WTSlot.TabIndex = 101;
+            this.WTSlot.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(6, 7);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(28, 13);
+            this.label58.TabIndex = 102;
+            this.label58.Text = "Box:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 560);
-            this.Controls.Add(this.botWonderTrade);
-            this.Controls.Add(this.groupBox4);
+            this.ClientSize = new System.Drawing.Size(906, 444);
+            this.Controls.Add(this.BotTab);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
             this.Controls.Add(this.level);
@@ -2578,7 +2706,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "PKMN NTR";
+            this.Text = "PKMN NTR with Bots";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
@@ -2650,8 +2778,14 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.BotTab.ResumeLayout(false);
+            this.RemonteControls.ResumeLayout(false);
+            this.RemonteControls.PerformLayout();
+            this.WonderTradeBot.ResumeLayout(false);
+            this.WonderTradeBot.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2829,7 +2963,6 @@
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.CheckBox deleteKeepBackup;
         private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button manualA;
         private System.Windows.Forms.Button manualB;
         private System.Windows.Forms.Button manualX;
@@ -2849,7 +2982,16 @@
         private System.Windows.Forms.NumericUpDown touchX;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Button manualTouch;
-        private System.Windows.Forms.Button botWonderTrade;
+        private System.Windows.Forms.Button RunWTbot;
+        private System.Windows.Forms.TabControl BotTab;
+        private System.Windows.Forms.TabPage RemonteControls;
+        private System.Windows.Forms.TabPage WonderTradeBot;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.NumericUpDown WTtradesNo;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.NumericUpDown WTBox;
+        private System.Windows.Forms.NumericUpDown WTSlot;
+        private System.Windows.Forms.Label label58;
     }
 }
 

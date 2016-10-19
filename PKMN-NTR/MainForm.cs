@@ -39,6 +39,8 @@ namespace ntrbase
 
         public byte[] selectedCloneData = new byte[232];
         public bool selectedCloneValid = false;
+        public bool botWorking = false;
+        public int botState = 0;
 
         //public int tradedumpcount = 0;
 
@@ -111,8 +113,15 @@ namespace ntrbase
         public static readonly Color[] hiddenPowerColor = { Color.FromArgb(192, 48, 40), Color.FromArgb(168, 144, 240), Color.FromArgb(160, 64, 160), Color.FromArgb(224, 192, 104), Color.FromArgb(184, 160, 56), Color.FromArgb(168, 184, 32), Color.FromArgb(112, 88, 152), Color.FromArgb(184, 184, 208), Color.FromArgb(240, 128, 48), Color.FromArgb(104, 144, 240), Color.FromArgb(120, 200, 80), Color.FromArgb(248, 208, 48), Color.FromArgb(248, 88, 136), Color.FromArgb(152, 216, 216), Color.FromArgb(112, 56, 248), Color.FromArgb(112, 88, 72), };
         public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, };
         // Position in boxes
-        public static readonly uint[] boxXcord = { 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180 };
-        public static readonly uint[] boxYcord = { 60, 60, 60, 60, 60, 60, 90, 90, 90, 90, 90, 90, 120, 120, 120, 120, 120, 120, 150, 150, 150, 150, 150, 150, 180, 180, 180, 180, 180, 180, };
+        public static readonly uint[] boxpokeXcord = { 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180 };
+        public static readonly uint[] boxpokeYcord = { 60, 60, 60, 60, 60, 60, 90, 90, 90, 90, 90, 90, 120, 120, 120, 120, 120, 120, 150, 150, 150, 150, 150, 150, 180, 180, 180, 180, 180, 180 };
+        public static readonly uint[] boxXcord = { 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260 };
+        public static readonly uint[] boxYcord = { 24, 24, 24, 24, 24, 24, 24, 24, 72, 72, 72, 72, 72, 72, 72, 72, 120, 120, 120, 120, 120, 120, 120, 120, 168, 168, 168, 168, 168, 168, 168 };
+        // Trade evolutions for Wonder Trade Bot
+        public static readonly string[] pokeTradeEvolve = { "Kadabra", "Alakazam", "Graveler", "Haunter", "Boldore", "Gurdurr", "Phantump" };
+        public static readonly string[] pokeTradeEvolveitem = { "Poliwhirl", "Slowpoke", "Onix", "Seadra", "Scyther", "Porygon", "Clamperl", "Rhydon", "Electabuzz", "Magmar", "Porygon2", "Dusclops", "Feebas", "Spritzee", "Swirlix" };
+        public static readonly string[] TradeEvolveitem = { "King's Rock", "King's Rock", "Metal Coat", "Dragon Scale", "Metal Coat", "Up-Grade", "Deep Sea Tooth", "Protector", "Electrizer", "Magmarizer", "Dubious Disc", "Reaper Cloth", "Prism Scale", "Sachet", "Whipped Dream" };
+
 
         //HID values
         public static readonly uint nokey = 0xFFF;
@@ -388,7 +397,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, botWonderTrade };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -1196,7 +1205,7 @@ namespace ntrbase
                 DataReadyWaiting args = (DataReadyWaiting)args_obj;
 
                 PKHeX validator = new PKHeX();
-                validator.Data = PKHeX.decryptArray(args.data); 
+                validator.Data = PKHeX.decryptArray(args.data);
 
                 bool dataCorrect = validator.Species != 0;
                 if (!onlyView.Checked)
@@ -1215,9 +1224,17 @@ namespace ntrbase
                         writePokemonToFile(validator.Data, folderPath + fileName);
                     }
                 }
+                //Added a bit of code to work with the bots
                 else if (!dataCorrect)
                 {
-                    MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (botWorking)
+                    {
+                        botState = 1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
 
                 if (!dataCorrect)
@@ -2466,39 +2483,113 @@ namespace ntrbase
             sendTouch(notouch);
         }
 
-        private async void botWonderTrade_Click(object sender, EventArgs e)
+
+        private async void RunWTbot_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("This scirpt will Wonder Trade the first pokémon on the active PC box. Do not touch your 3DS until the scirpt is finished. This bot is in early stages so, try it under your own risk." + Environment.NewLine + Environment.NewLine + "Before starting make sure:" + Environment.NewLine + Environment.NewLine + "- The active box is not the Battle Box." + Environment.NewLine + "- There is a pokémon in the first slot of that box." + Environment.NewLine + "- The PSS screen is in the bottom screen." + Environment.NewLine + Environment.NewLine + "Do you want to continue?", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + WTtradesNo.Value + " pokémon, starting from the slot " + WTSlot.Value + " of box " + WTBox.Value + ". All empty spaces will be ingnored but sill counted." + Environment.NewLine + Environment.NewLine + "Remember that you can stop this bot by pressing the Disconnect button., the application might crash afterwards, but it is unharmful." + Environment.NewLine + Environment.NewLine + "Before starting make sure:" + Environment.NewLine + "- InputRedirection is working, you can test it with the Remote Control function" + Environment.NewLine + "- The PSS menu where the Wonder Trade button can be pressed is shown in the bottom screen of your 3DS." + Environment.NewLine + "- All pokémon can be traded, the bot is not programmed to handle non-tradeable pokémon." + Environment.NewLine + Environment.NewLine + "Do you want to continue?", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.OK)
             {
-                foreach (Control c in enableWhenConnected)
+                botWorking = true; // Set the botWorking flag
+                                   // Local variables
+                int currentbox = Convert.ToInt16(WTBox.Value - 1);
+                int currentslot = Convert.ToInt16(WTSlot.Value - 1);
+                int oldbox = -1;
+                string oldPID;
+                int i = 0;
+
+                // Disable controls
+                radioBoxes.Checked = true;
+                onlyView.Checked = true;
+                foreach (Control c in enableWhenConnected) c.Enabled = false;
+                // Wonder Trade procedue
+                while (WTtradesNo.Value > 0) // Number of remaining trades > 0
                 {
-                    c.Enabled = false;
+                    botState = 0;
+                    //Check information of the pokémon to be traded.
+                    SetValue(boxDump, currentbox + 1);
+                    SetValue(slotDump, currentslot + 1);
+                    dumpPokemon.Enabled = true;
+                    dumpPokemon.PerformClick();
+                    dumpPokemon.Enabled = false;
+                    await Task.Delay(1500); // Wait 1.5 seconds
+                    if (botState == 0)
+                    { // If the slot it's not empty
+                        oldPID = dPID.Text;
+                        autotouchsend(240, 120); // Press Wonder Trade button
+                        await Task.Delay(2000); // Wait 2 seconds
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(7000); // Wait 7 seconds for game save
+                        autotouchsend(160, 100); // Press Yes
+                        await Task.Delay(3000); // Wait 3 seconds for box loading
+                        if (oldbox != currentbox)
+                        { // If the box is finished
+                            autotouchsend(30, 220); // Press all boxes button
+                            await Task.Delay(1500); // Wait 1.5 second
+                            autotouchsend(boxXcord[currentbox], boxYcord[currentbox]); // Select box
+                            await Task.Delay(1500); // Wait 1.5 second
+                            autobuttonsend(keyA); // Press A button
+                            await Task.Delay(2000); // Wait 2 seconds for box loading
+                        }
+                        autotouchsend(boxpokeXcord[currentslot], boxpokeYcord[currentslot]); // Select pokémon
+                        await Task.Delay(1500); // Wait 1.5 seconds
+                        autobuttonsend(keyA); // Press Trade
+                        await Task.Delay(1500); // Wait 1.5 seconds
+                        autobuttonsend(keyA); // Press Yes
+                        await Task.Delay(1500); // Wait 1.5 seconds
+                        for (i = 0; i < 15; i++)
+                        { // During 75 seconds check if a pokémon is received during every 5 seconds.
+                            dumpPokemon.Enabled = true;
+                            dumpPokemon.PerformClick();
+                            dumpPokemon.Enabled = false;
+                            await Task.Delay(5000);
+                            if (oldPID != dPID.Text) break; // PID is checked to check if a new pokemon is received.
+                        }
+                        if (i >= 20) // If trade timed out try agin
+                        {
+                            autobuttonsend(keyA); // Press A button ("A trade partner was not found...")
+                            await Task.Delay(1500); // Wait 1.5 seconds
+                            autobuttonsend(keyA); // Press A button ("Wait a little and try again...")
+                            await Task.Delay(1500); // Wait 1.5 seconds
+                            autobuttonsend(keyA); // Press A button Return to PSS
+                            await Task.Delay(10000); // Wait 10 seconds
+                            currentslot--; // Decrease counter to try to trade the same pokémon again
+                        }
+                        else
+                        { // Wait unitl trade is completed
+                          // Search if the pokémon evolves by trading while holding an item
+                            botState = Array.IndexOf(pokeTradeEvolveitem, species.Text);
+                            if (botState > -1 && heldItem.Text == TradeEvolveitem[botState])
+                            { // Test if the pokémon has the correct item, if so, wait 70 seconds
+                                await Task.Delay(70000);
+                            }
+                            else if (Array.IndexOf(pokeTradeEvolve, species.Text) > -1 && heldItem.Text != "Everstone")
+                            { // Else search if the pokémon evolves by simple trade and it's not holding an Everstone, if so, wait 70 seconds.
+                                await Task.Delay(70000);
+                            }
+                            else await Task.Delay(50000); // If the pokemon will not evolve, wait 50 seconds.
+                        }
+                        oldbox = currentbox; // For box change checking
+                    }
+                    else oldbox = -1; // IF the slot is empty make the bot select the box again to avoid mistakes.
+                    SetValue(WTtradesNo, WTtradesNo.Value - 1); // Decrease the remaining trades count
+                    currentslot++; // Increase the slot counter
+                    if (currentslot >= 30)
+                    { // If the box is finished
+                        currentslot = 0; // Return to slot 1
+                        currentbox++; // Increase the box number
+                    }
+                    if (currentbox >= 31) currentbox = 0; // If the box 31 is finished, return to box 1.
                 }
-                autobuttonsend(keySTART); // Press Start button
-                await Task.Delay(500);
-                autotouchsend(240, 120); // Press Wonder Trade button
-                await Task.Delay(2000);
-                autobuttonsend(keyA); // Press A button
-                await Task.Delay(4000); // Wait for game save
-                autotouchsend(160, 100); // Press Yes
-                await Task.Delay(3000); // Wait box loading
-                autotouchsend(boxXcord[0], boxYcord[0]); // Select slot 1
-                await Task.Delay(500);
-                autobuttonsend(keyA); // Press A button
-                await Task.Delay(500);
-                autobuttonsend(keyA); // Press A button
-                foreach (Control c in enableWhenConnected)
-                {
-                    c.Enabled = true;
-                }
-                MessageBox.Show("Finished", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                foreach (Control c in enableWhenConnected) c.Enabled = true; // Enable controls
+                MessageBox.Show("Finished", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);  // Finish message
+                botWorking = false; // Disable the botWorking flag
             }
         }
-        
-        #endregion Bots
-    }
 
+        #endregion Bots
+
+
+    }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
     //to handle them and any additional arguments it might require.
