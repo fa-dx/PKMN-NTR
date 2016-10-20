@@ -192,6 +192,9 @@
             this.label50 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.LegendarySoftResetBot = new System.Windows.Forms.TabPage();
+            this.label70 = new System.Windows.Forms.Label();
+            this.HPTypeLSR = new System.Windows.Forms.ComboBox();
+            this.shinyLSR = new System.Windows.Forms.CheckBox();
             this.ivHPLSR = new System.Windows.Forms.NumericUpDown();
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
@@ -2403,6 +2406,9 @@
             // LegendarySoftResetBot
             // 
             this.LegendarySoftResetBot.BackColor = System.Drawing.SystemColors.Control;
+            this.LegendarySoftResetBot.Controls.Add(this.label70);
+            this.LegendarySoftResetBot.Controls.Add(this.HPTypeLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.shinyLSR);
             this.LegendarySoftResetBot.Controls.Add(this.ivHPLSR);
             this.LegendarySoftResetBot.Controls.Add(this.label61);
             this.LegendarySoftResetBot.Controls.Add(this.label62);
@@ -2425,6 +2431,52 @@
             this.LegendarySoftResetBot.Size = new System.Drawing.Size(261, 156);
             this.LegendarySoftResetBot.TabIndex = 2;
             this.LegendarySoftResetBot.Text = "Legendary SR";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(4, 56);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(52, 13);
+            this.label70.TabIndex = 107;
+            this.label70.Text = "HP Type:";
+            // 
+            // HPTypeLSR
+            // 
+            this.HPTypeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.HPTypeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.HPTypeLSR.FormattingEnabled = true;
+            this.HPTypeLSR.Items.AddRange(new object[] {
+            "Fighting",
+            "Flying",
+            "Poison",
+            "Ground",
+            "Rock",
+            "Bug",
+            "Ghost",
+            "Steel",
+            "Fire",
+            "Water",
+            "Grass",
+            "Electric",
+            "Psychic",
+            "Ice",
+            "Dragon",
+            "Dark"});
+            this.HPTypeLSR.Location = new System.Drawing.Point(62, 51);
+            this.HPTypeLSR.Name = "HPTypeLSR";
+            this.HPTypeLSR.Size = new System.Drawing.Size(81, 21);
+            this.HPTypeLSR.TabIndex = 108;
+            // 
+            // shinyLSR
+            // 
+            this.shinyLSR.AutoSize = true;
+            this.shinyLSR.Location = new System.Drawing.Point(87, 130);
+            this.shinyLSR.Name = "shinyLSR";
+            this.shinyLSR.Size = new System.Drawing.Size(52, 17);
+            this.shinyLSR.TabIndex = 106;
+            this.shinyLSR.Text = "Shiny";
+            this.shinyLSR.UseVisualStyleBackColor = true;
             // 
             // ivHPLSR
             // 
@@ -2459,7 +2511,7 @@
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(4, 27);
+            this.label60.Location = new System.Drawing.Point(14, 27);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(42, 13);
             this.label60.TabIndex = 103;
@@ -2530,7 +2582,7 @@
             "Sassy",
             "Careful",
             "Quirky"});
-            this.natureLSR.Location = new System.Drawing.Point(46, 23);
+            this.natureLSR.Location = new System.Drawing.Point(62, 24);
             this.natureLSR.Name = "natureLSR";
             this.natureLSR.Size = new System.Drawing.Size(81, 21);
             this.natureLSR.TabIndex = 104;
@@ -2941,11 +2993,11 @@
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(515, 328);
+            this.label69.Location = new System.Drawing.Point(541, 328);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(108, 13);
+            this.label69.Size = new System.Drawing.Size(78, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.1.18-beta2";
+            this.label69.Text = "Version: 1.1.18";
             this.label69.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // MainForm
@@ -3282,6 +3334,9 @@
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.Label label65;
         private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.CheckBox shinyLSR;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.ComboBox HPTypeLSR;
     }
 }
 

@@ -398,7 +398,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2591,13 +2591,19 @@ namespace ntrbase
         private async void RunLSRbot_Click(object sender, EventArgs e)
         {
             // Reading filters
-            string desirednature = "";
+            string desirednature;
             if (natureLSR.SelectedIndex < 0) desirednature = "Any";
             else desirednature = natureLSR.SelectedItem.ToString();
             string desiredIVs = ivHPLSR.Value.ToString() + "/" + ivAtkLSR.Value.ToString() + "/" + ivDefLSR.Value.ToString() + "/" + ivSpALSR.Value.ToString() + "/" + ivSpDLSR.Value.ToString() + "/" + ivSpeLSR.Value.ToString();
+            string desiredHPtype;
+            if (HPTypeLSR.SelectedIndex < 0) desiredHPtype = "Any";
+            else desiredHPtype = HPTypeLSR.SelectedItem.ToString();
+            string desiredshiny;
+            if (shinyLSR.Checked) desiredshiny = "Yes";
+            else desiredshiny = "Don't care";
 
             // Warning screen
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger a battle against a Legendary Pokémon located in front of you an reset the game if it doesn't comply with the following specifications:\r\n\r\n- Nature: " +  desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n\r\nDo you want to continue?", "Legendary Soft-reset Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger a battle against a Legendary Pokémon located in front of you an reset the game if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nDo you want to continue?", "Legendary Soft-reset Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Bot start
@@ -2666,7 +2672,7 @@ namespace ntrbase
                         Addlog("Nature: FAIL");
                         botState++;
                     }
-                    if(ivHPNum.Value >= ivHPLSR.Value)
+                    if (ivHPNum.Value >= ivHPLSR.Value)
                     {
                         Addlog("Hit Points IV: PASS");
                     }
@@ -2693,7 +2699,7 @@ namespace ntrbase
                         Addlog("Defense IV: FAIL");
                         botState++;
                     }
-                    if (ivSpALSR.Value >= ivSpALSR.Value)
+                    if (ivSPANum.Value >= ivSpALSR.Value)
                     {
                         Addlog("Special Attack IV: PASS");
                     }
@@ -2720,7 +2726,40 @@ namespace ntrbase
                         Addlog("Speed IV: FAIL");
                         botState++;
                     }
+                    if (HPTypeLSR.SelectedIndex < 0 || desiredHPtype == hiddenPower.Text)
+                    {
+                        Addlog("Hidden Power: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Hidden Power: FAIL");
+                        botState++;
+                    }
 
+                    if (shinyLSR.Checked)
+                    {
+                        if (setShiny.Text == "★")
+                        {
+                            Addlog("Shiny: PASS");
+                        }
+                        else
+                        {
+                            Addlog("Shiny: FAIL");
+                            botState++;
+                        }
+                    }
+                    else
+                    {
+                        if (setShiny.Text == "★")
+                        {
+                            Addlog("Shiny: Yes");
+                            botState = -1;
+                        }
+                        else
+                        {
+                            Addlog("Shiny: No");
+                        }
+                    }
 
                     // Soft reset 
                     if (botState > 0)
@@ -2744,7 +2783,14 @@ namespace ntrbase
                     }
                     else
                     {
-                        Addlog("All tests passed!\r\nTotal number of resets: " + softresetNo.ToString());
+                        if (botState == -1)
+                        {
+                            Addlog("Shiny Pokémon detected!\r\nTotal number of resets: " + softresetNo.ToString());
+                        }
+                        else
+                        {
+                            Addlog("All tests passed!\r\nTotal number of resets: " + softresetNo.ToString());
+                        }
                     }
                 }
                 MessageBox.Show("Finished, " + softresetNo.ToString() + " resets performed", "Legendary Soft Reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);  // Finish message
