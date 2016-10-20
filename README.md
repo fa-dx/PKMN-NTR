@@ -15,6 +15,7 @@ This script will try Wonder Trade the amount of pokémon in the "# trades" box, 
 **Notes:**
 - This bot is time-based, so inputs might get lost sometimes.
 - If the "Disconnect" button is pressed while the bot is running, the program might crash, this is unharmful, you only need to restart the application and resume.
+- The bot will assume that you have unlocked all 31 boxes in the game.
 - The following situations will break the bot:
   - The games takes an unusually long time to save or perform the trade animation after the data is received.
   - The bot tries to send an un-tradeable Pokémon (Illegal or Event).
@@ -23,6 +24,7 @@ This script will try Wonder Trade the amount of pokémon in the "# trades" box, 
 - The following features are untested:
   - Handling of the "No trade partner has been found...".
   - Handling of received pokémon that evolves by trading.
+- To start the bot make sure the PSS menu is on the bottom screen, the bot will try to press the Wonder Trade button automatically.
 
 # Credits
 - **fa-dx**: Gathering offsets, creating the tool.
