@@ -137,6 +137,7 @@ namespace ntrbase
         public static readonly uint DpadDOWN = 0xF7F;
         public static readonly uint DpadLEFT = 0xFDF;
         public static readonly uint DpadRIGHT = 0xFEF;
+        public static readonly uint softReset = 0xCF7;
         public static readonly uint notouch = 0x02000000;
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
@@ -2472,14 +2473,14 @@ namespace ntrbase
         public async void autobuttonsend(uint command)
         {
             sendButton(command);
-            await Task.Delay(100);
+            await Task.Delay(150);
             sendButton(nokey);
         }
 
         public async void autotouchsend(decimal Xvalue, decimal Yvalue)
         {
             sendTouch(gethexcoord(Xvalue, Yvalue));
-            await Task.Delay(100);
+            await Task.Delay(150);
             sendTouch(notouch);
         }
 
@@ -2586,9 +2587,114 @@ namespace ntrbase
             }
         }
 
+        // Legendary Soft Reset Bot
+        private async void RunLSRbot_Click(object sender, EventArgs e)
+        {
+            // Reading filters
+            string desirednature = "";
+            if (natureLSR.SelectedIndex < 0) desirednature = "Any";
+            else desirednature = natureLSR.SelectedItem.ToString();
+
+            // Warning screen
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger a battle against a Legendary Pokémon located in front of you an reset the game if it doesn't comply with the following specifications:\r\n\r\n- Nature: " +  desirednature + "\r\n\r\nDo you want to continue?", "Legendary Soft-reset Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.OK)
+            { // Bot start
+                botWorking = true; // Set the botWorking flag
+                botState = 1;
+                //Disable controlds
+                radioOpponent.Checked = true;
+                //Local Variables
+                int softresetNo = 0;
+
+                // Wi-Fi fix
+                Addlog("Fixing Wi-Fi");
+                byte[] buttonByte = BitConverter.GetBytes(0x4770);
+                Program.scriptHelper.write(0x0105AE4, buttonByte, 0x1A);
+                await Task.Delay(2000); // Wait 2 seconds
+                //Disable PSS comunications
+                Addlog("Disabling PSS");
+                autotouchsend(240, 180); // Press PSS Settings
+                await Task.Delay(3000); // Wait 3 seconds
+                autotouchsend(160, 120); // Press Disable PSS communications
+                await Task.Delay(3000); // Wait 3 seconds
+                autotouchsend(160, 120); // Press Yes
+                Addlog("Wait 10 seconds");
+                await Task.Delay(10000); // Wait 10 seconds
+                // Save the game
+                Addlog("Saving game");
+                autotouchsend(220, 220); // Press save icon
+                await Task.Delay(5000); // Wait 5 seconds
+                autobuttonsend(keyA); // Press A button
+                await Task.Delay(7000); // Wait 7 seconds
+
+                // Soft-reset procedure
+                while (botState > 0)
+                {
+                    SetText(dPID, "");
+                    Addlog("Pressing A buton 4 times");
+                    autobuttonsend(keyA); // Press A button
+                    await Task.Delay(2000); // Wait 1.5 seconds
+                    autobuttonsend(keyA); // Press A button
+                    await Task.Delay(2000); // Wait 1.5 seconds
+                    autobuttonsend(keyA); // Press A button
+                    await Task.Delay(2000); // Wait 1.5 seconds
+                    autobuttonsend(keyA); // Press A button
+                    await Task.Delay(2000); // Wait 1.5 seconds
+                    while (dPID.Text.Length <= 0)
+                    {
+                        Addlog("Wait for opponent data");
+                        if (dPID.Text.Length > 0) break;
+                        dumpPokemon.Enabled = true; // Check if pokémon data is available
+                        dumpPokemon.PerformClick();
+                        dumpPokemon.Enabled = false;
+                        await Task.Delay(3000); // Wait until information is received
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(1000); // Wait 1 second
+                    }
+                    // Analyze the pokemon
+                    Addlog("Pokémon detected, start analysis");
+                    botState = 0;
+                    if (natureLSR.SelectedIndex < 0 || desirednature == nature.Text)
+                    {
+                        Addlog("Nature: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Nature: FAIL");
+                        botState++;
+                    }
+                    // Soft reset 
+                    if (botState > 0)
+                    {
+                        softresetNo++;
+                        Addlog("Reset #" + softresetNo.ToString() + " Wait 25 seconds");
+                        await Task.Delay(3000);
+                        autobuttonsend(softReset); // Press L + R + A  button
+                        await Task.Delay(22000); // Wait 20 seconds
+                        Addlog("Reconnect");
+                        Program.scriptHelper.connect(host.Text, 8000);
+                        await Task.Delay(3000); // Wait 3 seconds
+                        Addlog("Pressing A buton 3 times");
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(5000); // Wait 5 seconds
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(5000); // Wait 5 seconds
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(5000); // Wait 5 seconds
+                    }
+                    else
+                    {
+                        Addlog("All tests passed!\r\nTotal number of resets: " + softresetNo.ToString());
+                    }
+                }
+                MessageBox.Show("Finished, " + softresetNo.ToString() + " resets performed", "Legendary Soft Reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);  // Finish message
+                botWorking = false; // Disable the botWorking flag
+            }
+        }
+
+
         #endregion Bots
-
-
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
