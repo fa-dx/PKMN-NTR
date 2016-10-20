@@ -187,36 +187,58 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.deleteKeepBackup = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.touchY = new System.Windows.Forms.NumericUpDown();
             this.touchX = new System.Windows.Forms.NumericUpDown();
+            this.touchY = new System.Windows.Forms.NumericUpDown();
             this.label50 = new System.Windows.Forms.Label();
-            this.manualTouch = new System.Windows.Forms.Button();
-            this.touchCoord = new System.Windows.Forms.TextBox();
-            this.label55 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.manualStart = new System.Windows.Forms.Button();
-            this.ManualDDown = new System.Windows.Forms.Button();
-            this.manualDRight = new System.Windows.Forms.Button();
-            this.manualSelect = new System.Windows.Forms.Button();
-            this.manualR = new System.Windows.Forms.Button();
-            this.manualDLeft = new System.Windows.Forms.Button();
-            this.manualA = new System.Windows.Forms.Button();
-            this.manualL = new System.Windows.Forms.Button();
-            this.manualY = new System.Windows.Forms.Button();
-            this.manualX = new System.Windows.Forms.Button();
-            this.manualDUp = new System.Windows.Forms.Button();
-            this.manualB = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.RunWTbot = new System.Windows.Forms.Button();
-            this.BotTab = new System.Windows.Forms.TabControl();
-            this.RemonteControls = new System.Windows.Forms.TabPage();
+            this.LegendarySoftResetBot = new System.Windows.Forms.TabPage();
+            this.label70 = new System.Windows.Forms.Label();
+            this.HPTypeLSR = new System.Windows.Forms.ComboBox();
+            this.shinyLSR = new System.Windows.Forms.CheckBox();
+            this.ivHPLSR = new System.Windows.Forms.NumericUpDown();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.ivSpeLSR = new System.Windows.Forms.NumericUpDown();
+            this.RunLSRbot = new System.Windows.Forms.Button();
+            this.ivSpDLSR = new System.Windows.Forms.NumericUpDown();
+            this.natureLSR = new System.Windows.Forms.ComboBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.ivDefLSR = new System.Windows.Forms.NumericUpDown();
+            this.ivSpALSR = new System.Windows.Forms.NumericUpDown();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.ivAtkLSR = new System.Windows.Forms.NumericUpDown();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
             this.WonderTradeBot = new System.Windows.Forms.TabPage();
             this.label59 = new System.Windows.Forms.Label();
+            this.RunWTbot = new System.Windows.Forms.Button();
             this.WTtradesNo = new System.Windows.Forms.NumericUpDown();
             this.label57 = new System.Windows.Forms.Label();
             this.WTBox = new System.Windows.Forms.NumericUpDown();
             this.WTSlot = new System.Windows.Forms.NumericUpDown();
             this.label58 = new System.Windows.Forms.Label();
+            this.RemonteControls = new System.Windows.Forms.TabPage();
+            this.manualDLeft = new System.Windows.Forms.Button();
+            this.manualTouch = new System.Windows.Forms.Button();
+            this.manualX = new System.Windows.Forms.Button();
+            this.manualY = new System.Windows.Forms.Button();
+            this.touchCoord = new System.Windows.Forms.TextBox();
+            this.manualDUp = new System.Windows.Forms.Button();
+            this.label55 = new System.Windows.Forms.Label();
+            this.manualL = new System.Windows.Forms.Button();
+            this.manualB = new System.Windows.Forms.Button();
+            this.manualA = new System.Windows.Forms.Button();
+            this.manualR = new System.Windows.Forms.Button();
+            this.manualSelect = new System.Windows.Forms.Button();
+            this.manualDRight = new System.Windows.Forms.Button();
+            this.label54 = new System.Windows.Forms.Label();
+            this.ManualDDown = new System.Windows.Forms.Button();
+            this.manualStart = new System.Windows.Forms.Button();
+            this.BotTab = new System.Windows.Forms.TabControl();
+            this.label69 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -274,14 +296,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.writeSlotTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).BeginInit();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
-            this.BotTab.SuspendLayout();
-            this.RemonteControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
+            this.LegendarySoftResetBot.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ivHPLSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpeLSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpDLSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivDefLSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpALSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivAtkLSR)).BeginInit();
             this.WonderTradeBot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
+            this.RemonteControls.SuspendLayout();
+            this.BotTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -2333,20 +2362,6 @@
             this.toolTip1.SetToolTip(this.deleteKeepBackup, "Backup to file before deleting");
             this.deleteKeepBackup.UseVisualStyleBackColor = true;
             // 
-            // touchY
-            // 
-            this.touchY.Location = new System.Drawing.Point(153, 97);
-            this.touchY.Maximum = new decimal(new int[] {
-            239,
-            0,
-            0,
-            0});
-            this.touchY.Name = "touchY";
-            this.touchY.Size = new System.Drawing.Size(62, 20);
-            this.touchY.TabIndex = 71;
-            this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
-            this.touchY.ValueChanged += new System.EventHandler(this.touchY_ValueChanged);
-            // 
             // touchX
             // 
             this.touchX.Location = new System.Drawing.Point(85, 97);
@@ -2361,6 +2376,20 @@
             this.toolTip1.SetToolTip(this.touchX, "X (horizontal) coordinate, from the left part of the screen.");
             this.touchX.ValueChanged += new System.EventHandler(this.touchX_ValueChanged);
             // 
+            // touchY
+            // 
+            this.touchY.Location = new System.Drawing.Point(153, 97);
+            this.touchY.Maximum = new decimal(new int[] {
+            239,
+            0,
+            0,
+            0});
+            this.touchY.Name = "touchY";
+            this.touchY.Size = new System.Drawing.Size(62, 20);
+            this.touchY.TabIndex = 71;
+            this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
+            this.touchY.ValueChanged += new System.EventHandler(this.touchY_ValueChanged);
+            // 
             // label50
             // 
             this.label50.AutoSize = true;
@@ -2370,216 +2399,283 @@
             this.label50.TabIndex = 61;
             this.label50.Text = "NTR communication log:";
             // 
-            // manualTouch
-            // 
-            this.manualTouch.Location = new System.Drawing.Point(153, 123);
-            this.manualTouch.Name = "manualTouch";
-            this.manualTouch.Size = new System.Drawing.Size(62, 23);
-            this.manualTouch.TabIndex = 74;
-            this.manualTouch.Text = "Touch";
-            this.manualTouch.UseVisualStyleBackColor = true;
-            this.manualTouch.Click += new System.EventHandler(this.manualTouch_Click);
-            // 
-            // touchCoord
-            // 
-            this.touchCoord.Location = new System.Drawing.Point(9, 125);
-            this.touchCoord.Name = "touchCoord";
-            this.touchCoord.ReadOnly = true;
-            this.touchCoord.Size = new System.Drawing.Size(138, 20);
-            this.touchCoord.TabIndex = 73;
-            this.touchCoord.Text = "0x02000000";
-            this.touchCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(221, 99);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(33, 13);
-            this.label55.TabIndex = 72;
-            this.label55.Text = "(X, Y)";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(6, 99);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(73, 13);
-            this.label54.TabIndex = 69;
-            this.label54.Text = "Touchscreen:";
-            // 
-            // manualStart
-            // 
-            this.manualStart.Location = new System.Drawing.Point(64, 68);
-            this.manualStart.Name = "manualStart";
-            this.manualStart.Size = new System.Drawing.Size(62, 23);
-            this.manualStart.TabIndex = 68;
-            this.manualStart.Text = "START";
-            this.manualStart.UseVisualStyleBackColor = true;
-            this.manualStart.Click += new System.EventHandler(this.manualStart_Click);
-            // 
-            // ManualDDown
-            // 
-            this.ManualDDown.Location = new System.Drawing.Point(35, 68);
-            this.ManualDDown.Name = "ManualDDown";
-            this.ManualDDown.Size = new System.Drawing.Size(23, 23);
-            this.ManualDDown.TabIndex = 67;
-            this.ManualDDown.Text = "↓";
-            this.ManualDDown.UseVisualStyleBackColor = true;
-            this.ManualDDown.Click += new System.EventHandler(this.ManualDDown_Click);
-            // 
-            // manualDRight
-            // 
-            this.manualDRight.Location = new System.Drawing.Point(64, 39);
-            this.manualDRight.Name = "manualDRight";
-            this.manualDRight.Size = new System.Drawing.Size(23, 23);
-            this.manualDRight.TabIndex = 67;
-            this.manualDRight.Text = "→";
-            this.manualDRight.UseVisualStyleBackColor = true;
-            this.manualDRight.Click += new System.EventHandler(this.manualDRight_Click);
-            // 
-            // manualSelect
-            // 
-            this.manualSelect.Location = new System.Drawing.Point(132, 68);
-            this.manualSelect.Name = "manualSelect";
-            this.manualSelect.Size = new System.Drawing.Size(62, 23);
-            this.manualSelect.TabIndex = 67;
-            this.manualSelect.Text = "SELECT";
-            this.manualSelect.UseVisualStyleBackColor = true;
-            this.manualSelect.Click += new System.EventHandler(this.manualSelect_Click);
-            // 
-            // manualR
-            // 
-            this.manualR.Location = new System.Drawing.Point(132, 10);
-            this.manualR.Name = "manualR";
-            this.manualR.Size = new System.Drawing.Size(23, 23);
-            this.manualR.TabIndex = 64;
-            this.manualR.Text = "R";
-            this.manualR.UseVisualStyleBackColor = true;
-            this.manualR.Click += new System.EventHandler(this.manualR_Click);
-            // 
-            // manualDLeft
-            // 
-            this.manualDLeft.Location = new System.Drawing.Point(6, 39);
-            this.manualDLeft.Name = "manualDLeft";
-            this.manualDLeft.Size = new System.Drawing.Size(23, 23);
-            this.manualDLeft.TabIndex = 67;
-            this.manualDLeft.Text = "←";
-            this.manualDLeft.UseVisualStyleBackColor = true;
-            this.manualDLeft.Click += new System.EventHandler(this.manualDLeft_Click);
-            // 
-            // manualA
-            // 
-            this.manualA.Location = new System.Drawing.Point(229, 39);
-            this.manualA.Name = "manualA";
-            this.manualA.Size = new System.Drawing.Size(23, 23);
-            this.manualA.TabIndex = 0;
-            this.manualA.Text = "A";
-            this.manualA.UseVisualStyleBackColor = true;
-            this.manualA.Click += new System.EventHandler(this.manualA_Click);
-            // 
-            // manualL
-            // 
-            this.manualL.Location = new System.Drawing.Point(103, 10);
-            this.manualL.Name = "manualL";
-            this.manualL.Size = new System.Drawing.Size(23, 23);
-            this.manualL.TabIndex = 63;
-            this.manualL.Text = "L";
-            this.manualL.UseVisualStyleBackColor = true;
-            this.manualL.Click += new System.EventHandler(this.manualL_Click);
-            // 
-            // manualY
-            // 
-            this.manualY.Location = new System.Drawing.Point(171, 39);
-            this.manualY.Name = "manualY";
-            this.manualY.Size = new System.Drawing.Size(23, 23);
-            this.manualY.TabIndex = 3;
-            this.manualY.Text = "Y";
-            this.manualY.UseVisualStyleBackColor = true;
-            this.manualY.Click += new System.EventHandler(this.manualY_Click);
-            // 
-            // manualX
-            // 
-            this.manualX.Location = new System.Drawing.Point(200, 10);
-            this.manualX.Name = "manualX";
-            this.manualX.Size = new System.Drawing.Size(23, 23);
-            this.manualX.TabIndex = 2;
-            this.manualX.Text = "X";
-            this.manualX.UseVisualStyleBackColor = true;
-            this.manualX.Click += new System.EventHandler(this.manualX_Click);
-            // 
-            // manualDUp
-            // 
-            this.manualDUp.Location = new System.Drawing.Point(35, 10);
-            this.manualDUp.Name = "manualDUp";
-            this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.manualDUp.Size = new System.Drawing.Size(23, 23);
-            this.manualDUp.TabIndex = 4;
-            this.manualDUp.Text = "↑";
-            this.manualDUp.UseVisualStyleBackColor = true;
-            this.manualDUp.Click += new System.EventHandler(this.manualDUp_Click);
-            // 
-            // manualB
-            // 
-            this.manualB.Location = new System.Drawing.Point(200, 68);
-            this.manualB.Name = "manualB";
-            this.manualB.Size = new System.Drawing.Size(23, 23);
-            this.manualB.TabIndex = 1;
-            this.manualB.Text = "B";
-            this.manualB.UseVisualStyleBackColor = true;
-            this.manualB.Click += new System.EventHandler(this.manualB_Click);
-            // 
             // timer2
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // RunWTbot
+            // LegendarySoftResetBot
             // 
-            this.RunWTbot.Location = new System.Drawing.Point(144, 23);
-            this.RunWTbot.Name = "RunWTbot";
-            this.RunWTbot.Size = new System.Drawing.Size(63, 23);
-            this.RunWTbot.TabIndex = 63;
-            this.RunWTbot.Text = "Run";
-            this.RunWTbot.UseVisualStyleBackColor = true;
-            this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click);
+            this.LegendarySoftResetBot.BackColor = System.Drawing.SystemColors.Control;
+            this.LegendarySoftResetBot.Controls.Add(this.label70);
+            this.LegendarySoftResetBot.Controls.Add(this.HPTypeLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.shinyLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.ivHPLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.label61);
+            this.LegendarySoftResetBot.Controls.Add(this.label62);
+            this.LegendarySoftResetBot.Controls.Add(this.label60);
+            this.LegendarySoftResetBot.Controls.Add(this.ivSpeLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.RunLSRbot);
+            this.LegendarySoftResetBot.Controls.Add(this.ivSpDLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.natureLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.label63);
+            this.LegendarySoftResetBot.Controls.Add(this.ivDefLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.ivSpALSR);
+            this.LegendarySoftResetBot.Controls.Add(this.label68);
+            this.LegendarySoftResetBot.Controls.Add(this.label67);
+            this.LegendarySoftResetBot.Controls.Add(this.ivAtkLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.label66);
+            this.LegendarySoftResetBot.Controls.Add(this.label64);
+            this.LegendarySoftResetBot.Controls.Add(this.label65);
+            this.LegendarySoftResetBot.Location = new System.Drawing.Point(4, 22);
+            this.LegendarySoftResetBot.Name = "LegendarySoftResetBot";
+            this.LegendarySoftResetBot.Size = new System.Drawing.Size(261, 156);
+            this.LegendarySoftResetBot.TabIndex = 2;
+            this.LegendarySoftResetBot.Text = "Legendary SR";
             // 
-            // BotTab
+            // label70
             // 
-            this.BotTab.Controls.Add(this.RemonteControls);
-            this.BotTab.Controls.Add(this.WonderTradeBot);
-            this.BotTab.Location = new System.Drawing.Point(629, 257);
-            this.BotTab.Name = "BotTab";
-            this.BotTab.SelectedIndex = 0;
-            this.BotTab.Size = new System.Drawing.Size(269, 182);
-            this.BotTab.TabIndex = 75;
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(4, 56);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(52, 13);
+            this.label70.TabIndex = 107;
+            this.label70.Text = "HP Type:";
             // 
-            // RemonteControls
+            // HPTypeLSR
             // 
-            this.RemonteControls.BackColor = System.Drawing.SystemColors.Control;
-            this.RemonteControls.Controls.Add(this.manualDLeft);
-            this.RemonteControls.Controls.Add(this.manualTouch);
-            this.RemonteControls.Controls.Add(this.manualX);
-            this.RemonteControls.Controls.Add(this.manualY);
-            this.RemonteControls.Controls.Add(this.touchCoord);
-            this.RemonteControls.Controls.Add(this.manualDUp);
-            this.RemonteControls.Controls.Add(this.label55);
-            this.RemonteControls.Controls.Add(this.manualL);
-            this.RemonteControls.Controls.Add(this.manualB);
-            this.RemonteControls.Controls.Add(this.touchY);
-            this.RemonteControls.Controls.Add(this.manualA);
-            this.RemonteControls.Controls.Add(this.manualR);
-            this.RemonteControls.Controls.Add(this.touchX);
-            this.RemonteControls.Controls.Add(this.manualSelect);
-            this.RemonteControls.Controls.Add(this.manualDRight);
-            this.RemonteControls.Controls.Add(this.label54);
-            this.RemonteControls.Controls.Add(this.ManualDDown);
-            this.RemonteControls.Controls.Add(this.manualStart);
-            this.RemonteControls.Location = new System.Drawing.Point(4, 22);
-            this.RemonteControls.Name = "RemonteControls";
-            this.RemonteControls.Padding = new System.Windows.Forms.Padding(3);
-            this.RemonteControls.Size = new System.Drawing.Size(261, 156);
-            this.RemonteControls.TabIndex = 0;
-            this.RemonteControls.Text = "Controls";
+            this.HPTypeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.HPTypeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.HPTypeLSR.FormattingEnabled = true;
+            this.HPTypeLSR.Items.AddRange(new object[] {
+            "Fighting",
+            "Flying",
+            "Poison",
+            "Ground",
+            "Rock",
+            "Bug",
+            "Ghost",
+            "Steel",
+            "Fire",
+            "Water",
+            "Grass",
+            "Electric",
+            "Psychic",
+            "Ice",
+            "Dragon",
+            "Dark"});
+            this.HPTypeLSR.Location = new System.Drawing.Point(62, 51);
+            this.HPTypeLSR.Name = "HPTypeLSR";
+            this.HPTypeLSR.Size = new System.Drawing.Size(81, 21);
+            this.HPTypeLSR.TabIndex = 108;
+            // 
+            // shinyLSR
+            // 
+            this.shinyLSR.AutoSize = true;
+            this.shinyLSR.Location = new System.Drawing.Point(87, 130);
+            this.shinyLSR.Name = "shinyLSR";
+            this.shinyLSR.Size = new System.Drawing.Size(52, 17);
+            this.shinyLSR.TabIndex = 106;
+            this.shinyLSR.Text = "Shiny";
+            this.shinyLSR.UseVisualStyleBackColor = true;
+            // 
+            // ivHPLSR
+            // 
+            this.ivHPLSR.Location = new System.Drawing.Point(221, 20);
+            this.ivHPLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivHPLSR.Name = "ivHPLSR";
+            this.ivHPLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivHPLSR.TabIndex = 91;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(4, 7);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(127, 13);
+            this.label61.TabIndex = 105;
+            this.label61.Text = "Leave blank if don\'t care.";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(217, 4);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(41, 13);
+            this.label62.TabIndex = 84;
+            this.label62.Text = "min IVs";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(14, 27);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(42, 13);
+            this.label60.TabIndex = 103;
+            this.label60.Text = "Nature:";
+            // 
+            // ivSpeLSR
+            // 
+            this.ivSpeLSR.Location = new System.Drawing.Point(221, 125);
+            this.ivSpeLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpeLSR.Name = "ivSpeLSR";
+            this.ivSpeLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivSpeLSR.TabIndex = 96;
+            // 
+            // RunLSRbot
+            // 
+            this.RunLSRbot.Location = new System.Drawing.Point(6, 126);
+            this.RunLSRbot.Name = "RunLSRbot";
+            this.RunLSRbot.Size = new System.Drawing.Size(75, 23);
+            this.RunLSRbot.TabIndex = 0;
+            this.RunLSRbot.Text = "Run";
+            this.RunLSRbot.UseVisualStyleBackColor = true;
+            this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click);
+            // 
+            // ivSpDLSR
+            // 
+            this.ivSpDLSR.Location = new System.Drawing.Point(221, 104);
+            this.ivSpDLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpDLSR.Name = "ivSpDLSR";
+            this.ivSpDLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivSpDLSR.TabIndex = 95;
+            // 
+            // natureLSR
+            // 
+            this.natureLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.natureLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.natureLSR.FormattingEnabled = true;
+            this.natureLSR.Items.AddRange(new object[] {
+            "Hardy",
+            "Lonely",
+            "Brave",
+            "Adamant",
+            "Naughty",
+            "Bold",
+            "Docile",
+            "Relaxed",
+            "Impish",
+            "Lax",
+            "Timid",
+            "Hasty",
+            "Serious",
+            "Jolly",
+            "Naive",
+            "Modest",
+            "Mild",
+            "Quiet",
+            "Bashful",
+            "Rash",
+            "Calm",
+            "Gentle",
+            "Sassy",
+            "Careful",
+            "Quirky"});
+            this.natureLSR.Location = new System.Drawing.Point(62, 24);
+            this.natureLSR.Name = "natureLSR";
+            this.natureLSR.Size = new System.Drawing.Size(81, 21);
+            this.natureLSR.TabIndex = 104;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(190, 66);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(31, 13);
+            this.label63.TabIndex = 87;
+            this.label63.Text = "DEF:";
+            // 
+            // ivDefLSR
+            // 
+            this.ivDefLSR.Location = new System.Drawing.Point(221, 62);
+            this.ivDefLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivDefLSR.Name = "ivDefLSR";
+            this.ivDefLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivDefLSR.TabIndex = 93;
+            // 
+            // ivSpALSR
+            // 
+            this.ivSpALSR.Location = new System.Drawing.Point(221, 83);
+            this.ivSpALSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpALSR.Name = "ivSpALSR";
+            this.ivSpALSR.Size = new System.Drawing.Size(33, 20);
+            this.ivSpALSR.TabIndex = 94;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(190, 45);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(31, 13);
+            this.label68.TabIndex = 86;
+            this.label68.Text = "ATK:";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(189, 108);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(32, 13);
+            this.label67.TabIndex = 89;
+            this.label67.Text = "SPD:";
+            // 
+            // ivAtkLSR
+            // 
+            this.ivAtkLSR.Location = new System.Drawing.Point(221, 41);
+            this.ivAtkLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivAtkLSR.Name = "ivAtkLSR";
+            this.ivAtkLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivAtkLSR.TabIndex = 92;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(190, 87);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(31, 13);
+            this.label66.TabIndex = 88;
+            this.label66.Text = "SPA:";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(196, 24);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(25, 13);
+            this.label64.TabIndex = 85;
+            this.label64.Text = "HP:";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(190, 129);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(31, 13);
+            this.label65.TabIndex = 90;
+            this.label65.Text = "SPE:";
             // 
             // WonderTradeBot
             // 
@@ -2606,6 +2702,16 @@
             this.label59.Size = new System.Drawing.Size(49, 13);
             this.label59.TabIndex = 105;
             this.label59.Text = "# trades:";
+            // 
+            // RunWTbot
+            // 
+            this.RunWTbot.Location = new System.Drawing.Point(144, 23);
+            this.RunWTbot.Name = "RunWTbot";
+            this.RunWTbot.Size = new System.Drawing.Size(63, 23);
+            this.RunWTbot.TabIndex = 63;
+            this.RunWTbot.Text = "Run";
+            this.RunWTbot.UseVisualStyleBackColor = true;
+            this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click);
             // 
             // WTtradesNo
             // 
@@ -2686,11 +2792,220 @@
             this.label58.TabIndex = 102;
             this.label58.Text = "Box:";
             // 
+            // RemonteControls
+            // 
+            this.RemonteControls.BackColor = System.Drawing.SystemColors.Control;
+            this.RemonteControls.Controls.Add(this.manualDLeft);
+            this.RemonteControls.Controls.Add(this.manualTouch);
+            this.RemonteControls.Controls.Add(this.manualX);
+            this.RemonteControls.Controls.Add(this.manualY);
+            this.RemonteControls.Controls.Add(this.touchCoord);
+            this.RemonteControls.Controls.Add(this.manualDUp);
+            this.RemonteControls.Controls.Add(this.label55);
+            this.RemonteControls.Controls.Add(this.manualL);
+            this.RemonteControls.Controls.Add(this.manualB);
+            this.RemonteControls.Controls.Add(this.touchY);
+            this.RemonteControls.Controls.Add(this.manualA);
+            this.RemonteControls.Controls.Add(this.manualR);
+            this.RemonteControls.Controls.Add(this.touchX);
+            this.RemonteControls.Controls.Add(this.manualSelect);
+            this.RemonteControls.Controls.Add(this.manualDRight);
+            this.RemonteControls.Controls.Add(this.label54);
+            this.RemonteControls.Controls.Add(this.ManualDDown);
+            this.RemonteControls.Controls.Add(this.manualStart);
+            this.RemonteControls.Location = new System.Drawing.Point(4, 22);
+            this.RemonteControls.Name = "RemonteControls";
+            this.RemonteControls.Padding = new System.Windows.Forms.Padding(3);
+            this.RemonteControls.Size = new System.Drawing.Size(261, 156);
+            this.RemonteControls.TabIndex = 0;
+            this.RemonteControls.Text = "Controls";
+            // 
+            // manualDLeft
+            // 
+            this.manualDLeft.Location = new System.Drawing.Point(6, 39);
+            this.manualDLeft.Name = "manualDLeft";
+            this.manualDLeft.Size = new System.Drawing.Size(23, 23);
+            this.manualDLeft.TabIndex = 67;
+            this.manualDLeft.Text = "←";
+            this.manualDLeft.UseVisualStyleBackColor = true;
+            this.manualDLeft.Click += new System.EventHandler(this.manualDLeft_Click);
+            // 
+            // manualTouch
+            // 
+            this.manualTouch.Location = new System.Drawing.Point(153, 123);
+            this.manualTouch.Name = "manualTouch";
+            this.manualTouch.Size = new System.Drawing.Size(62, 23);
+            this.manualTouch.TabIndex = 74;
+            this.manualTouch.Text = "Touch";
+            this.manualTouch.UseVisualStyleBackColor = true;
+            this.manualTouch.Click += new System.EventHandler(this.manualTouch_Click);
+            // 
+            // manualX
+            // 
+            this.manualX.Location = new System.Drawing.Point(200, 10);
+            this.manualX.Name = "manualX";
+            this.manualX.Size = new System.Drawing.Size(23, 23);
+            this.manualX.TabIndex = 2;
+            this.manualX.Text = "X";
+            this.manualX.UseVisualStyleBackColor = true;
+            this.manualX.Click += new System.EventHandler(this.manualX_Click);
+            // 
+            // manualY
+            // 
+            this.manualY.Location = new System.Drawing.Point(171, 39);
+            this.manualY.Name = "manualY";
+            this.manualY.Size = new System.Drawing.Size(23, 23);
+            this.manualY.TabIndex = 3;
+            this.manualY.Text = "Y";
+            this.manualY.UseVisualStyleBackColor = true;
+            this.manualY.Click += new System.EventHandler(this.manualY_Click);
+            // 
+            // touchCoord
+            // 
+            this.touchCoord.Location = new System.Drawing.Point(9, 125);
+            this.touchCoord.Name = "touchCoord";
+            this.touchCoord.ReadOnly = true;
+            this.touchCoord.Size = new System.Drawing.Size(138, 20);
+            this.touchCoord.TabIndex = 73;
+            this.touchCoord.Text = "0x02000000";
+            this.touchCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // manualDUp
+            // 
+            this.manualDUp.Location = new System.Drawing.Point(35, 10);
+            this.manualDUp.Name = "manualDUp";
+            this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.manualDUp.Size = new System.Drawing.Size(23, 23);
+            this.manualDUp.TabIndex = 4;
+            this.manualDUp.Text = "↑";
+            this.manualDUp.UseVisualStyleBackColor = true;
+            this.manualDUp.Click += new System.EventHandler(this.manualDUp_Click);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(221, 99);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(33, 13);
+            this.label55.TabIndex = 72;
+            this.label55.Text = "(X, Y)";
+            // 
+            // manualL
+            // 
+            this.manualL.Location = new System.Drawing.Point(103, 10);
+            this.manualL.Name = "manualL";
+            this.manualL.Size = new System.Drawing.Size(23, 23);
+            this.manualL.TabIndex = 63;
+            this.manualL.Text = "L";
+            this.manualL.UseVisualStyleBackColor = true;
+            this.manualL.Click += new System.EventHandler(this.manualL_Click);
+            // 
+            // manualB
+            // 
+            this.manualB.Location = new System.Drawing.Point(200, 68);
+            this.manualB.Name = "manualB";
+            this.manualB.Size = new System.Drawing.Size(23, 23);
+            this.manualB.TabIndex = 1;
+            this.manualB.Text = "B";
+            this.manualB.UseVisualStyleBackColor = true;
+            this.manualB.Click += new System.EventHandler(this.manualB_Click);
+            // 
+            // manualA
+            // 
+            this.manualA.Location = new System.Drawing.Point(229, 39);
+            this.manualA.Name = "manualA";
+            this.manualA.Size = new System.Drawing.Size(23, 23);
+            this.manualA.TabIndex = 0;
+            this.manualA.Text = "A";
+            this.manualA.UseVisualStyleBackColor = true;
+            this.manualA.Click += new System.EventHandler(this.manualA_Click);
+            // 
+            // manualR
+            // 
+            this.manualR.Location = new System.Drawing.Point(132, 10);
+            this.manualR.Name = "manualR";
+            this.manualR.Size = new System.Drawing.Size(23, 23);
+            this.manualR.TabIndex = 64;
+            this.manualR.Text = "R";
+            this.manualR.UseVisualStyleBackColor = true;
+            this.manualR.Click += new System.EventHandler(this.manualR_Click);
+            // 
+            // manualSelect
+            // 
+            this.manualSelect.Location = new System.Drawing.Point(132, 68);
+            this.manualSelect.Name = "manualSelect";
+            this.manualSelect.Size = new System.Drawing.Size(62, 23);
+            this.manualSelect.TabIndex = 67;
+            this.manualSelect.Text = "SELECT";
+            this.manualSelect.UseVisualStyleBackColor = true;
+            this.manualSelect.Click += new System.EventHandler(this.manualSelect_Click);
+            // 
+            // manualDRight
+            // 
+            this.manualDRight.Location = new System.Drawing.Point(64, 39);
+            this.manualDRight.Name = "manualDRight";
+            this.manualDRight.Size = new System.Drawing.Size(23, 23);
+            this.manualDRight.TabIndex = 67;
+            this.manualDRight.Text = "→";
+            this.manualDRight.UseVisualStyleBackColor = true;
+            this.manualDRight.Click += new System.EventHandler(this.manualDRight_Click);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(6, 99);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(73, 13);
+            this.label54.TabIndex = 69;
+            this.label54.Text = "Touchscreen:";
+            // 
+            // ManualDDown
+            // 
+            this.ManualDDown.Location = new System.Drawing.Point(35, 68);
+            this.ManualDDown.Name = "ManualDDown";
+            this.ManualDDown.Size = new System.Drawing.Size(23, 23);
+            this.ManualDDown.TabIndex = 67;
+            this.ManualDDown.Text = "↓";
+            this.ManualDDown.UseVisualStyleBackColor = true;
+            this.ManualDDown.Click += new System.EventHandler(this.ManualDDown_Click);
+            // 
+            // manualStart
+            // 
+            this.manualStart.Location = new System.Drawing.Point(64, 68);
+            this.manualStart.Name = "manualStart";
+            this.manualStart.Size = new System.Drawing.Size(62, 23);
+            this.manualStart.TabIndex = 68;
+            this.manualStart.Text = "START";
+            this.manualStart.UseVisualStyleBackColor = true;
+            this.manualStart.Click += new System.EventHandler(this.manualStart_Click);
+            // 
+            // BotTab
+            // 
+            this.BotTab.Controls.Add(this.RemonteControls);
+            this.BotTab.Controls.Add(this.WonderTradeBot);
+            this.BotTab.Controls.Add(this.LegendarySoftResetBot);
+            this.BotTab.Location = new System.Drawing.Point(629, 257);
+            this.BotTab.Name = "BotTab";
+            this.BotTab.SelectedIndex = 0;
+            this.BotTab.Size = new System.Drawing.Size(269, 182);
+            this.BotTab.TabIndex = 75;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(541, 328);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(78, 13);
+            this.label69.TabIndex = 76;
+            this.label69.Text = "Version: 1.1.18";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 444);
+            this.Controls.Add(this.label69);
             this.Controls.Add(this.BotTab);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
@@ -2776,16 +3091,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
-            this.BotTab.ResumeLayout(false);
-            this.RemonteControls.ResumeLayout(false);
-            this.RemonteControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
+            this.LegendarySoftResetBot.ResumeLayout(false);
+            this.LegendarySoftResetBot.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ivHPLSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpeLSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpDLSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivDefLSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpALSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivAtkLSR)).EndInit();
             this.WonderTradeBot.ResumeLayout(false);
             this.WonderTradeBot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).EndInit();
+            this.RemonteControls.ResumeLayout(false);
+            this.RemonteControls.PerformLayout();
+            this.BotTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2963,35 +3286,57 @@
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.CheckBox deleteKeepBackup;
         private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Button manualA;
-        private System.Windows.Forms.Button manualB;
-        private System.Windows.Forms.Button manualX;
-        private System.Windows.Forms.Button manualY;
-        private System.Windows.Forms.Button manualSelect;
-        private System.Windows.Forms.Button manualDUp;
-        private System.Windows.Forms.Button manualL;
-        private System.Windows.Forms.Button manualR;
-        private System.Windows.Forms.Button manualStart;
-        private System.Windows.Forms.Button ManualDDown;
-        private System.Windows.Forms.Button manualDRight;
-        private System.Windows.Forms.Button manualDLeft;
         private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.TextBox touchCoord;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.NumericUpDown touchY;
-        private System.Windows.Forms.NumericUpDown touchX;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Button manualTouch;
-        private System.Windows.Forms.Button RunWTbot;
-        private System.Windows.Forms.TabControl BotTab;
-        private System.Windows.Forms.TabPage RemonteControls;
+        private System.Windows.Forms.TabPage LegendarySoftResetBot;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Button RunLSRbot;
+        private System.Windows.Forms.ComboBox natureLSR;
         private System.Windows.Forms.TabPage WonderTradeBot;
         private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Button RunWTbot;
         private System.Windows.Forms.NumericUpDown WTtradesNo;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.NumericUpDown WTBox;
         private System.Windows.Forms.NumericUpDown WTSlot;
         private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TabPage RemonteControls;
+        private System.Windows.Forms.Button manualDLeft;
+        private System.Windows.Forms.Button manualTouch;
+        private System.Windows.Forms.Button manualX;
+        private System.Windows.Forms.Button manualY;
+        private System.Windows.Forms.TextBox touchCoord;
+        private System.Windows.Forms.Button manualDUp;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Button manualL;
+        private System.Windows.Forms.Button manualB;
+        private System.Windows.Forms.NumericUpDown touchY;
+        private System.Windows.Forms.Button manualA;
+        private System.Windows.Forms.Button manualR;
+        private System.Windows.Forms.NumericUpDown touchX;
+        private System.Windows.Forms.Button manualSelect;
+        private System.Windows.Forms.Button manualDRight;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Button ManualDDown;
+        private System.Windows.Forms.Button manualStart;
+        private System.Windows.Forms.TabControl BotTab;
+        private System.Windows.Forms.NumericUpDown ivHPLSR;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.NumericUpDown ivSpeLSR;
+        private System.Windows.Forms.NumericUpDown ivSpDLSR;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.NumericUpDown ivDefLSR;
+        private System.Windows.Forms.NumericUpDown ivSpALSR;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.NumericUpDown ivAtkLSR;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.CheckBox shinyLSR;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.ComboBox HPTypeLSR;
     }
 }
 

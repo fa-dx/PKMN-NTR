@@ -137,6 +137,7 @@ namespace ntrbase
         public static readonly uint DpadDOWN = 0xF7F;
         public static readonly uint DpadLEFT = 0xFDF;
         public static readonly uint DpadRIGHT = 0xFEF;
+        public static readonly uint softReset = 0xCF7;
         public static readonly uint notouch = 0x02000000;
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
@@ -397,7 +398,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2472,14 +2473,14 @@ namespace ntrbase
         public async void autobuttonsend(uint command)
         {
             sendButton(command);
-            await Task.Delay(100);
+            await Task.Delay(150);
             sendButton(nokey);
         }
 
         public async void autotouchsend(decimal Xvalue, decimal Yvalue)
         {
             sendTouch(gethexcoord(Xvalue, Yvalue));
-            await Task.Delay(100);
+            await Task.Delay(150);
             sendTouch(notouch);
         }
 
@@ -2586,9 +2587,220 @@ namespace ntrbase
             }
         }
 
+        // Legendary Soft Reset Bot
+        private async void RunLSRbot_Click(object sender, EventArgs e)
+        {
+            // Reading filters
+            string desirednature;
+            if (natureLSR.SelectedIndex < 0) desirednature = "Any";
+            else desirednature = natureLSR.SelectedItem.ToString();
+            string desiredIVs = ivHPLSR.Value.ToString() + "/" + ivAtkLSR.Value.ToString() + "/" + ivDefLSR.Value.ToString() + "/" + ivSpALSR.Value.ToString() + "/" + ivSpDLSR.Value.ToString() + "/" + ivSpeLSR.Value.ToString();
+            string desiredHPtype;
+            if (HPTypeLSR.SelectedIndex < 0) desiredHPtype = "Any";
+            else desiredHPtype = HPTypeLSR.SelectedItem.ToString();
+            string desiredshiny;
+            if (shinyLSR.Checked) desiredshiny = "Yes";
+            else desiredshiny = "Don't care";
+
+            // Warning screen
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger a battle against a Legendary Pokémon located in front of you an reset the game if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nDo you want to continue?", "Legendary Soft-reset Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.OK)
+            { // Bot start
+                botWorking = true; // Set the botWorking flag
+                botState = 1;
+                //Disable controlds
+                radioOpponent.Checked = true;
+                foreach (Control c in enableWhenConnected) c.Enabled = false;
+                //Local Variables
+                int softresetNo = 0;
+
+                // Wi-Fi fix
+                Addlog("Fixing Wi-Fi");
+                byte[] buttonByte = BitConverter.GetBytes(0x4770);
+                Program.scriptHelper.write(0x0105AE4, buttonByte, 0x1A);
+                await Task.Delay(2000); // Wait 2 seconds
+                //Disable PSS comunications
+                Addlog("Disabling PSS");
+                autotouchsend(240, 180); // Press PSS Settings
+                await Task.Delay(3000); // Wait 3 seconds
+                autotouchsend(160, 120); // Press Disable PSS communications
+                await Task.Delay(3000); // Wait 3 seconds
+                autotouchsend(160, 120); // Press Yes
+                Addlog("Wait 10 seconds");
+                await Task.Delay(10000); // Wait 10 seconds
+                // Save the game
+                Addlog("Saving game");
+                autotouchsend(220, 220); // Press save icon
+                await Task.Delay(5000); // Wait 5 seconds
+                autobuttonsend(keyA); // Press A button
+                await Task.Delay(7000); // Wait 7 seconds
+
+                // Soft-reset procedure
+                while (botState > 0)
+                {
+                    SetText(dPID, "");
+                    Addlog("Pressing A buton 4 times");
+                    autobuttonsend(keyA); // Press A button
+                    await Task.Delay(2000); // Wait 1.5 seconds
+                    autobuttonsend(keyA); // Press A button
+                    await Task.Delay(2000); // Wait 1.5 seconds
+                    autobuttonsend(keyA); // Press A button
+                    await Task.Delay(2000); // Wait 1.5 seconds
+                    autobuttonsend(keyA); // Press A button
+                    await Task.Delay(2000); // Wait 1.5 seconds
+                    while (dPID.Text.Length <= 0)
+                    {
+                        Addlog("Wait for opponent data");
+                        if (dPID.Text.Length > 0) break;
+                        dumpPokemon.Enabled = true; // Check if pokémon data is available
+                        dumpPokemon.PerformClick();
+                        dumpPokemon.Enabled = false;
+                        await Task.Delay(3000); // Wait until information is received
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(1000); // Wait 1 second
+                    }
+                    // Analyze the pokemon
+                    Addlog("Pokémon detected, start analysis");
+                    botState = 0;
+                    if (natureLSR.SelectedIndex < 0 || desirednature == nature.Text)
+                    {
+                        Addlog("Nature: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Nature: FAIL");
+                        botState++;
+                    }
+                    if (ivHPNum.Value >= ivHPLSR.Value)
+                    {
+                        Addlog("Hit Points IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Hit Points IV: FAIL");
+                        botState++;
+                    }
+                    if (ivATKNum.Value >= ivAtkLSR.Value)
+                    {
+                        Addlog("Attack IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Attack IV: FAIL");
+                        botState++;
+                    }
+                    if (ivDEFNum.Value >= ivDefLSR.Value)
+                    {
+                        Addlog("Defense IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Defense IV: FAIL");
+                        botState++;
+                    }
+                    if (ivSPANum.Value >= ivSpALSR.Value)
+                    {
+                        Addlog("Special Attack IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Special Attack IV: FAIL");
+                        botState++;
+                    }
+                    if (ivSPDNum.Value >= ivSpDLSR.Value)
+                    {
+                        Addlog("Special Defense IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Special Defense IV: FAIL");
+                        botState++;
+                    }
+                    if (ivSPENum.Value >= ivSpeLSR.Value)
+                    {
+                        Addlog("Speed IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Speed IV: FAIL");
+                        botState++;
+                    }
+                    if (HPTypeLSR.SelectedIndex < 0 || desiredHPtype == hiddenPower.Text)
+                    {
+                        Addlog("Hidden Power: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Hidden Power: FAIL");
+                        botState++;
+                    }
+
+                    if (shinyLSR.Checked)
+                    {
+                        if (setShiny.Text == "★")
+                        {
+                            Addlog("Shiny: PASS");
+                        }
+                        else
+                        {
+                            Addlog("Shiny: FAIL");
+                            botState++;
+                        }
+                    }
+                    else
+                    {
+                        if (setShiny.Text == "★")
+                        {
+                            Addlog("Shiny: Yes");
+                            botState = -1;
+                        }
+                        else
+                        {
+                            Addlog("Shiny: No");
+                        }
+                    }
+
+                    // Soft reset 
+                    if (botState > 0)
+                    {
+                        softresetNo++;
+                        Addlog("Reset #" + softresetNo.ToString() + " Wait 20 seconds");
+                        await Task.Delay(3000);
+                        autobuttonsend(softReset); // Press L + R + A  button
+                        await Task.Delay(17000); // Wait 17 seconds
+                        Addlog("Reconnect");
+                        Program.scriptHelper.connect(host.Text, 8000);
+                        foreach (Control c in enableWhenConnected) c.Enabled = false; // Disable controls
+                        await Task.Delay(3000); // Wait 3 seconds
+                        Addlog("Pressing A buton 3 times");
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(4000); // Wait 4 seconds
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(6000); // Wait 6 seconds
+                        autobuttonsend(keyA); // Press A button
+                        await Task.Delay(5000); // Wait 5 seconds
+                    }
+                    else
+                    {
+                        if (botState == -1)
+                        {
+                            Addlog("Shiny Pokémon detected!\r\nTotal number of resets: " + softresetNo.ToString());
+                        }
+                        else
+                        {
+                            Addlog("All tests passed!\r\nTotal number of resets: " + softresetNo.ToString());
+                        }
+                    }
+                }
+                MessageBox.Show("Finished, " + softresetNo.ToString() + " resets performed", "Legendary Soft Reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);  // Finish message
+                foreach (Control c in enableWhenConnected) c.Enabled = true; // Enable controls
+                botWorking = false; // Disable the botWorking flag
+            }
+        }
+
+
         #endregion Bots
-
-
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
