@@ -2473,14 +2473,14 @@ namespace ntrbase
         public async void autobuttonsend(uint command)
         {
             sendButton(command);
-            await Task.Delay(150);
+            await Task.Delay(200);
             sendButton(nokey);
         }
 
         public async void autotouchsend(decimal Xvalue, decimal Yvalue)
         {
             sendTouch(gethexcoord(Xvalue, Yvalue));
-            await Task.Delay(150);
+            await Task.Delay(200);
             sendTouch(notouch);
         }
 
@@ -2509,6 +2509,7 @@ namespace ntrbase
                     //Check information of the pokémon to be traded.
                     SetValue(boxDump, currentbox + 1);
                     SetValue(slotDump, currentslot + 1);
+                    Addlog("Reading outgoing pokémon information");
                     dumpPokemon.Enabled = true;
                     dumpPokemon.PerformClick();
                     dumpPokemon.Enabled = false;
@@ -2516,6 +2517,7 @@ namespace ntrbase
                     if (botState == 0)
                     { // If the slot it's not empty
                         oldPID = dPID.Text;
+                        Addlog("Starting Wonder Trade");
                         autotouchsend(240, 120); // Press Wonder Trade button
                         await Task.Delay(2000); // Wait 2 seconds
                         autobuttonsend(keyA); // Press A button
@@ -2539,6 +2541,7 @@ namespace ntrbase
                         await Task.Delay(1500); // Wait 1.5 seconds
                         for (i = 0; i < 15; i++)
                         { // During 75 seconds check if a pokémon is received during every 5 seconds.
+                            Addlog("Waiting for a trade...");
                             dumpPokemon.Enabled = true;
                             dumpPokemon.PerformClick();
                             dumpPokemon.Enabled = false;
@@ -2547,6 +2550,7 @@ namespace ntrbase
                         }
                         if (i >= 20) // If trade timed out try agin
                         {
+                            Addlog("No trade partner found, trying again");
                             autobuttonsend(keyA); // Press A button ("A trade partner was not found...")
                             await Task.Delay(1500); // Wait 1.5 seconds
                             autobuttonsend(keyA); // Press A button ("Wait a little and try again...")
@@ -2561,13 +2565,19 @@ namespace ntrbase
                             botState = Array.IndexOf(pokeTradeEvolveitem, species.Text);
                             if (botState > -1 && heldItem.Text == TradeEvolveitem[botState])
                             { // Test if the pokémon has the correct item, if so, wait 70 seconds
+                                Addlog("Trade Evolution detected, waiting 70 seconds");
                                 await Task.Delay(70000);
                             }
                             else if (Array.IndexOf(pokeTradeEvolve, species.Text) > -1 && heldItem.Text != "Everstone")
                             { // Else search if the pokémon evolves by simple trade and it's not holding an Everstone, if so, wait 70 seconds.
+                                Addlog("Trade Evolution detected, waiting 70 seconds");
                                 await Task.Delay(70000);
                             }
-                            else await Task.Delay(50000); // If the pokemon will not evolve, wait 50 seconds.
+                            else
+                            {
+                                await Task.Delay(50000); // If the pokemon will not evolve, wait 50 seconds.
+                                Addlog("Trade detected, waiting 50 seconds");
+                            }
                         }
                         oldbox = currentbox; // For box change checking
                     }
