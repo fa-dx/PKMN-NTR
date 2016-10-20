@@ -1,9 +1,7 @@
 # PKMN-NTR
-A Generation VI Pokémon games real-time editing tool for use with NTR CFW.
+A Generation VI Pokémon games real-time editing tool for use with NTR CFW. Discuss this tool on [GBATemp](http://gbatemp.net/threads/wip-pkmn-ntr-pok%C3%A9mon-gen-6-memory-editor.441892/)
 
-Discuss this tool on GBATemp forum: http://gbatemp.net/threads/wip-pkmn-ntr-pok%C3%A9mon-gen-6-memory-editor.441892/
-
-Be sure to read the [https://github.com/drgoku282/PKMN-NTR/wiki](wiki) to learn about the usage of the program and the included bots.
+Be sure to read the [wiki](https://github.com/drgoku282/PKMN-NTR/wiki) to learn about the usage of the program and the included bots.
 
 # Credits
 - **fa-dx**: Gathering offsets, creating the tool.
