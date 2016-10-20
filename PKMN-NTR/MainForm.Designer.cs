@@ -192,10 +192,23 @@
             this.label50 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.LegendarySoftResetBot = new System.Windows.Forms.TabPage();
+            this.ivHPLSR = new System.Windows.Forms.NumericUpDown();
             this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
+            this.ivSpeLSR = new System.Windows.Forms.NumericUpDown();
             this.RunLSRbot = new System.Windows.Forms.Button();
+            this.ivSpDLSR = new System.Windows.Forms.NumericUpDown();
             this.natureLSR = new System.Windows.Forms.ComboBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.ivDefLSR = new System.Windows.Forms.NumericUpDown();
+            this.ivSpALSR = new System.Windows.Forms.NumericUpDown();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.ivAtkLSR = new System.Windows.Forms.NumericUpDown();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
             this.WonderTradeBot = new System.Windows.Forms.TabPage();
             this.label59 = new System.Windows.Forms.Label();
             this.RunWTbot = new System.Windows.Forms.Button();
@@ -222,6 +235,7 @@
             this.ManualDDown = new System.Windows.Forms.Button();
             this.manualStart = new System.Windows.Forms.Button();
             this.BotTab = new System.Windows.Forms.TabControl();
+            this.label69 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -282,6 +296,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
             this.LegendarySoftResetBot.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ivHPLSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpeLSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpDLSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivDefLSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpALSR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivAtkLSR)).BeginInit();
             this.WonderTradeBot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
@@ -2383,15 +2403,40 @@
             // LegendarySoftResetBot
             // 
             this.LegendarySoftResetBot.BackColor = System.Drawing.SystemColors.Control;
+            this.LegendarySoftResetBot.Controls.Add(this.ivHPLSR);
             this.LegendarySoftResetBot.Controls.Add(this.label61);
+            this.LegendarySoftResetBot.Controls.Add(this.label62);
             this.LegendarySoftResetBot.Controls.Add(this.label60);
+            this.LegendarySoftResetBot.Controls.Add(this.ivSpeLSR);
             this.LegendarySoftResetBot.Controls.Add(this.RunLSRbot);
+            this.LegendarySoftResetBot.Controls.Add(this.ivSpDLSR);
             this.LegendarySoftResetBot.Controls.Add(this.natureLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.label63);
+            this.LegendarySoftResetBot.Controls.Add(this.ivDefLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.ivSpALSR);
+            this.LegendarySoftResetBot.Controls.Add(this.label68);
+            this.LegendarySoftResetBot.Controls.Add(this.label67);
+            this.LegendarySoftResetBot.Controls.Add(this.ivAtkLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.label66);
+            this.LegendarySoftResetBot.Controls.Add(this.label64);
+            this.LegendarySoftResetBot.Controls.Add(this.label65);
             this.LegendarySoftResetBot.Location = new System.Drawing.Point(4, 22);
             this.LegendarySoftResetBot.Name = "LegendarySoftResetBot";
             this.LegendarySoftResetBot.Size = new System.Drawing.Size(261, 156);
             this.LegendarySoftResetBot.TabIndex = 2;
             this.LegendarySoftResetBot.Text = "Legendary SR";
+            // 
+            // ivHPLSR
+            // 
+            this.ivHPLSR.Location = new System.Drawing.Point(221, 20);
+            this.ivHPLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivHPLSR.Name = "ivHPLSR";
+            this.ivHPLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivHPLSR.TabIndex = 91;
             // 
             // label61
             // 
@@ -2402,6 +2447,15 @@
             this.label61.TabIndex = 105;
             this.label61.Text = "Leave blank if don\'t care.";
             // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(217, 4);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(41, 13);
+            this.label62.TabIndex = 84;
+            this.label62.Text = "min IVs";
+            // 
             // label60
             // 
             this.label60.AutoSize = true;
@@ -2411,15 +2465,39 @@
             this.label60.TabIndex = 103;
             this.label60.Text = "Nature:";
             // 
+            // ivSpeLSR
+            // 
+            this.ivSpeLSR.Location = new System.Drawing.Point(221, 125);
+            this.ivSpeLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpeLSR.Name = "ivSpeLSR";
+            this.ivSpeLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivSpeLSR.TabIndex = 96;
+            // 
             // RunLSRbot
             // 
-            this.RunLSRbot.Location = new System.Drawing.Point(183, 126);
+            this.RunLSRbot.Location = new System.Drawing.Point(6, 126);
             this.RunLSRbot.Name = "RunLSRbot";
             this.RunLSRbot.Size = new System.Drawing.Size(75, 23);
             this.RunLSRbot.TabIndex = 0;
             this.RunLSRbot.Text = "Run";
             this.RunLSRbot.UseVisualStyleBackColor = true;
             this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click);
+            // 
+            // ivSpDLSR
+            // 
+            this.ivSpDLSR.Location = new System.Drawing.Point(221, 104);
+            this.ivSpDLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpDLSR.Name = "ivSpDLSR";
+            this.ivSpDLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivSpDLSR.TabIndex = 95;
             // 
             // natureLSR
             // 
@@ -2456,6 +2534,96 @@
             this.natureLSR.Name = "natureLSR";
             this.natureLSR.Size = new System.Drawing.Size(81, 21);
             this.natureLSR.TabIndex = 104;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(190, 66);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(31, 13);
+            this.label63.TabIndex = 87;
+            this.label63.Text = "DEF:";
+            // 
+            // ivDefLSR
+            // 
+            this.ivDefLSR.Location = new System.Drawing.Point(221, 62);
+            this.ivDefLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivDefLSR.Name = "ivDefLSR";
+            this.ivDefLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivDefLSR.TabIndex = 93;
+            // 
+            // ivSpALSR
+            // 
+            this.ivSpALSR.Location = new System.Drawing.Point(221, 83);
+            this.ivSpALSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpALSR.Name = "ivSpALSR";
+            this.ivSpALSR.Size = new System.Drawing.Size(33, 20);
+            this.ivSpALSR.TabIndex = 94;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(190, 45);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(31, 13);
+            this.label68.TabIndex = 86;
+            this.label68.Text = "ATK:";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(189, 108);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(32, 13);
+            this.label67.TabIndex = 89;
+            this.label67.Text = "SPD:";
+            // 
+            // ivAtkLSR
+            // 
+            this.ivAtkLSR.Location = new System.Drawing.Point(221, 41);
+            this.ivAtkLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivAtkLSR.Name = "ivAtkLSR";
+            this.ivAtkLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivAtkLSR.TabIndex = 92;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(190, 87);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(31, 13);
+            this.label66.TabIndex = 88;
+            this.label66.Text = "SPA:";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(196, 24);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(25, 13);
+            this.label64.TabIndex = 85;
+            this.label64.Text = "HP:";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(190, 129);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(31, 13);
+            this.label65.TabIndex = 90;
+            this.label65.Text = "SPE:";
             // 
             // WonderTradeBot
             // 
@@ -2770,11 +2938,22 @@
             this.BotTab.Size = new System.Drawing.Size(269, 182);
             this.BotTab.TabIndex = 75;
             // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(515, 328);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(108, 13);
+            this.label69.TabIndex = 76;
+            this.label69.Text = "Version: 1.1.18-beta2";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 444);
+            this.Controls.Add(this.label69);
             this.Controls.Add(this.BotTab);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.cloneWriteTabs);
@@ -2864,6 +3043,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
             this.LegendarySoftResetBot.ResumeLayout(false);
             this.LegendarySoftResetBot.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ivHPLSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpeLSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpDLSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivDefLSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpALSR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivAtkLSR)).EndInit();
             this.WonderTradeBot.ResumeLayout(false);
             this.WonderTradeBot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
@@ -3083,6 +3268,20 @@
         private System.Windows.Forms.Button ManualDDown;
         private System.Windows.Forms.Button manualStart;
         private System.Windows.Forms.TabControl BotTab;
+        private System.Windows.Forms.NumericUpDown ivHPLSR;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.NumericUpDown ivSpeLSR;
+        private System.Windows.Forms.NumericUpDown ivSpDLSR;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.NumericUpDown ivDefLSR;
+        private System.Windows.Forms.NumericUpDown ivSpALSR;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.NumericUpDown ivAtkLSR;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label69;
     }
 }
 

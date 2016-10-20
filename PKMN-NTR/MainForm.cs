@@ -398,7 +398,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2594,9 +2594,10 @@ namespace ntrbase
             string desirednature = "";
             if (natureLSR.SelectedIndex < 0) desirednature = "Any";
             else desirednature = natureLSR.SelectedItem.ToString();
+            string desiredIVs = ivHPLSR.Value.ToString() + "/" + ivAtkLSR.Value.ToString() + "/" + ivDefLSR.Value.ToString() + "/" + ivSpALSR.Value.ToString() + "/" + ivSpDLSR.Value.ToString() + "/" + ivSpeLSR.Value.ToString();
 
             // Warning screen
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger a battle against a Legendary Pokémon located in front of you an reset the game if it doesn't comply with the following specifications:\r\n\r\n- Nature: " +  desirednature + "\r\n\r\nDo you want to continue?", "Legendary Soft-reset Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger a battle against a Legendary Pokémon located in front of you an reset the game if it doesn't comply with the following specifications:\r\n\r\n- Nature: " +  desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n\r\nDo you want to continue?", "Legendary Soft-reset Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Bot start
@@ -2604,6 +2605,7 @@ namespace ntrbase
                 botState = 1;
                 //Disable controlds
                 radioOpponent.Checked = true;
+                foreach (Control c in enableWhenConnected) c.Enabled = false;
                 //Local Variables
                 int softresetNo = 0;
 
@@ -2664,22 +2666,79 @@ namespace ntrbase
                         Addlog("Nature: FAIL");
                         botState++;
                     }
+                    if(ivHPNum.Value >= ivHPLSR.Value)
+                    {
+                        Addlog("Hit Points IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Hit Points IV: FAIL");
+                        botState++;
+                    }
+                    if (ivATKNum.Value >= ivAtkLSR.Value)
+                    {
+                        Addlog("Attack IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Attack IV: FAIL");
+                        botState++;
+                    }
+                    if (ivDEFNum.Value >= ivDefLSR.Value)
+                    {
+                        Addlog("Defense IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Defense IV: FAIL");
+                        botState++;
+                    }
+                    if (ivSpALSR.Value >= ivSpALSR.Value)
+                    {
+                        Addlog("Special Attack IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Special Attack IV: FAIL");
+                        botState++;
+                    }
+                    if (ivSPDNum.Value >= ivSpDLSR.Value)
+                    {
+                        Addlog("Special Defense IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Special Defense IV: FAIL");
+                        botState++;
+                    }
+                    if (ivSPENum.Value >= ivSpeLSR.Value)
+                    {
+                        Addlog("Speed IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Speed IV: FAIL");
+                        botState++;
+                    }
+
+
                     // Soft reset 
                     if (botState > 0)
                     {
                         softresetNo++;
-                        Addlog("Reset #" + softresetNo.ToString() + " Wait 25 seconds");
+                        Addlog("Reset #" + softresetNo.ToString() + " Wait 20 seconds");
                         await Task.Delay(3000);
                         autobuttonsend(softReset); // Press L + R + A  button
-                        await Task.Delay(22000); // Wait 20 seconds
+                        await Task.Delay(17000); // Wait 17 seconds
                         Addlog("Reconnect");
                         Program.scriptHelper.connect(host.Text, 8000);
+                        foreach (Control c in enableWhenConnected) c.Enabled = false; // Disable controls
                         await Task.Delay(3000); // Wait 3 seconds
                         Addlog("Pressing A buton 3 times");
                         autobuttonsend(keyA); // Press A button
-                        await Task.Delay(5000); // Wait 5 seconds
+                        await Task.Delay(4000); // Wait 4 seconds
                         autobuttonsend(keyA); // Press A button
-                        await Task.Delay(5000); // Wait 5 seconds
+                        await Task.Delay(6000); // Wait 6 seconds
                         autobuttonsend(keyA); // Press A button
                         await Task.Delay(5000); // Wait 5 seconds
                     }
@@ -2689,6 +2748,7 @@ namespace ntrbase
                     }
                 }
                 MessageBox.Show("Finished, " + softresetNo.ToString() + " resets performed", "Legendary Soft Reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);  // Finish message
+                foreach (Control c in enableWhenConnected) c.Enabled = true; // Enable controls
                 botWorking = false; // Disable the botWorking flag
             }
         }
