@@ -2673,7 +2673,7 @@ namespace ntrbase
                     // Analyze the pokemon
                     Addlog("Pokémon detected, start analysis");
                     botState = 0;
-                    if (natureLSR.SelectedIndex < 0 || desirednature == nature.Text)
+                    if (natureLSR.SelectedIndex < 0 || dumpedPKHeX.Nature == natureLSR.SelectedIndex)
                     {
                         Addlog("Nature: PASS");
                     }
@@ -2682,7 +2682,7 @@ namespace ntrbase
                         Addlog("Nature: FAIL");
                         botState++;
                     }
-                    if (ivHPNum.Value >= ivHPLSR.Value)
+                    if (dumpedPKHeX.IV_HP >= ivHPLSR.Value)
                     {
                         Addlog("Hit Points IV: PASS");
                     }
@@ -2691,7 +2691,7 @@ namespace ntrbase
                         Addlog("Hit Points IV: FAIL");
                         botState++;
                     }
-                    if (ivATKNum.Value >= ivAtkLSR.Value)
+                    if (dumpedPKHeX.IV_ATK >= ivAtkLSR.Value)
                     {
                         Addlog("Attack IV: PASS");
                     }
@@ -2700,7 +2700,7 @@ namespace ntrbase
                         Addlog("Attack IV: FAIL");
                         botState++;
                     }
-                    if (ivDEFNum.Value >= ivDefLSR.Value)
+                    if (dumpedPKHeX.IV_DEF >= ivDefLSR.Value)
                     {
                         Addlog("Defense IV: PASS");
                     }
@@ -2709,7 +2709,7 @@ namespace ntrbase
                         Addlog("Defense IV: FAIL");
                         botState++;
                     }
-                    if (ivSPANum.Value >= ivSpALSR.Value)
+                    if (dumpedPKHeX.IV_ATK>= ivSpALSR.Value)
                     {
                         Addlog("Special Attack IV: PASS");
                     }
@@ -2748,7 +2748,7 @@ namespace ntrbase
 
                     if (shinyLSR.Checked)
                     {
-                        if (setShiny.Text == "★")
+                        if (dumpedPKHeX.isShiny)
                         {
                             Addlog("Shiny: PASS");
                         }
@@ -2760,7 +2760,7 @@ namespace ntrbase
                     }
                     else
                     {
-                        if (setShiny.Text == "★")
+                        if (dumpedPKHeX.isShiny)
                         {
                             Addlog("Shiny: Yes");
                             botState = -1;
@@ -2811,6 +2811,18 @@ namespace ntrbase
 
 
         #endregion Bots
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dumpedPKHeX.isShiny)
+            {
+                MessageBox.Show("pokemon is shiny");
+            }
+            else
+            {
+                MessageBox.Show("pokemon is not shiny");
+            }
+        }
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
