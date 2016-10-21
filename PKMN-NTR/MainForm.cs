@@ -2,7 +2,6 @@
  * TODO: 
  * * Change magic numbers to constants wherever it's not a pain in the ass
  * * Error handling, error handling, error handling. Wrap file writes in try/catch, handle malformed pokemon, incomplete writes, patterns not found, etc.
- * * Bug - shiny pid calculation hangs on < Gen6 pokemon. The bug is in PKHeX, but we might manage to do it ourselves.
  */
 using ntrbase.Properties;
 using System;
@@ -39,8 +38,6 @@ namespace ntrbase
 
         public byte[] selectedCloneData = new byte[232];
         public bool selectedCloneValid = false;
-
-        //public int tradedumpcount = 0;
 
         //Game information
         public int pid;
@@ -988,6 +985,12 @@ namespace ntrbase
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
+            //Some people leave the default IP address, hoping it would work...
+            if (host.Text == "0.0.0.0")
+            {
+                MessageBox.Show("Please input your console's local IP address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             txtLog.Clear();
             Program.scriptHelper.connect(host.Text, 8000);
         }
@@ -2088,14 +2091,16 @@ namespace ntrbase
         {
             dumpedPKHeX.setShinyPID();
             dPID.Text = dumpedPKHeX.PID.ToString("X");
-            if (dumpedPKHeX.isShiny == true)
-            {
-                setShiny.Text = "★";
-            }
-            else
-            {
-                setShiny.Text = "☆";
-            }
+
+            setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
+        }
+
+        private void randomPID_Click(object sender, EventArgs e)
+        {
+            dumpedPKHeX.setRandomPID();
+            dPID.Text = dumpedPKHeX.PID.ToString("X");
+
+            setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
         }
 
         private void TIDNum_ValueChanged(object sender, EventArgs e)
@@ -2109,34 +2114,7 @@ namespace ntrbase
             ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
             ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
         }
-
-        private void randomPID_Click(object sender, EventArgs e)
-        {
-            Random theRandom = new Random();
-            byte[] theBytes = new byte[4];
-            theRandom.NextBytes(theBytes);
-            StringBuilder buffer = new StringBuilder(8);
-            for (int i = 0; i < 4; i++)
-            {
-                buffer.Append(theBytes[i].ToString("X").PadLeft(2));
-            }
-
-            dPID.Text = buffer.ToString().Replace(" ", "0");
-
-            dumpedPKHeX.PID = PKHeX.getHEXval(dPID.Text);
-
-            if (dumpedPKHeX.isShiny == true)
-            {
-                setShiny.Enabled = false;
-                setShiny.Text = "★";
-            }
-            if (dumpedPKHeX.isShiny == false)
-            {
-                setShiny.Enabled = true;
-                setShiny.Text = "☆";
-            }
-        }
-
+        
         private void onlyView_CheckedChanged(object sender, EventArgs e)
         {
             if (onlyView.Checked == true)
@@ -2174,8 +2152,7 @@ namespace ntrbase
                 gender.Text = "♂";
                 dumpedPKHeX.Gender = 0;
             }
-            else
-            if (dumpedPKHeX.Gender == 2)
+            else if (dumpedPKHeX.Gender == 2)
             {
                 //If a Pokemon is genderless, there's nothing you can do...
             }
@@ -2495,7 +2472,7 @@ namespace ntrbase
                 MessageBox.Show("Finished", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        
+
         #endregion Bots
     }
 

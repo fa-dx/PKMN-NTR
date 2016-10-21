@@ -325,6 +325,8 @@
             this.host.Name = "host";
             this.host.Size = new System.Drawing.Size(119, 20);
             this.host.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.host, "Input you console\'s local IP address here.\r\nYour computer and your console need" +
+        " to be on the same local network.");
             // 
             // groupBox1
             // 
