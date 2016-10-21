@@ -2811,18 +2811,6 @@ namespace ntrbase
 
 
         #endregion Bots
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (dumpedPKHeX.isShiny)
-            {
-                MessageBox.Show("pokemon is shiny");
-            }
-            else
-            {
-                MessageBox.Show("pokemon is not shiny");
-            }
-        }
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 

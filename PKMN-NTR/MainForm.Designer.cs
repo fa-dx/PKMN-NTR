@@ -239,7 +239,6 @@
             this.manualStart = new System.Windows.Forms.Button();
             this.BotTab = new System.Windows.Forms.TabControl();
             this.label69 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -3001,22 +3000,11 @@
             this.label69.Text = "Version: 1.1.18";
             this.label69.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(197, 359);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 77;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 444);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.label69);
             this.Controls.Add(this.BotTab);
             this.Controls.Add(this.label50);
@@ -3349,7 +3337,6 @@
         private System.Windows.Forms.CheckBox shinyLSR;
         private System.Windows.Forms.Label label70;
         private System.Windows.Forms.ComboBox HPTypeLSR;
-        private System.Windows.Forms.Button button2;
     }
 }
 
