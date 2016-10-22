@@ -96,7 +96,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.itemsGridView = new System.Windows.Forms.DataGridView();
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -124,10 +124,10 @@
             this.showTMs = new System.Windows.Forms.Button();
             this.showMedicine = new System.Windows.Forms.Button();
             this.showItems = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.keysGridView = new System.Windows.Forms.DataGridView();
+            this.tmsGridView = new System.Windows.Forms.DataGridView();
+            this.medsGridView = new System.Windows.Forms.DataGridView();
+            this.bersGridView = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
@@ -259,17 +259,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivDEFNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivATKNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivHPNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TIDNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hourNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keysGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tmsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.medsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).BeginInit();
@@ -367,6 +367,8 @@
             this.host.Name = "host";
             this.host.Size = new System.Drawing.Size(119, 20);
             this.host.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.host, "Input you console\'s local IP address here.\r\nYour computer and your console need t" +
+        "o be on the same local network.");
             // 
             // groupBox1
             // 
@@ -1218,18 +1220,18 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Enabled = false;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(191, 177);
-            this.dataGridView1.TabIndex = 32;
+            this.itemsGridView.AllowUserToAddRows = false;
+            this.itemsGridView.AllowUserToDeleteRows = false;
+            this.itemsGridView.AllowUserToResizeColumns = false;
+            this.itemsGridView.AllowUserToResizeRows = false;
+            this.itemsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.itemsGridView.Enabled = false;
+            this.itemsGridView.Location = new System.Drawing.Point(6, 19);
+            this.itemsGridView.Name = "dataGridView1";
+            this.itemsGridView.RowHeadersVisible = false;
+            this.itemsGridView.ShowEditingIcon = false;
+            this.itemsGridView.Size = new System.Drawing.Size(191, 177);
+            this.itemsGridView.TabIndex = 32;
             // 
             // Item
             // 
@@ -1527,79 +1529,79 @@
             // 
             // dataGridView2
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Enabled = false;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.ShowEditingIcon = false;
-            this.dataGridView2.Size = new System.Drawing.Size(191, 177);
-            this.dataGridView2.TabIndex = 38;
-            this.dataGridView2.Visible = false;
+            this.keysGridView.AllowUserToAddRows = false;
+            this.keysGridView.AllowUserToDeleteRows = false;
+            this.keysGridView.AllowUserToResizeColumns = false;
+            this.keysGridView.AllowUserToResizeRows = false;
+            this.keysGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.keysGridView.Enabled = false;
+            this.keysGridView.Location = new System.Drawing.Point(6, 19);
+            this.keysGridView.Name = "dataGridView2";
+            this.keysGridView.RowHeadersVisible = false;
+            this.keysGridView.ShowEditingIcon = false;
+            this.keysGridView.Size = new System.Drawing.Size(191, 177);
+            this.keysGridView.TabIndex = 38;
+            this.keysGridView.Visible = false;
             // 
             // dataGridView3
             // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.AllowUserToResizeColumns = false;
-            this.dataGridView3.AllowUserToResizeRows = false;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Enabled = false;
-            this.dataGridView3.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.ShowEditingIcon = false;
-            this.dataGridView3.Size = new System.Drawing.Size(191, 177);
-            this.dataGridView3.TabIndex = 39;
-            this.dataGridView3.Visible = false;
+            this.tmsGridView.AllowUserToAddRows = false;
+            this.tmsGridView.AllowUserToDeleteRows = false;
+            this.tmsGridView.AllowUserToResizeColumns = false;
+            this.tmsGridView.AllowUserToResizeRows = false;
+            this.tmsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tmsGridView.Enabled = false;
+            this.tmsGridView.Location = new System.Drawing.Point(6, 19);
+            this.tmsGridView.Name = "dataGridView3";
+            this.tmsGridView.RowHeadersVisible = false;
+            this.tmsGridView.ShowEditingIcon = false;
+            this.tmsGridView.Size = new System.Drawing.Size(191, 177);
+            this.tmsGridView.TabIndex = 39;
+            this.tmsGridView.Visible = false;
             // 
             // dataGridView4
             // 
-            this.dataGridView4.AllowUserToAddRows = false;
-            this.dataGridView4.AllowUserToDeleteRows = false;
-            this.dataGridView4.AllowUserToResizeColumns = false;
-            this.dataGridView4.AllowUserToResizeRows = false;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Enabled = false;
-            this.dataGridView4.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.RowHeadersVisible = false;
-            this.dataGridView4.ShowEditingIcon = false;
-            this.dataGridView4.Size = new System.Drawing.Size(191, 177);
-            this.dataGridView4.TabIndex = 40;
-            this.dataGridView4.Visible = false;
+            this.medsGridView.AllowUserToAddRows = false;
+            this.medsGridView.AllowUserToDeleteRows = false;
+            this.medsGridView.AllowUserToResizeColumns = false;
+            this.medsGridView.AllowUserToResizeRows = false;
+            this.medsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.medsGridView.Enabled = false;
+            this.medsGridView.Location = new System.Drawing.Point(6, 19);
+            this.medsGridView.Name = "dataGridView4";
+            this.medsGridView.RowHeadersVisible = false;
+            this.medsGridView.ShowEditingIcon = false;
+            this.medsGridView.Size = new System.Drawing.Size(191, 177);
+            this.medsGridView.TabIndex = 40;
+            this.medsGridView.Visible = false;
             // 
             // dataGridView5
             // 
-            this.dataGridView5.AllowUserToAddRows = false;
-            this.dataGridView5.AllowUserToDeleteRows = false;
-            this.dataGridView5.AllowUserToResizeColumns = false;
-            this.dataGridView5.AllowUserToResizeRows = false;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Enabled = false;
-            this.dataGridView5.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.RowHeadersVisible = false;
-            this.dataGridView5.ShowEditingIcon = false;
-            this.dataGridView5.Size = new System.Drawing.Size(191, 177);
-            this.dataGridView5.TabIndex = 41;
-            this.dataGridView5.Visible = false;
+            this.bersGridView.AllowUserToAddRows = false;
+            this.bersGridView.AllowUserToDeleteRows = false;
+            this.bersGridView.AllowUserToResizeColumns = false;
+            this.bersGridView.AllowUserToResizeRows = false;
+            this.bersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.bersGridView.Enabled = false;
+            this.bersGridView.Location = new System.Drawing.Point(6, 19);
+            this.bersGridView.Name = "dataGridView5";
+            this.bersGridView.RowHeadersVisible = false;
+            this.bersGridView.ShowEditingIcon = false;
+            this.bersGridView.Size = new System.Drawing.Size(191, 177);
+            this.bersGridView.TabIndex = 41;
+            this.bersGridView.Visible = false;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.dataGridView5);
+            this.groupBox3.Controls.Add(this.bersGridView);
             this.groupBox3.Controls.Add(this.itemAdd);
-            this.groupBox3.Controls.Add(this.dataGridView1);
-            this.groupBox3.Controls.Add(this.dataGridView4);
+            this.groupBox3.Controls.Add(this.itemsGridView);
+            this.groupBox3.Controls.Add(this.medsGridView);
             this.groupBox3.Controls.Add(this.showKeys);
             this.groupBox3.Controls.Add(this.itemWrite);
-            this.groupBox3.Controls.Add(this.dataGridView3);
+            this.groupBox3.Controls.Add(this.tmsGridView);
             this.groupBox3.Controls.Add(this.showBerries);
-            this.groupBox3.Controls.Add(this.dataGridView2);
+            this.groupBox3.Controls.Add(this.keysGridView);
             this.groupBox3.Controls.Add(this.showTMs);
             this.groupBox3.Controls.Add(this.showItems);
             this.groupBox3.Controls.Add(this.showMedicine);
@@ -3046,7 +3048,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivDEFNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivATKNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivHPNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsGridView)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SIDNum)).EndInit();
@@ -3054,10 +3056,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.secNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hourNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keysGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tmsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.medsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).EndInit();
@@ -3142,7 +3144,7 @@
         private System.Windows.Forms.Button dumpBoxes;
         private System.Windows.Forms.RadioButton radioDaycare;
         private System.Windows.Forms.RadioButton radioBoxes;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView itemsGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -3162,10 +3164,10 @@
         private System.Windows.Forms.Button showTMs;
         private System.Windows.Forms.Button showMedicine;
         private System.Windows.Forms.Button showItems;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.DataGridView keysGridView;
+        private System.Windows.Forms.DataGridView tmsGridView;
+        private System.Windows.Forms.DataGridView medsGridView;
+        private System.Windows.Forms.DataGridView bersGridView;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button itemWrite;
         private System.Windows.Forms.Button itemAdd;

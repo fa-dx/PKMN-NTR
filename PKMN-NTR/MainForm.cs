@@ -2,7 +2,6 @@
  * TODO: 
  * * Change magic numbers to constants wherever it's not a pain in the ass
  * * Error handling, error handling, error handling. Wrap file writes in try/catch, handle malformed pokemon, incomplete writes, patterns not found, etc.
- * * Bug - shiny pid calculation hangs on < Gen6 pokemon. The bug is in PKHeX, but we might manage to do it ourselves.
  */
 using ntrbase.Properties;
 using System;
@@ -41,8 +40,6 @@ namespace ntrbase
         public bool selectedCloneValid = false;
         public bool botWorking = false;
         public int botState = 0;
-
-        //public int tradedumpcount = 0;
 
         //Game information
         public int pid;
@@ -370,16 +367,16 @@ namespace ntrbase
                 Width = 51,
             };
 
-            dataGridView1.Columns.Add(itemItem);
-            dataGridView1.Columns.Add(itemAmount);
-            dataGridView2.Columns.Add(keyItem);
-            dataGridView2.Columns.Add(keyAmount);
-            dataGridView3.Columns.Add(tmItem);
-            dataGridView3.Columns.Add(tmAmount);
-            dataGridView4.Columns.Add(medItem);
-            dataGridView4.Columns.Add(medAmount);
-            dataGridView5.Columns.Add(berItem);
-            dataGridView5.Columns.Add(berAmount);
+            itemsGridView.Columns.Add(itemItem);
+            itemsGridView.Columns.Add(itemAmount);
+            keysGridView.Columns.Add(keyItem);
+            keysGridView.Columns.Add(keyAmount);
+            tmsGridView.Columns.Add(tmItem);
+            tmsGridView.Columns.Add(tmAmount);
+            medsGridView.Columns.Add(medItem);
+            medsGridView.Columns.Add(medAmount);
+            bersGridView.Columns.Add(berItem);
+            bersGridView.Columns.Add(berAmount);
             foreach (string t in itemList)
             {
                 itemItem.Items.Add(t);
@@ -398,6 +395,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, botWonderTrade };
             enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR };
             foreach (Control c in enableWhenConnected)
             {
@@ -607,11 +605,76 @@ namespace ntrbase
 
         public void dumpItems()
         {
-            Program.scriptHelper.data(itemsoff, 0x640, pid, "items.temp");
-            Program.scriptHelper.data(keysoff, 0x180, pid, "keys.temp");
-            Program.scriptHelper.data(tmsoff, 0x1A8, pid, "tms.temp");
-            Program.scriptHelper.data(medsoff, 0x100, pid, "meds.temp");
-            Program.scriptHelper.data(bersoff, 0x120, pid, "bers.temp");
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0xB90], handleItemData, null);
+            waitingForData.Add(Program.scriptHelper.data(itemsoff, 0xB90, pid), myArgs);
+        }
+
+        public void handleItemData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            items = new byte[args.data.Length];
+            Array.Copy(args.data, items, args.data.Length);
+            //Final data processing will be done in GUI thread
+            ItemDumpFinished();
+        }
+
+
+        private int countItems(byte[] data)
+        {
+            int i = 0;
+            for (i = 0; i < data.Length; i += 4)
+            {
+                uint type = BitConverter.ToUInt16(data, i);
+                uint amount = BitConverter.ToUInt16(data, i + 2);
+                if (type == 0 && amount == 0)
+                {
+                    break;
+                }
+            }
+            return i / 4;
+        }
+
+        private void addItemsToGridView(byte[] data, DataGridView gv)
+        {
+            int numOfItems = countItems(data);
+
+            if (numOfItems > 0)
+            {
+                gv.Rows.Add(numOfItems);
+                for (int i = 0; i < numOfItems; i++)
+                {
+                    int itemsfinal = BitConverter.ToUInt16(data, i * 4);
+                    int amountfinal = BitConverter.ToUInt16(data, (i * 4) + 2);
+
+                    gv.Rows[i].Cells[0].Value = itemList[itemsfinal];
+                    gv.Rows[i].Cells[1].Value = amountfinal;
+                }
+            }
+        }
+
+        public void readItems()
+        {
+            const int itemsLength = 1600;
+            const int keysLength = 384;
+            const int tmsLength = 432;
+            const int medsLength = 256;
+            const int bersLength = 288;
+            const int totalLength = itemsLength + keysLength + tmsLength + medsLength + bersLength;
+
+            if (items == null || items.Length != totalLength)
+                throw new ArgumentOutOfRangeException("Item data array is of wrong length");
+
+            itemData = items.Skip(0).Take(itemsLength).ToArray();
+            keyData = items.Skip((int)(keysoff - itemsoff)).Take(keysLength).ToArray();
+            tmData = items.Skip((int)(tmsoff - itemsoff)).Take(tmsLength).ToArray();
+            medData = items.Skip((int)(medsoff - itemsoff)).Take(medsLength).ToArray();
+            berryData = items.Skip((int)(bersoff - itemsoff)).Take(bersLength).ToArray();
+
+            addItemsToGridView(itemData, itemsGridView);
+            addItemsToGridView(keyData, keysGridView);
+            addItemsToGridView(tmData, tmsGridView);
+            addItemsToGridView(medData, medsGridView);
+            addItemsToGridView(berryData, bersGridView);
         }
 
         /*
@@ -816,161 +879,8 @@ namespace ntrbase
         #region oldcode
         public void txtLog_TextChanged(object sender, EventArgs e)
         {
-            isItemsDumped();
         }
-
-        public void isItemsDumped()
-        {
-            if (txtLog.Text.Contains("items.temp successfully") &&
-                txtLog.Text.Contains("keys.temp successfully") &&
-                txtLog.Text.Contains("tms.temp successfully") &&
-                txtLog.Text.Contains("meds.temp successfully") &&
-                txtLog.Text.Contains("bers.temp successfully"))
-            {
-                txtLog.Clear();
-                readItems();
-                RMTemp();
-            }
-        }
-
-        public void readItems()
-        {
-            const string dumpedItems = "items.temp";
-            const string dumpedKeys = "keys.temp";
-            const string dumpedTMs = "tms.temp";
-            const string dumpedMeds = "meds.temp";
-            const string dumpedBers = "bers.temp";
-
-            if (File.Exists(dumpedItems))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedItems, FileMode.Open)))
-                {
-                    const int itemsLength = 1600;
-                    items = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(items).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    numofItems = Convert.ToInt32(numofItemsRounded);
-                    if (numofItems > 0)
-                    {
-                        dataGridView1.Rows.Add(numofItems);
-                    }
-                    for (int i = 0; i < numofItems; i++)
-                    {
-                        uint itemsfinal = BitConverter.ToUInt16(items, i * 4);
-                        uint amountfinal = BitConverter.ToUInt16(items, (i * 4) + 2);
-                        dataGridView1.Rows[i].Cells[0].Value = itemList[itemsfinal];
-                        dataGridView1.Rows[i].Cells[1].Value = amountfinal;
-                    }
-                }
-            }
-
-            if (File.Exists(dumpedKeys))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedKeys, FileMode.Open)))
-                {
-                    const int itemsLength = 384;
-                    byte[] keys = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(keys).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofKeys = Convert.ToInt32(numofItemsRounded);
-                    if (numofKeys > 0)
-                    {
-                        dataGridView2.Rows.Add(numofKeys);
-                    }
-                    for (int i = 0; i < numofKeys; i++)
-                    {
-                        uint keysfinal = BitConverter.ToUInt16(keys, i * 4);
-                        uint keysamountfinal = BitConverter.ToUInt16(keys, (i * 4) + 2);
-                        dataGridView2.Rows[i].Cells[0].Value = itemList[keysfinal];
-                        dataGridView2.Rows[i].Cells[1].Value = keysamountfinal;
-
-                    }
-                }
-            }
-
-            if (File.Exists(dumpedTMs))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedTMs, FileMode.Open)))
-                {
-                    const int itemsLength = 432;
-                    byte[] tms = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(tms).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofTMs = Convert.ToInt32(numofItemsRounded);
-                    if (numofTMs > 0)
-                    {
-                        dataGridView3.Rows.Add(numofTMs);
-                    }
-                    for (int i = 0; i < numofTMs; i++)
-                    {
-                        uint tmsfinal = BitConverter.ToUInt16(tms, i * 4);
-                        uint tmsamountfinal = BitConverter.ToUInt16(tms, (i * 4) + 2);
-                        dataGridView3.Rows[i].Cells[0].Value = itemList[tmsfinal];
-                        dataGridView3.Rows[i].Cells[1].Value = tmsamountfinal;
-
-                    }
-                }
-            }
-
-            if (File.Exists(dumpedMeds))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedMeds, FileMode.Open)))
-                {
-                    const int itemsLength = 256;
-                    byte[] meds = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(meds).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofMeds = Convert.ToInt32(numofItemsRounded);
-                    if (numofMeds > 0)
-                    {
-                        dataGridView4.Rows.Add(numofMeds);
-                    }
-                    for (int i = 0; i < numofMeds; i++)
-                    {
-                        uint medsfinal = BitConverter.ToUInt16(meds, i * 4);
-                        uint medsamountfinal = BitConverter.ToUInt16(meds, (i * 4) + 2);
-                        dataGridView4.Rows[i].Cells[0].Value = itemList[medsfinal];
-                        dataGridView4.Rows[i].Cells[1].Value = medsamountfinal;
-
-                    }
-                }
-            }
-
-            if (File.Exists(dumpedBers))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedBers, FileMode.Open)))
-                {
-                    const int itemsLength = 288;
-                    byte[] bers = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(bers).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofBers = Convert.ToInt32(numofItemsRounded);
-                    if (numofBers > 0)
-                    {
-                        dataGridView5.Rows.Add(numofBers);
-                    }
-                    for (int i = 0; i < numofBers; i++)
-                    {
-                        uint bersfinal = BitConverter.ToUInt16(bers, i * 4);
-                        uint bersamountfinal = BitConverter.ToUInt16(bers, (i * 4) + 2);
-                        dataGridView5.Rows[i].Cells[0].Value = itemList[bersfinal];
-                        dataGridView5.Rows[i].Cells[1].Value = bersamountfinal;
-
-                    }
-                }
-            }
-        }
-
+        /*
         public void RMTemp()
         {
             DirectoryInfo di = new DirectoryInfo(@Application.StartupPath);
@@ -986,7 +896,7 @@ namespace ntrbase
                 {
                 }
         }
-
+        */
         #endregion oldcode
         public void getHiddenPower()
         {
@@ -998,6 +908,12 @@ namespace ntrbase
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
+            //Some people leave the default IP address, hoping it would work...
+            if (host.Text == "0.0.0.0")
+            {
+                MessageBox.Show("Please input your console's local IP address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             txtLog.Clear();
             Program.scriptHelper.connect(host.Text, 8000);
         }
@@ -1014,11 +930,11 @@ namespace ntrbase
             {
                 c.Enabled = false;
             }
-            dataGridView1.Rows.Clear();
-            dataGridView2.Rows.Clear();
-            dataGridView3.Rows.Clear();
-            dataGridView4.Rows.Clear();
-            dataGridView5.Rows.Clear();
+            itemsGridView.Rows.Clear();
+            keysGridView.Rows.Clear();
+            tmsGridView.Rows.Clear();
+            medsGridView.Rows.Clear();
+            bersGridView.Rows.Clear();
         }
 
         private void pokeName_Click(object sender, EventArgs e)
@@ -1672,11 +1588,11 @@ namespace ntrbase
 
         private void showItems_Click(object sender, EventArgs e)
         {
-            dataGridView1.Visible = true;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = false;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = false;
+            itemsGridView.Visible = true;
+            keysGridView.Visible = false;
+            tmsGridView.Visible = false;
+            medsGridView.Visible = false;
+            bersGridView.Visible = false;
             showItems.ForeColor = System.Drawing.Color.Green;
             showMedicine.ForeColor = System.Drawing.Color.Black;
             showTMs.ForeColor = System.Drawing.Color.Black;
@@ -1686,11 +1602,11 @@ namespace ntrbase
 
         private void showMedicine_Click(object sender, EventArgs e)
         {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = false;
-            dataGridView4.Visible = true;
-            dataGridView5.Visible = false;
+            itemsGridView.Visible = false;
+            keysGridView.Visible = false;
+            tmsGridView.Visible = false;
+            medsGridView.Visible = true;
+            bersGridView.Visible = false;
             showItems.ForeColor = System.Drawing.Color.Black;
             showMedicine.ForeColor = System.Drawing.Color.Green;
             showTMs.ForeColor = System.Drawing.Color.Black;
@@ -1700,11 +1616,11 @@ namespace ntrbase
 
         private void showTMs_Click(object sender, EventArgs e)
         {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = true;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = false;
+            itemsGridView.Visible = false;
+            keysGridView.Visible = false;
+            tmsGridView.Visible = true;
+            medsGridView.Visible = false;
+            bersGridView.Visible = false;
             showItems.ForeColor = System.Drawing.Color.Black;
             showMedicine.ForeColor = System.Drawing.Color.Black;
             showTMs.ForeColor = System.Drawing.Color.Green;
@@ -1714,11 +1630,11 @@ namespace ntrbase
 
         private void showBerries_Click(object sender, EventArgs e)
         {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = false;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = true;
+            itemsGridView.Visible = false;
+            keysGridView.Visible = false;
+            tmsGridView.Visible = false;
+            medsGridView.Visible = false;
+            bersGridView.Visible = true;
             showItems.ForeColor = System.Drawing.Color.Black;
             showMedicine.ForeColor = System.Drawing.Color.Black;
             showTMs.ForeColor = System.Drawing.Color.Black;
@@ -1728,11 +1644,11 @@ namespace ntrbase
 
         private void showKeys_Click(object sender, EventArgs e)
         {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = true;
-            dataGridView3.Visible = false;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = false;
+            itemsGridView.Visible = false;
+            keysGridView.Visible = true;
+            tmsGridView.Visible = false;
+            medsGridView.Visible = false;
+            bersGridView.Visible = false;
             showItems.ForeColor = System.Drawing.Color.Black;
             showMedicine.ForeColor = System.Drawing.Color.Black;
             showTMs.ForeColor = System.Drawing.Color.Black;
@@ -1746,15 +1662,15 @@ namespace ntrbase
             byte[] dataToWrite = new byte[0] { };
             uint offsetToWrite = 0;
 
-            if (dataGridView1.Visible == true)
+            if (itemsGridView.Visible == true)
             {
                 itemData = new byte[1600];
-                for (int i = 0; i < dataGridView1.RowCount; i++)
+                for (int i = 0; i < itemsGridView.RowCount; i++)
                 {
-                    string datastring = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                    string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
                     int itemIndex = Array.IndexOf(itemList, datastring);
                     int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView1.Rows[i].Cells[1].Value.ToString());
+                    itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
 
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
                     BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
@@ -1763,15 +1679,15 @@ namespace ntrbase
                 offsetToWrite = itemsoff;
             }
 
-            if (dataGridView2.Visible == true)
+            if (keysGridView.Visible == true)
             {
                 keyData = new byte[384];
-                for (int i = 0; i < dataGridView2.RowCount; i++)
+                for (int i = 0; i < keysGridView.RowCount; i++)
                 {
-                    string datastring = dataGridView2.Rows[i].Cells[0].Value.ToString();
+                    string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
                     int itemIndex = Array.IndexOf(itemList, datastring);
                     int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView2.Rows[i].Cells[1].Value.ToString());
+                    itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
 
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
                     BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
@@ -1780,15 +1696,15 @@ namespace ntrbase
                 offsetToWrite = keysoff;
             }
 
-            if (dataGridView3.Visible == true)
+            if (tmsGridView.Visible == true)
             {
                 tmData = new byte[432];
-                for (int i = 0; i < dataGridView3.RowCount; i++)
+                for (int i = 0; i < tmsGridView.RowCount; i++)
                 {
-                    string datastring = dataGridView3.Rows[i].Cells[0].Value.ToString();
+                    string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
                     int itemIndex = Array.IndexOf(itemList, datastring);
                     int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView3.Rows[i].Cells[1].Value.ToString());
+                    itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
 
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
                     BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
@@ -1797,15 +1713,15 @@ namespace ntrbase
                 offsetToWrite = tmsoff;
             }
 
-            if (dataGridView4.Visible == true)
+            if (medsGridView.Visible == true)
             {
                 medData = new byte[256];
-                for (int i = 0; i < dataGridView4.RowCount; i++)
+                for (int i = 0; i < medsGridView.RowCount; i++)
                 {
-                    string datastring = dataGridView4.Rows[i].Cells[0].Value.ToString();
+                    string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
                     int itemIndex = Array.IndexOf(itemList, datastring);
                     int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView4.Rows[i].Cells[1].Value.ToString());
+                    itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
 
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
                     BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
@@ -1814,15 +1730,15 @@ namespace ntrbase
                 offsetToWrite = medsoff;
             }
 
-            if (dataGridView5.Visible == true)
+            if (bersGridView.Visible == true)
             {
                 berryData = new byte[288];
-                for (int i = 0; i < dataGridView5.RowCount; i++)
+                for (int i = 0; i < bersGridView.RowCount; i++)
                 {
-                    string datastring = dataGridView5.Rows[i].Cells[0].Value.ToString();
+                    string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
                     int itemIndex = Array.IndexOf(itemList, datastring);
                     int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView5.Rows[i].Cells[1].Value.ToString());
+                    itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
 
                     BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
                     BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
@@ -1836,63 +1752,63 @@ namespace ntrbase
 
         private void itemAdd_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.Visible == true)
+            if (itemsGridView.Visible == true)
             {
-                if (dataGridView1.RowCount >= 400)
+                if (itemsGridView.RowCount >= 400)
                 {
                     MessageBox.Show("You already have the max amount of items!", "Too many items");
                 }
                 else
                 {
-                    dataGridView1.Rows.Add("[None]", 0);
+                    itemsGridView.Rows.Add("[None]", 0);
                 }
             }
 
-            if (dataGridView2.Visible == true)
+            if (keysGridView.Visible == true)
             {
-                if (dataGridView2.RowCount >= 96)
+                if (keysGridView.RowCount >= 96)
                 {
                     MessageBox.Show("You already have the max amount of key items!", "Too many items");
                 }
                 else
                 {
-                    dataGridView2.Rows.Add("[None]", 0);
+                    keysGridView.Rows.Add("[None]", 0);
                 }
             }
 
-            if (dataGridView3.Visible == true)
+            if (tmsGridView.Visible == true)
             {
-                if (dataGridView3.RowCount >= 96)
+                if (tmsGridView.RowCount >= 96)
                 {
                     MessageBox.Show("You already have the max amount of medicine items!", "Too many items");
                 }
                 else
                 {
-                    dataGridView3.Rows.Add("[None]", 0);
+                    tmsGridView.Rows.Add("[None]", 0);
                 }
             }
 
-            if (dataGridView4.Visible == true)
+            if (medsGridView.Visible == true)
             {
-                if (dataGridView4.RowCount >= 108)
+                if (medsGridView.RowCount >= 108)
                 {
                     MessageBox.Show("You already have the max amount of TMs & HMs!", "Too many items");
                 }
                 else
                 {
-                    dataGridView4.Rows.Add("[None]", 0);
+                    medsGridView.Rows.Add("[None]", 0);
                 }
             }
 
-            if (dataGridView5.Visible == true)
+            if (bersGridView.Visible == true)
             {
-                if (dataGridView5.RowCount >= 72)
+                if (bersGridView.RowCount >= 72)
                 {
                     MessageBox.Show("You already have the max amount of berries!", "Too many items");
                 }
                 else
                 {
-                    dataGridView5.Rows.Add("[None]", 0);
+                    bersGridView.Rows.Add("[None]", 0);
                 }
             }
         }
@@ -2106,14 +2022,16 @@ namespace ntrbase
         {
             dumpedPKHeX.setShinyPID();
             dPID.Text = dumpedPKHeX.PID.ToString("X");
-            if (dumpedPKHeX.isShiny == true)
-            {
-                setShiny.Text = "★";
-            }
-            else
-            {
-                setShiny.Text = "☆";
-            }
+
+            setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
+        }
+
+        private void randomPID_Click(object sender, EventArgs e)
+        {
+            dumpedPKHeX.setRandomPID();
+            dPID.Text = dumpedPKHeX.PID.ToString("X");
+
+            setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
         }
 
         private void TIDNum_ValueChanged(object sender, EventArgs e)
@@ -2127,34 +2045,7 @@ namespace ntrbase
             ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
             ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
         }
-
-        private void randomPID_Click(object sender, EventArgs e)
-        {
-            Random theRandom = new Random();
-            byte[] theBytes = new byte[4];
-            theRandom.NextBytes(theBytes);
-            StringBuilder buffer = new StringBuilder(8);
-            for (int i = 0; i < 4; i++)
-            {
-                buffer.Append(theBytes[i].ToString("X").PadLeft(2));
-            }
-
-            dPID.Text = buffer.ToString().Replace(" ", "0");
-
-            dumpedPKHeX.PID = PKHeX.getHEXval(dPID.Text);
-
-            if (dumpedPKHeX.isShiny == true)
-            {
-                setShiny.Enabled = false;
-                setShiny.Text = "★";
-            }
-            if (dumpedPKHeX.isShiny == false)
-            {
-                setShiny.Enabled = true;
-                setShiny.Text = "☆";
-            }
-        }
-
+        
         private void onlyView_CheckedChanged(object sender, EventArgs e)
         {
             if (onlyView.Checked == true)
@@ -2192,8 +2083,7 @@ namespace ntrbase
                 gender.Text = "♂";
                 dumpedPKHeX.Gender = 0;
             }
-            else
-            if (dumpedPKHeX.Gender == 2)
+            else if (dumpedPKHeX.Gender == 2)
             {
                 //If a Pokemon is genderless, there's nothing you can do...
             }
@@ -2334,6 +2224,19 @@ namespace ntrbase
                     ctrl.ForeColor = c;
             }
         }
+
+        private void ItemDumpFinished()
+        {
+            if (itemsGridView.InvokeRequired)
+            {
+                itemsGridView.Invoke((MethodInvoker)delegate { readItems(); });
+            }
+            else
+            {
+                readItems();
+            }
+        }
+
         #endregion fucking thread safety
 
         #region Remote control
@@ -2808,7 +2711,6 @@ namespace ntrbase
                 botWorking = false; // Disable the botWorking flag
             }
         }
-
 
         #endregion Bots
     }
