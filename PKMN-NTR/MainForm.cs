@@ -119,7 +119,6 @@ namespace ntrbase
         public static readonly string[] pokeTradeEvolveitem = { "Poliwhirl", "Slowpoke", "Onix", "Seadra", "Scyther", "Porygon", "Clamperl", "Rhydon", "Electabuzz", "Magmar", "Porygon2", "Dusclops", "Feebas", "Spritzee", "Swirlix" };
         public static readonly string[] TradeEvolveitem = { "King's Rock", "King's Rock", "Metal Coat", "Dragon Scale", "Metal Coat", "Up-Grade", "Deep Sea Tooth", "Protector", "Electrizer", "Magmarizer", "Dubious Disc", "Reaper Cloth", "Prism Scale", "Sachet", "Whipped Dream" };
 
-
         //HID values
         public static readonly uint nokey = 0xFFF;
         public static readonly uint keyA = 0xFFE;
@@ -395,8 +394,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, botWonderTrade };
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -452,9 +450,12 @@ namespace ntrbase
             buttonConnect.Text = "Connected";
             buttonConnect.Enabled = false;
             buttonDisconnect.Enabled = true;
-            foreach (Control c in enableWhenConnected)
+            if (!botWorking)
             {
-                c.Enabled = true;
+                foreach (Control c in enableWhenConnected)
+                {
+                    c.Enabled = true;
+                }
             }
             Settings.Default.IP = host.Text;
             Settings.Default.Save();
@@ -2045,7 +2046,7 @@ namespace ntrbase
             ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
             ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
         }
-        
+
         private void onlyView_CheckedChanged(object sender, EventArgs e)
         {
             if (onlyView.Checked == true)
@@ -2390,11 +2391,12 @@ namespace ntrbase
 
         private async void RunWTbot_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + WTtradesNo.Value + " pokémon, starting from the slot " + WTSlot.Value + " of box " + WTBox.Value + ". All empty spaces will be ingnored but sill counted." + Environment.NewLine + Environment.NewLine + "Remember that you can stop this bot by pressing the Disconnect button., the application might crash afterwards, but it is unharmful." + Environment.NewLine + Environment.NewLine + "Before starting make sure:" + Environment.NewLine + "- InputRedirection is working, you can test it with the Remote Control function" + Environment.NewLine + "- The PSS menu where the Wonder Trade button can be pressed is shown in the bottom screen of your 3DS." + Environment.NewLine + "- All pokémon can be traded, the bot is not programmed to handle non-tradeable pokémon." + Environment.NewLine + Environment.NewLine + "Do you want to continue?", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + WTtradesNo.Value + " pokémon, starting from the slot " + WTSlot.Value + " of box " + WTBox.Value + ". All empty spaces will be ingnored but sill counted.\r\n\r\nRemember that you can stop this bot by pressing the Disconnect button., the application might crash afterwards, but it is unharmful.\r\n\r\nBefore starting make sure:\r\n- InputRedirection is working, you can test it with the Remote Control function\r\n- The PSS menu where the Wonder Trade button can be pressed is shown in the bottom screen of your 3DS.\r\n- All pokémon can be traded, the bot is not programmed to handle non-tradeable pokémon.\r\n\r\nDo you want to continue?", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.OK)
             {
                 botWorking = true; // Set the botWorking flag
-                                   // Local variables
+
+                // Local variables
                 int currentbox = Convert.ToInt16(WTBox.Value - 1);
                 int currentslot = Convert.ToInt16(WTSlot.Value - 1);
                 int oldbox = -1;
@@ -2404,7 +2406,11 @@ namespace ntrbase
                 // Disable controls
                 radioBoxes.Checked = true;
                 onlyView.Checked = true;
-                foreach (Control c in enableWhenConnected) c.Enabled = false;
+                foreach (Control c in enableWhenConnected)
+                {
+                    c.Enabled = false;
+                }
+
                 // Wonder Trade procedue
                 while (WTtradesNo.Value > 0) // Number of remaining trades > 0
                 {
@@ -2449,7 +2455,10 @@ namespace ntrbase
                             dumpPokemon.PerformClick();
                             dumpPokemon.Enabled = false;
                             await Task.Delay(5000);
-                            if (oldPID != dPID.Text) break; // PID is checked to check if a new pokemon is received.
+                            if (oldPID != dPID.Text)
+                            {
+                                break; // PID is checked to check if a new pokemon is received.
+                            }
                         }
                         if (i >= 20) // If trade timed out try agin
                         {
@@ -2484,7 +2493,10 @@ namespace ntrbase
                         }
                         oldbox = currentbox; // For box change checking
                     }
-                    else oldbox = -1; // IF the slot is empty make the bot select the box again to avoid mistakes.
+                    else
+                    {
+                        oldbox = -1; // If the slot is empty make the bot select the box again to avoid mistakes.
+                    }
                     SetValue(WTtradesNo, WTtradesNo.Value - 1); // Decrease the remaining trades count
                     currentslot++; // Increase the slot counter
                     if (currentslot >= 30)
@@ -2492,9 +2504,15 @@ namespace ntrbase
                         currentslot = 0; // Return to slot 1
                         currentbox++; // Increase the box number
                     }
-                    if (currentbox >= 31) currentbox = 0; // If the box 31 is finished, return to box 1.
+                    if (currentbox >= 31)
+                    {
+                        currentbox = 0; // If the box 31 is finished, return to box 1.
+                    }
                 }
-                foreach (Control c in enableWhenConnected) c.Enabled = true; // Enable controls
+                foreach (Control c in enableWhenConnected)
+                {
+                    c.Enabled = true; // Enable controls
+                }
                 MessageBox.Show("Finished", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);  // Finish message
                 botWorking = false; // Disable the botWorking flag
             }
@@ -2505,15 +2523,33 @@ namespace ntrbase
         {
             // Reading filters
             string desirednature;
-            if (natureLSR.SelectedIndex < 0) desirednature = "Any";
-            else desirednature = natureLSR.SelectedItem.ToString();
+            if (natureLSR.SelectedIndex < 0)
+            {
+                desirednature = "Any";
+            }
+            else
+            {
+                desirednature = natureLSR.SelectedItem.ToString();
+            }
             string desiredIVs = ivHPLSR.Value.ToString() + "/" + ivAtkLSR.Value.ToString() + "/" + ivDefLSR.Value.ToString() + "/" + ivSpALSR.Value.ToString() + "/" + ivSpDLSR.Value.ToString() + "/" + ivSpeLSR.Value.ToString();
             string desiredHPtype;
-            if (HPTypeLSR.SelectedIndex < 0) desiredHPtype = "Any";
-            else desiredHPtype = HPTypeLSR.SelectedItem.ToString();
+            if (HPTypeLSR.SelectedIndex < 0)
+            {
+                desiredHPtype = "Any";
+            }
+            else
+            {
+                desiredHPtype = HPTypeLSR.SelectedItem.ToString();
+            }
             string desiredshiny;
-            if (shinyLSR.Checked) desiredshiny = "Yes";
-            else desiredshiny = "Don't care";
+            if (shinyLSR.Checked)
+            {
+                desiredshiny = "Yes";
+            }
+            else
+            {
+                desiredshiny = "Don't care";
+            }
 
             // Warning screen
             DialogResult dialogResult = MessageBox.Show("This bot will trigger a battle against a Legendary Pokémon located in front of you an reset the game if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nDo you want to continue?", "Legendary Soft-reset Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
@@ -2522,9 +2558,14 @@ namespace ntrbase
             { // Bot start
                 botWorking = true; // Set the botWorking flag
                 botState = 1;
+
                 //Disable controlds
                 radioOpponent.Checked = true;
-                foreach (Control c in enableWhenConnected) c.Enabled = false;
+                foreach (Control c in enableWhenConnected)
+                {
+                    c.Enabled = false;
+                }
+
                 //Local Variables
                 int softresetNo = 0;
 
@@ -2533,6 +2574,7 @@ namespace ntrbase
                 byte[] buttonByte = BitConverter.GetBytes(0x4770);
                 Program.scriptHelper.write(0x0105AE4, buttonByte, 0x1A);
                 await Task.Delay(2000); // Wait 2 seconds
+
                 //Disable PSS comunications
                 Addlog("Disabling PSS");
                 autotouchsend(240, 180); // Press PSS Settings
@@ -2542,6 +2584,7 @@ namespace ntrbase
                 autotouchsend(160, 120); // Press Yes
                 Addlog("Wait 10 seconds");
                 await Task.Delay(10000); // Wait 10 seconds
+
                 // Save the game
                 Addlog("Saving game");
                 autotouchsend(220, 220); // Press save icon
@@ -2555,13 +2598,13 @@ namespace ntrbase
                     SetText(dPID, "");
                     Addlog("Pressing A buton 4 times");
                     autobuttonsend(keyA); // Press A button
-                    await Task.Delay(2000); // Wait 1.5 seconds
+                    await Task.Delay(2000); // Wait 2 seconds
                     autobuttonsend(keyA); // Press A button
-                    await Task.Delay(2000); // Wait 1.5 seconds
+                    await Task.Delay(2000); // Wait 2 seconds
                     autobuttonsend(keyA); // Press A button
-                    await Task.Delay(2000); // Wait 1.5 seconds
+                    await Task.Delay(2000); // Wait 2 seconds
                     autobuttonsend(keyA); // Press A button
-                    await Task.Delay(2000); // Wait 1.5 seconds
+                    await Task.Delay(2000); // Wait 2 seconds
                     while (dPID.Text.Length <= 0)
                     {
                         Addlog("Wait for opponent data");
@@ -2573,6 +2616,7 @@ namespace ntrbase
                         autobuttonsend(keyA); // Press A button
                         await Task.Delay(1000); // Wait 1 second
                     }
+
                     // Analyze the pokemon
                     Addlog("Pokémon detected, start analysis");
                     botState = 0;
@@ -2612,7 +2656,7 @@ namespace ntrbase
                         Addlog("Defense IV: FAIL");
                         botState++;
                     }
-                    if (dumpedPKHeX.IV_ATK>= ivSpALSR.Value)
+                    if (dumpedPKHeX.IV_ATK >= ivSpALSR.Value)
                     {
                         Addlog("Special Attack IV: PASS");
                     }
@@ -2684,7 +2728,6 @@ namespace ntrbase
                         await Task.Delay(17000); // Wait 17 seconds
                         Addlog("Reconnect");
                         Program.scriptHelper.connect(host.Text, 8000);
-                        foreach (Control c in enableWhenConnected) c.Enabled = false; // Disable controls
                         await Task.Delay(3000); // Wait 3 seconds
                         Addlog("Pressing A buton 3 times");
                         autobuttonsend(keyA); // Press A button
@@ -2707,7 +2750,10 @@ namespace ntrbase
                     }
                 }
                 MessageBox.Show("Finished, " + softresetNo.ToString() + " resets performed", "Legendary Soft Reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);  // Finish message
-                foreach (Control c in enableWhenConnected) c.Enabled = true; // Enable controls
+                foreach (Control c in enableWhenConnected)
+                {
+                    c.Enabled = true; // Enable controls
+                }
                 botWorking = false; // Disable the botWorking flag
             }
         }
