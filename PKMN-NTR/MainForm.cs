@@ -2727,7 +2727,7 @@ namespace ntrbase
                         autobuttonsend(softReset); // Press L + R + A  button
                         await Task.Delay(17000); // Wait 17 seconds
                         Addlog("Reconnect");
-                        Program.scriptHelper.connect(host.Text, 8000);
+                        Program.scriptHelper.listprocess(); // Reload process list
                         await Task.Delay(3000); // Wait 3 seconds
                         Addlog("Pressing A buton 3 times");
                         autobuttonsend(keyA); // Press A button
