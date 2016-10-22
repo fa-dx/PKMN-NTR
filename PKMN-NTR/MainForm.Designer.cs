@@ -1218,7 +1218,7 @@
             this.label19.TabIndex = 55;
             this.label19.Text = "DEF:";
             // 
-            // dataGridView1
+            // itemsGridView
             // 
             this.itemsGridView.AllowUserToAddRows = false;
             this.itemsGridView.AllowUserToDeleteRows = false;
@@ -1227,7 +1227,7 @@
             this.itemsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsGridView.Enabled = false;
             this.itemsGridView.Location = new System.Drawing.Point(6, 19);
-            this.itemsGridView.Name = "dataGridView1";
+            this.itemsGridView.Name = "itemsGridView";
             this.itemsGridView.RowHeadersVisible = false;
             this.itemsGridView.ShowEditingIcon = false;
             this.itemsGridView.Size = new System.Drawing.Size(191, 177);
@@ -1527,7 +1527,7 @@
             this.showItems.UseVisualStyleBackColor = true;
             this.showItems.Click += new System.EventHandler(this.showItems_Click);
             // 
-            // dataGridView2
+            // keysGridView
             // 
             this.keysGridView.AllowUserToAddRows = false;
             this.keysGridView.AllowUserToDeleteRows = false;
@@ -1536,14 +1536,14 @@
             this.keysGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.keysGridView.Enabled = false;
             this.keysGridView.Location = new System.Drawing.Point(6, 19);
-            this.keysGridView.Name = "dataGridView2";
+            this.keysGridView.Name = "keysGridView";
             this.keysGridView.RowHeadersVisible = false;
             this.keysGridView.ShowEditingIcon = false;
             this.keysGridView.Size = new System.Drawing.Size(191, 177);
             this.keysGridView.TabIndex = 38;
             this.keysGridView.Visible = false;
             // 
-            // dataGridView3
+            // tmsGridView
             // 
             this.tmsGridView.AllowUserToAddRows = false;
             this.tmsGridView.AllowUserToDeleteRows = false;
@@ -1552,14 +1552,14 @@
             this.tmsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tmsGridView.Enabled = false;
             this.tmsGridView.Location = new System.Drawing.Point(6, 19);
-            this.tmsGridView.Name = "dataGridView3";
+            this.tmsGridView.Name = "tmsGridView";
             this.tmsGridView.RowHeadersVisible = false;
             this.tmsGridView.ShowEditingIcon = false;
             this.tmsGridView.Size = new System.Drawing.Size(191, 177);
             this.tmsGridView.TabIndex = 39;
             this.tmsGridView.Visible = false;
             // 
-            // dataGridView4
+            // medsGridView
             // 
             this.medsGridView.AllowUserToAddRows = false;
             this.medsGridView.AllowUserToDeleteRows = false;
@@ -1568,14 +1568,14 @@
             this.medsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.medsGridView.Enabled = false;
             this.medsGridView.Location = new System.Drawing.Point(6, 19);
-            this.medsGridView.Name = "dataGridView4";
+            this.medsGridView.Name = "medsGridView";
             this.medsGridView.RowHeadersVisible = false;
             this.medsGridView.ShowEditingIcon = false;
             this.medsGridView.Size = new System.Drawing.Size(191, 177);
             this.medsGridView.TabIndex = 40;
             this.medsGridView.Visible = false;
             // 
-            // dataGridView5
+            // bersGridView
             // 
             this.bersGridView.AllowUserToAddRows = false;
             this.bersGridView.AllowUserToDeleteRows = false;
@@ -1584,7 +1584,7 @@
             this.bersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bersGridView.Enabled = false;
             this.bersGridView.Location = new System.Drawing.Point(6, 19);
-            this.bersGridView.Name = "dataGridView5";
+            this.bersGridView.Name = "bersGridView";
             this.bersGridView.RowHeadersVisible = false;
             this.bersGridView.ShowEditingIcon = false;
             this.bersGridView.Size = new System.Drawing.Size(191, 177);
@@ -2994,12 +2994,12 @@
             // 
             // label69
             // 
-            this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(541, 328);
+            this.label69.Location = new System.Drawing.Point(432, 328);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(78, 13);
+            this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label69.Size = new System.Drawing.Size(187, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.1.18";
+            this.label69.Text = "Version: 1.18.3-beta1";
             this.label69.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // MainForm
