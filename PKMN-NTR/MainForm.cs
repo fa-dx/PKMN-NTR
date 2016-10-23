@@ -82,10 +82,21 @@ namespace ntrbase
         public int hid_pid = 0x10;
         //Offsets for bot screen detection
         public uint savescrnOff;
+        public uint savescrnIN;
+        public uint savescrnOUT;
         public uint psssmenu1Off;
+        public uint psssmenu1IN;
+        public uint psssmenu1OUT;
         public uint wtconfirmationOff;
+        public uint wtconfirmationIN;
+        public uint wtconfirmationOUT;
         public uint wtboxesOff;
+        public uint wtboxesIN;
+        public uint wtboxesOUT;
         public uint wtboxviewOff;
+        public uint wtboxviewIN;
+        public uint wtboxviewOUT;
+        public uint wtboxviewRange;
 
         //TODO: add opponent data offset (right now it's a constant)
 
@@ -505,6 +516,22 @@ namespace ntrbase
                 langoff = 0x8C79C69;
                 tradeoffrg = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
+                savescrnOff = 0x19AB78;
+                savescrnIN = 0x7E0000;
+                savescrnOUT = 0x4D0000;
+                psssmenu1Off = 0x19ABC0;
+                psssmenu1IN = 0x7E0000;
+                psssmenu1OUT = 0x4D0000;
+                wtconfirmationOff = 0x19A918;
+                wtconfirmationIN = 0x4D0000;
+                wtconfirmationOUT = 0x780000;
+                wtboxesOff = 0x19A988;
+                wtboxesIN = 0x6C0000;
+                wtboxesOUT = 0x4D0000;
+                wtboxviewOff = 0x627437;
+                wtboxviewIN = 0x00000000;
+                wtboxviewOUT = 0x20000000;
+                wtboxviewRange = 0x1000000;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -533,6 +560,22 @@ namespace ntrbase
                 langoff = 0x8C79C69;
                 tradeoffrg = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
+                savescrnOff = 0x19AB78;
+                savescrnIN = 0x7E0000;
+                savescrnOUT = 0x4D0000;
+                psssmenu1Off = 0x19ABC0;
+                psssmenu1IN = 0x7E0000;
+                psssmenu1OUT = 0x4D0000;
+                wtconfirmationOff = 0x19A918;
+                wtconfirmationIN = 0x4D0000;
+                wtconfirmationOUT = 0x780000;
+                wtboxesOff = 0x19A988;
+                wtboxesIN = 0x6C0000;
+                wtboxesOUT = 0x4D0000;
+                wtboxviewOff = 0x627437;
+                wtboxviewIN = 0x00000000;
+                wtboxviewOUT = 0x20000000;
+                wtboxviewRange = 0x1000000;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -562,10 +605,21 @@ namespace ntrbase
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 savescrnOff = 0x19C1CC;
+                savescrnIN = 0x830000;
+                savescrnOUT = 0x500000;
                 psssmenu1Off = 0x19C21C;
+                psssmenu1IN = 0x830000;
+                psssmenu1OUT = 0x500000;
                 wtconfirmationOff = 0x19C024;
+                wtconfirmationIN = 0x500000;
+                wtconfirmationOUT = 0x700000;
                 wtboxesOff = 0x19BFCC;
+                wtboxesIN = 0x710000;
+                wtboxesOUT = 0x500000;
                 wtboxviewOff = 0x66F5F2;
+                wtboxviewIN = 0xC000;
+                wtboxviewOUT = 0x4000;
+                wtboxviewRange = 0x1000;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -595,10 +649,21 @@ namespace ntrbase
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 savescrnOff = 0x19C1CC;
+                savescrnIN = 0x830000;
+                savescrnOUT = 0x500000;
                 psssmenu1Off = 0x19C21C;
+                psssmenu1IN = 0x830000;
+                psssmenu1OUT = 0x500000;
                 wtconfirmationOff = 0x19C024;
+                wtconfirmationIN = 0x500000;
+                wtconfirmationOUT = 0x700000;
                 wtboxesOff = 0x19BFCC;
+                wtboxesIN = 0x710000;
+                wtboxesOUT = 0x500000;
                 wtboxviewOff = 0x66F5F2;
+                wtboxviewIN = 0xC000;
+                wtboxviewOUT = 0x4000;
+                wtboxviewRange = 0x1000;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -1167,14 +1232,7 @@ namespace ntrbase
                 //Added a bit of code to work with the bots
                 else if (!dataCorrect)
                 {
-                    if (botWorking)
-                    {
-                        botState = 1;
-                    }
-                    else
-                    {
-                        MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 if (!dataCorrect)
@@ -2580,12 +2638,12 @@ namespace ntrbase
                         Addlog("Test if the PSS menu is shown");
                         waitNTRtask = waitNTRread(psssmenu1Off);
                         waitresult = await waitNTRtask;
-                        if (lastmemoryread >= 0x500000 && lastmemoryread < 0x510000)
+                        if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
                         {
                             MessageBox.Show("Please go to the PSS menu and try again.");
                             botState = -1;
                         }
-                        else if (lastmemoryread >= 0x830000 && lastmemoryread < 0x840000)
+                        else if (lastmemoryread >= psssmenu1IN && lastmemoryread < psssmenu1IN + 0x10000)
                         {
                             botState = 1;
                         }
@@ -2627,7 +2685,7 @@ namespace ntrbase
                                 boxchange = true;
                                 if (currentbox >= 31)
                                 {
-                                    currentbox = 0;   
+                                    currentbox = 0;
                                 }
                             }
                             WTtradesNo.Value--;
@@ -2662,7 +2720,7 @@ namespace ntrbase
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(savescrnOff);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= 0x830000 && lastmemoryread < 0x840000)
+                            if (lastmemoryread >= savescrnIN && lastmemoryread < savescrnIN + 0x10000)
                             {
                                 break;
                             }
@@ -2671,7 +2729,7 @@ namespace ntrbase
                         {
                             botState = 4;
                         }
-                        else if (lastmemoryread >= 0x500000 && lastmemoryread < 0x510000)
+                        else if (lastmemoryread >= savescrnOUT && lastmemoryread < savescrnOUT + 0x10000)
                         { // Still on the PSS menu
                             botState = 2;
                         }
@@ -2702,8 +2760,8 @@ namespace ntrbase
                             await Task.Delay(1000);
                             waitNTRtask = waitNTRread(wtconfirmationOff);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= 0x500000 && lastmemoryread < 0x510000)
-                            {
+                            if (lastmemoryread >= wtconfirmationIN && lastmemoryread < wtconfirmationIN + 0x10000)
+                            { //&& lastmemoryread < wtconfirmationIN + 10000
                                 break;
                             }
                         }
@@ -2711,7 +2769,7 @@ namespace ntrbase
                         {
                             botState = 6;
                         }
-                        else if (lastmemoryread >= 0x700000 && lastmemoryread < 0x710000)
+                        else if (lastmemoryread >= wtconfirmationOUT && lastmemoryread < wtconfirmationOUT + 0x10000)
                         { // Still on the save screen
                             botState = 4;
                         }
@@ -2742,7 +2800,7 @@ namespace ntrbase
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(wtboxesOff);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= 0x710000 && lastmemoryread < 0x720000)
+                            if (lastmemoryread >= wtboxesIN && lastmemoryread < wtboxesIN + 0x10000)
                             {
                                 break;
                             }
@@ -2751,7 +2809,7 @@ namespace ntrbase
                         {
                             botState = 8;
                         }
-                        else if (lastmemoryread >= 0x500000 && lastmemoryread < 0x510000)
+                        else if (lastmemoryread >= wtboxesOUT && lastmemoryread < wtboxesOUT + 0x10000)
                         { // Still on the confirmation screen
                             botState = 6;
                         }
@@ -2795,7 +2853,7 @@ namespace ntrbase
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(wtboxviewOff);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= 0xC000 && lastmemoryread < 0xD000)
+                            if (lastmemoryread >= wtboxviewIN && lastmemoryread < wtboxviewIN + wtboxviewRange)
                             {
                                 break;
                             }
@@ -2804,7 +2862,7 @@ namespace ntrbase
                         {
                             botState = 11;
                         }
-                        else if (lastmemoryread >= 0x4000 && lastmemoryread < 0x5000)
+                        else if (lastmemoryread >= wtboxviewOUT && lastmemoryread < wtboxviewOUT + wtboxviewRange)
                         { // Still on the boxes
                             botState = 9;
                         }
@@ -2849,7 +2907,7 @@ namespace ntrbase
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(wtboxviewOff);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= 0x4300 && lastmemoryread < 0x4400)
+                            if (lastmemoryread >= wtboxviewOUT && lastmemoryread < wtboxviewOUT + wtboxviewRange)
                             {
                                 break;
                             }
@@ -2858,7 +2916,7 @@ namespace ntrbase
                         {
                             botState = 14;
                         }
-                        else if (lastmemoryread >= 0xC200 && lastmemoryread < 0xC300)
+                        else if (lastmemoryread >= wtboxviewIN && lastmemoryread < wtboxviewIN + wtboxviewRange)
                         { // Still on the box view
                             botState = 11;
                         }
@@ -2918,7 +2976,7 @@ namespace ntrbase
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(wtboxesOff);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= 0x500000 && lastmemoryread < 0x510000)
+                            if (lastmemoryread >= wtboxesOUT && lastmemoryread < wtboxesOUT + 0x10000)
                             {
                                 break;
                             }
@@ -2927,7 +2985,7 @@ namespace ntrbase
                         {
                             botState = 18;
                         }
-                        else if (lastmemoryread >= 0x710000 && lastmemoryread < 0x720000)
+                        else if (lastmemoryread >= wtboxesOUT && lastmemoryread < wtboxesOUT + 0x10000)
                         { // Still on the box view
                             botState = 14;
                         }
@@ -2973,7 +3031,7 @@ namespace ntrbase
                             await Task.Delay(2000);
                             waitNTRtask = waitNTRread(psssmenu1Off);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= 0x830000 && lastmemoryread < 0x840000)
+                            if (lastmemoryread >= psssmenu1IN && lastmemoryread < psssmenu1IN + 0x10000)
                             {
                                 break;
                             }
@@ -3001,7 +3059,7 @@ namespace ntrbase
                                 botState = -1;
                             }
                         }
-                        else if (lastmemoryread >= 0x500000 && lastmemoryread < 0x510000)
+                        else if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
                         { // Still waiting to complete trade
                             botState = 20;
                         }
@@ -3018,7 +3076,7 @@ namespace ntrbase
                             await Task.Delay(1000);
                             waitNTRtask = waitNTRread(wtboxesOff);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= 0x830000 && lastmemoryread < 0x840000)
+                            if (lastmemoryread >= psssmenu1IN && lastmemoryread < psssmenu1IN + 0x10000)
                             {
                                 break;
                             }
@@ -3027,7 +3085,7 @@ namespace ntrbase
                                 waitNTRtask = waitbutton(keyA);
                                 waitresult = await waitNTRtask;
                                 if (waitresult != 0)
-                                { 
+                                {
                                     MessageBox.Show(buttonerror);
                                     waittimeout = 45;
                                     botState = -1;
@@ -3039,7 +3097,7 @@ namespace ntrbase
                         { // Return to begining
                             botState = 1;
                         }
-                        else if (lastmemoryread >= 0x500000 && lastmemoryread < 0x510000)
+                        else if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
                         { // Still waiting to complete trade
                             botState = 21;
                         }
@@ -3064,10 +3122,6 @@ namespace ntrbase
             botWorking = false;
             MessageBox.Show("Finished", "Wonder Trade Bot");
         }
-
-
-
-
 
         // Legendary Soft Reset Bot
         private async void RunLSRbot_Click(object sender, EventArgs e)
@@ -3311,10 +3365,6 @@ namespace ntrbase
 
         #endregion Bots
 
-        private void boxDump_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 

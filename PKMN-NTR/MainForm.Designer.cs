@@ -707,7 +707,6 @@
             0,
             0,
             0});
-            this.boxDump.ValueChanged += new System.EventHandler(this.boxDump_ValueChanged);
             // 
             // pictureBox1
             // 
@@ -3023,7 +3022,7 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(78, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.3";
+            this.label69.Text = "Version: 1.18.4";
             // 
             // label71
             // 
