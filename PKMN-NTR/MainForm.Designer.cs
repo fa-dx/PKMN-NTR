@@ -213,6 +213,8 @@
             this.label64 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
             this.WonderTradeBot = new System.Windows.Forms.TabPage();
+            this.readResult = new System.Windows.Forms.TextBox();
+            this.testButton = new System.Windows.Forms.Button();
             this.label59 = new System.Windows.Forms.Label();
             this.RunWTbot = new System.Windows.Forms.Button();
             this.WTtradesNo = new System.Windows.Forms.NumericUpDown();
@@ -239,6 +241,7 @@
             this.manualStart = new System.Windows.Forms.Button();
             this.BotTab = new System.Windows.Forms.TabControl();
             this.label69 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -2696,6 +2699,24 @@
             this.WonderTradeBot.TabIndex = 1;
             this.WonderTradeBot.Text = "Wonder Trade";
             // 
+            // readResult
+            // 
+            this.readResult.Location = new System.Drawing.Point(519, 325);
+            this.readResult.Name = "readResult";
+            this.readResult.ReadOnly = true;
+            this.readResult.Size = new System.Drawing.Size(100, 20);
+            this.readResult.TabIndex = 107;
+            // 
+            // testButton
+            // 
+            this.testButton.Location = new System.Drawing.Point(217, 416);
+            this.testButton.Name = "testButton";
+            this.testButton.Size = new System.Drawing.Size(75, 23);
+            this.testButton.TabIndex = 106;
+            this.testButton.Text = "Testing";
+            this.testButton.UseVisualStyleBackColor = true;
+            this.testButton.Click += new System.EventHandler(this.testButton_Click);
+            // 
             // label59
             // 
             this.label59.AutoSize = true;
@@ -2994,19 +3015,31 @@
             // 
             // label69
             // 
-            this.label69.Location = new System.Drawing.Point(432, 328);
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(4, 431);
             this.label69.Name = "label69";
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label69.Size = new System.Drawing.Size(187, 13);
+            this.label69.Size = new System.Drawing.Size(108, 13);
             this.label69.TabIndex = 76;
             this.label69.Text = "Version: 1.18.3-beta1";
-            this.label69.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(454, 328);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(59, 13);
+            this.label71.TabIndex = 108;
+            this.label71.Text = "Last Read:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 444);
+            this.ClientSize = new System.Drawing.Size(906, 445);
+            this.Controls.Add(this.label71);
+            this.Controls.Add(this.testButton);
+            this.Controls.Add(this.readResult);
             this.Controls.Add(this.label69);
             this.Controls.Add(this.BotTab);
             this.Controls.Add(this.label50);
@@ -3339,6 +3372,9 @@
         private System.Windows.Forms.CheckBox shinyLSR;
         private System.Windows.Forms.Label label70;
         private System.Windows.Forms.ComboBox HPTypeLSR;
+        private System.Windows.Forms.Button testButton;
+        private System.Windows.Forms.TextBox readResult;
+        private System.Windows.Forms.Label label71;
     }
 }
 

@@ -38,8 +38,12 @@ namespace ntrbase
 
         public byte[] selectedCloneData = new byte[232];
         public bool selectedCloneValid = false;
+
+        // Variables for bots
         public bool botWorking = false;
         public int botState = 0;
+        public uint lastmemoryread;
+        public string lastlog;
 
         //Game information
         public int pid;
@@ -68,10 +72,13 @@ namespace ntrbase
         public uint daycare1Off;
         public uint daycare2Off;
         public uint battleBoxOff;
-        //Offsetts for HID
+        //Offsets for HID
         public uint buttonsOff = 0x10df20;
         public uint touchscrOff = 0x10df24;
         public int hid_pid = 0x10;
+        //Offsets for Save Screen detection
+        public uint savescrnOff;
+
         //TODO: add opponent data offset (right now it's a constant)
 
         private byte[] itemData = new byte[1600];
@@ -403,6 +410,7 @@ namespace ntrbase
 
         public void Addlog(string l)
         {
+            lastlog = l;
             if (!l.Contains("\r\n"))
             {
                 l = l.Replace("\n", "\r\n");
@@ -549,6 +557,7 @@ namespace ntrbase
                 langoff = 0x8C8136D;
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
+                savescrnOff = 0x19C1CC;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -577,6 +586,7 @@ namespace ntrbase
                 langoff = 0x8C8136D;
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
+                savescrnOff = 0x19C1CC;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -2388,6 +2398,41 @@ namespace ntrbase
             sendTouch(notouch);
         }
 
+        public void autoMemoryRead(uint address)
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMemoryRead, null);
+            waitingForData.Add(Program.scriptHelper.data(address, 0x04, pid), myArgs);
+        }
+
+        public void handleMemoryRead(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            lastmemoryread = BitConverter.ToUInt32(args.data, 0);
+            SetText(readResult, lastmemoryread.ToString("X8"));
+        }
+
+        private async void testButton_Click(object sender, EventArgs e)
+        {
+            autoMemoryRead(0x19C1CC);
+            bool readfinished = false;
+            while(!readfinished)
+            {
+                await Task.Delay(100);
+                readfinished = lastlog.Contains("finished");
+            }
+            if (lastmemoryread >= 0x830000 && lastmemoryread < 0x840000)
+            {
+                MessageBox.Show("You are in the save screen.");
+            }
+            else if (lastmemoryread >= 0x500000 && lastmemoryread < 0x510000)
+            {
+                MessageBox.Show("You are not in the save screen.");
+            }
+            else
+            {
+                MessageBox.Show("Error: Unusual memory read");
+            }
+        }
 
         private async void RunWTbot_Click(object sender, EventArgs e)
         {
@@ -2759,6 +2804,7 @@ namespace ntrbase
         }
 
         #endregion Bots
+
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
