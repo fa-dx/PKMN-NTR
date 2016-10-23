@@ -213,8 +213,6 @@
             this.label64 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
             this.WonderTradeBot = new System.Windows.Forms.TabPage();
-            this.readResult = new System.Windows.Forms.TextBox();
-            this.testButton = new System.Windows.Forms.Button();
             this.label59 = new System.Windows.Forms.Label();
             this.RunWTbot = new System.Windows.Forms.Button();
             this.WTtradesNo = new System.Windows.Forms.NumericUpDown();
@@ -222,6 +220,8 @@
             this.WTBox = new System.Windows.Forms.NumericUpDown();
             this.WTSlot = new System.Windows.Forms.NumericUpDown();
             this.label58 = new System.Windows.Forms.Label();
+            this.readResult = new System.Windows.Forms.TextBox();
+            this.stopBotButton = new System.Windows.Forms.Button();
             this.RemonteControls = new System.Windows.Forms.TabPage();
             this.manualDLeft = new System.Windows.Forms.Button();
             this.manualTouch = new System.Windows.Forms.Button();
@@ -707,6 +707,7 @@
             0,
             0,
             0});
+            this.boxDump.ValueChanged += new System.EventHandler(this.boxDump_ValueChanged);
             // 
             // pictureBox1
             // 
@@ -2699,24 +2700,6 @@
             this.WonderTradeBot.TabIndex = 1;
             this.WonderTradeBot.Text = "Wonder Trade";
             // 
-            // readResult
-            // 
-            this.readResult.Location = new System.Drawing.Point(519, 325);
-            this.readResult.Name = "readResult";
-            this.readResult.ReadOnly = true;
-            this.readResult.Size = new System.Drawing.Size(100, 20);
-            this.readResult.TabIndex = 107;
-            // 
-            // testButton
-            // 
-            this.testButton.Location = new System.Drawing.Point(217, 416);
-            this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(75, 23);
-            this.testButton.TabIndex = 106;
-            this.testButton.Text = "Testing";
-            this.testButton.UseVisualStyleBackColor = true;
-            this.testButton.Click += new System.EventHandler(this.testButton_Click);
-            // 
             // label59
             // 
             this.label59.AutoSize = true;
@@ -2814,6 +2797,25 @@
             this.label58.Size = new System.Drawing.Size(28, 13);
             this.label58.TabIndex = 102;
             this.label58.Text = "Box:";
+            // 
+            // readResult
+            // 
+            this.readResult.Location = new System.Drawing.Point(519, 325);
+            this.readResult.Name = "readResult";
+            this.readResult.ReadOnly = true;
+            this.readResult.Size = new System.Drawing.Size(100, 20);
+            this.readResult.TabIndex = 107;
+            // 
+            // stopBotButton
+            // 
+            this.stopBotButton.Enabled = false;
+            this.stopBotButton.Location = new System.Drawing.Point(217, 416);
+            this.stopBotButton.Name = "stopBotButton";
+            this.stopBotButton.Size = new System.Drawing.Size(75, 23);
+            this.stopBotButton.TabIndex = 106;
+            this.stopBotButton.Text = "Stop Bot";
+            this.stopBotButton.UseVisualStyleBackColor = true;
+            this.stopBotButton.Click += new System.EventHandler(this.stopBotButton_Click);
             // 
             // RemonteControls
             // 
@@ -3038,7 +3040,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 445);
             this.Controls.Add(this.label71);
-            this.Controls.Add(this.testButton);
+            this.Controls.Add(this.stopBotButton);
             this.Controls.Add(this.readResult);
             this.Controls.Add(this.label69);
             this.Controls.Add(this.BotTab);
@@ -3372,7 +3374,7 @@
         private System.Windows.Forms.CheckBox shinyLSR;
         private System.Windows.Forms.Label label70;
         private System.Windows.Forms.ComboBox HPTypeLSR;
-        private System.Windows.Forms.Button testButton;
+        private System.Windows.Forms.Button stopBotButton;
         private System.Windows.Forms.TextBox readResult;
         private System.Windows.Forms.Label label71;
     }
