@@ -85,6 +85,7 @@ namespace ntrbase
         public uint psssmenu1Off;
         public uint wtconfirmationOff;
         public uint wtboxesOff;
+        public uint wtboxviewOff;
 
         //TODO: add opponent data offset (right now it's a constant)
 
@@ -564,6 +565,7 @@ namespace ntrbase
                 psssmenu1Off = 0x19C21C;
                 wtconfirmationOff = 0x19C024;
                 wtboxesOff = 0x19BFCC;
+                wtboxviewOff = 0x66F5F2;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -596,6 +598,7 @@ namespace ntrbase
                 psssmenu1Off = 0x19C21C;
                 wtconfirmationOff = 0x19C024;
                 wtboxesOff = 0x19BFCC;
+                wtboxviewOff = 0x66F5F2;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -2790,7 +2793,7 @@ namespace ntrbase
                         for (waittimeout = 0; waittimeout < 10; waittimeout++)
                         { // Wait two seconds
                             await Task.Delay(100);
-                            waitNTRtask = waitNTRread(0x66F5F2);
+                            waitNTRtask = waitNTRread(wtboxviewOff);
                             waitresult = await waitNTRtask;
                             if (lastmemoryread >= 0xC000 && lastmemoryread < 0xD000)
                             {
@@ -2844,7 +2847,7 @@ namespace ntrbase
                         for (waittimeout = 0; waittimeout < 10; waittimeout++)
                         { // Wait two seconds
                             await Task.Delay(100);
-                            waitNTRtask = waitNTRread(0x66F5F2);
+                            waitNTRtask = waitNTRread(wtboxviewOff);
                             waitresult = await waitNTRtask;
                             if (lastmemoryread >= 0x4300 && lastmemoryread < 0x4400)
                             {
