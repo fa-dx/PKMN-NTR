@@ -330,7 +330,7 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(314, 95);
+            this.txtLog.Size = new System.Drawing.Size(314, 100);
             this.txtLog.TabIndex = 0;
             this.txtLog.TextChanged += new System.EventHandler(this.txtLog_TextChanged);
             // 
@@ -2437,7 +2437,7 @@
             this.LegendarySoftResetBot.Controls.Add(this.label65);
             this.LegendarySoftResetBot.Location = new System.Drawing.Point(4, 22);
             this.LegendarySoftResetBot.Name = "LegendarySoftResetBot";
-            this.LegendarySoftResetBot.Size = new System.Drawing.Size(261, 156);
+            this.LegendarySoftResetBot.Size = new System.Drawing.Size(261, 161);
             this.LegendarySoftResetBot.TabIndex = 2;
             this.LegendarySoftResetBot.Text = "Legendary SR";
             // 
@@ -2501,7 +2501,7 @@
             // shinyLSR
             // 
             this.shinyLSR.AutoSize = true;
-            this.shinyLSR.Location = new System.Drawing.Point(87, 130);
+            this.shinyLSR.Location = new System.Drawing.Point(84, 139);
             this.shinyLSR.Name = "shinyLSR";
             this.shinyLSR.Size = new System.Drawing.Size(52, 17);
             this.shinyLSR.TabIndex = 106;
@@ -2561,7 +2561,7 @@
             // 
             // RunLSRbot
             // 
-            this.RunLSRbot.Location = new System.Drawing.Point(6, 126);
+            this.RunLSRbot.Location = new System.Drawing.Point(3, 135);
             this.RunLSRbot.Name = "RunLSRbot";
             this.RunLSRbot.Size = new System.Drawing.Size(75, 23);
             this.RunLSRbot.TabIndex = 0;
@@ -2720,7 +2720,7 @@
             this.WonderTradeBot.Location = new System.Drawing.Point(4, 22);
             this.WonderTradeBot.Name = "WonderTradeBot";
             this.WonderTradeBot.Padding = new System.Windows.Forms.Padding(3);
-            this.WonderTradeBot.Size = new System.Drawing.Size(261, 156);
+            this.WonderTradeBot.Size = new System.Drawing.Size(261, 161);
             this.WonderTradeBot.TabIndex = 1;
             this.WonderTradeBot.Text = "Wonder Trade";
             // 
@@ -2833,7 +2833,7 @@
             // stopBotButton
             // 
             this.stopBotButton.Enabled = false;
-            this.stopBotButton.Location = new System.Drawing.Point(217, 416);
+            this.stopBotButton.Location = new System.Drawing.Point(224, 421);
             this.stopBotButton.Name = "stopBotButton";
             this.stopBotButton.Size = new System.Drawing.Size(75, 23);
             this.stopBotButton.TabIndex = 106;
@@ -2865,7 +2865,7 @@
             this.RemonteControls.Location = new System.Drawing.Point(4, 22);
             this.RemonteControls.Name = "RemonteControls";
             this.RemonteControls.Padding = new System.Windows.Forms.Padding(3);
-            this.RemonteControls.Size = new System.Drawing.Size(261, 156);
+            this.RemonteControls.Size = new System.Drawing.Size(261, 161);
             this.RemonteControls.TabIndex = 0;
             this.RemonteControls.Text = "Controls";
             // 
@@ -3036,7 +3036,7 @@
             this.BotTab.Location = new System.Drawing.Point(629, 257);
             this.BotTab.Name = "BotTab";
             this.BotTab.SelectedIndex = 0;
-            this.BotTab.Size = new System.Drawing.Size(269, 182);
+            this.BotTab.Size = new System.Drawing.Size(269, 187);
             this.BotTab.TabIndex = 75;
             // 
             // label69
@@ -3062,7 +3062,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 445);
+            this.ClientSize = new System.Drawing.Size(906, 451);
             this.Controls.Add(this.label71);
             this.Controls.Add(this.stopBotButton);
             this.Controls.Add(this.readResult);
