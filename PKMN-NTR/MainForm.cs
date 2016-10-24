@@ -101,6 +101,9 @@ namespace ntrbase
         public uint pssettingsOff;
         public uint pssettingsIN;
         public uint pssettingsOUT;
+        public uint pssdisableOff;
+        public uint pssdisableIN;
+        public uint pssdisableOUT;
 
         //TODO: add opponent data offset (right now it's a constant)
 
@@ -444,15 +447,12 @@ namespace ntrbase
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (!botWorking)
+            try
             {
-                try
-                {
-                    Program.ntrClient.sendHeartbeatPacket();
-                }
-                catch (Exception)
-                {
-                }
+                Program.ntrClient.sendHeartbeatPacket();
+            }
+            catch (Exception)
+            {
             }
         }
 
@@ -543,6 +543,9 @@ namespace ntrbase
                 pssettingsOff = 0x0;
                 pssettingsIN = 0x0;
                 pssettingsOUT = 0x0;
+                pssdisableOff = 0x0;
+                pssdisableIN = 0x0;
+                pssdisableOUT = 0x0;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -590,6 +593,9 @@ namespace ntrbase
                 pssettingsOff = 0x0;
                 pssettingsIN = 0x0;
                 pssettingsOUT = 0x0;
+                pssdisableOff = 0x0;
+                pssdisableIN = 0x0;
+                pssdisableOUT = 0x0;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -637,6 +643,9 @@ namespace ntrbase
                 pssettingsOff = 0x19C244;
                 pssettingsIN = 0x830000;
                 pssettingsOUT = 0x500000;
+                pssdisableOff = 0x630DA5;
+                pssdisableIN = 0x33000000;
+                pssdisableOUT = 0x33100000;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -684,6 +693,9 @@ namespace ntrbase
                 pssettingsOff = 0x19C244;
                 pssettingsIN = 0x830000;
                 pssettingsOUT = 0x500000;
+                pssdisableOff = 0x630DA5;
+                pssdisableIN = 0x33000000;
+                pssdisableOUT = 0x33100000;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -2605,6 +2617,51 @@ namespace ntrbase
             }
         }
 
+        async Task<int> waitsoftreset()
+        {
+            // Send soft-reset instruction
+            lastlog = "";
+            byte[] buttonByte = BitConverter.GetBytes(softReset);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            // Timeout 1
+            int readcount = 0;
+            for (readcount = 0; readcount < 20; readcount++)
+            {
+                await Task.Delay(100);
+                if (lastlog.Contains("finished"))
+                {
+                    break;
+                }
+            }
+            if (readcount == 20)
+            { // If not response in two seconds, return timeout
+                return -1;
+            }
+            else
+            { // Wait for app restart
+                lastlog = "";
+                buttonByte = BitConverter.GetBytes(nokey);
+                Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+                // Timeout 2
+                for (readcount = 0; readcount < 5; readcount++)
+                {
+                    await Task.Delay(1000);
+                    if (lastlog.Contains("patching smdh"))
+                    {
+                        break;
+                    }
+                }
+                if (readcount == 5)
+                { // If not response in five seconds, return timeout
+                    return -1;
+                }
+                else
+                { // Return sucess
+                    return 0;
+                }
+            }
+        }
+
         private void stopBotButton_Click(object sender, EventArgs e)
         {
             botStop = true;
@@ -3141,187 +3198,19 @@ namespace ntrbase
         // Legendary Soft Reset Bot
         private async void RunLSRbot_Click(object sender, EventArgs e)
         {
-            #region oldcode
-            //    autotouchsend(240, 180); // Press PSS Settings
-            //    await Task.Delay(3000); // Wait 3 seconds
-            //    autotouchsend(160, 120); // Press Disable PSS communications
-            //    await Task.Delay(3000); // Wait 3 seconds
-            //    autotouchsend(160, 120); // Press Yes
-            //    Addlog("Wait 10 seconds");
-            //    await Task.Delay(10000); // Wait 10 seconds
-
-            //    // Save the game
-            //    Addlog("Saving game");
-            //    autotouchsend(220, 220); // Press save icon
-            //    await Task.Delay(5000); // Wait 5 seconds
-            //    autobuttonsend(keyA); // Press A button
-            //    await Task.Delay(7000); // Wait 7 seconds
-
-            //    // Soft-reset procedure
-            //    while (botState > 0)
-            //    {
-            //        SetText(dPID, "");
-            //        Addlog("Pressing A buton 4 times");
-            //        autobuttonsend(keyA); // Press A button
-            //        await Task.Delay(2000); // Wait 2 seconds
-            //        autobuttonsend(keyA); // Press A button
-            //        await Task.Delay(2000); // Wait 2 seconds
-            //        autobuttonsend(keyA); // Press A button
-            //        await Task.Delay(2000); // Wait 2 seconds
-            //        autobuttonsend(keyA); // Press A button
-            //        await Task.Delay(2000); // Wait 2 seconds
-            //        while (dPID.Text.Length <= 0)
-            //        {
-            //            Addlog("Wait for opponent data");
-            //            if (dPID.Text.Length > 0) break;
-            //            dumpPokemon.Enabled = true; // Check if pokémon data is available
-            //            dumpPokemon.PerformClick();
-            //            dumpPokemon.Enabled = false;
-            //            await Task.Delay(3000); // Wait until information is received
-            //            autobuttonsend(keyA); // Press A button
-            //            await Task.Delay(1000); // Wait 1 second
-            //        }
-
-            //        // Analyze the pokemon
-            //        Addlog("Pokémon detected, start analysis");
-            //        botState = 0;
-            //        if (natureLSR.SelectedIndex < 0 || dumpedPKHeX.Nature == natureLSR.SelectedIndex)
-            //        {
-            //            Addlog("Nature: PASS");
-            //        }
-            //        else
-            //        {
-            //            Addlog("Nature: FAIL");
-            //            botState++;
-            //        }
-            //        if (dumpedPKHeX.IV_HP >= ivHPLSR.Value)
-            //        {
-            //            Addlog("Hit Points IV: PASS");
-            //        }
-            //        else
-            //        {
-            //            Addlog("Hit Points IV: FAIL");
-            //            botState++;
-            //        }
-            //        if (dumpedPKHeX.IV_ATK >= ivAtkLSR.Value)
-            //        {
-            //            Addlog("Attack IV: PASS");
-            //        }
-            //        else
-            //        {
-            //            Addlog("Attack IV: FAIL");
-            //            botState++;
-            //        }
-            //        if (dumpedPKHeX.IV_DEF >= ivDefLSR.Value)
-            //        {
-            //            Addlog("Defense IV: PASS");
-            //        }
-            //        else
-            //        {
-            //            Addlog("Defense IV: FAIL");
-            //            botState++;
-            //        }
-            //        if (dumpedPKHeX.IV_ATK >= ivSpALSR.Value)
-            //        {
-            //            Addlog("Special Attack IV: PASS");
-            //        }
-            //        else
-            //        {
-            //            Addlog("Special Attack IV: FAIL");
-            //            botState++;
-            //        }
-            //        if (ivSPDNum.Value >= ivSpDLSR.Value)
-            //        {
-            //            Addlog("Special Defense IV: PASS");
-            //        }
-            //        else
-            //        {
-            //            Addlog("Special Defense IV: FAIL");
-            //            botState++;
-            //        }
-            //        if (ivSPENum.Value >= ivSpeLSR.Value)
-            //        {
-            //            Addlog("Speed IV: PASS");
-            //        }
-            //        else
-            //        {
-            //            Addlog("Speed IV: FAIL");
-            //            botState++;
-            //        }
-            //        if (HPTypeLSR.SelectedIndex < 0 || desiredHPtype == hiddenPower.Text)
-            //        {
-            //            Addlog("Hidden Power: PASS");
-            //        }
-            //        else
-            //        {
-            //            Addlog("Hidden Power: FAIL");
-            //            botState++;
-            //        }
-
-            //        if (shinyLSR.Checked)
-            //        {
-            //            if (dumpedPKHeX.isShiny)
-            //            {
-            //                Addlog("Shiny: PASS");
-            //            }
-            //            else
-            //            {
-            //                Addlog("Shiny: FAIL");
-            //                botState++;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            if (dumpedPKHeX.isShiny)
-            //            {
-            //                Addlog("Shiny: Yes");
-            //                botState = -1;
-            //            }
-            //            else
-            //            {
-            //                Addlog("Shiny: No");
-            //            }
-            //        }
-
-            //        // Soft reset 
-            //        if (botState > 0)
-            //        {
-            //            softresetNo++;
-            //            Addlog("Reset #" + softresetNo.ToString() + " Wait 20 seconds");
-            //            await Task.Delay(3000);
-            //            autobuttonsend(softReset); // Press L + R + A  button
-            //            await Task.Delay(17000); // Wait 17 seconds
-            //            Addlog("Reconnect");
-            //            Program.scriptHelper.listprocess(); // Reload process list
-            //            await Task.Delay(3000); // Wait 3 seconds
-            //            Addlog("Pressing A buton 3 times");
-            //            autobuttonsend(keyA); // Press A button
-            //            await Task.Delay(4000); // Wait 4 seconds
-            //            autobuttonsend(keyA); // Press A button
-            //            await Task.Delay(6000); // Wait 6 seconds
-            //            autobuttonsend(keyA); // Press A button
-            //            await Task.Delay(5000); // Wait 5 seconds
-            //        }
-            //        else
-            //        {
-            //            if (botState == -1)
-            //            {
-            //                Addlog("Shiny Pokémon detected!\r\nTotal number of resets: " + softresetNo.ToString());
-            //            }
-            //            else
-            //            {
-            //                Addlog("All tests passed!\r\nTotal number of resets: " + softresetNo.ToString());
-            //            }
-            //        }
-            //    }
-            //    MessageBox.Show("Finished, " + softresetNo.ToString() + " resets performed", "Legendary Soft Reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);  // Finish message
-            //    foreach (Control c in enableWhenConnected)
-            //    {
-            //        c.Enabled = true; // Enable controls
-            //    }
-            //    botWorking = false; // Disable the botWorking flag
-            #endregion oldcode
             // Show warning
+            string typemessage;
+            botStop = false;
+            switch (typeLSR.SelectedIndex)
+            {
+                case 0:
+                    typemessage = "Mirage Spot - Make sure you are in front of the hole.";
+                    break;
+                default:
+                    typemessage = "No type - Select one type of soft-reset and try again.";
+                    botStop = true;
+                    break;
+            }
             string desirednature;
             if (natureLSR.SelectedIndex < 0)
             {
@@ -3350,14 +3239,11 @@ namespace ntrbase
             {
                 desiredshiny = "Don't care";
             }
-
-            // Warning screen
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger a battle against a Legendary Pokémon located in front of you an reset the game if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nDo you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a legendary pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nType: " + typemessage +  "\r\n\r\nDo you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
                 botWorking = true;
-                botStop = false;
                 botState = 0;
                 onlyView.Checked = true;
                 radioOpponent.Checked = true;
@@ -3379,6 +3265,7 @@ namespace ntrbase
             int waittimeout = 0;
             int currentslot = Convert.ToInt16(WTSlot.Value - 1);
             int currentbox = Convert.ToInt16(WTBox.Value - 1);
+            int resetNo = 0;
 
             // Bot procedure
             while (!botStop)
@@ -3428,7 +3315,7 @@ namespace ntrbase
                         }
                         break;
                     case 2:
-                        Addlog("Press PSS settings");
+                        Addlog("Touch PSS settings");
                         waitNTRtask = waittouch(240, 180);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
@@ -3455,7 +3342,7 @@ namespace ntrbase
                         }
                         if (waittimeout < 10)
                         {
-                            botState = 3;
+                            botState = 4;
                         }
                         else if (lastmemoryread >= pssettingsOUT && lastmemoryread < pssettingsOUT + 0x10000)
                         { // Still on the PSS menu
@@ -3464,6 +3351,499 @@ namespace ntrbase
                         else
                         { // Other error
                             MessageBox.Show(readerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 4:
+                        Addlog("Touch Disable PSS communication");
+                        waitNTRtask = waittouch(160, 120);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 5;
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = -1;
+                        }
+                        break;
+                    case 5:
+                        Addlog("Test if PSS disable confirmation appears");
+                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(pssdisableOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= pssdisableIN && lastmemoryread < pssdisableIN + 0x100000)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < 10)
+                        {
+                            botState = 6;
+                        }
+                        else if (lastmemoryread >= pssdisableOUT && lastmemoryread < pssdisableOUT + 0x100000)
+                        { // Still on PSS settings
+                            botState = 4;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 6:
+                        Addlog("Touch Yes");
+                        waitNTRtask = waittouch(160, 120);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 7;
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = -1;
+                        }
+                        break;
+                    case 7:
+                        Addlog("Test if back to PSS screen");
+                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(pssettingsOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= pssettingsOUT && lastmemoryread < pssettingsOUT + 0x10000)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < 10)
+                        {
+                            botState = 8;
+                        }
+                        else if (lastmemoryread >= pssettingsIN && lastmemoryread < pssettingsIN + 0x10000)
+                        { // Still on the confirmation screen
+                            botState = 6;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 8:
+                        Addlog("Return contol to character");
+                        await Task.Delay(1000);
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 51;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 51:
+                        Addlog("Touch Save button");
+                        waitNTRtask = waittouch(220, 220);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 52;
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = -1;
+                        }
+                        break;
+                    case 52:
+                        Addlog("Test if the save screen is shown");
+                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        { // Wait two seconds
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(savescrnOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= savescrnIN && lastmemoryread < savescrnIN + 0x10000)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < 20)
+                        {
+                            botState = 53;
+                        }
+                        else if (lastmemoryread >= savescrnOUT && lastmemoryread < savescrnOUT + 0x10000)
+                        { // Still on the PSS menu
+                            botState = 51;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 53:
+                        Addlog("Press Yes");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 54;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 54:
+                        Addlog("Test if out from save screen");
+                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        { // Wait two seconds
+                            await Task.Delay(1000);
+                            waitNTRtask = waitNTRread(savescrnOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= savescrnOUT && lastmemoryread < savescrnOUT + 0x10000)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < 10)
+                        {
+                            botState = 55;
+                        }
+                        else if (lastmemoryread >= savescrnIN && lastmemoryread < savescrnIN + 0x10000)
+                        { // Still on the save screen
+                            botState = 53;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 55:
+                        switch (typeLSR.SelectedIndex)
+                        {
+                            case 0:
+                                botState = 101;
+                                break;
+                            default:
+                                botState = 9;
+                                break;
+                        }
+                        break;
+                    case 9:
+                        Addlog("Try to trigger encounter");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 10;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 10:
+                        Addlog("Try to read opponent");
+                        dPID.Clear();
+                        lastlog = "";
+                        dumpPokemon.Enabled = true;
+                        dumpPokemon.PerformClick();
+                        dumpPokemon.Enabled = false;
+                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            if (lastlog.Contains("finished"))
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < 20 && dPID.Text.Length < 1)
+                        { // Battle not triggered yet
+                            botState = 9;
+                        }
+                        else if (waittimeout < 20 && dPID.Text.Length > 0)
+                        { // Battle triggered, data received
+                            botState = 11;
+                        }
+                        else
+                        {
+                            MessageBox.Show(readerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 11:
+                        Addlog("Analyze pokémon");
+                        if (shinyLSR.Checked)
+                        {
+                            if (dumpedPKHeX.isShiny)
+                            {
+                                Addlog("Shiny: PASS");
+                                botState = 12;
+                            }
+                            else
+                            {
+                                Addlog("Shiny: FAIL");
+                                botState = 20;
+                            }
+                        }
+                        else
+                        {
+                            if (dumpedPKHeX.isShiny)
+                            {
+                                Addlog("Shiny: Yes");
+                                botState = -1; // Shiny detected
+                            }
+                            else
+                            {
+                                Addlog("Shiny: No");
+                                botState = 12;
+                            }
+                        }
+                        break;
+                    case 12:
+                        if (natureLSR.SelectedIndex < 0 || dumpedPKHeX.Nature == natureLSR.SelectedIndex)
+                        {
+                            Addlog("Nature: PASS");
+                            botState = 13;
+                        }
+                        else
+                        {
+                            Addlog("Nature: FAIL");
+                            botState = 20;
+                        }
+                        break;
+                    case 13:
+                        if (dumpedPKHeX.IV_HP >= ivHPLSR.Value)
+                        {
+                            Addlog("Hit Points IV: PASS");
+                            botState = 14;
+                        }
+                        else
+                        {
+                            Addlog("Hit Points IV: FAIL");
+                            botState = 20;
+                        }
+                        break;
+                    case 14:
+                        if (dumpedPKHeX.IV_ATK >= ivAtkLSR.Value)
+                        {
+                            Addlog("Attack IV: PASS");
+                            botState = 15;
+                        }
+                        else
+                        {
+                            Addlog("Attack IV: FAIL");
+                            botState = 20;
+                        }
+                        break;
+                    case 15:
+                        if (dumpedPKHeX.IV_DEF >= ivDefLSR.Value)
+                        {
+                            Addlog("Defense IV: PASS");
+                            botState = 16;
+                        }
+                        else
+                        {
+                            Addlog("Defense IV: FAIL");
+                            botState = 20;
+                        }
+                        break;
+                    case 16:
+                        if (dumpedPKHeX.IV_ATK >= ivSpALSR.Value)
+                        {
+                            Addlog("Special Attack IV: PASS");
+                            botState = 17;
+                        }
+                        else
+                        {
+                            Addlog("Special Attack IV: FAIL");
+                            botState = 20;
+                        }
+                        break;
+                    case 17:
+                        if (ivSPDNum.Value >= ivSpDLSR.Value)
+                        {
+                            Addlog("Special Defense IV: PASS");
+                            botState = 18;
+                        }
+                        else
+                        {
+                            Addlog("Special Defense IV: FAIL");
+                            botState = 20;
+                        }
+                        break;
+                    case 18:
+                        if (ivSPENum.Value >= ivSpeLSR.Value)
+                        {
+                            Addlog("Speed IV: PASS");
+                            botState = 19;
+                        }
+                        else
+                        {
+                            Addlog("Speed IV: FAIL");
+                            botState++;
+                            botState = 20;
+                        }
+                        break;
+                    case 19:
+                        if (HPTypeLSR.SelectedIndex < 0 || desiredHPtype == hiddenPower.Text)
+                        {
+                            Addlog("Hidden Power: PASS");
+                            botState = -1; // All tests passed
+                            Addlog("All tests passed!");
+                        }
+                        else
+                        {
+                            Addlog("Hidden Power: FAIL");
+                            botState = 20;
+                        }
+                        break;
+                    case 20:
+                        resetNo++;
+                        Addlog("Sof-reset #" + resetNo.ToString());
+                        waitNTRtask = waitsoftreset();
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 21;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 21:
+                        await Task.Delay(10000);
+                        Addlog("Skip intro cutscene");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 22;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 22:
+                        await Task.Delay(3000);
+                        Addlog("Skip title screen");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 23;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 23:
+                        await Task.Delay(4000);
+                        Addlog("Start game");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 24;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 24:
+                        Addlog("Reconnect");
+                        Program.scriptHelper.connect(host.Text, 8000);
+                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        {
+                            await Task.Delay(500);
+                            if (lastlog.Contains("finished"))
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < 10)
+                        {
+                            botState = 55;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 101:
+                        Addlog("Start dialog");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 102;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 102:
+                        Addlog("Continue dialog (A mysterious ring...)");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 103;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 103:
+                        Addlog("Continue dialog (Would you like...)");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 104;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 104:
+                        Addlog("Select yes");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 10;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
                             botState = -1;
                         }
                         break;
@@ -3480,7 +3860,7 @@ namespace ntrbase
             }
             stopBotButton.Enabled = false;
             botWorking = false;
-            MessageBox.Show("Finished", "Soft-reset bot");
+            MessageBox.Show("Finished, number of resets: " + resetNo, "Soft-reset bot");
         }
 
         #endregion Bots
