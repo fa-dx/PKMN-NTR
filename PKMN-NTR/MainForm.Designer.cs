@@ -244,6 +244,8 @@
             this.BotTab = new System.Windows.Forms.TabControl();
             this.label69 = new System.Windows.Forms.Label();
             this.label71 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -3047,7 +3049,7 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(108, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.4-beta2";
+            this.label69.Text = "Version: 1.18.4-beta3";
             // 
             // label71
             // 
@@ -3058,11 +3060,30 @@
             this.label71.TabIndex = 108;
             this.label71.Text = "Last Read:";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(199, 402);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 109;
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(165, 407);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(28, 13);
+            this.label73.TabIndex = 110;
+            this.label73.Text = "PID:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 451);
+            this.Controls.Add(this.label73);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label71);
             this.Controls.Add(this.stopBotButton);
             this.Controls.Add(this.readResult);
@@ -3403,6 +3424,8 @@
         private System.Windows.Forms.Label label71;
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.ComboBox typeLSR;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label73;
     }
 }
 

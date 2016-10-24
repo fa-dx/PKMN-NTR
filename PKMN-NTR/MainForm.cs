@@ -503,8 +503,8 @@ namespace ntrbase
                 game = GameType.X;
                 string log = args.info;
                 pname = ", pname: kujira-1";
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 2), 16);
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
                 moneyoff = 0x8C6A6AC;
                 milesoff = 0x8C82BA0;
                 bpoff = 0x8C6A6E0;
@@ -553,8 +553,8 @@ namespace ntrbase
                 game = GameType.Y;
                 string log = args.info;
                 pname = ", pname: kujira-2";
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 2), 16);
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
                 moneyoff = 0x8C6A6AC;
                 milesoff = 0x8C82BA0;
                 bpoff = 0x8C6A6E0;
@@ -603,8 +603,8 @@ namespace ntrbase
                 game = GameType.OR;
                 string log = args.info;
                 pname = ", pname:  sango-1";
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 2), 16);
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
                 moneyoff = 0x8C71DC0;
                 milesoff = 0x8C8B36C;
                 bpoff = 0x8C71DE8;
@@ -653,8 +653,8 @@ namespace ntrbase
                 game = GameType.AS;
                 string log = args.info;
                 pname = ", pname:  sango-2";
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 2), 16);
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
                 moneyoff = 0x8C71DC0;
                 milesoff = 0x8C8B36C;
                 bpoff = 0x8C71DE8;
@@ -705,6 +705,7 @@ namespace ntrbase
 
             if (game != GameType.None)
             {
+                SetText(textBox1, "0x" + pid.ToString("X"));
                 dumpAllData();
             }
         }
