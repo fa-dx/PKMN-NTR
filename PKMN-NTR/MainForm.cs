@@ -3783,6 +3783,7 @@ namespace ntrbase
                         }
                         if (waittimeout < 10)
                         {
+                            await Task.Delay(2000);
                             botState = 55;
                         }
                         else
