@@ -214,6 +214,7 @@
             this.label66 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
+            this.resumeLSR = new System.Windows.Forms.CheckBox();
             this.WonderTradeBot = new System.Windows.Forms.TabPage();
             this.label59 = new System.Windows.Forms.Label();
             this.RunWTbot = new System.Windows.Forms.Button();
@@ -244,8 +245,6 @@
             this.BotTab = new System.Windows.Forms.TabControl();
             this.label69 = new System.Windows.Forms.Label();
             this.label71 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label73 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -326,13 +325,13 @@
             this.txtLog.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtLog.ForeColor = System.Drawing.Color.LawnGreen;
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(305, 344);
+            this.txtLog.Location = new System.Drawing.Point(167, 344);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(314, 100);
+            this.txtLog.Size = new System.Drawing.Size(452, 120);
             this.txtLog.TabIndex = 0;
             this.txtLog.TextChanged += new System.EventHandler(this.txtLog_TextChanged);
             // 
@@ -2028,7 +2027,7 @@
             // level
             // 
             this.level.Enabled = false;
-            this.level.Location = new System.Drawing.Point(179, 331);
+            this.level.Location = new System.Drawing.Point(7, 434);
             this.level.Name = "level";
             this.level.Size = new System.Drawing.Size(120, 20);
             this.level.TabIndex = 59;
@@ -2402,7 +2401,7 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(302, 328);
+            this.label50.Location = new System.Drawing.Point(164, 328);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(124, 13);
             this.label50.TabIndex = 61;
@@ -2439,7 +2438,7 @@
             this.LegendarySoftResetBot.Controls.Add(this.label65);
             this.LegendarySoftResetBot.Location = new System.Drawing.Point(4, 22);
             this.LegendarySoftResetBot.Name = "LegendarySoftResetBot";
-            this.LegendarySoftResetBot.Size = new System.Drawing.Size(261, 161);
+            this.LegendarySoftResetBot.Size = new System.Drawing.Size(261, 156);
             this.LegendarySoftResetBot.TabIndex = 2;
             this.LegendarySoftResetBot.Text = "Legendary SR";
             // 
@@ -2461,7 +2460,7 @@
             "Mirage Spot"});
             this.typeLSR.Location = new System.Drawing.Point(62, 23);
             this.typeLSR.Name = "typeLSR";
-            this.typeLSR.Size = new System.Drawing.Size(81, 21);
+            this.typeLSR.Size = new System.Drawing.Size(68, 21);
             this.typeLSR.TabIndex = 109;
             // 
             // label70
@@ -2497,13 +2496,13 @@
             "Dark"});
             this.HPTypeLSR.Location = new System.Drawing.Point(62, 77);
             this.HPTypeLSR.Name = "HPTypeLSR";
-            this.HPTypeLSR.Size = new System.Drawing.Size(81, 21);
+            this.HPTypeLSR.Size = new System.Drawing.Size(68, 21);
             this.HPTypeLSR.TabIndex = 108;
             // 
             // shinyLSR
             // 
             this.shinyLSR.AutoSize = true;
-            this.shinyLSR.Location = new System.Drawing.Point(84, 139);
+            this.shinyLSR.Location = new System.Drawing.Point(136, 25);
             this.shinyLSR.Name = "shinyLSR";
             this.shinyLSR.Size = new System.Drawing.Size(52, 17);
             this.shinyLSR.TabIndex = 106;
@@ -2563,7 +2562,7 @@
             // 
             // RunLSRbot
             // 
-            this.RunLSRbot.Location = new System.Drawing.Point(3, 135);
+            this.RunLSRbot.Location = new System.Drawing.Point(3, 108);
             this.RunLSRbot.Name = "RunLSRbot";
             this.RunLSRbot.Size = new System.Drawing.Size(75, 23);
             this.RunLSRbot.TabIndex = 0;
@@ -2616,7 +2615,7 @@
             "Quirky"});
             this.natureLSR.Location = new System.Drawing.Point(62, 50);
             this.natureLSR.Name = "natureLSR";
-            this.natureLSR.Size = new System.Drawing.Size(81, 21);
+            this.natureLSR.Size = new System.Drawing.Size(68, 21);
             this.natureLSR.TabIndex = 104;
             // 
             // label63
@@ -2709,6 +2708,16 @@
             this.label65.TabIndex = 90;
             this.label65.Text = "SPE:";
             // 
+            // resumeLSR
+            // 
+            this.resumeLSR.AutoSize = true;
+            this.resumeLSR.Location = new System.Drawing.Point(710, 445);
+            this.resumeLSR.Name = "resumeLSR";
+            this.resumeLSR.Size = new System.Drawing.Size(65, 17);
+            this.resumeLSR.TabIndex = 110;
+            this.resumeLSR.Text = "Resume";
+            this.resumeLSR.UseVisualStyleBackColor = true;
+            // 
             // WonderTradeBot
             // 
             this.WonderTradeBot.BackColor = System.Drawing.SystemColors.Control;
@@ -2722,7 +2731,7 @@
             this.WonderTradeBot.Location = new System.Drawing.Point(4, 22);
             this.WonderTradeBot.Name = "WonderTradeBot";
             this.WonderTradeBot.Padding = new System.Windows.Forms.Padding(3);
-            this.WonderTradeBot.Size = new System.Drawing.Size(261, 161);
+            this.WonderTradeBot.Size = new System.Drawing.Size(261, 156);
             this.WonderTradeBot.TabIndex = 1;
             this.WonderTradeBot.Text = "Wonder Trade";
             // 
@@ -2835,7 +2844,7 @@
             // stopBotButton
             // 
             this.stopBotButton.Enabled = false;
-            this.stopBotButton.Location = new System.Drawing.Point(224, 421);
+            this.stopBotButton.Location = new System.Drawing.Point(629, 441);
             this.stopBotButton.Name = "stopBotButton";
             this.stopBotButton.Size = new System.Drawing.Size(75, 23);
             this.stopBotButton.TabIndex = 106;
@@ -2867,7 +2876,7 @@
             this.RemonteControls.Location = new System.Drawing.Point(4, 22);
             this.RemonteControls.Name = "RemonteControls";
             this.RemonteControls.Padding = new System.Windows.Forms.Padding(3);
-            this.RemonteControls.Size = new System.Drawing.Size(261, 161);
+            this.RemonteControls.Size = new System.Drawing.Size(261, 156);
             this.RemonteControls.TabIndex = 0;
             this.RemonteControls.Text = "Controls";
             // 
@@ -3038,13 +3047,13 @@
             this.BotTab.Location = new System.Drawing.Point(629, 257);
             this.BotTab.Name = "BotTab";
             this.BotTab.SelectedIndex = 0;
-            this.BotTab.Size = new System.Drawing.Size(269, 187);
+            this.BotTab.Size = new System.Drawing.Size(269, 182);
             this.BotTab.TabIndex = 75;
             // 
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(4, 431);
+            this.label69.Location = new System.Drawing.Point(786, 446);
             this.label69.Name = "label69";
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(108, 13);
@@ -3054,36 +3063,18 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(454, 328);
+            this.label71.Location = new System.Drawing.Point(404, 328);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(59, 13);
+            this.label71.Size = new System.Drawing.Size(109, 13);
             this.label71.TabIndex = 108;
-            this.label71.Text = "Last Read:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(199, 402);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 109;
-            // 
-            // label73
-            // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(165, 407);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(28, 13);
-            this.label73.TabIndex = 110;
-            this.label73.Text = "PID:";
+            this.label71.Text = "Last Read from RAM:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 451);
-            this.Controls.Add(this.label73);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(906, 468);
+            this.Controls.Add(this.resumeLSR);
             this.Controls.Add(this.label71);
             this.Controls.Add(this.stopBotButton);
             this.Controls.Add(this.readResult);
@@ -3424,8 +3415,7 @@
         private System.Windows.Forms.Label label71;
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.ComboBox typeLSR;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.CheckBox resumeLSR;
     }
 }
 

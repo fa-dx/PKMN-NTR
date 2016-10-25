@@ -424,7 +424,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -466,7 +466,6 @@ namespace ntrbase
             disconnectTimer.Enabled = true;
         }
 
-
         private void disconnectTimer_Tick(object sender, EventArgs e)
         {
             disconnectTimer.Enabled = false;
@@ -490,6 +489,8 @@ namespace ntrbase
             Settings.Default.IP = host.Text;
             Settings.Default.Save();
         }
+
+        #region dump
 
         //This functions handles additional information events from NTR netcode.
         //We are only interested in them if they are a process list, containing
@@ -705,7 +706,6 @@ namespace ntrbase
 
             if (game != GameType.None)
             {
-                SetText(textBox1, "0x" + pid.ToString("X"));
                 dumpAllData();
             }
         }
@@ -895,8 +895,6 @@ namespace ntrbase
         public void handleMilesData(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
-
-
             SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
         }
 
@@ -995,6 +993,8 @@ namespace ntrbase
             return string.Format(pattern, max);
         }
 
+        #endregion dump
+
         #region oldcode
         public void txtLog_TextChanged(object sender, EventArgs e)
         {
@@ -1017,6 +1017,8 @@ namespace ntrbase
         }
         */
         #endregion oldcode
+
+        #region controls
 
         public void getHiddenPower()
         {
@@ -2232,6 +2234,8 @@ namespace ntrbase
             }
         }
 
+        #endregion controls
+
         #region fucking thread safety
         //Hooray for forced thread-safety!
         //If Visual C# didn't throw an exception every time you tried to access controls from a different thread
@@ -2481,20 +2485,6 @@ namespace ntrbase
 
         #region Bots
 
-        public async void autobuttonsend(uint command)
-        {
-            sendButton(command);
-            await Task.Delay(200);
-            sendButton(nokey);
-        }
-
-        public async void autotouchsend(decimal Xvalue, decimal Yvalue)
-        {
-            sendTouch(gethexcoord(Xvalue, Yvalue));
-            await Task.Delay(200);
-            sendTouch(notouch);
-        }
-
         public void handleMemoryRead(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
@@ -2535,7 +2525,7 @@ namespace ntrbase
             Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
             // Timeout 1
             int readcount = 0;
-            for (readcount = 0; readcount < 20; readcount++)
+            for (readcount = 0; readcount < 50; readcount++)
             {
                 await Task.Delay(100);
                 if (lastlog.Contains("finished"))
@@ -2543,7 +2533,7 @@ namespace ntrbase
                     break;
                 }
             }
-            if (readcount == 20)
+            if (readcount == 50)
             { // If not response in two seconds, return timeout
                 return -1;
             }
@@ -2553,7 +2543,7 @@ namespace ntrbase
                 buttonByte = BitConverter.GetBytes(nokey);
                 Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
                 // Timeout 2
-                for (readcount = 0; readcount < 20; readcount++)
+                for (readcount = 0; readcount < 50; readcount++)
                 {
                     await Task.Delay(100);
                     if (lastlog.Contains("finished"))
@@ -2561,7 +2551,7 @@ namespace ntrbase
                         break;
                     }
                 }
-                if (readcount == 20)
+                if (readcount == 50)
                 { // If not response in two seconds, return timeout
                     return -1;
                 }
@@ -2580,7 +2570,7 @@ namespace ntrbase
             Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
             // Timeout 1
             int readcount = 0;
-            for (readcount = 0; readcount < 20; readcount++)
+            for (readcount = 0; readcount < 50; readcount++)
             {
                 await Task.Delay(100);
                 if (lastlog.Contains("finished"))
@@ -2588,7 +2578,7 @@ namespace ntrbase
                     break;
                 }
             }
-            if (readcount == 20)
+            if (readcount == 50)
             { // If not response in two seconds, return timeout
                 return -1;
             }
@@ -2598,7 +2588,7 @@ namespace ntrbase
                 buttonByte = BitConverter.GetBytes(notouch);
                 Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
                 // Timeout 2
-                for (readcount = 0; readcount < 20; readcount++)
+                for (readcount = 0; readcount < 25; readcount++)
                 {
                     await Task.Delay(100);
                     if (lastlog.Contains("finished"))
@@ -2606,7 +2596,7 @@ namespace ntrbase
                         break;
                     }
                 }
-                if (readcount == 20)
+                if (readcount == 50)
                 { // If not response in two seconds, return timeout
                     return -1;
                 }
@@ -2625,7 +2615,7 @@ namespace ntrbase
             Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
             // Timeout 1
             int readcount = 0;
-            for (readcount = 0; readcount < 20; readcount++)
+            for (readcount = 0; readcount < 50; readcount++)
             {
                 await Task.Delay(100);
                 if (lastlog.Contains("finished"))
@@ -2633,7 +2623,7 @@ namespace ntrbase
                     break;
                 }
             }
-            if (readcount == 20)
+            if (readcount == 50)
             { // If not response in two seconds, return timeout
                 return -1;
             }
@@ -2645,8 +2635,8 @@ namespace ntrbase
                 // Timeout 2
                 for (readcount = 0; readcount < 5; readcount++)
                 {
-                    await Task.Delay(1000);
-                    if (lastlog.Contains("patching smdh"))
+                    await Task.Delay(2000);
+                    if (lastlog.Contains("patching smdh") || lastlog.Contains("finished"))
                     {
                         break;
                     }
@@ -3200,14 +3190,19 @@ namespace ntrbase
         {
             // Show warning
             string typemessage;
+            string resumemessage;
             botStop = false;
             switch (typeLSR.SelectedIndex)
             {
                 case 0:
                     typemessage = "Mirage Spot - Make sure you are in front of the hole.";
+                    resumemessage = "In front of hole, will press A to trigger dialog";
+                    botState = 55;
                     break;
                 default:
                     typemessage = "No type - Select one type of soft-reset and try again.";
+                    resumemessage = "";
+                    botState = -1;
                     botStop = true;
                     break;
             }
@@ -3239,12 +3234,15 @@ namespace ntrbase
             {
                 desiredshiny = "Don't care";
             }
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a legendary pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nType: " + typemessage +  "\r\n\r\nDo you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a legendary pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nDo you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
                 botWorking = true;
-                botState = 0;
+                if (!resumeLSR.Checked)
+                {
+                    botState = 0;
+                }
                 onlyView.Checked = true;
                 radioOpponent.Checked = true;
                 foreach (Control c in enableWhenConnected)
@@ -3330,7 +3328,7 @@ namespace ntrbase
                         break;
                     case 3:
                         Addlog("Test if the PSS setings are shown");
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(pssettingsOff);
@@ -3340,7 +3338,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < 20)
                         {
                             botState = 4;
                         }
@@ -3370,7 +3368,7 @@ namespace ntrbase
                         break;
                     case 5:
                         Addlog("Test if PSS disable confirmation appears");
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(pssdisableOff);
@@ -3380,7 +3378,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < 20)
                         {
                             botState = 6;
                         }
@@ -3410,7 +3408,7 @@ namespace ntrbase
                         break;
                     case 7:
                         Addlog("Test if back to PSS screen");
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(pssettingsOff);
@@ -3420,7 +3418,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < 20)
                         {
                             botState = 8;
                         }
@@ -3505,7 +3503,7 @@ namespace ntrbase
                         break;
                     case 54:
                         Addlog("Test if out from save screen");
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         { // Wait two seconds
                             await Task.Delay(1000);
                             waitNTRtask = waitNTRread(savescrnOff);
@@ -3515,7 +3513,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < 20)
                         {
                             botState = 55;
                         }
@@ -3561,7 +3559,7 @@ namespace ntrbase
                         dumpPokemon.Enabled = true;
                         dumpPokemon.PerformClick();
                         dumpPokemon.Enabled = false;
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        for (waittimeout = 0; waittimeout < 50; waittimeout++)
                         {
                             await Task.Delay(100);
                             if (lastlog.Contains("finished"))
@@ -3569,11 +3567,11 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20 && dPID.Text.Length < 1)
+                        if (waittimeout < 50 && dPID.Text.Length < 1)
                         { // Battle not triggered yet
                             botState = 9;
                         }
-                        else if (waittimeout < 20 && dPID.Text.Length > 0)
+                        else if (waittimeout < 50 && dPID.Text.Length > 0)
                         { // Battle triggered, data received
                             botState = 11;
                         }
@@ -3773,7 +3771,7 @@ namespace ntrbase
                     case 24:
                         Addlog("Reconnect");
                         Program.scriptHelper.connect(host.Text, 8000);
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         {
                             await Task.Delay(500);
                             if (lastlog.Contains("finished"))
@@ -3781,7 +3779,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < 20)
                         {
                             await Task.Delay(2000);
                             botState = 55;
