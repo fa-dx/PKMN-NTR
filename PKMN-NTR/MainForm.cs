@@ -102,6 +102,7 @@ namespace ntrbase
         public uint pssettingsIN;
         public uint pssettingsOUT;
         public uint pssdisableOff;
+        public uint pssdisableY;
         public uint pssdisableIN;
         public uint pssdisableOUT;
 
@@ -541,12 +542,13 @@ namespace ntrbase
                 wtboxviewIN = 0x00000000;
                 wtboxviewOUT = 0x20000000;
                 wtboxviewRange = 0x1000000;
-                pssettingsOff = 0x0;
-                pssettingsIN = 0x0;
-                pssettingsOUT = 0x0;
-                pssdisableOff = 0x0;
-                pssdisableIN = 0x0;
-                pssdisableOUT = 0x0;
+                pssettingsOff = 0x19AFB0;
+                pssettingsIN = 0x7E0000;
+                pssettingsOUT = 0x4D0000;
+                pssdisableOff = 0x5EEEA4;
+                pssdisableY = 100;
+                pssdisableIN = 0x00000000;
+                pssdisableOUT = 0x15000000;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -592,12 +594,13 @@ namespace ntrbase
                 wtboxviewIN = 0x00000000;
                 wtboxviewOUT = 0x20000000;
                 wtboxviewRange = 0x1000000;
-                pssettingsOff = 0x0;
-                pssettingsIN = 0x0;
-                pssettingsOUT = 0x0;
-                pssdisableOff = 0x0;
-                pssdisableIN = 0x0;
-                pssdisableOUT = 0x0;
+                pssettingsOff = 0x19ABF0;
+                pssettingsIN = 0x7E0000;
+                pssettingsOUT = 0x4D0000;
+                pssdisableOff = 0x5EEEA4;
+                pssdisableY = 100;
+                pssdisableIN = 0x00000000;
+                pssdisableOUT = 0x15000000;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -647,6 +650,7 @@ namespace ntrbase
                 pssettingsIN = 0x830000;
                 pssettingsOUT = 0x500000;
                 pssdisableOff = 0x630DA5;
+                pssdisableY = 120;
                 pssdisableIN = 0x33000000;
                 pssdisableOUT = 0x33100000;
                 //opwroff = 0x8C83D94;
@@ -698,6 +702,7 @@ namespace ntrbase
                 pssettingsIN = 0x830000;
                 pssettingsOUT = 0x500000;
                 pssdisableOff = 0x630DA5;
+                pssdisableY = 120;
                 pssdisableIN = 0x33000000;
                 pssdisableOUT = 0x33100000;
                 //opwroff = 0x8C83D94;
@@ -3217,6 +3222,11 @@ namespace ntrbase
             switch (typeLSR.SelectedIndex)
             {
                 case 0:
+                    typemessage = "Regular - Make sure you are in front of the pokémon.";
+                    resumemessage = "In front of pokémon, will press A to trigger start the battle";
+                    botState = 55;
+                    break;
+                case 1:
                     typemessage = "Mirage Spot - Make sure you are in front of the hole.";
                     resumemessage = "In front of hole, will press A to trigger dialog";
                     botState = 55;
@@ -3376,7 +3386,7 @@ namespace ntrbase
                         break;
                     case 4:
                         Addlog("Touch Disable PSS communication");
-                        waitNTRtask = waittouch(160, 120);
+                        waitNTRtask = waittouch(160, pssdisableY);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
@@ -3553,6 +3563,9 @@ namespace ntrbase
                         switch (typeLSR.SelectedIndex)
                         {
                             case 0:
+                                botState = 201;
+                                break;
+                            case 1:
                                 botState = 101;
                                 break;
                             default:
@@ -3681,7 +3694,7 @@ namespace ntrbase
                         }
                         break;
                     case 16:
-                        if (dumpedPKHeX.IV_ATK >= ivSpALSR.Value)
+                        if (dumpedPKHeX.IV_SPA >= ivSpALSR.Value)
                         {
                             Addlog("Special Attack IV: PASS");
                             botState = 17;
@@ -3693,7 +3706,7 @@ namespace ntrbase
                         }
                         break;
                     case 17:
-                        if (ivSPDNum.Value >= ivSpDLSR.Value)
+                        if (dumpedPKHeX.IV_SPD >= ivSpDLSR.Value)
                         {
                             Addlog("Special Defense IV: PASS");
                             botState = 18;
@@ -3705,7 +3718,7 @@ namespace ntrbase
                         }
                         break;
                     case 18:
-                        if (ivSPENum.Value >= ivSpeLSR.Value)
+                        if (dumpedPKHeX.IV_SPE >= ivSpeLSR.Value)
                         {
                             Addlog("Speed IV: PASS");
                             botState = 19;
@@ -3752,7 +3765,14 @@ namespace ntrbase
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 22;
+                            if (game == GameType.X || game == GameType.Y)
+                            {
+                                botState = 23;
+                            }
+                            else
+                            {
+                                botState = 22;
+                            }
                         }
                         else
                         {
@@ -3856,6 +3876,35 @@ namespace ntrbase
                         break;
                     case 104:
                         Addlog("Select yes");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 10;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 201:
+                        Addlog("Trigger encounter");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = 202;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = -1;
+                        }
+                        break;
+                    case 202:
+                        Addlog("Skip pokemon dialog, wait 5 seconds");
+                        await Task.Delay(5000);
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)

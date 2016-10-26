@@ -2456,6 +2456,7 @@
             this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.typeLSR.FormattingEnabled = true;
             this.typeLSR.Items.AddRange(new object[] {
+            "Regular",
             "Mirage Spot"});
             this.typeLSR.Location = new System.Drawing.Point(62, 23);
             this.typeLSR.Name = "typeLSR";
