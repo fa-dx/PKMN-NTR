@@ -524,6 +524,7 @@ namespace ntrbase
                 langoff = 0x8C79C69;
                 tradeoffrg = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
+                partyOff = 0x8CE1CF8;
                 savescrnOff = 0x19AB78;
                 savescrnIN = 0x7E0000;
                 savescrnOUT = 0x4D0000;
@@ -574,6 +575,7 @@ namespace ntrbase
                 langoff = 0x8C79C69;
                 tradeoffrg = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
+                partyOff = 0x8CE1CF8;
                 savescrnOff = 0x19AB78;
                 savescrnIN = 0x7E0000;
                 savescrnOUT = 0x4D0000;
@@ -624,6 +626,7 @@ namespace ntrbase
                 langoff = 0x8C8136D;
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
+                partyOff = 0x0;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
@@ -674,6 +677,7 @@ namespace ntrbase
                 langoff = 0x8C8136D;
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
+                partyOff = 0x0;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
@@ -1145,9 +1149,18 @@ namespace ntrbase
                     dumpOff = partyOff + (Decimal.ToUInt32(boxDump.Value) - 1) * 484;
                 }
 
-                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePkmData, null);
-                uint mySeq = Program.scriptHelper.data(dumpOff, POKEBYTES, pid);
-                waitingForData.Add(mySeq, myArgs);
+                if (radioParty.Checked == true)
+                {
+                    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[260], handlePkmData, null);
+                    uint mySeq = Program.scriptHelper.data(dumpOff, 260, pid);
+                    waitingForData.Add(mySeq, myArgs);
+                }
+                else
+                {
+                    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePkmData, null);
+                    uint mySeq = Program.scriptHelper.data(dumpOff, POKEBYTES, pid);
+                    waitingForData.Add(mySeq, myArgs);
+                }
             }
         }
 
@@ -2087,6 +2100,15 @@ namespace ntrbase
 
         private void radioParty_CheckedChanged_1(object sender, EventArgs e)
         {
+            if (radioParty.Checked)
+            {
+                MessageBox.Show("Important:\r\n\r\nThis feature is experimental, the slots that is selected in this application might not be the same slots that are shown in your party. Due the unkonown mechanics of this, the write feature has been disabled.\r\n\r\nIf you wish to edit a pokémon in your party, deposit it in a box.\r\n\r\nCurrently, this only works in XY", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                button1.Enabled = false;
+            }
+            else
+            {
+                button1.Enabled = true;
+            }
             boxDump.Minimum = 1;
             boxDump.Maximum = 6;
             label8.Text = "Slot:";

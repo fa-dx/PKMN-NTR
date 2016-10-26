@@ -561,7 +561,6 @@
             this.radioParty.TabIndex = 94;
             this.radioParty.Text = "Party";
             this.radioParty.UseVisualStyleBackColor = true;
-            this.radioParty.Visible = false;
             this.radioParty.CheckedChanged += new System.EventHandler(this.radioParty_CheckedChanged_1);
             // 
             // radioTrade
@@ -3058,7 +3057,7 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(108, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.4-beta3";
+            this.label69.Text = "Version: 1.18.4-beta4";
             // 
             // label71
             // 
