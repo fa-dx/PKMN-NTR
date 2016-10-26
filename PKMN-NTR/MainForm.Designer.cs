@@ -198,9 +198,9 @@
             this.label72 = new System.Windows.Forms.Label();
             this.typeLSR = new System.Windows.Forms.ComboBox();
             this.label70 = new System.Windows.Forms.Label();
-            this.HPTypeLSR = new System.Windows.Forms.ComboBox();
             this.shinyLSR = new System.Windows.Forms.CheckBox();
             this.ivHPLSR = new System.Windows.Forms.NumericUpDown();
+            this.HPTypeLSR = new System.Windows.Forms.ComboBox();
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
             this.RunLSRbot = new System.Windows.Forms.Button();
@@ -2507,6 +2507,28 @@
             this.label70.TabIndex = 107;
             this.label70.Text = "HP Type:";
             // 
+            // shinyLSR
+            // 
+            this.shinyLSR.AutoSize = true;
+            this.shinyLSR.Location = new System.Drawing.Point(136, 25);
+            this.shinyLSR.Name = "shinyLSR";
+            this.shinyLSR.Size = new System.Drawing.Size(52, 17);
+            this.shinyLSR.TabIndex = 106;
+            this.shinyLSR.Text = "Shiny";
+            this.shinyLSR.UseVisualStyleBackColor = true;
+            // 
+            // ivHPLSR
+            // 
+            this.ivHPLSR.Location = new System.Drawing.Point(221, 20);
+            this.ivHPLSR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivHPLSR.Name = "ivHPLSR";
+            this.ivHPLSR.Size = new System.Drawing.Size(33, 20);
+            this.ivHPLSR.TabIndex = 91;
+            // 
             // HPTypeLSR
             // 
             this.HPTypeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -2533,28 +2555,6 @@
             this.HPTypeLSR.Name = "HPTypeLSR";
             this.HPTypeLSR.Size = new System.Drawing.Size(68, 21);
             this.HPTypeLSR.TabIndex = 108;
-            // 
-            // shinyLSR
-            // 
-            this.shinyLSR.AutoSize = true;
-            this.shinyLSR.Location = new System.Drawing.Point(136, 25);
-            this.shinyLSR.Name = "shinyLSR";
-            this.shinyLSR.Size = new System.Drawing.Size(52, 17);
-            this.shinyLSR.TabIndex = 106;
-            this.shinyLSR.Text = "Shiny";
-            this.shinyLSR.UseVisualStyleBackColor = true;
-            // 
-            // ivHPLSR
-            // 
-            this.ivHPLSR.Location = new System.Drawing.Point(221, 20);
-            this.ivHPLSR.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivHPLSR.Name = "ivHPLSR";
-            this.ivHPLSR.Size = new System.Drawing.Size(33, 20);
-            this.ivHPLSR.TabIndex = 91;
             // 
             // label61
             // 
@@ -3093,7 +3093,7 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(78, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.4";
+            this.label69.Text = "Version: 1.18.5";
             // 
             // label71
             // 

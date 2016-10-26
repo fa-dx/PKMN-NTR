@@ -51,8 +51,8 @@ namespace ntrbase
         public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
         public static readonly string writeerror = "An error has ocurred while writting data to your 3DS RAM, please check connection and try again.";
 
-    //Game information
-    public int pid;
+        //Game information
+        public int pid;
         public byte lang;
         public string pname;
         public GameType game = GameType.None;
@@ -493,8 +493,6 @@ namespace ntrbase
             Settings.Default.Save();
         }
 
-        #region dump
-
         //This functions handles additional information events from NTR netcode.
         //We are only interested in them if they are a process list, containing
         //our game's PID and game type.
@@ -720,6 +718,8 @@ namespace ntrbase
                 dumpAllData();
             }
         }
+
+        #region dump
 
         public void dumpAllData()
         {
@@ -1266,26 +1266,29 @@ namespace ntrbase
                 validator.Data = PKHeX.decryptArray(args.data);
 
                 bool dataCorrect = validator.Species != 0;
-                if (!onlyView.Checked)
+
+                if (!botWorking)
                 {
-                    DialogResult res = DialogResult.Cancel;
-                    if (!dataCorrect)
+                    if (!onlyView.Checked)
                     {
-                        res = MessageBox.Show("This Pokemon's data seems to be empty.\r\nPress OK if you want to save it, Cancel if you don't.",
-                           "Empty data", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        DialogResult res = DialogResult.Cancel;
+                        if (!dataCorrect)
+                        {
+                            res = MessageBox.Show("This Pokemon's data seems to be empty.\r\nPress OK if you want to save it, Cancel if you don't.",
+                               "Empty data", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        }
+                        if (dataCorrect || res == DialogResult.OK)
+                        {
+                            string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+                            (new System.IO.FileInfo(folderPath)).Directory.Create();
+                            string fileName = nameek6.Text + ".pk6";
+                            writePokemonToFile(validator.Data, folderPath + fileName);
+                        }
                     }
-                    if (dataCorrect || res == DialogResult.OK)
+                    else if (!dataCorrect)
                     {
-                        string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\";
-                        (new System.IO.FileInfo(folderPath)).Directory.Create();
-                        string fileName = nameek6.Text + ".pk6";
-                        writePokemonToFile(validator.Data, folderPath + fileName);
+                        MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }
-                //Added a bit of code to work with the bots
-                else if (!dataCorrect)
-                {
-                    MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 if (!dataCorrect)
@@ -2687,6 +2690,31 @@ namespace ntrbase
             stopBotButton.Enabled = false;
         }
 
+        private void GenderLSR_Click(object sender, EventArgs e)
+        {
+            if (desiredgender == 0)
+            {
+                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
+                GenderLSR.ForeColor = Color.Red;
+                GenderLSR.Text = "♀";
+                desiredgender = 1;
+            }
+            else if (desiredgender == 1)
+            {
+                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
+                GenderLSR.ForeColor = Color.Black;
+                GenderLSR.Text = "-";
+                desiredgender = 2;
+            }
+            else
+            {
+                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
+                GenderLSR.ForeColor = Color.Blue;
+                GenderLSR.Text = "♂";
+                desiredgender = 0;
+            }
+        }
+
         // Wonder Trade bot
         private async void RunWTbot_Click(object sender, EventArgs e)
         {
@@ -3135,10 +3163,10 @@ namespace ntrbase
                             {
                                 currentslot = 0;
                                 currentbox++;
+                                boxchange = true;
                                 if (currentbox >= 31)
                                 {
                                     currentbox = 0;
-                                    boxchange = true;
                                 }
                             }
                             WTtradesNo.Value--;
@@ -3166,7 +3194,7 @@ namespace ntrbase
                         for (waittimeout = 0; waittimeout < 45; waittimeout++)
                         { // Wait two seconds
                             await Task.Delay(1000);
-                            waitNTRtask = waitNTRread(wtboxesOff);
+                            waitNTRtask = waitNTRread(psssmenu1IN);
                             waitresult = await waitNTRtask;
                             if (lastmemoryread >= psssmenu1IN && lastmemoryread < psssmenu1IN + 0x10000)
                             {
@@ -4011,31 +4039,6 @@ namespace ntrbase
         }
 
         #endregion Bots
-
-        private void GenderLSR_Click(object sender, EventArgs e)
-        {
-            if (desiredgender == 0)
-            {
-                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                GenderLSR.ForeColor = Color.Red;
-                GenderLSR.Text = "♀";
-                desiredgender = 1;
-            }
-            else if (desiredgender == 1)
-            {
-                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                GenderLSR.ForeColor = Color.Black;
-                GenderLSR.Text = "-";
-                desiredgender = 2;
-            }
-            else
-            {
-                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                GenderLSR.ForeColor = Color.Blue;
-                GenderLSR.Text = "♂";
-                desiredgender = 0;
-            }
-        }
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
