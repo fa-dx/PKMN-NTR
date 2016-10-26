@@ -43,6 +43,7 @@ namespace ntrbase
         public bool botWorking = false;
         public bool botStop = false;
         public int botState = 0;
+        public static readonly int timeout = 10;
         public uint lastmemoryread;
         public string lastlog;
         public int desiredgender = 2;
@@ -2531,7 +2532,7 @@ namespace ntrbase
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMemoryRead, null);
             waitingForData.Add(Program.scriptHelper.data(address, 0x04, pid), myArgs);
             int readcount = 0;
-            for (readcount = 0; readcount < 50; readcount++)
+            for (readcount = 0; readcount < timeout * 10; readcount++)
             {
                 await Task.Delay(100);
                 if (lastlog.Contains("finished"))
@@ -2539,7 +2540,7 @@ namespace ntrbase
                     break;
                 }
             }
-            if (readcount == 50)
+            if (readcount == timeout * 10)
             {
                 return -1;
             }
@@ -2557,7 +2558,7 @@ namespace ntrbase
             Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
             // Timeout 1
             int readcount = 0;
-            for (readcount = 0; readcount < 50; readcount++)
+            for (readcount = 0; readcount < timeout * 10; readcount++)
             {
                 await Task.Delay(100);
                 if (lastlog.Contains("finished"))
@@ -2565,7 +2566,7 @@ namespace ntrbase
                     break;
                 }
             }
-            if (readcount == 50)
+            if (readcount >= timeout * 10)
             { // If not response in two seconds, return timeout
                 return -1;
             }
@@ -2575,7 +2576,7 @@ namespace ntrbase
                 buttonByte = BitConverter.GetBytes(nokey);
                 Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
                 // Timeout 2
-                for (readcount = 0; readcount < 50; readcount++)
+                for (readcount = 0; readcount < timeout * 10; readcount++)
                 {
                     await Task.Delay(100);
                     if (lastlog.Contains("finished"))
@@ -2583,7 +2584,7 @@ namespace ntrbase
                         break;
                     }
                 }
-                if (readcount == 50)
+                if (readcount >= timeout * 10)
                 { // If not response in two seconds, return timeout
                     return -1;
                 }
@@ -2602,7 +2603,7 @@ namespace ntrbase
             Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
             // Timeout 1
             int readcount = 0;
-            for (readcount = 0; readcount < 50; readcount++)
+            for (readcount = 0; readcount < timeout * 10; readcount++)
             {
                 await Task.Delay(100);
                 if (lastlog.Contains("finished"))
@@ -2610,7 +2611,7 @@ namespace ntrbase
                     break;
                 }
             }
-            if (readcount == 50)
+            if (readcount >= timeout * 10)
             { // If not response in two seconds, return timeout
                 return -1;
             }
@@ -2620,7 +2621,7 @@ namespace ntrbase
                 buttonByte = BitConverter.GetBytes(notouch);
                 Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
                 // Timeout 2
-                for (readcount = 0; readcount < 25; readcount++)
+                for (readcount = 0; readcount < timeout * 10; readcount++)
                 {
                     await Task.Delay(100);
                     if (lastlog.Contains("finished"))
@@ -2628,7 +2629,7 @@ namespace ntrbase
                         break;
                     }
                 }
-                if (readcount == 50)
+                if (readcount >= timeout * 10)
                 { // If not response in two seconds, return timeout
                     return -1;
                 }
@@ -2647,7 +2648,7 @@ namespace ntrbase
             Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
             // Timeout 1
             int readcount = 0;
-            for (readcount = 0; readcount < 50; readcount++)
+            for (readcount = 0; readcount < timeout * 10; readcount++)
             {
                 await Task.Delay(100);
                 if (lastlog.Contains("finished"))
@@ -2655,7 +2656,7 @@ namespace ntrbase
                     break;
                 }
             }
-            if (readcount == 50)
+            if (readcount >= timeout * 10)
             { // If not response in two seconds, return timeout
                 return -1;
             }
@@ -2665,16 +2666,16 @@ namespace ntrbase
                 buttonByte = BitConverter.GetBytes(nokey);
                 Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
                 // Timeout 2
-                for (readcount = 0; readcount < 5; readcount++)
+                for (readcount = 0; readcount < timeout; readcount++)
                 {
-                    await Task.Delay(2000);
+                    await Task.Delay(1000);
                     if (lastlog.Contains("patching smdh") || lastlog.Contains("finished"))
                     {
                         break;
                     }
                 }
-                if (readcount == 5)
-                { // If not response in five seconds, return timeout
+                if (readcount == timeout)
+                { // If not response return timeout
                     return -1;
                 }
                 else
@@ -2782,19 +2783,19 @@ namespace ntrbase
                         dumpPokemon.Enabled = true;
                         dumpPokemon.PerformClick();
                         dumpPokemon.Enabled = false;
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
-                        { // Wait two seconds
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
                             await Task.Delay(100);
                             if (lastlog.Contains("finished"))
                             {
                                 break;
                             }
                         }
-                        if (dPID.Text.Length > 0)
+                        if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
                         {
                             botState = 2;
                         }
-                        else
+                        else if (waittimeout < timeout * 10 && dPID.Text.Length < 1)
                         { // Empty space
                             Addlog("Space is empty");
                             currentslot++;
@@ -2818,6 +2819,11 @@ namespace ntrbase
                                 botState = -1;
                             }
                         }
+                        else
+                        {
+                            MessageBox.Show(readerror);
+                            botState = -1;
+                        }
                         break;
                     case 2:
                         Addlog("Press Wonder Trade button");
@@ -2835,7 +2841,7 @@ namespace ntrbase
                         break;
                     case 3:
                         Addlog("Test if the save screen is shown");
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         { // Wait two seconds
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(savescrnOff);
@@ -2845,7 +2851,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = 4;
                         }
@@ -2875,7 +2881,7 @@ namespace ntrbase
                         break;
                     case 5:
                         Addlog("Test if Wonder Trade screen is shown");
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout; waittimeout++)
                         { // Wait ten seconds
                             await Task.Delay(1000);
                             waitNTRtask = waitNTRread(wtconfirmationOff);
@@ -2885,7 +2891,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < timeout)
                         {
                             botState = 6;
                         }
@@ -2915,8 +2921,8 @@ namespace ntrbase
                         break;
                     case 7:
                         Addlog("Test if the boxes are shown");
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
-                        { // Wait two seconds
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(wtboxesOff);
                             waitresult = await waitNTRtask;
@@ -2925,7 +2931,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = 8;
                         }
@@ -2968,8 +2974,8 @@ namespace ntrbase
                     case 10:
                         Addlog("Test if box view is shown");
                         await Task.Delay(500);
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
-                        { // Wait two seconds
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(wtboxviewOff);
                             waitresult = await waitNTRtask;
@@ -2978,7 +2984,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = 11;
                         }
@@ -3022,8 +3028,8 @@ namespace ntrbase
                         break;
                     case 13:
                         Addlog("Test if box view is not shown");
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
-                        { // Wait two seconds
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(wtboxviewOff);
                             waitresult = await waitNTRtask;
@@ -3032,7 +3038,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = 14;
                         }
@@ -3091,7 +3097,7 @@ namespace ntrbase
                         break;
                     case 17:
                         Addlog("Test if the boxes are not shown");
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(wtboxesOff);
@@ -3101,7 +3107,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = 18;
                         }
@@ -3147,7 +3153,7 @@ namespace ntrbase
                     case 20:
                         Addlog("Test if back to the PSS menu");
                         for (waittimeout = 0; waittimeout < 45; waittimeout++)
-                        { // Wait two seconds
+                        { // Wait during 90 seconds
                             await Task.Delay(2000);
                             waitNTRtask = waitNTRread(psssmenu1Off);
                             waitresult = await waitNTRtask;
@@ -3191,8 +3197,8 @@ namespace ntrbase
                         break;
                     case 21:
                         Addlog("No trade partner is found");
-                        for (waittimeout = 0; waittimeout < 45; waittimeout++)
-                        { // Wait two seconds
+                        for (waittimeout = 0; waittimeout < 30; waittimeout++)
+                        { // Wait during 30 seconds
                             await Task.Delay(1000);
                             waitNTRtask = waitNTRread(psssmenu1IN);
                             waitresult = await waitNTRtask;
@@ -3213,7 +3219,7 @@ namespace ntrbase
                                 }
                             }
                         }
-                        if (waittimeout < 45)
+                        if (waittimeout < 30)
                         { // Return to begining
                             botState = 1;
                         }
@@ -3402,16 +3408,16 @@ namespace ntrbase
                         Addlog("Fix Wi-Fi");
                         byte[] buttonByte = BitConverter.GetBytes(0x4770);
                         Program.scriptHelper.write(0x0105AE4, buttonByte, 0x1A);
-                        for (waittimeout = 0; waittimeout < 10; waittimeout++)
-                        { // Wait 5 seconds
+                        for (waittimeout = 0; waittimeout < timeout; waittimeout++)
+                        { 
                             lastlog = "";
-                            await Task.Delay(2000);
+                            await Task.Delay(1000);
                             if (lastlog.Contains("finished"))
                             {
                                 break;
                             }
                         }
-                        if (waittimeout < 10)
+                        if (waittimeout < timeout)
                         {
                             botState = (int)srbotstates.touchpssset;
                         }
@@ -3437,7 +3443,7 @@ namespace ntrbase
                         break;
                     case (int)srbotstates.testpssset:
                         Addlog("Test if the PSS setings are shown");
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(pssettingsOff);
@@ -3447,7 +3453,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = (int)srbotstates.touchpssdis;
                         }
@@ -3477,7 +3483,7 @@ namespace ntrbase
                         break;
                     case (int)srbotstates.testpssdis:
                         Addlog("Test if PSS disable confirmation appears");
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(pssdisableOff);
@@ -3487,7 +3493,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = (int)srbotstates.touchpssconf;
                         }
@@ -3517,7 +3523,7 @@ namespace ntrbase
                         break;
                     case (int)srbotstates.testpssout:
                         Addlog("Test if back to PSS screen");
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(pssettingsOff);
@@ -3527,7 +3533,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = (int)srbotstates.returncontrol;
                         }
@@ -3572,8 +3578,8 @@ namespace ntrbase
                         break;
                     case (int)srbotstates.testsave:
                         Addlog("Test if the save screen is shown");
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
-                        { // Wait two seconds
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        { 
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(savescrnOff);
                             waitresult = await waitNTRtask;
@@ -3582,13 +3588,13 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20)
+                        if (waittimeout < timeout * 10)
                         {
                             botState = (int)srbotstates.saveconf;
                         }
                         else if (lastmemoryread >= savescrnOUT && lastmemoryread < savescrnOUT + 0x10000)
                         { // Still on the PSS menu
-                            botState = 51;
+                            botState = (int)srbotstates.touchsave;
                         }
                         else
                         { // Other error
@@ -3612,7 +3618,7 @@ namespace ntrbase
                         break;
                     case (int)srbotstates.saveout:
                         Addlog("Test if out from save screen");
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout; waittimeout++)
                         { // Wait two seconds
                             await Task.Delay(1000);
                             waitNTRtask = waitNTRread(savescrnOff);
@@ -3622,7 +3628,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20)
+                        if (waittimeout < timeout)
                         {
                             botState = (int)srbotstates.typesr;
                         }
@@ -3671,7 +3677,7 @@ namespace ntrbase
                         dumpPokemon.Enabled = true;
                         dumpPokemon.PerformClick();
                         dumpPokemon.Enabled = false;
-                        for (waittimeout = 0; waittimeout < 50; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(100);
                             if (lastlog.Contains("finished"))
@@ -3679,11 +3685,11 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 50 && dPID.Text.Length < 1)
+                        if (waittimeout < timeout * 10 && dPID.Text.Length < 1)
                         { // Battle not triggered yet
                             botState = (int)srbotstates.trigger;
                         }
-                        else if (waittimeout < 50 && dPID.Text.Length > 0)
+                        else if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
                         { // Battle triggered, data received
                             botState = (int)srbotstates.testshiny;
                         }
@@ -3917,7 +3923,7 @@ namespace ntrbase
                     case (int)srbotstates.reconnect:
                         Addlog("Reconnect");
                         Program.scriptHelper.connect(host.Text, 8000);
-                        for (waittimeout = 0; waittimeout < 20; waittimeout++)
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(500);
                             if (lastlog.Contains("finished"))
@@ -3925,7 +3931,7 @@ namespace ntrbase
                                 break;
                             }
                         }
-                        if (waittimeout < 20)
+                        if (waittimeout < timeout * 10)
                         {
                             await Task.Delay(2000);
                             botState = (int)srbotstates.typesr;
