@@ -629,7 +629,7 @@ namespace ntrbase
                 langoff = 0x8C8136D;
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
-                partyOff = 0x0;
+                partyOff = 0x8CFB26C;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
@@ -681,7 +681,7 @@ namespace ntrbase
                 langoff = 0x8C8136D;
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
-                partyOff = 0x0;
+                partyOff = 0x8CFB26C;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
@@ -2685,6 +2685,7 @@ namespace ntrbase
             stopBotButton.Enabled = false;
         }
 
+        // Wonder Trade bot
         private async void RunWTbot_Click(object sender, EventArgs e)
         {
             // Show warning
@@ -3212,7 +3213,7 @@ namespace ntrbase
             MessageBox.Show("Finished", "Wonder Trade Bot");
         }
 
-        // Legendary Soft Reset Bot
+        // Soft-reset Bot
         private async void RunLSRbot_Click(object sender, EventArgs e)
         {
             // Show warning
@@ -3266,7 +3267,7 @@ namespace ntrbase
             {
                 desiredshiny = "Don't care";
             }
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a legendary pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nDo you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a legendary pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot

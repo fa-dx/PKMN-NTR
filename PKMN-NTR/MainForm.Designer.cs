@@ -3053,12 +3053,12 @@
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(786, 446);
+            this.label69.Location = new System.Drawing.Point(816, 446);
             this.label69.Name = "label69";
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label69.Size = new System.Drawing.Size(108, 13);
+            this.label69.Size = new System.Drawing.Size(78, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.4-beta4";
+            this.label69.Text = "Version: 1.18.4";
             // 
             // label71
             // 
