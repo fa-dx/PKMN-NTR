@@ -192,6 +192,9 @@
             this.label50 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.LegendarySoftResetBot = new System.Windows.Forms.TabPage();
+            this.GenderLSR = new System.Windows.Forms.Button();
+            this.label73 = new System.Windows.Forms.Label();
+            this.AbilityLSR = new System.Windows.Forms.ComboBox();
             this.label72 = new System.Windows.Forms.Label();
             this.typeLSR = new System.Windows.Forms.ComboBox();
             this.label70 = new System.Windows.Forms.Label();
@@ -200,9 +203,9 @@
             this.ivHPLSR = new System.Windows.Forms.NumericUpDown();
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
+            this.RunLSRbot = new System.Windows.Forms.Button();
             this.label60 = new System.Windows.Forms.Label();
             this.ivSpeLSR = new System.Windows.Forms.NumericUpDown();
-            this.RunLSRbot = new System.Windows.Forms.Button();
             this.ivSpDLSR = new System.Windows.Forms.NumericUpDown();
             this.natureLSR = new System.Windows.Forms.ComboBox();
             this.label63 = new System.Windows.Forms.Label();
@@ -2413,17 +2416,20 @@
             // LegendarySoftResetBot
             // 
             this.LegendarySoftResetBot.BackColor = System.Drawing.SystemColors.Control;
+            this.LegendarySoftResetBot.Controls.Add(this.GenderLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.label73);
+            this.LegendarySoftResetBot.Controls.Add(this.AbilityLSR);
             this.LegendarySoftResetBot.Controls.Add(this.label72);
             this.LegendarySoftResetBot.Controls.Add(this.typeLSR);
             this.LegendarySoftResetBot.Controls.Add(this.label70);
-            this.LegendarySoftResetBot.Controls.Add(this.HPTypeLSR);
             this.LegendarySoftResetBot.Controls.Add(this.shinyLSR);
             this.LegendarySoftResetBot.Controls.Add(this.ivHPLSR);
+            this.LegendarySoftResetBot.Controls.Add(this.HPTypeLSR);
             this.LegendarySoftResetBot.Controls.Add(this.label61);
             this.LegendarySoftResetBot.Controls.Add(this.label62);
+            this.LegendarySoftResetBot.Controls.Add(this.RunLSRbot);
             this.LegendarySoftResetBot.Controls.Add(this.label60);
             this.LegendarySoftResetBot.Controls.Add(this.ivSpeLSR);
-            this.LegendarySoftResetBot.Controls.Add(this.RunLSRbot);
             this.LegendarySoftResetBot.Controls.Add(this.ivSpDLSR);
             this.LegendarySoftResetBot.Controls.Add(this.natureLSR);
             this.LegendarySoftResetBot.Controls.Add(this.label63);
@@ -2441,6 +2447,35 @@
             this.LegendarySoftResetBot.TabIndex = 2;
             this.LegendarySoftResetBot.Text = "Legendary SR";
             // 
+            // GenderLSR
+            // 
+            this.GenderLSR.Location = new System.Drawing.Point(132, 48);
+            this.GenderLSR.Name = "GenderLSR";
+            this.GenderLSR.Size = new System.Drawing.Size(52, 23);
+            this.GenderLSR.TabIndex = 110;
+            this.GenderLSR.Text = "-";
+            this.GenderLSR.UseVisualStyleBackColor = true;
+            this.GenderLSR.Click += new System.EventHandler(this.GenderLSR_Click);
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(17, 80);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(37, 13);
+            this.label73.TabIndex = 103;
+            this.label73.Text = "Ability:";
+            // 
+            // AbilityLSR
+            // 
+            this.AbilityLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.AbilityLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.AbilityLSR.FormattingEnabled = true;
+            this.AbilityLSR.Location = new System.Drawing.Point(62, 77);
+            this.AbilityLSR.Name = "AbilityLSR";
+            this.AbilityLSR.Size = new System.Drawing.Size(68, 21);
+            this.AbilityLSR.TabIndex = 103;
+            // 
             // label72
             // 
             this.label72.AutoSize = true;
@@ -2452,7 +2487,7 @@
             // 
             // typeLSR
             // 
-            this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.typeLSR.FormattingEnabled = true;
             this.typeLSR.Items.AddRange(new object[] {
@@ -2466,7 +2501,7 @@
             // label70
             // 
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(4, 80);
+            this.label70.Location = new System.Drawing.Point(4, 108);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(52, 13);
             this.label70.TabIndex = 107;
@@ -2474,7 +2509,7 @@
             // 
             // HPTypeLSR
             // 
-            this.HPTypeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.HPTypeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.HPTypeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.HPTypeLSR.FormattingEnabled = true;
             this.HPTypeLSR.Items.AddRange(new object[] {
@@ -2494,7 +2529,7 @@
             "Ice",
             "Dragon",
             "Dark"});
-            this.HPTypeLSR.Location = new System.Drawing.Point(62, 77);
+            this.HPTypeLSR.Location = new System.Drawing.Point(62, 104);
             this.HPTypeLSR.Name = "HPTypeLSR";
             this.HPTypeLSR.Size = new System.Drawing.Size(68, 21);
             this.HPTypeLSR.TabIndex = 108;
@@ -2539,6 +2574,16 @@
             this.label62.TabIndex = 84;
             this.label62.Text = "min IVs";
             // 
+            // RunLSRbot
+            // 
+            this.RunLSRbot.Location = new System.Drawing.Point(6, 129);
+            this.RunLSRbot.Name = "RunLSRbot";
+            this.RunLSRbot.Size = new System.Drawing.Size(124, 23);
+            this.RunLSRbot.TabIndex = 0;
+            this.RunLSRbot.Text = "Run";
+            this.RunLSRbot.UseVisualStyleBackColor = true;
+            this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click);
+            // 
             // label60
             // 
             this.label60.AutoSize = true;
@@ -2560,16 +2605,6 @@
             this.ivSpeLSR.Size = new System.Drawing.Size(33, 20);
             this.ivSpeLSR.TabIndex = 96;
             // 
-            // RunLSRbot
-            // 
-            this.RunLSRbot.Location = new System.Drawing.Point(3, 108);
-            this.RunLSRbot.Name = "RunLSRbot";
-            this.RunLSRbot.Size = new System.Drawing.Size(75, 23);
-            this.RunLSRbot.TabIndex = 0;
-            this.RunLSRbot.Text = "Run";
-            this.RunLSRbot.UseVisualStyleBackColor = true;
-            this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click);
-            // 
             // ivSpDLSR
             // 
             this.ivSpDLSR.Location = new System.Drawing.Point(221, 104);
@@ -2584,7 +2619,7 @@
             // 
             // natureLSR
             // 
-            this.natureLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.natureLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.natureLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.natureLSR.FormattingEnabled = true;
             this.natureLSR.Items.AddRange(new object[] {
@@ -3416,6 +3451,9 @@
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.ComboBox typeLSR;
         private System.Windows.Forms.CheckBox resumeLSR;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.ComboBox AbilityLSR;
+        private System.Windows.Forms.Button GenderLSR;
     }
 }
 

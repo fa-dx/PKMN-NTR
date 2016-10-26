@@ -45,13 +45,14 @@ namespace ntrbase
         public int botState = 0;
         public uint lastmemoryread;
         public string lastlog;
+        public int desiredgender = 2;
         public static readonly string readerror = "An error has ocurred while reading data from your 3DS RAM, please check connection and try again.";
         public static readonly string toucherror = "An error has ocurred while sending a touch screen command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
         public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
         public static readonly string writeerror = "An error has ocurred while writting data to your 3DS RAM, please check connection and try again.";
 
-        //Game information
-        public int pid;
+    //Game information
+    public int pid;
         public byte lang;
         public string pname;
         public GameType game = GameType.None;
@@ -311,6 +312,7 @@ namespace ntrbase
 
             species.Items.AddRange(speciesList);
             ability.Items.AddRange(abilityList);
+            AbilityLSR.Items.AddRange(abilityList);
             heldItem.Items.AddRange(itemList);
             move1.Items.AddRange(moveList);
             move2.Items.AddRange(moveList);
@@ -425,7 +427,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -3214,6 +3216,8 @@ namespace ntrbase
         }
 
         // Soft-reset Bot
+        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, botexit };
+
         private async void RunLSRbot_Click(object sender, EventArgs e)
         {
             // Show warning
@@ -3225,18 +3229,14 @@ namespace ntrbase
                 case 0:
                     typemessage = "Regular - Make sure you are in front of the pokémon.";
                     resumemessage = "In front of pokémon, will press A to trigger start the battle";
-                    botState = 55;
                     break;
                 case 1:
                     typemessage = "Mirage Spot - Make sure you are in front of the hole.";
                     resumemessage = "In front of hole, will press A to trigger dialog";
-                    botState = 55;
                     break;
                 default:
                     typemessage = "No type - Select one type of soft-reset and try again.";
                     resumemessage = "";
-                    botState = -1;
-                    botStop = true;
                     break;
             }
             string desirednature;
@@ -3267,15 +3267,34 @@ namespace ntrbase
             {
                 desiredshiny = "Don't care";
             }
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a legendary pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Nature: " + desirednature + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n- Shiny: " + desiredshiny + "\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            string desiredability;
+            if (AbilityLSR.SelectedIndex < 0)
+            {
+                desiredability = "Any";
+            }
+            else
+            {
+                desiredability = AbilityLSR.SelectedItem.ToString();
+            }
+            string genderstring;
+            if (desiredgender == 0)
+            {
+                genderstring = "Male";
+            }
+            else if (desiredgender == 1)
+            {
+                genderstring = "Female";
+            }
+            else
+            {
+                genderstring = "Any";
+            }
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a legendary pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Shiny: " + desiredshiny + "\r\n- Nautre: " + desirednature + "\r\n- Ability: " + desiredability + "\r\n- Gender: " + genderstring + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
                 botWorking = true;
-                if (!resumeLSR.Checked)
-                {
-                    botState = 0;
-                }
+                botState = (int)srbotstates.botstart;
                 onlyView.Checked = true;
                 radioOpponent.Checked = true;
                 foreach (Control c in enableWhenConnected)
@@ -3303,26 +3322,55 @@ namespace ntrbase
             { // Halts bot if Stop Bot button was click
                 switch (botState)
                 {
-                    case 0:
+                    case (int)srbotstates.botstart:
+                        Addlog("Bot start");
+                        switch (typeLSR.SelectedIndex)
+                        {
+                            case 0:
+                                if (resumeLSR.Checked)
+                                {
+                                    botState = (int)srbotstates.tst_start;
+                                }
+                                else
+                                {
+                                    botState = (int)srbotstates.pssmenush;
+                                }
+                                break;
+                            case 1:
+                                if (resumeLSR.Checked)
+                                {
+                                    botState = (int)srbotstates.tms_start;
+                                }
+                                else
+                                {
+                                    botState = (int)srbotstates.pssmenush;
+                                }
+                                break;
+                            default:
+                                botState = (int)srbotstates.botexit;
+                                break;
+                        }
+                        break;
+                    case (int)srbotstates.pssmenush:
                         Addlog("Test if the PSS menu is shown");
                         waitNTRtask = waitNTRread(psssmenu1Off);
                         waitresult = await waitNTRtask;
                         if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
                         {
                             MessageBox.Show("Please go to the PSS menu and try again.");
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         else if (lastmemoryread >= psssmenu1IN && lastmemoryread < psssmenu1IN + 0x10000)
                         {
-                            botState = 1;
+                            botState = (int)srbotstates.fixwifi;
                         }
                         else
                         {
                             MessageBox.Show(readerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 1:
+                    case (int)srbotstates.fixwifi:
                         Addlog("Fix Wi-Fi");
                         byte[] buttonByte = BitConverter.GetBytes(0x4770);
                         Program.scriptHelper.write(0x0105AE4, buttonByte, 0x1A);
@@ -3337,29 +3385,29 @@ namespace ntrbase
                         }
                         if (waittimeout < 10)
                         {
-                            botState = 2;
+                            botState = (int)srbotstates.touchpssset;
                         }
                         else
                         {
                             MessageBox.Show(writeerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 2:
+                    case (int)srbotstates.touchpssset:
                         Addlog("Touch PSS settings");
                         waitNTRtask = waittouch(240, 180);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 3;
+                            botState = (int)srbotstates.testpssset;
                         }
                         else
                         {
                             MessageBox.Show(toucherror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 3:
+                    case (int)srbotstates.testpssset:
                         Addlog("Test if the PSS setings are shown");
                         for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         {
@@ -3373,33 +3421,33 @@ namespace ntrbase
                         }
                         if (waittimeout < 20)
                         {
-                            botState = 4;
+                            botState = (int)srbotstates.touchpssdis;
                         }
                         else if (lastmemoryread >= pssettingsOUT && lastmemoryread < pssettingsOUT + 0x10000)
                         { // Still on the PSS menu
-                            botState = 2;
+                            botState = (int)srbotstates.touchpssset;
                         }
                         else
                         { // Other error
                             MessageBox.Show(readerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 4:
+                    case (int)srbotstates.touchpssdis:
                         Addlog("Touch Disable PSS communication");
                         waitNTRtask = waittouch(160, pssdisableY);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 5;
+                            botState = (int)srbotstates.testpssdis;
                         }
                         else
                         {
                             MessageBox.Show(toucherror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 5:
+                    case (int)srbotstates.testpssdis:
                         Addlog("Test if PSS disable confirmation appears");
                         for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         {
@@ -3413,33 +3461,33 @@ namespace ntrbase
                         }
                         if (waittimeout < 20)
                         {
-                            botState = 6;
+                            botState = (int)srbotstates.touchpssconf;
                         }
                         else if (lastmemoryread >= pssdisableOUT && lastmemoryread < pssdisableOUT + 0x100000)
                         { // Still on PSS settings
-                            botState = 4;
+                            botState = (int)srbotstates.touchpssdis;
                         }
                         else
                         { // Other error
                             MessageBox.Show(readerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 6:
+                    case (int)srbotstates.touchpssconf:
                         Addlog("Touch Yes");
                         waitNTRtask = waittouch(160, 120);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 7;
+                            botState = (int)srbotstates.testpssout;
                         }
                         else
                         {
                             MessageBox.Show(toucherror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 7:
+                    case (int)srbotstates.testpssout:
                         Addlog("Test if back to PSS screen");
                         for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         {
@@ -3453,48 +3501,48 @@ namespace ntrbase
                         }
                         if (waittimeout < 20)
                         {
-                            botState = 8;
+                            botState = (int)srbotstates.returncontrol;
                         }
                         else if (lastmemoryread >= pssettingsIN && lastmemoryread < pssettingsIN + 0x10000)
                         { // Still on the confirmation screen
-                            botState = 6;
+                            botState = (int)srbotstates.touchpssconf;
                         }
                         else
                         { // Other error
                             MessageBox.Show(readerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 8:
+                    case (int)srbotstates.returncontrol:
                         Addlog("Return contol to character");
                         await Task.Delay(1000);
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 51;
+                            botState = (int)srbotstates.touchsave;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 51:
+                    case (int)srbotstates.touchsave:
                         Addlog("Touch Save button");
                         waitNTRtask = waittouch(220, 220);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 52;
+                            botState = (int)srbotstates.testsave;
                         }
                         else
                         {
                             MessageBox.Show(toucherror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 52:
+                    case (int)srbotstates.testsave:
                         Addlog("Test if the save screen is shown");
                         for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         { // Wait two seconds
@@ -3508,7 +3556,7 @@ namespace ntrbase
                         }
                         if (waittimeout < 20)
                         {
-                            botState = 53;
+                            botState = (int)srbotstates.saveconf;
                         }
                         else if (lastmemoryread >= savescrnOUT && lastmemoryread < savescrnOUT + 0x10000)
                         { // Still on the PSS menu
@@ -3517,24 +3565,24 @@ namespace ntrbase
                         else
                         { // Other error
                             MessageBox.Show(readerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 53:
+                    case (int)srbotstates.saveconf:
                         Addlog("Press Yes");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 54;
+                            botState = (int)srbotstates.saveout;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 54:
+                    case (int)srbotstates.saveout:
                         Addlog("Test if out from save screen");
                         for (waittimeout = 0; waittimeout < 20; waittimeout++)
                         { // Wait two seconds
@@ -3548,47 +3596,47 @@ namespace ntrbase
                         }
                         if (waittimeout < 20)
                         {
-                            botState = 55;
+                            botState = (int)srbotstates.typesr;
                         }
                         else if (lastmemoryread >= savescrnIN && lastmemoryread < savescrnIN + 0x10000)
                         { // Still on the save screen
-                            botState = 53;
+                            botState = (int)srbotstates.saveconf;
                         }
                         else
                         { // Other error
                             MessageBox.Show(readerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 55:
+                    case (int)srbotstates.typesr:
                         switch (typeLSR.SelectedIndex)
                         {
                             case 0:
-                                botState = 201;
+                                botState = (int)srbotstates.tst_cont;
                                 break;
                             case 1:
-                                botState = 101;
+                                botState = (int)srbotstates.tms_start;
                                 break;
                             default:
-                                botState = 9;
+                                botState = (int)srbotstates.trigger;
                                 break;
                         }
                         break;
-                    case 9:
+                    case (int)srbotstates.trigger:
                         Addlog("Try to trigger encounter");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 10;
+                            botState = (int)srbotstates.readopp;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 10:
+                    case (int)srbotstates.readopp:
                         Addlog("Try to read opponent");
                         dPID.Clear();
                         lastlog = "";
@@ -3605,31 +3653,31 @@ namespace ntrbase
                         }
                         if (waittimeout < 50 && dPID.Text.Length < 1)
                         { // Battle not triggered yet
-                            botState = 9;
+                            botState = (int)srbotstates.trigger;
                         }
                         else if (waittimeout < 50 && dPID.Text.Length > 0)
                         { // Battle triggered, data received
-                            botState = 11;
+                            botState = (int)srbotstates.testshiny;
                         }
                         else
                         {
                             MessageBox.Show(readerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 11:
+                    case (int)srbotstates.testshiny:
                         Addlog("Analyze pokémon");
                         if (shinyLSR.Checked)
                         {
                             if (dumpedPKHeX.isShiny)
                             {
                                 Addlog("Shiny: PASS");
-                                botState = 12;
+                                botState = (int)srbotstates.testnature;
                             }
                             else
                             {
                                 Addlog("Shiny: FAIL");
-                                botState = 20;
+                                botState = (int)srbotstates.softreset;
                             }
                         }
                         else
@@ -3637,129 +3685,156 @@ namespace ntrbase
                             if (dumpedPKHeX.isShiny)
                             {
                                 Addlog("Shiny: Yes");
-                                botState = -1; // Shiny detected
+                                botState = (int)srbotstates.botexit; // Shiny detected
                             }
                             else
                             {
                                 Addlog("Shiny: No");
-                                botState = 12;
+                                botState = (int)srbotstates.testnature;
                             }
                         }
                         break;
-                    case 12:
+                    case (int)srbotstates.testnature:
                         if (natureLSR.SelectedIndex < 0 || dumpedPKHeX.Nature == natureLSR.SelectedIndex)
                         {
                             Addlog("Nature: PASS");
-                            botState = 13;
+                            botState = (int)srbotstates.testhp;
                         }
                         else
                         {
                             Addlog("Nature: FAIL");
-                            botState = 20;
+                            botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case 13:
+                    case (int)srbotstates.testhp:
                         if (dumpedPKHeX.IV_HP >= ivHPLSR.Value)
                         {
                             Addlog("Hit Points IV: PASS");
-                            botState = 14;
+                            botState = (int)srbotstates.testatk;
                         }
                         else
                         {
                             Addlog("Hit Points IV: FAIL");
-                            botState = 20;
+                            botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case 14:
+                    case (int)srbotstates.testatk:
                         if (dumpedPKHeX.IV_ATK >= ivAtkLSR.Value)
                         {
                             Addlog("Attack IV: PASS");
-                            botState = 15;
+                            botState = (int)srbotstates.testdef;
                         }
                         else
                         {
                             Addlog("Attack IV: FAIL");
-                            botState = 20;
+                            botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case 15:
+                    case (int)srbotstates.testdef:
                         if (dumpedPKHeX.IV_DEF >= ivDefLSR.Value)
                         {
                             Addlog("Defense IV: PASS");
-                            botState = 16;
+                            botState = (int)srbotstates.testspa;
                         }
                         else
                         {
                             Addlog("Defense IV: FAIL");
-                            botState = 20;
+                            botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case 16:
+                    case (int)srbotstates.testspa:
                         if (dumpedPKHeX.IV_SPA >= ivSpALSR.Value)
                         {
                             Addlog("Special Attack IV: PASS");
-                            botState = 17;
+                            botState = (int)srbotstates.testspd;
                         }
                         else
                         {
                             Addlog("Special Attack IV: FAIL");
-                            botState = 20;
+                            botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case 17:
+                    case (int)srbotstates.testspd:
                         if (dumpedPKHeX.IV_SPD >= ivSpDLSR.Value)
                         {
                             Addlog("Special Defense IV: PASS");
-                            botState = 18;
+                            botState = (int)srbotstates.testspe;
                         }
                         else
                         {
                             Addlog("Special Defense IV: FAIL");
-                            botState = 20;
+                            botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case 18:
+                    case (int)srbotstates.testspe:
                         if (dumpedPKHeX.IV_SPE >= ivSpeLSR.Value)
                         {
                             Addlog("Speed IV: PASS");
-                            botState = 19;
+                            botState = (int)srbotstates.testhdnpwr;
                         }
                         else
                         {
                             Addlog("Speed IV: FAIL");
                             botState++;
-                            botState = 20;
+                            botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case 19:
+                    case (int)srbotstates.testhdnpwr:
                         if (HPTypeLSR.SelectedIndex < 0 || desiredHPtype == hiddenPower.Text)
                         {
                             Addlog("Hidden Power: PASS");
-                            botState = -1; // All tests passed
-                            Addlog("All tests passed!");
+                            botState = (int)srbotstates.testability;
                         }
                         else
                         {
                             Addlog("Hidden Power: FAIL");
-                            botState = 20;
+                            botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case 20:
+                    case (int)srbotstates.testability:
+                        if (AbilityLSR.SelectedIndex < 0 || AbilityLSR.SelectedIndex == dumpedPKHeX.Ability - 1)
+                        {
+                            Addlog("Ability: PASS");
+                            botState = (int)srbotstates.testgender;
+                        }
+                        else
+                        {
+                            Addlog("Ability: FAIL");
+                            botState = (int)srbotstates.softreset;
+                        }
+                        break;
+                    case (int)srbotstates.testgender:
+                        if (desiredgender == 2 || desiredgender == dumpedPKHeX.Gender)
+                        {
+                            Addlog("Gender: PASS");
+                            botState = (int)srbotstates.alltestsok;
+                        }
+                        else
+                        {
+                            Addlog("Gender: FAIL");
+                            botState = (int)srbotstates.softreset;
+                        }
+                        break;
+                    case (int)srbotstates.alltestsok:
+                        Addlog("All tests passed!");
+                        botState = (int)srbotstates.botexit; // All tests passed
+                        break;
+                    case (int)srbotstates.softreset:
                         resetNo++;
                         Addlog("Sof-reset #" + resetNo.ToString());
                         waitNTRtask = waitsoftreset();
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 21;
+                            botState = (int)srbotstates.skipintro;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 21:
+                    case (int)srbotstates.skipintro:
                         await Task.Delay(10000);
                         Addlog("Skip intro cutscene");
                         waitNTRtask = waitbutton(keyA);
@@ -3768,50 +3843,50 @@ namespace ntrbase
                         {
                             if (game == GameType.X || game == GameType.Y)
                             {
-                                botState = 23;
+                                botState = (int)srbotstates.startgame;
                             }
                             else
                             {
-                                botState = 22;
+                                botState = (int)srbotstates.skiptitle;
                             }
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 22:
+                    case (int)srbotstates.skiptitle:
                         await Task.Delay(3000);
                         Addlog("Skip title screen");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 23;
+                            botState = (int)srbotstates.startgame;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 23:
+                    case (int)srbotstates.startgame:
                         await Task.Delay(4000);
                         Addlog("Start game");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 24;
+                            botState = (int)srbotstates.reconnect;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 24:
+                    case (int)srbotstates.reconnect:
                         Addlog("Reconnect");
                         Program.scriptHelper.connect(host.Text, 8000);
                         for (waittimeout = 0; waittimeout < 20; waittimeout++)
@@ -3825,100 +3900,101 @@ namespace ntrbase
                         if (waittimeout < 20)
                         {
                             await Task.Delay(2000);
-                            botState = 55;
+                            botState = (int)srbotstates.typesr;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 101:
+                    case (int)srbotstates.tms_start:
                         Addlog("Start dialog");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 102;
+                            botState = (int)srbotstates.tms_cont1;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 102:
+                    case (int)srbotstates.tms_cont1:
                         Addlog("Continue dialog (A mysterious ring...)");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 103;
+                            botState = (int)srbotstates.tms_cont2;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 103:
+                    case (int)srbotstates.tms_cont2:
                         Addlog("Continue dialog (Would you like...)");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 104;
+                            botState = (int)srbotstates.tms_cont3;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 104:
+                    case (int)srbotstates.tms_cont3:
                         Addlog("Select yes");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 10;
+                            botState = (int)srbotstates.readopp;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 201:
+                    case (int)srbotstates.tst_start:
                         Addlog("Trigger encounter");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 202;
+                            botState = (int)srbotstates.tst_cont;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case 202:
+                    case (int)srbotstates.tst_cont:
                         Addlog("Skip pokemon dialog, wait 5 seconds");
                         await Task.Delay(5000);
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = 10;
+                            botState = (int)srbotstates.readopp;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
-                            botState = -1;
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
                     default:
+                        Addlog("Bot stop");
                         botStop = true;
                         break;
                 }
@@ -3936,6 +4012,30 @@ namespace ntrbase
 
         #endregion Bots
 
+        private void GenderLSR_Click(object sender, EventArgs e)
+        {
+            if (desiredgender == 0)
+            {
+                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
+                GenderLSR.ForeColor = Color.Red;
+                GenderLSR.Text = "♀";
+                desiredgender = 1;
+            }
+            else if (desiredgender == 1)
+            {
+                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
+                GenderLSR.ForeColor = Color.Black;
+                GenderLSR.Text = "-";
+                desiredgender = 2;
+            }
+            else
+            {
+                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
+                GenderLSR.ForeColor = Color.Blue;
+                GenderLSR.Text = "♂";
+                desiredgender = 0;
+            }
+        }
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
