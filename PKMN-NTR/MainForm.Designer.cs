@@ -2441,11 +2441,12 @@
             this.LegendarySoftResetBot.Controls.Add(this.label66);
             this.LegendarySoftResetBot.Controls.Add(this.label64);
             this.LegendarySoftResetBot.Controls.Add(this.label65);
+            this.LegendarySoftResetBot.Cursor = System.Windows.Forms.Cursors.Default;
             this.LegendarySoftResetBot.Location = new System.Drawing.Point(4, 22);
             this.LegendarySoftResetBot.Name = "LegendarySoftResetBot";
             this.LegendarySoftResetBot.Size = new System.Drawing.Size(261, 156);
             this.LegendarySoftResetBot.TabIndex = 2;
-            this.LegendarySoftResetBot.Text = "Legendary SR";
+            this.LegendarySoftResetBot.Text = "Soft-reset";
             // 
             // GenderLSR
             // 
@@ -2492,7 +2493,8 @@
             this.typeLSR.FormattingEnabled = true;
             this.typeLSR.Items.AddRange(new object[] {
             "Regular",
-            "Mirage Spot"});
+            "Mirage Spot",
+            "Event"});
             this.typeLSR.Location = new System.Drawing.Point(62, 23);
             this.typeLSR.Name = "typeLSR";
             this.typeLSR.Size = new System.Drawing.Size(68, 21);
@@ -3093,7 +3095,7 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(78, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.5";
+            this.label69.Text = "Version: 1.18.6";
             // 
             // label71
             // 

@@ -543,7 +543,7 @@ namespace ntrbase
                 wtboxviewIN = 0x00000000;
                 wtboxviewOUT = 0x20000000;
                 wtboxviewRange = 0x1000000;
-                pssettingsOff = 0x19AFB0;
+                pssettingsOff = 0x19ABF0;
                 pssettingsIN = 0x7E0000;
                 pssettingsOUT = 0x4D0000;
                 pssdisableOff = 0x5EEEA4;
@@ -2111,7 +2111,7 @@ namespace ntrbase
 
         private void radioParty_CheckedChanged_1(object sender, EventArgs e)
         {
-            if (radioParty.Checked)
+            if (radioParty.Checked && !botWorking)
             {
                 MessageBox.Show("Important:\r\n\r\nThis feature is experimental, the slots that is selected in this application might not be the same slots that are shown in your party. Due the unkonown mechanics of this, the write feature has been disabled.\r\n\r\nIf you wish to edit a pokémon in your party, deposit it in a box.\r\n\r\nCurrently, this only works in XY", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 button1.Enabled = false;
@@ -3250,7 +3250,7 @@ namespace ntrbase
         }
 
         // Soft-reset Bot
-        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, botexit };
+        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, tev_start, tev_cont1, tev_cont2, tev_cont3, tev_cont4, tev_cont5, tev_check, botexit };
 
         private async void RunLSRbot_Click(object sender, EventArgs e)
         {
@@ -3267,6 +3267,10 @@ namespace ntrbase
                 case 1:
                     typemessage = "Mirage Spot - Make sure you are in front of the hole.";
                     resumemessage = "In front of hole, will press A to trigger dialog";
+                    break;
+                case 2:
+                    typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
+                    resumemessage = "In fron of the lady, will press A to trigger dialog";
                     break;
                 default:
                     typemessage = "No type - Select one type of soft-reset and try again.";
@@ -3323,7 +3327,7 @@ namespace ntrbase
             {
                 genderstring = "Any";
             }
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a legendary pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Shiny: " + desiredshiny + "\r\n- Nautre: " + desirednature + "\r\n- Ability: " + desiredability + "\r\n- Gender: " + genderstring + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Shiny: " + desiredshiny + "\r\n- Nautre: " + desirednature + "\r\n- Ability: " + desiredability + "\r\n- Gender: " + genderstring + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
@@ -3378,6 +3382,21 @@ namespace ntrbase
                                 else
                                 {
                                     botState = (int)srbotstates.pssmenush;
+                                }
+                                break;
+                            case 2:
+                                if (resumeLSR.Checked)
+                                {
+                                    botState = (int)srbotstates.tev_start;
+                                    radioParty.Checked = true;
+                                    SetValue(boxDump, 2);
+                                }
+                                else
+                                {
+                                    botState = (int)srbotstates.pssmenush;
+                                    radioParty.Checked = true;
+                                    SetValue(boxDump, 2);
+                                    resetNo = -1;
                                 }
                                 break;
                             default:
@@ -3630,7 +3649,15 @@ namespace ntrbase
                         }
                         if (waittimeout < timeout)
                         {
-                            botState = (int)srbotstates.typesr;
+                            if (typeLSR.SelectedIndex == 2)
+                            {
+                                Addlog("Soft-reset for party data intialize");
+                                botState = (int)srbotstates.softreset;
+                            }
+                            else
+                            {
+                                botState = (int)srbotstates.typesr;
+                            }
                         }
                         else if (lastmemoryread >= savescrnIN && lastmemoryread < savescrnIN + 0x10000)
                         { // Still on the save screen
@@ -3650,6 +3677,9 @@ namespace ntrbase
                                 break;
                             case 1:
                                 botState = (int)srbotstates.tms_start;
+                                break;
+                            case 2:
+                                botState = (int)srbotstates.tev_start;
                                 break;
                             default:
                                 botState = (int)srbotstates.trigger;
@@ -4024,6 +4054,107 @@ namespace ntrbase
                         else
                         {
                             MessageBox.Show(buttonerror);
+                            botState = (int)srbotstates.botexit;
+                        }
+                        break;
+                    case (int)srbotstates.tev_start:
+                        Addlog("Talk to lady");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)srbotstates.tev_cont1;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)srbotstates.botexit;
+                        }
+                        break;
+                    case (int)srbotstates.tev_cont1:
+                        Addlog("Continue dialog (Good day!...");
+                        waitNTRtask = waitbutton(keyB);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)srbotstates.tev_cont2;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)srbotstates.botexit;
+                        }
+                        break;
+                    case (int)srbotstates.tev_cont2:
+                        Addlog("Continue dialog (I've got a...");
+                        waitNTRtask = waitbutton(keyB);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)srbotstates.tev_cont3;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)srbotstates.botexit;
+                        }
+                        break;
+                    case (int)srbotstates.tev_cont3:
+                        Addlog("Wait for fanfare");
+                        await Task.Delay(1500);
+                        waitNTRtask = waitbutton(keyB);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)srbotstates.tev_cont4;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)srbotstates.botexit;
+                        }
+                        break;
+                    case (int)srbotstates.tev_cont4:
+                        Addlog("Exit dialog");
+                        waitNTRtask = waitbutton(keyB);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)srbotstates.tev_check;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)srbotstates.botexit;
+                        }
+                        break;
+                    case (int)srbotstates.tev_check:
+                        Addlog("Try to read party");
+                        dPID.Clear();
+                        lastlog = "";
+                        await Task.Delay(2000);
+                        dumpPokemon.Enabled = true;
+                        dumpPokemon.PerformClick();
+                        dumpPokemon.Enabled = false;
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            if (lastlog.Contains("finished"))
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
+                        { // Pokemon received
+                            botState = (int)srbotstates.testshiny;
+                        }
+                        else if (waittimeout < timeout * 10 && dPID.Text.Length < 1)
+                        { // Pokémon not received yet
+                            botState = (int)srbotstates.tev_cont4;
+                        }
+                        else
+                        {
+                            MessageBox.Show(readerror);
                             botState = (int)srbotstates.botexit;
                         }
                         break;
