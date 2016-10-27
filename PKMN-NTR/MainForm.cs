@@ -329,6 +329,7 @@ namespace ntrbase
             species.Items.AddRange(speciesList);
             ability.Items.AddRange(abilityList);
             AbilityLSR.Items.AddRange(abilityList);
+            abilityBreed.Items.AddRange(abilityList);
             heldItem.Items.AddRange(itemList);
             move1.Items.AddRange(moveList);
             move2.Items.AddRange(moveList);
@@ -4332,7 +4333,21 @@ namespace ntrbase
         private async void runBreedingBot_Click(object sender, EventArgs e)
         {
             // Show warning
-            DialogResult dialogResult = MessageBox.Show("Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            string modemessage;
+            switch (modeBreed.SelectedIndex)
+            {
+                case 0:
+                    modemessage = "Simple: This bot will produce " + eggsNoBreed + " eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ".\r\n\r\n" ;
+                    break;
+                case 1:
+                    modemessage = "Filter: Not implemented yet.";
+                    break;
+                default:
+                    modemessage = "No mode selected. Select one and try again.";
+                    break;
+            }
+
+            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Currently, this only works in the Day Care of Route 117 in ORAS. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
@@ -4375,6 +4390,7 @@ namespace ntrbase
             if (game == GameType.X || game == GameType.Y)
             {
                 orasgame = false;
+                botStop = true;
             }
             else
             {
