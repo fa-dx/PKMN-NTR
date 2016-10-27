@@ -66,6 +66,7 @@ namespace ntrbase
         public uint moneyoff;
         public uint milesoff;
         public uint bpoff;
+        public uint eggoff;
         //Offsets for items data
         public uint itemsoff;
         public uint medsoff;
@@ -527,6 +528,7 @@ namespace ntrbase
                 tradeoffrg = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
+                eggoff = 0x8C80124;
                 savescrnOff = 0x19AB78;
                 savescrnIN = 0x7E0000;
                 savescrnOUT = 0x4D0000;
@@ -579,6 +581,7 @@ namespace ntrbase
                 tradeoffrg = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
+                eggoff = 0x8C80124;
                 savescrnOff = 0x19AB78;
                 savescrnIN = 0x7E0000;
                 savescrnOUT = 0x4D0000;
@@ -631,6 +634,7 @@ namespace ntrbase
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
+                eggoff = 0x8C88358;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
@@ -683,6 +687,7 @@ namespace ntrbase
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
+                eggoff = 0x8C88358;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
