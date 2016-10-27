@@ -166,6 +166,10 @@ namespace ntrbase
         public static readonly uint DpadDOWN = 0xF7F;
         public static readonly uint DpadLEFT = 0xFDF;
         public static readonly uint DpadRIGHT = 0xFEF;
+        public static readonly uint runUP = 0xFBD;
+        public static readonly uint runDOWN = 0xF7D;
+        public static readonly uint runLEFT = 0xFDD;
+        public static readonly uint runRIGHT = 0xFED;
         public static readonly uint softReset = 0xCF7;
         public static readonly uint notouch = 0x02000000;
         #endregion constants
@@ -429,7 +433,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR, boxBreed, slotBreed, modeBreed, runBreedingBot };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2600,6 +2604,58 @@ namespace ntrbase
             }
         }
 
+        async Task<int> waitholdbutton(uint key)
+        {
+            // Get and send hex coordinates
+            lastlog = "";
+            byte[] buttonByte = BitConverter.GetBytes(key);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            // Timeout 1
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (lastlog.Contains("finished"))
+                {
+                    break;
+                }
+            }
+            if (readcount >= timeout * 10)
+            { // If not response in two seconds, return timeout
+                return -1;
+            }
+            else
+            { // Return sucess
+                return 0;
+            }
+        }
+
+        async Task<int> waitfreebutton()
+        {
+            // Get and send hex coordinates
+            lastlog = "";
+            byte[] buttonByte = BitConverter.GetBytes(nokey);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            // Timeout 1
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (lastlog.Contains("finished"))
+                {
+                    break;
+                }
+            }
+            if (readcount >= timeout * 10)
+            { // If not response in two seconds, return timeout
+                return -1;
+            }
+            else
+            { // Return sucess
+                return 0;
+            }
+        }
+
         async Task<int> waittouch(uint Xcoord, uint Ycoord)
         {
             // Get and send hex coordinates
@@ -2642,6 +2698,58 @@ namespace ntrbase
                 { // Return sucess
                     return 0;
                 }
+            }
+        }
+
+        async Task<int> waitholdtouch(uint Xcoord, uint Ycoord)
+        {
+            // Get and send hex coordinates
+            lastlog = "";
+            byte[] buttonByte = BitConverter.GetBytes(gethexcoord(Xcoord, Ycoord));
+            Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
+            // Timeout 1
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (lastlog.Contains("finished"))
+                {
+                    break;
+                }
+            }
+            if (readcount >= timeout * 10)
+            { // If not response in two seconds, return timeout
+                return -1;
+            }
+            else
+            { // Return sucess
+                return 0;
+            }
+        }
+
+        async Task<int> waitfreetouch()
+        {
+            // Get and send hex coordinates
+            lastlog = "";
+            byte[] buttonByte = BitConverter.GetBytes(notouch);
+            Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
+            // Timeout 1
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (lastlog.Contains("finished"))
+                {
+                    break;
+                }
+            }
+            if (readcount >= timeout * 10)
+            { // If not response in two seconds, return timeout
+                return -1;
+            }
+            else
+            { // Return sucess
+                return 0;
             }
         }
 
@@ -3254,7 +3362,7 @@ namespace ntrbase
             MessageBox.Show("Finished", "Wonder Trade Bot");
         }
 
-        // Soft-reset Bot
+        // Soft-reset bot
         public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, tev_start, tev_cont1, tev_cont2, tev_cont3, tev_cont4, tev_cont5, tev_check, botexit };
 
         private async void RunLSRbot_Click(object sender, EventArgs e)
@@ -3433,7 +3541,7 @@ namespace ntrbase
                         byte[] buttonByte = BitConverter.GetBytes(0x4770);
                         Program.scriptHelper.write(0x0105AE4, buttonByte, 0x1A);
                         for (waittimeout = 0; waittimeout < timeout; waittimeout++)
-                        { 
+                        {
                             lastlog = "";
                             await Task.Delay(1000);
                             if (lastlog.Contains("finished"))
@@ -3603,7 +3711,7 @@ namespace ntrbase
                     case (int)srbotstates.testsave:
                         Addlog("Test if the save screen is shown");
                         for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
-                        { 
+                        {
                             await Task.Delay(100);
                             waitNTRtask = waitNTRread(savescrnOff);
                             waitresult = await waitNTRtask;
@@ -4178,6 +4286,237 @@ namespace ntrbase
             stopBotButton.Enabled = false;
             botWorking = false;
             MessageBox.Show("Finished, number of resets: " + resetNo, "Soft-reset bot");
+        }
+
+        // Breeding bot
+        private void modeBreed_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (modeBreed.SelectedIndex)
+            {
+                case 0:
+                    eggsNoBreed.Enabled = true;
+                    natureBreed.Enabled = false;
+                    abilityBreed.Enabled = false;
+                    HPtypeBreed.Enabled = false;
+                    genderBreed.Enabled = false;
+                    ivHPBreed.Enabled = false;
+                    ivAtkBreed.Enabled = false;
+                    ivDEFBreed.Enabled = false;
+                    ivSpABreed.Enabled = false;
+                    ivSpDBreed.Enabled = false;
+                    ivSpeBreed.Enabled = false;
+                    break;
+                case 1:
+                    eggsNoBreed.Enabled = false;
+                    natureBreed.Enabled = true;
+                    abilityBreed.Enabled = true;
+                    HPtypeBreed.Enabled = true;
+                    genderBreed.Enabled = true;
+                    ivHPBreed.Enabled = true;
+                    ivAtkBreed.Enabled = true;
+                    ivDEFBreed.Enabled = true;
+                    ivSpABreed.Enabled = true;
+                    ivSpDBreed.Enabled = true;
+                    ivSpeBreed.Enabled = true;
+                    break;
+                default:
+                    eggsNoBreed.Enabled = false;
+                    natureBreed.Enabled = false;
+                    abilityBreed.Enabled = false;
+                    HPtypeBreed.Enabled = false;
+                    genderBreed.Enabled = false;
+                    ivHPBreed.Enabled = false;
+                    ivAtkBreed.Enabled = false;
+                    ivDEFBreed.Enabled = false;
+                    ivSpABreed.Enabled = false;
+                    ivSpDBreed.Enabled = false;
+                    ivSpeBreed.Enabled = false;
+                    break;
+            }
+        }
+
+        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, stopdaycare, botexit };
+
+        private async void runBreedingBot_Click(object sender, EventArgs e)
+        {
+            // Show warning
+            DialogResult dialogResult = MessageBox.Show("Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.OK)
+            { // Initialize bot
+                botStop = false; // for testing
+                botWorking = true;
+                botState = (int)breedbotstates.botstart;
+                onlyView.Checked = true;
+                radioBoxes.Checked = true;
+                foreach (Control c in enableWhenConnected)
+                {
+                    c.Enabled = false;
+                }
+                stopBotButton.Enabled = true;
+                txtLog.Clear();
+            }
+            else
+            { // Exit bot
+                botStop = true;
+            }
+
+            // Local variables
+            Task<int> waitNTRtask;
+            int waitresult = 0;
+            int waittimeout = 0;
+            bool orasgame;
+            if (game == GameType.X || game == GameType.Y)
+            {
+                orasgame = false;
+            }
+            else
+            {
+                orasgame = true;
+            }
+
+
+            // Bot procedure
+            while (!botStop)
+            {
+                switch (botState)
+                {
+                    case (int)breedbotstates.botstart:
+                        Addlog("Bot start");
+                        botState = (int)breedbotstates.walk1;
+                        break;
+                    case (int)breedbotstates.walk1:
+                        Addlog("Run in direction 1");
+                        if (orasgame)
+                        {
+                            waitNTRtask = waitholdbutton(runDOWN);
+                        }
+                        else
+                        {
+                            waitNTRtask = waitholdbutton(runRIGHT);
+                        }
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.checkegg1;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.checkegg1:
+                        Addlog("Check if egg");
+                        waitNTRtask = waitNTRread(eggoff);
+                        waitresult = await waitNTRtask;
+                        if (lastmemoryread == 0x01)
+                        {
+                            Addlog("Egg found");
+                            botState = (int)breedbotstates.walk3;
+                        }
+                        else if (lastmemoryread == 0x00)
+                        {
+                            botState = (int)breedbotstates.walk2;
+                        }
+                        else
+                        {
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.walk2:
+                        Addlog("Run in direction 2");
+                        if (orasgame)
+                        {
+                            waitNTRtask = waitholdbutton(runUP);
+                        }
+                        else
+                        {
+                            waitNTRtask = waitholdbutton(runLEFT);
+                        }
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.checkegg2;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.checkegg2:
+                        Addlog("Check if egg");
+                        waitNTRtask = waitNTRread(eggoff);
+                        waitresult = await waitNTRtask;
+                        if (lastmemoryread == 0x01)
+                        {
+                            Addlog("Egg found");
+                            botState = (int)breedbotstates.walk3;
+                        }
+                        else if (lastmemoryread == 0x00)
+                        {
+                            botState = (int)breedbotstates.walk1;
+                        }
+                        else
+                        {
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.walk3:
+                        Addlog("Return to day care man");
+                        if (orasgame)
+                        {
+                            waitNTRtask = waitholdbutton(runUP);
+                        }
+                        else
+                        {
+                            waitNTRtask = waitholdbutton(runLEFT);
+                        }
+                        waitresult = await waitNTRtask;
+                        await Task.Delay(2000);
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.stopdaycare;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.stopdaycare:
+                        Addlog("Stop moving");
+                        waitNTRtask = waitfreebutton();
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    default:
+                        Addlog("Bot stop");
+                        botStop = true;
+                        break;
+                }
+            }
+
+            // Finish bot
+            foreach (Control c in enableWhenConnected)
+            {
+                c.Enabled = true;
+            }
+            stopBotButton.Enabled = false;
+            botWorking = false;
+            MessageBox.Show("Finished. ", "Breeding bot");
+
         }
 
         #endregion Bots

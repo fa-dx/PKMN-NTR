@@ -248,8 +248,40 @@
             this.tabControls = new System.Windows.Forms.TabPage();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabSoftReset = new System.Windows.Forms.TabPage();
-            this.tabBreeding = new System.Windows.Forms.TabPage();
             this.label74 = new System.Windows.Forms.Label();
+            this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.genderBreed = new System.Windows.Forms.ComboBox();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.ivSpeBreed = new System.Windows.Forms.NumericUpDown();
+            this.label81 = new System.Windows.Forms.Label();
+            this.ivSpDBreed = new System.Windows.Forms.NumericUpDown();
+            this.label82 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.runBreedingBot = new System.Windows.Forms.Button();
+            this.label85 = new System.Windows.Forms.Label();
+            this.abilityBreed = new System.Windows.Forms.ComboBox();
+            this.ivDEFBreed = new System.Windows.Forms.NumericUpDown();
+            this.label86 = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
+            this.natureBreed = new System.Windows.Forms.ComboBox();
+            this.ivSpABreed = new System.Windows.Forms.NumericUpDown();
+            this.HPtypeBreed = new System.Windows.Forms.ComboBox();
+            this.ivHPBreed = new System.Windows.Forms.NumericUpDown();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label89 = new System.Windows.Forms.Label();
+            this.modeBreed = new System.Windows.Forms.ComboBox();
+            this.label90 = new System.Windows.Forms.Label();
+            this.ivAtkBreed = new System.Windows.Forms.NumericUpDown();
+            this.label91 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.slotBreed = new System.Windows.Forms.NumericUpDown();
+            this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
+            this.boxBreed = new System.Windows.Forms.NumericUpDown();
+            this.label77 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -322,6 +354,16 @@
             this.tabControls.SuspendLayout();
             this.tabWonderTrade.SuspendLayout();
             this.tabSoftReset.SuspendLayout();
+            this.tabBreeding.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpeBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpDBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivDEFBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpABreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivHPBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivAtkBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -637,7 +679,7 @@
             // 
             // nameek6
             // 
-            this.nameek6.Location = new System.Drawing.Point(100, 39);
+            this.nameek6.Location = new System.Drawing.Point(99, 39);
             this.nameek6.Name = "nameek6";
             this.nameek6.Size = new System.Drawing.Size(103, 20);
             this.nameek6.TabIndex = 29;
@@ -3110,15 +3152,6 @@
             this.tabSoftReset.TabIndex = 3;
             this.tabSoftReset.Text = "Soft-reset";
             // 
-            // tabBreeding
-            // 
-            this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
-            this.tabBreeding.Location = new System.Drawing.Point(4, 22);
-            this.tabBreeding.Name = "tabBreeding";
-            this.tabBreeding.Size = new System.Drawing.Size(272, 397);
-            this.tabBreeding.TabIndex = 4;
-            this.tabBreeding.Text = "Breeding";
-            // 
             // label74
             // 
             this.label74.AutoSize = true;
@@ -3127,6 +3160,454 @@
             this.label74.Size = new System.Drawing.Size(45, 13);
             this.label74.TabIndex = 110;
             this.label74.Text = "Gender:";
+            // 
+            // tabBreeding
+            // 
+            this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.genderBreed);
+            this.tabBreeding.Controls.Add(this.label79);
+            this.tabBreeding.Controls.Add(this.label80);
+            this.tabBreeding.Controls.Add(this.ivSpeBreed);
+            this.tabBreeding.Controls.Add(this.label81);
+            this.tabBreeding.Controls.Add(this.ivSpDBreed);
+            this.tabBreeding.Controls.Add(this.label82);
+            this.tabBreeding.Controls.Add(this.label83);
+            this.tabBreeding.Controls.Add(this.label84);
+            this.tabBreeding.Controls.Add(this.runBreedingBot);
+            this.tabBreeding.Controls.Add(this.label85);
+            this.tabBreeding.Controls.Add(this.abilityBreed);
+            this.tabBreeding.Controls.Add(this.ivDEFBreed);
+            this.tabBreeding.Controls.Add(this.label86);
+            this.tabBreeding.Controls.Add(this.label87);
+            this.tabBreeding.Controls.Add(this.natureBreed);
+            this.tabBreeding.Controls.Add(this.ivSpABreed);
+            this.tabBreeding.Controls.Add(this.HPtypeBreed);
+            this.tabBreeding.Controls.Add(this.ivHPBreed);
+            this.tabBreeding.Controls.Add(this.label88);
+            this.tabBreeding.Controls.Add(this.label89);
+            this.tabBreeding.Controls.Add(this.modeBreed);
+            this.tabBreeding.Controls.Add(this.label90);
+            this.tabBreeding.Controls.Add(this.ivAtkBreed);
+            this.tabBreeding.Controls.Add(this.label91);
+            this.tabBreeding.Controls.Add(this.label78);
+            this.tabBreeding.Controls.Add(this.label75);
+            this.tabBreeding.Controls.Add(this.label76);
+            this.tabBreeding.Controls.Add(this.slotBreed);
+            this.tabBreeding.Controls.Add(this.eggsNoBreed);
+            this.tabBreeding.Controls.Add(this.boxBreed);
+            this.tabBreeding.Controls.Add(this.label77);
+            this.tabBreeding.Location = new System.Drawing.Point(4, 22);
+            this.tabBreeding.Name = "tabBreeding";
+            this.tabBreeding.Size = new System.Drawing.Size(272, 397);
+            this.tabBreeding.TabIndex = 4;
+            this.tabBreeding.Text = "Breeding";
+            // 
+            // genderBreed
+            // 
+            this.genderBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.genderBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.genderBreed.Enabled = false;
+            this.genderBreed.FormattingEnabled = true;
+            this.genderBreed.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.genderBreed.Location = new System.Drawing.Point(62, 180);
+            this.genderBreed.Name = "genderBreed";
+            this.genderBreed.Size = new System.Drawing.Size(133, 21);
+            this.genderBreed.TabIndex = 138;
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(9, 185);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(45, 13);
+            this.label79.TabIndex = 137;
+            this.label79.Text = "Gender:";
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(228, 54);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(41, 13);
+            this.label80.TabIndex = 115;
+            this.label80.Text = "min IVs";
+            // 
+            // ivSpeBreed
+            // 
+            this.ivSpeBreed.Enabled = false;
+            this.ivSpeBreed.Location = new System.Drawing.Point(232, 175);
+            this.ivSpeBreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpeBreed.Name = "ivSpeBreed";
+            this.ivSpeBreed.Size = new System.Drawing.Size(33, 20);
+            this.ivSpeBreed.TabIndex = 127;
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(3, 54);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(127, 13);
+            this.label81.TabIndex = 132;
+            this.label81.Text = "Leave blank if don\'t care.";
+            // 
+            // ivSpDBreed
+            // 
+            this.ivSpDBreed.Enabled = false;
+            this.ivSpDBreed.Location = new System.Drawing.Point(232, 154);
+            this.ivSpDBreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpDBreed.Name = "ivSpDBreed";
+            this.ivSpDBreed.Size = new System.Drawing.Size(33, 20);
+            this.ivSpDBreed.TabIndex = 126;
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(17, 129);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(37, 13);
+            this.label82.TabIndex = 129;
+            this.label82.Text = "Ability:";
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(201, 179);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(31, 13);
+            this.label83.TabIndex = 121;
+            this.label83.Text = "SPE:";
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(22, 75);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(37, 13);
+            this.label84.TabIndex = 114;
+            this.label84.Text = "Mode:";
+            // 
+            // runBreedingBot
+            // 
+            this.runBreedingBot.Location = new System.Drawing.Point(7, 209);
+            this.runBreedingBot.Name = "runBreedingBot";
+            this.runBreedingBot.Size = new System.Drawing.Size(258, 23);
+            this.runBreedingBot.TabIndex = 113;
+            this.runBreedingBot.Text = "Run";
+            this.runBreedingBot.UseVisualStyleBackColor = true;
+            this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click);
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(201, 116);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(31, 13);
+            this.label85.TabIndex = 118;
+            this.label85.Text = "DEF:";
+            // 
+            // abilityBreed
+            // 
+            this.abilityBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.abilityBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.abilityBreed.Enabled = false;
+            this.abilityBreed.FormattingEnabled = true;
+            this.abilityBreed.Location = new System.Drawing.Point(62, 126);
+            this.abilityBreed.Name = "abilityBreed";
+            this.abilityBreed.Size = new System.Drawing.Size(133, 21);
+            this.abilityBreed.TabIndex = 128;
+            // 
+            // ivDEFBreed
+            // 
+            this.ivDEFBreed.Enabled = false;
+            this.ivDEFBreed.Location = new System.Drawing.Point(232, 112);
+            this.ivDEFBreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivDEFBreed.Name = "ivDEFBreed";
+            this.ivDEFBreed.Size = new System.Drawing.Size(33, 20);
+            this.ivDEFBreed.TabIndex = 124;
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(14, 102);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(42, 13);
+            this.label86.TabIndex = 130;
+            this.label86.Text = "Nature:";
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(207, 74);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(25, 13);
+            this.label87.TabIndex = 116;
+            this.label87.Text = "HP:";
+            // 
+            // natureBreed
+            // 
+            this.natureBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.natureBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.natureBreed.Enabled = false;
+            this.natureBreed.FormattingEnabled = true;
+            this.natureBreed.Items.AddRange(new object[] {
+            "Hardy",
+            "Lonely",
+            "Brave",
+            "Adamant",
+            "Naughty",
+            "Bold",
+            "Docile",
+            "Relaxed",
+            "Impish",
+            "Lax",
+            "Timid",
+            "Hasty",
+            "Serious",
+            "Jolly",
+            "Naive",
+            "Modest",
+            "Mild",
+            "Quiet",
+            "Bashful",
+            "Rash",
+            "Calm",
+            "Gentle",
+            "Sassy",
+            "Careful",
+            "Quirky"});
+            this.natureBreed.Location = new System.Drawing.Point(62, 99);
+            this.natureBreed.Name = "natureBreed";
+            this.natureBreed.Size = new System.Drawing.Size(133, 21);
+            this.natureBreed.TabIndex = 131;
+            // 
+            // ivSpABreed
+            // 
+            this.ivSpABreed.Enabled = false;
+            this.ivSpABreed.Location = new System.Drawing.Point(232, 133);
+            this.ivSpABreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivSpABreed.Name = "ivSpABreed";
+            this.ivSpABreed.Size = new System.Drawing.Size(33, 20);
+            this.ivSpABreed.TabIndex = 125;
+            // 
+            // HPtypeBreed
+            // 
+            this.HPtypeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.HPtypeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.HPtypeBreed.Enabled = false;
+            this.HPtypeBreed.FormattingEnabled = true;
+            this.HPtypeBreed.Items.AddRange(new object[] {
+            "Fighting",
+            "Flying",
+            "Poison",
+            "Ground",
+            "Rock",
+            "Bug",
+            "Ghost",
+            "Steel",
+            "Fire",
+            "Water",
+            "Grass",
+            "Electric",
+            "Psychic",
+            "Ice",
+            "Dragon",
+            "Dark"});
+            this.HPtypeBreed.Location = new System.Drawing.Point(62, 153);
+            this.HPtypeBreed.Name = "HPtypeBreed";
+            this.HPtypeBreed.Size = new System.Drawing.Size(133, 21);
+            this.HPtypeBreed.TabIndex = 135;
+            // 
+            // ivHPBreed
+            // 
+            this.ivHPBreed.Enabled = false;
+            this.ivHPBreed.Location = new System.Drawing.Point(232, 70);
+            this.ivHPBreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivHPBreed.Name = "ivHPBreed";
+            this.ivHPBreed.Size = new System.Drawing.Size(33, 20);
+            this.ivHPBreed.TabIndex = 122;
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(4, 157);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(52, 13);
+            this.label88.TabIndex = 134;
+            this.label88.Text = "HP Type:";
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(201, 137);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(31, 13);
+            this.label89.TabIndex = 119;
+            this.label89.Text = "SPA:";
+            // 
+            // modeBreed
+            // 
+            this.modeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.modeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.modeBreed.FormattingEnabled = true;
+            this.modeBreed.Items.AddRange(new object[] {
+            "Simple",
+            "Filter"});
+            this.modeBreed.Location = new System.Drawing.Point(62, 72);
+            this.modeBreed.Name = "modeBreed";
+            this.modeBreed.Size = new System.Drawing.Size(133, 21);
+            this.modeBreed.TabIndex = 136;
+            this.modeBreed.SelectedIndexChanged += new System.EventHandler(this.modeBreed_SelectedIndexChanged);
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(201, 95);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(31, 13);
+            this.label90.TabIndex = 117;
+            this.label90.Text = "ATK:";
+            // 
+            // ivAtkBreed
+            // 
+            this.ivAtkBreed.Enabled = false;
+            this.ivAtkBreed.Location = new System.Drawing.Point(232, 91);
+            this.ivAtkBreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivAtkBreed.Name = "ivAtkBreed";
+            this.ivAtkBreed.Size = new System.Drawing.Size(33, 20);
+            this.ivAtkBreed.TabIndex = 123;
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.Location = new System.Drawing.Point(200, 158);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(32, 13);
+            this.label91.TabIndex = 120;
+            this.label91.Text = "SPD:";
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(3, 10);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(106, 13);
+            this.label78.TabIndex = 112;
+            this.label78.Text = "Egg deposit location:";
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(163, 32);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(43, 13);
+            this.label75.TabIndex = 111;
+            this.label75.Text = "# eggs:";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(3, 32);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(28, 13);
+            this.label76.TabIndex = 108;
+            this.label76.Text = "Box:";
+            // 
+            // slotBreed
+            // 
+            this.slotBreed.Location = new System.Drawing.Point(117, 30);
+            this.slotBreed.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.slotBreed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.slotBreed.Name = "slotBreed";
+            this.slotBreed.Size = new System.Drawing.Size(40, 20);
+            this.slotBreed.TabIndex = 107;
+            this.slotBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // eggsNoBreed
+            // 
+            this.eggsNoBreed.Enabled = false;
+            this.eggsNoBreed.Location = new System.Drawing.Point(212, 30);
+            this.eggsNoBreed.Maximum = new decimal(new int[] {
+            930,
+            0,
+            0,
+            0});
+            this.eggsNoBreed.Name = "eggsNoBreed";
+            this.eggsNoBreed.Size = new System.Drawing.Size(40, 20);
+            this.eggsNoBreed.TabIndex = 110;
+            this.eggsNoBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // boxBreed
+            // 
+            this.boxBreed.Location = new System.Drawing.Point(37, 29);
+            this.boxBreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.boxBreed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.boxBreed.Name = "boxBreed";
+            this.boxBreed.Size = new System.Drawing.Size(40, 20);
+            this.boxBreed.TabIndex = 106;
+            this.boxBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(83, 32);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(28, 13);
+            this.label77.TabIndex = 109;
+            this.label77.Text = "Slot:";
             // 
             // MainForm
             // 
@@ -3240,6 +3721,17 @@
             this.tabWonderTrade.PerformLayout();
             this.tabSoftReset.ResumeLayout(false);
             this.tabSoftReset.PerformLayout();
+            this.tabBreeding.ResumeLayout(false);
+            this.tabBreeding.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpeBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpDBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivDEFBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivSpABreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivHPBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivAtkBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3479,6 +3971,38 @@
         private System.Windows.Forms.TabPage tabSoftReset;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.TabPage tabBreeding;
+        private System.Windows.Forms.ComboBox genderBreed;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.NumericUpDown ivSpeBreed;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.NumericUpDown ivSpDBreed;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Button runBreedingBot;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.ComboBox abilityBreed;
+        private System.Windows.Forms.NumericUpDown ivDEFBreed;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.ComboBox natureBreed;
+        private System.Windows.Forms.NumericUpDown ivSpABreed;
+        private System.Windows.Forms.ComboBox HPtypeBreed;
+        private System.Windows.Forms.NumericUpDown ivHPBreed;
+        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.Label label89;
+        private System.Windows.Forms.ComboBox modeBreed;
+        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.NumericUpDown ivAtkBreed;
+        private System.Windows.Forms.Label label91;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.NumericUpDown slotBreed;
+        private System.Windows.Forms.NumericUpDown eggsNoBreed;
+        private System.Windows.Forms.NumericUpDown boxBreed;
+        private System.Windows.Forms.Label label77;
     }
 }
 
