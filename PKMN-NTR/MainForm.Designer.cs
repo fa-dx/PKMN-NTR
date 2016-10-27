@@ -246,10 +246,10 @@
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
             this.tabControls = new System.Windows.Forms.TabPage();
-            this.tabWonderTrade = new System.Windows.Forms.TabPage();
-            this.tabSoftReset = new System.Windows.Forms.TabPage();
-            this.label74 = new System.Windows.Forms.Label();
             this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.label92 = new System.Windows.Forms.Label();
+            this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
+            this.OrganizeTop = new System.Windows.Forms.RadioButton();
             this.genderBreed = new System.Windows.Forms.ComboBox();
             this.label79 = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
@@ -282,6 +282,9 @@
             this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
             this.boxBreed = new System.Windows.Forms.NumericUpDown();
             this.label77 = new System.Windows.Forms.Label();
+            this.tabWonderTrade = new System.Windows.Forms.TabPage();
+            this.tabSoftReset = new System.Windows.Forms.TabPage();
+            this.label74 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -352,8 +355,6 @@
             this.miscTabs.SuspendLayout();
             this.tabEditTrainer.SuspendLayout();
             this.tabControls.SuspendLayout();
-            this.tabWonderTrade.SuspendLayout();
-            this.tabSoftReset.SuspendLayout();
             this.tabBreeding.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ivSpeBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivSpDBreed)).BeginInit();
@@ -364,6 +365,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
+            this.tabWonderTrade.SuspendLayout();
+            this.tabSoftReset.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -3026,9 +3029,9 @@
             // 
             this.miscTabs.Controls.Add(this.tabEditTrainer);
             this.miscTabs.Controls.Add(this.tabControls);
+            this.miscTabs.Controls.Add(this.tabBreeding);
             this.miscTabs.Controls.Add(this.tabWonderTrade);
             this.miscTabs.Controls.Add(this.tabSoftReset);
-            this.miscTabs.Controls.Add(this.tabBreeding);
             this.miscTabs.Location = new System.Drawing.Point(629, 12);
             this.miscTabs.Name = "miscTabs";
             this.miscTabs.SelectedIndex = 0;
@@ -3101,69 +3104,12 @@
             this.tabControls.TabIndex = 1;
             this.tabControls.Text = "Controls";
             // 
-            // tabWonderTrade
-            // 
-            this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
-            this.tabWonderTrade.Controls.Add(this.label59);
-            this.tabWonderTrade.Controls.Add(this.label58);
-            this.tabWonderTrade.Controls.Add(this.RunWTbot);
-            this.tabWonderTrade.Controls.Add(this.WTSlot);
-            this.tabWonderTrade.Controls.Add(this.WTtradesNo);
-            this.tabWonderTrade.Controls.Add(this.WTBox);
-            this.tabWonderTrade.Controls.Add(this.label57);
-            this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
-            this.tabWonderTrade.Name = "tabWonderTrade";
-            this.tabWonderTrade.Size = new System.Drawing.Size(272, 397);
-            this.tabWonderTrade.TabIndex = 2;
-            this.tabWonderTrade.Text = "Wonder Trade";
-            // 
-            // tabSoftReset
-            // 
-            this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSoftReset.Controls.Add(this.GenderLSR);
-            this.tabSoftReset.Controls.Add(this.label74);
-            this.tabSoftReset.Controls.Add(this.shinyLSR);
-            this.tabSoftReset.Controls.Add(this.label62);
-            this.tabSoftReset.Controls.Add(this.ivSpeLSR);
-            this.tabSoftReset.Controls.Add(this.label61);
-            this.tabSoftReset.Controls.Add(this.ivSpDLSR);
-            this.tabSoftReset.Controls.Add(this.label73);
-            this.tabSoftReset.Controls.Add(this.label65);
-            this.tabSoftReset.Controls.Add(this.label72);
-            this.tabSoftReset.Controls.Add(this.RunLSRbot);
-            this.tabSoftReset.Controls.Add(this.label63);
-            this.tabSoftReset.Controls.Add(this.AbilityLSR);
-            this.tabSoftReset.Controls.Add(this.ivDefLSR);
-            this.tabSoftReset.Controls.Add(this.label60);
-            this.tabSoftReset.Controls.Add(this.label64);
-            this.tabSoftReset.Controls.Add(this.natureLSR);
-            this.tabSoftReset.Controls.Add(this.ivSpALSR);
-            this.tabSoftReset.Controls.Add(this.HPTypeLSR);
-            this.tabSoftReset.Controls.Add(this.ivHPLSR);
-            this.tabSoftReset.Controls.Add(this.label70);
-            this.tabSoftReset.Controls.Add(this.label66);
-            this.tabSoftReset.Controls.Add(this.typeLSR);
-            this.tabSoftReset.Controls.Add(this.label68);
-            this.tabSoftReset.Controls.Add(this.ivAtkLSR);
-            this.tabSoftReset.Controls.Add(this.label67);
-            this.tabSoftReset.Location = new System.Drawing.Point(4, 22);
-            this.tabSoftReset.Name = "tabSoftReset";
-            this.tabSoftReset.Size = new System.Drawing.Size(272, 397);
-            this.tabSoftReset.TabIndex = 3;
-            this.tabSoftReset.Text = "Soft-reset";
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(9, 141);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(45, 13);
-            this.label74.TabIndex = 110;
-            this.label74.Text = "Gender:";
-            // 
             // tabBreeding
             // 
             this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.label92);
+            this.tabBreeding.Controls.Add(this.OrganizeMiddle);
+            this.tabBreeding.Controls.Add(this.OrganizeTop);
             this.tabBreeding.Controls.Add(this.genderBreed);
             this.tabBreeding.Controls.Add(this.label79);
             this.tabBreeding.Controls.Add(this.label80);
@@ -3202,11 +3148,41 @@
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(4, 209);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(123, 13);
+            this.label92.TabIndex = 141;
+            this.label92.Text = "Organize Boxes position:";
+            // 
+            // OrganizeMiddle
+            // 
+            this.OrganizeMiddle.AutoSize = true;
+            this.OrganizeMiddle.Checked = true;
+            this.OrganizeMiddle.Location = new System.Drawing.Point(132, 207);
+            this.OrganizeMiddle.Name = "OrganizeMiddle";
+            this.OrganizeMiddle.Size = new System.Drawing.Size(56, 17);
+            this.OrganizeMiddle.TabIndex = 140;
+            this.OrganizeMiddle.TabStop = true;
+            this.OrganizeMiddle.Text = "Middle";
+            this.OrganizeMiddle.UseVisualStyleBackColor = true;
+            // 
+            // OrganizeTop
+            // 
+            this.OrganizeTop.AutoSize = true;
+            this.OrganizeTop.Location = new System.Drawing.Point(194, 207);
+            this.OrganizeTop.Name = "OrganizeTop";
+            this.OrganizeTop.Size = new System.Drawing.Size(44, 17);
+            this.OrganizeTop.TabIndex = 139;
+            this.OrganizeTop.Text = "Top";
+            this.OrganizeTop.UseVisualStyleBackColor = true;
+            // 
             // genderBreed
             // 
             this.genderBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.genderBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.genderBreed.Enabled = false;
             this.genderBreed.FormattingEnabled = true;
             this.genderBreed.Items.AddRange(new object[] {
             "Male",
@@ -3236,7 +3212,6 @@
             // 
             // ivSpeBreed
             // 
-            this.ivSpeBreed.Enabled = false;
             this.ivSpeBreed.Location = new System.Drawing.Point(232, 175);
             this.ivSpeBreed.Maximum = new decimal(new int[] {
             31,
@@ -3258,7 +3233,6 @@
             // 
             // ivSpDBreed
             // 
-            this.ivSpDBreed.Enabled = false;
             this.ivSpDBreed.Location = new System.Drawing.Point(232, 154);
             this.ivSpDBreed.Maximum = new decimal(new int[] {
             31,
@@ -3298,7 +3272,7 @@
             // 
             // runBreedingBot
             // 
-            this.runBreedingBot.Location = new System.Drawing.Point(7, 209);
+            this.runBreedingBot.Location = new System.Drawing.Point(7, 225);
             this.runBreedingBot.Name = "runBreedingBot";
             this.runBreedingBot.Size = new System.Drawing.Size(258, 23);
             this.runBreedingBot.TabIndex = 113;
@@ -3319,7 +3293,6 @@
             // 
             this.abilityBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.abilityBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.abilityBreed.Enabled = false;
             this.abilityBreed.FormattingEnabled = true;
             this.abilityBreed.Location = new System.Drawing.Point(62, 126);
             this.abilityBreed.Name = "abilityBreed";
@@ -3328,7 +3301,6 @@
             // 
             // ivDEFBreed
             // 
-            this.ivDEFBreed.Enabled = false;
             this.ivDEFBreed.Location = new System.Drawing.Point(232, 112);
             this.ivDEFBreed.Maximum = new decimal(new int[] {
             31,
@@ -3361,7 +3333,6 @@
             // 
             this.natureBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.natureBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.natureBreed.Enabled = false;
             this.natureBreed.FormattingEnabled = true;
             this.natureBreed.Items.AddRange(new object[] {
             "Hardy",
@@ -3396,7 +3367,6 @@
             // 
             // ivSpABreed
             // 
-            this.ivSpABreed.Enabled = false;
             this.ivSpABreed.Location = new System.Drawing.Point(232, 133);
             this.ivSpABreed.Maximum = new decimal(new int[] {
             31,
@@ -3411,7 +3381,6 @@
             // 
             this.HPtypeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.HPtypeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.HPtypeBreed.Enabled = false;
             this.HPtypeBreed.FormattingEnabled = true;
             this.HPtypeBreed.Items.AddRange(new object[] {
             "Fighting",
@@ -3437,7 +3406,6 @@
             // 
             // ivHPBreed
             // 
-            this.ivHPBreed.Enabled = false;
             this.ivHPBreed.Location = new System.Drawing.Point(232, 70);
             this.ivHPBreed.Maximum = new decimal(new int[] {
             31,
@@ -3478,7 +3446,6 @@
             this.modeBreed.Name = "modeBreed";
             this.modeBreed.Size = new System.Drawing.Size(133, 21);
             this.modeBreed.TabIndex = 136;
-            this.modeBreed.SelectedIndexChanged += new System.EventHandler(this.modeBreed_SelectedIndexChanged);
             // 
             // label90
             // 
@@ -3491,7 +3458,6 @@
             // 
             // ivAtkBreed
             // 
-            this.ivAtkBreed.Enabled = false;
             this.ivAtkBreed.Location = new System.Drawing.Point(232, 91);
             this.ivAtkBreed.Maximum = new decimal(new int[] {
             31,
@@ -3562,7 +3528,6 @@
             // 
             // eggsNoBreed
             // 
-            this.eggsNoBreed.Enabled = false;
             this.eggsNoBreed.Location = new System.Drawing.Point(212, 30);
             this.eggsNoBreed.Maximum = new decimal(new int[] {
             930,
@@ -3608,6 +3573,66 @@
             this.label77.Size = new System.Drawing.Size(28, 13);
             this.label77.TabIndex = 109;
             this.label77.Text = "Slot:";
+            // 
+            // tabWonderTrade
+            // 
+            this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
+            this.tabWonderTrade.Controls.Add(this.label59);
+            this.tabWonderTrade.Controls.Add(this.label58);
+            this.tabWonderTrade.Controls.Add(this.RunWTbot);
+            this.tabWonderTrade.Controls.Add(this.WTSlot);
+            this.tabWonderTrade.Controls.Add(this.WTtradesNo);
+            this.tabWonderTrade.Controls.Add(this.WTBox);
+            this.tabWonderTrade.Controls.Add(this.label57);
+            this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
+            this.tabWonderTrade.Name = "tabWonderTrade";
+            this.tabWonderTrade.Size = new System.Drawing.Size(272, 397);
+            this.tabWonderTrade.TabIndex = 2;
+            this.tabWonderTrade.Text = "Wonder Trade";
+            // 
+            // tabSoftReset
+            // 
+            this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSoftReset.Controls.Add(this.GenderLSR);
+            this.tabSoftReset.Controls.Add(this.label74);
+            this.tabSoftReset.Controls.Add(this.shinyLSR);
+            this.tabSoftReset.Controls.Add(this.label62);
+            this.tabSoftReset.Controls.Add(this.ivSpeLSR);
+            this.tabSoftReset.Controls.Add(this.label61);
+            this.tabSoftReset.Controls.Add(this.ivSpDLSR);
+            this.tabSoftReset.Controls.Add(this.label73);
+            this.tabSoftReset.Controls.Add(this.label65);
+            this.tabSoftReset.Controls.Add(this.label72);
+            this.tabSoftReset.Controls.Add(this.RunLSRbot);
+            this.tabSoftReset.Controls.Add(this.label63);
+            this.tabSoftReset.Controls.Add(this.AbilityLSR);
+            this.tabSoftReset.Controls.Add(this.ivDefLSR);
+            this.tabSoftReset.Controls.Add(this.label60);
+            this.tabSoftReset.Controls.Add(this.label64);
+            this.tabSoftReset.Controls.Add(this.natureLSR);
+            this.tabSoftReset.Controls.Add(this.ivSpALSR);
+            this.tabSoftReset.Controls.Add(this.HPTypeLSR);
+            this.tabSoftReset.Controls.Add(this.ivHPLSR);
+            this.tabSoftReset.Controls.Add(this.label70);
+            this.tabSoftReset.Controls.Add(this.label66);
+            this.tabSoftReset.Controls.Add(this.typeLSR);
+            this.tabSoftReset.Controls.Add(this.label68);
+            this.tabSoftReset.Controls.Add(this.ivAtkLSR);
+            this.tabSoftReset.Controls.Add(this.label67);
+            this.tabSoftReset.Location = new System.Drawing.Point(4, 22);
+            this.tabSoftReset.Name = "tabSoftReset";
+            this.tabSoftReset.Size = new System.Drawing.Size(272, 397);
+            this.tabSoftReset.TabIndex = 3;
+            this.tabSoftReset.Text = "Soft-reset";
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(9, 141);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(45, 13);
+            this.label74.TabIndex = 110;
+            this.label74.Text = "Gender:";
             // 
             // MainForm
             // 
@@ -3717,10 +3742,6 @@
             this.tabEditTrainer.PerformLayout();
             this.tabControls.ResumeLayout(false);
             this.tabControls.PerformLayout();
-            this.tabWonderTrade.ResumeLayout(false);
-            this.tabWonderTrade.PerformLayout();
-            this.tabSoftReset.ResumeLayout(false);
-            this.tabSoftReset.PerformLayout();
             this.tabBreeding.ResumeLayout(false);
             this.tabBreeding.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ivSpeBreed)).EndInit();
@@ -3732,6 +3753,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
+            this.tabWonderTrade.ResumeLayout(false);
+            this.tabWonderTrade.PerformLayout();
+            this.tabSoftReset.ResumeLayout(false);
+            this.tabSoftReset.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4003,6 +4028,9 @@
         private System.Windows.Forms.NumericUpDown eggsNoBreed;
         private System.Windows.Forms.NumericUpDown boxBreed;
         private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.RadioButton OrganizeMiddle;
+        private System.Windows.Forms.RadioButton OrganizeTop;
+        private System.Windows.Forms.Label label92;
     }
 }
 

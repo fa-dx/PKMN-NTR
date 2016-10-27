@@ -67,6 +67,10 @@ namespace ntrbase
         public uint milesoff;
         public uint bpoff;
         public uint eggoff;
+        public uint mapidoff;
+        public uint mapxoff;
+        public uint mapyoff;
+        public uint mapzoff;
         //Offsets for items data
         public uint itemsoff;
         public uint medsoff;
@@ -108,6 +112,11 @@ namespace ntrbase
         public uint pssdisableY;
         public uint pssdisableIN;
         public uint pssdisableOUT;
+        public uint computerOff;
+        public uint computerIN;
+        public uint computerOUT;
+        public uint organizeBoxIN;
+        public uint organizeBoxOUT;
 
         //TODO: add opponent data offset (right now it's a constant)
 
@@ -166,6 +175,7 @@ namespace ntrbase
         public static readonly uint DpadDOWN = 0xF7F;
         public static readonly uint DpadLEFT = 0xFDF;
         public static readonly uint DpadRIGHT = 0xFEF;
+        public static readonly uint DpadUPRIGHT = 0xFAF;
         public static readonly uint runUP = 0xFBD;
         public static readonly uint runDOWN = 0xF7D;
         public static readonly uint runLEFT = 0xFDD;
@@ -433,7 +443,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR, boxBreed, slotBreed, modeBreed, runBreedingBot };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -639,6 +649,10 @@ namespace ntrbase
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
                 eggoff = 0x8C88358;
+                mapidoff = 0x8187BD4;
+                mapxoff = 0x8187BF4;
+                mapyoff = 0x8187BFC;
+                mapzoff = 0x8187BF8;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
@@ -662,6 +676,11 @@ namespace ntrbase
                 pssdisableY = 120;
                 pssdisableIN = 0x33000000;
                 pssdisableOUT = 0x33100000;
+                computerOff = 0x19BF5C;
+                computerIN = 0x500000;
+                computerOUT = 0x7D0000;
+                organizeBoxIN = 0x710000;
+                organizeBoxOUT = 0x500000;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -692,6 +711,10 @@ namespace ntrbase
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
                 eggoff = 0x8C88358;
+                mapidoff = 0x8187BD4;
+                mapxoff = 0x8187BF4;
+                mapyoff = 0x8187BFC;
+                mapzoff = 0x8187BF8;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
@@ -715,6 +738,11 @@ namespace ntrbase
                 pssdisableY = 120;
                 pssdisableIN = 0x33000000;
                 pssdisableOUT = 0x33100000;
+                computerOff = 0x19BF5C;
+                computerIN = 0x500000;
+                computerOUT = 0x7D0000;
+                organizeBoxIN = 0x710000;
+                organizeBoxOUT = 0x500000;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -2604,6 +2632,16 @@ namespace ntrbase
             }
         }
 
+        async Task<int> quickbuton(uint key)
+        {
+            byte[] buttonByte = BitConverter.GetBytes(key);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            await Task.Delay(20);
+            buttonByte = BitConverter.GetBytes(nokey);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            return 0;
+        }
+
         async Task<int> waitholdbutton(uint key)
         {
             // Get and send hex coordinates
@@ -4289,53 +4327,7 @@ namespace ntrbase
         }
 
         // Breeding bot
-        private void modeBreed_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (modeBreed.SelectedIndex)
-            {
-                case 0:
-                    eggsNoBreed.Enabled = true;
-                    natureBreed.Enabled = false;
-                    abilityBreed.Enabled = false;
-                    HPtypeBreed.Enabled = false;
-                    genderBreed.Enabled = false;
-                    ivHPBreed.Enabled = false;
-                    ivAtkBreed.Enabled = false;
-                    ivDEFBreed.Enabled = false;
-                    ivSpABreed.Enabled = false;
-                    ivSpDBreed.Enabled = false;
-                    ivSpeBreed.Enabled = false;
-                    break;
-                case 1:
-                    eggsNoBreed.Enabled = false;
-                    natureBreed.Enabled = true;
-                    abilityBreed.Enabled = true;
-                    HPtypeBreed.Enabled = true;
-                    genderBreed.Enabled = true;
-                    ivHPBreed.Enabled = true;
-                    ivAtkBreed.Enabled = true;
-                    ivDEFBreed.Enabled = true;
-                    ivSpABreed.Enabled = true;
-                    ivSpDBreed.Enabled = true;
-                    ivSpeBreed.Enabled = true;
-                    break;
-                default:
-                    eggsNoBreed.Enabled = false;
-                    natureBreed.Enabled = false;
-                    abilityBreed.Enabled = false;
-                    HPtypeBreed.Enabled = false;
-                    genderBreed.Enabled = false;
-                    ivHPBreed.Enabled = false;
-                    ivAtkBreed.Enabled = false;
-                    ivDEFBreed.Enabled = false;
-                    ivSpABreed.Enabled = false;
-                    ivSpDBreed.Enabled = false;
-                    ivSpeBreed.Enabled = false;
-                    break;
-            }
-        }
-
-        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, stopdaycare, botexit };
+        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, retirefromcomputer, checkmap6, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, botexit };
 
         private async void runBreedingBot_Click(object sender, EventArgs e)
         {
@@ -4344,7 +4336,7 @@ namespace ntrbase
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
-                botStop = false; // for testing
+                botStop = false;
                 botWorking = true;
                 botState = (int)breedbotstates.botstart;
                 onlyView.Checked = true;
@@ -4363,9 +4355,23 @@ namespace ntrbase
 
             // Local variables
             Task<int> waitNTRtask;
+            int currentbox = Convert.ToInt32(boxBreed.Value - 1);
+            int currentslot = Convert.ToInt32(slotBreed.Value - 1);
             int waitresult = 0;
             int waittimeout = 0;
+            int eggsinparty = 0;
+            uint routemapid = 0;
+            uint daycaremapid = 0;
+            uint daycaremanx = 0;
+            uint daycaremany = 0;
+            uint daycaredoorx = 0;
+            uint daycaredoory = 0;
+            uint daycareexitx = 0;
+            uint daycareexity = 0;
+            uint computerx = 0;
+            uint computery = 0;
             bool orasgame;
+            bool boxchange = true;
             if (game == GameType.X || game == GameType.Y)
             {
                 orasgame = false;
@@ -4373,6 +4379,16 @@ namespace ntrbase
             else
             {
                 orasgame = true;
+                routemapid = 0x2C;
+                daycaremapid = 0x187;
+                daycaremanx = 0x45553000;
+                daycaremany = 0x44D92000;
+                daycaredoorx = 0x455AD000;
+                daycaredoory = 0x44D6E000;
+                daycareexitx = 0x43610000;
+                daycareexity = 0x43A68000;
+                computerx = 0x43828000;
+                computery = 0x43730000;
             }
 
 
@@ -4383,7 +4399,15 @@ namespace ntrbase
                 {
                     case (int)breedbotstates.botstart:
                         Addlog("Bot start");
-                        botState = (int)breedbotstates.walk1;
+                        switch (modeBreed.SelectedIndex)
+                        {
+                            case 0:
+                                botState = (int)breedbotstates.walk1;
+                                break;
+                            default:
+                                botState = (int)breedbotstates.botexit;
+                                break;
+                        }
                         break;
                     case (int)breedbotstates.walk1:
                         Addlog("Run in direction 1");
@@ -4476,14 +4500,42 @@ namespace ntrbase
                             waitNTRtask = waitholdbutton(runLEFT);
                         }
                         waitresult = await waitNTRtask;
-                        await Task.Delay(2000);
                         if (waitresult == 0)
                         {
-                            botState = (int)breedbotstates.stopdaycare;
+                            botState = (int)breedbotstates.checkmap1;
                         }
                         else
                         {
                             MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.checkmap1:
+                        await Task.Delay(1000);
+                        if (orasgame)
+                        {
+                            for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                            {
+                                await Task.Delay(100);
+                                waitNTRtask = waitNTRread(mapyoff);
+                                waitresult = await waitNTRtask;
+                                if (lastmemoryread >= daycaremany && lastmemoryread < daycaremany + 0x100)
+                                {
+                                    break;
+                                }
+                            }
+                            if (waittimeout < timeout * 10)
+                            {
+                                botState = (int)breedbotstates.stopdaycare;
+                            }
+                            else
+                            { // Still far from day care man
+                                botState = (int)breedbotstates.walk3;
+                            }
+                            break;
+                        }
+                        else
+                        {
                             botState = (int)breedbotstates.botexit;
                         }
                         break;
@@ -4493,7 +4545,7 @@ namespace ntrbase
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
-                            botState = (int)breedbotstates.botexit;
+                            botState = (int)breedbotstates.triggerdialog;
                         }
                         else
                         {
@@ -4501,7 +4553,736 @@ namespace ntrbase
                             botState = (int)breedbotstates.botexit;
                         }
                         break;
+                    case (int)breedbotstates.triggerdialog:
+                        Addlog("Talk to Day Care Man");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.cont1;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.cont1:
+                        Addlog("Continue dialog (Ah! You're back!)");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.cont2;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.cont2:
+                        Addlog("Continue dialog (We were raising...)");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.cont3;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.cont3:
+                        Addlog("Continue dialog (While we were...)");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.cont4;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.cont4:
+                        Addlog("Continue dialog (Don't know where...)");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.cont5;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.cont5:
+                        Addlog("Continue dialog (You'll be wanting it...)");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.acceptegg;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.acceptegg:
+                        Addlog("Accept egg");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.cont6;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.cont6:
+                        Addlog("Continue dialog (Player received the Egg..)");
+                        await Task.Delay(2000);
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.exitdialog;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.exitdialog:
+                        Addlog("Exit dialog (Be sure to take...)");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            eggsinparty++;
+                            SetValue(eggsNoBreed, eggsNoBreed.Value - 1);
+                            if (eggsinparty >= 5 || eggsNoBreed.Value == 0)
+                            {
+                                botState = (int)breedbotstates.walktodaycare;
+                            }
+                            else
+                            {
+                                botState = (int)breedbotstates.walk1;
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.walktodaycare:
+                        Addlog("Walk to Day Care");
+                        waitNTRtask = quickbuton(DpadRIGHT);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap2;
+                        break;
+                    case (int)breedbotstates.checkmap2:
+                        await Task.Delay(250);
+                        waitNTRtask = waitNTRread(mapxoff);
+                        waitresult = await waitNTRtask;
+                        if (lastmemoryread >= daycaredoorx && lastmemoryread < daycaredoorx + 0x100)
+                        {
+                            botState = (int)breedbotstates.entertodaycare;
+                        }
+                        else
+                        { // Still far from day care man
+                            botState = (int)breedbotstates.walktodaycare;
+                        }
+                        break;
+                    case (int)breedbotstates.entertodaycare:
+                        Addlog("Enter to Day Care");
+                        waitNTRtask = waitbutton(DpadUP);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.checkmap3;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.checkmap3:
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(1000);
+                            waitNTRtask = waitNTRread(mapidoff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread == daycaremapid)
+                            {
+                                botState = (int)breedbotstates.walktodesk;
+                                break;
+                            }
+                            else if (lastmemoryread == routemapid)
+                            {
+                                botState = (int)breedbotstates.entertodaycare;
+                                break;
+                            }
+                        }
+                        if (waittimeout >= timeout * 10)
+                        {
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.walktodesk:
+                        Addlog("Run to desk");
+                        waitNTRtask = waitbutton(runUP);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.checkmap4;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.checkmap4:
+                        waitNTRtask = waitNTRread(mapyoff);
+                        waitresult = await waitNTRtask;
+                        if (lastmemoryread >= computery && lastmemoryread < computery + 0x100)
+                        {
+                            botState = (int)breedbotstates.walktocomputer;
+                        }
+                        else
+                        { // Still far from day care man
+                            botState = (int)breedbotstates.walktodesk;
+                        }
+                        break;
+                    case (int)breedbotstates.walktocomputer:
+                        Addlog("Walk to Computer");
+                        waitNTRtask = quickbuton(DpadRIGHT);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap5;
+                        break;
+                    case (int)breedbotstates.checkmap5:
+                        await Task.Delay(250);
+                        waitNTRtask = waitNTRread(mapxoff);
+                        waitresult = await waitNTRtask;
+                        if (lastmemoryread >= computerx && lastmemoryread < computerx + 0x100)
+                        {
+                            botState = (int)breedbotstates.facecomputer;
+                        }
+                        else
+                        { // Still far from computer
+                            botState = (int)breedbotstates.walktocomputer;
+                        }
+                        break;
+                    case (int)breedbotstates.facecomputer:
+                        waitNTRtask = waitbutton(DpadUP);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.startcomputer;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.startcomputer:
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.testcomputer;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.testcomputer:
+                        await Task.Delay(1000);
+                        Addlog("Test if the computer is on");
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(computerOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= computerIN && lastmemoryread < computerIN + 0x10000)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < timeout * 10)
+                        {
+                            botState = (int)breedbotstates.computerdialog;
+                        }
+                        else if (lastmemoryread >= computerOUT && lastmemoryread < computerOUT + 0x10000)
+                        { // Computer off
+                            botState = (int)breedbotstates.facecomputer;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.computerdialog:
+                        Addlog("Skip computer dialog");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.pressPCstorage;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.pressPCstorage:
+                        Addlog("Press Access PC storage");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.touchOrganize;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.touchOrganize:
+                        Addlog("Touch Organize boxes");
+                        if (orasgame && OrganizeTop.Checked)
+                        {
+                            waitNTRtask = waittouch(160, 40);
+                        }
+                        else
+                        {
+                            waitNTRtask = waittouch(160, 120);
+                        }
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.testboxes;
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.testboxes:
+                        Addlog("Test if the boxes are shown");
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(wtboxesOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= organizeBoxIN && lastmemoryread < organizeBoxIN + 0x10000)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < timeout * 10)
+                        {
+                            botState = (int)breedbotstates.readslot;
+                        }
+                        else if (lastmemoryread >= organizeBoxOUT && lastmemoryread < organizeBoxOUT + 0x10000)
+                        { // Still on PC mode screen
+                            botState = (int)breedbotstates.touchOrganize;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.readslot:
+                        Addlog("Check if box " + (currentbox + 1).ToString() + ", slot " + (currentslot + 1).ToString() + " is empty");
+                        dPID.Clear();
+                        lastlog = "";
+                        SetValue(boxDump, currentbox + 1);
+                        SetValue(slotDump, currentslot + 1);
+                        SetValue(boxBreed, currentbox + 1);
+                        SetValue(slotBreed, currentslot + 1);
+                        dumpPokemon.Enabled = true;
+                        dumpPokemon.PerformClick();
+                        dumpPokemon.Enabled = false;
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            if (lastlog.Contains("finished"))
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < timeout * 10 && dPID.Text.Length < 1)
+                        {
+                            botState = (int)breedbotstates.testboxchange;
+                        }
+                        else if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
+                        { // Non empty space
+                            Addlog("Space is not empty");
+                            currentslot++;
+                            if (currentslot >= 30)
+                            {
+                                currentslot = 0;
+                                currentbox++;
+                                boxchange = true;
+                                if (currentbox >= 31)
+                                {
+                                    currentbox = 0;
+                                }
+                            }
+                            botState = (int)breedbotstates.readslot;
+                        }
+                        else
+                        {
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.testboxchange:
+                        if (boxchange)
+                        {
+                            botState = (int)breedbotstates.touchboxview;
+                            boxchange = false;
+                        }
+                        else
+                        {
+                            botState = (int)breedbotstates.touchegg;
+                        }
+                        break;
+                    case (int)breedbotstates.touchboxview:
+                        Addlog("Touch Box View");
+                        await Task.Delay(500);
+                        waitNTRtask = waittouch(30, 220);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.testboxview;
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.testboxview:
+                        Addlog("Test if box view is shown");
+                        await Task.Delay(500);
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(wtboxviewOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= wtboxviewIN && lastmemoryread < wtboxviewIN + wtboxviewRange)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < timeout * 10)
+                        {
+                            botState = (int)breedbotstates.touchnewbox;
+                        }
+                        else if (lastmemoryread >= wtboxviewOUT && lastmemoryread < wtboxviewOUT + wtboxviewRange)
+                        { // Still on the boxes
+                            botState = (int)breedbotstates.touchboxview;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.touchnewbox:
+                        Addlog("Touch New Box");
+                        waitNTRtask = waittouch(boxXcord[currentbox], boxYcord[currentbox]);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.selectnewbox;
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.selectnewbox:
+                        Addlog("Select New Box");
+                        waitNTRtask = waitbutton(keyA);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.testviewout;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.testviewout:
+                        Addlog("Test if box view is not shown");
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(wtboxviewOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= wtboxviewOUT && lastmemoryread < wtboxviewOUT + wtboxviewRange)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < timeout * 10)
+                        {
+                            botState = (int)breedbotstates.touchegg;
+                        }
+                        else if (lastmemoryread >= wtboxviewIN && lastmemoryread < wtboxviewIN + wtboxviewRange)
+                        { // Still on the box view
+                            botState = (int)breedbotstates.selectnewbox;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.touchegg:
+                        Addlog("Select Egg");
+                        waitNTRtask = waitholdtouch(300,100);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.moveegg;
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.moveegg:
+                        Addlog("Move Egg");
+                        waitNTRtask = waitholdtouch(boxpokeXcord[currentslot], boxpokeYcord[currentslot]);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.releaseegg;
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.releaseegg:
+                        Addlog("Release Egg");
+                        waitNTRtask = waitfreetouch();
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            currentslot++;
+                            if (currentslot >= 30)
+                            {
+                                currentslot = 0;
+                                currentbox++;
+                                boxchange = true;
+                                if (currentbox >= 31)
+                                {
+                                    currentbox = 0;
+                                }
+                            }
+                            eggsinparty--;
+                            if (eggsinparty > 0)
+                            {
+                                botState = (int)breedbotstates.readslot;
+                            }
+                            else
+                            {
+                                botState = (int)breedbotstates.exitcomputer;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(toucherror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.exitcomputer:
+                        Addlog("Exit from PC");
+                        waitNTRtask = waitbutton(keyX);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.testexit;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.testexit:
+                        Addlog("Test if out from PC");
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(wtboxesOff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= organizeBoxOUT && lastmemoryread < organizeBoxOUT + 0x10000)
+                            {
+                                break;
+                            }
+                        }
+                        if (waittimeout < timeout * 10)
+                        {
+                            if (eggsNoBreed.Value > 0)
+                            {
+                                botState = (int)breedbotstates.retirefromcomputer;
+                            }
+                            else
+                            {
+                                botState = (int)breedbotstates.botexit;
+                            }
+                        }
+                        else if (lastmemoryread >= organizeBoxIN && lastmemoryread < organizeBoxIN + 0x10000)
+                        { // Still on PC mode screen
+                            botState = (int)breedbotstates.exitcomputer;
+                        }
+                        else
+                        { // Other error
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.retirefromcomputer:
+                        Addlog("Retire from Computer");
+                        waitNTRtask = quickbuton(DpadLEFT);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap6;
+                        break;
+                    case (int)breedbotstates.checkmap6:
+                        await Task.Delay(250);
+                        waitNTRtask = waitNTRread(mapxoff);
+                        waitresult = await waitNTRtask;
+                        if (lastmemoryread >= daycareexitx && lastmemoryread < daycareexitx + 0x100)
+                        {
+                            botState = (int)breedbotstates.retirefromdesk;
+                        }
+                        else
+                        { // Still far from exit
+                            botState = (int)breedbotstates.retirefromcomputer;
+                        }
+                        break;
+                    case (int)breedbotstates.retirefromdesk:
+                        Addlog("Run to exit");
+                        waitNTRtask = waitbutton(runDOWN);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.checkmap7;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.checkmap7:
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                        {
+                            await Task.Delay(1000);
+                            waitNTRtask = waitNTRread(mapidoff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread == routemapid)
+                            {
+                                botState = (int)breedbotstates.retirefromdoor;
+                                break;
+                            }
+                            else if (lastmemoryread == daycaremapid)
+                            {
+                                botState = (int)breedbotstates.retirefromdesk;
+                                break;
+                            }
+                        }
+                        if (waittimeout >= timeout * 10)
+                        {
+                            MessageBox.Show(readerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.retirefromdoor:
+                        Addlog("Retire from door");
+                        waitNTRtask = quickbuton(DpadDOWN);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap8;
+                        break;
+                    case (int)breedbotstates.checkmap8:
+                        await Task.Delay(250);
+                        waitNTRtask = waitNTRread(mapyoff);
+                        waitresult = await waitNTRtask;
+                        if (lastmemoryread >= daycaremany && lastmemoryread < daycaremany + 0x100)
+                        {
+                            botState = (int)breedbotstates.walktodaycareman;
+                        }
+                        else
+                        { // Still far day care man
+                            botState = (int)breedbotstates.retirefromdoor;
+                        }
+                        break;
+                    case (int)breedbotstates.walktodaycareman:
+                        Addlog("Retire walk to Day Care Man");
+                        waitNTRtask = quickbuton(DpadLEFT);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap9;
+                        break;
+                    case (int)breedbotstates.checkmap9:
+                        await Task.Delay(250);
+                        waitNTRtask = waitNTRread(mapxoff);
+                        waitresult = await waitNTRtask;
+                        if (lastmemoryread >= daycaremanx && lastmemoryread < daycaremanx + 0x100)
+                        {
+                            botState = (int)breedbotstates.walk1;
+                        }
+                        else
+                        { // Still far day care man
+                            botState = (int)breedbotstates.walktodaycareman;
+                        }
+                        break;
                     default:
+                        waitNTRtask = waitfreebutton();
+                        waitresult = await waitNTRtask;
+                        waitNTRtask = waitfreetouch();
+                        waitresult = await waitNTRtask;
                         Addlog("Bot stop");
                         botStop = true;
                         break;
