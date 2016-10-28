@@ -444,7 +444,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2 };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -4347,7 +4347,7 @@ namespace ntrbase
                     break;
             }
 
-            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Currently, this only works in the Day Care of Route 117 in ORAS. Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Currently, this only works in ORAS. Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
@@ -4395,8 +4395,6 @@ namespace ntrbase
             else
             {
                 orasgame = true;
-                computerx = 0x43828000;
-                computery = 0x43730000;
                 if (radioDayCare1.Checked)
                 {
                     routemapid = 0x2C;
@@ -4407,17 +4405,22 @@ namespace ntrbase
                     daycaredoory = 0x44D6E000;
                     daycareexitx = 0x43610000;
                     daycareexity = 0x43A68000;
+                    computerx = 0x43828000;
+                    computery = 0x43730000;
                 }
                 else
                 {
-                    routemapid = 0x0;
-                    daycaremapid = 0x0;
-                    daycaremanx = 0x0;
-                    daycaremany = 0x0;
-                    daycaredoorx = 0x0;
-                    daycaredoory = 0x0;
-                    daycareexitx = 0x0;
-                    daycareexity = 0x0;
+                    routemapid = 0xD2;
+                    daycaremapid = 0x207;
+                    daycaremanx = 0x44A9E000;
+                    daycaremany = 0x44D92000;
+                    daycaredoorx = 0x449C6000;
+                    daycaredoory = 0x44D4A000;
+                    daycareexitx = 0x43610000;
+                    daycareexity = 0x43A68000;
+                    computerx = 0x43828000;
+                    computery = 0x43730000;
+                    eggoff = 0x8C88548;
                 }
             }
 
@@ -4722,7 +4725,14 @@ namespace ntrbase
                         break;
                     case (int)breedbotstates.walktodaycare:
                         Addlog("Walk to Day Care");
-                        waitNTRtask = quickbuton(DpadRIGHT);
+                        if (orasgame && radioDayCare2.Checked)
+                        {
+                            waitNTRtask = quickbuton(DpadLEFT);
+                        }
+                        else
+                        {
+                            waitNTRtask = quickbuton(DpadRIGHT);
+                        }
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                             botState = (int)breedbotstates.checkmap2;
@@ -5289,8 +5299,15 @@ namespace ntrbase
                         }
                         break;
                     case (int)breedbotstates.walktodaycareman:
-                        Addlog("Retire walk to Day Care Man");
-                        waitNTRtask = quickbuton(DpadLEFT);
+                        Addlog("Walk to Day Care Man");
+                        if (orasgame && radioDayCare2.Checked)
+                        {
+                            waitNTRtask = quickbuton(DpadRIGHT);
+                        }
+                        else
+                        {
+                            waitNTRtask = quickbuton(DpadLEFT);
+                        }
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                             botState = (int)breedbotstates.checkmap9;
