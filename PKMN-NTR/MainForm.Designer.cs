@@ -247,6 +247,24 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControls = new System.Windows.Forms.TabPage();
             this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.shinyBreed = new System.Windows.Forms.CheckBox();
+            this.bFilterLoad = new System.Windows.Forms.Button();
+            this.bFilterSave = new System.Windows.Forms.Button();
+            this.bFilterRemove = new System.Windows.Forms.Button();
+            this.bFilterAdd = new System.Windows.Forms.Button();
+            this.BreedFilter = new System.Windows.Forms.DataGridView();
+            this.bFilterShiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterNature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterAbility = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterHiddenPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterHP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterAtk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterDef = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterSpA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterSpD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterSpe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label50 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioDayCare1 = new System.Windows.Forms.RadioButton();
             this.radioDayCare2 = new System.Windows.Forms.RadioButton();
@@ -361,6 +379,7 @@
             this.groupBox5.SuspendLayout();
             this.tabControls.SuspendLayout();
             this.tabBreeding.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BreedFilter)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ivSpeBreed)).BeginInit();
@@ -3140,6 +3159,13 @@
             // tabBreeding
             // 
             this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.shinyBreed);
+            this.tabBreeding.Controls.Add(this.bFilterLoad);
+            this.tabBreeding.Controls.Add(this.bFilterSave);
+            this.tabBreeding.Controls.Add(this.bFilterRemove);
+            this.tabBreeding.Controls.Add(this.bFilterAdd);
+            this.tabBreeding.Controls.Add(this.BreedFilter);
+            this.tabBreeding.Controls.Add(this.label50);
             this.tabBreeding.Controls.Add(this.groupBox4);
             this.tabBreeding.Controls.Add(this.groupBox2);
             this.tabBreeding.Controls.Add(this.genderBreed);
@@ -3180,13 +3206,172 @@
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
+            // shinyBreed
+            // 
+            this.shinyBreed.AutoSize = true;
+            this.shinyBreed.Location = new System.Drawing.Point(143, 53);
+            this.shinyBreed.Name = "shinyBreed";
+            this.shinyBreed.Size = new System.Drawing.Size(52, 17);
+            this.shinyBreed.TabIndex = 150;
+            this.shinyBreed.Text = "Shiny";
+            this.shinyBreed.UseVisualStyleBackColor = true;
+            // 
+            // bFilterLoad
+            // 
+            this.bFilterLoad.Location = new System.Drawing.Point(488, 180);
+            this.bFilterLoad.Name = "bFilterLoad";
+            this.bFilterLoad.Size = new System.Drawing.Size(65, 23);
+            this.bFilterLoad.TabIndex = 149;
+            this.bFilterLoad.Text = "Load";
+            this.bFilterLoad.UseVisualStyleBackColor = true;
+            this.bFilterLoad.Click += new System.EventHandler(this.bFilterLoad_Click);
+            // 
+            // bFilterSave
+            // 
+            this.bFilterSave.Location = new System.Drawing.Point(417, 180);
+            this.bFilterSave.Name = "bFilterSave";
+            this.bFilterSave.Size = new System.Drawing.Size(65, 23);
+            this.bFilterSave.TabIndex = 148;
+            this.bFilterSave.Text = "Save";
+            this.bFilterSave.UseVisualStyleBackColor = true;
+            this.bFilterSave.Click += new System.EventHandler(this.bFilterSave_Click);
+            // 
+            // bFilterRemove
+            // 
+            this.bFilterRemove.Location = new System.Drawing.Point(346, 180);
+            this.bFilterRemove.Name = "bFilterRemove";
+            this.bFilterRemove.Size = new System.Drawing.Size(65, 23);
+            this.bFilterRemove.TabIndex = 147;
+            this.bFilterRemove.Text = "Remove";
+            this.bFilterRemove.UseVisualStyleBackColor = true;
+            this.bFilterRemove.Click += new System.EventHandler(this.bFilterRemove_Click);
+            // 
+            // bFilterAdd
+            // 
+            this.bFilterAdd.Location = new System.Drawing.Point(275, 180);
+            this.bFilterAdd.Name = "bFilterAdd";
+            this.bFilterAdd.Size = new System.Drawing.Size(65, 23);
+            this.bFilterAdd.TabIndex = 146;
+            this.bFilterAdd.Text = "Add";
+            this.bFilterAdd.UseVisualStyleBackColor = true;
+            this.bFilterAdd.Click += new System.EventHandler(this.bFilterAdd_Click);
+            // 
+            // BreedFilter
+            // 
+            this.BreedFilter.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.BreedFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.BreedFilter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.bFilterShiny,
+            this.bFilterNature,
+            this.bFilterAbility,
+            this.bFilterHiddenPower,
+            this.bFilterGender,
+            this.bFilterHP,
+            this.bFilterAtk,
+            this.bFilterDef,
+            this.bFilterSpA,
+            this.bFilterSpD,
+            this.bFilterSpe});
+            this.BreedFilter.Location = new System.Drawing.Point(275, 29);
+            this.BreedFilter.MultiSelect = false;
+            this.BreedFilter.Name = "BreedFilter";
+            this.BreedFilter.ReadOnly = true;
+            this.BreedFilter.Size = new System.Drawing.Size(277, 145);
+            this.BreedFilter.TabIndex = 145;
+            // 
+            // bFilterShiny
+            // 
+            this.bFilterShiny.HeaderText = "Shiny";
+            this.bFilterShiny.Name = "bFilterShiny";
+            this.bFilterShiny.ReadOnly = true;
+            this.bFilterShiny.Width = 58;
+            // 
+            // bFilterNature
+            // 
+            this.bFilterNature.HeaderText = "Nature";
+            this.bFilterNature.Name = "bFilterNature";
+            this.bFilterNature.ReadOnly = true;
+            this.bFilterNature.Width = 64;
+            // 
+            // bFilterAbility
+            // 
+            this.bFilterAbility.HeaderText = "Ability";
+            this.bFilterAbility.Name = "bFilterAbility";
+            this.bFilterAbility.ReadOnly = true;
+            this.bFilterAbility.Width = 59;
+            // 
+            // bFilterHiddenPower
+            // 
+            this.bFilterHiddenPower.HeaderText = "HP type";
+            this.bFilterHiddenPower.Name = "bFilterHiddenPower";
+            this.bFilterHiddenPower.ReadOnly = true;
+            this.bFilterHiddenPower.Width = 70;
+            // 
+            // bFilterGender
+            // 
+            this.bFilterGender.HeaderText = "Gender";
+            this.bFilterGender.Name = "bFilterGender";
+            this.bFilterGender.ReadOnly = true;
+            this.bFilterGender.Width = 67;
+            // 
+            // bFilterHP
+            // 
+            this.bFilterHP.HeaderText = "HP";
+            this.bFilterHP.Name = "bFilterHP";
+            this.bFilterHP.ReadOnly = true;
+            this.bFilterHP.Width = 47;
+            // 
+            // bFilterAtk
+            // 
+            this.bFilterAtk.HeaderText = "Atk";
+            this.bFilterAtk.Name = "bFilterAtk";
+            this.bFilterAtk.ReadOnly = true;
+            this.bFilterAtk.Width = 48;
+            // 
+            // bFilterDef
+            // 
+            this.bFilterDef.HeaderText = "Def";
+            this.bFilterDef.Name = "bFilterDef";
+            this.bFilterDef.ReadOnly = true;
+            this.bFilterDef.Width = 49;
+            // 
+            // bFilterSpA
+            // 
+            this.bFilterSpA.HeaderText = "SpA";
+            this.bFilterSpA.Name = "bFilterSpA";
+            this.bFilterSpA.ReadOnly = true;
+            this.bFilterSpA.Width = 52;
+            // 
+            // bFilterSpD
+            // 
+            this.bFilterSpD.HeaderText = "SpD";
+            this.bFilterSpD.Name = "bFilterSpD";
+            this.bFilterSpD.ReadOnly = true;
+            this.bFilterSpD.Width = 53;
+            // 
+            // bFilterSpe
+            // 
+            this.bFilterSpe.HeaderText = "Spe";
+            this.bFilterSpe.Name = "bFilterSpe";
+            this.bFilterSpe.ReadOnly = true;
+            this.bFilterSpe.Width = 51;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(272, 10);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(34, 13);
+            this.label50.TabIndex = 144;
+            this.label50.Text = "Filters";
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.radioDayCare1);
             this.groupBox4.Controls.Add(this.radioDayCare2);
             this.groupBox4.Location = new System.Drawing.Point(7, 258);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(262, 45);
+            this.groupBox4.Size = new System.Drawing.Size(259, 45);
             this.groupBox4.TabIndex = 143;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Daycare:";
@@ -3218,9 +3403,9 @@
             this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox2.Controls.Add(this.OrganizeMiddle);
             this.groupBox2.Controls.Add(this.OrganizeTop);
-            this.groupBox2.Location = new System.Drawing.Point(6, 207);
+            this.groupBox2.Location = new System.Drawing.Point(7, 207);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(263, 45);
+            this.groupBox2.Size = new System.Drawing.Size(259, 45);
             this.groupBox2.TabIndex = 142;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Organize Boxes position:";
@@ -3272,7 +3457,7 @@
             // label80
             // 
             this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(228, 54);
+            this.label80.Location = new System.Drawing.Point(229, 54);
             this.label80.Name = "label80";
             this.label80.Size = new System.Drawing.Size(41, 13);
             this.label80.TabIndex = 115;
@@ -3280,7 +3465,7 @@
             // 
             // ivSpeBreed
             // 
-            this.ivSpeBreed.Location = new System.Drawing.Point(232, 175);
+            this.ivSpeBreed.Location = new System.Drawing.Point(233, 175);
             this.ivSpeBreed.Maximum = new decimal(new int[] {
             31,
             0,
@@ -3301,7 +3486,7 @@
             // 
             // ivSpDBreed
             // 
-            this.ivSpDBreed.Location = new System.Drawing.Point(232, 154);
+            this.ivSpDBreed.Location = new System.Drawing.Point(233, 154);
             this.ivSpDBreed.Maximum = new decimal(new int[] {
             31,
             0,
@@ -3323,7 +3508,7 @@
             // label83
             // 
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(201, 179);
+            this.label83.Location = new System.Drawing.Point(202, 179);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(31, 13);
             this.label83.TabIndex = 121;
@@ -3340,9 +3525,9 @@
             // 
             // runBreedingBot
             // 
-            this.runBreedingBot.Location = new System.Drawing.Point(6, 309);
+            this.runBreedingBot.Location = new System.Drawing.Point(6, 335);
             this.runBreedingBot.Name = "runBreedingBot";
-            this.runBreedingBot.Size = new System.Drawing.Size(263, 23);
+            this.runBreedingBot.Size = new System.Drawing.Size(260, 23);
             this.runBreedingBot.TabIndex = 113;
             this.runBreedingBot.Text = "Run";
             this.runBreedingBot.UseVisualStyleBackColor = true;
@@ -3351,7 +3536,7 @@
             // label85
             // 
             this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(201, 116);
+            this.label85.Location = new System.Drawing.Point(202, 116);
             this.label85.Name = "label85";
             this.label85.Size = new System.Drawing.Size(31, 13);
             this.label85.TabIndex = 118;
@@ -3369,7 +3554,7 @@
             // 
             // ivDEFBreed
             // 
-            this.ivDEFBreed.Location = new System.Drawing.Point(232, 112);
+            this.ivDEFBreed.Location = new System.Drawing.Point(233, 112);
             this.ivDEFBreed.Maximum = new decimal(new int[] {
             31,
             0,
@@ -3391,7 +3576,7 @@
             // label87
             // 
             this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(207, 74);
+            this.label87.Location = new System.Drawing.Point(208, 74);
             this.label87.Name = "label87";
             this.label87.Size = new System.Drawing.Size(25, 13);
             this.label87.TabIndex = 116;
@@ -3435,7 +3620,7 @@
             // 
             // ivSpABreed
             // 
-            this.ivSpABreed.Location = new System.Drawing.Point(232, 133);
+            this.ivSpABreed.Location = new System.Drawing.Point(233, 133);
             this.ivSpABreed.Maximum = new decimal(new int[] {
             31,
             0,
@@ -3474,7 +3659,7 @@
             // 
             // ivHPBreed
             // 
-            this.ivHPBreed.Location = new System.Drawing.Point(232, 70);
+            this.ivHPBreed.Location = new System.Drawing.Point(233, 70);
             this.ivHPBreed.Maximum = new decimal(new int[] {
             31,
             0,
@@ -3496,7 +3681,7 @@
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(201, 137);
+            this.label89.Location = new System.Drawing.Point(202, 137);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(31, 13);
             this.label89.TabIndex = 119;
@@ -3518,7 +3703,7 @@
             // label90
             // 
             this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(201, 95);
+            this.label90.Location = new System.Drawing.Point(202, 95);
             this.label90.Name = "label90";
             this.label90.Size = new System.Drawing.Size(31, 13);
             this.label90.TabIndex = 117;
@@ -3526,7 +3711,7 @@
             // 
             // ivAtkBreed
             // 
-            this.ivAtkBreed.Location = new System.Drawing.Point(232, 91);
+            this.ivAtkBreed.Location = new System.Drawing.Point(233, 91);
             this.ivAtkBreed.Maximum = new decimal(new int[] {
             31,
             0,
@@ -3539,7 +3724,7 @@
             // label91
             // 
             this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(200, 158);
+            this.label91.Location = new System.Drawing.Point(201, 158);
             this.label91.Name = "label91";
             this.label91.Size = new System.Drawing.Size(32, 13);
             this.label91.TabIndex = 120;
@@ -3821,6 +4006,7 @@
             this.tabControls.PerformLayout();
             this.tabBreeding.ResumeLayout(false);
             this.tabBreeding.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BreedFilter)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -4118,6 +4304,24 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView BreedFilter;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterShiny;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterNature;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterAbility;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterHiddenPower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterGender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterHP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterAtk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterDef;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterSpA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterSpD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bFilterSpe;
+        private System.Windows.Forms.Button bFilterLoad;
+        private System.Windows.Forms.Button bFilterSave;
+        private System.Windows.Forms.Button bFilterRemove;
+        private System.Windows.Forms.Button bFilterAdd;
+        private System.Windows.Forms.CheckBox shinyBreed;
     }
 }
 

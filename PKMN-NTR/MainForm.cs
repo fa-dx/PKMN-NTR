@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace ntrbase
 {
@@ -32,6 +33,7 @@ namespace ntrbase
         public const int POKEBYTES = 232;
         public const string FOLDERPOKE = "Pokemon";
         public const string FOLDERDELETE = "Deleted";
+        public const string FOLDERBOT = "Bot";
         PKHeX dumpedPKHeX = new PKHeX();
 
         UpdateDetails foundUpdate = null;
@@ -1088,12 +1090,14 @@ namespace ntrbase
 
         #region controls
 
-        public void getHiddenPower()
+        public int getHiddenPower()
         {
             int hp = (15 * ((dumpedPKHeX.IV_HP & 1) + 2 * (dumpedPKHeX.IV_ATK & 1) + 4 * (dumpedPKHeX.IV_DEF & 1) + 8 * (dumpedPKHeX.IV_SPE & 1) + 16 * (dumpedPKHeX.IV_SPA & 1) + 32 * (dumpedPKHeX.IV_SPD & 1)) / 63);
 
             SetText(hiddenPower, hiddenPowerString[hp]);
             SetColor(hiddenPower, hiddenPowerColor[hp], true);
+
+            return hp;
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)
@@ -2574,6 +2578,7 @@ namespace ntrbase
 
         #region Bots
 
+        // R/W handlers
         public void handleMemoryRead(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
@@ -2883,6 +2888,199 @@ namespace ntrbase
                 GenderLSR.ForeColor = Color.Blue;
                 GenderLSR.Text = "♂";
                 desiredgender = 0;
+            }
+        }
+
+        // Filter handlers
+        public bool FilterCheck(DataGridView filters)
+        {
+            if (filters.Rows.Count > 0)
+            {
+                int failedtests = 0;
+                foreach (DataGridViewRow row in filters.Rows)
+                {
+                    Addlog("Analyze pokémon using filter # " + (row.Index + 1).ToString());
+                    // Test shiny
+                    if ((int)row.Cells[0].Value == 1)
+                    {
+                        if (dumpedPKHeX.isShiny)
+                        {
+                            Addlog("Shiny: PASS");
+                        }
+                        else
+                        {
+                            Addlog("Shiny: FAIL");
+                            failedtests++;
+                        }
+                    }
+                    // Test nature
+                    if ((int)row.Cells[1].Value < 0 || dumpedPKHeX.Nature == (int)row.Cells[1].Value)
+                    {
+                        Addlog("Nature: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Nature: FAIL");
+                        failedtests++;
+                    }
+                    // Test Ability
+                    if ((int)row.Cells[2].Value < 0 || dumpedPKHeX.Ability == (int)row.Cells[2].Value)
+                    {
+                        Addlog("Ability: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Ability: FAIL");
+                        failedtests++;
+                    }
+                    // Test Hidden Power
+                    if (HPTypeLSR.SelectedIndex < 0 || getHiddenPower() == (int)row.Cells[3].Value)
+                    {
+                        Addlog("Hidden Power: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Hidden Power: FAIL");
+                        failedtests++;
+                    }
+                    // Test Gender
+                    if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == dumpedPKHeX.Gender)
+                    {
+                        Addlog("Gender: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Gender: FAIL");
+                        failedtests++;
+                    }
+                    // Test HP
+                    if (dumpedPKHeX.IV_HP >= (int)row.Cells[5].Value)
+                    {
+                        Addlog("Hit Points IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Hit Points IV: FAIL");
+                        failedtests++;
+                    }
+                    // Test Atk
+                    if (dumpedPKHeX.IV_ATK >= (int)row.Cells[6].Value)
+                    {
+                        Addlog("Attack IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Attack IV: FAIL");
+                        failedtests++;
+                    }
+                    // Test Def
+                    if (dumpedPKHeX.IV_DEF >= (int)row.Cells[7].Value)
+                    {
+                        Addlog("Defense IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Defense IV: FAIL");
+                        failedtests++;
+                    }
+                    // Test SpA
+                    if (dumpedPKHeX.IV_SPA >= (int)row.Cells[8].Value)
+                    {
+                        Addlog("Special Attack IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Special Attack IV: FAIL");
+                        failedtests++;
+                    }
+                    // Test SpD
+                    if (dumpedPKHeX.IV_SPD >= (int)row.Cells[9].Value)
+                    {
+                        Addlog("Special Defense IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Special Defense IV: FAIL");
+                        failedtests++;
+                    }
+                    // Test Spe
+                    if (dumpedPKHeX.IV_SPE >= (int)row.Cells[10].Value)
+                    {
+                        Addlog("Speed IV: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Speed IV: FAIL");
+                        failedtests++;
+                    }
+                }
+                if (failedtests > 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void bFilterAdd_Click(object sender, EventArgs e)
+        {
+            BreedFilter.Rows.Add(shinyBreed.Checked ? 1 : 0, Convert.ToInt32(natureBreed.SelectedIndex), Convert.ToInt32(abilityBreed.SelectedIndex), Convert.ToInt32(HPtypeBreed.SelectedIndex), Convert.ToInt32(genderBreed.SelectedIndex), Convert.ToInt32(ivHPBreed.Value), Convert.ToInt32(ivAtkBreed.Value), Convert.ToInt32(ivDEFBreed.Value), Convert.ToInt32(ivSpABreed.Value), Convert.ToInt32(ivSpDBreed.Value), Convert.ToInt32(ivSpeBreed.Value));
+        }
+
+        private void bFilterRemove_Click(object sender, EventArgs e)
+        {
+            if (BreedFilter.SelectedRows.Count > 0 && BreedFilter.Rows.Count > 0)
+            {
+                BreedFilter.Rows.RemoveAt(BreedFilter.SelectedRows[0].Index);
+            }
+            else
+            {
+                MessageBox.Show("There is no filter selected.");
+            }
+        }
+
+        private void bFilterSave_Click(object sender, EventArgs e)
+        {
+            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            (new System.IO.FileInfo(folderPath)).Directory.Create();
+            string fileName = "BreedingFilters.csv";
+            var csv = new StringBuilder();
+            var headers = BreedFilter.Columns.Cast<DataGridViewColumn>();
+            foreach (DataGridViewRow row in BreedFilter.Rows)
+            {
+                var cells = row.Cells.Cast<DataGridViewCell>();
+                csv.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+            }
+            File.WriteAllText(folderPath + fileName, csv.ToString());
+            MessageBox.Show("Breeding Filters saved");
+        }
+
+        private void bFilterLoad_Click(object sender, EventArgs e)
+        {
+            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            (new System.IO.FileInfo(folderPath)).Directory.Create();
+            string fileName = "BreedingFilters.csv";
+            if (System.IO.File.Exists(folderPath + fileName))
+            {
+                BreedFilter.Rows.Clear();
+                List<int[]> rows = File.ReadAllLines(folderPath + fileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                rows.RemoveAt(rows.Count - 1);
+                foreach (int[] row in rows)
+                {
+                    BreedFilter.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
+                }
+                MessageBox.Show("Breeding Filters loaded");
+            }
+            else
+            {
+                MessageBox.Show("Breeding Filters file not found");
             }
         }
 
@@ -4346,6 +4544,7 @@ namespace ntrbase
         }
 
         // Breeding bot
+
         public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, retirefromcomputer, checkmap6, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, botexit };
 
         private async void runBreedingBot_Click(object sender, EventArgs e)
@@ -4473,9 +4672,10 @@ namespace ntrbase
                         Addlog("Run in direction 1");
                         waitNTRtask = waitholdbutton(runDOWN);
                         waitresult = await waitNTRtask;
+                        await Task.Delay(1000);
                         if (waitresult == 0)
                         {
-                            botState = (int)breedbotstates.checkegg1;
+                            botState = (int)breedbotstates.walk2;
                         }
                         else
                         {
