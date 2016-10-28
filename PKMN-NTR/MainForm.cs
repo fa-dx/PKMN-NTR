@@ -4347,7 +4347,7 @@ namespace ntrbase
                     break;
             }
 
-            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Currently, this only works in the Day Care of Route 117 in ORAS. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Currently, this only works in the Day Care of Route 117 in ORAS. Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
@@ -4395,16 +4395,30 @@ namespace ntrbase
             else
             {
                 orasgame = true;
-                routemapid = 0x2C;
-                daycaremapid = 0x187;
-                daycaremanx = 0x45553000;
-                daycaremany = 0x44D92000;
-                daycaredoorx = 0x455AD000;
-                daycaredoory = 0x44D6E000;
-                daycareexitx = 0x43610000;
-                daycareexity = 0x43A68000;
                 computerx = 0x43828000;
                 computery = 0x43730000;
+                if (radioDayCare1.Checked)
+                {
+                    routemapid = 0x2C;
+                    daycaremapid = 0x187;
+                    daycaremanx = 0x45553000;
+                    daycaremany = 0x44D92000;
+                    daycaredoorx = 0x455AD000;
+                    daycaredoory = 0x44D6E000;
+                    daycareexitx = 0x43610000;
+                    daycareexity = 0x43A68000;
+                }
+                else
+                {
+                    routemapid = 0x0;
+                    daycaremapid = 0x0;
+                    daycaremanx = 0x0;
+                    daycaremany = 0x0;
+                    daycaredoorx = 0x0;
+                    daycaredoory = 0x0;
+                    daycareexitx = 0x0;
+                    daycareexity = 0x0;
+                }
             }
 
 

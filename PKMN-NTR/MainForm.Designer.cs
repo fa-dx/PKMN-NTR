@@ -155,10 +155,10 @@
             this.Main = new System.Windows.Forms.TabPage();
             this.label56 = new System.Windows.Forms.Label();
             this.ExpPoints = new System.Windows.Forms.NumericUpDown();
+            this.level = new System.Windows.Forms.NumericUpDown();
             this.Stats = new System.Windows.Forms.TabPage();
             this.Moves = new System.Windows.Forms.TabPage();
             this.OT = new System.Windows.Forms.TabPage();
-            this.level = new System.Windows.Forms.NumericUpDown();
             this.cloneWriteTabs = new System.Windows.Forms.TabControl();
             this.cloneTab = new System.Windows.Forms.TabPage();
             this.cloneDoIt = new System.Windows.Forms.Button();
@@ -188,7 +188,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.touchX = new System.Windows.Forms.NumericUpDown();
             this.touchY = new System.Windows.Forms.NumericUpDown();
-            this.label50 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.GenderLSR = new System.Windows.Forms.Button();
             this.label73 = new System.Windows.Forms.Label();
@@ -245,9 +244,13 @@
             this.label71 = new System.Windows.Forms.Label();
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControls = new System.Windows.Forms.TabPage();
             this.tabBreeding = new System.Windows.Forms.TabPage();
-            this.label92 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.radioDayCare1 = new System.Windows.Forms.RadioButton();
+            this.radioDayCare2 = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
             this.OrganizeTop = new System.Windows.Forms.RadioButton();
             this.genderBreed = new System.Windows.Forms.ComboBox();
@@ -285,6 +288,7 @@
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabSoftReset = new System.Windows.Forms.TabPage();
             this.label74 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -325,10 +329,10 @@
             this.DumpedEdit.SuspendLayout();
             this.Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ExpPoints)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.level)).BeginInit();
             this.Stats.SuspendLayout();
             this.Moves.SuspendLayout();
             this.OT.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.level)).BeginInit();
             this.cloneWriteTabs.SuspendLayout();
             this.cloneTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cloneSlotFrom)).BeginInit();
@@ -354,8 +358,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
             this.miscTabs.SuspendLayout();
             this.tabEditTrainer.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.tabControls.SuspendLayout();
             this.tabBreeding.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ivSpeBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivSpDBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivDEFBreed)).BeginInit();
@@ -367,6 +374,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
             this.tabWonderTrade.SuspendLayout();
             this.tabSoftReset.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -375,13 +383,13 @@
             this.txtLog.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtLog.ForeColor = System.Drawing.Color.LawnGreen;
             this.txtLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtLog.Location = new System.Drawing.Point(167, 344);
+            this.txtLog.Location = new System.Drawing.Point(3, 3);
             this.txtLog.MaxLength = 32767000;
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(452, 120);
+            this.txtLog.Size = new System.Drawing.Size(552, 355);
             this.txtLog.TabIndex = 0;
             this.txtLog.TextChanged += new System.EventHandler(this.txtLog_TextChanged);
             // 
@@ -463,45 +471,47 @@
             // 
             // moneyNum
             // 
-            this.moneyNum.Location = new System.Drawing.Point(141, 22);
+            this.moneyNum.Location = new System.Drawing.Point(81, 109);
             this.moneyNum.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.moneyNum.Name = "moneyNum";
-            this.moneyNum.Size = new System.Drawing.Size(71, 20);
+            this.moneyNum.Size = new System.Drawing.Size(80, 20);
             this.moneyNum.TabIndex = 7;
             // 
             // milesNum
             // 
-            this.milesNum.Location = new System.Drawing.Point(141, 70);
+            this.milesNum.Location = new System.Drawing.Point(81, 138);
             this.milesNum.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.milesNum.Name = "milesNum";
-            this.milesNum.Size = new System.Drawing.Size(71, 20);
+            this.milesNum.Size = new System.Drawing.Size(80, 20);
             this.milesNum.TabIndex = 8;
             // 
             // bpNum
             // 
-            this.bpNum.Location = new System.Drawing.Point(141, 116);
+            this.bpNum.Location = new System.Drawing.Point(81, 166);
             this.bpNum.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.bpNum.Name = "bpNum";
-            this.bpNum.Size = new System.Drawing.Size(71, 20);
+            this.bpNum.Size = new System.Drawing.Size(80, 20);
             this.bpNum.TabIndex = 9;
             // 
             // pokeMoney
             // 
-            this.pokeMoney.Location = new System.Drawing.Point(218, 19);
+            this.pokeMoney.AutoSize = true;
+            this.pokeMoney.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeMoney.Location = new System.Drawing.Point(167, 106);
             this.pokeMoney.Name = "pokeMoney";
-            this.pokeMoney.Size = new System.Drawing.Size(45, 23);
+            this.pokeMoney.Size = new System.Drawing.Size(42, 23);
             this.pokeMoney.TabIndex = 10;
             this.pokeMoney.Text = "Write";
             this.pokeMoney.UseVisualStyleBackColor = true;
@@ -509,9 +519,11 @@
             // 
             // pokeMiles
             // 
-            this.pokeMiles.Location = new System.Drawing.Point(218, 67);
+            this.pokeMiles.AutoSize = true;
+            this.pokeMiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeMiles.Location = new System.Drawing.Point(167, 135);
             this.pokeMiles.Name = "pokeMiles";
-            this.pokeMiles.Size = new System.Drawing.Size(45, 23);
+            this.pokeMiles.Size = new System.Drawing.Size(42, 23);
             this.pokeMiles.TabIndex = 11;
             this.pokeMiles.Text = "Write";
             this.pokeMiles.UseVisualStyleBackColor = true;
@@ -519,18 +531,20 @@
             // 
             // pokeBP
             // 
-            this.pokeBP.Location = new System.Drawing.Point(218, 113);
+            this.pokeBP.AutoSize = true;
+            this.pokeBP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeBP.Location = new System.Drawing.Point(167, 164);
             this.pokeBP.Name = "pokeBP";
-            this.pokeBP.Size = new System.Drawing.Size(45, 23);
+            this.pokeBP.Size = new System.Drawing.Size(42, 23);
             this.pokeBP.TabIndex = 12;
-            this.pokeBP.Text = "Write BP";
+            this.pokeBP.Text = "Write";
             this.pokeBP.UseVisualStyleBackColor = true;
             this.pokeBP.Click += new System.EventHandler(this.pokeBP_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(141, 3);
+            this.label2.Location = new System.Drawing.Point(33, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 11;
@@ -539,7 +553,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(141, 54);
+            this.label3.Location = new System.Drawing.Point(13, 140);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 12;
@@ -548,7 +562,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(141, 100);
+            this.label4.Location = new System.Drawing.Point(6, 168);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 13;
@@ -593,7 +607,7 @@
             // 
             this.onlyView.AutoSize = true;
             this.onlyView.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.onlyView.Location = new System.Drawing.Point(192, 108);
+            this.onlyView.Location = new System.Drawing.Point(192, 106);
             this.onlyView.Name = "onlyView";
             this.onlyView.Size = new System.Drawing.Size(67, 17);
             this.onlyView.TabIndex = 96;
@@ -1299,7 +1313,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(7, 144);
+            this.label28.Location = new System.Drawing.Point(17, 198);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(58, 13);
             this.label28.TabIndex = 44;
@@ -1316,16 +1330,18 @@
             "GER",
             "SPA",
             "KOR"});
-            this.Lang.Location = new System.Drawing.Point(10, 161);
+            this.Lang.Location = new System.Drawing.Point(81, 195);
             this.Lang.Name = "Lang";
-            this.Lang.Size = new System.Drawing.Size(49, 21);
+            this.Lang.Size = new System.Drawing.Size(80, 21);
             this.Lang.TabIndex = 43;
             // 
             // pokeLang
             // 
-            this.pokeLang.Location = new System.Drawing.Point(60, 160);
+            this.pokeLang.AutoSize = true;
+            this.pokeLang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeLang.Location = new System.Drawing.Point(167, 193);
             this.pokeLang.Name = "pokeLang";
-            this.pokeLang.Size = new System.Drawing.Size(45, 23);
+            this.pokeLang.Size = new System.Drawing.Size(42, 23);
             this.pokeLang.TabIndex = 42;
             this.pokeLang.Text = "Write";
             this.pokeLang.UseVisualStyleBackColor = true;
@@ -1333,9 +1349,11 @@
             // 
             // pokeSID
             // 
-            this.pokeSID.Location = new System.Drawing.Point(91, 113);
+            this.pokeSID.AutoSize = true;
+            this.pokeSID.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeSID.Location = new System.Drawing.Point(167, 77);
             this.pokeSID.Name = "pokeSID";
-            this.pokeSID.Size = new System.Drawing.Size(45, 23);
+            this.pokeSID.Size = new System.Drawing.Size(42, 23);
             this.pokeSID.TabIndex = 40;
             this.pokeSID.Text = "Write";
             this.pokeSID.UseVisualStyleBackColor = true;
@@ -1343,7 +1361,7 @@
             // 
             // SIDNum
             // 
-            this.SIDNum.Location = new System.Drawing.Point(10, 116);
+            this.SIDNum.Location = new System.Drawing.Point(81, 80);
             this.SIDNum.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -1357,7 +1375,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 100);
+            this.label15.Location = new System.Drawing.Point(47, 82);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(28, 13);
             this.label15.TabIndex = 38;
@@ -1366,7 +1384,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(114, 185);
+            this.label14.Location = new System.Drawing.Point(118, 219);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(34, 13);
             this.label14.TabIndex = 37;
@@ -1374,9 +1392,11 @@
             // 
             // pokeTID
             // 
-            this.pokeTID.Location = new System.Drawing.Point(91, 65);
+            this.pokeTID.AutoSize = true;
+            this.pokeTID.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeTID.Location = new System.Drawing.Point(167, 48);
             this.pokeTID.Name = "pokeTID";
-            this.pokeTID.Size = new System.Drawing.Size(45, 23);
+            this.pokeTID.Size = new System.Drawing.Size(42, 23);
             this.pokeTID.TabIndex = 30;
             this.pokeTID.Text = "Write";
             this.pokeTID.UseVisualStyleBackColor = true;
@@ -1385,7 +1405,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(72, 185);
+            this.label13.Location = new System.Drawing.Point(72, 219);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 13);
             this.label13.TabIndex = 36;
@@ -1393,7 +1413,7 @@
             // 
             // TIDNum
             // 
-            this.TIDNum.Location = new System.Drawing.Point(10, 68);
+            this.TIDNum.Location = new System.Drawing.Point(81, 51);
             this.TIDNum.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -1406,20 +1426,20 @@
             // 
             // secNum
             // 
-            this.secNum.Location = new System.Drawing.Point(115, 201);
+            this.secNum.Location = new System.Drawing.Point(121, 235);
             this.secNum.Maximum = new decimal(new int[] {
             60,
             0,
             0,
             0});
             this.secNum.Name = "secNum";
-            this.secNum.Size = new System.Drawing.Size(35, 20);
+            this.secNum.Size = new System.Drawing.Size(40, 20);
             this.secNum.TabIndex = 35;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 52);
+            this.label11.Location = new System.Drawing.Point(47, 54);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
             this.label11.TabIndex = 28;
@@ -1427,20 +1447,20 @@
             // 
             // minNum
             // 
-            this.minNum.Location = new System.Drawing.Point(74, 201);
+            this.minNum.Location = new System.Drawing.Point(75, 235);
             this.minNum.Maximum = new decimal(new int[] {
             60,
             0,
             0,
             0});
             this.minNum.Name = "minNum";
-            this.minNum.Size = new System.Drawing.Size(35, 20);
+            this.minNum.Size = new System.Drawing.Size(40, 20);
             this.minNum.TabIndex = 34;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 3);
+            this.label10.Location = new System.Drawing.Point(37, 24);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(38, 13);
             this.label10.TabIndex = 25;
@@ -1448,9 +1468,11 @@
             // 
             // pokeTime
             // 
-            this.pokeTime.Location = new System.Drawing.Point(151, 198);
+            this.pokeTime.AutoSize = true;
+            this.pokeTime.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeTime.Location = new System.Drawing.Point(167, 232);
             this.pokeTime.Name = "pokeTime";
-            this.pokeTime.Size = new System.Drawing.Size(45, 23);
+            this.pokeTime.Size = new System.Drawing.Size(42, 23);
             this.pokeTime.TabIndex = 33;
             this.pokeTime.Text = "Write";
             this.pokeTime.UseVisualStyleBackColor = true;
@@ -1458,9 +1480,11 @@
             // 
             // pokeName
             // 
-            this.pokeName.Location = new System.Drawing.Point(90, 19);
+            this.pokeName.AutoSize = true;
+            this.pokeName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeName.Location = new System.Drawing.Point(167, 19);
             this.pokeName.Name = "pokeName";
-            this.pokeName.Size = new System.Drawing.Size(45, 23);
+            this.pokeName.Size = new System.Drawing.Size(42, 23);
             this.pokeName.TabIndex = 23;
             this.pokeName.Text = "Write";
             this.pokeName.UseVisualStyleBackColor = true;
@@ -1468,19 +1492,19 @@
             // 
             // hourNum
             // 
-            this.hourNum.Location = new System.Drawing.Point(9, 201);
+            this.hourNum.Location = new System.Drawing.Point(6, 235);
             this.hourNum.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
             this.hourNum.Name = "hourNum";
-            this.hourNum.Size = new System.Drawing.Size(59, 20);
+            this.hourNum.Size = new System.Drawing.Size(63, 20);
             this.hourNum.TabIndex = 32;
             // 
             // playerName
             // 
-            this.playerName.Location = new System.Drawing.Point(9, 21);
+            this.playerName.Location = new System.Drawing.Point(81, 21);
             this.playerName.Name = "playerName";
             this.playerName.Size = new System.Drawing.Size(80, 20);
             this.playerName.TabIndex = 22;
@@ -1488,7 +1512,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 185);
+            this.label12.Location = new System.Drawing.Point(3, 219);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(38, 13);
             this.label12.TabIndex = 31;
@@ -1496,9 +1520,9 @@
             // 
             // showKeys
             // 
-            this.showKeys.Location = new System.Drawing.Point(199, 134);
+            this.showKeys.Location = new System.Drawing.Point(203, 135);
             this.showKeys.Name = "showKeys";
-            this.showKeys.Size = new System.Drawing.Size(115, 26);
+            this.showKeys.Size = new System.Drawing.Size(115, 23);
             this.showKeys.TabIndex = 33;
             this.showKeys.Text = "KEY ITEMS";
             this.showKeys.UseVisualStyleBackColor = true;
@@ -1506,9 +1530,9 @@
             // 
             // showBerries
             // 
-            this.showBerries.Location = new System.Drawing.Point(199, 105);
+            this.showBerries.Location = new System.Drawing.Point(203, 106);
             this.showBerries.Name = "showBerries";
-            this.showBerries.Size = new System.Drawing.Size(115, 26);
+            this.showBerries.Size = new System.Drawing.Size(115, 23);
             this.showBerries.TabIndex = 34;
             this.showBerries.Text = "BERRIES";
             this.showBerries.UseVisualStyleBackColor = true;
@@ -1516,9 +1540,9 @@
             // 
             // showTMs
             // 
-            this.showTMs.Location = new System.Drawing.Point(199, 76);
+            this.showTMs.Location = new System.Drawing.Point(203, 77);
             this.showTMs.Name = "showTMs";
-            this.showTMs.Size = new System.Drawing.Size(115, 26);
+            this.showTMs.Size = new System.Drawing.Size(115, 23);
             this.showTMs.TabIndex = 35;
             this.showTMs.Text = "TMs && HMs";
             this.showTMs.UseVisualStyleBackColor = true;
@@ -1526,9 +1550,9 @@
             // 
             // showMedicine
             // 
-            this.showMedicine.Location = new System.Drawing.Point(199, 47);
+            this.showMedicine.Location = new System.Drawing.Point(203, 48);
             this.showMedicine.Name = "showMedicine";
-            this.showMedicine.Size = new System.Drawing.Size(115, 26);
+            this.showMedicine.Size = new System.Drawing.Size(115, 23);
             this.showMedicine.TabIndex = 36;
             this.showMedicine.Text = "MEDICINE";
             this.showMedicine.UseVisualStyleBackColor = true;
@@ -1537,9 +1561,9 @@
             // showItems
             // 
             this.showItems.ForeColor = System.Drawing.Color.Green;
-            this.showItems.Location = new System.Drawing.Point(199, 18);
+            this.showItems.Location = new System.Drawing.Point(203, 19);
             this.showItems.Name = "showItems";
-            this.showItems.Size = new System.Drawing.Size(115, 26);
+            this.showItems.Size = new System.Drawing.Size(115, 23);
             this.showItems.TabIndex = 37;
             this.showItems.Text = "ITEMS";
             this.showItems.UseVisualStyleBackColor = true;
@@ -1611,6 +1635,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.AutoSize = true;
+            this.groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox3.Controls.Add(this.bersGridView);
             this.groupBox3.Controls.Add(this.itemAdd);
             this.groupBox3.Controls.Add(this.itemsGridView);
@@ -1623,16 +1649,16 @@
             this.groupBox3.Controls.Add(this.showTMs);
             this.groupBox3.Controls.Add(this.showItems);
             this.groupBox3.Controls.Add(this.showMedicine);
-            this.groupBox3.Location = new System.Drawing.Point(305, 5);
+            this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(318, 201);
+            this.groupBox3.Size = new System.Drawing.Size(324, 215);
             this.groupBox3.TabIndex = 42;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Edit Items";
             // 
             // itemAdd
             // 
-            this.itemAdd.Location = new System.Drawing.Point(257, 173);
+            this.itemAdd.Location = new System.Drawing.Point(260, 164);
             this.itemAdd.Name = "itemAdd";
             this.itemAdd.Size = new System.Drawing.Size(57, 23);
             this.itemAdd.TabIndex = 46;
@@ -1642,7 +1668,7 @@
             // 
             // itemWrite
             // 
-            this.itemWrite.Location = new System.Drawing.Point(199, 173);
+            this.itemWrite.Location = new System.Drawing.Point(203, 164);
             this.itemWrite.Name = "itemWrite";
             this.itemWrite.Size = new System.Drawing.Size(57, 23);
             this.itemWrite.TabIndex = 43;
@@ -1906,7 +1932,7 @@
             this.DumpedEdit.Controls.Add(this.Stats);
             this.DumpedEdit.Controls.Add(this.Moves);
             this.DumpedEdit.Controls.Add(this.OT);
-            this.DumpedEdit.Location = new System.Drawing.Point(7, 139);
+            this.DumpedEdit.Location = new System.Drawing.Point(12, 142);
             this.DumpedEdit.Multiline = true;
             this.DumpedEdit.Name = "DumpedEdit";
             this.DumpedEdit.SelectedIndex = 0;
@@ -1923,6 +1949,7 @@
             this.Main.Controls.Add(this.isEgg);
             this.Main.Controls.Add(this.label31);
             this.Main.Controls.Add(this.label51);
+            this.Main.Controls.Add(this.level);
             this.Main.Controls.Add(this.gender);
             this.Main.Controls.Add(this.nickname);
             this.Main.Controls.Add(this.label32);
@@ -1969,6 +1996,15 @@
             this.ExpPoints.Name = "ExpPoints";
             this.ExpPoints.Size = new System.Drawing.Size(77, 20);
             this.ExpPoints.TabIndex = 58;
+            // 
+            // level
+            // 
+            this.level.Enabled = false;
+            this.level.Location = new System.Drawing.Point(158, 111);
+            this.level.Name = "level";
+            this.level.Size = new System.Drawing.Size(120, 20);
+            this.level.TabIndex = 59;
+            this.level.Visible = false;
             // 
             // Stats
             // 
@@ -2036,21 +2072,12 @@
             this.OT.TabIndex = 1;
             this.OT.Text = "OT";
             // 
-            // level
-            // 
-            this.level.Enabled = false;
-            this.level.Location = new System.Drawing.Point(7, 434);
-            this.level.Name = "level";
-            this.level.Size = new System.Drawing.Size(120, 20);
-            this.level.TabIndex = 59;
-            this.level.Visible = false;
-            // 
             // cloneWriteTabs
             // 
             this.cloneWriteTabs.Controls.Add(this.cloneTab);
             this.cloneWriteTabs.Controls.Add(this.writeTab);
             this.cloneWriteTabs.Controls.Add(this.tabPage1);
-            this.cloneWriteTabs.Location = new System.Drawing.Point(306, 204);
+            this.cloneWriteTabs.Location = new System.Drawing.Point(6, 227);
             this.cloneWriteTabs.Name = "cloneWriteTabs";
             this.cloneWriteTabs.SelectedIndex = 0;
             this.cloneWriteTabs.Size = new System.Drawing.Size(317, 121);
@@ -2080,7 +2107,7 @@
             // 
             // cloneDoIt
             // 
-            this.cloneDoIt.Location = new System.Drawing.Point(228, 66);
+            this.cloneDoIt.Location = new System.Drawing.Point(228, 65);
             this.cloneDoIt.Name = "cloneDoIt";
             this.cloneDoIt.Size = new System.Drawing.Size(75, 23);
             this.cloneDoIt.TabIndex = 17;
@@ -2410,15 +2437,6 @@
             this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
             this.touchY.ValueChanged += new System.EventHandler(this.touchY_ValueChanged);
             // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(164, 328);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(124, 13);
-            this.label50.TabIndex = 61;
-            this.label50.Text = "NTR communication log:";
-            // 
             // timer2
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
@@ -2723,7 +2741,7 @@
             // resumeLSR
             // 
             this.resumeLSR.AutoSize = true;
-            this.resumeLSR.Location = new System.Drawing.Point(710, 445);
+            this.resumeLSR.Location = new System.Drawing.Point(391, 409);
             this.resumeLSR.Name = "resumeLSR";
             this.resumeLSR.Size = new System.Drawing.Size(65, 17);
             this.resumeLSR.TabIndex = 110;
@@ -2830,7 +2848,7 @@
             // 
             // readResult
             // 
-            this.readResult.Location = new System.Drawing.Point(519, 325);
+            this.readResult.Location = new System.Drawing.Point(577, 407);
             this.readResult.Name = "readResult";
             this.readResult.ReadOnly = true;
             this.readResult.Size = new System.Drawing.Size(100, 20);
@@ -2839,7 +2857,7 @@
             // stopBotButton
             // 
             this.stopBotButton.Enabled = false;
-            this.stopBotButton.Location = new System.Drawing.Point(629, 441);
+            this.stopBotButton.Location = new System.Drawing.Point(310, 405);
             this.stopBotButton.Name = "stopBotButton";
             this.stopBotButton.Size = new System.Drawing.Size(75, 23);
             this.stopBotButton.TabIndex = 106;
@@ -3009,7 +3027,7 @@
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(801, 446);
+            this.label69.Location = new System.Drawing.Point(764, 410);
             this.label69.Name = "label69";
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(108, 13);
@@ -3019,7 +3037,7 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(404, 328);
+            this.label71.Location = new System.Drawing.Point(462, 410);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(109, 13);
             this.label71.TabIndex = 108;
@@ -3032,49 +3050,64 @@
             this.miscTabs.Controls.Add(this.tabBreeding);
             this.miscTabs.Controls.Add(this.tabWonderTrade);
             this.miscTabs.Controls.Add(this.tabSoftReset);
-            this.miscTabs.Location = new System.Drawing.Point(629, 12);
+            this.miscTabs.Controls.Add(this.tabPage2);
+            this.miscTabs.Location = new System.Drawing.Point(310, 12);
             this.miscTabs.Name = "miscTabs";
             this.miscTabs.SelectedIndex = 0;
-            this.miscTabs.Size = new System.Drawing.Size(280, 423);
+            this.miscTabs.Size = new System.Drawing.Size(566, 387);
             this.miscTabs.TabIndex = 111;
             // 
             // tabEditTrainer
             // 
             this.tabEditTrainer.BackColor = System.Drawing.SystemColors.Control;
-            this.tabEditTrainer.Controls.Add(this.label4);
-            this.tabEditTrainer.Controls.Add(this.pokeMiles);
-            this.tabEditTrainer.Controls.Add(this.label10);
-            this.tabEditTrainer.Controls.Add(this.label2);
-            this.tabEditTrainer.Controls.Add(this.label12);
-            this.tabEditTrainer.Controls.Add(this.pokeBP);
-            this.tabEditTrainer.Controls.Add(this.playerName);
-            this.tabEditTrainer.Controls.Add(this.milesNum);
-            this.tabEditTrainer.Controls.Add(this.hourNum);
-            this.tabEditTrainer.Controls.Add(this.bpNum);
-            this.tabEditTrainer.Controls.Add(this.pokeName);
-            this.tabEditTrainer.Controls.Add(this.label28);
-            this.tabEditTrainer.Controls.Add(this.pokeTime);
-            this.tabEditTrainer.Controls.Add(this.label3);
-            this.tabEditTrainer.Controls.Add(this.minNum);
-            this.tabEditTrainer.Controls.Add(this.moneyNum);
-            this.tabEditTrainer.Controls.Add(this.label11);
-            this.tabEditTrainer.Controls.Add(this.Lang);
-            this.tabEditTrainer.Controls.Add(this.secNum);
-            this.tabEditTrainer.Controls.Add(this.pokeMoney);
-            this.tabEditTrainer.Controls.Add(this.TIDNum);
-            this.tabEditTrainer.Controls.Add(this.pokeLang);
-            this.tabEditTrainer.Controls.Add(this.label13);
-            this.tabEditTrainer.Controls.Add(this.pokeSID);
-            this.tabEditTrainer.Controls.Add(this.pokeTID);
-            this.tabEditTrainer.Controls.Add(this.SIDNum);
-            this.tabEditTrainer.Controls.Add(this.label14);
-            this.tabEditTrainer.Controls.Add(this.label15);
+            this.tabEditTrainer.Controls.Add(this.groupBox5);
+            this.tabEditTrainer.Controls.Add(this.cloneWriteTabs);
+            this.tabEditTrainer.Controls.Add(this.groupBox3);
             this.tabEditTrainer.Location = new System.Drawing.Point(4, 22);
             this.tabEditTrainer.Name = "tabEditTrainer";
             this.tabEditTrainer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditTrainer.Size = new System.Drawing.Size(272, 397);
+            this.tabEditTrainer.Size = new System.Drawing.Size(558, 361);
             this.tabEditTrainer.TabIndex = 0;
-            this.tabEditTrainer.Text = "Edit Trainer";
+            this.tabEditTrainer.Text = "Edit Save";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.AutoSize = true;
+            this.groupBox5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.label2);
+            this.groupBox5.Controls.Add(this.pokeName);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Controls.Add(this.hourNum);
+            this.groupBox5.Controls.Add(this.label15);
+            this.groupBox5.Controls.Add(this.pokeTID);
+            this.groupBox5.Controls.Add(this.pokeTime);
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Controls.Add(this.minNum);
+            this.groupBox5.Controls.Add(this.label28);
+            this.groupBox5.Controls.Add(this.secNum);
+            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Controls.Add(this.pokeBP);
+            this.groupBox5.Controls.Add(this.pokeSID);
+            this.groupBox5.Controls.Add(this.TIDNum);
+            this.groupBox5.Controls.Add(this.playerName);
+            this.groupBox5.Controls.Add(this.SIDNum);
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.pokeLang);
+            this.groupBox5.Controls.Add(this.moneyNum);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.pokeMoney);
+            this.groupBox5.Controls.Add(this.pokeMiles);
+            this.groupBox5.Controls.Add(this.milesNum);
+            this.groupBox5.Controls.Add(this.bpNum);
+            this.groupBox5.Controls.Add(this.Lang);
+            this.groupBox5.Location = new System.Drawing.Point(336, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(215, 274);
+            this.groupBox5.TabIndex = 61;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Edit Trainer";
             // 
             // tabControls
             // 
@@ -3100,16 +3133,15 @@
             this.tabControls.Location = new System.Drawing.Point(4, 22);
             this.tabControls.Name = "tabControls";
             this.tabControls.Padding = new System.Windows.Forms.Padding(3);
-            this.tabControls.Size = new System.Drawing.Size(272, 397);
+            this.tabControls.Size = new System.Drawing.Size(558, 361);
             this.tabControls.TabIndex = 1;
             this.tabControls.Text = "Controls";
             // 
             // tabBreeding
             // 
             this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
-            this.tabBreeding.Controls.Add(this.label92);
-            this.tabBreeding.Controls.Add(this.OrganizeMiddle);
-            this.tabBreeding.Controls.Add(this.OrganizeTop);
+            this.tabBreeding.Controls.Add(this.groupBox4);
+            this.tabBreeding.Controls.Add(this.groupBox2);
             this.tabBreeding.Controls.Add(this.genderBreed);
             this.tabBreeding.Controls.Add(this.label79);
             this.tabBreeding.Controls.Add(this.label80);
@@ -3144,24 +3176,60 @@
             this.tabBreeding.Controls.Add(this.label77);
             this.tabBreeding.Location = new System.Drawing.Point(4, 22);
             this.tabBreeding.Name = "tabBreeding";
-            this.tabBreeding.Size = new System.Drawing.Size(272, 397);
+            this.tabBreeding.Size = new System.Drawing.Size(558, 361);
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
-            // label92
+            // groupBox4
             // 
-            this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(4, 209);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(123, 13);
-            this.label92.TabIndex = 141;
-            this.label92.Text = "Organize Boxes position:";
+            this.groupBox4.Controls.Add(this.radioDayCare1);
+            this.groupBox4.Controls.Add(this.radioDayCare2);
+            this.groupBox4.Location = new System.Drawing.Point(7, 258);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(262, 45);
+            this.groupBox4.TabIndex = 143;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Daycare:";
+            // 
+            // radioDayCare1
+            // 
+            this.radioDayCare1.AutoSize = true;
+            this.radioDayCare1.Checked = true;
+            this.radioDayCare1.Location = new System.Drawing.Point(6, 19);
+            this.radioDayCare1.Name = "radioDayCare1";
+            this.radioDayCare1.Size = new System.Drawing.Size(75, 17);
+            this.radioDayCare1.TabIndex = 140;
+            this.radioDayCare1.TabStop = true;
+            this.radioDayCare1.Text = "Route 117";
+            this.radioDayCare1.UseVisualStyleBackColor = true;
+            // 
+            // radioDayCare2
+            // 
+            this.radioDayCare2.AutoSize = true;
+            this.radioDayCare2.Location = new System.Drawing.Point(87, 19);
+            this.radioDayCare2.Name = "radioDayCare2";
+            this.radioDayCare2.Size = new System.Drawing.Size(86, 17);
+            this.radioDayCare2.TabIndex = 139;
+            this.radioDayCare2.Text = "Battle Resort";
+            this.radioDayCare2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox2.Controls.Add(this.OrganizeMiddle);
+            this.groupBox2.Controls.Add(this.OrganizeTop);
+            this.groupBox2.Location = new System.Drawing.Point(6, 207);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(263, 45);
+            this.groupBox2.TabIndex = 142;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Organize Boxes position:";
             // 
             // OrganizeMiddle
             // 
             this.OrganizeMiddle.AutoSize = true;
             this.OrganizeMiddle.Checked = true;
-            this.OrganizeMiddle.Location = new System.Drawing.Point(132, 207);
+            this.OrganizeMiddle.Location = new System.Drawing.Point(6, 19);
             this.OrganizeMiddle.Name = "OrganizeMiddle";
             this.OrganizeMiddle.Size = new System.Drawing.Size(56, 17);
             this.OrganizeMiddle.TabIndex = 140;
@@ -3172,7 +3240,7 @@
             // OrganizeTop
             // 
             this.OrganizeTop.AutoSize = true;
-            this.OrganizeTop.Location = new System.Drawing.Point(194, 207);
+            this.OrganizeTop.Location = new System.Drawing.Point(68, 19);
             this.OrganizeTop.Name = "OrganizeTop";
             this.OrganizeTop.Size = new System.Drawing.Size(44, 17);
             this.OrganizeTop.TabIndex = 139;
@@ -3272,9 +3340,9 @@
             // 
             // runBreedingBot
             // 
-            this.runBreedingBot.Location = new System.Drawing.Point(7, 225);
+            this.runBreedingBot.Location = new System.Drawing.Point(6, 309);
             this.runBreedingBot.Name = "runBreedingBot";
-            this.runBreedingBot.Size = new System.Drawing.Size(258, 23);
+            this.runBreedingBot.Size = new System.Drawing.Size(263, 23);
             this.runBreedingBot.TabIndex = 113;
             this.runBreedingBot.Text = "Run";
             this.runBreedingBot.UseVisualStyleBackColor = true;
@@ -3586,7 +3654,7 @@
             this.tabWonderTrade.Controls.Add(this.label57);
             this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
             this.tabWonderTrade.Name = "tabWonderTrade";
-            this.tabWonderTrade.Size = new System.Drawing.Size(272, 397);
+            this.tabWonderTrade.Size = new System.Drawing.Size(558, 361);
             this.tabWonderTrade.TabIndex = 2;
             this.tabWonderTrade.Text = "Wonder Trade";
             // 
@@ -3621,7 +3689,7 @@
             this.tabSoftReset.Controls.Add(this.label67);
             this.tabSoftReset.Location = new System.Drawing.Point(4, 22);
             this.tabSoftReset.Name = "tabSoftReset";
-            this.tabSoftReset.Size = new System.Drawing.Size(272, 397);
+            this.tabSoftReset.Size = new System.Drawing.Size(558, 361);
             this.tabSoftReset.TabIndex = 3;
             this.tabSoftReset.Text = "Soft-reset";
             // 
@@ -3634,23 +3702,30 @@
             this.label74.TabIndex = 110;
             this.label74.Text = "Gender:";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.txtLog);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(558, 361);
+            this.tabPage2.TabIndex = 5;
+            this.tabPage2.Text = "NTR Log";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 468);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(882, 438);
             this.Controls.Add(this.miscTabs);
+            this.Controls.Add(this.readResult);
             this.Controls.Add(this.resumeLSR);
             this.Controls.Add(this.label71);
             this.Controls.Add(this.stopBotButton);
-            this.Controls.Add(this.readResult);
             this.Controls.Add(this.label69);
-            this.Controls.Add(this.label50);
-            this.Controls.Add(this.cloneWriteTabs);
-            this.Controls.Add(this.level);
             this.Controls.Add(this.DumpedEdit);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.txtLog);
             this.Controls.Add(this.dumpBox);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -3704,13 +3779,13 @@
             this.Main.ResumeLayout(false);
             this.Main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ExpPoints)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.level)).EndInit();
             this.Stats.ResumeLayout(false);
             this.Stats.PerformLayout();
             this.Moves.ResumeLayout(false);
             this.Moves.PerformLayout();
             this.OT.ResumeLayout(false);
             this.OT.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.level)).EndInit();
             this.cloneWriteTabs.ResumeLayout(false);
             this.cloneTab.ResumeLayout(false);
             this.cloneTab.PerformLayout();
@@ -3740,10 +3815,16 @@
             this.miscTabs.ResumeLayout(false);
             this.tabEditTrainer.ResumeLayout(false);
             this.tabEditTrainer.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.tabControls.ResumeLayout(false);
             this.tabControls.PerformLayout();
             this.tabBreeding.ResumeLayout(false);
             this.tabBreeding.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ivSpeBreed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivSpDBreed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivDEFBreed)).EndInit();
@@ -3757,6 +3838,8 @@
             this.tabWonderTrade.PerformLayout();
             this.tabSoftReset.ResumeLayout(false);
             this.tabSoftReset.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3932,7 +4015,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.CheckBox deleteKeepBackup;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Label label60;
@@ -4030,7 +4112,12 @@
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.RadioButton OrganizeMiddle;
         private System.Windows.Forms.RadioButton OrganizeTop;
-        private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton radioDayCare1;
+        private System.Windows.Forms.RadioButton radioDayCare2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
