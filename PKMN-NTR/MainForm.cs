@@ -544,6 +544,10 @@ namespace ntrbase
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
                 eggoff = 0x8C80124;
+                mapidoff = 0x81828EC;
+                mapxoff = 0x818290C;
+                mapyoff = 0x8182914;
+                mapzoff = 0x8182910;
                 savescrnOff = 0x19AB78;
                 savescrnIN = 0x7E0000;
                 savescrnOUT = 0x4D0000;
@@ -567,6 +571,11 @@ namespace ntrbase
                 pssdisableY = 100;
                 pssdisableIN = 0x00000000;
                 pssdisableOUT = 0x15000000;
+                computerOff = 0x19A918;
+                computerIN = 0x4D0000;
+                computerOUT = 0x780000;
+                organizeBoxIN = 0x6C0000;
+                organizeBoxOUT = 0x4D0000;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -597,6 +606,10 @@ namespace ntrbase
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
                 eggoff = 0x8C80124;
+                mapidoff = 0x81828EC;
+                mapxoff = 0x818290C;
+                mapyoff = 0x8182914;
+                mapzoff = 0x8182910;
                 savescrnOff = 0x19AB78;
                 savescrnIN = 0x7E0000;
                 savescrnOUT = 0x4D0000;
@@ -620,6 +633,11 @@ namespace ntrbase
                 pssdisableY = 100;
                 pssdisableIN = 0x00000000;
                 pssdisableOUT = 0x15000000;
+                computerOff = 0x19A918;
+                computerIN = 0x4D0000;
+                computerOUT = 0x780000;
+                organizeBoxIN = 0x6C0000;
+                organizeBoxOUT = 0x4D0000;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -4337,7 +4355,7 @@ namespace ntrbase
             switch (modeBreed.SelectedIndex)
             {
                 case 0:
-                    modemessage = "Simple: This bot will produce " + eggsNoBreed + " eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ".\r\n\r\n" ;
+                    modemessage = "Simple: This bot will produce " + eggsNoBreed.Value.ToString() + " eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ".\r\n\r\n";
                     break;
                 case 1:
                     modemessage = "Filter: Not implemented yet.";
@@ -4390,7 +4408,16 @@ namespace ntrbase
             if (game == GameType.X || game == GameType.Y)
             {
                 orasgame = false;
-                botStop = true;
+                routemapid = 0x108;
+                daycaremapid = 0x109;
+                daycaremanx = 0x46219400;
+                daycaremany = 0x460F9400;
+                daycaredoorx = 0x4622FC00;
+                daycaredoory = 0x460F4C00;
+                daycareexitx = 0x43610000;
+                daycareexity = 0x43AF8000;
+                computerx = 0x43828000;
+                computery = 0x43730000;
             }
             else
             {
@@ -4444,14 +4471,7 @@ namespace ntrbase
                         break;
                     case (int)breedbotstates.walk1:
                         Addlog("Run in direction 1");
-                        if (orasgame)
-                        {
-                            waitNTRtask = waitholdbutton(runDOWN);
-                        }
-                        else
-                        {
-                            waitNTRtask = waitholdbutton(runRIGHT);
-                        }
+                        waitNTRtask = waitholdbutton(runDOWN);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
@@ -4484,14 +4504,7 @@ namespace ntrbase
                         break;
                     case (int)breedbotstates.walk2:
                         Addlog("Run in direction 2");
-                        if (orasgame)
-                        {
-                            waitNTRtask = waitholdbutton(runUP);
-                        }
-                        else
-                        {
-                            waitNTRtask = waitholdbutton(runLEFT);
-                        }
+                        waitNTRtask = waitholdbutton(runUP);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
@@ -4524,14 +4537,7 @@ namespace ntrbase
                         break;
                     case (int)breedbotstates.walk3:
                         Addlog("Return to day care man");
-                        if (orasgame)
-                        {
-                            waitNTRtask = waitholdbutton(runUP);
-                        }
-                        else
-                        {
-                            waitNTRtask = waitholdbutton(runLEFT);
-                        }
+                        waitNTRtask = waitholdbutton(runUP);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
@@ -4545,31 +4551,23 @@ namespace ntrbase
                         break;
                     case (int)breedbotstates.checkmap1:
                         await Task.Delay(1000);
-                        if (orasgame)
+                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
-                            for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                            await Task.Delay(100);
+                            waitNTRtask = waitNTRread(mapyoff);
+                            waitresult = await waitNTRtask;
+                            if (lastmemoryread >= daycaremany && lastmemoryread < daycaremany + 0x100)
                             {
-                                await Task.Delay(100);
-                                waitNTRtask = waitNTRread(mapyoff);
-                                waitresult = await waitNTRtask;
-                                if (lastmemoryread >= daycaremany && lastmemoryread < daycaremany + 0x100)
-                                {
-                                    break;
-                                }
+                                break;
                             }
-                            if (waittimeout < timeout * 10)
-                            {
-                                botState = (int)breedbotstates.stopdaycare;
-                            }
-                            else
-                            { // Still far from day care man
-                                botState = (int)breedbotstates.walk3;
-                            }
-                            break;
+                        }
+                        if (waittimeout < timeout * 10)
+                        {
+                            botState = (int)breedbotstates.stopdaycare;
                         }
                         else
-                        {
-                            botState = (int)breedbotstates.botexit;
+                        { // Still far from day care man
+                            botState = (int)breedbotstates.walk3;
                         }
                         break;
                     case (int)breedbotstates.stopdaycare:
@@ -4814,7 +4812,7 @@ namespace ntrbase
                         }
                         break;
                     case (int)breedbotstates.walktocomputer:
-                        Addlog("Walk to Computer");
+                        Addlog("Walk to the PC");
                         waitNTRtask = quickbuton(DpadRIGHT);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
@@ -4834,6 +4832,7 @@ namespace ntrbase
                         }
                         break;
                     case (int)breedbotstates.facecomputer:
+                        Addlog("Turn on tje PC");
                         waitNTRtask = waitbutton(DpadUP);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
@@ -4861,7 +4860,7 @@ namespace ntrbase
                         break;
                     case (int)breedbotstates.testcomputer:
                         await Task.Delay(1000);
-                        Addlog("Test if the computer is on");
+                        Addlog("Test if the PC is on");
                         for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(100);
@@ -4887,7 +4886,7 @@ namespace ntrbase
                         }
                         break;
                     case (int)breedbotstates.computerdialog:
-                        Addlog("Skip computer dialog");
+                        Addlog("Skip PC dialog");
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
@@ -5115,7 +5114,7 @@ namespace ntrbase
                         break;
                     case (int)breedbotstates.touchegg:
                         Addlog("Select Egg");
-                        waitNTRtask = waitholdtouch(300,100);
+                        waitNTRtask = waitholdtouch(300, 100);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
@@ -5222,7 +5221,7 @@ namespace ntrbase
                         }
                         break;
                     case (int)breedbotstates.retirefromcomputer:
-                        Addlog("Retire from Computer");
+                        Addlog("Retire from PC");
                         waitNTRtask = quickbuton(DpadLEFT);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)

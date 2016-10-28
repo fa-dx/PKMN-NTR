@@ -3032,7 +3032,7 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(108, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.7-beta2";
+            this.label69.Text = "Version: 1.18.7-beta3";
             // 
             // label71
             // 
