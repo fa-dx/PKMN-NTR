@@ -189,7 +189,6 @@
             this.touchX = new System.Windows.Forms.NumericUpDown();
             this.touchY = new System.Windows.Forms.NumericUpDown();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.GenderLSR = new System.Windows.Forms.Button();
             this.label73 = new System.Windows.Forms.Label();
             this.AbilityLSR = new System.Windows.Forms.ComboBox();
             this.label72 = new System.Windows.Forms.Label();
@@ -306,10 +305,29 @@
             this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
             this.boxBreed = new System.Windows.Forms.NumericUpDown();
             this.label77 = new System.Windows.Forms.Label();
-            this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabSoftReset = new System.Windows.Forms.TabPage();
+            this.srFilterRead = new System.Windows.Forms.Button();
+            this.srFilterLoad = new System.Windows.Forms.Button();
+            this.srFilterSave = new System.Windows.Forms.Button();
+            this.srFilterRemove = new System.Windows.Forms.Button();
+            this.srFilterAdd = new System.Windows.Forms.Button();
+            this.SRFilters = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label93 = new System.Windows.Forms.Label();
+            this.genderLSR = new System.Windows.Forms.ComboBox();
             this.label74 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabWonderTrade = new System.Windows.Forms.TabPage();
+            this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -394,9 +412,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
-            this.tabWonderTrade.SuspendLayout();
             this.tabSoftReset.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SRFilters)).BeginInit();
+            this.tabWonderTrade.SuspendLayout();
+            this.tabNTRlog.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -2463,16 +2482,6 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // GenderLSR
-            // 
-            this.GenderLSR.Location = new System.Drawing.Point(62, 136);
-            this.GenderLSR.Name = "GenderLSR";
-            this.GenderLSR.Size = new System.Drawing.Size(74, 23);
-            this.GenderLSR.TabIndex = 110;
-            this.GenderLSR.Text = "-";
-            this.GenderLSR.UseVisualStyleBackColor = true;
-            this.GenderLSR.Click += new System.EventHandler(this.GenderLSR_Click);
-            // 
             // label73
             // 
             this.label73.AutoSize = true;
@@ -2527,7 +2536,7 @@
             // shinyLSR
             // 
             this.shinyLSR.AutoSize = true;
-            this.shinyLSR.Location = new System.Drawing.Point(142, 140);
+            this.shinyLSR.Location = new System.Drawing.Point(143, 9);
             this.shinyLSR.Name = "shinyLSR";
             this.shinyLSR.Size = new System.Drawing.Size(52, 17);
             this.shinyLSR.TabIndex = 106;
@@ -2595,7 +2604,7 @@
             // 
             this.RunLSRbot.Location = new System.Drawing.Point(7, 165);
             this.RunLSRbot.Name = "RunLSRbot";
-            this.RunLSRbot.Size = new System.Drawing.Size(258, 23);
+            this.RunLSRbot.Size = new System.Drawing.Size(186, 23);
             this.RunLSRbot.TabIndex = 0;
             this.RunLSRbot.Text = "Run";
             this.RunLSRbot.UseVisualStyleBackColor = true;
@@ -2763,7 +2772,7 @@
             // resumeLSR
             // 
             this.resumeLSR.AutoSize = true;
-            this.resumeLSR.Location = new System.Drawing.Point(391, 409);
+            this.resumeLSR.Location = new System.Drawing.Point(200, 169);
             this.resumeLSR.Name = "resumeLSR";
             this.resumeLSR.Size = new System.Drawing.Size(65, 17);
             this.resumeLSR.TabIndex = 110;
@@ -3070,9 +3079,9 @@
             this.miscTabs.Controls.Add(this.tabEditTrainer);
             this.miscTabs.Controls.Add(this.tabControls);
             this.miscTabs.Controls.Add(this.tabBreeding);
-            this.miscTabs.Controls.Add(this.tabWonderTrade);
             this.miscTabs.Controls.Add(this.tabSoftReset);
-            this.miscTabs.Controls.Add(this.tabPage2);
+            this.miscTabs.Controls.Add(this.tabWonderTrade);
+            this.miscTabs.Controls.Add(this.tabNTRlog);
             this.miscTabs.Location = new System.Drawing.Point(310, 12);
             this.miscTabs.Name = "miscTabs";
             this.miscTabs.SelectedIndex = 0;
@@ -3867,26 +3876,18 @@
             this.label77.TabIndex = 109;
             this.label77.Text = "Slot:";
             // 
-            // tabWonderTrade
-            // 
-            this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
-            this.tabWonderTrade.Controls.Add(this.label59);
-            this.tabWonderTrade.Controls.Add(this.label58);
-            this.tabWonderTrade.Controls.Add(this.RunWTbot);
-            this.tabWonderTrade.Controls.Add(this.WTSlot);
-            this.tabWonderTrade.Controls.Add(this.WTtradesNo);
-            this.tabWonderTrade.Controls.Add(this.WTBox);
-            this.tabWonderTrade.Controls.Add(this.label57);
-            this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
-            this.tabWonderTrade.Name = "tabWonderTrade";
-            this.tabWonderTrade.Size = new System.Drawing.Size(558, 361);
-            this.tabWonderTrade.TabIndex = 2;
-            this.tabWonderTrade.Text = "Wonder Trade";
-            // 
             // tabSoftReset
             // 
             this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSoftReset.Controls.Add(this.GenderLSR);
+            this.tabSoftReset.Controls.Add(this.srFilterRead);
+            this.tabSoftReset.Controls.Add(this.srFilterLoad);
+            this.tabSoftReset.Controls.Add(this.resumeLSR);
+            this.tabSoftReset.Controls.Add(this.srFilterSave);
+            this.tabSoftReset.Controls.Add(this.srFilterRemove);
+            this.tabSoftReset.Controls.Add(this.srFilterAdd);
+            this.tabSoftReset.Controls.Add(this.SRFilters);
+            this.tabSoftReset.Controls.Add(this.label93);
+            this.tabSoftReset.Controls.Add(this.genderLSR);
             this.tabSoftReset.Controls.Add(this.label74);
             this.tabSoftReset.Controls.Add(this.shinyLSR);
             this.tabSoftReset.Controls.Add(this.label62);
@@ -3918,24 +3919,217 @@
             this.tabSoftReset.TabIndex = 3;
             this.tabSoftReset.Text = "Soft-reset";
             // 
+            // srFilterRead
+            // 
+            this.srFilterRead.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.srFilterRead.Location = new System.Drawing.Point(275, 84);
+            this.srFilterRead.Name = "srFilterRead";
+            this.srFilterRead.Size = new System.Drawing.Size(57, 23);
+            this.srFilterRead.TabIndex = 158;
+            this.srFilterRead.Text = "Read";
+            this.srFilterRead.UseVisualStyleBackColor = true;
+            this.srFilterRead.Click += new System.EventHandler(this.srFilterRead_Click);
+            // 
+            // srFilterLoad
+            // 
+            this.srFilterLoad.Location = new System.Drawing.Point(275, 142);
+            this.srFilterLoad.Name = "srFilterLoad";
+            this.srFilterLoad.Size = new System.Drawing.Size(57, 23);
+            this.srFilterLoad.TabIndex = 157;
+            this.srFilterLoad.Text = "Load";
+            this.srFilterLoad.UseVisualStyleBackColor = true;
+            this.srFilterLoad.Click += new System.EventHandler(this.srFilterLoad_Click);
+            // 
+            // srFilterSave
+            // 
+            this.srFilterSave.Location = new System.Drawing.Point(275, 113);
+            this.srFilterSave.Name = "srFilterSave";
+            this.srFilterSave.Size = new System.Drawing.Size(57, 23);
+            this.srFilterSave.TabIndex = 156;
+            this.srFilterSave.Text = "Save";
+            this.srFilterSave.UseVisualStyleBackColor = true;
+            this.srFilterSave.Click += new System.EventHandler(this.srilterSave_Click);
+            // 
+            // srFilterRemove
+            // 
+            this.srFilterRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.srFilterRemove.Location = new System.Drawing.Point(275, 55);
+            this.srFilterRemove.Name = "srFilterRemove";
+            this.srFilterRemove.Size = new System.Drawing.Size(57, 23);
+            this.srFilterRemove.TabIndex = 155;
+            this.srFilterRemove.Text = "Remove";
+            this.srFilterRemove.UseVisualStyleBackColor = true;
+            this.srFilterRemove.Click += new System.EventHandler(this.srFilterRemove_Click);
+            // 
+            // srFilterAdd
+            // 
+            this.srFilterAdd.Location = new System.Drawing.Point(275, 26);
+            this.srFilterAdd.Name = "srFilterAdd";
+            this.srFilterAdd.Size = new System.Drawing.Size(57, 23);
+            this.srFilterAdd.TabIndex = 154;
+            this.srFilterAdd.Text = "Add";
+            this.srFilterAdd.UseVisualStyleBackColor = true;
+            this.srFilterAdd.Click += new System.EventHandler(this.srFilterAdd_Click);
+            // 
+            // SRFilters
+            // 
+            this.SRFilters.AllowUserToAddRows = false;
+            this.SRFilters.AllowUserToDeleteRows = false;
+            this.SRFilters.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.SRFilters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.SRFilters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11});
+            this.SRFilters.Location = new System.Drawing.Point(338, 10);
+            this.SRFilters.MultiSelect = false;
+            this.SRFilters.Name = "SRFilters";
+            this.SRFilters.ReadOnly = true;
+            this.SRFilters.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.SRFilters.Size = new System.Drawing.Size(214, 155);
+            this.SRFilters.TabIndex = 153;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Shiny";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 58;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Nature";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Ability";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 59;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "HP type";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Gender";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "HP";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 47;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Atk";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 48;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Def";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 49;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "SpA";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 52;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "SpD";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 53;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Spe";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.Width = 51;
+            // 
+            // label93
+            // 
+            this.label93.AutoSize = true;
+            this.label93.Location = new System.Drawing.Point(272, 10);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(34, 13);
+            this.label93.TabIndex = 152;
+            this.label93.Text = "Filters";
+            // 
+            // genderLSR
+            // 
+            this.genderLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.genderLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.genderLSR.FormattingEnabled = true;
+            this.genderLSR.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.genderLSR.Location = new System.Drawing.Point(60, 136);
+            this.genderLSR.Name = "genderLSR";
+            this.genderLSR.Size = new System.Drawing.Size(133, 21);
+            this.genderLSR.TabIndex = 139;
+            // 
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(9, 141);
+            this.label74.Location = new System.Drawing.Point(11, 139);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(45, 13);
             this.label74.TabIndex = 110;
             this.label74.Text = "Gender:";
             // 
-            // tabPage2
+            // tabWonderTrade
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.txtLog);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(558, 361);
-            this.tabPage2.TabIndex = 5;
-            this.tabPage2.Text = "NTR Log";
+            this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
+            this.tabWonderTrade.Controls.Add(this.label59);
+            this.tabWonderTrade.Controls.Add(this.label58);
+            this.tabWonderTrade.Controls.Add(this.RunWTbot);
+            this.tabWonderTrade.Controls.Add(this.WTSlot);
+            this.tabWonderTrade.Controls.Add(this.WTtradesNo);
+            this.tabWonderTrade.Controls.Add(this.WTBox);
+            this.tabWonderTrade.Controls.Add(this.label57);
+            this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
+            this.tabWonderTrade.Name = "tabWonderTrade";
+            this.tabWonderTrade.Size = new System.Drawing.Size(558, 361);
+            this.tabWonderTrade.TabIndex = 2;
+            this.tabWonderTrade.Text = "Wonder Trade";
+            // 
+            // tabNTRlog
+            // 
+            this.tabNTRlog.BackColor = System.Drawing.SystemColors.Control;
+            this.tabNTRlog.Controls.Add(this.txtLog);
+            this.tabNTRlog.Location = new System.Drawing.Point(4, 22);
+            this.tabNTRlog.Name = "tabNTRlog";
+            this.tabNTRlog.Size = new System.Drawing.Size(558, 361);
+            this.tabNTRlog.TabIndex = 5;
+            this.tabNTRlog.Text = "NTR Log";
             // 
             // MainForm
             // 
@@ -3946,7 +4140,6 @@
             this.ClientSize = new System.Drawing.Size(882, 438);
             this.Controls.Add(this.miscTabs);
             this.Controls.Add(this.readResult);
-            this.Controls.Add(this.resumeLSR);
             this.Controls.Add(this.label71);
             this.Controls.Add(this.stopBotButton);
             this.Controls.Add(this.label69);
@@ -4060,12 +4253,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
-            this.tabWonderTrade.ResumeLayout(false);
-            this.tabWonderTrade.PerformLayout();
             this.tabSoftReset.ResumeLayout(false);
             this.tabSoftReset.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SRFilters)).EndInit();
+            this.tabWonderTrade.ResumeLayout(false);
+            this.tabWonderTrade.PerformLayout();
+            this.tabNTRlog.ResumeLayout(false);
+            this.tabNTRlog.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4296,7 +4490,6 @@
         private System.Windows.Forms.CheckBox resumeLSR;
         private System.Windows.Forms.Label label73;
         private System.Windows.Forms.ComboBox AbilityLSR;
-        private System.Windows.Forms.Button GenderLSR;
         private System.Windows.Forms.TabControl miscTabs;
         private System.Windows.Forms.TabPage tabEditTrainer;
         private System.Windows.Forms.TabPage tabControls;
@@ -4343,7 +4536,7 @@
         private System.Windows.Forms.RadioButton radioDayCare2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabNTRlog;
         private System.Windows.Forms.DataGridView BreedFilter;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.DataGridViewTextBoxColumn bFilterShiny;
@@ -4365,6 +4558,25 @@
         private System.Windows.Forms.Button bFilterRead;
         private System.Windows.Forms.Button manualSR;
         private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.Button srFilterRead;
+        private System.Windows.Forms.Button srFilterLoad;
+        private System.Windows.Forms.Button srFilterSave;
+        private System.Windows.Forms.Button srFilterRemove;
+        private System.Windows.Forms.Button srFilterAdd;
+        private System.Windows.Forms.DataGridView SRFilters;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.Label label93;
+        private System.Windows.Forms.ComboBox genderLSR;
     }
 }
 

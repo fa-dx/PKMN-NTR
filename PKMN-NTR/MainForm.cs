@@ -51,7 +51,6 @@ namespace ntrbase
         public static readonly int timeout = 10;
         public uint lastmemoryread;
         public string lastlog;
-        public int desiredgender = 2;
         public int currentfilter = 0;
         public static readonly string readerror = "An error has ocurred while reading data from your 3DS RAM, please check connection and try again.";
         public static readonly string toucherror = "An error has ocurred while sending a touch screen command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
@@ -450,7 +449,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2883,31 +2882,6 @@ namespace ntrbase
             stopBotButton.Enabled = false;
         }
 
-        private void GenderLSR_Click(object sender, EventArgs e)
-        {
-            if (desiredgender == 0)
-            {
-                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                GenderLSR.ForeColor = Color.Red;
-                GenderLSR.Text = "♀";
-                desiredgender = 1;
-            }
-            else if (desiredgender == 1)
-            {
-                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                GenderLSR.ForeColor = Color.Black;
-                GenderLSR.Text = "-";
-                desiredgender = 2;
-            }
-            else
-            {
-                GenderLSR.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                GenderLSR.ForeColor = Color.Blue;
-                GenderLSR.Text = "♂";
-                desiredgender = 0;
-            }
-        }
-
         // Filter handlers
         public bool FilterCheck(DataGridView filters)
         {
@@ -3130,6 +3104,89 @@ namespace ntrbase
             else
             {
                 MessageBox.Show("Breeding Filters file not found");
+            }
+        }
+
+        private void srFilterAdd_Click(object sender, EventArgs e)
+        {
+            SRFilters.Rows.Add(shinyLSR.Checked ? 1 : 0, Convert.ToInt32(natureLSR.SelectedIndex), Convert.ToInt32(AbilityLSR.SelectedIndex), Convert.ToInt32(HPTypeLSR.SelectedIndex), Convert.ToInt32(genderLSR.SelectedIndex), Convert.ToInt32(ivHPLSR.Value), Convert.ToInt32(ivAtkLSR.Value), Convert.ToInt32(ivDefLSR.Value), Convert.ToInt32(ivSpALSR.Value), Convert.ToInt32(ivSpDLSR.Value), Convert.ToInt32(ivSpeLSR.Value));
+        }
+
+        private void srFilterRemove_Click(object sender, EventArgs e)
+        {
+            if (SRFilters.SelectedRows.Count > 0 && SRFilters.Rows.Count > 0)
+            {
+                SRFilters.Rows.RemoveAt(SRFilters.SelectedRows[0].Index);
+            }
+            else
+            {
+                MessageBox.Show("There is no filter selected.");
+            }
+        }
+
+        private void srFilterRead_Click(object sender, EventArgs e)
+        {
+            if (SRFilters.SelectedRows.Count > 0)
+            {
+                if ((int)SRFilters.SelectedRows[0].Cells[0].Value == 1)
+                {
+                    SetChecked(shinyLSR, true);
+                }
+                else
+                {
+                    SetChecked(shinyLSR, false);
+                }
+                SetSelectedIndex(natureLSR, (int)SRFilters.SelectedRows[0].Cells[1].Value);
+                SetSelectedIndex(AbilityLSR, (int)SRFilters.SelectedRows[0].Cells[2].Value);
+                SetSelectedIndex(HPTypeLSR, (int)SRFilters.SelectedRows[0].Cells[3].Value);
+                SetSelectedIndex(genderLSR, (int)SRFilters.SelectedRows[0].Cells[4].Value);
+                SetValue(ivHPLSR, (int)SRFilters.SelectedRows[0].Cells[5].Value);
+                SetValue(ivAtkLSR, (int)SRFilters.SelectedRows[0].Cells[6].Value);
+                SetValue(ivDefLSR, (int)SRFilters.SelectedRows[0].Cells[7].Value);
+                SetValue(ivSpALSR, (int)SRFilters.SelectedRows[0].Cells[8].Value);
+                SetValue(ivSpDLSR, (int)SRFilters.SelectedRows[0].Cells[9].Value);
+                SetValue(ivSpeLSR, (int)SRFilters.SelectedRows[0].Cells[10].Value);
+            }
+            else
+            {
+                MessageBox.Show("There is no filter selected.");
+            }
+        }
+
+        private void srilterSave_Click(object sender, EventArgs e)
+        {
+            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            (new System.IO.FileInfo(folderPath)).Directory.Create();
+            string fileName = "SoftResetFilters.csv";
+            var csv = new StringBuilder();
+            var headers = SRFilters.Columns.Cast<DataGridViewColumn>();
+            foreach (DataGridViewRow row in SRFilters.Rows)
+            {
+                var cells = row.Cells.Cast<DataGridViewCell>();
+                csv.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+            }
+            File.WriteAllText(folderPath + fileName, csv.ToString());
+            MessageBox.Show("Soft-reset Filters saved");
+        }
+
+        private void srFilterLoad_Click(object sender, EventArgs e)
+        {
+            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            (new System.IO.FileInfo(folderPath)).Directory.Create();
+            string fileName = "SoftResetFilters.csv";
+            if (System.IO.File.Exists(folderPath + fileName))
+            {
+                SRFilters.Rows.Clear();
+                List<int[]> rows = File.ReadAllLines(folderPath + fileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                foreach (int[] row in rows)
+                {
+                    SRFilters.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
+                }
+                MessageBox.Show("Soft-reset Filters loaded");
+            }
+            else
+            {
+                MessageBox.Show("Soft-reset Filters file not found");
             }
         }
 
@@ -3668,14 +3725,13 @@ namespace ntrbase
         }
 
         // Soft-reset bot
-        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, tev_start, tev_cont1, tev_cont2, tev_cont3, tev_cont4, tev_cont5, tev_check, botexit };
+        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, tev_start, tev_cont1, tev_cont2, tev_cont3, tev_cont4, tev_cont5, tev_check, botexit };
 
         private async void RunLSRbot_Click(object sender, EventArgs e)
         {
             // Show warning
             string typemessage;
             string resumemessage;
-            botStop = false;
             switch (typeLSR.SelectedIndex)
             {
                 case 0:
@@ -3695,61 +3751,12 @@ namespace ntrbase
                     resumemessage = "";
                     break;
             }
-            string desirednature;
-            if (natureLSR.SelectedIndex < 0)
-            {
-                desirednature = "Any";
-            }
-            else
-            {
-                desirednature = natureLSR.SelectedItem.ToString();
-            }
-            string desiredIVs = ivHPLSR.Value.ToString() + "/" + ivAtkLSR.Value.ToString() + "/" + ivDefLSR.Value.ToString() + "/" + ivSpALSR.Value.ToString() + "/" + ivSpDLSR.Value.ToString() + "/" + ivSpeLSR.Value.ToString();
-            string desiredHPtype;
-            if (HPTypeLSR.SelectedIndex < 0)
-            {
-                desiredHPtype = "Any";
-            }
-            else
-            {
-                desiredHPtype = HPTypeLSR.SelectedItem.ToString();
-            }
-            string desiredshiny;
-            if (shinyLSR.Checked)
-            {
-                desiredshiny = "Yes";
-            }
-            else
-            {
-                desiredshiny = "Don't care";
-            }
-            string desiredability;
-            if (AbilityLSR.SelectedIndex < 0)
-            {
-                desiredability = "Any";
-            }
-            else
-            {
-                desiredability = AbilityLSR.SelectedItem.ToString();
-            }
-            string genderstring;
-            if (desiredgender == 0)
-            {
-                genderstring = "Male";
-            }
-            else if (desiredgender == 1)
-            {
-                genderstring = "Female";
-            }
-            else
-            {
-                genderstring = "Any";
-            }
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't comply with the following specifications:\r\n\r\n- Shiny: " + desiredshiny + "\r\n- Nautre: " + desirednature + "\r\n- Ability: " + desiredability + "\r\n- Gender: " + genderstring + "\r\n- Minimum IVs: " + desiredIVs + "\r\n- Hidden Power: " + desiredHPtype + "\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
                 botWorking = true;
+                botStop = false;
                 botState = (int)srbotstates.botstart;
                 onlyView.Checked = true;
                 radioOpponent.Checked = true;
@@ -4140,7 +4147,7 @@ namespace ntrbase
                         }
                         else if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
                         { // Battle triggered, data received
-                            botState = (int)srbotstates.testshiny;
+                            botState = (int)srbotstates.filter;
                         }
                         else
                         {
@@ -4148,157 +4155,18 @@ namespace ntrbase
                             botState = (int)srbotstates.botexit;
                         }
                         break;
-                    case (int)srbotstates.testshiny:
-                        Addlog("Analyze pokémon");
-                        if (shinyLSR.Checked)
+                    case (int)srbotstates.filter:
+                        bool testsok = FilterCheck(SRFilters);
+                        if (testsok)
                         {
-                            if (dumpedPKHeX.isShiny)
-                            {
-                                Addlog("Shiny: PASS");
-                                botState = (int)srbotstates.testnature;
-                            }
-                            else
-                            {
-                                Addlog("Shiny: FAIL");
-                                botState = (int)srbotstates.softreset;
-                            }
+                            botState = (int)srbotstates.testspassed;
                         }
                         else
                         {
-                            if (dumpedPKHeX.isShiny)
-                            {
-                                Addlog("Shiny: Yes");
-                                botState = (int)srbotstates.botexit; // Shiny detected
-                            }
-                            else
-                            {
-                                Addlog("Shiny: No");
-                                botState = (int)srbotstates.testnature;
-                            }
-                        }
-                        break;
-                    case (int)srbotstates.testnature:
-                        if (natureLSR.SelectedIndex < 0 || dumpedPKHeX.Nature == natureLSR.SelectedIndex)
-                        {
-                            Addlog("Nature: PASS");
-                            botState = (int)srbotstates.testhp;
-                        }
-                        else
-                        {
-                            Addlog("Nature: FAIL");
                             botState = (int)srbotstates.softreset;
                         }
                         break;
-                    case (int)srbotstates.testhp:
-                        if (dumpedPKHeX.IV_HP >= ivHPLSR.Value)
-                        {
-                            Addlog("Hit Points IV: PASS");
-                            botState = (int)srbotstates.testatk;
-                        }
-                        else
-                        {
-                            Addlog("Hit Points IV: FAIL");
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.testatk:
-                        if (dumpedPKHeX.IV_ATK >= ivAtkLSR.Value)
-                        {
-                            Addlog("Attack IV: PASS");
-                            botState = (int)srbotstates.testdef;
-                        }
-                        else
-                        {
-                            Addlog("Attack IV: FAIL");
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.testdef:
-                        if (dumpedPKHeX.IV_DEF >= ivDefLSR.Value)
-                        {
-                            Addlog("Defense IV: PASS");
-                            botState = (int)srbotstates.testspa;
-                        }
-                        else
-                        {
-                            Addlog("Defense IV: FAIL");
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.testspa:
-                        if (dumpedPKHeX.IV_SPA >= ivSpALSR.Value)
-                        {
-                            Addlog("Special Attack IV: PASS");
-                            botState = (int)srbotstates.testspd;
-                        }
-                        else
-                        {
-                            Addlog("Special Attack IV: FAIL");
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.testspd:
-                        if (dumpedPKHeX.IV_SPD >= ivSpDLSR.Value)
-                        {
-                            Addlog("Special Defense IV: PASS");
-                            botState = (int)srbotstates.testspe;
-                        }
-                        else
-                        {
-                            Addlog("Special Defense IV: FAIL");
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.testspe:
-                        if (dumpedPKHeX.IV_SPE >= ivSpeLSR.Value)
-                        {
-                            Addlog("Speed IV: PASS");
-                            botState = (int)srbotstates.testhdnpwr;
-                        }
-                        else
-                        {
-                            Addlog("Speed IV: FAIL");
-                            botState++;
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.testhdnpwr:
-                        if (HPTypeLSR.SelectedIndex < 0 || desiredHPtype == hiddenPower.Text)
-                        {
-                            Addlog("Hidden Power: PASS");
-                            botState = (int)srbotstates.testability;
-                        }
-                        else
-                        {
-                            Addlog("Hidden Power: FAIL");
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.testability:
-                        if (AbilityLSR.SelectedIndex < 0 || AbilityLSR.SelectedIndex == dumpedPKHeX.Ability - 1)
-                        {
-                            Addlog("Ability: PASS");
-                            botState = (int)srbotstates.testgender;
-                        }
-                        else
-                        {
-                            Addlog("Ability: FAIL");
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.testgender:
-                        if (desiredgender == 2 || desiredgender == dumpedPKHeX.Gender)
-                        {
-                            Addlog("Gender: PASS");
-                            botState = (int)srbotstates.alltestsok;
-                        }
-                        else
-                        {
-                            Addlog("Gender: FAIL");
-                            botState = (int)srbotstates.softreset;
-                        }
-                        break;
-                    case (int)srbotstates.alltestsok:
+                    case (int)srbotstates.testspassed:
                         Addlog("All tests passed!");
                         botState = (int)srbotstates.botexit; // All tests passed
                         break;
@@ -4565,7 +4433,7 @@ namespace ntrbase
                         }
                         if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
                         { // Pokemon received
-                            botState = (int)srbotstates.testshiny;
+                            botState = (int)srbotstates.filter;
                         }
                         else if (waittimeout < timeout * 10 && dPID.Text.Length < 1)
                         { // Pokémon not received yet
