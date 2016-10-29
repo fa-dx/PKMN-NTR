@@ -247,6 +247,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControls = new System.Windows.Forms.TabPage();
             this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.bFilterRead = new System.Windows.Forms.Button();
             this.shinyBreed = new System.Windows.Forms.CheckBox();
             this.bFilterLoad = new System.Windows.Forms.Button();
             this.bFilterSave = new System.Windows.Forms.Button();
@@ -3159,6 +3160,7 @@
             // tabBreeding
             // 
             this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.bFilterRead);
             this.tabBreeding.Controls.Add(this.shinyBreed);
             this.tabBreeding.Controls.Add(this.bFilterLoad);
             this.tabBreeding.Controls.Add(this.bFilterSave);
@@ -3206,6 +3208,17 @@
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
+            // bFilterRead
+            // 
+            this.bFilterRead.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.bFilterRead.Location = new System.Drawing.Point(275, 84);
+            this.bFilterRead.Name = "bFilterRead";
+            this.bFilterRead.Size = new System.Drawing.Size(57, 23);
+            this.bFilterRead.TabIndex = 151;
+            this.bFilterRead.Text = "Read";
+            this.bFilterRead.UseVisualStyleBackColor = true;
+            this.bFilterRead.Click += new System.EventHandler(this.bFilterRead_Click);
+            // 
             // shinyBreed
             // 
             this.shinyBreed.AutoSize = true;
@@ -3218,9 +3231,9 @@
             // 
             // bFilterLoad
             // 
-            this.bFilterLoad.Location = new System.Drawing.Point(488, 180);
+            this.bFilterLoad.Location = new System.Drawing.Point(275, 142);
             this.bFilterLoad.Name = "bFilterLoad";
-            this.bFilterLoad.Size = new System.Drawing.Size(65, 23);
+            this.bFilterLoad.Size = new System.Drawing.Size(57, 23);
             this.bFilterLoad.TabIndex = 149;
             this.bFilterLoad.Text = "Load";
             this.bFilterLoad.UseVisualStyleBackColor = true;
@@ -3228,9 +3241,9 @@
             // 
             // bFilterSave
             // 
-            this.bFilterSave.Location = new System.Drawing.Point(417, 180);
+            this.bFilterSave.Location = new System.Drawing.Point(275, 113);
             this.bFilterSave.Name = "bFilterSave";
-            this.bFilterSave.Size = new System.Drawing.Size(65, 23);
+            this.bFilterSave.Size = new System.Drawing.Size(57, 23);
             this.bFilterSave.TabIndex = 148;
             this.bFilterSave.Text = "Save";
             this.bFilterSave.UseVisualStyleBackColor = true;
@@ -3238,9 +3251,10 @@
             // 
             // bFilterRemove
             // 
-            this.bFilterRemove.Location = new System.Drawing.Point(346, 180);
+            this.bFilterRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.bFilterRemove.Location = new System.Drawing.Point(275, 55);
             this.bFilterRemove.Name = "bFilterRemove";
-            this.bFilterRemove.Size = new System.Drawing.Size(65, 23);
+            this.bFilterRemove.Size = new System.Drawing.Size(57, 23);
             this.bFilterRemove.TabIndex = 147;
             this.bFilterRemove.Text = "Remove";
             this.bFilterRemove.UseVisualStyleBackColor = true;
@@ -3248,9 +3262,9 @@
             // 
             // bFilterAdd
             // 
-            this.bFilterAdd.Location = new System.Drawing.Point(275, 180);
+            this.bFilterAdd.Location = new System.Drawing.Point(275, 26);
             this.bFilterAdd.Name = "bFilterAdd";
-            this.bFilterAdd.Size = new System.Drawing.Size(65, 23);
+            this.bFilterAdd.Size = new System.Drawing.Size(57, 23);
             this.bFilterAdd.TabIndex = 146;
             this.bFilterAdd.Text = "Add";
             this.bFilterAdd.UseVisualStyleBackColor = true;
@@ -3258,6 +3272,8 @@
             // 
             // BreedFilter
             // 
+            this.BreedFilter.AllowUserToAddRows = false;
+            this.BreedFilter.AllowUserToDeleteRows = false;
             this.BreedFilter.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.BreedFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BreedFilter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -3272,11 +3288,12 @@
             this.bFilterSpA,
             this.bFilterSpD,
             this.bFilterSpe});
-            this.BreedFilter.Location = new System.Drawing.Point(275, 29);
+            this.BreedFilter.Location = new System.Drawing.Point(338, 10);
             this.BreedFilter.MultiSelect = false;
             this.BreedFilter.Name = "BreedFilter";
             this.BreedFilter.ReadOnly = true;
-            this.BreedFilter.Size = new System.Drawing.Size(277, 145);
+            this.BreedFilter.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.BreedFilter.Size = new System.Drawing.Size(214, 155);
             this.BreedFilter.TabIndex = 145;
             // 
             // bFilterShiny
@@ -4322,6 +4339,7 @@
         private System.Windows.Forms.Button bFilterRemove;
         private System.Windows.Forms.Button bFilterAdd;
         private System.Windows.Forms.CheckBox shinyBreed;
+        private System.Windows.Forms.Button bFilterRead;
     }
 }
 

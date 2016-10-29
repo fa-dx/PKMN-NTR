@@ -49,6 +49,7 @@ namespace ntrbase
         public uint lastmemoryread;
         public string lastlog;
         public int desiredgender = 2;
+        public int currentfilter = 0;
         public static readonly string readerror = "An error has ocurred while reading data from your 3DS RAM, please check connection and try again.";
         public static readonly string toucherror = "An error has ocurred while sending a touch screen command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
         public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
@@ -446,7 +447,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2 };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, GenderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -2896,10 +2897,13 @@ namespace ntrbase
         {
             if (filters.Rows.Count > 0)
             {
+                currentfilter = 0;
                 int failedtests = 0;
                 foreach (DataGridViewRow row in filters.Rows)
                 {
-                    Addlog("Analyze pokémon using filter # " + (row.Index + 1).ToString());
+                    currentfilter++;
+                    Addlog("Analyze pokémon using filter # " + currentfilter);
+                    failedtests = 0;
                     // Test shiny
                     if ((int)row.Cells[0].Value == 1)
                     {
@@ -2912,6 +2916,10 @@ namespace ntrbase
                             Addlog("Shiny: FAIL");
                             failedtests++;
                         }
+                    }
+                    else
+                    {
+                        Addlog("Shiny: Don't care");
                     }
                     // Test nature
                     if ((int)row.Cells[1].Value < 0 || dumpedPKHeX.Nature == (int)row.Cells[1].Value)
@@ -3013,15 +3021,12 @@ namespace ntrbase
                         Addlog("Speed IV: FAIL");
                         failedtests++;
                     }
+                    if (failedtests == 0)
+                    {
+                        return true;
+                    }
                 }
-                if (failedtests > 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return false;
             }
             else
             {
@@ -3039,6 +3044,35 @@ namespace ntrbase
             if (BreedFilter.SelectedRows.Count > 0 && BreedFilter.Rows.Count > 0)
             {
                 BreedFilter.Rows.RemoveAt(BreedFilter.SelectedRows[0].Index);
+            }
+            else
+            {
+                MessageBox.Show("There is no filter selected.");
+            }
+        }
+
+        private void bFilterRead_Click(object sender, EventArgs e)
+        {
+            if (BreedFilter.SelectedRows.Count > 0)
+            {
+                if ((int)BreedFilter.SelectedRows[0].Cells[0].Value == 1)
+                {
+                    SetChecked(shinyBreed, true);
+                }
+                else
+                {
+                    SetChecked(shinyBreed, false);
+                }
+                SetSelectedIndex(natureBreed, (int)BreedFilter.SelectedRows[0].Cells[1].Value);
+                SetSelectedIndex(abilityBreed, (int)BreedFilter.SelectedRows[0].Cells[2].Value);
+                SetSelectedIndex(HPtypeBreed, (int)BreedFilter.SelectedRows[0].Cells[3].Value);
+                SetSelectedIndex(genderBreed, (int)BreedFilter.SelectedRows[0].Cells[4].Value);
+                SetValue(ivHPBreed, (int)BreedFilter.SelectedRows[0].Cells[5].Value);
+                SetValue(ivAtkBreed, (int)BreedFilter.SelectedRows[0].Cells[6].Value);
+                SetValue(ivDEFBreed, (int)BreedFilter.SelectedRows[0].Cells[7].Value);
+                SetValue(ivSpABreed, (int)BreedFilter.SelectedRows[0].Cells[8].Value);
+                SetValue(ivSpDBreed, (int)BreedFilter.SelectedRows[0].Cells[9].Value);
+                SetValue(ivSpeBreed, (int)BreedFilter.SelectedRows[0].Cells[10].Value);
             }
             else
             {
@@ -3071,7 +3105,6 @@ namespace ntrbase
             {
                 BreedFilter.Rows.Clear();
                 List<int[]> rows = File.ReadAllLines(folderPath + fileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                rows.RemoveAt(rows.Count - 1);
                 foreach (int[] row in rows)
                 {
                     BreedFilter.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
@@ -4545,7 +4578,7 @@ namespace ntrbase
 
         // Breeding bot
 
-        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, retirefromcomputer, checkmap6, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, botexit };
+        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, retirefromcomputer, checkmap6, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, filter, testspassed, botexit };
 
         private async void runBreedingBot_Click(object sender, EventArgs e)
         {
@@ -4557,7 +4590,7 @@ namespace ntrbase
                     modemessage = "Simple: This bot will produce " + eggsNoBreed.Value.ToString() + " eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ".\r\n\r\n";
                     break;
                 case 1:
-                    modemessage = "Filter: Not implemented yet.";
+                    modemessage = "Filter: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check against the selected filters and if it finds a match the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
                     break;
                 default:
                     modemessage = "No mode selected. Select one and try again.";
@@ -4589,21 +4622,26 @@ namespace ntrbase
             Task<int> waitNTRtask;
             int currentbox = Convert.ToInt32(boxBreed.Value - 1);
             int currentslot = Convert.ToInt32(slotBreed.Value - 1);
-            int waitresult = 0;
-            int waittimeout = 0;
-            int eggsinparty = 0;
-            uint routemapid = 0;
-            uint daycaremapid = 0;
-            uint daycaremanx = 0;
-            uint daycaremany = 0;
-            uint daycaredoorx = 0;
-            uint daycaredoory = 0;
-            uint daycareexitx = 0;
-            uint daycareexity = 0;
-            uint computerx = 0;
-            uint computery = 0;
+            int filterbox = 0;
+            int filterslot = 0;
+            int waitresult;
+            int waittimeout;
+            uint routemapid;
+            uint daycaremapid;
+            uint daycaremanx;
+            uint daycaremany;
+            uint daycaredoorx;
+            uint daycaredoory;
+            uint daycareexitx;
+            uint daycareexity;
+            uint computerx;
+            uint computery;
             bool orasgame;
             bool boxchange = true;
+            int[,] egglocations = new int[5, 2];
+            int eggsinbatch = 0;
+            int eggsinparty = 0;
+            string finishmessage = "Finished";
             if (game == GameType.X || game == GameType.Y)
             {
                 orasgame = false;
@@ -4662,6 +4700,10 @@ namespace ntrbase
                         {
                             case 0:
                                 botState = (int)breedbotstates.walk1;
+                                break;
+                            case 1:
+                                botState = (int)breedbotstates.walktodaycare;
+                                eggsinparty = 5;
                                 break;
                             default:
                                 botState = (int)breedbotstates.botexit;
@@ -5032,7 +5074,7 @@ namespace ntrbase
                         }
                         break;
                     case (int)breedbotstates.facecomputer:
-                        Addlog("Turn on tje PC");
+                        Addlog("Turn on the PC");
                         waitNTRtask = waitbutton(DpadUP);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
@@ -5346,6 +5388,9 @@ namespace ntrbase
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
+                            egglocations[eggsinbatch, 0] = currentbox;
+                            egglocations[eggsinbatch, 1] = currentslot;
+                            eggsinbatch++;
                             currentslot++;
                             if (currentslot >= 30)
                             {
@@ -5401,7 +5446,11 @@ namespace ntrbase
                         }
                         if (waittimeout < timeout * 10)
                         {
-                            if (eggsNoBreed.Value > 0)
+                            if (modeBreed.SelectedIndex == 1)
+                            {
+                                botState = (int)breedbotstates.filter;
+                            }
+                            else if (eggsNoBreed.Value > 0)
                             {
                                 botState = (int)breedbotstates.retirefromcomputer;
                             }
@@ -5524,6 +5573,60 @@ namespace ntrbase
                             botState = (int)breedbotstates.walktodaycareman;
                         }
                         break;
+                    case (int)breedbotstates.filter:
+                        for (int i = 0; i < eggsinbatch; i++)
+                        {
+                            filterbox = egglocations[i, 0] + 1;
+                            filterslot = egglocations[i, 1] + 1;
+                            bool testsok = false;
+                            Addlog("Reading egg located at box " + filterbox + " slot  " + filterslot);
+                            SetValue(boxDump, filterbox);
+                            SetValue(slotDump, filterslot);
+                            dumpPokemon.Enabled = true;
+                            dumpPokemon.PerformClick();
+                            dumpPokemon.Enabled = false;
+                            for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+                            {
+                                await Task.Delay(100);
+                                if (lastlog.Contains("finished"))
+                                {
+                                    break;
+                                }
+                            }
+                            if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
+                            {
+                                testsok = FilterCheck(BreedFilter);
+                            }
+                            else
+                            {
+                                MessageBox.Show(readerror);
+                                break;
+                            }
+                            if (testsok)
+                            {
+                                botState = (int)breedbotstates.testspassed;
+                                break;
+                            }
+                            else if (eggsNoBreed.Value > 0)
+                            {
+                                botState = (int)breedbotstates.retirefromcomputer;
+                            }
+                            else
+                            {
+                                Addlog("No match found");
+                                finishmessage = "Finished. Maximum number of eggs reached without a match for any filter.";
+                                botState = (int)breedbotstates.botexit;
+                            }
+
+                        }
+                        eggsinbatch = 0;
+                        break;
+                    case (int)breedbotstates.testspassed:
+                        Addlog("All tests passed");
+                        finishmessage = "Finished. A match was found at box" + filterbox + ", slot " + filterslot + ", using filter #" + currentfilter;
+                        Addlog("Bot stop");
+                        botStop = true;
+                        break;
                     default:
                         waitNTRtask = waitfreebutton();
                         waitresult = await waitNTRtask;
@@ -5542,7 +5645,7 @@ namespace ntrbase
             }
             stopBotButton.Enabled = false;
             botWorking = false;
-            MessageBox.Show("Finished. ", "Breeding bot");
+            MessageBox.Show(finishmessage, "Breeding bot");
 
         }
 
