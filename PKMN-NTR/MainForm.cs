@@ -27,6 +27,9 @@ namespace ntrbase
         //is fulfilled, handleDataReady() uses information in DataReadyWaiting object to process the data.
         static Dictionary<uint, DataReadyWaiting> waitingForData = new Dictionary<uint, DataReadyWaiting>();
 
+        // Set this boolean to true to enable the write feature for the party pokémon.
+        public static readonly bool enablepartywrite = false;
+
         public enum GameType { None, X, Y, OR, AS };
         public const int BOXES = 31;
         public const int BOXSIZE = 30;
@@ -2172,7 +2175,7 @@ namespace ntrbase
 
         private void radioParty_CheckedChanged_1(object sender, EventArgs e)
         {
-            if (radioParty.Checked && !botWorking)
+            if (radioParty.Checked && !botWorking && !enablepartywrite)
             {
                 MessageBox.Show("Important:\r\n\r\nThis feature is experimental, the slots that is selected in this application might not be the same slots that are shown in your party. Due the unkonown mechanics of this, the write feature has been disabled.\r\n\r\nIf you wish to edit a pokémon in your party, deposit it in a box.\r\n\r\nCurrently, this only works in XY", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 button1.Enabled = false;
@@ -3153,6 +3156,7 @@ namespace ntrbase
             else
             { // Exit bot
                 botStop = true;
+                return;
             }
 
             // Local variables
@@ -3759,6 +3763,7 @@ namespace ntrbase
             else
             { // Exit bot
                 botStop = true;
+                return;
             }
 
             // Local Variables
@@ -4605,11 +4610,11 @@ namespace ntrbase
                     modemessage = "Filter: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check against the selected filters and if it finds a match the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
                     break;
                 default:
-                    modemessage = "No mode selected. Select one and try again.";
+                    modemessage = "No mode selected. Select one and try again.\r\n\r\n";
                     break;
             }
 
-            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Currently, this only works in ORAS. Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
@@ -4628,6 +4633,7 @@ namespace ntrbase
             else
             { // Exit bot
                 botStop = true;
+                return;
             }
 
             // Local variables
