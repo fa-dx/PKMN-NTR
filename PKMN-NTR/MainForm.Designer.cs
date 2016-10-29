@@ -246,6 +246,8 @@
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControls = new System.Windows.Forms.TabPage();
+            this.manualSR = new System.Windows.Forms.Button();
+            this.label92 = new System.Windows.Forms.Label();
             this.tabBreeding = new System.Windows.Forms.TabPage();
             this.bFilterRead = new System.Windows.Forms.Button();
             this.shinyBreed = new System.Windows.Forms.CheckBox();
@@ -308,8 +310,6 @@
             this.tabSoftReset = new System.Windows.Forms.TabPage();
             this.label74 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label92 = new System.Windows.Forms.Label();
-            this.manualSR = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -3054,7 +3054,7 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(108, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.7-beta3";
+            this.label69.Text = "Version: 1.18.7-beta4";
             // 
             // label71
             // 
@@ -3160,6 +3160,25 @@
             this.tabControls.Size = new System.Drawing.Size(558, 361);
             this.tabControls.TabIndex = 1;
             this.tabControls.Text = "Controls";
+            // 
+            // manualSR
+            // 
+            this.manualSR.Location = new System.Drawing.Point(6, 160);
+            this.manualSR.Name = "manualSR";
+            this.manualSR.Size = new System.Drawing.Size(75, 23);
+            this.manualSR.TabIndex = 76;
+            this.manualSR.Text = "Soft-Reset";
+            this.manualSR.UseVisualStyleBackColor = true;
+            this.manualSR.Click += new System.EventHandler(this.manualSR_Click);
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(6, 144);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(74, 13);
+            this.label92.TabIndex = 75;
+            this.label92.Text = "Special Inputs";
             // 
             // tabBreeding
             // 
@@ -3917,25 +3936,6 @@
             this.tabPage2.Size = new System.Drawing.Size(558, 361);
             this.tabPage2.TabIndex = 5;
             this.tabPage2.Text = "NTR Log";
-            // 
-            // label92
-            // 
-            this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(6, 144);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(74, 13);
-            this.label92.TabIndex = 75;
-            this.label92.Text = "Special Inputs";
-            // 
-            // manualSR
-            // 
-            this.manualSR.Location = new System.Drawing.Point(6, 160);
-            this.manualSR.Name = "manualSR";
-            this.manualSR.Size = new System.Drawing.Size(75, 23);
-            this.manualSR.TabIndex = 76;
-            this.manualSR.Text = "Soft-Reset";
-            this.manualSR.UseVisualStyleBackColor = true;
-            this.manualSR.Click += new System.EventHandler(this.manualSR_Click);
             // 
             // MainForm
             // 

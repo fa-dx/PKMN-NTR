@@ -4721,8 +4721,7 @@ namespace ntrbase
                                 botState = (int)breedbotstates.walk1;
                                 break;
                             case 1:
-                                botState = (int)breedbotstates.walktodaycare;
-                                eggsinparty = 5;
+                                botState = (int)breedbotstates.walk1;
                                 break;
                             default:
                                 botState = (int)breedbotstates.botexit;
