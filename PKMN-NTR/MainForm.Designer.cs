@@ -2879,7 +2879,7 @@
             // 
             // readResult
             // 
-            this.readResult.Location = new System.Drawing.Point(577, 407);
+            this.readResult.Location = new System.Drawing.Point(506, 407);
             this.readResult.Name = "readResult";
             this.readResult.ReadOnly = true;
             this.readResult.Size = new System.Drawing.Size(100, 20);
@@ -3063,12 +3063,12 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(108, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.7-beta4";
+            this.label69.Text = "Version: 1.18.7-beta5";
             // 
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(462, 410);
+            this.label71.Location = new System.Drawing.Point(391, 410);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(109, 13);
             this.label71.TabIndex = 108;
