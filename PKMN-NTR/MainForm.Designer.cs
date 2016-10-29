@@ -308,6 +308,8 @@
             this.tabSoftReset = new System.Windows.Forms.TabPage();
             this.label74 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label92 = new System.Windows.Forms.Label();
+            this.manualSR = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -3132,6 +3134,8 @@
             // tabControls
             // 
             this.tabControls.BackColor = System.Drawing.SystemColors.Control;
+            this.tabControls.Controls.Add(this.manualSR);
+            this.tabControls.Controls.Add(this.label92);
             this.tabControls.Controls.Add(this.manualDLeft);
             this.tabControls.Controls.Add(this.manualTouch);
             this.tabControls.Controls.Add(this.manualDUp);
@@ -3914,6 +3918,25 @@
             this.tabPage2.TabIndex = 5;
             this.tabPage2.Text = "NTR Log";
             // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(6, 144);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(74, 13);
+            this.label92.TabIndex = 75;
+            this.label92.Text = "Special Inputs";
+            // 
+            // manualSR
+            // 
+            this.manualSR.Location = new System.Drawing.Point(6, 160);
+            this.manualSR.Name = "manualSR";
+            this.manualSR.Size = new System.Drawing.Size(75, 23);
+            this.manualSR.TabIndex = 76;
+            this.manualSR.Text = "Soft-Reset";
+            this.manualSR.UseVisualStyleBackColor = true;
+            this.manualSR.Click += new System.EventHandler(this.manualSR_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4340,6 +4363,8 @@
         private System.Windows.Forms.Button bFilterAdd;
         private System.Windows.Forms.CheckBox shinyBreed;
         private System.Windows.Forms.Button bFilterRead;
+        private System.Windows.Forms.Button manualSR;
+        private System.Windows.Forms.Label label92;
     }
 }
 
