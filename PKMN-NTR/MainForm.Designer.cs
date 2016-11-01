@@ -482,7 +482,7 @@
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(7, 331);
+            this.groupBox1.Location = new System.Drawing.Point(12, 334);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 97);
             this.groupBox1.TabIndex = 6;
@@ -3440,7 +3440,7 @@
             // radioDayCare2
             // 
             this.radioDayCare2.AutoSize = true;
-            this.radioDayCare2.Location = new System.Drawing.Point(87, 19);
+            this.radioDayCare2.Location = new System.Drawing.Point(93, 19);
             this.radioDayCare2.Name = "radioDayCare2";
             this.radioDayCare2.Size = new System.Drawing.Size(86, 17);
             this.radioDayCare2.TabIndex = 139;

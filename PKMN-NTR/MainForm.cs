@@ -5338,6 +5338,7 @@ namespace ntrbase
                             }
                             else if (eggsNoBreed.Value > 0)
                             {
+                                eggsinbatch = 0;
                                 botState = (int)breedbotstates.retirefromcomputer;
                             }
                             else
