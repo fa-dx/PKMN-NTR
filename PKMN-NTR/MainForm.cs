@@ -180,7 +180,6 @@ namespace ntrbase
         public static readonly uint DpadDOWN = 0xF7F;
         public static readonly uint DpadLEFT = 0xFDF;
         public static readonly uint DpadRIGHT = 0xFEF;
-        public static readonly uint DpadUPRIGHT = 0xFAF;
         public static readonly uint runUP = 0xFBD;
         public static readonly uint runDOWN = 0xF7D;
         public static readonly uint runLEFT = 0xFDD;
@@ -2922,7 +2921,7 @@ namespace ntrbase
                         failedtests++;
                     }
                     // Test Ability
-                    if ((int)row.Cells[2].Value < 0 || dumpedPKHeX.Ability == (int)row.Cells[2].Value)
+                    if ((int)row.Cells[2].Value < 0 || (dumpedPKHeX.Ability - 1) == (int)row.Cells[2].Value)
                     {
                         Addlog("Ability: PASS");
                     }
@@ -4463,7 +4462,7 @@ namespace ntrbase
         }
 
         // Breeding bot
-        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, retirefromcomputer, checkmap6, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, filter, testspassed, botexit };
+        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
 
         private async void runBreedingBot_Click(object sender, EventArgs e)
         {
@@ -4651,7 +4650,7 @@ namespace ntrbase
                         if (lastmemoryread == 0x01)
                         {
                             Addlog("Egg found");
-                            botState = (int)breedbotstates.walk3;
+                            botState = (int)breedbotstates.checkmap1;
                         }
                         else if (lastmemoryread == 0x00)
                         {
@@ -4666,6 +4665,7 @@ namespace ntrbase
                     case (int)breedbotstates.walk3:
                         Addlog("Return to day care man");
                         waitNTRtask = waitholdbutton(runUP);
+                        await Task.Delay(500);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
@@ -4678,7 +4678,6 @@ namespace ntrbase
                         }
                         break;
                     case (int)breedbotstates.checkmap1:
-                        await Task.Delay(1000);
                         for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(100);
@@ -4871,14 +4870,32 @@ namespace ntrbase
                         {
                             botState = (int)breedbotstates.entertodaycare;
                         }
+                        else if (lastmemoryread < daycaredoorx)
+                        {
+                            botState = (int)breedbotstates.fix1;
+                        }
                         else
                         { // Still far from day care man
                             botState = (int)breedbotstates.walktodaycare;
                         }
                         break;
+                    case (int)breedbotstates.fix1:
+                        Addlog("Missed day care, return");
+                        if (orasgame && radioDayCare2.Checked)
+                        {
+                            waitNTRtask = quickbuton(DpadRIGHT);
+                        }
+                        else
+                        {
+                            waitNTRtask = quickbuton(DpadLEFT);
+                        }
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap2;
+                        break;
                     case (int)breedbotstates.entertodaycare:
                         Addlog("Enter to Day Care");
-                        waitNTRtask = waitbutton(DpadUP);
+                        waitNTRtask = waitbutton(runUP);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
                         {
@@ -4954,10 +4971,21 @@ namespace ntrbase
                         {
                             botState = (int)breedbotstates.facecomputer;
                         }
+                        else if (lastmemoryread > computerx)
+                        {
+                            botState = (int)breedbotstates.fix2;
+                        }
                         else
                         { // Still far from computer
                             botState = (int)breedbotstates.walktocomputer;
                         }
+                        break;
+                    case (int)breedbotstates.fix2:
+                        Addlog("Missed PC, return");
+                        waitNTRtask = quickbuton(DpadLEFT);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap5;
                         break;
                     case (int)breedbotstates.facecomputer:
                         Addlog("Turn on the PC");
@@ -5371,10 +5399,21 @@ namespace ntrbase
                         {
                             botState = (int)breedbotstates.retirefromdesk;
                         }
+                        else if (lastmemoryread < daycareexitx)
+                        {
+                            botState = (int)breedbotstates.fix3;
+                        }
                         else
                         { // Still far from exit
                             botState = (int)breedbotstates.retirefromcomputer;
                         }
+                        break;
+                    case (int)breedbotstates.fix3:
+                        Addlog("Missed exit, return");
+                        waitNTRtask = quickbuton(DpadRIGHT);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap6;
                         break;
                     case (int)breedbotstates.retirefromdesk:
                         Addlog("Run to exit");
@@ -5424,7 +5463,7 @@ namespace ntrbase
                         await Task.Delay(250);
                         waitNTRtask = waitNTRread(mapyoff);
                         waitresult = await waitNTRtask;
-                        if (lastmemoryread >= daycaremany && lastmemoryread < daycaremany + 0x100)
+                        if (lastmemoryread >= daycaremany)
                         {
                             botState = (int)breedbotstates.walktodaycareman;
                         }
@@ -5455,10 +5494,28 @@ namespace ntrbase
                         {
                             botState = (int)breedbotstates.walk1;
                         }
+                        else if (lastmemoryread > daycaremanx)
+                        {
+                            botState = (int)breedbotstates.fix4;
+                        }
                         else
                         { // Still far day care man
                             botState = (int)breedbotstates.walktodaycareman;
                         }
+                        break;
+                    case (int)breedbotstates.fix4:
+                        Addlog("Missed Day Care Man, return");
+                        if (orasgame && radioDayCare2.Checked)
+                        {
+                            waitNTRtask = quickbuton(DpadLEFT);
+                        }
+                        else
+                        {
+                            waitNTRtask = quickbuton(DpadRIGHT);
+                        }
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                            botState = (int)breedbotstates.checkmap9;
                         break;
                     case (int)breedbotstates.filter:
                         for (int i = 0; i < eggsinbatch; i++)
