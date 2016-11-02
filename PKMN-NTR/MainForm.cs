@@ -448,7 +448,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad, readESV };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad, readESV, ESVlistSave };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -4870,7 +4870,11 @@ namespace ntrbase
                         {
                             botState = (int)breedbotstates.entertodaycare;
                         }
-                        else if (lastmemoryread < daycaredoorx)
+                        else if (lastmemoryread < daycaredoorx && orasgame && radioDayCare2.Checked)
+                        {
+                            botState = (int)breedbotstates.fix1;
+                        }
+                        else if (lastmemoryread > daycaredoorx && (!orasgame || !radioDayCare2.Checked))
                         {
                             botState = (int)breedbotstates.fix1;
                         }
@@ -5494,7 +5498,11 @@ namespace ntrbase
                         {
                             botState = (int)breedbotstates.walk1;
                         }
-                        else if (lastmemoryread > daycaremanx)
+                        else if (lastmemoryread > daycaremanx && orasgame && radioDayCare2.Checked)
+                        {
+                            botState = (int)breedbotstates.fix4;
+                        }
+                        else if (lastmemoryread < daycaremanx && (!orasgame || !radioDayCare2.Checked))
                         {
                             botState = (int)breedbotstates.fix4;
                         }

@@ -248,7 +248,11 @@
             this.manualSR = new System.Windows.Forms.Button();
             this.label92 = new System.Windows.Forms.Label();
             this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.ESVlistSave = new System.Windows.Forms.Button();
             this.ESVlist = new System.Windows.Forms.DataGridView();
+            this.ESVlistBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESVlistSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESVlistValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.readESV = new System.Windows.Forms.CheckBox();
             this.label94 = new System.Windows.Forms.Label();
             this.bFilterRead = new System.Windows.Forms.Button();
@@ -331,10 +335,6 @@
             this.label74 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
-            this.ESVlistSave = new System.Windows.Forms.Button();
-            this.ESVlistBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -3071,7 +3071,7 @@
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(108, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.7-beta6";
+            this.label69.Text = "Version: 1.18.7-beta7";
             // 
             // label71
             // 
@@ -3252,6 +3252,16 @@
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
+            // ESVlistSave
+            // 
+            this.ESVlistSave.Location = new System.Drawing.Point(275, 335);
+            this.ESVlistSave.Name = "ESVlistSave";
+            this.ESVlistSave.Size = new System.Drawing.Size(173, 23);
+            this.ESVlistSave.TabIndex = 156;
+            this.ESVlistSave.Text = "Save ESV List";
+            this.ESVlistSave.UseVisualStyleBackColor = true;
+            this.ESVlistSave.Click += new System.EventHandler(this.ESVlistSave_Click);
+            // 
             // ESVlist
             // 
             this.ESVlist.AllowUserToAddRows = false;
@@ -3272,6 +3282,26 @@
             this.ESVlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.ESVlist.Size = new System.Drawing.Size(173, 135);
             this.ESVlist.TabIndex = 155;
+            // 
+            // ESVlistBox
+            // 
+            this.ESVlistBox.FillWeight = 50F;
+            this.ESVlistBox.HeaderText = "Box";
+            this.ESVlistBox.Name = "ESVlistBox";
+            this.ESVlistBox.ReadOnly = true;
+            // 
+            // ESVlistSlot
+            // 
+            this.ESVlistSlot.FillWeight = 50F;
+            this.ESVlistSlot.HeaderText = "Slot";
+            this.ESVlistSlot.Name = "ESVlistSlot";
+            this.ESVlistSlot.ReadOnly = true;
+            // 
+            // ESVlistValue
+            // 
+            this.ESVlistValue.HeaderText = "ESV";
+            this.ESVlistValue.Name = "ESVlistValue";
+            this.ESVlistValue.ReadOnly = true;
             // 
             // readESV
             // 
@@ -4182,36 +4212,6 @@
             this.tabNTRlog.Size = new System.Drawing.Size(558, 361);
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
-            // 
-            // ESVlistSave
-            // 
-            this.ESVlistSave.Location = new System.Drawing.Point(275, 335);
-            this.ESVlistSave.Name = "ESVlistSave";
-            this.ESVlistSave.Size = new System.Drawing.Size(173, 23);
-            this.ESVlistSave.TabIndex = 156;
-            this.ESVlistSave.Text = "Save ESV List";
-            this.ESVlistSave.UseVisualStyleBackColor = true;
-            this.ESVlistSave.Click += new System.EventHandler(this.ESVlistSave_Click);
-            // 
-            // ESVlistBox
-            // 
-            this.ESVlistBox.FillWeight = 50F;
-            this.ESVlistBox.HeaderText = "Box";
-            this.ESVlistBox.Name = "ESVlistBox";
-            this.ESVlistBox.ReadOnly = true;
-            // 
-            // ESVlistSlot
-            // 
-            this.ESVlistSlot.FillWeight = 50F;
-            this.ESVlistSlot.HeaderText = "Slot";
-            this.ESVlistSlot.Name = "ESVlistSlot";
-            this.ESVlistSlot.ReadOnly = true;
-            // 
-            // ESVlistValue
-            // 
-            this.ESVlistValue.HeaderText = "ESV";
-            this.ESVlistValue.Name = "ESVlistValue";
-            this.ESVlistValue.ReadOnly = true;
             // 
             // MainForm
             // 
