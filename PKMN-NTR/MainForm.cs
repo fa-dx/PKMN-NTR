@@ -448,7 +448,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad, readESV };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -3075,7 +3075,6 @@ namespace ntrbase
             (new System.IO.FileInfo(folderPath)).Directory.Create();
             string fileName = "BreedingFilters.csv";
             var csv = new StringBuilder();
-            var headers = BreedFilter.Columns.Cast<DataGridViewColumn>();
             foreach (DataGridViewRow row in BreedFilter.Rows)
             {
                 var cells = row.Cells.Cast<DataGridViewCell>();
@@ -4462,7 +4461,7 @@ namespace ntrbase
         }
 
         // Breeding bot
-        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
+        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, readegg, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
 
         private async void runBreedingBot_Click(object sender, EventArgs e)
         {
@@ -4485,17 +4484,18 @@ namespace ntrbase
 
             if (dialogResult == DialogResult.OK)
             { // Initialize bot
-                botStop = false;
-                botWorking = true;
-                botState = (int)breedbotstates.botstart;
                 onlyView.Checked = true;
                 radioBoxes.Checked = true;
+                stopBotButton.Enabled = true;
                 foreach (Control c in enableWhenConnected)
                 {
                     c.Enabled = false;
                 }
-                stopBotButton.Enabled = true;
+                botStop = false;
+                botWorking = true;
+                botState = (int)breedbotstates.botstart;
                 txtLog.Clear();
+                ESVlist.Rows.Clear();
             }
             else
             { // Exit bot
@@ -5360,7 +5360,7 @@ namespace ntrbase
                         }
                         if (waittimeout < timeout * 10)
                         {
-                            if (modeBreed.SelectedIndex == 1)
+                            if (modeBreed.SelectedIndex == 1 || readESV.Checked)
                             {
                                 botState = (int)breedbotstates.filter;
                             }
@@ -5537,9 +5537,17 @@ namespace ntrbase
                                     break;
                                 }
                             }
-                            if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
+                            if (waittimeout < timeout * 10)
                             {
-                                testsok = FilterCheck(BreedFilter);
+                                if (readESV.Checked)
+                                {
+                                    int esv = (int)((dumpedPKHeX.PID >> 16 ^ dumpedPKHeX.PID & 0xFFFF) >> 4);
+                                    ESVlist.Rows.Add(filterbox, filterslot, esv.ToString("D4"));
+                                }
+                                if (modeBreed.SelectedIndex == 1)
+                                {
+                                    testsok = FilterCheck(BreedFilter);
+                                }
                             }
                             else
                             {
@@ -5557,8 +5565,11 @@ namespace ntrbase
                             }
                             else
                             {
-                                Addlog("No match found");
-                                finishmessage = "Finished. Maximum number of eggs reached without a match for any filter.";
+                                if (modeBreed.SelectedIndex == 1)
+                                {
+                                    Addlog("No match found");
+                                    finishmessage = "Finished. Maximum number of eggs reached without a match for any filter.";
+                                }
                                 botState = (int)breedbotstates.botexit;
                             }
 
@@ -5591,6 +5602,30 @@ namespace ntrbase
             botWorking = false;
             MessageBox.Show(finishmessage, "Breeding bot");
 
+        }
+
+        private void ESVlistSave_Click(object sender, EventArgs e)
+        {
+            if (ESVlist.Rows.Count > 0)
+            {
+                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                string fileName = "ESVlist.csv";
+                var esvlst = new StringBuilder();
+                var headers = ESVlist.Columns.Cast<DataGridViewColumn>();
+                esvlst.AppendLine(string.Join(",", headers.Select(column => column.HeaderText).ToArray()));
+                foreach (DataGridViewRow row in ESVlist.Rows)
+                {
+                    var cells = row.Cells.Cast<DataGridViewCell>();
+                    esvlst.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                }
+                File.WriteAllText(folderPath + fileName, esvlst.ToString());
+                MessageBox.Show("Breeding Filters saved");
+            }
+            else
+            {
+                MessageBox.Show("There are no eggs on the ESV list");
+            }
         }
 
         #endregion Bots
