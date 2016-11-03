@@ -248,6 +248,12 @@
             this.manualSR = new System.Windows.Forms.Button();
             this.label92 = new System.Windows.Forms.Label();
             this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.TSVlistLoad = new System.Windows.Forms.Button();
+            this.TSVlistSave = new System.Windows.Forms.Button();
+            this.TSVlistRemove = new System.Windows.Forms.Button();
+            this.TSVlistAdd = new System.Windows.Forms.Button();
+            this.TSVlistNum = new System.Windows.Forms.NumericUpDown();
+            this.TSVlist = new System.Windows.Forms.ListBox();
             this.ESVlistSave = new System.Windows.Forms.Button();
             this.ESVlist = new System.Windows.Forms.DataGridView();
             this.ESVlistBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -335,6 +341,7 @@
             this.label74 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
+            this.label95 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -407,6 +414,7 @@
             this.groupBox5.SuspendLayout();
             this.tabControls.SuspendLayout();
             this.tabBreeding.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BreedFilter)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -3200,6 +3208,13 @@
             // tabBreeding
             // 
             this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.label95);
+            this.tabBreeding.Controls.Add(this.TSVlistLoad);
+            this.tabBreeding.Controls.Add(this.TSVlistSave);
+            this.tabBreeding.Controls.Add(this.TSVlistRemove);
+            this.tabBreeding.Controls.Add(this.TSVlistAdd);
+            this.tabBreeding.Controls.Add(this.TSVlistNum);
+            this.tabBreeding.Controls.Add(this.TSVlist);
             this.tabBreeding.Controls.Add(this.ESVlistSave);
             this.tabBreeding.Controls.Add(this.ESVlist);
             this.tabBreeding.Controls.Add(this.readESV);
@@ -3252,11 +3267,72 @@
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
+            // TSVlistLoad
+            // 
+            this.TSVlistLoad.Location = new System.Drawing.Point(495, 307);
+            this.TSVlistLoad.Name = "TSVlistLoad";
+            this.TSVlistLoad.Size = new System.Drawing.Size(57, 23);
+            this.TSVlistLoad.TabIndex = 162;
+            this.TSVlistLoad.Text = "Load";
+            this.TSVlistLoad.UseVisualStyleBackColor = true;
+            this.TSVlistLoad.Click += new System.EventHandler(this.TSVlistLoad_Click);
+            // 
+            // TSVlistSave
+            // 
+            this.TSVlistSave.Location = new System.Drawing.Point(495, 278);
+            this.TSVlistSave.Name = "TSVlistSave";
+            this.TSVlistSave.Size = new System.Drawing.Size(57, 23);
+            this.TSVlistSave.TabIndex = 161;
+            this.TSVlistSave.Text = "Save";
+            this.TSVlistSave.UseVisualStyleBackColor = true;
+            this.TSVlistSave.Click += new System.EventHandler(this.TSVlistSave_Click);
+            // 
+            // TSVlistRemove
+            // 
+            this.TSVlistRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.TSVlistRemove.Location = new System.Drawing.Point(495, 249);
+            this.TSVlistRemove.Name = "TSVlistRemove";
+            this.TSVlistRemove.Size = new System.Drawing.Size(57, 23);
+            this.TSVlistRemove.TabIndex = 160;
+            this.TSVlistRemove.Text = "Remove";
+            this.TSVlistRemove.UseVisualStyleBackColor = true;
+            this.TSVlistRemove.Click += new System.EventHandler(this.TSVlistRemove_Click);
+            // 
+            // TSVlistAdd
+            // 
+            this.TSVlistAdd.Location = new System.Drawing.Point(495, 220);
+            this.TSVlistAdd.Name = "TSVlistAdd";
+            this.TSVlistAdd.Size = new System.Drawing.Size(57, 23);
+            this.TSVlistAdd.TabIndex = 159;
+            this.TSVlistAdd.Text = "Add";
+            this.TSVlistAdd.UseVisualStyleBackColor = true;
+            this.TSVlistAdd.Click += new System.EventHandler(this.TSVlistAdd_Click);
+            // 
+            // TSVlistNum
+            // 
+            this.TSVlistNum.Location = new System.Drawing.Point(495, 194);
+            this.TSVlistNum.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.TSVlistNum.Name = "TSVlistNum";
+            this.TSVlistNum.Size = new System.Drawing.Size(57, 20);
+            this.TSVlistNum.TabIndex = 158;
+            // 
+            // TSVlist
+            // 
+            this.TSVlist.FormattingEnabled = true;
+            this.TSVlist.Location = new System.Drawing.Point(439, 194);
+            this.TSVlist.Name = "TSVlist";
+            this.TSVlist.Size = new System.Drawing.Size(50, 160);
+            this.TSVlist.TabIndex = 157;
+            // 
             // ESVlistSave
             // 
             this.ESVlistSave.Location = new System.Drawing.Point(275, 335);
             this.ESVlistSave.Name = "ESVlistSave";
-            this.ESVlistSave.Size = new System.Drawing.Size(173, 23);
+            this.ESVlistSave.Size = new System.Drawing.Size(158, 23);
             this.ESVlistSave.TabIndex = 156;
             this.ESVlistSave.Text = "Save ESV List";
             this.ESVlistSave.UseVisualStyleBackColor = true;
@@ -3280,7 +3356,7 @@
             this.ESVlist.ReadOnly = true;
             this.ESVlist.RowHeadersWidth = 21;
             this.ESVlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.ESVlist.Size = new System.Drawing.Size(173, 135);
+            this.ESVlist.Size = new System.Drawing.Size(158, 135);
             this.ESVlist.TabIndex = 155;
             // 
             // ESVlistBox
@@ -3825,7 +3901,8 @@
             this.modeBreed.FormattingEnabled = true;
             this.modeBreed.Items.AddRange(new object[] {
             "Simple",
-            "Filter"});
+            "Filter",
+            "ESV/TSV"});
             this.modeBreed.Location = new System.Drawing.Point(62, 72);
             this.modeBreed.Name = "modeBreed";
             this.modeBreed.Size = new System.Drawing.Size(133, 21);
@@ -4213,6 +4290,15 @@
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
             // 
+            // label95
+            // 
+            this.label95.AutoSize = true;
+            this.label95.Location = new System.Drawing.Point(436, 177);
+            this.label95.Name = "label95";
+            this.label95.Size = new System.Drawing.Size(47, 13);
+            this.label95.TabIndex = 163;
+            this.label95.Text = "TSV List";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4321,6 +4407,7 @@
             this.tabControls.PerformLayout();
             this.tabBreeding.ResumeLayout(false);
             this.tabBreeding.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BreedFilter)).EndInit();
             this.groupBox4.ResumeLayout(false);
@@ -4667,6 +4754,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistSlot;
         private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistValue;
+        private System.Windows.Forms.ListBox TSVlist;
+        private System.Windows.Forms.Button TSVlistLoad;
+        private System.Windows.Forms.Button TSVlistSave;
+        private System.Windows.Forms.Button TSVlistRemove;
+        private System.Windows.Forms.Button TSVlistAdd;
+        private System.Windows.Forms.NumericUpDown TSVlistNum;
+        private System.Windows.Forms.Label label95;
     }
 }
 

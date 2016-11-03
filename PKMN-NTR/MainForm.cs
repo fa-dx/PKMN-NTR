@@ -448,7 +448,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad, readESV, ESVlistSave };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad, readESV, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -3673,10 +3673,11 @@ namespace ntrbase
                         for (waittimeout = 0; waittimeout < 30; waittimeout++)
                         { // Wait during 30 seconds
                             await Task.Delay(1000);
-                            waitNTRtask = waitNTRread(psssmenu1IN);
+                            waitNTRtask = waitNTRread(psssmenu1Off);
                             waitresult = await waitNTRtask;
-                            if (lastmemoryread >= psssmenu1IN && lastmemoryread < psssmenu1IN + 0x10000)
+                            if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
                             {
+                                await Task.Delay(2000);
                                 break;
                             }
                             else
@@ -4475,6 +4476,9 @@ namespace ntrbase
                 case 1:
                     modemessage = "Filter: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check against the selected filters and if it finds a match the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
                     break;
+                case 2:
+                    modemessage = "ESV/TSV: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check the egg's ESV and if it finds a match with the values in the TSV list, the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
+                    break;
                 default:
                     modemessage = "No mode selected. Select one and try again.\r\n\r\n";
                     break;
@@ -4589,6 +4593,11 @@ namespace ntrbase
                                 break;
                             case 1:
                                 botState = (int)breedbotstates.walk1;
+                                break;
+                            case 2:
+                                //botState = (int)breedbotstates.walk1;
+                                botState = (int)breedbotstates.facecomputer;
+                                eggsinparty = 5;
                                 break;
                             default:
                                 botState = (int)breedbotstates.botexit;
@@ -5364,7 +5373,7 @@ namespace ntrbase
                         }
                         if (waittimeout < timeout * 10)
                         {
-                            if (modeBreed.SelectedIndex == 1 || readESV.Checked)
+                            if (modeBreed.SelectedIndex == 1 || modeBreed.SelectedIndex == 2 || readESV.Checked)
                             {
                                 botState = (int)breedbotstates.filter;
                             }
@@ -5547,10 +5556,14 @@ namespace ntrbase
                             }
                             if (waittimeout < timeout * 10)
                             {
-                                if (readESV.Checked)
+                                if (readESV.Checked || modeBreed.SelectedIndex == 2)
                                 {
                                     int esv = (int)((dumpedPKHeX.PID >> 16 ^ dumpedPKHeX.PID & 0xFFFF) >> 4);
                                     ESVlist.Rows.Add(filterbox, filterslot, esv.ToString("D4"));
+                                    if (modeBreed.SelectedIndex == 2)
+                                    {
+                                        testsok = ESV_TSV_check(esv);
+                                    }
                                 }
                                 if (modeBreed.SelectedIndex == 1)
                                 {
@@ -5628,11 +5641,81 @@ namespace ntrbase
                     esvlst.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
                 }
                 File.WriteAllText(folderPath + fileName, esvlst.ToString());
-                MessageBox.Show("Breeding Filters saved");
+                MessageBox.Show("ESV list saved");
             }
             else
             {
                 MessageBox.Show("There are no eggs on the ESV list");
+            }
+        }
+
+        private void TSVlistAdd_Click(object sender, EventArgs e)
+        {
+            TSVlist.Items.Add(((int)TSVlistNum.Value).ToString("D4"));
+        }
+
+        private void TSVlistRemove_Click(object sender, EventArgs e)
+        {
+            if (TSVlist.SelectedIndices.Count > 0)
+            {
+                TSVlist.Items.RemoveAt(TSVlist.SelectedIndices[0]);
+            }
+            else
+            {
+                MessageBox.Show("No TSV selected for remove");
+            }
+        }
+
+        private void TSVlistSave_Click(object sender, EventArgs e)
+        {
+            if (TSVlist.Items.Count > 0)
+            {
+                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                string fileName = "TSVlist.csv";
+                var tsvlst = new StringBuilder();
+                foreach (var value in TSVlist.Items)
+                {
+                    tsvlst.AppendLine(value.ToString());
+                }
+                File.WriteAllText(folderPath + fileName, tsvlst.ToString());
+                MessageBox.Show("TSV list saved");
+            }
+            else
+            {
+                MessageBox.Show("There are no numbers on the TSV list");
+            }
+        }
+
+        private void TSVlistLoad_Click(object sender, EventArgs e)
+        {
+            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            (new System.IO.FileInfo(folderPath)).Directory.Create();
+            string fileName = "TSVlist.csv";
+            if (System.IO.File.Exists(folderPath + fileName))
+            {
+                string[] values = File.ReadAllLines(folderPath + fileName);
+                TSVlist.Items.Clear();
+                TSVlist.Items.AddRange(values);
+            }
+        }
+
+        public bool ESV_TSV_check(int esv)
+        {
+            if (TSVlist.Items.Count > 0)
+            {
+                foreach (var tsv in TSVlist.Items)
+                {
+                    if (Convert.ToInt32(tsv) == esv)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
