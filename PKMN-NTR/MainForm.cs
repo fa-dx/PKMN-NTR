@@ -339,6 +339,10 @@ namespace ntrbase
             move2.Items.AddRange(moveList);
             move3.Items.AddRange(moveList);
             move4.Items.AddRange(moveList);
+            relearnmove1.Items.AddRange(moveList);
+            relearnmove2.Items.AddRange(moveList);
+            relearnmove3.Items.AddRange(moveList);
+            relearnmove4.Items.AddRange(moveList);
 
             DataGridViewComboBoxColumn itemItem = new DataGridViewComboBoxColumn
             {
@@ -1412,6 +1416,10 @@ namespace ntrbase
                 SetSelectedIndex(move2, dumpedPKHeX.Move2);
                 SetSelectedIndex(move3, dumpedPKHeX.Move3);
                 SetSelectedIndex(move4, dumpedPKHeX.Move4);
+                SetSelectedIndex(relearnmove1, dumpedPKHeX.RelearnMove1);
+                SetSelectedIndex(relearnmove2, dumpedPKHeX.RelearnMove2);
+                SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
+                SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
 
                 //TODO: make it thread-safe!
                 //ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((dumpedPKHeX.TID ^ dumpedPKHeX.SID) >> 4).ToString());
@@ -2092,6 +2100,10 @@ namespace ntrbase
                         dumpedPKHeX.Move2 = move2.SelectedIndex;
                         dumpedPKHeX.Move3 = move3.SelectedIndex;
                         dumpedPKHeX.Move4 = move4.SelectedIndex;
+                        dumpedPKHeX.RelearnMove1 = relearnmove1.SelectedIndex;
+                        dumpedPKHeX.RelearnMove2 = relearnmove1.SelectedIndex;
+                        dumpedPKHeX.RelearnMove3 = relearnmove1.SelectedIndex;
+                        dumpedPKHeX.RelearnMove4 = relearnmove1.SelectedIndex;
 
                         Array.Copy(BitConverter.GetBytes(dumpedPKHeX.IV32), 0, pkmToEdit, 116, 4);
                         byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);

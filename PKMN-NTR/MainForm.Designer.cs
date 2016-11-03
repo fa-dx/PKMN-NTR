@@ -343,6 +343,14 @@
             this.label74 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
+            this.relearnmove1 = new System.Windows.Forms.ComboBox();
+            this.relearnmove2 = new System.Windows.Forms.ComboBox();
+            this.relearnmove3 = new System.Windows.Forms.ComboBox();
+            this.relearnmove4 = new System.Windows.Forms.ComboBox();
+            this.label96 = new System.Windows.Forms.Label();
+            this.label97 = new System.Windows.Forms.Label();
+            this.label98 = new System.Windows.Forms.Label();
+            this.label99 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -2099,6 +2107,14 @@
             // Moves
             // 
             this.Moves.BackColor = System.Drawing.SystemColors.Control;
+            this.Moves.Controls.Add(this.relearnmove1);
+            this.Moves.Controls.Add(this.relearnmove2);
+            this.Moves.Controls.Add(this.relearnmove3);
+            this.Moves.Controls.Add(this.relearnmove4);
+            this.Moves.Controls.Add(this.label96);
+            this.Moves.Controls.Add(this.label97);
+            this.Moves.Controls.Add(this.label98);
+            this.Moves.Controls.Add(this.label99);
             this.Moves.Controls.Add(this.move1);
             this.Moves.Controls.Add(this.move2);
             this.Moves.Controls.Add(this.move3);
@@ -4311,6 +4327,82 @@
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
             // 
+            // relearnmove1
+            // 
+            this.relearnmove1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.relearnmove1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.relearnmove1.FormattingEnabled = true;
+            this.relearnmove1.Location = new System.Drawing.Point(132, 19);
+            this.relearnmove1.Name = "relearnmove1";
+            this.relearnmove1.Size = new System.Drawing.Size(120, 21);
+            this.relearnmove1.TabIndex = 92;
+            // 
+            // relearnmove2
+            // 
+            this.relearnmove2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.relearnmove2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.relearnmove2.FormattingEnabled = true;
+            this.relearnmove2.Location = new System.Drawing.Point(132, 56);
+            this.relearnmove2.Name = "relearnmove2";
+            this.relearnmove2.Size = new System.Drawing.Size(120, 21);
+            this.relearnmove2.TabIndex = 93;
+            // 
+            // relearnmove3
+            // 
+            this.relearnmove3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.relearnmove3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.relearnmove3.FormattingEnabled = true;
+            this.relearnmove3.Location = new System.Drawing.Point(132, 92);
+            this.relearnmove3.Name = "relearnmove3";
+            this.relearnmove3.Size = new System.Drawing.Size(120, 21);
+            this.relearnmove3.TabIndex = 94;
+            // 
+            // relearnmove4
+            // 
+            this.relearnmove4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.relearnmove4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.relearnmove4.FormattingEnabled = true;
+            this.relearnmove4.Location = new System.Drawing.Point(132, 128);
+            this.relearnmove4.Name = "relearnmove4";
+            this.relearnmove4.Size = new System.Drawing.Size(120, 21);
+            this.relearnmove4.TabIndex = 95;
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.Location = new System.Drawing.Point(133, 5);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(86, 13);
+            this.label96.TabIndex = 96;
+            this.label96.Text = "Relearn Move 1:";
+            // 
+            // label97
+            // 
+            this.label97.AutoSize = true;
+            this.label97.Location = new System.Drawing.Point(134, 42);
+            this.label97.Name = "label97";
+            this.label97.Size = new System.Drawing.Size(86, 13);
+            this.label97.TabIndex = 97;
+            this.label97.Text = "Relearn Move 2:";
+            // 
+            // label98
+            // 
+            this.label98.AutoSize = true;
+            this.label98.Location = new System.Drawing.Point(133, 78);
+            this.label98.Name = "label98";
+            this.label98.Size = new System.Drawing.Size(86, 13);
+            this.label98.TabIndex = 98;
+            this.label98.Text = "Relearn Move 3:";
+            // 
+            // label99
+            // 
+            this.label99.AutoSize = true;
+            this.label99.Location = new System.Drawing.Point(134, 114);
+            this.label99.Name = "label99";
+            this.label99.Size = new System.Drawing.Size(86, 13);
+            this.label99.TabIndex = 99;
+            this.label99.Text = "Relearn Move 4:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4774,6 +4866,14 @@
         private System.Windows.Forms.NumericUpDown TSVlistNum;
         private System.Windows.Forms.Label label95;
         private System.Windows.Forms.CheckBox quickBreed;
+        private System.Windows.Forms.ComboBox relearnmove1;
+        private System.Windows.Forms.ComboBox relearnmove2;
+        private System.Windows.Forms.ComboBox relearnmove3;
+        private System.Windows.Forms.ComboBox relearnmove4;
+        private System.Windows.Forms.Label label96;
+        private System.Windows.Forms.Label label97;
+        private System.Windows.Forms.Label label98;
+        private System.Windows.Forms.Label label99;
     }
 }
 
