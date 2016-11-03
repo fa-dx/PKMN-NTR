@@ -4520,9 +4520,9 @@ namespace ntrbase
             uint daycaremanx;
             uint daycaremany;
             uint daycaredoorx;
-            uint daycaredoory;
+            //uint daycaredoory;
             uint daycareexitx;
-            uint daycareexity;
+            //uint daycareexity;
             uint computerx;
             uint computery;
             bool orasgame;
@@ -4530,6 +4530,7 @@ namespace ntrbase
             int[,] egglocations = new int[5, 2];
             int eggsinbatch = 0;
             int eggsinparty = 0;
+            int currentesv = 0;
             string finishmessage = "Finished";
             if (game == GameType.X || game == GameType.Y)
             {
@@ -4539,9 +4540,9 @@ namespace ntrbase
                 daycaremanx = 0x46219400;
                 daycaremany = 0x460F9400;
                 daycaredoorx = 0x4622FC00;
-                daycaredoory = 0x460F4C00;
+                //daycaredoory = 0x460F4C00;
                 daycareexitx = 0x43610000;
-                daycareexity = 0x43AF8000;
+                //daycareexity = 0x43AF8000;
                 computerx = 0x43828000;
                 computery = 0x43730000;
             }
@@ -4555,9 +4556,9 @@ namespace ntrbase
                     daycaremanx = 0x45553000;
                     daycaremany = 0x44D92000;
                     daycaredoorx = 0x455AD000;
-                    daycaredoory = 0x44D6E000;
+                    //daycaredoory = 0x44D6E000;
                     daycareexitx = 0x43610000;
-                    daycareexity = 0x43A68000;
+                    //daycareexity = 0x43A68000;
                     computerx = 0x43828000;
                     computery = 0x43730000;
                     eggoff = 0x8C88358;
@@ -4569,9 +4570,9 @@ namespace ntrbase
                     daycaremanx = 0x44A9E000;
                     daycaremany = 0x44D92000;
                     daycaredoorx = 0x449C6000;
-                    daycaredoory = 0x44D4A000;
+                    //daycaredoory = 0x44D4A000;
                     daycareexitx = 0x43610000;
-                    daycareexity = 0x43A68000;
+                    //daycareexity = 0x43A68000;
                     computerx = 0x43828000;
                     computery = 0x43730000;
                     eggoff = 0x8C88548;
@@ -4595,9 +4596,7 @@ namespace ntrbase
                                 botState = (int)breedbotstates.walk1;
                                 break;
                             case 2:
-                                //botState = (int)breedbotstates.walk1;
-                                botState = (int)breedbotstates.facecomputer;
-                                eggsinparty = 5;
+                                botState = (int)breedbotstates.walk1;
                                 break;
                             default:
                                 botState = (int)breedbotstates.botexit;
@@ -5562,6 +5561,7 @@ namespace ntrbase
                                     ESVlist.Rows.Add(filterbox, filterslot, esv.ToString("D4"));
                                     if (modeBreed.SelectedIndex == 2)
                                     {
+                                        currentesv = esv;
                                         testsok = ESV_TSV_check(esv);
                                     }
                                 }
@@ -5598,8 +5598,16 @@ namespace ntrbase
                         eggsinbatch = 0;
                         break;
                     case (int)breedbotstates.testspassed:
-                        Addlog("All tests passed");
-                        finishmessage = "Finished. A match was found at box" + filterbox + ", slot " + filterslot + ", using filter #" + currentfilter;
+                        if (modeBreed.SelectedIndex == 1)
+                        {
+                            Addlog("All tests passed");
+                            finishmessage = "Finished. A match was found at box " + filterbox + ", slot " + filterslot + ", using filter #" + currentfilter;
+                        }
+                        else if (modeBreed.SelectedIndex == 2)
+                        {
+                            Addlog("ESV/TSV match found");
+                            finishmessage = "Finished. A match was found at box " + filterbox + ", slot " + filterslot + ", the ESV/TSV value is" + currentesv;
+                        }
                         Addlog("Bot stop");
                         botStop = true;
                         break;
@@ -5704,6 +5712,7 @@ namespace ntrbase
         {
             if (TSVlist.Items.Count > 0)
             {
+                Addlog("Checking egg with ESV: " + esv);
                 foreach (var tsv in TSVlist.Items)
                 {
                     if (Convert.ToInt32(tsv) == esv)
