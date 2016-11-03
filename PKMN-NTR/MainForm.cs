@@ -3755,7 +3755,11 @@ namespace ntrbase
                     break;
                 case 2:
                     typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
-                    resumemessage = "In fron of the lady, will press A to trigger dialog";
+                    resumemessage = "In front of the lady, will press A to trigger dialog";
+                    break;
+                case 3:
+                    typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
+                    resumemessage = "In front of Groudon/Kyobre, will press A to trigger dialog";
                     break;
                 default:
                     typemessage = "No type - Select one type of soft-reset and try again.";
@@ -3836,6 +3840,16 @@ namespace ntrbase
                                     resetNo = -1;
                                 }
                                 break;
+                            case 3:
+                                if (resumeLSR.Checked)
+                                {
+                                    botState = (int)srbotstates.tst_start;
+                                }
+                                else
+                                {
+                                    botState = (int)srbotstates.fixwifi;
+                                }
+                                break;
                             default:
                                 botState = (int)srbotstates.botexit;
                                 break;
@@ -3875,7 +3889,14 @@ namespace ntrbase
                         }
                         if (waittimeout < timeout)
                         {
-                            botState = (int)srbotstates.touchpssset;
+                            if (typeLSR.SelectedIndex == 3)
+                            {
+                                botState = (int)srbotstates.tst_start;
+                            }
+                            else
+                            {
+                                botState = (int)srbotstates.touchpssset;
+                            }
                         }
                         else
                         {
@@ -4341,8 +4362,8 @@ namespace ntrbase
                         }
                         break;
                     case (int)srbotstates.tst_cont:
-                        Addlog("Skip pokemon dialog, wait 5 seconds");
-                        await Task.Delay(5000);
+                        Addlog("Skip pokemon dialog");
+                        await Task.Delay(1000);
                         waitNTRtask = waitbutton(keyA);
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
