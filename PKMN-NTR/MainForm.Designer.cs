@@ -248,6 +248,8 @@
             this.manualSR = new System.Windows.Forms.Button();
             this.label92 = new System.Windows.Forms.Label();
             this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.quickBreed = new System.Windows.Forms.CheckBox();
+            this.label95 = new System.Windows.Forms.Label();
             this.TSVlistLoad = new System.Windows.Forms.Button();
             this.TSVlistSave = new System.Windows.Forms.Button();
             this.TSVlistRemove = new System.Windows.Forms.Button();
@@ -341,7 +343,6 @@
             this.label74 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
-            this.label95 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -3074,12 +3075,12 @@
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(764, 410);
+            this.label69.Location = new System.Drawing.Point(794, 408);
             this.label69.Name = "label69";
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label69.Size = new System.Drawing.Size(108, 13);
+            this.label69.Size = new System.Drawing.Size(78, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.18.7-beta7";
+            this.label69.Text = "Version: 1.19.0";
             // 
             // label71
             // 
@@ -3208,6 +3209,7 @@
             // tabBreeding
             // 
             this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.quickBreed);
             this.tabBreeding.Controls.Add(this.label95);
             this.tabBreeding.Controls.Add(this.TSVlistLoad);
             this.tabBreeding.Controls.Add(this.TSVlistSave);
@@ -3266,6 +3268,25 @@
             this.tabBreeding.Size = new System.Drawing.Size(558, 361);
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
+            // 
+            // quickBreed
+            // 
+            this.quickBreed.AutoSize = true;
+            this.quickBreed.Location = new System.Drawing.Point(149, 312);
+            this.quickBreed.Name = "quickBreed";
+            this.quickBreed.Size = new System.Drawing.Size(85, 17);
+            this.quickBreed.TabIndex = 164;
+            this.quickBreed.Text = "Quick Breed";
+            this.quickBreed.UseVisualStyleBackColor = true;
+            // 
+            // label95
+            // 
+            this.label95.AutoSize = true;
+            this.label95.Location = new System.Drawing.Point(436, 177);
+            this.label95.Name = "label95";
+            this.label95.Size = new System.Drawing.Size(47, 13);
+            this.label95.TabIndex = 163;
+            this.label95.Text = "TSV List";
             // 
             // TSVlistLoad
             // 
@@ -4290,15 +4311,6 @@
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
             // 
-            // label95
-            // 
-            this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(436, 177);
-            this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(47, 13);
-            this.label95.TabIndex = 163;
-            this.label95.Text = "TSV List";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4761,6 +4773,7 @@
         private System.Windows.Forms.Button TSVlistAdd;
         private System.Windows.Forms.NumericUpDown TSVlistNum;
         private System.Windows.Forms.Label label95;
+        private System.Windows.Forms.CheckBox quickBreed;
     }
 }
 

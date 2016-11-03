@@ -448,7 +448,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad, readESV, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad };
+            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad, readESV, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, quickBreed };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -4462,7 +4462,7 @@ namespace ntrbase
         }
 
         // Breeding bot
-        public enum breedbotstates { botstart, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, readegg, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
+        public enum breedbotstates { botstart, facedaycareman, quickegg, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, readegg, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
 
         private async void runBreedingBot_Click(object sender, EventArgs e)
         {
@@ -4587,20 +4587,53 @@ namespace ntrbase
                 {
                     case (int)breedbotstates.botstart:
                         Addlog("Bot start");
-                        switch (modeBreed.SelectedIndex)
+                        if (quickBreed.Checked)
                         {
-                            case 0:
-                                botState = (int)breedbotstates.walk1;
+                            botState = (int)breedbotstates.facedaycareman;
+                        }
+                        else if (modeBreed.SelectedIndex > 0)
+                        {
+                            botState = (int)breedbotstates.walk1;
+                        }
+                        else
+                        {
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.facedaycareman:
+                        Addlog("Turn to Day Care Man");
+                        waitNTRtask = waitbutton(DpadUP);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)breedbotstates.quickegg;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
+                            botState = (int)breedbotstates.botexit;
+                        }
+                        break;
+                    case (int)breedbotstates.quickegg:
+                        byte[] command = BitConverter.GetBytes(0x01);
+                        Program.scriptHelper.write(eggoff, command, pid);
+                        for (waittimeout = 0; waittimeout < timeout; waittimeout++)
+                        {
+                            lastlog = "";
+                            await Task.Delay(1000);
+                            if (lastlog.Contains("finished"))
+                            {
                                 break;
-                            case 1:
-                                botState = (int)breedbotstates.walk1;
-                                break;
-                            case 2:
-                                botState = (int)breedbotstates.walk1;
-                                break;
-                            default:
-                                botState = (int)breedbotstates.botexit;
-                                break;
+                            }
+                        }
+                        if (waittimeout < timeout)
+                        {
+                            botState = (int)breedbotstates.triggerdialog;
+                        }
+                        else
+                        {
+                            MessageBox.Show(writeerror);
+                            botState = (int)srbotstates.botexit;
                         }
                         break;
                     case (int)breedbotstates.walk1:
@@ -4843,6 +4876,10 @@ namespace ntrbase
                             if (eggsinparty >= 5 || eggsNoBreed.Value == 0)
                             {
                                 botState = (int)breedbotstates.walktodaycare;
+                            }
+                            else if (quickBreed.Checked)
+                            {
+                                botState = (int)breedbotstates.quickegg;
                             }
                             else
                             {
@@ -5496,7 +5533,9 @@ namespace ntrbase
                         }
                         waitresult = await waitNTRtask;
                         if (waitresult == 0)
+                        {
                             botState = (int)breedbotstates.checkmap9;
+                        }
                         break;
                     case (int)breedbotstates.checkmap9:
                         await Task.Delay(250);
@@ -5504,7 +5543,14 @@ namespace ntrbase
                         waitresult = await waitNTRtask;
                         if (lastmemoryread >= daycaremanx && lastmemoryread < daycaremanx + 0x100)
                         {
-                            botState = (int)breedbotstates.walk1;
+                            if (quickBreed.Checked)
+                            {
+                                botState = (int)breedbotstates.facedaycareman;
+                            }
+                            else
+                            {
+                                botState = (int)breedbotstates.walk1;
+                            }
                         }
                         else if (lastmemoryread > daycaremanx && orasgame && radioDayCare2.Checked)
                         {
@@ -5586,10 +5632,10 @@ namespace ntrbase
                             }
                             else
                             {
-                                if (modeBreed.SelectedIndex == 1)
+                                if (modeBreed.SelectedIndex == 1 || modeBreed.SelectedIndex == 2)
                                 {
                                     Addlog("No match found");
-                                    finishmessage = "Finished. Maximum number of eggs reached without a match for any filter.";
+                                    finishmessage = "Finished. Maximum number of eggs reached without a match.";
                                 }
                                 botState = (int)breedbotstates.botexit;
                             }
@@ -5606,7 +5652,7 @@ namespace ntrbase
                         else if (modeBreed.SelectedIndex == 2)
                         {
                             Addlog("ESV/TSV match found");
-                            finishmessage = "Finished. A match was found at box " + filterbox + ", slot " + filterslot + ", the ESV/TSV value is" + currentesv;
+                            finishmessage = "Finished. A match was found at box " + filterbox + ", slot " + filterslot + ", the ESV/TSV value is: " + currentesv;
                         }
                         Addlog("Bot stop");
                         botStop = true;
