@@ -2628,7 +2628,8 @@
             "Regular",
             "Mirage Spot",
             "Event",
-            "Groudon/Kyogre"});
+            "Groudon/Kyogre",
+            "Walk"});
             this.typeLSR.Location = new System.Drawing.Point(62, 28);
             this.typeLSR.Name = "typeLSR";
             this.typeLSR.Size = new System.Drawing.Size(132, 21);
@@ -3168,12 +3169,12 @@
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(794, 408);
+            this.label69.Location = new System.Drawing.Point(768, 410);
             this.label69.Name = "label69";
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label69.Size = new System.Drawing.Size(78, 13);
+            this.label69.Size = new System.Drawing.Size(108, 13);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.19.0";
+            this.label69.Text = "Version: 1.19.1-beta1";
             // 
             // label71
             // 

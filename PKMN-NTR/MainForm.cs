@@ -3736,7 +3736,7 @@ namespace ntrbase
         }
 
         // Soft-reset bot
-        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, tev_start, tev_cont1, tev_cont2, tev_cont3, tev_cont4, tev_cont5, tev_check, botexit };
+        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, tev_start, tev_cont1, tev_cont2, tev_cont3, tev_cont4, tev_cont5, tev_check, twk_start, botexit };
 
         private async void RunLSRbot_Click(object sender, EventArgs e)
         {
@@ -3759,7 +3759,11 @@ namespace ntrbase
                     break;
                 case 3:
                     typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
-                    resumemessage = "In front of Groudon/Kyobre, will press A to trigger dialog";
+                    resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
+                    break;
+                case 4:
+                    typemessage = "Walk - Make sure you are one step south of the pokémon.";
+                    resumemessage = "One step south of the pokémon, will press up to trigger dialog";
                     break;
                 default:
                     typemessage = "No type - Select one type of soft-reset and try again.";
@@ -3848,6 +3852,16 @@ namespace ntrbase
                                 else
                                 {
                                     botState = (int)srbotstates.fixwifi;
+                                }
+                                break;
+                            case 4:
+                                if (resumeLSR.Checked)
+                                {
+                                    botState = (int)srbotstates.twk_start;
+                                }
+                                else
+                                {
+                                    botState = (int)srbotstates.pssmenush;
                                 }
                                 break;
                             default:
@@ -4131,13 +4145,19 @@ namespace ntrbase
                         switch (typeLSR.SelectedIndex)
                         {
                             case 0:
-                                botState = (int)srbotstates.tst_cont;
+                                botState = (int)srbotstates.tst_start;
                                 break;
                             case 1:
                                 botState = (int)srbotstates.tms_start;
                                 break;
                             case 2:
                                 botState = (int)srbotstates.tev_start;
+                                break;
+                            case 3:
+                                botState = (int)srbotstates.tst_start;
+                                break;
+                            case 4:
+                                botState = (int)srbotstates.twk_start;
                                 break;
                             default:
                                 botState = (int)srbotstates.trigger;
@@ -4474,6 +4494,20 @@ namespace ntrbase
                         else
                         {
                             MessageBox.Show(readerror);
+                            botState = (int)srbotstates.botexit;
+                        }
+                        break;
+                    case (int)srbotstates.twk_start:
+                        Addlog("Walk one step");
+                        waitNTRtask = waitbutton(runUP);
+                        waitresult = await waitNTRtask;
+                        if (waitresult == 0)
+                        {
+                            botState = (int)srbotstates.trigger;
+                        }
+                        else
+                        {
+                            MessageBox.Show(buttonerror);
                             botState = (int)srbotstates.botexit;
                         }
                         break;
