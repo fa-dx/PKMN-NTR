@@ -4658,7 +4658,7 @@ namespace ntrbase
                         {
                             botState = (int)breedbotstates.facedaycareman;
                         }
-                        else if (modeBreed.SelectedIndex > 0)
+                        else if (modeBreed.SelectedIndex >= 0)
                         {
                             botState = (int)breedbotstates.walk1;
                         }
