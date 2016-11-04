@@ -6,14 +6,11 @@
 using ntrbase.Properties;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Data;
@@ -38,8 +35,6 @@ namespace ntrbase
         public const string FOLDERDELETE = "Deleted";
         public const string FOLDERBOT = "Bot";
         PKHeX dumpedPKHeX = new PKHeX();
-
-        UpdateDetails foundUpdate = null;
 
         public byte[] selectedCloneData = new byte[232];
         public bool selectedCloneValid = false;
@@ -207,129 +202,12 @@ namespace ntrbase
         public System.Windows.Forms.ToolTip ToolTipTSVs = new System.Windows.Forms.ToolTip();
         public System.Windows.Forms.ToolTip ToolTipPSV = new System.Windows.Forms.ToolTip();
 
-        #region update checking
-        public static bool PingHost(string nameOrAddress)
-        {
-            bool pingable = false;
-            Ping pinger = new Ping();
-            try
-            {
-                PingReply reply = pinger.Send(nameOrAddress);
-                pingable = reply.Status == IPStatus.Success;
-            }
-            catch (PingException)
-            {
-
-            }
-            return pingable;
-        }
-
-        class UpdateDetails
-        {
-            public Version v;
-            public string url;
-            public string about;
-        }
-
-        public bool UpdateAvailable()
-        {
-            Version netVersion = null;
-            string netUrl = "";
-            string netAbout = "";
-            if (PingHost("fadx.co.uk") == true)
-            {
-                string xmlUrl = "http://fadx.co.uk/PKMN-NTR/update.xml";
-                XmlTextReader reader = null;
-                try
-                {
-                    reader = new XmlTextReader(xmlUrl);
-                    reader.MoveToContent();
-                    string elementName = "";
-                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "appinfo"))
-                    {
-                        while (reader.Read())
-                        {
-                            if (reader.NodeType == XmlNodeType.Element)
-                            {
-                                elementName = reader.Name;
-                            }
-                            else
-                            {
-                                if ((reader.NodeType == XmlNodeType.Text) && (reader.HasValue))
-                                    switch (elementName)
-                                    {
-                                        case "version":
-                                            netVersion = new Version(reader.Value);
-                                            break;
-                                        case "url":
-                                            netUrl = reader.Value;
-                                            break;
-                                        case "about":
-                                            netAbout = reader.Value;
-                                            break;
-
-                                    }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occured while checking for updates:\r\n" + ex.Message);
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
-
-                Version applicationVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                if (applicationVersion.CompareTo(netVersion) < 0)
-                {
-                    foundUpdate = new UpdateDetails();
-                    foundUpdate.v = netVersion;
-                    foundUpdate.url = netUrl;
-                    foundUpdate.about = netAbout;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public void AskToUpdate()
-        {
-            if (foundUpdate != null)
-            {
-                Version applicationVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                string str = String.Format("Current Version: {0}.\nLatest Vesion: {1}. \n\nWhat's new: {2} ", applicationVersion, foundUpdate.v, foundUpdate.about);
-                if (DialogResult.No != MessageBox.Show(str + "\n\nDownload now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                {
-                    try
-                    {
-                        Process.Start(foundUpdate.url);
-                    }
-                    catch { }
-                    return;
-                }
-            }
-        }
-        #endregion update checking
-
         public delegate void LogDelegate(string l);
         public LogDelegate delAddLog;
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            groupBox1.Size = new System.Drawing.Size(154, 74);
-            groupBox1.Location = new System.Drawing.Point(7, 331);
-
-            if (UpdateAvailable())
-            {
-                groupBox1.Size = new System.Drawing.Size(154, 97);
-                groupBox1.Location = new System.Drawing.Point(7, 331);
-                versionCheck.Visible = true;
-            }
-
+            label69.Text = "Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             species.Items.AddRange(speciesList);
             ability.Items.AddRange(abilityList);
             AbilityLSR.Items.AddRange(abilityList);
@@ -2176,11 +2054,6 @@ namespace ntrbase
             dumpPokemon.Location = new System.Drawing.Point(6, 61);
             dumpPokemon.Text = "Dump";
             dumpBoxes.Text = "Dump All Boxes";
-        }
-
-        private void versionCheck_Click(object sender, EventArgs e)
-        {
-            AskToUpdate();
         }
 
         private void radioParty_CheckedChanged_1(object sender, EventArgs e)

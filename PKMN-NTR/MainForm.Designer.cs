@@ -23,7 +23,6 @@
             this.buttonDisconnect = new System.Windows.Forms.Button();
             this.host = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.versionCheck = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.moneyNum = new System.Windows.Forms.NumericUpDown();
             this.milesNum = new System.Windows.Forms.NumericUpDown();
@@ -502,29 +501,17 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.versionCheck);
+            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.buttonDisconnect);
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.buttonConnect);
             this.groupBox1.Location = new System.Drawing.Point(12, 334);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(154, 97);
+            this.groupBox1.Size = new System.Drawing.Size(154, 78);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connection";
-            // 
-            // versionCheck
-            // 
-            this.versionCheck.ForeColor = System.Drawing.Color.Green;
-            this.versionCheck.Location = new System.Drawing.Point(6, 69);
-            this.versionCheck.Name = "versionCheck";
-            this.versionCheck.Size = new System.Drawing.Size(142, 23);
-            this.versionCheck.TabIndex = 44;
-            this.versionCheck.Text = "Update Available";
-            this.versionCheck.UseVisualStyleBackColor = true;
-            this.versionCheck.Visible = false;
-            this.versionCheck.Click += new System.EventHandler(this.versionCheck_Click);
             // 
             // label1
             // 
@@ -3168,13 +3155,13 @@
             // 
             // label69
             // 
-            this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(768, 410);
+            this.label69.Location = new System.Drawing.Point(612, 410);
             this.label69.Name = "label69";
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label69.Size = new System.Drawing.Size(108, 13);
+            this.label69.Size = new System.Drawing.Size(260, 19);
             this.label69.TabIndex = 76;
-            this.label69.Text = "Version: 1.19.1-beta1";
+            this.label69.Text = "Version: ";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label71
             // 
@@ -4658,7 +4645,6 @@
         private System.Windows.Forms.ComboBox ball;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Button versionCheck;
         private System.Windows.Forms.RadioButton radioParty;
         private System.Windows.Forms.NumericUpDown dTIDNum;
         private System.Windows.Forms.NumericUpDown dSIDNum;

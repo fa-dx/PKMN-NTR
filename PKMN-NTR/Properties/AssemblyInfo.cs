@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("PKMN NTR")]
@@ -15,5 +14,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("cd7cfe42-3900-4148-aa42-6a04af45b783")]
 
-[assembly: AssemblyVersion("1.19.0.1")]
-[assembly: AssemblyFileVersion("1.19.0.1")]
+[assembly: AssemblyVersion("1.19.1.1")]
+[assembly: AssemblyFileVersion("1.19.1.1")]
