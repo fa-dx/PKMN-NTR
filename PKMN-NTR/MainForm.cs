@@ -330,7 +330,7 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { pokeMoney, pokeMiles, pokeBP, moneyNum, milesNum, bpNum, slotDump, boxDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioOpponent, radioTrade, pokeName, playerName, pokeTID, TIDNum, pokeSID, SIDNum, hourNum, minNum, secNum, pokeTime, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemAdd, itemWrite, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView, delPkm, deleteBox, deleteSlot, deleteAmount, Lang, pokeLang, ivHPNum, ivATKNum, ivDEFNum, ivSPENum, ivSPANum, ivSPDNum, evHPNum, evATKNum, evDEFNum, evSPENum, evSPANum, evSPDNum, isEgg, nickname, nature, button1, heldItem, species, ability, move1, move2, move3, move4, ball, radioParty, dTIDNum, dSIDNum, otName, dPID, setShiny, onlyView, gender, friendship, randomPID, radioBattleBox, cloneDoIt, cloneSlotFrom, cloneBoxFrom, cloneCopiesNo, cloneSlotTo, cloneBoxTo, writeDoIt, writeBrowse, writeAutoInc, writeCopiesNo, writeSlotTo, writeBoxTo, deleteKeepBackup, ExpPoints, manualA, manualB, manualX, manualY, manualR, manualL, manualStart, manualSelect, manualDUp, ManualDDown, manualDLeft, manualDRight, manualSR, touchX, touchY, manualTouch, RunWTbot, WTBox, WTSlot, WTtradesNo, RunLSRbot, natureLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, HPTypeLSR, shinyLSR, typeLSR, resumeLSR, AbilityLSR, genderLSR, boxBreed, slotBreed, modeBreed, eggsNoBreed, runBreedingBot, natureBreed, abilityBreed, HPtypeBreed, genderBreed, OrganizeMiddle, OrganizeTop, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, radioDayCare1, radioDayCare2, shinyBreed, bFilterAdd, bFilterRead, bFilterRemove, bFilterSave, bFilterLoad, readESV, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, quickBreed };
+            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, shinyBreed, natureBreed, abilityBreed, HPtypeBreed, genderBreed, ivTotBreed, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, bFilterAdd, bFilterRemove, bFilterRead, bFilterSave, bFilterLoad, BreedFilter, ESVlist, ESVlistSave, TSVlist, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, shinyLSR, natureLSR, AbilityLSR, HPTypeLSR, genderLSR, ivTotLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, srFilterAdd, srFilterRemove, srFilterRead, srFilterSave, srFilterLoad, SRFilters, WTBox, WTSlot, WTtradesNo, RunWTbot };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
@@ -1581,7 +1581,7 @@ namespace ntrbase
             int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
             if (ret > 0)
                 MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
-            else if (ret < 0)
+            else if (ret <= 0)
                 if (writeAutoInc.Checked)
                 {
                     writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
@@ -2449,16 +2449,6 @@ namespace ntrbase
             Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
         }
 
-        private void touchX_ValueChanged(object sender, EventArgs e)
-        {
-            SetText(touchCoord, "0x" + gethexcoord(touchX.Value, touchY.Value).ToString("X8"));
-        }
-
-        private void touchY_ValueChanged(object sender, EventArgs e)
-        {
-            SetText(touchCoord, "0x" + gethexcoord(touchX.Value, touchY.Value).ToString("X8"));
-        }
-
         // Send manual touch command
         private void manualTouch_Click(object sender, EventArgs e)
         {
@@ -2773,6 +2763,7 @@ namespace ntrbase
             {
                 currentfilter = 0;
                 int failedtests = 0;
+                int perfectIVs = 0;
                 foreach (DataGridViewRow row in filters.Rows)
                 {
                     currentfilter++;
@@ -2845,6 +2836,10 @@ namespace ntrbase
                         Addlog("Hit Points IV: FAIL");
                         failedtests++;
                     }
+                    if (dumpedPKHeX.IV_HP == 31)
+                    {
+                        perfectIVs++;
+                    }
                     // Test Atk
                     if (dumpedPKHeX.IV_ATK >= (int)row.Cells[6].Value)
                     {
@@ -2854,6 +2849,10 @@ namespace ntrbase
                     {
                         Addlog("Attack IV: FAIL");
                         failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_ATK == 31)
+                    {
+                        perfectIVs++;
                     }
                     // Test Def
                     if (dumpedPKHeX.IV_DEF >= (int)row.Cells[7].Value)
@@ -2865,6 +2864,10 @@ namespace ntrbase
                         Addlog("Defense IV: FAIL");
                         failedtests++;
                     }
+                    if (dumpedPKHeX.IV_DEF == 31)
+                    {
+                        perfectIVs++;
+                    }
                     // Test SpA
                     if (dumpedPKHeX.IV_SPA >= (int)row.Cells[8].Value)
                     {
@@ -2874,6 +2877,10 @@ namespace ntrbase
                     {
                         Addlog("Special Attack IV: FAIL");
                         failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_SPA == 31)
+                    {
+                        perfectIVs++;
                     }
                     // Test SpD
                     if (dumpedPKHeX.IV_SPD >= (int)row.Cells[9].Value)
@@ -2885,6 +2892,10 @@ namespace ntrbase
                         Addlog("Special Defense IV: FAIL");
                         failedtests++;
                     }
+                    if (dumpedPKHeX.IV_SPD == 31)
+                    {
+                        perfectIVs++;
+                    }
                     // Test Spe
                     if (dumpedPKHeX.IV_SPE >= (int)row.Cells[10].Value)
                     {
@@ -2893,6 +2904,20 @@ namespace ntrbase
                     else
                     {
                         Addlog("Speed IV: FAIL");
+                        failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_SPE == 31)
+                    {
+                        perfectIVs++;
+                    }
+                    // Test Perfect IVs
+                    if (perfectIVs >= (int)row.Cells[11].Value)
+                    {
+                        Addlog("Perfect IVs: PASS");
+                    }
+                    else
+                    {
+                        Addlog("Perfect IVs: FAIL");
                         failedtests++;
                     }
                     if (failedtests == 0)
@@ -2910,7 +2935,7 @@ namespace ntrbase
 
         private void bFilterAdd_Click(object sender, EventArgs e)
         {
-            BreedFilter.Rows.Add(shinyBreed.Checked ? 1 : 0, Convert.ToInt32(natureBreed.SelectedIndex), Convert.ToInt32(abilityBreed.SelectedIndex), Convert.ToInt32(HPtypeBreed.SelectedIndex), Convert.ToInt32(genderBreed.SelectedIndex), Convert.ToInt32(ivHPBreed.Value), Convert.ToInt32(ivAtkBreed.Value), Convert.ToInt32(ivDEFBreed.Value), Convert.ToInt32(ivSpABreed.Value), Convert.ToInt32(ivSpDBreed.Value), Convert.ToInt32(ivSpeBreed.Value));
+            BreedFilter.Rows.Add(shinyBreed.Checked ? 1 : 0, Convert.ToInt32(natureBreed.SelectedIndex), Convert.ToInt32(abilityBreed.SelectedIndex), Convert.ToInt32(HPtypeBreed.SelectedIndex), Convert.ToInt32(genderBreed.SelectedIndex), Convert.ToInt32(ivHPBreed.Value), Convert.ToInt32(ivAtkBreed.Value), Convert.ToInt32(ivDEFBreed.Value), Convert.ToInt32(ivSpABreed.Value), Convert.ToInt32(ivSpDBreed.Value), Convert.ToInt32(ivSpeBreed.Value), Convert.ToInt32(ivTotBreed.Value));
         }
 
         private void bFilterRemove_Click(object sender, EventArgs e)
@@ -2980,7 +3005,7 @@ namespace ntrbase
                 List<int[]> rows = File.ReadAllLines(folderPath + fileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
                 foreach (int[] row in rows)
                 {
-                    BreedFilter.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
+                    BreedFilter.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]);
                 }
                 MessageBox.Show("Breeding Filters loaded");
             }
@@ -2992,7 +3017,7 @@ namespace ntrbase
 
         private void srFilterAdd_Click(object sender, EventArgs e)
         {
-            SRFilters.Rows.Add(shinyLSR.Checked ? 1 : 0, Convert.ToInt32(natureLSR.SelectedIndex), Convert.ToInt32(AbilityLSR.SelectedIndex), Convert.ToInt32(HPTypeLSR.SelectedIndex), Convert.ToInt32(genderLSR.SelectedIndex), Convert.ToInt32(ivHPLSR.Value), Convert.ToInt32(ivAtkLSR.Value), Convert.ToInt32(ivDefLSR.Value), Convert.ToInt32(ivSpALSR.Value), Convert.ToInt32(ivSpDLSR.Value), Convert.ToInt32(ivSpeLSR.Value));
+            SRFilters.Rows.Add(shinyLSR.Checked ? 1 : 0, Convert.ToInt32(natureLSR.SelectedIndex), Convert.ToInt32(AbilityLSR.SelectedIndex), Convert.ToInt32(HPTypeLSR.SelectedIndex), Convert.ToInt32(genderLSR.SelectedIndex), Convert.ToInt32(ivHPLSR.Value), Convert.ToInt32(ivAtkLSR.Value), Convert.ToInt32(ivDefLSR.Value), Convert.ToInt32(ivSpALSR.Value), Convert.ToInt32(ivSpDLSR.Value), Convert.ToInt32(ivSpeLSR.Value), Convert.ToInt32(ivTotLSR.Value));
         }
 
         private void srFilterRemove_Click(object sender, EventArgs e)
@@ -3063,7 +3088,7 @@ namespace ntrbase
                 List<int[]> rows = File.ReadAllLines(folderPath + fileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
                 foreach (int[] row in rows)
                 {
-                    SRFilters.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
+                    SRFilters.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]);
                 }
                 MessageBox.Show("Soft-reset Filters loaded");
             }
