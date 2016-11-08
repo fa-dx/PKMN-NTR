@@ -210,8 +210,7 @@ namespace ntrbase
             label69.Text = "Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             species.Items.AddRange(speciesList);
             ability.Items.AddRange(abilityList);
-            AbilityLSR.Items.AddRange(abilityList);
-            abilityBreed.Items.AddRange(abilityList);
+            filterAbility.Items.AddRange(abilityList);
             heldItem.Items.AddRange(itemList);
             move1.Items.AddRange(moveList);
             move2.Items.AddRange(moveList);
@@ -331,11 +330,18 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
-            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, shinyBreed, natureBreed, abilityBreed, HPtypeBreed, genderBreed, ivTotBreed, ivHPBreed, ivAtkBreed, ivDEFBreed, ivSpABreed, ivSpDBreed, ivSpeBreed, bFilterAdd, bFilterRemove, bFilterRead, bFilterSave, bFilterLoad, BreedFilter, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, shinyLSR, natureLSR, AbilityLSR, HPTypeLSR, genderLSR, ivTotLSR, ivHPLSR, ivAtkLSR, ivDefLSR, ivSpALSR, ivSpDLSR, ivSpeLSR, srFilterAdd, srFilterRemove, srFilterRead, srFilterSave, srFilterLoad, SRFilters, WTBox, WTSlot, WTtradesNo, RunWTbot };
+            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, WTBox, WTSlot, WTtradesNo, RunWTbot };
             foreach (Control c in enableWhenConnected)
             {
                 c.Enabled = false;
             }
+            SetSelectedIndex(filterHPlogic, 0);
+            SetSelectedIndex(filterATKlogic, 0);
+            SetSelectedIndex(filterDEFlogic, 0);
+            SetSelectedIndex(filterSPAlogic, 0);
+            SetSelectedIndex(filterSPDlogic, 0);
+            SetSelectedIndex(filterSPElogic, 0);
+            SetSelectedIndex(filterPerIVlogic, 0);
         }
 
         public void Addlog(string l)
@@ -2808,7 +2814,7 @@ namespace ntrbase
                         failedtests++;
                     }
                     // Test Hidden Power
-                    if (HPTypeLSR.SelectedIndex < 0 || getHiddenPower() == (int)row.Cells[3].Value)
+                    if ((int)row.Cells[3].Value < 0 || getHiddenPower() == (int)row.Cells[3].Value)
                     {
                         Addlog("Hidden Power: PASS");
                     }
@@ -2828,7 +2834,7 @@ namespace ntrbase
                         failedtests++;
                     }
                     // Test HP
-                    if (dumpedPKHeX.IV_HP >= (int)row.Cells[5].Value)
+                    if (IVCheck((int)row.Cells[5].Value, dumpedPKHeX.IV_HP, (int)row.Cells[6].Value))
                     {
                         Addlog("Hit Points IV: PASS");
                     }
@@ -2842,7 +2848,7 @@ namespace ntrbase
                         perfectIVs++;
                     }
                     // Test Atk
-                    if (dumpedPKHeX.IV_ATK >= (int)row.Cells[6].Value)
+                    if (IVCheck((int)row.Cells[7].Value, dumpedPKHeX.IV_ATK, (int)row.Cells[8].Value))
                     {
                         Addlog("Attack IV: PASS");
                     }
@@ -2856,7 +2862,7 @@ namespace ntrbase
                         perfectIVs++;
                     }
                     // Test Def
-                    if (dumpedPKHeX.IV_DEF >= (int)row.Cells[7].Value)
+                    if (IVCheck((int)row.Cells[9].Value, dumpedPKHeX.IV_DEF, (int)row.Cells[10].Value))
                     {
                         Addlog("Defense IV: PASS");
                     }
@@ -2870,7 +2876,7 @@ namespace ntrbase
                         perfectIVs++;
                     }
                     // Test SpA
-                    if (dumpedPKHeX.IV_SPA >= (int)row.Cells[8].Value)
+                    if (IVCheck((int)row.Cells[11].Value, dumpedPKHeX.IV_SPA, (int)row.Cells[12].Value))
                     {
                         Addlog("Special Attack IV: PASS");
                     }
@@ -2884,7 +2890,7 @@ namespace ntrbase
                         perfectIVs++;
                     }
                     // Test SpD
-                    if (dumpedPKHeX.IV_SPD >= (int)row.Cells[9].Value)
+                    if (IVCheck((int)row.Cells[13].Value, dumpedPKHeX.IV_SPD, (int)row.Cells[14].Value))
                     {
                         Addlog("Special Defense IV: PASS");
                     }
@@ -2898,7 +2904,7 @@ namespace ntrbase
                         perfectIVs++;
                     }
                     // Test Spe
-                    if (dumpedPKHeX.IV_SPE >= (int)row.Cells[10].Value)
+                    if (IVCheck((int)row.Cells[15].Value, dumpedPKHeX.IV_SPE, (int)row.Cells[16].Value))
                     {
                         Addlog("Speed IV: PASS");
                     }
@@ -2912,7 +2918,7 @@ namespace ntrbase
                         perfectIVs++;
                     }
                     // Test Perfect IVs
-                    if (perfectIVs >= (int)row.Cells[11].Value)
+                    if (IVCheck((int)row.Cells[17].Value, perfectIVs, (int)row.Cells[18].Value))
                     {
                         Addlog("Perfect IVs: PASS");
                     }
@@ -2934,16 +2940,97 @@ namespace ntrbase
             }
         }
 
-        private void bFilterAdd_Click(object sender, EventArgs e)
+        public bool IVCheck(int refiv, int actualiv, int logic)
         {
-            BreedFilter.Rows.Add(shinyBreed.Checked ? 1 : 0, Convert.ToInt32(natureBreed.SelectedIndex), Convert.ToInt32(abilityBreed.SelectedIndex), Convert.ToInt32(HPtypeBreed.SelectedIndex), Convert.ToInt32(genderBreed.SelectedIndex), Convert.ToInt32(ivHPBreed.Value), Convert.ToInt32(ivAtkBreed.Value), Convert.ToInt32(ivDEFBreed.Value), Convert.ToInt32(ivSpABreed.Value), Convert.ToInt32(ivSpDBreed.Value), Convert.ToInt32(ivSpeBreed.Value), Convert.ToInt32(ivTotBreed.Value));
+            switch (logic)
+            {
+                case 0: // Greater or equal
+                    if (actualiv >= refiv)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case 1: // Greater
+                    if (actualiv > refiv)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case 2: // Equal
+                    if (actualiv == refiv)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case 3: // Less
+                    if (actualiv < refiv)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case 4: // Less or equal
+                    if (actualiv <= refiv)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case 5: // Different
+                    if (actualiv >= refiv)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case 6: // Even
+                    if (actualiv % 2 == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case 7: // Odd
+                    if (actualiv % 2 == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                default:
+                    return true;
+            }
         }
 
-        private void bFilterRemove_Click(object sender, EventArgs e)
+        private void filterAdd_Click(object sender, EventArgs e)
         {
-            if (BreedFilter.SelectedRows.Count > 0 && BreedFilter.Rows.Count > 0)
+            filterList.Rows.Add(filterShiny.Checked ? 1 : 0, Convert.ToInt32(filterNature.SelectedIndex), Convert.ToInt32(filterAbility.SelectedIndex), Convert.ToInt32(filterHPtype.SelectedIndex), Convert.ToInt32(filterGender.SelectedIndex), Convert.ToInt32(filterHPvalue.Value), Convert.ToInt32(filterHPlogic.SelectedIndex), Convert.ToInt32(filterATKvalue.Value), Convert.ToInt32(filterATKlogic.SelectedIndex), Convert.ToInt32(filterDEFvalue.Value), Convert.ToInt32(filterDEFlogic.SelectedIndex), Convert.ToInt32(filterSPAvalue.Value), Convert.ToInt32(filterSPAlogic.SelectedIndex), Convert.ToInt32(filterSPDvalue.Value), Convert.ToInt32(filterSPDlogic.SelectedIndex), Convert.ToInt32(filterSPEvalue.Value), Convert.ToInt32(filterSPElogic.SelectedIndex), Convert.ToInt32(filterPerIVvalue.Value), Convert.ToInt32(filterPerIVlogic.SelectedIndex));
+        }
+
+        private void filterRemove_Click(object sender, EventArgs e)
+        {
+            if (filterList.SelectedRows.Count > 0 && filterList.Rows.Count > 0)
             {
-                BreedFilter.Rows.RemoveAt(BreedFilter.SelectedRows[0].Index);
+                filterList.Rows.RemoveAt(filterList.SelectedRows[0].Index);
             }
             else
             {
@@ -2951,28 +3038,36 @@ namespace ntrbase
             }
         }
 
-        private void bFilterRead_Click(object sender, EventArgs e)
+        private void filterRead_Click(object sender, EventArgs e)
         {
-            if (BreedFilter.SelectedRows.Count > 0)
+            if (filterList.SelectedRows.Count > 0)
             {
-                if ((int)BreedFilter.SelectedRows[0].Cells[0].Value == 1)
+                if ((int)filterList.SelectedRows[0].Cells[0].Value == 1)
                 {
-                    SetChecked(shinyBreed, true);
+                    SetChecked(filterShiny, true);
                 }
                 else
                 {
-                    SetChecked(shinyBreed, false);
+                    SetChecked(filterShiny, false);
                 }
-                SetSelectedIndex(natureBreed, (int)BreedFilter.SelectedRows[0].Cells[1].Value);
-                SetSelectedIndex(abilityBreed, (int)BreedFilter.SelectedRows[0].Cells[2].Value);
-                SetSelectedIndex(HPtypeBreed, (int)BreedFilter.SelectedRows[0].Cells[3].Value);
-                SetSelectedIndex(genderBreed, (int)BreedFilter.SelectedRows[0].Cells[4].Value);
-                SetValue(ivHPBreed, (int)BreedFilter.SelectedRows[0].Cells[5].Value);
-                SetValue(ivAtkBreed, (int)BreedFilter.SelectedRows[0].Cells[6].Value);
-                SetValue(ivDEFBreed, (int)BreedFilter.SelectedRows[0].Cells[7].Value);
-                SetValue(ivSpABreed, (int)BreedFilter.SelectedRows[0].Cells[8].Value);
-                SetValue(ivSpDBreed, (int)BreedFilter.SelectedRows[0].Cells[9].Value);
-                SetValue(ivSpeBreed, (int)BreedFilter.SelectedRows[0].Cells[10].Value);
+                SetSelectedIndex(filterNature, (int)filterList.SelectedRows[0].Cells[1].Value);
+                SetSelectedIndex(filterAbility, (int)filterList.SelectedRows[0].Cells[2].Value);
+                SetSelectedIndex(filterHPtype, (int)filterList.SelectedRows[0].Cells[3].Value);
+                SetSelectedIndex(filterGender, (int)filterList.SelectedRows[0].Cells[4].Value);
+                SetValue(filterHPvalue, (int)filterList.SelectedRows[0].Cells[5].Value);
+                SetSelectedIndex(filterHPlogic, (int)filterList.SelectedRows[0].Cells[6].Value);
+                SetValue(filterATKvalue, (int)filterList.SelectedRows[0].Cells[7].Value);
+                SetSelectedIndex(filterATKlogic, (int)filterList.SelectedRows[0].Cells[8].Value);
+                SetValue(filterDEFvalue, (int)filterList.SelectedRows[0].Cells[9].Value);
+                SetSelectedIndex(filterDEFlogic, (int)filterList.SelectedRows[0].Cells[10].Value);
+                SetValue(filterSPAvalue, (int)filterList.SelectedRows[0].Cells[11].Value);
+                SetSelectedIndex(filterSPAlogic, (int)filterList.SelectedRows[0].Cells[12].Value);
+                SetValue(filterSPDvalue, (int)filterList.SelectedRows[0].Cells[13].Value);
+                SetSelectedIndex(filterSPDlogic, (int)filterList.SelectedRows[0].Cells[14].Value);
+                SetValue(filterSPEvalue, (int)filterList.SelectedRows[0].Cells[15].Value);
+                SetSelectedIndex(filterSPElogic, (int)filterList.SelectedRows[0].Cells[16].Value);
+                SetValue(filterPerIVvalue, (int)filterList.SelectedRows[0].Cells[17].Value);
+                SetSelectedIndex(filterPerIVlogic, (int)filterList.SelectedRows[0].Cells[18].Value);
             }
             else
             {
@@ -2980,122 +3075,90 @@ namespace ntrbase
             }
         }
 
-        private void bFilterSave_Click(object sender, EventArgs e)
+        private void filterSave_Click(object sender, EventArgs e)
         {
             string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
             (new System.IO.FileInfo(folderPath)).Directory.Create();
-            string fileName = "BreedingFilters.csv";
-            var csv = new StringBuilder();
-            foreach (DataGridViewRow row in BreedFilter.Rows)
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+            saveFileDialog1.Title = "Save a filter set";
+            saveFileDialog1.InitialDirectory = folderPath;
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName != "")
             {
-                var cells = row.Cells.Cast<DataGridViewCell>();
-                csv.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                var filters = new StringBuilder();
+                foreach (DataGridViewRow row in filterList.Rows)
+                {
+                    var cells = row.Cells.Cast<DataGridViewCell>();
+                    filters.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                }
+                File.WriteAllText(saveFileDialog1.FileName, filters.ToString());
+                MessageBox.Show("Breeding Filters saved");
             }
-            File.WriteAllText(folderPath + fileName, csv.ToString());
-            MessageBox.Show("Breeding Filters saved");
+        }
+
+        private void filterLoad_Click(object sender, EventArgs e)
+        {
+            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            (new System.IO.FileInfo(folderPath)).Directory.Create();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+            openFileDialog1.Title = "Select a filter set";
+            openFileDialog1.InitialDirectory = folderPath;
+            openFileDialog1.ShowDialog();
+            if (openFileDialog1.FileName != "")
+            {
+                filterList.Rows.Clear();
+                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                foreach (int[] row in rows)
+                {
+                    filterList.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                }
+                MessageBox.Show("Filter set loaded");
+            }
         }
 
         private void bFilterLoad_Click(object sender, EventArgs e)
         {
             string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
             (new System.IO.FileInfo(folderPath)).Directory.Create();
-            string fileName = "BreedingFilters.csv";
-            if (System.IO.File.Exists(folderPath + fileName))
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+            openFileDialog1.Title = "Select a filter set";
+            openFileDialog1.InitialDirectory = folderPath;
+            openFileDialog1.ShowDialog();
+            if (openFileDialog1.FileName != "")
             {
-                BreedFilter.Rows.Clear();
-                List<int[]> rows = File.ReadAllLines(folderPath + fileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                filterList.Rows.Clear();
+                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
                 foreach (int[] row in rows)
                 {
-                    BreedFilter.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]);
+                    filterBreeding.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
                 }
                 MessageBox.Show("Breeding Filters loaded");
             }
-            else
-            {
-                MessageBox.Show("Breeding Filters file not found");
-            }
-        }
-
-        private void srFilterAdd_Click(object sender, EventArgs e)
-        {
-            SRFilters.Rows.Add(shinyLSR.Checked ? 1 : 0, Convert.ToInt32(natureLSR.SelectedIndex), Convert.ToInt32(AbilityLSR.SelectedIndex), Convert.ToInt32(HPTypeLSR.SelectedIndex), Convert.ToInt32(genderLSR.SelectedIndex), Convert.ToInt32(ivHPLSR.Value), Convert.ToInt32(ivAtkLSR.Value), Convert.ToInt32(ivDefLSR.Value), Convert.ToInt32(ivSpALSR.Value), Convert.ToInt32(ivSpDLSR.Value), Convert.ToInt32(ivSpeLSR.Value), Convert.ToInt32(ivTotLSR.Value));
-        }
-
-        private void srFilterRemove_Click(object sender, EventArgs e)
-        {
-            if (SRFilters.SelectedRows.Count > 0 && SRFilters.Rows.Count > 0)
-            {
-                SRFilters.Rows.RemoveAt(SRFilters.SelectedRows[0].Index);
-            }
-            else
-            {
-                MessageBox.Show("There is no filter selected.");
-            }
-        }
-
-        private void srFilterRead_Click(object sender, EventArgs e)
-        {
-            if (SRFilters.SelectedRows.Count > 0)
-            {
-                if ((int)SRFilters.SelectedRows[0].Cells[0].Value == 1)
-                {
-                    SetChecked(shinyLSR, true);
-                }
-                else
-                {
-                    SetChecked(shinyLSR, false);
-                }
-                SetSelectedIndex(natureLSR, (int)SRFilters.SelectedRows[0].Cells[1].Value);
-                SetSelectedIndex(AbilityLSR, (int)SRFilters.SelectedRows[0].Cells[2].Value);
-                SetSelectedIndex(HPTypeLSR, (int)SRFilters.SelectedRows[0].Cells[3].Value);
-                SetSelectedIndex(genderLSR, (int)SRFilters.SelectedRows[0].Cells[4].Value);
-                SetValue(ivHPLSR, (int)SRFilters.SelectedRows[0].Cells[5].Value);
-                SetValue(ivAtkLSR, (int)SRFilters.SelectedRows[0].Cells[6].Value);
-                SetValue(ivDefLSR, (int)SRFilters.SelectedRows[0].Cells[7].Value);
-                SetValue(ivSpALSR, (int)SRFilters.SelectedRows[0].Cells[8].Value);
-                SetValue(ivSpDLSR, (int)SRFilters.SelectedRows[0].Cells[9].Value);
-                SetValue(ivSpeLSR, (int)SRFilters.SelectedRows[0].Cells[10].Value);
-            }
-            else
-            {
-                MessageBox.Show("There is no filter selected.");
-            }
-        }
-
-        private void srilterSave_Click(object sender, EventArgs e)
-        {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            string fileName = "SoftResetFilters.csv";
-            var csv = new StringBuilder();
-            var headers = SRFilters.Columns.Cast<DataGridViewColumn>();
-            foreach (DataGridViewRow row in SRFilters.Rows)
-            {
-                var cells = row.Cells.Cast<DataGridViewCell>();
-                csv.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
-            }
-            File.WriteAllText(folderPath + fileName, csv.ToString());
-            MessageBox.Show("Soft-reset Filters saved");
         }
 
         private void srFilterLoad_Click(object sender, EventArgs e)
         {
             string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
             (new System.IO.FileInfo(folderPath)).Directory.Create();
-            string fileName = "SoftResetFilters.csv";
-            if (System.IO.File.Exists(folderPath + fileName))
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+            openFileDialog1.Title = "Select a filter set";
+            openFileDialog1.InitialDirectory = folderPath;
+            openFileDialog1.ShowDialog();
+            if (openFileDialog1.FileName != "")
             {
-                SRFilters.Rows.Clear();
-                List<int[]> rows = File.ReadAllLines(folderPath + fileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                filterList.Rows.Clear();
+                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
                 foreach (int[] row in rows)
                 {
-                    SRFilters.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]);
+                    filtersSoftReset.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
                 }
                 MessageBox.Show("Soft-reset Filters loaded");
-            }
-            else
-            {
-                MessageBox.Show("Soft-reset Filters file not found");
             }
         }
 
@@ -4107,7 +4170,7 @@ namespace ntrbase
                         }
                         break;
                     case (int)srbotstates.filter:
-                        bool testsok = FilterCheck(SRFilters);
+                        bool testsok = FilterCheck(filtersSoftReset);
                         if (testsok)
                         {
                             botState = (int)srbotstates.testspassed;
@@ -5590,7 +5653,7 @@ namespace ntrbase
                                 }
                                 if (modeBreed.SelectedIndex == 1)
                                 {
-                                    testsok = FilterCheck(BreedFilter);
+                                    testsok = FilterCheck(filterBreeding);
                                 }
                             }
                             else
