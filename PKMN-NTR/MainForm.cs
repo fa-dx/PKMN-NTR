@@ -658,7 +658,7 @@ namespace ntrbase
                 pname = ", pname: niji_loc";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
-                //moneyoff = 0x8C6A6AC;
+                moneyoff = 0x330D8FC0;
                 //milesoff = 0x8C82BA0;
                 //bpoff = 0x8C6A6E0;
                 //boxOff = 0x8C861C8;
@@ -669,7 +669,7 @@ namespace ntrbase
                 //keysoff = 0x8C67BA4;
                 //tmsoff = 0x8C67D24;
                 //bersoff = 0x8C67FCC;
-                nameoff = 0x6845C4;
+                nameoff = 0x330D6808;
                 //tidoff = 0x8C79C3C;
                 //sidoff = 0x8C79C3E;
                 //hroff = 0x8CE2814;
@@ -734,6 +734,7 @@ namespace ntrbase
 
         public void dumpAllData7()
         {
+            dumpMoney();
             dumpName();
         }
 
