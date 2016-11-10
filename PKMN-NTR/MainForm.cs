@@ -27,7 +27,8 @@ namespace ntrbase
         // Set this boolean to true to enable the write feature for the party pokémon.
         public static readonly bool enablepartywrite = false;
 
-        public enum GameType { None, X, Y, OR, AS };
+        public enum GameType { None, X, Y, OR, AS, S, M };
+        public bool gen7;
         public const int BOXES = 31;
         public const int BOXSIZE = 30;
         public const int POKEBYTES = 232;
@@ -208,18 +209,6 @@ namespace ntrbase
         private void MainForm_Load(object sender, EventArgs e)
         {
             label69.Text = "Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            species.Items.AddRange(speciesList);
-            ability.Items.AddRange(abilityList);
-            filterAbility.Items.AddRange(abilityList);
-            heldItem.Items.AddRange(itemList);
-            move1.Items.AddRange(moveList);
-            move2.Items.AddRange(moveList);
-            move3.Items.AddRange(moveList);
-            move4.Items.AddRange(moveList);
-            relearnmove1.Items.AddRange(moveList);
-            relearnmove2.Items.AddRange(moveList);
-            relearnmove3.Items.AddRange(moveList);
-            relearnmove4.Items.AddRange(moveList);
 
             DataGridViewComboBoxColumn itemItem = new DataGridViewComboBoxColumn
             {
@@ -409,10 +398,10 @@ namespace ntrbase
         public void getGame(object sender, EventArgs e)
         {
             InfoReadyEventArgs args = (InfoReadyEventArgs)e;
-            //XY
             if (args.info.Contains("kujira-1")) // X
             {
                 game = GameType.X;
+                gen7 = false;
                 string log = args.info;
                 pname = ", pname: kujira-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -475,6 +464,7 @@ namespace ntrbase
             else if (args.info.Contains("kujira-2")) // Y
             {
                 game = GameType.Y;
+                gen7 = false;
                 string log = args.info;
                 pname = ", pname: kujira-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -537,6 +527,7 @@ namespace ntrbase
             else if (args.info.Contains("sango-1")) //Omega Ruby
             {
                 game = GameType.OR;
+                gen7 = false;
                 string log = args.info;
                 pname = ", pname:  sango-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -599,6 +590,7 @@ namespace ntrbase
             else if (args.info.Contains("sango-2")) //Alpha Sapphire
             {
                 game = GameType.AS;
+                gen7 = false;
                 string log = args.info;
                 pname = ", pname:  sango-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -658,15 +650,71 @@ namespace ntrbase
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
+            else if (args.info.Contains("niji_loc")) // Moon
+            {
+                game = GameType.M;
+                gen7 = true;
+                string log = args.info;
+                pname = ", pname: niji_loc";
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
+                //moneyoff = 0x8C6A6AC;
+                //milesoff = 0x8C82BA0;
+                //bpoff = 0x8C6A6E0;
+                //boxOff = 0x8C861C8;
+                //daycare1Off = 0x8C7FF4C;
+                //daycare2Off = 0x8C8003C;
+                //itemsoff = 0x8C67564;
+                //medsoff = 0x8C67ECC;
+                //keysoff = 0x8C67BA4;
+                //tmsoff = 0x8C67D24;
+                //bersoff = 0x8C67FCC;
+                nameoff = 0x6845C4;
+                //tidoff = 0x8C79C3C;
+                //sidoff = 0x8C79C3E;
+                //hroff = 0x8CE2814;
+                //langoff = 0x8C79C69;
+                //tradeoffrg = 0x8500000;
+                //battleBoxOff = 0x8C6AC2C;
+                //partyOff = 0x8CE1CF8;
+                //eggoff = 0x8C80124;
+            }
             else //not a process list or game not found - ignore packet
             {
                 return;
             }
 
-            if (game != GameType.None)
+            if (game != GameType.None && gen7)
             {
+                fillGen7();
+                dumpAllData7();
+            }
+            if (game != GameType.None && !gen7)
+            {
+                fillGen6();
                 dumpAllData();
             }
+        }
+
+        private void fillGen6()
+        {
+            ComboboxFill(species, speciesList);
+            ComboboxFill(ability, abilityList);
+            ComboboxFill(filterAbility, abilityList);
+            ComboboxFill(heldItem, itemList);
+            ComboboxFill(move1, moveList);
+            ComboboxFill(move2, moveList);
+            ComboboxFill(move3, moveList);
+            ComboboxFill(move4, moveList);
+            ComboboxFill(relearnmove1, moveList);
+            ComboboxFill(relearnmove2, moveList);
+            ComboboxFill(relearnmove3, moveList);
+            ComboboxFill(relearnmove4, moveList);
+        }
+
+        private void fillGen7()
+        {
+
         }
 
         #region dump
@@ -682,6 +730,11 @@ namespace ntrbase
             dumpMiles();
             dumpLang();
             dumpItems();
+        }
+
+        public void dumpAllData7()
+        {
+            dumpName();
         }
 
         public void dumpItems()
@@ -2303,6 +2356,21 @@ namespace ntrbase
             else
             {
                 ctrl.SelectedIndex = i;
+            }
+        }
+
+        delegate void ComboboxFillDelegate(ComboBox ctrl, string[] val);
+
+        public static void ComboboxFill(ComboBox ctrl, string[] val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                ComboboxFillDelegate del = new ComboboxFillDelegate(ComboboxFill);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+            {
+                ctrl.Items.AddRange(val);
             }
         }
 
