@@ -340,7 +340,7 @@ namespace ntrbase
             {
                 foreach (Control c in enableWhenConnected7)
                 {
-                   SetEnabled(c, true);
+                    SetEnabled(c, true);
                 }
             }
             else
@@ -424,6 +424,16 @@ namespace ntrbase
             SetColor(hiddenPower, hiddenPowerColor[hp], true);
 
             return hp;
+        }
+
+        public int getTSV(decimal TID, decimal SID)
+        {
+            return ((int)TID ^ (int)SID) >> 4;
+        }
+
+        public int getGen7ID(decimal TID, decimal SID)
+        {
+            return (int)((uint)((int)TID | ((int)SID << 16)) % 1000000);
         }
 
         #endregion Functions
@@ -717,8 +727,8 @@ namespace ntrbase
                 //tmsoff = 0x8C67D24;
                 //bersoff = 0x8C67FCC;
                 nameoff = 0x330D6808;
-                //tidoff = 0x8C79C3C;
-                //sidoff = 0x8C79C3E;
+                tidoff = 0x330D67D0;
+                sidoff = 0x330D67D2;
                 //hroff = 0x8CE2814;
                 //langoff = 0x8C79C69;
                 //tradeoffrg = 0x8500000;
@@ -788,6 +798,8 @@ namespace ntrbase
         {
             dumpMoney();
             dumpName();
+            dumpTID();
+            dumpSID();
         }
 
         public void dumpItems()
@@ -974,8 +986,6 @@ namespace ntrbase
         public void handleBPData(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
-
-
             SetValue(bpNum, BitConverter.ToInt32(args.data, 0));
         }
 
@@ -2203,14 +2213,34 @@ namespace ntrbase
 
         private void TIDNum_ValueChanged(object sender, EventArgs e)
         {
-            ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
-            ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
+            int TSV = getTSV(TIDNum.Value, SIDNum.Value);
+            if (gen7)
+            {
+                int G7ID = getGen7ID(TIDNum.Value, SIDNum.Value);
+                ToolTipTSVtt.SetToolTip(TIDNum, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+                ToolTipTSVss.SetToolTip(SIDNum, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+            }
+            else
+            {
+                ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + TSV.ToString("D4"));
+                ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + TSV.ToString("D4"));
+            }
         }
 
         private void SIDNum_ValueChanged(object sender, EventArgs e)
         {
-            ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
-            ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
+            int TSV = getTSV(TIDNum.Value, SIDNum.Value);
+            if (gen7)
+            {
+                int G7ID = getGen7ID(TIDNum.Value, SIDNum.Value);
+                ToolTipTSVtt.SetToolTip(TIDNum, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+                ToolTipTSVss.SetToolTip(SIDNum, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+            }
+            else
+            {
+                ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + TSV.ToString("D4"));
+                ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + TSV.ToString("D4"));
+            }
         }
 
         private void onlyView_CheckedChanged(object sender, EventArgs e)
