@@ -186,6 +186,7 @@ namespace ntrbase
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
+        Control[] enableWhenConnected7 = new Control[] { };
 
         public DataGridViewComboBoxColumn itemItem;
         public DataGridViewColumn itemAmount;
@@ -205,6 +206,8 @@ namespace ntrbase
 
         public delegate void LogDelegate(string l);
         public LogDelegate delAddLog;
+
+        #region Main window
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -320,10 +323,8 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            foreach (Control c in enableWhenConnected)
-            {
-                c.Enabled = false;
-            }
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR };
+            disableControls();
             SetSelectedIndex(filterHPlogic, 0);
             SetSelectedIndex(filterATKlogic, 0);
             SetSelectedIndex(filterDEFlogic, 0);
@@ -331,6 +332,42 @@ namespace ntrbase
             SetSelectedIndex(filterSPDlogic, 0);
             SetSelectedIndex(filterSPElogic, 0);
             SetSelectedIndex(filterPerIVlogic, 0);
+        }
+
+        private void enableControls()
+        {
+            if (gen7)
+            {
+                foreach (Control c in enableWhenConnected7)
+                {
+                   SetEnabled(c, true);
+                }
+            }
+            else
+            {
+                foreach (Control c in enableWhenConnected)
+                {
+                    SetEnabled(c, true);
+                }
+            }
+        }
+
+        private void disableControls()
+        {
+            if (gen7)
+            {
+                foreach (Control c in enableWhenConnected7)
+                {
+                    SetEnabled(c, false);
+                }
+            }
+            else
+            {
+                foreach (Control c in enableWhenConnected)
+                {
+                    SetEnabled(c, false);
+                }
+            }
         }
 
         public void Addlog(string l)
@@ -375,19 +412,29 @@ namespace ntrbase
             game = GameType.None;
         }
 
+        #endregion window
+
+        #region Functions
+
+        public int getHiddenPower()
+        {
+            int hp = (15 * ((dumpedPKHeX.IV_HP & 1) + 2 * (dumpedPKHeX.IV_ATK & 1) + 4 * (dumpedPKHeX.IV_DEF & 1) + 8 * (dumpedPKHeX.IV_SPE & 1) + 16 * (dumpedPKHeX.IV_SPA & 1) + 32 * (dumpedPKHeX.IV_SPD & 1)) / 63);
+
+            SetText(hiddenPower, hiddenPowerString[hp]);
+            SetColor(hiddenPower, hiddenPowerColor[hp], true);
+
+            return hp;
+        }
+
+        #endregion Functions
+
+        #region Connection
         public void connectCheck(object sender, EventArgs e)
         {
             Program.scriptHelper.listprocess();
             buttonConnect.Text = "Connected";
             buttonConnect.Enabled = false;
             buttonDisconnect.Enabled = true;
-            if (!botWorking)
-            {
-                foreach (Control c in enableWhenConnected)
-                {
-                    c.Enabled = true;
-                }
-            }
             Settings.Default.IP = host.Text;
             Settings.Default.Save();
         }
@@ -683,7 +730,6 @@ namespace ntrbase
             {
                 return;
             }
-
             if (game != GameType.None && gen7)
             {
                 fillGen7();
@@ -693,6 +739,10 @@ namespace ntrbase
             {
                 fillGen6();
                 dumpAllData();
+            }
+            if (!botWorking)
+            {
+                enableControls();
             }
         }
 
@@ -716,6 +766,8 @@ namespace ntrbase
         {
 
         }
+
+        #endregion Connection
 
         #region dump
 
@@ -1010,40 +1062,7 @@ namespace ntrbase
 
         #endregion dump
 
-        #region oldcode
-        public void txtLog_TextChanged(object sender, EventArgs e)
-        {
-        }
-        /*
-        public void RMTemp()
-        {
-            DirectoryInfo di = new DirectoryInfo(@Application.StartupPath);
-            FileInfo[] files = di.GetFiles("*.temp")
-                                 .Where(p => p.Extension == ".temp").ToArray();
-            foreach (FileInfo file in files)
-                try
-                {
-                    file.Attributes = FileAttributes.Normal;
-                    File.Delete(file.FullName);
-                }
-                catch
-                {
-                }
-        }
-        */
-        #endregion oldcode
-
         #region controls
-
-        public int getHiddenPower()
-        {
-            int hp = (15 * ((dumpedPKHeX.IV_HP & 1) + 2 * (dumpedPKHeX.IV_ATK & 1) + 4 * (dumpedPKHeX.IV_DEF & 1) + 8 * (dumpedPKHeX.IV_SPE & 1) + 16 * (dumpedPKHeX.IV_SPA & 1) + 32 * (dumpedPKHeX.IV_SPD & 1)) / 63);
-
-            SetText(hiddenPower, hiddenPowerString[hp]);
-            SetColor(hiddenPower, hiddenPowerColor[hp], true);
-
-            return hp;
-        }
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
@@ -1064,10 +1083,7 @@ namespace ntrbase
             buttonConnect.Text = "Connect";
             buttonConnect.Enabled = true;
             buttonDisconnect.Enabled = false;
-            foreach (Control c in enableWhenConnected)
-            {
-                c.Enabled = false;
-            }
+            disableControls();
             itemsGridView.Rows.Clear();
             keysGridView.Rows.Clear();
             tmsGridView.Rows.Clear();
@@ -3244,10 +3260,7 @@ namespace ntrbase
                 botState = 0;
                 radioBoxes.Checked = true;
                 onlyView.Checked = true;
-                foreach (Control c in enableWhenConnected)
-                {
-                    c.Enabled = false;
-                }
+                disableControls();
                 stopBotButton.Enabled = true;
                 txtLog.Clear();
             }
@@ -3757,10 +3770,7 @@ namespace ntrbase
             }
 
             // Finish bot
-            foreach (Control c in enableWhenConnected)
-            {
-                c.Enabled = true;
-            }
+            enableControls();
             stopBotButton.Enabled = false;
             botWorking = false;
             MessageBox.Show("Finished", "Wonder Trade Bot");
@@ -3810,10 +3820,7 @@ namespace ntrbase
                 botState = (int)srbotstates.botstart;
                 onlyView.Checked = true;
                 radioOpponent.Checked = true;
-                foreach (Control c in enableWhenConnected)
-                {
-                    c.Enabled = false;
-                }
+                disableControls();
                 stopBotButton.Enabled = true;
                 txtLog.Clear();
             }
@@ -4550,10 +4557,7 @@ namespace ntrbase
             }
 
             // Finish bot
-            foreach (Control c in enableWhenConnected)
-            {
-                c.Enabled = true;
-            }
+            enableControls();
             stopBotButton.Enabled = false;
             botWorking = false;
             MessageBox.Show("Finished, number of resets: " + resetNo, "Soft-reset bot");
@@ -4589,10 +4593,7 @@ namespace ntrbase
                 onlyView.Checked = true;
                 radioBoxes.Checked = true;
                 stopBotButton.Enabled = true;
-                foreach (Control c in enableWhenConnected)
-                {
-                    c.Enabled = false;
-                }
+                disableControls();
                 botStop = false;
                 botWorking = true;
                 botState = (int)breedbotstates.botstart;
@@ -5778,10 +5779,7 @@ namespace ntrbase
             }
 
             // Finish bot
-            foreach (Control c in enableWhenConnected)
-            {
-                c.Enabled = true;
-            }
+            enableControls();
             stopBotButton.Enabled = false;
             botWorking = false;
             MessageBox.Show(finishmessage, "Breeding bot");
