@@ -1580,9 +1580,9 @@ namespace ntrbase
 
             bool isEncrypted = false;
 
-            if (extension == ".pk6" || extension == ".pkx")
+            if (extension == ".pk6" || extension == ".pk7" || extension == ".pkx")
                 isEncrypted = false;
-            else if (extension == ".ek6" || extension == ".ekx")
+            else if (extension == ".ek6" || extension == ".ek7" || extension == ".ekx")
                 isEncrypted = true;
             else
             {
@@ -1728,7 +1728,14 @@ namespace ntrbase
         {
             OpenFileDialog selectWriteDialog = new OpenFileDialog();
             selectWriteDialog.Title = "Select an EKX/PKX file";
-            selectWriteDialog.Filter = "EKX/PKX files|*.ek6;*.ekx;*.pk6;*.pkx";
+            if (gen7)
+            {
+                selectWriteDialog.Filter = "EKX/PKX files|*.ek7;*.ekx;*.pk7;*.pkx";
+            }
+            else
+            {
+                selectWriteDialog.Filter = "EKX/PKX files|*.ek6;*.ekx;*.pk6;*.pkx";
+            }
             string path = @Application.StartupPath + "\\Pokemon";
             selectWriteDialog.InitialDirectory = path;
             if (selectWriteDialog.ShowDialog() == DialogResult.OK)
@@ -1830,7 +1837,15 @@ namespace ntrbase
                     validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
                     if (validator.Species == 0)
                         continue;
-                    string fileName = folderPath + "backup.pk6";
+                    string fileName;
+                    if (gen7)
+                    {
+                        fileName = folderPath + "backup.pk7";
+                    }
+                    else
+                    {
+                        fileName = folderPath + "backup.pk6";
+                    }
                     writePokemonToFile(validator.Data, fileName);
                 }
             }

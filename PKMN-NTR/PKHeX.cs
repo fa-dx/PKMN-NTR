@@ -6,12 +6,12 @@
 using System;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 
 namespace ntrbase
 {
     public class PKHeX
     {
+        public bool Gen7 => Version >= 30 && Version <= 31;
         public bool Gen6 => Version >= 24 && Version <= 29;
         public bool Gen5 => Version >= 20 && Version <= 23;
         public bool Gen4 => Version >= 7 && Version <= 12 && Version != 9;
@@ -21,6 +21,7 @@ namespace ntrbase
         {
             get
             {
+                if (Gen7) return 7;
                 if (Gen6) return 6;
                 if (Gen5) return 5;
                 if (Gen4) return 4;
@@ -530,7 +531,7 @@ namespace ntrbase
         {
             return (uint)rand.Next(1 << 30) << 2 | (uint)rand.Next(1 << 2);
         }
-        
+
         public static uint getRandomPID(int species, int cg, int origin, int nature, int form, uint OLDPID)
         {
             if (origin >= 24)
@@ -564,7 +565,7 @@ namespace ntrbase
                     if (pidLetter != form)
                         continue;
                 }
-                
+
                 return pid;
             }
         }
@@ -592,7 +593,8 @@ namespace ntrbase
 
         public void setShinyPID()
         {
-            do { 
+            do
+            {
                 PID = getRandomPID(Species, Gender, Version, Nature, AltForm, PID);
             }
             while (!isShiny);
