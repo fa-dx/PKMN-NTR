@@ -2421,11 +2421,6 @@
             // writeCopiesNo
             // 
             this.writeCopiesNo.Location = new System.Drawing.Point(234, 5);
-            this.writeCopiesNo.Maximum = new decimal(new int[] {
-            930,
-            0,
-            0,
-            0});
             this.writeCopiesNo.Minimum = new decimal(new int[] {
             1,
             0,
