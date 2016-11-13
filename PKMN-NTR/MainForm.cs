@@ -66,6 +66,8 @@ namespace ntrbase
         public uint langoff;
         public uint moneyoff;
         public uint milesoff;
+        public uint currentFCoff;
+        public uint totalFCoff;
         public uint bpoff;
         public uint eggoff;
         public uint mapidoff;
@@ -203,6 +205,7 @@ namespace ntrbase
         public System.Windows.Forms.ToolTip ToolTipTSVt = new System.Windows.Forms.ToolTip();
         public System.Windows.Forms.ToolTip ToolTipTSVs = new System.Windows.Forms.ToolTip();
         public System.Windows.Forms.ToolTip ToolTipPSV = new System.Windows.Forms.ToolTip();
+        public System.Windows.Forms.ToolTip ToolTipFC = new System.Windows.Forms.ToolTip();
 
         public delegate void LogDelegate(string l);
         public LogDelegate delAddLog;
@@ -449,9 +452,7 @@ namespace ntrbase
             Settings.Default.Save();
         }
 
-        //This functions handles additional information events from NTR netcode.
-        //We are only interested in them if they are a process list, containing
-        //our game's PID and game type.
+        //This functions handles additional information events from NTR netcode. We are only interested in them if they are a process list, containing our game's PID and game type.
         public void getGame(object sender, EventArgs e)
         {
             InfoReadyEventArgs args = (InfoReadyEventArgs)e;
@@ -716,7 +717,8 @@ namespace ntrbase
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
                 moneyoff = 0x330D8FC0;
-                //milesoff = 0x8C82BA0;
+                currentFCoff = 0x33124D58;
+                totalFCoff = 0x33124D5C;
                 //bpoff = 0x8C6A6E0;
                 //boxOff = 0x8C861C8;
                 //daycare1Off = 0x8C7FF4C;
@@ -770,11 +772,12 @@ namespace ntrbase
             ComboboxFill(relearnmove2, moveList);
             ComboboxFill(relearnmove3, moveList);
             ComboboxFill(relearnmove4, moveList);
+            SetLabel(label3, "Poké Miles:");
         }
 
         private void fillGen7()
         {
-
+            SetLabel(label3, "Current FC:");
         }
 
         #endregion Connection
@@ -800,6 +803,7 @@ namespace ntrbase
             dumpName();
             dumpTID();
             dumpSID();
+            dumpFC();
         }
 
         public void dumpItems()
@@ -977,6 +981,22 @@ namespace ntrbase
             SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
         }
 
+        public void dumpFC()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
+            waitingForData.Add(Program.scriptHelper.data(currentFCoff, 0x04, pid), myArgs);
+            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleFCData, null);
+            waitingForData.Add(Program.scriptHelper.data(totalFCoff, 0x04, pid), myArgs2);
+        }
+
+        public void handleFCData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetTooltip(ToolTipFC, milesNum, "Obtained FC: " + BitConverter.ToInt32(args.data, 0).ToString());
+            //ToolTipFC.SetToolTip(milesNum, "Obtained FC: " + BitConverter.ToInt32(args.data, 0).ToString());
+            //SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
+        }
+
         public void dumpBP()
         {
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleBPData, null);
@@ -1144,8 +1164,16 @@ namespace ntrbase
 
         private void pokeMiles_Click(object sender, EventArgs e)
         {
-            byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
-            Program.scriptHelper.write(milesoff, milesbyte, pid);
+            if (gen7)
+            { // Current Festival Coins
+                byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
+                Program.scriptHelper.write(currentFCoff, FCbyte, pid);
+            }
+            else
+            { // Poké Miles
+                byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
+                Program.scriptHelper.write(milesoff, milesbyte, pid);
+            }
         }
 
         private void pokeBP_Click(object sender, EventArgs e)
@@ -2343,6 +2371,51 @@ namespace ntrbase
             else
             {
                 ctrl.Text = text;
+            }
+        }
+
+        delegate void SetLabelDelegate(Label ctrl, string text);
+
+        public static void SetLabel(Label ctrl, string text)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetLabelDelegate del = new SetLabelDelegate(SetLabel);
+                ctrl.Invoke(del, ctrl, text);
+            }
+            else
+            {
+                ctrl.Text = text;
+            }
+        }
+
+        delegate void SetTooltipDelegate(ToolTip source, Control ctrl, string text);
+
+        public static void SetTooltip(ToolTip source, Control ctrl, string text)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetTooltipDelegate del = new SetTooltipDelegate(SetTooltip);
+                ctrl.Invoke(del, source, ctrl, text);
+            }
+            else
+            {
+                source.SetToolTip(ctrl, text);
+            }
+        }
+
+        delegate void RemoveTooltipDelegate(ToolTip source, Control ctrl);
+
+        public static void RemoveTooltip(ToolTip source, Control ctrl)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                RemoveTooltipDelegate del = new RemoveTooltipDelegate(RemoveTooltip);
+                ctrl.Invoke(del, source, ctrl);
+            }
+            else
+            {
+                source.RemoveAll();
             }
         }
 
