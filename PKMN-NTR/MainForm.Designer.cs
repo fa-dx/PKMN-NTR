@@ -137,7 +137,6 @@
             this.deleteSlot = new System.Windows.Forms.NumericUpDown();
             this.dTIDNum = new System.Windows.Forms.NumericUpDown();
             this.dSIDNum = new System.Windows.Forms.NumericUpDown();
-            this.dPID = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
@@ -366,6 +365,7 @@
             this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
+            this.dPID = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -1868,14 +1868,6 @@
             this.dSIDNum.Size = new System.Drawing.Size(72, 20);
             this.dSIDNum.TabIndex = 2;
             this.dSIDNum.ValueChanged += new System.EventHandler(this.dSIDNum_ValueChanged);
-            // 
-            // dPID
-            // 
-            this.dPID.Location = new System.Drawing.Point(191, 11);
-            this.dPID.Name = "dPID";
-            this.dPID.Size = new System.Drawing.Size(92, 20);
-            this.dPID.TabIndex = 6;
-            this.dPID.TextChanged += new System.EventHandler(this.dPID_TextChanged);
             // 
             // label45
             // 
@@ -4494,6 +4486,14 @@
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
             // 
+            // dPID
+            // 
+            this.dPID.Location = new System.Drawing.Point(191, 11);
+            this.dPID.Name = "dPID";
+            this.dPID.Size = new System.Drawing.Size(92, 20);
+            this.dPID.TabIndex = 6;
+            this.dPID.TextChanged += new System.EventHandler(this.dPID_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4748,7 +4748,6 @@
         private System.Windows.Forms.TextBox otName;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Button setShiny;
-        public System.Windows.Forms.TextBox dPID;
         private System.Windows.Forms.CheckBox onlyView;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.NumericUpDown friendship;
@@ -4973,6 +4972,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
+        public System.Windows.Forms.TextBox dPID;
     }
 }
 

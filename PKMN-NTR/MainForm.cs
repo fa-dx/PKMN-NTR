@@ -200,12 +200,10 @@ namespace ntrbase
         public DataGridViewColumn medAmount;
         public DataGridViewComboBoxColumn berItem;
         public DataGridViewColumn berAmount;
-        public System.Windows.Forms.ToolTip ToolTipTSVtt = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipTSVss = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipTSVt = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipTSVs = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipPSV = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipFC = new System.Windows.Forms.ToolTip();
+        public ToolTip ToolTipTSVtrainer = new ToolTip();
+        public ToolTip ToolTipTSVpoke = new ToolTip();
+        public ToolTip ToolTipPSV = new ToolTip();
+        public ToolTip ToolTipFC = new ToolTip();
 
         public delegate void LogDelegate(string l);
         public LogDelegate delAddLog;
@@ -437,6 +435,11 @@ namespace ntrbase
         public int getGen7ID(decimal TID, decimal SID)
         {
             return (int)((uint)((int)TID | ((int)SID << 16)) % 1000000);
+        }
+
+        public uint getPSV(uint PID)
+        {
+            return ((PID >> 16 ^ PID & 0xFFFF) >> 4);
         }
 
         #endregion Functions
@@ -993,8 +996,6 @@ namespace ntrbase
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             SetTooltip(ToolTipFC, milesNum, "Obtained FC: " + BitConverter.ToInt32(args.data, 0).ToString());
-            //ToolTipFC.SetToolTip(milesNum, "Obtained FC: " + BitConverter.ToInt32(args.data, 0).ToString());
-            //SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
         }
 
         public void dumpBP()
@@ -1414,15 +1415,26 @@ namespace ntrbase
                 SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
                 SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
 
-                //TODO: make it thread-safe!
-                //ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((dumpedPKHeX.TID ^ dumpedPKHeX.SID) >> 4).ToString());
-                //ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((dumpedPKHeX.TID ^ dumpedPKHeX.SID) >> 4).ToString());
-                //ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((dumpedPKHeX.PID >> 16 ^ dumpedPKHeX.PID & 0xFFFF) >> 4)).ToString());
-
                 SetEnabled(setShiny, !dumpedPKHeX.isShiny); //If it's already shiny, the box will be disabled
                 SetText(setShiny, dumpedPKHeX.isShiny ? "★" : "☆");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void setTSVToolTip(NumericUpDown TID, NumericUpDown SID)
+        {
+            int TSV = getTSV(TID.Value, SID.Value);
+            if (gen7)
+            {
+                int G7ID = getGen7ID(TID.Value, SIDNum.Value);
+                SetTooltip(ToolTipTSVpoke, TID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+                SetTooltip(ToolTipTSVpoke, SID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+            }
+            else
+            {
+                SetTooltip(ToolTipTSVpoke, TID, "TSV: " + TSV.ToString("D4"));
+                SetTooltip(ToolTipTSVpoke, SID, "TSV: " + TSV.ToString("D4"));
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -2203,24 +2215,17 @@ namespace ntrbase
 
         private void dTIDNum_ValueChanged(object sender, EventArgs e)
         {
-            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + (((int)dTIDNum.Value ^ (int)dSIDNum.Value) >> 4).ToString());
-            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + (((int)dTIDNum.Value ^ (int)dSIDNum.Value) >> 4).ToString());
-            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((dumpedPKHeX.PID >> 16 ^ dumpedPKHeX.PID & 0xFFFF) >> 4)).ToString());
+            setTSVToolTip(dTIDNum, dSIDNum);
         }
 
-        //TODO: are you sure it's not supposed to be the same as above?
         private void dSIDNum_ValueChanged(object sender, EventArgs e)
         {
-            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((dumpedPKHeX.TID ^ dumpedPKHeX.SID) >> 4).ToString());
-            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((dumpedPKHeX.TID ^ dumpedPKHeX.SID) >> 4).ToString());
-            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((dumpedPKHeX.PID >> 16 ^ dumpedPKHeX.PID & 0xFFFF) >> 4)).ToString());
+            setTSVToolTip(dTIDNum, dSIDNum);
         }
 
         private void dPID_TextChanged(object sender, EventArgs e)
         {
-            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((dumpedPKHeX.TID ^ dumpedPKHeX.SID) >> 4).ToString());
-            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((dumpedPKHeX.TID ^ dumpedPKHeX.SID) >> 4).ToString());
-            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((dumpedPKHeX.PID >> 16 ^ dumpedPKHeX.PID & 0xFFFF) >> 4)).ToString());
+            SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(dumpedPKHeX.PID).ToString("D4"));
         }
 
         private void setShiny_Click(object sender, EventArgs e)
@@ -2241,34 +2246,12 @@ namespace ntrbase
 
         private void TIDNum_ValueChanged(object sender, EventArgs e)
         {
-            int TSV = getTSV(TIDNum.Value, SIDNum.Value);
-            if (gen7)
-            {
-                int G7ID = getGen7ID(TIDNum.Value, SIDNum.Value);
-                ToolTipTSVtt.SetToolTip(TIDNum, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
-                ToolTipTSVss.SetToolTip(SIDNum, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
-            }
-            else
-            {
-                ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + TSV.ToString("D4"));
-                ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + TSV.ToString("D4"));
-            }
+            setTSVToolTip(TIDNum, SIDNum);
         }
 
         private void SIDNum_ValueChanged(object sender, EventArgs e)
         {
-            int TSV = getTSV(TIDNum.Value, SIDNum.Value);
-            if (gen7)
-            {
-                int G7ID = getGen7ID(TIDNum.Value, SIDNum.Value);
-                ToolTipTSVtt.SetToolTip(TIDNum, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
-                ToolTipTSVss.SetToolTip(SIDNum, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
-            }
-            else
-            {
-                ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + TSV.ToString("D4"));
-                ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + TSV.ToString("D4"));
-            }
+            setTSVToolTip(TIDNum, SIDNum);
         }
 
         private void onlyView_CheckedChanged(object sender, EventArgs e)
