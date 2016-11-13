@@ -226,6 +226,7 @@
             this.label71 = new System.Windows.Forms.Label();
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
+            this.ReloadFields = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControls = new System.Windows.Forms.TabPage();
             this.manualSR = new System.Windows.Forms.Button();
@@ -366,7 +367,6 @@
             this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
-            this.ReloadFields = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -2925,6 +2925,16 @@
             this.tabEditTrainer.TabIndex = 0;
             this.tabEditTrainer.Text = "Edit Save";
             // 
+            // ReloadFields
+            // 
+            this.ReloadFields.Location = new System.Drawing.Point(336, 321);
+            this.ReloadFields.Name = "ReloadFields";
+            this.ReloadFields.Size = new System.Drawing.Size(215, 23);
+            this.ReloadFields.TabIndex = 3;
+            this.ReloadFields.Text = "Reload Fields";
+            this.ReloadFields.UseVisualStyleBackColor = true;
+            this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
+            // 
             // groupBox5
             // 
             this.groupBox5.AutoSize = true;
@@ -4487,16 +4497,6 @@
             this.tabNTRlog.Size = new System.Drawing.Size(558, 369);
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
-            // 
-            // ReloadFields
-            // 
-            this.ReloadFields.Location = new System.Drawing.Point(336, 321);
-            this.ReloadFields.Name = "ReloadFields";
-            this.ReloadFields.Size = new System.Drawing.Size(215, 23);
-            this.ReloadFields.TabIndex = 27;
-            this.ReloadFields.Text = "Reload Fields";
-            this.ReloadFields.UseVisualStyleBackColor = true;
-            this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
             // 
             // MainForm
             // 
