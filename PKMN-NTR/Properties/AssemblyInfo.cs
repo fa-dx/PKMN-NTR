@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("PKMN NTR")]
-[assembly: AssemblyDescription("A Pokémon Gen 6 real time memory editing/reading program with bots.")]
+[assembly: AssemblyDescription("A Pokémon real time memory editing/reading program with bots for Nintendo 3DS.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PKMN NTR")]
@@ -14,5 +14,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("cd7cfe42-3900-4148-aa42-6a04af45b783")]
 
-[assembly: AssemblyVersion("1.99.0.1")]
-[assembly: AssemblyFileVersion("1.99.0.1")]
+[assembly: AssemblyVersion("1.98.0.1")]
+[assembly: AssemblyFileVersion("1.98.0.1")]

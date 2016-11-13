@@ -153,6 +153,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.ExpPoints = new System.Windows.Forms.NumericUpDown();
+            this.dPID = new System.Windows.Forms.TextBox();
             this.Stats = new System.Windows.Forms.TabPage();
             this.Moves = new System.Windows.Forms.TabPage();
             this.relearnmove1 = new System.Windows.Forms.ComboBox();
@@ -365,7 +366,7 @@
             this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
-            this.dPID = new System.Windows.Forms.TextBox();
+            this.ReloadFields = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -1379,14 +1380,6 @@
             // Lang
             // 
             this.Lang.FormattingEnabled = true;
-            this.Lang.Items.AddRange(new object[] {
-            "JPN",
-            "ENG",
-            "FRE",
-            "ITA",
-            "GER",
-            "SPA",
-            "KOR"});
             this.Lang.Location = new System.Drawing.Point(81, 195);
             this.Lang.Name = "Lang";
             this.Lang.Size = new System.Drawing.Size(80, 21);
@@ -2054,6 +2047,14 @@
             this.ExpPoints.Name = "ExpPoints";
             this.ExpPoints.Size = new System.Drawing.Size(82, 20);
             this.ExpPoints.TabIndex = 11;
+            // 
+            // dPID
+            // 
+            this.dPID.Location = new System.Drawing.Point(191, 11);
+            this.dPID.Name = "dPID";
+            this.dPID.Size = new System.Drawing.Size(92, 20);
+            this.dPID.TabIndex = 6;
+            this.dPID.TextChanged += new System.EventHandler(this.dPID_TextChanged);
             // 
             // Stats
             // 
@@ -2913,6 +2914,7 @@
             // tabEditTrainer
             // 
             this.tabEditTrainer.BackColor = System.Drawing.SystemColors.Control;
+            this.tabEditTrainer.Controls.Add(this.ReloadFields);
             this.tabEditTrainer.Controls.Add(this.groupBox5);
             this.tabEditTrainer.Controls.Add(this.cloneWriteTabs);
             this.tabEditTrainer.Controls.Add(this.groupBox3);
@@ -4486,13 +4488,15 @@
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
             // 
-            // dPID
+            // ReloadFields
             // 
-            this.dPID.Location = new System.Drawing.Point(191, 11);
-            this.dPID.Name = "dPID";
-            this.dPID.Size = new System.Drawing.Size(92, 20);
-            this.dPID.TabIndex = 6;
-            this.dPID.TextChanged += new System.EventHandler(this.dPID_TextChanged);
+            this.ReloadFields.Location = new System.Drawing.Point(336, 321);
+            this.ReloadFields.Name = "ReloadFields";
+            this.ReloadFields.Size = new System.Drawing.Size(215, 23);
+            this.ReloadFields.TabIndex = 27;
+            this.ReloadFields.Text = "Reload Fields";
+            this.ReloadFields.UseVisualStyleBackColor = true;
+            this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
             // 
             // MainForm
             // 
@@ -4973,6 +4977,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
         public System.Windows.Forms.TextBox dPID;
+        private System.Windows.Forms.Button ReloadFields;
     }
 }
 
