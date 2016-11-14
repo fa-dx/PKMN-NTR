@@ -89,6 +89,8 @@ namespace ntrbase
         public uint boxOff;
         public uint daycare1Off;
         public uint daycare2Off;
+        public uint daycare3Off; // Battle Resort Daycare
+        public uint daycare4Off; // Battle Resort Daycare
         public uint battleBoxOff;
         //Offsets for HID
         public uint buttonsOff = 0x10df20;
@@ -318,7 +320,7 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR };
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
             SetSelectedIndex(filterATKlogic, 0);
@@ -592,8 +594,10 @@ namespace ntrbase
                 milesoff = 0x8C8B36C;
                 bpoff = 0x8C71DE8;
                 boxOff = 0x8C9E134;
-                daycare1Off = 0x8C88370;
-                daycare2Off = 0x8C88460;
+                daycare1Off = 0x8C88180;
+                daycare2Off = 0x8C88270;
+                daycare3Off = 0x8C88370;
+                daycare4Off = 0x8C88460;
                 itemsoff = 0x8C6EC70;
                 medsoff = 0x8C6F5E0;
                 keysoff = 0x8C6F2B0;
@@ -655,8 +659,10 @@ namespace ntrbase
                 milesoff = 0x8C8B36C;
                 bpoff = 0x8C71DE8;
                 boxOff = 0x8C9E134;
-                daycare1Off = 0x8C88370;
-                daycare2Off = 0x8C88460;
+                daycare1Off = 0x8C88180;
+                daycare2Off = 0x8C88270;
+                daycare3Off = 0x8C88370;
+                daycare4Off = 0x8C88460;
                 itemsoff = 0x8C6EC70;
                 medsoff = 0x8C6F5E0;
                 keysoff = 0x8C6F2B0;
@@ -733,7 +739,7 @@ namespace ntrbase
                 langoff = 0x330D6805;
                 //tradeoffrg = 0x8500000;
                 //battleBoxOff = 0x8C6AC2C;
-                //partyOff = 0x8CE1CF8;
+                partyOff = 0x34195E10;
                 //eggoff = 0x8C80124;
             }
             else //not a process list or game not found - ignore packet
@@ -1159,7 +1165,7 @@ namespace ntrbase
 
         private void ReloadFields_Click(object sender, EventArgs e)
         {
-            if(gen7)
+            if (gen7)
             {
                 dumpAllData7();
             }
@@ -1248,7 +1254,7 @@ namespace ntrbase
             {
                 if (radioBattleBox.Checked == true)
                 {
-                    dumpOff = battleBoxOff + ((Decimal.ToUInt32(boxDump.Value) - 1) * POKEBYTES);
+                    dumpOff = battleBoxOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * POKEBYTES);
                 }
                 else if (radioBoxes.Checked == true)
                 {
@@ -1257,11 +1263,29 @@ namespace ntrbase
                 }
                 else if (radioDaycare.Checked == true)
                 {
-                    dumpOff = daycare1Off;
+                    switch ((int)slotDump.Value)
+                    {
+                        case 1:
+                            dumpOff = daycare1Off;
+                            break;
+                        case 2:
+                            dumpOff = daycare2Off;
+                            break;
+                        case 3:
+                            dumpOff = daycare3Off;
+                            break;
+                        case 4:
+                            dumpOff = daycare4Off;
+                            break;
+                        default:
+                            dumpOff = daycare1Off;
+                            break;
+                    }
+
                 }
                 else if (radioParty.Checked == true)
                 {
-                    dumpOff = partyOff + (Decimal.ToUInt32(boxDump.Value) - 1) * 484;
+                    dumpOff = partyOff + (Decimal.ToUInt32(slotDump.Value) - 1) * 484;
                 }
 
                 if (radioParty.Checked == true)
@@ -1281,17 +1305,8 @@ namespace ntrbase
 
         private void dumpBoxes_Click(object sender, EventArgs e)
         {
-            if (radioBoxes.Checked == true)
-            {
-                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[BOXES * BOXSIZE * POKEBYTES], handleAllBoxesData, null);
-                waitingForData.Add(Program.scriptHelper.data(boxOff, BOXES * BOXSIZE * POKEBYTES, pid), myArgs);
-            }
-            else if (radioDaycare.Checked == true)
-            {
-                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePkmData, null);
-                uint mySeq = Program.scriptHelper.data(daycare2Off, POKEBYTES, pid);
-                waitingForData.Add(mySeq, myArgs);
-            }
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[BOXES * BOXSIZE * POKEBYTES], handleAllBoxesData, null);
+            waitingForData.Add(Program.scriptHelper.data(boxOff, BOXES * BOXSIZE * POKEBYTES, pid), myArgs);
         }
 
         public void handleAllBoxesData(object args_obj)
@@ -1486,92 +1501,61 @@ namespace ntrbase
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            label7.Visible = false;
-            label8.Visible = false;
-            label9.Visible = true;
-            boxDump.Visible = false;
-            slotDump.Visible = false;
-            nameek6.Visible = true;
-            dumpBoxes.Visible = false;
-            dumpPokemon.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 39);
-            label9.Location = new System.Drawing.Point(6, 20);
-            dumpPokemon.Size = new System.Drawing.Size(197, 23);
-            nameek6.Size = new System.Drawing.Size(197, 23);
-            dumpPokemon.Text = "Dump";
-            dumpBoxes.Enabled = true;
+            boxDump.Minimum = 1;
+            boxDump.Maximum = 1;
+            slotDump.Minimum = 1;
+            slotDump.Maximum = 1;
+            boxDump.Enabled = false;
+            slotDump.Enabled = false;
+            dumpBoxes.Enabled = false;
             nameek6.Enabled = true;
-            onlyView.Visible = false;
+            onlyView.Enabled = false;
         }
 
         private void radioBoxes_CheckedChanged(object sender, EventArgs e)
         {
             boxDump.Minimum = 1;
             boxDump.Maximum = BOXES;
-            label8.Text = "Box:";
-            label7.Text = "Slot:";
-            label9.Text = "Filename:";
-            boxDump.Visible = true;
-            slotDump.Visible = true;
-            dumpBoxes.Visible = true;
-            nameek6.Visible = true;
-            label7.Visible = true;
-            label8.Visible = true;
-            label9.Visible = true;
-            label9.Location = new System.Drawing.Point(97, 20);
-            nameek6.Location = new System.Drawing.Point(100, 39);
-            nameek6.Size = new System.Drawing.Size(103, 20);
-            dumpPokemon.Size = new System.Drawing.Size(86, 23);
-            dumpBoxes.Size = new System.Drawing.Size(105, 23);
-            dumpBoxes.Location = new System.Drawing.Point(98, 61);
-            dumpPokemon.Location = new System.Drawing.Point(6, 61);
-            dumpPokemon.Text = "Dump";
-            dumpBoxes.Text = "Dump All Boxes";
-            onlyView.Visible = true;
-            onlyView.Checked = false;
+            slotDump.Minimum = 1;
+            slotDump.Maximum = 30;
+            boxDump.Enabled = true;
+            slotDump.Enabled = true;
+            dumpBoxes.Enabled = true;
+            nameek6.Enabled = true;
+            onlyView.Enabled = true;
         }
 
         private void radioDaycare_CheckedChanged(object sender, EventArgs e)
         {
-            label7.Visible = false;
-            label8.Visible = false;
-            label9.Visible = true;
-            boxDump.Visible = false;
-            slotDump.Visible = false;
-            nameek6.Visible = true;
-            dumpBoxes.Visible = true;
-            dumpPokemon.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 39);
-            label9.Location = new System.Drawing.Point(6, 20);
-            dumpPokemon.Size = new System.Drawing.Size(95, 23);
-            dumpBoxes.Size = new System.Drawing.Size(95, 23);
-            dumpBoxes.Location = new System.Drawing.Point(108, 61);
-            nameek6.Size = new System.Drawing.Size(197, 23);
-            dumpPokemon.Text = "Dump Slot 1";
-            dumpBoxes.Text = "Dump Slot 2";
-            dumpBoxes.Enabled = true;
+            boxDump.Minimum = 1;
+            boxDump.Maximum = 2;
+            slotDump.Minimum = 1;
+            if (game == GameType.OR || game == GameType.AS)
+            {
+                slotDump.Maximum = 4;
+            }
+            else
+            {
+                slotDump.Maximum = 2;
+            }
+            boxDump.Enabled = false;
+            slotDump.Enabled = true;
+            dumpBoxes.Enabled = false;
             nameek6.Enabled = true;
-            onlyView.Visible = false;
+            onlyView.Enabled = true;
         }
 
         private void radioOpponent_CheckedChanged(object sender, EventArgs e)
         {
-            label7.Visible = false;
-            label8.Visible = false;
-            label9.Visible = true;
-            boxDump.Visible = false;
-            slotDump.Visible = false;
-            nameek6.Visible = true;
-            dumpBoxes.Visible = false;
-            dumpPokemon.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 39);
-            label9.Location = new System.Drawing.Point(6, 20);
-            dumpPokemon.Size = new System.Drawing.Size(197, 23);
-            nameek6.Size = new System.Drawing.Size(197, 23);
-            dumpPokemon.Text = "Dump";
-            dumpBoxes.Enabled = true;
+            boxDump.Minimum = 1;
+            boxDump.Maximum = 1;
+            slotDump.Minimum = 1;
+            slotDump.Maximum = 1;
+            boxDump.Enabled = false;
+            slotDump.Enabled = false;
+            dumpBoxes.Enabled = false;
             nameek6.Enabled = true;
-            onlyView.Visible = false;
+            onlyView.Enabled = false;
         }
 
         void writeTab_DragEnter(object sender, DragEventArgs e)
@@ -2187,7 +2171,7 @@ namespace ntrbase
 
                         if (radioBoxes.Checked == true)
                         {
-                            uint ssd = (Decimal.ToUInt32(boxDump.Value) * 30 - 30) + Decimal.ToUInt32(slotDump.Value) - 1;
+                            uint ssd = (Decimal.ToUInt32(slotDump.Value) * 30 - 30) + Decimal.ToUInt32(slotDump.Value) - 1;
                             uint ssdOff = boxOff + (ssd * 232);
                             Program.scriptHelper.write(ssdOff, pkmEdited, pid);
                             getHiddenPower();
@@ -2195,14 +2179,14 @@ namespace ntrbase
 
                         if (radioBattleBox.Checked == true)
                         {
-                            uint bbOff = battleBoxOff + ((Decimal.ToUInt32(boxDump.Value) - 1) * 232);
+                            uint bbOff = battleBoxOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * 232);
                             Program.scriptHelper.write(bbOff, pkmEdited, pid);
                             getHiddenPower();
                         }
 
                         if (radioParty.Checked == true)
                         {
-                            uint pOff = partyOff + ((Decimal.ToUInt32(boxDump.Value) - 1) * 484);
+                            uint pOff = partyOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * 484);
                             string pfOff = pOff.ToString("X");
                             string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
                             Program.scriptHelper.write(pOff, pkmEdited, pid);
@@ -2228,59 +2212,24 @@ namespace ntrbase
             }
         }
 
-        private void radioParty_CheckedChanged(object sender, EventArgs e)
-        {
-            boxDump.Minimum = 1;
-            boxDump.Maximum = 6;
-            label8.Text = "Slot:";
-            label9.Text = "Filename:";
-            boxDump.Visible = true;
-            slotDump.Visible = true;
-            dumpBoxes.Visible = true;
-            nameek6.Visible = true;
-            slotDump.Visible = false;
-            label7.Visible = false;
-            label8.Visible = true;
-            label9.Visible = true;
-            label9.Location = new System.Drawing.Point(50, 20);
-            nameek6.Location = new System.Drawing.Point(54, 39);
-            nameek6.Size = new System.Drawing.Size(149, 20);
-            dumpPokemon.Size = new System.Drawing.Size(86, 23);
-            dumpBoxes.Size = new System.Drawing.Size(105, 23);
-            dumpBoxes.Location = new System.Drawing.Point(98, 61);
-            dumpPokemon.Location = new System.Drawing.Point(6, 61);
-            dumpPokemon.Text = "Dump";
-            dumpBoxes.Text = "Dump All Boxes";
-        }
-
         private void radioParty_CheckedChanged_1(object sender, EventArgs e)
         {
             if (radioParty.Checked && !botWorking && !enablepartywrite)
             {
-                MessageBox.Show("Important:\r\n\r\nThis feature is experimental, the slots that is selected in this application might not be the same slots that are shown in your party. Due the unkonown mechanics of this, the write feature has been disabled.\r\n\r\nIf you wish to edit a pokémon in your party, deposit it in a box.\r\n\r\nCurrently, this only works in XY", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Important:\r\n\r\nThis feature is experimental, the slots that is selected in this application might not be the same slots that are shown in your party. Due the unkonown mechanics of this, the write feature has been disabled.\r\n\r\nIf you wish to edit a pokémon in your party, deposit it the PC.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 button1.Enabled = false;
+                slotDump.Minimum = 1;
+                slotDump.Maximum = 6;
+                slotDump.Enabled = true;
+                boxDump.Enabled = false;
+                dumpBoxes.Enabled = false;
+                nameek6.Enabled = true;
+                dumpPokemon.Text = "Dump";
             }
             else
             {
                 button1.Enabled = true;
             }
-            boxDump.Minimum = 1;
-            boxDump.Maximum = 6;
-            label8.Text = "Slot:";
-            label9.Text = "Filename:";
-            boxDump.Visible = true;
-            slotDump.Visible = false;
-            dumpBoxes.Visible = false;
-            nameek6.Visible = true;
-            label7.Visible = false;
-            label8.Visible = true;
-            label9.Visible = true;
-            label9.Location = new System.Drawing.Point(50, 20);
-            nameek6.Location = new System.Drawing.Point(53, 39);
-            nameek6.Size = new System.Drawing.Size(150, 20);
-            dumpPokemon.Size = new System.Drawing.Size(197, 23);
-            dumpPokemon.Location = new System.Drawing.Point(6, 61);
-            dumpPokemon.Text = "Dump";
         }
 
         private void dTIDNum_ValueChanged(object sender, EventArgs e)
@@ -2370,22 +2319,14 @@ namespace ntrbase
         private void radioBattleBox_CheckedChanged(object sender, EventArgs e)
         {
             boxDump.Minimum = 1;
-            boxDump.Maximum = 6;
-            label8.Text = "Slot:";
-            label9.Text = "Filename:";
-            boxDump.Visible = true;
-            slotDump.Visible = false;
-            dumpBoxes.Visible = false;
-            nameek6.Visible = true;
-            label7.Visible = false;
-            label8.Visible = true;
-            label9.Visible = true;
-            label9.Location = new System.Drawing.Point(50, 20);
-            nameek6.Location = new System.Drawing.Point(53, 39);
-            nameek6.Size = new System.Drawing.Size(150, 20);
-            dumpPokemon.Size = new System.Drawing.Size(197, 23);
-            dumpPokemon.Location = new System.Drawing.Point(6, 61);
-            dumpPokemon.Text = "Dump";
+            boxDump.Maximum = 1;
+            slotDump.Minimum = 1;
+            slotDump.Maximum = 6;
+            boxDump.Enabled = false;
+            slotDump.Enabled = true;
+            dumpBoxes.Enabled = false;
+            nameek6.Enabled = true;
+            onlyView.Enabled = true;
         }
 
         static void handleDataReady(object sender, DataReadyEventArgs e)
