@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bot\WonderTradeBot6.cs" />
     <Compile Include="Helpers\LookupTable.cs" />
     <Compile Include="Helpers\RemoteControl.cs" />
     <Compile Include="MainForm.cs">

@@ -2632,7 +2632,7 @@
             this.RunWTbot.TabIndex = 3;
             this.RunWTbot.Text = "Run";
             this.RunWTbot.UseVisualStyleBackColor = true;
-            this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click);
+            this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click_1);
             // 
             // WTtradesNo
             // 

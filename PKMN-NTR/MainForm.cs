@@ -4,6 +4,7 @@
  * * Error handling, error handling, error handling. Wrap file writes in try/catch, handle malformed pokemon, incomplete writes, patterns not found, etc.
  */
 using ntrbase.Properties;
+using ntrbase.Bot;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -38,7 +39,7 @@ namespace ntrbase
         public const string FOLDERBOT = "Bot";
         public string PKXEXT;
         public string BOXEXT;
-        PKHeX dumpedPKHeX = new PKHeX();
+        public PKHeX dumpedPKHeX = new PKHeX();
         LookupTable PKTable = new LookupTable();
         Task<bool> waitTask;
         private static string numberPattern = " ({0})";
@@ -59,6 +60,7 @@ namespace ntrbase
         public static readonly string toucherror = "An error has ocurred while sending a touch screen command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
         public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
         public static readonly string writeerror = "An error has ocurred while writting data to your 3DS RAM, please check connection and try again.";
+        private WonderTradeBot6 WTBot6;
 
         //Game information
         public int pid;
@@ -457,7 +459,7 @@ namespace ntrbase
 
         private void buttonDisconnect_Click(object sender, EventArgs e)
         {
-            PerformDisconnect();   
+            PerformDisconnect();
         }
 
         private void PerformDisconnect()
@@ -521,22 +523,10 @@ namespace ntrbase
                 mapxoff = 0x818290C;
                 mapyoff = 0x8182914;
                 mapzoff = 0x8182910;
-                savescrnOff = 0x19AB78;
-                savescrnIN = 0x7E0000;
-                savescrnOUT = 0x4D0000;
-                psssmenu1Off = 0x19ABC0;
-                psssmenu1IN = 0x7E0000;
-                psssmenu1OUT = 0x4D0000;
-                wtconfirmationOff = 0x19A918;
-                wtconfirmationIN = 0x4D0000;
-                wtconfirmationOUT = 0x780000;
-                wtboxesOff = 0x19A988;
-                wtboxesIN = 0x6C0000;
-                wtboxesOUT = 0x4D0000;
-                wtboxviewOff = 0x627437;
-                wtboxviewIN = 0x00000000;
-                wtboxviewOUT = 0x20000000;
-                wtboxviewRange = 0x1000000;
+                
+
+                
+                
                 pssettingsOff = 0x19ABF0;
                 pssettingsIN = 0x7E0000;
                 pssettingsOUT = 0x4D0000;
@@ -649,22 +639,10 @@ namespace ntrbase
                 mapxoff = 0x8187BF4;
                 mapyoff = 0x8187BFC;
                 mapzoff = 0x8187BF8;
-                savescrnOff = 0x19C1CC;
-                savescrnIN = 0x830000;
-                savescrnOUT = 0x500000;
-                psssmenu1Off = 0x19C21C;
-                psssmenu1IN = 0x830000;
-                psssmenu1OUT = 0x500000;
-                wtconfirmationOff = 0x19C024;
-                wtconfirmationIN = 0x500000;
-                wtconfirmationOUT = 0x700000;
-                wtboxesOff = 0x19BFCC;
-                wtboxesIN = 0x710000;
-                wtboxesOUT = 0x500000;
-                wtboxviewOff = 0x66F5F2;
-                wtboxviewIN = 0xC000;
-                wtboxviewOUT = 0x4000;
-                wtboxviewRange = 0x1000;
+                
+
+                
+                
                 pssettingsOff = 0x19C244;
                 pssettingsIN = 0x830000;
                 pssettingsOUT = 0x500000;
@@ -781,6 +759,7 @@ namespace ntrbase
             }
 
             // Fill fields in the form according to gen
+            Program.helper.pid = pid;
             if (game != GameType.None && gen7 && !botWorking)
             {
                 PKXEXT = ".pk7";
@@ -1395,11 +1374,13 @@ namespace ntrbase
                         writePokemonToFile(validator.Data, folderPath + fileName);
                     }
                 }
-                else if (!dataCorrect)
+                else if (!dataCorrect && !botWorking)
                     MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 if (!dataCorrect)
+                {
                     return;
+                }
 
                 dumpedPKHeX.Data = validator.Data;
 
@@ -2437,11 +2418,28 @@ namespace ntrbase
         #region Bots
 
         // R/W handlers
+        public void HandleRAMread(uint value)
+        {
+            SetText(readResult, value.ToString("X8"));
+        }
+
+        public void addwaitingForData(uint newkey, DataReadyWaiting newvalue)
+        {
+            waitingForData.Add(newkey, newvalue);
+        }
+
         public void handleMemoryRead(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             lastmemoryread = BitConverter.ToUInt32(args.data, 0);
             SetText(readResult, lastmemoryread.ToString("X8"));
+        }
+
+        public void updateWTslots(int box, int slot, int quantity)
+        {
+            SetValue(WTBox, box + 1);
+            SetValue(WTSlot, slot + 1);
+            SetValue(WTtradesNo, quantity);
         }
 
         async Task<int> waitNTRread(uint address)
@@ -3124,532 +3122,42 @@ namespace ntrbase
         }
 
         // Wonder Trade bot
-        private async void RunWTbot_Click(object sender, EventArgs e)
+        private async void RunWTbot_Click_1(object sender, EventArgs e)
         {
             // Show warning
             DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + WTtradesNo.Value + " pokémon, starting from the slot " + WTSlot.Value + " of box " + WTBox.Value + ". Remember to read the wiki for this bot in GitHub before starting.\r\n\r\nDo you want to continue?", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK && WTtradesNo.Value > 0)
-            { // Initialize bot
+            {
                 botWorking = true;
-                botStop = false;
-                botState = 0;
-                radioBoxes.Checked = true;
-                onlyView.Checked = true;
                 disableControls();
-                stopBotButton.Enabled = true;
                 txtLog.Clear();
-            }
-            else
-            { // Exit bot
-                botStop = true;
-                return;
-            }
-
-            // Local variables
-            Task<int> waitNTRtask;
-            int waitresult = 0;
-            int waittimeout = 0;
-            int currentslot = Convert.ToInt16(WTSlot.Value - 1);
-            int currentbox = Convert.ToInt16(WTBox.Value - 1);
-            bool boxchange = true;
-            string oldPID = "";
-
-            // Bot procedure
-            while (!botStop)
-            { // Halts bot if Stop Bot button was click
-                switch (botState)
+                bool oras;
+                if (game == GameType.X || game == GameType.Y)
+                    oras = false;
+                else
+                    oras = true;
+                WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras);
+                Task<int> Bot = WTBot6.RunBot();
+                int result = await Bot;
+                switch (result)
                 {
                     case 0:
-                        Addlog("Test if the PSS menu is shown");
-                        waitNTRtask = waitNTRread(psssmenu1Off);
-                        waitresult = await waitNTRtask;
-                        if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
-                        {
-                            MessageBox.Show("Please go to the PSS menu and try again.");
-                            botState = -1;
-                        }
-                        else if (lastmemoryread >= psssmenu1IN && lastmemoryread < psssmenu1IN + 0x10000)
-                        {
-                            botState = 1;
-                        }
-                        else
-                        {
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
+                        MessageBox.Show("Bot finished sucessfully", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case 1:
-                        Addlog("Reading Pokémon data from box " + (currentbox + 1).ToString() + ", slot " + (currentslot + 1).ToString());
-                        dPID.Clear();
-                        lastlog = "";
-                        SetValue(boxDump, currentbox + 1);
-                        SetValue(slotDump, currentslot + 1);
-                        dumpPokemon.Enabled = true;
-                        dumpPokemon.PerformClick();
-                        dumpPokemon.Enabled = false;
-                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
-                        {
-                            await Task.Delay(100);
-                            if (lastlog.Contains("finished"))
-                            {
-                                break;
-                            }
-                        }
-                        if (waittimeout < timeout * 10 && dPID.Text.Length > 0)
-                        {
-                            botState = 2;
-                        }
-                        else if (waittimeout < timeout * 10 && dPID.Text.Length < 1)
-                        { // Empty space
-                            Addlog("Space is empty");
-                            currentslot++;
-                            if (currentslot >= 30)
-                            {
-                                currentslot = 0;
-                                currentbox++;
-                                boxchange = true;
-                                if (currentbox >= 31)
-                                {
-                                    currentbox = 0;
-                                }
-                            }
-                            WTtradesNo.Value--;
-                            if (WTtradesNo.Value > 0)
-                            {
-                                botState = 1;
-                            }
-                            else
-                            { // If no trades remaining, exit
-                                botState = -1;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
+                        MessageBox.Show("Please go to the PSS menu and try again.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                     case 2:
-                        Addlog("Press Wonder Trade button");
-                        waitNTRtask = waittouch(240, 120);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 3;
-                        }
-                        else
-                        {
-                            MessageBox.Show(toucherror);
-                            botState = -1;
-                        }
-                        break;
-                    case 3:
-                        Addlog("Test if the save screen is shown");
-                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
-                        { // Wait two seconds
-                            await Task.Delay(100);
-                            waitNTRtask = waitNTRread(savescrnOff);
-                            waitresult = await waitNTRtask;
-                            if (lastmemoryread >= savescrnIN && lastmemoryread < savescrnIN + 0x10000)
-                            {
-                                break;
-                            }
-                        }
-                        if (waittimeout < timeout * 10)
-                        {
-                            botState = 4;
-                        }
-                        else if (lastmemoryread >= savescrnOUT && lastmemoryread < savescrnOUT + 0x10000)
-                        { // Still on the PSS menu
-                            botState = 2;
-                        }
-                        else
-                        { // Other error
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 4:
-                        Addlog("Press Yes");
-                        waitNTRtask = waitbutton(keyA);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 5;
-                        }
-                        else
-                        {
-                            MessageBox.Show(buttonerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 5:
-                        Addlog("Test if Wonder Trade screen is shown");
-                        for (waittimeout = 0; waittimeout < timeout; waittimeout++)
-                        { // Wait ten seconds
-                            await Task.Delay(1000);
-                            waitNTRtask = waitNTRread(wtconfirmationOff);
-                            waitresult = await waitNTRtask;
-                            if (lastmemoryread >= wtconfirmationIN && lastmemoryread < wtconfirmationIN + 0x10000)
-                            { //&& lastmemoryread < wtconfirmationIN + 10000
-                                break;
-                            }
-                        }
-                        if (waittimeout < timeout)
-                        {
-                            botState = 6;
-                        }
-                        else if (lastmemoryread >= wtconfirmationOUT && lastmemoryread < wtconfirmationOUT + 0x10000)
-                        { // Still on the save screen
-                            botState = 4;
-                        }
-                        else
-                        { // Other error
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 6:
-                        Addlog("Touch Yes");
-                        waitNTRtask = waittouch(160, 100);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 7;
-                        }
-                        else
-                        {
-                            MessageBox.Show(toucherror);
-                            botState = -1;
-                        }
-                        break;
-                    case 7:
-                        Addlog("Test if the boxes are shown");
-                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
-                        {
-                            await Task.Delay(100);
-                            waitNTRtask = waitNTRread(wtboxesOff);
-                            waitresult = await waitNTRtask;
-                            if (lastmemoryread >= wtboxesIN && lastmemoryread < wtboxesIN + 0x10000)
-                            {
-                                break;
-                            }
-                        }
-                        if (waittimeout < timeout * 10)
-                        {
-                            botState = 8;
-                        }
-                        else if (lastmemoryread >= wtboxesOUT && lastmemoryread < wtboxesOUT + 0x10000)
-                        { // Still on the confirmation screen
-                            botState = 6;
-                        }
-                        else
-                        { // Other error
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 8:
-                        if (boxchange)
-                        {
-                            botState = 9;
-                            boxchange = false;
-                        }
-                        else
-                        {
-                            botState = 14;
-                        }
-                        break;
-                    case 9:
-                        Addlog("Touch Box View");
-                        await Task.Delay(500);
-                        waitNTRtask = waittouch(30, 220);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 10;
-                        }
-                        else
-                        {
-                            MessageBox.Show(toucherror);
-                            botState = -1;
-                        }
-                        break;
-                    case 10:
-                        Addlog("Test if box view is shown");
-                        await Task.Delay(500);
-                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
-                        {
-                            await Task.Delay(100);
-                            waitNTRtask = waitNTRread(wtboxviewOff);
-                            waitresult = await waitNTRtask;
-                            if (lastmemoryread >= wtboxviewIN && lastmemoryread < wtboxviewIN + wtboxviewRange)
-                            {
-                                break;
-                            }
-                        }
-                        if (waittimeout < timeout * 10)
-                        {
-                            botState = 11;
-                        }
-                        else if (lastmemoryread >= wtboxviewOUT && lastmemoryread < wtboxviewOUT + wtboxviewRange)
-                        { // Still on the boxes
-                            botState = 9;
-                        }
-                        else
-                        { // Other error
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 11:
-                        Addlog("Touch New Box");
-                        waitNTRtask = waittouch(boxXcord[currentbox], boxYcord[currentbox]);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 12;
-                        }
-                        else
-                        {
-                            MessageBox.Show(toucherror);
-                            botState = -1;
-                        }
-                        break;
-                    case 12:
-                        Addlog("Select New Box");
-                        waitNTRtask = waitbutton(keyA);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 13;
-                        }
-                        else
-                        {
-                            MessageBox.Show(buttonerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 13:
-                        Addlog("Test if box view is not shown");
-                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
-                        {
-                            await Task.Delay(100);
-                            waitNTRtask = waitNTRread(wtboxviewOff);
-                            waitresult = await waitNTRtask;
-                            if (lastmemoryread >= wtboxviewOUT && lastmemoryread < wtboxviewOUT + wtboxviewRange)
-                            {
-                                break;
-                            }
-                        }
-                        if (waittimeout < timeout * 10)
-                        {
-                            botState = 14;
-                        }
-                        else if (lastmemoryread >= wtboxviewIN && lastmemoryread < wtboxviewIN + wtboxviewRange)
-                        { // Still on the box view
-                            botState = 11;
-                        }
-                        else
-                        { // Other error
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 14:
-                        Addlog("Touch Pokémon");
-                        await Task.Delay(500);
-                        waitNTRtask = waittouch(boxpokeXcord[currentslot], boxpokeYcord[currentslot]);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 15;
-                        }
-                        else
-                        {
-                            MessageBox.Show(toucherror);
-                            botState = -1;
-                        }
-                        break;
-                    case 15:
-                        Addlog("Select Trade");
-                        waitNTRtask = waitbutton(keyA);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 16;
-                        }
-                        else
-                        {
-                            MessageBox.Show(buttonerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 16:
-                        Addlog("Select Yes");
-                        waitNTRtask = waitbutton(keyA);
-                        waitresult = await waitNTRtask;
-                        if (waitresult == 0)
-                        {
-                            botState = 17;
-                        }
-                        else
-                        {
-                            MessageBox.Show(buttonerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 17:
-                        Addlog("Test if the boxes are not shown");
-                        for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
-                        {
-                            await Task.Delay(100);
-                            waitNTRtask = waitNTRread(wtboxesOff);
-                            waitresult = await waitNTRtask;
-                            if (lastmemoryread >= wtboxesOUT && lastmemoryread < wtboxesOUT + 0x10000)
-                            {
-                                break;
-                            }
-                        }
-                        if (waittimeout < timeout * 10)
-                        {
-                            botState = 18;
-                        }
-                        else if (lastmemoryread >= wtboxesOUT && lastmemoryread < wtboxesOUT + 0x10000)
-                        { // Still on the box view
-                            botState = 14;
-                        }
-                        else
-                        { // Other error
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 18:
-                        Addlog("Wait for trade");
-                        for (waittimeout = 0; waittimeout < 30; waittimeout++)
-                        { // Wait 60 seconds
-                            oldPID = dPID.Text;
-                            lastlog = "";
-                            dumpPokemon.Enabled = true;
-                            dumpPokemon.PerformClick();
-                            dumpPokemon.Enabled = false;
-                            await Task.Delay(2000);
-                            if (lastlog.Contains("finished") && dPID.Text != oldPID)
-                            {
-                                break;
-                            }
-                        }
-                        if (waittimeout < 30)
-                        {
-                            botState = 19;
-                        }
-                        else
-                        { // Timeout, not trade partner was found
-                            botState = 21;
-                        }
-                        break;
-                    case 19:
-                        Addlog("Wait 30 seconds");
-                        await Task.Delay(30000);
-                        botState = 20;
-                        break;
-                    case 20:
-                        Addlog("Test if back to the PSS menu");
-                        for (waittimeout = 0; waittimeout < 45; waittimeout++)
-                        { // Wait during 90 seconds
-                            await Task.Delay(2000);
-                            waitNTRtask = waitNTRread(psssmenu1Off);
-                            waitresult = await waitNTRtask;
-                            if (lastmemoryread >= psssmenu1IN && lastmemoryread < psssmenu1IN + 0x10000)
-                            {
-                                break;
-                            }
-                        }
-                        if (waittimeout < 45)
-                        { // Calculate next slot and return to begining
-                            currentslot++;
-                            if (currentslot >= 30)
-                            {
-                                currentslot = 0;
-                                currentbox++;
-                                boxchange = true;
-                                if (currentbox >= 31)
-                                {
-                                    currentbox = 0;
-                                }
-                            }
-                            WTtradesNo.Value--;
-                            if (WTtradesNo.Value > 0)
-                            {
-                                botState = 1;
-                            }
-                            else
-                            { // If no trades remaining, exit
-                                botState = -1;
-                            }
-                        }
-                        else if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
-                        { // Still waiting to complete trade
-                            botState = 20;
-                        }
-                        else
-                        { // Other error
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
-                        break;
-                    case 21:
-                        Addlog("No trade partner is found");
-                        for (waittimeout = 0; waittimeout < 30; waittimeout++)
-                        { // Wait during 30 seconds
-                            await Task.Delay(1000);
-                            waitNTRtask = waitNTRread(psssmenu1Off);
-                            waitresult = await waitNTRtask;
-                            if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
-                            {
-                                await Task.Delay(2000);
-                                break;
-                            }
-                            else
-                            { // Press A button
-                                waitNTRtask = waitbutton(keyA);
-                                waitresult = await waitNTRtask;
-                                if (waitresult != 0)
-                                {
-                                    MessageBox.Show(buttonerror);
-                                    waittimeout = 45;
-                                    botState = -1;
-                                    break;
-                                }
-                            }
-                        }
-                        if (waittimeout < 30)
-                        { // Return to begining
-                            botState = 1;
-                        }
-                        else if (lastmemoryread >= psssmenu1OUT && lastmemoryread < psssmenu1OUT + 0x10000)
-                        { // Still waiting to complete trade
-                            botState = 21;
-                        }
-                        else
-                        { // Other error
-                            MessageBox.Show(readerror);
-                            botState = -1;
-                        }
+                        MessageBox.Show(readerror, "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     default:
-                        botStop = true;
+                        MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
+                botWorking = false;
+                enableControls();
             }
-
-            // Finish bot
-            enableControls();
-            stopBotButton.Enabled = false;
-            botWorking = false;
-            MessageBox.Show("Finished", "Wonder Trade Bot");
         }
 
         // Soft-reset bot
@@ -5762,7 +5270,7 @@ namespace ntrbase
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
     //to handle them and any additional arguments it might require.
-    class DataReadyWaiting
+    public class DataReadyWaiting
     {
         public byte[] data;
         public object arguments;
