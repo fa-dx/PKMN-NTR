@@ -19,6 +19,8 @@ namespace ntrbase
 {
     public partial class MainForm : Form
     {
+        #region Class variables
+
         //A "waiting room", where functions wait for data to be acquired. Entries are indexed by their sequence number. Once a request with a given sequence number is fulfilled, handleDataReady() uses information in DataReadyWaiting object to process the data.
         static Dictionary<uint, DataReadyWaiting> waitingForData = new Dictionary<uint, DataReadyWaiting>();
 
@@ -168,13 +170,14 @@ namespace ntrbase
         Control[] enableWhenConnected7 = new Control[] { };
 
         // Tooltips for TSV and ESV
-        public ToolTip ToolTipTSVtrainer = new ToolTip();
         public ToolTip ToolTipTSVpoke = new ToolTip();
         public ToolTip ToolTipPSV = new ToolTip();
 
         // Log handling
         public delegate void LogDelegate(string l);
         public LogDelegate delAddLog;
+
+        #endregion Class variables
 
         #region constants
 
@@ -401,6 +404,18 @@ namespace ntrbase
         #endregion window
 
         #region Functions
+
+        static void handleDataReady(object sender, DataReadyEventArgs e)
+        { // We move data processing to a separate thread. This way even if processing takes a long time, the netcode doesn't hang.
+            DataReadyWaiting args;
+            if (waitingForData.TryGetValue(e.seq, out args))
+            {
+                Array.Copy(e.data, args.data, Math.Min(e.data.Length, args.data.Length));
+                Thread t = new Thread(new ParameterizedThreadStart(args.handler));
+                t.Start(args);
+                waitingForData.Remove(e.seq);
+            }
+        }
 
         public int getHiddenPower()
         {
@@ -800,8 +815,8 @@ namespace ntrbase
             cloneBoxTo.Maximum = BOXES;
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
-            SetLabel(label3, "Poké Miles:");
-            SetLabel(label4, "Battle Points:");
+            SetText(label3, "Poké Miles:");
+            SetText(label4, "Battle Points:");
         }
 
         private void fillGen7()
@@ -826,8 +841,8 @@ namespace ntrbase
             cloneBoxTo.Maximum = BOXES;
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
-            SetLabel(label3, "Current FC:");
-            SetLabel(label4, "Total FC:");
+            SetText(label3, "Current FC:");
+            SetText(label4, "Total FC:");
         }
 
         #endregion Connection
@@ -1666,7 +1681,7 @@ namespace ntrbase
                     uint ssdOff = boxOff + (ssd * 232);
                     Program.scriptHelper.write(ssdOff, pkmEdited, pid);
                 }
-               else if (radioBattleBox.Checked)
+                else if (radioBattleBox.Checked)
                 {
                     uint bbOff = battleBoxOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * 232);
                     Program.scriptHelper.write(bbOff, pkmEdited, pid);
@@ -1681,6 +1696,43 @@ namespace ntrbase
                 }
                 else
                     MessageBox.Show("No editing support for this pokémon.", "Editing Unavailable");
+            }
+        }
+
+        private void setShiny_Click(object sender, EventArgs e)
+        {
+            dumpedPKHeX.setShinyPID();
+            dPID.Text = dumpedPKHeX.PID.ToString("X8");
+            setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
+        }
+
+        private void randomPID_Click(object sender, EventArgs e)
+        {
+            dumpedPKHeX.setRandomPID();
+            dPID.Text = dumpedPKHeX.PID.ToString("X8");
+
+            setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
+        }
+
+        private void gender_Click(object sender, EventArgs e)
+        { //TODO: add checking if a gender is available for Pokemon
+            if (dumpedPKHeX.Gender == 0)
+            {
+                gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
+                gender.ForeColor = Color.Red;
+                gender.Text = "♀";
+                dumpedPKHeX.Gender = 1;
+            }
+            else if (dumpedPKHeX.Gender == 1)
+            {
+                gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
+                gender.ForeColor = Color.Blue;
+                gender.Text = "♂";
+                dumpedPKHeX.Gender = 0;
+            }
+            else if (dumpedPKHeX.Gender == 2)
+            {
+                //If a Pokemon is genderless, there's nothing you can do...
             }
         }
 
@@ -1942,81 +1994,6 @@ namespace ntrbase
             deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
         }
 
-
-
-        private void setShiny_Click(object sender, EventArgs e)
-        {
-            dumpedPKHeX.setShinyPID();
-            dPID.Text = dumpedPKHeX.PID.ToString("X");
-
-            setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
-        }
-
-        private void randomPID_Click(object sender, EventArgs e)
-        {
-            dumpedPKHeX.setRandomPID();
-            dPID.Text = dumpedPKHeX.PID.ToString("X");
-
-            setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
-        }
-
-        private void TIDNum_ValueChanged(object sender, EventArgs e)
-        {
-            setTSVToolTip(TIDNum, SIDNum);
-        }
-
-        private void SIDNum_ValueChanged(object sender, EventArgs e)
-        {
-            setTSVToolTip(TIDNum, SIDNum);
-        }
-
-        private void ball_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ball.SelectedIndex >= 0)
-                pictureBox1.Image = ballImages[ball.SelectedIndex];
-            else
-                pictureBox1.Image = null;
-        }
-
-        //TODO: add checking if a gender is available for Pokemon
-        private void gender_Click(object sender, EventArgs e)
-        {
-            if (dumpedPKHeX.Gender == 0)
-            {
-                gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                gender.ForeColor = Color.Red;
-                gender.Text = "♀";
-                dumpedPKHeX.Gender = 1;
-            }
-            else if (dumpedPKHeX.Gender == 1)
-            {
-                gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                gender.ForeColor = Color.Blue;
-                gender.Text = "♂";
-                dumpedPKHeX.Gender = 0;
-            }
-            else if (dumpedPKHeX.Gender == 2)
-            {
-                //If a Pokemon is genderless, there's nothing you can do...
-            }
-        }
-
-
-
-        static void handleDataReady(object sender, DataReadyEventArgs e)
-        {
-            //We move data processing to a separate thread
-            //This way even if processing takes a long time, the netcode doesn't hang
-            DataReadyWaiting args;
-            if (waitingForData.TryGetValue(e.seq, out args))
-            {
-                Array.Copy(e.data, args.data, Math.Min(e.data.Length, args.data.Length));
-                Thread t = new Thread(new ParameterizedThreadStart(args.handler));
-                t.Start(args);
-                waitingForData.Remove(e.seq);
-            }
-        }
-
         #endregion R/W pokémon data
 
         #region GUI handling
@@ -2195,13 +2172,27 @@ namespace ntrbase
         }
 
         private void dTIDNum_ValueChanged(object sender, EventArgs e)
-        {
+        { // Handles pokémon OT's TID/SID fields
             setTSVToolTip(dTIDNum, dSIDNum);
+        }
+
+        private void TIDNum_ValueChanged(object sender, EventArgs e)
+        { // Handles Trainer's TID/SID fields
+            setTSVToolTip(TIDNum, SIDNum);
         }
 
         private void dPID_TextChanged(object sender, EventArgs e)
         {
             SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(PKHeX.getHEXval(dPID.Text)).ToString("D4"));
+        }
+
+        // Poké ball image
+        private void ball_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ball.SelectedIndex >= 0)
+                pictureBox1.Image = ballImages[ball.SelectedIndex];
+            else
+                pictureBox1.Image = null;
         }
 
         // Automatic Hidden Power Calculation
@@ -2214,14 +2205,7 @@ namespace ntrbase
 
         #endregion GUI handling
 
-        #region fucking thread safety
-        //Hooray for forced thread-safety!
-        //If Visual C# didn't throw an exception every time you tried to access controls from a different thread
-        //this wouldn't be necessary. We're not sending a rocket into space, dammit, we're just messing around with Pokemon.
-        //I appreciate your care, Microsoft, but we really don't need this.
-        //And if you're wondering - no, this is not because I decided to run threads in handleDataReady().
-        //If handleDataReady() just called the function directly, it would still run in packetRecvThreadStart()'s thread
-        //which is different from the GUI thread.
+        #region Thread Safety
         delegate void SetTextDelegate(Control ctrl, string text);
 
         public static void SetText(Control ctrl, string text)
@@ -2232,24 +2216,7 @@ namespace ntrbase
                 ctrl.Invoke(del, ctrl, text);
             }
             else
-            {
                 ctrl.Text = text;
-            }
-        }
-
-        delegate void SetLabelDelegate(Label ctrl, string text);
-
-        public static void SetLabel(Label ctrl, string text)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetLabelDelegate del = new SetLabelDelegate(SetLabel);
-                ctrl.Invoke(del, ctrl, text);
-            }
-            else
-            {
-                ctrl.Text = text;
-            }
         }
 
         delegate void SetTooltipDelegate(ToolTip source, Control ctrl, string text);
@@ -2262,9 +2229,7 @@ namespace ntrbase
                 ctrl.Invoke(del, source, ctrl, text);
             }
             else
-            {
                 source.SetToolTip(ctrl, text);
-            }
         }
 
         delegate void RemoveTooltipDelegate(ToolTip source, Control ctrl);
@@ -2277,9 +2242,7 @@ namespace ntrbase
                 ctrl.Invoke(del, source, ctrl);
             }
             else
-            {
                 source.RemoveAll();
-            }
         }
 
         delegate void SetEnabledDelegate(Control ctrl, bool en);
@@ -2292,9 +2255,7 @@ namespace ntrbase
                 ctrl.Invoke(del, ctrl, en);
             }
             else
-            {
                 ctrl.Enabled = en;
-            }
         }
 
         delegate void SetCheckedDelegate(CheckBox ctrl, bool en);
@@ -2307,9 +2268,7 @@ namespace ntrbase
                 ctrl.Invoke(del, ctrl, en);
             }
             else
-            {
                 ctrl.Checked = en;
-            }
         }
 
         delegate void SetValueDelegate(NumericUpDown ctrl, decimal val);
@@ -2322,9 +2281,7 @@ namespace ntrbase
                 ctrl.Invoke(del, ctrl, val);
             }
             else
-            {
                 ctrl.Value = val;
-            }
         }
 
         delegate void SetSelectedIndexDelegate(ComboBox ctrl, int i);
@@ -2337,9 +2294,7 @@ namespace ntrbase
                 ctrl.Invoke(del, ctrl, i);
             }
             else
-            {
                 ctrl.SelectedIndex = i;
-            }
         }
 
         delegate void ComboboxFillDelegate(ComboBox ctrl, string[] val);
@@ -2376,8 +2331,7 @@ namespace ntrbase
             }
         }
 
-
-        #endregion fucking thread safety
+        #endregion Thread Safety
 
         #region Remote control
 

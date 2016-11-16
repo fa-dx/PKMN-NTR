@@ -1426,7 +1426,7 @@
             this.SIDNum.Name = "SIDNum";
             this.SIDNum.Size = new System.Drawing.Size(80, 20);
             this.SIDNum.TabIndex = 4;
-            this.SIDNum.ValueChanged += new System.EventHandler(this.SIDNum_ValueChanged);
+            this.SIDNum.ValueChanged += new System.EventHandler(this.TIDNum_ValueChanged);
             // 
             // label15
             // 
