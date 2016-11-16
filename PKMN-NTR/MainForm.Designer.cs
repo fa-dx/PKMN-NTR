@@ -617,21 +617,21 @@
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 140);
+            this.label3.Location = new System.Drawing.Point(0, 140);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 22;
             this.label3.Text = "Poké Miles:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 168);
+            this.label4.Location = new System.Drawing.Point(0, 168);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.Size = new System.Drawing.Size(75, 18);
             this.label4.TabIndex = 23;
             this.label4.Text = "Battle Points:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // dumpBox
             // 
@@ -1694,11 +1694,11 @@
             this.groupBox3.Controls.Add(this.showTMs);
             this.groupBox3.Controls.Add(this.showItems);
             this.groupBox3.Controls.Add(this.showMedicine);
-            this.groupBox3.Controls.Add(this.bersGridView);
             this.groupBox3.Controls.Add(this.itemsGridView);
             this.groupBox3.Controls.Add(this.medsGridView);
             this.groupBox3.Controls.Add(this.tmsGridView);
             this.groupBox3.Controls.Add(this.keysGridView);
+            this.groupBox3.Controls.Add(this.bersGridView);
             this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(324, 215);

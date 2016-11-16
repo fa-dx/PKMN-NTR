@@ -199,7 +199,6 @@ namespace ntrbase
         public ToolTip ToolTipTSVtrainer = new ToolTip();
         public ToolTip ToolTipTSVpoke = new ToolTip();
         public ToolTip ToolTipPSV = new ToolTip();
-        public ToolTip ToolTipFC = new ToolTip();
 
         public delegate void LogDelegate(string l);
         public LogDelegate delAddLog;
@@ -320,7 +319,7 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR };
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
             SetSelectedIndex(filterATKlogic, 0);
@@ -727,11 +726,11 @@ namespace ntrbase
                 boxOff = 0x330D9838;
                 //daycare1Off = 0x8C7FF4C;
                 //daycare2Off = 0x8C8003C;
-                //itemsoff = 0x8C67564;
-                //medsoff = 0x8C67ECC;
-                //keysoff = 0x8C67BA4;
-                //tmsoff = 0x8C67D24;
-                //bersoff = 0x8C67FCC;
+                itemsoff = 0x330D5934; // Lenght 0x6B8
+                medsoff = 0x330D647C; // Lenght 0x100
+                keysoff = 0x330D5FEC; // Length 0x2E0
+                tmsoff = 0x330D62CC; // Length 0x1B0
+                bersoff = 0x330D657C; // Length 0x120
                 nameoff = 0x330D6808;
                 tidoff = 0x330D67D0;
                 sidoff = 0x330D67D2;
@@ -791,6 +790,7 @@ namespace ntrbase
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
             SetLabel(label3, "Poké Miles:");
+            SetLabel(label4, "Battle Points:");
         }
 
         private void fillGen7()
@@ -818,6 +818,7 @@ namespace ntrbase
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
             SetLabel(label3, "Current FC:");
+            SetLabel(label4, "Total FC:");
         }
 
         #endregion Connection
@@ -1029,14 +1030,8 @@ namespace ntrbase
         {
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
             waitingForData.Add(Program.scriptHelper.data(currentFCoff, 0x04, pid), myArgs);
-            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleFCData, null);
+            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleBPData, null);
             waitingForData.Add(Program.scriptHelper.data(totalFCoff, 0x04, pid), myArgs2);
-        }
-
-        public void handleFCData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetTooltip(ToolTipFC, milesNum, "Obtained FC: " + BitConverter.ToInt32(args.data, 0).ToString());
         }
 
         public void dumpBP()
@@ -1232,8 +1227,16 @@ namespace ntrbase
 
         private void pokeBP_Click(object sender, EventArgs e)
         {
-            byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-            Program.scriptHelper.write(bpoff, bpbyte, pid);
+            if (gen7)
+            { // Total Festival Coins
+                byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
+                Program.scriptHelper.write(totalFCoff, FCbyte, pid);
+            }
+            else
+            { // Battle Points
+                byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
+                Program.scriptHelper.write(bpoff, bpbyte, pid);
+            }
         }
 
         private void dumpPokemon_Click(object sender, EventArgs e)
