@@ -1121,6 +1121,7 @@
             this.ivSPENum.Name = "ivSPENum";
             this.ivSPENum.Size = new System.Drawing.Size(33, 20);
             this.ivSPENum.TabIndex = 5;
+            this.ivSPENum.ValueChanged += new System.EventHandler(this.ivChanged);
             // 
             // label23
             // 
@@ -1142,6 +1143,7 @@
             this.ivSPDNum.Name = "ivSPDNum";
             this.ivSPDNum.Size = new System.Drawing.Size(33, 20);
             this.ivSPDNum.TabIndex = 4;
+            this.ivSPDNum.ValueChanged += new System.EventHandler(this.ivChanged);
             // 
             // label24
             // 
@@ -1163,6 +1165,7 @@
             this.ivSPANum.Name = "ivSPANum";
             this.ivSPANum.Size = new System.Drawing.Size(33, 20);
             this.ivSPANum.TabIndex = 3;
+            this.ivSPANum.ValueChanged += new System.EventHandler(this.ivChanged);
             // 
             // nature
             // 
@@ -1211,6 +1214,7 @@
             this.ivDEFNum.Name = "ivDEFNum";
             this.ivDEFNum.Size = new System.Drawing.Size(33, 20);
             this.ivDEFNum.TabIndex = 2;
+            this.ivDEFNum.ValueChanged += new System.EventHandler(this.ivChanged);
             // 
             // label25
             // 
@@ -1232,6 +1236,7 @@
             this.ivATKNum.Name = "ivATKNum";
             this.ivATKNum.Size = new System.Drawing.Size(33, 20);
             this.ivATKNum.TabIndex = 1;
+            this.ivATKNum.ValueChanged += new System.EventHandler(this.ivChanged);
             // 
             // label30
             // 
@@ -1253,6 +1258,7 @@
             this.ivHPNum.Name = "ivHPNum";
             this.ivHPNum.Size = new System.Drawing.Size(33, 20);
             this.ivHPNum.TabIndex = 0;
+            this.ivHPNum.ValueChanged += new System.EventHandler(this.ivChanged);
             // 
             // hiddenPower
             // 

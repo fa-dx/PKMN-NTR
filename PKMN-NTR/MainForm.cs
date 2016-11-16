@@ -1441,10 +1441,6 @@ namespace ntrbase
                         break;
                 }
 
-                SetValue(dTIDNum, dumpedPKHeX.TID);
-                SetValue(dSIDNum, dumpedPKHeX.SID);
-                SetText(dPID, dumpedPKHeX.PID.ToString("X"));
-
                 SetText(nickname, dumpedPKHeX.Nickname);
                 SetText(otName, dumpedPKHeX.OT_Name);
 
@@ -2082,6 +2078,13 @@ namespace ntrbase
                 case 8: lang = 0x0A; break;
             }
             Program.scriptHelper.writebyte(langoff, lang, pid);
+        }
+
+        private void ivChanged(object sender, EventArgs e)
+        {
+            int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
+            SetText(hiddenPower, PKTable.HPName[hp]);
+            SetColor(hiddenPower, PKTable.HPColor[hp], true);
         }
 
         //TODO: are all these Array.Copy() really necessary? Shouldn't PKHeX just handle everything?
