@@ -1447,7 +1447,7 @@ namespace ntrbase
 
             return string.Format(pattern, max);
         }
-        
+
         // Save all boxes
         private void dumpBoxes_Click(object sender, EventArgs e)
         {
@@ -1473,41 +1473,42 @@ namespace ntrbase
         private int readPokemonFromFile(string filename, out byte[] result)
         {
             string extension = Path.GetExtension(filename);
-
             result = new byte[POKEBYTES];
 
-            bool isEncrypted = false;
-
-            if (extension == ".pk6" || extension == ".pk7" || extension == ".pkx")
-                isEncrypted = false;
-            else if (extension == ".ek6" || extension == ".ek7" || extension == ".ekx")
-                isEncrypted = true;
-            else
+            // Test if correct generation format
+            if ((gen7 && (extension == ".pk7" || extension == ".ek7")) || (!gen7 && (extension == ".pk6" || extension == ".ek6")))
             {
-                MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
-                return 1;
-            }
-
-            byte[] tmpBytes = File.ReadAllBytes(filename);
-
-            if (tmpBytes.Length == 260 || tmpBytes.Length == 232)
-            {
-                //All OK, commit
-                if (isEncrypted)
+                bool isEncrypted = false;
+                if (extension == ".pk6" || extension == ".pk7")
+                    isEncrypted = false;
+                else if (extension == ".ek6" || extension == ".ek7")
+                    isEncrypted = true;
+                else
                 {
-                    tmpBytes.CopyTo(result, 0);
+                    MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
+                    return 1;
+                }
+
+                byte[] tmpBytes = File.ReadAllBytes(filename);
+                if (tmpBytes.Length == 260 || tmpBytes.Length == 232)
+                { // All OK, commit
+                    if (isEncrypted)
+                        tmpBytes.CopyTo(result, 0);
+                    else
+                        PKHeX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
                 }
                 else
                 {
-                    PKHeX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
+                    MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
+                    return 2;
                 }
+                return 0;
             }
             else
             {
-                MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
-                return 2;
+                MessageBox.Show("This program does not support conversion of pokémon files between generations.", "Incorrect Generation Number");
+                return 3;
             }
-            return 0;
         }
 
         void writeTab_DragEnter(object sender, DragEventArgs e)
@@ -1545,7 +1546,7 @@ namespace ntrbase
             Program.scriptHelper.write(offset, dataToWrite, pid);
             return ret;
         }
-        
+
         #region housekeeping for cloning
         private uint cloneGetCopies()
         {
@@ -1627,11 +1628,11 @@ namespace ntrbase
             selectWriteDialog.Title = "Select an EKX/PKX file";
             if (gen7)
             {
-                selectWriteDialog.Filter = "EKX/PKX files|*.ek7;*.ekx;*.pk7;*.pkx";
+                selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
             }
             else
             {
-                selectWriteDialog.Filter = "EKX/PKX files|*.ek6;*.ekx;*.pk6;*.pkx";
+                selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
             }
             string path = @Application.StartupPath + "\\Pokemon";
             selectWriteDialog.InitialDirectory = path;
@@ -2105,7 +2106,7 @@ namespace ntrbase
                 }
             }
         }
-        
+
         private void dTIDNum_ValueChanged(object sender, EventArgs e)
         {
             setTSVToolTip(dTIDNum, dSIDNum);
