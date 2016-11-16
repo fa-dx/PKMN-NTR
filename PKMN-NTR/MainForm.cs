@@ -1158,6 +1158,142 @@ namespace ntrbase
             return i / 4;
         }
 
+        private void itemAdd_Click(object sender, EventArgs e)
+        {
+            if (itemsGridView.Visible == true)
+            {
+                if (itemsGridView.RowCount >= 400)
+                    MessageBox.Show("You already have the max amount of items!", "Too many items");
+                else
+                    itemsGridView.Rows.Add("[None]", 0);
+            }
+
+            if (keysGridView.Visible == true)
+            {
+                if (keysGridView.RowCount >= 96)
+                    MessageBox.Show("You already have the max amount of key items!", "Too many items");
+                else
+                    keysGridView.Rows.Add("[None]", 0);
+            }
+
+            if (tmsGridView.Visible == true)
+            {
+                if (tmsGridView.RowCount >= 96)
+                    MessageBox.Show("You already have the max amount of medicine items!", "Too many items");
+                else
+                    tmsGridView.Rows.Add("[None]", 0);
+            }
+
+            if (medsGridView.Visible == true)
+            {
+                if (medsGridView.RowCount >= 108)
+                    MessageBox.Show("You already have the max amount of TMs & HMs!", "Too many items");
+                else
+                    medsGridView.Rows.Add("[None]", 0);
+            }
+
+            if (bersGridView.Visible == true)
+            {
+                if (bersGridView.RowCount >= 72)
+                    MessageBox.Show("You already have the max amount of berries!", "Too many items");
+                else
+                    bersGridView.Rows.Add("[None]", 0);
+            }
+        }
+
+        public void itemWrite_Click(object sender, EventArgs e)
+        {
+            byte[] dataToWrite = new byte[0] { };
+            uint offsetToWrite = 0;
+
+            if (itemsGridView.Visible == true)
+            {
+                itemData = new byte[1600];
+                for (int i = 0; i < itemsGridView.RowCount; i++)
+                {
+                    string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
+                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                    int itemcnt;
+                    itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
+
+                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
+                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
+                }
+                dataToWrite = itemData;
+                offsetToWrite = itemsoff;
+            }
+
+            if (keysGridView.Visible == true)
+            {
+                keyData = new byte[384];
+                for (int i = 0; i < keysGridView.RowCount; i++)
+                {
+                    string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
+                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                    int itemcnt;
+                    itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
+
+                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
+                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
+                }
+                dataToWrite = keyData;
+                offsetToWrite = keysoff;
+            }
+
+            if (tmsGridView.Visible == true)
+            {
+                tmData = new byte[432];
+                for (int i = 0; i < tmsGridView.RowCount; i++)
+                {
+                    string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
+                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                    int itemcnt;
+                    itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
+
+                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
+                    BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
+                }
+                dataToWrite = tmData;
+                offsetToWrite = tmsoff;
+            }
+
+            if (medsGridView.Visible == true)
+            {
+                medData = new byte[256];
+                for (int i = 0; i < medsGridView.RowCount; i++)
+                {
+                    string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
+                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                    int itemcnt;
+                    itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
+
+                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
+                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
+                }
+                dataToWrite = medData;
+                offsetToWrite = medsoff;
+            }
+
+            if (bersGridView.Visible == true)
+            {
+                berryData = new byte[288];
+                for (int i = 0; i < bersGridView.RowCount; i++)
+                {
+                    string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
+                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                    int itemcnt;
+                    itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
+
+                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
+                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
+                }
+                dataToWrite = berryData;
+                offsetToWrite = bersoff;
+            }
+
+            Program.scriptHelper.write(offsetToWrite, dataToWrite, pid);
+        }
+
         #endregion R/W trainer data
 
         #region R/W pokémon data
@@ -1464,14 +1600,153 @@ namespace ntrbase
             writePokemonToFile(args.data, folderPath + fileName);
         }
 
-        // Write single pokémon
+        // Write single pokémon from tabs
+        private void pokeEkx_Click(object sender, EventArgs e)
+        { //TODO: are all these Array.Copy() really necessary? Shouldn't PKHeX just handle everything?
+            if (dumpedPKHeX.Data == null)
+                MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
+            else if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value >= 511)
+                MessageBox.Show("Pokemon EV count is too high, the sum of all EVs should be 510 or less!", "EVs too high");
+            else if (nickname.Text.Length > 12)
+                MessageBox.Show("Pokemon name length too long! Please use a name with a length of 12 or less.", "Name too long");
+            else if (otName.Text.Length > 12)
+                MessageBox.Show("OT name length too long! Please use a name with a length of 12 or less.", "Name too long");
+            else
+            {
+                dumpedPKHeX.Nickname = nickname.Text.PadRight(12, '\0');
+                dumpedPKHeX.OT_Name = otName.Text.PadRight(12, '\0');
+                byte[] pkmToEdit = dumpedPKHeX.Data;
+                Array.Copy(Encoding.Unicode.GetBytes(dumpedPKHeX.Nickname), 0, pkmToEdit, 64, 24);
+                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.Nature), 0, pkmToEdit, 28, 1);
+                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.HeldItem), 0, pkmToEdit, 10, 2);
+
+                dumpedPKHeX.IV_HP = (int)ivHPNum.Value;
+                dumpedPKHeX.IV_ATK = (int)ivATKNum.Value;
+                dumpedPKHeX.IV_DEF = (int)ivDEFNum.Value;
+                dumpedPKHeX.IV_SPE = (int)ivSPENum.Value;
+                dumpedPKHeX.IV_SPA = (int)ivSPANum.Value;
+                dumpedPKHeX.IV_SPD = (int)ivSPDNum.Value;
+
+                dumpedPKHeX.EV_HP = (int)evHPNum.Value;
+                dumpedPKHeX.EV_ATK = (int)evATKNum.Value;
+                dumpedPKHeX.EV_DEF = (int)evDEFNum.Value;
+                dumpedPKHeX.EV_SPE = (int)evSPENum.Value;
+                dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
+                dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
+
+                dumpedPKHeX.EXP = (uint)ExpPoints.Value;
+                dumpedPKHeX.Ball = ball.SelectedIndex + 1;
+                dumpedPKHeX.SID = (int)dSIDNum.Value;
+                dumpedPKHeX.TID = (int)dTIDNum.Value;
+                dumpedPKHeX.PID = PKHeX.getHEXval(dPID.Text);
+                if (isEgg.Checked == true) { dumpedPKHeX.IsEgg = true; }
+                if (isEgg.Checked == false) { dumpedPKHeX.IsEgg = false; }
+                dumpedPKHeX.Species = species.SelectedIndex + 1;
+                dumpedPKHeX.Nature = nature.SelectedIndex;
+                dumpedPKHeX.Ability = ability.SelectedIndex + 1;
+                dumpedPKHeX.HeldItem = heldItem.SelectedIndex;
+
+                dumpedPKHeX.Move1 = move1.SelectedIndex;
+                dumpedPKHeX.Move2 = move2.SelectedIndex;
+                dumpedPKHeX.Move3 = move3.SelectedIndex;
+                dumpedPKHeX.Move4 = move4.SelectedIndex;
+                dumpedPKHeX.RelearnMove1 = relearnmove1.SelectedIndex;
+                dumpedPKHeX.RelearnMove2 = relearnmove2.SelectedIndex;
+                dumpedPKHeX.RelearnMove3 = relearnmove3.SelectedIndex;
+                dumpedPKHeX.RelearnMove4 = relearnmove4.SelectedIndex;
+
+                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.IV32), 0, pkmToEdit, 116, 4);
+                byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);
+                byte[] chkSum = BitConverter.GetBytes(PKHeX.getCHK(pkmToEdit));
+                Array.Copy(chkSum, 0, pkmEdited, 6, 2);
+
+                if (radioBoxes.Checked)
+                {
+                    uint ssd = (Decimal.ToUInt32(slotDump.Value) * 30 - 30) + Decimal.ToUInt32(slotDump.Value) - 1;
+                    uint ssdOff = boxOff + (ssd * 232);
+                    Program.scriptHelper.write(ssdOff, pkmEdited, pid);
+                }
+               else if (radioBattleBox.Checked)
+                {
+                    uint bbOff = battleBoxOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * 232);
+                    Program.scriptHelper.write(bbOff, pkmEdited, pid);
+                }
+
+                else if (radioParty.Checked)
+                {
+                    uint pOff = partyOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * 484);
+                    string pfOff = pOff.ToString("X");
+                    string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
+                    Program.scriptHelper.write(pOff, pkmEdited, pid);
+                }
+                else
+                    MessageBox.Show("No editing support for this pokémon.", "Editing Unavailable");
+            }
+        }
 
         // Clone pokémon
+        private void cloneDoIt_Click(object sender, EventArgs e)
+        {
+            uint offset = boxOff + cloneGetBoxIndexFrom() * POKEBYTES;
+            uint mySeq = Program.scriptHelper.data(offset, POKEBYTES, pid);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handleCloneData, null);
+            waitingForData.Add(mySeq, myArgs);
+        }
+
+        private void handleCloneData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            writePokemonToBox(args.data, cloneGetBoxIndexTo(), cloneGetCopies());
+        }
+
+        private uint cloneGetCopies()
+        {
+            return Decimal.ToUInt32(cloneCopiesNo.Value);
+        }
+
+        private uint cloneGetBoxIndexTo()
+        {
+            return Decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
+        }
+
+        private uint cloneGetBoxIndexFrom()
+        {
+            return Decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
+        }
+
+        private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
+        {
+            cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
+        }
+
+        private void cloneSlotTo_ValueChanged(object sender, EventArgs e)
+        {
+            cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
+        }
 
         // Write pokémon from file
-        //Returns 0 on success, other values on failure
-        private int readPokemonFromFile(string filename, out byte[] result)
+        private void writeBrowse_Click(object sender, EventArgs e)
         {
+            OpenFileDialog selectWriteDialog = new OpenFileDialog();
+            selectWriteDialog.Title = "Select an EKX/PKX file";
+            if (gen7)
+            {
+                selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
+            }
+            else
+            {
+                selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
+            }
+            string path = @Application.StartupPath + "\\Pokemon";
+            selectWriteDialog.InitialDirectory = path;
+            if (selectWriteDialog.ShowDialog() == DialogResult.OK)
+            {
+                selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
+            }
+        }
+
+        private int readPokemonFromFile(string filename, out byte[] result)
+        { //Returns 0 on success, other values on failure
             string extension = Path.GetExtension(filename);
             result = new byte[POKEBYTES];
 
@@ -1511,21 +1786,23 @@ namespace ntrbase
             }
         }
 
-        void writeTab_DragEnter(object sender, DragEventArgs e)
+        private void writeDoIt_Click(object sender, EventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
+            if (!selectedCloneValid)
+            {
+                MessageBox.Show("No Pokemon selected!", "Error");
+                return;
+            }
+            int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
+            if (ret > 0)
+                MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
+            else if (ret <= 0)
+                if (writeAutoInc.Checked)
+                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
         }
 
-
-
-        // Delete pokémon
-
-
-
-        //Returns 0 on success, positive value represents how many copies could not be written.
         private int writePokemonToBox(byte[] data, uint boxFrom, uint count)
-        {
+        { //Returns 0 on success, positive value represents how many copies could not be written.
             if (data.Length != POKEBYTES)
                 return -1;
 
@@ -1539,57 +1816,43 @@ namespace ntrbase
 
             byte[] dataToWrite = new byte[count * POKEBYTES];
             for (int i = 0; i < count; i++)
-            {
                 data.CopyTo(dataToWrite, i * POKEBYTES);
-            }
             uint offset = boxOff + boxFrom * POKEBYTES;
             Program.scriptHelper.write(offset, dataToWrite, pid);
             return ret;
         }
 
-        #region housekeeping for cloning
-        private uint cloneGetCopies()
+        void writeTab_DragEnter(object sender, DragEventArgs e)
         {
-            return Decimal.ToUInt32(cloneCopiesNo.Value);
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
         }
 
-        private uint cloneGetBoxIndexTo()
+        void writeTab_DragDrop(object sender, DragEventArgs e)
         {
-            return Decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length <= 0)
+                return;
+            int fails = 0;
+            foreach (string filename in files)
+            {
+                byte[] data = new byte[POKEBYTES];
+                if (readPokemonFromFile(filename, out data) == 0)
+                {
+                    int ret = writePokemonToBox(data, writeGetBoxIndex(), writeGetCopies());
+                    if (ret > 0)
+                        fails += ret;
+                    else if (ret < 0)
+                        return;
+                }
+
+                if (writeAutoInc.Checked)
+                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+            }
+            if (fails > 0)
+                MessageBox.Show(fails + " write(s) failed because end of boxes was reached.", "Error");
         }
 
-        private uint cloneGetBoxIndexFrom()
-        {
-            return Decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
-        }
-
-        private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
-        {
-            cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
-        }
-
-        private void cloneSlotTo_ValueChanged(object sender, EventArgs e)
-        {
-            cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
-        }
-
-        #endregion housekeeping for cloning
-
-        private void cloneDoIt_Click(object sender, EventArgs e)
-        {
-            uint offset = boxOff + cloneGetBoxIndexFrom() * POKEBYTES;
-            uint mySeq = Program.scriptHelper.data(offset, POKEBYTES, pid);
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handleCloneData, null);
-            waitingForData.Add(mySeq, myArgs);
-        }
-
-        private void handleCloneData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            writePokemonToBox(args.data, cloneGetBoxIndexTo(), cloneGetCopies());
-        }
-
-        #region housekeeping for write from file
         private uint writeGetCopies()
         {
             return Decimal.ToUInt32(writeCopiesNo.Value);
@@ -1620,76 +1883,45 @@ namespace ntrbase
             writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
         }
 
-        #endregion housekeeping for write from file
-
-        private void writeBrowse_Click(object sender, EventArgs e)
+        // Delete pokémon
+        private void delPkm_Click(object sender, EventArgs e)
         {
-            OpenFileDialog selectWriteDialog = new OpenFileDialog();
-            selectWriteDialog.Title = "Select an EKX/PKX file";
+            uint offset = boxOff + deleteGetIndex() * POKEBYTES;
+            uint size = POKEBYTES * deleteGetAmount();
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[size], handleDeleteData, null);
+            uint mySeq = Program.scriptHelper.data(offset, size, pid);
+            waitingForData.Add(mySeq, myArgs);
+        }
+
+        private void handleDeleteData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+
+            if (deleteKeepBackup.Checked)
+            {
+                string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
+                FileInfo folder = new FileInfo(folderPath);
+                folder.Directory.Create();
+                PKHeX validator = new PKHeX();
+                for (int i = 0; i < args.data.Length; i += POKEBYTES)
+                {
+                    validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
+                    if (validator.Species == 0)
+                        continue;
+                    string fileName;
+                    if (gen7)
+                        fileName = folderPath + "backup.pk7";
+                    else
+                        fileName = folderPath + "backup.pk6";
+                    writePokemonToFile(validator.Data, fileName);
+                }
+            }
             if (gen7)
-            {
-                selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
-            }
+                writePokemonToBox(PKTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
             else
-            {
-                selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
-            }
-            string path = @Application.StartupPath + "\\Pokemon";
-            selectWriteDialog.InitialDirectory = path;
-            if (selectWriteDialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
-            }
+                writePokemonToBox(PKTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
         }
 
-        private void writeDoIt_Click(object sender, EventArgs e)
-        {
-            if (!selectedCloneValid)
-            {
-                MessageBox.Show("No Pokemon selected!", "Error");
-                return;
-            }
-            int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
-            if (ret > 0)
-                MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
-            else if (ret <= 0)
-                if (writeAutoInc.Checked)
-                {
-                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
-                }
-        }
-
-        void writeTab_DragDrop(object sender, DragEventArgs e)
-        {
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            if (files.Length <= 0)
-                return;
-            //TODO: maybe show a message if importing multiple files?
-            int fails = 0;
-            foreach (string filename in files)
-            {
-                byte[] data = new byte[POKEBYTES];
-                if (readPokemonFromFile(filename, out data) == 0)
-                {
-                    int ret = writePokemonToBox(data, writeGetBoxIndex(), writeGetCopies());
-                    if (ret > 0)
-                        fails += ret;
-                    else if (ret < 0)
-                        return;
-                }
-
-                if (writeAutoInc.Checked)
-                {
-                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
-                }
-            }
-            if (fails > 0)
-            {
-                MessageBox.Show(fails + " write(s) failed because end of boxes was reached.", "Error");
-            }
-        }
-
-        #region housekeeping for delete
         private uint deleteGetAmount()
         {
             return Decimal.ToUInt32(deleteAmount.Value);
@@ -1709,418 +1941,8 @@ namespace ntrbase
         {
             deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
         }
-        #endregion housekeeping for delete
-
-        private void delPkm_Click(object sender, EventArgs e)
-        {
-            uint offset = boxOff + deleteGetIndex() * POKEBYTES;
-            uint size = POKEBYTES * deleteGetAmount();
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[size], handleDeleteData, null);
-            uint mySeq = Program.scriptHelper.data(offset, size, pid);
-            waitingForData.Add(mySeq, myArgs);
-        }
-
-        private void handleDeleteData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-
-            if (deleteKeepBackup.Checked)
-            {
-                string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
-                System.IO.FileInfo folder = new System.IO.FileInfo(folderPath);
-                folder.Directory.Create();
-                PKHeX validator = new PKHeX();
-                for (int i = 0; i < args.data.Length; i += POKEBYTES)
-                {
-                    validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
-                    if (validator.Species == 0)
-                        continue;
-                    string fileName;
-                    if (gen7)
-                    {
-                        fileName = folderPath + "backup.pk7";
-                    }
-                    else
-                    {
-                        fileName = folderPath + "backup.pk6";
-                    }
-                    writePokemonToFile(validator.Data, fileName);
-                }
-            }
-            if (gen7)
-            {
-                writePokemonToBox(PKTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
-            }
-            else
-            {
-                writePokemonToBox(PKTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
-            }
-        }
-
-        private void showItems_Click(object sender, EventArgs e)
-        {
-            itemsGridView.Visible = true;
-            keysGridView.Visible = false;
-            tmsGridView.Visible = false;
-            medsGridView.Visible = false;
-            bersGridView.Visible = false;
-            showItems.ForeColor = System.Drawing.Color.Green;
-            showMedicine.ForeColor = System.Drawing.Color.Black;
-            showTMs.ForeColor = System.Drawing.Color.Black;
-            showBerries.ForeColor = System.Drawing.Color.Black;
-            showKeys.ForeColor = System.Drawing.Color.Black;
-        }
-
-        private void showMedicine_Click(object sender, EventArgs e)
-        {
-            itemsGridView.Visible = false;
-            keysGridView.Visible = false;
-            tmsGridView.Visible = false;
-            medsGridView.Visible = true;
-            bersGridView.Visible = false;
-            showItems.ForeColor = System.Drawing.Color.Black;
-            showMedicine.ForeColor = System.Drawing.Color.Green;
-            showTMs.ForeColor = System.Drawing.Color.Black;
-            showBerries.ForeColor = System.Drawing.Color.Black;
-            showKeys.ForeColor = System.Drawing.Color.Black;
-        }
-
-        private void showTMs_Click(object sender, EventArgs e)
-        {
-            itemsGridView.Visible = false;
-            keysGridView.Visible = false;
-            tmsGridView.Visible = true;
-            medsGridView.Visible = false;
-            bersGridView.Visible = false;
-            showItems.ForeColor = System.Drawing.Color.Black;
-            showMedicine.ForeColor = System.Drawing.Color.Black;
-            showTMs.ForeColor = System.Drawing.Color.Green;
-            showBerries.ForeColor = System.Drawing.Color.Black;
-            showKeys.ForeColor = System.Drawing.Color.Black;
-        }
-
-        private void showBerries_Click(object sender, EventArgs e)
-        {
-            itemsGridView.Visible = false;
-            keysGridView.Visible = false;
-            tmsGridView.Visible = false;
-            medsGridView.Visible = false;
-            bersGridView.Visible = true;
-            showItems.ForeColor = System.Drawing.Color.Black;
-            showMedicine.ForeColor = System.Drawing.Color.Black;
-            showTMs.ForeColor = System.Drawing.Color.Black;
-            showBerries.ForeColor = System.Drawing.Color.Green;
-            showKeys.ForeColor = System.Drawing.Color.Black;
-        }
-
-        private void showKeys_Click(object sender, EventArgs e)
-        {
-            itemsGridView.Visible = false;
-            keysGridView.Visible = true;
-            tmsGridView.Visible = false;
-            medsGridView.Visible = false;
-            bersGridView.Visible = false;
-            showItems.ForeColor = System.Drawing.Color.Black;
-            showMedicine.ForeColor = System.Drawing.Color.Black;
-            showTMs.ForeColor = System.Drawing.Color.Black;
-            showBerries.ForeColor = System.Drawing.Color.Black;
-            showKeys.ForeColor = System.Drawing.Color.Green;
-        }
-
-        public void itemWrite_Click(object sender, EventArgs e)
-        {
-            byte[] dataToWrite = new byte[0] { };
-            uint offsetToWrite = 0;
-
-            if (itemsGridView.Visible == true)
-            {
-                itemData = new byte[1600];
-                for (int i = 0; i < itemsGridView.RowCount; i++)
-                {
-                    string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
-                }
-                dataToWrite = itemData;
-                offsetToWrite = itemsoff;
-            }
-
-            if (keysGridView.Visible == true)
-            {
-                keyData = new byte[384];
-                for (int i = 0; i < keysGridView.RowCount; i++)
-                {
-                    string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
-                }
-                dataToWrite = keyData;
-                offsetToWrite = keysoff;
-            }
-
-            if (tmsGridView.Visible == true)
-            {
-                tmData = new byte[432];
-                for (int i = 0; i < tmsGridView.RowCount; i++)
-                {
-                    string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
-                    BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
-                }
-                dataToWrite = tmData;
-                offsetToWrite = tmsoff;
-            }
-
-            if (medsGridView.Visible == true)
-            {
-                medData = new byte[256];
-                for (int i = 0; i < medsGridView.RowCount; i++)
-                {
-                    string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
-                }
-                dataToWrite = medData;
-                offsetToWrite = medsoff;
-            }
-
-            if (bersGridView.Visible == true)
-            {
-                berryData = new byte[288];
-                for (int i = 0; i < bersGridView.RowCount; i++)
-                {
-                    string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
-                }
-                dataToWrite = berryData;
-                offsetToWrite = bersoff;
-            }
-
-            Program.scriptHelper.write(offsetToWrite, dataToWrite, pid);
-        }
-
-        private void itemAdd_Click(object sender, EventArgs e)
-        {
-            if (itemsGridView.Visible == true)
-            {
-                if (itemsGridView.RowCount >= 400)
-                {
-                    MessageBox.Show("You already have the max amount of items!", "Too many items");
-                }
-                else
-                {
-                    itemsGridView.Rows.Add("[None]", 0);
-                }
-            }
-
-            if (keysGridView.Visible == true)
-            {
-                if (keysGridView.RowCount >= 96)
-                {
-                    MessageBox.Show("You already have the max amount of key items!", "Too many items");
-                }
-                else
-                {
-                    keysGridView.Rows.Add("[None]", 0);
-                }
-            }
-
-            if (tmsGridView.Visible == true)
-            {
-                if (tmsGridView.RowCount >= 96)
-                {
-                    MessageBox.Show("You already have the max amount of medicine items!", "Too many items");
-                }
-                else
-                {
-                    tmsGridView.Rows.Add("[None]", 0);
-                }
-            }
-
-            if (medsGridView.Visible == true)
-            {
-                if (medsGridView.RowCount >= 108)
-                {
-                    MessageBox.Show("You already have the max amount of TMs & HMs!", "Too many items");
-                }
-                else
-                {
-                    medsGridView.Rows.Add("[None]", 0);
-                }
-            }
-
-            if (bersGridView.Visible == true)
-            {
-                if (bersGridView.RowCount >= 72)
-                {
-                    MessageBox.Show("You already have the max amount of berries!", "Too many items");
-                }
-                else
-                {
-                    bersGridView.Rows.Add("[None]", 0);
-                }
-            }
-        }
 
 
-
-        private void ivChanged(object sender, EventArgs e)
-        {
-            int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
-            SetText(hiddenPower, PKTable.HPName[hp]);
-            SetColor(hiddenPower, PKTable.HPColor[hp], true);
-        }
-
-        //TODO: are all these Array.Copy() really necessary? Shouldn't PKHeX just handle everything?
-        private void pokeEkx_Click(object sender, EventArgs e)
-        {
-            if (dumpedPKHeX.Data == null)
-            {
-                MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
-            }
-            else if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value >= 511)
-            {
-                MessageBox.Show("Pokemon EV count is too high, the sum of all EVs should be 510 or less!", "EVs too high");
-            }
-            //This shouldn't be possible (length limited by text field), but better leave it
-            else if (nickname.Text.Length > 12)
-            {
-                MessageBox.Show("Pokemon name length too long! Please use a name with a length of 12 or less.", "Name too long");
-            }
-            else if (otName.Text.Length > 12)
-            {
-                MessageBox.Show("OT name length too long! Please use a name with a length of 12 or less.", "Name too long");
-            }
-            else
-            {
-                if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value <= 510)
-                {
-                    if (nickname.Text.Length <= 12 && otName.Text.Length <= 12)
-                    {
-                        dumpedPKHeX.Nickname = nickname.Text.PadRight(12, '\0');
-                        dumpedPKHeX.OT_Name = otName.Text.PadRight(12, '\0');
-                        byte[] pkmToEdit = dumpedPKHeX.Data;
-                        Array.Copy(Encoding.Unicode.GetBytes(dumpedPKHeX.Nickname), 0, pkmToEdit, 64, 24);
-                        Array.Copy(BitConverter.GetBytes(dumpedPKHeX.Nature), 0, pkmToEdit, 28, 1);
-                        Array.Copy(BitConverter.GetBytes(dumpedPKHeX.HeldItem), 0, pkmToEdit, 10, 2);
-                        dumpedPKHeX.IV_HP = (int)ivHPNum.Value;
-                        dumpedPKHeX.IV_ATK = (int)ivATKNum.Value;
-                        dumpedPKHeX.IV_DEF = (int)ivDEFNum.Value;
-                        dumpedPKHeX.IV_SPE = (int)ivSPENum.Value;
-                        dumpedPKHeX.IV_SPA = (int)ivSPANum.Value;
-                        dumpedPKHeX.IV_SPD = (int)ivSPDNum.Value;
-
-                        dumpedPKHeX.EV_HP = (int)evHPNum.Value;
-                        dumpedPKHeX.EV_ATK = (int)evATKNum.Value;
-                        dumpedPKHeX.EV_DEF = (int)evDEFNum.Value;
-                        dumpedPKHeX.EV_SPE = (int)evSPENum.Value;
-                        dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
-                        dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
-
-                        dumpedPKHeX.EXP = (uint)ExpPoints.Value;
-
-                        dumpedPKHeX.Ball = ball.SelectedIndex + 1;
-
-                        dumpedPKHeX.SID = (int)dSIDNum.Value;
-                        dumpedPKHeX.TID = (int)dTIDNum.Value;
-
-                        dumpedPKHeX.PID = PKHeX.getHEXval(dPID.Text);
-
-                        if (isEgg.Checked == true) { dumpedPKHeX.IsEgg = true; }
-                        if (isEgg.Checked == false) { dumpedPKHeX.IsEgg = false; }
-                        dumpedPKHeX.Species = species.SelectedIndex + 1;
-                        dumpedPKHeX.Nature = nature.SelectedIndex;
-                        dumpedPKHeX.Ability = ability.SelectedIndex + 1;
-                        dumpedPKHeX.HeldItem = heldItem.SelectedIndex;
-                        dumpedPKHeX.Move1 = move1.SelectedIndex;
-                        dumpedPKHeX.Move2 = move2.SelectedIndex;
-                        dumpedPKHeX.Move3 = move3.SelectedIndex;
-                        dumpedPKHeX.Move4 = move4.SelectedIndex;
-                        dumpedPKHeX.RelearnMove1 = relearnmove1.SelectedIndex;
-                        dumpedPKHeX.RelearnMove2 = relearnmove2.SelectedIndex;
-                        dumpedPKHeX.RelearnMove3 = relearnmove3.SelectedIndex;
-                        dumpedPKHeX.RelearnMove4 = relearnmove4.SelectedIndex;
-
-                        Array.Copy(BitConverter.GetBytes(dumpedPKHeX.IV32), 0, pkmToEdit, 116, 4);
-                        byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);
-                        byte[] chkSum = BitConverter.GetBytes(PKHeX.getCHK(pkmToEdit));
-                        Array.Copy(chkSum, 0, pkmEdited, 6, 2);
-
-                        if (radioBoxes.Checked == true)
-                        {
-                            uint ssd = (Decimal.ToUInt32(slotDump.Value) * 30 - 30) + Decimal.ToUInt32(slotDump.Value) - 1;
-                            uint ssdOff = boxOff + (ssd * 232);
-                            Program.scriptHelper.write(ssdOff, pkmEdited, pid);
-                        }
-
-                        if (radioBattleBox.Checked == true)
-                        {
-                            uint bbOff = battleBoxOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * 232);
-                            Program.scriptHelper.write(bbOff, pkmEdited, pid);
-                        }
-
-                        if (radioParty.Checked == true)
-                        {
-                            uint pOff = partyOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * 484);
-                            string pfOff = pOff.ToString("X");
-                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
-                            Program.scriptHelper.write(pOff, pkmEdited, pid);
-                        }
-
-                        if (radioOpponent.Checked == true)
-                        {
-                            MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
-                        }
-
-                        if (radioDaycare.Checked == true)
-                        {
-                            MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
-                        }
-
-                        if (radioTrade.Checked == true)
-                        {
-                            MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
-                        }
-                    }
-                }
-            }
-        }
-
-        private void dTIDNum_ValueChanged(object sender, EventArgs e)
-        {
-            setTSVToolTip(dTIDNum, dSIDNum);
-        }
-
-        private void dSIDNum_ValueChanged(object sender, EventArgs e)
-        {
-            setTSVToolTip(dTIDNum, dSIDNum);
-        }
-
-        private void dPID_TextChanged(object sender, EventArgs e)
-        {
-            SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(dumpedPKHeX.PID).ToString("D4"));
-        }
 
         private void setShiny_Click(object sender, EventArgs e)
         {
@@ -2284,6 +2106,77 @@ namespace ntrbase
             }
         }
 
+        // Item buttons
+        private void showItems_Click(object sender, EventArgs e)
+        {
+            itemsGridView.Visible = true;
+            keysGridView.Visible = false;
+            tmsGridView.Visible = false;
+            medsGridView.Visible = false;
+            bersGridView.Visible = false;
+            showItems.ForeColor = Color.Green;
+            showMedicine.ForeColor = Color.Black;
+            showTMs.ForeColor = Color.Black;
+            showBerries.ForeColor = Color.Black;
+            showKeys.ForeColor = Color.Black;
+        }
+
+        private void showMedicine_Click(object sender, EventArgs e)
+        {
+            itemsGridView.Visible = false;
+            keysGridView.Visible = false;
+            tmsGridView.Visible = false;
+            medsGridView.Visible = true;
+            bersGridView.Visible = false;
+            showItems.ForeColor = Color.Black;
+            showMedicine.ForeColor = Color.Green;
+            showTMs.ForeColor = Color.Black;
+            showBerries.ForeColor = Color.Black;
+            showKeys.ForeColor = Color.Black;
+        }
+
+        private void showTMs_Click(object sender, EventArgs e)
+        {
+            itemsGridView.Visible = false;
+            keysGridView.Visible = false;
+            tmsGridView.Visible = true;
+            medsGridView.Visible = false;
+            bersGridView.Visible = false;
+            showItems.ForeColor = Color.Black;
+            showMedicine.ForeColor = Color.Black;
+            showTMs.ForeColor = Color.Green;
+            showBerries.ForeColor = Color.Black;
+            showKeys.ForeColor = Color.Black;
+        }
+
+        private void showBerries_Click(object sender, EventArgs e)
+        {
+            itemsGridView.Visible = false;
+            keysGridView.Visible = false;
+            tmsGridView.Visible = false;
+            medsGridView.Visible = false;
+            bersGridView.Visible = true;
+            showItems.ForeColor = Color.Black;
+            showMedicine.ForeColor = Color.Black;
+            showTMs.ForeColor = Color.Black;
+            showBerries.ForeColor = Color.Green;
+            showKeys.ForeColor = Color.Black;
+        }
+
+        private void showKeys_Click(object sender, EventArgs e)
+        {
+            itemsGridView.Visible = false;
+            keysGridView.Visible = true;
+            tmsGridView.Visible = false;
+            medsGridView.Visible = false;
+            bersGridView.Visible = false;
+            showItems.ForeColor = Color.Black;
+            showMedicine.ForeColor = Color.Black;
+            showTMs.ForeColor = Color.Black;
+            showBerries.ForeColor = Color.Black;
+            showKeys.ForeColor = Color.Green;
+        }
+
         // Tooltips for TSV / ESV / G7ID
         private void setTSVToolTip(NumericUpDown TID, NumericUpDown SID)
         {
@@ -2299,6 +2192,24 @@ namespace ntrbase
                 SetTooltip(ToolTipTSVpoke, TID, "TSV: " + TSV.ToString("D4"));
                 SetTooltip(ToolTipTSVpoke, SID, "TSV: " + TSV.ToString("D4"));
             }
+        }
+
+        private void dTIDNum_ValueChanged(object sender, EventArgs e)
+        {
+            setTSVToolTip(dTIDNum, dSIDNum);
+        }
+
+        private void dPID_TextChanged(object sender, EventArgs e)
+        {
+            SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(PKHeX.getHEXval(dPID.Text)).ToString("D4"));
+        }
+
+        // Automatic Hidden Power Calculation
+        private void ivChanged(object sender, EventArgs e)
+        {
+            int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
+            SetText(hiddenPower, PKTable.HPName[hp]);
+            SetColor(hiddenPower, PKTable.HPColor[hp], true);
         }
 
         #endregion GUI handling

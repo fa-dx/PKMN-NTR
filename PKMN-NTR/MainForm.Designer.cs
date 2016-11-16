@@ -1866,7 +1866,7 @@
             this.dSIDNum.Name = "dSIDNum";
             this.dSIDNum.Size = new System.Drawing.Size(72, 20);
             this.dSIDNum.TabIndex = 2;
-            this.dSIDNum.ValueChanged += new System.EventHandler(this.dSIDNum_ValueChanged);
+            this.dSIDNum.ValueChanged += new System.EventHandler(this.dTIDNum_ValueChanged);
             // 
             // label45
             // 
