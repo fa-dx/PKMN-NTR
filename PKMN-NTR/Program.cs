@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ntrbase.Helpers;
+using System;
 using System.Windows.Forms;
 
 
@@ -9,12 +10,14 @@ namespace ntrbase
         public static NTR ntrClient;
 		public static ScriptHelper scriptHelper;
 		public static MainForm gCmdWindow;
+        public static RemoteControl helper;
 
         [STAThread]
         static void Main()
         {
             ntrClient = new NTR();
 			scriptHelper = new ScriptHelper();
+            helper = new RemoteControl();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -194,7 +194,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.touchX = new System.Windows.Forms.NumericUpDown();
             this.touchY = new System.Windows.Forms.NumericUpDown();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.label72 = new System.Windows.Forms.Label();
             this.typeLSR = new System.Windows.Forms.ComboBox();
             this.RunLSRbot = new System.Windows.Forms.Button();
@@ -2571,10 +2570,6 @@
             this.touchY.TabIndex = 13;
             this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
             // 
-            // timer2
-            // 
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
             // label72
             // 
             this.label72.AutoSize = true;
@@ -4794,7 +4789,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.CheckBox deleteKeepBackup;
-        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button RunLSRbot;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.Button RunWTbot;

@@ -40,6 +40,7 @@ namespace ntrbase
         public string BOXEXT;
         PKHeX dumpedPKHeX = new PKHeX();
         LookupTable PKTable = new LookupTable();
+        Task<bool> waitTask;
         private static string numberPattern = " ({0})";
 
         // Variables for cloning
@@ -179,7 +180,7 @@ namespace ntrbase
 
         #endregion Class variables
 
-        #region constants
+        #region Constants
 
         // Poké Ball images
         public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, };
@@ -209,7 +210,7 @@ namespace ntrbase
         public static readonly uint softReset = 0xCF7;
         public static readonly uint notouch = 0x02000000;
 
-        #endregion constants
+        #endregion Constants
 
         #region Main window
 
@@ -455,6 +456,11 @@ namespace ntrbase
         }
 
         private void buttonDisconnect_Click(object sender, EventArgs e)
+        {
+            PerformDisconnect();   
+        }
+
+        private void PerformDisconnect()
         {
             Program.scriptHelper.disconnect();
             game = GameType.None;
@@ -2335,105 +2341,80 @@ namespace ntrbase
 
         #region Remote control
 
-        // Test for remote control
-
-        public void sendButton(uint command)
+        // Manual button presses
+        private void sendButton(uint command)
         {
-            byte[] buttonByte = BitConverter.GetBytes(command);
-            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            Program.helper.quickbuton(command, 200);
         }
 
-        // A button
         private void manualA_Click(object sender, EventArgs e)
         {
             sendButton(keyA);
-            timer2.Start();
         }
 
-        // B button
         private void manualB_Click(object sender, EventArgs e)
         {
             sendButton(keyB);
-            timer2.Start();
         }
 
-        // X button
         private void manualX_Click(object sender, EventArgs e)
         {
             sendButton(keyX);
-            timer2.Start();
         }
 
-        // Y Button
         private void manualY_Click(object sender, EventArgs e)
         {
             sendButton(keyY);
-            timer2.Start();
         }
 
-        //D-pad
         private void manualDUp_Click(object sender, EventArgs e)
         {
             sendButton(DpadUP);
-            timer2.Start();
         }
 
         private void ManualDDown_Click(object sender, EventArgs e)
         {
             sendButton(DpadDOWN);
-            timer2.Start();
         }
 
         private void manualDLeft_Click(object sender, EventArgs e)
         {
             sendButton(DpadLEFT);
-            timer2.Start();
         }
 
         private void manualDRight_Click(object sender, EventArgs e)
         {
             sendButton(DpadRIGHT);
-            timer2.Start();
         }
 
-        // Start button
         private void manualStart_Click(object sender, EventArgs e)
         {
             sendButton(keySTART);
-            timer2.Start();
         }
 
-        //Select button
         private void manualSelect_Click(object sender, EventArgs e)
         {
             sendButton(keySELECT);
-            timer2.Start();
         }
 
-        //L button
         private void manualL_Click(object sender, EventArgs e)
         {
             sendButton(keyL);
-            timer2.Start();
         }
 
-        //R button
         private void manualR_Click(object sender, EventArgs e)
         {
             sendButton(keyR);
-            timer2.Start();
         }
 
-        // Soft-reset
         private async void manualSR_Click(object sender, EventArgs e)
         {
             DialogResult dialogr = MessageBox.Show("Are you sure that you want to send a soft-reset command? The application will automatically disconnect from the game afterwards.", "Remote Control", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogr == DialogResult.Yes)
             {
                 sendButton(softReset);
-                timer2.Start();
-                await Task.Delay(500);
-                buttonDisconnect.PerformClick();
+                await Task.Delay(1000);
+                PerformDisconnect();
             }
         }
 
@@ -2445,25 +2426,10 @@ namespace ntrbase
             return 0x01000000 + hexY * 0x1000 + hexX;
         }
 
-        public void sendTouch(uint coord)
-        {
-            byte[] buttonByte = BitConverter.GetBytes(coord);
-            Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
-        }
-
         // Send manual touch command
         private void manualTouch_Click(object sender, EventArgs e)
         {
-            sendTouch(gethexcoord(touchX.Value, touchY.Value));
-            timer2.Start();
-        }
-
-        // Release buttons and touchscreen
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            timer2.Stop();
-            sendButton(nokey);
-            sendTouch(notouch);
+            Program.helper.quicktouch(touchX.Value, touchY.Value, 200);
         }
 
         #endregion Remote control
