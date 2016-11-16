@@ -19,14 +19,13 @@ namespace ntrbase
 {
     public partial class MainForm : Form
     {
-        //A "waiting room", where functions wait for data to be acquired.
-        //Entries are indexed by their sequence number. Once a request with a given sequence number
-        //is fulfilled, handleDataReady() uses information in DataReadyWaiting object to process the data.
+        //A "waiting room", where functions wait for data to be acquired. Entries are indexed by their sequence number. Once a request with a given sequence number is fulfilled, handleDataReady() uses information in DataReadyWaiting object to process the data.
         static Dictionary<uint, DataReadyWaiting> waitingForData = new Dictionary<uint, DataReadyWaiting>();
 
         // Set this boolean to true to enable the write feature for the party pokémon.
         public static readonly bool enablepartywrite = false;
 
+        // Program-wide variables
         public enum GameType { None, X, Y, OR, AS, SM };
         public bool gen7;
         public uint BOXES;
@@ -40,6 +39,7 @@ namespace ntrbase
         PKHeX dumpedPKHeX = new PKHeX();
         LookupTable PKTable = new LookupTable();
 
+        // Variables for cloning
         public byte[] selectedCloneData = new byte[232];
         public bool selectedCloneValid = false;
 
@@ -92,7 +92,7 @@ namespace ntrbase
         public uint daycare3Off; // Battle Resort Daycare
         public uint daycare4Off; // Battle Resort Daycare
         public uint battleBoxOff;
-        //Offsets for HID
+        //Offsets for remote controls
         public uint buttonsOff = 0x10df20;
         public uint touchscrOff = 0x10df24;
         public int hid_pid = 0x10;
@@ -126,8 +126,7 @@ namespace ntrbase
         public uint organizeBoxIN;
         public uint organizeBoxOUT;
 
-        //TODO: add opponent data offset (right now it's a constant)
-
+        // Variables for inventory
         private byte[] itemData = new byte[1600];
         private byte[] keyData = new byte[384];
         private byte[] tmData = new byte[432];
@@ -152,15 +151,40 @@ namespace ntrbase
         public uint bersfinal;
         public uint bersamountfinal;
 
+        public DataGridViewComboBoxColumn itemItem;
+        public DataGridViewColumn itemAmount;
+        public DataGridViewComboBoxColumn keyItem;
+        public DataGridViewColumn keyAmount;
+        public DataGridViewComboBoxColumn tmItem;
+        public DataGridViewColumn tmAmount;
+        public DataGridViewComboBoxColumn medItem;
+        public DataGridViewColumn medAmount;
+        public DataGridViewComboBoxColumn berItem;
+        public DataGridViewColumn berAmount;
+
+        //This array will contain controls that should be enabled when connected and disabled when disconnected.
+        Control[] enableWhenConnected = new Control[] { };
+        Control[] enableWhenConnected7 = new Control[] { };
+
+        // Tooltips for TSV and ESV
+        public ToolTip ToolTipTSVtrainer = new ToolTip();
+        public ToolTip ToolTipTSVpoke = new ToolTip();
+        public ToolTip ToolTipPSV = new ToolTip();
+
+        // Log handling
+        public delegate void LogDelegate(string l);
+        public LogDelegate delAddLog;
+
         #region constants
-        //Lookup tables
+
+        // Poké Ball images
         public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, };
-        // Position in boxes
+        // Position of boxes and pokémon in the lower screen
         public static readonly uint[] boxpokeXcord = { 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180 };
         public static readonly uint[] boxpokeYcord = { 60, 60, 60, 60, 60, 60, 90, 90, 90, 90, 90, 90, 120, 120, 120, 120, 120, 120, 150, 150, 150, 150, 150, 150, 180, 180, 180, 180, 180, 180 };
         public static readonly uint[] boxXcord = { 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260 };
         public static readonly uint[] boxYcord = { 24, 24, 24, 24, 24, 24, 24, 24, 72, 72, 72, 72, 72, 72, 72, 72, 120, 120, 120, 120, 120, 120, 120, 120, 168, 168, 168, 168, 168, 168, 168 };
-        //HID values
+        // Button values for remote controls
         public static readonly uint nokey = 0xFFF;
         public static readonly uint keyA = 0xFFE;
         public static readonly uint keyB = 0xFFD;
@@ -180,28 +204,8 @@ namespace ntrbase
         public static readonly uint runRIGHT = 0xFED;
         public static readonly uint softReset = 0xCF7;
         public static readonly uint notouch = 0x02000000;
+
         #endregion constants
-
-        //This array will contain controls that should be enabled when connected and disabled when disconnected.
-        Control[] enableWhenConnected = new Control[] { };
-        Control[] enableWhenConnected7 = new Control[] { };
-
-        public DataGridViewComboBoxColumn itemItem;
-        public DataGridViewColumn itemAmount;
-        public DataGridViewComboBoxColumn keyItem;
-        public DataGridViewColumn keyAmount;
-        public DataGridViewComboBoxColumn tmItem;
-        public DataGridViewColumn tmAmount;
-        public DataGridViewComboBoxColumn medItem;
-        public DataGridViewColumn medAmount;
-        public DataGridViewComboBoxColumn berItem;
-        public DataGridViewColumn berAmount;
-        public ToolTip ToolTipTSVtrainer = new ToolTip();
-        public ToolTip ToolTipTSVpoke = new ToolTip();
-        public ToolTip ToolTipPSV = new ToolTip();
-
-        public delegate void LogDelegate(string l);
-        public LogDelegate delAddLog;
 
         #region Main window
 
@@ -299,6 +303,7 @@ namespace ntrbase
             medsGridView.Columns.Add(medAmount);
             bersGridView.Columns.Add(berItem);
             bersGridView.Columns.Add(berAmount);
+
             foreach (string t in PKTable.Item6)
             {
                 itemItem.Items.Add(t);
@@ -307,6 +312,7 @@ namespace ntrbase
                 medItem.Items.Add(t);
                 berItem.Items.Add(t);
             }
+
             host.Text = Settings.Default.IP;
             host.Focus();
         }
@@ -318,8 +324,10 @@ namespace ntrbase
             Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
+
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
             enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR };
+
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
             SetSelectedIndex(filterATKlogic, 0);
@@ -333,50 +341,30 @@ namespace ntrbase
         private void enableControls()
         {
             if (gen7)
-            {
                 foreach (Control c in enableWhenConnected7)
-                {
                     SetEnabled(c, true);
-                }
-            }
             else
-            {
                 foreach (Control c in enableWhenConnected)
-                {
                     SetEnabled(c, true);
-                }
-            }
         }
 
         private void disableControls()
         {
             if (gen7)
-            {
                 foreach (Control c in enableWhenConnected7)
-                {
                     SetEnabled(c, false);
-                }
-            }
             else
-            {
                 foreach (Control c in enableWhenConnected)
-                {
                     SetEnabled(c, false);
-                }
-            }
         }
 
         public void Addlog(string l)
         {
             lastlog = l;
             if (!l.Contains("\r\n"))
-            {
                 l = l.Replace("\n", "\r\n");
-            }
             if (!l.EndsWith("\n"))
-            {
                 l += "\r\n";
-            }
             txtLog.AppendText(l);
         }
 
@@ -388,6 +376,7 @@ namespace ntrbase
             }
             catch (Exception)
             {
+
             }
         }
 
@@ -415,10 +404,6 @@ namespace ntrbase
         public int getHiddenPower()
         {
             int hp = (15 * ((dumpedPKHeX.IV_HP & 1) + 2 * (dumpedPKHeX.IV_ATK & 1) + 4 * (dumpedPKHeX.IV_DEF & 1) + 8 * (dumpedPKHeX.IV_SPE & 1) + 16 * (dumpedPKHeX.IV_SPA & 1) + 32 * (dumpedPKHeX.IV_SPD & 1)) / 63);
-
-            SetText(hiddenPower, PKTable.HPName[hp]);
-            SetColor(hiddenPower, PKTable.HPColor[hp], true);
-
             return hp;
         }
 
@@ -581,7 +566,7 @@ namespace ntrbase
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
-            else if (args.info.Contains("sango-1")) //Omega Ruby
+            else if (args.info.Contains("sango-1")) // Omega Ruby
             {
                 game = GameType.OR;
                 gen7 = false;
@@ -646,7 +631,7 @@ namespace ntrbase
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
-            else if (args.info.Contains("sango-2")) //Alpha Sapphire
+            else if (args.info.Contains("sango-2")) // Alpha Sapphire
             {
                 game = GameType.AS;
                 gen7 = false;
@@ -741,28 +726,28 @@ namespace ntrbase
                 partyOff = 0x34195E10;
                 //eggoff = 0x8C80124;
             }
-            else //not a process list or game not found - ignore packet
+            else // not a process list or game not found - ignore packet
             {
                 return;
             }
-            if (game != GameType.None && gen7)
+
+            // Fill fields in the form according to gen
+            if (game != GameType.None && gen7 && !botWorking)
             {
                 PKXEXT = ".pk7";
                 BOXEXT = "_boxes.ek7";
                 BOXES = 32;
                 fillGen7();
                 dumpAllData7();
+                enableControls();
             }
-            else if (game != GameType.None && !gen7)
+            else if (game != GameType.None && !gen7 && !botWorking)
             {
                 PKXEXT = ".pk6";
                 BOXEXT = "_boxes.ek6";
                 BOXES = 31;
                 fillGen6();
                 dumpAllData();
-            }
-            if (!botWorking)
-            {
                 enableControls();
             }
         }
@@ -1463,7 +1448,9 @@ namespace ntrbase
                 SetText(nickname, dumpedPKHeX.Nickname);
                 SetText(otName, dumpedPKHeX.OT_Name);
 
-                getHiddenPower();
+                int hp = getHiddenPower();
+                SetText(hiddenPower, PKTable.HPName[hp]);
+                SetColor(hiddenPower, PKTable.HPColor[hp], true);
 
                 SetChecked(isEgg, dumpedPKHeX.IsEgg);
 
@@ -2177,14 +2164,12 @@ namespace ntrbase
                             uint ssd = (Decimal.ToUInt32(slotDump.Value) * 30 - 30) + Decimal.ToUInt32(slotDump.Value) - 1;
                             uint ssdOff = boxOff + (ssd * 232);
                             Program.scriptHelper.write(ssdOff, pkmEdited, pid);
-                            getHiddenPower();
                         }
 
                         if (radioBattleBox.Checked == true)
                         {
                             uint bbOff = battleBoxOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * 232);
                             Program.scriptHelper.write(bbOff, pkmEdited, pid);
-                            getHiddenPower();
                         }
 
                         if (radioParty.Checked == true)
@@ -2193,7 +2178,6 @@ namespace ntrbase
                             string pfOff = pOff.ToString("X");
                             string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
                             Program.scriptHelper.write(pOff, pkmEdited, pid);
-                            getHiddenPower();
                         }
 
                         if (radioOpponent.Checked == true)
@@ -4434,7 +4418,7 @@ namespace ntrbase
                         for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
                         {
                             await Task.Delay(500);
-                            if (lastlog.Contains("finished"))
+                            if (lastlog.Contains("end of process list"))
                             {
                                 break;
                             }
