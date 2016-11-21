@@ -41,7 +41,6 @@ namespace ntrbase
         public string BOXEXT;
         public PKHeX dumpedPKHeX = new PKHeX();
         LookupTable PKTable = new LookupTable();
-        Task<bool> waitTask;
         private static string numberPattern = " ({0})";
 
         // Variables for cloning
@@ -51,6 +50,7 @@ namespace ntrbase
         // Variables for bots
         public bool botWorking = false;
         public bool botStop = false;
+        public int botnumber = -1;
         public int botState = 0;
         public static readonly int timeout = 10;
         public uint lastmemoryread;
@@ -523,10 +523,10 @@ namespace ntrbase
                 mapxoff = 0x818290C;
                 mapyoff = 0x8182914;
                 mapzoff = 0x8182910;
-                
 
-                
-                
+
+
+
                 pssettingsOff = 0x19ABF0;
                 pssettingsIN = 0x7E0000;
                 pssettingsOUT = 0x4D0000;
@@ -639,10 +639,10 @@ namespace ntrbase
                 mapxoff = 0x8187BF4;
                 mapyoff = 0x8187BFC;
                 mapzoff = 0x8187BF8;
-                
 
-                
-                
+
+
+
                 pssettingsOff = 0x19C244;
                 pssettingsIN = 0x830000;
                 pssettingsOUT = 0x500000;
@@ -1664,7 +1664,7 @@ namespace ntrbase
 
                 if (radioBoxes.Checked)
                 {
-                    uint ssd = (Decimal.ToUInt32(slotDump.Value) * 30 - 30) + Decimal.ToUInt32(slotDump.Value) - 1;
+                    uint ssd = (Decimal.ToUInt32(boxDump.Value) * 30 - 30) + Decimal.ToUInt32(slotDump.Value) - 1;
                     uint ssdOff = boxOff + (ssd * 232);
                     Program.scriptHelper.write(ssdOff, pkmEdited, pid);
                 }
@@ -2718,7 +2718,18 @@ namespace ntrbase
 
         private void stopBotButton_Click(object sender, EventArgs e)
         {
-            botStop = true;
+            switch (botnumber)
+            {
+                case 1: // Breeding bot
+                    botStop = true;
+                    break;
+                case 2: // Soft-reset bot
+                    botStop = true;
+                    break;
+                case 3: // Wonder Trade bot (Gen 6)
+                    WTBot6.botstop = true;
+                    break;
+            }
             stopBotButton.Enabled = false;
         }
 
@@ -3130,7 +3141,9 @@ namespace ntrbase
             if (dialogResult == DialogResult.OK && WTtradesNo.Value > 0)
             {
                 botWorking = true;
+                botnumber = 3;
                 disableControls();
+                stopBotButton.Enabled = true;
                 txtLog.Clear();
                 bool oras;
                 if (game == GameType.X || game == GameType.Y)

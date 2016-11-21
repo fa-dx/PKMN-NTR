@@ -14,21 +14,18 @@ namespace ntrbase.Bot
         private int currentslot;
         private int quantity;
         private int botstate;
-        private int waittimeout;
         private int attempts;
         private int tradewait;
         private uint currentPID;
 
         private bool boxchange = true;
-
         private bool taskresultbool;
-        private int taskresultint;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
 
         private uint psssmenu1Off;
         private uint psssmenu1IN;
-        private uint psssmenu1OUT;
+        //private uint psssmenu1OUT;
         public uint savescrnOff;
         public uint savescrnIN;
         public uint savescrnOUT;
@@ -66,7 +63,7 @@ namespace ntrbase.Bot
             { // Offsets for XY
                 psssmenu1Off = 0x19ABC0;
                 psssmenu1IN = 0x7E0000;
-                psssmenu1OUT = 0x4D0000;
+                //psssmenu1OUT = 0x4D0000;
                 savescrnOff = 0x19AB78;
                 savescrnIN = 0x7E0000;
                 savescrnOUT = 0x4D0000;
@@ -85,7 +82,7 @@ namespace ntrbase.Bot
             { // Offsets for ORAS
                 psssmenu1Off = 0x19C21C;
                 psssmenu1IN = 0x830000;
-                psssmenu1OUT = 0x500000;
+                //psssmenu1OUT = 0x500000;
                 savescrnOff = 0x19C1CC;
                 savescrnIN = 0x830000;
                 savescrnOUT = 0x500000;
