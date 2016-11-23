@@ -365,6 +365,7 @@
             this.srFilterLoad = new System.Windows.Forms.Button();
             this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
+            this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
@@ -4261,7 +4262,7 @@
             this.runBreedingBot.TabIndex = 16;
             this.runBreedingBot.Text = "Run";
             this.runBreedingBot.UseVisualStyleBackColor = true;
-            this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click_1);
+            this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click);
             // 
             // tabSoftReset
             // 
@@ -4468,6 +4469,7 @@
             // tabWonderTrade
             // 
             this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
+            this.tabWonderTrade.Controls.Add(this.WTcollectFC);
             this.tabWonderTrade.Controls.Add(this.label59);
             this.tabWonderTrade.Controls.Add(this.label58);
             this.tabWonderTrade.Controls.Add(this.RunWTbot);
@@ -4480,6 +4482,17 @@
             this.tabWonderTrade.Size = new System.Drawing.Size(558, 369);
             this.tabWonderTrade.TabIndex = 2;
             this.tabWonderTrade.Text = "Wonder Trade";
+            // 
+            // WTcollectFC
+            // 
+            this.WTcollectFC.AutoSize = true;
+            this.WTcollectFC.Enabled = false;
+            this.WTcollectFC.Location = new System.Drawing.Point(12, 55);
+            this.WTcollectFC.Name = "WTcollectFC";
+            this.WTcollectFC.Size = new System.Drawing.Size(134, 17);
+            this.WTcollectFC.TabIndex = 7;
+            this.WTcollectFC.Text = "Collect FC after a trade";
+            this.WTcollectFC.UseVisualStyleBackColor = true;
             // 
             // tabNTRlog
             // 
@@ -4973,6 +4986,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
         public System.Windows.Forms.TextBox dPID;
         private System.Windows.Forms.Button ReloadFields;
+        private System.Windows.Forms.CheckBox WTcollectFC;
     }
 }
 

@@ -260,7 +260,7 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)botstates.selectnewbox:
-                        Report("Touch New Box");
+                        Report("Select New Box");
                         Program.helper.quickbuton(keyA, 200);
                         await Task.Delay(500);
                         botstate = (int)botstates.testboxviewout;
