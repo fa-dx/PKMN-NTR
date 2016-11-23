@@ -122,6 +122,20 @@ namespace ntrbase.Helpers
             Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
         }
 
+        public async void holdtouch(decimal Xcoord, decimal Ycoord)
+        {
+            byte[] buttonByte = BitConverter.GetBytes(gethexcoord(Xcoord, Ycoord));
+            Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
+            await Task.Delay(100);
+        }
+
+        public async void freetouch()
+        {
+            byte[] buttonByte = BitConverter.GetBytes(notouch);
+            Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
+            await Task.Delay(100);
+        }
+
         private uint gethexcoord(decimal Xvalue, decimal Yvalue)
         {
             uint hexX = Convert.ToUInt32(Math.Round(Xvalue * 0xFFF / 319));
@@ -240,6 +254,25 @@ namespace ntrbase.Helpers
                 } // If no data received or not in range, try again
             }
             return false;
+        }
+
+        // Memory Write handler
+        public async Task<bool> waitNTRwrite(uint address, int data, int pid)
+        {
+            byte[] command = BitConverter.GetBytes(data);
+            Program.scriptHelper.write(address, command, pid);
+            int waittimeout;
+            for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+            {
+                WriteLastLog("");
+                await Task.Delay(100);
+                if (CompareLastLog("finished"))
+                    break;
+            }
+            if (waittimeout < timeout)
+                return true;
+            else
+                return false;
         }
     }
 }

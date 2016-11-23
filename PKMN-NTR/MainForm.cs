@@ -61,6 +61,7 @@ namespace ntrbase
         public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
         public static readonly string writeerror = "An error has ocurred while writting data to your 3DS RAM, please check connection and try again.";
         private WonderTradeBot6 WTBot6;
+        private BreedingBot6 BreedBot6;
 
         //Game information
         public int pid;
@@ -518,11 +519,7 @@ namespace ntrbase
                 tradeoffrg = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
-                eggoff = 0x8C80124;
-                mapidoff = 0x81828EC;
-                mapxoff = 0x818290C;
-                mapyoff = 0x8182914;
-                mapzoff = 0x8182910;
+
 
 
 
@@ -534,11 +531,8 @@ namespace ntrbase
                 pssdisableY = 100;
                 pssdisableIN = 0x00000000;
                 pssdisableOUT = 0x15000000;
-                computerOff = 0x19A918;
-                computerIN = 0x4D0000;
-                computerOUT = 0x780000;
-                organizeBoxIN = 0x6C0000;
-                organizeBoxOUT = 0x4D0000;
+
+
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -634,11 +628,7 @@ namespace ntrbase
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
-                eggoff = 0x8C88358;
-                mapidoff = 0x8187BD4;
-                mapxoff = 0x8187BF4;
-                mapyoff = 0x8187BFC;
-                mapzoff = 0x8187BF8;
+
 
 
 
@@ -650,11 +640,7 @@ namespace ntrbase
                 pssdisableY = 120;
                 pssdisableIN = 0x33000000;
                 pssdisableOUT = 0x33100000;
-                computerOff = 0x19BF5C;
-                computerIN = 0x500000;
-                computerOUT = 0x7D0000;
-                organizeBoxIN = 0x710000;
-                organizeBoxOUT = 0x500000;
+
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -2300,6 +2286,21 @@ namespace ntrbase
             }
         }
 
+        delegate void DataGridViewAddRowDelegate(DataGridView ctrl, params object[] args);
+
+        public static void DataGridViewAddRow(DataGridView ctrl, params object[] args)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                DataGridViewAddRowDelegate del = new DataGridViewAddRowDelegate(DataGridViewAddRow);
+                ctrl.Invoke(del, args);
+            }
+            else
+            {
+                ctrl.Rows.Add(args);
+            }
+        }
+
         delegate void SetColorDelegate(Control ctrl, Color c, bool back);
 
         public static void SetColor(Control ctrl, Color c, bool back)
@@ -2433,13 +2434,6 @@ namespace ntrbase
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             lastmemoryread = BitConverter.ToUInt32(args.data, 0);
             SetText(readResult, lastmemoryread.ToString("X8"));
-        }
-
-        public void updateWTslots(int box, int slot, int quantity)
-        {
-            SetValue(WTBox, box + 1);
-            SetValue(WTSlot, slot + 1);
-            SetValue(WTtradesNo, quantity);
         }
 
         async Task<int> waitNTRread(uint address)
@@ -2721,7 +2715,7 @@ namespace ntrbase
             switch (botnumber)
             {
                 case 1: // Breeding bot
-                    botStop = true;
+                    BreedBot6.botstop = true;
                     break;
                 case 2: // Soft-reset bot
                     botStop = true;
@@ -3169,8 +3163,17 @@ namespace ntrbase
                         break;
                 }
                 botWorking = false;
+                botnumber = -1;
                 enableControls();
+                stopBotButton.Enabled = false;
             }
+        }
+
+        public void updateWTslots(int box, int slot, int quantity)
+        {
+            SetValue(WTBox, box + 1);
+            SetValue(WTSlot, slot + 1);
+            SetValue(WTtradesNo, quantity);
         }
 
         // Soft-reset bot
@@ -3961,6 +3964,90 @@ namespace ntrbase
         }
 
         // Breeding bot
+        private async void runBreedingBot_Click_1(object sender, EventArgs e)
+        {
+            string modemessage;
+            switch (modeBreed.SelectedIndex)
+            {
+                case 0:
+                    modemessage = "Simple: This bot will produce " + eggsNoBreed.Value.ToString() + " eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ".\r\n\r\n";
+                    break;
+                case 1:
+                    modemessage = "Filter: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check against the selected filters and if it finds a match the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
+                    break;
+                case 2:
+                    modemessage = "ESV/TSV: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check the egg's ESV and if it finds a match with the values in the TSV list, the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
+                    break;
+                default:
+                    modemessage = "No mode selected. Select one and try again.\r\n\r\n";
+                    break;
+            }
+
+            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.OK && eggsNoBreed.Value > 0)
+            {
+                botWorking = true;
+                botnumber = 1;
+                disableControls();
+                stopBotButton.Enabled = true;
+                txtLog.Clear();
+                bool oras;
+                if (game == GameType.X || game == GameType.Y)
+                    oras = false;
+                else
+                    oras = true;
+                BreedBot6 = new BreedingBot6(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, OrganizeTop.Checked, radioDayCare1.Checked, readESV.Checked, quickBreed.Checked, oras);
+                Task<int> Bot = BreedBot6.RunBot();
+                int result = await Bot;
+                switch (await Bot)
+                {
+                    case 0: // Finished
+                        MessageBox.Show("Bot finished sucessfully", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 1: // Write error
+                        MessageBox.Show(writeerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 2: // Read error
+                        MessageBox.Show(readerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 3: // Finish with no matches
+                        MessageBox.Show("Finished. Maximum number of eggs reached without a match.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 4: // Filter mode sucessful
+                        MessageBox.Show(BreedBot6.finishmessage + currentfilter, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 5: // ESV/TSV mode sucessful
+                        MessageBox.Show(BreedBot6.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    default: // General error
+                        MessageBox.Show("An error has occurred.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+                botWorking = false;
+                botnumber = -1;
+                enableControls();
+                stopBotButton.Enabled = false;
+            }
+        }
+
+        public void updateBreedingslots(int box, int slot, int quantity)
+        {
+            SetValue(boxBreed, box + 1);
+            SetValue(slotBreed, slot + 1);
+            SetValue(eggsNoBreed, quantity);
+        }
+
+        public void AddESVrow(int row, int slot, int tsv)
+        {
+            DataGridViewAddRow(ESVlist, row + 1, slot + 1, tsv.ToString("D4"));
+        }
+
+        public bool CheckBreedingFilters()
+        {
+            return FilterCheck(filterBreeding);
+        }
+
         public enum breedbotstates { botstart, facedaycareman, quickegg, walk1, checkegg1, walk2, checkegg2, walk3, checkmap1, stopdaycare, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, readegg, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, fix5, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
 
         private async void runBreedingBot_Click(object sender, EventArgs e)
@@ -4129,7 +4216,7 @@ namespace ntrbase
                         else
                         {
                             MessageBox.Show(writeerror);
-                            botState = (int)srbotstates.botexit;
+                            botState = (int)breedbotstates.botexit;
                         }
                         break;
                     case (int)breedbotstates.walk1:
