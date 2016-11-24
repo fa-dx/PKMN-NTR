@@ -84,7 +84,7 @@ namespace ntrbase.Bot
                         if (collectFC)
                         {
                             int level = 0;
-                            while (currentFC > nextFC)
+                            while (currentFC >= nextFC)
                             {
                                 nextFC = FCtable[level];
                                 level++;
@@ -312,9 +312,8 @@ namespace ntrbase.Bot
                         {
                             await Task.Delay(2000);
                             tradewait++;
-                            if (tradewait > 32) // Too much time passed, 90 secs
+                            if (tradewait > 40) // Too much time passed, 90 secs
                             {
-                                attempts = 0;
                                 notradepartner = true;
                                 botstate = (int)botstates.testtradefinish;
                             }
@@ -358,7 +357,12 @@ namespace ntrbase.Bot
                             getNextSlot();
                         notradepartner = false;
                         if (quantity > 0) // Test if there are more trades
+                        {
+                            await Task.Delay(2000);
                             botstate = (int)botstates.readpoke;
+                            attempts = 0;
+                            tradewait = 0;
+                        }
                         else
                         { // Stop if no more trades
                             botresult = 0;
@@ -369,8 +373,8 @@ namespace ntrbase.Bot
                     case (int)botstates.collectFC1:
                         Report("Trigger Dialog");
                         await Task.Delay(1500);
-                        Program.helper.quickbuton(keyA, commandtime + 250);
-                        await Task.Delay(commandtime + delaytime + 250);
+                        Program.helper.quickbuton(keyA, commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.collectFC2;
                         break;
 
