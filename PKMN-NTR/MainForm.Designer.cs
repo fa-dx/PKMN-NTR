@@ -230,6 +230,9 @@
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
             this.ReloadFields = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.pokeTotalFC = new System.Windows.Forms.Button();
+            this.totalFCNum = new System.Windows.Forms.NumericUpDown();
             this.tabControls = new System.Windows.Forms.TabPage();
             this.manualSR = new System.Windows.Forms.Button();
             this.label92 = new System.Windows.Forms.Label();
@@ -434,6 +437,7 @@
             this.miscTabs.SuspendLayout();
             this.tabEditTrainer.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.totalFCNum)).BeginInit();
             this.tabControls.SuspendLayout();
             this.tabFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
@@ -564,7 +568,7 @@
             // 
             // bpNum
             // 
-            this.bpNum.Location = new System.Drawing.Point(81, 166);
+            this.bpNum.Location = new System.Drawing.Point(81, 196);
             this.bpNum.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -602,7 +606,7 @@
             // 
             this.pokeBP.AutoSize = true;
             this.pokeBP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pokeBP.Location = new System.Drawing.Point(167, 164);
+            this.pokeBP.Location = new System.Drawing.Point(167, 194);
             this.pokeBP.Name = "pokeBP";
             this.pokeBP.Size = new System.Drawing.Size(42, 23);
             this.pokeBP.TabIndex = 11;
@@ -621,18 +625,18 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(0, 140);
+            this.label3.Location = new System.Drawing.Point(6, 140);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 22;
             this.label3.Text = "Poké Miles:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(0, 168);
+            this.label4.Location = new System.Drawing.Point(6, 198);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 18);
+            this.label4.Size = new System.Drawing.Size(69, 19);
             this.label4.TabIndex = 23;
             this.label4.Text = "Battle Points:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1381,7 +1385,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(17, 198);
+            this.label28.Location = new System.Drawing.Point(17, 228);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(58, 13);
             this.label28.TabIndex = 24;
@@ -1390,7 +1394,7 @@
             // Lang
             // 
             this.Lang.FormattingEnabled = true;
-            this.Lang.Location = new System.Drawing.Point(81, 195);
+            this.Lang.Location = new System.Drawing.Point(81, 225);
             this.Lang.Name = "Lang";
             this.Lang.Size = new System.Drawing.Size(80, 21);
             this.Lang.TabIndex = 12;
@@ -1399,7 +1403,7 @@
             // 
             this.pokeLang.AutoSize = true;
             this.pokeLang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pokeLang.Location = new System.Drawing.Point(167, 193);
+            this.pokeLang.Location = new System.Drawing.Point(167, 223);
             this.pokeLang.Name = "pokeLang";
             this.pokeLang.Size = new System.Drawing.Size(42, 23);
             this.pokeLang.TabIndex = 13;
@@ -1444,7 +1448,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(118, 219);
+            this.label14.Location = new System.Drawing.Point(118, 249);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(34, 13);
             this.label14.TabIndex = 26;
@@ -1465,7 +1469,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(72, 219);
+            this.label13.Location = new System.Drawing.Point(72, 249);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 13);
             this.label13.TabIndex = 25;
@@ -1486,7 +1490,7 @@
             // 
             // secNum
             // 
-            this.secNum.Location = new System.Drawing.Point(121, 235);
+            this.secNum.Location = new System.Drawing.Point(121, 265);
             this.secNum.Maximum = new decimal(new int[] {
             60,
             0,
@@ -1507,7 +1511,7 @@
             // 
             // minNum
             // 
-            this.minNum.Location = new System.Drawing.Point(75, 235);
+            this.minNum.Location = new System.Drawing.Point(75, 265);
             this.minNum.Maximum = new decimal(new int[] {
             60,
             0,
@@ -1530,7 +1534,7 @@
             // 
             this.pokeTime.AutoSize = true;
             this.pokeTime.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pokeTime.Location = new System.Drawing.Point(167, 232);
+            this.pokeTime.Location = new System.Drawing.Point(167, 262);
             this.pokeTime.Name = "pokeTime";
             this.pokeTime.Size = new System.Drawing.Size(42, 23);
             this.pokeTime.TabIndex = 17;
@@ -1552,7 +1556,7 @@
             // 
             // hourNum
             // 
-            this.hourNum.Location = new System.Drawing.Point(6, 235);
+            this.hourNum.Location = new System.Drawing.Point(6, 265);
             this.hourNum.Maximum = new decimal(new int[] {
             999,
             0,
@@ -1572,7 +1576,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 219);
+            this.label12.Location = new System.Drawing.Point(3, 249);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(38, 13);
             this.label12.TabIndex = 24;
@@ -2971,6 +2975,9 @@
             // 
             this.groupBox5.AutoSize = true;
             this.groupBox5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox5.Controls.Add(this.label55);
+            this.groupBox5.Controls.Add(this.pokeTotalFC);
+            this.groupBox5.Controls.Add(this.totalFCNum);
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Controls.Add(this.label12);
             this.groupBox5.Controls.Add(this.label2);
@@ -3001,10 +3008,45 @@
             this.groupBox5.Controls.Add(this.Lang);
             this.groupBox5.Location = new System.Drawing.Point(336, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(215, 274);
+            this.groupBox5.Size = new System.Drawing.Size(215, 304);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Edit Trainer";
+            // 
+            // label55
+            // 
+            this.label55.Location = new System.Drawing.Point(6, 169);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(69, 18);
+            this.label55.TabIndex = 29;
+            this.label55.Text = "Total FC:";
+            this.label55.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // pokeTotalFC
+            // 
+            this.pokeTotalFC.AutoSize = true;
+            this.pokeTotalFC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pokeTotalFC.Enabled = false;
+            this.pokeTotalFC.Location = new System.Drawing.Point(167, 164);
+            this.pokeTotalFC.Name = "pokeTotalFC";
+            this.pokeTotalFC.Size = new System.Drawing.Size(42, 23);
+            this.pokeTotalFC.TabIndex = 28;
+            this.pokeTotalFC.Text = "Write";
+            this.pokeTotalFC.UseVisualStyleBackColor = true;
+            this.pokeTotalFC.Click += new System.EventHandler(this.pokeTotalFC_Click);
+            // 
+            // totalFCNum
+            // 
+            this.totalFCNum.Enabled = false;
+            this.totalFCNum.Location = new System.Drawing.Point(81, 167);
+            this.totalFCNum.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.totalFCNum.Name = "totalFCNum";
+            this.totalFCNum.Size = new System.Drawing.Size(80, 20);
+            this.totalFCNum.TabIndex = 27;
             // 
             // tabControls
             // 
@@ -4637,6 +4679,7 @@
             this.tabEditTrainer.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.totalFCNum)).EndInit();
             this.tabControls.ResumeLayout(false);
             this.tabControls.PerformLayout();
             this.tabFilters.ResumeLayout(false);
@@ -5026,6 +5069,9 @@
         private System.Windows.Forms.DataGridView itemsView7;
         private System.Windows.Forms.DataGridViewComboBoxColumn nameItem7;
         private System.Windows.Forms.DataGridViewTextBoxColumn countItem7;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Button pokeTotalFC;
+        private System.Windows.Forms.NumericUpDown totalFCNum;
     }
 }
 

@@ -178,6 +178,15 @@ namespace ntrbase
         private int itemcount7 = 336;
         private byte[] itemData7 = new byte[336 * 4];
         private int[,] items7 = new int[336, 2];
+        private int tmscount7 = 100;
+        private byte[] tmsData7 = new byte[100 * 4];
+        private int[,] tms7 = new int[100, 2];
+        private int berscount7 = 67;
+        private byte[] bersData7 = new byte[67 * 4];
+        private int[,] bers7 = new int[67, 2];
+        private int keyscount7 = 24;
+        private byte[] keysData7 = new byte[24 * 4];
+        private int[,] keys7 = new int[24, 2];
 
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
@@ -355,7 +364,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -802,13 +811,18 @@ namespace ntrbase
             ComboboxFill(relearnmove2, PKTable.Moves6);
             ComboboxFill(relearnmove3, PKTable.Moves6);
             ComboboxFill(relearnmove4, PKTable.Moves6);
+            SetVisible(itemsView7, false);
+            SetVisible(itemsGridView, true);
+            SetVisible(keysGridView, false);
+            SetVisible(tmsGridView, false);
+            SetVisible(medsGridView, false);
+            SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
                 boxDump.Maximum = BOXES;
             cloneBoxTo.Maximum = BOXES;
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
             SetText(label3, "Poké Miles:");
-            SetText(label4, "Battle Points:");
         }
 
         private void fillGen7()
@@ -826,15 +840,18 @@ namespace ntrbase
             ComboboxFill(relearnmove2, PKTable.Moves7);
             ComboboxFill(relearnmove3, PKTable.Moves7);
             ComboboxFill(relearnmove4, PKTable.Moves7);
-            cloneBoxTo.Maximum = BOXES;
-            cloneBoxFrom.Maximum = BOXES;
+            SetVisible(itemsView7, true);
+            SetVisible(itemsGridView, false);
+            SetVisible(keysGridView, false);
+            SetVisible(tmsGridView, false);
+            SetVisible(medsGridView, false);
+            SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
                 boxDump.Maximum = BOXES;
             cloneBoxTo.Maximum = BOXES;
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
             SetText(label3, "Current FC:");
-            SetText(label4, "Total FC:");
         }
 
         #endregion Connection
@@ -870,7 +887,14 @@ namespace ntrbase
         private void ReloadFields_Click(object sender, EventArgs e)
         {
             if (gen7)
+            {
                 dumpAllData7();
+                showItems.ForeColor = Color.Green;
+                showMedicine.ForeColor = Color.Black;
+                showTMs.ForeColor = Color.Black;
+                showBerries.ForeColor = Color.Black;
+                showKeys.ForeColor = Color.Black;
+            }
             else
                 dumpAllData();
         }
@@ -976,14 +1000,6 @@ namespace ntrbase
             waitingForData.Add(Program.scriptHelper.data(bpoff, 0x04, pid), myArgs);
         }
 
-        public void dumpFC()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
-            waitingForData.Add(Program.scriptHelper.data(currentFCoff, 0x04, pid), myArgs);
-            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleBPData, null);
-            waitingForData.Add(Program.scriptHelper.data(totalFCoff, 0x04, pid), myArgs2);
-        }
-
         public void handleBPData(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
@@ -1006,16 +1022,29 @@ namespace ntrbase
 
         private void pokeBP_Click(object sender, EventArgs e)
         {
-            if (gen7)
-            { // Total Festival Coins
-                byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-                Program.scriptHelper.write(totalFCoff, FCbyte, pid);
-            }
-            else
-            { // Battle Points
-                byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-                Program.scriptHelper.write(bpoff, bpbyte, pid);
-            }
+            byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
+            Program.scriptHelper.write(bpoff, bpbyte, pid);
+        }
+
+        // Festival Coins handling
+        public void dumpFC()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
+            waitingForData.Add(Program.scriptHelper.data(currentFCoff, 0x04, pid), myArgs);
+            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleFC, null);
+            waitingForData.Add(Program.scriptHelper.data(totalFCoff, 0x04, pid), myArgs2);
+        }
+
+        public void handleFC(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(totalFCNum, BitConverter.ToInt32(args.data, 0));
+        }
+
+        private void pokeTotalFC_Click(object sender, EventArgs e)
+        {
+            byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
+            Program.scriptHelper.write(totalFCoff, FCbyte, pid);
         }
 
         // Language handling
@@ -1234,6 +1263,18 @@ namespace ntrbase
                     case 0:
                         offsetToWrite = medsoff;
                         break;
+                    case 1:
+                        offsetToWrite = itemsoff;
+                        break;
+                    case 2:
+                        offsetToWrite = tmsoff;
+                        break;
+                    case 3:
+                        offsetToWrite = bersoff;
+                        break;
+                    case 4:
+                        offsetToWrite = keysoff;
+                        break;
                 }
             }
             else
@@ -1332,7 +1373,13 @@ namespace ntrbase
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[53 * 4], handleMeds7, null);
             waitingForData.Add(Program.scriptHelper.data(medsoff, 53 * 4, pid), myArgs);
             DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[336 * 4], handleItems7, null);
-            waitingForData.Add(Program.scriptHelper.data(medsoff, 336 * 4, pid), myArgs);
+            waitingForData.Add(Program.scriptHelper.data(itemsoff, 336 * 4, pid), myArgs2);
+            DataReadyWaiting myArgs3 = new DataReadyWaiting(new byte[100 * 4], handleTMs7, null);
+            waitingForData.Add(Program.scriptHelper.data(tmsoff, 100 * 4, pid), myArgs3);
+            DataReadyWaiting myArgs4 = new DataReadyWaiting(new byte[67 * 4], handleBerries7, null);
+            waitingForData.Add(Program.scriptHelper.data(bersoff, 67 * 4, pid), myArgs4);
+            DataReadyWaiting myArgs5 = new DataReadyWaiting(new byte[24 * 4], handleKeyItems7, null);
+            waitingForData.Add(Program.scriptHelper.data(keysoff, 24 * 4, pid), myArgs5);
         }
 
         public void handleMeds7(object args_obj)
@@ -1344,8 +1391,6 @@ namespace ntrbase
                 uint val = BitConverter.ToUInt32(medData7, i * 4);
                 meds7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
                 meds7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
-                currentpouch = 0;
-                ItemDumpFinished7(meds7);
             }
         }
 
@@ -1358,7 +1403,44 @@ namespace ntrbase
                 uint val = BitConverter.ToUInt32(itemData7, i * 4);
                 items7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
                 items7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
-                ItemDumpFinished7(meds7);
+            }
+            ItemDumpFinished7(items7);
+            currentpouch = 1;
+        }
+
+        public void handleTMs7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, tmsData7, args.data.Length);
+            for (int i = 0; i < tmscount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(tmsData7, i * 4);
+                tms7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                tms7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+            }
+        }
+
+        public void handleBerries7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, bersData7, args.data.Length);
+            for (int i = 0; i < berscount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(bersData7, i * 4);
+                bers7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                bers7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+            }
+        }
+
+        public void handleKeyItems7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, keysData7, args.data.Length);
+            for (int i = 0; i < keyscount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(keysData7, i * 4);
+                keys7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                keys7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
             }
         }
 
@@ -2160,11 +2242,19 @@ namespace ntrbase
         // Item buttons
         private void showItems_Click(object sender, EventArgs e)
         {
-            itemsGridView.Visible = true;
-            keysGridView.Visible = false;
-            tmsGridView.Visible = false;
-            medsGridView.Visible = false;
-            bersGridView.Visible = false;
+            if (gen7)
+            {
+                readItems7(items7);
+                currentpouch = 1;
+            }
+            else
+            {
+                itemsGridView.Visible = true;
+                keysGridView.Visible = false;
+                tmsGridView.Visible = false;
+                medsGridView.Visible = false;
+                bersGridView.Visible = false;
+            }
             showItems.ForeColor = Color.Green;
             showMedicine.ForeColor = Color.Black;
             showTMs.ForeColor = Color.Black;
@@ -2174,11 +2264,19 @@ namespace ntrbase
 
         private void showMedicine_Click(object sender, EventArgs e)
         {
-            itemsGridView.Visible = false;
-            keysGridView.Visible = false;
-            tmsGridView.Visible = false;
-            medsGridView.Visible = true;
-            bersGridView.Visible = false;
+            if (gen7)
+            {
+                readItems7(meds7);
+                currentpouch = 0;
+            }
+            else
+            {
+                itemsGridView.Visible = false;
+                keysGridView.Visible = false;
+                tmsGridView.Visible = false;
+                medsGridView.Visible = true;
+                bersGridView.Visible = false;
+            }
             showItems.ForeColor = Color.Black;
             showMedicine.ForeColor = Color.Green;
             showTMs.ForeColor = Color.Black;
@@ -2188,11 +2286,19 @@ namespace ntrbase
 
         private void showTMs_Click(object sender, EventArgs e)
         {
-            itemsGridView.Visible = false;
-            keysGridView.Visible = false;
-            tmsGridView.Visible = true;
-            medsGridView.Visible = false;
-            bersGridView.Visible = false;
+            if (gen7)
+            {
+                readItems7(tms7);
+                currentpouch = 2;
+            }
+            else
+            {
+                itemsGridView.Visible = false;
+                keysGridView.Visible = false;
+                tmsGridView.Visible = true;
+                medsGridView.Visible = false;
+                bersGridView.Visible = false;
+            }
             showItems.ForeColor = Color.Black;
             showMedicine.ForeColor = Color.Black;
             showTMs.ForeColor = Color.Green;
@@ -2202,11 +2308,19 @@ namespace ntrbase
 
         private void showBerries_Click(object sender, EventArgs e)
         {
-            itemsGridView.Visible = false;
-            keysGridView.Visible = false;
-            tmsGridView.Visible = false;
-            medsGridView.Visible = false;
-            bersGridView.Visible = true;
+            if (gen7)
+            {
+                readItems7(bers7);
+                currentpouch = 3;
+            }
+            else
+            {
+                itemsGridView.Visible = false;
+                keysGridView.Visible = false;
+                tmsGridView.Visible = false;
+                medsGridView.Visible = false;
+                bersGridView.Visible = true;
+            }
             showItems.ForeColor = Color.Black;
             showMedicine.ForeColor = Color.Black;
             showTMs.ForeColor = Color.Black;
@@ -2216,11 +2330,19 @@ namespace ntrbase
 
         private void showKeys_Click(object sender, EventArgs e)
         {
-            itemsGridView.Visible = false;
-            keysGridView.Visible = true;
-            tmsGridView.Visible = false;
-            medsGridView.Visible = false;
-            bersGridView.Visible = false;
+            if (gen7)
+            {
+                readItems7(keys7);
+                currentpouch = 4;
+            }
+            else
+            {
+                itemsGridView.Visible = false;
+                keysGridView.Visible = true;
+                tmsGridView.Visible = false;
+                medsGridView.Visible = false;
+                bersGridView.Visible = false;
+            }
             showItems.ForeColor = Color.Black;
             showMedicine.ForeColor = Color.Black;
             showTMs.ForeColor = Color.Black;
@@ -2330,6 +2452,19 @@ namespace ntrbase
             }
             else
                 ctrl.Enabled = en;
+        }
+
+        delegate void SeVisibleDelegate(Control ctrl, bool en);
+
+        public static void SetVisible(Control ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SeVisibleDelegate del = new SeVisibleDelegate(SetVisible);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.Visible = en;
         }
 
         delegate void SetCheckedDelegate(CheckBox ctrl, bool en);
