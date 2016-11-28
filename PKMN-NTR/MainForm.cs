@@ -750,15 +750,15 @@ namespace ntrbase
                 moneyoff = 0x34184E00;
                 currentFCoff = 0x33124D58;
                 totalFCoff = 0x33124D5C;
-                //bpoff = 0x8C6A6E0;
+                bpoff = 0x330D90D8;
                 boxOff = 0x330D9838;
                 //daycare1Off = 0x8C7FF4C;
                 //daycare2Off = 0x8C8003C;
-                itemsoff = 0x330D5934; // Lenght 0x6B8
-                medsoff = 0x330D647C; // Lenght 0xD4
-                keysoff = 0x330D5FEC; // Length 0x2E0
-                tmsoff = 0x330D62CC; // Length 0x1B0
-                bersoff = 0x330D657C; // Length 0x120
+                itemsoff = 0x330D5934;
+                medsoff = 0x330D647C;
+                keysoff = 0x330D5FEC;
+                tmsoff = 0x330D62CC;
+                bersoff = 0x330D657C;
                 nameoff = 0x330D6808;
                 tidoff = 0x330D67D0;
                 sidoff = 0x330D67D2;
@@ -878,6 +878,7 @@ namespace ntrbase
             dumpTID();
             dumpSID();
             dumpMoney();
+            dumpBP();
             dumpFC();
             dumpLang();
             dumpTime();
@@ -981,19 +982,7 @@ namespace ntrbase
             Program.scriptHelper.write(moneyoff, moneybyte, pid);
         }
 
-        // Poké Miles, Battle Points and Festival Coins handling
-        public void dumpMiles()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
-            waitingForData.Add(Program.scriptHelper.data(milesoff, 0x04, pid), myArgs);
-        }
-
-        public void handleMilesData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
-        }
-
+        // Battle Points Handling
         public void dumpBP()
         {
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleBPData, null);
@@ -1004,6 +993,25 @@ namespace ntrbase
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             SetValue(bpNum, BitConverter.ToInt32(args.data, 0));
+        }
+
+        private void pokeBP_Click(object sender, EventArgs e)
+        {
+            byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
+            Program.scriptHelper.write(bpoff, bpbyte, pid);
+        }
+
+        // Poké Miles and Current FC handling
+        public void dumpMiles()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
+            waitingForData.Add(Program.scriptHelper.data(milesoff, 0x04, pid), myArgs);
+        }
+
+        public void handleMilesData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
         }
 
         private void pokeMiles_Click(object sender, EventArgs e)
@@ -1018,12 +1026,6 @@ namespace ntrbase
                 byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
                 Program.scriptHelper.write(milesoff, milesbyte, pid);
             }
-        }
-
-        private void pokeBP_Click(object sender, EventArgs e)
-        {
-            byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-            Program.scriptHelper.write(bpoff, bpbyte, pid);
         }
 
         // Festival Coins handling
@@ -1043,7 +1045,7 @@ namespace ntrbase
 
         private void pokeTotalFC_Click(object sender, EventArgs e)
         {
-            byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
+            byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(totalFCNum.Value));
             Program.scriptHelper.write(totalFCoff, FCbyte, pid);
         }
 
