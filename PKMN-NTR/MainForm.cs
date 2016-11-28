@@ -170,6 +170,16 @@ namespace ntrbase
         public DataGridViewComboBoxColumn berItem;
         public DataGridViewColumn berAmount;
 
+
+        private int currentpouch = 0;
+        private int medcount7 = 53;
+        private byte[] medData7 = new byte[53 * 4];
+        private int[,] meds7 = new int[53, 2];
+        private int itemcount7 = 336;
+        private byte[] itemData7 = new byte[336 * 4];
+        private int[,] items7 = new int[336, 2];
+
+
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
         Control[] enableWhenConnected7 = new Control[] { };
@@ -322,6 +332,16 @@ namespace ntrbase
                 berItem.Items.Add(t);
             }
 
+            foreach (string t in PKTable.Item7)
+            {
+                nameItem7.Items.Add(t);
+            }
+
+            nameItem7.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
+            nameItem7.DisplayIndex = 0;
+            nameItem7.FlatStyle = FlatStyle.Flat;
+            countItem7.DisplayIndex = 1;
+
             host.Text = Settings.Default.IP;
             host.Focus();
         }
@@ -335,7 +355,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, manualSR, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -726,7 +746,7 @@ namespace ntrbase
                 //daycare1Off = 0x8C7FF4C;
                 //daycare2Off = 0x8C8003C;
                 itemsoff = 0x330D5934; // Lenght 0x6B8
-                medsoff = 0x330D647C; // Lenght 0x100
+                medsoff = 0x330D647C; // Lenght 0xD4
                 keysoff = 0x330D5FEC; // Length 0x2E0
                 tmsoff = 0x330D62CC; // Length 0x1B0
                 bersoff = 0x330D657C; // Length 0x120
@@ -844,6 +864,7 @@ namespace ntrbase
             dumpFC();
             dumpLang();
             dumpTime();
+            dumpItems7();
         }
 
         private void ReloadFields_Click(object sender, EventArgs e)
@@ -1192,93 +1213,172 @@ namespace ntrbase
         {
             byte[] dataToWrite = new byte[0] { };
             uint offsetToWrite = 0;
-
-            if (itemsGridView.Visible == true)
+            if (gen7)
             {
-                itemData = new byte[1600];
-                for (int i = 0; i < itemsGridView.RowCount; i++)
+                itemData = new byte[itemsView7.Rows.Count * 4];
+                for (int i = 0; i < itemsView7.Rows.Count; i++)
                 {
-                    string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                    // Build Item Value
+                    uint val = 0;
+                    string datastring = itemsView7.Rows[i].Cells[0].Value.ToString();
+                    int itemIndex = Array.IndexOf(PKTable.Item7, datastring);
                     int itemcnt;
-                    itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
+                    itemcnt = Convert.ToInt32(itemsView7.Rows[i].Cells[1].Value.ToString());
+                    val |= (uint)(itemIndex & 0x3FF);
+                    val |= (uint)(itemcnt & 0x3FF) << 10;
+                    BitConverter.GetBytes(val).CopyTo(itemData, i * 4);
                 }
                 dataToWrite = itemData;
-                offsetToWrite = itemsoff;
-            }
-
-            if (keysGridView.Visible == true)
-            {
-                keyData = new byte[384];
-                for (int i = 0; i < keysGridView.RowCount; i++)
+                switch (currentpouch)
                 {
-                    string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
+                    case 0:
+                        offsetToWrite = medsoff;
+                        break;
                 }
-                dataToWrite = keyData;
-                offsetToWrite = keysoff;
             }
-
-            if (tmsGridView.Visible == true)
+            else
             {
-                tmData = new byte[432];
-                for (int i = 0; i < tmsGridView.RowCount; i++)
+                if (itemsGridView.Visible == true)
                 {
-                    string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
+                    itemData = new byte[1600];
+                    for (int i = 0; i < itemsGridView.RowCount; i++)
+                    {
+                        string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
 
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
-                    BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
+                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
+                    }
+                    dataToWrite = itemData;
+                    offsetToWrite = itemsoff;
                 }
-                dataToWrite = tmData;
-                offsetToWrite = tmsoff;
-            }
 
-            if (medsGridView.Visible == true)
-            {
-                medData = new byte[256];
-                for (int i = 0; i < medsGridView.RowCount; i++)
+                if (keysGridView.Visible == true)
                 {
-                    string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
+                    keyData = new byte[384];
+                    for (int i = 0; i < keysGridView.RowCount; i++)
+                    {
+                        string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
 
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
+                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
+                    }
+                    dataToWrite = keyData;
+                    offsetToWrite = keysoff;
                 }
-                dataToWrite = medData;
-                offsetToWrite = medsoff;
-            }
 
-            if (bersGridView.Visible == true)
-            {
-                berryData = new byte[288];
-                for (int i = 0; i < bersGridView.RowCount; i++)
+                if (tmsGridView.Visible == true)
                 {
-                    string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
+                    tmData = new byte[432];
+                    for (int i = 0; i < tmsGridView.RowCount; i++)
+                    {
+                        string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
 
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
+                        BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
+                    }
+                    dataToWrite = tmData;
+                    offsetToWrite = tmsoff;
                 }
-                dataToWrite = berryData;
-                offsetToWrite = bersoff;
-            }
 
+                if (medsGridView.Visible == true)
+                {
+                    medData = new byte[256];
+                    for (int i = 0; i < medsGridView.RowCount; i++)
+                    {
+                        string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
+
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
+                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
+                    }
+                    dataToWrite = medData;
+                    offsetToWrite = medsoff;
+                }
+
+                if (bersGridView.Visible == true)
+                {
+                    berryData = new byte[288];
+                    for (int i = 0; i < bersGridView.RowCount; i++)
+                    {
+                        string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(PKTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
+
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
+                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
+                    }
+                    dataToWrite = berryData;
+                    offsetToWrite = bersoff;
+                }
+            }
             Program.scriptHelper.write(offsetToWrite, dataToWrite, pid);
+        }
+
+        // Item handling Gen 7
+        public void dumpItems7()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[53 * 4], handleMeds7, null);
+            waitingForData.Add(Program.scriptHelper.data(medsoff, 53 * 4, pid), myArgs);
+            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[336 * 4], handleItems7, null);
+            waitingForData.Add(Program.scriptHelper.data(medsoff, 336 * 4, pid), myArgs);
+        }
+
+        public void handleMeds7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, medData7, args.data.Length);
+            for (int i = 0; i < medcount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(medData7, i * 4);
+                meds7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                meds7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+                currentpouch = 0;
+                ItemDumpFinished7(meds7);
+            }
+        }
+
+        public void handleItems7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, itemData7, args.data.Length);
+            for (int i = 0; i < itemcount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(itemData7, i * 4);
+                items7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                items7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+                ItemDumpFinished7(meds7);
+            }
+        }
+
+        private void ItemDumpFinished7(int[,] itemdata)
+        {
+            if (itemsView7.InvokeRequired)
+                itemsView7.Invoke((MethodInvoker)delegate { readItems7(itemdata); });
+            else
+                readItems7(itemdata);
+        }
+
+        private void readItems7(int[,] itemdata)
+        {
+            itemsView7.Rows.Clear();
+            for (int i = 0; i < itemdata.GetLength(0); i++)
+            {
+                itemsView7.Rows.Add();
+                itemsView7.Rows[i].Cells[0].Value = PKTable.Item7[itemdata[i, 0]];
+                itemsView7.Rows[i].Cells[1].Value = itemdata[i, 1];
+            }
         }
 
         #endregion R/W trainer data

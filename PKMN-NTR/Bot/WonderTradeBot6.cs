@@ -22,6 +22,8 @@ namespace ntrbase.Bot
         private bool taskresultbool;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
+        private int commandtime = 250;
+        private int delaytime = 150;
 
         private uint psssmenu1Off;
         private uint psssmenu1IN;
@@ -150,8 +152,8 @@ namespace ntrbase.Bot
 
                     case (int)botstates.pressWTbutton:
                         Report("Touch Wonder Trade button");
-                        Program.helper.quicktouch(240, 120, 200);
-                        await Task.Delay(250);
+                        Program.helper.quicktouch(240, 120, commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testsavescrn;
                         break;
 
@@ -173,8 +175,9 @@ namespace ntrbase.Bot
 
                     case (int)botstates.confirmsave:
                         Report("Press Yes");
-                        Program.helper.quickbuton(keyA, 200);
-                        await Task.Delay(250);
+                        await Task.Delay(500);
+                        Program.helper.quickbuton(keyA, commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testwtscrn;
                         break;
 
@@ -196,8 +199,9 @@ namespace ntrbase.Bot
 
                     case (int)botstates.confirmwt:
                         Report("Touch Yes");
-                        Program.helper.quicktouch(160, 100, 200);
-                        await Task.Delay(250);
+                        await Task.Delay(500);
+                        Program.helper.quicktouch(160, 100, commandtime);
+                        await Task.Delay(delaytime);
                         botstate = (int)botstates.testboxes;
                         break;
 
@@ -230,8 +234,8 @@ namespace ntrbase.Bot
 
                     case (int)botstates.touchboxview:
                         Report("Touch Box View");
-                        Program.helper.quicktouch(30, 220, 200);
-                        await Task.Delay(250);
+                        Program.helper.quicktouch(30, 220, commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testboxview;
                         break;
 
@@ -254,15 +258,16 @@ namespace ntrbase.Bot
                     case (int)botstates.touchnewbox:
                         await Task.Delay(500);
                         Report("Touch New Box");
-                        Program.helper.quicktouch(boxposX[currentbox], boxposY[currentbox], 200);
-                        await Task.Delay(500);
+                        Program.helper.quicktouch(boxposX[currentbox], boxposY[currentbox], commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.selectnewbox;
                         break;
 
                     case (int)botstates.selectnewbox:
                         Report("Select New Box");
-                        Program.helper.quickbuton(keyA, 200);
                         await Task.Delay(500);
+                        Program.helper.quickbuton(keyA, commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testboxviewout;
                         break;
 
@@ -284,22 +289,25 @@ namespace ntrbase.Bot
 
                     case (int)botstates.touchpoke:
                         Report("Touch Pokémon");
-                        Program.helper.quicktouch(pokeposX[currentslot], pokeposY[currentslot], 200);
-                        await Task.Delay(1000);
+                        await Task.Delay(500);
+                        Program.helper.quicktouch(pokeposX[currentslot], pokeposY[currentslot], commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.selectrade;
                         break;
 
                     case (int)botstates.selectrade:
                         Report("Select Trade");
-                        Program.helper.quickbuton(keyA, 200);
-                        await Task.Delay(1000);
+                        await Task.Delay(750);
+                        Program.helper.quickbuton(keyA, commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.confirmsend;
                         break;
 
                     case (int)botstates.confirmsend:
                         Report("Select Yes");
-                        Program.helper.quickbuton(keyA, 200);
-                        await Task.Delay(250);
+                        await Task.Delay(750);
+                        Program.helper.quickbuton(keyA, commandtime);
+                        await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testboxesout;
                         break;
 
@@ -379,8 +387,8 @@ namespace ntrbase.Bot
                         { // Still waiting
                             attempts++;
                             Report("Select Yes");
-                            Program.helper.quickbuton(keyA, 200);
-                            await Task.Delay(250);
+                            Program.helper.quickbuton(keyA, commandtime);
+                            await Task.Delay(commandtime + delaytime);
                             botstate = (int)botstates.notradepartner;
                         }
                         break;

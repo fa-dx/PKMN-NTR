@@ -126,6 +126,9 @@
             this.medsGridView = new System.Windows.Forms.DataGridView();
             this.bersGridView = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.itemsView7 = new System.Windows.Forms.DataGridView();
+            this.nameItem7 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.countItem7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
             this.label38 = new System.Windows.Forms.Label();
@@ -398,6 +401,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.medsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsView7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).BeginInit();
@@ -1693,6 +1697,7 @@
             // 
             this.groupBox3.AutoSize = true;
             this.groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox3.Controls.Add(this.itemsView7);
             this.groupBox3.Controls.Add(this.itemAdd);
             this.groupBox3.Controls.Add(this.showKeys);
             this.groupBox3.Controls.Add(this.itemWrite);
@@ -1711,6 +1716,36 @@
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Edit Items";
+            // 
+            // itemsView7
+            // 
+            this.itemsView7.AllowUserToAddRows = false;
+            this.itemsView7.AllowUserToDeleteRows = false;
+            this.itemsView7.AllowUserToResizeColumns = false;
+            this.itemsView7.AllowUserToResizeRows = false;
+            this.itemsView7.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.itemsView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.itemsView7.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameItem7,
+            this.countItem7});
+            this.itemsView7.Location = new System.Drawing.Point(6, 19);
+            this.itemsView7.Name = "itemsView7";
+            this.itemsView7.RowHeadersVisible = false;
+            this.itemsView7.ShowEditingIcon = false;
+            this.itemsView7.Size = new System.Drawing.Size(191, 177);
+            this.itemsView7.TabIndex = 8;
+            // 
+            // nameItem7
+            // 
+            this.nameItem7.FillWeight = 3F;
+            this.nameItem7.HeaderText = "Item";
+            this.nameItem7.Name = "nameItem7";
+            // 
+            // countItem7
+            // 
+            this.countItem7.FillWeight = 1F;
+            this.countItem7.HeaderText = "Count";
+            this.countItem7.Name = "countItem7";
             // 
             // itemAdd
             // 
@@ -4560,6 +4595,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.medsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.itemsView7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).EndInit();
@@ -4987,6 +5023,9 @@
         public System.Windows.Forms.TextBox dPID;
         private System.Windows.Forms.Button ReloadFields;
         private System.Windows.Forms.CheckBox WTcollectFC;
+        private System.Windows.Forms.DataGridView itemsView7;
+        private System.Windows.Forms.DataGridViewComboBoxColumn nameItem7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn countItem7;
     }
 }
 
