@@ -5,7 +5,7 @@ namespace ntrbase.Bot
 {
     class BreedingBot6
     {
-        public enum breedbotstates { botstart, facedaycareman, quickegg, walk1, walk2, checkegg, walk3, checkmap1, triggerdialog, cont1, cont2, cont3, cont4, cont5, acceptegg, cont6, exitdialog, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, readegg, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, fix5, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
+        public enum breedbotstates { botstart, facedaycareman, quickegg, walk1, walk2, checkegg, walk3, checkmap1, triggerdialog, checknoegg, exitdialog, testparty, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, readegg, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, fix5, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
 
         public bool botstop = false;
         public string finishmessage;
@@ -20,7 +20,8 @@ namespace ntrbase.Bot
         private int walktime = 50;
         private int commandtime = 250;
         private int commanddelay = 250;
-        private int longcommandtime = 600;
+        private int longcommandtime = 750;
+        private uint lastposition = 0;
         long dataready;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
@@ -199,7 +200,7 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.botstart:
                         Report("Bot start");
                         if (quickbreed)
-                            botState = (int)breedbotstates.retirefromcomputer;
+                            botState = (int)breedbotstates.facedaycareman;
                         else if (mode >= 0)
                             botState = (int)breedbotstates.walk1;
                         else
@@ -208,6 +209,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.facedaycareman:
                         Report("Turn to Day Care Man");
+                        await Task.Delay(500);
                         Program.helper.quickbuton(DpadUP, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.quickegg;
@@ -216,7 +218,10 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.quickegg:
                         waitTaskbool = Program.helper.waitNTRwrite(eggoff, 0x01, Program.gCmdWindow.pid);
                         if (await waitTaskbool)
+                        {
+                            attempts = -10;
                             botState = (int)breedbotstates.triggerdialog;
+                        }
                         else
                         {
                             botresult = 1;
@@ -254,7 +259,7 @@ namespace ntrbase.Bot
                         waitTaskbool = Program.helper.timememoryinrange(mapyoff, daycaremany, 0x01, 100, 5000);
                         if (await waitTaskbool)
                         {
-                            attempts = 0;
+                            attempts = -10;
                             Report("Egg found");
                             botState = (int)breedbotstates.triggerdialog;
                         }
@@ -275,68 +280,36 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.triggerdialog:
                         Report("Talk to Day Care Man");
                         Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(2000);
-                        botState = (int)breedbotstates.cont1;
+                        await Task.Delay(commandtime + commanddelay);
+                        botState = (int)breedbotstates.checknoegg;
                         break;
 
-                    case (int)breedbotstates.cont1:
-                        Report("Continue dialog 1/6");
-                        Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(1500);
-                        botState = (int)breedbotstates.cont2;
+                    case (int)breedbotstates.checknoegg:
+                        waitTaskbool = Program.helper.memoryinrange(eggoff, 0x00, 0x01);
+                        if (await waitTaskbool)
+                        {
+                            attempts = 0;
+                            Report("Egg received");
+                            botState = (int)breedbotstates.exitdialog;
+                        }
+                        else
+                        {
+                            attempts++;
+                            botState = (int)breedbotstates.triggerdialog;
+                        }
                         break;
-
-                    case (int)breedbotstates.cont2:
-                        Report("Continue dialog 2/6");
-                        Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(1500);
-                        botState = (int)breedbotstates.cont3;
-                        break;
-
-                    case (int)breedbotstates.cont3:
-                        Report("Continue dialog 3/6");
-                        Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(1500);
-                        botState = (int)breedbotstates.cont4;
-                        break;
-
-                    case (int)breedbotstates.cont4:
-                        Report("Continue dialog 4/6");
-                        Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(1500);
-                        botState = (int)breedbotstates.cont5;
-                        break;
-
-                    case (int)breedbotstates.cont5:
-                        Report("Continue dialog 5/6");
-                        Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(1500);
-                        botState = (int)breedbotstates.acceptegg;
-                        break;
-
-                    case (int)breedbotstates.acceptegg:
-                        Report("Accept the egg");
-                        Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(1500);
-                        botState = (int)breedbotstates.cont6;
-                        break;
-
-                    case (int)breedbotstates.cont6:
-                        Report("Continue dialog 6/6");
-                        await Task.Delay(3000); // Wait for fanfare
-                        Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(1500);
-                        botState = (int)breedbotstates.exitdialog;
-                        break;
-
+                   
                     case (int)breedbotstates.exitdialog:
                         Report("Exit dialog");
-                        Program.helper.quickbuton(keyA, commandtime);
-                        await Task.Delay(1500);
+                        await Task.Delay(3000);
+                        Program.helper.quickbuton(keyB, commandtime);
+                        await Task.Delay(commandtime + 1000);
+                        Program.helper.quickbuton(keyB, commandtime);
+                        await Task.Delay(commandtime + commanddelay);
                         addEggtoParty();
                         if (eggsinparty >= 5 || quantity == 0)
                         {
-                            attempts = -10; // Allow more attempts
+                            attempts = -15; // Allow more attempts
                             botState = (int)breedbotstates.walktodaycare;
                         }
                         else if (quickbreed)
@@ -356,11 +329,20 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)breedbotstates.checkmap2:
+                        lastposition = Program.helper.lastRead;
                         waitTaskbool = Program.helper.memoryinrange(mapxoff, daycaredoorx, 0x01);
                         if (await waitTaskbool)
                         {
                             attempts = 0;
                             botState = (int)breedbotstates.entertodaycare;
+                        }
+                        else if (lastposition == Program.helper.lastRead)
+                        {
+                            Report("No movement detected, still on dialog?");
+                            Program.helper.quickbuton(keyB, commandtime);
+                            await Task.Delay(commandtime + commanddelay);
+                            attempts++;
+                            botState = (int)breedbotstates.walktodaycare;
                         }
                         else if (Program.helper.lastRead < daycaredoorx && oras && !mauvdaycare)
                         {
@@ -509,7 +491,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.touchOrganize:
                         Report("Touch Organize boxes");
-                        await Task.Delay(1000);
+                        await Task.Delay(1500);
                         if (oras && organizeboxes)
                             Program.helper.quicktouch(160, 40, commandtime);
                         else
@@ -621,14 +603,14 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.touchegg:
                         Report("Select Egg");
                         Program.helper.holdtouch(300, 100);
-                        await Task.Delay(commanddelay);
+                        await Task.Delay(commanddelay + 250);
                         botState = (int)breedbotstates.moveegg;
                         break;
 
                     case (int)breedbotstates.moveegg:
                         Report("Select Egg");
                         Program.helper.holdtouch(pokeposX[currentslot], pokeposY[currentslot]);
-                        await Task.Delay(commanddelay);
+                        await Task.Delay(commanddelay + 250);
                         botState = (int)breedbotstates.releaseegg;
                         break;
 
@@ -663,10 +645,7 @@ namespace ntrbase.Bot
                             if (mode == 1 || mode == 2 || readesv)
                                 botState = (int)breedbotstates.filter;
                             else if (quantity > 0)
-                            {
-                                eggsinbatch = 0;
                                 botState = (int)breedbotstates.retirefromcomputer;
-                            }
                             else
                             {
                                 botState = (int)breedbotstates.botexit;
@@ -681,6 +660,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.retirefromcomputer:
                         Report("Retire from PC");
+                        eggsinbatch = 0;
                         Program.helper.quickbuton(DpadLEFT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap6;

@@ -195,7 +195,10 @@ namespace ntrbase.Helpers
             if (readcount == timeout * 10)
                 return -2; // No data received
             else if (validator.Species != 0)
+            {
+                Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                 return validator.PID;
+            }
             else // Empty slot
                 return -1;
         }

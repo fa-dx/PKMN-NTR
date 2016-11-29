@@ -4339,7 +4339,7 @@
             this.runBreedingBot.TabIndex = 16;
             this.runBreedingBot.Text = "Run";
             this.runBreedingBot.UseVisualStyleBackColor = true;
-            this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click);
+            this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click_1);
             // 
             // tabSoftReset
             // 
