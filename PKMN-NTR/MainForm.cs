@@ -4239,7 +4239,7 @@ namespace ntrbase
 
             DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-            if (dialogResult == DialogResult.OK && eggsNoBreed.Value > 0)
+            if (dialogResult == DialogResult.OK && eggsNoBreed.Value > 0 && modeBreed.SelectedIndex >= 0)
             {
                 botWorking = true;
                 botnumber = 1;

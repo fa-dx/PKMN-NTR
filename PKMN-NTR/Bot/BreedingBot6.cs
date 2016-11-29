@@ -608,7 +608,7 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)breedbotstates.moveegg:
-                        Report("Select Egg");
+                        Report("Move Egg");
                         Program.helper.holdtouch(pokeposX[currentslot], pokeposY[currentslot]);
                         await Task.Delay(commanddelay + 250);
                         botState = (int)breedbotstates.releaseegg;
