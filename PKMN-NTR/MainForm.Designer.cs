@@ -2643,7 +2643,7 @@
             this.RunLSRbot.TabIndex = 1;
             this.RunLSRbot.Text = "Run";
             this.RunLSRbot.UseVisualStyleBackColor = true;
-            this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click);
+            this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click_1);
             // 
             // resumeLSR
             // 

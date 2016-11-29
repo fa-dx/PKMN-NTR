@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ntrbase.Helpers
@@ -11,6 +12,8 @@ namespace ntrbase.Helpers
         public uint lastRead = 0; // Last read from RAM
         public int pid = 0;
         PKHeX validator = new PKHeX();
+        public enum GameType { None, X, Y, OR, AS, SM };
+        public GameType game;
 
         // Offsets for remote controls
         private uint buttonsOff = 0x10df20;
@@ -75,6 +78,39 @@ namespace ntrbase.Helpers
             await Task.Delay(time);
             buttonByte = BitConverter.GetBytes(nokey);
             Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+        }
+
+        public async Task<bool> waitSoftReset()
+        {
+            // Get and send hex coordinates
+            WriteLastLog("");
+            byte[] buttonByte = BitConverter.GetBytes(0xCF7);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            { // Timeout 1
+                await Task.Delay(100);
+                if (CompareLastLog("finished"))
+                    break;
+            }
+            if (readcount >= timeout * 10) // If not response, return timeout
+                return false;
+            else
+            { // Free the buttons
+                WriteLastLog("");
+                buttonByte = BitConverter.GetBytes(nokey);
+                Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+                for (readcount = 0; readcount < timeout * 10; readcount++)
+                { // Timeout 2
+                    await Task.Delay(100);
+                    if (CompareLastLog("finished") || CompareLastLog("patching smdh"))
+                        break;
+                }
+                if (readcount >= timeout * 10) // If not response, return timeout
+                    return false;
+                else // Return sucess
+                    return true;
+            }
         }
 
         // Touch Screen Handler
@@ -183,6 +219,29 @@ namespace ntrbase.Helpers
         public async Task<long> waitPokeRead(int box, int slot)
         {
             uint dumpOff = Program.gCmdWindow.boxOff + (Convert.ToUInt32(box * BOXSIZE + slot) * POKEBYTES);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
+            Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(dumpOff, POKEBYTES, pid), myArgs);
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (CompareLastLog("finished"))
+                    break;
+            }
+            if (readcount == timeout * 10)
+                return -2; // No data received
+            else if (validator.Species != 0)
+            {
+                Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
+                return validator.PID;
+            }
+            else // Empty slot
+                return -1;
+        }
+
+        public async Task<long> waitPartyRead(uint partyOff, int slot)
+        {
+            uint dumpOff = Program.gCmdWindow.partyOff + Convert.ToUInt32(slot * 484);
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
             Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(dumpOff, POKEBYTES, pid), myArgs);
             int readcount = 0;

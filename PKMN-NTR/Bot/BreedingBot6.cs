@@ -114,6 +114,7 @@ namespace ntrbase.Bot
                 wtboxviewOff = 0x627437;
                 wtboxviewIN = 0x00000000;
                 wtboxviewOUT = 0x20000000;
+                wtboxviewRange = 0x1000000;
                 mapidoff = 0x81828EC;
                 mapxoff = 0x818290C;
                 mapyoff = 0x8182914;
@@ -128,6 +129,7 @@ namespace ntrbase.Bot
                 //daycareexity = 0x43AF8000;
                 computerx = 0x43828000;
                 computery = 0x43730000;
+                eggoff = 0x8C80124;
                 runtime = 1000;
             }
             else
@@ -787,9 +789,9 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.fix4:
                         Report("Missed Day Care Man, return");
                         if (oras && !mauvdaycare)
-                            Program.helper.quickbuton(DpadLEFT, walktime);
-                        else
                             Program.helper.quickbuton(DpadRIGHT, walktime);
+                        else
+                            Program.helper.quickbuton(DpadLEFT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap9;
                         break;
@@ -850,13 +852,13 @@ namespace ntrbase.Bot
                         {
                             Report("All tests passed");
                             botresult = 4;
-                            finishmessage = "Finished. A match was found at box " + filterbox + ", slot " + filterslot + ", using filter #";
+                            finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", using filter #";
                         }
                         else if (mode == 2)
                         {
                             Report("ESV/TSV match found");
                             botresult = 5;
-                            finishmessage = "Finished. A match was found at box " + filterbox + ", slot " + filterslot + ", the ESV/TSV value is: " + currentesv;
+                            finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", the ESV/TSV value is: " + currentesv;
                         }
                         Report("Bot stop");
                         botState = (int)breedbotstates.botexit;

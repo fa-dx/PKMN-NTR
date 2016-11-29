@@ -63,6 +63,7 @@ namespace ntrbase
         private WonderTradeBot6 WTBot6;
         private WonderTradeBot7 WTBot7;
         private BreedingBot6 BreedBot6;
+        private SoftResetbot6 SRBot6;
 
         //Game information
         public int pid;
@@ -525,6 +526,7 @@ namespace ntrbase
             if (args.info.Contains("kujira-1")) // X
             {
                 game = GameType.X;
+                Program.helper.game = Helpers.RemoteControl.GameType.X;
                 gen7 = false;
                 string log = args.info;
                 pname = ", pname: kujira-1";
@@ -569,6 +571,7 @@ namespace ntrbase
             else if (args.info.Contains("kujira-2")) // Y
             {
                 game = GameType.Y;
+                Program.helper.game = Helpers.RemoteControl.GameType.Y;
                 gen7 = false;
                 string log = args.info;
                 pname = ", pname: kujira-2";
@@ -632,6 +635,7 @@ namespace ntrbase
             else if (args.info.Contains("sango-1")) // Omega Ruby
             {
                 game = GameType.OR;
+                Program.helper.game = Helpers.RemoteControl.GameType.OR;
                 gen7 = false;
                 string log = args.info;
                 pname = ", pname:  sango-1";
@@ -658,25 +662,13 @@ namespace ntrbase
                 tradeoffrg = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
-
-
-
-
-
-                pssettingsOff = 0x19C244;
-                pssettingsIN = 0x830000;
-                pssettingsOUT = 0x500000;
-                pssdisableOff = 0x630DA5;
-                pssdisableY = 120;
-                pssdisableIN = 0x33000000;
-                pssdisableOUT = 0x33100000;
-
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
             else if (args.info.Contains("sango-2")) // Alpha Sapphire
             {
                 game = GameType.AS;
+                Program.helper.game = Helpers.RemoteControl.GameType.AS;
                 gen7 = false;
                 string log = args.info;
                 pname = ", pname:  sango-2";
@@ -742,6 +734,7 @@ namespace ntrbase
             else if (args.info.Contains("niji_loc")) // Sun/Moon
             {
                 game = GameType.SM;
+                Program.helper.game = Helpers.RemoteControl.GameType.SM;
                 gen7 = true;
                 string log = args.info;
                 pname = ", pname: niji_loc";
@@ -2956,7 +2949,7 @@ namespace ntrbase
                     BreedBot6.botstop = true;
                     break;
                 case 2: // Soft-reset bot
-                    botStop = true;
+                    SRBot6.botstop = true;
                     break;
                 case 3: // Wonder Trade bot
                     if (gen7)
@@ -3431,6 +3424,141 @@ namespace ntrbase
         }
 
         // Soft-reset bot
+        private async void RunLSRbot_Click_1(object sender, EventArgs e)
+        {
+            string typemessage;
+            string resumemessage;
+            switch (typeLSR.SelectedIndex)
+            {
+                case 0:
+                    typemessage = "Regular - Make sure you are in front of the pokémon.";
+                    resumemessage = "In front of pokémon, will press A to trigger start the battle";
+                    break;
+                case 1:
+                    typemessage = "Mirage Spot - Make sure you are in front of the hole.";
+                    resumemessage = "In front of hole, will press A to trigger dialog";
+                    break;
+                case 2:
+                    typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
+                    resumemessage = "In front of the lady, will press A to trigger dialog";
+                    break;
+                case 3:
+                    typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
+                    resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
+                    break;
+                case 4:
+                    typemessage = "Walk - Make sure you are one step south of the pokémon.";
+                    resumemessage = "One step south of the pokémon, will press up to trigger dialog";
+                    break;
+                default:
+                    typemessage = "No type - Select one type of soft-reset and try again.";
+                    resumemessage = "";
+                    break;
+            }
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.OK && typeLSR.SelectedIndex >= 0)
+            {
+                botWorking = true;
+                botnumber = 2;
+                disableControls();
+                stopBotButton.Enabled = true;
+                txtLog.Clear();
+                Task<int> Bot;
+                if (gen7)
+                {
+                    return;
+                }
+                else
+                {
+                    bool oras;
+                    if (game == GameType.X || game == GameType.Y)
+                        oras = false;
+                    else
+                        oras = true;
+                    SRBot6 = new SoftResetbot6(typeLSR.SelectedIndex, resumeLSR.Checked, oras);
+                    Bot = SRBot6.RunBot();
+                }
+                int result = await Bot;
+                int totalresets;
+                if (gen7)
+                {
+                    return;
+                }
+                else
+                    totalresets = SRBot6.resetNo;
+                switch (result)
+                {
+                    case 0:
+                        MessageBox.Show("Bot finished sucessfully", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 1:
+                        MessageBox.Show("Please go to the PSS menu and try again.", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 2:
+                        MessageBox.Show(writeerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 3:
+                        MessageBox.Show(readerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 4:
+                        MessageBox.Show("Finished, number of resets: " + totalresets, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                }
+                botWorking = false;
+                botnumber = -1;
+                enableControls();
+                stopBotButton.Enabled = false;
+            }
+        }
+
+        public async Task<long> ReadOpponent()
+        {
+            SetText(dPID, "");
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
+            waitingForData.Add(Program.scriptHelper.data(0x8800000, 0x1FFFF, pid), myArgs);
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (lastlog.Contains("finished"))
+                    break;
+            }
+            if (readcount == timeout * 10)
+                return -2; // No data received
+            for (readcount = 0; readcount < 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (dPID.Text.Length > 1)
+                    break;
+            }
+            if (readcount == 10)
+                return -2; // No data received
+            else if (dumpedPKHeX.Species != 0)
+            {
+                return dumpedPKHeX.PID;
+            }
+            else // Empty slot
+                return -1;
+        }
+
+        public async Task<bool> Reconnect()
+        {
+            Addlog("Reconnect");
+            Program.scriptHelper.connect(host.Text, 8000);
+            int waittimeout;
+            for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+            {
+                await Task.Delay(500);
+                if (lastlog.Contains("end of process list"))
+                    break;
+            }
+            if (waittimeout < timeout * 10)
+                return true;
+            else
+                return false;
+        }
+
         public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tms_start, tms_cont1, tms_cont2, tms_cont3, tst_start, tst_cont, tev_start, tev_cont1, tev_cont2, tev_cont3, tev_cont4, tev_cont5, tev_check, twk_start, botexit };
 
         private async void RunLSRbot_Click(object sender, EventArgs e)
@@ -4215,6 +4343,11 @@ namespace ntrbase
             stopBotButton.Enabled = false;
             botWorking = false;
             MessageBox.Show("Finished, number of resets: " + resetNo, "Soft-reset bot");
+        }
+
+        public bool CheckSoftResetFilters()
+        {
+            return FilterCheck(filtersSoftReset);
         }
 
         // Breeding bot
