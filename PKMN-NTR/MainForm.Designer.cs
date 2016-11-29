@@ -570,7 +570,7 @@
             // 
             this.bpNum.Location = new System.Drawing.Point(81, 196);
             this.bpNum.Maximum = new decimal(new int[] {
-            9999999,
+            9999,
             0,
             0,
             0});

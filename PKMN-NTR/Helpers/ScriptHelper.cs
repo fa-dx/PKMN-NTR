@@ -44,8 +44,6 @@ namespace ntrbase
             Program.ntrClient.sendEmptyPacket(11, 0, 0, 4);
         }
 
-
-
 		public void connect(string host, int port)
         {
 			Program.ntrClient.setServer(host, port);
@@ -114,7 +112,6 @@ namespace ntrbase
         {
             Program.ntrClient.sendWriteMemPacketByte(addr, (uint)pid, buf);
         }
-
 
         public void sendfile(String localPath, String remotePath)
         {

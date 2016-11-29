@@ -65,33 +65,6 @@ namespace ntrbase.Bot
         private uint computery;
         private uint eggoff;
 
-        // Position of boxes and pokémon in the lower screen
-        public static readonly uint[] pokeposX = { 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180 };
-        public static readonly uint[] pokeposY = { 60, 60, 60, 60, 60, 60, 90, 90, 90, 90, 90, 90, 120, 120, 120, 120, 120, 120, 150, 150, 150, 150, 150, 150, 180, 180, 180, 180, 180, 180 };
-        public static readonly uint[] boxposX = { 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260 };
-        public static readonly uint[] boxposY = { 24, 24, 24, 24, 24, 24, 24, 24, 72, 72, 72, 72, 72, 72, 72, 72, 120, 120, 120, 120, 120, 120, 120, 120, 168, 168, 168, 168, 168, 168, 168 };
-
-        // Button values for remote controls
-        public static readonly uint nokey = 0xFFF;
-        public static readonly uint keyA = 0xFFE;
-        public static readonly uint keyB = 0xFFD;
-        public static readonly uint keyX = 0xBFF;
-        public static readonly uint keyY = 0x7FF;
-        public static readonly uint keyR = 0xEFF;
-        public static readonly uint keyL = 0xDFF;
-        public static readonly uint keySTART = 0xFF7;
-        public static readonly uint keySELECT = 0xFFB;
-        public static readonly uint DpadUP = 0xFBF;
-        public static readonly uint DpadDOWN = 0xF7F;
-        public static readonly uint DpadLEFT = 0xFDF;
-        public static readonly uint DpadRIGHT = 0xFEF;
-        public static readonly uint runUP = 0xFBD;
-        public static readonly uint runDOWN = 0xF7D;
-        public static readonly uint runLEFT = 0xFDD;
-        public static readonly uint runRIGHT = 0xFED;
-        public static readonly uint softReset = 0xCF7;
-        public static readonly uint notouch = 0x02000000;
-
         public BreedingBot6(int selectedmode, int startbox, int startlsot, int amount, bool organizeboxesposition, bool mauvilledaycare, bool readesvafterdep, bool quickbreedflag, bool orasgame)
         {
             mode = selectedmode;
@@ -212,7 +185,7 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.facedaycareman:
                         Report("Turn to Day Care Man");
                         await Task.Delay(500);
-                        Program.helper.quickbuton(DpadUP, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.DpadUP, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.quickegg;
                         break;
@@ -233,14 +206,14 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.walk1:
                         Report("Run to south");
-                        Program.helper.quickbuton(runDOWN, runtime);
+                        Program.helper.quickbuton(Program.PKTable.runDOWN, runtime);
                         await Task.Delay(runtime + commanddelay);
                         botState = (int)breedbotstates.walk2;
                         break;
 
                     case (int)breedbotstates.walk2:
                         Report("Run to north");
-                        Program.helper.quickbuton(runUP, runtime);
+                        Program.helper.quickbuton(Program.PKTable.runUP, runtime);
                         await Task.Delay(runtime + commanddelay);
                         botState = (int)breedbotstates.checkegg;
                         break;
@@ -274,14 +247,14 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.walk3:
                         Report("Return to day care man");
-                        Program.helper.quickbuton(runUP, longcommandtime);
+                        Program.helper.quickbuton(Program.PKTable.runUP, longcommandtime);
                         await Task.Delay(longcommandtime + commanddelay);
                         botState = (int)breedbotstates.checkmap1;
                         break;
 
                     case (int)breedbotstates.triggerdialog:
                         Report("Talk to Day Care Man");
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.checknoegg;
                         break;
@@ -304,9 +277,9 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.exitdialog:
                         Report("Exit dialog");
                         await Task.Delay(3000);
-                        Program.helper.quickbuton(keyB, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyB, commandtime);
                         await Task.Delay(commandtime + 1000);
-                        Program.helper.quickbuton(keyB, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyB, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         addEggtoParty();
                         if (eggsinparty >= 5 || quantity == 0)
@@ -323,9 +296,9 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.walktodaycare:
                         Report("Walk to Day Care");
                         if (oras && !mauvdaycare)
-                            Program.helper.quickbuton(DpadLEFT, walktime);
+                            Program.helper.quickbuton(Program.PKTable.DpadLEFT, walktime);
                         else
-                            Program.helper.quickbuton(DpadRIGHT, walktime);
+                            Program.helper.quickbuton(Program.PKTable.DpadRIGHT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap2;
                         break;
@@ -341,7 +314,7 @@ namespace ntrbase.Bot
                         else if (lastposition == Program.helper.lastRead)
                         {
                             Report("No movement detected, still on dialog?");
-                            Program.helper.quickbuton(keyB, commandtime);
+                            Program.helper.quickbuton(Program.PKTable.keyB, commandtime);
                             await Task.Delay(commandtime + commanddelay);
                             attempts++;
                             botState = (int)breedbotstates.walktodaycare;
@@ -366,16 +339,16 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.fix1:
                         Report("Missed day care, return");
                         if (oras && !mauvdaycare)
-                            Program.helper.quickbuton(DpadRIGHT, walktime);
+                            Program.helper.quickbuton(Program.PKTable.DpadRIGHT, walktime);
                         else
-                            Program.helper.quickbuton(DpadLEFT, walktime);
+                            Program.helper.quickbuton(Program.PKTable.DpadLEFT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap2;
                         break;
 
                     case (int)breedbotstates.entertodaycare:
                         Report("Enter to Day Care");
-                        Program.helper.quickbuton(runUP, longcommandtime);
+                        Program.helper.quickbuton(Program.PKTable.runUP, longcommandtime);
                         await Task.Delay(longcommandtime + commanddelay);
                         botState = (int)breedbotstates.checkmap3;
                         break;
@@ -396,7 +369,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.walktodesk:
                         Report("Run to desk");
-                        Program.helper.quickbuton(runUP, longcommandtime);
+                        Program.helper.quickbuton(Program.PKTable.runUP, longcommandtime);
                         await Task.Delay(longcommandtime + commanddelay);
                         botState = (int)breedbotstates.checkmap4;
                         break;
@@ -417,7 +390,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.walktocomputer:
                         Report("Walk to the PC");
-                        Program.helper.quickbuton(DpadRIGHT, walktime);
+                        Program.helper.quickbuton(Program.PKTable.DpadRIGHT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap5;
                         break;
@@ -443,20 +416,20 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.fix2:
                         Report("Missed PC, return");
-                        Program.helper.quickbuton(DpadLEFT, walktime);
+                        Program.helper.quickbuton(Program.PKTable.DpadLEFT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap5;
                         break;
 
                     case (int)breedbotstates.facecomputer:
                         Report("Turn on the PC");
-                        Program.helper.quickbuton(DpadUP, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.DpadUP, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.startcomputer;
                         break;
 
                     case (int)breedbotstates.startcomputer:
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.testcomputer;
                         break;
@@ -479,14 +452,14 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.computerdialog:
                         Report("Skip PC dialog");
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.pressPCstorage;
                         break;
 
                     case (int)breedbotstates.pressPCstorage:
                         Report("Press Access PC storage");
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.touchOrganize;
                         break;
@@ -574,14 +547,14 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.touchnewbox:
                         Report("Touch New Box");
-                        Program.helper.quicktouch(boxposX[currentbox], boxposY[currentbox], commandtime);
+                        Program.helper.quicktouch(Program.PKTable.boxposX[currentbox], Program.PKTable.boxposY[currentbox], commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.selectnewbox;
                         break;
 
                     case (int)breedbotstates.selectnewbox:
                         Report("Select New Box");
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.testviewout;
                         break;
@@ -611,7 +584,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.moveegg:
                         Report("Move Egg");
-                        Program.helper.holdtouch(pokeposX[currentslot], pokeposY[currentslot]);
+                        Program.helper.holdtouch(Program.PKTable.pokeposX[currentslot], Program.PKTable.pokeposY[currentslot]);
                         await Task.Delay(commanddelay + 250);
                         botState = (int)breedbotstates.releaseegg;
                         break;
@@ -633,7 +606,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.exitcomputer:
                         Report("Exit from PC");
-                        Program.helper.quickbuton(keyX, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyX, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)breedbotstates.testexit;
                         break;
@@ -663,7 +636,7 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.retirefromcomputer:
                         Report("Retire from PC");
                         eggsinbatch = 0;
-                        Program.helper.quickbuton(DpadLEFT, walktime);
+                        Program.helper.quickbuton(Program.PKTable.DpadLEFT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap6;
                         break;
@@ -689,14 +662,14 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.fix3:
                         Report("Missed exit, return");
-                        Program.helper.quickbuton(DpadRIGHT, walktime);
+                        Program.helper.quickbuton(Program.PKTable.DpadRIGHT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap6;
                         break;
 
                     case (int)breedbotstates.retirefromdesk:
                         Report("Run to exit");
-                        Program.helper.quickbuton(runDOWN, longcommandtime);
+                        Program.helper.quickbuton(Program.PKTable.runDOWN, longcommandtime);
                         await Task.Delay(longcommandtime + commanddelay);
                         botState = (int)breedbotstates.checkmap7;
                         break;
@@ -717,7 +690,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.retirefromdoor:
                         Report("Retire from door");
-                        Program.helper.quickbuton(DpadDOWN, walktime);
+                        Program.helper.quickbuton(Program.PKTable.DpadDOWN, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap8;
                         break;
@@ -744,7 +717,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.fix5:
                         Report("Missed Day Care Man, return");
-                        Program.helper.quickbuton(DpadUP, walktime);
+                        Program.helper.quickbuton(Program.PKTable.DpadUP, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap8;
                         break;
@@ -752,9 +725,9 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.walktodaycareman:
                         Report("Walk to Day Care Man");
                         if (oras && !mauvdaycare)
-                            Program.helper.quickbuton(DpadRIGHT, walktime);
+                            Program.helper.quickbuton(Program.PKTable.DpadRIGHT, walktime);
                         else
-                            Program.helper.quickbuton(DpadLEFT, walktime);
+                            Program.helper.quickbuton(Program.PKTable.DpadLEFT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap9;
                         break;
@@ -789,9 +762,9 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.fix4:
                         Report("Missed Day Care Man, return");
                         if (oras && !mauvdaycare)
-                            Program.helper.quickbuton(DpadRIGHT, walktime);
+                            Program.helper.quickbuton(Program.PKTable.DpadRIGHT, walktime);
                         else
-                            Program.helper.quickbuton(DpadLEFT, walktime);
+                            Program.helper.quickbuton(Program.PKTable.DpadLEFT, walktime);
                         await Task.Delay(walktime + commanddelay);
                         botState = (int)breedbotstates.checkmap9;
                         break;

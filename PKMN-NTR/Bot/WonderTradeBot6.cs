@@ -42,15 +42,6 @@ namespace ntrbase.Bot
         public uint wtboxviewOUT;
         public uint wtboxviewRange;
 
-        // Button values for remote controls
-        public static readonly uint keyA = 0xFFE;
-
-        // Position of boxes and pokémon in the lower screen
-        public static readonly uint[] pokeposX = { 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180 };
-        public static readonly uint[] pokeposY = { 60, 60, 60, 60, 60, 60, 90, 90, 90, 90, 90, 90, 120, 120, 120, 120, 120, 120, 150, 150, 150, 150, 150, 150, 180, 180, 180, 180, 180, 180 };
-        public static readonly uint[] boxposX = { 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260 };
-        public static readonly uint[] boxposY = { 24, 24, 24, 24, 24, 24, 24, 24, 72, 72, 72, 72, 72, 72, 72, 72, 120, 120, 120, 120, 120, 120, 120, 120, 168, 168, 168, 168, 168, 168, 168 };
-
         public WonderTradeBot6(int StartBox, int StartSlot, int Amount, bool oras)
         {
             currentbox = StartBox - 1;
@@ -176,7 +167,7 @@ namespace ntrbase.Bot
                     case (int)botstates.confirmsave:
                         Report("Press Yes");
                         await Task.Delay(500);
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testwtscrn;
                         break;
@@ -258,7 +249,7 @@ namespace ntrbase.Bot
                     case (int)botstates.touchnewbox:
                         await Task.Delay(500);
                         Report("Touch New Box");
-                        Program.helper.quicktouch(boxposX[currentbox], boxposY[currentbox], commandtime);
+                        Program.helper.quicktouch(Program.PKTable.boxposX[currentbox], Program.PKTable.boxposY[currentbox], commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.selectnewbox;
                         break;
@@ -266,7 +257,7 @@ namespace ntrbase.Bot
                     case (int)botstates.selectnewbox:
                         Report("Select New Box");
                         await Task.Delay(500);
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testboxviewout;
                         break;
@@ -290,7 +281,7 @@ namespace ntrbase.Bot
                     case (int)botstates.touchpoke:
                         Report("Touch Pokémon");
                         await Task.Delay(500);
-                        Program.helper.quicktouch(pokeposX[currentslot], pokeposY[currentslot], commandtime);
+                        Program.helper.quicktouch(Program.PKTable.pokeposX[currentslot], Program.PKTable.pokeposY[currentslot], commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.selectrade;
                         break;
@@ -298,7 +289,7 @@ namespace ntrbase.Bot
                     case (int)botstates.selectrade:
                         Report("Select Trade");
                         await Task.Delay(750);
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.confirmsend;
                         break;
@@ -306,7 +297,7 @@ namespace ntrbase.Bot
                     case (int)botstates.confirmsend:
                         Report("Select Yes");
                         await Task.Delay(750);
-                        Program.helper.quickbuton(keyA, commandtime);
+                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testboxesout;
                         break;
@@ -387,7 +378,7 @@ namespace ntrbase.Bot
                         { // Still waiting
                             attempts++;
                             Report("Select Yes");
-                            Program.helper.quickbuton(keyA, commandtime);
+                            Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
                             await Task.Delay(commandtime + delaytime);
                             botstate = (int)botstates.notradepartner;
                         }

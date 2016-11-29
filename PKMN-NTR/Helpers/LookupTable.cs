@@ -157,6 +157,46 @@ namespace ntrbase
         }
 
         #endregion Hidden Power
+
+        #region Buttons
+
+        public uint nokey = 0xFFF;
+        public uint keyA = 0xFFE;
+        public uint keyB = 0xFFD;
+        public uint keyX = 0xBFF;
+        public uint keyY = 0x7FF;
+        public uint keyR = 0xEFF;
+        public uint keyL = 0xDFF;
+        public uint keySTART = 0xFF7;
+        public uint keySELECT = 0xFFB;
+        public uint DpadUP = 0xFBF;
+        public uint DpadDOWN = 0xF7F;
+        public uint DpadLEFT = 0xFDF;
+        public uint DpadRIGHT = 0xFEF;
+        public uint runUP = 0xFBD;
+        public uint runDOWN = 0xF7D;
+        public uint runLEFT = 0xFDD;
+        public uint runRIGHT = 0xFED;
+        public uint softReset = 0xCF7;
+        public uint notouch = 0x02000000;
+
+        #endregion Buttons
+
+        #region Box Position
+
+        // Gen 6
+        public uint[] pokeposX = { 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180 };
+        public uint[] pokeposY = { 60, 60, 60, 60, 60, 60, 90, 90, 90, 90, 90, 90, 120, 120, 120, 120, 120, 120, 150, 150, 150, 150, 150, 150, 180, 180, 180, 180, 180, 180 };
+        public uint[] boxposX = { 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260, 300, 20, 60, 100, 140, 180, 220, 260 };
+        public uint[] boxposY = { 24, 24, 24, 24, 24, 24, 24, 24, 72, 72, 72, 72, 72, 72, 72, 72, 120, 120, 120, 120, 120, 120, 120, 120, 168, 168, 168, 168, 168, 168, 168 };
+
+        // Gen 7
+        public uint[] pokeposX7 = { 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180, 30, 60, 90, 120, 150, 180 };
+        public uint[] pokeposY7 = { 70, 70, 70, 70, 70, 70, 100, 100, 100, 100, 100, 100, 130, 130, 130, 130, 130, 130, 160, 160, 160, 160, 160, 160, 190, 190, 190, 190, 190, 190 };
+        public uint[] boxposX7 = { 35, 70, 105, 140, 175, 210, 245, 280, 35, 70, 105, 140, 175, 210, 245, 280, 35, 70, 105, 140, 175, 210, 245, 280, 35, 70, 105, 140, 175, 210, 245, 280 };
+        public uint[] boxposY7 = { 40, 40, 40, 40, 40, 40, 40, 40, 80, 80, 80, 80, 80, 80, 80, 80, 120, 120, 120, 120, 120, 120, 120, 120, 160, 160, 160, 160, 160, 160, 160, 160 };
+
+        #endregion Box Position
     }
 
 }

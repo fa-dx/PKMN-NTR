@@ -12,8 +12,6 @@ namespace ntrbase.Helpers
         public uint lastRead = 0; // Last read from RAM
         public int pid = 0;
         PKHeX validator = new PKHeX();
-        public enum GameType { None, X, Y, OR, AS, SM };
-        public GameType game;
 
         // Offsets for remote controls
         private uint buttonsOff = 0x10df20;
