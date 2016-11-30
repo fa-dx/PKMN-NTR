@@ -591,7 +591,7 @@ namespace ntrbase
                 pname = ", pname: niji_loc";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
-                moneyoff = 0x34184E00;
+                moneyoff = 0x330D8FC0;
                 currentFCoff = 0x33124D58;
                 totalFCoff = 0x33124D5C;
                 bpoff = 0x330D90D8;
@@ -3237,7 +3237,6 @@ namespace ntrbase
             else
                 return true;
         }
-
 
         #endregion Bots
     }
