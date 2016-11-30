@@ -16,6 +16,7 @@ namespace ntrbase.Helpers
         // Offsets for remote controls
         private uint buttonsOff = 0x10df20;
         private uint touchscrOff = 0x10df24;
+        private uint stickOff = 0x10df28;
         private int hid_pid = 0x10;
         public const int BOXSIZE = 30;
         public const int POKEBYTES = 232;
@@ -23,6 +24,7 @@ namespace ntrbase.Helpers
         // Constant values for remote control
         private static readonly uint nokey = 0xFFF;
         private static readonly uint notouch = 0x02000000;
+        private static readonly uint nostick = 0x00800800;
 
         // Log Handler
         private void WriteLastLog(string str)
@@ -174,6 +176,60 @@ namespace ntrbase.Helpers
         {
             uint hexX = Convert.ToUInt32(Math.Round(Xvalue * 0xFFF / 319));
             uint hexY = Convert.ToUInt32(Math.Round(Yvalue * 0xFFF / 239));
+            return 0x01000000 + hexY * 0x1000 + hexX;
+        }
+
+        // Control Screen Handler
+        public async Task<bool> waitsitck(decimal Xvalue, decimal Yvalue)
+        {
+            // Get and send hex coordinates
+            WriteLastLog("");
+            byte[] buttonByte = BitConverter.GetBytes(getstickhex(Xvalue, Yvalue));
+            Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            { // Timeout 1
+                await Task.Delay(100);
+                if (CompareLastLog("finished"))
+                {
+                    break;
+                }
+            }
+            if (readcount >= timeout * 10) // If no response, return timeout
+                return false;
+            else
+            { // Free the touch screen
+                WriteLastLog("");
+                buttonByte = BitConverter.GetBytes(nostick);
+                Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
+                for (readcount = 0; readcount < timeout * 10; readcount++)
+                { // Timeout 2
+                    await Task.Delay(100);
+                    if (CompareLastLog("finished"))
+                        break;
+                }
+                if (readcount >= timeout * 10) // If not response in two seconds, return timeout
+                    return false;
+                else // Return sucess
+                    return true;
+            }
+        }
+
+        public async void quickstick(decimal Xvalue, decimal Yvalue, int time)
+        {
+            byte[] buttonByte = BitConverter.GetBytes(getstickhex(Xvalue, Yvalue));
+            Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
+            await Task.Delay(time);
+            buttonByte = BitConverter.GetBytes(nostick);
+            Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
+        }
+
+        private uint getstickhex(decimal Xvalue, decimal Yvalue)
+        {
+            uint hexX = Convert.ToUInt32((Xvalue + 100) * 0xFFF / 200);
+            uint hexY = Convert.ToUInt32((Yvalue + 100) * 0xFFF / 200);
+            if (hexX >= 0x1000) hexX = 0xFFF;
+            if (hexY >= 0x1000) hexY = 0xFFF;
             return 0x01000000 + hexY * 0x1000 + hexX;
         }
 

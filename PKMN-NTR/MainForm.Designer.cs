@@ -234,6 +234,14 @@
             this.pokeTotalFC = new System.Windows.Forms.Button();
             this.totalFCNum = new System.Windows.Forms.NumericUpDown();
             this.tabControls = new System.Windows.Forms.TabPage();
+            this.StickSend = new System.Windows.Forms.Button();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.StickNumX = new System.Windows.Forms.NumericUpDown();
+            this.StickNumY = new System.Windows.Forms.NumericUpDown();
+            this.label60 = new System.Windows.Forms.Label();
+            this.StickY = new System.Windows.Forms.TrackBar();
+            this.StickX = new System.Windows.Forms.TrackBar();
             this.manualSR = new System.Windows.Forms.Button();
             this.label92 = new System.Windows.Forms.Label();
             this.tabFilters = new System.Windows.Forms.TabPage();
@@ -439,6 +447,10 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.totalFCNum)).BeginInit();
             this.tabControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickX)).BeginInit();
             this.tabFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterPerIVvalue)).BeginInit();
@@ -2889,7 +2901,7 @@
             this.label54.Location = new System.Drawing.Point(272, 16);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(73, 13);
-            this.label54.TabIndex = 16;
+            this.label54.TabIndex = 21;
             this.label54.Text = "Touchscreen:";
             // 
             // ManualDDown
@@ -3051,6 +3063,14 @@
             // tabControls
             // 
             this.tabControls.BackColor = System.Drawing.SystemColors.Control;
+            this.tabControls.Controls.Add(this.StickSend);
+            this.tabControls.Controls.Add(this.label62);
+            this.tabControls.Controls.Add(this.label61);
+            this.tabControls.Controls.Add(this.StickNumX);
+            this.tabControls.Controls.Add(this.StickNumY);
+            this.tabControls.Controls.Add(this.label60);
+            this.tabControls.Controls.Add(this.StickY);
+            this.tabControls.Controls.Add(this.StickX);
             this.tabControls.Controls.Add(this.manualSR);
             this.tabControls.Controls.Add(this.label92);
             this.tabControls.Controls.Add(this.manualDLeft);
@@ -3076,6 +3096,94 @@
             this.tabControls.TabIndex = 1;
             this.tabControls.Text = "Controls";
             // 
+            // StickSend
+            // 
+            this.StickSend.Location = new System.Drawing.Point(64, 162);
+            this.StickSend.Name = "StickSend";
+            this.StickSend.Size = new System.Drawing.Size(144, 23);
+            this.StickSend.TabIndex = 20;
+            this.StickSend.Text = "Send Command";
+            this.StickSend.UseVisualStyleBackColor = true;
+            this.StickSend.Click += new System.EventHandler(this.StickSend_Click);
+            // 
+            // label62
+            // 
+            this.label62.Location = new System.Drawing.Point(146, 141);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(62, 18);
+            this.label62.TabIndex = 25;
+            this.label62.Text = "Horizontal";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label61
+            // 
+            this.label61.Location = new System.Drawing.Point(64, 141);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(62, 18);
+            this.label61.TabIndex = 24;
+            this.label61.Text = "Vertical";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // StickNumX
+            // 
+            this.StickNumX.Location = new System.Drawing.Point(146, 118);
+            this.StickNumX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.StickNumX.Name = "StickNumX";
+            this.StickNumX.Size = new System.Drawing.Size(62, 20);
+            this.StickNumX.TabIndex = 19;
+            this.StickNumX.ValueChanged += new System.EventHandler(this.StickNumX_ValueChanged);
+            // 
+            // StickNumY
+            // 
+            this.StickNumY.Location = new System.Drawing.Point(64, 118);
+            this.StickNumY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.StickNumY.Name = "StickNumY";
+            this.StickNumY.Size = new System.Drawing.Size(62, 20);
+            this.StickNumY.TabIndex = 18;
+            this.StickNumY.ValueChanged += new System.EventHandler(this.StickNumY_ValueChanged);
+            // 
+            // label60
+            // 
+            this.label60.Location = new System.Drawing.Point(64, 102);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(144, 23);
+            this.label60.TabIndex = 23;
+            this.label60.Text = "Control Stick";
+            this.label60.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // StickY
+            // 
+            this.StickY.Location = new System.Drawing.Point(6, 95);
+            this.StickY.Maximum = 100;
+            this.StickY.Minimum = -100;
+            this.StickY.Name = "StickY";
+            this.StickY.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.StickY.Size = new System.Drawing.Size(45, 141);
+            this.StickY.TabIndex = 16;
+            this.StickY.TickFrequency = 25;
+            this.StickY.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.StickY.Scroll += new System.EventHandler(this.StickY_Scroll);
+            // 
+            // StickX
+            // 
+            this.StickX.Location = new System.Drawing.Point(57, 191);
+            this.StickX.Maximum = 100;
+            this.StickX.Minimum = -100;
+            this.StickX.Name = "StickX";
+            this.StickX.Size = new System.Drawing.Size(151, 45);
+            this.StickX.TabIndex = 17;
+            this.StickX.TickFrequency = 25;
+            this.StickX.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.StickX.Scroll += new System.EventHandler(this.StickX_Scroll);
+            // 
             // manualSR
             // 
             this.manualSR.Location = new System.Drawing.Point(351, 40);
@@ -3092,7 +3200,7 @@
             this.label92.Location = new System.Drawing.Point(271, 44);
             this.label92.Name = "label92";
             this.label92.Size = new System.Drawing.Size(74, 13);
-            this.label92.TabIndex = 17;
+            this.label92.TabIndex = 22;
             this.label92.Text = "Special Inputs";
             // 
             // tabFilters
@@ -4682,6 +4790,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.totalFCNum)).EndInit();
             this.tabControls.ResumeLayout(false);
             this.tabControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickX)).EndInit();
             this.tabFilters.ResumeLayout(false);
             this.tabFilters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).EndInit();
@@ -5072,6 +5184,14 @@
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Button pokeTotalFC;
         private System.Windows.Forms.NumericUpDown totalFCNum;
+        private System.Windows.Forms.Button StickSend;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.NumericUpDown StickNumX;
+        private System.Windows.Forms.NumericUpDown StickNumY;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.TrackBar StickY;
+        private System.Windows.Forms.TrackBar StickX;
     }
 }
 
