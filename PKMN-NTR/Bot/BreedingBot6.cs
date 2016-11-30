@@ -798,6 +798,7 @@ namespace ntrbase.Bot
                             {
                                 botresult = 2;
                                 botState = (int)breedbotstates.botexit;
+                                break;
                             }
                             if (testsok)
                             {
@@ -816,6 +817,7 @@ namespace ntrbase.Bot
                                 else
                                     botresult = 0;
                                 botState = (int)breedbotstates.botexit;
+                                break;
                             }
                         }
                         break;
@@ -833,11 +835,17 @@ namespace ntrbase.Bot
                             botresult = 5;
                             finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", the ESV/TSV value is: " + currentesv;
                         }
-                        Report("Bot stop");
                         botState = (int)breedbotstates.botexit;
                         break;
 
+                    case (int)breedbotstates.botexit:
+                        Report("Bot stop");
+                        botstop = true;
+                        break;
+
                     default:
+                        Report("Bot stop");
+                        botresult = 0;
                         botstop = true;
                         break;
                 }
