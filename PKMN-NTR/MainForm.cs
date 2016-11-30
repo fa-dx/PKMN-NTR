@@ -669,7 +669,7 @@ namespace ntrbase
             SetText(label3, "Poké Miles:");
         }
 
-        private void fillGen7()
+        private async void fillGen7()
         {
             ComboboxFill(Lang, Program.PKTable.Lang7);
             ComboboxFill(species, Program.PKTable.Species7);
@@ -696,6 +696,11 @@ namespace ntrbase
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
             SetText(label3, "Current FC:");
+
+            // Apply connection patch
+            Task <bool> Patch = Program.helper.waitNTRwrite(0x3DFFD0, 0xE3A01000, pid);
+            if (!(await Patch))
+                MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         #endregion Connection

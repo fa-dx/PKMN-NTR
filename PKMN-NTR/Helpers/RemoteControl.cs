@@ -373,7 +373,7 @@ namespace ntrbase.Helpers
         }
 
         // Memory Write handler
-        public async Task<bool> waitNTRwrite(uint address, int data, int pid)
+        public async Task<bool> waitNTRwrite(uint address, uint data, int pid)
         {
             byte[] command = BitConverter.GetBytes(data);
             Program.scriptHelper.write(address, command, pid);
