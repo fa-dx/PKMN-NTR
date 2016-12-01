@@ -1413,7 +1413,7 @@ namespace ntrbase
         {
             try
             { //TODO: TEMPORARY HACK, DO PROPER ERROR HANDLING
-                botWorking = true;
+                species.SelectedIndexChanged -= species_SelectedIndexChanged;
                 DataReadyWaiting args = (DataReadyWaiting)args_obj;
                 PKHeX validator = new PKHeX();
                 validator.Data = PKHeX.decryptArray(args.data);
@@ -1499,7 +1499,7 @@ namespace ntrbase
                 SetValue(dTIDNum, dumpedPKHeX.TID);
                 SetValue(dSIDNum, dumpedPKHeX.SID);
 
-                botWorking = false;
+                species.SelectedIndexChanged += species_SelectedIndexChanged;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -2298,7 +2298,6 @@ namespace ntrbase
         // Ability update on species change
         private void species_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!botWorking)
                 updateAbility(species.SelectedIndex + 1, 0, 1);
         }
 
