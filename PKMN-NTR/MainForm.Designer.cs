@@ -1017,6 +1017,7 @@
             this.species.Name = "species";
             this.species.Size = new System.Drawing.Size(81, 21);
             this.species.TabIndex = 0;
+            this.species.SelectedIndexChanged += new System.EventHandler(this.species_SelectedIndexChanged);
             // 
             // move1
             // 

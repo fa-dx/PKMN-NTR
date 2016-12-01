@@ -150,6 +150,10 @@ namespace ntrbase
         private byte[] keysData7 = new byte[24 * 4];
         private int[,] keys7 = new int[24, 2];
 
+        // Variables for ability change
+        int[] absno;
+        string[] abstr = new string[3];
+
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
         Control[] enableWhenConnected7 = new Control[] { };
@@ -406,6 +410,42 @@ namespace ntrbase
         public uint getPSV(uint PID)
         {
             return ((PID >> 16 ^ PID & 0xFFFF) >> 4);
+        }
+
+        public void updateAbility(int speciesno, int formeno, int abnumber)
+        {
+            if (gen7)
+            {
+                absno = Program.PKTable.getAbilities7(speciesno, formeno);
+                abstr[0] = Program.PKTable.Ability7[absno[0] - 1] + " (1)";
+                abstr[1] = Program.PKTable.Ability7[absno[1] - 1] + " (2)";
+                abstr[2] = Program.PKTable.Ability7[absno[2] - 1] + " (H)";
+                ComboboxFill(ability, abstr);
+            }
+            else
+            {
+                absno = Program.PKTable.getAbilities(speciesno, formeno);
+                abstr[0] = Program.PKTable.Ability6[absno[0] - 1] + " (1)";
+                abstr[1] = Program.PKTable.Ability6[absno[1] - 1] + " (2)";
+                abstr[2] = Program.PKTable.Ability6[absno[2] - 1] + " (H)";
+                ComboboxFill(ability, abstr);
+            }
+
+            switch (abnumber)
+            {
+                case 1:
+                    SetSelectedIndex(ability, 0);
+                    break;
+                case 2:
+                    SetSelectedIndex(ability, 1);
+                    break;
+                case 4:
+                    SetSelectedIndex(ability, 2);
+                    break;
+                default:
+                    SetSelectedIndex(ability, 0);
+                    break;
+            }
         }
 
         #endregion Functions
@@ -1373,6 +1413,7 @@ namespace ntrbase
         {
             try
             { //TODO: TEMPORARY HACK, DO PROPER ERROR HANDLING
+                botWorking = true;
                 DataReadyWaiting args = (DataReadyWaiting)args_obj;
                 PKHeX validator = new PKHeX();
                 validator.Data = PKHeX.decryptArray(args.data);
@@ -1406,7 +1447,7 @@ namespace ntrbase
                 SetSelectedIndex(species, dumpedPKHeX.Species - 1);
                 SetText(nickname, dumpedPKHeX.Nickname);
                 SetSelectedIndex(nature, dumpedPKHeX.Nature);
-                SetSelectedIndex(ability, dumpedPKHeX.Ability - 1);
+                updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
                 SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
                 SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
 
@@ -1457,6 +1498,8 @@ namespace ntrbase
                 SetText(otName, dumpedPKHeX.OT_Name);
                 SetValue(dTIDNum, dumpedPKHeX.TID);
                 SetValue(dSIDNum, dumpedPKHeX.SID);
+
+                botWorking = false;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -1664,7 +1707,27 @@ namespace ntrbase
                 if (isEgg.Checked == false) { dumpedPKHeX.IsEgg = false; }
                 dumpedPKHeX.Species = species.SelectedIndex + 1;
                 dumpedPKHeX.Nature = nature.SelectedIndex;
-                dumpedPKHeX.Ability = ability.SelectedIndex + 1;
+
+                switch (ability.SelectedIndex)
+                {
+                    case 0:
+                        dumpedPKHeX.AbilityNumber = 1;
+                        dumpedPKHeX.Ability = absno[0];
+                        break;
+                    case 1:
+                        dumpedPKHeX.AbilityNumber = 2;
+                        dumpedPKHeX.Ability = absno[1];
+                        break;
+                    case 2:
+                        dumpedPKHeX.AbilityNumber = 4;
+                        dumpedPKHeX.Ability = absno[2];
+                        break;
+                    default:
+                        dumpedPKHeX.AbilityNumber = 1;
+                        dumpedPKHeX.Ability = absno[0];
+                        break;
+                }
+
                 dumpedPKHeX.HeldItem = heldItem.SelectedIndex;
 
                 dumpedPKHeX.Move1 = move1.SelectedIndex;
@@ -2230,6 +2293,13 @@ namespace ntrbase
         private void dPID_TextChanged(object sender, EventArgs e)
         {
             SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(PKHeX.getHEXval(dPID.Text)).ToString("D4"));
+        }
+
+        // Ability update on species change
+        private void species_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(!botWorking)
+                updateAbility(species.SelectedIndex + 1, 0, 1);
         }
 
         // Poké ball image

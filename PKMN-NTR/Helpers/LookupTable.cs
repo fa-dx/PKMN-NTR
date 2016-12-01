@@ -68,6 +68,1770 @@ namespace ntrbase
             }
         }
 
+        public int[] getAbilities(int species, int forme)
+        {
+            switch (species)
+            {
+                case 1: return new int[] { 65, 65, 34 }; // Bulbasaur
+                case 2: return new int[] { 65, 65, 34 }; // Ivysaur
+                case 3: return new int[] { 65, 65, 34 }; // Venusaur
+                //case 3: return new int[] { 47, 47, 47 }; // Mega Venusaur
+                case 4: return new int[] { 66, 66, 94 }; // Charmander
+                case 5: return new int[] { 66, 66, 94 }; // Charmeleon
+                case 6: return new int[] { 66, 66, 94 }; // Charizard
+                //case 6: return new int[] { 181, 181, 181 }; // Mega Charizard X
+                //case 6: return new int[] { 70, 70, 70 }; // Mega Charizard Y
+                case 7: return new int[] { 67, 67, 44 }; // Squirtle
+                case 8: return new int[] { 67, 67, 44 }; // Wartortle
+                case 9: return new int[] { 67, 67, 44 }; // Blastoise
+                //case 9: return new int[] { 178, 178, 178 }; // Mega Blastoise
+                case 10: return new int[] { 19, 19, 50 }; // Caterpie
+                case 11: return new int[] { 61, 61, 61 }; // Metapod
+                case 12: return new int[] { 14, 14, 110 }; // Butterfree
+                case 13: return new int[] { 19, 19, 50 }; // Weedle
+                case 14: return new int[] { 61, 61, 61 }; // Kakuna
+                case 15: return new int[] { 68, 68, 97 }; // Beedrill
+                //case 15: return new int[] { 91, 91, 91 }; // Mega Beedrill
+                case 16: return new int[] { 51, 77, 145 }; // Pidgey
+                case 17: return new int[] { 51, 77, 145 }; // Pidgeotto
+                case 18: return new int[] { 51, 77, 145 }; // Pidgeot
+                //case 18: return new int[] { 99, 99, 99 }; // Mega Pidgeot
+                case 19: return new int[] { 50, 62, 55 }; // Rattata
+                //case 19: return new int[] { 82, 55, 47 }; // Alolan Rattata
+                case 20: return new int[] { 50, 62, 55 }; // Raticate
+                //case 20: return new int[] { 82, 55, 47 }; // Alolan Raticate
+                case 21: return new int[] { 51, 51, 97 }; // Spearow
+                case 22: return new int[] { 51, 51, 97 }; // Fearow
+                case 23: return new int[] { 22, 61, 127 }; // Ekans
+                case 24: return new int[] { 22, 61, 127 }; // Arbok
+                case 25: return new int[] { 9, 9, 31 }; // Pikachu
+                //case 25: return new int[] { 31, 31, 31 }; // Cosplay Pikachu
+                case 26: return new int[] { 9, 9, 31 }; // Raichu
+                //case 26: return new int[] { 207, 207, 207 }; // Alolan Raichu
+                case 27: return new int[] { 8, 8, 146 }; // Sandshrew
+                //case 27: return new int[] { 81, 81, 202 }; // Alolan Sandshrew
+                case 28: return new int[] { 8, 8, 146 }; // Sandslash
+                //case 28: return new int[] { 81, 81, 202 }; // Alolan Sandslash
+                case 29: return new int[] { 38, 79, 55 }; // Nidoran♀
+                case 30: return new int[] { 38, 79, 55 }; // Nidorina
+                case 31: return new int[] { 38, 79, 125 }; // Nidoqueen
+                case 32: return new int[] { 38, 79, 55 }; // Nidoran♂
+                case 33: return new int[] { 38, 79, 55 }; // Nidorino
+                case 34: return new int[] { 38, 79, 125 }; // Nidoking
+                case 35: return new int[] { 56, 98, 132 }; // Clefairy
+                case 36: return new int[] { 56, 98, 109 }; // Clefable
+                case 37: return new int[] { 18, 18, 70 }; // Vulpix
+                //case 37: return new int[] { 81, 81, 117 }; // Alolan Vulpix
+                case 38: return new int[] { 18, 18, 70 }; // Ninetales
+                //case 38: return new int[] { 81, 81, 117 }; // Alolan Ninetales
+                case 39: return new int[] { 56, 172, 132 }; // Jigglypuff
+                case 40: return new int[] { 56, 172, 119 }; // Wigglytuff
+                case 41: return new int[] { 39, 39, 151 }; // Zubat
+                case 42: return new int[] { 39, 39, 151 }; // Golbat
+                case 43: return new int[] { 34, 34, 50 }; // Oddish
+                case 44: return new int[] { 34, 34, 1 }; // Gloom
+                case 45: return new int[] { 34, 34, 27 }; // Vileplume
+                case 46: return new int[] { 27, 87, 6 }; // Paras
+                case 47: return new int[] { 27, 87, 6 }; // Parasect
+                case 48: return new int[] { 14, 110, 50 }; // Venonat
+                case 49: return new int[] { 19, 110, 147 }; // Venomoth
+                case 50: return new int[] { 8, 71, 159 }; // Diglett
+                //case 50: return new int[] { 8, 221, 159 }; // Alolan Diglett
+                case 51: return new int[] { 8, 71, 159 }; // Dugtrio
+                //case 51: return new int[] { 8, 221, 159 }; // Alolan Dugtrio
+                case 52: return new int[] { 53, 101, 127 }; // Meowth
+                //case 52: return new int[] { 53, 101, 155 }; // Alolan Meowth
+                case 53: return new int[] { 7, 101, 127 }; // Persian
+                //case 53: return new int[] { 169, 101, 155 }; // Alolan Persian
+                case 54: return new int[] { 6, 13, 33 }; // Psyduck
+                case 55: return new int[] { 6, 13, 33 }; // Golduck
+                case 56: return new int[] { 72, 83, 128 }; // Mankey
+                case 57: return new int[] { 72, 83, 128 }; // Primeape
+                case 58: return new int[] { 22, 18, 154 }; // Growlithe
+                case 59: return new int[] { 22, 18, 154 }; // Arcanine
+                case 60: return new int[] { 11, 6, 33 }; // Poliwag
+                case 61: return new int[] { 11, 6, 33 }; // Poliwhirl
+                case 62: return new int[] { 11, 6, 33 }; // Poliwrath
+                case 63: return new int[] { 28, 39, 98 }; // Abra
+                case 64: return new int[] { 28, 39, 98 }; // Kadabra
+                case 65: return new int[] { 28, 39, 98 }; // Alakazam
+                //case 65: return new int[] { 36, 36, 36 }; // Mega Alakazam
+                case 66: return new int[] { 62, 99, 80 }; // Machop
+                case 67: return new int[] { 62, 99, 80 }; // Machoke
+                case 68: return new int[] { 62, 99, 80 }; // Machamp
+                case 69: return new int[] { 34, 34, 82 }; // Bellsprout
+                case 70: return new int[] { 34, 34, 82 }; // Weepinbell
+                case 71: return new int[] { 34, 34, 82 }; // Victreebel
+                case 72: return new int[] { 29, 64, 44 }; // Tentacool
+                case 73: return new int[] { 29, 64, 44 }; // Tentacruel
+                case 74: return new int[] { 69, 5, 8 }; // Geodude
+                //case 74: return new int[] { 42, 5, 206 }; // Alolan Geodude
+                case 75: return new int[] { 69, 5, 8 }; // Graveler
+                //case 75: return new int[] { 42, 5, 206 }; // Alolan Graveler
+                case 76: return new int[] { 69, 5, 8 }; // Golem
+                //case 76: return new int[] { 42, 5, 206 }; // Alolan Golem
+                case 77: return new int[] { 50, 18, 49 }; // Ponyta
+                case 78: return new int[] { 50, 18, 49 }; // Rapidash
+                case 79: return new int[] { 12, 20, 144 }; // Slowpoke
+                case 80: return new int[] { 12, 20, 144 }; // Slowbro
+                //case 80: return new int[] { 75, 75, 75 }; // Mega Slowbro
+                case 81: return new int[] { 42, 5, 148 }; // Magnemite
+                case 82: return new int[] { 42, 5, 148 }; // Magneton
+                case 83: return new int[] { 51, 39, 128 }; // Farfetch'd
+                case 84: return new int[] { 50, 48, 77 }; // Doduo
+                case 85: return new int[] { 50, 48, 77 }; // Dodrio
+                case 86: return new int[] { 47, 93, 115 }; // Seel
+                case 87: return new int[] { 47, 93, 115 }; // Dewgong
+                case 88: return new int[] { 1, 60, 143 }; // Grimer
+                //case 88: return new int[] { 143, 82, 223 }; // Alolan Grimer
+                case 89: return new int[] { 1, 60, 143 }; // Muk
+                //case 89: return new int[] { 143, 82, 223 }; // Alolan Muk
+                case 90: return new int[] { 75, 92, 142 }; // Shellder
+                case 91: return new int[] { 75, 92, 142 }; // Cloyster
+                case 92: return new int[] { 26, 26, 26 }; // Gastly
+                case 93: return new int[] { 26, 26, 26 }; // Haunter
+                case 94: return new int[] { 26, 26, 26 }; // Gengar
+                //case 94: return new int[] { 23, 23, 23 }; // Mega Gengar
+                case 95: return new int[] { 69, 5, 133 }; // Onix
+                case 96: return new int[] { 15, 108, 39 }; // Drowzee
+                case 97: return new int[] { 15, 108, 39 }; // Hypno
+                case 98: return new int[] { 52, 75, 125 }; // Krabby
+                case 99: return new int[] { 52, 75, 125 }; // Kingler
+                case 100: return new int[] { 43, 9, 106 }; // Voltorb
+                case 101: return new int[] { 43, 9, 106 }; // Electrode
+                case 102: return new int[] { 34, 34, 139 }; // Exeggcute
+                case 103: return new int[] { 34, 34, 139 }; // Exeggutor
+                //case 103: return new int[] { 119, 119, 139 }; // Alolan Exeggutor
+                case 104: return new int[] { 69, 31, 4 }; // Cubone
+                case 105: return new int[] { 69, 31, 4 }; // Marowak
+                //case 105: return new int[] { 130, 31, 69 }; // Alolan Marowak
+                case 106: return new int[] { 7, 120, 84 }; // Hitmonlee
+                case 107: return new int[] { 51, 89, 39 }; // Hitmonchan
+                case 108: return new int[] { 20, 12, 13 }; // Lickitung
+                case 109: return new int[] { 26, 26, 26 }; // Koffing
+                case 110: return new int[] { 26, 26, 26 }; // Weezing
+                case 111: return new int[] { 31, 69, 120 }; // Rhyhorn
+                case 112: return new int[] { 31, 69, 120 }; // Rhydon
+                case 113: return new int[] { 30, 32, 131 }; // Chansey
+                case 114: return new int[] { 34, 102, 144 }; // Tangela
+                case 115: return new int[] { 48, 113, 39 }; // Kangaskhan
+                //case 115: return new int[] { 185, 185, 185 }; // Mega Kangaskhan
+                case 116: return new int[] { 33, 97, 6 }; // Horsea
+                case 117: return new int[] { 38, 97, 6 }; // Seadra
+                case 118: return new int[] { 33, 41, 31 }; // Goldeen
+                case 119: return new int[] { 33, 41, 31 }; // Seaking
+                case 120: return new int[] { 35, 30, 148 }; // Staryu
+                case 121: return new int[] { 35, 30, 148 }; // Starmie
+                case 122: return new int[] { 43, 111, 101 }; // Mr. Mime
+                case 123: return new int[] { 68, 101, 80 }; // Scyther
+                case 124: return new int[] { 12, 108, 87 }; // Jynx
+                case 125: return new int[] { 9, 9, 72 }; // Electabuzz
+                case 126: return new int[] { 49, 49, 72 }; // Magmar
+                case 127: return new int[] { 52, 104, 153 }; // Pinsir
+                //case 127: return new int[] { 184, 184, 184 }; // Mega Pinsir
+                case 128: return new int[] { 22, 83, 125 }; // Tauros
+                case 129: return new int[] { 33, 33, 155 }; // Magikarp
+                case 130: return new int[] { 22, 22, 153 }; // Gyarados
+                //case 130: return new int[] { 104, 104, 104 }; // Mega Gyarados
+                case 131: return new int[] { 11, 75, 93 }; // Lapras
+                case 132: return new int[] { 7, 7, 150 }; // Ditto
+                case 133: return new int[] { 50, 91, 107 }; // Eevee
+                case 134: return new int[] { 11, 11, 93 }; // Vaporeon
+                case 135: return new int[] { 10, 10, 95 }; // Jolteon
+                case 136: return new int[] { 18, 18, 62 }; // Flareon
+                case 137: return new int[] { 36, 88, 148 }; // Porygon
+                case 138: return new int[] { 33, 75, 133 }; // Omanyte
+                case 139: return new int[] { 33, 75, 133 }; // Omastar
+                case 140: return new int[] { 33, 4, 133 }; // Kabuto
+                case 141: return new int[] { 33, 4, 133 }; // Kabutops
+                case 142: return new int[] { 69, 46, 127 }; // Aerodactyl
+                //case 142: return new int[] { 181, 181, 181 }; // Mega Aerodactyl
+                case 143: return new int[] { 17, 47, 82 }; // Snorlax
+                case 144: return new int[] { 46, 46, 81 }; // Articuno
+                case 145: return new int[] { 46, 46, 9 }; // Zapdos*
+                case 146: return new int[] { 46, 46, 49 }; // Moltres
+                case 147: return new int[] { 61, 61, 63 }; // Dratini
+                case 148: return new int[] { 61, 61, 63 }; // Dragonair
+                case 149: return new int[] { 39, 39, 136 }; // Dragonite
+                case 150: return new int[] { 46, 46, 127 }; // Mewtwo
+                //case 150: return new int[] { 80, 80, 80 }; // Mega Mewtwo X
+                //case 150: return new int[] { 15, 15, 15 }; // Mega Mewtwo Y
+                case 151: return new int[] { 28, 28, 28 }; // Mew
+                case 152: return new int[] { 65, 65, 102 }; // Chikorita
+                case 153: return new int[] { 65, 65, 102 }; // Bayleef
+                case 154: return new int[] { 65, 65, 102 }; // Meganium
+                case 155: return new int[] { 66, 66, 18 }; // Cyndaquil
+                case 156: return new int[] { 66, 66, 18 }; // Quilava
+                case 157: return new int[] { 66, 66, 18 }; // Typhlosion
+                case 158: return new int[] { 67, 67, 125 }; // Totodile
+                case 159: return new int[] { 67, 67, 125 }; // Croconaw
+                case 160: return new int[] { 67, 67, 125 }; // Feraligatr
+                case 161: return new int[] { 50, 51, 119 }; // Sentret
+                case 162: return new int[] { 50, 51, 119 }; // Furret
+                case 163: return new int[] { 15, 51, 110 }; // Hoothoot
+                case 164: return new int[] { 15, 51, 110 }; // Noctowl
+                case 165: return new int[] { 68, 48, 155 }; // Ledyba
+                case 166: return new int[] { 68, 48, 89 }; // Ledian
+                case 167: return new int[] { 68, 15, 97 }; // Spinarak
+                case 168: return new int[] { 68, 15, 97 }; // Ariados
+                case 169: return new int[] { 39, 39, 151 }; // Crobat
+                case 170: return new int[] { 10, 35, 11 }; // Chinchou
+                case 171: return new int[] { 10, 35, 11 }; // Lanturn
+                case 172: return new int[] { 9, 9, 31 }; // Pichu
+                //case 172: return new int[] { 9, 9, 9 }; // Spiky-eared Pichu
+                case 173: return new int[] { 56, 98, 132 }; // Cleffa
+                case 174: return new int[] { 56, 172, 132 }; // Igglybuff
+                case 175: return new int[] { 55, 32, 105 }; // Togepi
+                case 176: return new int[] { 55, 32, 105 }; // Togetic
+                case 177: return new int[] { 28, 48, 156 }; // Natu
+                case 178: return new int[] { 28, 48, 156 }; // Xatu
+                case 179: return new int[] { 9, 9, 57 }; // Mareep
+                case 180: return new int[] { 9, 9, 57 }; // Flaaffy
+                case 181: return new int[] { 9, 9, 57 }; // Ampharos
+                //case 181: return new int[] { 104, 104, 104 }; // Mega Ampharos
+                case 182: return new int[] { 34, 34, 131 }; // Bellossom
+                case 183: return new int[] { 47, 37, 157 }; // Marill
+                case 184: return new int[] { 47, 37, 157 }; // Azumarill
+                case 185: return new int[] { 5, 69, 155 }; // Sudowoodo
+                case 186: return new int[] { 11, 6, 2 }; // Politoed
+                case 187: return new int[] { 34, 102, 151 }; // Hoppip
+                case 188: return new int[] { 34, 102, 151 }; // Skiploom
+                case 189: return new int[] { 34, 102, 151 }; // Jumpluff
+                case 190: return new int[] { 50, 53, 92 }; // Aipom
+                case 191: return new int[] { 34, 94, 48 }; // Sunkern
+                case 192: return new int[] { 34, 94, 48 }; // Sunflora
+                case 193: return new int[] { 3, 14, 119 }; // Yanma
+                case 194: return new int[] { 6, 11, 109 }; // Wooper
+                case 195: return new int[] { 6, 11, 109 }; // Quagsire
+                case 196: return new int[] { 28, 28, 156 }; // Espeon
+                case 197: return new int[] { 28, 28, 39 }; // Umbreon
+                case 198: return new int[] { 15, 105, 158 }; // Murkrow
+                case 199: return new int[] { 12, 20, 144 }; // Slowking
+                case 200: return new int[] { 26, 26, 26 }; // Misdreavus
+                case 201: return new int[] { 26, 26, 26 }; // Unown
+                case 202: return new int[] { 23, 23, 140 }; // Wobbuffet
+                case 203: return new int[] { 39, 48, 157 }; // Girafarig
+                case 204: return new int[] { 5, 5, 142 }; // Pineco
+                case 205: return new int[] { 5, 5, 142 }; // Forretress
+                case 206: return new int[] { 32, 50, 155 }; // Dunsparce
+                case 207: return new int[] { 52, 8, 17 }; // Gligar
+                case 208: return new int[] { 69, 5, 125 }; // Steelix
+                //case 208: return new int[] { 159, 159, 159 }; // Mega Steelix
+                case 209: return new int[] { 22, 50, 155 }; // Snubbull
+                case 210: return new int[] { 22, 95, 155 }; // Granbull
+                case 211: return new int[] { 38, 33, 22 }; // Qwilfish
+                case 212: return new int[] { 68, 101, 135 }; // Scizor
+                //case 212: return new int[] { 101, 101, 101 }; // Mega Scizor
+                case 213: return new int[] { 5, 82, 126 }; // Shuckle
+                case 214: return new int[] { 68, 62, 153 }; // Heracross
+                //case 214: return new int[] { 92, 92, 92 }; // Mega Heracross
+                case 215: return new int[] { 39, 51, 124 }; // Sneasel
+                case 216: return new int[] { 53, 95, 118 }; // Teddiursa
+                case 217: return new int[] { 62, 95, 127 }; // Ursaring
+                case 218: return new int[] { 40, 49, 133 }; // Slugma
+                case 219: return new int[] { 40, 49, 133 }; // Magcargo
+                case 220: return new int[] { 12, 81, 47 }; // Swinub
+                case 221: return new int[] { 12, 81, 47 }; // Piloswine
+                case 222: return new int[] { 55, 30, 144 }; // Corsola
+                case 223: return new int[] { 55, 97, 141 }; // Remoraid
+                case 224: return new int[] { 21, 97, 141 }; // Octillery
+                case 225: return new int[] { 72, 55, 15 }; // Delibird
+                case 226: return new int[] { 33, 11, 41 }; // Mantine
+                case 227: return new int[] { 51, 5, 133 }; // Skarmory
+                case 228: return new int[] { 48, 18, 127 }; // Houndour
+                case 229: return new int[] { 48, 18, 127 }; // Houndoom
+                //case 229: return new int[] { 94, 94, 94 }; // Mega Houndoom
+                case 230: return new int[] { 33, 97, 6 }; // Kingdra
+                case 231: return new int[] { 53, 53, 8 }; // Phanpy
+                case 232: return new int[] { 5, 5, 8 }; // Donphan
+                case 233: return new int[] { 36, 88, 148 }; // Porygon2
+                case 234: return new int[] { 22, 119, 157 }; // Stantler
+                case 235: return new int[] { 20, 101, 141 }; // Smeargle
+                case 236: return new int[] { 62, 80, 72 }; // Tyrogue
+                case 237: return new int[] { 22, 101, 80 }; // Hitmontop
+                case 238: return new int[] { 12, 108, 93 }; // Smoochum
+                case 239: return new int[] { 9, 9, 72 }; // Elekid
+                case 240: return new int[] { 49, 49, 72 }; // Magby
+                case 241: return new int[] { 47, 113, 157 }; // Miltank
+                case 242: return new int[] { 30, 32, 131 }; // Blissey
+                case 243: return new int[] { 46, 46, 10 }; // Raikou
+                case 244: return new int[] { 46, 46, 18 }; // Entei
+                case 245: return new int[] { 46, 46, 11 }; // Suicune
+                case 246: return new int[] { 62, 62, 8 }; // Larvitar
+                case 247: return new int[] { 61, 61, 61 }; // Pupitar
+                case 248: return new int[] { 45, 45, 127 }; // Tyranitar
+                //case 248: return new int[] { 45, 45, 45 }; // Mega Tyranitar
+                case 249: return new int[] { 46, 46, 136 }; // Lugia
+                case 250: return new int[] { 46, 46, 144 }; // Ho-Oh
+                case 251: return new int[] { 30, 30, 30 }; // Celebi
+                case 252: return new int[] { 65, 65, 84 }; // Treecko
+                case 253: return new int[] { 65, 65, 84 }; // Grovyle
+                case 254: return new int[] { 65, 65, 84 }; // Sceptile
+                //case 254: return new int[] { 31, 31, 31 }; // Mega Sceptile
+                case 255: return new int[] { 66, 66, 3 }; // Torchic
+                case 256: return new int[] { 66, 66, 3 }; // Combusken
+                case 257: return new int[] { 66, 66, 3 }; // Blaziken
+                //case 257: return new int[] { 3, 3, 3 }; // Mega Blaziken
+                case 258: return new int[] { 67, 67, 6 }; // Mudkip
+                case 259: return new int[] { 67, 67, 6 }; // Marshtomp
+                case 260: return new int[] { 67, 67, 6 }; // Swampert
+                //case 260: return new int[] { 33, 33, 33 }; // Mega Swampert
+                case 261: return new int[] { 50, 95, 155 }; // Poochyena
+                case 262: return new int[] { 22, 95, 153 }; // Mightyena
+                case 263: return new int[] { 53, 82, 95 }; // Zigzagoon
+                case 264: return new int[] { 53, 82, 95 }; // Linoone
+                case 265: return new int[] { 19, 19, 50 }; // Wurmple
+                case 266: return new int[] { 61, 61, 61 }; // Silcoon
+                case 267: return new int[] { 68, 68, 79 }; // Beautifly
+                case 268: return new int[] { 61, 61, 61 }; // Cascoon
+                case 269: return new int[] { 19, 19, 14 }; // Dustox
+                case 270: return new int[] { 33, 44, 20 }; // Lotad
+                case 271: return new int[] { 33, 44, 20 }; // Lombre
+                case 272: return new int[] { 33, 44, 20 }; // Ludicolo
+                case 273: return new int[] { 34, 48, 124 }; // Seedot
+                case 274: return new int[] { 34, 48, 124 }; // Nuzleaf
+                case 275: return new int[] { 34, 48, 124 }; // Shiftry
+                case 276: return new int[] { 62, 62, 113 }; // Taillow
+                case 277: return new int[] { 62, 62, 113 }; // Swellow
+                case 278: return new int[] { 51, 51, 44 }; // Wingull
+                case 279: return new int[] { 51, 51, 44 }; // Pelipper
+                case 280: return new int[] { 28, 36, 140 }; // Ralts
+                case 281: return new int[] { 28, 36, 140 }; // Kirlia
+                case 282: return new int[] { 28, 36, 140 }; // Gardevoir
+                //case 282: return new int[] { 182, 182, 182 }; // Mega Gardevoir
+                case 283: return new int[] { 33, 33, 44 }; // Surskit
+                case 284: return new int[] { 22, 22, 127 }; // Masquerain
+                case 285: return new int[] { 27, 90, 95 }; // Shroomish
+                case 286: return new int[] { 27, 90, 101 }; // Breloom
+                case 287: return new int[] { 54, 54, 54 }; // Slakoth
+                case 288: return new int[] { 72, 72, 72 }; // Vigoroth
+                case 289: return new int[] { 54, 54, 54 }; // Slaking
+                case 290: return new int[] { 14, 14, 50 }; // Nincada
+                case 291: return new int[] { 3, 3, 151 }; // Ninjask
+                case 292: return new int[] { 25, 25, 25 }; // Shedinja
+                case 293: return new int[] { 43, 43, 155 }; // Whismur
+                case 294: return new int[] { 43, 43, 113 }; // Loudred
+                case 295: return new int[] { 43, 43, 113 }; // Exploud
+                case 296: return new int[] { 47, 62, 125 }; // Makuhita
+                case 297: return new int[] { 47, 62, 125 }; // Hariyama
+                case 298: return new int[] { 47, 37, 157 }; // Azurill
+                case 299: return new int[] { 5, 42, 159 }; // Nosepass
+                case 300: return new int[] { 56, 96, 147 }; // Skitty
+                case 301: return new int[] { 56, 96, 147 }; // Delcatty
+                case 302: return new int[] { 51, 100, 158 }; // Sableye
+                //case 302: return new int[] { 156, 156, 156 }; // Mega Sableye
+                case 303: return new int[] { 52, 22, 125 }; // Mawile
+                //case 303: return new int[] { 37, 37, 37 }; // Mega Mawile
+                case 304: return new int[] { 5, 69, 134 }; // Aron
+                case 305: return new int[] { 5, 69, 134 }; // Lairon
+                case 306: return new int[] { 5, 69, 134 }; // Aggron
+                //case 306: return new int[] { 111, 111, 111 }; // Mega Aggron
+                case 307: return new int[] { 74, 74, 140 }; // Meditite
+                case 308: return new int[] { 74, 74, 140 }; // Medicham
+                //case 308: return new int[] { 74, 74, 74 }; // Mega Medicham
+                case 309: return new int[] { 9, 31, 58 }; // Electrike
+                case 310: return new int[] { 9, 31, 58 }; // Manectric
+                //case 310: return new int[] { 22, 22, 22 }; // Mega Manectric
+                case 311: return new int[] { 57, 57, 31 }; // Plusle
+                case 312: return new int[] { 58, 58, 10 }; // Minun
+                case 313: return new int[] { 35, 68, 158 }; // Volbeat
+                case 314: return new int[] { 12, 110, 158 }; // Illumise
+                case 315: return new int[] { 30, 38, 102 }; // Roselia
+                case 316: return new int[] { 64, 60, 82 }; // Gulpin
+                case 317: return new int[] { 64, 60, 82 }; // Swalot
+                case 318: return new int[] { 24, 24, 3 }; // Carvanha
+                case 319: return new int[] { 24, 24, 3 }; // Sharpedo
+                //case 319: return new int[] { 173, 173, 173 }; // Mega Sharpedo
+                case 320: return new int[] { 41, 12, 46 }; // Wailmer
+                case 321: return new int[] { 41, 12, 46 }; // Wailord
+                case 322: return new int[] { 12, 86, 20 }; // Numel
+                case 323: return new int[] { 40, 116, 83 }; // Camerupt
+                //case 323: return new int[] { 125, 125, 125 }; // Mega Camerupt
+                case 324: return new int[] { 73, 73, 75 }; // Torkoal
+                case 325: return new int[] { 47, 20, 82 }; // Spoink
+                case 326: return new int[] { 47, 20, 82 }; // Grumpig
+                case 327: return new int[] { 20, 77, 126 }; // Spinda
+                case 328: return new int[] { 52, 71, 125 }; // Trapinch
+                case 329: return new int[] { 26, 26, 26 }; // Vibrava
+                case 330: return new int[] { 26, 26, 26 }; // Flygon
+                case 331: return new int[] { 8, 8, 11 }; // Cacnea
+                case 332: return new int[] { 8, 8, 11 }; // Cacturne
+                case 333: return new int[] { 30, 30, 13 }; // Swablu
+                case 334: return new int[] { 30, 30, 13 }; // Altaria
+                //case 334: return new int[] { 182, 182, 182 }; // Mega Altaria
+                case 335: return new int[] { 17, 17, 137 }; // Zangoose
+                case 336: return new int[] { 61, 61, 151 }; // Seviper
+                case 337: return new int[] { 26, 26, 26 }; // Lunatone
+                case 338: return new int[] { 26, 26, 26 }; // Solrock
+                case 339: return new int[] { 12, 107, 93 }; // Barboach
+                case 340: return new int[] { 12, 107, 93 }; // Whiscash
+                case 341: return new int[] { 52, 75, 91 }; // Corphish
+                case 342: return new int[] { 52, 75, 91 }; // Crawdaunt
+                case 343: return new int[] { 26, 26, 26 }; // Baltoy
+                case 344: return new int[] { 26, 26, 26 }; // Claydol
+                case 345: return new int[] { 21, 21, 114 }; // Lileep
+                case 346: return new int[] { 21, 21, 114 }; // Cradily
+                case 347: return new int[] { 4, 4, 33 }; // Anorith
+                case 348: return new int[] { 4, 4, 33 }; // Armaldo
+                case 349: return new int[] { 33, 12, 91 }; // Feebas
+                case 350: return new int[] { 63, 172, 56 }; // Milotic
+                case 351: return new int[] { 59, 59, 59 }; // Castform
+                //case 351: return new int[] { 59, 59, 59 }; // Castform
+                //case 351: return new int[] { 59, 59, 59 }; // Castform
+                //case 351: return new int[] { 59, 59, 59 }; // Castform
+                case 352: return new int[] { 16, 16, 168 }; // Kecleon
+                case 353: return new int[] { 15, 119, 130 }; // Shuppet
+                case 354: return new int[] { 15, 119, 130 }; // Banette
+                //case 354: return new int[] { 158, 158, 158 }; // Mega Banette
+                case 355: return new int[] { 26, 26, 119 }; // Duskull
+                case 356: return new int[] { 46, 46, 119 }; // Dusclops
+                case 357: return new int[] { 34, 94, 139 }; // Tropius
+                case 358: return new int[] { 26, 26, 26 }; // Chimecho
+                case 359: return new int[] { 46, 105, 154 }; // Absol
+                //case 359: return new int[] { 156, 156, 156 }; // Mega Absol
+                case 360: return new int[] { 23, 23, 140 }; // Wynaut
+                case 361: return new int[] { 39, 115, 141 }; // Snorunt
+                case 362: return new int[] { 39, 115, 141 }; // Glalie
+                //case 362: return new int[] { 174, 174, 174 }; // Mega Glalie
+                case 363: return new int[] { 47, 115, 12 }; // Spheal
+                case 364: return new int[] { 47, 115, 12 }; // Sealeo
+                case 365: return new int[] { 47, 115, 12 }; // Walrein
+                case 366: return new int[] { 75, 75, 155 }; // Clamperl
+                case 367: return new int[] { 33, 33, 41 }; // Huntail
+                case 368: return new int[] { 33, 33, 93 }; // Gorebyss
+                case 369: return new int[] { 33, 69, 5 }; // Relicanth
+                case 370: return new int[] { 33, 33, 93 }; // Luvdisc
+                case 371: return new int[] { 69, 69, 125 }; // Bagon
+                case 372: return new int[] { 69, 69, 142 }; // Shelgon
+                case 373: return new int[] { 22, 22, 153 }; // Salamence
+                //case 373: return new int[] { 184, 184, 184 }; // Mega Salamence
+                case 374: return new int[] { 29, 29, 135 }; // Beldum
+                case 375: return new int[] { 29, 29, 135 }; // Metang
+                case 376: return new int[] { 29, 29, 135 }; // Metagross
+                //case 376: return new int[] { 181, 181, 181 }; // Mega Metagross
+                case 377: return new int[] { 29, 29, 5 }; // Regirock
+                case 378: return new int[] { 29, 29, 115 }; // Regice
+                case 379: return new int[] { 29, 29, 135 }; // Registeel
+                case 380: return new int[] { 26, 26, 26 }; // Latias
+                //case 380: return new int[] { 26, 26, 26 }; // Mega Latias
+                case 381: return new int[] { 26, 26, 26 }; // Latios
+                //case 381: return new int[] { 26, 26, 26 }; // Mega Latios
+                case 382: return new int[] { 2, 2, 2 }; // Kyogre
+                //case 382: return new int[] { 189, 189, 189 }; // Primal Kyogre
+                case 383: return new int[] { 70, 70, 70 }; // Groudon
+                //case 383: return new int[] { 190, 190, 190 }; // Primal Groudon
+                case 384: return new int[] { 76, 76, 76 }; // Rayquaza
+                //case 384: return new int[] { 191, 191, 191 }; // Mega Rayquaza
+                case 385: return new int[] { 32, 32, 32 }; // Jirachi
+                case 386: return new int[] { 46, 46, 46 }; // Deoxys
+                //case 386: return new int[] { 46, 46, 46 }; // Deoxys
+                //case 386: return new int[] { 46, 46, 46 }; // Deoxys
+                //case 386: return new int[] { 46, 46, 46 }; // Deoxys
+                case 387: return new int[] { 65, 65, 75 }; // Turtwig
+                case 388: return new int[] { 65, 65, 75 }; // Grotle
+                case 389: return new int[] { 65, 65, 75 }; // Torterra
+                case 390: return new int[] { 66, 66, 89 }; // Chimchar
+                case 391: return new int[] { 66, 66, 89 }; // Monferno
+                case 392: return new int[] { 66, 66, 89 }; // Infernape
+                case 393: return new int[] { 67, 67, 128 }; // Piplup
+                case 394: return new int[] { 67, 67, 128 }; // Prinplup
+                case 395: return new int[] { 67, 67, 128 }; // Empoleon
+                case 396: return new int[] { 51, 51, 120 }; // Starly
+                case 397: return new int[] { 22, 22, 120 }; // Staravia
+                case 398: return new int[] { 22, 22, 120 }; // Staraptor
+                case 399: return new int[] { 86, 109, 141 }; // Bidoof
+                case 400: return new int[] { 86, 109, 141 }; // Bibarel
+                case 401: return new int[] { 61, 61, 50 }; // Kricketot
+                case 402: return new int[] { 68, 68, 101 }; // Kricketune
+                case 403: return new int[] { 79, 22, 62 }; // Shinx
+                case 404: return new int[] { 79, 22, 62 }; // Luxio
+                case 405: return new int[] { 79, 22, 62 }; // Luxray
+                case 406: return new int[] { 30, 38, 102 }; // Budew
+                case 407: return new int[] { 30, 38, 101 }; // Roserade
+                case 408: return new int[] { 104, 104, 125 }; // Cranidos
+                case 409: return new int[] { 104, 104, 125 }; // Rampardos
+                case 410: return new int[] { 5, 5, 43 }; // Shieldon
+                case 411: return new int[] { 5, 5, 43 }; // Bastiodon
+                case 412: return new int[] { 61, 61, 142 }; // Burmy
+                //case 412: return new int[] { 61, 61, 142 }; // Burmy
+                //case 412: return new int[] { 61, 61, 142 }; // Burmy
+                case 413: return new int[] { 107, 107, 142 }; // Wormadam
+                //case 413: return new int[] { 107, 107, 142 }; // Wormadam
+                //case 413: return new int[] { 107, 107, 142 }; // Wormadam
+                case 414: return new int[] { 68, 68, 110 }; // Mothim
+                case 415: return new int[] { 118, 118, 55 }; // Combee
+                case 416: return new int[] { 46, 46, 127 }; // Vespiquen
+                case 417: return new int[] { 50, 53, 10 }; // Pachirisu
+                case 418: return new int[] { 33, 33, 41 }; // Buizel
+                case 419: return new int[] { 33, 33, 41 }; // Floatzel
+                case 420: return new int[] { 34, 34, 34 }; // Cherubi
+                case 421: return new int[] { 122, 122, 122 }; // Cherrim
+                //case 421: return new int[] { 122, 122, 122 }; // Cherrim
+                case 422: return new int[] { 60, 114, 159 }; // Shellos
+                //case 422: return new int[] { 60, 114, 159 }; // Shellos
+                case 423: return new int[] { 60, 114, 159 }; // Gastrodon
+                //case 423: return new int[] { 60, 114, 159 }; // Gastrodon
+                case 424: return new int[] { 101, 53, 92 }; // Ambipom
+                case 425: return new int[] { 106, 84, 138 }; // Drifloon
+                case 426: return new int[] { 106, 84, 138 }; // Drifblim
+                case 427: return new int[] { 50, 103, 7 }; // Buneary
+                case 428: return new int[] { 56, 103, 7 }; // Lopunny
+                //case 428: return new int[] { 113, 113, 113 }; // Mega Lopunny
+                case 429: return new int[] { 26, 26, 26 }; // Mismagius
+                case 430: return new int[] { 15, 105, 153 }; // Honchkrow
+                case 431: return new int[] { 7, 20, 51 }; // Glameow
+                case 432: return new int[] { 47, 20, 128 }; // Purugly
+                case 433: return new int[] { 26, 26, 26 }; // Chingling
+                case 434: return new int[] { 1, 106, 51 }; // Stunky
+                case 435: return new int[] { 1, 106, 51 }; // Skuntank
+                case 436: return new int[] { 26, 85, 134 }; // Bronzor
+                case 437: return new int[] { 26, 85, 134 }; // Bronzong
+                case 438: return new int[] { 5, 69, 155 }; // Bonsly
+                case 439: return new int[] { 43, 111, 101 }; // Mime Jr.
+                case 440: return new int[] { 30, 32, 132 }; // Happiny
+                case 441: return new int[] { 51, 77, 145 }; // Chatot
+                case 442: return new int[] { 46, 46, 151 }; // Spiritomb
+                case 443: return new int[] { 8, 8, 24 }; // Gible
+                case 444: return new int[] { 8, 8, 24 }; // Gabite
+                case 445: return new int[] { 8, 8, 24 }; // Garchomp
+                //case 445: return new int[] { 159, 159, 159 }; // Mega Garchomp
+                case 446: return new int[] { 53, 47, 82 }; // Munchlax
+                case 447: return new int[] { 80, 39, 158 }; // Riolu
+                case 448: return new int[] { 80, 39, 154 }; // Lucario
+                //case 448: return new int[] { 91, 91, 91 }; // Mega Lucario
+                case 449: return new int[] { 45, 45, 159 }; // Hippopotas
+                case 450: return new int[] { 45, 45, 159 }; // Hippowdon
+                case 451: return new int[] { 4, 97, 51 }; // Skorupi
+                case 452: return new int[] { 4, 97, 51 }; // Drapion
+                case 453: return new int[] { 107, 87, 143 }; // Croagunk
+                case 454: return new int[] { 107, 87, 143 }; // Toxicroak
+                case 455: return new int[] { 26, 26, 26 }; // Carnivine
+                case 456: return new int[] { 33, 114, 41 }; // Finneon
+                case 457: return new int[] { 33, 114, 41 }; // Lumineon
+                case 458: return new int[] { 33, 11, 41 }; // Mantyke
+                case 459: return new int[] { 117, 117, 43 }; // Snover
+                case 460: return new int[] { 117, 117, 43 }; // Abomasnow
+                //case 460: return new int[] { 117, 117, 117 }; // Mega Abomasnow
+                case 461: return new int[] { 46, 46, 124 }; // Weavile
+                case 462: return new int[] { 42, 5, 148 }; // Magnezone
+                case 463: return new int[] { 20, 12, 13 }; // Lickilicky
+                case 464: return new int[] { 31, 116, 120 }; // Rhyperior
+                case 465: return new int[] { 34, 102, 144 }; // Tangrowth
+                case 466: return new int[] { 78, 78, 72 }; // Electivire
+                case 467: return new int[] { 49, 49, 72 }; // Magmortar
+                case 468: return new int[] { 55, 32, 105 }; // Togekiss
+                case 469: return new int[] { 3, 110, 119 }; // Yanmega
+                case 470: return new int[] { 102, 102, 34 }; // Leafeon
+                case 471: return new int[] { 81, 81, 115 }; // Glaceon
+                case 472: return new int[] { 52, 8, 90 }; // Gliscor
+                case 473: return new int[] { 12, 81, 47 }; // Mamoswine
+                case 474: return new int[] { 91, 88, 148 }; // Porygon-Z
+                case 475: return new int[] { 80, 80, 154 }; // Gallade
+                //case 475: return new int[] { 39, 39, 39 }; // Mega Gallade
+                case 476: return new int[] { 5, 42, 159 }; // Probopass
+                case 477: return new int[] { 46, 46, 119 }; // Dusknoir
+                case 478: return new int[] { 81, 81, 130 }; // Froslass
+                case 479: return new int[] { 26, 26, 26 }; // Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Heat Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Wash Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Frost Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Fan Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Mow Rotom
+                case 480: return new int[] { 26, 26, 26 }; // Uxie
+                case 481: return new int[] { 26, 26, 26 }; // Mesprit
+                case 482: return new int[] { 26, 26, 26 }; // Azelf
+                case 483: return new int[] { 46, 46, 140 }; // Dialga
+                case 484: return new int[] { 46, 46, 140 }; // Palkia
+                case 485: return new int[] { 18, 18, 49 }; // Heatran
+                case 486: return new int[] { 112, 112, 112 }; // Regigigas
+                case 487: return new int[] { 46, 46, 140 }; // Giratina
+                //case 487: return new int[] { 26, 26, 26 }; // Giratina
+                case 488: return new int[] { 26, 26, 26 }; // Cresselia
+                case 489: return new int[] { 93, 93, 93 }; // Phione
+                case 490: return new int[] { 93, 93, 93 }; // Manaphy
+                case 491: return new int[] { 123, 123, 123 }; // Darkrai
+                case 492: return new int[] { 30, 30, 30 }; // Shaymin
+                //case 492: return new int[] { 32, 32, 32 }; // Shaymin
+                case 493: return new int[] { 121, 121, 121 }; // Arceus
+                case 494: return new int[] { 162, 162, 162 }; // Victini
+                case 495: return new int[] { 65, 65, 126 }; // Snivy
+                case 496: return new int[] { 65, 65, 126 }; // Servine
+                case 497: return new int[] { 65, 65, 126 }; // Serperior
+                case 498: return new int[] { 66, 66, 47 }; // Tepig
+                case 499: return new int[] { 66, 66, 47 }; // Pignite
+                case 500: return new int[] { 66, 66, 120 }; // Emboar
+                case 501: return new int[] { 67, 67, 75 }; // Oshawott
+                case 502: return new int[] { 67, 67, 75 }; // Dewott
+                case 503: return new int[] { 67, 67, 75 }; // Samurott
+                case 504: return new int[] { 50, 51, 148 }; // Patrat
+                case 505: return new int[] { 35, 51, 148 }; // Watchog
+                case 506: return new int[] { 72, 53, 50 }; // Lillipup
+                case 507: return new int[] { 22, 146, 113 }; // Herdier
+                case 508: return new int[] { 22, 146, 113 }; // Stoutland
+                case 509: return new int[] { 7, 84, 158 }; // Purrloin
+                case 510: return new int[] { 7, 84, 158 }; // Liepard
+                case 511: return new int[] { 82, 82, 65 }; // Pansage
+                case 512: return new int[] { 82, 82, 65 }; // Simisage
+                case 513: return new int[] { 82, 82, 66 }; // Pansear
+                case 514: return new int[] { 82, 82, 66 }; // Simisear
+                case 515: return new int[] { 82, 82, 67 }; // Panpour
+                case 516: return new int[] { 82, 82, 67 }; // Simipour
+                case 517: return new int[] { 108, 28, 140 }; // Munna
+                case 518: return new int[] { 108, 28, 140 }; // Musharna
+                case 519: return new int[] { 145, 105, 79 }; // Pidove
+                case 520: return new int[] { 145, 105, 79 }; // Tranquill
+                case 521: return new int[] { 145, 105, 79 }; // Unfezant
+                case 522: return new int[] { 31, 78, 157 }; // Blitzle
+                case 523: return new int[] { 31, 78, 157 }; // Zebstrika
+                case 524: return new int[] { 5, 5, 159 }; // Roggenrola
+                case 525: return new int[] { 5, 5, 159 }; // Boldore
+                case 526: return new int[] { 5, 5, 159 }; // Gigalith
+                case 527: return new int[] { 109, 103, 86 }; // Woobat
+                case 528: return new int[] { 109, 103, 86 }; // Swoobat
+                case 529: return new int[] { 146, 159, 104 }; // Drilbur
+                case 530: return new int[] { 146, 159, 104 }; // Excadrill
+                case 531: return new int[] { 131, 144, 103 }; // Audino
+                //case 531: return new int[] { 131, 131, 131 }; // Mega Audino
+                case 532: return new int[] { 62, 125, 89 }; // Timburr
+                case 533: return new int[] { 62, 125, 89 }; // Gurdurr
+                case 534: return new int[] { 62, 125, 89 }; // Conkeldurr
+                case 535: return new int[] { 33, 93, 11 }; // Tympole
+                case 536: return new int[] { 33, 93, 11 }; // Palpitoad
+                case 537: return new int[] { 33, 143, 11 }; // Seismitoad
+                case 538: return new int[] { 62, 39, 104 }; // Throh
+                case 539: return new int[] { 5, 39, 104 }; // Sawk
+                case 540: return new int[] { 68, 34, 142 }; // Sewaddle
+                case 541: return new int[] { 102, 34, 142 }; // Swadloon
+                case 542: return new int[] { 68, 34, 142 }; // Leavanny
+                case 543: return new int[] { 38, 68, 3 }; // Venipede*
+                case 544: return new int[] { 38, 68, 3 }; // Whirlipede*
+                case 545: return new int[] { 38, 68, 3 }; // Scolipede*
+                case 546: return new int[] { 158, 151, 34 }; // Cottonee
+                case 547: return new int[] { 158, 151, 34 }; // Whimsicott
+                case 548: return new int[] { 34, 20, 102 }; // Petilil
+                case 549: return new int[] { 34, 20, 102 }; // Lilligant
+                case 550: return new int[] { 120, 91, 104 }; // Basculin
+                //case 550: return new int[] { 69, 91, 104 }; // Basculin*
+                case 551: return new int[] { 22, 153, 83 }; // Sandile
+                case 552: return new int[] { 22, 153, 83 }; // Krokorok
+                case 553: return new int[] { 22, 153, 83 }; // Krookodile
+                case 554: return new int[] { 55, 55, 39 }; // Darumaka
+                case 555: return new int[] { 125, 125, 161 }; // Darmanitan
+                //case 555: return new int[] { 161, 161, 161 }; // Darmanitan
+                case 556: return new int[] { 11, 34, 114 }; // Maractus
+                case 557: return new int[] { 5, 75, 133 }; // Dwebble
+                case 558: return new int[] { 5, 75, 133 }; // Crustle
+                case 559: return new int[] { 61, 153, 22 }; // Scraggy
+                case 560: return new int[] { 61, 153, 22 }; // Scrafty
+                case 561: return new int[] { 147, 98, 110 }; // Sigilyph
+                case 562: return new int[] { 152, 152, 152 }; // Yamask
+                case 563: return new int[] { 152, 152, 152 }; // Cofagrigus
+                case 564: return new int[] { 116, 5, 33 }; // Tirtouga
+                case 565: return new int[] { 116, 5, 33 }; // Carracosta
+                case 566: return new int[] { 129, 129, 129 }; // Archen
+                case 567: return new int[] { 129, 129, 129 }; // Archeops
+                case 568: return new int[] { 1, 60, 106 }; // Trubbish
+                case 569: return new int[] { 1, 133, 106 }; // Garbodor
+                case 570: return new int[] { 149, 149, 149 }; // Zorua
+                case 571: return new int[] { 149, 149, 149 }; // Zoroark
+                case 572: return new int[] { 56, 101, 92 }; // Minccino
+                case 573: return new int[] { 56, 101, 92 }; // Cinccino
+                case 574: return new int[] { 119, 172, 23 }; // Gothita
+                case 575: return new int[] { 119, 172, 23 }; // Gothorita
+                case 576: return new int[] { 119, 172, 23 }; // Gothitelle
+                case 577: return new int[] { 142, 98, 144 }; // Solosis
+                case 578: return new int[] { 142, 98, 144 }; // Duosion
+                case 579: return new int[] { 142, 98, 144 }; // Reuniclus
+                case 580: return new int[] { 51, 145, 93 }; // Ducklett
+                case 581: return new int[] { 51, 145, 93 }; // Swanna
+                case 582: return new int[] { 115, 115, 133 }; // Vanillite
+                case 583: return new int[] { 115, 115, 133 }; // Vanillish
+                case 584: return new int[] { 115, 115, 133 }; // Vanilluxe
+                case 585: return new int[] { 34, 157, 32 }; // Deerling
+                //case 585: return new int[] { 34, 157, 32 }; // Deerling
+                //case 585: return new int[] { 34, 157, 32 }; // Deerling
+                //case 585: return new int[] { 34, 157, 32 }; // Deerling
+                case 586: return new int[] { 34, 157, 32 }; // Sawsbuck
+                //case 586: return new int[] { 34, 157, 32 }; // Sawsbuck
+                //case 586: return new int[] { 34, 157, 32 }; // Sawsbuck
+                //case 586: return new int[] { 34, 157, 32 }; // Sawsbuck
+                case 587: return new int[] { 9, 9, 78 }; // Emolga
+                case 588: return new int[] { 68, 61, 99 }; // Karrablast
+                case 589: return new int[] { 68, 75, 142 }; // Escavalier
+                case 590: return new int[] { 27, 27, 144 }; // Foongus
+                case 591: return new int[] { 27, 27, 144 }; // Amoonguss
+                case 592: return new int[] { 11, 130, 6 }; // Frillish
+                case 593: return new int[] { 11, 130, 6 }; // Jellicent
+                case 594: return new int[] { 131, 93, 144 }; // Alomomola
+                case 595: return new int[] { 14, 127, 68 }; // Joltik
+                case 596: return new int[] { 14, 127, 68 }; // Galvantula
+                case 597: return new int[] { 160, 160, 160 }; // Ferroseed
+                case 598: return new int[] { 160, 160, 107 }; // Ferrothorn
+                case 599: return new int[] { 57, 58, 29 }; // Klink
+                case 600: return new int[] { 57, 58, 29 }; // Klang
+                case 601: return new int[] { 57, 58, 29 }; // Klinklang
+                case 602: return new int[] { 26, 26, 26 }; // Tynamo
+                case 603: return new int[] { 26, 26, 26 }; // Eelektrik
+                case 604: return new int[] { 26, 26, 26 }; // Eelektross
+                case 605: return new int[] { 140, 28, 148 }; // Elgyem
+                case 606: return new int[] { 140, 28, 148 }; // Beheeyem
+                case 607: return new int[] { 18, 49, 151 }; // Litwick*
+                case 608: return new int[] { 18, 49, 151 }; // Lampent*
+                case 609: return new int[] { 18, 49, 151 }; // Chandelure*
+                case 610: return new int[] { 79, 104, 127 }; // Axew
+                case 611: return new int[] { 79, 104, 127 }; // Fraxure
+                case 612: return new int[] { 79, 104, 127 }; // Haxorus
+                case 613: return new int[] { 81, 81, 155 }; // Cubchoo
+                case 614: return new int[] { 81, 81, 33 }; // Beartic
+                case 615: return new int[] { 26, 26, 26 }; // Cryogonal
+                case 616: return new int[] { 93, 75, 142 }; // Shelmet
+                case 617: return new int[] { 93, 60, 84 }; // Accelgor
+                case 618: return new int[] { 9, 7, 8 }; // Stunfisk
+                case 619: return new int[] { 39, 144, 120 }; // Mienfoo
+                case 620: return new int[] { 39, 144, 120 }; // Mienshao
+                case 621: return new int[] { 24, 125, 104 }; // Druddigon
+                case 622: return new int[] { 89, 103, 99 }; // Golett
+                case 623: return new int[] { 89, 103, 99 }; // Golurk
+                case 624: return new int[] { 128, 39, 46 }; // Pawniard
+                case 625: return new int[] { 128, 39, 46 }; // Bisharp
+                case 626: return new int[] { 120, 157, 43 }; // Bouffalant
+                case 627: return new int[] { 51, 125, 55 }; // Rufflet
+                case 628: return new int[] { 51, 125, 128 }; // Braviary
+                case 629: return new int[] { 145, 142, 133 }; // Vullaby
+                case 630: return new int[] { 145, 142, 133 }; // Mandibuzz
+                case 631: return new int[] { 82, 18, 73 }; // Heatmor
+                case 632: return new int[] { 68, 55, 54 }; // Durant
+                case 633: return new int[] { 55, 55, 55 }; // Deino
+                case 634: return new int[] { 55, 55, 55 }; // Zweilous
+                case 635: return new int[] { 26, 26, 26 }; // Hydreigon
+                case 636: return new int[] { 49, 49, 68 }; // Larvesta
+                case 637: return new int[] { 49, 49, 68 }; // Volcarona
+                case 638: return new int[] { 154, 154, 154 }; // Cobalion
+                case 639: return new int[] { 154, 154, 154 }; // Terrakion
+                case 640: return new int[] { 154, 154, 154 }; // Virizion
+                case 641: return new int[] { 158, 158, 128 }; // Tornadus
+                //case 641: return new int[] { 144, 144, 144 }; // Tornadus
+                case 642: return new int[] { 158, 158, 128 }; // Thundurus
+                //case 642: return new int[] { 10, 10, 10 }; // Thundurus
+                case 643: return new int[] { 163, 163, 163 }; // Reshiram
+                case 644: return new int[] { 164, 164, 164 }; // Zekrom
+                case 645: return new int[] { 159, 159, 125 }; // Landorus
+                //case 645: return new int[] { 22, 22, 22 }; // Landorus
+                case 646: return new int[] { 46, 46, 46 }; // Kyurem
+                //case 646: return new int[] { 164, 164, 164 }; // Black Kyurem
+                //case 646: return new int[] { 163, 163, 163 }; // White Kyurem
+                case 647: return new int[] { 154, 154, 154 }; // Keldeo
+                //case 647: return new int[] { 154, 154, 154 }; // Keldeo
+                case 648: return new int[] { 32, 32, 32 }; // Meloetta
+                //case 648: return new int[] { 32, 32, 32 }; // Meloetta
+                case 649: return new int[] { 88, 88, 88 }; // Genesect
+                case 650: return new int[] { 65, 65, 171 }; // Chespin
+                case 651: return new int[] { 65, 65, 171 }; // Quilladin
+                case 652: return new int[] { 65, 65, 171 }; // Chesnaught
+                case 653: return new int[] { 66, 66, 170 }; // Fennekin
+                case 654: return new int[] { 66, 66, 170 }; // Braixen
+                case 655: return new int[] { 66, 66, 170 }; // Delphox
+                case 656: return new int[] { 67, 67, 168 }; // Froakie
+                case 657: return new int[] { 67, 67, 168 }; // Frogadier
+                case 658: return new int[] { 67, 67, 168 }; // Greninja
+                //case 658: return new int[] { 210, 210, 210 }; // Ash-Greninja
+                case 659: return new int[] { 53, 167, 37 }; // Bunnelby
+                case 660: return new int[] { 53, 167, 37 }; // Diggersby
+                case 661: return new int[] { 145, 145, 177 }; // Fletchling
+                case 662: return new int[] { 49, 49, 177 }; // Fletchinder
+                case 663: return new int[] { 49, 49, 177 }; // Talonflame
+                case 664: return new int[] { 19, 14, 132 }; // Scatterbug
+                case 665: return new int[] { 61, 61, 132 }; // Spewpa
+                case 666: return new int[] { 19, 14, 132 }; // Vivillon
+                case 667: return new int[] { 79, 127, 153 }; // Litleo
+                case 668: return new int[] { 79, 127, 153 }; // Pyroar
+                case 669: return new int[] { 166, 166, 180 }; // Flabébé
+                case 670: return new int[] { 166, 166, 180 }; // Floette
+                //case 670: return new int[] { 166, 166, 166 }; // Eternal Floette
+                case 671: return new int[] { 166, 166, 180 }; // Florges
+                case 672: return new int[] { 157, 157, 179 }; // Skiddo
+                case 673: return new int[] { 157, 157, 179 }; // Gogoat
+                case 674: return new int[] { 89, 104, 113 }; // Pancham
+                case 675: return new int[] { 89, 104, 113 }; // Pangoro
+                case 676: return new int[] { 169, 169, 169 }; // Furfrou
+                case 677: return new int[] { 51, 151, 20 }; // Espurr
+                case 678: return new int[] { 51, 151, 158 }; // Meowstic♂
+                //case 678: return new int[] { 51, 151, 172 }; // Meowstic♀
+                case 679: return new int[] { 99, 99, 99 }; // Honedge
+                case 680: return new int[] { 99, 99, 99 }; // Doublade
+                case 681: return new int[] { 176, 176, 176 }; // Aegislash
+                //case 681: return new int[] { 176, 176, 176 }; // Aegislash
+                case 682: return new int[] { 131, 131, 165 }; // Spritzee
+                case 683: return new int[] { 131, 131, 165 }; // Aromatisse
+                case 684: return new int[] { 175, 175, 84 }; // Swirlix
+                case 685: return new int[] { 175, 175, 84 }; // Slurpuff
+                case 686: return new int[] { 126, 21, 151 }; // Inkay
+                case 687: return new int[] { 126, 21, 151 }; // Malamar
+                case 688: return new int[] { 97, 181, 124 }; // Binacle
+                case 689: return new int[] { 97, 181, 124 }; // Barbaracle
+                case 690: return new int[] { 38, 143, 91 }; // Skrelp
+                case 691: return new int[] { 38, 143, 91 }; // Dragalge
+                case 692: return new int[] { 178, 178, 178 }; // Clauncher
+                case 693: return new int[] { 178, 178, 178 }; // Clawitzer
+                case 694: return new int[] { 87, 8, 94 }; // Helioptile
+                case 695: return new int[] { 87, 8, 94 }; // Heliolisk
+                case 696: return new int[] { 173, 173, 5 }; // Tyrunt
+                case 697: return new int[] { 173, 173, 69 }; // Tyrantrum
+                case 698: return new int[] { 174, 174, 117 }; // Amaura
+                case 699: return new int[] { 174, 174, 117 }; // Aurorus
+                case 700: return new int[] { 56, 56, 182 }; // Sylveon
+                case 701: return new int[] { 7, 84, 104 }; // Hawlucha
+                case 702: return new int[] { 167, 53, 57 }; // Dedenne
+                case 703: return new int[] { 29, 29, 5 }; // Carbink
+                case 704: return new int[] { 157, 93, 183 }; // Goomy
+                case 705: return new int[] { 157, 93, 183 }; // Sliggoo
+                case 706: return new int[] { 157, 93, 183 }; // Goodra
+                case 707: return new int[] { 158, 158, 170 }; // Klefki
+                case 708: return new int[] { 30, 119, 139 }; // Phantump
+                case 709: return new int[] { 30, 119, 139 }; // Trevenant
+                case 710: return new int[] { 53, 119, 15 }; // Pumpkaboo
+                case 711: return new int[] { 53, 119, 15 }; // Gourgeist
+                case 712: return new int[] { 20, 115, 5 }; // Bergmite
+                case 713: return new int[] { 20, 115, 5 }; // Avalugg
+                case 714: return new int[] { 119, 151, 140 }; // Noibat
+                case 715: return new int[] { 119, 151, 140 }; // Noivern
+                case 716: return new int[] { 187, 187, 187 }; // Xerneas
+                case 717: return new int[] { 186, 186, 186 }; // Yveltal
+                case 718: return new int[] { 188, 211, 188 }; // Zygarde
+                //case 718: return new int[] { 188, 211, 188 }; // Zygarde 10% Forme
+                //case 718: return new int[] { 211, 211, 211 }; // Zygarde Complete Forme
+                case 719: return new int[] { 29, 29, 29 }; // Diancie
+                //case 719: return new int[] { 156, 156, 156 }; // Mega Diancie
+                case 720: return new int[] { 170, 170, 170 }; // Hoopa Confined
+                //case 720: return new int[] { 170, 170, 170 }; // Hoopa Unbound
+                case 721: return new int[] { 11, 11, 11 }; // Volcanion
+                default: return new int[] { 0, 0, 0 }; // No pokémon
+            }
+        }
+
+        public int[] getAbilities7(int species, int forme)
+        {
+            switch (species)
+            {
+                case 1: return new int[] { 65, 65, 34 }; // Bulbasaur
+                case 2: return new int[] { 65, 65, 34 }; // Ivysaur
+                case 3: return new int[] { 65, 65, 34 }; // Venusaur
+                //case 3: return new int[] { 47, 47, 47 }; // Mega Venusaur
+                case 4: return new int[] { 66, 66, 94 }; // Charmander
+                case 5: return new int[] { 66, 66, 94 }; // Charmeleon
+                case 6: return new int[] { 66, 66, 94 }; // Charizard
+                //case 6: return new int[] { 181, 181, 181 }; // Mega Charizard X
+                //case 6: return new int[] { 70, 70, 70 }; // Mega Charizard Y
+                case 7: return new int[] { 67, 67, 44 }; // Squirtle
+                case 8: return new int[] { 67, 67, 44 }; // Wartortle
+                case 9: return new int[] { 67, 67, 44 }; // Blastoise
+                //case 9: return new int[] { 178, 178, 178 }; // Mega Blastoise
+                case 10: return new int[] { 19, 19, 50 }; // Caterpie
+                case 11: return new int[] { 61, 61, 61 }; // Metapod
+                case 12: return new int[] { 14, 14, 110 }; // Butterfree
+                case 13: return new int[] { 19, 19, 50 }; // Weedle
+                case 14: return new int[] { 61, 61, 61 }; // Kakuna
+                case 15: return new int[] { 68, 68, 97 }; // Beedrill
+                //case 15: return new int[] { 91, 91, 91 }; // Mega Beedrill
+                case 16: return new int[] { 51, 77, 145 }; // Pidgey
+                case 17: return new int[] { 51, 77, 145 }; // Pidgeotto
+                case 18: return new int[] { 51, 77, 145 }; // Pidgeot
+                //case 18: return new int[] { 99, 99, 99 }; // Mega Pidgeot
+                case 19: return new int[] { 50, 62, 55 }; // Rattata
+                //case 19: return new int[] { 82, 55, 47 }; // Alolan Rattata
+                case 20: return new int[] { 50, 62, 55 }; // Raticate
+                //case 20: return new int[] { 82, 55, 47 }; // Alolan Raticate
+                case 21: return new int[] { 51, 51, 97 }; // Spearow
+                case 22: return new int[] { 51, 51, 97 }; // Fearow
+                case 23: return new int[] { 22, 61, 127 }; // Ekans
+                case 24: return new int[] { 22, 61, 127 }; // Arbok
+                case 25: return new int[] { 9, 9, 31 }; // Pikachu
+                //case 25: return new int[] { 31, 31, 31 }; // Cosplay Pikachu
+                case 26: return new int[] { 9, 9, 31 }; // Raichu
+                //case 26: return new int[] { 207, 207, 207 }; // Alolan Raichu
+                case 27: return new int[] { 8, 8, 146 }; // Sandshrew
+                //case 27: return new int[] { 81, 81, 202 }; // Alolan Sandshrew
+                case 28: return new int[] { 8, 8, 146 }; // Sandslash
+                //case 28: return new int[] { 81, 81, 202 }; // Alolan Sandslash
+                case 29: return new int[] { 38, 79, 55 }; // Nidoran♀
+                case 30: return new int[] { 38, 79, 55 }; // Nidorina
+                case 31: return new int[] { 38, 79, 125 }; // Nidoqueen
+                case 32: return new int[] { 38, 79, 55 }; // Nidoran♂
+                case 33: return new int[] { 38, 79, 55 }; // Nidorino
+                case 34: return new int[] { 38, 79, 125 }; // Nidoking
+                case 35: return new int[] { 56, 98, 132 }; // Clefairy
+                case 36: return new int[] { 56, 98, 109 }; // Clefable
+                case 37: return new int[] { 18, 18, 70 }; // Vulpix
+                //case 37: return new int[] { 81, 81, 117 }; // Alolan Vulpix
+                case 38: return new int[] { 18, 18, 70 }; // Ninetales
+                //case 38: return new int[] { 81, 81, 117 }; // Alolan Ninetales
+                case 39: return new int[] { 56, 172, 132 }; // Jigglypuff
+                case 40: return new int[] { 56, 172, 119 }; // Wigglytuff
+                case 41: return new int[] { 39, 39, 151 }; // Zubat
+                case 42: return new int[] { 39, 39, 151 }; // Golbat
+                case 43: return new int[] { 34, 34, 50 }; // Oddish
+                case 44: return new int[] { 34, 34, 1 }; // Gloom
+                case 45: return new int[] { 34, 34, 27 }; // Vileplume
+                case 46: return new int[] { 27, 87, 6 }; // Paras
+                case 47: return new int[] { 27, 87, 6 }; // Parasect
+                case 48: return new int[] { 14, 110, 50 }; // Venonat
+                case 49: return new int[] { 19, 110, 147 }; // Venomoth
+                case 50: return new int[] { 8, 71, 159 }; // Diglett
+                //case 50: return new int[] { 8, 221, 159 }; // Alolan Diglett
+                case 51: return new int[] { 8, 71, 159 }; // Dugtrio
+                //case 51: return new int[] { 8, 221, 159 }; // Alolan Dugtrio
+                case 52: return new int[] { 53, 101, 127 }; // Meowth
+                //case 52: return new int[] { 53, 101, 155 }; // Alolan Meowth
+                case 53: return new int[] { 7, 101, 127 }; // Persian
+                //case 53: return new int[] { 169, 101, 155 }; // Alolan Persian
+                case 54: return new int[] { 6, 13, 33 }; // Psyduck
+                case 55: return new int[] { 6, 13, 33 }; // Golduck
+                case 56: return new int[] { 72, 83, 128 }; // Mankey
+                case 57: return new int[] { 72, 83, 128 }; // Primeape
+                case 58: return new int[] { 22, 18, 154 }; // Growlithe
+                case 59: return new int[] { 22, 18, 154 }; // Arcanine
+                case 60: return new int[] { 11, 6, 33 }; // Poliwag
+                case 61: return new int[] { 11, 6, 33 }; // Poliwhirl
+                case 62: return new int[] { 11, 6, 33 }; // Poliwrath
+                case 63: return new int[] { 28, 39, 98 }; // Abra
+                case 64: return new int[] { 28, 39, 98 }; // Kadabra
+                case 65: return new int[] { 28, 39, 98 }; // Alakazam
+                //case 65: return new int[] { 36, 36, 36 }; // Mega Alakazam
+                case 66: return new int[] { 62, 99, 80 }; // Machop
+                case 67: return new int[] { 62, 99, 80 }; // Machoke
+                case 68: return new int[] { 62, 99, 80 }; // Machamp
+                case 69: return new int[] { 34, 34, 82 }; // Bellsprout
+                case 70: return new int[] { 34, 34, 82 }; // Weepinbell
+                case 71: return new int[] { 34, 34, 82 }; // Victreebel
+                case 72: return new int[] { 29, 64, 44 }; // Tentacool
+                case 73: return new int[] { 29, 64, 44 }; // Tentacruel
+                case 74: return new int[] { 69, 5, 8 }; // Geodude
+                //case 74: return new int[] { 42, 5, 206 }; // Alolan Geodude
+                case 75: return new int[] { 69, 5, 8 }; // Graveler
+                //case 75: return new int[] { 42, 5, 206 }; // Alolan Graveler
+                case 76: return new int[] { 69, 5, 8 }; // Golem
+                //case 76: return new int[] { 42, 5, 206 }; // Alolan Golem
+                case 77: return new int[] { 50, 18, 49 }; // Ponyta
+                case 78: return new int[] { 50, 18, 49 }; // Rapidash
+                case 79: return new int[] { 12, 20, 144 }; // Slowpoke
+                case 80: return new int[] { 12, 20, 144 }; // Slowbro
+                //case 80: return new int[] { 75, 75, 75 }; // Mega Slowbro
+                case 81: return new int[] { 42, 5, 148 }; // Magnemite
+                case 82: return new int[] { 42, 5, 148 }; // Magneton
+                case 83: return new int[] { 51, 39, 128 }; // Farfetch'd
+                case 84: return new int[] { 50, 48, 77 }; // Doduo
+                case 85: return new int[] { 50, 48, 77 }; // Dodrio
+                case 86: return new int[] { 47, 93, 115 }; // Seel
+                case 87: return new int[] { 47, 93, 115 }; // Dewgong
+                case 88: return new int[] { 1, 60, 143 }; // Grimer
+                //case 88: return new int[] { 143, 82, 223 }; // Alolan Grimer
+                case 89: return new int[] { 1, 60, 143 }; // Muk
+                //case 89: return new int[] { 143, 82, 223 }; // Alolan Muk
+                case 90: return new int[] { 75, 92, 142 }; // Shellder
+                case 91: return new int[] { 75, 92, 142 }; // Cloyster
+                case 92: return new int[] { 26, 26, 26 }; // Gastly
+                case 93: return new int[] { 26, 26, 26 }; // Haunter
+                case 94: return new int[] { 130, 130, 130 }; // Gengar*
+                //case 94: return new int[] { 23, 23, 23 }; // Mega Gengar
+                case 95: return new int[] { 69, 5, 133 }; // Onix
+                case 96: return new int[] { 15, 108, 39 }; // Drowzee
+                case 97: return new int[] { 15, 108, 39 }; // Hypno
+                case 98: return new int[] { 52, 75, 125 }; // Krabby
+                case 99: return new int[] { 52, 75, 125 }; // Kingler
+                case 100: return new int[] { 43, 9, 106 }; // Voltorb
+                case 101: return new int[] { 43, 9, 106 }; // Electrode
+                case 102: return new int[] { 34, 34, 139 }; // Exeggcute
+                case 103: return new int[] { 34, 34, 139 }; // Exeggutor
+                //case 103: return new int[] { 119, 119, 139 }; // Alolan Exeggutor
+                case 104: return new int[] { 69, 31, 4 }; // Cubone
+                case 105: return new int[] { 69, 31, 4 }; // Marowak
+                //case 105: return new int[] { 130, 31, 69 }; // Alolan Marowak
+                case 106: return new int[] { 7, 120, 84 }; // Hitmonlee
+                case 107: return new int[] { 51, 89, 39 }; // Hitmonchan
+                case 108: return new int[] { 20, 12, 13 }; // Lickitung
+                case 109: return new int[] { 26, 26, 26 }; // Koffing
+                case 110: return new int[] { 26, 26, 26 }; // Weezing
+                case 111: return new int[] { 31, 69, 120 }; // Rhyhorn
+                case 112: return new int[] { 31, 69, 120 }; // Rhydon
+                case 113: return new int[] { 30, 32, 131 }; // Chansey
+                case 114: return new int[] { 34, 102, 144 }; // Tangela
+                case 115: return new int[] { 48, 113, 39 }; // Kangaskhan
+                //case 115: return new int[] { 185, 185, 185 }; // Mega Kangaskhan
+                case 116: return new int[] { 33, 97, 6 }; // Horsea
+                case 117: return new int[] { 38, 97, 6 }; // Seadra
+                case 118: return new int[] { 33, 41, 31 }; // Goldeen
+                case 119: return new int[] { 33, 41, 31 }; // Seaking
+                case 120: return new int[] { 35, 30, 148 }; // Staryu
+                case 121: return new int[] { 35, 30, 148 }; // Starmie
+                case 122: return new int[] { 43, 111, 101 }; // Mr. Mime
+                case 123: return new int[] { 68, 101, 80 }; // Scyther
+                case 124: return new int[] { 12, 108, 87 }; // Jynx
+                case 125: return new int[] { 9, 9, 72 }; // Electabuzz
+                case 126: return new int[] { 49, 49, 72 }; // Magmar
+                case 127: return new int[] { 52, 104, 153 }; // Pinsir
+                //case 127: return new int[] { 184, 184, 184 }; // Mega Pinsir
+                case 128: return new int[] { 22, 83, 125 }; // Tauros
+                case 129: return new int[] { 33, 33, 155 }; // Magikarp
+                case 130: return new int[] { 22, 22, 153 }; // Gyarados
+                //case 130: return new int[] { 104, 104, 104 }; // Mega Gyarados
+                case 131: return new int[] { 11, 75, 93 }; // Lapras
+                case 132: return new int[] { 7, 7, 150 }; // Ditto
+                case 133: return new int[] { 50, 91, 107 }; // Eevee
+                case 134: return new int[] { 11, 11, 93 }; // Vaporeon
+                case 135: return new int[] { 10, 10, 95 }; // Jolteon
+                case 136: return new int[] { 18, 18, 62 }; // Flareon
+                case 137: return new int[] { 36, 88, 148 }; // Porygon
+                case 138: return new int[] { 33, 75, 133 }; // Omanyte
+                case 139: return new int[] { 33, 75, 133 }; // Omastar
+                case 140: return new int[] { 33, 4, 133 }; // Kabuto
+                case 141: return new int[] { 33, 4, 133 }; // Kabutops
+                case 142: return new int[] { 69, 46, 127 }; // Aerodactyl
+                //case 142: return new int[] { 181, 181, 181 }; // Mega Aerodactyl
+                case 143: return new int[] { 17, 47, 82 }; // Snorlax
+                case 144: return new int[] { 46, 46, 81 }; // Articuno
+                case 145: return new int[] { 46, 46, 9 }; // Zapdos*
+                case 146: return new int[] { 46, 46, 49 }; // Moltres
+                case 147: return new int[] { 61, 61, 63 }; // Dratini
+                case 148: return new int[] { 61, 61, 63 }; // Dragonair
+                case 149: return new int[] { 39, 39, 136 }; // Dragonite
+                case 150: return new int[] { 46, 46, 127 }; // Mewtwo
+                //case 150: return new int[] { 80, 80, 80 }; // Mega Mewtwo X
+                //case 150: return new int[] { 15, 15, 15 }; // Mega Mewtwo Y
+                case 151: return new int[] { 28, 28, 28 }; // Mew
+                case 152: return new int[] { 65, 65, 102 }; // Chikorita
+                case 153: return new int[] { 65, 65, 102 }; // Bayleef
+                case 154: return new int[] { 65, 65, 102 }; // Meganium
+                case 155: return new int[] { 66, 66, 18 }; // Cyndaquil
+                case 156: return new int[] { 66, 66, 18 }; // Quilava
+                case 157: return new int[] { 66, 66, 18 }; // Typhlosion
+                case 158: return new int[] { 67, 67, 125 }; // Totodile
+                case 159: return new int[] { 67, 67, 125 }; // Croconaw
+                case 160: return new int[] { 67, 67, 125 }; // Feraligatr
+                case 161: return new int[] { 50, 51, 119 }; // Sentret
+                case 162: return new int[] { 50, 51, 119 }; // Furret
+                case 163: return new int[] { 15, 51, 110 }; // Hoothoot
+                case 164: return new int[] { 15, 51, 110 }; // Noctowl
+                case 165: return new int[] { 68, 48, 155 }; // Ledyba
+                case 166: return new int[] { 68, 48, 89 }; // Ledian
+                case 167: return new int[] { 68, 15, 97 }; // Spinarak
+                case 168: return new int[] { 68, 15, 97 }; // Ariados
+                case 169: return new int[] { 39, 39, 151 }; // Crobat
+                case 170: return new int[] { 10, 35, 11 }; // Chinchou
+                case 171: return new int[] { 10, 35, 11 }; // Lanturn
+                case 172: return new int[] { 9, 9, 31 }; // Pichu
+                //case 172: return new int[] { 9, 9, 9 }; // Spiky-eared Pichu
+                case 173: return new int[] { 56, 98, 132 }; // Cleffa
+                case 174: return new int[] { 56, 172, 132 }; // Igglybuff
+                case 175: return new int[] { 55, 32, 105 }; // Togepi
+                case 176: return new int[] { 55, 32, 105 }; // Togetic
+                case 177: return new int[] { 28, 48, 156 }; // Natu
+                case 178: return new int[] { 28, 48, 156 }; // Xatu
+                case 179: return new int[] { 9, 9, 57 }; // Mareep
+                case 180: return new int[] { 9, 9, 57 }; // Flaaffy
+                case 181: return new int[] { 9, 9, 57 }; // Ampharos
+                //case 181: return new int[] { 104, 104, 104 }; // Mega Ampharos
+                case 182: return new int[] { 34, 34, 131 }; // Bellossom
+                case 183: return new int[] { 47, 37, 157 }; // Marill
+                case 184: return new int[] { 47, 37, 157 }; // Azumarill
+                case 185: return new int[] { 5, 69, 155 }; // Sudowoodo
+                case 186: return new int[] { 11, 6, 2 }; // Politoed
+                case 187: return new int[] { 34, 102, 151 }; // Hoppip
+                case 188: return new int[] { 34, 102, 151 }; // Skiploom
+                case 189: return new int[] { 34, 102, 151 }; // Jumpluff
+                case 190: return new int[] { 50, 53, 92 }; // Aipom
+                case 191: return new int[] { 34, 94, 48 }; // Sunkern
+                case 192: return new int[] { 34, 94, 48 }; // Sunflora
+                case 193: return new int[] { 3, 14, 119 }; // Yanma
+                case 194: return new int[] { 6, 11, 109 }; // Wooper
+                case 195: return new int[] { 6, 11, 109 }; // Quagsire
+                case 196: return new int[] { 28, 28, 156 }; // Espeon
+                case 197: return new int[] { 28, 28, 39 }; // Umbreon
+                case 198: return new int[] { 15, 105, 158 }; // Murkrow
+                case 199: return new int[] { 12, 20, 144 }; // Slowking
+                case 200: return new int[] { 26, 26, 26 }; // Misdreavus
+                case 201: return new int[] { 26, 26, 26 }; // Unown
+                case 202: return new int[] { 23, 23, 140 }; // Wobbuffet
+                case 203: return new int[] { 39, 48, 157 }; // Girafarig
+                case 204: return new int[] { 5, 5, 142 }; // Pineco
+                case 205: return new int[] { 5, 5, 142 }; // Forretress
+                case 206: return new int[] { 32, 50, 155 }; // Dunsparce
+                case 207: return new int[] { 52, 8, 17 }; // Gligar
+                case 208: return new int[] { 69, 5, 125 }; // Steelix
+                //case 208: return new int[] { 159, 159, 159 }; // Mega Steelix
+                case 209: return new int[] { 22, 50, 155 }; // Snubbull
+                case 210: return new int[] { 22, 95, 155 }; // Granbull
+                case 211: return new int[] { 38, 33, 22 }; // Qwilfish
+                case 212: return new int[] { 68, 101, 135 }; // Scizor
+                //case 212: return new int[] { 101, 101, 101 }; // Mega Scizor
+                case 213: return new int[] { 5, 82, 126 }; // Shuckle
+                case 214: return new int[] { 68, 62, 153 }; // Heracross
+                //case 214: return new int[] { 92, 92, 92 }; // Mega Heracross
+                case 215: return new int[] { 39, 51, 124 }; // Sneasel
+                case 216: return new int[] { 53, 95, 118 }; // Teddiursa
+                case 217: return new int[] { 62, 95, 127 }; // Ursaring
+                case 218: return new int[] { 40, 49, 133 }; // Slugma
+                case 219: return new int[] { 40, 49, 133 }; // Magcargo
+                case 220: return new int[] { 12, 81, 47 }; // Swinub
+                case 221: return new int[] { 12, 81, 47 }; // Piloswine
+                case 222: return new int[] { 55, 30, 144 }; // Corsola
+                case 223: return new int[] { 55, 97, 141 }; // Remoraid
+                case 224: return new int[] { 21, 97, 141 }; // Octillery
+                case 225: return new int[] { 72, 55, 15 }; // Delibird
+                case 226: return new int[] { 33, 11, 41 }; // Mantine
+                case 227: return new int[] { 51, 5, 133 }; // Skarmory
+                case 228: return new int[] { 48, 18, 127 }; // Houndour
+                case 229: return new int[] { 48, 18, 127 }; // Houndoom
+                //case 229: return new int[] { 94, 94, 94 }; // Mega Houndoom
+                case 230: return new int[] { 33, 97, 6 }; // Kingdra
+                case 231: return new int[] { 53, 53, 8 }; // Phanpy
+                case 232: return new int[] { 5, 5, 8 }; // Donphan
+                case 233: return new int[] { 36, 88, 148 }; // Porygon2
+                case 234: return new int[] { 22, 119, 157 }; // Stantler
+                case 235: return new int[] { 20, 101, 141 }; // Smeargle
+                case 236: return new int[] { 62, 80, 72 }; // Tyrogue
+                case 237: return new int[] { 22, 101, 80 }; // Hitmontop
+                case 238: return new int[] { 12, 108, 93 }; // Smoochum
+                case 239: return new int[] { 9, 9, 72 }; // Elekid
+                case 240: return new int[] { 49, 49, 72 }; // Magby
+                case 241: return new int[] { 47, 113, 157 }; // Miltank
+                case 242: return new int[] { 30, 32, 131 }; // Blissey
+                case 243: return new int[] { 46, 46, 39 }; // Raikou*
+                case 244: return new int[] { 46, 46, 39 }; // Entei*
+                case 245: return new int[] { 46, 46, 39 }; // Suicune*
+                case 246: return new int[] { 62, 62, 8 }; // Larvitar
+                case 247: return new int[] { 61, 61, 61 }; // Pupitar
+                case 248: return new int[] { 45, 45, 127 }; // Tyranitar
+                //case 248: return new int[] { 45, 45, 45 }; // Mega Tyranitar
+                case 249: return new int[] { 46, 46, 136 }; // Lugia
+                case 250: return new int[] { 46, 46, 144 }; // Ho-Oh
+                case 251: return new int[] { 30, 30, 30 }; // Celebi
+                case 252: return new int[] { 65, 65, 84 }; // Treecko
+                case 253: return new int[] { 65, 65, 84 }; // Grovyle
+                case 254: return new int[] { 65, 65, 84 }; // Sceptile
+                //case 254: return new int[] { 31, 31, 31 }; // Mega Sceptile
+                case 255: return new int[] { 66, 66, 3 }; // Torchic
+                case 256: return new int[] { 66, 66, 3 }; // Combusken
+                case 257: return new int[] { 66, 66, 3 }; // Blaziken
+                //case 257: return new int[] { 3, 3, 3 }; // Mega Blaziken
+                case 258: return new int[] { 67, 67, 6 }; // Mudkip
+                case 259: return new int[] { 67, 67, 6 }; // Marshtomp
+                case 260: return new int[] { 67, 67, 6 }; // Swampert
+                //case 260: return new int[] { 33, 33, 33 }; // Mega Swampert
+                case 261: return new int[] { 50, 95, 155 }; // Poochyena
+                case 262: return new int[] { 22, 95, 153 }; // Mightyena
+                case 263: return new int[] { 53, 82, 95 }; // Zigzagoon
+                case 264: return new int[] { 53, 82, 95 }; // Linoone
+                case 265: return new int[] { 19, 19, 50 }; // Wurmple
+                case 266: return new int[] { 61, 61, 61 }; // Silcoon
+                case 267: return new int[] { 68, 68, 79 }; // Beautifly
+                case 268: return new int[] { 61, 61, 61 }; // Cascoon
+                case 269: return new int[] { 19, 19, 14 }; // Dustox
+                case 270: return new int[] { 33, 44, 20 }; // Lotad
+                case 271: return new int[] { 33, 44, 20 }; // Lombre
+                case 272: return new int[] { 33, 44, 20 }; // Ludicolo
+                case 273: return new int[] { 34, 48, 124 }; // Seedot
+                case 274: return new int[] { 34, 48, 124 }; // Nuzleaf
+                case 275: return new int[] { 34, 48, 124 }; // Shiftry
+                case 276: return new int[] { 62, 62, 113 }; // Taillow
+                case 277: return new int[] { 62, 62, 113 }; // Swellow
+                case 278: return new int[] { 51, 93, 44 }; // Wingull
+                case 279: return new int[] { 51, 2, 44 }; // Pelipper
+                case 280: return new int[] { 28, 36, 140 }; // Ralts
+                case 281: return new int[] { 28, 36, 140 }; // Kirlia
+                case 282: return new int[] { 28, 36, 140 }; // Gardevoir
+                //case 282: return new int[] { 182, 182, 182 }; // Mega Gardevoir
+                case 283: return new int[] { 33, 33, 44 }; // Surskit
+                case 284: return new int[] { 22, 22, 127 }; // Masquerain
+                case 285: return new int[] { 27, 90, 95 }; // Shroomish
+                case 286: return new int[] { 27, 90, 101 }; // Breloom
+                case 287: return new int[] { 54, 54, 54 }; // Slakoth
+                case 288: return new int[] { 72, 72, 72 }; // Vigoroth
+                case 289: return new int[] { 54, 54, 54 }; // Slaking
+                case 290: return new int[] { 14, 14, 50 }; // Nincada
+                case 291: return new int[] { 3, 3, 151 }; // Ninjask
+                case 292: return new int[] { 25, 25, 25 }; // Shedinja
+                case 293: return new int[] { 43, 43, 155 }; // Whismur
+                case 294: return new int[] { 43, 43, 113 }; // Loudred
+                case 295: return new int[] { 43, 43, 113 }; // Exploud
+                case 296: return new int[] { 47, 62, 125 }; // Makuhita
+                case 297: return new int[] { 47, 62, 125 }; // Hariyama
+                case 298: return new int[] { 47, 37, 157 }; // Azurill
+                case 299: return new int[] { 5, 42, 159 }; // Nosepass
+                case 300: return new int[] { 56, 96, 147 }; // Skitty
+                case 301: return new int[] { 56, 96, 147 }; // Delcatty
+                case 302: return new int[] { 51, 100, 158 }; // Sableye
+                //case 302: return new int[] { 156, 156, 156 }; // Mega Sableye
+                case 303: return new int[] { 52, 22, 125 }; // Mawile
+                //case 303: return new int[] { 37, 37, 37 }; // Mega Mawile
+                case 304: return new int[] { 5, 69, 134 }; // Aron
+                case 305: return new int[] { 5, 69, 134 }; // Lairon
+                case 306: return new int[] { 5, 69, 134 }; // Aggron
+                //case 306: return new int[] { 111, 111, 111 }; // Mega Aggron
+                case 307: return new int[] { 74, 74, 140 }; // Meditite
+                case 308: return new int[] { 74, 74, 140 }; // Medicham
+                //case 308: return new int[] { 74, 74, 74 }; // Mega Medicham
+                case 309: return new int[] { 9, 31, 58 }; // Electrike
+                case 310: return new int[] { 9, 31, 58 }; // Manectric
+                //case 310: return new int[] { 22, 22, 22 }; // Mega Manectric
+                case 311: return new int[] { 57, 57, 31 }; // Plusle
+                case 312: return new int[] { 58, 58, 10 }; // Minun
+                case 313: return new int[] { 35, 68, 158 }; // Volbeat
+                case 314: return new int[] { 12, 110, 158 }; // Illumise
+                case 315: return new int[] { 30, 38, 102 }; // Roselia
+                case 316: return new int[] { 64, 60, 82 }; // Gulpin
+                case 317: return new int[] { 64, 60, 82 }; // Swalot
+                case 318: return new int[] { 24, 24, 3 }; // Carvanha
+                case 319: return new int[] { 24, 24, 3 }; // Sharpedo
+                //case 319: return new int[] { 173, 173, 173 }; // Mega Sharpedo
+                case 320: return new int[] { 41, 12, 46 }; // Wailmer
+                case 321: return new int[] { 41, 12, 46 }; // Wailord
+                case 322: return new int[] { 12, 86, 20 }; // Numel
+                case 323: return new int[] { 40, 116, 83 }; // Camerupt
+                //case 323: return new int[] { 125, 125, 125 }; // Mega Camerupt
+                case 324: return new int[] { 73, 70, 75 }; // Torkoal
+                case 325: return new int[] { 47, 20, 82 }; // Spoink
+                case 326: return new int[] { 47, 20, 82 }; // Grumpig
+                case 327: return new int[] { 20, 77, 126 }; // Spinda
+                case 328: return new int[] { 52, 71, 125 }; // Trapinch
+                case 329: return new int[] { 26, 26, 26 }; // Vibrava
+                case 330: return new int[] { 26, 26, 26 }; // Flygon
+                case 331: return new int[] { 8, 8, 11 }; // Cacnea
+                case 332: return new int[] { 8, 8, 11 }; // Cacturne
+                case 333: return new int[] { 30, 30, 13 }; // Swablu
+                case 334: return new int[] { 30, 30, 13 }; // Altaria
+                //case 334: return new int[] { 182, 182, 182 }; // Mega Altaria
+                case 335: return new int[] { 17, 17, 137 }; // Zangoose
+                case 336: return new int[] { 61, 61, 151 }; // Seviper
+                case 337: return new int[] { 26, 26, 26 }; // Lunatone
+                case 338: return new int[] { 26, 26, 26 }; // Solrock
+                case 339: return new int[] { 12, 107, 93 }; // Barboach
+                case 340: return new int[] { 12, 107, 93 }; // Whiscash
+                case 341: return new int[] { 52, 75, 91 }; // Corphish
+                case 342: return new int[] { 52, 75, 91 }; // Crawdaunt
+                case 343: return new int[] { 26, 26, 26 }; // Baltoy
+                case 344: return new int[] { 26, 26, 26 }; // Claydol
+                case 345: return new int[] { 21, 21, 114 }; // Lileep
+                case 346: return new int[] { 21, 21, 114 }; // Cradily
+                case 347: return new int[] { 4, 4, 33 }; // Anorith
+                case 348: return new int[] { 4, 4, 33 }; // Armaldo
+                case 349: return new int[] { 33, 12, 91 }; // Feebas
+                case 350: return new int[] { 63, 172, 56 }; // Milotic
+                case 351: return new int[] { 59, 59, 59 }; // Castform
+                //case 351: return new int[] { 59, 59, 59 }; // Castform
+                //case 351: return new int[] { 59, 59, 59 }; // Castform
+                //case 351: return new int[] { 59, 59, 59 }; // Castform
+                case 352: return new int[] { 16, 16, 168 }; // Kecleon
+                case 353: return new int[] { 15, 119, 130 }; // Shuppet
+                case 354: return new int[] { 15, 119, 130 }; // Banette
+                //case 354: return new int[] { 158, 158, 158 }; // Mega Banette
+                case 355: return new int[] { 26, 26, 119 }; // Duskull
+                case 356: return new int[] { 46, 46, 119 }; // Dusclops
+                case 357: return new int[] { 34, 94, 139 }; // Tropius
+                case 358: return new int[] { 26, 26, 26 }; // Chimecho
+                case 359: return new int[] { 46, 105, 154 }; // Absol
+                //case 359: return new int[] { 156, 156, 156 }; // Mega Absol
+                case 360: return new int[] { 23, 23, 140 }; // Wynaut
+                case 361: return new int[] { 39, 115, 141 }; // Snorunt
+                case 362: return new int[] { 39, 115, 141 }; // Glalie
+                //case 362: return new int[] { 174, 174, 174 }; // Mega Glalie
+                case 363: return new int[] { 47, 115, 12 }; // Spheal
+                case 364: return new int[] { 47, 115, 12 }; // Sealeo
+                case 365: return new int[] { 47, 115, 12 }; // Walrein
+                case 366: return new int[] { 75, 75, 155 }; // Clamperl
+                case 367: return new int[] { 33, 33, 41 }; // Huntail
+                case 368: return new int[] { 33, 33, 93 }; // Gorebyss
+                case 369: return new int[] { 33, 69, 5 }; // Relicanth
+                case 370: return new int[] { 33, 33, 93 }; // Luvdisc
+                case 371: return new int[] { 69, 69, 125 }; // Bagon
+                case 372: return new int[] { 69, 69, 142 }; // Shelgon
+                case 373: return new int[] { 22, 22, 153 }; // Salamence
+                //case 373: return new int[] { 184, 184, 184 }; // Mega Salamence
+                case 374: return new int[] { 29, 29, 135 }; // Beldum
+                case 375: return new int[] { 29, 29, 135 }; // Metang
+                case 376: return new int[] { 29, 29, 135 }; // Metagross
+                //case 376: return new int[] { 181, 181, 181 }; // Mega Metagross
+                case 377: return new int[] { 29, 29, 5 }; // Regirock
+                case 378: return new int[] { 29, 29, 115 }; // Regice
+                case 379: return new int[] { 29, 29, 135 }; // Registeel
+                case 380: return new int[] { 26, 26, 26 }; // Latias
+                //case 380: return new int[] { 26, 26, 26 }; // Mega Latias
+                case 381: return new int[] { 26, 26, 26 }; // Latios
+                //case 381: return new int[] { 26, 26, 26 }; // Mega Latios
+                case 382: return new int[] { 2, 2, 2 }; // Kyogre
+                //case 382: return new int[] { 189, 189, 189 }; // Primal Kyogre
+                case 383: return new int[] { 70, 70, 70 }; // Groudon
+                //case 383: return new int[] { 190, 190, 190 }; // Primal Groudon
+                case 384: return new int[] { 76, 76, 76 }; // Rayquaza
+                //case 384: return new int[] { 191, 191, 191 }; // Mega Rayquaza
+                case 385: return new int[] { 32, 32, 32 }; // Jirachi
+                case 386: return new int[] { 46, 46, 46 }; // Deoxys
+                //case 386: return new int[] { 46, 46, 46 }; // Deoxys
+                //case 386: return new int[] { 46, 46, 46 }; // Deoxys
+                //case 386: return new int[] { 46, 46, 46 }; // Deoxys
+                case 387: return new int[] { 65, 65, 75 }; // Turtwig
+                case 388: return new int[] { 65, 65, 75 }; // Grotle
+                case 389: return new int[] { 65, 65, 75 }; // Torterra
+                case 390: return new int[] { 66, 66, 89 }; // Chimchar
+                case 391: return new int[] { 66, 66, 89 }; // Monferno
+                case 392: return new int[] { 66, 66, 89 }; // Infernape
+                case 393: return new int[] { 67, 67, 128 }; // Piplup
+                case 394: return new int[] { 67, 67, 128 }; // Prinplup
+                case 395: return new int[] { 67, 67, 128 }; // Empoleon
+                case 396: return new int[] { 51, 51, 120 }; // Starly
+                case 397: return new int[] { 22, 22, 120 }; // Staravia
+                case 398: return new int[] { 22, 22, 120 }; // Staraptor
+                case 399: return new int[] { 86, 109, 141 }; // Bidoof
+                case 400: return new int[] { 86, 109, 141 }; // Bibarel
+                case 401: return new int[] { 61, 61, 50 }; // Kricketot
+                case 402: return new int[] { 68, 68, 101 }; // Kricketune
+                case 403: return new int[] { 79, 22, 62 }; // Shinx
+                case 404: return new int[] { 79, 22, 62 }; // Luxio
+                case 405: return new int[] { 79, 22, 62 }; // Luxray
+                case 406: return new int[] { 30, 38, 102 }; // Budew
+                case 407: return new int[] { 30, 38, 101 }; // Roserade
+                case 408: return new int[] { 104, 104, 125 }; // Cranidos
+                case 409: return new int[] { 104, 104, 125 }; // Rampardos
+                case 410: return new int[] { 5, 5, 43 }; // Shieldon
+                case 411: return new int[] { 5, 5, 43 }; // Bastiodon
+                case 412: return new int[] { 61, 61, 142 }; // Burmy
+                //case 412: return new int[] { 61, 61, 142 }; // Burmy
+                //case 412: return new int[] { 61, 61, 142 }; // Burmy
+                case 413: return new int[] { 107, 107, 142 }; // Wormadam
+                //case 413: return new int[] { 107, 107, 142 }; // Wormadam
+                //case 413: return new int[] { 107, 107, 142 }; // Wormadam
+                case 414: return new int[] { 68, 68, 110 }; // Mothim
+                case 415: return new int[] { 118, 118, 55 }; // Combee
+                case 416: return new int[] { 46, 46, 127 }; // Vespiquen
+                case 417: return new int[] { 50, 53, 10 }; // Pachirisu
+                case 418: return new int[] { 33, 33, 41 }; // Buizel
+                case 419: return new int[] { 33, 33, 41 }; // Floatzel
+                case 420: return new int[] { 34, 34, 34 }; // Cherubi
+                case 421: return new int[] { 122, 122, 122 }; // Cherrim
+                //case 421: return new int[] { 122, 122, 122 }; // Cherrim
+                case 422: return new int[] { 60, 114, 159 }; // Shellos
+                //case 422: return new int[] { 60, 114, 159 }; // Shellos
+                case 423: return new int[] { 60, 114, 159 }; // Gastrodon
+                //case 423: return new int[] { 60, 114, 159 }; // Gastrodon
+                case 424: return new int[] { 101, 53, 92 }; // Ambipom
+                case 425: return new int[] { 106, 84, 138 }; // Drifloon
+                case 426: return new int[] { 106, 84, 138 }; // Drifblim
+                case 427: return new int[] { 50, 103, 7 }; // Buneary
+                case 428: return new int[] { 56, 103, 7 }; // Lopunny
+                //case 428: return new int[] { 113, 113, 113 }; // Mega Lopunny
+                case 429: return new int[] { 26, 26, 26 }; // Mismagius
+                case 430: return new int[] { 15, 105, 153 }; // Honchkrow
+                case 431: return new int[] { 7, 20, 51 }; // Glameow
+                case 432: return new int[] { 47, 20, 128 }; // Purugly
+                case 433: return new int[] { 26, 26, 26 }; // Chingling
+                case 434: return new int[] { 1, 106, 51 }; // Stunky
+                case 435: return new int[] { 1, 106, 51 }; // Skuntank
+                case 436: return new int[] { 26, 85, 134 }; // Bronzor
+                case 437: return new int[] { 26, 85, 134 }; // Bronzong
+                case 438: return new int[] { 5, 69, 155 }; // Bonsly
+                case 439: return new int[] { 43, 111, 101 }; // Mime Jr.
+                case 440: return new int[] { 30, 32, 132 }; // Happiny
+                case 441: return new int[] { 51, 77, 145 }; // Chatot
+                case 442: return new int[] { 46, 46, 151 }; // Spiritomb
+                case 443: return new int[] { 8, 8, 24 }; // Gible
+                case 444: return new int[] { 8, 8, 24 }; // Gabite
+                case 445: return new int[] { 8, 8, 24 }; // Garchomp
+                //case 445: return new int[] { 159, 159, 159 }; // Mega Garchomp
+                case 446: return new int[] { 53, 47, 82 }; // Munchlax
+                case 447: return new int[] { 80, 39, 158 }; // Riolu
+                case 448: return new int[] { 80, 39, 154 }; // Lucario
+                //case 448: return new int[] { 91, 91, 91 }; // Mega Lucario
+                case 449: return new int[] { 45, 45, 159 }; // Hippopotas
+                case 450: return new int[] { 45, 45, 159 }; // Hippowdon
+                case 451: return new int[] { 4, 97, 51 }; // Skorupi
+                case 452: return new int[] { 4, 97, 51 }; // Drapion
+                case 453: return new int[] { 107, 87, 143 }; // Croagunk
+                case 454: return new int[] { 107, 87, 143 }; // Toxicroak
+                case 455: return new int[] { 26, 26, 26 }; // Carnivine
+                case 456: return new int[] { 33, 114, 41 }; // Finneon
+                case 457: return new int[] { 33, 114, 41 }; // Lumineon
+                case 458: return new int[] { 33, 11, 41 }; // Mantyke
+                case 459: return new int[] { 117, 117, 43 }; // Snover
+                case 460: return new int[] { 117, 117, 43 }; // Abomasnow
+                //case 460: return new int[] { 117, 117, 117 }; // Mega Abomasnow
+                case 461: return new int[] { 46, 46, 124 }; // Weavile
+                case 462: return new int[] { 42, 5, 148 }; // Magnezone
+                case 463: return new int[] { 20, 12, 13 }; // Lickilicky
+                case 464: return new int[] { 31, 116, 120 }; // Rhyperior
+                case 465: return new int[] { 34, 102, 144 }; // Tangrowth
+                case 466: return new int[] { 78, 78, 72 }; // Electivire
+                case 467: return new int[] { 49, 49, 72 }; // Magmortar
+                case 468: return new int[] { 55, 32, 105 }; // Togekiss
+                case 469: return new int[] { 3, 110, 119 }; // Yanmega
+                case 470: return new int[] { 102, 102, 34 }; // Leafeon
+                case 471: return new int[] { 81, 81, 115 }; // Glaceon
+                case 472: return new int[] { 52, 8, 90 }; // Gliscor
+                case 473: return new int[] { 12, 81, 47 }; // Mamoswine
+                case 474: return new int[] { 91, 88, 148 }; // Porygon-Z
+                case 475: return new int[] { 80, 80, 154 }; // Gallade
+                //case 475: return new int[] { 39, 39, 39 }; // Mega Gallade
+                case 476: return new int[] { 5, 42, 159 }; // Probopass
+                case 477: return new int[] { 46, 46, 119 }; // Dusknoir
+                case 478: return new int[] { 81, 81, 130 }; // Froslass
+                case 479: return new int[] { 26, 26, 26 }; // Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Heat Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Wash Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Frost Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Fan Rotom
+                //case 479: return new int[] { 26, 26, 26 }; // Mow Rotom
+                case 480: return new int[] { 26, 26, 26 }; // Uxie
+                case 481: return new int[] { 26, 26, 26 }; // Mesprit
+                case 482: return new int[] { 26, 26, 26 }; // Azelf
+                case 483: return new int[] { 46, 46, 140 }; // Dialga
+                case 484: return new int[] { 46, 46, 140 }; // Palkia
+                case 485: return new int[] { 18, 18, 49 }; // Heatran
+                case 486: return new int[] { 112, 112, 112 }; // Regigigas
+                case 487: return new int[] { 46, 46, 140 }; // Giratina
+                //case 487: return new int[] { 26, 26, 26 }; // Giratina
+                case 488: return new int[] { 26, 26, 26 }; // Cresselia
+                case 489: return new int[] { 93, 93, 93 }; // Phione
+                case 490: return new int[] { 93, 93, 93 }; // Manaphy
+                case 491: return new int[] { 123, 123, 123 }; // Darkrai
+                case 492: return new int[] { 30, 30, 30 }; // Shaymin
+                //case 492: return new int[] { 32, 32, 32 }; // Shaymin
+                case 493: return new int[] { 121, 121, 121 }; // Arceus
+                case 494: return new int[] { 162, 162, 162 }; // Victini
+                case 495: return new int[] { 65, 65, 126 }; // Snivy
+                case 496: return new int[] { 65, 65, 126 }; // Servine
+                case 497: return new int[] { 65, 65, 126 }; // Serperior
+                case 498: return new int[] { 66, 66, 47 }; // Tepig
+                case 499: return new int[] { 66, 66, 47 }; // Pignite
+                case 500: return new int[] { 66, 66, 120 }; // Emboar
+                case 501: return new int[] { 67, 67, 75 }; // Oshawott
+                case 502: return new int[] { 67, 67, 75 }; // Dewott
+                case 503: return new int[] { 67, 67, 75 }; // Samurott
+                case 504: return new int[] { 50, 51, 148 }; // Patrat
+                case 505: return new int[] { 35, 51, 148 }; // Watchog
+                case 506: return new int[] { 72, 53, 50 }; // Lillipup
+                case 507: return new int[] { 22, 146, 113 }; // Herdier
+                case 508: return new int[] { 22, 146, 113 }; // Stoutland
+                case 509: return new int[] { 7, 84, 158 }; // Purrloin
+                case 510: return new int[] { 7, 84, 158 }; // Liepard
+                case 511: return new int[] { 82, 82, 65 }; // Pansage
+                case 512: return new int[] { 82, 82, 65 }; // Simisage
+                case 513: return new int[] { 82, 82, 66 }; // Pansear
+                case 514: return new int[] { 82, 82, 66 }; // Simisear
+                case 515: return new int[] { 82, 82, 67 }; // Panpour
+                case 516: return new int[] { 82, 82, 67 }; // Simipour
+                case 517: return new int[] { 108, 28, 140 }; // Munna
+                case 518: return new int[] { 108, 28, 140 }; // Musharna
+                case 519: return new int[] { 145, 105, 79 }; // Pidove
+                case 520: return new int[] { 145, 105, 79 }; // Tranquill
+                case 521: return new int[] { 145, 105, 79 }; // Unfezant
+                case 522: return new int[] { 31, 78, 157 }; // Blitzle
+                case 523: return new int[] { 31, 78, 157 }; // Zebstrika
+                case 524: return new int[] { 5, 133, 159 }; // Roggenrola
+                case 525: return new int[] { 5, 133, 159 }; // Boldore
+                case 526: return new int[] { 5, 45, 159 }; // Gigalith
+                case 527: return new int[] { 109, 103, 86 }; // Woobat
+                case 528: return new int[] { 109, 103, 86 }; // Swoobat
+                case 529: return new int[] { 146, 159, 104 }; // Drilbur
+                case 530: return new int[] { 146, 159, 104 }; // Excadrill
+                case 531: return new int[] { 131, 144, 103 }; // Audino
+                //case 531: return new int[] { 131, 131, 131 }; // Mega Audino
+                case 532: return new int[] { 62, 125, 89 }; // Timburr
+                case 533: return new int[] { 62, 125, 89 }; // Gurdurr
+                case 534: return new int[] { 62, 125, 89 }; // Conkeldurr
+                case 535: return new int[] { 33, 93, 11 }; // Tympole
+                case 536: return new int[] { 33, 93, 11 }; // Palpitoad
+                case 537: return new int[] { 33, 143, 11 }; // Seismitoad
+                case 538: return new int[] { 62, 39, 104 }; // Throh
+                case 539: return new int[] { 5, 39, 104 }; // Sawk
+                case 540: return new int[] { 68, 34, 142 }; // Sewaddle
+                case 541: return new int[] { 102, 34, 142 }; // Swadloon
+                case 542: return new int[] { 68, 34, 142 }; // Leavanny
+                case 543: return new int[] { 38, 68, 3 }; // Venipede*
+                case 544: return new int[] { 38, 68, 3 }; // Whirlipede*
+                case 545: return new int[] { 38, 68, 3 }; // Scolipede*
+                case 546: return new int[] { 158, 151, 34 }; // Cottonee
+                case 547: return new int[] { 158, 151, 34 }; // Whimsicott
+                case 548: return new int[] { 34, 20, 102 }; // Petilil
+                case 549: return new int[] { 34, 20, 102 }; // Lilligant
+                case 550: return new int[] { 120, 91, 104 }; // Basculin
+                //case 550: return new int[] { 69, 91, 104 }; // Basculin*
+                case 551: return new int[] { 22, 153, 83 }; // Sandile
+                case 552: return new int[] { 22, 153, 83 }; // Krokorok
+                case 553: return new int[] { 22, 153, 83 }; // Krookodile
+                case 554: return new int[] { 55, 55, 39 }; // Darumaka
+                case 555: return new int[] { 125, 125, 161 }; // Darmanitan
+                //case 555: return new int[] { 161, 161, 161 }; // Darmanitan
+                case 556: return new int[] { 11, 34, 114 }; // Maractus
+                case 557: return new int[] { 5, 75, 133 }; // Dwebble
+                case 558: return new int[] { 5, 75, 133 }; // Crustle
+                case 559: return new int[] { 61, 153, 22 }; // Scraggy
+                case 560: return new int[] { 61, 153, 22 }; // Scrafty
+                case 561: return new int[] { 147, 98, 110 }; // Sigilyph
+                case 562: return new int[] { 152, 152, 152 }; // Yamask
+                case 563: return new int[] { 152, 152, 152 }; // Cofagrigus
+                case 564: return new int[] { 116, 5, 33 }; // Tirtouga
+                case 565: return new int[] { 116, 5, 33 }; // Carracosta
+                case 566: return new int[] { 129, 129, 129 }; // Archen
+                case 567: return new int[] { 129, 129, 129 }; // Archeops
+                case 568: return new int[] { 1, 60, 106 }; // Trubbish
+                case 569: return new int[] { 1, 133, 106 }; // Garbodor
+                case 570: return new int[] { 149, 149, 149 }; // Zorua
+                case 571: return new int[] { 149, 149, 149 }; // Zoroark
+                case 572: return new int[] { 56, 101, 92 }; // Minccino
+                case 573: return new int[] { 56, 101, 92 }; // Cinccino
+                case 574: return new int[] { 119, 172, 23 }; // Gothita
+                case 575: return new int[] { 119, 172, 23 }; // Gothorita
+                case 576: return new int[] { 119, 172, 23 }; // Gothitelle
+                case 577: return new int[] { 142, 98, 144 }; // Solosis
+                case 578: return new int[] { 142, 98, 144 }; // Duosion
+                case 579: return new int[] { 142, 98, 144 }; // Reuniclus
+                case 580: return new int[] { 51, 145, 93 }; // Ducklett
+                case 581: return new int[] { 51, 145, 93 }; // Swanna
+                case 582: return new int[] { 115, 81, 133 }; // Vanillite
+                case 583: return new int[] { 115, 81, 133 }; // Vanillish
+                case 584: return new int[] { 115, 117, 133 }; // Vanilluxe
+                case 585: return new int[] { 34, 157, 32 }; // Deerling
+                //case 585: return new int[] { 34, 157, 32 }; // Deerling
+                //case 585: return new int[] { 34, 157, 32 }; // Deerling
+                //case 585: return new int[] { 34, 157, 32 }; // Deerling
+                case 586: return new int[] { 34, 157, 32 }; // Sawsbuck
+                //case 586: return new int[] { 34, 157, 32 }; // Sawsbuck
+                //case 586: return new int[] { 34, 157, 32 }; // Sawsbuck
+                //case 586: return new int[] { 34, 157, 32 }; // Sawsbuck
+                case 587: return new int[] { 9, 9, 78 }; // Emolga
+                case 588: return new int[] { 68, 61, 99 }; // Karrablast
+                case 589: return new int[] { 68, 75, 142 }; // Escavalier
+                case 590: return new int[] { 27, 27, 144 }; // Foongus
+                case 591: return new int[] { 27, 27, 144 }; // Amoonguss
+                case 592: return new int[] { 11, 130, 6 }; // Frillish
+                case 593: return new int[] { 11, 130, 6 }; // Jellicent
+                case 594: return new int[] { 131, 93, 144 }; // Alomomola
+                case 595: return new int[] { 14, 127, 68 }; // Joltik
+                case 596: return new int[] { 14, 127, 68 }; // Galvantula
+                case 597: return new int[] { 160, 160, 160 }; // Ferroseed
+                case 598: return new int[] { 160, 160, 107 }; // Ferrothorn
+                case 599: return new int[] { 57, 58, 29 }; // Klink
+                case 600: return new int[] { 57, 58, 29 }; // Klang
+                case 601: return new int[] { 57, 58, 29 }; // Klinklang
+                case 602: return new int[] { 26, 26, 26 }; // Tynamo
+                case 603: return new int[] { 26, 26, 26 }; // Eelektrik
+                case 604: return new int[] { 26, 26, 26 }; // Eelektross
+                case 605: return new int[] { 140, 28, 148 }; // Elgyem
+                case 606: return new int[] { 140, 28, 148 }; // Beheeyem
+                case 607: return new int[] { 18, 49, 151 }; // Litwick*
+                case 608: return new int[] { 18, 49, 151 }; // Lampent*
+                case 609: return new int[] { 18, 49, 151 }; // Chandelure*
+                case 610: return new int[] { 79, 104, 127 }; // Axew
+                case 611: return new int[] { 79, 104, 127 }; // Fraxure
+                case 612: return new int[] { 79, 104, 127 }; // Haxorus
+                case 613: return new int[] { 81, 202, 155 }; // Cubchoo
+                case 614: return new int[] { 81, 202, 33 }; // Cubchoo
+                case 615: return new int[] { 26, 26, 26 }; // Cryogonal
+                case 616: return new int[] { 93, 75, 142 }; // Shelmet
+                case 617: return new int[] { 93, 60, 84 }; // Accelgor
+                case 618: return new int[] { 9, 7, 8 }; // Stunfisk
+                case 619: return new int[] { 39, 144, 120 }; // Mienfoo
+                case 620: return new int[] { 39, 144, 120 }; // Mienshao
+                case 621: return new int[] { 24, 125, 104 }; // Druddigon
+                case 622: return new int[] { 89, 103, 99 }; // Golett
+                case 623: return new int[] { 89, 103, 99 }; // Golurk
+                case 624: return new int[] { 128, 39, 46 }; // Pawniard
+                case 625: return new int[] { 128, 39, 46 }; // Bisharp
+                case 626: return new int[] { 120, 157, 43 }; // Bouffalant
+                case 627: return new int[] { 51, 125, 55 }; // Rufflet
+                case 628: return new int[] { 51, 125, 128 }; // Braviary
+                case 629: return new int[] { 145, 142, 133 }; // Vullaby
+                case 630: return new int[] { 145, 142, 133 }; // Mandibuzz
+                case 631: return new int[] { 82, 18, 73 }; // Heatmor
+                case 632: return new int[] { 68, 55, 54 }; // Durant
+                case 633: return new int[] { 55, 55, 55 }; // Deino
+                case 634: return new int[] { 55, 55, 55 }; // Zweilous
+                case 635: return new int[] { 26, 26, 26 }; // Hydreigon
+                case 636: return new int[] { 49, 49, 68 }; // Larvesta
+                case 637: return new int[] { 49, 49, 68 }; // Volcarona
+                case 638: return new int[] { 154, 154, 154 }; // Cobalion
+                case 639: return new int[] { 154, 154, 154 }; // Terrakion
+                case 640: return new int[] { 154, 154, 154 }; // Virizion
+                case 641: return new int[] { 158, 158, 128 }; // Tornadus
+                //case 641: return new int[] { 144, 144, 144 }; // Tornadus
+                case 642: return new int[] { 158, 158, 128 }; // Thundurus
+                //case 642: return new int[] { 10, 10, 10 }; // Thundurus
+                case 643: return new int[] { 163, 163, 163 }; // Reshiram
+                case 644: return new int[] { 164, 164, 164 }; // Zekrom
+                case 645: return new int[] { 159, 159, 125 }; // Landorus
+                //case 645: return new int[] { 22, 22, 22 }; // Landorus
+                case 646: return new int[] { 46, 46, 46 }; // Kyurem
+                //case 646: return new int[] { 164, 164, 164 }; // Black Kyurem
+                //case 646: return new int[] { 163, 163, 163 }; // White Kyurem
+                case 647: return new int[] { 154, 154, 154 }; // Keldeo
+                //case 647: return new int[] { 154, 154, 154 }; // Keldeo
+                case 648: return new int[] { 32, 32, 32 }; // Meloetta
+                //case 648: return new int[] { 32, 32, 32 }; // Meloetta
+                case 649: return new int[] { 88, 88, 88 }; // Genesect
+                case 650: return new int[] { 65, 65, 171 }; // Chespin
+                case 651: return new int[] { 65, 65, 171 }; // Quilladin
+                case 652: return new int[] { 65, 65, 171 }; // Chesnaught
+                case 653: return new int[] { 66, 66, 170 }; // Fennekin
+                case 654: return new int[] { 66, 66, 170 }; // Braixen
+                case 655: return new int[] { 66, 66, 170 }; // Delphox
+                case 656: return new int[] { 67, 67, 168 }; // Froakie
+                case 657: return new int[] { 67, 67, 168 }; // Frogadier
+                case 658: return new int[] { 67, 67, 168 }; // Greninja
+                //case 658: return new int[] { 210, 210, 210 }; // Ash-Greninja
+                case 659: return new int[] { 53, 167, 37 }; // Bunnelby
+                case 660: return new int[] { 53, 167, 37 }; // Diggersby
+                case 661: return new int[] { 145, 145, 177 }; // Fletchling
+                case 662: return new int[] { 49, 49, 177 }; // Fletchinder
+                case 663: return new int[] { 49, 49, 177 }; // Talonflame
+                case 664: return new int[] { 19, 14, 132 }; // Scatterbug
+                case 665: return new int[] { 61, 61, 132 }; // Spewpa
+                case 666: return new int[] { 19, 14, 132 }; // Vivillon
+                case 667: return new int[] { 79, 127, 153 }; // Litleo
+                case 668: return new int[] { 79, 127, 153 }; // Pyroar
+                case 669: return new int[] { 166, 166, 180 }; // Flabébé
+                case 670: return new int[] { 166, 166, 180 }; // Floette
+                //case 670: return new int[] { 166, 166, 166 }; // Eternal Floette
+                case 671: return new int[] { 166, 166, 180 }; // Florges
+                case 672: return new int[] { 157, 157, 179 }; // Skiddo
+                case 673: return new int[] { 157, 157, 179 }; // Gogoat
+                case 674: return new int[] { 89, 104, 113 }; // Pancham
+                case 675: return new int[] { 89, 104, 113 }; // Pangoro
+                case 676: return new int[] { 169, 169, 169 }; // Furfrou
+                case 677: return new int[] { 51, 151, 20 }; // Espurr
+                case 678: return new int[] { 51, 151, 158 }; // Meowstic♂
+                //case 678: return new int[] { 51, 151, 172 }; // Meowstic♀
+                case 679: return new int[] { 99, 99, 99 }; // Honedge
+                case 680: return new int[] { 99, 99, 99 }; // Doublade
+                case 681: return new int[] { 176, 176, 176 }; // Aegislash
+                //case 681: return new int[] { 176, 176, 176 }; // Aegislash
+                case 682: return new int[] { 131, 131, 165 }; // Spritzee
+                case 683: return new int[] { 131, 131, 165 }; // Aromatisse
+                case 684: return new int[] { 175, 175, 84 }; // Swirlix
+                case 685: return new int[] { 175, 175, 84 }; // Slurpuff
+                case 686: return new int[] { 126, 21, 151 }; // Inkay
+                case 687: return new int[] { 126, 21, 151 }; // Malamar
+                case 688: return new int[] { 97, 181, 124 }; // Binacle
+                case 689: return new int[] { 97, 181, 124 }; // Barbaracle
+                case 690: return new int[] { 38, 143, 91 }; // Skrelp
+                case 691: return new int[] { 38, 143, 91 }; // Dragalge
+                case 692: return new int[] { 178, 178, 178 }; // Clauncher
+                case 693: return new int[] { 178, 178, 178 }; // Clawitzer
+                case 694: return new int[] { 87, 8, 94 }; // Helioptile
+                case 695: return new int[] { 87, 8, 94 }; // Heliolisk
+                case 696: return new int[] { 173, 173, 5 }; // Tyrunt
+                case 697: return new int[] { 173, 173, 69 }; // Tyrantrum
+                case 698: return new int[] { 174, 174, 117 }; // Amaura
+                case 699: return new int[] { 174, 174, 117 }; // Aurorus
+                case 700: return new int[] { 56, 56, 182 }; // Sylveon
+                case 701: return new int[] { 7, 84, 104 }; // Hawlucha
+                case 702: return new int[] { 167, 53, 57 }; // Dedenne
+                case 703: return new int[] { 29, 29, 5 }; // Carbink
+                case 704: return new int[] { 157, 93, 183 }; // Goomy
+                case 705: return new int[] { 157, 93, 183 }; // Sliggoo
+                case 706: return new int[] { 157, 93, 183 }; // Goodra
+                case 707: return new int[] { 158, 158, 170 }; // Klefki
+                case 708: return new int[] { 30, 119, 139 }; // Phantump
+                case 709: return new int[] { 30, 119, 139 }; // Trevenant
+                case 710: return new int[] { 53, 119, 15 }; // Pumpkaboo
+                case 711: return new int[] { 53, 119, 15 }; // Gourgeist
+                case 712: return new int[] { 20, 115, 5 }; // Bergmite
+                case 713: return new int[] { 20, 115, 5 }; // Avalugg
+                case 714: return new int[] { 119, 151, 140 }; // Noibat
+                case 715: return new int[] { 119, 151, 140 }; // Noivern
+                case 716: return new int[] { 187, 187, 187 }; // Xerneas
+                case 717: return new int[] { 186, 186, 186 }; // Yveltal
+                case 718: return new int[] { 188, 211, 188 }; // Zygarde
+                //case 718: return new int[] { 188, 211, 188 }; // Zygarde 10% Forme
+                //case 718: return new int[] { 211, 211, 211 }; // Zygarde Complete Forme
+                case 719: return new int[] { 29, 29, 29 }; // Diancie
+                //case 719: return new int[] { 156, 156, 156 }; // Mega Diancie
+                case 720: return new int[] { 170, 170, 170 }; // Hoopa Confined
+                //case 720: return new int[] { 170, 170, 170 }; // Hoopa Unbound
+                case 721: return new int[] { 11, 11, 11 }; // Volcanion
+                case 722: return new int[] { 65, 65, 203 }; // Rowlet
+                case 723: return new int[] { 65, 65, 203 }; // Dartrix
+                case 724: return new int[] { 65, 65, 203 }; // Decidueye
+                case 725: return new int[] { 66, 66, 22 }; // Litten
+                case 726: return new int[] { 66, 66, 22 }; // Torracat
+                case 727: return new int[] { 66, 66, 22 }; // Incineroar
+                case 728: return new int[] { 67, 67, 204 }; // Popplio
+                case 729: return new int[] { 67, 67, 204 }; // Brionne
+                case 730: return new int[] { 67, 67, 204 }; // Primarina
+                case 731: return new int[] { 51, 92, 51 }; // Pikipek
+                case 732: return new int[] { 51, 92, 51 }; // Trumbeak
+                case 733: return new int[] { 51, 92, 51 }; // Toucannon
+                case 734: return new int[] { 198, 173, 91 }; // Yungoos
+                case 735: return new int[] { 198, 173, 91 }; // Gumshoos
+                case 736: return new int[] { 68, 68, 68 }; // Grubbin
+                case 737: return new int[] { 217, 217, 217 }; // Charjabug
+                case 738: return new int[] { 26, 26, 26 }; // Vikavolt
+                case 739: return new int[] { 52, 89, 83 }; // Crabrawler
+                case 740: return new int[] { 52, 89, 83 }; // Crabominable
+                case 741: return new int[] { 216, 216, 216 }; // Oricorio
+                case 742: return new int[] { 118, 19, 175 }; // Cutiefly
+                case 743: return new int[] { 118, 19, 175 }; // Ribombee
+                case 744: return new int[] { 51, 72, 80 }; // Rockruff
+                case 745: return new int[] { 51, 146, 80 }; // Midday Form Lycanroc
+                //case 745: return new int[] { 51, 72, 99 }; // Midnight Form Lycanroc
+                case 746: return new int[] { 208, 208, 208 }; // Wishiwashi
+                case 747: return new int[] { 196, 7, 144 }; // Mareanie
+                case 748: return new int[] { 196, 7, 144 }; // Toxapex
+                case 749: return new int[] { 20, 192, 39 }; // Mudbray
+                case 750: return new int[] { 20, 192, 39 }; // Mudsdale
+                case 751: return new int[] { 199, 199, 11 }; // Dewpider
+                case 752: return new int[] { 199, 199, 11 }; // Araquanid
+                case 753: return new int[] { 102, 102, 126 }; // Fomantis
+                case 754: return new int[] { 102, 102, 126 }; // Lurantis
+                case 755: return new int[] { 35, 27, 44 }; // Morelull
+                case 756: return new int[] { 35, 27, 44 }; // Shiinotic
+                case 757: return new int[] { 212, 212, 12 }; // Salandit
+                case 758: return new int[] { 212, 212, 12 }; // Salazzle
+                case 759: return new int[] { 218, 103, 56 }; // Stufful
+                case 760: return new int[] { 218, 103, 127 }; // Bewear
+                case 761: return new int[] { 102, 12, 175 }; // Bounsweet
+                case 762: return new int[] { 102, 12, 175 }; // Steenee
+                case 763: return new int[] { 102, 214, 175 }; // Tsareena
+                case 764: return new int[] { 166, 205, 30 }; // Comfey
+                case 765: return new int[] { 39, 140, 180 }; // Oranguru
+                case 766: return new int[] { 222, 222, 128 }; // Passimian
+                case 767: return new int[] { 193, 193, 193 }; // Wimpod
+                case 768: return new int[] { 194, 194, 194 }; // Golisopod
+                case 769: return new int[] { 195, 195, 8 }; // Sandygast
+                case 770: return new int[] { 195, 195, 8 }; // Palossand
+                case 771: return new int[] { 215, 215, 109 }; // Pyukumuku
+                case 772: return new int[] { 4, 4, 4 }; // Type: Null
+                case 773: return new int[] { 225, 225, 225 }; // Silvally
+                case 774: return new int[] { 197, 197, 197 }; // Minior
+                case 775: return new int[] { 213, 213, 213 }; // Komala
+                case 776: return new int[] { 75, 75, 75 }; // Turtonator
+                case 777: return new int[] { 160, 31, 5 }; // Togedemaru
+                case 778: return new int[] { 209, 209, 209 }; // Mimikyu
+                case 779: return new int[] { 219, 173, 147 }; // Bruxish
+                case 780: return new int[] { 201, 157, 13 }; // Drampa
+                case 781: return new int[] { 200, 200, 200 }; // Dhelmise
+                case 782: return new int[] { 171, 43, 142 }; // Jangmo-o
+                case 783: return new int[] { 171, 43, 142 }; // Hakamo-o
+                case 784: return new int[] { 171, 43, 142 }; // Kommo-o
+                case 785: return new int[] { 226, 226, 140 }; // Tapu Koko
+                case 786: return new int[] { 227, 227, 140 }; // Tapu Lele
+                case 787: return new int[] { 229, 229, 140 }; // Tapu Bulu
+                case 788: return new int[] { 228, 228, 140 }; // Tapu Fini
+                case 789: return new int[] { 109, 109, 109 }; // Cosmog
+                case 790: return new int[] { 5, 5, 5 }; // Cosmoem
+                case 791: return new int[] { 230, 230, 230 }; // Solgaleo
+                case 792: return new int[] { 231, 231, 231 }; // Lunala
+                case 793: return new int[] { 224, 224, 224 }; // Nihilego
+                case 794: return new int[] { 224, 224, 224 }; // Buzzwole
+                case 795: return new int[] { 224, 224, 224 }; // Pheromosa
+                case 796: return new int[] { 224, 224, 224 }; // Xurkitree
+                case 797: return new int[] { 224, 224, 224 }; // Celesteela
+                case 798: return new int[] { 224, 224, 224 }; // Kartana
+                case 799: return new int[] { 224, 224, 224 }; // Guzzlord
+                case 800: return new int[] { 232, 232, 232 }; // Necrozma
+                case 801: return new int[] { 220, 220, 220 }; // Magearna
+                case 802: return new int[] { 101, 101, 101 }; // Marshadow
+                default: return new int[] { 0, 0, 0 }; // No pokémon
+            }
+        }
+
         #endregion Ability
 
         #region Species
