@@ -168,13 +168,6 @@ namespace ntrbase
 
         #endregion Class variables
 
-        #region Constants
-
-        // Poké Ball images
-        public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, Resources._25 };
-
-        #endregion Constants
-
         #region Main window
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -2307,7 +2300,7 @@ namespace ntrbase
         private void ball_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ball.SelectedIndex >= 0)
-                pictureBox1.Image = ballImages[ball.SelectedIndex];
+                pictureBox1.Image = (Bitmap)Resources.ResourceManager.GetObject("ball" + ball.SelectedIndex);
             else
                 pictureBox1.Image = null;
         }
