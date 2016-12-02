@@ -171,7 +171,7 @@ namespace ntrbase
         #region Constants
 
         // Poké Ball images
-        public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, };
+        public static readonly Bitmap[] ballImages = { Resources._0, Resources._1, Resources._2, Resources._3, Resources._4, Resources._5, Resources._6, Resources._7, Resources._8, Resources._9, Resources._10, Resources._11, Resources._12, Resources._13, Resources._14, Resources._15, Resources._16, Resources._17, Resources._18, Resources._19, Resources._20, Resources._21, Resources._22, Resources._23, Resources._24, Resources._25 };
 
         #endregion Constants
 
@@ -687,6 +687,7 @@ namespace ntrbase
             ComboboxFill(ability, Program.PKTable.Ability6);
             ComboboxFill(filterAbility, Program.PKTable.Ability6);
             ComboboxFill(heldItem, Program.PKTable.Item6);
+            ComboboxFill(ball, Program.PKTable.Balls6);
             ComboboxFill(move1, Program.PKTable.Moves6);
             ComboboxFill(move2, Program.PKTable.Moves6);
             ComboboxFill(move3, Program.PKTable.Moves6);
@@ -716,6 +717,7 @@ namespace ntrbase
             ComboboxFill(ability, Program.PKTable.Ability7);
             ComboboxFill(filterAbility, Program.PKTable.Ability7);
             ComboboxFill(heldItem, Program.PKTable.Item7);
+            ComboboxFill(ball, Program.PKTable.Balls7);
             ComboboxFill(move1, Program.PKTable.Moves7);
             ComboboxFill(move2, Program.PKTable.Moves7);
             ComboboxFill(move3, Program.PKTable.Moves7);

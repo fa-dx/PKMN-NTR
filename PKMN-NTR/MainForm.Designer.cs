@@ -881,32 +881,6 @@
             this.ball.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.ball.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.ball.FormattingEnabled = true;
-            this.ball.Items.AddRange(new object[] {
-            "Master Ball",
-            "Ultra Ball",
-            "Great Ball",
-            "Poke Ball",
-            "Safari Ball",
-            "Net Ball",
-            "Dive Ball",
-            "Nest Ball",
-            "Repeat Ball",
-            "Timer Ball",
-            "Luxury Ball",
-            "Premier Ball",
-            "Dusk Ball",
-            "Heal Ball",
-            "Quick Ball",
-            "Cherish Ball",
-            "Fast Ball",
-            "Level Ball",
-            "Lure Ball",
-            "Heavy Ball",
-            "Love Ball",
-            "Friend Ball",
-            "Moon Ball",
-            "Sport Ball",
-            "Dream Ball"});
             this.ball.Location = new System.Drawing.Point(70, 145);
             this.ball.Name = "ball";
             this.ball.Size = new System.Drawing.Size(81, 21);

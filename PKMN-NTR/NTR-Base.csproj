@@ -126,6 +126,8 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="Pkmn NTR.ico" />
+    <None Include="Resources\25.png" />
+    <None Include="Resources\_25.bmp" />
     <None Include="Resources\Sprites\24.png" />
     <None Include="Resources\Sprites\23.png" />
     <None Include="Resources\Sprites\22.png" />

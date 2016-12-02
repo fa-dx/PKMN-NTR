@@ -48,6 +48,28 @@ namespace ntrbase
 
         #endregion Items
 
+        #region Balls
+
+        public string[] Balls6
+        {
+            get
+            {
+                string[] data = { "Master Ball", "Ultra Ball", "Great Ball", "Poke Ball", "Safari Ball", "Net Ball", "Dive Ball", "Nest Ball", "Repeat Ball", "Timer Ball", "Luxury Ball", "Premier Ball", "Dusk Ball", "Heal Ball", "Quick Ball", "Cherish Ball", "Fast Ball", "Level Ball", "Lure Ball", "Heavy Ball", "Love Ball", "Friend Ball", "Moon Ball", "Sport Ball", "Dream Ball" };
+                return data;
+            }
+        }
+
+        public string[] Balls7
+        {
+            get
+            {
+                string[] data = { "Master Ball", "Ultra Ball", "Great Ball", "Poke Ball", "Safari Ball", "Net Ball", "Dive Ball", "Nest Ball", "Repeat Ball", "Timer Ball", "Luxury Ball", "Premier Ball", "Dusk Ball", "Heal Ball", "Quick Ball", "Cherish Ball", "Fast Ball", "Level Ball", "Lure Ball", "Heavy Ball", "Love Ball", "Friend Ball", "Moon Ball", "Sport Ball", "Dream Ball", "Beast Ball" };
+                return data;
+            }
+        }
+
+        #endregion Balls
+
         #region Ability
 
         public string[] Ability6
