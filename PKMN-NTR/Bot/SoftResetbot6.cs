@@ -392,6 +392,7 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)srbotstates.reconnect:
+                        await Task.Delay(3000);
                         waitTaskbool = Program.gCmdWindow.Reconnect();
                         if (await waitTaskbool)
                         {
