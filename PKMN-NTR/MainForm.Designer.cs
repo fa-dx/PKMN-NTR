@@ -381,6 +381,7 @@
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -473,6 +474,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).BeginInit();
             this.tabWonderTrade.SuspendLayout();
             this.tabNTRlog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -487,7 +489,7 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(552, 335);
+            this.txtLog.Size = new System.Drawing.Size(552, 344);
             this.txtLog.TabIndex = 0;
             // 
             // timer1
@@ -538,7 +540,7 @@
             this.groupBox1.Controls.Add(this.host);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.buttonConnect);
-            this.groupBox1.Location = new System.Drawing.Point(7, 359);
+            this.groupBox1.Location = new System.Drawing.Point(7, 368);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(297, 48);
             this.groupBox1.TabIndex = 0;
@@ -2006,7 +2008,7 @@
             this.DumpedEdit.Controls.Add(this.Stats);
             this.DumpedEdit.Controls.Add(this.Moves);
             this.DumpedEdit.Controls.Add(this.OT);
-            this.DumpedEdit.Location = new System.Drawing.Point(7, 155);
+            this.DumpedEdit.Location = new System.Drawing.Point(11, 164);
             this.DumpedEdit.Multiline = true;
             this.DumpedEdit.Name = "DumpedEdit";
             this.DumpedEdit.SelectedIndex = 0;
@@ -2742,7 +2744,7 @@
             // 
             // readResult
             // 
-            this.readResult.Location = new System.Drawing.Point(118, 344);
+            this.readResult.Location = new System.Drawing.Point(118, 353);
             this.readResult.Name = "readResult";
             this.readResult.ReadOnly = true;
             this.readResult.Size = new System.Drawing.Size(100, 20);
@@ -2901,7 +2903,7 @@
             // 
             // label69
             // 
-            this.label69.Location = new System.Drawing.Point(224, 347);
+            this.label69.Location = new System.Drawing.Point(224, 356);
             this.label69.Name = "label69";
             this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label69.Size = new System.Drawing.Size(331, 19);
@@ -2912,7 +2914,7 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(3, 347);
+            this.label71.Location = new System.Drawing.Point(3, 356);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(109, 13);
             this.label71.TabIndex = 2;
@@ -2930,7 +2932,7 @@
             this.miscTabs.Location = new System.Drawing.Point(310, 12);
             this.miscTabs.Name = "miscTabs";
             this.miscTabs.SelectedIndex = 0;
-            this.miscTabs.Size = new System.Drawing.Size(566, 395);
+            this.miscTabs.Size = new System.Drawing.Size(566, 404);
             this.miscTabs.TabIndex = 3;
             this.miscTabs.TabStop = false;
             // 
@@ -2944,7 +2946,7 @@
             this.tabEditTrainer.Location = new System.Drawing.Point(4, 22);
             this.tabEditTrainer.Name = "tabEditTrainer";
             this.tabEditTrainer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditTrainer.Size = new System.Drawing.Size(558, 369);
+            this.tabEditTrainer.Size = new System.Drawing.Size(558, 378);
             this.tabEditTrainer.TabIndex = 0;
             this.tabEditTrainer.Text = "Edit Save";
             // 
@@ -3067,7 +3069,7 @@
             this.tabControls.Location = new System.Drawing.Point(4, 22);
             this.tabControls.Name = "tabControls";
             this.tabControls.Padding = new System.Windows.Forms.Padding(3);
-            this.tabControls.Size = new System.Drawing.Size(558, 369);
+            this.tabControls.Size = new System.Drawing.Size(558, 378);
             this.tabControls.TabIndex = 1;
             this.tabControls.Text = "Controls";
             // 
@@ -3220,7 +3222,7 @@
             this.tabFilters.Controls.Add(this.label112);
             this.tabFilters.Location = new System.Drawing.Point(4, 22);
             this.tabFilters.Name = "tabFilters";
-            this.tabFilters.Size = new System.Drawing.Size(558, 369);
+            this.tabFilters.Size = new System.Drawing.Size(558, 378);
             this.tabFilters.TabIndex = 6;
             this.tabFilters.Text = "Filters";
             // 
@@ -3896,7 +3898,7 @@
             this.tabBreeding.Controls.Add(this.runBreedingBot);
             this.tabBreeding.Location = new System.Drawing.Point(4, 22);
             this.tabBreeding.Name = "tabBreeding";
-            this.tabBreeding.Size = new System.Drawing.Size(558, 369);
+            this.tabBreeding.Size = new System.Drawing.Size(558, 378);
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
@@ -4436,7 +4438,7 @@
             this.tabSoftReset.Controls.Add(this.typeLSR);
             this.tabSoftReset.Location = new System.Drawing.Point(4, 22);
             this.tabSoftReset.Name = "tabSoftReset";
-            this.tabSoftReset.Size = new System.Drawing.Size(558, 369);
+            this.tabSoftReset.Size = new System.Drawing.Size(558, 378);
             this.tabSoftReset.TabIndex = 3;
             this.tabSoftReset.Text = "Soft-reset";
             // 
@@ -4639,7 +4641,7 @@
             this.tabWonderTrade.Controls.Add(this.label57);
             this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
             this.tabWonderTrade.Name = "tabWonderTrade";
-            this.tabWonderTrade.Size = new System.Drawing.Size(558, 369);
+            this.tabWonderTrade.Size = new System.Drawing.Size(558, 378);
             this.tabWonderTrade.TabIndex = 2;
             this.tabWonderTrade.Text = "Wonder Trade";
             // 
@@ -4663,9 +4665,17 @@
             this.tabNTRlog.Controls.Add(this.label71);
             this.tabNTRlog.Location = new System.Drawing.Point(4, 22);
             this.tabNTRlog.Name = "tabNTRlog";
-            this.tabNTRlog.Size = new System.Drawing.Size(558, 369);
+            this.tabNTRlog.Size = new System.Drawing.Size(558, 378);
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(264, 152);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 30);
+            this.pictureBox2.TabIndex = 18;
+            this.pictureBox2.TabStop = false;
             // 
             // MainForm
             // 
@@ -4673,7 +4683,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(882, 415);
+            this.ClientSize = new System.Drawing.Size(882, 430);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.stopBotButton);
             this.Controls.Add(this.miscTabs);
             this.Controls.Add(this.DumpedEdit);
@@ -4798,6 +4809,7 @@
             this.tabWonderTrade.PerformLayout();
             this.tabNTRlog.ResumeLayout(false);
             this.tabNTRlog.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -5167,6 +5179,7 @@
         private System.Windows.Forms.Label label60;
         private System.Windows.Forms.TrackBar StickY;
         private System.Windows.Forms.TrackBar StickX;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

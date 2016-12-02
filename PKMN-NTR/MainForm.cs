@@ -733,7 +733,7 @@ namespace ntrbase
             SetText(label3, "Current FC:");
 
             // Apply connection patch
-            Task <bool> Patch = Program.helper.waitNTRwrite(0x3DFFD0, 0xE3A01000, pid);
+            Task<bool> Patch = Program.helper.waitNTRwrite(0x3DFFD0, 0xE3A01000, pid);
             if (!(await Patch))
                 MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -1440,6 +1440,7 @@ namespace ntrbase
                 dumpedPKHeX.Data = validator.Data;
 
                 SetSelectedIndex(species, dumpedPKHeX.Species - 1);
+                setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
                 SetText(nickname, dumpedPKHeX.Nickname);
                 SetSelectedIndex(nature, dumpedPKHeX.Nature);
                 updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
@@ -2290,10 +2291,34 @@ namespace ntrbase
             SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(PKHeX.getHEXval(dPID.Text)).ToString("D4"));
         }
 
-        // Ability update on species change
+        // Ability and sprite update on species change
         private void species_SelectedIndexChanged(object sender, EventArgs e)
         {
-                updateAbility(species.SelectedIndex + 1, 0, 1);
+            updateAbility(species.SelectedIndex + 1, 0, 1);
+            if (dumpedPKHeX.Data != null)
+            {
+                dumpedPKHeX.Species = species.SelectedIndex + 1;
+                dumpedPKHeX.AltForm = 0;
+                dumpedPKHeX.AbilityNumber = 1;
+                dumpedPKHeX.Ability = absno[0];
+            }
+            setSprite(species.SelectedIndex + 1, 0, false);
+        }
+
+        private void setSprite(int speciesindex, int formindex, bool isegg)
+        {
+            string resname;
+            if (isegg)
+                resname = "egg";
+            else if (formindex == 0)
+                resname = "_" + speciesindex;
+            else
+                resname = "_" + speciesindex + "_" + formindex;
+            Bitmap data;
+            data = (Bitmap)Resources.ResourceManager.GetObject(resname);
+            if (data == null)
+                data = (Bitmap)Resources.ResourceManager.GetObject("unknown");
+            pictureBox2.Image = data;
         }
 
         // Poké ball image
