@@ -149,6 +149,48 @@ namespace ntrbase.Helpers
             }
         }
 
+        public async Task<bool> waitholdtouch(decimal Xcoord, decimal Ycoord)
+        {
+            // Get and send hex coordinates
+            WriteLastLog("");
+            byte[] buttonByte = BitConverter.GetBytes(gethexcoord(Xcoord, Ycoord));
+            Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            { // Timeout 1
+                await Task.Delay(100);
+                if (CompareLastLog("finished"))
+                {
+                    break;
+                }
+            }
+            if (readcount >= timeout * 10) // If no response, return timeout
+                return false;
+            else
+                return true;
+        }
+
+        public async Task<bool> waitfreetouch()
+        {
+            // Get and send hex coordinates
+            WriteLastLog("");
+            byte[] buttonByte = BitConverter.GetBytes(notouch);
+            Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            { // Timeout 1
+                await Task.Delay(100);
+                if (CompareLastLog("finished"))
+                {
+                    break;
+                }
+            }
+            if (readcount >= timeout * 10) // If no response, return timeout
+                return false;
+            else
+                return true;
+        }
+
         public async void quicktouch(decimal Xcoord, decimal Ycoord, int time)
         {
             byte[] buttonByte = BitConverter.GetBytes(gethexcoord(Xcoord, Ycoord));

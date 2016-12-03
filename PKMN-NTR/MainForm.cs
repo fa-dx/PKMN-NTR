@@ -3221,6 +3221,12 @@ namespace ntrbase
                     case 5: // ESV/TSV mode sucessful
                         MessageBox.Show(BreedBot6.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
+                    case 6: // Touch screen error
+                        MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 7: // Touch screen error
+                        MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     default: // General error
                         MessageBox.Show("An error has occurred.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
