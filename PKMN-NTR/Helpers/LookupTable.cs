@@ -709,7 +709,7 @@ namespace ntrbase
                     {
                         case 1: return new int[] { 69, 91, 104 }; // Basculin - Blue
                         default: return new int[] { 120, 91, 104 }; // Basculin - Red
-                    } 
+                    }
                 case 551: return new int[] { 22, 153, 83 }; // Sandile
                 case 552: return new int[] { 22, 153, 83 }; // Krokorok
                 case 553: return new int[] { 22, 153, 83 }; // Krookodile
@@ -2012,6 +2012,960 @@ namespace ntrbase
         }
 
         #endregion Hidden Power
+
+        #region Experience
+
+        public int getExpGroup(int species)
+        {
+            switch (species)
+            {
+                case 1: return 3; // Bulbasaur
+                case 2: return 3; // Ivysaur
+                case 3: return 3; // Venusaur
+                case 4: return 3; // Charmander
+                case 5: return 3; // Charmeleon
+                case 6: return 3; // Charizard
+                case 7: return 3; // Squirtle
+                case 8: return 3; // Wartortle
+                case 9: return 3; // Blastoise
+                case 10: return 2; // Caterpie
+                case 11: return 2; // Metapod
+                case 12: return 2; // Butterfree
+                case 13: return 2; // Weedle
+                case 14: return 2; // Kakuna
+                case 15: return 2; // Beedrill
+                case 16: return 3; // Pidgey
+                case 17: return 3; // Pidgeotto
+                case 18: return 3; // Pidgeot
+                case 19: return 2; // Rattata
+                case 20: return 2; // Raticate
+                case 21: return 2; // Spearow
+                case 22: return 2; // Fearow
+                case 23: return 2; // Ekans
+                case 24: return 2; // Arbok
+                case 25: return 2; // Pikachu
+                case 26: return 2; // Raichu
+                case 27: return 2; // Sandshrew
+                case 28: return 2; // Sandslash
+                case 29: return 3; // Nidoran♀
+                case 30: return 3; // Nidorina
+                case 31: return 3; // Nidoqueen
+                case 32: return 3; // Nidoran♂
+                case 33: return 3; // Nidorino
+                case 34: return 3; // Nidoking
+                case 35: return 1; // Clefairy
+                case 36: return 1; // Clefable
+                case 37: return 2; // Vulpix
+                case 38: return 2; // Ninetales
+                case 39: return 1; // Jigglypuff
+                case 40: return 1; // Wigglytuff
+                case 41: return 2; // Zubat
+                case 42: return 2; // Golbat
+                case 43: return 3; // Oddish
+                case 44: return 3; // Gloom
+                case 45: return 3; // Vileplume
+                case 46: return 2; // Paras
+                case 47: return 2; // Parasect
+                case 48: return 2; // Venonat
+                case 49: return 2; // Venomoth
+                case 50: return 2; // Diglett
+                case 51: return 2; // Dugtrio
+                case 52: return 2; // Meowth
+                case 53: return 2; // Persian
+                case 54: return 2; // Psyduck
+                case 55: return 2; // Golduck
+                case 56: return 2; // Mankey
+                case 57: return 2; // Primeape
+                case 58: return 4; // Growlithe
+                case 59: return 4; // Arcanine
+                case 60: return 3; // Poliwag
+                case 61: return 3; // Poliwhirl
+                case 62: return 3; // Poliwrath
+                case 63: return 3; // Abra
+                case 64: return 3; // Kadabra
+                case 65: return 3; // Alakazam
+                case 66: return 3; // Machop
+                case 67: return 3; // Machoke
+                case 68: return 3; // Machamp
+                case 69: return 3; // Bellsprout
+                case 70: return 3; // Weepinbell
+                case 71: return 3; // Victreebel
+                case 72: return 4; // Tentacool
+                case 73: return 4; // Tentacruel
+                case 74: return 3; // Geodude
+                case 75: return 3; // Graveler
+                case 76: return 3; // Golem
+                case 77: return 2; // Ponyta
+                case 78: return 2; // Rapidash
+                case 79: return 2; // Slowpoke
+                case 80: return 2; // Slowbro
+                case 81: return 2; // Magnemite
+                case 82: return 2; // Magneton
+                case 83: return 2; // Farfetch'd
+                case 84: return 2; // Doduo
+                case 85: return 2; // Dodrio
+                case 86: return 2; // Seel
+                case 87: return 2; // Dewgong
+                case 88: return 2; // Grimer
+                case 89: return 2; // Muk
+                case 90: return 4; // Shellder
+                case 91: return 4; // Cloyster
+                case 92: return 3; // Gastly
+                case 93: return 3; // Haunter
+                case 94: return 3; // Gengar
+                case 95: return 2; // Onix
+                case 96: return 2; // Drowzee
+                case 97: return 2; // Hypno
+                case 98: return 2; // Krabby
+                case 99: return 2; // Kingler
+                case 100: return 2; // Voltorb
+                case 101: return 2; // Electrode
+                case 102: return 4; // Exeggcute
+                case 103: return 4; // Exeggutor
+                case 104: return 2; // Cubone
+                case 105: return 2; // Marowak
+                case 106: return 2; // Hitmonlee
+                case 107: return 2; // Hitmonchan
+                case 108: return 2; // Lickitung
+                case 109: return 2; // Koffing
+                case 110: return 2; // Weezing
+                case 111: return 4; // Rhyhorn
+                case 112: return 4; // Rhydon
+                case 113: return 1; // Chansey
+                case 114: return 2; // Tangela
+                case 115: return 2; // Kangaskhan
+                case 116: return 2; // Horsea
+                case 117: return 2; // Seadra
+                case 118: return 2; // Goldeen
+                case 119: return 2; // Seaking
+                case 120: return 4; // Staryu
+                case 121: return 4; // Starmie
+                case 122: return 2; // Mr. Mime
+                case 123: return 2; // Scyther
+                case 124: return 2; // Jynx
+                case 125: return 2; // Electabuzz
+                case 126: return 2; // Magmar
+                case 127: return 4; // Pinsir
+                case 128: return 4; // Tauros
+                case 129: return 4; // Magikarp
+                case 130: return 4; // Gyarados
+                case 131: return 4; // Lapras
+                case 132: return 2; // Ditto
+                case 133: return 2; // Eevee
+                case 134: return 2; // Vaporeon
+                case 135: return 2; // Jolteon
+                case 136: return 2; // Flareon
+                case 137: return 2; // Porygon
+                case 138: return 2; // Omanyte
+                case 139: return 2; // Omastar
+                case 140: return 2; // Kabuto
+                case 141: return 2; // Kabutops
+                case 142: return 4; // Aerodactyl
+                case 143: return 4; // Snorlax
+                case 144: return 4; // Articuno
+                case 145: return 4; // Zapdos
+                case 146: return 4; // Moltres
+                case 147: return 4; // Dratini
+                case 148: return 4; // Dragonair
+                case 149: return 4; // Dragonite
+                case 150: return 4; // Mewtwo
+                case 151: return 3; // Mew
+                case 152: return 3; // Chikorita
+                case 153: return 3; // Bayleef
+                case 154: return 3; // Meganium
+                case 155: return 3; // Cyndaquil
+                case 156: return 3; // Quilava
+                case 157: return 3; // Typhlosion
+                case 158: return 3; // Totodile
+                case 159: return 3; // Croconaw
+                case 160: return 3; // Feraligatr
+                case 161: return 2; // Sentret
+                case 162: return 2; // Furret
+                case 163: return 2; // Hoothoot
+                case 164: return 2; // Noctowl
+                case 165: return 1; // Ledyba
+                case 166: return 1; // Ledian
+                case 167: return 1; // Spinarak
+                case 168: return 1; // Ariados
+                case 169: return 2; // Crobat
+                case 170: return 4; // Chinchou
+                case 171: return 4; // Lanturn
+                case 172: return 2; // Pichu
+                case 173: return 1; // Cleffa
+                case 174: return 1; // Igglybuff
+                case 175: return 1; // Togepi
+                case 176: return 1; // Togetic
+                case 177: return 2; // Natu
+                case 178: return 2; // Xatu
+                case 179: return 3; // Mareep
+                case 180: return 3; // Flaaffy
+                case 181: return 3; // Ampharos
+                case 182: return 3; // Bellossom
+                case 183: return 1; // Marill
+                case 184: return 1; // Azumarill
+                case 185: return 2; // Sudowoodo
+                case 186: return 3; // Politoed
+                case 187: return 3; // Hoppip
+                case 188: return 3; // Skiploom
+                case 189: return 3; // Jumpluff
+                case 190: return 1; // Aipom
+                case 191: return 3; // Sunkern
+                case 192: return 3; // Sunflora
+                case 193: return 2; // Yanma
+                case 194: return 2; // Wooper
+                case 195: return 2; // Quagsire
+                case 196: return 2; // Espeon
+                case 197: return 2; // Umbreon
+                case 198: return 3; // Murkrow
+                case 199: return 2; // Slowking
+                case 200: return 1; // Misdreavus
+                case 201: return 2; // Unown
+                case 202: return 2; // Wobbuffet
+                case 203: return 2; // Girafarig
+                case 204: return 2; // Pineco
+                case 205: return 2; // Forretress
+                case 206: return 2; // Dunsparce
+                case 207: return 3; // Gligar
+                case 208: return 2; // Steelix
+                case 209: return 1; // Snubbull
+                case 210: return 1; // Granbull
+                case 211: return 2; // Qwilfish
+                case 212: return 2; // Scizor
+                case 213: return 3; // Shuckle
+                case 214: return 4; // Heracross
+                case 215: return 3; // Sneasel
+                case 216: return 2; // Teddiursa
+                case 217: return 2; // Ursaring
+                case 218: return 2; // Slugma
+                case 219: return 2; // Magcargo
+                case 220: return 4; // Swinub
+                case 221: return 4; // Piloswine
+                case 222: return 1; // Corsola
+                case 223: return 2; // Remoraid
+                case 224: return 2; // Octillery
+                case 225: return 1; // Delibird
+                case 226: return 4; // Mantine
+                case 227: return 4; // Skarmory
+                case 228: return 4; // Houndour
+                case 229: return 4; // Houndoom
+                case 230: return 2; // Kingdra
+                case 231: return 2; // Phanpy
+                case 232: return 2; // Donphan
+                case 233: return 2; // Porygon2
+                case 234: return 4; // Stantler
+                case 235: return 1; // Smeargle
+                case 236: return 2; // Tyrogue
+                case 237: return 2; // Hitmontop
+                case 238: return 2; // Smoochum
+                case 239: return 2; // Elekid
+                case 240: return 2; // Magby
+                case 241: return 4; // Miltank
+                case 242: return 1; // Blissey
+                case 243: return 4; // Raikou
+                case 244: return 4; // Entei
+                case 245: return 4; // Suicune
+                case 246: return 4; // Larvitar
+                case 247: return 4; // Pupitar
+                case 248: return 4; // Tyranitar
+                case 249: return 4; // Lugia
+                case 250: return 4; // Ho-Oh
+                case 251: return 3; // Celebi
+                case 252: return 3; // Treecko
+                case 253: return 3; // Grovyle
+                case 254: return 3; // Sceptile
+                case 255: return 3; // Torchic
+                case 256: return 3; // Combusken
+                case 257: return 3; // Blaziken
+                case 258: return 3; // Mudkip
+                case 259: return 3; // Marshtomp
+                case 260: return 3; // Swampert
+                case 261: return 2; // Poochyena
+                case 262: return 2; // Mightyena
+                case 263: return 2; // Zigzagoon
+                case 264: return 2; // Linoone
+                case 265: return 2; // Wurmple
+                case 266: return 2; // Silcoon
+                case 267: return 2; // Beautifly
+                case 268: return 2; // Cascoon
+                case 269: return 2; // Dustox
+                case 270: return 3; // Lotad
+                case 271: return 3; // Lombre
+                case 272: return 3; // Ludicolo
+                case 273: return 3; // Seedot
+                case 274: return 3; // Nuzleaf
+                case 275: return 3; // Shiftry
+                case 276: return 3; // Taillow
+                case 277: return 3; // Swellow
+                case 278: return 2; // Wingull
+                case 279: return 2; // Pelipper
+                case 280: return 4; // Ralts
+                case 281: return 4; // Kirlia
+                case 282: return 4; // Gardevoir
+                case 283: return 2; // Surskit
+                case 284: return 2; // Masquerain
+                case 285: return 5; // Shroomish
+                case 286: return 5; // Breloom
+                case 287: return 4; // Slakoth
+                case 288: return 4; // Vigoroth
+                case 289: return 4; // Slaking
+                case 290: return 0; // Nincada
+                case 291: return 0; // Ninjask
+                case 292: return 0; // Shedinja
+                case 293: return 3; // Whismur
+                case 294: return 3; // Loudred
+                case 295: return 3; // Exploud
+                case 296: return 5; // Makuhita
+                case 297: return 5; // Hariyama
+                case 298: return 1; // Azurill
+                case 299: return 2; // Nosepass
+                case 300: return 1; // Skitty
+                case 301: return 1; // Delcatty
+                case 302: return 3; // Sableye
+                case 303: return 1; // Mawile
+                case 304: return 4; // Aron
+                case 305: return 4; // Lairon
+                case 306: return 4; // Aggron
+                case 307: return 2; // Meditite
+                case 308: return 2; // Medicham
+                case 309: return 4; // Electrike
+                case 310: return 4; // Manectric
+                case 311: return 2; // Plusle
+                case 312: return 2; // Minun
+                case 313: return 0; // Volbeat
+                case 314: return 5; // Illumise
+                case 315: return 3; // Roselia
+                case 316: return 5; // Gulpin
+                case 317: return 5; // Swalot
+                case 318: return 4; // Carvanha
+                case 319: return 4; // Sharpedo
+                case 320: return 5; // Wailmer
+                case 321: return 5; // Wailord
+                case 322: return 2; // Numel
+                case 323: return 2; // Camerupt
+                case 324: return 2; // Torkoal
+                case 325: return 1; // Spoink
+                case 326: return 1; // Grumpig
+                case 327: return 1; // Spinda
+                case 328: return 3; // Trapinch
+                case 329: return 3; // Vibrava
+                case 330: return 3; // Flygon
+                case 331: return 3; // Cacnea
+                case 332: return 3; // Cacturne
+                case 333: return 0; // Swablu
+                case 334: return 0; // Altaria
+                case 335: return 0; // Zangoose
+                case 336: return 5; // Seviper
+                case 337: return 1; // Lunatone
+                case 338: return 1; // Solrock
+                case 339: return 2; // Barboach
+                case 340: return 2; // Whiscash
+                case 341: return 5; // Corphish
+                case 342: return 5; // Crawdaunt
+                case 343: return 2; // Baltoy
+                case 344: return 2; // Claydol
+                case 345: return 0; // Lileep
+                case 346: return 0; // Cradily
+                case 347: return 0; // Anorith
+                case 348: return 0; // Armaldo
+                case 349: return 0; // Feebas
+                case 350: return 0; // Milotic
+                case 351: return 2; // Castform
+                case 352: return 3; // Kecleon
+                case 353: return 1; // Shuppet
+                case 354: return 1; // Banette
+                case 355: return 1; // Duskull
+                case 356: return 1; // Dusclops
+                case 357: return 4; // Tropius
+                case 358: return 1; // Chimecho
+                case 359: return 3; // Absol
+                case 360: return 2; // Wynaut
+                case 361: return 2; // Snorunt
+                case 362: return 2; // Glalie
+                case 363: return 3; // Spheal
+                case 364: return 3; // Sealeo
+                case 365: return 3; // Walrein
+                case 366: return 0; // Clamperl
+                case 367: return 0; // Huntail
+                case 368: return 0; // Gorebyss
+                case 369: return 4; // Relicanth
+                case 370: return 1; // Luvdisc
+                case 371: return 4; // Bagon
+                case 372: return 4; // Shelgon
+                case 373: return 4; // Salamence
+                case 374: return 4; // Beldum
+                case 375: return 4; // Metang
+                case 376: return 4; // Metagross
+                case 377: return 4; // Regirock
+                case 378: return 4; // Regice
+                case 379: return 4; // Registeel
+                case 380: return 4; // Latias
+                case 381: return 4; // Latios
+                case 382: return 4; // Kyogre
+                case 383: return 4; // Groudon
+                case 384: return 4; // Rayquaza
+                case 385: return 4; // Jirachi
+                case 386: return 4; // Deoxys
+                case 387: return 3; // Turtwig
+                case 388: return 3; // Grotle
+                case 389: return 3; // Torterra
+                case 390: return 3; // Chimchar
+                case 391: return 3; // Monferno
+                case 392: return 3; // Infernape
+                case 393: return 3; // Piplup
+                case 394: return 3; // Prinplup
+                case 395: return 3; // Empoleon
+                case 396: return 3; // Starly
+                case 397: return 3; // Staravia
+                case 398: return 3; // Staraptor
+                case 399: return 2; // Bidoof
+                case 400: return 2; // Bibarel
+                case 401: return 3; // Kricketot
+                case 402: return 3; // Kricketune
+                case 403: return 3; // Shinx
+                case 404: return 3; // Luxio
+                case 405: return 3; // Luxray
+                case 406: return 3; // Budew
+                case 407: return 3; // Roserade
+                case 408: return 0; // Cranidos
+                case 409: return 0; // Rampardos
+                case 410: return 0; // Shieldon
+                case 411: return 0; // Bastiodon
+                case 412: return 2; // Burmy
+                case 413: return 2; // Wormadam
+                case 414: return 2; // Mothim
+                case 415: return 3; // Combee
+                case 416: return 3; // Vespiquen
+                case 417: return 2; // Pachirisu
+                case 418: return 2; // Buizel
+                case 419: return 2; // Floatzel
+                case 420: return 2; // Cherubi
+                case 421: return 2; // Cherrim
+                case 422: return 2; // Shellos
+                case 423: return 2; // Gastrodon
+                case 424: return 1; // Ambipom
+                case 425: return 5; // Drifloon
+                case 426: return 5; // Drifblim
+                case 427: return 2; // Buneary
+                case 428: return 2; // Lopunny
+                case 429: return 1; // Mismagius
+                case 430: return 3; // Honchkrow
+                case 431: return 1; // Glameow
+                case 432: return 1; // Purugly
+                case 433: return 1; // Chingling
+                case 434: return 2; // Stunky
+                case 435: return 2; // Skuntank
+                case 436: return 2; // Bronzor
+                case 437: return 2; // Bronzong
+                case 438: return 2; // Bonsly
+                case 439: return 2; // Mime Jr.
+                case 440: return 1; // Happiny
+                case 441: return 3; // Chatot
+                case 442: return 2; // Spiritomb
+                case 443: return 4; // Gible
+                case 444: return 4; // Gabite
+                case 445: return 4; // Garchomp
+                case 446: return 4; // Munchlax
+                case 447: return 3; // Riolu
+                case 448: return 3; // Lucario
+                case 449: return 4; // Hippopotas
+                case 450: return 4; // Hippowdon
+                case 451: return 4; // Skorupi
+                case 452: return 4; // Drapion
+                case 453: return 2; // Croagunk
+                case 454: return 2; // Toxicroak
+                case 455: return 4; // Carnivine
+                case 456: return 0; // Finneon
+                case 457: return 0; // Lumineon
+                case 458: return 4; // Mantyke
+                case 459: return 4; // Snover
+                case 460: return 4; // Abomasnow
+                case 461: return 3; // Weavile
+                case 462: return 2; // Magnezone
+                case 463: return 2; // Lickilicky
+                case 464: return 4; // Rhyperior
+                case 465: return 2; // Tangrowth
+                case 466: return 2; // Electivire
+                case 467: return 2; // Magmortar
+                case 468: return 1; // Togekiss
+                case 469: return 2; // Yanmega
+                case 470: return 2; // Leafeon
+                case 471: return 2; // Glaceon
+                case 472: return 3; // Gliscor
+                case 473: return 4; // Mamoswine
+                case 474: return 2; // Porygon-Z
+                case 475: return 4; // Gallade
+                case 476: return 2; // Probopass
+                case 477: return 1; // Dusknoir
+                case 478: return 2; // Froslass
+                case 479: return 2; // Rotom
+                case 480: return 4; // Uxie
+                case 481: return 4; // Mesprit
+                case 482: return 4; // Azelf
+                case 483: return 4; // Dialga
+                case 484: return 4; // Palkia
+                case 485: return 4; // Heatran
+                case 486: return 4; // Regigigas
+                case 487: return 4; // Giratina
+                case 488: return 4; // Cresselia
+                case 489: return 4; // Phione
+                case 490: return 4; // Manaphy
+                case 491: return 4; // Darkrai
+                case 492: return 3; // Shaymin
+                case 493: return 4; // Arceus
+                case 494: return 4; // Victini
+                case 495: return 3; // Snivy
+                case 496: return 3; // Servine
+                case 497: return 3; // Serperior
+                case 498: return 3; // Tepig
+                case 499: return 3; // Pignite
+                case 500: return 3; // Emboar
+                case 501: return 3; // Oshawott
+                case 502: return 3; // Dewott
+                case 503: return 3; // Samurott
+                case 504: return 2; // Patrat
+                case 505: return 2; // Watchog
+                case 506: return 3; // Lillipup
+                case 507: return 3; // Herdier
+                case 508: return 3; // Stoutland
+                case 509: return 2; // Purrloin
+                case 510: return 2; // Liepard
+                case 511: return 2; // Pansage
+                case 512: return 2; // Simisage
+                case 513: return 2; // Pansear
+                case 514: return 2; // Simisear
+                case 515: return 2; // Panpour
+                case 516: return 2; // Simipour
+                case 517: return 1; // Munna
+                case 518: return 1; // Musharna
+                case 519: return 3; // Pidove
+                case 520: return 3; // Tranquill
+                case 521: return 3; // Unfezant
+                case 522: return 2; // Blitzle
+                case 523: return 2; // Zebstrika
+                case 524: return 3; // Roggenrola
+                case 525: return 3; // Boldore
+                case 526: return 3; // Gigalith
+                case 527: return 2; // Woobat
+                case 528: return 2; // Swoobat
+                case 529: return 2; // Drilbur
+                case 530: return 2; // Excadrill
+                case 531: return 1; // Audino
+                case 532: return 3; // Timburr
+                case 533: return 3; // Gurdurr
+                case 534: return 3; // Conkeldurr
+                case 535: return 3; // Tympole
+                case 536: return 3; // Palpitoad
+                case 537: return 3; // Seismitoad
+                case 538: return 2; // Throh
+                case 539: return 2; // Sawk
+                case 540: return 3; // Sewaddle
+                case 541: return 3; // Swadloon
+                case 542: return 3; // Leavanny
+                case 543: return 3; // Venipede
+                case 544: return 3; // Whirlipede
+                case 545: return 3; // Scolipede
+                case 546: return 2; // Cottonee
+                case 547: return 2; // Whimsicott
+                case 548: return 2; // Petilil
+                case 549: return 2; // Lilligant
+                case 550: return 2; // Basculin
+                case 551: return 3; // Sandile
+                case 552: return 3; // Krokorok
+                case 553: return 3; // Krookodile
+                case 554: return 3; // Darumaka
+                case 555: return 3; // Darmanitan
+                case 556: return 2; // Maractus
+                case 557: return 2; // Dwebble
+                case 558: return 2; // Crustle
+                case 559: return 2; // Scraggy
+                case 560: return 2; // Scrafty
+                case 561: return 2; // Sigilyph
+                case 562: return 2; // Yamask
+                case 563: return 2; // Cofagrigus
+                case 564: return 2; // Tirtouga
+                case 565: return 2; // Carracosta
+                case 566: return 2; // Archen
+                case 567: return 2; // Archeops
+                case 568: return 2; // Trubbish
+                case 569: return 2; // Garbodor
+                case 570: return 3; // Zorua
+                case 571: return 3; // Zoroark
+                case 572: return 1; // Minccino
+                case 573: return 1; // Cinccino
+                case 574: return 3; // Gothita
+                case 575: return 3; // Gothorita
+                case 576: return 3; // Gothitelle
+                case 577: return 3; // Solosis
+                case 578: return 3; // Duosion
+                case 579: return 3; // Reuniclus
+                case 580: return 2; // Ducklett
+                case 581: return 2; // Swanna
+                case 582: return 4; // Vanillite
+                case 583: return 4; // Vanillish
+                case 584: return 4; // Vanilluxe
+                case 585: return 2; // Deerling
+                case 586: return 2; // Sawsbuck
+                case 587: return 2; // Emolga
+                case 588: return 2; // Karrablast
+                case 589: return 2; // Escavalier
+                case 590: return 2; // Foongus
+                case 591: return 2; // Amoonguss
+                case 592: return 2; // Frillish
+                case 593: return 2; // Jellicent
+                case 594: return 1; // Alomomola
+                case 595: return 2; // Joltik
+                case 596: return 2; // Galvantula
+                case 597: return 2; // Ferroseed
+                case 598: return 2; // Ferrothorn
+                case 599: return 3; // Klink
+                case 600: return 3; // Klang
+                case 601: return 3; // Klinklang
+                case 602: return 4; // Tynamo
+                case 603: return 4; // Eelektrik
+                case 604: return 4; // Eelektross
+                case 605: return 2; // Elgyem
+                case 606: return 2; // Beheeyem
+                case 607: return 3; // Litwick
+                case 608: return 3; // Lampent
+                case 609: return 3; // Chandelure
+                case 610: return 4; // Axew
+                case 611: return 4; // Fraxure
+                case 612: return 4; // Haxorus
+                case 613: return 2; // Cubchoo
+                case 614: return 2; // Beartic
+                case 615: return 2; // Cryogonal
+                case 616: return 2; // Shelmet
+                case 617: return 2; // Accelgor
+                case 618: return 2; // Stunfisk
+                case 619: return 3; // Mienfoo
+                case 620: return 3; // Mienshao
+                case 621: return 2; // Druddigon
+                case 622: return 2; // Golett
+                case 623: return 2; // Golurk
+                case 624: return 2; // Pawniard
+                case 625: return 2; // Bisharp
+                case 626: return 2; // Bouffalant
+                case 627: return 4; // Rufflet
+                case 628: return 4; // Braviary
+                case 629: return 4; // Vullaby
+                case 630: return 4; // Mandibuzz
+                case 631: return 2; // Heatmor
+                case 632: return 2; // Durant
+                case 633: return 4; // Deino
+                case 634: return 4; // Zweilous
+                case 635: return 4; // Hydreigon
+                case 636: return 4; // Larvesta
+                case 637: return 4; // Volcarona
+                case 638: return 4; // Cobalion
+                case 639: return 4; // Terrakion
+                case 640: return 4; // Virizion
+                case 641: return 4; // Tornadus
+                case 642: return 4; // Thundurus
+                case 643: return 4; // Reshiram
+                case 644: return 4; // Zekrom
+                case 645: return 4; // Landorus
+                case 646: return 4; // Kyurem
+                case 647: return 4; // Keldeo
+                case 648: return 4; // Meloetta
+                case 649: return 4; // Genesect
+                case 650: return 3; // Chespin
+                case 651: return 3; // Quilladin
+                case 652: return 3; // Chesnaught
+                case 653: return 3; // Fennekin
+                case 654: return 3; // Braixen
+                case 655: return 3; // Delphox
+                case 656: return 3; // Froakie
+                case 657: return 3; // Frogadier
+                case 658: return 3; // Greninja
+                case 659: return 2; // Bunnelby
+                case 660: return 2; // Diggersby
+                case 661: return 3; // Fletchling
+                case 662: return 3; // Fletchinder
+                case 663: return 3; // Talonflame
+                case 664: return 2; // Scatterbug
+                case 665: return 2; // Spewpa
+                case 666: return 2; // Vivillon
+                case 667: return 3; // Litleo
+                case 668: return 3; // Pyroar
+                case 669: return 2; // Flabébé
+                case 670: return 2; // Floette
+                case 671: return 2; // Florges
+                case 672: return 2; // Skiddo
+                case 673: return 2; // Gogoat
+                case 674: return 2; // Pancham
+                case 675: return 2; // Pangoro
+                case 676: return 2; // Furfrou
+                case 677: return 2; // Espurr
+                case 678: return 2; // Meowstic
+                case 679: return 2; // Honedge
+                case 680: return 2; // Doublade
+                case 681: return 2; // Aegislash
+                case 682: return 2; // Spritzee
+                case 683: return 2; // Aromatisse
+                case 684: return 2; // Swirlix
+                case 685: return 2; // Slurpuff
+                case 686: return 2; // Inkay
+                case 687: return 2; // Malamar
+                case 688: return 2; // Binacle
+                case 689: return 2; // Barbaracle
+                case 690: return 2; // Skrelp
+                case 691: return 2; // Dragalge
+                case 692: return 4; // Clauncher
+                case 693: return 4; // Clawitzer
+                case 694: return 2; // Helioptile
+                case 695: return 2; // Heliolisk
+                case 696: return 2; // Tyrunt
+                case 697: return 2; // Tyrantrum
+                case 698: return 2; // Amaura
+                case 699: return 2; // Aurorus
+                case 700: return 2; // Sylveon
+                case 701: return 2; // Hawlucha
+                case 702: return 2; // Dedenne
+                case 703: return 4; // Carbink
+                case 704: return 4; // Goomy
+                case 705: return 4; // Sliggoo
+                case 706: return 4; // Goodra
+                case 707: return 1; // Klefki
+                case 708: return 2; // Phantump
+                case 709: return 2; // Trevenant
+                case 710: return 2; // Pumpkaboo
+                case 711: return 2; // Gourgeist
+                case 712: return 2; // Bergmite
+                case 713: return 2; // Avalugg
+                case 714: return 2; // Noibat
+                case 715: return 2; // Noivern
+                case 716: return 4; // Xerneas
+                case 717: return 4; // Yveltal
+                case 718: return 4; // Zygarde
+                case 719: return 4; // Diancie
+                case 720: return 4; // Hoopa
+                case 721: return 4; // Volcanion
+                case 722: return 3; // Rowlet
+                case 723: return 3; // Dartrix
+                case 724: return 3; // Decidueye
+                case 725: return 3; // Litten
+                case 726: return 3; // Torracat
+                case 727: return 3; // Incineroar
+                case 728: return 3; // Popplio
+                case 729: return 3; // Brionne
+                case 730: return 3; // Primarina
+                case 731: return 2; // Pikipek
+                case 732: return 2; // Trumbeak
+                case 733: return 2; // Toucannon
+                case 734: return 2; // Yungoos
+                case 735: return 2; // Gumshoos
+                case 736: return 2; // Grubbin
+                case 737: return 2; // Charjabug
+                case 738: return 2; // Vikavolt
+                case 739: return 2; // Crabrawler
+                case 740: return 2; // Crabominable
+                case 741: return 2; // Oricorio
+                case 742: return 2; // Cutiefly
+                case 743: return 2; // Ribombee
+                case 744: return 2; // Rockruff
+                case 745: return 2; // Lycanroc
+                case 746: return 1; // Wishiwashi
+                case 747: return 2; // Mareanie
+                case 748: return 2; // Toxapex
+                case 749: return 2; // Mudbray
+                case 750: return 2; // Mudsdale
+                case 751: return 2; // Dewpider
+                case 752: return 2; // Araquanid
+                case 753: return 2; // Fomantis
+                case 754: return 2; // Lurantis
+                case 755: return 2; // Morelull
+                case 756: return 2; // Shiinotic
+                case 757: return 2; // Salandit
+                case 758: return 2; // Salazzle
+                case 759: return 2; // Stufful
+                case 760: return 2; // Bewear
+                case 761: return 3; // Bounsweet
+                case 762: return 3; // Steenee
+                case 763: return 3; // Tsareena
+                case 764: return 1; // Comfey
+                case 765: return 4; // Oranguru
+                case 766: return 4; // Passimian
+                case 767: return 2; // Wimpod
+                case 768: return 2; // Golisopod
+                case 769: return 2; // Sandygast
+                case 770: return 2; // Palossand
+                case 771: return 1; // Pyukumuku
+                case 772: return 4; // Type: Null
+                case 773: return 4; // Silvally
+                case 774: return 3; // Minior
+                case 775: return 4; // Komala
+                case 776: return 2; // Turtonator
+                case 777: return 2; // Togedemaru
+                case 778: return 2; // Mimikyu
+                case 779: return 2; // Bruxish
+                case 780: return 2; // Drampa
+                case 781: return 2; // Dhelmise
+                case 782: return 4; // Jangmo-o
+                case 783: return 4; // Hakamo-o
+                case 784: return 4; // Kommo-o
+                case 785: return 4; // Tapu Koko
+                case 786: return 4; // Tapu Lele
+                case 787: return 4; // Tapu Bulu
+                case 788: return 4; // Tapu Fini
+                case 789: return 4; // Cosmog
+                case 790: return 4; // Cosmoem
+                case 791: return 4; // Solgaleo
+                case 792: return 4; // Lunala
+                case 793: return 4; // Nihilego
+                case 794: return 4; // Buzzwole
+                case 795: return 4; // Pheromosa
+                case 796: return 4; // Xurkitree
+                case 797: return 4; // Celesteela
+                case 798: return 4; // Kartana
+                case 799: return 4; // Guzzlord
+                case 800: return 4; // Necrozma
+                case 801: return 4; // Magearna
+                case 802: return 4; // Marshadow
+                default: return -1; // Error
+            }
+        }
+
+        public uint[] getExpLevel(int level)
+        {
+            switch (level)
+            {
+                case 1: return new uint[] { 0, 0, 0, 0, 0, 0 };
+                case 2: return new uint[] { 15, 6, 8, 9, 10, 4 };
+                case 3: return new uint[] { 52, 21, 27, 57, 33, 13 };
+                case 4: return new uint[] { 122, 51, 64, 96, 80, 32 };
+                case 5: return new uint[] { 237, 100, 125, 135, 156, 65 };
+                case 6: return new uint[] { 406, 172, 216, 179, 270, 112 };
+                case 7: return new uint[] { 637, 274, 343, 236, 428, 178 };
+                case 8: return new uint[] { 942, 409, 512, 314, 640, 276 };
+                case 9: return new uint[] { 1326, 583, 729, 419, 911, 393 };
+                case 10: return new uint[] { 1800, 800, 1000, 560, 1250, 540 };
+                case 11: return new uint[] { 2369, 1064, 1331, 742, 1663, 745 };
+                case 12: return new uint[] { 3041, 1382, 1728, 973, 2160, 967 };
+                case 13: return new uint[] { 3822, 1757, 2197, 1261, 2746, 1230 };
+                case 14: return new uint[] { 4719, 2195, 2744, 1612, 3430, 1591 };
+                case 15: return new uint[] { 5737, 2700, 3375, 2035, 4218, 1957 };
+                case 16: return new uint[] { 6881, 3276, 4096, 2535, 5120, 2457 };
+                case 17: return new uint[] { 8155, 3930, 4913, 3120, 6141, 3046 };
+                case 18: return new uint[] { 9564, 4665, 5832, 3798, 7290, 3732 };
+                case 19: return new uint[] { 11111, 5487, 6859, 4575, 8573, 4526 };
+                case 20: return new uint[] { 12800, 6400, 8000, 5460, 10000, 5440 };
+                case 21: return new uint[] { 14632, 7408, 9261, 6458, 11576, 6482 };
+                case 22: return new uint[] { 16610, 8518, 10648, 7577, 13310, 7666 };
+                case 23: return new uint[] { 18737, 9733, 12167, 8825, 15208, 9003 };
+                case 24: return new uint[] { 21012, 11059, 13824, 10208, 17280, 10506 };
+                case 25: return new uint[] { 23437, 12500, 15625, 11735, 19531, 12187 };
+                case 26: return new uint[] { 26012, 14060, 17576, 13411, 21970, 14060 };
+                case 27: return new uint[] { 28737, 15746, 19683, 15244, 24603, 16140 };
+                case 28: return new uint[] { 31610, 17561, 21952, 17242, 27440, 18439 };
+                case 29: return new uint[] { 34632, 19511, 24389, 19411, 30486, 20974 };
+                case 30: return new uint[] { 37800, 21600, 27000, 21760, 33750, 23760 };
+                case 31: return new uint[] { 41111, 23832, 29791, 24294, 37238, 26811 };
+                case 32: return new uint[] { 44564, 26214, 32768, 27021, 40960, 30146 };
+                case 33: return new uint[] { 48155, 28749, 35937, 29949, 44921, 33780 };
+                case 34: return new uint[] { 51881, 31443, 39304, 33084, 49130, 37731 };
+                case 35: return new uint[] { 55737, 34300, 42875, 36435, 53593, 42017 };
+                case 36: return new uint[] { 59719, 37324, 46656, 40007, 58320, 46656 };
+                case 37: return new uint[] { 63822, 40522, 50653, 43808, 63316, 50653 };
+                case 38: return new uint[] { 68041, 43897, 54872, 47846, 68590, 55969 };
+                case 39: return new uint[] { 72369, 47455, 59319, 52127, 74148, 60505 };
+                case 40: return new uint[] { 76800, 51200, 64000, 56660, 80000, 66560 };
+                case 41: return new uint[] { 81326, 55136, 68921, 61450, 86151, 71677 };
+                case 42: return new uint[] { 85942, 59270, 74088, 66505, 92610, 78533 };
+                case 43: return new uint[] { 90637, 63605, 79507, 71833, 99383, 84277 };
+                case 44: return new uint[] { 95406, 68147, 85184, 77440, 106480, 91998 };
+                case 45: return new uint[] { 100237, 72900, 91125, 83335, 113906, 98415 };
+                case 46: return new uint[] { 105122, 77868, 97336, 89523, 121670, 107069 };
+                case 47: return new uint[] { 110052, 83058, 103823, 96012, 129778, 114205 };
+                case 48: return new uint[] { 115015, 88473, 110592, 102810, 138240, 123863 };
+                case 49: return new uint[] { 120001, 94119, 117649, 109923, 147061, 131766 };
+                case 50: return new uint[] { 125000, 100000, 125000, 117360, 156250, 142500 };
+                case 51: return new uint[] { 131324, 106120, 132651, 125126, 165813, 151222 };
+                case 52: return new uint[] { 137795, 112486, 140608, 133229, 175760, 163105 };
+                case 53: return new uint[] { 144410, 119101, 148877, 141677, 186096, 172697 };
+                case 54: return new uint[] { 151165, 125971, 157464, 150476, 196830, 185807 };
+                case 55: return new uint[] { 158056, 133100, 166375, 159635, 207968, 196322 };
+                case 56: return new uint[] { 165079, 140492, 175616, 169159, 219520, 210739 };
+                case 57: return new uint[] { 172229, 148154, 185193, 179056, 231491, 222231 };
+                case 58: return new uint[] { 179503, 156089, 195112, 189334, 243890, 238036 };
+                case 59: return new uint[] { 186894, 164303, 205379, 199999, 256723, 250562 };
+                case 60: return new uint[] { 194400, 172800, 216000, 211060, 270000, 267840 };
+                case 61: return new uint[] { 202013, 181584, 226981, 222522, 283726, 281456 };
+                case 62: return new uint[] { 209728, 190662, 238328, 234393, 297910, 300293 };
+                case 63: return new uint[] { 217540, 200037, 250047, 246681, 312558, 315059 };
+                case 64: return new uint[] { 225443, 209715, 262144, 259392, 327680, 335544 };
+                case 65: return new uint[] { 233431, 219700, 274625, 272535, 343281, 351520 };
+                case 66: return new uint[] { 241496, 229996, 287496, 286115, 359370, 373744 };
+                case 67: return new uint[] { 249633, 240610, 300763, 300140, 375953, 390991 };
+                case 68: return new uint[] { 257834, 251545, 314432, 314618, 393040, 415050 };
+                case 69: return new uint[] { 267406, 262807, 328509, 329555, 410636, 433631 };
+                case 70: return new uint[] { 276458, 274400, 343000, 344960, 428750, 459620 };
+                case 71: return new uint[] { 286328, 286328, 357911, 360838, 447388, 479600 };
+                case 72: return new uint[] { 296358, 298598, 373248, 377197, 466560, 507617 };
+                case 73: return new uint[] { 305767, 311213, 389017, 394045, 486271, 529063 };
+                case 74: return new uint[] { 316074, 324179, 405224, 411388, 506530, 559209 };
+                case 75: return new uint[] { 326531, 337500, 421875, 429235, 527343, 582187 };
+                case 76: return new uint[] { 336255, 351180, 438976, 447591, 548720, 614566 };
+                case 77: return new uint[] { 346965, 365226, 456533, 466464, 570666, 639146 };
+                case 78: return new uint[] { 357812, 379641, 474552, 485862, 593190, 673863 };
+                case 79: return new uint[] { 367807, 394431, 493039, 505791, 616298, 700115 };
+                case 80: return new uint[] { 378880, 409600, 512000, 526260, 640000, 737280 };
+                case 81: return new uint[] { 390077, 425152, 531441, 547274, 664301, 765275 };
+                case 82: return new uint[] { 400293, 441094, 551368, 568841, 689210, 804997 };
+                case 83: return new uint[] { 411686, 457429, 571787, 590969, 714733, 834809 };
+                case 84: return new uint[] { 423190, 474163, 592704, 613664, 740880, 877201 };
+                case 85: return new uint[] { 433572, 491300, 614125, 636935, 767656, 908905 };
+                case 86: return new uint[] { 445239, 508844, 636056, 660787, 795070, 954084 };
+                case 87: return new uint[] { 457001, 526802, 658503, 685228, 823128, 987754 };
+                case 88: return new uint[] { 467489, 545177, 681472, 710266, 851840, 1035837 };
+                case 89: return new uint[] { 479378, 563975, 704969, 735907, 881211, 1071552 };
+                case 90: return new uint[] { 491346, 583200, 729000, 762160, 911250, 1122660 };
+                case 91: return new uint[] { 501878, 602856, 753571, 789030, 941963, 1160499 };
+                case 92: return new uint[] { 513934, 622950, 778688, 816525, 973360, 1214753 };
+                case 93: return new uint[] { 526049, 643485, 804357, 844653, 1005446, 1254796 };
+                case 94: return new uint[] { 536557, 664467, 830584, 873420, 1038230, 1312322 };
+                case 95: return new uint[] { 548720, 685900, 857375, 902835, 1071718, 1354652 };
+                case 96: return new uint[] { 560922, 707788, 884736, 932903, 1105920, 1415577 };
+                case 97: return new uint[] { 571333, 730138, 912673, 963632, 1140841, 1460276 };
+                case 98: return new uint[] { 583539, 752953, 941192, 995030, 1176490, 1524731 };
+                case 99: return new uint[] { 591882, 776239, 970299, 1027103, 1212873, 1571884 };
+                case 100: return new uint[] { 600000, 800000, 1000000, 1059860, 1250000, 1640000 };
+                default: return new uint[] { 600000, 800000, 1000000, 1059860, 1250000, 1640000 };
+            }
+        }
+
+        public int getLevel(int species, int exp)
+        {
+            if (species > 0)
+            {
+                int expgroup = getExpGroup(species);
+                uint currentexp;
+                int lvl;
+                for (lvl = 1; lvl <= 100; lvl++)
+                {
+                    currentexp = getExpLevel(lvl)[expgroup];
+                    if (currentexp > exp)
+                    {
+                        lvl--;
+                        break;
+                    }
+                    else if (currentexp == exp)
+                        break;
+                }
+                return lvl;
+            }
+            else
+                return 1;
+        }
+
+        public uint getExp(int species, int lvl)
+        {
+            if (species > 0)
+                return getExpLevel(lvl)[getExpGroup(species)];
+            else
+                return 0;
+        }
+
+        #endregion Experience
 
         #region Buttons
 

@@ -646,7 +646,6 @@ namespace ntrbase
                 //tradeoffrg = 0x8500000;
                 //battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x34195E10;
-                //eggoff = 0x3313EDD8;
             }
             else // not a process list or game not found - ignore packet
             {
@@ -663,6 +662,7 @@ namespace ntrbase
                 fillGen7();
                 dumpAllData7();
                 enableControls();
+                SetCheckedRadio(radioBoxes, true);
             }
             else if (game != GameType.None && !gen7 && !botWorking)
             {
@@ -672,6 +672,7 @@ namespace ntrbase
                 fillGen6();
                 dumpAllData();
                 enableControls();
+                SetCheckedRadio(radioBoxes, true);
             }
         }
 
@@ -704,6 +705,7 @@ namespace ntrbase
             writeBoxTo.Maximum = BOXES;
             boxBreed.Maximum = BOXES;
             SetText(label3, "Poké Miles:");
+            SetText(radioDaycare, "Daycare");
         }
 
         private async void fillGen7()
@@ -735,6 +737,7 @@ namespace ntrbase
             writeBoxTo.Maximum = BOXES;
             boxBreed.Maximum = BOXES;
             SetText(label3, "Current FC:");
+            SetText(radioDaycare, "Nursery");
 
             // Apply connection patch
             Task<bool> Patch = Program.helper.waitNTRwrite(0x3DFFD0, 0xE3A01000, pid);
@@ -1413,6 +1416,7 @@ namespace ntrbase
             try
             { //TODO: TEMPORARY HACK, DO PROPER ERROR HANDLING
                 species.SelectedIndexChanged -= species_SelectedIndexChanged;
+                level.ValueChanged -= level_ValueChanged;
                 DataReadyWaiting args = (DataReadyWaiting)args_obj;
                 PKHeX validator = new PKHeX();
                 validator.Data = PKHeX.decryptArray(args.data);
@@ -1471,6 +1475,7 @@ namespace ntrbase
                 }
                 SetChecked(isEgg, dumpedPKHeX.IsEgg);
                 SetValue(ExpPoints, dumpedPKHeX.EXP);
+                ExpPoints.Maximum = Program.PKTable.getExp(dumpedPKHeX.Species, 100);
                 SetValue(friendship, dumpedPKHeX.HT_Friendship);
 
                 SetValue(ivHPNum, dumpedPKHeX.IV_HP);
@@ -1509,6 +1514,7 @@ namespace ntrbase
                 SetValue(dSIDNum, dumpedPKHeX.SID);
 
                 species.SelectedIndexChanged += species_SelectedIndexChanged;
+                level.ValueChanged += level_ValueChanged;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -2314,16 +2320,20 @@ namespace ntrbase
             SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(PKHeX.getHEXval(dPID.Text)).ToString("D4"));
         }
 
-        // Ability and sprite update on species change
+        // Ability, Exp and sprite update on species change
         private void species_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateAbility(species.SelectedIndex + 1, 0, 1);
+            uint newexp = Program.PKTable.getExp(species.SelectedIndex + 1, (int)level.Value);
+            SetValue(ExpPoints, newexp);
+            ExpPoints.Maximum = Program.PKTable.getExp(species.SelectedIndex + 1, 100);
             if (dumpedPKHeX.Data != null)
             {
                 dumpedPKHeX.Species = species.SelectedIndex + 1;
                 dumpedPKHeX.AltForm = 0;
                 dumpedPKHeX.AbilityNumber = 1;
                 dumpedPKHeX.Ability = absno[0];
+                dumpedPKHeX.EXP = newexp;
             }
             setSprite(species.SelectedIndex + 1, 0, false);
         }
@@ -2342,6 +2352,22 @@ namespace ntrbase
             if (data == null)
                 data = (Bitmap)Resources.ResourceManager.GetObject("unknown");
             pictureBox2.Image = data;
+        }
+
+        private void ExpPoints_ValueChanged(object sender, EventArgs e)
+        {
+            level.ValueChanged -= level_ValueChanged;
+            int newlevel = Program.PKTable.getLevel(species.SelectedIndex + 1, (int)ExpPoints.Value);
+            SetValue(level, newlevel);
+            level.ValueChanged += level_ValueChanged;
+        }
+
+        private void level_ValueChanged(object sender, EventArgs e)
+        {
+            ExpPoints.ValueChanged -= ExpPoints_ValueChanged;
+            uint newexp = Program.PKTable.getExp(species.SelectedIndex + 1, (int)level.Value);
+            SetValue(ExpPoints, newexp);
+            ExpPoints.ValueChanged += ExpPoints_ValueChanged;
         }
 
         // Poké ball image
@@ -2500,6 +2526,19 @@ namespace ntrbase
             if (ctrl.InvokeRequired)
             {
                 SetCheckedDelegate del = new SetCheckedDelegate(SetChecked);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.Checked = en;
+        }
+
+        delegate void SetCheckedRadioDelegate(RadioButton ctrl, bool en);
+
+        public static void SetCheckedRadio(RadioButton ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetCheckedRadioDelegate del = new SetCheckedRadioDelegate(SetCheckedRadio);
                 ctrl.Invoke(del, ctrl, en);
             }
             else
@@ -2703,7 +2742,7 @@ namespace ntrbase
 
         public void HandleRAMread(uint value)
         {
-            SetText(readResult, value.ToString("X8"));
+            SetText(readResult, "0x" + value.ToString("X8"));
         }
 
         public void addwaitingForData(uint newkey, DataReadyWaiting newvalue)
@@ -2961,7 +3000,7 @@ namespace ntrbase
                     filters.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
                 }
                 File.WriteAllText(saveFileDialog1.FileName, filters.ToString());
-                MessageBox.Show("Breeding Filters saved");
+                MessageBox.Show("Filter set saved");
             }
         }
 

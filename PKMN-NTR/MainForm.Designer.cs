@@ -153,11 +153,19 @@
             this.randomPID = new System.Windows.Forms.Button();
             this.DumpedEdit = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.level = new System.Windows.Forms.NumericUpDown();
             this.label31 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.ExpPoints = new System.Windows.Forms.NumericUpDown();
             this.dPID = new System.Windows.Forms.TextBox();
             this.Stats = new System.Windows.Forms.TabPage();
+            this.label63 = new System.Windows.Forms.Label();
+            this.HypT_Spe = new System.Windows.Forms.CheckBox();
+            this.HypT_SpD = new System.Windows.Forms.CheckBox();
+            this.HypT_SpA = new System.Windows.Forms.CheckBox();
+            this.HypT_Def = new System.Windows.Forms.CheckBox();
+            this.HypT_Atk = new System.Windows.Forms.CheckBox();
+            this.HypT_HP = new System.Windows.Forms.CheckBox();
             this.Moves = new System.Windows.Forms.TabPage();
             this.relearnmove1 = new System.Windows.Forms.ComboBox();
             this.relearnmove2 = new System.Windows.Forms.ComboBox();
@@ -382,13 +390,6 @@
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.HypT_HP = new System.Windows.Forms.CheckBox();
-            this.HypT_Atk = new System.Windows.Forms.CheckBox();
-            this.HypT_Def = new System.Windows.Forms.CheckBox();
-            this.HypT_SpA = new System.Windows.Forms.CheckBox();
-            this.HypT_SpD = new System.Windows.Forms.CheckBox();
-            this.HypT_Spe = new System.Windows.Forms.CheckBox();
-            this.label63 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -429,6 +430,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.friendship)).BeginInit();
             this.DumpedEdit.SuspendLayout();
             this.Main.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.level)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpPoints)).BeginInit();
             this.Stats.SuspendLayout();
             this.Moves.SuspendLayout();
@@ -514,7 +516,7 @@
             // 
             this.buttonConnect.Location = new System.Drawing.Point(130, 18);
             this.buttonConnect.Name = "buttonConnect";
-            this.buttonConnect.Size = new System.Drawing.Size(77, 21);
+            this.buttonConnect.Size = new System.Drawing.Size(82, 21);
             this.buttonConnect.TabIndex = 1;
             this.buttonConnect.Text = "Connect";
             this.buttonConnect.UseVisualStyleBackColor = true;
@@ -523,9 +525,9 @@
             // buttonDisconnect
             // 
             this.buttonDisconnect.Enabled = false;
-            this.buttonDisconnect.Location = new System.Drawing.Point(213, 18);
+            this.buttonDisconnect.Location = new System.Drawing.Point(218, 18);
             this.buttonDisconnect.Name = "buttonDisconnect";
-            this.buttonDisconnect.Size = new System.Drawing.Size(78, 21);
+            this.buttonDisconnect.Size = new System.Drawing.Size(83, 21);
             this.buttonDisconnect.TabIndex = 2;
             this.buttonDisconnect.Text = "Disconnect";
             this.buttonDisconnect.UseVisualStyleBackColor = true;
@@ -549,7 +551,7 @@
             this.groupBox1.Controls.Add(this.buttonConnect);
             this.groupBox1.Location = new System.Drawing.Point(7, 368);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(297, 48);
+            this.groupBox1.Size = new System.Drawing.Size(307, 48);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connection";
@@ -681,7 +683,7 @@
             this.dumpBox.Controls.Add(this.boxDump);
             this.dumpBox.Location = new System.Drawing.Point(7, 12);
             this.dumpBox.Name = "dumpBox";
-            this.dumpBox.Size = new System.Drawing.Size(297, 137);
+            this.dumpBox.Size = new System.Drawing.Size(311, 137);
             this.dumpBox.TabIndex = 1;
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump and Edit Pokémon";
@@ -689,7 +691,7 @@
             // radioBattleBox
             // 
             this.radioBattleBox.AutoSize = true;
-            this.radioBattleBox.Location = new System.Drawing.Point(218, 91);
+            this.radioBattleBox.Location = new System.Drawing.Point(224, 91);
             this.radioBattleBox.Name = "radioBattleBox";
             this.radioBattleBox.Size = new System.Drawing.Size(73, 17);
             this.radioBattleBox.TabIndex = 7;
@@ -701,7 +703,7 @@
             // 
             this.onlyView.AutoSize = true;
             this.onlyView.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.onlyView.Location = new System.Drawing.Point(224, 66);
+            this.onlyView.Location = new System.Drawing.Point(238, 66);
             this.onlyView.Name = "onlyView";
             this.onlyView.Size = new System.Drawing.Size(67, 17);
             this.onlyView.TabIndex = 11;
@@ -713,7 +715,7 @@
             // radioParty
             // 
             this.radioParty.AutoSize = true;
-            this.radioParty.Location = new System.Drawing.Point(218, 114);
+            this.radioParty.Location = new System.Drawing.Point(224, 114);
             this.radioParty.Name = "radioParty";
             this.radioParty.Size = new System.Drawing.Size(49, 17);
             this.radioParty.TabIndex = 10;
@@ -736,7 +738,7 @@
             // radioOpponent
             // 
             this.radioOpponent.AutoSize = true;
-            this.radioOpponent.Location = new System.Drawing.Point(113, 114);
+            this.radioOpponent.Location = new System.Drawing.Point(119, 114);
             this.radioOpponent.Name = "radioOpponent";
             this.radioOpponent.Size = new System.Drawing.Size(72, 17);
             this.radioOpponent.TabIndex = 9;
@@ -748,7 +750,7 @@
             // radioDaycare
             // 
             this.radioDaycare.AutoSize = true;
-            this.radioDaycare.Location = new System.Drawing.Point(113, 91);
+            this.radioDaycare.Location = new System.Drawing.Point(119, 91);
             this.radioDaycare.Name = "radioDaycare";
             this.radioDaycare.Size = new System.Drawing.Size(65, 17);
             this.radioDaycare.TabIndex = 6;
@@ -771,9 +773,9 @@
             // 
             // dumpBoxes
             // 
-            this.dumpBoxes.Location = new System.Drawing.Point(113, 62);
+            this.dumpBoxes.Location = new System.Drawing.Point(119, 62);
             this.dumpBoxes.Name = "dumpBoxes";
-            this.dumpBoxes.Size = new System.Drawing.Size(107, 23);
+            this.dumpBoxes.Size = new System.Drawing.Size(113, 23);
             this.dumpBoxes.TabIndex = 4;
             this.dumpBoxes.Text = "Dump All Boxes";
             this.dumpBoxes.UseVisualStyleBackColor = true;
@@ -792,7 +794,7 @@
             // 
             this.nameek6.Location = new System.Drawing.Point(113, 36);
             this.nameek6.Name = "nameek6";
-            this.nameek6.Size = new System.Drawing.Size(178, 20);
+            this.nameek6.Size = new System.Drawing.Size(192, 20);
             this.nameek6.TabIndex = 2;
             this.nameek6.Text = "pkmn";
             // 
@@ -800,7 +802,7 @@
             // 
             this.dumpPokemon.Location = new System.Drawing.Point(9, 62);
             this.dumpPokemon.Name = "dumpPokemon";
-            this.dumpPokemon.Size = new System.Drawing.Size(98, 23);
+            this.dumpPokemon.Size = new System.Drawing.Size(104, 23);
             this.dumpPokemon.TabIndex = 3;
             this.dumpPokemon.Text = "Dump";
             this.dumpPokemon.UseVisualStyleBackColor = true;
@@ -966,7 +968,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(185, 143);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 23);
+            this.button1.Size = new System.Drawing.Size(108, 23);
             this.button1.TabIndex = 13;
             this.button1.Text = "Write";
             this.button1.UseVisualStyleBackColor = true;
@@ -1107,7 +1109,7 @@
             // 
             this.isEgg.AutoSize = true;
             this.isEgg.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.isEgg.Location = new System.Drawing.Point(238, 66);
+            this.isEgg.Location = new System.Drawing.Point(248, 66);
             this.isEgg.Name = "isEgg";
             this.isEgg.Size = new System.Drawing.Size(45, 17);
             this.isEgg.TabIndex = 10;
@@ -1984,7 +1986,7 @@
             0,
             0});
             this.friendship.Name = "friendship";
-            this.friendship.Size = new System.Drawing.Size(62, 20);
+            this.friendship.Size = new System.Drawing.Size(72, 20);
             this.friendship.TabIndex = 12;
             // 
             // gender
@@ -1993,7 +1995,7 @@
             this.gender.ForeColor = System.Drawing.Color.Gray;
             this.gender.Location = new System.Drawing.Point(201, 62);
             this.gender.Name = "gender";
-            this.gender.Size = new System.Drawing.Size(31, 22);
+            this.gender.Size = new System.Drawing.Size(41, 22);
             this.gender.TabIndex = 9;
             this.gender.Text = "-";
             this.gender.UseVisualStyleBackColor = true;
@@ -2003,7 +2005,7 @@
             // 
             this.randomPID.Location = new System.Drawing.Point(219, 36);
             this.randomPID.Name = "randomPID";
-            this.randomPID.Size = new System.Drawing.Size(64, 22);
+            this.randomPID.Size = new System.Drawing.Size(74, 22);
             this.randomPID.TabIndex = 8;
             this.randomPID.Text = "Random";
             this.randomPID.UseVisualStyleBackColor = true;
@@ -2019,13 +2021,14 @@
             this.DumpedEdit.Multiline = true;
             this.DumpedEdit.Name = "DumpedEdit";
             this.DumpedEdit.SelectedIndex = 0;
-            this.DumpedEdit.Size = new System.Drawing.Size(297, 198);
+            this.DumpedEdit.Size = new System.Drawing.Size(307, 198);
             this.DumpedEdit.TabIndex = 2;
             this.DumpedEdit.TabStop = false;
             // 
             // Main
             // 
             this.Main.BackColor = System.Drawing.SystemColors.Control;
+            this.Main.Controls.Add(this.level);
             this.Main.Controls.Add(this.label31);
             this.Main.Controls.Add(this.label56);
             this.Main.Controls.Add(this.button1);
@@ -2055,9 +2058,28 @@
             this.Main.Location = new System.Drawing.Point(4, 22);
             this.Main.Name = "Main";
             this.Main.Padding = new System.Windows.Forms.Padding(3);
-            this.Main.Size = new System.Drawing.Size(289, 172);
+            this.Main.Size = new System.Drawing.Size(299, 172);
             this.Main.TabIndex = 2;
             this.Main.Text = "Main";
+            // 
+            // level
+            // 
+            this.level.Location = new System.Drawing.Point(253, 92);
+            this.level.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.level.Name = "level";
+            this.level.Size = new System.Drawing.Size(40, 20);
+            this.level.TabIndex = 94;
+            this.toolTip1.SetToolTip(this.level, "Level");
+            this.level.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.level.ValueChanged += new System.EventHandler(this.level_ValueChanged);
             // 
             // label31
             // 
@@ -2079,21 +2101,22 @@
             // 
             // ExpPoints
             // 
-            this.ExpPoints.Location = new System.Drawing.Point(201, 92);
+            this.ExpPoints.Location = new System.Drawing.Point(188, 92);
             this.ExpPoints.Maximum = new decimal(new int[] {
-            9999999,
+            1640000,
             0,
             0,
             0});
             this.ExpPoints.Name = "ExpPoints";
-            this.ExpPoints.Size = new System.Drawing.Size(82, 20);
+            this.ExpPoints.Size = new System.Drawing.Size(65, 20);
             this.ExpPoints.TabIndex = 11;
+            this.ExpPoints.ValueChanged += new System.EventHandler(this.ExpPoints_ValueChanged);
             // 
             // dPID
             // 
             this.dPID.Location = new System.Drawing.Point(191, 11);
             this.dPID.Name = "dPID";
-            this.dPID.Size = new System.Drawing.Size(92, 20);
+            this.dPID.Size = new System.Drawing.Size(102, 20);
             this.dPID.TabIndex = 6;
             this.dPID.TextChanged += new System.EventHandler(this.dPID_TextChanged);
             // 
@@ -2132,9 +2155,78 @@
             this.Stats.Location = new System.Drawing.Point(4, 22);
             this.Stats.Name = "Stats";
             this.Stats.Padding = new System.Windows.Forms.Padding(3);
-            this.Stats.Size = new System.Drawing.Size(289, 172);
+            this.Stats.Size = new System.Drawing.Size(299, 172);
             this.Stats.TabIndex = 0;
             this.Stats.Text = "Stats";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(126, 4);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(22, 13);
+            this.label63.TabIndex = 25;
+            this.label63.Text = "HT";
+            // 
+            // HypT_Spe
+            // 
+            this.HypT_Spe.AutoSize = true;
+            this.HypT_Spe.Enabled = false;
+            this.HypT_Spe.Location = new System.Drawing.Point(130, 123);
+            this.HypT_Spe.Name = "HypT_Spe";
+            this.HypT_Spe.Size = new System.Drawing.Size(15, 14);
+            this.HypT_Spe.TabIndex = 24;
+            this.HypT_Spe.UseVisualStyleBackColor = true;
+            // 
+            // HypT_SpD
+            // 
+            this.HypT_SpD.AutoSize = true;
+            this.HypT_SpD.Enabled = false;
+            this.HypT_SpD.Location = new System.Drawing.Point(130, 102);
+            this.HypT_SpD.Name = "HypT_SpD";
+            this.HypT_SpD.Size = new System.Drawing.Size(15, 14);
+            this.HypT_SpD.TabIndex = 24;
+            this.HypT_SpD.UseVisualStyleBackColor = true;
+            // 
+            // HypT_SpA
+            // 
+            this.HypT_SpA.AutoSize = true;
+            this.HypT_SpA.Enabled = false;
+            this.HypT_SpA.Location = new System.Drawing.Point(130, 81);
+            this.HypT_SpA.Name = "HypT_SpA";
+            this.HypT_SpA.Size = new System.Drawing.Size(15, 14);
+            this.HypT_SpA.TabIndex = 24;
+            this.HypT_SpA.UseVisualStyleBackColor = true;
+            // 
+            // HypT_Def
+            // 
+            this.HypT_Def.AutoSize = true;
+            this.HypT_Def.Enabled = false;
+            this.HypT_Def.Location = new System.Drawing.Point(130, 60);
+            this.HypT_Def.Name = "HypT_Def";
+            this.HypT_Def.Size = new System.Drawing.Size(15, 14);
+            this.HypT_Def.TabIndex = 24;
+            this.HypT_Def.UseVisualStyleBackColor = true;
+            // 
+            // HypT_Atk
+            // 
+            this.HypT_Atk.AutoSize = true;
+            this.HypT_Atk.Enabled = false;
+            this.HypT_Atk.Location = new System.Drawing.Point(130, 39);
+            this.HypT_Atk.Name = "HypT_Atk";
+            this.HypT_Atk.Size = new System.Drawing.Size(15, 14);
+            this.HypT_Atk.TabIndex = 23;
+            this.HypT_Atk.UseVisualStyleBackColor = true;
+            // 
+            // HypT_HP
+            // 
+            this.HypT_HP.AutoSize = true;
+            this.HypT_HP.Enabled = false;
+            this.HypT_HP.Location = new System.Drawing.Point(130, 18);
+            this.HypT_HP.Name = "HypT_HP";
+            this.HypT_HP.Size = new System.Drawing.Size(15, 14);
+            this.HypT_HP.TabIndex = 22;
+            this.HypT_HP.UseVisualStyleBackColor = true;
             // 
             // Moves
             // 
@@ -2158,7 +2250,7 @@
             this.Moves.Location = new System.Drawing.Point(4, 22);
             this.Moves.Name = "Moves";
             this.Moves.Padding = new System.Windows.Forms.Padding(3);
-            this.Moves.Size = new System.Drawing.Size(289, 172);
+            this.Moves.Size = new System.Drawing.Size(299, 172);
             this.Moves.TabIndex = 3;
             this.Moves.Text = "Moves";
             // 
@@ -2250,7 +2342,7 @@
             this.OT.Location = new System.Drawing.Point(4, 22);
             this.OT.Name = "OT";
             this.OT.Padding = new System.Windows.Forms.Padding(3);
-            this.OT.Size = new System.Drawing.Size(289, 172);
+            this.OT.Size = new System.Drawing.Size(299, 172);
             this.OT.TabIndex = 1;
             this.OT.Text = "OT";
             // 
@@ -2943,7 +3035,7 @@
             this.miscTabs.Controls.Add(this.tabSoftReset);
             this.miscTabs.Controls.Add(this.tabWonderTrade);
             this.miscTabs.Controls.Add(this.tabNTRlog);
-            this.miscTabs.Location = new System.Drawing.Point(310, 12);
+            this.miscTabs.Location = new System.Drawing.Point(320, 12);
             this.miscTabs.Name = "miscTabs";
             this.miscTabs.SelectedIndex = 0;
             this.miscTabs.Size = new System.Drawing.Size(566, 404);
@@ -4685,80 +4777,11 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(264, 152);
+            this.pictureBox2.Location = new System.Drawing.Point(274, 152);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(40, 30);
             this.pictureBox2.TabIndex = 18;
             this.pictureBox2.TabStop = false;
-            // 
-            // HypT_HP
-            // 
-            this.HypT_HP.AutoSize = true;
-            this.HypT_HP.Enabled = false;
-            this.HypT_HP.Location = new System.Drawing.Point(130, 18);
-            this.HypT_HP.Name = "HypT_HP";
-            this.HypT_HP.Size = new System.Drawing.Size(15, 14);
-            this.HypT_HP.TabIndex = 22;
-            this.HypT_HP.UseVisualStyleBackColor = true;
-            // 
-            // HypT_Atk
-            // 
-            this.HypT_Atk.AutoSize = true;
-            this.HypT_Atk.Enabled = false;
-            this.HypT_Atk.Location = new System.Drawing.Point(130, 39);
-            this.HypT_Atk.Name = "HypT_Atk";
-            this.HypT_Atk.Size = new System.Drawing.Size(15, 14);
-            this.HypT_Atk.TabIndex = 23;
-            this.HypT_Atk.UseVisualStyleBackColor = true;
-            // 
-            // HypT_Def
-            // 
-            this.HypT_Def.AutoSize = true;
-            this.HypT_Def.Enabled = false;
-            this.HypT_Def.Location = new System.Drawing.Point(130, 60);
-            this.HypT_Def.Name = "HypT_Def";
-            this.HypT_Def.Size = new System.Drawing.Size(15, 14);
-            this.HypT_Def.TabIndex = 24;
-            this.HypT_Def.UseVisualStyleBackColor = true;
-            // 
-            // HypT_SpA
-            // 
-            this.HypT_SpA.AutoSize = true;
-            this.HypT_SpA.Enabled = false;
-            this.HypT_SpA.Location = new System.Drawing.Point(130, 81);
-            this.HypT_SpA.Name = "HypT_SpA";
-            this.HypT_SpA.Size = new System.Drawing.Size(15, 14);
-            this.HypT_SpA.TabIndex = 24;
-            this.HypT_SpA.UseVisualStyleBackColor = true;
-            // 
-            // HypT_SpD
-            // 
-            this.HypT_SpD.AutoSize = true;
-            this.HypT_SpD.Enabled = false;
-            this.HypT_SpD.Location = new System.Drawing.Point(130, 102);
-            this.HypT_SpD.Name = "HypT_SpD";
-            this.HypT_SpD.Size = new System.Drawing.Size(15, 14);
-            this.HypT_SpD.TabIndex = 24;
-            this.HypT_SpD.UseVisualStyleBackColor = true;
-            // 
-            // HypT_Spe
-            // 
-            this.HypT_Spe.AutoSize = true;
-            this.HypT_Spe.Enabled = false;
-            this.HypT_Spe.Location = new System.Drawing.Point(130, 123);
-            this.HypT_Spe.Name = "HypT_Spe";
-            this.HypT_Spe.Size = new System.Drawing.Size(15, 14);
-            this.HypT_Spe.TabIndex = 24;
-            this.HypT_Spe.UseVisualStyleBackColor = true;
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(126, 4);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(22, 13);
-            this.label63.TabIndex = 25;
-            this.label63.Text = "HT";
             // 
             // MainForm
             // 
@@ -4766,7 +4789,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(882, 430);
+            this.ClientSize = new System.Drawing.Size(891, 430);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.stopBotButton);
             this.Controls.Add(this.miscTabs);
@@ -4824,6 +4847,7 @@
             this.DumpedEdit.ResumeLayout(false);
             this.Main.ResumeLayout(false);
             this.Main.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.level)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpPoints)).EndInit();
             this.Stats.ResumeLayout(false);
             this.Stats.PerformLayout();
@@ -5270,6 +5294,7 @@
         private System.Windows.Forms.CheckBox HypT_Def;
         private System.Windows.Forms.CheckBox HypT_Atk;
         private System.Windows.Forms.CheckBox HypT_HP;
+        private System.Windows.Forms.NumericUpDown level;
     }
 }
 

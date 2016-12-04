@@ -202,7 +202,7 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)breedbotstates.walkleft1:
-                        Report("Walk to Day Care");
+                        Report("Walk to Nursery");
                         Program.helper.quickstick(-100, 0, 500);
                         await Task.Delay(1000);
                         botState = (int)breedbotstates.checkmap1;
