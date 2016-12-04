@@ -56,12 +56,14 @@ namespace ntrbase
         public string lastlog;
         public int currentfilter = 0;
         public static readonly string readerror = "An error has ocurred while reading data from your 3DS RAM, please check connection and try again.";
-        public static readonly string toucherror = "An error has ocurred while sending a touch screen command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
-        public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
+        public static readonly string toucherror = "An error has ocurred while sending a Touch Screen command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
+        public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
+        public static readonly string stickerror = "An error has ocurred while sending a Control Stick command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
         public static readonly string writeerror = "An error has ocurred while writting data to your 3DS RAM, please check connection and try again.";
         private WonderTradeBot6 WTBot6;
         private WonderTradeBot7 WTBot7;
         private BreedingBot6 BreedBot6;
+        private BreedingBot7 BreedBot7;
         private SoftResetbot6 SRBot6;
 
         //Game information
@@ -297,7 +299,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -700,6 +702,7 @@ namespace ntrbase
             cloneBoxTo.Maximum = BOXES;
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
+            boxBreed.Maximum = BOXES;
             SetText(label3, "Poké Miles:");
         }
 
@@ -730,6 +733,7 @@ namespace ntrbase
             cloneBoxTo.Maximum = BOXES;
             cloneBoxFrom.Maximum = BOXES;
             writeBoxTo.Maximum = BOXES;
+            boxBreed.Maximum = BOXES;
             SetText(label3, "Current FC:");
 
             // Apply connection patch
@@ -2618,10 +2622,13 @@ namespace ntrbase
             switch (botnumber)
             {
                 case 1: // Breeding bot
-                    BreedBot6.botstop = true;
+                    if (gen7)
+                        BreedBot7.botstop = true;
+                    else
+                        BreedBot6.botstop = true;
                     break;
                 case 2: // Soft-reset bot
-                    SRBot6.botstop = true;
+                        SRBot6.botstop = true;
                     break;
                 case 3: // Wonder Trade bot
                     if (gen7)
@@ -3193,13 +3200,22 @@ namespace ntrbase
                 disableControls();
                 stopBotButton.Enabled = true;
                 txtLog.Clear();
-                bool oras;
-                if (game == GameType.X || game == GameType.Y)
-                    oras = false;
+                Task<int> Bot;
+                if (gen7)
+                {
+                    BreedBot7 = new BreedingBot7(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, readESV.Checked);
+                    Bot = BreedBot7.RunBot();
+                }
                 else
-                    oras = true;
-                BreedBot6 = new BreedingBot6(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, OrganizeTop.Checked, radioDayCare1.Checked, readESV.Checked, quickBreed.Checked, oras);
-                Task<int> Bot = BreedBot6.RunBot();
+                {
+                    bool oras;
+                    if (game == GameType.X || game == GameType.Y)
+                        oras = false;
+                    else
+                        oras = true;
+                    BreedBot6 = new BreedingBot6(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, OrganizeTop.Checked, radioDayCare1.Checked, readESV.Checked, quickBreed.Checked, oras);
+                    Bot = BreedBot6.RunBot();
+                }
                 int result = await Bot;
                 switch (await Bot)
                 {

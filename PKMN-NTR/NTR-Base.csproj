@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bot\BreedingBot6.cs" />
+    <Compile Include="Bot\BreedingBot7.cs" />
     <Compile Include="Bot\SoftResetbot6.cs" />
     <Compile Include="Bot\WonderTradeBot6.cs" />
     <Compile Include="Bot\WonderTradeBot7.cs" />

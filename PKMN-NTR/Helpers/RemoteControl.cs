@@ -221,8 +221,8 @@ namespace ntrbase.Helpers
             return 0x01000000 + hexY * 0x1000 + hexX;
         }
 
-        // Control Screen Handler
-        public async Task<bool> waitsitck(decimal Xvalue, decimal Yvalue)
+        // Control Stick Handler
+        public async Task<bool> waitsitck(int Xvalue, int Yvalue)
         {
             // Get and send hex coordinates
             WriteLastLog("");
@@ -257,7 +257,7 @@ namespace ntrbase.Helpers
             }
         }
 
-        public async void quickstick(decimal Xvalue, decimal Yvalue, int time)
+        public async void quickstick(int Xvalue, int Yvalue, int time)
         {
             byte[] buttonByte = BitConverter.GetBytes(getstickhex(Xvalue, Yvalue));
             Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
@@ -266,7 +266,7 @@ namespace ntrbase.Helpers
             Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
         }
 
-        private uint getstickhex(decimal Xvalue, decimal Yvalue)
+        private uint getstickhex(int Xvalue, int Yvalue)
         {
             uint hexX = Convert.ToUInt32((Xvalue + 100) * 0xFFF / 200);
             uint hexY = Convert.ToUInt32((Yvalue + 100) * 0xFFF / 200);

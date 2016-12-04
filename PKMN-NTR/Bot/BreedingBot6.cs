@@ -66,11 +66,11 @@ namespace ntrbase.Bot
         private uint computery;
         private uint eggoff;
 
-        public BreedingBot6(int selectedmode, int startbox, int startlsot, int amount, bool organizeboxesposition, bool mauvilledaycare, bool readesvafterdep, bool quickbreedflag, bool orasgame)
+        public BreedingBot6(int selectedmode, int startbox, int startslot, int amount, bool organizeboxesposition, bool mauvilledaycare, bool readesvafterdep, bool quickbreedflag, bool orasgame)
         {
             mode = selectedmode;
             currentbox = startbox - 1;
-            currentslot = startlsot - 1;
+            currentslot = startslot - 1;
             quantity = amount;
             organizeboxes = organizeboxesposition;
             mauvdaycare = mauvilledaycare;
@@ -210,7 +210,8 @@ namespace ntrbase.Bot
                         else
                         {
                             botresult = 1;
-                            botState = (int)breedbotstates.botexit;
+                            Report("Error detected");
+                            attempts = 11;
                         }
                         break;
 
@@ -533,9 +534,9 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            attempts++;
                             botresult = 7;
-                            botState = (int)breedbotstates.botexit;
+                            Report("Error detected");
+                            attempts = 11;
                         }
                         break;
 
@@ -549,9 +550,9 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            attempts++;
                             botresult = 7;
-                            botState = (int)breedbotstates.botexit;
+                            Report("Error detected");
+                            attempts = 11;
                         }
                         break;
 
@@ -597,7 +598,8 @@ namespace ntrbase.Bot
                         {
                             case -2: // Read error
                                 botresult = 2;
-                                botState = (int)breedbotstates.botexit;
+                                Report("Error detected");
+                                attempts = 11;
                                 break;
                             case -1: // Empty slot
                                 botState = (int)breedbotstates.testboxchange;
@@ -704,7 +706,8 @@ namespace ntrbase.Bot
                         else
                         {
                             botresult = 6;
-                            botState = (int)breedbotstates.botexit;
+                            Report("Error detected");
+                            attempts = 11;
                         }
                         break;
 
@@ -716,7 +719,8 @@ namespace ntrbase.Bot
                         else
                         {
                             botresult = 6;
-                            botState = (int)breedbotstates.botexit;
+                            Report("Error detected");
+                            attempts = 11;
                         }
                         break;
 
@@ -738,7 +742,8 @@ namespace ntrbase.Bot
                         else
                         {
                             botresult = 6;
-                            botState = (int)breedbotstates.botexit;
+                            Report("Error detected");
+                            attempts = 11;
                         }
                         break;
 
@@ -767,7 +772,8 @@ namespace ntrbase.Bot
                                 botState = (int)breedbotstates.retirefromcomputer;
                             else
                             {
-                                botState = (int)breedbotstates.botexit;
+                                Report("Error detected");
+                                attempts = 11;
                             }
                         }
                         else
@@ -944,7 +950,8 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = 2;
-                                botState = (int)breedbotstates.botexit;
+                                Report("Error detected");
+                                attempts = 11;
                                 break;
                             }
                             if (testsok)
@@ -1001,6 +1008,7 @@ namespace ntrbase.Bot
                     if (maxreconnect > 0)
                     {
                         waitTaskbool = Program.gCmdWindow.Reconnect();
+                        maxreconnect--;
                         if (await waitTaskbool)
                         {
                             await Task.Delay(1000);
@@ -1013,7 +1021,10 @@ namespace ntrbase.Bot
                         }
                     }
                     else
+                    {
+                        Report("Bot stop");
                         botstop = true;
+                    }
                 }
             }
             return botresult;
