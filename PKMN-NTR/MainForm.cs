@@ -1707,12 +1707,15 @@ namespace ntrbase
                 dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
                 dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
 
-                dumpedPKHeX.HT_HP = HypT_HP.Checked;
-                dumpedPKHeX.HT_ATK = HypT_Atk.Checked;
-                dumpedPKHeX.HT_DEF = HypT_Def.Checked;
-                dumpedPKHeX.HT_SPA = HypT_SpA.Checked;
-                dumpedPKHeX.HT_SPD = HypT_SpD.Checked;
-                dumpedPKHeX.HT_SPE = HypT_Spe.Checked;
+                if (gen7)
+                {
+                    dumpedPKHeX.HT_HP = HypT_HP.Checked;
+                    dumpedPKHeX.HT_ATK = HypT_Atk.Checked;
+                    dumpedPKHeX.HT_DEF = HypT_Def.Checked;
+                    dumpedPKHeX.HT_SPA = HypT_SpA.Checked;
+                    dumpedPKHeX.HT_SPD = HypT_SpD.Checked;
+                    dumpedPKHeX.HT_SPE = HypT_Spe.Checked;
+                }
 
                 dumpedPKHeX.EXP = (uint)ExpPoints.Value;
                 dumpedPKHeX.Ball = ball.SelectedIndex + 1;
