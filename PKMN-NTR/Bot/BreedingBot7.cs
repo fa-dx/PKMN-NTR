@@ -32,7 +32,6 @@ namespace ntrbase.Bot
         private int filterslot;
 
         private uint eggOff = 0x3313EDD8;
-        //private uint mapOff = 0x330D6734;
         private uint posXOff = 0x33199260;
         private uint posYOff = 0x3319E2C4;
         private uint dialogOff = 0x63DD68;

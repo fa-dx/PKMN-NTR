@@ -516,6 +516,13 @@ namespace ntrbase
         public int Met_Level { get { return Data[0xDD] & ~0x80; } set { Data[0xDD] = (byte)((Data[0xDD] & 0x80) | value); } }
         public int OT_Gender { get { return Data[0xDD] >> 7; } set { Data[0xDD] = (byte)((Data[0xDD] & ~0x80) | (value << 7)); } }
         public int EncounterType { get { return Data[0xDE]; } set { Data[0xDE] = (byte)value; } }
+        public int HyperTrainFlags { get { return Data[0xDE]; } set { Data[0xDE] = (byte)value; } }
+        public bool HT_HP { get { return ((HyperTrainFlags >> 0) & 1) == 1; } set { HyperTrainFlags = (HyperTrainFlags & ~(1 << 0)) | ((value ? 1 : 0) << 0); } }
+        public bool HT_ATK { get { return ((HyperTrainFlags >> 1) & 1) == 1; } set { HyperTrainFlags = (HyperTrainFlags & ~(1 << 1)) | ((value ? 1 : 0) << 1); } }
+        public bool HT_DEF { get { return ((HyperTrainFlags >> 2) & 1) == 1; } set { HyperTrainFlags = (HyperTrainFlags & ~(1 << 2)) | ((value ? 1 : 0) << 2); } }
+        public bool HT_SPA { get { return ((HyperTrainFlags >> 3) & 1) == 1; } set { HyperTrainFlags = (HyperTrainFlags & ~(1 << 3)) | ((value ? 1 : 0) << 3); } }
+        public bool HT_SPD { get { return ((HyperTrainFlags >> 4) & 1) == 1; } set { HyperTrainFlags = (HyperTrainFlags & ~(1 << 4)) | ((value ? 1 : 0) << 4); } }
+        public bool HT_SPE { get { return ((HyperTrainFlags >> 5) & 1) == 1; } set { HyperTrainFlags = (HyperTrainFlags & ~(1 << 5)) | ((value ? 1 : 0) << 5); } }
         public int Version { get { return Data[0xDF]; } set { Data[0xDF] = (byte)value; } }
         public int Country { get { return Data[0xE0]; } set { Data[0xE0] = (byte)value; } }
         public int Region { get { return Data[0xE1]; } set { Data[0xE1] = (byte)value; } }

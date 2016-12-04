@@ -299,7 +299,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, setShiny, randomPID, gender, isEgg, ExpPoints, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe,  move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -1485,6 +1485,15 @@ namespace ntrbase
                 SetValue(evSPANum, dumpedPKHeX.EV_SPA);
                 SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
                 SetValue(evSPENum, dumpedPKHeX.EV_SPE);
+                if (gen7)
+                {
+                    SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
+                    SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
+                    SetChecked(HypT_Def, dumpedPKHeX.HT_DEF);
+                    SetChecked(HypT_SpA, dumpedPKHeX.HT_SPA);
+                    SetChecked(HypT_SpD, dumpedPKHeX.HT_SPD);
+                    SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
+                }
 
                 SetSelectedIndex(move1, dumpedPKHeX.Move1);
                 SetSelectedIndex(move2, dumpedPKHeX.Move2);
@@ -1697,6 +1706,13 @@ namespace ntrbase
                 dumpedPKHeX.EV_SPE = (int)evSPENum.Value;
                 dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
                 dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
+
+                dumpedPKHeX.HT_HP = HypT_HP.Checked;
+                dumpedPKHeX.HT_ATK = HypT_Atk.Checked;
+                dumpedPKHeX.HT_DEF = HypT_Def.Checked;
+                dumpedPKHeX.HT_SPA = HypT_SpA.Checked;
+                dumpedPKHeX.HT_SPD = HypT_SpD.Checked;
+                dumpedPKHeX.HT_SPE = HypT_Spe.Checked;
 
                 dumpedPKHeX.EXP = (uint)ExpPoints.Value;
                 dumpedPKHeX.Ball = ball.SelectedIndex + 1;
@@ -2334,12 +2350,54 @@ namespace ntrbase
                 pictureBox1.Image = null;
         }
 
-        // Automatic Hidden Power Calculation
+        // Automatic Hidden Power Calculation and Hyper Training Boxes
         private void ivChanged(object sender, EventArgs e)
         {
             int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
             SetText(hiddenPower, Program.PKTable.HPName[hp]);
             SetColor(hiddenPower, Program.PKTable.HPColor[hp], true);
+            if (ivHPNum.Value == 31)
+            {
+                HypT_HP.Checked = false;
+                HypT_HP.Enabled = false;
+            }
+            else
+                HypT_HP.Enabled = true;
+            if (ivATKNum.Value == 31)
+            {
+                HypT_Atk.Checked = false;
+                HypT_Atk.Enabled = false;
+            }
+            else
+                HypT_Atk.Enabled = true;
+            if (ivDEFNum.Value == 31)
+            {
+                HypT_Def.Checked = false;
+                HypT_Def.Enabled = false;
+            }
+            else
+                HypT_Def.Enabled = true;
+            if (ivSPANum.Value == 31)
+            {
+                HypT_SpA.Checked = false;
+                HypT_SpA.Enabled = false;
+            }
+            else
+                HypT_SpA.Enabled = true;
+            if (ivSPDNum.Value == 31)
+            {
+                HypT_SpD.Checked = false;
+                HypT_SpD.Enabled = false;
+            }
+            else
+                HypT_SpD.Enabled = true;
+            if (ivSPENum.Value == 31)
+            {
+                HypT_Spe.Checked = false;
+                HypT_Spe.Enabled = false;
+            }
+            else
+                HypT_Spe.Enabled = true;
         }
 
         // Control Stick controls

@@ -382,6 +382,13 @@
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.HypT_HP = new System.Windows.Forms.CheckBox();
+            this.HypT_Atk = new System.Windows.Forms.CheckBox();
+            this.HypT_Def = new System.Windows.Forms.CheckBox();
+            this.HypT_SpA = new System.Windows.Forms.CheckBox();
+            this.HypT_SpD = new System.Windows.Forms.CheckBox();
+            this.HypT_Spe = new System.Windows.Forms.CheckBox();
+            this.label63 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -1260,10 +1267,10 @@
             // hiddenPower
             // 
             this.hiddenPower.BackColor = System.Drawing.SystemColors.Control;
-            this.hiddenPower.Location = new System.Drawing.Point(184, 16);
+            this.hiddenPower.Location = new System.Drawing.Point(64, 146);
             this.hiddenPower.Name = "hiddenPower";
             this.hiddenPower.ReadOnly = true;
-            this.hiddenPower.Size = new System.Drawing.Size(50, 20);
+            this.hiddenPower.Size = new System.Drawing.Size(56, 20);
             this.hiddenPower.TabIndex = 12;
             this.hiddenPower.TabStop = false;
             this.hiddenPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1271,7 +1278,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(126, 19);
+            this.label29.Location = new System.Drawing.Point(6, 149);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(52, 13);
             this.label29.TabIndex = 21;
@@ -2093,6 +2100,13 @@
             // Stats
             // 
             this.Stats.BackColor = System.Drawing.SystemColors.Control;
+            this.Stats.Controls.Add(this.label63);
+            this.Stats.Controls.Add(this.HypT_Spe);
+            this.Stats.Controls.Add(this.HypT_SpD);
+            this.Stats.Controls.Add(this.HypT_SpA);
+            this.Stats.Controls.Add(this.HypT_Def);
+            this.Stats.Controls.Add(this.HypT_Atk);
+            this.Stats.Controls.Add(this.HypT_HP);
             this.Stats.Controls.Add(this.ivHPNum);
             this.Stats.Controls.Add(this.evHPNum);
             this.Stats.Controls.Add(this.evATKNum);
@@ -4677,6 +4691,75 @@
             this.pictureBox2.TabIndex = 18;
             this.pictureBox2.TabStop = false;
             // 
+            // HypT_HP
+            // 
+            this.HypT_HP.AutoSize = true;
+            this.HypT_HP.Enabled = false;
+            this.HypT_HP.Location = new System.Drawing.Point(130, 18);
+            this.HypT_HP.Name = "HypT_HP";
+            this.HypT_HP.Size = new System.Drawing.Size(15, 14);
+            this.HypT_HP.TabIndex = 22;
+            this.HypT_HP.UseVisualStyleBackColor = true;
+            // 
+            // HypT_Atk
+            // 
+            this.HypT_Atk.AutoSize = true;
+            this.HypT_Atk.Enabled = false;
+            this.HypT_Atk.Location = new System.Drawing.Point(130, 39);
+            this.HypT_Atk.Name = "HypT_Atk";
+            this.HypT_Atk.Size = new System.Drawing.Size(15, 14);
+            this.HypT_Atk.TabIndex = 23;
+            this.HypT_Atk.UseVisualStyleBackColor = true;
+            // 
+            // HypT_Def
+            // 
+            this.HypT_Def.AutoSize = true;
+            this.HypT_Def.Enabled = false;
+            this.HypT_Def.Location = new System.Drawing.Point(130, 60);
+            this.HypT_Def.Name = "HypT_Def";
+            this.HypT_Def.Size = new System.Drawing.Size(15, 14);
+            this.HypT_Def.TabIndex = 24;
+            this.HypT_Def.UseVisualStyleBackColor = true;
+            // 
+            // HypT_SpA
+            // 
+            this.HypT_SpA.AutoSize = true;
+            this.HypT_SpA.Enabled = false;
+            this.HypT_SpA.Location = new System.Drawing.Point(130, 81);
+            this.HypT_SpA.Name = "HypT_SpA";
+            this.HypT_SpA.Size = new System.Drawing.Size(15, 14);
+            this.HypT_SpA.TabIndex = 24;
+            this.HypT_SpA.UseVisualStyleBackColor = true;
+            // 
+            // HypT_SpD
+            // 
+            this.HypT_SpD.AutoSize = true;
+            this.HypT_SpD.Enabled = false;
+            this.HypT_SpD.Location = new System.Drawing.Point(130, 102);
+            this.HypT_SpD.Name = "HypT_SpD";
+            this.HypT_SpD.Size = new System.Drawing.Size(15, 14);
+            this.HypT_SpD.TabIndex = 24;
+            this.HypT_SpD.UseVisualStyleBackColor = true;
+            // 
+            // HypT_Spe
+            // 
+            this.HypT_Spe.AutoSize = true;
+            this.HypT_Spe.Enabled = false;
+            this.HypT_Spe.Location = new System.Drawing.Point(130, 123);
+            this.HypT_Spe.Name = "HypT_Spe";
+            this.HypT_Spe.Size = new System.Drawing.Size(15, 14);
+            this.HypT_Spe.TabIndex = 24;
+            this.HypT_Spe.UseVisualStyleBackColor = true;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(126, 4);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(22, 13);
+            this.label63.TabIndex = 25;
+            this.label63.Text = "HT";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5180,6 +5263,13 @@
         private System.Windows.Forms.TrackBar StickY;
         private System.Windows.Forms.TrackBar StickX;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.CheckBox HypT_Spe;
+        private System.Windows.Forms.CheckBox HypT_SpD;
+        private System.Windows.Forms.CheckBox HypT_SpA;
+        private System.Windows.Forms.CheckBox HypT_Def;
+        private System.Windows.Forms.CheckBox HypT_Atk;
+        private System.Windows.Forms.CheckBox HypT_HP;
     }
 }
 
