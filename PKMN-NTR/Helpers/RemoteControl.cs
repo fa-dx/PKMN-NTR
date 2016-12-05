@@ -329,6 +329,7 @@ namespace ntrbase.Helpers
             else if (validator.Species != 0)
             {
                 Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
+                Program.gCmdWindow.updateTabs();
                 return validator.PID;
             }
             else // Empty slot
@@ -352,6 +353,7 @@ namespace ntrbase.Helpers
             else if (validator.Species != 0)
             {
                 Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
+                Program.gCmdWindow.updateTabs();
                 return validator.PID;
             }
             else // Empty slot
