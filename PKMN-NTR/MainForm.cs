@@ -2385,48 +2385,51 @@ namespace ntrbase
             int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
             SetText(hiddenPower, Program.PKTable.HPName[hp]);
             SetColor(hiddenPower, Program.PKTable.HPColor[hp], true);
-            if (ivHPNum.Value == 31)
+            if (gen7)
             {
-                HypT_HP.Checked = false;
-                HypT_HP.Enabled = false;
+                if (ivHPNum.Value == 31)
+                {
+                    HypT_HP.Checked = false;
+                    HypT_HP.Enabled = false;
+                }
+                else
+                    HypT_HP.Enabled = true;
+                if (ivATKNum.Value == 31)
+                {
+                    HypT_Atk.Checked = false;
+                    HypT_Atk.Enabled = false;
+                }
+                else
+                    HypT_Atk.Enabled = true;
+                if (ivDEFNum.Value == 31)
+                {
+                    HypT_Def.Checked = false;
+                    HypT_Def.Enabled = false;
+                }
+                else
+                    HypT_Def.Enabled = true;
+                if (ivSPANum.Value == 31)
+                {
+                    HypT_SpA.Checked = false;
+                    HypT_SpA.Enabled = false;
+                }
+                else
+                    HypT_SpA.Enabled = true;
+                if (ivSPDNum.Value == 31)
+                {
+                    HypT_SpD.Checked = false;
+                    HypT_SpD.Enabled = false;
+                }
+                else
+                    HypT_SpD.Enabled = true;
+                if (ivSPENum.Value == 31)
+                {
+                    HypT_Spe.Checked = false;
+                    HypT_Spe.Enabled = false;
+                }
+                else
+                    HypT_Spe.Enabled = true;
             }
-            else
-                HypT_HP.Enabled = true;
-            if (ivATKNum.Value == 31)
-            {
-                HypT_Atk.Checked = false;
-                HypT_Atk.Enabled = false;
-            }
-            else
-                HypT_Atk.Enabled = true;
-            if (ivDEFNum.Value == 31)
-            {
-                HypT_Def.Checked = false;
-                HypT_Def.Enabled = false;
-            }
-            else
-                HypT_Def.Enabled = true;
-            if (ivSPANum.Value == 31)
-            {
-                HypT_SpA.Checked = false;
-                HypT_SpA.Enabled = false;
-            }
-            else
-                HypT_SpA.Enabled = true;
-            if (ivSPDNum.Value == 31)
-            {
-                HypT_SpD.Checked = false;
-                HypT_SpD.Enabled = false;
-            }
-            else
-                HypT_SpD.Enabled = true;
-            if (ivSPENum.Value == 31)
-            {
-                HypT_Spe.Checked = false;
-                HypT_Spe.Enabled = false;
-            }
-            else
-                HypT_Spe.Enabled = true;
         }
 
         // Control Stick controls

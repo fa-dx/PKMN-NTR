@@ -982,6 +982,7 @@
             this.label5.Size = new System.Drawing.Size(26, 13);
             this.label5.TabIndex = 14;
             this.label5.Text = "EVs";
+            this.toolTip1.SetToolTip(this.label5, "Effort Values. Their sum shouldn\'t be higher than 510.");
             // 
             // move2
             // 
@@ -1320,6 +1321,7 @@
             this.label16.Size = new System.Drawing.Size(22, 13);
             this.label16.TabIndex = 13;
             this.label16.Text = "IVs";
+            this.toolTip1.SetToolTip(this.label16, "Individual values");
             // 
             // label18
             // 
@@ -1967,6 +1969,7 @@
             this.label51.Size = new System.Drawing.Size(58, 13);
             this.label51.TabIndex = 24;
             this.label51.Text = "Friendship:";
+            this.toolTip1.SetToolTip(this.label51, "Cycle counter before hatch if it is an Egg.");
             // 
             // label49
             // 
@@ -2167,6 +2170,7 @@
             this.label63.Size = new System.Drawing.Size(22, 13);
             this.label63.TabIndex = 25;
             this.label63.Text = "HT";
+            this.toolTip1.SetToolTip(this.label63, "Hyper Training");
             // 
             // HypT_Spe
             // 
@@ -4244,6 +4248,7 @@
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Daycare:";
+            this.toolTip1.SetToolTip(this.groupBox4, "Ignore this field if you\'re playing in X/Y or S/M.");
             // 
             // radioDayCare1
             // 
@@ -4278,6 +4283,7 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Organize Boxes position:";
+            this.toolTip1.SetToolTip(this.groupBox2, "Ignore this field if you\'re playing in X/Y or S/M.");
             // 
             // OrganizeMiddle
             // 
