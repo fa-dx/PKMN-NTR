@@ -929,6 +929,7 @@ namespace ntrbase.Bot
                             filterslot = egglocations[i, 1];
                             bool testsok = false;
                             Report("Reading egg located at box " + (filterbox + 1) + " slot  " + (filterslot + 1));
+                            Program.gCmdWindow.updateBreedingslots(filterbox, filterslot, quantity);
                             waitTaskint = Program.helper.waitPokeRead(filterbox, filterslot);
                             dataready = await waitTaskint;
                             if (dataready >= 0)
@@ -971,7 +972,6 @@ namespace ntrbase.Bot
                                 else
                                     botresult = 0;
                                 botState = (int)breedbotstates.botexit;
-                                break;
                             }
                         }
                         break;
