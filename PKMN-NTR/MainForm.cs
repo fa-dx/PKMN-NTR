@@ -2828,6 +2828,12 @@ namespace ntrbase
             waitingForData.Add(newkey, newvalue);
         }
 
+        public void updateDumpBoxes(int box, int slot)
+        {
+            SetValue(boxDump, box + 1);
+            SetValue(slotDump, slot + 1);
+        }
+
         // Filter handlers
         public bool FilterCheck(DataGridView filters)
         {
@@ -3156,6 +3162,7 @@ namespace ntrbase
                 botWorking = true;
                 botnumber = 3;
                 disableControls();
+                radioBoxes.Checked = true;
                 stopBotButton.Enabled = true;
                 txtLog.Clear();
                 Task<int> Bot;
@@ -3218,22 +3225,27 @@ namespace ntrbase
                 case 0:
                     typemessage = "Regular - Make sure you are in front of the pokémon.";
                     resumemessage = "In front of pokémon, will press A to trigger start the battle";
+                    radioOpponent.Checked = true;
                     break;
                 case 1:
                     typemessage = "Mirage Spot - Make sure you are in front of the hole.";
                     resumemessage = "In front of hole, will press A to trigger dialog";
+                    radioOpponent.Checked = true;
                     break;
                 case 2:
                     typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
                     resumemessage = "In front of the lady, will press A to trigger dialog";
+                    radioParty.Checked = true;
                     break;
                 case 3:
                     typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
                     resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
+                    radioOpponent.Checked = true;
                     break;
                 case 4:
                     typemessage = "Walk - Make sure you are one step south of the pokémon.";
                     resumemessage = "One step south of the pokémon, will press up to trigger dialog";
+                    radioOpponent.Checked = true;
                     break;
                 default:
                     typemessage = "No type - Select one type of soft-reset and try again.";
@@ -3377,6 +3389,7 @@ namespace ntrbase
                 botnumber = 1;
                 disableControls();
                 stopBotButton.Enabled = true;
+                radioBoxes.Checked = true;
                 txtLog.Clear();
                 Task<int> Bot;
                 if (gen7)
