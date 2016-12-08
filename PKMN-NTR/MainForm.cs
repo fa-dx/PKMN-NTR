@@ -1491,7 +1491,7 @@ namespace ntrbase
                 SetValue(evSPANum, dumpedPKHeX.EV_SPA);
                 SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
                 SetValue(evSPENum, dumpedPKHeX.EV_SPE);
-                if (gen7)
+                if (gen7 && level.Value == 100)
                 {
                     SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
                     SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
@@ -1714,7 +1714,7 @@ namespace ntrbase
                 dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
                 dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
 
-                if (gen7)
+                if (gen7 && level.Value == 100)
                 {
                     dumpedPKHeX.HT_HP = HypT_HP.Checked;
                     dumpedPKHeX.HT_ATK = HypT_Atk.Checked;
@@ -2386,7 +2386,7 @@ namespace ntrbase
             int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
             SetText(hiddenPower, Program.PKTable.HPName[hp]);
             SetColor(hiddenPower, Program.PKTable.HPColor[hp], true);
-            if (gen7)
+            if (gen7 & level.Value == 100)
             {
                 if (ivHPNum.Value == 31)
                 {
@@ -2430,6 +2430,21 @@ namespace ntrbase
                 }
                 else
                     HypT_Spe.Enabled = true;
+            }
+            else
+            {
+                HypT_HP.Checked = false;
+                HypT_Atk.Checked = false;
+                HypT_Def.Checked = false;
+                HypT_SpA.Checked = false;
+                HypT_SpD.Checked = false;
+                HypT_Spe.Checked = false;
+                HypT_HP.Enabled = false;
+                HypT_Atk.Enabled = false;
+                HypT_Def.Enabled = false;
+                HypT_SpA.Enabled = false;
+                HypT_SpD.Enabled = false;
+                HypT_Spe.Enabled = false;
             }
         }
 
