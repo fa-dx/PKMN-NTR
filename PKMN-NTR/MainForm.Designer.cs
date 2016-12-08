@@ -145,7 +145,6 @@
             this.label48 = new System.Windows.Forms.Label();
             this.otName = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
-            this.setShiny = new System.Windows.Forms.Button();
             this.label51 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.friendship = new System.Windows.Forms.NumericUpDown();
@@ -153,8 +152,8 @@
             this.randomPID = new System.Windows.Forms.Button();
             this.DumpedEdit = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.shinyBox = new System.Windows.Forms.CheckBox();
             this.level = new System.Windows.Forms.NumericUpDown();
-            this.label31 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.ExpPoints = new System.Windows.Forms.NumericUpDown();
             this.dPID = new System.Windows.Forms.TextBox();
@@ -1953,16 +1952,6 @@
             this.label46.TabIndex = 3;
             this.label46.Text = "Name:";
             // 
-            // setShiny
-            // 
-            this.setShiny.Location = new System.Drawing.Point(191, 37);
-            this.setShiny.Name = "setShiny";
-            this.setShiny.Size = new System.Drawing.Size(22, 22);
-            this.setShiny.TabIndex = 7;
-            this.setShiny.Text = "☆";
-            this.setShiny.UseVisualStyleBackColor = true;
-            this.setShiny.Click += new System.EventHandler(this.setShiny_Click);
-            // 
             // label51
             // 
             this.label51.AutoSize = true;
@@ -2008,9 +1997,9 @@
             // 
             // randomPID
             // 
-            this.randomPID.Location = new System.Drawing.Point(219, 36);
+            this.randomPID.Location = new System.Drawing.Point(214, 36);
             this.randomPID.Name = "randomPID";
-            this.randomPID.Size = new System.Drawing.Size(74, 22);
+            this.randomPID.Size = new System.Drawing.Size(79, 22);
             this.randomPID.TabIndex = 8;
             this.randomPID.Text = "Random";
             this.randomPID.UseVisualStyleBackColor = true;
@@ -2033,8 +2022,8 @@
             // Main
             // 
             this.Main.BackColor = System.Drawing.SystemColors.Control;
+            this.Main.Controls.Add(this.shinyBox);
             this.Main.Controls.Add(this.level);
-            this.Main.Controls.Add(this.label31);
             this.Main.Controls.Add(this.label56);
             this.Main.Controls.Add(this.button1);
             this.Main.Controls.Add(this.label49);
@@ -2047,7 +2036,6 @@
             this.Main.Controls.Add(this.friendship);
             this.Main.Controls.Add(this.species);
             this.Main.Controls.Add(this.label30);
-            this.Main.Controls.Add(this.setShiny);
             this.Main.Controls.Add(this.ability);
             this.Main.Controls.Add(this.label23);
             this.Main.Controls.Add(this.pictureBox1);
@@ -2067,6 +2055,18 @@
             this.Main.TabIndex = 2;
             this.Main.Text = "Main";
             // 
+            // shinyBox
+            // 
+            this.shinyBox.AutoSize = true;
+            this.shinyBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.shinyBox.Location = new System.Drawing.Point(156, 40);
+            this.shinyBox.Name = "shinyBox";
+            this.shinyBox.Size = new System.Drawing.Size(52, 17);
+            this.shinyBox.TabIndex = 0;
+            this.shinyBox.Text = "Shiny";
+            this.shinyBox.UseVisualStyleBackColor = true;
+            this.shinyBox.CheckedChanged += new System.EventHandler(this.shinyBox_CheckedChanged);
+            // 
             // level
             // 
             this.level.Location = new System.Drawing.Point(253, 92);
@@ -2085,15 +2085,6 @@
             0,
             0});
             this.level.ValueChanged += new System.EventHandler(this.level_ValueChanged);
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(157, 41);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(33, 13);
-            this.label31.TabIndex = 21;
-            this.label31.Text = "Shiny";
             // 
             // label56
             // 
@@ -5063,7 +5054,6 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.TextBox otName;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Button setShiny;
         private System.Windows.Forms.CheckBox onlyView;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.NumericUpDown friendship;
@@ -5187,7 +5177,6 @@
         private System.Windows.Forms.NumericUpDown eggsNoBreed;
         private System.Windows.Forms.NumericUpDown boxBreed;
         private System.Windows.Forms.Label label77;
-        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TabPage tabFilters;
         private System.Windows.Forms.ComboBox filterPerIVlogic;
         private System.Windows.Forms.ComboBox filterSPElogic;
@@ -5314,6 +5303,7 @@
         private System.Windows.Forms.CheckBox HypT_HP;
         private System.Windows.Forms.NumericUpDown level;
         private System.Windows.Forms.PictureBox shinypic;
+        private System.Windows.Forms.CheckBox shinyBox;
     }
 }
 
