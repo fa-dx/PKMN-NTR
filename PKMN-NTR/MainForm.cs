@@ -3005,7 +3005,7 @@ namespace ntrbase
                     else
                         return false;
                 case 5: // Different
-                    if (actualiv >= refiv)
+                    if (actualiv != refiv)
                         return true;
                     else
                         return false;
