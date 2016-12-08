@@ -205,6 +205,12 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.touchX = new System.Windows.Forms.NumericUpDown();
             this.touchY = new System.Windows.Forms.NumericUpDown();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.radioDayCare1 = new System.Windows.Forms.RadioButton();
+            this.radioDayCare2 = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
+            this.OrganizeTop = new System.Windows.Forms.RadioButton();
             this.label72 = new System.Windows.Forms.Label();
             this.typeLSR = new System.Windows.Forms.ComboBox();
             this.RunLSRbot = new System.Windows.Forms.Button();
@@ -337,12 +343,6 @@
             this.TSVlistLoad = new System.Windows.Forms.Button();
             this.TSVlistSave = new System.Windows.Forms.Button();
             this.TSVlistRemove = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioDayCare1 = new System.Windows.Forms.RadioButton();
-            this.radioDayCare2 = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
-            this.OrganizeTop = new System.Windows.Forms.RadioButton();
             this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
             this.TSVlistAdd = new System.Windows.Forms.Button();
             this.label77 = new System.Windows.Forms.Label();
@@ -390,6 +390,7 @@
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.shinypic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -449,6 +450,8 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
@@ -472,8 +475,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).BeginInit();
             this.tabBreeding.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).BeginInit();
-            this.groupBox4.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
@@ -484,6 +485,7 @@
             this.tabWonderTrade.SuspendLayout();
             this.tabNTRlog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shinypic)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -2709,6 +2711,75 @@
             this.touchY.TabIndex = 13;
             this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.radioDayCare1);
+            this.groupBox4.Controls.Add(this.radioDayCare2);
+            this.groupBox4.Location = new System.Drawing.Point(172, 61);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(94, 70);
+            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Daycare:";
+            this.toolTip1.SetToolTip(this.groupBox4, "Ignore this field if you\'re playing in X/Y or S/M.");
+            // 
+            // radioDayCare1
+            // 
+            this.radioDayCare1.AutoSize = true;
+            this.radioDayCare1.Checked = true;
+            this.radioDayCare1.Location = new System.Drawing.Point(6, 19);
+            this.radioDayCare1.Name = "radioDayCare1";
+            this.radioDayCare1.Size = new System.Drawing.Size(75, 17);
+            this.radioDayCare1.TabIndex = 0;
+            this.radioDayCare1.TabStop = true;
+            this.radioDayCare1.Text = "Route 117";
+            this.radioDayCare1.UseVisualStyleBackColor = true;
+            // 
+            // radioDayCare2
+            // 
+            this.radioDayCare2.AutoSize = true;
+            this.radioDayCare2.Location = new System.Drawing.Point(6, 42);
+            this.radioDayCare2.Name = "radioDayCare2";
+            this.radioDayCare2.Size = new System.Drawing.Size(86, 17);
+            this.radioDayCare2.TabIndex = 1;
+            this.radioDayCare2.Text = "Battle Resort";
+            this.radioDayCare2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox2.Controls.Add(this.OrganizeMiddle);
+            this.groupBox2.Controls.Add(this.OrganizeTop);
+            this.groupBox2.Location = new System.Drawing.Point(6, 61);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(157, 70);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Organize Boxes position:";
+            this.toolTip1.SetToolTip(this.groupBox2, "Ignore this field if you\'re playing in X/Y or S/M.");
+            // 
+            // OrganizeMiddle
+            // 
+            this.OrganizeMiddle.AutoSize = true;
+            this.OrganizeMiddle.Checked = true;
+            this.OrganizeMiddle.Location = new System.Drawing.Point(6, 19);
+            this.OrganizeMiddle.Name = "OrganizeMiddle";
+            this.OrganizeMiddle.Size = new System.Drawing.Size(56, 17);
+            this.OrganizeMiddle.TabIndex = 0;
+            this.OrganizeMiddle.TabStop = true;
+            this.OrganizeMiddle.Text = "Middle";
+            this.OrganizeMiddle.UseVisualStyleBackColor = true;
+            // 
+            // OrganizeTop
+            // 
+            this.OrganizeTop.AutoSize = true;
+            this.OrganizeTop.Location = new System.Drawing.Point(6, 42);
+            this.OrganizeTop.Name = "OrganizeTop";
+            this.OrganizeTop.Size = new System.Drawing.Size(44, 17);
+            this.OrganizeTop.TabIndex = 1;
+            this.OrganizeTop.Text = "Top";
+            this.OrganizeTop.UseVisualStyleBackColor = true;
+            // 
             // label72
             // 
             this.label72.AutoSize = true;
@@ -4238,75 +4309,6 @@
             this.TSVlistRemove.UseVisualStyleBackColor = true;
             this.TSVlistRemove.Click += new System.EventHandler(this.TSVlistRemove_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.radioDayCare1);
-            this.groupBox4.Controls.Add(this.radioDayCare2);
-            this.groupBox4.Location = new System.Drawing.Point(172, 61);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(94, 70);
-            this.groupBox4.TabIndex = 5;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Daycare:";
-            this.toolTip1.SetToolTip(this.groupBox4, "Ignore this field if you\'re playing in X/Y or S/M.");
-            // 
-            // radioDayCare1
-            // 
-            this.radioDayCare1.AutoSize = true;
-            this.radioDayCare1.Checked = true;
-            this.radioDayCare1.Location = new System.Drawing.Point(6, 19);
-            this.radioDayCare1.Name = "radioDayCare1";
-            this.radioDayCare1.Size = new System.Drawing.Size(75, 17);
-            this.radioDayCare1.TabIndex = 0;
-            this.radioDayCare1.TabStop = true;
-            this.radioDayCare1.Text = "Route 117";
-            this.radioDayCare1.UseVisualStyleBackColor = true;
-            // 
-            // radioDayCare2
-            // 
-            this.radioDayCare2.AutoSize = true;
-            this.radioDayCare2.Location = new System.Drawing.Point(6, 42);
-            this.radioDayCare2.Name = "radioDayCare2";
-            this.radioDayCare2.Size = new System.Drawing.Size(86, 17);
-            this.radioDayCare2.TabIndex = 1;
-            this.radioDayCare2.Text = "Battle Resort";
-            this.radioDayCare2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox2.Controls.Add(this.OrganizeMiddle);
-            this.groupBox2.Controls.Add(this.OrganizeTop);
-            this.groupBox2.Location = new System.Drawing.Point(6, 61);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(157, 70);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Organize Boxes position:";
-            this.toolTip1.SetToolTip(this.groupBox2, "Ignore this field if you\'re playing in X/Y or S/M.");
-            // 
-            // OrganizeMiddle
-            // 
-            this.OrganizeMiddle.AutoSize = true;
-            this.OrganizeMiddle.Checked = true;
-            this.OrganizeMiddle.Location = new System.Drawing.Point(6, 19);
-            this.OrganizeMiddle.Name = "OrganizeMiddle";
-            this.OrganizeMiddle.Size = new System.Drawing.Size(56, 17);
-            this.OrganizeMiddle.TabIndex = 0;
-            this.OrganizeMiddle.TabStop = true;
-            this.OrganizeMiddle.Text = "Middle";
-            this.OrganizeMiddle.UseVisualStyleBackColor = true;
-            // 
-            // OrganizeTop
-            // 
-            this.OrganizeTop.AutoSize = true;
-            this.OrganizeTop.Location = new System.Drawing.Point(6, 42);
-            this.OrganizeTop.Name = "OrganizeTop";
-            this.OrganizeTop.Size = new System.Drawing.Size(44, 17);
-            this.OrganizeTop.TabIndex = 1;
-            this.OrganizeTop.Text = "Top";
-            this.OrganizeTop.UseVisualStyleBackColor = true;
-            // 
             // eggsNoBreed
             // 
             this.eggsNoBreed.Location = new System.Drawing.Point(218, 35);
@@ -4789,6 +4791,14 @@
             this.pictureBox2.TabIndex = 18;
             this.pictureBox2.TabStop = false;
             // 
+            // shinypic
+            // 
+            this.shinypic.Location = new System.Drawing.Point(274, 152);
+            this.shinypic.Name = "shinypic";
+            this.shinypic.Size = new System.Drawing.Size(10, 10);
+            this.shinypic.TabIndex = 19;
+            this.shinypic.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4796,6 +4806,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(891, 430);
+            this.Controls.Add(this.shinypic);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.stopBotButton);
             this.Controls.Add(this.miscTabs);
@@ -4878,6 +4889,10 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).EndInit();
@@ -4906,10 +4921,6 @@
             this.tabBreeding.ResumeLayout(false);
             this.tabBreeding.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
@@ -4923,6 +4934,7 @@
             this.tabNTRlog.ResumeLayout(false);
             this.tabNTRlog.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shinypic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -5301,6 +5313,7 @@
         private System.Windows.Forms.CheckBox HypT_Atk;
         private System.Windows.Forms.CheckBox HypT_HP;
         private System.Windows.Forms.NumericUpDown level;
+        private System.Windows.Forms.PictureBox shinypic;
     }
 }
 

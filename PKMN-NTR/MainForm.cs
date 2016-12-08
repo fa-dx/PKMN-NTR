@@ -1459,6 +1459,7 @@ namespace ntrbase
                 SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
                 SetEnabled(setShiny, !dumpedPKHeX.isShiny); //If it's already shiny, the box will be disabled
                 SetText(setShiny, dumpedPKHeX.isShiny ? "★" : "☆");
+                setShinyMark();
                 switch (dumpedPKHeX.Gender)
                 {
                     case 0:
@@ -1799,14 +1800,15 @@ namespace ntrbase
             dumpedPKHeX.setShinyPID();
             dPID.Text = dumpedPKHeX.PID.ToString("X8");
             setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
+            setShinyMark();
         }
 
         private void randomPID_Click(object sender, EventArgs e)
         {
             dumpedPKHeX.setRandomPID();
             dPID.Text = dumpedPKHeX.PID.ToString("X8");
-
             setShiny.Text = dumpedPKHeX.isShiny ? "★" : "☆";
+            setShinyMark();
         }
 
         private void gender_Click(object sender, EventArgs e)
@@ -2380,6 +2382,15 @@ namespace ntrbase
                 pictureBox1.Image = null;
         }
 
+        // Shiny pokémon mark
+        private void setShinyMark()
+        {
+            if (dumpedPKHeX.isShiny)
+                shinypic.Image = Resources.shiny;
+            else
+                shinypic.Image = null;
+        }
+
         // Automatic Hidden Power Calculation and Hyper Training Boxes
         private void ivChanged(object sender, EventArgs e)
         {
@@ -2472,80 +2483,77 @@ namespace ntrbase
         // Update pokémon editing tabs 
         public void updateTabs()
         {
-            try
+            species.SelectedIndexChanged -= species_SelectedIndexChanged;
+            level.ValueChanged -= level_ValueChanged;
+
+            SetSelectedIndex(species, dumpedPKHeX.Species - 1);
+            setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
+            SetText(nickname, dumpedPKHeX.Nickname);
+            SetSelectedIndex(nature, dumpedPKHeX.Nature);
+            updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
+            SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
+            SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
+
+            SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
+            SetText(setShiny, dumpedPKHeX.isShiny ? "★" : "☆");
+            setShinyMark();
+            switch (dumpedPKHeX.Gender)
             {
-                species.SelectedIndexChanged -= species_SelectedIndexChanged;
-                level.ValueChanged -= level_ValueChanged;
-
-                SetSelectedIndex(species, dumpedPKHeX.Species - 1);
-                setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
-                SetText(nickname, dumpedPKHeX.Nickname);
-                SetSelectedIndex(nature, dumpedPKHeX.Nature);
-                updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
-                SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
-                SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
-
-                SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
-                SetText(setShiny, dumpedPKHeX.isShiny ? "★" : "☆");
-                switch (dumpedPKHeX.Gender)
-                {
-                    case 0:
-                        SetColor(gender, Color.Blue, false);
-                        SetText(gender, "♂");
-                        break;
-                    case 1:
-                        SetColor(gender, Color.Red, false);
-                        SetText(gender, "♀");
-                        break;
-                    case 2:
-                        SetColor(gender, Color.Gray, false);
-                        SetText(gender, "-");
-                        break;
-                }
-                SetChecked(isEgg, dumpedPKHeX.IsEgg);
-                ExpPoints.Maximum = Program.PKTable.getExp(dumpedPKHeX.Species, 100);
-                SetValue(ExpPoints, dumpedPKHeX.EXP);
-                SetValue(friendship, dumpedPKHeX.HT_Friendship);
-
-                SetValue(ivHPNum, dumpedPKHeX.IV_HP);
-                SetValue(ivATKNum, dumpedPKHeX.IV_ATK);
-                SetValue(ivDEFNum, dumpedPKHeX.IV_DEF);
-                SetValue(ivSPANum, dumpedPKHeX.IV_SPA);
-                SetValue(ivSPDNum, dumpedPKHeX.IV_SPD);
-                SetValue(ivSPENum, dumpedPKHeX.IV_SPE);
-                SetValue(evHPNum, dumpedPKHeX.EV_HP);
-                SetValue(evATKNum, dumpedPKHeX.EV_ATK);
-                SetValue(evDEFNum, dumpedPKHeX.EV_DEF);
-                SetValue(evSPANum, dumpedPKHeX.EV_SPA);
-                SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
-                SetValue(evSPENum, dumpedPKHeX.EV_SPE);
-                if (gen7)
-                {
-                    SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
-                    SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
-                    SetChecked(HypT_Def, dumpedPKHeX.HT_DEF);
-                    SetChecked(HypT_SpA, dumpedPKHeX.HT_SPA);
-                    SetChecked(HypT_SpD, dumpedPKHeX.HT_SPD);
-                    SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
-                }
-
-                SetSelectedIndex(move1, dumpedPKHeX.Move1);
-                SetSelectedIndex(move2, dumpedPKHeX.Move2);
-                SetSelectedIndex(move3, dumpedPKHeX.Move3);
-                SetSelectedIndex(move4, dumpedPKHeX.Move4);
-                SetSelectedIndex(relearnmove1, dumpedPKHeX.RelearnMove1);
-                SetSelectedIndex(relearnmove2, dumpedPKHeX.RelearnMove2);
-                SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
-                SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
-
-                SetText(otName, dumpedPKHeX.OT_Name);
-                SetValue(dTIDNum, dumpedPKHeX.TID);
-                SetValue(dSIDNum, dumpedPKHeX.SID);
-
-                species.SelectedIndexChanged += species_SelectedIndexChanged;
-                level.ValueChanged += level_ValueChanged;
+                case 0:
+                    SetColor(gender, Color.Blue, false);
+                    SetText(gender, "♂");
+                    break;
+                case 1:
+                    SetColor(gender, Color.Red, false);
+                    SetText(gender, "♀");
+                    break;
+                case 2:
+                    SetColor(gender, Color.Gray, false);
+                    SetText(gender, "-");
+                    break;
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            SetChecked(isEgg, dumpedPKHeX.IsEgg);
+            ExpPoints.Maximum = Program.PKTable.getExp(dumpedPKHeX.Species, 100);
+            SetValue(ExpPoints, dumpedPKHeX.EXP);
+            SetValue(friendship, dumpedPKHeX.HT_Friendship);
+
+            SetValue(ivHPNum, dumpedPKHeX.IV_HP);
+            SetValue(ivATKNum, dumpedPKHeX.IV_ATK);
+            SetValue(ivDEFNum, dumpedPKHeX.IV_DEF);
+            SetValue(ivSPANum, dumpedPKHeX.IV_SPA);
+            SetValue(ivSPDNum, dumpedPKHeX.IV_SPD);
+            SetValue(ivSPENum, dumpedPKHeX.IV_SPE);
+            SetValue(evHPNum, dumpedPKHeX.EV_HP);
+            SetValue(evATKNum, dumpedPKHeX.EV_ATK);
+            SetValue(evDEFNum, dumpedPKHeX.EV_DEF);
+            SetValue(evSPANum, dumpedPKHeX.EV_SPA);
+            SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
+            SetValue(evSPENum, dumpedPKHeX.EV_SPE);
+            if (gen7)
+            {
+                SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
+                SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
+                SetChecked(HypT_Def, dumpedPKHeX.HT_DEF);
+                SetChecked(HypT_SpA, dumpedPKHeX.HT_SPA);
+                SetChecked(HypT_SpD, dumpedPKHeX.HT_SPD);
+                SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
+            }
+
+            SetSelectedIndex(move1, dumpedPKHeX.Move1);
+            SetSelectedIndex(move2, dumpedPKHeX.Move2);
+            SetSelectedIndex(move3, dumpedPKHeX.Move3);
+            SetSelectedIndex(move4, dumpedPKHeX.Move4);
+            SetSelectedIndex(relearnmove1, dumpedPKHeX.RelearnMove1);
+            SetSelectedIndex(relearnmove2, dumpedPKHeX.RelearnMove2);
+            SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
+            SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
+
+            SetText(otName, dumpedPKHeX.OT_Name);
+            SetValue(dTIDNum, dumpedPKHeX.TID);
+            SetValue(dSIDNum, dumpedPKHeX.SID);
+
+            species.SelectedIndexChanged += species_SelectedIndexChanged;
+            level.ValueChanged += level_ValueChanged;
         }
 
         #endregion GUI handling

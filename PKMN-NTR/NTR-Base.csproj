@@ -153,6 +153,7 @@
     <Content Include="Resources\Balls\ball7.png" />
     <Content Include="Resources\Balls\ball8.png" />
     <Content Include="Resources\Balls\ball9.png" />
+    <Content Include="Resources\Misc\shiny.png" />
     <Content Include="Resources\Poke\0.png" />
     <Content Include="Resources\Poke\1.png" />
     <Content Include="Resources\Poke\10.png" />
