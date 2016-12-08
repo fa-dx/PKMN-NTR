@@ -426,21 +426,22 @@ namespace ntrbase
                 ComboboxFill(ability, abstr);
             }
 
-            switch (abnumber)
-            {
-                case 1:
-                    SetSelectedIndex(ability, 0);
-                    break;
-                case 2:
-                    SetSelectedIndex(ability, 1);
-                    break;
-                case 4:
-                    SetSelectedIndex(ability, 2);
-                    break;
-                default:
-                    SetSelectedIndex(ability, 0);
-                    break;
-            }
+            if (ability.Items.Count == 3)
+                switch (abnumber)
+                {
+                    case 1:
+                        SetSelectedIndex(ability, 0);
+                        break;
+                    case 2:
+                        SetSelectedIndex(ability, 1);
+                        break;
+                    case 4:
+                        SetSelectedIndex(ability, 2);
+                        break;
+                    default:
+                        SetSelectedIndex(ability, 0);
+                        break;
+                }
         }
 
         #endregion Functions
@@ -2456,76 +2457,80 @@ namespace ntrbase
         // Update pokémon editing tabs 
         public void updateTabs()
         {
-            species.SelectedIndexChanged -= species_SelectedIndexChanged;
-            level.ValueChanged -= level_ValueChanged;
-
-            SetSelectedIndex(species, dumpedPKHeX.Species - 1);
-            setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
-            SetText(nickname, dumpedPKHeX.Nickname);
-            SetSelectedIndex(nature, dumpedPKHeX.Nature);
-            updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
-            SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
-            SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
-
-            SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
-            SetText(setShiny, dumpedPKHeX.isShiny ? "★" : "☆");
-            switch (dumpedPKHeX.Gender)
+            try
             {
-                case 0:
-                    SetColor(gender, Color.Blue, false);
-                    SetText(gender, "♂");
-                    break;
-                case 1:
-                    SetColor(gender, Color.Red, false);
-                    SetText(gender, "♀");
-                    break;
-                case 2:
-                    SetColor(gender, Color.Gray, false);
-                    SetText(gender, "-");
-                    break;
+                species.SelectedIndexChanged -= species_SelectedIndexChanged;
+                level.ValueChanged -= level_ValueChanged;
+
+                SetSelectedIndex(species, dumpedPKHeX.Species - 1);
+                setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
+                SetText(nickname, dumpedPKHeX.Nickname);
+                SetSelectedIndex(nature, dumpedPKHeX.Nature);
+                updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
+                SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
+                SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
+
+                SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
+                SetText(setShiny, dumpedPKHeX.isShiny ? "★" : "☆");
+                switch (dumpedPKHeX.Gender)
+                {
+                    case 0:
+                        SetColor(gender, Color.Blue, false);
+                        SetText(gender, "♂");
+                        break;
+                    case 1:
+                        SetColor(gender, Color.Red, false);
+                        SetText(gender, "♀");
+                        break;
+                    case 2:
+                        SetColor(gender, Color.Gray, false);
+                        SetText(gender, "-");
+                        break;
+                }
+                SetChecked(isEgg, dumpedPKHeX.IsEgg);
+                ExpPoints.Maximum = Program.PKTable.getExp(dumpedPKHeX.Species, 100);
+                SetValue(ExpPoints, dumpedPKHeX.EXP);
+                SetValue(friendship, dumpedPKHeX.HT_Friendship);
+
+                SetValue(ivHPNum, dumpedPKHeX.IV_HP);
+                SetValue(ivATKNum, dumpedPKHeX.IV_ATK);
+                SetValue(ivDEFNum, dumpedPKHeX.IV_DEF);
+                SetValue(ivSPANum, dumpedPKHeX.IV_SPA);
+                SetValue(ivSPDNum, dumpedPKHeX.IV_SPD);
+                SetValue(ivSPENum, dumpedPKHeX.IV_SPE);
+                SetValue(evHPNum, dumpedPKHeX.EV_HP);
+                SetValue(evATKNum, dumpedPKHeX.EV_ATK);
+                SetValue(evDEFNum, dumpedPKHeX.EV_DEF);
+                SetValue(evSPANum, dumpedPKHeX.EV_SPA);
+                SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
+                SetValue(evSPENum, dumpedPKHeX.EV_SPE);
+                if (gen7)
+                {
+                    SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
+                    SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
+                    SetChecked(HypT_Def, dumpedPKHeX.HT_DEF);
+                    SetChecked(HypT_SpA, dumpedPKHeX.HT_SPA);
+                    SetChecked(HypT_SpD, dumpedPKHeX.HT_SPD);
+                    SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
+                }
+
+                SetSelectedIndex(move1, dumpedPKHeX.Move1);
+                SetSelectedIndex(move2, dumpedPKHeX.Move2);
+                SetSelectedIndex(move3, dumpedPKHeX.Move3);
+                SetSelectedIndex(move4, dumpedPKHeX.Move4);
+                SetSelectedIndex(relearnmove1, dumpedPKHeX.RelearnMove1);
+                SetSelectedIndex(relearnmove2, dumpedPKHeX.RelearnMove2);
+                SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
+                SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
+
+                SetText(otName, dumpedPKHeX.OT_Name);
+                SetValue(dTIDNum, dumpedPKHeX.TID);
+                SetValue(dSIDNum, dumpedPKHeX.SID);
+
+                species.SelectedIndexChanged += species_SelectedIndexChanged;
+                level.ValueChanged += level_ValueChanged;
             }
-            SetChecked(isEgg, dumpedPKHeX.IsEgg);
-            SetValue(ExpPoints, dumpedPKHeX.EXP);
-            ExpPoints.Maximum = Program.PKTable.getExp(dumpedPKHeX.Species, 100);
-            SetValue(friendship, dumpedPKHeX.HT_Friendship);
-
-            SetValue(ivHPNum, dumpedPKHeX.IV_HP);
-            SetValue(ivATKNum, dumpedPKHeX.IV_ATK);
-            SetValue(ivDEFNum, dumpedPKHeX.IV_DEF);
-            SetValue(ivSPANum, dumpedPKHeX.IV_SPA);
-            SetValue(ivSPDNum, dumpedPKHeX.IV_SPD);
-            SetValue(ivSPENum, dumpedPKHeX.IV_SPE);
-            SetValue(evHPNum, dumpedPKHeX.EV_HP);
-            SetValue(evATKNum, dumpedPKHeX.EV_ATK);
-            SetValue(evDEFNum, dumpedPKHeX.EV_DEF);
-            SetValue(evSPANum, dumpedPKHeX.EV_SPA);
-            SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
-            SetValue(evSPENum, dumpedPKHeX.EV_SPE);
-            if (gen7)
-            {
-                SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
-                SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
-                SetChecked(HypT_Def, dumpedPKHeX.HT_DEF);
-                SetChecked(HypT_SpA, dumpedPKHeX.HT_SPA);
-                SetChecked(HypT_SpD, dumpedPKHeX.HT_SPD);
-                SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
-            }
-
-            SetSelectedIndex(move1, dumpedPKHeX.Move1);
-            SetSelectedIndex(move2, dumpedPKHeX.Move2);
-            SetSelectedIndex(move3, dumpedPKHeX.Move3);
-            SetSelectedIndex(move4, dumpedPKHeX.Move4);
-            SetSelectedIndex(relearnmove1, dumpedPKHeX.RelearnMove1);
-            SetSelectedIndex(relearnmove2, dumpedPKHeX.RelearnMove2);
-            SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
-            SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
-
-            SetText(otName, dumpedPKHeX.OT_Name);
-            SetValue(dTIDNum, dumpedPKHeX.TID);
-            SetValue(dSIDNum, dumpedPKHeX.SID);
-
-            species.SelectedIndexChanged += species_SelectedIndexChanged;
-            level.ValueChanged += level_ValueChanged;
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         #endregion GUI handling
@@ -3168,8 +3173,7 @@ namespace ntrbase
                 Task<int> Bot;
                 if (gen7)
                 {
-                    dumpAllData7();
-                    WTBot7 = new WonderTradeBot7((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, WTcollectFC.Checked, bpNum.Value);
+                    WTBot7 = new WonderTradeBot7((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, WTcollectFC.Checked);
                     Bot = WTBot7.RunBot();
                 }
                 else
@@ -3197,6 +3201,12 @@ namespace ntrbase
                     case 3:
                         MessageBox.Show("Bot finished due level up in Festival Plaza", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
+                    case 6: // Touch screen error
+                        MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 7: // Button error
+                        MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     default:
                         MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
@@ -3213,6 +3223,12 @@ namespace ntrbase
             SetValue(WTBox, box + 1);
             SetValue(WTSlot, slot + 1);
             SetValue(WTtradesNo, quantity);
+        }
+
+        public void updateFCfields(uint totalFC, uint currentFC)
+        {
+            SetValue(milesNum, currentFC);
+            SetValue(totalFCNum, totalFC);
         }
 
         // Soft-reset bot
@@ -3431,7 +3447,7 @@ namespace ntrbase
                     case 6: // Touch screen error
                         MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case 7: // Touch screen error
+                    case 7: // Button error
                         MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     default: // General error

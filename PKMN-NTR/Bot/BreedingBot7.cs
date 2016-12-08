@@ -350,7 +350,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.walkright1:
                         Report("Walk to computer");
-                        Program.helper.quickstick(80, 20, 200);
+                        Program.helper.quickstick(100, 25, 250);
                         await Task.Delay(700);
                         botState = (int)breedbotstates.checkmap5;
                         break;
