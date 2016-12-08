@@ -2064,9 +2064,9 @@ namespace ntrbase
                 }
             }
             if (gen7)
-                writePokemonToBox(Program.PKTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
-            else
                 writePokemonToBox(Program.PKTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
+            else
+                writePokemonToBox(Program.PKTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
         }
 
         private uint deleteGetAmount()
