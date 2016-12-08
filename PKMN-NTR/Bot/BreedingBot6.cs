@@ -171,7 +171,6 @@ namespace ntrbase.Bot
         {
             while (!botstop)
             {
-                botresult = 0;
                 switch (botState)
                 {
                     case (int)breedbotstates.botstart:

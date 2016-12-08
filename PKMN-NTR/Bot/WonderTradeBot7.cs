@@ -8,7 +8,7 @@ namespace ntrbase.Bot
         private enum botstates { startbot, initializeFC1, initializeFC2, readpoke, presstradebutton, testtrademenu, pressWTbutton, testWTscreen, pressWTstart, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, starttrade, confirmtrade, testboxesout, waitfortrade, testtradefinish, tryfinish, finishtrade, collectFC1, collectFC2, collectFC3, collectFC4, collectFC5, exitbot };
 
         public bool botstop;
-        private int botresult;
+        public int botresult;
         private int maxreconnect;
         private int currentbox;
         private int currentslot;
@@ -72,7 +72,6 @@ namespace ntrbase.Bot
         {
             while (!botstop)
             {
-                botresult = 0;
                 switch (botstate)
                 {
                     case (int)botstates.startbot:
@@ -430,7 +429,7 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)botstates.tryfinish:
-                        if (tradeevo)
+                        if (!tradeevo)
                         {
                             Report("Press B button");
                             waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyB);
@@ -470,7 +469,7 @@ namespace ntrbase.Bot
 
                     case (int)botstates.collectFC1:
                         Report("Trigger Dialog");
-                        await Task.Delay(1500);
+                        await Task.Delay(1000);
                         waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
                         if (await waitTaskbool)
                             botstate = (int)botstates.collectFC2;

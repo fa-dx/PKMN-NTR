@@ -10,7 +10,7 @@ namespace ntrbase.Bot
         public bool botstop = false;
         public string finishmessage;
         private int botState = 0;
-        private int botresult = 0;
+        public int botresult = 0;
         private int attempts = 0;
         private bool boxchange = true;
         private int[,] egglocations = new int[5, 2];
@@ -59,7 +59,6 @@ namespace ntrbase.Bot
         {
             while (!botstop)
             {
-                botresult = 0;
                 switch (botState)
                 {
                     case (int)breedbotstates.botstart:

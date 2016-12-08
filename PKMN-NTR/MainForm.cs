@@ -2821,6 +2821,7 @@ namespace ntrbase
                     break;
             }
             stopBotButton.Enabled = false;
+            botStop = true;
         }
 
         public void HandleRAMread(uint value)
@@ -3165,6 +3166,7 @@ namespace ntrbase
             if (dialogResult == DialogResult.OK && WTtradesNo.Value > 0)
             {
                 botWorking = true;
+                botStop = false;
                 botnumber = 3;
                 disableControls();
                 radioBoxes.Checked = true;
@@ -3187,6 +3189,8 @@ namespace ntrbase
                     Bot = WTBot6.RunBot();
                 }
                 int result = await Bot;
+                if (botStop)
+                    result = 8;
                 switch (result)
                 {
                     case 0:
@@ -3206,6 +3210,9 @@ namespace ntrbase
                         break;
                     case 7: // Button error
                         MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 8:
+                        MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     default:
                         MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3273,6 +3280,7 @@ namespace ntrbase
             if (dialogResult == DialogResult.OK && typeLSR.SelectedIndex >= 0)
             {
                 botWorking = true;
+                botStop = false;
                 botnumber = 2;
                 disableControls();
                 stopBotButton.Enabled = true;
@@ -3293,6 +3301,8 @@ namespace ntrbase
                     Bot = SRBot6.RunBot();
                 }
                 int result = await Bot;
+                if (botStop)
+                    result = 8;
                 int totalresets;
                 if (gen7)
                 {
@@ -3316,6 +3326,9 @@ namespace ntrbase
                         break;
                     case 4:
                         MessageBox.Show("Finished, number of resets: " + totalresets, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 8:
+                        MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                 }
                 botWorking = false;
@@ -3402,6 +3415,7 @@ namespace ntrbase
             if (dialogResult == DialogResult.OK && eggsNoBreed.Value > 0 && modeBreed.SelectedIndex >= 0)
             {
                 botWorking = true;
+                botStop = false;
                 botnumber = 1;
                 disableControls();
                 stopBotButton.Enabled = true;
@@ -3424,6 +3438,8 @@ namespace ntrbase
                     Bot = BreedBot6.RunBot();
                 }
                 int result = await Bot;
+                if (botStop)
+                    result = 8;
                 switch (await Bot)
                 {
                     case 0: // Finished
@@ -3449,6 +3465,9 @@ namespace ntrbase
                         break;
                     case 7: // Button error
                         MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 8:
+                        MessageBox.Show("Bot stopped by user", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     default: // General error
                         MessageBox.Show("An error has occurred.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
