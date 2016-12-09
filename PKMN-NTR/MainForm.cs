@@ -3207,6 +3207,7 @@ namespace ntrbase
         {
             string typemessage;
             string resumemessage;
+            botWorking = true; // Supress warning messages
             switch (typeLSR.SelectedIndex)
             {
                 case 0:
@@ -3223,6 +3224,8 @@ namespace ntrbase
                     typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
                     resumemessage = "In front of the lady, will press A to trigger dialog";
                     radioParty.Checked = true;
+                    SetValue(boxDump, 1);
+                    SetValue(slotDump, 2);
                     break;
                 case 3:
                     typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
@@ -3239,6 +3242,7 @@ namespace ntrbase
                     resumemessage = "";
                     break;
             }
+            botWorking = false;
             DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK && typeLSR.SelectedIndex >= 0)

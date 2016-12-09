@@ -341,7 +341,6 @@ namespace ntrbase.Helpers
         {
             uint dumpOff = Program.gCmdWindow.partyOff + Convert.ToUInt32(slot * 484);
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
-            Program.gCmdWindow.updateDumpBoxes(1, slot);
             Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(dumpOff, POKEBYTES, pid), myArgs);
             int readcount = 0;
             for (readcount = 0; readcount < timeout * 10; readcount++)
