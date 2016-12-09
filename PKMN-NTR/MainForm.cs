@@ -298,8 +298,8 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -680,6 +680,7 @@ namespace ntrbase
         private void fillGen6()
         {
             ComboboxFill(Lang, Program.PKTable.Lang6);
+            ComboboxFill(pkLang, Program.PKTable.Lang6);
             ComboboxFill(species, Program.PKTable.Species6);
             ComboboxFill(ability, Program.PKTable.Ability6);
             ComboboxFill(filterAbility, Program.PKTable.Ability6);
@@ -712,6 +713,7 @@ namespace ntrbase
         private async void fillGen7()
         {
             ComboboxFill(Lang, Program.PKTable.Lang7);
+            ComboboxFill(pkLang, Program.PKTable.Lang7);
             ComboboxFill(species, Program.PKTable.Species7);
             ComboboxFill(ability, Program.PKTable.Ability7);
             ComboboxFill(filterAbility, Program.PKTable.Ability7);
@@ -1416,8 +1418,6 @@ namespace ntrbase
         {
             try
             { //TODO: TEMPORARY HACK, DO PROPER ERROR HANDLING
-                species.SelectedIndexChanged -= species_SelectedIndexChanged;
-                level.ValueChanged -= level_ValueChanged;
                 DataReadyWaiting args = (DataReadyWaiting)args_obj;
                 PKHeX validator = new PKHeX();
                 validator.Data = PKHeX.decryptArray(args.data);
@@ -1442,65 +1442,10 @@ namespace ntrbase
                     MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 if (!dataCorrect)
-                {
                     return;
-                }
 
                 dumpedPKHeX.Data = validator.Data;
-
-                SetSelectedIndex(species, dumpedPKHeX.Species - 1);
-                setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
-                SetText(nickname, dumpedPKHeX.Nickname);
-                SetSelectedIndex(nature, dumpedPKHeX.Nature);
-                updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
-                SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
-                SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
-
-                SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
-                setShinyMark();
-                SetSelectedIndex(genderBox, dumpedPKHeX.Gender);
-                SetChecked(isEgg, dumpedPKHeX.IsEgg);
-                SetValue(ExpPoints, dumpedPKHeX.EXP);
-                ExpPoints.Maximum = Program.PKTable.getExp(dumpedPKHeX.Species, 100);
-                SetValue(friendship, dumpedPKHeX.HT_Friendship);
-
-                SetValue(ivHPNum, dumpedPKHeX.IV_HP);
-                SetValue(ivATKNum, dumpedPKHeX.IV_ATK);
-                SetValue(ivDEFNum, dumpedPKHeX.IV_DEF);
-                SetValue(ivSPANum, dumpedPKHeX.IV_SPA);
-                SetValue(ivSPDNum, dumpedPKHeX.IV_SPD);
-                SetValue(ivSPENum, dumpedPKHeX.IV_SPE);
-                SetValue(evHPNum, dumpedPKHeX.EV_HP);
-                SetValue(evATKNum, dumpedPKHeX.EV_ATK);
-                SetValue(evDEFNum, dumpedPKHeX.EV_DEF);
-                SetValue(evSPANum, dumpedPKHeX.EV_SPA);
-                SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
-                SetValue(evSPENum, dumpedPKHeX.EV_SPE);
-                if (gen7 && level.Value == 100)
-                {
-                    SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
-                    SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
-                    SetChecked(HypT_Def, dumpedPKHeX.HT_DEF);
-                    SetChecked(HypT_SpA, dumpedPKHeX.HT_SPA);
-                    SetChecked(HypT_SpD, dumpedPKHeX.HT_SPD);
-                    SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
-                }
-
-                SetSelectedIndex(move1, dumpedPKHeX.Move1);
-                SetSelectedIndex(move2, dumpedPKHeX.Move2);
-                SetSelectedIndex(move3, dumpedPKHeX.Move3);
-                SetSelectedIndex(move4, dumpedPKHeX.Move4);
-                SetSelectedIndex(relearnmove1, dumpedPKHeX.RelearnMove1);
-                SetSelectedIndex(relearnmove2, dumpedPKHeX.RelearnMove2);
-                SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
-                SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
-
-                SetText(otName, dumpedPKHeX.OT_Name);
-                SetValue(dTIDNum, dumpedPKHeX.TID);
-                SetValue(dSIDNum, dumpedPKHeX.SID);
-
-                species.SelectedIndexChanged += species_SelectedIndexChanged;
-                level.ValueChanged += level_ValueChanged;
+                updateTabs();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -1750,6 +1695,19 @@ namespace ntrbase
                 dumpedPKHeX.RelearnMove2 = relearnmove2.SelectedIndex;
                 dumpedPKHeX.RelearnMove3 = relearnmove3.SelectedIndex;
                 dumpedPKHeX.RelearnMove4 = relearnmove4.SelectedIndex;
+
+                switch (pkLang.SelectedIndex)
+                {
+                    case 0: dumpedPKHeX.Language = 0x01; break;
+                    case 1: dumpedPKHeX.Language = 0x02; break;
+                    case 2: dumpedPKHeX.Language = 0x03; break;
+                    case 3: dumpedPKHeX.Language = 0x04; break;
+                    case 4: dumpedPKHeX.Language = 0x05; break;
+                    case 5: dumpedPKHeX.Language = 0x07; break;
+                    case 6: dumpedPKHeX.Language = 0x08; break;
+                    case 7: dumpedPKHeX.Language = 0x09; break;
+                    case 8: dumpedPKHeX.Language = 0x0A; break;
+                }
 
                 Array.Copy(BitConverter.GetBytes(dumpedPKHeX.IV32), 0, pkmToEdit, 116, 4);
                 byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);
@@ -2512,6 +2470,21 @@ namespace ntrbase
             SetText(otName, dumpedPKHeX.OT_Name);
             SetValue(dTIDNum, dumpedPKHeX.TID);
             SetValue(dSIDNum, dumpedPKHeX.SID);
+            int i;
+            switch (dumpedPKHeX.Language)
+            {
+                case 1: i = 0; break;
+                case 2: i = 1; break;
+                case 3: i = 2; break;
+                case 4: i = 3; break;
+                case 5: i = 4; break;
+                case 7: i = 5; break;
+                case 8: i = 6; break;
+                case 9: i = 7; break;
+                case 10: i = 8; break;
+                default: i = -1; break;
+            }
+            SetSelectedIndex(pkLang, i);
 
             species.SelectedIndexChanged += species_SelectedIndexChanged;
             level.ValueChanged += level_ValueChanged;

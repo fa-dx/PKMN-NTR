@@ -390,6 +390,8 @@
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
+            this.pkLang = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -1884,27 +1886,27 @@
             // 
             // dTIDNum
             // 
-            this.dTIDNum.Location = new System.Drawing.Point(50, 32);
+            this.dTIDNum.Location = new System.Drawing.Point(70, 32);
             this.dTIDNum.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.dTIDNum.Name = "dTIDNum";
-            this.dTIDNum.Size = new System.Drawing.Size(72, 20);
+            this.dTIDNum.Size = new System.Drawing.Size(80, 20);
             this.dTIDNum.TabIndex = 1;
             this.dTIDNum.ValueChanged += new System.EventHandler(this.dTIDNum_ValueChanged);
             // 
             // dSIDNum
             // 
-            this.dSIDNum.Location = new System.Drawing.Point(50, 58);
+            this.dSIDNum.Location = new System.Drawing.Point(70, 58);
             this.dSIDNum.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.dSIDNum.Name = "dSIDNum";
-            this.dSIDNum.Size = new System.Drawing.Size(72, 20);
+            this.dSIDNum.Size = new System.Drawing.Size(80, 20);
             this.dSIDNum.TabIndex = 2;
             this.dSIDNum.ValueChanged += new System.EventHandler(this.dTIDNum_ValueChanged);
             // 
@@ -1920,37 +1922,37 @@
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(16, 34);
+            this.label47.Location = new System.Drawing.Point(18, 34);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(28, 13);
+            this.label47.Size = new System.Drawing.Size(46, 13);
             this.label47.TabIndex = 4;
-            this.label47.Text = "TID:";
+            this.label47.Text = "OT TID:";
             // 
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(16, 60);
+            this.label48.Location = new System.Drawing.Point(18, 60);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(28, 13);
+            this.label48.Size = new System.Drawing.Size(46, 13);
             this.label48.TabIndex = 5;
-            this.label48.Text = "SID:";
+            this.label48.Text = "OT SID:";
             // 
             // otName
             // 
-            this.otName.Location = new System.Drawing.Point(50, 6);
+            this.otName.Location = new System.Drawing.Point(70, 6);
             this.otName.MaxLength = 12;
             this.otName.Name = "otName";
-            this.otName.Size = new System.Drawing.Size(72, 20);
+            this.otName.Size = new System.Drawing.Size(80, 20);
             this.otName.TabIndex = 0;
             // 
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(6, 9);
+            this.label46.Location = new System.Drawing.Point(8, 9);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(38, 13);
+            this.label46.Size = new System.Drawing.Size(56, 13);
             this.label46.TabIndex = 3;
-            this.label46.Text = "Name:";
+            this.label46.Text = "OT Name:";
             // 
             // label51
             // 
@@ -2336,12 +2338,14 @@
             this.OT.Controls.Add(this.label48);
             this.OT.Controls.Add(this.otName);
             this.OT.Controls.Add(this.label46);
+            this.OT.Controls.Add(this.pkLang);
+            this.OT.Controls.Add(this.label31);
             this.OT.Location = new System.Drawing.Point(4, 22);
             this.OT.Name = "OT";
             this.OT.Padding = new System.Windows.Forms.Padding(3);
             this.OT.Size = new System.Drawing.Size(299, 172);
             this.OT.TabIndex = 1;
-            this.OT.Text = "OT";
+            this.OT.Text = "Misc";
             // 
             // cloneWriteTabs
             // 
@@ -4790,6 +4794,23 @@
             this.shinypic.TabIndex = 19;
             this.shinypic.TabStop = false;
             // 
+            // pkLang
+            // 
+            this.pkLang.FormattingEnabled = true;
+            this.pkLang.Location = new System.Drawing.Point(70, 84);
+            this.pkLang.Name = "pkLang";
+            this.pkLang.Size = new System.Drawing.Size(80, 21);
+            this.pkLang.TabIndex = 12;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(6, 87);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(58, 13);
+            this.label31.TabIndex = 24;
+            this.label31.Text = "Language:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5304,6 +5325,8 @@
         private System.Windows.Forms.PictureBox shinypic;
         private System.Windows.Forms.CheckBox shinyBox;
         private System.Windows.Forms.ComboBox genderBox;
+        private System.Windows.Forms.ComboBox pkLang;
+        private System.Windows.Forms.Label label31;
     }
 }
 
