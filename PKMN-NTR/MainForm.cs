@@ -2274,6 +2274,7 @@ namespace ntrbase
             level.ValueChanged -= level_ValueChanged;
             int newlevel = Program.PKTable.getLevel(species.SelectedIndex + 1, (int)ExpPoints.Value);
             SetValue(level, newlevel);
+            HyperTrainBoxes();
             level.ValueChanged += level_ValueChanged;
         }
 
@@ -2282,6 +2283,7 @@ namespace ntrbase
             ExpPoints.ValueChanged -= ExpPoints_ValueChanged;
             uint newexp = Program.PKTable.getExp(species.SelectedIndex + 1, (int)level.Value);
             SetValue(ExpPoints, newexp);
+            HyperTrainBoxes();
             ExpPoints.ValueChanged += ExpPoints_ValueChanged;
         }
 
@@ -2331,7 +2333,12 @@ namespace ntrbase
             int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
             SetText(hiddenPower, Program.PKTable.HPName[hp]);
             SetColor(hiddenPower, Program.PKTable.HPColor[hp], true);
-            if (gen7 & level.Value == 100)
+            HyperTrainBoxes();
+        }
+
+        private void HyperTrainBoxes()
+        {
+            if (gen7 && level.Value == 100 && !botWorking)
             {
                 if (ivHPNum.Value == 31)
                 {
