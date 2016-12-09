@@ -701,11 +701,12 @@ namespace ntrbase
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
-                boxDump.Maximum = BOXES;
-            cloneBoxTo.Maximum = BOXES;
-            cloneBoxFrom.Maximum = BOXES;
-            writeBoxTo.Maximum = BOXES;
-            boxBreed.Maximum = BOXES;
+                SetMaximum(boxDump, BOXES);
+            SetMaximum(cloneBoxTo, BOXES);
+            SetMaximum(cloneBoxFrom, BOXES);
+            SetMaximum(writeBoxTo, BOXES);
+            SetMaximum(boxBreed, BOXES);
+            SetMaximum(WTBox, BOXES);
             SetText(label3, "Poké Miles:");
             SetText(radioDaycare, "Daycare");
         }
@@ -734,11 +735,12 @@ namespace ntrbase
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
-                boxDump.Maximum = BOXES;
-            cloneBoxTo.Maximum = BOXES;
-            cloneBoxFrom.Maximum = BOXES;
-            writeBoxTo.Maximum = BOXES;
-            boxBreed.Maximum = BOXES;
+                SetMaximum(boxDump, BOXES);
+            SetMaximum(cloneBoxTo, BOXES);
+            SetMaximum(cloneBoxFrom, BOXES);
+            SetMaximum(writeBoxTo, BOXES);
+            SetMaximum(boxBreed, BOXES);
+            SetMaximum(WTBox, BOXES);
             SetText(label3, "Current FC:");
             SetText(radioDaycare, "Nursery");
 
@@ -1615,6 +1617,8 @@ namespace ntrbase
         { //TODO: are all these Array.Copy() really necessary? Shouldn't PKHeX just handle everything?
             if (dumpedPKHeX.Data == null)
                 MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
+            else if (dumpedPKHeX.Data.Length != 232)
+                MessageBox.Show("The data size of this pokémon data is invalid. If you dumped it from the party, please deposit it in a box before editing and try again.", "Invalid data size");
             else if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value >= 511)
                 MessageBox.Show("Pokemon EV count is too high, the sum of all EVs should be 510 or less!", "EVs too high");
             else if (nickname.Text.Length > 12)
@@ -2258,7 +2262,7 @@ namespace ntrbase
             string resname;
             if (isegg)
                 resname = "egg";
-            else if (formindex == 0)
+            else if (formindex == 0 || speciesindex == 493 || speciesindex == 773) // All Arceus / Silvally formes have same sprite
                 resname = "_" + speciesindex;
             else
                 resname = "_" + speciesindex + "_" + formindex;
@@ -2272,7 +2276,9 @@ namespace ntrbase
         private void ExpPoints_ValueChanged(object sender, EventArgs e)
         {
             level.ValueChanged -= level_ValueChanged;
-            int newlevel = Program.PKTable.getLevel(species.SelectedIndex + 1, (int)ExpPoints.Value);
+            int speciesno = 0;
+            Invoke(new MethodInvoker(delegate () { speciesno = species.SelectedIndex; }));
+            int newlevel = Program.PKTable.getLevel(speciesno + 1, (int)ExpPoints.Value);
             SetValue(level, newlevel);
             HyperTrainBoxes();
             level.ValueChanged += level_ValueChanged;
@@ -2439,7 +2445,7 @@ namespace ntrbase
             setShinyMark();
             SetSelectedIndex(genderBox, dumpedPKHeX.Gender);
             SetChecked(isEgg, dumpedPKHeX.IsEgg);
-            ExpPoints.Maximum = Program.PKTable.getExp(dumpedPKHeX.Species, 100);
+            SetMaximum(ExpPoints, Program.PKTable.getExp(dumpedPKHeX.Species, 100));
             SetValue(ExpPoints, dumpedPKHeX.EXP);
             SetValue(friendship, dumpedPKHeX.HT_Friendship);
 
@@ -2603,6 +2609,19 @@ namespace ntrbase
             }
             else
                 ctrl.Value = val;
+        }
+
+        delegate void SetMaximumDelegate(NumericUpDown ctrl, decimal val);
+
+        public static void SetMaximum(NumericUpDown ctrl, decimal val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetMaximumDelegate del = new SetMaximumDelegate(SetMaximum);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+                ctrl.Maximum = val;
         }
 
         delegate void SetSelectedIndexDelegate(ComboBox ctrl, int i);
