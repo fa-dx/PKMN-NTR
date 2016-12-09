@@ -175,6 +175,8 @@
             this.label97 = new System.Windows.Forms.Label();
             this.label96 = new System.Windows.Forms.Label();
             this.OT = new System.Windows.Forms.TabPage();
+            this.pkLang = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.cloneWriteTabs = new System.Windows.Forms.TabControl();
             this.cloneTab = new System.Windows.Forms.TabPage();
             this.cloneDoIt = new System.Windows.Forms.Button();
@@ -390,8 +392,6 @@
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
-            this.pkLang = new System.Windows.Forms.ComboBox();
-            this.label31 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -1984,6 +1984,8 @@
             this.friendship.Name = "friendship";
             this.friendship.Size = new System.Drawing.Size(72, 20);
             this.friendship.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.friendship, "Friendship with current Trainer.\r\nNon-white color indicates Pokemon is with its O" +
+        "T.");
             // 
             // randomPID
             // 
@@ -2346,6 +2348,23 @@
             this.OT.Size = new System.Drawing.Size(299, 172);
             this.OT.TabIndex = 1;
             this.OT.Text = "Misc";
+            // 
+            // pkLang
+            // 
+            this.pkLang.FormattingEnabled = true;
+            this.pkLang.Location = new System.Drawing.Point(70, 84);
+            this.pkLang.Name = "pkLang";
+            this.pkLang.Size = new System.Drawing.Size(80, 21);
+            this.pkLang.TabIndex = 12;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(6, 87);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(58, 13);
+            this.label31.TabIndex = 24;
+            this.label31.Text = "Language:";
             // 
             // cloneWriteTabs
             // 
@@ -4793,23 +4812,6 @@
             this.shinypic.Size = new System.Drawing.Size(10, 10);
             this.shinypic.TabIndex = 19;
             this.shinypic.TabStop = false;
-            // 
-            // pkLang
-            // 
-            this.pkLang.FormattingEnabled = true;
-            this.pkLang.Location = new System.Drawing.Point(70, 84);
-            this.pkLang.Name = "pkLang";
-            this.pkLang.Size = new System.Drawing.Size(80, 21);
-            this.pkLang.TabIndex = 12;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(6, 87);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(58, 13);
-            this.label31.TabIndex = 24;
-            this.label31.Text = "Language:";
             // 
             // MainForm
             // 
