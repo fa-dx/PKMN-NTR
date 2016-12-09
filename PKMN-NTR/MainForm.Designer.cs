@@ -148,10 +148,10 @@
             this.label51 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.friendship = new System.Windows.Forms.NumericUpDown();
-            this.gender = new System.Windows.Forms.Button();
             this.randomPID = new System.Windows.Forms.Button();
             this.DumpedEdit = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.genderBox = new System.Windows.Forms.ComboBox();
             this.shinyBox = new System.Windows.Forms.CheckBox();
             this.level = new System.Windows.Forms.NumericUpDown();
             this.label56 = new System.Windows.Forms.Label();
@@ -1983,18 +1983,6 @@
             this.friendship.Size = new System.Drawing.Size(72, 20);
             this.friendship.TabIndex = 12;
             // 
-            // gender
-            // 
-            this.gender.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gender.ForeColor = System.Drawing.Color.Gray;
-            this.gender.Location = new System.Drawing.Point(201, 62);
-            this.gender.Name = "gender";
-            this.gender.Size = new System.Drawing.Size(41, 22);
-            this.gender.TabIndex = 9;
-            this.gender.Text = "-";
-            this.gender.UseVisualStyleBackColor = true;
-            this.gender.Click += new System.EventHandler(this.gender_Click);
-            // 
             // randomPID
             // 
             this.randomPID.Location = new System.Drawing.Point(214, 36);
@@ -2022,6 +2010,7 @@
             // Main
             // 
             this.Main.BackColor = System.Drawing.SystemColors.Control;
+            this.Main.Controls.Add(this.genderBox);
             this.Main.Controls.Add(this.shinyBox);
             this.Main.Controls.Add(this.level);
             this.Main.Controls.Add(this.label56);
@@ -2030,7 +2019,6 @@
             this.Main.Controls.Add(this.ExpPoints);
             this.Main.Controls.Add(this.isEgg);
             this.Main.Controls.Add(this.label51);
-            this.Main.Controls.Add(this.gender);
             this.Main.Controls.Add(this.nickname);
             this.Main.Controls.Add(this.label32);
             this.Main.Controls.Add(this.friendship);
@@ -2054,6 +2042,18 @@
             this.Main.Size = new System.Drawing.Size(299, 172);
             this.Main.TabIndex = 2;
             this.Main.Text = "Main";
+            // 
+            // genderBox
+            // 
+            this.genderBox.FormattingEnabled = true;
+            this.genderBox.Items.AddRange(new object[] {
+            "M",
+            "F",
+            "-"});
+            this.genderBox.Location = new System.Drawing.Point(203, 64);
+            this.genderBox.Name = "genderBox";
+            this.genderBox.Size = new System.Drawing.Size(39, 21);
+            this.genderBox.TabIndex = 4;
             // 
             // shinyBox
             // 
@@ -5059,7 +5059,6 @@
         private System.Windows.Forms.NumericUpDown friendship;
         private System.Windows.Forms.Button randomPID;
         private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Button gender;
         private System.Windows.Forms.TabControl DumpedEdit;
         private System.Windows.Forms.TabPage Main;
         private System.Windows.Forms.TabPage Stats;
@@ -5304,6 +5303,7 @@
         private System.Windows.Forms.NumericUpDown level;
         private System.Windows.Forms.PictureBox shinypic;
         private System.Windows.Forms.CheckBox shinyBox;
+        private System.Windows.Forms.ComboBox genderBox;
     }
 }
 
