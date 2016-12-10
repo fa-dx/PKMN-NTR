@@ -229,7 +229,7 @@ namespace ntrbase.Bot
                     case (int)srbotstates.returncontrol:
                         Report("Return contol to character");
                         await Task.Delay(1500);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)srbotstates.touchsave;
                         break;
@@ -260,7 +260,7 @@ namespace ntrbase.Bot
                     case (int)srbotstates.saveconf:
                         Report("Press Yes");
                         await Task.Delay(2000);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)srbotstates.saveout;
                         break;
@@ -312,7 +312,7 @@ namespace ntrbase.Bot
 
                     case (int)srbotstates.trigger:
                         Report("Try to trigger encounter");
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)srbotstates.readopp;
                         break;
@@ -367,7 +367,7 @@ namespace ntrbase.Bot
                     case (int)srbotstates.skipintro:
                         await Task.Delay(9000);
                         Report("Skip intro cutscene");
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         if (!oras)
                             botState = (int)srbotstates.startgame;
@@ -378,7 +378,7 @@ namespace ntrbase.Bot
                     case (int)srbotstates.skiptitle:
                         await Task.Delay(4000);
                         Report("Skip title screen");
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)srbotstates.startgame;
                         break;
@@ -386,7 +386,7 @@ namespace ntrbase.Bot
                     case (int)srbotstates.startgame:
                         await Task.Delay(5000);
                         Report("Start game");
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)srbotstates.reconnect;
                         break;
@@ -409,7 +409,7 @@ namespace ntrbase.Bot
                     case (int)srbotstates.tev_start:
                         await Task.Delay(1000);
                         Report("Trigger Dialog");
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)srbotstates.tev_cont1;
                         break;
@@ -417,7 +417,7 @@ namespace ntrbase.Bot
                     case (int)srbotstates.tev_cont1:
                         await Task.Delay(1000);
                         Report("Talk to lady");
-                        Program.helper.quickbuton(Program.PKTable.keyB, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyB, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)srbotstates.tev_check;
                         break;
@@ -442,7 +442,7 @@ namespace ntrbase.Bot
                     case (int)srbotstates.twk_start:
                         await Task.Delay(1000);
                         Report("Walk one step");
-                        Program.helper.quickbuton(Program.PKTable.runUP, commandtime);
+                        Program.helper.quickbuton(LookupTable.runUP, commandtime);
                         await Task.Delay(commandtime + commanddelay);
                         botState = (int)srbotstates.trigger;
                         break;

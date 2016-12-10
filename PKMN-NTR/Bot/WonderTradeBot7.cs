@@ -219,7 +219,7 @@ namespace ntrbase.Bot
                     case (int)botstates.pressWTstart:
                         Report("Press Start");
                         await Task.Delay(1000);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testboxes;
                         break;
@@ -283,7 +283,7 @@ namespace ntrbase.Bot
 
                     case (int)botstates.touchnewbox:
                         Report("Touch new box");
-                        waitTaskbool = Program.helper.waittouch(Program.PKTable.boxposX7[currentbox], Program.PKTable.boxposY7[currentbox]);
+                        waitTaskbool = Program.helper.waittouch(LookupTable.boxposX7[currentbox], LookupTable.boxposY7[currentbox]);
                         if (await waitTaskbool)
                         {
                             attempts = 0;
@@ -299,7 +299,7 @@ namespace ntrbase.Bot
 
                     case (int)botstates.selectnewbox:
                         Report("Select new box");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botstate = (int)botstates.testboxviewout;
                         else
@@ -328,7 +328,7 @@ namespace ntrbase.Bot
 
                     case (int)botstates.touchpoke:
                         Report("Touch pokémon");
-                        waitTaskbool = Program.helper.waittouch(Program.PKTable.pokeposX7[currentslot], Program.PKTable.pokeposY7[currentslot]);
+                        waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[currentslot], LookupTable.pokeposY7[currentslot]);
                         if (await waitTaskbool)
                         {
                             attempts = 0;
@@ -344,7 +344,7 @@ namespace ntrbase.Bot
 
                     case (int)botstates.starttrade:
                         Report("Press Start");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botstate = (int)botstates.confirmtrade;
                         else
@@ -357,7 +357,7 @@ namespace ntrbase.Bot
 
                     case (int)botstates.confirmtrade:
                         Report("Press Yes");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botstate = (int)botstates.testboxesout;
                         else
@@ -432,12 +432,12 @@ namespace ntrbase.Bot
                         if (!tradeevo)
                         {
                             Report("Press B button");
-                            waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyB);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                         }
                         else
                         {
                             Report("Trade evolution detected, press A button");
-                            waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         }
                         if (await waitTaskbool)
                             botstate = (int)botstates.testtradefinish;
@@ -470,7 +470,7 @@ namespace ntrbase.Bot
                     case (int)botstates.collectFC1:
                         Report("Trigger Dialog");
                         await Task.Delay(1000);
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botstate = (int)botstates.collectFC2;
                         else
@@ -499,7 +499,7 @@ namespace ntrbase.Bot
 
                     case (int)botstates.collectFC3:
                         Report("Continue dialog");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyB);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                         if (await waitTaskbool)
                             botstate = (int)botstates.collectFC4;
                         else

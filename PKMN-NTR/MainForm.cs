@@ -267,7 +267,7 @@ namespace ntrbase
             bersGridView.Columns.Add(berItem);
             bersGridView.Columns.Add(berAmount);
 
-            foreach (string t in Program.PKTable.Item6)
+            foreach (string t in LookupTable.Item6)
             {
                 itemItem.Items.Add(t);
                 keyItem.Items.Add(t);
@@ -276,7 +276,7 @@ namespace ntrbase
                 berItem.Items.Add(t);
             }
 
-            foreach (string t in Program.PKTable.Item7)
+            foreach (string t in LookupTable.Item7)
             {
                 nameItem7.Items.Add(t);
             }
@@ -411,18 +411,18 @@ namespace ntrbase
         {
             if (gen7)
             {
-                absno = Program.PKTable.getAbilities7(speciesno, formeno);
-                abstr[0] = Program.PKTable.Ability7[absno[0] - 1] + " (1)";
-                abstr[1] = Program.PKTable.Ability7[absno[1] - 1] + " (2)";
-                abstr[2] = Program.PKTable.Ability7[absno[2] - 1] + " (H)";
+                absno = LookupTable.getAbilities7(speciesno, formeno);
+                abstr[0] = LookupTable.Ability7[absno[0] - 1] + " (1)";
+                abstr[1] = LookupTable.Ability7[absno[1] - 1] + " (2)";
+                abstr[2] = LookupTable.Ability7[absno[2] - 1] + " (H)";
                 ComboboxFill(ability, abstr);
             }
             else
             {
-                absno = Program.PKTable.getAbilities(speciesno, formeno);
-                abstr[0] = Program.PKTable.Ability6[absno[0] - 1] + " (1)";
-                abstr[1] = Program.PKTable.Ability6[absno[1] - 1] + " (2)";
-                abstr[2] = Program.PKTable.Ability6[absno[2] - 1] + " (H)";
+                absno = LookupTable.getAbilities(speciesno, formeno);
+                abstr[0] = LookupTable.Ability6[absno[0] - 1] + " (1)";
+                abstr[1] = LookupTable.Ability6[absno[1] - 1] + " (2)";
+                abstr[2] = LookupTable.Ability6[absno[2] - 1] + " (H)";
                 ComboboxFill(ability, abstr);
             }
 
@@ -679,21 +679,22 @@ namespace ntrbase
 
         private void fillGen6()
         {
-            ComboboxFill(Lang, Program.PKTable.Lang6);
-            ComboboxFill(pkLang, Program.PKTable.Lang6);
-            ComboboxFill(species, Program.PKTable.Species6);
-            ComboboxFill(ability, Program.PKTable.Ability6);
-            ComboboxFill(filterAbility, Program.PKTable.Ability6);
-            ComboboxFill(heldItem, Program.PKTable.Item6);
-            ComboboxFill(ball, Program.PKTable.Balls6);
-            ComboboxFill(move1, Program.PKTable.Moves6);
-            ComboboxFill(move2, Program.PKTable.Moves6);
-            ComboboxFill(move3, Program.PKTable.Moves6);
-            ComboboxFill(move4, Program.PKTable.Moves6);
-            ComboboxFill(relearnmove1, Program.PKTable.Moves6);
-            ComboboxFill(relearnmove2, Program.PKTable.Moves6);
-            ComboboxFill(relearnmove3, Program.PKTable.Moves6);
-            ComboboxFill(relearnmove4, Program.PKTable.Moves6);
+            ComboboxFill(Lang, LookupTable.Lang6);
+            ComboboxFill(pkLang, LookupTable.Lang6);
+            ComboboxFill(species, LookupTable.Species6);
+            ComboboxFill(ability, LookupTable.Ability6);
+            ComboboxFill(filterAbility, LookupTable.Ability6);
+            ComboboxFill(heldItem, LookupTable.Item6);
+            ComboboxFill(ball, LookupTable.Balls6);
+            ComboboxFill(move1, LookupTable.Moves6);
+            ComboboxFill(move2, LookupTable.Moves6);
+            ComboboxFill(move3, LookupTable.Moves6);
+            ComboboxFill(move4, LookupTable.Moves6);
+            ComboboxFill(relearnmove1, LookupTable.Moves6);
+            ComboboxFill(relearnmove2, LookupTable.Moves6);
+            ComboboxFill(relearnmove3, LookupTable.Moves6);
+            ComboboxFill(relearnmove4, LookupTable.Moves6);
+            ComboboxFill(typeLSR, LookupTable.SoftResetModes6);
             SetVisible(itemsView7, false);
             SetVisible(itemsGridView, true);
             SetVisible(keysGridView, false);
@@ -713,21 +714,22 @@ namespace ntrbase
 
         private async void fillGen7()
         {
-            ComboboxFill(Lang, Program.PKTable.Lang7);
-            ComboboxFill(pkLang, Program.PKTable.Lang7);
-            ComboboxFill(species, Program.PKTable.Species7);
-            ComboboxFill(ability, Program.PKTable.Ability7);
-            ComboboxFill(filterAbility, Program.PKTable.Ability7);
-            ComboboxFill(heldItem, Program.PKTable.Item7);
-            ComboboxFill(ball, Program.PKTable.Balls7);
-            ComboboxFill(move1, Program.PKTable.Moves7);
-            ComboboxFill(move2, Program.PKTable.Moves7);
-            ComboboxFill(move3, Program.PKTable.Moves7);
-            ComboboxFill(move4, Program.PKTable.Moves7);
-            ComboboxFill(relearnmove1, Program.PKTable.Moves7);
-            ComboboxFill(relearnmove2, Program.PKTable.Moves7);
-            ComboboxFill(relearnmove3, Program.PKTable.Moves7);
-            ComboboxFill(relearnmove4, Program.PKTable.Moves7);
+            ComboboxFill(Lang, LookupTable.Lang7);
+            ComboboxFill(pkLang, LookupTable.Lang7);
+            ComboboxFill(species, LookupTable.Species7);
+            ComboboxFill(ability, LookupTable.Ability7);
+            ComboboxFill(filterAbility, LookupTable.Ability7);
+            ComboboxFill(heldItem, LookupTable.Item7);
+            ComboboxFill(ball, LookupTable.Balls7);
+            ComboboxFill(move1, LookupTable.Moves7);
+            ComboboxFill(move2, LookupTable.Moves7);
+            ComboboxFill(move3, LookupTable.Moves7);
+            ComboboxFill(move4, LookupTable.Moves7);
+            ComboboxFill(relearnmove1, LookupTable.Moves7);
+            ComboboxFill(relearnmove2, LookupTable.Moves7);
+            ComboboxFill(relearnmove3, LookupTable.Moves7);
+            ComboboxFill(relearnmove4, LookupTable.Moves7);
+            ComboboxFill(typeLSR, LookupTable.SoftResetModes7);
             SetVisible(itemsView7, true);
             SetVisible(itemsGridView, false);
             SetVisible(keysGridView, false);
@@ -1074,7 +1076,7 @@ namespace ntrbase
                 {
                     int itemsfinal = BitConverter.ToUInt16(data, i * 4);
                     int amountfinal = BitConverter.ToUInt16(data, (i * 4) + 2);
-                    gv.Rows[i].Cells[0].Value = Program.PKTable.Item6[itemsfinal];
+                    gv.Rows[i].Cells[0].Value = LookupTable.Item6[itemsfinal];
                     gv.Rows[i].Cells[1].Value = amountfinal;
                 }
             }
@@ -1148,7 +1150,7 @@ namespace ntrbase
                     // Build Item Value
                     uint val = 0;
                     string datastring = itemsView7.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(Program.PKTable.Item7, datastring);
+                    int itemIndex = Array.IndexOf(LookupTable.Item7, datastring);
                     int itemcnt;
                     itemcnt = Convert.ToInt32(itemsView7.Rows[i].Cells[1].Value.ToString());
                     val |= (uint)(itemIndex & 0x3FF);
@@ -1183,7 +1185,7 @@ namespace ntrbase
                     for (int i = 0; i < itemsGridView.RowCount; i++)
                     {
                         string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1200,7 +1202,7 @@ namespace ntrbase
                     for (int i = 0; i < keysGridView.RowCount; i++)
                     {
                         string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1217,7 +1219,7 @@ namespace ntrbase
                     for (int i = 0; i < tmsGridView.RowCount; i++)
                     {
                         string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1234,7 +1236,7 @@ namespace ntrbase
                     for (int i = 0; i < medsGridView.RowCount; i++)
                     {
                         string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1251,7 +1253,7 @@ namespace ntrbase
                     for (int i = 0; i < bersGridView.RowCount; i++)
                     {
                         string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1356,7 +1358,7 @@ namespace ntrbase
             for (int i = 0; i < itemdata.GetLength(0); i++)
             {
                 itemsView7.Rows.Add();
-                itemsView7.Rows[i].Cells[0].Value = Program.PKTable.Item7[itemdata[i, 0]];
+                itemsView7.Rows[i].Cells[0].Value = LookupTable.Item7[itemdata[i, 0]];
                 itemsView7.Rows[i].Cells[1].Value = itemdata[i, 1];
             }
         }
@@ -1775,17 +1777,17 @@ namespace ntrbase
 
         private uint cloneGetCopies()
         {
-            return Decimal.ToUInt32(cloneCopiesNo.Value);
+            return decimal.ToUInt32(cloneCopiesNo.Value);
         }
 
         private uint cloneGetBoxIndexTo()
         {
-            return Decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
+            return decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
         }
 
         private uint cloneGetBoxIndexFrom()
         {
-            return Decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
+            return decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
         }
 
         private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
@@ -1929,12 +1931,12 @@ namespace ntrbase
 
         private uint writeGetCopies()
         {
-            return Decimal.ToUInt32(writeCopiesNo.Value);
+            return decimal.ToUInt32(writeCopiesNo.Value);
         }
 
         private uint writeGetBoxIndex()
         {
-            return Decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
+            return decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
         }
 
         private void writeSetBoxIndex(uint index)
@@ -1991,19 +1993,19 @@ namespace ntrbase
                 }
             }
             if (gen7)
-                writePokemonToBox(Program.PKTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
+                writePokemonToBox(LookupTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
             else
-                writePokemonToBox(Program.PKTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
+                writePokemonToBox(LookupTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
         }
 
         private uint deleteGetAmount()
         {
-            return Decimal.ToUInt32(deleteAmount.Value);
+            return decimal.ToUInt32(deleteAmount.Value);
         }
 
         private uint deleteGetIndex()
         {
-            return Decimal.ToUInt32((deleteBox.Value - 1) * BOXSIZE + deleteSlot.Value - 1);
+            return decimal.ToUInt32((deleteBox.Value - 1) * BOXSIZE + deleteSlot.Value - 1);
         }
 
         private void deleteBox_ValueChanged(object sender, EventArgs e)
@@ -2252,9 +2254,9 @@ namespace ntrbase
         private void species_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateAbility(species.SelectedIndex + 1, 0, 1);
-            uint newexp = Program.PKTable.getExp(species.SelectedIndex + 1, (int)level.Value);
+            uint newexp = LookupTable.getExp(species.SelectedIndex + 1, (int)level.Value);
             SetValue(ExpPoints, newexp);
-            ExpPoints.Maximum = Program.PKTable.getExp(species.SelectedIndex + 1, 100);
+            ExpPoints.Maximum = LookupTable.getExp(species.SelectedIndex + 1, 100);
             if (dumpedPKHeX.Data != null)
             {
                 dumpedPKHeX.Species = species.SelectedIndex + 1;
@@ -2287,7 +2289,7 @@ namespace ntrbase
             level.ValueChanged -= level_ValueChanged;
             int speciesno = 0;
             Invoke(new MethodInvoker(delegate () { speciesno = species.SelectedIndex; }));
-            int newlevel = Program.PKTable.getLevel(speciesno + 1, (int)ExpPoints.Value);
+            int newlevel = LookupTable.getLevel(speciesno + 1, (int)ExpPoints.Value);
             SetValue(level, newlevel);
             HyperTrainBoxes();
             level.ValueChanged += level_ValueChanged;
@@ -2296,7 +2298,7 @@ namespace ntrbase
         private void level_ValueChanged(object sender, EventArgs e)
         {
             ExpPoints.ValueChanged -= ExpPoints_ValueChanged;
-            uint newexp = Program.PKTable.getExp(species.SelectedIndex + 1, (int)level.Value);
+            uint newexp = LookupTable.getExp(species.SelectedIndex + 1, (int)level.Value);
             SetValue(ExpPoints, newexp);
             HyperTrainBoxes();
             ExpPoints.ValueChanged += ExpPoints_ValueChanged;
@@ -2346,8 +2348,8 @@ namespace ntrbase
         private void ivChanged(object sender, EventArgs e)
         {
             int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
-            SetText(hiddenPower, Program.PKTable.HPName[hp]);
-            SetColor(hiddenPower, Program.PKTable.HPColor[hp], true);
+            SetText(hiddenPower, LookupTable.HPName[hp]);
+            SetColor(hiddenPower, LookupTable.HPColor[hp], true);
             HyperTrainBoxes();
         }
 
@@ -2454,7 +2456,7 @@ namespace ntrbase
             setShinyMark();
             SetSelectedIndex(genderBox, dumpedPKHeX.Gender);
             SetChecked(isEgg, dumpedPKHeX.IsEgg);
-            SetMaximum(ExpPoints, Program.PKTable.getExp(dumpedPKHeX.Species, 100));
+            SetMaximum(ExpPoints, LookupTable.getExp(dumpedPKHeX.Species, 100));
             SetValue(ExpPoints, dumpedPKHeX.EXP);
             if (dumpedPKHeX.CurrentHandler == 0)
             {
@@ -2717,62 +2719,62 @@ namespace ntrbase
 
         private void manualA_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyA);
+            sendButton(LookupTable.keyA);
         }
 
         private void manualB_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyB);
+            sendButton(LookupTable.keyB);
         }
 
         private void manualX_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyX);
+            sendButton(LookupTable.keyX);
         }
 
         private void manualY_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyY);
+            sendButton(LookupTable.keyY);
         }
 
         private void manualDUp_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.DpadUP);
+            sendButton(LookupTable.DpadUP);
         }
 
         private void ManualDDown_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.DpadDOWN);
+            sendButton(LookupTable.DpadDOWN);
         }
 
         private void manualDLeft_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.DpadLEFT);
+            sendButton(LookupTable.DpadLEFT);
         }
 
         private void manualDRight_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.DpadRIGHT);
+            sendButton(LookupTable.DpadRIGHT);
         }
 
         private void manualStart_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keySTART);
+            sendButton(LookupTable.keySTART);
         }
 
         private void manualSelect_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keySELECT);
+            sendButton(LookupTable.keySELECT);
         }
 
         private void manualL_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyL);
+            sendButton(LookupTable.keyL);
         }
 
         private void manualR_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyR);
+            sendButton(LookupTable.keyR);
         }
 
         private async void manualSR_Click(object sender, EventArgs e)
@@ -2780,7 +2782,7 @@ namespace ntrbase
             DialogResult dialogr = MessageBox.Show("Are you sure that you want to send a soft-reset command? The application will automatically disconnect from the game afterwards.", "Remote Control", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogr == DialogResult.Yes)
             {
-                sendButton(Program.PKTable.softReset);
+                sendButton(LookupTable.softReset);
                 await Task.Delay(1000);
                 PerformDisconnect();
             }

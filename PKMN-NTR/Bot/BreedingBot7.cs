@@ -87,7 +87,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.triggerdialog:
                         Report("Start dialog");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botState = (int)breedbotstates.testdialog1;
                         else
@@ -119,7 +119,7 @@ namespace ntrbase.Bot
                         int i;
                         for (i = 0; i < 6; i++)
                         {
-                            waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (!(await waitTaskbool))
                                 break;
                         }
@@ -130,7 +130,7 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)breedbotstates.fixdialog:
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botState = (int)breedbotstates.checknoegg;
                         else
@@ -160,10 +160,10 @@ namespace ntrbase.Bot
                     case (int)breedbotstates.exitdialog:
                         Report("Exit dialog");
                         await Task.Delay(1000);
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyB);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                         if (await waitTaskbool)
                         {
-                            waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyB);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                                 botState = (int)breedbotstates.testdialog2;
                             else
@@ -277,7 +277,7 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)breedbotstates.enterdoor:
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botState = (int)breedbotstates.checkmap3;
                         else
@@ -392,7 +392,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.startcomputer:
                         Report("Turn on computer");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botState = (int)breedbotstates.testcomputer;
                         else
@@ -484,7 +484,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.touchnewbox:
                         Report("Touch New Box");
-                        waitTaskbool = Program.helper.waittouch(Program.PKTable.boxposX7[currentbox], Program.PKTable.boxposY7[currentbox]);
+                        waitTaskbool = Program.helper.waittouch(LookupTable.boxposX7[currentbox], LookupTable.boxposY7[currentbox]);
                         if (await waitTaskbool)
                         {
                             attempts = 0;
@@ -500,7 +500,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.selectnewbox:
                         Report("Select New Box");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botState = (int)breedbotstates.testviewout;
                         else
@@ -542,7 +542,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.moveegg:
                         Report("Move Egg");
-                        waitTaskbool = Program.helper.waitholdtouch(Program.PKTable.pokeposX7[currentslot], Program.PKTable.pokeposY7[currentslot]);
+                        waitTaskbool = Program.helper.waitholdtouch(LookupTable.pokeposX7[currentslot], LookupTable.pokeposY7[currentslot]);
                         if (await waitTaskbool)
                             botState = (int)breedbotstates.releaseegg;
                         else
@@ -578,7 +578,7 @@ namespace ntrbase.Bot
 
                     case (int)breedbotstates.exitcomputer:
                         Report("Exit from PC");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyB);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                         if (await waitTaskbool)
                             botState = (int)breedbotstates.testexit;
                         else

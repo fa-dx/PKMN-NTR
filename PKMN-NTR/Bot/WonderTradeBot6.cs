@@ -167,7 +167,7 @@ namespace ntrbase.Bot
                     case (int)botstates.confirmsave:
                         Report("Press Yes");
                         await Task.Delay(500);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testwtscrn;
                         break;
@@ -249,7 +249,7 @@ namespace ntrbase.Bot
                     case (int)botstates.touchnewbox:
                         await Task.Delay(500);
                         Report("Touch New Box");
-                        Program.helper.quicktouch(Program.PKTable.boxposX[currentbox], Program.PKTable.boxposY[currentbox], commandtime);
+                        Program.helper.quicktouch(LookupTable.boxposX6[currentbox], LookupTable.boxposY6[currentbox], commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.selectnewbox;
                         break;
@@ -257,7 +257,7 @@ namespace ntrbase.Bot
                     case (int)botstates.selectnewbox:
                         Report("Select New Box");
                         await Task.Delay(500);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testboxviewout;
                         break;
@@ -281,7 +281,7 @@ namespace ntrbase.Bot
                     case (int)botstates.touchpoke:
                         Report("Touch Pokémon");
                         await Task.Delay(500);
-                        Program.helper.quicktouch(Program.PKTable.pokeposX[currentslot], Program.PKTable.pokeposY[currentslot], commandtime);
+                        Program.helper.quicktouch(LookupTable.pokeposX6[currentslot], LookupTable.pokeposY6[currentslot], commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.selectrade;
                         break;
@@ -289,7 +289,7 @@ namespace ntrbase.Bot
                     case (int)botstates.selectrade:
                         Report("Select Trade");
                         await Task.Delay(750);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.confirmsend;
                         break;
@@ -297,7 +297,7 @@ namespace ntrbase.Bot
                     case (int)botstates.confirmsend:
                         Report("Select Yes");
                         await Task.Delay(750);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                        Program.helper.quickbuton(LookupTable.keyA, commandtime);
                         await Task.Delay(commandtime + delaytime);
                         botstate = (int)botstates.testboxesout;
                         break;
@@ -378,7 +378,7 @@ namespace ntrbase.Bot
                         { // Still waiting
                             attempts++;
                             Report("Select Yes");
-                            Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
+                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + delaytime);
                             botstate = (int)botstates.notradepartner;
                         }

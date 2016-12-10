@@ -11,7 +11,6 @@ namespace ntrbase
 		public static ScriptHelper scriptHelper;
 		public static MainForm gCmdWindow;
         public static RemoteControl helper;
-        public static LookupTable PKTable;
 
         [STAThread]
         static void Main()
@@ -19,7 +18,6 @@ namespace ntrbase
             ntrClient = new NTR();
 			scriptHelper = new ScriptHelper();
             helper = new RemoteControl();
-            PKTable = new LookupTable();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
