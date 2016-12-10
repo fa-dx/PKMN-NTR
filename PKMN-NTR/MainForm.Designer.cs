@@ -2808,12 +2808,6 @@
             this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.typeLSR.FormattingEnabled = true;
-            this.typeLSR.Items.AddRange(new object[] {
-            "Regular",
-            "Mirage Spot",
-            "Event",
-            "Groudon/Kyogre",
-            "Walk"});
             this.typeLSR.Location = new System.Drawing.Point(43, 7);
             this.typeLSR.Name = "typeLSR";
             this.typeLSR.Size = new System.Drawing.Size(222, 21);

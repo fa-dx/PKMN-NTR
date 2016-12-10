@@ -65,6 +65,7 @@ namespace ntrbase
         private BreedingBot6 BreedBot6;
         private BreedingBot7 BreedBot7;
         private SoftResetbot6 SRBot6;
+        private SoftResetbot7 SRBot7;
 
         //Game information
         public int pid;
@@ -299,7 +300,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -1393,7 +1394,7 @@ namespace ntrbase
             else if (radioTrade.Checked)
             {
                 if (!gen7)
-                { 
+                {
                     DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleTradeData, null);
                     waitingForData.Add(Program.scriptHelper.data(tradeoffrg, 0x1FFFF, pid), myArgs);
                 }
@@ -2503,7 +2504,7 @@ namespace ntrbase
             SetText(otName, dumpedPKHeX.OT_Name);
             SetValue(dTIDNum, dumpedPKHeX.TID);
             SetValue(dSIDNum, dumpedPKHeX.SID);
-            
+
             int i;
             switch (dumpedPKHeX.Language)
             {
@@ -2815,7 +2816,10 @@ namespace ntrbase
                         BreedBot6.botstop = true;
                     break;
                 case 2: // Soft-reset bot
-                    SRBot6.botstop = true;
+                    if (gen7)
+                        SRBot7.botstop = true;
+                    else
+                        SRBot6.botstop = true;
                     break;
                 case 3: // Wonder Trade bot
                     if (gen7)
@@ -3248,39 +3252,59 @@ namespace ntrbase
             string typemessage;
             string resumemessage;
             botWorking = true; // Supress warning messages
-            switch (typeLSR.SelectedIndex)
+            if (gen7)
             {
-                case 0:
-                    typemessage = "Regular - Make sure you are in front of the pokémon.";
-                    resumemessage = "In front of pokémon, will press A to trigger start the battle";
-                    radioOpponent.Checked = true;
-                    break;
-                case 1:
-                    typemessage = "Mirage Spot - Make sure you are in front of the hole.";
-                    resumemessage = "In front of hole, will press A to trigger dialog";
-                    radioOpponent.Checked = true;
-                    break;
-                case 2:
-                    typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
-                    resumemessage = "In front of the lady, will press A to trigger dialog";
-                    radioParty.Checked = true;
-                    SetValue(boxDump, 1);
-                    SetValue(slotDump, 2);
-                    break;
-                case 3:
-                    typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
-                    resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
-                    radioOpponent.Checked = true;
-                    break;
-                case 4:
-                    typemessage = "Walk - Make sure you are one step south of the pokémon.";
-                    resumemessage = "One step south of the pokémon, will press up to trigger dialog";
-                    radioOpponent.Checked = true;
-                    break;
-                default:
-                    typemessage = "No type - Select one type of soft-reset and try again.";
-                    resumemessage = "";
-                    break;
+                resumemessage = "No resume support for Gen 7";
+                switch (typeLSR.SelectedIndex)
+                {
+                    case 0:
+                        typemessage = "Event - Make sure you are in front of the man in the Pokémon Center. Also, you must only have one pokémon in your party.";
+                        radioParty.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 2);
+                        break;
+                    default:
+                        typemessage = "No type - Select one type of soft-reset and try again.";
+                        resumemessage = "";
+                        break;
+                }
+            }
+            else
+            {
+                switch (typeLSR.SelectedIndex)
+                {
+                    case 0:
+                        typemessage = "Regular - Make sure you are in front of the pokémon.";
+                        resumemessage = "In front of pokémon, will press A to trigger start the battle";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 1:
+                        typemessage = "Mirage Spot - Make sure you are in front of the hole.";
+                        resumemessage = "In front of hole, will press A to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 2:
+                        typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
+                        resumemessage = "In front of the lady, will press A to trigger dialog";
+                        radioParty.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 2);
+                        break;
+                    case 3:
+                        typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
+                        resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 4:
+                        typemessage = "Walk - Make sure you are one step south of the pokémon.";
+                        resumemessage = "One step south of the pokémon, will press up to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    default:
+                        typemessage = "No type - Select one type of soft-reset and try again.";
+                        resumemessage = "";
+                        break;
+                }
             }
             botWorking = false;
             DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
@@ -3296,7 +3320,8 @@ namespace ntrbase
                 Task<int> Bot;
                 if (gen7)
                 {
-                    return;
+                    SRBot7 = new SoftResetbot7(typeLSR.SelectedIndex);
+                    Bot = SRBot7.RunBot();
                 }
                 else
                 {
@@ -3313,9 +3338,7 @@ namespace ntrbase
                     result = 8;
                 int totalresets;
                 if (gen7)
-                {
-                    return;
-                }
+                    totalresets = SRBot7.resetNo;
                 else
                     totalresets = SRBot6.resetNo;
                 switch (result)
@@ -3334,6 +3357,9 @@ namespace ntrbase
                         break;
                     case 4:
                         MessageBox.Show("Finished, number of resets: " + totalresets, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 7: // Button error
+                        MessageBox.Show(buttonerror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 8:
                         MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
