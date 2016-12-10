@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ntrbase.Bot
 {
@@ -73,14 +74,14 @@ namespace ntrbase.Bot
                         waitTaskbool = Program.helper.waitNTRwrite(eggOff, 0x01, Program.gCmdWindow.pid);
                         if (await waitTaskbool)
                         {
-                            botresult = 0;
+                            attempts = 0;
                             botState = (int)breedbotstates.triggerdialog;
                         }
                         else
                         {
+                            attempts++;
                             botresult = 1;
-                            Report("Error detected");
-                            attempts = 11;
+                            botState = (int)breedbotstates.quickegg;
                         }
                         break;
 
