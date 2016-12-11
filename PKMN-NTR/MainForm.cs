@@ -3581,8 +3581,12 @@ namespace ntrbase
             if (TSVlist.Items.Count > 0)
             {
                 string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                (new System.IO.FileInfo(folderPath)).Directory.Create();
-                string fileName = "TSVlist.csv";
+                (new FileInfo(folderPath)).Directory.Create();
+                string fileName;
+                if (gen7)
+                    fileName = "TSVlist.csv";
+                else
+                    fileName = "TSVlist7.csv";
                 var tsvlst = new StringBuilder();
                 foreach (var value in TSVlist.Items)
                 {
@@ -3598,9 +3602,13 @@ namespace ntrbase
         private void TSVlistLoad_Click(object sender, EventArgs e)
         {
             string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            string fileName = "TSVlist.csv";
-            if (System.IO.File.Exists(folderPath + fileName))
+            (new FileInfo(folderPath)).Directory.Create();
+            string fileName;
+            if (gen7)
+                fileName = "TSVlist.csv";
+            else
+                fileName = "TSVlist7.csv";
+            if (File.Exists(folderPath + fileName))
             {
                 string[] values = File.ReadAllLines(folderPath + fileName);
                 TSVlist.Items.Clear();
