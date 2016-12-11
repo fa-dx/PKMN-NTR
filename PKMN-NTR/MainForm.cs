@@ -3123,6 +3123,28 @@ namespace ntrbase
             }
         }
 
+        private void filterReset_Click(object sender, EventArgs e)
+        {
+            SetChecked(filterShiny, false);
+            SetSelectedIndex(filterNature, -1);
+            SetSelectedIndex(filterAbility, -1);
+            SetSelectedIndex(filterHPtype, -1);
+            SetSelectedIndex(filterGender, -1);
+            SetSelectedIndex(filterHPlogic, 0);
+            SetSelectedIndex(filterATKlogic, 0);
+            SetSelectedIndex(filterDEFlogic, 0);
+            SetSelectedIndex(filterSPAlogic, 0);
+            SetSelectedIndex(filterSPDlogic, 0);
+            SetSelectedIndex(filterSPElogic, 0);
+            SetSelectedIndex(filterPerIVlogic, 0);
+            SetValue(filterHPvalue, 0);
+            SetValue(filterATKvalue, 0);
+            SetValue(filterDEFvalue, 0);
+            SetValue(filterSPAvalue, 0);
+            SetValue(filterSPDvalue, 0);
+            SetValue(filterSPEvalue, 0);
+        }
+
         private void bFilterLoad_Click(object sender, EventArgs e)
         {
             string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
@@ -3424,6 +3446,13 @@ namespace ntrbase
             return FilterCheck(filtersSoftReset);
         }
 
+        private void srClear_Click(object sender, EventArgs e)
+        {
+            SetSelectedIndex(typeLSR, -1);
+            SetChecked(resumeLSR, false);
+            filtersSoftReset.Rows.Clear();
+        }
+
         // Breeding bot
         private async void runBreedingBot_Click_1(object sender, EventArgs e)
         {
@@ -3546,7 +3575,7 @@ namespace ntrbase
             if (ESVlist.Rows.Count > 0)
             {
                 string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                (new FileInfo(folderPath)).Directory.Create();
                 string fileName = "ESVlist.csv";
                 var esvlst = new StringBuilder();
                 var headers = ESVlist.Columns.Cast<DataGridViewColumn>();
@@ -3630,6 +3659,21 @@ namespace ntrbase
             }
             else
                 return true;
+        }
+
+        private void breedingClear_Click(object sender, EventArgs e)
+        {
+            SetSelectedIndex(modeBreed, -1);
+            SetValue(boxBreed, 1);
+            SetValue(slotBreed, 1);
+            SetValue(eggsNoBreed, 1);
+            OrganizeMiddle.Checked = true;
+            radioDayCare1.Checked = true;
+            SetChecked(readESV, false);
+            SetChecked(quickBreed, false);
+            ESVlist.Rows.Clear();
+            TSVlist.Items.Clear();
+            filterBreeding.Rows.Clear();
         }
 
         #endregion Bots
