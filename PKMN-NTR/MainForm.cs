@@ -3380,6 +3380,9 @@ namespace ntrbase
                     case 4:
                         MessageBox.Show("Finished, number of resets: " + totalresets, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
+                    case 6: // Touch screen error
+                        MessageBox.Show(toucherror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     case 7: // Button error
                         MessageBox.Show(buttonerror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
