@@ -157,8 +157,9 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            botresult = 2;
-                            botState = (int)srbotstates.botexit;
+                            botresult = 1;
+                            Report("Error detected");
+                            attempts = 11;
                         }
                         break;
 
@@ -248,6 +249,7 @@ namespace ntrbase.Bot
 
                     case (int)srbotstates.returncontrol:
                         Report("Return contol to character");
+                        await Task.Delay(1500);
                         waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botState = (int)srbotstates.touchsave;
@@ -499,7 +501,10 @@ namespace ntrbase.Bot
                         Report("Walk one step");
                         waitTaskbool = Program.helper.waitbutton(LookupTable.runUP);
                         if (await waitTaskbool)
+                        {
+                            attempts = 0;
                             botState = (int)srbotstates.trigger;
+                        }
                         else
                         {
                             attempts++;
@@ -519,7 +524,7 @@ namespace ntrbase.Bot
                         botstop = true;
                         break;
                 }
-                if (attempts > 10)
+                if (attempts > 15)
                 { // Too many attempts
                     if (maxreconnect > 0)
                     {
