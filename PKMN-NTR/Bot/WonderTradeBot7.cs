@@ -10,6 +10,7 @@ namespace ntrbase.Bot
         public bool botstop;
         public int botresult;
         private int maxreconnect;
+        private bool lastreconnect;
         private int currentbox;
         private int currentslot;
         private int quantity;
@@ -64,6 +65,7 @@ namespace ntrbase.Bot
             botresult = 0;
             attempts = 0;
             maxreconnect = 10;
+            lastreconnect = false;
             collectFC = FCaftertrade;
             nextFC = 0;
         }
@@ -393,7 +395,7 @@ namespace ntrbase.Bot
                         {
                             await Task.Delay(2000);
                             tradewait++;
-                            if (tradewait > 40) // Too much time passed, 90 secs
+                            if (tradewait > 35) // Too much time passed, 90 secs
                             {
                                 notradepartner = true;
                                 botstate = (int)botstates.testtradefinish;
@@ -421,10 +423,15 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            if (Program.helper.lastRead == 0x40D40000)
-                                tradeevo = true;
                             attempts++;
                             botstate = (int)botstates.tryfinish;
+                            if (Program.helper.lastRead == 0x3F800000)
+                            { // Communication error
+                                botresult = 4;
+                                botstate = (int)botstates.exitbot;
+                            }
+                            else if (Program.helper.lastRead == 0x40D40000)
+                                tradeevo = true;
                         }
                         break;
 
@@ -565,7 +572,14 @@ namespace ntrbase.Bot
                 }
                 if (attempts > 10)
                 { // Too many attempts
-                    if (maxreconnect > 0)
+                    if (lastreconnect)
+                    {
+                        Report("Two consecutive reconnect attempts detected. Connection error?");
+                        attempts = 0;
+                        Program.helper.quicktouch(160, 230, 250);
+                        await Task.Delay(1000);
+                    }
+                    else if (maxreconnect > 0)
                     {
                         waitTaskbool = Program.gCmdWindow.Reconnect();
                         maxreconnect--;
@@ -573,6 +587,7 @@ namespace ntrbase.Bot
                         {
                             await Task.Delay(5000);
                             attempts = 0;
+                            lastreconnect = true;
                         }
                         else
                         {
@@ -586,6 +601,8 @@ namespace ntrbase.Bot
                         botstop = true;
                     }
                 }
+                else
+                    lastreconnect = false;
             }
             return botresult;
         }

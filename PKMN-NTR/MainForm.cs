@@ -3235,6 +3235,9 @@ namespace ntrbase
                     case 3:
                         MessageBox.Show("Bot finished due level up in Festival Plaza", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
+                    case 4: // Communication error
+                        MessageBox.Show("A communication error has ocurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     case 6: // Touch screen error
                         MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
