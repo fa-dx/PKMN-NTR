@@ -78,6 +78,9 @@ namespace ntrbase.Bot
                 pssdisableY = 100;
                 pssdisableIN = 0x00000000;
                 pssdisableOUT = 0x15000000;
+                dialogOff = 0x5EA188;
+                dialogIN = 0x0D;
+                dialogOUT = 0x00;
             }
             else
             { // ORAS
@@ -95,7 +98,7 @@ namespace ntrbase.Bot
                 pssdisableY = 120;
                 pssdisableIN = 0x33000000;
                 pssdisableOUT = 0x33100000;
-                dialogOff = 0x62C2f4;
+                dialogOff = 0x62C2F4;
                 dialogIN = 0x0D;
                 dialogOUT = 0x0A;
             }

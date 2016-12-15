@@ -847,7 +847,7 @@ namespace ntrbase
                 case 715: return new int[] { 119, 151, 140 }; // Noivern
                 case 716: return new int[] { 187, 187, 187 }; // Xerneas
                 case 717: return new int[] { 186, 186, 186 }; // Yveltal
-                case 718: return new int[] { 188, 211, 188 }; // Zygarde
+                case 718: return new int[] { 188, 188, 188 }; // Zygarde
                 case 719: return new int[] { 29, 29, 29 }; // Diancie
                 //case 719: return new int[] { 156, 156, 156 }; // Mega Diancie
                 case 720: return new int[] { 170, 170, 170 }; // Hoopa Confined
