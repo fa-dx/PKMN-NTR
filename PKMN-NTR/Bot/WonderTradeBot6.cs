@@ -5,26 +5,32 @@ namespace ntrbase.Bot
 {
     class WonderTradeBot6
     {
-        // Class variables
-        private enum botstates { testpssmenu, readpoke, pressWTbutton, testsavescrn, confirmsave, testwtscrn, confirmwt, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, selectrade, confirmsend, testboxesout, waitfortrade, testbackpssmenu, notradepartner, endbot };
+        private enum botstates { botstart, testpssmenu, readpoke, pressWTbutton, testsavescrn, confirmsave, testwtscrn, confirmwt, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, selectrade, confirmsend, testboxesout, waitfortrade, testbackpssmenu, notradepartner, endbot };
 
+        // Bot variables
+        public int botresult;
         public bool botstop;
-        private int botresult;
-        private int currentbox;
-        private int currentslot;
-        private int quantity;
+
+        // Class variables
         private int botstate;
         private int attempts;
         private int tradewait;
-        private uint currentPID;
-
-        private bool boxchange = true;
+        private bool boxchange;
         private bool taskresultbool;
+        private uint currentPID;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
-        private int commandtime = 250;
-        private int delaytime = 150;
 
+        // Input variables
+        private int currentbox;
+        private int currentslot;
+        private int quantity;
+
+        // Class constants
+        private readonly int commandtime = 250;
+        private readonly int delaytime = 150;
+
+        // Data offsets
         private uint psssmenu1Off;
         private uint psssmenu1IN;
         //private uint psssmenu1OUT;
@@ -44,16 +50,22 @@ namespace ntrbase.Bot
 
         public WonderTradeBot6(int StartBox, int StartSlot, int Amount, bool oras)
         {
+            botresult = 0;
+            botstop = false;
+
+            botstate = (int)botstates.botstart;
+            attempts = 0;
+            tradewait = 0;
+            boxchange = true;
+            taskresultbool = false;
+            currentPID = 0;
+
             currentbox = StartBox - 1;
             currentslot = StartSlot - 1;
             quantity = Amount;
-            botstop = false;
-            boxchange = true;
-            botstate = 0;
-            botresult = 0;
-            attempts = 0;
+
             if (!oras)
-            { // Offsets for XY
+            { // XY
                 psssmenu1Off = 0x19ABC0;
                 psssmenu1IN = 0x7E0000;
                 //psssmenu1OUT = 0x4D0000;
@@ -72,7 +84,7 @@ namespace ntrbase.Bot
                 wtboxviewRange = 0x1000000;
             }
             else
-            { // Offsets for ORAS
+            { // ORAS
                 psssmenu1Off = 0x19C21C;
                 psssmenu1IN = 0x830000;
                 //psssmenu1OUT = 0x500000;
@@ -98,6 +110,11 @@ namespace ntrbase.Bot
             {
                 switch (botstate)
                 {
+                    case (int)botstates.botstart:
+                        Report("Bot start");
+                        botstate = (int)botstates.testpssmenu;
+                        break;
+
                     case (int)botstates.testpssmenu:
                         Report("Test if the PSS menu is shown");
                         waitTaskbool = Program.helper.memoryinrange(psssmenu1Off, psssmenu1IN, 0x10000);

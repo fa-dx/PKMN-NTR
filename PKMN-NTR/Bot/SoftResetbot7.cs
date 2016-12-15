@@ -4,19 +4,24 @@ namespace ntrbase.Bot
 {
     class SoftResetbot7
     {
-        public enum srbotStates { botstart, startdialog, testdialog1, readparty, continuedialog, testdialog2, exitdialog, filter, testspassed, softreset, reconnect, connpatch, botexit };
+        public enum srbotStates { botstart, startdialog, testdialog1, readparty, continuedialog, testdialog2, exitdialog, filter, testspassed, softreset, reconnect, connpatch, nickname, botexit };
 
-        private int mode;
-        private int maxreconnect;
+        // Bot variables
+        public int botresult;
+        public int resetNo;
+        public bool botstop;
+
+        // Class variables
         private int botState;
         private int attempts;
+        private int maxreconnect;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
 
-        public bool botstop;
-        public int botresult;
-        public int resetNo;
+        // Input variables
+        private int mode;
 
+        // DataoOffsets
         private uint dialogOff = 0x63DD68;
         private uint dialogIn = 0x09;
         private uint dialogOut = 0x08;
@@ -24,14 +29,15 @@ namespace ntrbase.Bot
 
         public SoftResetbot7(int selectedmode)
         {
-            mode = selectedmode;
-            maxreconnect = 10;
-            botState = (int)srbotStates.botstart;
-            attempts = 0;
-
-            botstop = false;
             botresult = 0;
             resetNo = 0;
+            botstop = false;
+
+            botState = (int)srbotStates.botstart;
+            attempts = 0;
+            maxreconnect = 10;
+
+            mode = selectedmode;
         }
 
         public async Task<int> RunBot()
@@ -102,6 +108,11 @@ namespace ntrbase.Bot
                         {
                             attempts = 0;
                             botState = (int)srbotStates.exitdialog;
+                        }
+                        else if (Program.helper.lastRead == 0x11)
+                        {
+                            attempts = 0;
+                            botState = (int)srbotStates.nickname;
                         }
                         else
                         {
@@ -198,6 +209,19 @@ namespace ntrbase.Bot
                             attempts++;
                             botresult = 1;
                             botState = (int)srbotStates.connpatch;
+                        }
+                        break;
+
+                    case (int)srbotStates.nickname:
+                        Report("Nicname screen");
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keySTART);
+                        if (await waitTaskbool)
+                            botState = (int)srbotStates.testdialog2;
+                        else
+                        {
+                            attempts++;
+                            botresult = 7;
+                            botState = (int)srbotStates.nickname;
                         }
                         break;
 

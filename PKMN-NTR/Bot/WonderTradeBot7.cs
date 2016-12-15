@@ -7,31 +7,38 @@ namespace ntrbase.Bot
     {
         private enum botstates { startbot, initializeFC1, initializeFC2, readpoke, presstradebutton, testtrademenu, pressWTbutton, testWTscreen, pressWTstart, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, starttrade, confirmtrade, testboxesout, waitfortrade, testtradefinish, tryfinish, finishtrade, collectFC1, collectFC2, collectFC3, collectFC4, collectFC5, exitbot };
 
-        public bool botstop;
+        // Bot variables
         public int botresult;
-        private int maxreconnect;
-        private bool lastreconnect;
-        private int currentbox;
-        private int currentslot;
-        private int quantity;
-        private bool collectFC;
+        public bool botstop;
+
+        // Class variables
+        private int botstate;
         private int attempts;
+        private int maxreconnect;
         private int tradewait;
+        private bool lastreconnect;
+        private bool boxchange;
+        private bool notradepartner;
+        private bool tradeevo;
+        private bool taskresultbool;
         private uint currentPID;
         private uint currentTotalFC;
         private uint currentFC;
         private uint nextFC;
-
-        private int botstate = (int)botstates.startbot;
-        private bool boxchange = true;
-        private bool notradepartner = false;
-        private bool tradeevo = false;
-        private bool taskresultbool;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
-        private int commandtime = 250;
-        private int delaytime = 150;
 
+        // Input variables
+        private int currentbox;
+        private int currentslot;
+        private int quantity;
+        private bool collectFC;
+
+        // Class constants
+        private readonly int commandtime = 250;
+        private readonly int delaytime = 150;
+
+        // Data offsets
         private uint totalFCoff = 0x33124D5C;
         private uint currentFCoff = 0x33124D58;
         private uint trademenuOff = 0x672790;
@@ -56,18 +63,27 @@ namespace ntrbase.Bot
 
         public WonderTradeBot7(int StartBox, int StartSlot, int Amount, bool FCaftertrade)
         {
+            botresult = 0;
+            botstop = false;
+
+            botstate = (int)botstates.startbot;
+            attempts = 0;
+            maxreconnect = 10;
+            tradewait = 0;
+            lastreconnect = false;
+            boxchange = true;
+            notradepartner = false;
+            tradeevo = false;
+            taskresultbool = false;
+            currentPID = 0;
+            currentTotalFC = 0;
+            currentFC = 0;
+            nextFC = 0;
+
             currentbox = StartBox - 1;
             currentslot = StartSlot - 1;
             quantity = Amount;
-            botstop = false;
-            boxchange = true;
-            botstate = 0;
-            botresult = 0;
-            attempts = 0;
-            maxreconnect = 10;
-            lastreconnect = false;
             collectFC = FCaftertrade;
-            nextFC = 0;
         }
 
         public async Task<int> RunBot()

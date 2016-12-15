@@ -7,26 +7,35 @@ namespace ntrbase.Bot
     {
         public enum breedbotstates { botstart, facedaycareman, quickegg, walk1, walk2, checkegg, walk3, checkmap1, triggerdialog, continuedialog, checknoegg, exitdialog, testparty, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, readegg, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, fix5, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
 
-        public bool botstop = false;
+        // Bot variables
+        public int botresult;
+        public bool botstop;
         public string finishmessage;
-        private int botState = 0;
-        private int botresult = 0;
-        private int attempts = 0;
-        private bool boxchange = true;
+
+        // Class variables
+        private int botState;
+        private int attempts;
+        private int maxreconnect;
+        private int eggsinbatch;
+        private int eggsinparty;
+        private int currentesv;
+        private int filterbox;
+        private int filterslot;
+        private int runtime;
+        private bool boxchange;
+        private uint lastposition;
+        private long dataready;
         private int[,] egglocations = new int[5, 2];
-        private int eggsinbatch = 0;
-        private int eggsinparty = 0;
-        private int currentesv = 0;
-        private int walktime = 50;
-        private int commandtime = 250;
-        private int commanddelay = 250;
-        private int longcommandtime = 750;
-        private uint lastposition = 0;
-        long dataready;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
-        private int maxreconnect = 10;
 
+        // Class constants
+        private readonly int walktime = 50;
+        private readonly int commandtime = 250;
+        private readonly int commanddelay = 250;
+        private readonly int longcommandtime = 750;
+
+        // Input variables
         private int mode;
         private int currentbox;
         private int currentslot;
@@ -36,10 +45,8 @@ namespace ntrbase.Bot
         private bool readesv;
         private bool quickbreed;
         private bool oras;
-        private int runtime;
-        private int filterbox;
-        private int filterslot;
 
+        // Data offsets
         private uint wtboxesOff;
         private uint organizeBoxIN;
         private uint organizeBoxOUT;
@@ -47,8 +54,8 @@ namespace ntrbase.Bot
         private uint wtboxviewIN;
         private uint wtboxviewOUT;
         private uint wtboxviewRange;
-        public uint computerOff;
-        public uint computerIN;
+        private uint computerOff;
+        private uint computerIN;
         //private uint computerOUT;
         private uint mapidoff;
         private uint mapxoff;
@@ -68,6 +75,22 @@ namespace ntrbase.Bot
 
         public BreedingBot6(int selectedmode, int startbox, int startslot, int amount, bool organizeboxesposition, bool mauvilledaycare, bool readesvafterdep, bool quickbreedflag, bool orasgame)
         {
+            botstop = false;
+            botState = (int)breedbotstates.botstart;
+            botresult = 0;
+            attempts = 0;
+            maxreconnect = 10;
+            finishmessage = "";
+
+            boxchange = true;
+            eggsinbatch = 0;
+            eggsinparty = 0;
+            currentesv = 0;
+            lastposition = 0;
+            dataready = 0;
+            filterbox = 0;
+            filterslot = 0;
+            
             mode = selectedmode;
             currentbox = startbox - 1;
             currentslot = startslot - 1;
@@ -79,7 +102,7 @@ namespace ntrbase.Bot
             oras = orasgame;
 
             if (!oras)
-            {
+            { // XY
                 computerOff = 0x19A918;
                 computerIN = 0x4D0000;
                 wtboxesOff = 0x19A988;
@@ -107,7 +130,7 @@ namespace ntrbase.Bot
                 runtime = 1000;
             }
             else
-            {
+            { // ORAS
                 if (mauvdaycare)
                 { // Mauvile Day Care
                     computerOff = 0x19BF5C;

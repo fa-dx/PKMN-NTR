@@ -4,25 +4,31 @@ namespace ntrbase.Bot
 {
     class SoftResetbot6
     {
-        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tev_start, tev_cont1, tev_check, twk_start, botexit };
+        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tev_start, tev_dialog, tev_cont1, tev_check, twk_start, botexit };
 
-        public bool botstop = false;
-        private int botState = 0;
-        private int botresult = 0;
-        private int attempts = 0;
+        // Bot variables
+        public int botresult;
+        public int resetNo;
+        public bool botstop;
 
-        private int commandtime = 250;
-        private int commanddelay = 250;
-        long dataready;
+        // Class variables
+        private int botState;
+        private int attempts;
+        private int maxreconnect;
+        private long dataready;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
 
+        // Bot constants
+        private readonly int commandtime = 250;
+        private readonly int commanddelay = 250;
+
+        // Input variables
         private int mode;
         private bool resume;
         private bool oras;
-        public int resetNo;
-        private int maxreconnect;
 
+        // Data offsets
         private uint partyOff;
         private uint psssmenu1Off;
         private uint psssmenu1IN;
@@ -37,17 +43,27 @@ namespace ntrbase.Bot
         public uint pssdisableY;
         public uint pssdisableIN;
         public uint pssdisableOUT;
+        public uint dialogOff;
+        public uint dialogIN;
+        public uint dialogOUT;
 
         public SoftResetbot6(int botmode, bool botresume, bool orasgame)
         {
-            botState = (int)srbotstates.botstart;
+            botresult = 0;
             resetNo = 0;
+            botstop = false;
+
+            botState = (int)srbotstates.botstart;
+            attempts = 0;
+            maxreconnect = 10;
+            dataready = 0;
+
             mode = botmode;
             resume = botresume;
             oras = orasgame;
-            maxreconnect = 10;
+
             if (!oras)
-            {
+            { // XY
                 partyOff = 0x8CE1CF8;
                 psssmenu1Off = 0x19ABC0;
                 psssmenu1IN = 0x7E0000;
@@ -64,7 +80,7 @@ namespace ntrbase.Bot
                 pssdisableOUT = 0x15000000;
             }
             else
-            {
+            { // ORAS
                 partyOff = 0x8CFB26C;
                 psssmenu1Off = 0x19C21C;
                 psssmenu1IN = 0x830000;
@@ -79,6 +95,9 @@ namespace ntrbase.Bot
                 pssdisableY = 120;
                 pssdisableIN = 0x33000000;
                 pssdisableOUT = 0x33100000;
+                dialogOff = 0x62C2f4;
+                dialogIN = 0x0D;
+                dialogOUT = 0x0A;
             }
         }
 
@@ -452,15 +471,29 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)srbotstates.tev_start:
-                        await Task.Delay(1000);
                         Report("Trigger Dialog");
                         waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
-                            botState = (int)srbotstates.tev_cont1;
+                            botState = (int)srbotstates.tev_dialog;
                         else
                         {
                             attempts++;
                             botresult = 7;
+                            botState = (int)srbotstates.tev_start;
+                        }
+                        break;
+
+                    case (int)srbotstates.tev_dialog:
+                        Report("Test if dialog has started");
+                        waitTaskbool = Program.helper.timememoryinrange(dialogOff, dialogIN, 0x01, 100, 5000);
+                        if (await waitTaskbool)
+                        {
+                            attempts = 0;
+                            botState = (int)srbotstates.tev_cont1;
+                        }
+                        else
+                        {
+                            attempts++;
                             botState = (int)srbotstates.tev_start;
                         }
                         break;

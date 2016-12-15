@@ -8,23 +8,28 @@ namespace ntrbase.Bot
     {
         public enum breedbotstates { botstart, selectbox, readslot, quickegg, triggerdialog, testdialog1, continuedialog, fixdialog, checknoegg, exitdialog, testdialog2, filter, testspassed, botexit };
 
-        public bool botstop = false;
+        // Bot variables
+        public int botresult;
+        public bool botstop;
         public string finishmessage;
-        private int botState = 0;
-        public int botresult = 0;
-        private int attempts = 0;
-        private int currentesv = 0;
-        long dataready;
+
+        // Class variables
+        private int botState;
+        private int attempts;
+        private int maxreconnect;
+        private int currentesv;
+        private long dataready;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
-        private int maxreconnect = 10;
 
+        // Input variables
         private int mode;
         private int currentbox;
         private int currentslot;
         private int quantity;
         private bool readesv;
 
+        // Data offsets
         private uint eggOff = 0x3313EDD8;
         private uint dialogOff = 0x63DD68;
         private uint dialogIn = 0x09;
@@ -43,6 +48,16 @@ namespace ntrbase.Bot
 
         public BreedingBot7(int selectedmode, int startbox, int amount, bool readesvafterdep)
         {
+            botresult = 0;
+            botstop = false;
+            finishmessage = "";
+
+            botState = (int)breedbotstates.botstart;
+            attempts = 0;
+            maxreconnect = 10;
+            currentesv = 0;
+            dataready = 0;
+
             mode = selectedmode;
             currentbox = startbox - 1;
             currentslot = 0;
