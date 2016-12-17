@@ -335,6 +335,8 @@ namespace ntrbase
         public void Addlog(string l)
         {
             lastlog = l;
+            if (l.Contains("Server disconnected") && !botWorking && game != GameType.None)
+                PerformDisconnect();
             if (!l.Contains("\r\n"))
                 l = l.Replace("\n", "\r\n");
             if (!l.EndsWith("\n"))
