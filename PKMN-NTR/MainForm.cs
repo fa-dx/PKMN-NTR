@@ -652,9 +652,7 @@ namespace ntrbase
                 partyOff = 0x34195E10;
             }
             else // not a process list or game not found - ignore packet
-            {
                 return;
-            }
 
             // Fill fields in the form according to gen
             Program.helper.pid = pid;
@@ -704,6 +702,8 @@ namespace ntrbase
             SetVisible(tmsGridView, false);
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
+            SetSelectedIndex(modeBreed, -1);
+            SetSelectedIndex(typeLSR, -1);
             if (radioBoxes.Checked)
                 SetMaximum(boxDump, BOXES);
             SetMaximum(cloneBoxTo, BOXES);
@@ -739,6 +739,8 @@ namespace ntrbase
             SetVisible(tmsGridView, false);
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
+            SetSelectedIndex(modeBreed, -1);
+            SetSelectedIndex(typeLSR, -1);
             if (radioBoxes.Checked)
                 SetMaximum(boxDump, BOXES);
             SetMaximum(cloneBoxTo, BOXES);
