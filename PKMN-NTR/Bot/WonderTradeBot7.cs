@@ -414,6 +414,7 @@ namespace ntrbase.Bot
                             if (tradewait > 35) // Too much time passed, 90 secs
                             {
                                 notradepartner = true;
+                                boxchange = true; // Might fix a couple of errors
                                 botstate = (int)botstates.testtradefinish;
                             }
                         }

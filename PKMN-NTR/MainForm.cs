@@ -2805,6 +2805,7 @@ namespace ntrbase
 
         #region Bots
 
+        // General Bot functions
         private void stopBotButton_Click(object sender, EventArgs e)
         {
             switch (botnumber)
@@ -2846,6 +2847,25 @@ namespace ntrbase
         {
             SetValue(boxDump, box + 1);
             SetValue(slotDump, slot + 1);
+        }
+
+        private void startBot()
+        {
+            botWorking = true;
+            botStop = false;
+            txtLog.Clear();
+            disableControls();
+            timer1.Interval = 500;
+            SetEnabled(stopBotButton, true);
+        }
+
+        private void finishBot()
+        {
+            botWorking = false;
+            botnumber = -1;
+            enableControls();
+            timer1.Interval = 1000;
+            SetEnabled(stopBotButton, false);
         }
 
         // Filter handlers
@@ -3195,13 +3215,9 @@ namespace ntrbase
 
             if (dialogResult == DialogResult.OK && WTtradesNo.Value > 0)
             {
-                botWorking = true;
-                botStop = false;
+                startBot();
                 botnumber = 3;
-                disableControls();
                 radioBoxes.Checked = true;
-                stopBotButton.Enabled = true;
-                txtLog.Clear();
                 Task<int> Bot;
                 if (gen7)
                 {
@@ -3223,16 +3239,16 @@ namespace ntrbase
                     result = 8;
                 switch (result)
                 {
-                    case 0:
+                    case 0: // General finish message
                         MessageBox.Show("Bot finished sucessfully", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
-                    case 1:
+                    case 1: // PSS error
                         MessageBox.Show("Please go to the PSS menu and try again.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
-                    case 2:
+                    case 2: // Read error
                         MessageBox.Show(readerror, "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case 3:
+                    case 3: // Festival plaza level-up
                         MessageBox.Show("Bot finished due level up in Festival Plaza", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                     case 4: // Communication error
@@ -3244,17 +3260,14 @@ namespace ntrbase
                     case 7: // Button error
                         MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case 8:
+                    case 8: // User stop
                         MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
-                    default:
+                    default: // General error message
                         MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
-                botWorking = false;
-                botnumber = -1;
-                enableControls();
-                stopBotButton.Enabled = false;
+                finishBot();
             }
         }
 
@@ -3336,12 +3349,8 @@ namespace ntrbase
 
             if (dialogResult == DialogResult.OK && typeLSR.SelectedIndex >= 0)
             {
-                botWorking = true;
-                botStop = false;
+                startBot();
                 botnumber = 2;
-                disableControls();
-                stopBotButton.Enabled = true;
-                txtLog.Clear();
                 Task<int> Bot;
                 if (gen7)
                 {
@@ -3368,19 +3377,19 @@ namespace ntrbase
                     totalresets = SRBot6.resetNo;
                 switch (result)
                 {
-                    case 0:
+                    case 0: // General finish message
                         MessageBox.Show("Bot finished sucessfully", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
-                    case 1:
+                    case 1: // PSS error
                         MessageBox.Show("Please go to the PSS menu and try again.", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
-                    case 2:
+                    case 2: // Write error
                         MessageBox.Show(writeerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
-                    case 3:
+                    case 3: // Read error
                         MessageBox.Show(readerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
-                    case 4:
+                    case 4: // Finish
                         MessageBox.Show("Finished, number of resets: " + totalresets, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case 6: // Touch screen error
@@ -3389,14 +3398,11 @@ namespace ntrbase
                     case 7: // Button error
                         MessageBox.Show(buttonerror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case 8:
+                    case 8: // User stop
                         MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                 }
-                botWorking = false;
-                botnumber = -1;
-                enableControls();
-                stopBotButton.Enabled = false;
+                finishBot();
             }
         }
 
@@ -3493,13 +3499,9 @@ namespace ntrbase
 
             if (dialogResult == DialogResult.OK && eggsNoBreed.Value > 0 && modeBreed.SelectedIndex >= 0)
             {
-                botWorking = true;
-                botStop = false;
+                startBot();
                 botnumber = 1;
-                disableControls();
-                stopBotButton.Enabled = true;
                 radioBoxes.Checked = true;
-                txtLog.Clear();
                 Task<int> Bot;
                 if (gen7)
                 {
@@ -3545,17 +3547,14 @@ namespace ntrbase
                     case 7: // Button error
                         MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case 8:
+                    case 8: // User stop
                         MessageBox.Show("Bot stopped by user", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     default: // General error
                         MessageBox.Show("An error has occurred.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
-                botWorking = false;
-                botnumber = -1;
-                enableControls();
-                stopBotButton.Enabled = false;
+                finishBot();
             }
         }
 

@@ -148,6 +148,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 3;
                             botState = (int)srbotStates.exitdialog;
                         }
                         break;
@@ -213,8 +214,10 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)srbotStates.nickname:
-                        Report("Nicname screen");
+                        Report("Nickname screen");
                         waitTaskbool = Program.helper.waitbutton(LookupTable.keySTART);
+                        await Task.Delay(250);
+                        waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                         if (await waitTaskbool)
                             botState = (int)srbotStates.testdialog2;
                         else
