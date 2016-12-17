@@ -90,7 +90,7 @@ namespace ntrbase.Bot
             dataready = 0;
             filterbox = 0;
             filterslot = 0;
-            
+
             mode = selectedmode;
             currentbox = startbox - 1;
             currentslot = startslot - 1;
@@ -274,7 +274,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.walk3;
                         }
                         break;
@@ -325,7 +325,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.triggerdialog;
                         }
                         break;
@@ -439,7 +439,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.entertodaycare;
                         }
                         break;
@@ -461,7 +461,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.walktodesk;
                         }
                         break;
@@ -541,7 +541,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.facecomputer;
                         }
                         break;
@@ -607,7 +607,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.touchOrganize;
                         }
                         break;
@@ -669,7 +669,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.touchboxview;
                         }
                         break;
@@ -715,7 +715,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.selectnewbox;
                         }
                         break;
@@ -801,7 +801,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.exitcomputer;
                         }
                         break;
@@ -859,6 +859,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 2;
                             botState = (int)breedbotstates.retirefromdesk;
                         }
                         break;
@@ -874,18 +875,19 @@ namespace ntrbase.Bot
                         waitTaskbool = Program.helper.memoryinrange(mapyoff, daycaremany, 0x01);
                         if (await waitTaskbool)
                         {
-                            attempts = 0;
                             attempts = -10; // Allow more attempts
                             botState = (int)breedbotstates.walktodaycareman;
                         }
                         else if (Program.helper.lastRead > daycaremany)
                         {
                             attempts++;
+                            botresult = -1;
                             botState = (int)breedbotstates.fix5;
                         }
                         else
                         { // Still far from exit
                             attempts++;
+                            botresult = -1;
                             botState = (int)breedbotstates.retirefromdoor;
                         }
                         break;
@@ -920,16 +922,19 @@ namespace ntrbase.Bot
                         else if (Program.helper.lastRead > daycaremanx && oras && !mauvdaycare)
                         {
                             attempts++;
+                            botresult = -1;
                             botState = (int)breedbotstates.fix4;
                         }
                         else if (Program.helper.lastRead > daycaremanx && (!oras || mauvdaycare))
                         {
                             attempts++;
+                            botresult = -1;
                             botState = (int)breedbotstates.fix4;
                         }
                         else
                         {
                             attempts++;
+                            botresult = -1;
                             botState = (int)breedbotstates.walktodaycareman;
                         }
                         break;

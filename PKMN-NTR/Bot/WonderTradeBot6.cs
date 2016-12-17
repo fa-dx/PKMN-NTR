@@ -177,6 +177,7 @@ namespace ntrbase.Bot
                         else
                         { // If not in save screen, try again
                             attempts++;
+                            botresult = 2;
                             botstate = (int)botstates.pressWTbutton;
                         }
                         break;
@@ -201,6 +202,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 2;
                             botstate = (int)botstates.confirmsave;
                         }
                         break;
@@ -225,6 +227,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 2;
                             botstate = (int)botstates.confirmwt;
                         }
                         break;
@@ -259,6 +262,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 2;
                             botstate = (int)botstates.touchboxview;
                         }
                         break;
@@ -291,6 +295,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 2;
                             botstate = (int)botstates.touchnewbox;
                         }
                         break;
@@ -332,6 +337,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 2;
                             botstate = (int)botstates.touchpoke;
                         }
                         break;
@@ -378,6 +384,7 @@ namespace ntrbase.Bot
                         else
                         { // Still waiting
                             attempts++;
+                            botresult = -1;
                             botstate = (int)botstates.testbackpssmenu;
                         }
                         break;
@@ -394,6 +401,7 @@ namespace ntrbase.Bot
                         else
                         { // Still waiting
                             attempts++;
+                            botresult = -1;
                             Report("Select Yes");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + delaytime);

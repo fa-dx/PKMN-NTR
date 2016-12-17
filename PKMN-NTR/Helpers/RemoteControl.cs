@@ -19,8 +19,6 @@ namespace ntrbase.Helpers
         public const int BOXSIZE = 30;
         public const int POKEBYTES = 232;
 
-
-
         // Log Handler
         private void WriteLastLog(string str)
         {
@@ -356,7 +354,7 @@ namespace ntrbase.Helpers
                 return -1;
         }
 
-        public async Task <bool> memoryinrange(uint address, uint value, uint range)
+        public async Task<bool> memoryinrange(uint address, uint value, uint range)
         {
             lastRead = 0;
             WriteLastLog("");

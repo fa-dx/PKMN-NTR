@@ -199,7 +199,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botstate = (int)botstates.presstradebutton;
                         }
                         break;
@@ -229,7 +229,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botstate = (int)botstates.pressWTbutton;
                         }
                         break;
@@ -254,6 +254,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 2;
                             botstate = (int)botstates.pressWTstart;
                         }
                         break;
@@ -294,7 +295,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botstate = (int)botstates.touchboxview;
                         }
                         break;
@@ -329,7 +330,7 @@ namespace ntrbase.Bot
                         break;
 
                     case (int)botstates.testboxviewout:
-                        Report("Test if box view is notshown");
+                        Report("Test if box view is not shown");
                         waitTaskbool = Program.helper.timememoryinrange(boxesviewOff, boxesviewOUT, 0x1000000, 100, 5000);
                         if (await waitTaskbool)
                         {
@@ -339,7 +340,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botstate = (int)botstates.touchnewbox;
                         }
                         break;
@@ -398,6 +399,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 2;
                             botstate = (int)botstates.touchpoke;
                         }
                         break;
@@ -441,6 +443,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = -1;
                             botstate = (int)botstates.tryfinish;
                             if (Program.helper.lastRead == 0x3F800000)
                             { // Communication error
@@ -516,7 +519,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botstate = (int)botstates.collectFC1;
                         }
                         break;
@@ -545,7 +548,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botstate = (int)botstates.collectFC3;
                         }
                         break;

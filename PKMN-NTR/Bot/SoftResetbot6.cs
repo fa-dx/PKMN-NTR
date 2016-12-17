@@ -209,6 +209,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 3;
                             botState = (int)srbotstates.touchpssset;
                         }
                         break;
@@ -237,6 +238,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 3;
                             botState = (int)srbotstates.touchpssdis;
                         }
                         break;
@@ -265,6 +267,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 3;
                             botState = (int)srbotstates.touchpssconf;
                         }
                         break;
@@ -308,6 +311,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 3;
                             botState = (int)srbotstates.touchsave;
                         }
                         break;
@@ -343,6 +347,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 3;
                             botState = (int)srbotstates.saveconf;
                         }
                         break;
@@ -398,6 +403,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 3;
                             botState = (int)srbotstates.trigger;
                         }
                         break;
@@ -497,6 +503,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
+                            botresult = 3;
                             botState = (int)srbotstates.tev_start;
                         }
                         break;
@@ -528,7 +535,8 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botState = (int)srbotstates.tev_dialog;
+                            botresult = 3;
+                            botState = (int)srbotstates.tev_cont1;
                         }
                         break;
 

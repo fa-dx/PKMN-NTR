@@ -78,7 +78,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 3;
                             botState = (int)srbotStates.startdialog;
                         }
                         break;
@@ -117,7 +117,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 3;
                             botState = (int)srbotStates.continuedialog;
                         }
                         break;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ntrbase.Bot
 {
@@ -157,7 +156,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.triggerdialog;
                         }
                         break;
@@ -200,7 +199,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.fixdialog;
                         }
                         break;
@@ -240,7 +239,7 @@ namespace ntrbase.Bot
                         else
                         {
                             attempts++;
-                            botresult = -1;
+                            botresult = 2;
                             botState = (int)breedbotstates.exitdialog;
                         }
                         break;
