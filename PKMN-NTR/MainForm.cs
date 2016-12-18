@@ -1,7 +1,7 @@
 ﻿/*
  * TODO: 
  * * Change magic numbers to constants wherever it's not a pain in the ass
- * * Error handling, error handling, error handling. Wrap file writes in try/catch, handle malformed pokemon, incomplete writes, patterns not found, etc.
+ * * Error handling. Handle malformed pokemon, incomplete writes, patterns not found, etc.
  */
 using ntrbase.Properties;
 using ntrbase.Bot;
@@ -1644,12 +1644,19 @@ namespace ntrbase
 
         private void writePokemonToFile(byte[] data, string fileName, bool overwrite = false)
         {
-            if (!overwrite) // If current filename is available, it won't be changed
-                fileName = NextAvailableFilename(fileName);
+            try
+            {
+                if (!overwrite) // If current filename is available, it won't be changed
+                    fileName = NextAvailableFilename(fileName);
 
-            FileStream fs = File.OpenWrite(fileName);
-            fs.Write(data, 0, data.Length);
-            fs.Close();
+                FileStream fs = File.OpenWrite(fileName);
+                fs.Write(data, 0, data.Length);
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public static string NextAvailableFilename(string path)
@@ -1888,21 +1895,28 @@ namespace ntrbase
         // Write pokémon from file
         private void writeBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog selectWriteDialog = new OpenFileDialog();
-            selectWriteDialog.Title = "Select an EKX/PKX file";
-            if (gen7)
+            try
             {
-                selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
+                OpenFileDialog selectWriteDialog = new OpenFileDialog();
+                selectWriteDialog.Title = "Select an EKX/PKX file";
+                if (gen7)
+                {
+                    selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
+                }
+                else
+                {
+                    selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
+                }
+                string path = System.Windows.Forms.@Application.StartupPath + "\\Pokemon";
+                selectWriteDialog.InitialDirectory = path;
+                if (selectWriteDialog.ShowDialog() == DialogResult.OK)
+                {
+                    selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
-            }
-            string path = System.Windows.Forms.@Application.StartupPath + "\\Pokemon";
-            selectWriteDialog.InitialDirectory = path;
-            if (selectWriteDialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -2060,21 +2074,28 @@ namespace ntrbase
 
             if (deleteKeepBackup.Checked)
             {
-                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
-                FileInfo folder = new FileInfo(folderPath);
-                folder.Directory.Create();
-                PKHeX validator = new PKHeX();
-                for (int i = 0; i < args.data.Length; i += POKEBYTES)
+                try
                 {
-                    validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
-                    if (validator.Species == 0)
-                        continue;
-                    string fileName;
-                    if (gen7)
-                        fileName = folderPath + "backup.pk7";
-                    else
-                        fileName = folderPath + "backup.pk6";
-                    writePokemonToFile(validator.Data, fileName);
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
+                    FileInfo folder = new FileInfo(folderPath);
+                    folder.Directory.Create();
+                    PKHeX validator = new PKHeX();
+                    for (int i = 0; i < args.data.Length; i += POKEBYTES)
+                    {
+                        validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
+                        if (validator.Species == 0)
+                            continue;
+                        string fileName;
+                        if (gen7)
+                            fileName = folderPath + "backup.pk7";
+                        else
+                            fileName = folderPath + "backup.pk6";
+                        writePokemonToFile(validator.Data, fileName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
             if (gen7)
@@ -3184,46 +3205,60 @@ namespace ntrbase
 
         private void filterSave_Click(object sender, EventArgs e)
         {
-            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-            saveFileDialog1.Title = "Save a filter set";
-            saveFileDialog1.InitialDirectory = folderPath;
-            saveFileDialog1.ShowDialog();
-
-            if (saveFileDialog1.FileName != "")
+            try
             {
-                var filters = new StringBuilder();
-                foreach (DataGridViewRow row in filterList.Rows)
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                saveFileDialog1.Title = "Save a filter set";
+                saveFileDialog1.InitialDirectory = folderPath;
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != "")
                 {
-                    var cells = row.Cells.Cast<DataGridViewCell>();
-                    filters.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    var filters = new StringBuilder();
+                    foreach (DataGridViewRow row in filterList.Rows)
+                    {
+                        var cells = row.Cells.Cast<DataGridViewCell>();
+                        filters.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    }
+                    File.WriteAllText(saveFileDialog1.FileName, filters.ToString());
+                    MessageBox.Show("Filter set saved");
                 }
-                File.WriteAllText(saveFileDialog1.FileName, filters.ToString());
-                MessageBox.Show("Filter set saved");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void filterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-            openFileDialog1.Title = "Select a filter set";
-            openFileDialog1.InitialDirectory = folderPath;
-            openFileDialog1.ShowDialog();
-            if (openFileDialog1.FileName != "")
+            try
             {
-                filterList.Rows.Clear();
-                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                foreach (int[] row in rows)
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
                 {
-                    filterList.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    filterList.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filterList.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter set loaded");
                 }
-                MessageBox.Show("Filter set loaded");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -3251,43 +3286,57 @@ namespace ntrbase
 
         private void bFilterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-            openFileDialog1.Title = "Select a filter set";
-            openFileDialog1.InitialDirectory = folderPath;
-            openFileDialog1.ShowDialog();
-            if (openFileDialog1.FileName != "")
+            try
             {
-                filterBreeding.Rows.Clear();
-                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                foreach (int[] row in rows)
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
                 {
-                    filterBreeding.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    filterBreeding.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filterBreeding.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter Set loaded correctly.");
                 }
-                MessageBox.Show("Filter Set loaded correctly.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void srFilterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-            openFileDialog1.Title = "Select a filter set";
-            openFileDialog1.InitialDirectory = folderPath;
-            openFileDialog1.ShowDialog();
-            if (openFileDialog1.FileName != "")
+            try
             {
-                filtersSoftReset.Rows.Clear();
-                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                foreach (int[] row in rows)
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
                 {
-                    filtersSoftReset.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    filtersSoftReset.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filtersSoftReset.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter set loaded correctly");
                 }
-                MessageBox.Show("Filter set loaded correctly");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -3667,24 +3716,31 @@ namespace ntrbase
 
         private void ESVlistSave_Click(object sender, EventArgs e)
         {
-            if (ESVlist.Rows.Count > 0)
+            try
             {
-                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                (new FileInfo(folderPath)).Directory.Create();
-                string fileName = "ESVlist.csv";
-                var esvlst = new StringBuilder();
-                var headers = ESVlist.Columns.Cast<DataGridViewColumn>();
-                esvlst.AppendLine(string.Join(",", headers.Select(column => column.HeaderText).ToArray()));
-                foreach (DataGridViewRow row in ESVlist.Rows)
+                if (ESVlist.Rows.Count > 0)
                 {
-                    var cells = row.Cells.Cast<DataGridViewCell>();
-                    esvlst.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                    (new FileInfo(folderPath)).Directory.Create();
+                    string fileName = "ESVlist.csv";
+                    var esvlst = new StringBuilder();
+                    var headers = ESVlist.Columns.Cast<DataGridViewColumn>();
+                    esvlst.AppendLine(string.Join(",", headers.Select(column => column.HeaderText).ToArray()));
+                    foreach (DataGridViewRow row in ESVlist.Rows)
+                    {
+                        var cells = row.Cells.Cast<DataGridViewCell>();
+                        esvlst.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    }
+                    File.WriteAllText(folderPath + fileName, esvlst.ToString());
+                    MessageBox.Show("ESV list saved");
                 }
-                File.WriteAllText(folderPath + fileName, esvlst.ToString());
-                MessageBox.Show("ESV list saved");
+                else
+                    MessageBox.Show("There are no eggs on the ESV list");
             }
-            else
-                MessageBox.Show("There are no eggs on the ESV list");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void TSVlistAdd_Click(object sender, EventArgs e)
@@ -3702,7 +3758,37 @@ namespace ntrbase
 
         private void TSVlistSave_Click(object sender, EventArgs e)
         {
-            if (TSVlist.Items.Count > 0)
+            try
+            {
+                if (TSVlist.Items.Count > 0)
+                {
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                    (new FileInfo(folderPath)).Directory.Create();
+                    string fileName;
+                    if (gen7)
+                        fileName = "TSVlist.csv";
+                    else
+                        fileName = "TSVlist7.csv";
+                    var tsvlst = new StringBuilder();
+                    foreach (var value in TSVlist.Items)
+                    {
+                        tsvlst.AppendLine(value.ToString());
+                    }
+                    File.WriteAllText(folderPath + fileName, tsvlst.ToString());
+                    MessageBox.Show("TSV list saved");
+                }
+                else
+                    MessageBox.Show("There are no numbers on the TSV list");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TSVlistLoad_Click(object sender, EventArgs e)
+        {
+            try
             {
                 string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
                 (new FileInfo(folderPath)).Directory.Create();
@@ -3711,32 +3797,16 @@ namespace ntrbase
                     fileName = "TSVlist.csv";
                 else
                     fileName = "TSVlist7.csv";
-                var tsvlst = new StringBuilder();
-                foreach (var value in TSVlist.Items)
+                if (File.Exists(folderPath + fileName))
                 {
-                    tsvlst.AppendLine(value.ToString());
+                    string[] values = File.ReadAllLines(folderPath + fileName);
+                    TSVlist.Items.Clear();
+                    TSVlist.Items.AddRange(values);
                 }
-                File.WriteAllText(folderPath + fileName, tsvlst.ToString());
-                MessageBox.Show("TSV list saved");
             }
-            else
-                MessageBox.Show("There are no numbers on the TSV list");
-        }
-
-        private void TSVlistLoad_Click(object sender, EventArgs e)
-        {
-            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new FileInfo(folderPath)).Directory.Create();
-            string fileName;
-            if (gen7)
-                fileName = "TSVlist.csv";
-            else
-                fileName = "TSVlist7.csv";
-            if (File.Exists(folderPath + fileName))
+            catch (Exception ex)
             {
-                string[] values = File.ReadAllLines(folderPath + fileName);
-                TSVlist.Items.Clear();
-                TSVlist.Items.AddRange(values);
+                MessageBox.Show(ex.Message);
             }
         }
 
