@@ -48,7 +48,7 @@ namespace ntrbase.Bot
                 {
                     case (int)srbotStates.botstart:
                         Report("Bot start");
-                        if (mode == 0)
+                        if (mode == 0 || mode == 1)
                             botState = (int)srbotStates.startdialog;
                         else
                             botState = (int)srbotStates.botexit;
@@ -72,7 +72,10 @@ namespace ntrbase.Bot
                         waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
                         if (await waitTaskbool)
                         {
-                            attempts = 0;
+                            if (mode == 1)
+                                attempts = -15; // Type:Null dialog is longer
+                            else
+                                attempts = 0;
                             botState = (int)srbotStates.continuedialog;
                         }
                         else
