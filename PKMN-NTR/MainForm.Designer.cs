@@ -393,6 +393,7 @@
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
+            this.updateLabel = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
@@ -4821,6 +4822,7 @@
             // tabNTRlog
             // 
             this.tabNTRlog.BackColor = System.Drawing.SystemColors.Control;
+            this.tabNTRlog.Controls.Add(this.updateLabel);
             this.tabNTRlog.Controls.Add(this.txtLog);
             this.tabNTRlog.Controls.Add(this.readResult);
             this.tabNTRlog.Controls.Add(this.label69);
@@ -4830,6 +4832,18 @@
             this.tabNTRlog.Size = new System.Drawing.Size(558, 378);
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
+            // 
+            // updateLabel
+            // 
+            this.updateLabel.AutoSize = true;
+            this.updateLabel.Location = new System.Drawing.Point(224, 356);
+            this.updateLabel.Name = "updateLabel";
+            this.updateLabel.Size = new System.Drawing.Size(110, 13);
+            this.updateLabel.TabIndex = 4;
+            this.updateLabel.Text = "Looking for updates...";
+            this.toolTip1.SetToolTip(this.updateLabel, "If an update is available, you can click here to go to the release page in GitHub" +
+        ".");
+            this.updateLabel.Click += new System.EventHandler(this.updateLabel_Click);
             // 
             // pictureBox2
             // 
@@ -5366,6 +5380,7 @@
         private System.Windows.Forms.Button filterReset;
         private System.Windows.Forms.Button breedingClear;
         private System.Windows.Forms.Button srClear;
+        private System.Windows.Forms.Label updateLabel;
     }
 }
 

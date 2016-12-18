@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Data;
+using Octokit;
 
 namespace ntrbase
 {
@@ -41,6 +42,10 @@ namespace ntrbase
         public string BOXEXT;
         public PKHeX dumpedPKHeX = new PKHeX();
         private static string numberPattern = " ({0})";
+
+        // Variables for update checking
+        internal GitHubClient Github;
+        public string updateURL = null;
 
         // Variables for cloning
         public byte[] selectedCloneData = new byte[232];
@@ -287,6 +292,8 @@ namespace ntrbase
             nameItem7.FlatStyle = FlatStyle.Flat;
             countItem7.DisplayIndex = 1;
 
+            checkUpdate();
+
             host.Text = Settings.Default.IP;
             host.Focus();
         }
@@ -310,6 +317,79 @@ namespace ntrbase
             SetSelectedIndex(filterSPDlogic, 0);
             SetSelectedIndex(filterSPElogic, 0);
             SetSelectedIndex(filterPerIVlogic, 0);
+        }
+
+        private async void checkUpdate()
+        {
+            try
+            {
+                Addlog("Look for updates");
+                // Get current
+                int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
+                int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
+                int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+                int revision = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
+                Addlog("Current version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+
+                // Get latest stable
+                Github = new GitHubClient(new ProductHeaderValue("PKMN-NTR-UpdateCheck"));
+                Release lateststable = await Github.Repository.Release.GetLatest("drgoku282", "PKMN-NTR");
+                int[] verlatest = Array.ConvertAll(lateststable.TagName.Split('.'), int.Parse);
+                Addlog("Last stable: " + lateststable.TagName);
+
+                // Look for latest stable
+                if (verlatest[0] > major || verlatest[1] > minor || verlatest[2] > build)
+                {
+                    Addlog("Update found!");
+                    SetText(updateLabel, "Version " + lateststable.TagName + " is available.");
+                    updateURL = lateststable.HtmlUrl;
+                    DialogResult result = MessageBox.Show("Version " + lateststable.TagName + " is available.\r\nDo you want to go to GitHub and download it?", "Update Available", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                        System.Diagnostics.Process.Start(updateURL);
+                }
+                else
+                { // Look for beta
+                    IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("drgoku282", "PKMN-NTR");
+                    Release latestbeta = releases.FirstOrDefault(rel => rel.Prerelease);
+                    Addlog("Last preview: " + latestbeta.TagName);
+                    if (latestbeta != null)
+                    {
+                        int[] verbeta = Array.ConvertAll(latestbeta.TagName.Split('.'), int.Parse);
+                        if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build || verbeta[3] > revision)
+                        {
+                            Addlog("New preview version found");
+                            SetText(updateLabel, "Preview version " + latestbeta.TagName + " is available.");
+                            updateURL = latestbeta.HtmlUrl;
+                        }
+                        else
+                        {
+                            Addlog("PKMN-NTR is up to date");
+                            SetText(updateLabel, "PKMN-NTR is up to date.");
+                            updateURL = null;
+                        }
+                    }
+                    else
+                    {
+                        Addlog("PKMN-NTR is up to date");
+                        SetText(updateLabel, "PKMN-NTR is up to date.");
+                        updateURL = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                updateURL = null;
+                Addlog("An error has ocurred while checking for updates:");
+                Addlog(ex.Message);
+                MessageBox.Show(ex.Message);
+                SetText(updateLabel, "Update not found.");
+            }
+        }
+
+        private void updateLabel_Click(object sender, EventArgs e)
+        {
+            if (updateURL != null)
+                System.Diagnostics.Process.Start(updateURL);
         }
 
         private void enableControls()
@@ -1450,7 +1530,7 @@ namespace ntrbase
                     }
                     if (dataCorrect || res == DialogResult.OK)
                     {
-                        string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+                        string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
                         (new FileInfo(folderPath)).Directory.Create();
                         string fileName = nameek6.Text + PKXEXT;
                         writePokemonToFile(validator.Data, folderPath + fileName);
@@ -1622,7 +1702,7 @@ namespace ntrbase
         public void handleAllBoxesData(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
             (new FileInfo(folderPath)).Directory.Create();
             string fileName = nameek6.Text + BOXEXT;
             writePokemonToFile(args.data, folderPath + fileName);
@@ -1818,7 +1898,7 @@ namespace ntrbase
             {
                 selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
             }
-            string path = @Application.StartupPath + "\\Pokemon";
+            string path = System.Windows.Forms.@Application.StartupPath + "\\Pokemon";
             selectWriteDialog.InitialDirectory = path;
             if (selectWriteDialog.ShowDialog() == DialogResult.OK)
             {
@@ -1980,7 +2060,7 @@ namespace ntrbase
 
             if (deleteKeepBackup.Checked)
             {
-                string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
                 FileInfo folder = new FileInfo(folderPath);
                 folder.Directory.Create();
                 PKHeX validator = new PKHeX();
@@ -3104,7 +3184,7 @@ namespace ntrbase
 
         private void filterSave_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
             (new System.IO.FileInfo(folderPath)).Directory.Create();
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -3128,7 +3208,7 @@ namespace ntrbase
 
         private void filterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
             (new System.IO.FileInfo(folderPath)).Directory.Create();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
@@ -3171,7 +3251,7 @@ namespace ntrbase
 
         private void bFilterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
             (new System.IO.FileInfo(folderPath)).Directory.Create();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
@@ -3192,7 +3272,7 @@ namespace ntrbase
 
         private void srFilterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
             (new System.IO.FileInfo(folderPath)).Directory.Create();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
@@ -3589,7 +3669,7 @@ namespace ntrbase
         {
             if (ESVlist.Rows.Count > 0)
             {
-                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
                 (new FileInfo(folderPath)).Directory.Create();
                 string fileName = "ESVlist.csv";
                 var esvlst = new StringBuilder();
@@ -3624,7 +3704,7 @@ namespace ntrbase
         {
             if (TSVlist.Items.Count > 0)
             {
-                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
                 (new FileInfo(folderPath)).Directory.Create();
                 string fileName;
                 if (gen7)
@@ -3645,7 +3725,7 @@ namespace ntrbase
 
         private void TSVlistLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
             (new FileInfo(folderPath)).Directory.Create();
             string fileName;
             if (gen7)
