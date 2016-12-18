@@ -578,7 +578,7 @@ namespace ntrbase.Bot
                         {
                             await Task.Delay(1000);
                             attempts = 0;
-                            if (botState == (int)srbotstates.tev_check)
+                            if (botState == (int)srbotstates.tev_check || botState == (int)srbotstates.tev_cont1)
                                 botState = (int)srbotstates.tev_dialog;
                         }
                         else
