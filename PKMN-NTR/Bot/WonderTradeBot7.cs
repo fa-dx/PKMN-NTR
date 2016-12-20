@@ -16,7 +16,6 @@ namespace ntrbase.Bot
         private int botstate;
         private int attempts;
         private int maxreconnect;
-        private int tradewait;
         private bool lastreconnect;
         private bool boxchange;
         private bool notradepartner;
@@ -26,6 +25,7 @@ namespace ntrbase.Bot
         private uint currentTotalFC;
         private uint currentFC;
         private uint nextFC;
+        private Timer tradeTimer;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
 
@@ -70,7 +70,6 @@ namespace ntrbase.Bot
             botstate = (int)botstates.startbot;
             attempts = 0;
             maxreconnect = 10;
-            tradewait = 0;
             lastreconnect = false;
             boxchange = true;
             notradepartner = false;
@@ -80,6 +79,9 @@ namespace ntrbase.Bot
             currentTotalFC = 0;
             currentFC = 0;
             nextFC = 0;
+            tradeTimer = new Timer();
+            tradeTimer.Interval = 95000; // Trade timeout
+            tradeTimer.Tick += tradeTimer_Tick;
 
             currentbox = StartBox - 1;
             currentslot = StartSlot - 1;
@@ -263,7 +265,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.gotoboxchange:
-                            await Task.Delay(500);
+                            await Task.Delay(1000);
                             if (boxchange)
                             {
                                 botstate = (int)botstates.touchboxview;
@@ -398,6 +400,7 @@ namespace ntrbase.Bot
                             {
                                 attempts = -40; // Try 50 button presses
                                 botstate = (int)botstates.waitfortrade;
+                                tradeTimer.Start();
                             }
                             else
                             {
@@ -415,10 +418,8 @@ namespace ntrbase.Bot
                             if (currentPID == newPID)
                             {
                                 await Task.Delay(2000);
-                                tradewait++;
-                                if (tradewait > 35) // Too much time passed, 90 secs
+                                if (notradepartner) // Too much time passed
                                 {
-                                    notradepartner = true;
                                     boxchange = true; // Might fix a couple of errors
                                     botstate = (int)botstates.testtradefinish;
                                 }
@@ -426,6 +427,7 @@ namespace ntrbase.Bot
                             else
                             {
                                 Report("Wait 35 seconds");
+                                tradeTimer.Stop();
                                 await Task.Delay(35000);
                                 botstate = (int)botstates.testtradefinish;
                             }
@@ -488,7 +490,7 @@ namespace ntrbase.Bot
                             {
                                 botstate = (int)botstates.readpoke;
                                 attempts = 0;
-                                tradewait = 0;
+                                tradeTimer.Stop();
                             }
                             else
                             { // Stop if no more trades
@@ -627,10 +629,12 @@ namespace ntrbase.Bot
                     else
                         lastreconnect = false;
                 }
+                tradeTimer.Stop();
                 return botresult;
             }
             catch (Exception ex)
             {
+                tradeTimer.Stop();
                 Report(ex.Source);
                 Report(ex.Message);
                 Report(ex.StackTrace);
@@ -657,6 +661,13 @@ namespace ntrbase.Bot
             }
             quantity--;
             Program.gCmdWindow.updateWTslots(currentbox, currentslot, quantity);
+        }
+
+        private void tradeTimer_Tick(object sender, EventArgs e)
+        {
+            tradeTimer.Stop();
+            Report("Trade timed out");
+            notradepartner = true;
         }
     }
 }
