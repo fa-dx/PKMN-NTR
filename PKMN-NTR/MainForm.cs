@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Data;
+using ntrbase.Helpers;
 
 namespace ntrbase
 {
@@ -23,7 +24,7 @@ namespace ntrbase
         #region Class variables
 
         //A "waiting room", where functions wait for data to be acquired. Entries are indexed by their sequence number. Once a request with a given sequence number is fulfilled, handleDataReady() uses information in DataReadyWaiting object to process the data.
-        static Dictionary<uint, DataReadyWaiting> waitingForData = new Dictionary<uint, DataReadyWaiting>();
+        public static Dictionary<uint, DataReadyWaiting> waitingForData = new Dictionary<uint, DataReadyWaiting>();
 
         // Set this boolean to true to enable the write feature for the party pokémon.
         public static readonly bool enablepartywrite = false;
@@ -41,6 +42,9 @@ namespace ntrbase
         public string BOXEXT;
         public PKHeX dumpedPKHeX = new PKHeX();
         private static string numberPattern = " ({0})";
+
+        private int dumpBoxLastBox = -1;
+        private int dumpBoxLastSlot = -1;
 
         // Variables for cloning
         public byte[] selectedCloneData = new byte[232];
@@ -89,7 +93,8 @@ namespace ntrbase
         public uint tmsoff;
         public uint bersoff;
         //Offsets for Pokemon sources
-        public uint tradeoffrg;
+        public uint tradeOff;
+        public uint opponentOff;
         public uint partyOff;
         public uint boxOff;
         public uint daycare1Off;
@@ -299,7 +304,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -519,9 +524,10 @@ namespace ntrbase
                 sidoff = 0x8C79C3E;
                 hroff = 0x8CE2814;
                 langoff = 0x8C79C69;
-                tradeoffrg = 0x8500000;
+                tradeOff = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
+                opponentOff = 0x8800000;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -549,9 +555,10 @@ namespace ntrbase
                 sidoff = 0x8C79C3E;
                 hroff = 0x8CE2814;
                 langoff = 0x8C79C69;
-                tradeoffrg = 0x8500000;
+                tradeOff = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
+                opponentOff = 0x8800000;
                 //opwroff = 0x8C7D23E;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -581,9 +588,10 @@ namespace ntrbase
                 sidoff = 0x8C81342;
                 hroff = 0x8CFBD88;
                 langoff = 0x8C8136D;
-                tradeoffrg = 0x8520000;
+                tradeOff = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
+                opponentOff = 0x8800000;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -613,9 +621,10 @@ namespace ntrbase
                 sidoff = 0x8C81342;
                 hroff = 0x8CFBD88;
                 langoff = 0x8C8136D;
-                tradeoffrg = 0x8520000;
+                tradeOff = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
+                opponentOff = 0x8800000;
                 //opwroff = 0x8C83D94;
                 //shoutoutOff = 0x8803CF8;
             }
@@ -644,8 +653,8 @@ namespace ntrbase
                 sidoff = 0x330D67D2;
                 hroff = 0x34197648;
                 langoff = 0x330D6805;
-                tradeoffrg = 0x32A870C8;
-                //battleBoxOff = 0x8C6AC2C;
+                tradeOff = 0x32A870C8;
+                opponentOff = 0x3254F4AC;
                 partyOff = 0x34195E10;
             }
             else // not a process list or game not found - ignore packet
@@ -1393,19 +1402,33 @@ namespace ntrbase
                 if (!gen7)
                 { 
                     DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleTradeData, null);
-                    waitingForData.Add(Program.scriptHelper.data(tradeoffrg, 0x1FFFF, pid), myArgs);
+                    waitingForData.Add(Program.scriptHelper.data(tradeOff, 0x1FFFF, pid), myArgs);
                 }
                 else
                 {
                     DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePkmData, null);
-                    uint mySeq = Program.scriptHelper.data(tradeoffrg, POKEBYTES, pid);
+                    uint mySeq = Program.scriptHelper.data(tradeOff, POKEBYTES, pid);
                     waitingForData.Add(mySeq, myArgs);
                 }
             }
             else if (radioOpponent.Checked)
             {
-                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
-                waitingForData.Add(Program.scriptHelper.data(0x8800000, 0x1FFFF, pid), myArgs);
+                if (!gen7)
+                { 
+                    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
+                    waitingForData.Add(Program.scriptHelper.data(opponentOff, 0x1FFFF, pid), myArgs);
+                }
+                else
+                {
+                    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePkmData, null);
+                    uint offset = opponentOff + (uint)(slotDump.Value - 1)*260;
+                    if (boxDump.Value == 2)
+                    {
+                        offset += 0xC98;
+                    }
+                    uint mySeq = Program.scriptHelper.data(offset, POKEBYTES, pid);
+                    waitingForData.Add(mySeq, myArgs);
+                }
             }
             else if (radioParty.Checked)
                 dumpOff = partyOff + (Decimal.ToUInt32(slotDump.Value) - 1) * 484;
@@ -2023,14 +2046,33 @@ namespace ntrbase
         // Radio boxes for pokémon source
         private void radioBoxes_CheckedChanged(object sender, EventArgs e)
         {
-            boxDump.Minimum = 1;
-            boxDump.Maximum = BOXES;
-            slotDump.Minimum = 1;
-            slotDump.Maximum = 30;
-            boxDump.Enabled = true;
-            slotDump.Enabled = true;
-            dumpBoxes.Enabled = true;
-            onlyView.Enabled = true;
+            if (radioBoxes.Checked)
+            { 
+                boxDump.Minimum = 1;
+                boxDump.Maximum = BOXES;
+                slotDump.Minimum = 1;
+                slotDump.Maximum = 30;
+                boxDump.Enabled = true;
+                slotDump.Enabled = true;
+                dumpBoxes.Enabled = true;
+                onlyView.Enabled = true;
+                if (dumpBoxLastBox == -1)
+                {
+                    dumpBoxLastBox = 1;
+                }
+                boxDump.Value = dumpBoxLastBox;
+                if (dumpBoxLastSlot == -1)
+                {
+                    dumpBoxLastSlot = 1;
+                }
+                slotDump.Value = dumpBoxLastSlot;
+            }
+            else
+            {
+                dumpBoxLastBox = (int)boxDump.Value;
+                dumpBoxLastSlot = (int)slotDump.Value;
+            }
+            
         }
 
         private void radioDaycare_CheckedChanged(object sender, EventArgs e)
@@ -2060,7 +2102,7 @@ namespace ntrbase
             onlyView.Enabled = true;
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void radioTrade_CheckedChanged(object sender, EventArgs e)
         {
             boxDump.Minimum = 1;
             boxDump.Maximum = 1;
@@ -2074,14 +2116,22 @@ namespace ntrbase
 
         private void radioOpponent_CheckedChanged(object sender, EventArgs e)
         {
-            boxDump.Minimum = 1;
-            boxDump.Maximum = 1;
-            slotDump.Minimum = 1;
-            slotDump.Maximum = 1;
-            boxDump.Enabled = false;
-            slotDump.Enabled = false;
-            dumpBoxes.Enabled = false;
-            onlyView.Enabled = false;
+            if (radioOpponent.Checked)
+            { 
+                boxDump.Minimum = 1;
+                boxDump.Maximum = 2;
+                slotDump.Minimum = 1;
+                slotDump.Maximum = 6;
+                boxDump.Enabled = true;
+                slotDump.Enabled = true;
+                dumpBoxes.Enabled = false;
+                onlyView.Enabled = false;
+                BoxLabel.Text = "Opp.:";
+            }
+            else
+            {
+                BoxLabel.Text = "Box:";
+            }
         }
 
         private void radioParty_CheckedChanged_1(object sender, EventArgs e)
@@ -3587,6 +3637,11 @@ namespace ntrbase
         }
 
         #endregion Bots
+
+        private void PokeDiggerBtn_Click(object sender, EventArgs e)
+        {
+            new PokeDigger(pid, game != GameType.None).Show();
+        }
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 

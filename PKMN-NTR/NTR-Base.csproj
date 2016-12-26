@@ -70,6 +70,12 @@
     <Compile Include="Bot\WonderTradeBot6.cs" />
     <Compile Include="Bot\WonderTradeBot7.cs" />
     <Compile Include="Helpers\LookupTable.cs" />
+    <Compile Include="Helpers\PokeDigger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers\PokeDigger.Designer.cs">
+      <DependentUpon>PokeDigger.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\RemoteControl.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -82,8 +88,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\ScriptHelper.cs" />
+    <EmbeddedResource Include="Helpers\PokeDigger.resx">
+      <DependentUpon>PokeDigger.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
