@@ -45,9 +45,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.nameek6 = new System.Windows.Forms.TextBox();
             this.dumpPokemon = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
+            this.SlotLabel = new System.Windows.Forms.Label();
             this.slotDump = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
+            this.BoxLabel = new System.Windows.Forms.Label();
             this.boxDump = new System.Windows.Forms.NumericUpDown();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label44 = new System.Windows.Forms.Label();
@@ -243,6 +243,7 @@
             this.label71 = new System.Windows.Forms.Label();
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
+            this.PokeDiggerBtn = new System.Windows.Forms.Button();
             this.ReloadFields = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label55 = new System.Windows.Forms.Label();
@@ -686,9 +687,9 @@
             this.dumpBox.Controls.Add(this.label9);
             this.dumpBox.Controls.Add(this.nameek6);
             this.dumpBox.Controls.Add(this.dumpPokemon);
-            this.dumpBox.Controls.Add(this.label7);
+            this.dumpBox.Controls.Add(this.SlotLabel);
             this.dumpBox.Controls.Add(this.slotDump);
-            this.dumpBox.Controls.Add(this.label8);
+            this.dumpBox.Controls.Add(this.BoxLabel);
             this.dumpBox.Controls.Add(this.boxDump);
             this.dumpBox.Location = new System.Drawing.Point(7, 12);
             this.dumpBox.Name = "dumpBox";
@@ -742,7 +743,7 @@
             this.radioTrade.TabStop = true;
             this.radioTrade.Text = "Trade";
             this.radioTrade.UseVisualStyleBackColor = true;
-            this.radioTrade.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.radioTrade.CheckedChanged += new System.EventHandler(this.radioTrade_CheckedChanged);
             // 
             // radioOpponent
             // 
@@ -817,14 +818,14 @@
             this.dumpPokemon.UseVisualStyleBackColor = true;
             this.dumpPokemon.Click += new System.EventHandler(this.dumpPokemon_Click);
             // 
-            // label7
+            // SlotLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(58, 20);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(28, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Slot:";
+            this.SlotLabel.AutoSize = true;
+            this.SlotLabel.Location = new System.Drawing.Point(58, 20);
+            this.SlotLabel.Name = "SlotLabel";
+            this.SlotLabel.Size = new System.Drawing.Size(28, 13);
+            this.SlotLabel.TabIndex = 13;
+            this.SlotLabel.Text = "Slot:";
             // 
             // slotDump
             // 
@@ -848,14 +849,14 @@
             0,
             0});
             // 
-            // label8
+            // BoxLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(28, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Box:";
+            this.BoxLabel.AutoSize = true;
+            this.BoxLabel.Location = new System.Drawing.Point(6, 20);
+            this.BoxLabel.Name = "BoxLabel";
+            this.BoxLabel.Size = new System.Drawing.Size(28, 13);
+            this.BoxLabel.TabIndex = 12;
+            this.BoxLabel.Text = "Box:";
             // 
             // boxDump
             // 
@@ -3135,6 +3136,7 @@
             // tabEditTrainer
             // 
             this.tabEditTrainer.BackColor = System.Drawing.SystemColors.Control;
+            this.tabEditTrainer.Controls.Add(this.PokeDiggerBtn);
             this.tabEditTrainer.Controls.Add(this.ReloadFields);
             this.tabEditTrainer.Controls.Add(this.groupBox5);
             this.tabEditTrainer.Controls.Add(this.cloneWriteTabs);
@@ -3145,6 +3147,16 @@
             this.tabEditTrainer.Size = new System.Drawing.Size(558, 378);
             this.tabEditTrainer.TabIndex = 0;
             this.tabEditTrainer.Text = "Edit Save";
+            // 
+            // PokeDiggerBtn
+            // 
+            this.PokeDiggerBtn.Location = new System.Drawing.Point(10, 351);
+            this.PokeDiggerBtn.Name = "PokeDiggerBtn";
+            this.PokeDiggerBtn.Size = new System.Drawing.Size(75, 23);
+            this.PokeDiggerBtn.TabIndex = 4;
+            this.PokeDiggerBtn.Text = "PokeDigger";
+            this.PokeDiggerBtn.UseVisualStyleBackColor = true;
+            this.PokeDiggerBtn.Click += new System.EventHandler(this.PokeDiggerBtn_Click);
             // 
             // ReloadFields
             // 
@@ -5020,9 +5032,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox dumpBox;
         private System.Windows.Forms.Button dumpPokemon;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label SlotLabel;
         private System.Windows.Forms.NumericUpDown slotDump;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label BoxLabel;
         private System.Windows.Forms.NumericUpDown boxDump;
         private System.Windows.Forms.TextBox nameek6;
         private System.Windows.Forms.Label label9;
@@ -5377,6 +5389,7 @@
         private System.Windows.Forms.ComboBox genderBox;
         private System.Windows.Forms.ComboBox pkLang;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Button PokeDiggerBtn;
         private System.Windows.Forms.Button filterReset;
         private System.Windows.Forms.Button breedingClear;
         private System.Windows.Forms.Button srClear;
