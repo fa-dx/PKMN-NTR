@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ntrbase.Helpers
@@ -20,11 +18,6 @@ namespace ntrbase.Helpers
         private int hid_pid = 0x10;
         public const int BOXSIZE = 30;
         public const int POKEBYTES = 232;
-
-        // Constant values for remote control
-        private static readonly uint nokey = 0xFFF;
-        private static readonly uint notouch = 0x02000000;
-        private static readonly uint nostick = 0x00800800;
 
         // Log Handler
         private void WriteLastLog(string str)
@@ -56,7 +49,7 @@ namespace ntrbase.Helpers
             else
             { // Free the buttons
                 WriteLastLog("");
-                buttonByte = BitConverter.GetBytes(nokey);
+                buttonByte = BitConverter.GetBytes(LookupTable.nokey);
                 Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
                 for (readcount = 0; readcount < timeout * 10; readcount++)
                 { // Timeout 2
@@ -76,7 +69,7 @@ namespace ntrbase.Helpers
             byte[] buttonByte = BitConverter.GetBytes(key);
             Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
             await Task.Delay(time);
-            buttonByte = BitConverter.GetBytes(nokey);
+            buttonByte = BitConverter.GetBytes(LookupTable.nokey);
             Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
         }
 
@@ -98,7 +91,7 @@ namespace ntrbase.Helpers
             else
             { // Free the buttons
                 WriteLastLog("");
-                buttonByte = BitConverter.GetBytes(nokey);
+                buttonByte = BitConverter.GetBytes(LookupTable.nokey);
                 Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
                 for (readcount = 0; readcount < timeout * 10; readcount++)
                 { // Timeout 2
@@ -134,7 +127,7 @@ namespace ntrbase.Helpers
             else
             { // Free the touch screen
                 WriteLastLog("");
-                buttonByte = BitConverter.GetBytes(notouch);
+                buttonByte = BitConverter.GetBytes(LookupTable.notouch);
                 Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
                 for (readcount = 0; readcount < timeout * 10; readcount++)
                 { // Timeout 2
@@ -174,7 +167,7 @@ namespace ntrbase.Helpers
         {
             // Get and send hex coordinates
             WriteLastLog("");
-            byte[] buttonByte = BitConverter.GetBytes(notouch);
+            byte[] buttonByte = BitConverter.GetBytes(LookupTable.notouch);
             Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
             int readcount = 0;
             for (readcount = 0; readcount < timeout * 10; readcount++)
@@ -196,7 +189,7 @@ namespace ntrbase.Helpers
             byte[] buttonByte = BitConverter.GetBytes(gethexcoord(Xcoord, Ycoord));
             Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
             await Task.Delay(time);
-            buttonByte = BitConverter.GetBytes(notouch);
+            buttonByte = BitConverter.GetBytes(LookupTable.notouch);
             Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
         }
 
@@ -209,7 +202,7 @@ namespace ntrbase.Helpers
 
         public async void freetouch()
         {
-            byte[] buttonByte = BitConverter.GetBytes(notouch);
+            byte[] buttonByte = BitConverter.GetBytes(LookupTable.notouch);
             Program.scriptHelper.write(touchscrOff, buttonByte, hid_pid);
             await Task.Delay(100);
         }
@@ -242,7 +235,7 @@ namespace ntrbase.Helpers
             else
             { // Free the touch screen
                 WriteLastLog("");
-                buttonByte = BitConverter.GetBytes(nostick);
+                buttonByte = BitConverter.GetBytes(LookupTable.nostick);
                 Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
                 for (readcount = 0; readcount < timeout * 10; readcount++)
                 { // Timeout 2
@@ -262,7 +255,7 @@ namespace ntrbase.Helpers
             byte[] buttonByte = BitConverter.GetBytes(getstickhex(Xvalue, Yvalue));
             Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
             await Task.Delay(time);
-            buttonByte = BitConverter.GetBytes(nostick);
+            buttonByte = BitConverter.GetBytes(LookupTable.nostick);
             Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
         }
 
@@ -361,7 +354,7 @@ namespace ntrbase.Helpers
                 return -1;
         }
 
-        public async Task <bool> memoryinrange(uint address, uint value, uint range)
+        public async Task<bool> memoryinrange(uint address, uint value, uint range)
         {
             lastRead = 0;
             WriteLastLog("");

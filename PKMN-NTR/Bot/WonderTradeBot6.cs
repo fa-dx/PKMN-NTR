@@ -1,30 +1,37 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ntrbase.Bot
 {
     class WonderTradeBot6
     {
-        // Class variables
-        private enum botstates { testpssmenu, readpoke, pressWTbutton, testsavescrn, confirmsave, testwtscrn, confirmwt, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, selectrade, confirmsend, testboxesout, waitfortrade, testbackpssmenu, notradepartner, endbot };
+        private enum botstates { botstart, testpssmenu, readpoke, pressWTbutton, testsavescrn, confirmsave, testwtscrn, confirmwt, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, selectrade, confirmsend, testboxesout, waitfortrade, testbackpssmenu, notradepartner, endbot };
 
+        // Bot variables
+        public int botresult;
         public bool botstop;
-        private int botresult;
-        private int currentbox;
-        private int currentslot;
-        private int quantity;
+
+        // Class variables
         private int botstate;
         private int attempts;
         private int tradewait;
-        private uint currentPID;
-
-        private bool boxchange = true;
+        private bool boxchange;
         private bool taskresultbool;
+        private uint currentPID;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
-        private int commandtime = 250;
-        private int delaytime = 150;
 
+        // Input variables
+        private int currentbox;
+        private int currentslot;
+        private int quantity;
+
+        // Class constants
+        private readonly int commandtime = 250;
+        private readonly int delaytime = 150;
+
+        // Data offsets
         private uint psssmenu1Off;
         private uint psssmenu1IN;
         //private uint psssmenu1OUT;
@@ -44,16 +51,22 @@ namespace ntrbase.Bot
 
         public WonderTradeBot6(int StartBox, int StartSlot, int Amount, bool oras)
         {
+            botresult = 0;
+            botstop = false;
+
+            botstate = (int)botstates.botstart;
+            attempts = 0;
+            tradewait = 0;
+            boxchange = true;
+            taskresultbool = false;
+            currentPID = 0;
+
             currentbox = StartBox - 1;
             currentslot = StartSlot - 1;
             quantity = Amount;
-            botstop = false;
-            boxchange = true;
-            botstate = 0;
-            botresult = 0;
-            attempts = 0;
+
             if (!oras)
-            { // Offsets for XY
+            { // XY
                 psssmenu1Off = 0x19ABC0;
                 psssmenu1IN = 0x7E0000;
                 //psssmenu1OUT = 0x4D0000;
@@ -72,7 +85,7 @@ namespace ntrbase.Bot
                 wtboxviewRange = 0x1000000;
             }
             else
-            { // Offsets for ORAS
+            { // ORAS
                 psssmenu1Off = 0x19C21C;
                 psssmenu1IN = 0x830000;
                 //psssmenu1OUT = 0x500000;
@@ -94,34 +107,274 @@ namespace ntrbase.Bot
 
         public async Task<int> RunBot()
         {
-            while (!botstop)
+            try
             {
-                switch (botstate)
+                while (!botstop)
                 {
-                    case (int)botstates.testpssmenu:
-                        Report("Test if the PSS menu is shown");
-                        waitTaskbool = Program.helper.memoryinrange(psssmenu1Off, psssmenu1IN, 0x10000);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.readpoke;
-                        else
-                        {
-                            botresult = 1;
-                            botstate = (int)botstates.endbot;
-                        }
-                        break;
+                    switch (botstate)
+                    {
+                        case (int)botstates.botstart:
+                            Report("Bot start");
+                            botstate = (int)botstates.testpssmenu;
+                            break;
 
-                    case (int)botstates.readpoke:
-                        Report("Read pokémon from box " + (currentbox + 1) + ", slot " + (currentslot + 1));
-                        waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
-                        long dataready = await waitTaskint;
-                        switch (dataready)
-                        {
-                            case -2:
-                                botresult = 2;
+                        case (int)botstates.testpssmenu:
+                            Report("Test if the PSS menu is shown");
+                            waitTaskbool = Program.helper.memoryinrange(psssmenu1Off, psssmenu1IN, 0x10000);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.readpoke;
+                            else
+                            {
+                                botresult = 1;
                                 botstate = (int)botstates.endbot;
-                                break;
-                            case -1:
-                                Report("Slot is empty");
+                            }
+                            break;
+
+                        case (int)botstates.readpoke:
+                            Report("Read pokémon from box " + (currentbox + 1) + ", slot " + (currentslot + 1));
+                            waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
+                            long dataready = await waitTaskint;
+                            switch (dataready)
+                            {
+                                case -2:
+                                    botresult = 2;
+                                    botstate = (int)botstates.endbot;
+                                    break;
+                                case -1:
+                                    Report("Slot is empty");
+                                    getNextSlot();
+                                    if (quantity > 0) // Test if there are more trades
+                                        botstate = (int)botstates.readpoke;
+                                    else
+                                    { // Stop if no more trades
+                                        botresult = 0;
+                                        botstate = (int)botstates.endbot;
+                                    }
+                                    break;
+                                default:
+                                    {
+                                        currentPID = Convert.ToUInt32(dataready);
+                                        Report("Pokémon found, PID: 0x" + currentPID.ToString("X8"));
+                                        botstate = (int)botstates.pressWTbutton;
+                                    }
+                                    break;
+                            }
+                            break;
+
+                        case (int)botstates.pressWTbutton:
+                            Report("Touch Wonder Trade button");
+                            Program.helper.quicktouch(240, 120, commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.testsavescrn;
+                            break;
+
+                        case (int)botstates.testsavescrn:
+                            Report("Test if the save screen is shown");
+                            waitTaskbool = Program.helper.timememoryinrange(savescrnOff, savescrnIN, 0x10000, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.confirmsave;
+                            }
+                            else
+                            { // If not in save screen, try again
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.pressWTbutton;
+                            }
+                            break;
+
+                        case (int)botstates.confirmsave:
+                            Report("Press Yes");
+                            await Task.Delay(500);
+                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.testwtscrn;
+                            break;
+
+                        case (int)botstates.testwtscrn:
+                            Report("Test if Wonder Trade screen is shown");
+                            waitTaskbool = Program.helper.timememoryinrange(wtconfirmationOff, wtconfirmationIN, 0x10000, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.confirmwt;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.confirmsave;
+                            }
+                            break;
+
+                        case (int)botstates.confirmwt:
+                            Report("Touch Yes");
+                            await Task.Delay(500);
+                            Program.helper.quicktouch(160, 100, commandtime);
+                            await Task.Delay(delaytime);
+                            botstate = (int)botstates.testboxes;
+                            break;
+
+                        case (int)botstates.testboxes:
+                            Report("Test if the boxes are shown");
+                            waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, wtboxesIN, 0x10000, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.gotoboxchange;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.confirmwt;
+                            }
+                            break;
+
+                        case (int)botstates.gotoboxchange:
+                            await Task.Delay(2000);
+                            if (boxchange)
+                            {
+                                botstate = (int)botstates.touchboxview;
+                                boxchange = false;
+                            }
+                            else
+                                botstate = (int)botstates.touchpoke;
+                            break;
+
+                        case (int)botstates.touchboxview:
+                            Report("Touch Box View");
+                            Program.helper.quicktouch(30, 220, commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.testboxview;
+                            break;
+
+                        case (int)botstates.testboxview:
+                            Report("Test if box view is shown");
+                            waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewIN, wtboxviewRange, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.touchnewbox;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.touchboxview;
+                            }
+                            break;
+
+                        case (int)botstates.touchnewbox:
+                            await Task.Delay(500);
+                            Report("Touch New Box");
+                            Program.helper.quicktouch(LookupTable.boxposX6[currentbox], LookupTable.boxposY6[currentbox], commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.selectnewbox;
+                            break;
+
+                        case (int)botstates.selectnewbox:
+                            Report("Select New Box");
+                            await Task.Delay(500);
+                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.testboxviewout;
+                            break;
+
+                        case (int)botstates.testboxviewout:
+                            Report("Test if box view is not shown");
+                            waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewOUT, wtboxviewRange, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.touchpoke;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.touchnewbox;
+                            }
+                            break;
+
+                        case (int)botstates.touchpoke:
+                            Report("Touch Pokémon");
+                            await Task.Delay(500);
+                            Program.helper.quicktouch(LookupTable.pokeposX6[currentslot], LookupTable.pokeposY6[currentslot], commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.selectrade;
+                            break;
+
+                        case (int)botstates.selectrade:
+                            Report("Select Trade");
+                            await Task.Delay(750);
+                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.confirmsend;
+                            break;
+
+                        case (int)botstates.confirmsend:
+                            Report("Select Yes");
+                            await Task.Delay(750);
+                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.testboxesout;
+                            break;
+
+                        case (int)botstates.testboxesout:
+                            Report("Test if the boxes are not shown");
+                            waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, wtboxesOUT, 0x10000, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                tradewait = 0;
+                                botstate = (int)botstates.waitfortrade;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.touchpoke;
+                            }
+                            break;
+
+                        case (int)botstates.waitfortrade:
+                            Report("Wait for trade");
+                            waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
+                            uint newPID = Convert.ToUInt32(await waitTaskint);
+                            Report("PID: 0x" + newPID.ToString("X8"));
+                            if (currentPID == newPID)
+                            {
+                                await Task.Delay(2000);
+                                tradewait++;
+                                if (tradewait > 30) // Too much time passed
+                                {
+                                    attempts = 0;
+                                    botstate = (int)botstates.notradepartner;
+                                }
+                            }
+                            else
+                            {
+                                Report("Wait 30 seconds");
+                                await Task.Delay(30000);
+                                botstate = (int)botstates.testbackpssmenu;
+                            }
+                            break;
+
+                        case (int)botstates.testbackpssmenu:
+                            Report("Test if back to the PSS menu");
+                            waitTaskbool = Program.helper.timememoryinrange(psssmenu1Off, psssmenu1IN, 0x10000, 2000, 10000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            { // Trade sucessfull
+                                attempts = 0;
                                 getNextSlot();
                                 if (quantity > 0) // Test if there are more trades
                                     botstate = (int)botstates.readpoke;
@@ -130,271 +383,55 @@ namespace ntrbase.Bot
                                     botresult = 0;
                                     botstate = (int)botstates.endbot;
                                 }
-                                break;
-                            default:
-                                {
-                                    currentPID = Convert.ToUInt32(dataready);
-                                    Report("Pokémon found, PID: 0x" + currentPID.ToString("X8"));
-                                    botstate = (int)botstates.pressWTbutton;
-                                }
-                                break;
-                        }
-                        break;
+                            }
+                            else
+                            { // Still waiting
+                                attempts++;
+                                botresult = -1;
+                                botstate = (int)botstates.testbackpssmenu;
+                            }
+                            break;
 
-                    case (int)botstates.pressWTbutton:
-                        Report("Touch Wonder Trade button");
-                        Program.helper.quicktouch(240, 120, commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.testsavescrn;
-                        break;
-
-                    case (int)botstates.testsavescrn:
-                        Report("Test if the save screen is shown");
-                        waitTaskbool = Program.helper.timememoryinrange(savescrnOff, savescrnIN, 0x10000, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.confirmsave;
-                        }
-                        else
-                        { // If not in save screen, try again
-                            attempts++;
-                            botstate = (int)botstates.pressWTbutton;
-                        }
-                        break;
-
-                    case (int)botstates.confirmsave:
-                        Report("Press Yes");
-                        await Task.Delay(500);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.testwtscrn;
-                        break;
-
-                    case (int)botstates.testwtscrn:
-                        Report("Test if Wonder Trade screen is shown");
-                        waitTaskbool = Program.helper.timememoryinrange(wtconfirmationOff, wtconfirmationIN, 0x10000, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.confirmwt;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botstate = (int)botstates.confirmsave;
-                        }
-                        break;
-
-                    case (int)botstates.confirmwt:
-                        Report("Touch Yes");
-                        await Task.Delay(500);
-                        Program.helper.quicktouch(160, 100, commandtime);
-                        await Task.Delay(delaytime);
-                        botstate = (int)botstates.testboxes;
-                        break;
-
-                    case (int)botstates.testboxes:
-                        Report("Test if the boxes are shown");
-                        waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, wtboxesIN, 0x10000, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.gotoboxchange;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botstate = (int)botstates.confirmwt;
-                        }
-                        break;
-
-                    case (int)botstates.gotoboxchange:
-                        await Task.Delay(2000);
-                        if (boxchange)
-                        {
-                            botstate = (int)botstates.touchboxview;
-                            boxchange = false;
-                        }
-                        else
-                            botstate = (int)botstates.touchpoke;
-                        break;
-
-                    case (int)botstates.touchboxview:
-                        Report("Touch Box View");
-                        Program.helper.quicktouch(30, 220, commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.testboxview;
-                        break;
-
-                    case (int)botstates.testboxview:
-                        Report("Test if box view is shown");
-                        waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewIN, wtboxviewRange, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.touchnewbox;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botstate = (int)botstates.touchboxview;
-                        }
-                        break;
-
-                    case (int)botstates.touchnewbox:
-                        await Task.Delay(500);
-                        Report("Touch New Box");
-                        Program.helper.quicktouch(Program.PKTable.boxposX[currentbox], Program.PKTable.boxposY[currentbox], commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.selectnewbox;
-                        break;
-
-                    case (int)botstates.selectnewbox:
-                        Report("Select New Box");
-                        await Task.Delay(500);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.testboxviewout;
-                        break;
-
-                    case (int)botstates.testboxviewout:
-                        Report("Test if box view is not shown");
-                        waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewOUT, wtboxviewRange, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.touchpoke;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botstate = (int)botstates.touchnewbox;
-                        }
-                        break;
-
-                    case (int)botstates.touchpoke:
-                        Report("Touch Pokémon");
-                        await Task.Delay(500);
-                        Program.helper.quicktouch(Program.PKTable.pokeposX[currentslot], Program.PKTable.pokeposY[currentslot], commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.selectrade;
-                        break;
-
-                    case (int)botstates.selectrade:
-                        Report("Select Trade");
-                        await Task.Delay(750);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.confirmsend;
-                        break;
-
-                    case (int)botstates.confirmsend:
-                        Report("Select Yes");
-                        await Task.Delay(750);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.testboxesout;
-                        break;
-
-                    case (int)botstates.testboxesout:
-                        Report("Test if the boxes are not shown");
-                        waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, wtboxesOUT, 0x10000, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            tradewait = 0;
-                            botstate = (int)botstates.waitfortrade;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botstate = (int)botstates.touchpoke;
-                        }
-                        break;
-
-                    case (int)botstates.waitfortrade:
-                        Report("Wait for trade");
-                        waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
-                        uint newPID = Convert.ToUInt32(await waitTaskint);
-                        Report("PID: 0x" + newPID.ToString("X8"));
-                        if (currentPID == newPID)
-                        {
-                            await Task.Delay(2000);
-                            tradewait++;
-                            if (tradewait > 30) // Too much time passed
-                            {
+                        case (int)botstates.notradepartner:
+                            Report("Test if back to the PSS menu");
+                            waitTaskbool = Program.helper.timememoryinrange(psssmenu1Off, psssmenu1IN, 0x10000, 500, 3000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            { // Back in menu
                                 attempts = 0;
+                                botstate = (int)botstates.pressWTbutton;
+                            }
+                            else
+                            { // Still waiting
+                                attempts++;
+                                botresult = -1;
+                                Report("Select Yes");
+                                Program.helper.quickbuton(LookupTable.keyA, commandtime);
+                                await Task.Delay(commandtime + delaytime);
                                 botstate = (int)botstates.notradepartner;
                             }
-                        }
-                        else
-                        {
-                            Report("Wait 30 seconds");
-                            await Task.Delay(30000);
-                            botstate = (int)botstates.testbackpssmenu;
-                        }
-                        break;
+                            break;
 
-                    case (int)botstates.testbackpssmenu:
-                        Report("Test if back to the PSS menu");
-                        waitTaskbool = Program.helper.timememoryinrange(psssmenu1Off, psssmenu1IN, 0x10000, 2000, 10000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        { // Trade sucessfull
-                            attempts = 0;
-                            getNextSlot();
-                            if (quantity > 0) // Test if there are more trades
-                                botstate = (int)botstates.readpoke;
-                            else
-                            { // Stop if no more trades
-                                botresult = 0;
-                                botstate = (int)botstates.endbot;
-                            }
-                        }
-                        else
-                        { // Still waiting
-                            attempts++;
-                            botstate = (int)botstates.testbackpssmenu;
-                        }
-                        break;
-
-                    case (int)botstates.notradepartner:
-                        Report("Test if back to the PSS menu");
-                        waitTaskbool = Program.helper.timememoryinrange(psssmenu1Off, psssmenu1IN, 0x10000, 500, 3000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        { // Back in menu
-                            attempts = 0;
-                            botstate = (int)botstates.pressWTbutton;
-                        }
-                        else
-                        { // Still waiting
-                            attempts++;
-                            Report("Select Yes");
-                            Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.notradepartner;
-                        }
-                        break;
-
-                    default:
+                        default:
+                            botstop = true;
+                            break;
+                    }
+                    if (attempts > 10)
+                    { // Too many attempts
                         botstop = true;
-                        break;
+                        botresult = -1;
+                    }
                 }
-                if (attempts > 10)
-                { // Too many attempts
-                    botstop = true;
-                    botresult = -1;
-                }
+                return botresult;
             }
-            return botresult;
+            catch (Exception ex)
+            {
+                Report(ex.Source);
+                Report(ex.Message);
+                Report(ex.StackTrace);
+                MessageBox.Show(ex.Message);
+                return -1;
+            }
         }
 
         private void Report(string log)
@@ -416,6 +453,5 @@ namespace ntrbase.Bot
             quantity--;
             Program.gCmdWindow.updateWTslots(currentbox, currentslot, quantity);
         }
-
     }
 }

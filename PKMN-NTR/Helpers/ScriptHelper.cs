@@ -28,7 +28,7 @@ namespace ntrbase
             Program.ntrClient.log("Will be disconnected in 10 seconds to enhance performance.");
             Program.gCmdWindow.startAutoDisconnect();
         }
-        
+
         public void bpdis(uint id)
         {
             Program.ntrClient.sendEmptyPacket(11, id, 0, 3);
@@ -44,69 +44,70 @@ namespace ntrbase
             Program.ntrClient.sendEmptyPacket(11, 0, 0, 4);
         }
 
-		public void connect(string host, int port)
+        public void connect(string host, int port)
         {
-			Program.ntrClient.setServer(host, port);
-			Program.ntrClient.connectToServer();
-		}
+            Program.ntrClient.setServer(host, port);
+            Program.ntrClient.connectToServer();
+        }
 
-		public void reload()
+        public void reload()
         {
-			Program.ntrClient.sendReloadPacket();
-		}
-		
-		public void listprocess()
-        {
-			Program.ntrClient.sendEmptyPacket(5);
-		}
+            Program.ntrClient.sendReloadPacket();
+        }
 
-		public void listthread(int pid)
+        public void listprocess()
         {
-			Program.ntrClient.sendEmptyPacket(7, (uint) pid);
-		}
+            Program.ntrClient.sendEmptyPacket(5);
+        }
 
-		public void attachprocess(int pid, uint patchAddr = 0)
+        public void listthread(int pid)
         {
-			Program.ntrClient.sendEmptyPacket(6, (uint) pid, patchAddr);
-		}
+            Program.ntrClient.sendEmptyPacket(7, (uint)pid);
+        }
+
+        public void attachprocess(int pid, uint patchAddr = 0)
+        {
+            Program.ntrClient.sendEmptyPacket(6, (uint)pid, patchAddr);
+        }
 
         public void queryhandle(int pid)
         {
-            Program.ntrClient.sendEmptyPacket(12, (uint)pid );
+            Program.ntrClient.sendEmptyPacket(12, (uint)pid);
         }
 
-		public void memlayout(int pid)
+        public void memlayout(int pid)
         {
-			Program.ntrClient.sendEmptyPacket(8, (uint)pid);
-		}
+            Program.ntrClient.sendEmptyPacket(8, (uint)pid);
+        }
 
-		public void disconnect()
+        public void disconnect()
         {
-			Program.ntrClient.disconnect();
-		}
+            Program.ntrClient.disconnect();
+        }
 
-		public void sayhello()
+        public void sayhello()
         {
-			Program.ntrClient.sendHelloPacket();
-		}
+            Program.ntrClient.sendHelloPacket();
+        }
 
-		public void data(uint addr, uint size = 0x100, int pid = -1, string filename = null)
+        public void data(uint addr, uint size = 0x100, int pid = -1, string filename = null)
         {
-			if (filename == null && size > 1024) {
-				size = 1024;
-			}
-			Program.ntrClient.sendReadMemPacket(addr, size, (uint) pid, filename);
-		}
+            if (filename == null && size > 1024)
+            {
+                size = 1024;
+            }
+            Program.ntrClient.sendReadMemPacket(addr, size, (uint)pid, filename);
+        }
 
         public uint data(uint addr, uint size = 0x100, int pid = -1)
         {
             return Program.ntrClient.sendReadMemPacket(addr, size, (uint)pid);
         }
 
-		public void write(uint addr, byte[] buf, int pid=-1)
+        public void write(uint addr, byte[] buf, int pid = -1)
         {
-			Program.ntrClient.sendWriteMemPacket(addr, (uint)pid, buf);
-		}
+            Program.ntrClient.sendWriteMemPacket(addr, (uint)pid, buf);
+        }
 
         public void writebyte(uint addr, byte buf, int pid = -1)
         {
@@ -115,11 +116,11 @@ namespace ntrbase
 
         public void sendfile(String localPath, String remotePath)
         {
-			FileStream fs = new FileStream(localPath, FileMode.Open);
-			byte[] buf = new byte[fs.Length];
-			fs.Read(buf, 0, buf.Length);
-			fs.Close();
-			Program.ntrClient.sendSaveFilePacket(remotePath, buf);
-		}
-	}
+            FileStream fs = new FileStream(localPath, FileMode.Open);
+            byte[] buf = new byte[fs.Length];
+            fs.Read(buf, 0, buf.Length);
+            fs.Close();
+            Program.ntrClient.sendSaveFilePacket(remotePath, buf);
+        }
+    }
 }

@@ -261,6 +261,7 @@
             this.manualSR = new System.Windows.Forms.Button();
             this.label92 = new System.Windows.Forms.Label();
             this.tabFilters = new System.Windows.Forms.TabPage();
+            this.filterReset = new System.Windows.Forms.Button();
             this.filterRead = new System.Windows.Forms.Button();
             this.filterLoad = new System.Windows.Forms.Button();
             this.filterSave = new System.Windows.Forms.Button();
@@ -319,6 +320,7 @@
             this.filterATKvalue = new System.Windows.Forms.NumericUpDown();
             this.label112 = new System.Windows.Forms.Label();
             this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.breedingClear = new System.Windows.Forms.Button();
             this.label50 = new System.Windows.Forms.Label();
             this.filterBreeding = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -366,6 +368,7 @@
             this.bFilterLoad = new System.Windows.Forms.Button();
             this.runBreedingBot = new System.Windows.Forms.Button();
             this.tabSoftReset = new System.Windows.Forms.TabPage();
+            this.srClear = new System.Windows.Forms.Button();
             this.filtersSoftReset = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -391,6 +394,7 @@
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
+            this.updateLabel = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
@@ -580,6 +584,7 @@
             this.moneyNum.Name = "moneyNum";
             this.moneyNum.Size = new System.Drawing.Size(80, 20);
             this.moneyNum.TabIndex = 6;
+            this.moneyNum.ThousandsSeparator = true;
             // 
             // milesNum
             // 
@@ -592,6 +597,7 @@
             this.milesNum.Name = "milesNum";
             this.milesNum.Size = new System.Drawing.Size(80, 20);
             this.milesNum.TabIndex = 8;
+            this.milesNum.ThousandsSeparator = true;
             // 
             // bpNum
             // 
@@ -603,7 +609,7 @@
             0});
             this.bpNum.Name = "bpNum";
             this.bpNum.Size = new System.Drawing.Size(80, 20);
-            this.bpNum.TabIndex = 10;
+            this.bpNum.TabIndex = 12;
             // 
             // pokeMoney
             // 
@@ -636,7 +642,7 @@
             this.pokeBP.Location = new System.Drawing.Point(167, 194);
             this.pokeBP.Name = "pokeBP";
             this.pokeBP.Size = new System.Drawing.Size(42, 23);
-            this.pokeBP.TabIndex = 11;
+            this.pokeBP.TabIndex = 13;
             this.pokeBP.Text = "Write";
             this.pokeBP.UseVisualStyleBackColor = true;
             this.pokeBP.Click += new System.EventHandler(this.pokeBP_Click);
@@ -647,7 +653,7 @@
             this.label2.Location = new System.Drawing.Point(33, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 21;
+            this.label2.TabIndex = 23;
             this.label2.Text = "Money:";
             // 
             // label3
@@ -655,7 +661,7 @@
             this.label3.Location = new System.Drawing.Point(6, 140);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
-            this.label3.TabIndex = 22;
+            this.label3.TabIndex = 24;
             this.label3.Text = "Poké Miles:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -664,7 +670,7 @@
             this.label4.Location = new System.Drawing.Point(6, 198);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 19);
-            this.label4.TabIndex = 23;
+            this.label4.TabIndex = 26;
             this.label4.Text = "Battle Points:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -888,7 +894,7 @@
             this.label44.Location = new System.Drawing.Point(37, 148);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(27, 13);
-            this.label44.TabIndex = 19;
+            this.label44.TabIndex = 20;
             this.label44.Text = "Ball:";
             // 
             // ball
@@ -973,7 +979,7 @@
             this.button1.Location = new System.Drawing.Point(185, 143);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 13;
+            this.button1.TabIndex = 14;
             this.button1.Text = "Write";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.pokeEkx_Click);
@@ -984,7 +990,7 @@
             this.label5.Location = new System.Drawing.Point(86, 4);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(26, 13);
-            this.label5.TabIndex = 14;
+            this.label5.TabIndex = 26;
             this.label5.Text = "EVs";
             this.toolTip1.SetToolTip(this.label5, "Effort Values. Their sum shouldn\'t be higher than 510.");
             // 
@@ -1025,7 +1031,7 @@
             this.label32.Location = new System.Drawing.Point(16, 14);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(48, 13);
-            this.label32.TabIndex = 14;
+            this.label32.TabIndex = 15;
             this.label32.Text = "Species:";
             // 
             // evSPENum
@@ -1140,7 +1146,7 @@
             this.label23.Location = new System.Drawing.Point(22, 67);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(42, 13);
-            this.label23.TabIndex = 16;
+            this.label23.TabIndex = 17;
             this.label23.Text = "Nature:";
             // 
             // ivSPDNum
@@ -1162,7 +1168,7 @@
             this.label24.Location = new System.Drawing.Point(34, 121);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(30, 13);
-            this.label24.TabIndex = 18;
+            this.label24.TabIndex = 19;
             this.label24.Text = "Item:";
             // 
             // ivSPANum
@@ -1233,7 +1239,7 @@
             this.label25.Location = new System.Drawing.Point(27, 94);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(37, 13);
-            this.label25.TabIndex = 17;
+            this.label25.TabIndex = 18;
             this.label25.Text = "Ability:";
             // 
             // ivATKNum
@@ -1255,7 +1261,7 @@
             this.label30.Location = new System.Drawing.Point(6, 41);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(58, 13);
-            this.label30.TabIndex = 15;
+            this.label30.TabIndex = 16;
             this.label30.Text = "Nickname:";
             // 
             // ivHPNum
@@ -1278,7 +1284,7 @@
             this.hiddenPower.Name = "hiddenPower";
             this.hiddenPower.ReadOnly = true;
             this.hiddenPower.Size = new System.Drawing.Size(56, 20);
-            this.hiddenPower.TabIndex = 12;
+            this.hiddenPower.TabIndex = 18;
             this.hiddenPower.TabStop = false;
             this.hiddenPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1288,7 +1294,7 @@
             this.label29.Location = new System.Drawing.Point(6, 149);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(52, 13);
-            this.label29.TabIndex = 21;
+            this.label29.TabIndex = 28;
             this.label29.Text = "HP Type:";
             // 
             // nickname
@@ -1305,7 +1311,7 @@
             this.label22.Location = new System.Drawing.Point(6, 124);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(31, 13);
-            this.label22.TabIndex = 20;
+            this.label22.TabIndex = 24;
             this.label22.Text = "SPE:";
             // 
             // label21
@@ -1314,7 +1320,7 @@
             this.label21.Location = new System.Drawing.Point(5, 103);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(32, 13);
-            this.label21.TabIndex = 19;
+            this.label21.TabIndex = 23;
             this.label21.Text = "SPD:";
             // 
             // label16
@@ -1323,7 +1329,7 @@
             this.label16.Location = new System.Drawing.Point(47, 4);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(22, 13);
-            this.label16.TabIndex = 13;
+            this.label16.TabIndex = 25;
             this.label16.Text = "IVs";
             this.toolTip1.SetToolTip(this.label16, "Individual values");
             // 
@@ -1333,7 +1339,7 @@
             this.label18.Location = new System.Drawing.Point(6, 40);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(31, 13);
-            this.label18.TabIndex = 16;
+            this.label18.TabIndex = 20;
             this.label18.Text = "ATK:";
             // 
             // label20
@@ -1342,7 +1348,7 @@
             this.label20.Location = new System.Drawing.Point(6, 82);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(31, 13);
-            this.label20.TabIndex = 18;
+            this.label20.TabIndex = 22;
             this.label20.Text = "SPA:";
             // 
             // label17
@@ -1351,7 +1357,7 @@
             this.label17.Location = new System.Drawing.Point(12, 19);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(25, 13);
-            this.label17.TabIndex = 15;
+            this.label17.TabIndex = 19;
             this.label17.Text = "HP:";
             // 
             // label19
@@ -1360,7 +1366,7 @@
             this.label19.Location = new System.Drawing.Point(6, 61);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(31, 13);
-            this.label19.TabIndex = 17;
+            this.label19.TabIndex = 21;
             this.label19.Text = "DEF:";
             // 
             // itemsGridView
@@ -1392,7 +1398,7 @@
             this.label28.Location = new System.Drawing.Point(17, 228);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(58, 13);
-            this.label28.TabIndex = 24;
+            this.label28.TabIndex = 27;
             this.label28.Text = "Language:";
             // 
             // Lang
@@ -1401,7 +1407,8 @@
             this.Lang.Location = new System.Drawing.Point(81, 225);
             this.Lang.Name = "Lang";
             this.Lang.Size = new System.Drawing.Size(80, 21);
-            this.Lang.TabIndex = 12;
+            this.Lang.TabIndex = 14;
+            this.toolTip1.SetToolTip(this.Lang, "Save your game and restart to see the change.");
             // 
             // pokeLang
             // 
@@ -1410,7 +1417,7 @@
             this.pokeLang.Location = new System.Drawing.Point(167, 223);
             this.pokeLang.Name = "pokeLang";
             this.pokeLang.Size = new System.Drawing.Size(42, 23);
-            this.pokeLang.TabIndex = 13;
+            this.pokeLang.TabIndex = 15;
             this.pokeLang.Text = "Write";
             this.pokeLang.UseVisualStyleBackColor = true;
             this.pokeLang.Click += new System.EventHandler(this.pokeLang_Click);
@@ -1446,7 +1453,7 @@
             this.label15.Location = new System.Drawing.Point(47, 82);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(28, 13);
-            this.label15.TabIndex = 20;
+            this.label15.TabIndex = 22;
             this.label15.Text = "SID:";
             // 
             // label14
@@ -1455,7 +1462,7 @@
             this.label14.Location = new System.Drawing.Point(118, 249);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(34, 13);
-            this.label14.TabIndex = 26;
+            this.label14.TabIndex = 30;
             this.label14.Text = "Secs:";
             // 
             // pokeTID
@@ -1476,7 +1483,7 @@
             this.label13.Location = new System.Drawing.Point(72, 249);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 13);
-            this.label13.TabIndex = 25;
+            this.label13.TabIndex = 29;
             this.label13.Text = "Mins:";
             // 
             // TIDNum
@@ -1502,7 +1509,7 @@
             0});
             this.secNum.Name = "secNum";
             this.secNum.Size = new System.Drawing.Size(40, 20);
-            this.secNum.TabIndex = 16;
+            this.secNum.TabIndex = 18;
             // 
             // label11
             // 
@@ -1510,7 +1517,7 @@
             this.label11.Location = new System.Drawing.Point(47, 54);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
-            this.label11.TabIndex = 19;
+            this.label11.TabIndex = 21;
             this.label11.Text = "TID:";
             // 
             // minNum
@@ -1523,7 +1530,7 @@
             0});
             this.minNum.Name = "minNum";
             this.minNum.Size = new System.Drawing.Size(40, 20);
-            this.minNum.TabIndex = 15;
+            this.minNum.TabIndex = 17;
             // 
             // label10
             // 
@@ -1531,7 +1538,7 @@
             this.label10.Location = new System.Drawing.Point(37, 24);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(38, 13);
-            this.label10.TabIndex = 18;
+            this.label10.TabIndex = 20;
             this.label10.Text = "Name:";
             // 
             // pokeTime
@@ -1541,7 +1548,7 @@
             this.pokeTime.Location = new System.Drawing.Point(167, 262);
             this.pokeTime.Name = "pokeTime";
             this.pokeTime.Size = new System.Drawing.Size(42, 23);
-            this.pokeTime.TabIndex = 17;
+            this.pokeTime.TabIndex = 19;
             this.pokeTime.Text = "Write";
             this.pokeTime.UseVisualStyleBackColor = true;
             this.pokeTime.Click += new System.EventHandler(this.pokeTime_Click);
@@ -1568,7 +1575,7 @@
             0});
             this.hourNum.Name = "hourNum";
             this.hourNum.Size = new System.Drawing.Size(63, 20);
-            this.hourNum.TabIndex = 14;
+            this.hourNum.TabIndex = 16;
             // 
             // playerName
             // 
@@ -1583,7 +1590,7 @@
             this.label12.Location = new System.Drawing.Point(3, 249);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(38, 13);
-            this.label12.TabIndex = 24;
+            this.label12.TabIndex = 28;
             this.label12.Text = "Hours:";
             // 
             // showKeys
@@ -1917,7 +1924,7 @@
             this.label45.Location = new System.Drawing.Point(157, 14);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(28, 13);
-            this.label45.TabIndex = 20;
+            this.label45.TabIndex = 21;
             this.label45.Text = "PID:";
             // 
             // label47
@@ -1926,7 +1933,7 @@
             this.label47.Location = new System.Drawing.Point(18, 34);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(46, 13);
-            this.label47.TabIndex = 4;
+            this.label47.TabIndex = 5;
             this.label47.Text = "OT TID:";
             // 
             // label48
@@ -1935,7 +1942,7 @@
             this.label48.Location = new System.Drawing.Point(18, 60);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(46, 13);
-            this.label48.TabIndex = 5;
+            this.label48.TabIndex = 6;
             this.label48.Text = "OT SID:";
             // 
             // otName
@@ -1952,7 +1959,7 @@
             this.label46.Location = new System.Drawing.Point(8, 9);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(56, 13);
-            this.label46.TabIndex = 3;
+            this.label46.TabIndex = 4;
             this.label46.Text = "OT Name:";
             // 
             // label51
@@ -1984,7 +1991,7 @@
             0});
             this.friendship.Name = "friendship";
             this.friendship.Size = new System.Drawing.Size(72, 20);
-            this.friendship.TabIndex = 12;
+            this.friendship.TabIndex = 13;
             this.toolTip1.SetToolTip(this.friendship, "Friendship with current Trainer.\r\nNon-white color indicates Pokemon is with its O" +
         "T.");
             // 
@@ -2058,7 +2065,7 @@
             this.genderBox.Location = new System.Drawing.Point(203, 64);
             this.genderBox.Name = "genderBox";
             this.genderBox.Size = new System.Drawing.Size(39, 21);
-            this.genderBox.TabIndex = 4;
+            this.genderBox.TabIndex = 9;
             // 
             // shinyBox
             // 
@@ -2067,7 +2074,7 @@
             this.shinyBox.Location = new System.Drawing.Point(156, 40);
             this.shinyBox.Name = "shinyBox";
             this.shinyBox.Size = new System.Drawing.Size(52, 17);
-            this.shinyBox.TabIndex = 0;
+            this.shinyBox.TabIndex = 7;
             this.shinyBox.Text = "Shiny";
             this.shinyBox.UseVisualStyleBackColor = true;
             this.shinyBox.CheckedChanged += new System.EventHandler(this.shinyBox_CheckedChanged);
@@ -2082,7 +2089,7 @@
             0});
             this.level.Name = "level";
             this.level.Size = new System.Drawing.Size(40, 20);
-            this.level.TabIndex = 94;
+            this.level.TabIndex = 12;
             this.toolTip1.SetToolTip(this.level, "Level");
             this.level.Value = new decimal(new int[] {
             1,
@@ -2166,7 +2173,7 @@
             this.label63.Location = new System.Drawing.Point(126, 4);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(22, 13);
-            this.label63.TabIndex = 25;
+            this.label63.TabIndex = 27;
             this.label63.Text = "HT";
             this.toolTip1.SetToolTip(this.label63, "Hyper Training");
             // 
@@ -2177,7 +2184,7 @@
             this.HypT_Spe.Location = new System.Drawing.Point(130, 123);
             this.HypT_Spe.Name = "HypT_Spe";
             this.HypT_Spe.Size = new System.Drawing.Size(15, 14);
-            this.HypT_Spe.TabIndex = 24;
+            this.HypT_Spe.TabIndex = 17;
             this.HypT_Spe.UseVisualStyleBackColor = true;
             // 
             // HypT_SpD
@@ -2187,7 +2194,7 @@
             this.HypT_SpD.Location = new System.Drawing.Point(130, 102);
             this.HypT_SpD.Name = "HypT_SpD";
             this.HypT_SpD.Size = new System.Drawing.Size(15, 14);
-            this.HypT_SpD.TabIndex = 24;
+            this.HypT_SpD.TabIndex = 16;
             this.HypT_SpD.UseVisualStyleBackColor = true;
             // 
             // HypT_SpA
@@ -2197,7 +2204,7 @@
             this.HypT_SpA.Location = new System.Drawing.Point(130, 81);
             this.HypT_SpA.Name = "HypT_SpA";
             this.HypT_SpA.Size = new System.Drawing.Size(15, 14);
-            this.HypT_SpA.TabIndex = 24;
+            this.HypT_SpA.TabIndex = 15;
             this.HypT_SpA.UseVisualStyleBackColor = true;
             // 
             // HypT_Def
@@ -2207,7 +2214,7 @@
             this.HypT_Def.Location = new System.Drawing.Point(130, 60);
             this.HypT_Def.Name = "HypT_Def";
             this.HypT_Def.Size = new System.Drawing.Size(15, 14);
-            this.HypT_Def.TabIndex = 24;
+            this.HypT_Def.TabIndex = 14;
             this.HypT_Def.UseVisualStyleBackColor = true;
             // 
             // HypT_Atk
@@ -2217,7 +2224,7 @@
             this.HypT_Atk.Location = new System.Drawing.Point(130, 39);
             this.HypT_Atk.Name = "HypT_Atk";
             this.HypT_Atk.Size = new System.Drawing.Size(15, 14);
-            this.HypT_Atk.TabIndex = 23;
+            this.HypT_Atk.TabIndex = 13;
             this.HypT_Atk.UseVisualStyleBackColor = true;
             // 
             // HypT_HP
@@ -2227,7 +2234,7 @@
             this.HypT_HP.Location = new System.Drawing.Point(130, 18);
             this.HypT_HP.Name = "HypT_HP";
             this.HypT_HP.Size = new System.Drawing.Size(15, 14);
-            this.HypT_HP.TabIndex = 22;
+            this.HypT_HP.TabIndex = 12;
             this.HypT_HP.UseVisualStyleBackColor = true;
             // 
             // Moves
@@ -2356,7 +2363,7 @@
             this.pkLang.Location = new System.Drawing.Point(70, 84);
             this.pkLang.Name = "pkLang";
             this.pkLang.Size = new System.Drawing.Size(80, 21);
-            this.pkLang.TabIndex = 12;
+            this.pkLang.TabIndex = 3;
             // 
             // label31
             // 
@@ -2364,7 +2371,7 @@
             this.label31.Location = new System.Drawing.Point(6, 87);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(58, 13);
-            this.label31.TabIndex = 24;
+            this.label31.TabIndex = 7;
             this.label31.Text = "Language:";
             // 
             // cloneWriteTabs
@@ -2801,7 +2808,7 @@
             this.label72.Location = new System.Drawing.Point(3, 10);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(34, 13);
-            this.label72.TabIndex = 5;
+            this.label72.TabIndex = 6;
             this.label72.Text = "Type:";
             // 
             // typeLSR
@@ -2809,12 +2816,6 @@
             this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.typeLSR.FormattingEnabled = true;
-            this.typeLSR.Items.AddRange(new object[] {
-            "Regular",
-            "Mirage Spot",
-            "Event",
-            "Groudon/Kyogre",
-            "Walk"});
             this.typeLSR.Location = new System.Drawing.Point(43, 7);
             this.typeLSR.Name = "typeLSR";
             this.typeLSR.Size = new System.Drawing.Size(222, 21);
@@ -3214,7 +3215,7 @@
             this.label55.Location = new System.Drawing.Point(6, 169);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(69, 18);
-            this.label55.TabIndex = 29;
+            this.label55.TabIndex = 25;
             this.label55.Text = "Total FC:";
             this.label55.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -3226,7 +3227,7 @@
             this.pokeTotalFC.Location = new System.Drawing.Point(167, 164);
             this.pokeTotalFC.Name = "pokeTotalFC";
             this.pokeTotalFC.Size = new System.Drawing.Size(42, 23);
-            this.pokeTotalFC.TabIndex = 28;
+            this.pokeTotalFC.TabIndex = 11;
             this.pokeTotalFC.Text = "Write";
             this.pokeTotalFC.UseVisualStyleBackColor = true;
             this.pokeTotalFC.Click += new System.EventHandler(this.pokeTotalFC_Click);
@@ -3242,7 +3243,8 @@
             0});
             this.totalFCNum.Name = "totalFCNum";
             this.totalFCNum.Size = new System.Drawing.Size(80, 20);
-            this.totalFCNum.TabIndex = 27;
+            this.totalFCNum.TabIndex = 10;
+            this.totalFCNum.ThousandsSeparator = true;
             // 
             // tabControls
             // 
@@ -3389,6 +3391,7 @@
             // 
             // tabFilters
             // 
+            this.tabFilters.Controls.Add(this.filterReset);
             this.tabFilters.Controls.Add(this.filterRead);
             this.tabFilters.Controls.Add(this.filterLoad);
             this.tabFilters.Controls.Add(this.filterSave);
@@ -3433,6 +3436,16 @@
             this.tabFilters.TabIndex = 6;
             this.tabFilters.Text = "Filters";
             // 
+            // filterReset
+            // 
+            this.filterReset.Location = new System.Drawing.Point(346, 161);
+            this.filterReset.Name = "filterReset";
+            this.filterReset.Size = new System.Drawing.Size(209, 23);
+            this.filterReset.TabIndex = 22;
+            this.filterReset.Text = "Reset constructor";
+            this.filterReset.UseVisualStyleBackColor = true;
+            this.filterReset.Click += new System.EventHandler(this.filterReset_Click);
+            // 
             // filterRead
             // 
             this.filterRead.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -3449,7 +3462,7 @@
             this.filterLoad.Location = new System.Drawing.Point(455, 190);
             this.filterLoad.Name = "filterLoad";
             this.filterLoad.Size = new System.Drawing.Size(100, 23);
-            this.filterLoad.TabIndex = 23;
+            this.filterLoad.TabIndex = 24;
             this.filterLoad.Text = "Load filter set...";
             this.filterLoad.UseVisualStyleBackColor = true;
             this.filterLoad.Click += new System.EventHandler(this.filterLoad_Click);
@@ -3459,7 +3472,7 @@
             this.filterSave.Location = new System.Drawing.Point(346, 190);
             this.filterSave.Name = "filterSave";
             this.filterSave.Size = new System.Drawing.Size(100, 23);
-            this.filterSave.TabIndex = 22;
+            this.filterSave.TabIndex = 23;
             this.filterSave.Text = "Save filter set...";
             this.filterSave.UseVisualStyleBackColor = true;
             this.filterSave.Click += new System.EventHandler(this.filterSave_Click);
@@ -3517,7 +3530,7 @@
             this.filterList.ReadOnly = true;
             this.filterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.filterList.Size = new System.Drawing.Size(549, 145);
-            this.filterList.TabIndex = 24;
+            this.filterList.TabIndex = 25;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -4077,6 +4090,7 @@
             // tabBreeding
             // 
             this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.breedingClear);
             this.tabBreeding.Controls.Add(this.label50);
             this.tabBreeding.Controls.Add(this.filterBreeding);
             this.tabBreeding.Controls.Add(this.quickBreed);
@@ -4109,13 +4123,23 @@
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
+            // breedingClear
+            // 
+            this.breedingClear.Location = new System.Drawing.Point(272, 189);
+            this.breedingClear.Name = "breedingClear";
+            this.breedingClear.Size = new System.Drawing.Size(158, 23);
+            this.breedingClear.TabIndex = 16;
+            this.breedingClear.Text = "Reset all fields";
+            this.breedingClear.UseVisualStyleBackColor = true;
+            this.breedingClear.Click += new System.EventHandler(this.breedingClear_Click);
+            // 
             // label50
             // 
             this.label50.AutoSize = true;
             this.label50.Location = new System.Drawing.Point(3, 197);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(73, 13);
-            this.label50.TabIndex = 96;
+            this.label50.TabIndex = 26;
             this.label50.Text = "Loaded Filters";
             // 
             // filterBreeding
@@ -4150,7 +4174,7 @@
             this.filterBreeding.ReadOnly = true;
             this.filterBreeding.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.filterBreeding.Size = new System.Drawing.Size(546, 146);
-            this.filterBreeding.TabIndex = 14;
+            this.filterBreeding.TabIndex = 18;
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -4301,7 +4325,7 @@
             this.label95.Location = new System.Drawing.Point(436, 6);
             this.label95.Name = "label95";
             this.label95.Size = new System.Drawing.Size(47, 13);
-            this.label95.TabIndex = 22;
+            this.label95.TabIndex = 25;
             this.label95.Text = "TSV List";
             // 
             // TSVlistLoad
@@ -4309,7 +4333,7 @@
             this.TSVlistLoad.Location = new System.Drawing.Point(495, 136);
             this.TSVlistLoad.Name = "TSVlistLoad";
             this.TSVlistLoad.Size = new System.Drawing.Size(57, 23);
-            this.TSVlistLoad.TabIndex = 13;
+            this.TSVlistLoad.TabIndex = 15;
             this.TSVlistLoad.Text = "Load";
             this.TSVlistLoad.UseVisualStyleBackColor = true;
             this.TSVlistLoad.Click += new System.EventHandler(this.TSVlistLoad_Click);
@@ -4319,7 +4343,7 @@
             this.TSVlistSave.Location = new System.Drawing.Point(495, 107);
             this.TSVlistSave.Name = "TSVlistSave";
             this.TSVlistSave.Size = new System.Drawing.Size(57, 23);
-            this.TSVlistSave.TabIndex = 12;
+            this.TSVlistSave.TabIndex = 14;
             this.TSVlistSave.Text = "Save";
             this.TSVlistSave.UseVisualStyleBackColor = true;
             this.TSVlistSave.Click += new System.EventHandler(this.TSVlistSave_Click);
@@ -4330,7 +4354,7 @@
             this.TSVlistRemove.Location = new System.Drawing.Point(495, 78);
             this.TSVlistRemove.Name = "TSVlistRemove";
             this.TSVlistRemove.Size = new System.Drawing.Size(57, 23);
-            this.TSVlistRemove.TabIndex = 11;
+            this.TSVlistRemove.TabIndex = 13;
             this.TSVlistRemove.Text = "Remove";
             this.TSVlistRemove.UseVisualStyleBackColor = true;
             this.TSVlistRemove.Click += new System.EventHandler(this.TSVlistRemove_Click);
@@ -4357,7 +4381,7 @@
             this.TSVlistAdd.Location = new System.Drawing.Point(495, 49);
             this.TSVlistAdd.Name = "TSVlistAdd";
             this.TSVlistAdd.Size = new System.Drawing.Size(57, 23);
-            this.TSVlistAdd.TabIndex = 10;
+            this.TSVlistAdd.TabIndex = 12;
             this.TSVlistAdd.Text = "Add";
             this.TSVlistAdd.UseVisualStyleBackColor = true;
             this.TSVlistAdd.Click += new System.EventHandler(this.TSVlistAdd_Click);
@@ -4368,7 +4392,7 @@
             this.label77.Location = new System.Drawing.Point(89, 37);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(28, 13);
-            this.label77.TabIndex = 19;
+            this.label77.TabIndex = 22;
             this.label77.Text = "Slot:";
             // 
             // modeBreed
@@ -4413,7 +4437,7 @@
             this.label84.Location = new System.Drawing.Point(3, 10);
             this.label84.Name = "label84";
             this.label84.Size = new System.Drawing.Size(37, 13);
-            this.label84.TabIndex = 17;
+            this.label84.TabIndex = 20;
             this.label84.Text = "Mode:";
             // 
             // slotBreed
@@ -4448,7 +4472,7 @@
             0});
             this.TSVlistNum.Name = "TSVlistNum";
             this.TSVlistNum.Size = new System.Drawing.Size(57, 20);
-            this.TSVlistNum.TabIndex = 9;
+            this.TSVlistNum.TabIndex = 11;
             // 
             // label76
             // 
@@ -4456,7 +4480,7 @@
             this.label76.Location = new System.Drawing.Point(12, 37);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(28, 13);
-            this.label76.TabIndex = 18;
+            this.label76.TabIndex = 21;
             this.label76.Text = "Box:";
             // 
             // label75
@@ -4465,7 +4489,7 @@
             this.label75.Location = new System.Drawing.Point(169, 37);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(43, 13);
-            this.label75.TabIndex = 20;
+            this.label75.TabIndex = 23;
             this.label75.Text = "# eggs:";
             // 
             // TSVlist
@@ -4474,14 +4498,14 @@
             this.TSVlist.Location = new System.Drawing.Point(439, 23);
             this.TSVlist.Name = "TSVlist";
             this.TSVlist.Size = new System.Drawing.Size(50, 160);
-            this.TSVlist.TabIndex = 8;
+            this.TSVlist.TabIndex = 10;
             // 
             // ESVlistSave
             // 
             this.ESVlistSave.Location = new System.Drawing.Point(272, 160);
             this.ESVlistSave.Name = "ESVlistSave";
             this.ESVlistSave.Size = new System.Drawing.Size(158, 23);
-            this.ESVlistSave.TabIndex = 7;
+            this.ESVlistSave.TabIndex = 9;
             this.ESVlistSave.Text = "Save ESV List";
             this.ESVlistSave.UseVisualStyleBackColor = true;
             this.ESVlistSave.Click += new System.EventHandler(this.ESVlistSave_Click);
@@ -4505,7 +4529,7 @@
             this.ESVlist.RowHeadersWidth = 21;
             this.ESVlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.ESVlist.Size = new System.Drawing.Size(158, 128);
-            this.ESVlist.TabIndex = 6;
+            this.ESVlist.TabIndex = 8;
             // 
             // ESVlistBox
             // 
@@ -4543,7 +4567,7 @@
             this.label94.Location = new System.Drawing.Point(272, 10);
             this.label94.Name = "label94";
             this.label94.Size = new System.Drawing.Size(47, 13);
-            this.label94.TabIndex = 21;
+            this.label94.TabIndex = 24;
             this.label94.Text = "ESV List";
             // 
             // bFilterLoad
@@ -4551,7 +4575,7 @@
             this.bFilterLoad.Location = new System.Drawing.Point(439, 189);
             this.bFilterLoad.Name = "bFilterLoad";
             this.bFilterLoad.Size = new System.Drawing.Size(113, 23);
-            this.bFilterLoad.TabIndex = 15;
+            this.bFilterLoad.TabIndex = 17;
             this.bFilterLoad.Text = "Load filter set...";
             this.bFilterLoad.UseVisualStyleBackColor = true;
             this.bFilterLoad.Click += new System.EventHandler(this.bFilterLoad_Click);
@@ -4561,7 +4585,7 @@
             this.runBreedingBot.Location = new System.Drawing.Point(6, 160);
             this.runBreedingBot.Name = "runBreedingBot";
             this.runBreedingBot.Size = new System.Drawing.Size(260, 23);
-            this.runBreedingBot.TabIndex = 16;
+            this.runBreedingBot.TabIndex = 19;
             this.runBreedingBot.Text = "Run";
             this.runBreedingBot.UseVisualStyleBackColor = true;
             this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click_1);
@@ -4569,6 +4593,7 @@
             // tabSoftReset
             // 
             this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSoftReset.Controls.Add(this.srClear);
             this.tabSoftReset.Controls.Add(this.filtersSoftReset);
             this.tabSoftReset.Controls.Add(this.srFilterLoad);
             this.tabSoftReset.Controls.Add(this.resumeLSR);
@@ -4581,6 +4606,16 @@
             this.tabSoftReset.Size = new System.Drawing.Size(558, 378);
             this.tabSoftReset.TabIndex = 3;
             this.tabSoftReset.Text = "Soft-reset";
+            // 
+            // srClear
+            // 
+            this.srClear.Location = new System.Drawing.Point(271, 34);
+            this.srClear.Name = "srClear";
+            this.srClear.Size = new System.Drawing.Size(155, 23);
+            this.srClear.TabIndex = 3;
+            this.srClear.Text = "Reset all fields";
+            this.srClear.UseVisualStyleBackColor = true;
+            this.srClear.Click += new System.EventHandler(this.srClear_Click);
             // 
             // filtersSoftReset
             // 
@@ -4614,7 +4649,7 @@
             this.filtersSoftReset.ReadOnly = true;
             this.filtersSoftReset.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.filtersSoftReset.Size = new System.Drawing.Size(546, 146);
-            this.filtersSoftReset.TabIndex = 3;
+            this.filtersSoftReset.TabIndex = 5;
             // 
             // dataGridViewTextBoxColumn32
             // 
@@ -4765,7 +4800,7 @@
             this.label93.Location = new System.Drawing.Point(3, 39);
             this.label93.Name = "label93";
             this.label93.Size = new System.Drawing.Size(73, 13);
-            this.label93.TabIndex = 6;
+            this.label93.TabIndex = 7;
             this.label93.Text = "Loaded Filters";
             // 
             // tabWonderTrade
@@ -4799,6 +4834,7 @@
             // tabNTRlog
             // 
             this.tabNTRlog.BackColor = System.Drawing.SystemColors.Control;
+            this.tabNTRlog.Controls.Add(this.updateLabel);
             this.tabNTRlog.Controls.Add(this.txtLog);
             this.tabNTRlog.Controls.Add(this.readResult);
             this.tabNTRlog.Controls.Add(this.label69);
@@ -4808,6 +4844,18 @@
             this.tabNTRlog.Size = new System.Drawing.Size(558, 378);
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
+            // 
+            // updateLabel
+            // 
+            this.updateLabel.AutoSize = true;
+            this.updateLabel.Location = new System.Drawing.Point(224, 356);
+            this.updateLabel.Name = "updateLabel";
+            this.updateLabel.Size = new System.Drawing.Size(110, 13);
+            this.updateLabel.TabIndex = 4;
+            this.updateLabel.Text = "Looking for updates...";
+            this.toolTip1.SetToolTip(this.updateLabel, "If an update is available, you can click here to go to the release page in GitHub" +
+        ".");
+            this.updateLabel.Click += new System.EventHandler(this.updateLabel_Click);
             // 
             // pictureBox2
             // 
@@ -5342,6 +5390,10 @@
         private System.Windows.Forms.ComboBox pkLang;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button PokeDiggerBtn;
+        private System.Windows.Forms.Button filterReset;
+        private System.Windows.Forms.Button breedingClear;
+        private System.Windows.Forms.Button srClear;
+        private System.Windows.Forms.Label updateLabel;
     }
 }
 

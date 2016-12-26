@@ -8,22 +8,20 @@ namespace ntrbase
     static class Program
     {
         public static NTR ntrClient;
-		public static ScriptHelper scriptHelper;
-		public static MainForm gCmdWindow;
+        public static ScriptHelper scriptHelper;
+        public static MainForm gCmdWindow;
         public static RemoteControl helper;
-        public static LookupTable PKTable;
 
         [STAThread]
         static void Main()
         {
             ntrClient = new NTR();
-			scriptHelper = new ScriptHelper();
+            scriptHelper = new ScriptHelper();
             helper = new RemoteControl();
-            PKTable = new LookupTable();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-			gCmdWindow = new MainForm();
+            gCmdWindow = new MainForm();
             Application.Run(gCmdWindow);
         }
     }

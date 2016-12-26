@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ntrbase.Bot
 {
@@ -7,30 +8,38 @@ namespace ntrbase.Bot
     {
         private enum botstates { startbot, initializeFC1, initializeFC2, readpoke, presstradebutton, testtrademenu, pressWTbutton, testWTscreen, pressWTstart, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, starttrade, confirmtrade, testboxesout, waitfortrade, testtradefinish, tryfinish, finishtrade, collectFC1, collectFC2, collectFC3, collectFC4, collectFC5, exitbot };
 
-        public bool botstop;
+        // Bot variables
         public int botresult;
-        private int maxreconnect;
-        private int currentbox;
-        private int currentslot;
-        private int quantity;
-        private bool collectFC;
+        public bool botstop;
+
+        // Class variables
+        private int botstate;
         private int attempts;
-        private int tradewait;
+        private int maxreconnect;
+        private bool lastreconnect;
+        private bool boxchange;
+        private bool notradepartner;
+        private bool tradeevo;
+        private bool taskresultbool;
         private uint currentPID;
         private uint currentTotalFC;
         private uint currentFC;
         private uint nextFC;
-
-        private int botstate = (int)botstates.startbot;
-        private bool boxchange = true;
-        private bool notradepartner = false;
-        private bool tradeevo = false;
-        private bool taskresultbool;
+        private Timer tradeTimer;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
-        private int commandtime = 250;
-        private int delaytime = 150;
 
+        // Input variables
+        private int currentbox;
+        private int currentslot;
+        private int quantity;
+        private bool collectFC;
+
+        // Class constants
+        private readonly int commandtime = 250;
+        private readonly int delaytime = 150;
+
+        // Data offsets
         private uint totalFCoff = 0x33124D5C;
         private uint currentFCoff = 0x33124D58;
         private uint trademenuOff = 0x672790;
@@ -55,539 +64,583 @@ namespace ntrbase.Bot
 
         public WonderTradeBot7(int StartBox, int StartSlot, int Amount, bool FCaftertrade)
         {
+            botresult = 0;
+            botstop = false;
+
+            botstate = (int)botstates.startbot;
+            attempts = 0;
+            maxreconnect = 10;
+            lastreconnect = false;
+            boxchange = true;
+            notradepartner = false;
+            tradeevo = false;
+            taskresultbool = false;
+            currentPID = 0;
+            currentTotalFC = 0;
+            currentFC = 0;
+            nextFC = 0;
+            tradeTimer = new Timer();
+            tradeTimer.Interval = 95000; // Trade timeout
+            tradeTimer.Tick += tradeTimer_Tick;
+
             currentbox = StartBox - 1;
             currentslot = StartSlot - 1;
             quantity = Amount;
-            botstop = false;
-            boxchange = true;
-            botstate = 0;
-            botresult = 0;
-            attempts = 0;
-            maxreconnect = 10;
             collectFC = FCaftertrade;
-            nextFC = 0;
         }
 
         public async Task<int> RunBot()
         {
-            while (!botstop)
+            try
             {
-                switch (botstate)
+                while (!botstop)
                 {
-                    case (int)botstates.startbot:
-                        Report("Bot start");
-                        if (collectFC)
-                            botstate = (int)botstates.initializeFC1;
-                        else
-                            botstate = (int)botstates.readpoke;
-                        break;
+                    switch (botstate)
+                    {
+                        case (int)botstates.startbot:
+                            Report("Bot start");
+                            if (collectFC)
+                                botstate = (int)botstates.initializeFC1;
+                            else
+                                botstate = (int)botstates.readpoke;
+                            break;
 
-                    case (int)botstates.initializeFC1:
-                        waitTaskbool = Program.helper.waitNTRread(totalFCoff);
-                        if (await waitTaskbool)
-                        {
-                            attempts = 0;
-                            currentTotalFC = Program.helper.lastRead;
-                            Report("Current Total FC: " + currentTotalFC);
-                            botstate = (int)botstates.initializeFC2;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = 2;
-                            botstate = (int)botstates.initializeFC1;
-                        }
-                        break;
-
-                    case (int)botstates.initializeFC2:
-                        waitTaskbool = Program.helper.waitNTRread(currentFCoff);
-                        if (await waitTaskbool)
-                        {
-                            attempts = 0;
-                            currentFC = Program.helper.lastRead;
-                            Report("Current FC: " + currentFC);
-                            Program.gCmdWindow.updateFCfields(currentTotalFC, currentFC);
-                            int i = 0;
-                            while (currentTotalFC >= nextFC)
+                        case (int)botstates.initializeFC1:
+                            waitTaskbool = Program.helper.waitNTRread(totalFCoff);
+                            if (await waitTaskbool)
                             {
-                                nextFC = FCtable[i];
-                                i++;
+                                attempts = 0;
+                                currentTotalFC = Program.helper.lastRead;
+                                Report("Current Total FC: " + currentTotalFC);
+                                botstate = (int)botstates.initializeFC2;
                             }
-                            Report("Points for next level: " + (nextFC - currentTotalFC));
-                            botstate = (int)botstates.readpoke;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = 2;
-                            botstate = (int)botstates.initializeFC2;
-                        }
-                        break;
-
-                    case (int)botstates.readpoke:
-                        Report("Read pokémon from box " + (currentbox + 1) + ", slot " + (currentslot + 1));
-                        waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
-                        long dataready = await waitTaskint;
-                        switch (dataready)
-                        {
-                            case -2:
-                                botresult = 2;
-                                Report("Error detected");
-                                attempts = 11;
-                                break;
-                            case -1:
-                                Report("Slot is empty");
-                                getNextSlot();
-                                if (quantity > 0) // Test if there are more trades
-                                    botstate = (int)botstates.readpoke;
-                                else
-                                { // Stop if no more trades
-                                    botresult = 0;
-                                    botstate = (int)botstates.exitbot;
-                                }
-                                break;
-                            default:
-                                {
-                                    currentPID = Convert.ToUInt32(dataready);
-                                    Report("Pokémon found, PID: 0x" + currentPID.ToString("X8"));
-                                    botstate = (int)botstates.presstradebutton;
-                                }
-                                break;
-                        }
-                        break;
-
-                    case (int)botstates.presstradebutton:
-                        Report("Press Trade Button");
-                        waitTaskbool = Program.helper.waittouch(200, 120);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.testtrademenu;
-                        else
-                        {
-                            attempts++;
-                            botresult = 6;
-                            botstate = (int)botstates.presstradebutton;
-                        }
-                        break;
-
-                    case (int)botstates.testtrademenu:
-                        Report("Test if the trademenu is shown");
-                        waitTaskbool = Program.helper.timememoryinrange(trademenuOff, trademenuIN, 0x1000000, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.pressWTbutton;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = -1;
-                            botstate = (int)botstates.presstradebutton;
-                        }
-                        break;
-
-                    case (int)botstates.pressWTbutton:
-                        Report("Press Trade Button");
-                        waitTaskbool = Program.helper.waittouch(160, 160);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.testWTscreen;
-                        else
-                        {
-                            attempts++;
-                            botresult = 6;
-                            botstate = (int)botstates.pressWTbutton;
-                        }
-                        break;
-
-                    case (int)botstates.testWTscreen:
-                        Report("Test if the Wonder Trade screen is shown");
-                        waitTaskbool = Program.helper.timememoryinrange(wtscreenOff, wtscreenIN, 0x10000, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.pressWTstart;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = -1;
-                            botstate = (int)botstates.pressWTbutton;
-                        }
-                        break;
-
-                    case (int)botstates.pressWTstart:
-                        Report("Press Start");
-                        await Task.Delay(1000);
-                        Program.helper.quickbuton(Program.PKTable.keyA, commandtime);
-                        await Task.Delay(commandtime + delaytime);
-                        botstate = (int)botstates.testboxes;
-                        break;
-
-                    case (int)botstates.testboxes:
-                        Report("Test if the boxes are shown");
-                        waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesIN, 0x10000, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.gotoboxchange;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botstate = (int)botstates.pressWTstart;
-                        }
-                        break;
-
-                    case (int)botstates.gotoboxchange:
-                        await Task.Delay(500);
-                        if (boxchange)
-                        {
-                            botstate = (int)botstates.touchboxview;
-                            boxchange = false;
-                        }
-                        else
-                            botstate = (int)botstates.touchpoke;
-                        break;
-
-                    case (int)botstates.touchboxview:
-                        Report("Touch box view");
-                        waitTaskbool = Program.helper.waittouch(140, 230);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.testboxview;
-                        else
-                        {
-                            attempts++;
-                            botresult = 6;
-                            botstate = (int)botstates.touchboxview;
-                        }
-                        break;
-
-                    case (int)botstates.testboxview:
-                        Report("Test if box view is shown");
-                        await Task.Delay(1000);
-                        waitTaskbool = Program.helper.timememoryinrange(boxesviewOff, boxesviewIN, 0x1000000, 100, 5000);
-                        if (await waitTaskbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.touchnewbox;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = -1;
-                            botstate = (int)botstates.touchboxview;
-                        }
-                        break;
-
-                    case (int)botstates.touchnewbox:
-                        Report("Touch new box");
-                        waitTaskbool = Program.helper.waittouch(Program.PKTable.boxposX7[currentbox], Program.PKTable.boxposY7[currentbox]);
-                        if (await waitTaskbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.selectnewbox;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = 6;
-                            botstate = (int)botstates.touchnewbox;
-                        }
-                        break;
-
-                    case (int)botstates.selectnewbox:
-                        Report("Select new box");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.testboxviewout;
-                        else
-                        {
-                            attempts++;
-                            botresult = 7;
-                            botstate = (int)botstates.selectnewbox;
-                        }
-                        break;
-
-                    case (int)botstates.testboxviewout:
-                        Report("Test if box view is notshown");
-                        waitTaskbool = Program.helper.timememoryinrange(boxesviewOff, boxesviewOUT, 0x1000000, 100, 5000);
-                        if (await waitTaskbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.touchpoke;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = -1;
-                            botstate = (int)botstates.touchnewbox;
-                        }
-                        break;
-
-                    case (int)botstates.touchpoke:
-                        Report("Touch pokémon");
-                        waitTaskbool = Program.helper.waittouch(Program.PKTable.pokeposX7[currentslot], Program.PKTable.pokeposY7[currentslot]);
-                        if (await waitTaskbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.starttrade;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = 6;
-                            botstate = (int)botstates.touchpoke;
-                        }
-                        break;
-
-                    case (int)botstates.starttrade:
-                        Report("Press Start");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.confirmtrade;
-                        else
-                        {
-                            attempts++;
-                            botresult = 7;
-                            botstate = (int)botstates.starttrade;
-                        }
-                        break;
-
-                    case (int)botstates.confirmtrade:
-                        Report("Press Yes");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.testboxesout;
-                        else
-                        {
-                            attempts++;
-                            botresult = 7;
-                            botstate = (int)botstates.confirmtrade;
-                        }
-                        break;
-
-                    case (int)botstates.testboxesout:
-                        Report("Test if the boxes are not shown");
-                        waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesOUT, 0x10000, 100, 5000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = -40; // Try 50 button presses
-                            botstate = (int)botstates.waitfortrade;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botstate = (int)botstates.touchpoke;
-                        }
-                        break;
-
-                    case (int)botstates.waitfortrade:
-                        Report("Wait for trade");
-                        waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
-                        uint newPID = Convert.ToUInt32(await waitTaskint);
-                        Report("PID: 0x" + newPID.ToString("X8"));
-                        if (currentPID == newPID)
-                        {
-                            await Task.Delay(2000);
-                            tradewait++;
-                            if (tradewait > 40) // Too much time passed, 90 secs
+                            else
                             {
-                                notradepartner = true;
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.initializeFC1;
+                            }
+                            break;
+
+                        case (int)botstates.initializeFC2:
+                            waitTaskbool = Program.helper.waitNTRread(currentFCoff);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                currentFC = Program.helper.lastRead;
+                                Report("Current FC: " + currentFC);
+                                Program.gCmdWindow.updateFCfields(currentTotalFC, currentFC);
+                                int i = 0;
+                                while (currentTotalFC >= nextFC)
+                                {
+                                    nextFC = FCtable[i];
+                                    i++;
+                                }
+                                Report("Points for next level: " + (nextFC - currentTotalFC));
+                                botstate = (int)botstates.readpoke;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.initializeFC2;
+                            }
+                            break;
+
+                        case (int)botstates.readpoke:
+                            Report("Read pokémon from box " + (currentbox + 1) + ", slot " + (currentslot + 1));
+                            waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
+                            long dataready = await waitTaskint;
+                            switch (dataready)
+                            {
+                                case -2:
+                                    botresult = 2;
+                                    Report("Error detected");
+                                    attempts = 11;
+                                    break;
+                                case -1:
+                                    Report("Slot is empty");
+                                    getNextSlot();
+                                    if (quantity > 0) // Test if there are more trades
+                                        botstate = (int)botstates.readpoke;
+                                    else
+                                    { // Stop if no more trades
+                                        botresult = 0;
+                                        botstate = (int)botstates.exitbot;
+                                    }
+                                    break;
+                                default:
+                                    {
+                                        currentPID = Convert.ToUInt32(dataready);
+                                        Report("Pokémon found, PID: 0x" + currentPID.ToString("X8"));
+                                        botstate = (int)botstates.presstradebutton;
+                                    }
+                                    break;
+                            }
+                            break;
+
+                        case (int)botstates.presstradebutton:
+                            Report("Press Trade Button");
+                            waitTaskbool = Program.helper.waittouch(200, 120);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testtrademenu;
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.presstradebutton;
+                            }
+                            break;
+
+                        case (int)botstates.testtrademenu:
+                            Report("Test if the trademenu is shown");
+                            waitTaskbool = Program.helper.timememoryinrange(trademenuOff, trademenuIN, 0x1000000, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.pressWTbutton;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.presstradebutton;
+                            }
+                            break;
+
+                        case (int)botstates.pressWTbutton:
+                            Report("Press Trade Button");
+                            waitTaskbool = Program.helper.waittouch(160, 160);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testWTscreen;
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.pressWTbutton;
+                            }
+                            break;
+
+                        case (int)botstates.testWTscreen:
+                            Report("Test if the Wonder Trade screen is shown");
+                            waitTaskbool = Program.helper.timememoryinrange(wtscreenOff, wtscreenIN, 0x10000, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.pressWTstart;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.pressWTbutton;
+                            }
+                            break;
+
+                        case (int)botstates.pressWTstart:
+                            Report("Press Start");
+                            await Task.Delay(1000);
+                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
+                            await Task.Delay(commandtime + delaytime);
+                            botstate = (int)botstates.testboxes;
+                            break;
+
+                        case (int)botstates.testboxes:
+                            Report("Test if the boxes are shown");
+                            waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesIN, 0x10000, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.gotoboxchange;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.pressWTstart;
+                            }
+                            break;
+
+                        case (int)botstates.gotoboxchange:
+                            await Task.Delay(1000);
+                            if (boxchange)
+                            {
+                                botstate = (int)botstates.touchboxview;
+                                boxchange = false;
+                            }
+                            else
+                                botstate = (int)botstates.touchpoke;
+                            break;
+
+                        case (int)botstates.touchboxview:
+                            Report("Touch box view");
+                            waitTaskbool = Program.helper.waittouch(140, 230);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testboxview;
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.touchboxview;
+                            }
+                            break;
+
+                        case (int)botstates.testboxview:
+                            Report("Test if box view is shown");
+                            await Task.Delay(1000);
+                            waitTaskbool = Program.helper.timememoryinrange(boxesviewOff, boxesviewIN, 0x1000000, 100, 5000);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.touchnewbox;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.touchboxview;
+                            }
+                            break;
+
+                        case (int)botstates.touchnewbox:
+                            Report("Touch new box");
+                            waitTaskbool = Program.helper.waittouch(LookupTable.boxposX7[currentbox], LookupTable.boxposY7[currentbox]);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.selectnewbox;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.touchnewbox;
+                            }
+                            break;
+
+                        case (int)botstates.selectnewbox:
+                            Report("Select new box");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testboxviewout;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.selectnewbox;
+                            }
+                            break;
+
+                        case (int)botstates.testboxviewout:
+                            Report("Test if box view is not shown");
+                            waitTaskbool = Program.helper.timememoryinrange(boxesviewOff, boxesviewOUT, 0x1000000, 100, 5000);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.touchpoke;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.touchnewbox;
+                            }
+                            break;
+
+                        case (int)botstates.touchpoke:
+                            Report("Touch pokémon");
+                            waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[currentslot], LookupTable.pokeposY7[currentslot]);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.starttrade;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.touchpoke;
+                            }
+                            break;
+
+                        case (int)botstates.starttrade:
+                            Report("Press Start");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.confirmtrade;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.starttrade;
+                            }
+                            break;
+
+                        case (int)botstates.confirmtrade:
+                            Report("Press Yes");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testboxesout;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.confirmtrade;
+                            }
+                            break;
+
+                        case (int)botstates.testboxesout:
+                            Report("Test if the boxes are not shown");
+                            waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesOUT, 0x10000, 100, 5000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
+                            {
+                                attempts = -40; // Try 50 button presses
+                                botstate = (int)botstates.waitfortrade;
+                                tradeTimer.Start();
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.touchpoke;
+                            }
+                            break;
+
+                        case (int)botstates.waitfortrade:
+                            Report("Wait for trade");
+                            waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
+                            uint newPID = Convert.ToUInt32(await waitTaskint);
+                            Report("PID: 0x" + newPID.ToString("X8"));
+                            if (currentPID == newPID)
+                            {
+                                await Task.Delay(2000);
+                                if (notradepartner) // Too much time passed
+                                {
+                                    boxchange = true; // Might fix a couple of errors
+                                    botstate = (int)botstates.testtradefinish;
+                                }
+                            }
+                            else
+                            {
+                                Report("Wait 35 seconds");
+                                tradeTimer.Stop();
+                                await Task.Delay(35000);
                                 botstate = (int)botstates.testtradefinish;
                             }
-                        }
-                        else
-                        {
-                            Report("Wait 35 seconds");
-                            await Task.Delay(35000);
-                            botstate = (int)botstates.testtradefinish;
-                        }
-                        break;
+                            break;
 
-                    case (int)botstates.testtradefinish:
-                        Report("Test if the trade is finished");
-                        waitTaskbool = Program.helper.memoryinrange(trademenuOff, trademenuOUT, 0x1000000);
-                        taskresultbool = await waitTaskbool;
-                        if (taskresultbool)
-                        {
-                            attempts = 0;
-                            if (collectFC && !notradepartner)
-                                botstate = (int)botstates.collectFC1;
-                            else
-                                botstate = (int)botstates.finishtrade;
-                        }
-                        else
-                        {
-                            if (Program.helper.lastRead == 0x40D40000)
-                                tradeevo = true;
-                            attempts++;
-                            botstate = (int)botstates.tryfinish;
-                        }
-                        break;
-
-                    case (int)botstates.tryfinish:
-                        if (!tradeevo)
-                        {
-                            Report("Press B button");
-                            waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyB);
-                        }
-                        else
-                        {
-                            Report("Trade evolution detected, press A button");
-                            waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
-                        }
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.testtradefinish;
-                        else
-                        {
-                            attempts++;
-                            botresult = 7;
-                            botstate = (int)botstates.testtradefinish;
-                        }
-                        break;
-
-                    case (int)botstates.finishtrade:
-                        if (!notradepartner)
-                            getNextSlot();
-                        notradepartner = false;
-                        tradeevo = false;
-                        if (quantity > 0) // Test if there are more trades
-                        {
-                            botstate = (int)botstates.readpoke;
-                            attempts = 0;
-                            tradewait = 0;
-                        }
-                        else
-                        { // Stop if no more trades
-                            botresult = 0;
-                            botstate = (int)botstates.exitbot;
-                        }
-                        break;
-
-                    case (int)botstates.collectFC1:
-                        Report("Trigger Dialog");
-                        await Task.Delay(1000);
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyA);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.collectFC2;
-                        else
-                        {
-                            attempts++;
-                            botresult = 7;
-                            botstate = (int)botstates.testtradefinish;
-                        }
-                        break;
-
-                    case (int)botstates.collectFC2:
-                        Report("Test if dialog has started");
-                        waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
-                        if (await waitTaskbool)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.collectFC3;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = -1;
-                            botstate = (int)botstates.collectFC1;
-                        }
-                        break;
-
-                    case (int)botstates.collectFC3:
-                        Report("Continue dialog");
-                        waitTaskbool = Program.helper.waitbutton(Program.PKTable.keyB);
-                        if (await waitTaskbool)
-                            botstate = (int)botstates.collectFC4;
-                        else
-                        {
-                            attempts++;
-                            botresult = 7;
-                            botstate = (int)botstates.collectFC3;
-                        }
-                        break;
-
-                    case (int)botstates.collectFC4:
-                        Report("Test if dialog has finished");
-                        waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x01);
-                        if (await waitTaskbool || Program.helper.lastRead == 0x0D)
-                        {
-                            attempts = 0;
-                            botstate = (int)botstates.collectFC5;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = -1;
-                            botstate = (int)botstates.collectFC3;
-                        }
-                        break;
-
-                    case (int)botstates.collectFC5:
-                        Report("Test FC");
-                        waitTaskbool = Program.helper.waitNTRread(totalFCoff);
-                        if (await waitTaskbool)
-                        {
-                            attempts = 0;
-                            currentTotalFC = Program.helper.lastRead;
-                            Report("Current Total FC: " + currentTotalFC);
-                            if (currentTotalFC >= nextFC)
+                        case (int)botstates.testtradefinish:
+                            Report("Test if the trade is finished");
+                            waitTaskbool = Program.helper.memoryinrange(trademenuOff, trademenuOUT, 0x1000000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
                             {
-                                Report("Festival Plaza level up");
-                                getNextSlot();
-                                botresult = 3;
-                                botstate = (int)botstates.exitbot;
+                                attempts = 0;
+                                if (collectFC && !notradepartner)
+                                    botstate = (int)botstates.collectFC1;
+                                else
+                                    botstate = (int)botstates.finishtrade;
                             }
                             else
-                                botstate = (int)botstates.finishtrade;
-                        }
-                        else
-                        {
-                            attempts++;
-                            botresult = 2;
-                            botstate = (int)botstates.collectFC5;
-                        }
-                        break;
+                            {
+                                attempts++;
+                                botresult = -1;
+                                botstate = (int)botstates.tryfinish;
+                                if (Program.helper.lastRead == 0x3F800000)
+                                { // Communication error
+                                    botresult = 4;
+                                    botstate = (int)botstates.exitbot;
+                                }
+                                else if (Program.helper.lastRead == 0x40D40000)
+                                    tradeevo = true;
+                            }
+                            break;
 
-                    case (int)botstates.exitbot:
-                        Report("Bot stop");
-                        botstop = true;
-                        break;
+                        case (int)botstates.tryfinish:
+                            if (!tradeevo)
+                            {
+                                Report("Press B button");
+                                waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
+                            }
+                            else
+                            {
+                                Report("Trade evolution detected, press A button");
+                                waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            }
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testtradefinish;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.testtradefinish;
+                            }
+                            break;
 
-                    default:
-                        Report("Bot stop");
-                        botresult = -1;
-                        botstop = true;
-                        break;
-                }
-                if (attempts > 10)
-                { // Too many attempts
-                    if (maxreconnect > 0)
-                    {
-                        waitTaskbool = Program.gCmdWindow.Reconnect();
-                        maxreconnect--;
-                        if (await waitTaskbool)
-                        {
-                            await Task.Delay(5000);
-                            attempts = 0;
-                        }
-                        else
-                        {
+                        case (int)botstates.finishtrade:
+                            if (!notradepartner)
+                                getNextSlot();
+                            notradepartner = false;
+                            tradeevo = false;
+                            if (quantity > 0) // Test if there are more trades
+                            {
+                                botstate = (int)botstates.readpoke;
+                                attempts = 0;
+                                tradeTimer.Stop();
+                            }
+                            else
+                            { // Stop if no more trades
+                                botresult = 0;
+                                botstate = (int)botstates.exitbot;
+                            }
+                            break;
+
+                        case (int)botstates.collectFC1:
+                            Report("Trigger Dialog");
+                            await Task.Delay(1000);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.collectFC2;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.testtradefinish;
+                            }
+                            break;
+
+                        case (int)botstates.collectFC2:
+                            Report("Test if dialog has started");
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.collectFC3;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.collectFC1;
+                            }
+                            break;
+
+                        case (int)botstates.collectFC3:
+                            Report("Continue dialog");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.collectFC4;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.collectFC3;
+                            }
+                            break;
+
+                        case (int)botstates.collectFC4:
+                            Report("Test if dialog has finished");
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x01);
+                            if (await waitTaskbool || Program.helper.lastRead == 0x0D)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.collectFC5;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.collectFC3;
+                            }
+                            break;
+
+                        case (int)botstates.collectFC5:
+                            Report("Test FC");
+                            waitTaskbool = Program.helper.waitNTRread(totalFCoff);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                currentTotalFC = Program.helper.lastRead;
+                                Report("Current Total FC: " + currentTotalFC);
+                                if (currentTotalFC >= nextFC)
+                                {
+                                    Report("Festival Plaza level up");
+                                    getNextSlot();
+                                    botresult = 3;
+                                    botstate = (int)botstates.exitbot;
+                                }
+                                else
+                                    botstate = (int)botstates.finishtrade;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.collectFC5;
+                            }
+                            break;
+
+                        case (int)botstates.exitbot:
+                            Report("Bot stop");
+                            botstop = true;
+                            break;
+
+                        default:
+                            Report("Bot stop");
                             botresult = -1;
+                            botstop = true;
+                            break;
+                    }
+                    if (attempts > 10)
+                    { // Too many attempts
+                        if (lastreconnect)
+                        {
+                            Report("Two consecutive reconnect attempts detected. Connection error?");
+                            attempts = 0;
+                            Program.helper.quicktouch(160, 230, 250);
+                            await Task.Delay(1000);
+                        }
+                        else if (maxreconnect > 0)
+                        {
+                            waitTaskbool = Program.gCmdWindow.Reconnect();
+                            maxreconnect--;
+                            if (await waitTaskbool)
+                            {
+                                await Task.Delay(5000);
+                                attempts = 0;
+                                lastreconnect = true;
+                            }
+                            else
+                            {
+                                botresult = -1;
+                                botstop = true;
+                            }
+                        }
+                        else
+                        {
+                            Report("Bot stop");
                             botstop = true;
                         }
                     }
                     else
-                    {
-                        Report("Bot stop");
-                        botstop = true;
-                    }
+                        lastreconnect = false;
                 }
+                tradeTimer.Stop();
+                return botresult;
             }
-            return botresult;
+            catch (Exception ex)
+            {
+                tradeTimer.Stop();
+                Report(ex.Source);
+                Report(ex.Message);
+                Report(ex.StackTrace);
+                MessageBox.Show(ex.Message);
+                return -1;
+            }
         }
 
         private void Report(string log)
@@ -608,6 +661,13 @@ namespace ntrbase.Bot
             }
             quantity--;
             Program.gCmdWindow.updateWTslots(currentbox, currentslot, quantity);
+        }
+
+        private void tradeTimer_Tick(object sender, EventArgs e)
+        {
+            tradeTimer.Stop();
+            Report("Trade timed out");
+            notradepartner = true;
         }
     }
 }

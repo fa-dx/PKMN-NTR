@@ -1,7 +1,7 @@
 ﻿/*
  * TODO: 
  * * Change magic numbers to constants wherever it's not a pain in the ass
- * * Error handling, error handling, error handling. Wrap file writes in try/catch, handle malformed pokemon, incomplete writes, patterns not found, etc.
+ * * Error handling. Handle malformed pokemon, incomplete writes, patterns not found, etc.
  */
 using ntrbase.Properties;
 using ntrbase.Bot;
@@ -16,6 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Data;
 using ntrbase.Helpers;
+using Octokit;
 
 namespace ntrbase
 {
@@ -42,9 +43,12 @@ namespace ntrbase
         public string BOXEXT;
         public PKHeX dumpedPKHeX = new PKHeX();
         private static string numberPattern = " ({0})";
-
         private int dumpBoxLastBox = -1;
         private int dumpBoxLastSlot = -1;
+
+        // Variables for update checking
+        internal GitHubClient Github;
+        public string updateURL = null;
 
         // Variables for cloning
         public byte[] selectedCloneData = new byte[232];
@@ -69,6 +73,7 @@ namespace ntrbase
         private BreedingBot6 BreedBot6;
         private BreedingBot7 BreedBot7;
         private SoftResetbot6 SRBot6;
+        private SoftResetbot7 SRBot7;
 
         //Game information
         public int pid;
@@ -272,7 +277,7 @@ namespace ntrbase
             bersGridView.Columns.Add(berItem);
             bersGridView.Columns.Add(berAmount);
 
-            foreach (string t in Program.PKTable.Item6)
+            foreach (string t in LookupTable.Item6)
             {
                 itemItem.Items.Add(t);
                 keyItem.Items.Add(t);
@@ -281,7 +286,7 @@ namespace ntrbase
                 berItem.Items.Add(t);
             }
 
-            foreach (string t in Program.PKTable.Item7)
+            foreach (string t in LookupTable.Item7)
             {
                 nameItem7.Items.Add(t);
             }
@@ -290,6 +295,8 @@ namespace ntrbase
             nameItem7.DisplayIndex = 0;
             nameItem7.FlatStyle = FlatStyle.Flat;
             countItem7.DisplayIndex = 1;
+
+            checkUpdate();
 
             host.Text = Settings.Default.IP;
             host.Focus();
@@ -304,7 +311,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, button1, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -314,6 +321,79 @@ namespace ntrbase
             SetSelectedIndex(filterSPDlogic, 0);
             SetSelectedIndex(filterSPElogic, 0);
             SetSelectedIndex(filterPerIVlogic, 0);
+        }
+
+        private async void checkUpdate()
+        {
+            try
+            {
+                Addlog("Look for updates");
+                // Get current
+                int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
+                int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
+                int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+                int revision = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
+                Addlog("Current version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+
+                // Get latest stable
+                Github = new GitHubClient(new ProductHeaderValue("PKMN-NTR-UpdateCheck"));
+                Release lateststable = await Github.Repository.Release.GetLatest("drgoku282", "PKMN-NTR");
+                int[] verlatest = Array.ConvertAll(lateststable.TagName.Split('.'), int.Parse);
+                Addlog("Last stable: " + lateststable.TagName);
+
+                // Look for latest stable
+                if (verlatest[0] > major || verlatest[1] > minor || verlatest[2] > build)
+                {
+                    Addlog("Update found!");
+                    SetText(updateLabel, "Version " + lateststable.TagName + " is available.");
+                    updateURL = lateststable.HtmlUrl;
+                    DialogResult result = MessageBox.Show("Version " + lateststable.TagName + " is available.\r\nDo you want to go to GitHub and download it?", "Update Available", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                        System.Diagnostics.Process.Start(updateURL);
+                }
+                else
+                { // Look for beta
+                    IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("drgoku282", "PKMN-NTR");
+                    Release latestbeta = releases.FirstOrDefault(rel => rel.Prerelease);
+                    Addlog("Last preview: " + latestbeta.TagName);
+                    if (latestbeta != null)
+                    {
+                        int[] verbeta = Array.ConvertAll(latestbeta.TagName.Split('.'), int.Parse);
+                        if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build || verbeta[3] > revision)
+                        {
+                            Addlog("New preview version found");
+                            SetText(updateLabel, "Preview version " + latestbeta.TagName + " is available.");
+                            updateURL = latestbeta.HtmlUrl;
+                        }
+                        else
+                        {
+                            Addlog("PKMN-NTR is up to date");
+                            SetText(updateLabel, "PKMN-NTR is up to date.");
+                            updateURL = null;
+                        }
+                    }
+                    else
+                    {
+                        Addlog("PKMN-NTR is up to date");
+                        SetText(updateLabel, "PKMN-NTR is up to date.");
+                        updateURL = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                updateURL = null;
+                Addlog("An error has ocurred while checking for updates:");
+                Addlog(ex.Message);
+                MessageBox.Show(ex.Message);
+                SetText(updateLabel, "Update not found.");
+            }
+        }
+
+        private void updateLabel_Click(object sender, EventArgs e)
+        {
+            if (updateURL != null)
+                System.Diagnostics.Process.Start(updateURL);
         }
 
         private void enableControls()
@@ -339,6 +419,8 @@ namespace ntrbase
         public void Addlog(string l)
         {
             lastlog = l;
+            if (l.Contains("Server disconnected") && !botWorking && game != GameType.None)
+                PerformDisconnect();
             if (!l.Contains("\r\n"))
                 l = l.Replace("\n", "\r\n");
             if (!l.EndsWith("\n"))
@@ -416,18 +498,18 @@ namespace ntrbase
         {
             if (gen7)
             {
-                absno = Program.PKTable.getAbilities7(speciesno, formeno);
-                abstr[0] = Program.PKTable.Ability7[absno[0] - 1] + " (1)";
-                abstr[1] = Program.PKTable.Ability7[absno[1] - 1] + " (2)";
-                abstr[2] = Program.PKTable.Ability7[absno[2] - 1] + " (H)";
+                absno = LookupTable.getAbilities7(speciesno, formeno);
+                abstr[0] = LookupTable.Ability7[absno[0] - 1] + " (1)";
+                abstr[1] = LookupTable.Ability7[absno[1] - 1] + " (2)";
+                abstr[2] = LookupTable.Ability7[absno[2] - 1] + " (H)";
                 ComboboxFill(ability, abstr);
             }
             else
             {
-                absno = Program.PKTable.getAbilities(speciesno, formeno);
-                abstr[0] = Program.PKTable.Ability6[absno[0] - 1] + " (1)";
-                abstr[1] = Program.PKTable.Ability6[absno[1] - 1] + " (2)";
-                abstr[2] = Program.PKTable.Ability6[absno[2] - 1] + " (H)";
+                absno = LookupTable.getAbilities(speciesno, formeno);
+                abstr[0] = LookupTable.Ability6[absno[0] - 1] + " (1)";
+                abstr[1] = LookupTable.Ability6[absno[1] - 1] + " (2)";
+                abstr[2] = LookupTable.Ability6[absno[2] - 1] + " (H)";
                 ComboboxFill(ability, abstr);
             }
 
@@ -658,9 +740,7 @@ namespace ntrbase
                 partyOff = 0x34195E10;
             }
             else // not a process list or game not found - ignore packet
-            {
                 return;
-            }
 
             // Fill fields in the form according to gen
             Program.helper.pid = pid;
@@ -688,27 +768,30 @@ namespace ntrbase
 
         private void fillGen6()
         {
-            ComboboxFill(Lang, Program.PKTable.Lang6);
-            ComboboxFill(pkLang, Program.PKTable.Lang6);
-            ComboboxFill(species, Program.PKTable.Species6);
-            ComboboxFill(ability, Program.PKTable.Ability6);
-            ComboboxFill(filterAbility, Program.PKTable.Ability6);
-            ComboboxFill(heldItem, Program.PKTable.Item6);
-            ComboboxFill(ball, Program.PKTable.Balls6);
-            ComboboxFill(move1, Program.PKTable.Moves6);
-            ComboboxFill(move2, Program.PKTable.Moves6);
-            ComboboxFill(move3, Program.PKTable.Moves6);
-            ComboboxFill(move4, Program.PKTable.Moves6);
-            ComboboxFill(relearnmove1, Program.PKTable.Moves6);
-            ComboboxFill(relearnmove2, Program.PKTable.Moves6);
-            ComboboxFill(relearnmove3, Program.PKTable.Moves6);
-            ComboboxFill(relearnmove4, Program.PKTable.Moves6);
+            ComboboxFill(Lang, LookupTable.Lang6);
+            ComboboxFill(pkLang, LookupTable.Lang6);
+            ComboboxFill(species, LookupTable.Species6);
+            ComboboxFill(ability, LookupTable.Ability6);
+            ComboboxFill(filterAbility, LookupTable.Ability6);
+            ComboboxFill(heldItem, LookupTable.Item6);
+            ComboboxFill(ball, LookupTable.Balls6);
+            ComboboxFill(move1, LookupTable.Moves6);
+            ComboboxFill(move2, LookupTable.Moves6);
+            ComboboxFill(move3, LookupTable.Moves6);
+            ComboboxFill(move4, LookupTable.Moves6);
+            ComboboxFill(relearnmove1, LookupTable.Moves6);
+            ComboboxFill(relearnmove2, LookupTable.Moves6);
+            ComboboxFill(relearnmove3, LookupTable.Moves6);
+            ComboboxFill(relearnmove4, LookupTable.Moves6);
+            ComboboxFill(typeLSR, LookupTable.SoftResetModes6);
             SetVisible(itemsView7, false);
             SetVisible(itemsGridView, true);
             SetVisible(keysGridView, false);
             SetVisible(tmsGridView, false);
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
+            SetSelectedIndex(modeBreed, -1);
+            SetSelectedIndex(typeLSR, -1);
             if (radioBoxes.Checked)
                 SetMaximum(boxDump, BOXES);
             SetMaximum(cloneBoxTo, BOXES);
@@ -722,27 +805,30 @@ namespace ntrbase
 
         private async void fillGen7()
         {
-            ComboboxFill(Lang, Program.PKTable.Lang7);
-            ComboboxFill(pkLang, Program.PKTable.Lang7);
-            ComboboxFill(species, Program.PKTable.Species7);
-            ComboboxFill(ability, Program.PKTable.Ability7);
-            ComboboxFill(filterAbility, Program.PKTable.Ability7);
-            ComboboxFill(heldItem, Program.PKTable.Item7);
-            ComboboxFill(ball, Program.PKTable.Balls7);
-            ComboboxFill(move1, Program.PKTable.Moves7);
-            ComboboxFill(move2, Program.PKTable.Moves7);
-            ComboboxFill(move3, Program.PKTable.Moves7);
-            ComboboxFill(move4, Program.PKTable.Moves7);
-            ComboboxFill(relearnmove1, Program.PKTable.Moves7);
-            ComboboxFill(relearnmove2, Program.PKTable.Moves7);
-            ComboboxFill(relearnmove3, Program.PKTable.Moves7);
-            ComboboxFill(relearnmove4, Program.PKTable.Moves7);
+            ComboboxFill(Lang, LookupTable.Lang7);
+            ComboboxFill(pkLang, LookupTable.Lang7);
+            ComboboxFill(species, LookupTable.Species7);
+            ComboboxFill(ability, LookupTable.Ability7);
+            ComboboxFill(filterAbility, LookupTable.Ability7);
+            ComboboxFill(heldItem, LookupTable.Item7);
+            ComboboxFill(ball, LookupTable.Balls7);
+            ComboboxFill(move1, LookupTable.Moves7);
+            ComboboxFill(move2, LookupTable.Moves7);
+            ComboboxFill(move3, LookupTable.Moves7);
+            ComboboxFill(move4, LookupTable.Moves7);
+            ComboboxFill(relearnmove1, LookupTable.Moves7);
+            ComboboxFill(relearnmove2, LookupTable.Moves7);
+            ComboboxFill(relearnmove3, LookupTable.Moves7);
+            ComboboxFill(relearnmove4, LookupTable.Moves7);
+            ComboboxFill(typeLSR, LookupTable.SoftResetModes7);
             SetVisible(itemsView7, true);
             SetVisible(itemsGridView, false);
             SetVisible(keysGridView, false);
             SetVisible(tmsGridView, false);
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
+            SetSelectedIndex(modeBreed, -1);
+            SetSelectedIndex(typeLSR, -1);
             if (radioBoxes.Checked)
                 SetMaximum(boxDump, BOXES);
             SetMaximum(cloneBoxTo, BOXES);
@@ -1083,7 +1169,7 @@ namespace ntrbase
                 {
                     int itemsfinal = BitConverter.ToUInt16(data, i * 4);
                     int amountfinal = BitConverter.ToUInt16(data, (i * 4) + 2);
-                    gv.Rows[i].Cells[0].Value = Program.PKTable.Item6[itemsfinal];
+                    gv.Rows[i].Cells[0].Value = LookupTable.Item6[itemsfinal];
                     gv.Rows[i].Cells[1].Value = amountfinal;
                 }
             }
@@ -1157,7 +1243,7 @@ namespace ntrbase
                     // Build Item Value
                     uint val = 0;
                     string datastring = itemsView7.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(Program.PKTable.Item7, datastring);
+                    int itemIndex = Array.IndexOf(LookupTable.Item7, datastring);
                     int itemcnt;
                     itemcnt = Convert.ToInt32(itemsView7.Rows[i].Cells[1].Value.ToString());
                     val |= (uint)(itemIndex & 0x3FF);
@@ -1192,7 +1278,7 @@ namespace ntrbase
                     for (int i = 0; i < itemsGridView.RowCount; i++)
                     {
                         string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1209,7 +1295,7 @@ namespace ntrbase
                     for (int i = 0; i < keysGridView.RowCount; i++)
                     {
                         string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1226,7 +1312,7 @@ namespace ntrbase
                     for (int i = 0; i < tmsGridView.RowCount; i++)
                     {
                         string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1243,7 +1329,7 @@ namespace ntrbase
                     for (int i = 0; i < medsGridView.RowCount; i++)
                     {
                         string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1260,7 +1346,7 @@ namespace ntrbase
                     for (int i = 0; i < bersGridView.RowCount; i++)
                     {
                         string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(Program.PKTable.Item6, datastring);
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
                         int itemcnt;
                         itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
 
@@ -1365,7 +1451,7 @@ namespace ntrbase
             for (int i = 0; i < itemdata.GetLength(0); i++)
             {
                 itemsView7.Rows.Add();
-                itemsView7.Rows[i].Cells[0].Value = Program.PKTable.Item7[itemdata[i, 0]];
+                itemsView7.Rows[i].Cells[0].Value = LookupTable.Item7[itemdata[i, 0]];
                 itemsView7.Rows[i].Cells[1].Value = itemdata[i, 1];
             }
         }
@@ -1400,7 +1486,7 @@ namespace ntrbase
             else if (radioTrade.Checked)
             {
                 if (!gen7)
-                { 
+                {
                     DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleTradeData, null);
                     waitingForData.Add(Program.scriptHelper.data(tradeOff, 0x1FFFF, pid), myArgs);
                 }
@@ -1466,7 +1552,7 @@ namespace ntrbase
                     }
                     if (dataCorrect || res == DialogResult.OK)
                     {
-                        string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+                        string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
                         (new FileInfo(folderPath)).Directory.Create();
                         string fileName = nameek6.Text + PKXEXT;
                         writePokemonToFile(validator.Data, folderPath + fileName);
@@ -1580,12 +1666,19 @@ namespace ntrbase
 
         private void writePokemonToFile(byte[] data, string fileName, bool overwrite = false)
         {
-            if (!overwrite) // If current filename is available, it won't be changed
-                fileName = NextAvailableFilename(fileName);
+            try
+            {
+                if (!overwrite) // If current filename is available, it won't be changed
+                    fileName = NextAvailableFilename(fileName);
 
-            FileStream fs = File.OpenWrite(fileName);
-            fs.Write(data, 0, data.Length);
-            fs.Close();
+                FileStream fs = File.OpenWrite(fileName);
+                fs.Write(data, 0, data.Length);
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public static string NextAvailableFilename(string path)
@@ -1638,7 +1731,7 @@ namespace ntrbase
         public void handleAllBoxesData(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
             (new FileInfo(folderPath)).Directory.Create();
             string fileName = nameek6.Text + BOXEXT;
             writePokemonToFile(args.data, folderPath + fileName);
@@ -1798,17 +1891,17 @@ namespace ntrbase
 
         private uint cloneGetCopies()
         {
-            return Decimal.ToUInt32(cloneCopiesNo.Value);
+            return decimal.ToUInt32(cloneCopiesNo.Value);
         }
 
         private uint cloneGetBoxIndexTo()
         {
-            return Decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
+            return decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
         }
 
         private uint cloneGetBoxIndexFrom()
         {
-            return Decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
+            return decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
         }
 
         private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
@@ -1824,21 +1917,28 @@ namespace ntrbase
         // Write pokémon from file
         private void writeBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog selectWriteDialog = new OpenFileDialog();
-            selectWriteDialog.Title = "Select an EKX/PKX file";
-            if (gen7)
+            try
             {
-                selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
+                OpenFileDialog selectWriteDialog = new OpenFileDialog();
+                selectWriteDialog.Title = "Select an EKX/PKX file";
+                if (gen7)
+                {
+                    selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
+                }
+                else
+                {
+                    selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
+                }
+                string path = System.Windows.Forms.@Application.StartupPath + "\\Pokemon";
+                selectWriteDialog.InitialDirectory = path;
+                if (selectWriteDialog.ShowDialog() == DialogResult.OK)
+                {
+                    selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
-            }
-            string path = @Application.StartupPath + "\\Pokemon";
-            selectWriteDialog.InitialDirectory = path;
-            if (selectWriteDialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -1952,12 +2052,12 @@ namespace ntrbase
 
         private uint writeGetCopies()
         {
-            return Decimal.ToUInt32(writeCopiesNo.Value);
+            return decimal.ToUInt32(writeCopiesNo.Value);
         }
 
         private uint writeGetBoxIndex()
         {
-            return Decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
+            return decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
         }
 
         private void writeSetBoxIndex(uint index)
@@ -1996,37 +2096,44 @@ namespace ntrbase
 
             if (deleteKeepBackup.Checked)
             {
-                string folderPath = @Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
-                FileInfo folder = new FileInfo(folderPath);
-                folder.Directory.Create();
-                PKHeX validator = new PKHeX();
-                for (int i = 0; i < args.data.Length; i += POKEBYTES)
+                try
                 {
-                    validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
-                    if (validator.Species == 0)
-                        continue;
-                    string fileName;
-                    if (gen7)
-                        fileName = folderPath + "backup.pk7";
-                    else
-                        fileName = folderPath + "backup.pk6";
-                    writePokemonToFile(validator.Data, fileName);
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
+                    FileInfo folder = new FileInfo(folderPath);
+                    folder.Directory.Create();
+                    PKHeX validator = new PKHeX();
+                    for (int i = 0; i < args.data.Length; i += POKEBYTES)
+                    {
+                        validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
+                        if (validator.Species == 0)
+                            continue;
+                        string fileName;
+                        if (gen7)
+                            fileName = folderPath + "backup.pk7";
+                        else
+                            fileName = folderPath + "backup.pk6";
+                        writePokemonToFile(validator.Data, fileName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
             if (gen7)
-                writePokemonToBox(Program.PKTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
+                writePokemonToBox(LookupTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
             else
-                writePokemonToBox(Program.PKTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
+                writePokemonToBox(LookupTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
         }
 
         private uint deleteGetAmount()
         {
-            return Decimal.ToUInt32(deleteAmount.Value);
+            return decimal.ToUInt32(deleteAmount.Value);
         }
 
         private uint deleteGetIndex()
         {
-            return Decimal.ToUInt32((deleteBox.Value - 1) * BOXSIZE + deleteSlot.Value - 1);
+            return decimal.ToUInt32((deleteBox.Value - 1) * BOXSIZE + deleteSlot.Value - 1);
         }
 
         private void deleteBox_ValueChanged(object sender, EventArgs e)
@@ -2302,9 +2409,9 @@ namespace ntrbase
         private void species_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateAbility(species.SelectedIndex + 1, 0, 1);
-            uint newexp = Program.PKTable.getExp(species.SelectedIndex + 1, (int)level.Value);
+            uint newexp = LookupTable.getExp(species.SelectedIndex + 1, (int)level.Value);
             SetValue(ExpPoints, newexp);
-            ExpPoints.Maximum = Program.PKTable.getExp(species.SelectedIndex + 1, 100);
+            ExpPoints.Maximum = LookupTable.getExp(species.SelectedIndex + 1, 100);
             if (dumpedPKHeX.Data != null)
             {
                 dumpedPKHeX.Species = species.SelectedIndex + 1;
@@ -2337,7 +2444,7 @@ namespace ntrbase
             level.ValueChanged -= level_ValueChanged;
             int speciesno = 0;
             Invoke(new MethodInvoker(delegate () { speciesno = species.SelectedIndex; }));
-            int newlevel = Program.PKTable.getLevel(speciesno + 1, (int)ExpPoints.Value);
+            int newlevel = LookupTable.getLevel(speciesno + 1, (int)ExpPoints.Value);
             SetValue(level, newlevel);
             HyperTrainBoxes();
             level.ValueChanged += level_ValueChanged;
@@ -2346,7 +2453,7 @@ namespace ntrbase
         private void level_ValueChanged(object sender, EventArgs e)
         {
             ExpPoints.ValueChanged -= ExpPoints_ValueChanged;
-            uint newexp = Program.PKTable.getExp(species.SelectedIndex + 1, (int)level.Value);
+            uint newexp = LookupTable.getExp(species.SelectedIndex + 1, (int)level.Value);
             SetValue(ExpPoints, newexp);
             HyperTrainBoxes();
             ExpPoints.ValueChanged += ExpPoints_ValueChanged;
@@ -2396,8 +2503,8 @@ namespace ntrbase
         private void ivChanged(object sender, EventArgs e)
         {
             int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
-            SetText(hiddenPower, Program.PKTable.HPName[hp]);
-            SetColor(hiddenPower, Program.PKTable.HPColor[hp], true);
+            SetText(hiddenPower, LookupTable.HPName[hp]);
+            SetColor(hiddenPower, LookupTable.HPColor[hp], true);
             HyperTrainBoxes();
         }
 
@@ -2504,7 +2611,7 @@ namespace ntrbase
             setShinyMark();
             SetSelectedIndex(genderBox, dumpedPKHeX.Gender);
             SetChecked(isEgg, dumpedPKHeX.IsEgg);
-            SetMaximum(ExpPoints, Program.PKTable.getExp(dumpedPKHeX.Species, 100));
+            SetMaximum(ExpPoints, LookupTable.getExp(dumpedPKHeX.Species, 100));
             SetValue(ExpPoints, dumpedPKHeX.EXP);
             if (dumpedPKHeX.CurrentHandler == 0)
             {
@@ -2551,7 +2658,7 @@ namespace ntrbase
             SetText(otName, dumpedPKHeX.OT_Name);
             SetValue(dTIDNum, dumpedPKHeX.TID);
             SetValue(dSIDNum, dumpedPKHeX.SID);
-            
+
             int i;
             switch (dumpedPKHeX.Language)
             {
@@ -2767,62 +2874,62 @@ namespace ntrbase
 
         private void manualA_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyA);
+            sendButton(LookupTable.keyA);
         }
 
         private void manualB_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyB);
+            sendButton(LookupTable.keyB);
         }
 
         private void manualX_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyX);
+            sendButton(LookupTable.keyX);
         }
 
         private void manualY_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyY);
+            sendButton(LookupTable.keyY);
         }
 
         private void manualDUp_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.DpadUP);
+            sendButton(LookupTable.DpadUP);
         }
 
         private void ManualDDown_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.DpadDOWN);
+            sendButton(LookupTable.DpadDOWN);
         }
 
         private void manualDLeft_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.DpadLEFT);
+            sendButton(LookupTable.DpadLEFT);
         }
 
         private void manualDRight_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.DpadRIGHT);
+            sendButton(LookupTable.DpadRIGHT);
         }
 
         private void manualStart_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keySTART);
+            sendButton(LookupTable.keySTART);
         }
 
         private void manualSelect_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keySELECT);
+            sendButton(LookupTable.keySELECT);
         }
 
         private void manualL_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyL);
+            sendButton(LookupTable.keyL);
         }
 
         private void manualR_Click(object sender, EventArgs e)
         {
-            sendButton(Program.PKTable.keyR);
+            sendButton(LookupTable.keyR);
         }
 
         private async void manualSR_Click(object sender, EventArgs e)
@@ -2830,7 +2937,7 @@ namespace ntrbase
             DialogResult dialogr = MessageBox.Show("Are you sure that you want to send a soft-reset command? The application will automatically disconnect from the game afterwards.", "Remote Control", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogr == DialogResult.Yes)
             {
-                sendButton(Program.PKTable.softReset);
+                sendButton(LookupTable.softReset);
                 await Task.Delay(1000);
                 PerformDisconnect();
             }
@@ -2852,6 +2959,7 @@ namespace ntrbase
 
         #region Bots
 
+        // General Bot functions
         private void stopBotButton_Click(object sender, EventArgs e)
         {
             switch (botnumber)
@@ -2863,7 +2971,10 @@ namespace ntrbase
                         BreedBot6.botstop = true;
                     break;
                 case 2: // Soft-reset bot
-                    SRBot6.botstop = true;
+                    if (gen7)
+                        SRBot7.botstop = true;
+                    else
+                        SRBot6.botstop = true;
                     break;
                 case 3: // Wonder Trade bot
                     if (gen7)
@@ -2890,6 +3001,25 @@ namespace ntrbase
         {
             SetValue(boxDump, box + 1);
             SetValue(slotDump, slot + 1);
+        }
+
+        private void startBot()
+        {
+            botWorking = true;
+            botStop = false;
+            txtLog.Clear();
+            disableControls();
+            timer1.Interval = 500;
+            SetEnabled(stopBotButton, true);
+        }
+
+        private void finishBot()
+        {
+            botWorking = false;
+            botnumber = -1;
+            enableControls();
+            timer1.Interval = 1000;
+            SetEnabled(stopBotButton, false);
         }
 
         // Filter handlers
@@ -3124,88 +3254,138 @@ namespace ntrbase
 
         private void filterSave_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-            saveFileDialog1.Title = "Save a filter set";
-            saveFileDialog1.InitialDirectory = folderPath;
-            saveFileDialog1.ShowDialog();
-
-            if (saveFileDialog1.FileName != "")
+            try
             {
-                var filters = new StringBuilder();
-                foreach (DataGridViewRow row in filterList.Rows)
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                saveFileDialog1.Title = "Save a filter set";
+                saveFileDialog1.InitialDirectory = folderPath;
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != "")
                 {
-                    var cells = row.Cells.Cast<DataGridViewCell>();
-                    filters.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    var filters = new StringBuilder();
+                    foreach (DataGridViewRow row in filterList.Rows)
+                    {
+                        var cells = row.Cells.Cast<DataGridViewCell>();
+                        filters.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    }
+                    File.WriteAllText(saveFileDialog1.FileName, filters.ToString());
+                    MessageBox.Show("Filter set saved");
                 }
-                File.WriteAllText(saveFileDialog1.FileName, filters.ToString());
-                MessageBox.Show("Filter set saved");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void filterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-            openFileDialog1.Title = "Select a filter set";
-            openFileDialog1.InitialDirectory = folderPath;
-            openFileDialog1.ShowDialog();
-            if (openFileDialog1.FileName != "")
+            try
             {
-                filterList.Rows.Clear();
-                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                foreach (int[] row in rows)
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
                 {
-                    filterList.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    filterList.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filterList.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter set loaded");
                 }
-                MessageBox.Show("Filter set loaded");
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void filterReset_Click(object sender, EventArgs e)
+        {
+            SetChecked(filterShiny, false);
+            SetSelectedIndex(filterNature, -1);
+            SetSelectedIndex(filterAbility, -1);
+            SetSelectedIndex(filterHPtype, -1);
+            SetSelectedIndex(filterGender, -1);
+            SetSelectedIndex(filterHPlogic, 0);
+            SetSelectedIndex(filterATKlogic, 0);
+            SetSelectedIndex(filterDEFlogic, 0);
+            SetSelectedIndex(filterSPAlogic, 0);
+            SetSelectedIndex(filterSPDlogic, 0);
+            SetSelectedIndex(filterSPElogic, 0);
+            SetSelectedIndex(filterPerIVlogic, 0);
+            SetValue(filterHPvalue, 0);
+            SetValue(filterATKvalue, 0);
+            SetValue(filterDEFvalue, 0);
+            SetValue(filterSPAvalue, 0);
+            SetValue(filterSPDvalue, 0);
+            SetValue(filterSPEvalue, 0);
         }
 
         private void bFilterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-            openFileDialog1.Title = "Select a filter set";
-            openFileDialog1.InitialDirectory = folderPath;
-            openFileDialog1.ShowDialog();
-            if (openFileDialog1.FileName != "")
+            try
             {
-                filterBreeding.Rows.Clear();
-                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                foreach (int[] row in rows)
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
                 {
-                    filterBreeding.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    filterBreeding.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filterBreeding.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter Set loaded correctly.");
                 }
-                MessageBox.Show("Filter Set loaded correctly.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void srFilterLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-            openFileDialog1.Title = "Select a filter set";
-            openFileDialog1.InitialDirectory = folderPath;
-            openFileDialog1.ShowDialog();
-            if (openFileDialog1.FileName != "")
+            try
             {
-                filtersSoftReset.Rows.Clear();
-                List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                foreach (int[] row in rows)
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
                 {
-                    filtersSoftReset.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    filtersSoftReset.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filtersSoftReset.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter set loaded correctly");
                 }
-                MessageBox.Show("Filter set loaded correctly");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -3217,13 +3397,9 @@ namespace ntrbase
 
             if (dialogResult == DialogResult.OK && WTtradesNo.Value > 0)
             {
-                botWorking = true;
-                botStop = false;
+                startBot();
                 botnumber = 3;
-                disableControls();
                 radioBoxes.Checked = true;
-                stopBotButton.Enabled = true;
-                txtLog.Clear();
                 Task<int> Bot;
                 if (gen7)
                 {
@@ -3245,17 +3421,20 @@ namespace ntrbase
                     result = 8;
                 switch (result)
                 {
-                    case 0:
+                    case 0: // General finish message
                         MessageBox.Show("Bot finished sucessfully", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
-                    case 1:
+                    case 1: // PSS error
                         MessageBox.Show("Please go to the PSS menu and try again.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
-                    case 2:
+                    case 2: // Read error
                         MessageBox.Show(readerror, "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case 3:
+                    case 3: // Festival plaza level-up
                         MessageBox.Show("Bot finished due level up in Festival Plaza", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 4: // Communication error
+                        MessageBox.Show("A communication error has ocurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 6: // Touch screen error
                         MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3263,17 +3442,14 @@ namespace ntrbase
                     case 7: // Button error
                         MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case 8:
+                    case 8: // User stop
                         MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
-                    default:
+                    default: // General error message
                         MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
-                botWorking = false;
-                botnumber = -1;
-                enableControls();
-                stopBotButton.Enabled = false;
+                finishBot();
             }
         }
 
@@ -3296,55 +3472,72 @@ namespace ntrbase
             string typemessage;
             string resumemessage;
             botWorking = true; // Supress warning messages
-            switch (typeLSR.SelectedIndex)
+            if (gen7)
             {
-                case 0:
-                    typemessage = "Regular - Make sure you are in front of the pokémon.";
-                    resumemessage = "In front of pokémon, will press A to trigger start the battle";
-                    radioOpponent.Checked = true;
-                    break;
-                case 1:
-                    typemessage = "Mirage Spot - Make sure you are in front of the hole.";
-                    resumemessage = "In front of hole, will press A to trigger dialog";
-                    radioOpponent.Checked = true;
-                    break;
-                case 2:
-                    typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
-                    resumemessage = "In front of the lady, will press A to trigger dialog";
-                    radioParty.Checked = true;
-                    SetValue(boxDump, 1);
-                    SetValue(slotDump, 2);
-                    break;
-                case 3:
-                    typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
-                    resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
-                    radioOpponent.Checked = true;
-                    break;
-                case 4:
-                    typemessage = "Walk - Make sure you are one step south of the pokémon.";
-                    resumemessage = "One step south of the pokémon, will press up to trigger dialog";
-                    radioOpponent.Checked = true;
-                    break;
-                default:
-                    typemessage = "No type - Select one type of soft-reset and try again.";
-                    resumemessage = "";
-                    break;
+                resumemessage = "No resume support for Gen 7";
+                switch (typeLSR.SelectedIndex)
+                {
+                    case 0:
+                        typemessage = "Event - Make sure you are in front of the man in the Pokémon Center. Also, you must only have one pokémon in your party.";
+                        radioParty.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 2);
+                        break;
+                    default:
+                        typemessage = "No type - Select one type of soft-reset and try again.";
+                        resumemessage = "";
+                        break;
+                }
+            }
+            else
+            {
+                switch (typeLSR.SelectedIndex)
+                {
+                    case 0:
+                        typemessage = "Regular - Make sure you are in front of the pokémon.";
+                        resumemessage = "In front of pokémon, will press A to trigger start the battle";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 1:
+                        typemessage = "Mirage Spot - Make sure you are in front of the hole.";
+                        resumemessage = "In front of hole, will press A to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 2:
+                        typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
+                        resumemessage = "In front of the lady, will press A to trigger dialog";
+                        radioParty.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 2);
+                        break;
+                    case 3:
+                        typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
+                        resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 4:
+                        typemessage = "Walk - Make sure you are one step south of the pokémon.";
+                        resumemessage = "One step south of the pokémon, will press up to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    default:
+                        typemessage = "No type - Select one type of soft-reset and try again.";
+                        resumemessage = "";
+                        break;
+                }
             }
             botWorking = false;
             DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.OK && typeLSR.SelectedIndex >= 0)
             {
-                botWorking = true;
-                botStop = false;
+                startBot();
                 botnumber = 2;
-                disableControls();
-                stopBotButton.Enabled = true;
-                txtLog.Clear();
                 Task<int> Bot;
                 if (gen7)
                 {
-                    return;
+                    SRBot7 = new SoftResetbot7(typeLSR.SelectedIndex);
+                    Bot = SRBot7.RunBot();
                 }
                 else
                 {
@@ -3361,36 +3554,37 @@ namespace ntrbase
                     result = 8;
                 int totalresets;
                 if (gen7)
-                {
-                    return;
-                }
+                    totalresets = SRBot7.resetNo;
                 else
                     totalresets = SRBot6.resetNo;
                 switch (result)
                 {
-                    case 0:
+                    case 0: // General finish message
                         MessageBox.Show("Bot finished sucessfully", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
-                    case 1:
+                    case 1: // PSS error
                         MessageBox.Show("Please go to the PSS menu and try again.", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
-                    case 2:
+                    case 2: // Write error
                         MessageBox.Show(writeerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
-                    case 3:
+                    case 3: // Read error
                         MessageBox.Show(readerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
-                    case 4:
+                    case 4: // Finish
                         MessageBox.Show("Finished, number of resets: " + totalresets, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
-                    case 8:
+                    case 6: // Touch screen error
+                        MessageBox.Show(toucherror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 7: // Button error
+                        MessageBox.Show(buttonerror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 8: // User stop
                         MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                 }
-                botWorking = false;
-                botnumber = -1;
-                enableControls();
-                stopBotButton.Enabled = false;
+                finishBot();
             }
         }
 
@@ -3446,10 +3640,19 @@ namespace ntrbase
             return FilterCheck(filtersSoftReset);
         }
 
+        private void srClear_Click(object sender, EventArgs e)
+        {
+            SetSelectedIndex(typeLSR, -1);
+            SetChecked(resumeLSR, false);
+            filtersSoftReset.Rows.Clear();
+        }
+
         // Breeding bot
         private async void runBreedingBot_Click_1(object sender, EventArgs e)
         {
             string modemessage;
+            if (gen7)
+                SetValue(slotBreed, 1);
             switch (modeBreed.SelectedIndex)
             {
                 case 0:
@@ -3466,21 +3669,25 @@ namespace ntrbase
                     break;
             }
 
-            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult;
+            if (gen7)
+            {
+                dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that your party is full. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            }
 
             if (dialogResult == DialogResult.OK && eggsNoBreed.Value > 0 && modeBreed.SelectedIndex >= 0)
             {
-                botWorking = true;
-                botStop = false;
+                startBot();
                 botnumber = 1;
-                disableControls();
-                stopBotButton.Enabled = true;
                 radioBoxes.Checked = true;
-                txtLog.Clear();
                 Task<int> Bot;
                 if (gen7)
                 {
-                    BreedBot7 = new BreedingBot7(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, readESV.Checked);
+                    BreedBot7 = new BreedingBot7(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)eggsNoBreed.Value, readESV.Checked);
                     Bot = BreedBot7.RunBot();
                 }
                 else
@@ -3511,10 +3718,16 @@ namespace ntrbase
                         MessageBox.Show("Finished. Maximum number of eggs reached without a match.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case 4: // Filter mode sucessful
-                        MessageBox.Show(BreedBot6.finishmessage + currentfilter, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (gen7)
+                            MessageBox.Show(BreedBot7.finishmessage + currentfilter, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show(BreedBot6.finishmessage + currentfilter, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case 5: // ESV/TSV mode sucessful
-                        MessageBox.Show(BreedBot6.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (gen7)
+                            MessageBox.Show(BreedBot7.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show(BreedBot6.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case 6: // Touch screen error
                         MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3522,17 +3735,14 @@ namespace ntrbase
                     case 7: // Button error
                         MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case 8:
+                    case 8: // User stop
                         MessageBox.Show("Bot stopped by user", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     default: // General error
                         MessageBox.Show("An error has occurred.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
-                botWorking = false;
-                botnumber = -1;
-                enableControls();
-                stopBotButton.Enabled = false;
+                finishBot();
             }
         }
 
@@ -3555,24 +3765,31 @@ namespace ntrbase
 
         private void ESVlistSave_Click(object sender, EventArgs e)
         {
-            if (ESVlist.Rows.Count > 0)
+            try
             {
-                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                (new System.IO.FileInfo(folderPath)).Directory.Create();
-                string fileName = "ESVlist.csv";
-                var esvlst = new StringBuilder();
-                var headers = ESVlist.Columns.Cast<DataGridViewColumn>();
-                esvlst.AppendLine(string.Join(",", headers.Select(column => column.HeaderText).ToArray()));
-                foreach (DataGridViewRow row in ESVlist.Rows)
+                if (ESVlist.Rows.Count > 0)
                 {
-                    var cells = row.Cells.Cast<DataGridViewCell>();
-                    esvlst.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                    (new FileInfo(folderPath)).Directory.Create();
+                    string fileName = "ESVlist.csv";
+                    var esvlst = new StringBuilder();
+                    var headers = ESVlist.Columns.Cast<DataGridViewColumn>();
+                    esvlst.AppendLine(string.Join(",", headers.Select(column => column.HeaderText).ToArray()));
+                    foreach (DataGridViewRow row in ESVlist.Rows)
+                    {
+                        var cells = row.Cells.Cast<DataGridViewCell>();
+                        esvlst.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    }
+                    File.WriteAllText(folderPath + fileName, esvlst.ToString());
+                    MessageBox.Show("ESV list saved");
                 }
-                File.WriteAllText(folderPath + fileName, esvlst.ToString());
-                MessageBox.Show("ESV list saved");
+                else
+                    MessageBox.Show("There are no eggs on the ESV list");
             }
-            else
-                MessageBox.Show("There are no eggs on the ESV list");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void TSVlistAdd_Click(object sender, EventArgs e)
@@ -3590,33 +3807,55 @@ namespace ntrbase
 
         private void TSVlistSave_Click(object sender, EventArgs e)
         {
-            if (TSVlist.Items.Count > 0)
+            try
             {
-                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                (new System.IO.FileInfo(folderPath)).Directory.Create();
-                string fileName = "TSVlist.csv";
-                var tsvlst = new StringBuilder();
-                foreach (var value in TSVlist.Items)
+                if (TSVlist.Items.Count > 0)
                 {
-                    tsvlst.AppendLine(value.ToString());
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                    (new FileInfo(folderPath)).Directory.Create();
+                    string fileName;
+                    if (gen7)
+                        fileName = "TSVlist.csv";
+                    else
+                        fileName = "TSVlist7.csv";
+                    var tsvlst = new StringBuilder();
+                    foreach (var value in TSVlist.Items)
+                    {
+                        tsvlst.AppendLine(value.ToString());
+                    }
+                    File.WriteAllText(folderPath + fileName, tsvlst.ToString());
+                    MessageBox.Show("TSV list saved");
                 }
-                File.WriteAllText(folderPath + fileName, tsvlst.ToString());
-                MessageBox.Show("TSV list saved");
+                else
+                    MessageBox.Show("There are no numbers on the TSV list");
             }
-            else
-                MessageBox.Show("There are no numbers on the TSV list");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void TSVlistLoad_Click(object sender, EventArgs e)
         {
-            string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
-            (new System.IO.FileInfo(folderPath)).Directory.Create();
-            string fileName = "TSVlist.csv";
-            if (System.IO.File.Exists(folderPath + fileName))
+            try
             {
-                string[] values = File.ReadAllLines(folderPath + fileName);
-                TSVlist.Items.Clear();
-                TSVlist.Items.AddRange(values);
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+                string fileName;
+                if (gen7)
+                    fileName = "TSVlist.csv";
+                else
+                    fileName = "TSVlist7.csv";
+                if (File.Exists(folderPath + fileName))
+                {
+                    string[] values = File.ReadAllLines(folderPath + fileName);
+                    TSVlist.Items.Clear();
+                    TSVlist.Items.AddRange(values);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -3634,6 +3873,21 @@ namespace ntrbase
             }
             else
                 return true;
+        }
+
+        private void breedingClear_Click(object sender, EventArgs e)
+        {
+            SetSelectedIndex(modeBreed, -1);
+            SetValue(boxBreed, 1);
+            SetValue(slotBreed, 1);
+            SetValue(eggsNoBreed, 1);
+            OrganizeMiddle.Checked = true;
+            radioDayCare1.Checked = true;
+            SetChecked(readESV, false);
+            SetChecked(quickBreed, false);
+            ESVlist.Rows.Clear();
+            TSVlist.Items.Clear();
+            filterBreeding.Rows.Clear();
         }
 
         #endregion Bots

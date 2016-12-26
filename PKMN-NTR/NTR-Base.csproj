@@ -52,8 +52,13 @@
     <ApplicationIcon>Pkmn NTR.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Octokit, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Octokit.0.23.0\lib\net45\Octokit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,6 +72,7 @@
     <Compile Include="Bot\BreedingBot6.cs" />
     <Compile Include="Bot\BreedingBot7.cs" />
     <Compile Include="Bot\SoftResetbot6.cs" />
+    <Compile Include="Bot\SoftResetbot7.cs" />
     <Compile Include="Bot\WonderTradeBot6.cs" />
     <Compile Include="Bot\WonderTradeBot7.cs" />
     <Compile Include="Helpers\LookupTable.cs" />
@@ -106,7 +112,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
