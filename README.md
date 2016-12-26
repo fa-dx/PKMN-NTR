@@ -11,9 +11,9 @@ Be sure to read the [wiki](https://github.com/drgoku282/PKMN-NTR/wiki) to learn 
 
 # Credits
 - **fa-dx**: Gathering offsets, creating the tool.
-- **jackmax**: Doing a large-scale rewrite of the code to make it more robust, readable and maintainable.
+- **jackmax**: Doing a large-scale rewrite of the code to make it more robust, readable and maintainable. Ocasional developer, PokeDigger, Gen 7 trade and opponet dump.
 - **drgoku282**: Current developer, remote controls and bot scripting, Gen 7 support.
 - **44670**: NTR CFW & NTRClient(this tool is based off a modified [NTRClient](https://github.com/fa-dx/NTR-Base)).
 - **Kaphotics**: Helping with a few pieces of code, PKM Encrypt & Decrypt code + variables from the PKM layout from PKHeX, inspiration (most Pokemon Editing features were inspired by his save editing tool [PKHeX](https://github.com/kwsch/PKHeX)).
 - **Stary2001 and Kazo**: For [InputRedirection](https://github.com/Stary2001/InputRedirection) which was the base for the Remote Controls and the Bots.
-- **Octokit dev team** Their [GitHub API client](https://github.com/octokit/octokit.net) was used for update checking.
+- **Octokit dev team**: Their [GitHub API client](https://github.com/octokit/octokit.net) was used for update checking.
