@@ -45,7 +45,6 @@ namespace ntrbase
         private static string numberPattern = " ({0})";
         private int dumpBoxLastBox = -1;
         private int dumpBoxLastSlot = -1;
-        private Thread endlessWondertrade;
 
 
         // Variables for update checking
