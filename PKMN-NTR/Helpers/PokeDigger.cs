@@ -206,7 +206,7 @@ namespace ntrbase.Helpers
                 Bitmap sprite = getSprite(pkInfo.Species, pkInfo.AltForm, pkInfo.IsEgg);
                 ResultsGrid.Rows[i].Cells[0].Value = sprite;
                 ResultsGrid.Rows[i].Height = sprite.Height;
-                ResultsGrid.Rows[i].Cells[1].Value = Program.PKTable.getLevel(pkInfo.Species, (int)pkInfo.EXP);
+                ResultsGrid.Rows[i].Cells[1].Value = LookupTable.getLevel(pkInfo.Species, (int)pkInfo.EXP);
                 ResultsGrid.Rows[i].Cells[2].Value = pkInfo.Nickname;
                 ResultsGrid.Rows[i].Cells[4].Value = r.offset.ToString("X8");
                 i++;
