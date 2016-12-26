@@ -212,6 +212,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
             this.OrganizeTop = new System.Windows.Forms.RadioButton();
+            this.updateLabel = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
             this.typeLSR = new System.Windows.Forms.ComboBox();
             this.RunLSRbot = new System.Windows.Forms.Button();
@@ -392,9 +393,9 @@
             this.srFilterLoad = new System.Windows.Forms.Button();
             this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
+            this.buttonWTStartEndless = new System.Windows.Forms.Button();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
-            this.updateLabel = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
@@ -2802,6 +2803,18 @@
             this.OrganizeTop.Text = "Top";
             this.OrganizeTop.UseVisualStyleBackColor = true;
             // 
+            // updateLabel
+            // 
+            this.updateLabel.AutoSize = true;
+            this.updateLabel.Location = new System.Drawing.Point(224, 356);
+            this.updateLabel.Name = "updateLabel";
+            this.updateLabel.Size = new System.Drawing.Size(110, 13);
+            this.updateLabel.TabIndex = 4;
+            this.updateLabel.Text = "Looking for updates...";
+            this.toolTip1.SetToolTip(this.updateLabel, "If an update is available, you can click here to go to the release page in GitHub" +
+        ".");
+            this.updateLabel.Click += new System.EventHandler(this.updateLabel_Click);
+            // 
             // label72
             // 
             this.label72.AutoSize = true;
@@ -2854,9 +2867,9 @@
             // 
             this.RunWTbot.Location = new System.Drawing.Point(150, 26);
             this.RunWTbot.Name = "RunWTbot";
-            this.RunWTbot.Size = new System.Drawing.Size(63, 23);
+            this.RunWTbot.Size = new System.Drawing.Size(90, 23);
             this.RunWTbot.TabIndex = 3;
-            this.RunWTbot.Text = "Run";
+            this.RunWTbot.Text = "Run til zero";
             this.RunWTbot.UseVisualStyleBackColor = true;
             this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click_1);
             // 
@@ -4806,6 +4819,7 @@
             // tabWonderTrade
             // 
             this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
+            this.tabWonderTrade.Controls.Add(this.buttonWTStartEndless);
             this.tabWonderTrade.Controls.Add(this.WTcollectFC);
             this.tabWonderTrade.Controls.Add(this.label59);
             this.tabWonderTrade.Controls.Add(this.label58);
@@ -4819,6 +4833,16 @@
             this.tabWonderTrade.Size = new System.Drawing.Size(558, 378);
             this.tabWonderTrade.TabIndex = 2;
             this.tabWonderTrade.Text = "Wonder Trade";
+            // 
+            // buttonWTStartEndless
+            // 
+            this.buttonWTStartEndless.Location = new System.Drawing.Point(246, 26);
+            this.buttonWTStartEndless.Name = "buttonWTStartEndless";
+            this.buttonWTStartEndless.Size = new System.Drawing.Size(90, 23);
+            this.buttonWTStartEndless.TabIndex = 9;
+            this.buttonWTStartEndless.Text = "Run endlessly";
+            this.buttonWTStartEndless.UseVisualStyleBackColor = true;
+            this.buttonWTStartEndless.Click += new System.EventHandler(this.buttonWTStartEndless_Click);
             // 
             // WTcollectFC
             // 
@@ -4844,18 +4868,6 @@
             this.tabNTRlog.Size = new System.Drawing.Size(558, 378);
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
-            // 
-            // updateLabel
-            // 
-            this.updateLabel.AutoSize = true;
-            this.updateLabel.Location = new System.Drawing.Point(224, 356);
-            this.updateLabel.Name = "updateLabel";
-            this.updateLabel.Size = new System.Drawing.Size(110, 13);
-            this.updateLabel.TabIndex = 4;
-            this.updateLabel.Text = "Looking for updates...";
-            this.toolTip1.SetToolTip(this.updateLabel, "If an update is available, you can click here to go to the release page in GitHub" +
-        ".");
-            this.updateLabel.Click += new System.EventHandler(this.updateLabel_Click);
             // 
             // pictureBox2
             // 
@@ -5394,6 +5406,7 @@
         private System.Windows.Forms.Button breedingClear;
         private System.Windows.Forms.Button srClear;
         private System.Windows.Forms.Label updateLabel;
+        private System.Windows.Forms.Button buttonWTStartEndless;
     }
 }
 
