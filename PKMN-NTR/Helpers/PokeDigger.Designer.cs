@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.DoItBtn = new System.Windows.Forms.Button();
             this.InfoLabel = new System.Windows.Forms.Label();
             this.ResultsGrid = new System.Windows.Forms.DataGridView();
@@ -35,6 +36,7 @@
             this.ColLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDump = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColPID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DumpBtn = new System.Windows.Forms.Button();
             this.StartAddrText = new System.Windows.Forms.TextBox();
@@ -52,6 +54,9 @@
             this.StepMinusBtn = new System.Windows.Forms.Button();
             this.FastModeCB = new System.Windows.Forms.CheckBox();
             this.InvertBtn = new System.Windows.Forms.Button();
+            this.DumpSaveCB = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.HelpBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +67,7 @@
             this.DoItBtn.Size = new System.Drawing.Size(92, 23);
             this.DoItBtn.TabIndex = 0;
             this.DoItBtn.Text = "Can you dig it?";
+            this.toolTip1.SetToolTip(this.DoItBtn, "Dump memory from console and process it");
             this.DoItBtn.UseVisualStyleBackColor = true;
             this.DoItBtn.Click += new System.EventHandler(this.DoItBtn_Click);
             // 
@@ -84,6 +90,7 @@
             this.ColLevel,
             this.ColName,
             this.ColDump,
+            this.ColPID,
             this.ColOffset});
             this.ResultsGrid.Location = new System.Drawing.Point(15, 118);
             this.ResultsGrid.Name = "ResultsGrid";
@@ -118,6 +125,13 @@
             this.ColDump.ToolTipText = "Check this box and click \"Dump to file(s)\" to save this Pokemon\'s data to file.";
             this.ColDump.Width = 60;
             // 
+            // ColPID
+            // 
+            this.ColPID.HeaderText = "PID";
+            this.ColPID.Name = "ColPID";
+            this.ColPID.ReadOnly = true;
+            this.ColPID.Width = 80;
+            // 
             // ColOffset
             // 
             this.ColOffset.HeaderText = "Rel. offset";
@@ -133,6 +147,7 @@
             this.DumpBtn.Size = new System.Drawing.Size(96, 23);
             this.DumpBtn.TabIndex = 3;
             this.DumpBtn.Text = "Dump to file(s)";
+            this.toolTip1.SetToolTip(this.DumpBtn, "Save selected Pokemon to .pk7 files");
             this.DumpBtn.UseVisualStyleBackColor = true;
             this.DumpBtn.Click += new System.EventHandler(this.DumpBtn_Click);
             // 
@@ -143,6 +158,8 @@
             this.StartAddrText.Size = new System.Drawing.Size(100, 20);
             this.StartAddrText.TabIndex = 4;
             this.StartAddrText.Text = "0x32500000";
+            this.toolTip1.SetToolTip(this.StartAddrText, "Memory address (in hexadecimal, in bytes) to start dumping from.\r\nDefault is 0x32" +
+        "500000, just because I like it.");
             // 
             // StartLabel
             // 
@@ -169,6 +186,8 @@
             this.SizeText.Size = new System.Drawing.Size(100, 20);
             this.SizeText.TabIndex = 7;
             this.SizeText.Text = "0x00100000";
+            this.toolTip1.SetToolTip(this.SizeText, "Amount of memory (in hexadecimal, in bytes) to dump.\r\nDefault is 0x00100000 (1 MB" +
+        ").\r\nLarge amounts of memory may take a lot of time to transfer.");
             // 
             // progressBar
             // 
@@ -201,6 +220,7 @@
             this.FromFileBtn.Size = new System.Drawing.Size(75, 23);
             this.FromFileBtn.TabIndex = 10;
             this.FromFileBtn.Text = "From file...";
+            this.toolTip1.SetToolTip(this.FromFileBtn, "Read memory dump from file");
             this.FromFileBtn.UseVisualStyleBackColor = true;
             this.FromFileBtn.Click += new System.EventHandler(this.FromFileBtn_Click);
             // 
@@ -210,7 +230,9 @@
             this.ClearBtn.Name = "ClearBtn";
             this.ClearBtn.Size = new System.Drawing.Size(75, 23);
             this.ClearBtn.TabIndex = 11;
-            this.ClearBtn.Text = "Clear";
+            this.ClearBtn.Text = "Clear list";
+            this.toolTip1.SetToolTip(this.ClearBtn, "Clear list of found Pokemon.\r\nThe list will not be cleared after a dump is analyz" +
+        "ed\r\n(each new dump is appended to the end of the list).");
             this.ClearBtn.UseVisualStyleBackColor = true;
             this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
@@ -222,6 +244,7 @@
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 12;
             this.CancelBtn.Text = "Cancel";
+            this.toolTip1.SetToolTip(this.CancelBtn, "Cancel whatever operation is in progress");
             this.CancelBtn.UseVisualStyleBackColor = true;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
@@ -243,6 +266,7 @@
             this.StepPlusBtn.Size = new System.Drawing.Size(48, 23);
             this.StepPlusBtn.TabIndex = 14;
             this.StepPlusBtn.Text = "Step +";
+            this.toolTip1.SetToolTip(this.StepPlusBtn, "Increase start address by size value");
             this.StepPlusBtn.UseVisualStyleBackColor = true;
             this.StepPlusBtn.Click += new System.EventHandler(this.StepPlusBtn_Click);
             // 
@@ -253,6 +277,7 @@
             this.StepMinusBtn.Size = new System.Drawing.Size(48, 23);
             this.StepMinusBtn.TabIndex = 15;
             this.StepMinusBtn.Text = "Step -";
+            this.toolTip1.SetToolTip(this.StepMinusBtn, "Decrease start address by size value");
             this.StepMinusBtn.UseVisualStyleBackColor = true;
             this.StepMinusBtn.Click += new System.EventHandler(this.StepMinusBtn_Click);
             // 
@@ -264,6 +289,7 @@
             this.FastModeCB.Size = new System.Drawing.Size(75, 17);
             this.FastModeCB.TabIndex = 16;
             this.FastModeCB.Text = "Fast mode";
+            this.toolTip1.SetToolTip(this.FastModeCB, "Click it to learn more");
             this.FastModeCB.UseVisualStyleBackColor = true;
             this.FastModeCB.CheckedChanged += new System.EventHandler(this.FastModeCB_CheckedChanged);
             // 
@@ -274,14 +300,40 @@
             this.InvertBtn.Size = new System.Drawing.Size(90, 23);
             this.InvertBtn.TabIndex = 17;
             this.InvertBtn.Text = "Invert checked";
+            this.toolTip1.SetToolTip(this.InvertBtn, "Pokemon checked in \"Dump it?\" column will become unchecked\r\nand vice versa");
             this.InvertBtn.UseVisualStyleBackColor = true;
             this.InvertBtn.Click += new System.EventHandler(this.InvertBtn_Click);
+            // 
+            // DumpSaveCB
+            // 
+            this.DumpSaveCB.AutoSize = true;
+            this.DumpSaveCB.Location = new System.Drawing.Point(302, 63);
+            this.DumpSaveCB.Name = "DumpSaveCB";
+            this.DumpSaveCB.Size = new System.Drawing.Size(96, 17);
+            this.DumpSaveCB.TabIndex = 18;
+            this.DumpSaveCB.Text = "Save dump file";
+            this.toolTip1.SetToolTip(this.DumpSaveCB, "If checked, the entire memory dump will be saved to .bin file");
+            this.DumpSaveCB.UseVisualStyleBackColor = true;
+            // 
+            // HelpBtn
+            // 
+            this.HelpBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.HelpBtn.Location = new System.Drawing.Point(449, 12);
+            this.HelpBtn.Name = "HelpBtn";
+            this.HelpBtn.Size = new System.Drawing.Size(23, 23);
+            this.HelpBtn.TabIndex = 19;
+            this.HelpBtn.Text = "?";
+            this.toolTip1.SetToolTip(this.HelpBtn, "What do I do now???");
+            this.HelpBtn.UseVisualStyleBackColor = true;
+            this.HelpBtn.Click += new System.EventHandler(this.HelpBtn_Click);
             // 
             // PokeDigger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 320);
+            this.Controls.Add(this.HelpBtn);
+            this.Controls.Add(this.DumpSaveCB);
             this.Controls.Add(this.InvertBtn);
             this.Controls.Add(this.FastModeCB);
             this.Controls.Add(this.StepMinusBtn);
@@ -324,16 +376,20 @@
         private System.ComponentModel.BackgroundWorker DigWorker;
         private System.Windows.Forms.Button FromFileBtn;
         private System.Windows.Forms.Button ClearBtn;
-        private System.Windows.Forms.DataGridViewImageColumn ColIcon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColLevel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColName;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ColDump;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColOffset;
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Label UglyMultithreadingHack;
         private System.Windows.Forms.Button StepPlusBtn;
         private System.Windows.Forms.Button StepMinusBtn;
         private System.Windows.Forms.CheckBox FastModeCB;
         private System.Windows.Forms.Button InvertBtn;
+        private System.Windows.Forms.DataGridViewImageColumn ColIcon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColLevel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColName;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ColDump;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColPID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColOffset;
+        private System.Windows.Forms.CheckBox DumpSaveCB;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button HelpBtn;
     }
 }
