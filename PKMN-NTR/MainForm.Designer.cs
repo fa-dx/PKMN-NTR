@@ -394,6 +394,7 @@
             this.srFilterLoad = new System.Windows.Forms.Button();
             this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
+            this.buttonWTStartEndless = new System.Windows.Forms.Button();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -2879,9 +2880,9 @@
             // 
             this.RunWTbot.Location = new System.Drawing.Point(150, 26);
             this.RunWTbot.Name = "RunWTbot";
-            this.RunWTbot.Size = new System.Drawing.Size(63, 23);
+            this.RunWTbot.Size = new System.Drawing.Size(90, 23);
             this.RunWTbot.TabIndex = 3;
-            this.RunWTbot.Text = "Run";
+            this.RunWTbot.Text = "Run til zero";
             this.RunWTbot.UseVisualStyleBackColor = true;
             this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click_1);
             // 
@@ -4831,6 +4832,7 @@
             // tabWonderTrade
             // 
             this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
+            this.tabWonderTrade.Controls.Add(this.buttonWTStartEndless);
             this.tabWonderTrade.Controls.Add(this.WTcollectFC);
             this.tabWonderTrade.Controls.Add(this.label59);
             this.tabWonderTrade.Controls.Add(this.label58);
@@ -4844,6 +4846,16 @@
             this.tabWonderTrade.Size = new System.Drawing.Size(558, 378);
             this.tabWonderTrade.TabIndex = 2;
             this.tabWonderTrade.Text = "Wonder Trade";
+            // 
+            // buttonWTStartEndless
+            // 
+            this.buttonWTStartEndless.Location = new System.Drawing.Point(246, 26);
+            this.buttonWTStartEndless.Name = "buttonWTStartEndless";
+            this.buttonWTStartEndless.Size = new System.Drawing.Size(90, 23);
+            this.buttonWTStartEndless.TabIndex = 9;
+            this.buttonWTStartEndless.Text = "Run endlessly";
+            this.buttonWTStartEndless.UseVisualStyleBackColor = true;
+            this.buttonWTStartEndless.Click += new System.EventHandler(this.buttonWTStartEndless_Click);
             // 
             // WTcollectFC
             // 
@@ -5407,6 +5419,7 @@
         private System.Windows.Forms.Button breedingClear;
         private System.Windows.Forms.Button srClear;
         private System.Windows.Forms.Label updateLabel;
+        private System.Windows.Forms.Button buttonWTStartEndless;
         private System.Windows.Forms.Button DumpInstructionsBtn;
     }
 }
