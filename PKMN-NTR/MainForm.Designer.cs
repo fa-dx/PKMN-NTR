@@ -34,6 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dumpBox = new System.Windows.Forms.GroupBox();
+            this.DumpInstructionsBtn = new System.Windows.Forms.Button();
             this.radioBattleBox = new System.Windows.Forms.RadioButton();
             this.onlyView = new System.Windows.Forms.CheckBox();
             this.radioParty = new System.Windows.Forms.RadioButton();
@@ -59,7 +60,7 @@
             this.move4 = new System.Windows.Forms.ComboBox();
             this.ability = new System.Windows.Forms.ComboBox();
             this.move3 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.WriteBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.move2 = new System.Windows.Forms.ComboBox();
             this.species = new System.Windows.Forms.ComboBox();
@@ -212,6 +213,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
             this.OrganizeTop = new System.Windows.Forms.RadioButton();
+            this.updateLabel = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
             this.typeLSR = new System.Windows.Forms.ComboBox();
             this.RunLSRbot = new System.Windows.Forms.Button();
@@ -394,7 +396,6 @@
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
-            this.updateLabel = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
@@ -676,6 +677,7 @@
             // 
             // dumpBox
             // 
+            this.dumpBox.Controls.Add(this.DumpInstructionsBtn);
             this.dumpBox.Controls.Add(this.radioBattleBox);
             this.dumpBox.Controls.Add(this.onlyView);
             this.dumpBox.Controls.Add(this.radioParty);
@@ -697,6 +699,17 @@
             this.dumpBox.TabIndex = 1;
             this.dumpBox.TabStop = false;
             this.dumpBox.Text = "Dump and Edit Pokémon";
+            // 
+            // DumpInstructionsBtn
+            // 
+            this.DumpInstructionsBtn.Location = new System.Drawing.Point(230, 10);
+            this.DumpInstructionsBtn.Name = "DumpInstructionsBtn";
+            this.DumpInstructionsBtn.Size = new System.Drawing.Size(75, 23);
+            this.DumpInstructionsBtn.TabIndex = 15;
+            this.DumpInstructionsBtn.Text = "How to use";
+            this.DumpInstructionsBtn.UseVisualStyleBackColor = true;
+            this.DumpInstructionsBtn.Visible = false;
+            this.DumpInstructionsBtn.Click += new System.EventHandler(this.DumpInstructionsBtn_Click);
             // 
             // radioBattleBox
             // 
@@ -974,15 +987,15 @@
             this.move3.Size = new System.Drawing.Size(136, 21);
             this.move3.TabIndex = 2;
             // 
-            // button1
+            // WriteBtn
             // 
-            this.button1.Location = new System.Drawing.Point(185, 143);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Write";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.pokeEkx_Click);
+            this.WriteBtn.Location = new System.Drawing.Point(185, 143);
+            this.WriteBtn.Name = "WriteBtn";
+            this.WriteBtn.Size = new System.Drawing.Size(108, 23);
+            this.WriteBtn.TabIndex = 14;
+            this.WriteBtn.Text = "Write";
+            this.WriteBtn.UseVisualStyleBackColor = true;
+            this.WriteBtn.Click += new System.EventHandler(this.pokeEkx_Click);
             // 
             // label5
             // 
@@ -2026,7 +2039,7 @@
             this.Main.Controls.Add(this.shinyBox);
             this.Main.Controls.Add(this.level);
             this.Main.Controls.Add(this.label56);
-            this.Main.Controls.Add(this.button1);
+            this.Main.Controls.Add(this.WriteBtn);
             this.Main.Controls.Add(this.label49);
             this.Main.Controls.Add(this.ExpPoints);
             this.Main.Controls.Add(this.isEgg);
@@ -2801,6 +2814,18 @@
             this.OrganizeTop.TabIndex = 1;
             this.OrganizeTop.Text = "Top";
             this.OrganizeTop.UseVisualStyleBackColor = true;
+            // 
+            // updateLabel
+            // 
+            this.updateLabel.AutoSize = true;
+            this.updateLabel.Location = new System.Drawing.Point(224, 356);
+            this.updateLabel.Name = "updateLabel";
+            this.updateLabel.Size = new System.Drawing.Size(110, 13);
+            this.updateLabel.TabIndex = 4;
+            this.updateLabel.Text = "Looking for updates...";
+            this.toolTip1.SetToolTip(this.updateLabel, "If an update is available, you can click here to go to the release page in GitHub" +
+        ".");
+            this.updateLabel.Click += new System.EventHandler(this.updateLabel_Click);
             // 
             // label72
             // 
@@ -4845,18 +4870,6 @@
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
             // 
-            // updateLabel
-            // 
-            this.updateLabel.AutoSize = true;
-            this.updateLabel.Location = new System.Drawing.Point(224, 356);
-            this.updateLabel.Name = "updateLabel";
-            this.updateLabel.Size = new System.Drawing.Size(110, 13);
-            this.updateLabel.TabIndex = 4;
-            this.updateLabel.Text = "Looking for updates...";
-            this.toolTip1.SetToolTip(this.updateLabel, "If an update is available, you can click here to go to the release page in GitHub" +
-        ".");
-            this.updateLabel.Click += new System.EventHandler(this.updateLabel_Click);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(274, 152);
@@ -5095,7 +5108,7 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox hiddenPower;
         private System.Windows.Forms.TextBox nickname;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button WriteBtn;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ComboBox nature;
         private System.Windows.Forms.NumericUpDown ivSPENum;
@@ -5394,6 +5407,7 @@
         private System.Windows.Forms.Button breedingClear;
         private System.Windows.Forms.Button srClear;
         private System.Windows.Forms.Label updateLabel;
+        private System.Windows.Forms.Button DumpInstructionsBtn;
     }
 }
 

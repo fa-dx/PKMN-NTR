@@ -102,6 +102,16 @@ namespace ntrbase.Helpers
             }
             
             recvData = e.data;
+            if (DumpSaveCB.Checked) { 
+                string folderPath = @Application.StartupPath + "\\Digger\\";
+                (new FileInfo(folderPath)).Directory.Create();
+                string fileName = folderPath + "dump " + StartAddrText.Text + ".bin";
+                fileName = MainForm.NextAvailableFilename(fileName);
+            
+                FileStream fs = File.OpenWrite(fileName);
+                fs.Write(recvData, 0, recvData.Length);
+                fs.Close();
+            }
             //Thanks to this, processing will be done in GUI thread
             //so we don't need to use SetBlahblahblah functions everywhere
             MainForm.SetText(UglyMultithreadingHack, "b");
@@ -208,7 +218,8 @@ namespace ntrbase.Helpers
                 ResultsGrid.Rows[i].Height = sprite.Height;
                 ResultsGrid.Rows[i].Cells[1].Value = LookupTable.getLevel(pkInfo.Species, (int)pkInfo.EXP);
                 ResultsGrid.Rows[i].Cells[2].Value = pkInfo.Nickname;
-                ResultsGrid.Rows[i].Cells[4].Value = r.offset.ToString("X8");
+                ResultsGrid.Rows[i].Cells[4].Value = pkInfo.PID.ToString("X8");
+                ResultsGrid.Rows[i].Cells[5].Value = r.offset.ToString("X8");
                 i++;
             }
         }
@@ -305,6 +316,12 @@ namespace ntrbase.Helpers
                     checkboxCell.Value = null;
                 }
             }
+        }
+
+        private void HelpBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hover your mouse cursor over all the controls to find out what they do.");
+            toolTip1.SetToolTip(HelpBtn, "Congratulations! You have demonstrated your ability to follow orders.");
         }
     }
 
