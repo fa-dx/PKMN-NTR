@@ -115,7 +115,7 @@ namespace ntrbase.Bot
                     switch (botState)
                     {
                         case (int)srbotstates.botstart:
-                            Report("Bot start");
+                            Report("Bot: START Gen 6 Soft-reset bot");
                             switch (mode)
                             {
                                 case 0:
@@ -161,7 +161,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.pssmenush:
-                            Report("Test if the PSS menu is shown");
+                            Report("Bot: Test if the PSS menu is shown");
                             waitTaskbool = Program.helper.memoryinrange(psssmenu1Off, psssmenu1IN, 0x10000);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.fixwifi;
@@ -184,13 +184,13 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = 1;
-                                Report("Error detected");
+                                Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
                         case (int)srbotstates.touchpssset:
-                            Report("Touch Box View");
+                            Report("Bot: Touch Box View");
                             waitTaskbool = Program.helper.waittouch(240, 180);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.testpssset;
@@ -203,7 +203,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.testpssset:
-                            Report("Test if the PSS setings are shown");
+                            Report("Bot: Test if the PSS setings are shown");
                             waitTaskbool = Program.helper.timememoryinrange(pssettingsOff, pssettingsIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -219,7 +219,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.touchpssdis:
-                            Report("Touch Disable PSS communication");
+                            Report("Bot: Touch Disable PSS communication");
                             waitTaskbool = Program.helper.waittouch(160, pssdisableY);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.testpssdis;
@@ -232,7 +232,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.testpssdis:
-                            Report("Test if PSS disable confirmation appears");
+                            Report("Bot: Test if PSS disable confirmation appears");
                             waitTaskbool = Program.helper.timememoryinrange(pssdisableOff, pssdisableIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -248,7 +248,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.touchpssconf:
-                            Report("Touch Yes");
+                            Report("Bot: Touch Yes");
                             waitTaskbool = Program.helper.waittouch(160, 120);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.testpssout;
@@ -261,7 +261,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.testpssout:
-                            Report("Test if back to PSS screen");
+                            Report("Bot: Test if back to PSS screen");
                             waitTaskbool = Program.helper.timememoryinrange(pssettingsOff, pssettingsOUT, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -277,7 +277,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.returncontrol:
-                            Report("Return contol to character");
+                            Report("Bot: Return contol to character");
                             await Task.Delay(1500);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
@@ -291,7 +291,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.touchsave:
-                            Report("Touch Save button");
+                            Report("Bot: Touch Save button");
                             await Task.Delay(1000);
                             waitTaskbool = Program.helper.waittouch(220, 220);
                             if (await waitTaskbool)
@@ -305,7 +305,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.testsave:
-                            Report("Test if the save screen is shown");
+                            Report("Bot: Test if the save screen is shown");
                             waitTaskbool = Program.helper.timememoryinrange(savescrnOff, savescrnIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -321,7 +321,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.saveconf:
-                            Report("Press Yes");
+                            Report("Bot: Press Yes");
                             await Task.Delay(2000);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
@@ -335,14 +335,14 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.saveout:
-                            Report("Test if the save screen is not shown");
+                            Report("Bot: Test if the save screen is not shown");
                             waitTaskbool = Program.helper.timememoryinrange(savescrnOff, savescrnOUT, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
                                 if (mode == 2)
                                 {
-                                    Report("Soft-reset for party data intialize");
+                                    Report("Bot: Soft-reset for party data intialize");
                                     botState = (int)srbotstates.softreset;
                                 }
                                 else
@@ -381,7 +381,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.trigger:
-                            Report("Try to trigger encounter");
+                            Report("Bot: Try to trigger encounter");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.readopp;
@@ -394,14 +394,13 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.readopp:
-                            Report("Try to read opponent");
+                            Report("Bot: Try to read opponent");
                             await Task.Delay(500); // Wait for pokémon data
                             waitTaskint = Program.gCmdWindow.ReadOpponent();
                             dataready = await waitTaskint;
                             if (dataready >= 0)
                             {
                                 attempts = 0;
-                                Report("PID: 0x" + dataready.ToString("X8"));
                                 botState = (int)srbotstates.filter;
                             }
                             else
@@ -421,14 +420,14 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.testspassed:
-                            Report("All tests passed!");
+                            Report("Bot: All tests passed!");
                             botresult = 4;
                             botState = (int)srbotstates.botexit;
                             break;
 
                         case (int)srbotstates.softreset:
                             resetNo++;
-                            Report("Sof-reset #" + resetNo.ToString());
+                            Report("Bot: Sof-reset #" + resetNo.ToString());
                             waitTaskbool = Program.helper.waitSoftReset();
                             if (await waitTaskbool)
                             {
@@ -443,7 +442,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.skipintro:
                             await Task.Delay(9000);
-                            Report("Skip intro cutscene");
+                            Report("Bot: Skip intro cutscene");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
                             if (!oras)
@@ -454,7 +453,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.skiptitle:
                             await Task.Delay(4000);
-                            Report("Skip title screen");
+                            Report("Bot: Skip title screen");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
                             botState = (int)srbotstates.startgame;
@@ -462,7 +461,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.startgame:
                             await Task.Delay(5000);
-                            Report("Start game");
+                            Report("Bot: Start game");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
                             botState = (int)srbotstates.reconnect;
@@ -484,7 +483,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.tev_start:
-                            Report("Trigger Dialog");
+                            Report("Bot: Trigger Dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.tev_dialog;
@@ -497,7 +496,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.tev_dialog:
-                            Report("Test if dialog has started");
+                            Report("Bot: Test if dialog has started");
                             waitTaskbool = Program.helper.timememoryinrange(dialogOff, dialogIN, 0x01, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -514,7 +513,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.tev_cont1:
                             await Task.Delay(1000);
-                            Report("Talk to lady");
+                            Report("Bot: Talk to lady");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.tev_check;
@@ -527,13 +526,12 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.tev_check:
-                            Report("Try to read party");
+                            Report("Bot: Try to read party");
                             waitTaskint = Program.helper.waitPartyRead(partyOff, 1);
                             dataready = await waitTaskint;
                             if (dataready >= 0)
                             {
                                 attempts = 0;
-                                Report("PID: 0x" + dataready.ToString("X8"));
                                 botState = (int)srbotstates.filter;
                             }
                             else
@@ -546,7 +544,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.twk_start:
                             await Task.Delay(1000);
-                            Report("Walk one step");
+                            Report("Bot: Walk one step");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.runUP);
                             if (await waitTaskbool)
                             {
@@ -562,13 +560,13 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.botexit:
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 6 Soft-reset bot");
                             botstop = true;
                             break;
 
                         default:
-                            Report("Bot stop");
-                            botresult = 0;
+                            Report("Bot: STOP Gen 6 Soft-reset bot");
+                            botresult = -1;
                             botstop = true;
                             break;
                     }
@@ -576,6 +574,7 @@ namespace ntrbase.Bot
                     { // Too many attempts
                         if (maxreconnect > 0)
                         {
+                            Report("Bot: Try reconnection to fix error");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             maxreconnect--;
                             if (await waitTaskbool)
@@ -593,7 +592,7 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 6 Soft-reset bot");
                             botstop = true;
                         }
                     }
@@ -602,9 +601,11 @@ namespace ntrbase.Bot
             }
             catch (Exception ex)
             {
+                Report("Bot: Exception detected:");
                 Report(ex.Source);
                 Report(ex.Message);
                 Report(ex.StackTrace);
+                Report("Bot: STOP Gen 6 Soft-reset bot");
                 MessageBox.Show(ex.Message);
                 return -1;
             }
@@ -612,7 +613,7 @@ namespace ntrbase.Bot
 
         private void Report(string log)
         {
-            Program.gCmdWindow.Addlog(log);
+            Program.gCmdWindow.addtoLog(log);
         }
     }
 }

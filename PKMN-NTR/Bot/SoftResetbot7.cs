@@ -51,7 +51,7 @@ namespace ntrbase.Bot
                     switch (botState)
                     {
                         case (int)srbotStates.botstart:
-                            Report("Bot start");
+                            Report("Bot: START Gen 7 Soft-reset bot");
                             if (mode == 0 || mode == 1)
                                 botState = (int)srbotStates.startdialog;
                             else
@@ -59,7 +59,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.startdialog:
-                            Report("Start dialog");
+                            Report("Bot: Start dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotStates.testdialog1;
@@ -72,7 +72,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.testdialog1:
-                            Report("Test if dialog has started");
+                            Report("Bot: Test if dialog has started");
                             waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
                             if (await waitTaskbool)
                             {
@@ -91,7 +91,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.continuedialog:
-                            Report("Continue dialog");
+                            Report("Bot: Continue dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotStates.testdialog2;
@@ -104,7 +104,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.testdialog2:
-                            Report("Test if dialog has finished");
+                            Report("Bot: Test if dialog has finished");
                             waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x01);
                             if (await waitTaskbool)
                             {
@@ -130,7 +130,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.exitdialog:
-                            Report("Exit dialog");
+                            Report("Bot: Exit dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                                 botState = (int)srbotStates.readparty;
@@ -143,13 +143,12 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.readparty:
-                            Report("Try to read party");
+                            Report("Bot: Try to read party");
                             waitTaskint = Program.helper.waitPartyRead(partyOff, 1);
                             long dataready = await waitTaskint;
                             if (dataready >= 0)
                             {
                                 attempts = 0;
-                                Report("PID: 0x" + dataready.ToString("X8"));
                                 botState = (int)srbotStates.filter;
                             }
                             else
@@ -169,14 +168,14 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.testspassed:
-                            Report("All tests passed!");
+                            Report("Bot: All tests passed!");
                             botresult = 4;
                             botState = (int)srbotStates.botexit;
                             break;
 
                         case (int)srbotStates.softreset:
                             resetNo++;
-                            Report("Sof-reset #" + resetNo.ToString());
+                            Report("Bot: Sof-reset #" + resetNo.ToString());
                             waitTaskbool = Program.helper.waitSoftReset();
                             if (await waitTaskbool)
                             {
@@ -191,7 +190,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.reconnect:
                             await Task.Delay(6000);
-                            Report("Try reconnect");
+                            Report("Bot: Try reconnect");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             if (await waitTaskbool)
                             {
@@ -205,7 +204,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.connpatch:
-                            Report("Apply NFC patch");
+                            Report("Bot: Apply NFC patch");
                             waitTaskbool = Program.helper.waitNTRwrite(0x3DFFD0, 0xE3A01000, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
@@ -221,7 +220,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.nickname:
-                            Report("Nickname screen");
+                            Report("Bot: Nickname screen");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keySTART);
                             await Task.Delay(250);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
@@ -236,12 +235,12 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.botexit:
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 7 Soft-reset bot");
                             botstop = true;
                             break;
 
                         default:
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 7 Soft-reset bot");
                             botresult = -1;
                             botstop = true;
                             break;
@@ -251,6 +250,7 @@ namespace ntrbase.Bot
                     { // Too many attempts
                         if (maxreconnect > 0)
                         {
+                            Report("Bot: Try reconnection to fix error");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             maxreconnect--;
                             if (await waitTaskbool)
@@ -266,7 +266,7 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 7 Soft-reset bot");
                             botstop = true;
                         }
                     }
@@ -275,9 +275,11 @@ namespace ntrbase.Bot
             }
             catch (Exception ex)
             {
+                Report("Bot: Exception detected:");
                 Report(ex.Source);
                 Report(ex.Message);
                 Report(ex.StackTrace);
+                Report("Bot: STOP Gen 6 Soft-reset bot");
                 MessageBox.Show(ex.Message);
                 return -1;
             }
@@ -285,7 +287,7 @@ namespace ntrbase.Bot
 
         private void Report(string log)
         {
-            Program.gCmdWindow.Addlog(log);
+            Program.gCmdWindow.addtoLog(log);
         }
     }
 }

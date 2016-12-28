@@ -200,7 +200,7 @@ namespace ntrbase.Bot
                     switch (botState)
                     {
                         case (int)breedbotstates.botstart:
-                            Report("Bot start");
+                            Report("Bot: START Gen 6 Breding bot");
                             if (quickbreed)
                                 botState = (int)breedbotstates.facedaycareman;
                             else if (mode >= 0)
@@ -210,7 +210,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.facedaycareman:
-                            Report("Turn to Day Care Man");
+                            Report("Bot: Turn to Day Care Man");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.DpadUP);
                             if (await waitTaskbool)
                             {
@@ -235,31 +235,31 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = 1;
-                                Report("Error detected");
+                                Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
                         case (int)breedbotstates.walk1:
-                            Report("Run to south");
+                            Report("Bot: Run south");
                             Program.helper.quickbuton(LookupTable.runDOWN, runtime);
                             await Task.Delay(runtime + commanddelay);
                             botState = (int)breedbotstates.walk2;
                             break;
 
                         case (int)breedbotstates.walk2:
-                            Report("Run to north");
+                            Report("Bot: Run north");
                             Program.helper.quickbuton(LookupTable.runUP, runtime);
                             await Task.Delay(runtime + commanddelay);
                             botState = (int)breedbotstates.checkegg;
                             break;
 
                         case (int)breedbotstates.checkegg:
-                            Report("Check if egg");
+                            Report("Bot: Check if an egg is available");
                             waitTaskbool = Program.helper.memoryinrange(eggoff, 0x01, 0x01);
                             if (await waitTaskbool)
                             {
-                                Report("Egg found");
+                                Report("Bot: Egg found");
                                 botState = (int)breedbotstates.checkmap1;
                             }
                             else
@@ -271,7 +271,7 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 attempts = -10;
-                                Report("Egg found");
+                                Report("Bot: Egg found");
                                 botState = (int)breedbotstates.triggerdialog;
                             }
                             else
@@ -283,14 +283,14 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.walk3:
-                            Report("Return to day care man");
+                            Report("Bot: Return to day care man");
                             Program.helper.quickbuton(LookupTable.runUP, longcommandtime);
                             await Task.Delay(longcommandtime + commanddelay);
                             botState = (int)breedbotstates.checkmap1;
                             break;
 
                         case (int)breedbotstates.triggerdialog:
-                            Report("Talk to Day Care Man");
+                            Report("Bot: Talk to Day Care Man");
                             int i;
                             for (i = 0; i < 7; i++)
                             {
@@ -305,7 +305,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.continuedialog:
-                            Report("Continue dialog");
+                            Report("Bot: Continue dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)breedbotstates.checknoegg;
@@ -322,7 +322,7 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                Report("Egg received");
+                                Report("Bot: Egg received");
                                 botState = (int)breedbotstates.exitdialog;
                             }
                             else
@@ -334,7 +334,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.exitdialog:
-                            Report("Exit dialog");
+                            Report("Bot: Exit dialog");
                             await Task.Delay(1000);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
@@ -369,7 +369,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.walktodaycare:
-                            Report("Walk to Day Care");
+                            Report("Bot: Walk to Day Care");
                             if (oras && !mauvdaycare)
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             else
@@ -388,7 +388,7 @@ namespace ntrbase.Bot
                             }
                             else if (lastposition == Program.helper.lastRead)
                             {
-                                Report("No movement detected, still on dialog?");
+                                Report("Bot: No movement detected, still on dialog?");
                                 Program.helper.quickbuton(LookupTable.keyB, commandtime);
                                 await Task.Delay(commandtime + commanddelay);
                                 attempts++;
@@ -416,7 +416,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.fix1:
-                            Report("Missed day care, return");
+                            Report("Bot: Missed day care, return");
                             if (oras && !mauvdaycare)
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             else
@@ -426,7 +426,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.entertodaycare:
-                            Report("Enter to Day Care");
+                            Report("Bot: Enter to Day Care");
                             Program.helper.quickbuton(LookupTable.runUP, longcommandtime);
                             await Task.Delay(longcommandtime + commanddelay);
                             botState = (int)breedbotstates.checkmap3;
@@ -448,7 +448,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.walktodesk:
-                            Report("Run to desk");
+                            Report("Bot: Run to desk");
                             Program.helper.quickbuton(LookupTable.runUP, longcommandtime);
                             await Task.Delay(longcommandtime + commanddelay);
                             botState = (int)breedbotstates.checkmap4;
@@ -470,7 +470,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.walktocomputer:
-                            Report("Walk to the PC");
+                            Report("Bot: Walk to the PC");
                             Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap5;
@@ -498,14 +498,14 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.fix2:
-                            Report("Missed PC, return");
+                            Report("Bot: Missed PC, return");
                             Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap5;
                             break;
 
                         case (int)breedbotstates.facecomputer:
-                            Report("Turn on the PC");
+                            Report("Bot: Turn on the PC");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.DpadUP);
                             if (await waitTaskbool)
                             {
@@ -533,7 +533,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.testcomputer:
-                            Report("Test if the PC is on");
+                            Report("Bot: Test if the PC is on");
                             await Task.Delay(2000); // Wait for PC on
                             waitTaskbool = Program.helper.timememoryinrange(computerOff, computerIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
@@ -550,7 +550,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.computerdialog:
-                            Report("Skip PC dialog");
+                            Report("Bot: Skip PC dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                             {
@@ -560,13 +560,13 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = 7;
-                                Report("Error detected");
+                                Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
                         case (int)breedbotstates.pressPCstorage:
-                            Report("Press Access PC storage");
+                            Report("Bot: Press Access PC storage");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                             {
@@ -576,13 +576,13 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = 7;
-                                Report("Error detected");
+                                Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
                         case (int)breedbotstates.touchOrganize:
-                            Report("Touch Organize boxes");
+                            Report("Bot: Touch Organize boxes");
                             await Task.Delay(500);
                             if (oras && organizeboxes)
                                 waitTaskbool = Program.helper.waittouch(160, 40);
@@ -616,21 +616,20 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.readslot:
-                            Report("Read pokémon from box " + (currentbox + 1) + ", slot " + (currentslot + 1));
+                            Report("Bot: Search for empty slot");
                             waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
                             dataready = await waitTaskint;
                             switch (dataready)
                             {
                                 case -2: // Read error
                                     botresult = 2;
-                                    Report("Error detected");
+                                    Report("Bot: Error detected");
                                     attempts = 11;
                                     break;
                                 case -1: // Empty slot
                                     botState = (int)breedbotstates.testboxchange;
                                     break;
                                 default: // Not empty slot
-                                    Report("Space is not empty");
                                     getNextSlot();
                                     botState = (int)breedbotstates.readslot;
                                     break;
@@ -648,7 +647,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.touchboxview:
-                            Report("Touch Box View");
+                            Report("Bot: Touch Box View");
                             waitTaskbool = Program.helper.waittouch(30, 220);
                             if (await waitTaskbool)
                                 botState = (int)breedbotstates.testboxview;
@@ -661,7 +660,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.testboxview:
-                            Report("Test if box view is shown");
+                            Report("Bot: Test if box view is shown");
                             await Task.Delay(1000);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewIN, wtboxviewRange, 100, 5000);
                             if (await waitTaskbool)
@@ -678,7 +677,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.touchnewbox:
-                            Report("Touch New Box");
+                            Report("Bot: Touch New Box");
                             waitTaskbool = Program.helper.waittouch(LookupTable.boxposX6[currentbox], LookupTable.boxposY6[currentbox]);
                             if (await waitTaskbool)
                             {
@@ -694,7 +693,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.selectnewbox:
-                            Report("Select New Box");
+                            Report("Bot: Select New Box");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)breedbotstates.testviewout;
@@ -707,7 +706,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.testviewout:
-                            Report("Test if box view is not shown");
+                            Report("Bot: Test if box view is not shown");
                             await Task.Delay(1000);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewOUT, wtboxviewRange, 100, 5000);
                             if (await waitTaskbool)
@@ -724,14 +723,15 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.touchegg:
-                            Report("Select Egg");
+                            Report("Bot: Select Egg");
+                            await Task.Delay(500);
                             waitTaskbool = Program.helper.waitholdtouch(300, 100);
                             if (await waitTaskbool)
                                 botState = (int)breedbotstates.moveegg;
                             else
                             {
                                 botresult = 6;
-                                Report("Error detected");
+                                Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
@@ -744,13 +744,13 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = 6;
-                                Report("Error detected");
+                                Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
                         case (int)breedbotstates.releaseegg:
-                            Report("Release Egg");
+                            Report("Bot: Release Egg");
                             waitTaskbool = Program.helper.waitfreetouch();
                             if (await waitTaskbool)
                             {
@@ -767,13 +767,13 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = 6;
-                                Report("Error detected");
+                                Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
                         case (int)breedbotstates.exitcomputer:
-                            Report("Exit from PC");
+                            Report("Bot: Exit from PC");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyX);
                             if (await waitTaskbool)
                                 botState = (int)breedbotstates.testexit;
@@ -786,7 +786,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.testexit:
-                            Report("Test if out from PC");
+                            Report("Bot: Test if out from PC");
                             waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, organizeBoxOUT, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -797,7 +797,7 @@ namespace ntrbase.Bot
                                     botState = (int)breedbotstates.retirefromcomputer;
                                 else
                                 {
-                                    Report("Error detected");
+                                    Report("Bot: Error detected");
                                     attempts = 11;
                                 }
                             }
@@ -810,7 +810,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.retirefromcomputer:
-                            Report("Retire from PC");
+                            Report("Bot: Retire from PC");
                             eggsinbatch = 0;
                             Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             await Task.Delay(walktime + commanddelay);
@@ -839,14 +839,14 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.fix3:
-                            Report("Missed exit, return");
+                            Report("Bot: Missed exit, return");
                             Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap6;
                             break;
 
                         case (int)breedbotstates.retirefromdesk:
-                            Report("Run to exit");
+                            Report("Bot: Run to exit");
                             Program.helper.quickbuton(LookupTable.runDOWN, longcommandtime);
                             await Task.Delay(longcommandtime + commanddelay);
                             botState = (int)breedbotstates.checkmap7;
@@ -868,7 +868,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.retirefromdoor:
-                            Report("Retire from door");
+                            Report("Bot: Retire from door");
                             Program.helper.quickbuton(LookupTable.DpadDOWN, walktime);
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap8;
@@ -896,14 +896,14 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.fix5:
-                            Report("Missed Day Care Man, return");
+                            Report("Bot: Missed Day Care Man, return");
                             Program.helper.quickbuton(LookupTable.DpadUP, walktime);
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap8;
                             break;
 
                         case (int)breedbotstates.walktodaycareman:
-                            Report("Walk to Day Care Man");
+                            Report("Bot: Walk to Day Care Man");
                             if (oras && !mauvdaycare)
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             else
@@ -943,7 +943,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.fix4:
-                            Report("Missed Day Care Man, return");
+                            Report("Bot: Missed Day Care Man, return");
                             if (oras && !mauvdaycare)
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             else
@@ -958,7 +958,7 @@ namespace ntrbase.Bot
                                 filterbox = egglocations[i, 0];
                                 filterslot = egglocations[i, 1];
                                 bool testsok = false;
-                                Report("Reading egg located at box " + (filterbox + 1) + " slot  " + (filterslot + 1));
+                                Report("Bot: Check deposited egg");
                                 waitTaskint = Program.helper.waitPokeRead(filterbox, filterslot);
                                 dataready = await waitTaskint;
                                 if (dataready >= 0)
@@ -980,7 +980,7 @@ namespace ntrbase.Bot
                                 else
                                 {
                                     botresult = 2;
-                                    Report("Error detected");
+                                    Report("Bot: Error detected");
                                     attempts = 11;
                                     break;
                                 }
@@ -995,7 +995,7 @@ namespace ntrbase.Bot
                                 {
                                     if (mode == 1 || mode == 2)
                                     {
-                                        Report("No match found");
+                                        Report("Bot: No match found");
                                         botresult = 3;
                                     }
                                     else
@@ -1008,13 +1008,13 @@ namespace ntrbase.Bot
                         case (int)breedbotstates.testspassed:
                             if (mode == 1)
                             {
-                                Report("All tests passed");
+                                Report("Bot: All tests passed");
                                 botresult = 4;
                                 finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", using filter #";
                             }
                             else if (mode == 2)
                             {
-                                Report("ESV/TSV match found");
+                                Report("Bot: ESV/TSV match found");
                                 botresult = 5;
                                 finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", the ESV/TSV value is: " + currentesv;
                             }
@@ -1022,12 +1022,12 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.botexit:
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 6 Breding bot");
                             botstop = true;
                             break;
 
                         default:
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 6 Breding bot");
                             botresult = 0;
                             botstop = true;
                             break;
@@ -1036,6 +1036,7 @@ namespace ntrbase.Bot
                     { // Too many attempts
                         if (maxreconnect > 0)
                         {
+                            Report("Bot: Try reconnection to fix error");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             maxreconnect--;
                             if (await waitTaskbool)
@@ -1051,7 +1052,7 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 6 Breding bot");
                             botstop = true;
                         }
                     }
@@ -1060,9 +1061,11 @@ namespace ntrbase.Bot
             }
             catch (Exception ex)
             {
+                Report("Bot: Exception detected:");
                 Report(ex.Source);
                 Report(ex.Message);
                 Report(ex.StackTrace);
+                Report("Bot: STOP Gen 6 Breding bot");
                 MessageBox.Show(ex.Message);
                 return -1;
             }
@@ -1070,7 +1073,7 @@ namespace ntrbase.Bot
 
         private void Report(string log)
         {
-            Program.gCmdWindow.Addlog(log);
+            Program.gCmdWindow.addtoLog(log);
         }
 
         private void getNextSlot()

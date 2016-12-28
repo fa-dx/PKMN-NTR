@@ -74,7 +74,7 @@ namespace ntrbase.Bot
                     switch (botState)
                     {
                         case (int)breedbotstates.botstart:
-                            Report("Bot start");
+                            Report("Bot: START Gen 7 Breding bot");
                             if (mode >= 0)
                                 botState = (int)breedbotstates.selectbox;
                             else
@@ -82,7 +82,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.selectbox:
-                            Report("Set start box");
+                            Report("Bot: Set start box");
                             waitTaskbool = Program.helper.waitNTRwrite(currentboxOff, Convert.ToUInt32(currentbox), Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
@@ -98,21 +98,21 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.readslot:
-                            Report("Read pokémon from box " + (currentbox + 1) + ", slot " + (currentslot + 1));
+                            Report("Bot: Look for empty space");
                             waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
                             dataready = await waitTaskint;
                             switch (dataready)
                             {
                                 case -2: // Read error
                                     botresult = 2;
-                                    Report("Error detected");
+                                    Report("Bot: Error detected");
                                     attempts = 11;
                                     break;
                                 case -1: // Empty slot
                                     botState = (int)breedbotstates.quickegg;
                                     break;
                                 default: // Not empty slot
-                                    Report("Space is not empty");
+                                    Report("Bot: Space is not empty");
                                     getNextSlot();
                                     botState = (int)breedbotstates.readslot;
                                     break;
@@ -120,7 +120,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.quickegg:
-                            Report("Produce Egg in Nursery");
+                            Report("Bot: Produce Egg in Nursery");
                             waitTaskbool = Program.helper.waitNTRwrite(eggOff, 0x01, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
@@ -136,7 +136,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.triggerdialog:
-                            Report("Start dialog");
+                            Report("Bot: Start dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)breedbotstates.testdialog1;
@@ -149,7 +149,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.testdialog1:
-                            Report("Test if dialog has started");
+                            Report("Bot: Test if dialog has started");
                             waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
                             if (await waitTaskbool)
                             {
@@ -165,7 +165,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.continuedialog:
-                            Report("Continue dialog");
+                            Report("Bot: Continue dialog");
                             int i;
                             for (i = 0; i < 6; i++)
                             {
@@ -196,7 +196,7 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                Report("Egg received");
+                                Report("Bot: Egg received");
                                 botState = (int)breedbotstates.exitdialog;
                             }
                             else
@@ -208,7 +208,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.exitdialog:
-                            Report("Exit dialog");
+                            Report("Bot: Exit dialog");
                             await Task.Delay(1000);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
@@ -236,7 +236,7 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                Report("Dialog finished");
+                                Report("Bot: Dialog finished");
                                 botState = (int)breedbotstates.filter;
                             }
                             else
@@ -249,7 +249,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.filter:
                             bool testsok = false;
-                            Report("Reading egg located at box " + (currentbox + 1) + " slot  " + (currentslot + 1));
+                            Report("Bot: Read recevied egg");
                             waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
                             dataready = await waitTaskint;
                             if (dataready >= 0)
@@ -273,7 +273,7 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = 2;
-                                Report("Error detected");
+                                Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             if (testsok)
@@ -287,7 +287,7 @@ namespace ntrbase.Bot
                             {
                                 if (mode == 1 || mode == 2)
                                 {
-                                    Report("No match found");
+                                    Report("Bot: No match found");
                                     botresult = 3;
                                 }
                                 else
@@ -299,13 +299,13 @@ namespace ntrbase.Bot
                         case (int)breedbotstates.testspassed:
                             if (mode == 1)
                             {
-                                Report("All tests passed");
+                                Report("Bot: All tests passed");
                                 botresult = 4;
                                 finishmessage = "Finished. A match was found at box " + (currentbox + 1) + ", slot " + (currentslot + 1) + ", using filter #";
                             }
                             else if (mode == 2)
                             {
-                                Report("ESV/TSV match found");
+                                Report("Bot: ESV/TSV match found");
                                 botresult = 5;
                                 finishmessage = "Finished. A match was found at box " + (currentbox + 1) + ", slot " + (currentslot + 1) + ", the ESV/TSV value is: " + currentesv;
                             }
@@ -313,12 +313,12 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.botexit:
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 7 Breding bot");
                             botstop = true;
                             break;
 
                         default:
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 7 Breding bot");
                             botresult = -1;
                             botstop = true;
                             break;
@@ -327,6 +327,7 @@ namespace ntrbase.Bot
                     { // Too many attempts
                         if (maxreconnect > 0)
                         {
+                            Report("Bot: Try reconnection to fix error");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             maxreconnect--;
                             if (await waitTaskbool)
@@ -342,7 +343,7 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            Report("Bot stop");
+                            Report("Bot: STOP Gen 7 Breding bot");
                             botstop = true;
                         }
                     }
@@ -351,9 +352,11 @@ namespace ntrbase.Bot
             }
             catch (Exception ex)
             {
+                Report("Bot: Exception detected:");
                 Report(ex.Source);
                 Report(ex.Message);
                 Report(ex.StackTrace);
+                Report("Bot: STOP Gen 7 Breding bot");
                 MessageBox.Show(ex.Message);
                 return -1;
             }
@@ -361,7 +364,7 @@ namespace ntrbase.Bot
 
         private void Report(string log)
         {
-            Program.gCmdWindow.Addlog(log);
+            Program.gCmdWindow.addtoLog(log);
         }
 
         private void getNextSlot()

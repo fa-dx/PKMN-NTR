@@ -46,7 +46,6 @@ namespace ntrbase
         public PKHeX dumpedPKHeX = new PKHeX();
         private static string numberPattern = " ({0})";
 
-
         // Variables for update checking
         internal GitHubClient Github;
         public string updateURL = null;
@@ -310,24 +309,24 @@ namespace ntrbase
         {
             try
             {
-                Addlog("Look for updates");
+                addtoLog("GUI: Look for updates");
                 // Get current
                 int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
                 int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
                 int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
                 int revision = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
-                Addlog("Current version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+                addtoLog("GUI: Current version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
 
                 // Get latest stable
                 Github = new GitHubClient(new ProductHeaderValue("PKMN-NTR-UpdateCheck"));
                 Release lateststable = await Github.Repository.Release.GetLatest("drgoku282", "PKMN-NTR");
                 int[] verlatest = Array.ConvertAll(lateststable.TagName.Split('.'), int.Parse);
-                Addlog("Last stable: " + lateststable.TagName);
+                addtoLog("GUI: Last stable: " + lateststable.TagName);
 
                 // Look for latest stable
                 if (verlatest[0] > major || verlatest[1] > minor || verlatest[2] > build)
                 {
-                    Addlog("Update found!");
+                    addtoLog("GUI: Update found!");
                     SetText(updateLabel, "Version " + lateststable.TagName + " is available.");
                     updateURL = lateststable.HtmlUrl;
                     DialogResult result = MessageBox.Show("Version " + lateststable.TagName + " is available.\r\nDo you want to go to GitHub and download it?", "Update Available", MessageBoxButtons.YesNo);
@@ -338,26 +337,26 @@ namespace ntrbase
                 { // Look for beta
                     IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("drgoku282", "PKMN-NTR");
                     Release latestbeta = releases.FirstOrDefault(rel => rel.Prerelease);
-                    Addlog("Last preview: " + latestbeta.TagName);
+                    addtoLog("GUI: Last preview: " + latestbeta.TagName);
                     if (latestbeta != null)
                     {
                         int[] verbeta = Array.ConvertAll(latestbeta.TagName.Split('.'), int.Parse);
                         if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build || verbeta[3] > revision)
                         {
-                            Addlog("New preview version found");
+                            addtoLog("GUI: New preview version found");
                             SetText(updateLabel, "Preview version " + latestbeta.TagName + " is available.");
                             updateURL = latestbeta.HtmlUrl;
                         }
                         else
                         {
-                            Addlog("PKMN-NTR is up to date");
+                            addtoLog("GUI: PKMN-NTR is up to date");
                             SetText(updateLabel, "PKMN-NTR is up to date.");
                             updateURL = null;
                         }
                     }
                     else
                     {
-                        Addlog("PKMN-NTR is up to date");
+                        addtoLog("GUI: PKMN-NTR is up to date");
                         SetText(updateLabel, "PKMN-NTR is up to date.");
                         updateURL = null;
                     }
@@ -366,8 +365,8 @@ namespace ntrbase
             catch (Exception ex)
             {
                 updateURL = null;
-                Addlog("An error has ocurred while checking for updates:");
-                Addlog(ex.Message);
+                addtoLog("GUI: An error has ocurred while checking for updates:");
+                addtoLog(ex.Message);
                 MessageBox.Show(ex.Message);
                 SetText(updateLabel, "Update not found.");
             }
@@ -2772,6 +2771,11 @@ namespace ntrbase
 
         #region Thread Safety
 
+        public void addtoLog(string msg)
+        {
+            Program.gCmdWindow.BeginInvoke(Program.gCmdWindow.delAddLog, msg);
+        }
+
         delegate void SetTextDelegate(Control ctrl, string text);
 
         public static void SetText(Control ctrl, string text)
@@ -3078,6 +3082,7 @@ namespace ntrbase
 
         public void HandleRAMread(uint value)
         {
+            addtoLog("NTR: Read sucessful - 0x" + value.ToString("X8"));
             SetText(readResult, "0x" + value.ToString("X8"));
         }
 
@@ -3122,119 +3127,119 @@ namespace ntrbase
                 foreach (DataGridViewRow row in filters.Rows)
                 {
                     currentfilter++;
-                    Addlog("Analyze pokémon using filter # " + currentfilter);
+                    addtoLog("Filter: Analyze pokémon using filter # " + currentfilter);
                     failedtests = 0;
                     // Test shiny
                     if ((int)row.Cells[0].Value == 1)
                     {
                         if (dumpedPKHeX.isShiny)
-                            Addlog("Shiny: PASS");
+                            addtoLog("Filter: Shiny - PASS");
                         else
                         {
-                            Addlog("Shiny: FAIL");
+                            addtoLog("Filter: Shiny - FAIL");
                             failedtests++;
                         }
                     }
                     else
-                        Addlog("Shiny: Don't care");
+                        addtoLog("Filter: Shiny - Don't care");
                     // Test nature
                     if ((int)row.Cells[1].Value < 0 || dumpedPKHeX.Nature == (int)row.Cells[1].Value)
-                        Addlog("Nature: PASS");
+                        addtoLog("Filter: Nature - PASS");
                     else
                     {
-                        Addlog("Nature: FAIL");
+                        addtoLog("Filter: Nature - FAIL");
                         failedtests++;
                     }
                     // Test Ability
                     if ((int)row.Cells[2].Value < 0 || (dumpedPKHeX.Ability - 1) == (int)row.Cells[2].Value)
-                        Addlog("Ability: PASS");
+                        addtoLog("Filter: Ability - PASS");
                     else
                     {
-                        Addlog("Ability: FAIL");
+                        addtoLog("Filter: Ability - FAIL");
                         failedtests++;
                     }
                     // Test Hidden Power
                     if ((int)row.Cells[3].Value < 0 || getHiddenPower() == (int)row.Cells[3].Value)
-                        Addlog("Hidden Power: PASS");
+                        addtoLog("Filter: Hidden Power - PASS");
                     else
                     {
-                        Addlog("Hidden Power: FAIL");
+                        addtoLog("Filter: Hidden Power - FAIL");
                         failedtests++;
                     }
                     // Test Gender
                     if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == dumpedPKHeX.Gender)
-                        Addlog("Gender: PASS");
+                        addtoLog("Filter: Gender - PASS");
                     else
                     {
-                        Addlog("Gender: FAIL");
+                        addtoLog("Filter: Gender - FAIL");
                         failedtests++;
                     }
                     // Test HP
                     if (IVCheck((int)row.Cells[5].Value, dumpedPKHeX.IV_HP, (int)row.Cells[6].Value))
-                        Addlog("Hit Points IV: PASS");
+                        addtoLog("Filter: Hit Points IV - PASS");
                     else
                     {
-                        Addlog("Hit Points IV: FAIL");
+                        addtoLog("Filter: Hit Points IV - FAIL");
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_HP == 31)
                         perfectIVs++;
                     // Test Atk
                     if (IVCheck((int)row.Cells[7].Value, dumpedPKHeX.IV_ATK, (int)row.Cells[8].Value))
-                        Addlog("Attack IV: PASS");
+                        addtoLog("Filter: Attack IV - PASS");
                     else
                     {
-                        Addlog("Attack IV: FAIL");
+                        addtoLog("Filter: Attack IV - FAIL");
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_ATK == 31)
                         perfectIVs++;
                     // Test Def
                     if (IVCheck((int)row.Cells[9].Value, dumpedPKHeX.IV_DEF, (int)row.Cells[10].Value))
-                        Addlog("Defense IV: PASS");
+                        addtoLog("Filter: Defense IV - PASS");
                     else
                     {
-                        Addlog("Defense IV: FAIL");
+                        addtoLog("Filter: Defense IV - FAIL");
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_DEF == 31)
                         perfectIVs++;
                     // Test SpA
                     if (IVCheck((int)row.Cells[11].Value, dumpedPKHeX.IV_SPA, (int)row.Cells[12].Value))
-                        Addlog("Special Attack IV: PASS");
+                        addtoLog("Filter: Special Attack IV - PASS");
                     else
                     {
-                        Addlog("Special Attack IV: FAIL");
+                        addtoLog("Filter: Special Attack IV - FAIL");
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPA == 31)
                         perfectIVs++;
                     // Test SpD
                     if (IVCheck((int)row.Cells[13].Value, dumpedPKHeX.IV_SPD, (int)row.Cells[14].Value))
-                        Addlog("Special Defense IV: PASS");
+                        addtoLog("Filter: Special Defense IV - PASS");
                     else
                     {
-                        Addlog("Special Defense IV: FAIL");
+                        addtoLog("Filter: Special Defense IV - FAIL");
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPD == 31)
                         perfectIVs++;
                     // Test Spe
                     if (IVCheck((int)row.Cells[15].Value, dumpedPKHeX.IV_SPE, (int)row.Cells[16].Value))
-                        Addlog("Speed IV: PASS");
+                        addtoLog("Filter: Speed IV - PASS");
                     else
                     {
-                        Addlog("Speed IV: FAIL");
+                        addtoLog("Filter: Speed IV - FAIL");
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPE == 31)
                         perfectIVs++;
                     // Test Perfect IVs
                     if (IVCheck((int)row.Cells[17].Value, perfectIVs, (int)row.Cells[18].Value))
-                        Addlog("Perfect IVs: PASS");
+                        addtoLog("Filter: Perfect IVs - PASS");
                     else
                     {
-                        Addlog("Perfect IVs: FAIL");
+                        addtoLog("Filter: Perfect IVs - FAIL");
                         failedtests++;
                     }
                     if (failedtests == 0)
@@ -3757,6 +3762,7 @@ namespace ntrbase
 
         public async Task<long> ReadOpponent()
         {
+            addtoLog("NTR: Read opponent pokémon data");
             SetText(dPID, "");
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
             waitingForData.Add(Program.scriptHelper.data(0x8800000, 0x1FFFF, pid), myArgs);
@@ -3768,7 +3774,10 @@ namespace ntrbase
                     break;
             }
             if (readcount == timeout * 10)
+            {
+                addtoLog("NTR: Read failed");
                 return -2; // No data received
+            }
             for (readcount = 0; readcount < 10; readcount++)
             {
                 await Task.Delay(100);
@@ -3776,18 +3785,25 @@ namespace ntrbase
                     break;
             }
             if (readcount == 10)
+            {
+                addtoLog("NTR: Read failed");
                 return -2; // No data received
+            }
             else if (dumpedPKHeX.Species != 0)
             {
+                addtoLog("NTR: Read sucessful - PID 0x" + dumpedPKHeX.PID.ToString("X8"));
                 return dumpedPKHeX.PID;
             }
             else // Empty slot
+            {
+                addtoLog("NTR: Empty pokémon data");
                 return -1;
+            }
         }
 
         public async Task<bool> Reconnect()
         {
-            Addlog("Reconnect");
+            addtoLog("NTR: Reconnect");
             Program.scriptHelper.connect(host.Text, 8000);
             int waittimeout;
             for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
@@ -3797,9 +3813,15 @@ namespace ntrbase
                     break;
             }
             if (waittimeout < timeout * 10)
+            {
+                addtoLog("NTR: Reconnect sucessful");
                 return true;
+            }
             else
+            {
+                addtoLog("NTR: Reconnect failed");
                 return false;
+            }
         }
 
         public bool CheckSoftResetFilters()
@@ -4030,7 +4052,7 @@ namespace ntrbase
         {
             if (TSVlist.Items.Count > 0)
             {
-                Addlog("Checking egg with ESV: " + esv);
+                addtoLog("Filter: Checking egg with ESV: " + esv);
                 foreach (var tsv in TSVlist.Items)
                 {
                     if (Convert.ToInt32(tsv) == esv)

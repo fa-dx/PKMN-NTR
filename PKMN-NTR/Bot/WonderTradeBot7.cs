@@ -16,7 +16,6 @@ namespace ntrbase.Bot
         private int botstate;
         private int attempts;
         private int maxreconnect;
-        private bool lastreconnect;
         private bool boxchange;
         private bool notradepartner;
         private bool tradeevo;
@@ -70,7 +69,6 @@ namespace ntrbase.Bot
             botstate = (int)botstates.startbot;
             attempts = 0;
             maxreconnect = 10;
-            lastreconnect = false;
             boxchange = true;
             notradepartner = false;
             tradeevo = false;
@@ -98,7 +96,7 @@ namespace ntrbase.Bot
                     switch (botstate)
                     {
                         case (int)botstates.startbot:
-                            Report("Bot start");
+                            Report("Bot: START Gen 7 Wonder Trade bot");
                             if (collectFC)
                                 botstate = (int)botstates.initializeFC1;
                             else
@@ -111,7 +109,7 @@ namespace ntrbase.Bot
                             {
                                 attempts = 0;
                                 currentTotalFC = Program.helper.lastRead;
-                                Report("Current Total FC: " + currentTotalFC);
+                                Report("Bot: Current Total FC: " + currentTotalFC);
                                 botstate = (int)botstates.initializeFC2;
                             }
                             else
@@ -128,7 +126,7 @@ namespace ntrbase.Bot
                             {
                                 attempts = 0;
                                 currentFC = Program.helper.lastRead;
-                                Report("Current FC: " + currentFC);
+                                Report("Bot: Current FC: " + currentFC);
                                 Program.gCmdWindow.updateFCfields(currentTotalFC, currentFC);
                                 int i = 0;
                                 while (currentTotalFC >= nextFC)
@@ -136,7 +134,7 @@ namespace ntrbase.Bot
                                     nextFC = FCtable[i];
                                     i++;
                                 }
-                                Report("Points for next level: " + (nextFC - currentTotalFC));
+                                Report("Bot: Points for next level: " + (nextFC - currentTotalFC));
                                 botstate = (int)botstates.readpoke;
                             }
                             else
@@ -148,18 +146,18 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.readpoke:
-                            Report("Read pokémon from box " + (currentbox + 1) + ", slot " + (currentslot + 1));
+                            Report("Bot: Look for pokemon to trade");
                             waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
                             long dataready = await waitTaskint;
                             switch (dataready)
                             {
                                 case -2:
                                     botresult = 2;
-                                    Report("Error detected");
+                                    Report("Bot: Error detected");
                                     attempts = 11;
                                     break;
                                 case -1:
-                                    Report("Slot is empty");
+                                    Report("Bot: Slot is empty");
                                     getNextSlot();
                                     if (quantity > 0) // Test if there are more trades
                                         botstate = (int)botstates.readpoke;
@@ -172,7 +170,7 @@ namespace ntrbase.Bot
                                 default:
                                     {
                                         currentPID = Convert.ToUInt32(dataready);
-                                        Report("Pokémon found, PID: 0x" + currentPID.ToString("X8"));
+                                        Report("Bot: Pokemon found");
                                         botstate = (int)botstates.presstradebutton;
                                     }
                                     break;
@@ -180,7 +178,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.presstradebutton:
-                            Report("Press Trade Button");
+                            Report("Bot: Press Trade Button");
                             waitTaskbool = Program.helper.waittouch(200, 120);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testtrademenu;
@@ -193,7 +191,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.testtrademenu:
-                            Report("Test if the trademenu is shown");
+                            Report("Bot: Test if the trademenu is shown");
                             waitTaskbool = Program.helper.timememoryinrange(trademenuOff, trademenuIN, 0x1000000, 100, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
@@ -210,7 +208,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.pressWTbutton:
-                            Report("Press Trade Button");
+                            Report("Bot: Press Wonder Trade");
                             waitTaskbool = Program.helper.waittouch(160, 160);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testWTscreen;
@@ -223,7 +221,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.testWTscreen:
-                            Report("Test if the Wonder Trade screen is shown");
+                            Report("Bot: Test if the Wonder Trade screen is shown");
                             waitTaskbool = Program.helper.timememoryinrange(wtscreenOff, wtscreenIN, 0x10000, 100, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
@@ -240,7 +238,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.pressWTstart:
-                            Report("Press Start");
+                            Report("Bot: Press Start");
                             await Task.Delay(1000);
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + delaytime);
@@ -248,7 +246,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.testboxes:
-                            Report("Test if the boxes are shown");
+                            Report("Bot: Test if the boxes are shown");
                             waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesIN, 0x10000, 100, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
@@ -276,7 +274,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.touchboxview:
-                            Report("Touch box view");
+                            Report("Bot: Touch box view");
                             waitTaskbool = Program.helper.waittouch(140, 230);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testboxview;
@@ -289,7 +287,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.testboxview:
-                            Report("Test if box view is shown");
+                            Report("Bot: Test if box view is shown");
                             await Task.Delay(1000);
                             waitTaskbool = Program.helper.timememoryinrange(boxesviewOff, boxesviewIN, 0x1000000, 100, 5000);
                             if (await waitTaskbool)
@@ -306,7 +304,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.touchnewbox:
-                            Report("Touch new box");
+                            Report("Bot: Touch new box");
                             await Task.Delay(250);
                             waitTaskbool = Program.helper.waittouch(LookupTable.boxposX7[currentbox], LookupTable.boxposY7[currentbox]);
                             if (await waitTaskbool)
@@ -323,7 +321,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.selectnewbox:
-                            Report("Select new box");
+                            Report("Bot: Select new box");
                             await Task.Delay(250);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
@@ -337,7 +335,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.testboxviewout:
-                            Report("Test if box view is not shown");
+                            Report("Bot: Test if box view is not shown");
                             waitTaskbool = Program.helper.timememoryinrange(boxesviewOff, boxesviewOUT, 0x1000000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -353,7 +351,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.touchpoke:
-                            Report("Touch pokémon");
+                            Report("Bot: Touch pokémon");
                             waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[currentslot], LookupTable.pokeposY7[currentslot]);
                             if (await waitTaskbool)
                             {
@@ -369,7 +367,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.starttrade:
-                            Report("Press Start");
+                            Report("Bot: Press Start");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.confirmtrade;
@@ -382,7 +380,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.confirmtrade:
-                            Report("Press Yes");
+                            Report("Bot: Press Yes");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testboxesout;
@@ -395,7 +393,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.testboxesout:
-                            Report("Test if the boxes are not shown");
+                            Report("Bot: Test if the boxes are not shown");
                             waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesOUT, 0x10000, 100, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
@@ -413,10 +411,9 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.waitfortrade:
-                            Report("Wait for trade");
+                            Report("Bot: Wait for trade");
                             waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
                             uint newPID = Convert.ToUInt32(await waitTaskint);
-                            Report("PID: 0x" + newPID.ToString("X8"));
                             if (currentPID == newPID)
                             {
                                 await Task.Delay(2000);
@@ -428,7 +425,7 @@ namespace ntrbase.Bot
                             }
                             else
                             {
-                                Report("Wait 35 seconds");
+                                Report("Bot: Wait 35 seconds");
                                 tradeTimer.Stop();
                                 await Task.Delay(35000);
                                 botstate = (int)botstates.testtradefinish;
@@ -436,7 +433,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.testtradefinish:
-                            Report("Test if the trade is finished");
+                            Report("Bot: Test if the trade is finished");
                             waitTaskbool = Program.helper.memoryinrange(trademenuOff, trademenuOUT, 0x1000000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
@@ -444,6 +441,8 @@ namespace ntrbase.Bot
                                 attempts = 0;
                                 if (collectFC && !notradepartner)
                                     botstate = (int)botstates.collectFC1;
+                                else if (notradepartner)
+                                    botstate = (int)botstates.tryfinish;
                                 else
                                     botstate = (int)botstates.finishtrade;
                             }
@@ -465,12 +464,12 @@ namespace ntrbase.Bot
                         case (int)botstates.tryfinish:
                             if (!tradeevo)
                             {
-                                Report("Press B button");
+                                Report("Bot: Press B button");
                                 waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             }
                             else
                             {
-                                Report("Trade evolution detected, press A button");
+                                Report("Bot: Trade evolution detected, press A button");
                                 waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             }
                             if (await waitTaskbool)
@@ -502,7 +501,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.collectFC1:
-                            Report("Trigger Dialog");
+                            Report("Bot: Trigger Dialog");
                             await Task.Delay(1000);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
@@ -516,7 +515,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.collectFC2:
-                            Report("Test if dialog has started");
+                            Report("Bot: Test if dialog has started");
                             waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
                             if (await waitTaskbool)
                             {
@@ -532,7 +531,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.collectFC3:
-                            Report("Continue dialog");
+                            Report("Bot: Continue dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.collectFC4;
@@ -545,7 +544,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.collectFC4:
-                            Report("Test if dialog has finished");
+                            Report("Bot: Test if dialog has finished");
                             waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x01);
                             if (await waitTaskbool || Program.helper.lastRead == 0x0D)
                             {
@@ -561,16 +560,16 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.collectFC5:
-                            Report("Test FC");
+                            Report("Bot: Test FC");
                             waitTaskbool = Program.helper.waitNTRread(totalFCoff);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
                                 currentTotalFC = Program.helper.lastRead;
-                                Report("Current Total FC: " + currentTotalFC);
+                                Report("Bot: Current Total FC: " + currentTotalFC);
                                 if (currentTotalFC >= nextFC)
                                 {
-                                    Report("Festival Plaza level up");
+                                    Report("Bot: Festival Plaza level up");
                                     getNextSlot();
                                     botresult = 3;
                                     botstate = (int)botstates.exitbot;
@@ -587,34 +586,27 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.exitbot:
-                            Report("Bot stop");
+                            Report("Bot: Stop Gen 7 Wonder Trade bot");
                             botstop = true;
                             break;
 
                         default:
-                            Report("Bot stop");
+                            Report("Bot: Stop Gen 7 Wonder Trade bot");
                             botresult = -1;
                             botstop = true;
                             break;
                     }
                     if (attempts > 10)
                     { // Too many attempts
-                        if (lastreconnect)
+                        if (maxreconnect > 0)
                         {
-                            Report("Two consecutive reconnect attempts detected. Connection error?");
-                            attempts = 0;
-                            Program.helper.quicktouch(160, 230, 250);
-                            await Task.Delay(1000);
-                        }
-                        else if (maxreconnect > 0)
-                        {
+                            Report("Bot: Try reconnection to fix error");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             maxreconnect--;
                             if (await waitTaskbool)
                             {
                                 await Task.Delay(5000);
                                 attempts = 0;
-                                lastreconnect = true;
                             }
                             else
                             {
@@ -624,22 +616,21 @@ namespace ntrbase.Bot
                         }
                         else
                         {
-                            Report("Bot stop");
+                            Report("Bot: Stop Gen 7 Wonder Trade bot");
                             botstop = true;
                         }
                     }
-                    else
-                        lastreconnect = false;
+                    tradeTimer.Stop();
                 }
-                tradeTimer.Stop();
                 return botresult;
             }
             catch (Exception ex)
             {
-                tradeTimer.Stop();
+                Report("Bot: Exception detected:");
                 Report(ex.Source);
                 Report(ex.Message);
                 Report(ex.StackTrace);
+                Report("Bot: STOP Gen 7 Wonder Trade bot");
                 MessageBox.Show(ex.Message);
                 return -1;
             }
@@ -647,7 +638,7 @@ namespace ntrbase.Bot
 
         private void Report(string log)
         {
-            Program.gCmdWindow.Addlog(log);
+            Program.gCmdWindow.addtoLog(log);
         }
 
         private void getNextSlot()
@@ -668,7 +659,7 @@ namespace ntrbase.Bot
         private void tradeTimer_Tick(object sender, EventArgs e)
         {
             tradeTimer.Stop();
-            Report("Trade timed out");
+            Report("Bot: Trade timed out");
             notradepartner = true;
         }
     }
