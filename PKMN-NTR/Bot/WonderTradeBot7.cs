@@ -307,6 +307,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.touchnewbox:
                             Report("Touch new box");
+                            await Task.Delay(250);
                             waitTaskbool = Program.helper.waittouch(LookupTable.boxposX7[currentbox], LookupTable.boxposY7[currentbox]);
                             if (await waitTaskbool)
                             {
@@ -323,6 +324,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.selectnewbox:
                             Report("Select new box");
+                            await Task.Delay(250);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testboxviewout;
