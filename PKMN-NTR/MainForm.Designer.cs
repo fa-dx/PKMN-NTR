@@ -2882,7 +2882,7 @@
             this.RunWTbot.Name = "RunWTbot";
             this.RunWTbot.Size = new System.Drawing.Size(90, 23);
             this.RunWTbot.TabIndex = 3;
-            this.RunWTbot.Text = "Run til zero";
+            this.RunWTbot.Text = "Run once";
             this.RunWTbot.UseVisualStyleBackColor = true;
             this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click_1);
             // 

@@ -165,7 +165,7 @@ namespace ntrbase.Helpers
                             PKHeX pkFound = new PKHeX();
                             pkFound.Data = dataFound;
 
-                            if (pkFound.Species >= 1 && pkFound.Species <= 821)
+                            if (pkFound.Species >= 1 && pkFound.Species <= 802)
                             {
                                 //Almost certainly valid
                                 results.Add(new Result { data = dataFound, offset = i });
