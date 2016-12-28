@@ -245,8 +245,9 @@
             this.label71 = new System.Windows.Forms.Label();
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
+            this.EggSeed = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.PokeDiggerBtn = new System.Windows.Forms.Button();
-            this.ReloadFields = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label55 = new System.Windows.Forms.Label();
             this.pokeTotalFC = new System.Windows.Forms.Button();
@@ -397,6 +398,7 @@
             this.buttonWTStartEndless = new System.Windows.Forms.Button();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
+            this.ReloadFields = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
@@ -3162,6 +3164,8 @@
             // tabEditTrainer
             // 
             this.tabEditTrainer.BackColor = System.Drawing.SystemColors.Control;
+            this.tabEditTrainer.Controls.Add(this.EggSeed);
+            this.tabEditTrainer.Controls.Add(this.label7);
             this.tabEditTrainer.Controls.Add(this.PokeDiggerBtn);
             this.tabEditTrainer.Controls.Add(this.ReloadFields);
             this.tabEditTrainer.Controls.Add(this.groupBox5);
@@ -3174,6 +3178,23 @@
             this.tabEditTrainer.TabIndex = 0;
             this.tabEditTrainer.Text = "Edit Save";
             // 
+            // EggSeed
+            // 
+            this.EggSeed.Location = new System.Drawing.Point(396, 317);
+            this.EggSeed.Name = "EggSeed";
+            this.EggSeed.ReadOnly = true;
+            this.EggSeed.Size = new System.Drawing.Size(155, 20);
+            this.EggSeed.TabIndex = 6;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(333, 320);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Egg Seed:";
+            // 
             // PokeDiggerBtn
             // 
             this.PokeDiggerBtn.Location = new System.Drawing.Point(10, 351);
@@ -3183,16 +3204,6 @@
             this.PokeDiggerBtn.Text = "PokeDigger";
             this.PokeDiggerBtn.UseVisualStyleBackColor = true;
             this.PokeDiggerBtn.Click += new System.EventHandler(this.PokeDiggerBtn_Click);
-            // 
-            // ReloadFields
-            // 
-            this.ReloadFields.Location = new System.Drawing.Point(336, 321);
-            this.ReloadFields.Name = "ReloadFields";
-            this.ReloadFields.Size = new System.Drawing.Size(215, 23);
-            this.ReloadFields.TabIndex = 3;
-            this.ReloadFields.Text = "Reload Fields";
-            this.ReloadFields.UseVisualStyleBackColor = true;
-            this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
             // 
             // groupBox5
             // 
@@ -4882,6 +4893,16 @@
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
             // 
+            // ReloadFields
+            // 
+            this.ReloadFields.Location = new System.Drawing.Point(336, 343);
+            this.ReloadFields.Name = "ReloadFields";
+            this.ReloadFields.Size = new System.Drawing.Size(215, 23);
+            this.ReloadFields.TabIndex = 3;
+            this.ReloadFields.Text = "Reload Fields";
+            this.ReloadFields.UseVisualStyleBackColor = true;
+            this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(274, 152);
@@ -5421,6 +5442,8 @@
         private System.Windows.Forms.Label updateLabel;
         private System.Windows.Forms.Button buttonWTStartEndless;
         private System.Windows.Forms.Button DumpInstructionsBtn;
+        private System.Windows.Forms.TextBox EggSeed;
+        private System.Windows.Forms.Label label7;
     }
 }
 
