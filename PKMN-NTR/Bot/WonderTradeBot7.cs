@@ -305,7 +305,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.touchnewbox:
                             Report("Bot: Touch new box");
-                            await Task.Delay(250);
+                            await Task.Delay(500);
                             waitTaskbool = Program.helper.waittouch(LookupTable.boxposX7[currentbox], LookupTable.boxposY7[currentbox]);
                             if (await waitTaskbool)
                             {
@@ -322,7 +322,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.selectnewbox:
                             Report("Bot: Select new box");
-                            await Task.Delay(250);
+                            await Task.Delay(500);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testboxviewout;
@@ -336,6 +336,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.testboxviewout:
                             Report("Bot: Test if box view is not shown");
+                            await Task.Delay(500);
                             waitTaskbool = Program.helper.timememoryinrange(boxesviewOff, boxesviewOUT, 0x1000000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -352,6 +353,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.touchpoke:
                             Report("Bot: Touch pokémon");
+                            await Task.Delay(500);
                             waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[currentslot], LookupTable.pokeposY7[currentslot]);
                             if (await waitTaskbool)
                             {
@@ -368,6 +370,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.starttrade:
                             Report("Bot: Press Start");
+                            await Task.Delay(500);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.confirmtrade;
@@ -381,6 +384,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.confirmtrade:
                             Report("Bot: Press Yes");
+                            await Task.Delay(500);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testboxesout;
@@ -667,6 +671,7 @@ namespace ntrbase.Bot
         {
             tradeTimer.Stop();
             Report("Bot: Trade timed out");
+            attempts = -40;
             notradepartner = true;
         }
     }

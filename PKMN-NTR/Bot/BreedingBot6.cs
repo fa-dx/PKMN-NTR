@@ -600,7 +600,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.testboxes:
                             Report("Test if the boxes are shown");
-                            await Task.Delay(500);
+                            await Task.Delay(1000);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, organizeBoxIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
