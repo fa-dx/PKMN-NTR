@@ -370,34 +370,43 @@ namespace ntrbase.Helpers
 
         public async Task<long> waitPokeRead(int box, int slot)
         {
-            Report("NTR: Read pokémon data at box " + (box + 1) + ", slot " + (slot + 1));
-            uint dumpOff = Program.gCmdWindow.boxOff + (Convert.ToUInt32(box * BOXSIZE + slot) * POKEBYTES);
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
-            Program.gCmdWindow.updateDumpBoxes(box, slot);
-            Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(dumpOff, POKEBYTES, pid), myArgs);
-            int readcount = 0;
-            for (readcount = 0; readcount < timeout * 10; readcount++)
+            try
             {
-                await Task.Delay(100);
-                if (CompareLastLog("finished"))
-                    break;
+                Report("NTR: Read pokémon data at box " + (box + 1) + ", slot " + (slot + 1));
+                uint dumpOff = Program.gCmdWindow.boxOff + (Convert.ToUInt32(box * BOXSIZE + slot) * POKEBYTES);
+                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
+                Program.gCmdWindow.updateDumpBoxes(box, slot);
+                Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(dumpOff, POKEBYTES, pid), myArgs);
+                int readcount = 0;
+                for (readcount = 0; readcount < timeout * 10; readcount++)
+                {
+                    await Task.Delay(100);
+                    if (CompareLastLog("finished"))
+                        break;
+                }
+                if (readcount == timeout * 10)
+                {
+                    Report("NTR: Read failed");
+                    return -2; // No data received
+                }
+                else if (validator.Species != 0)
+                {
+                    Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
+                    Program.gCmdWindow.updateTabs();
+                    Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
+                    return validator.PID;
+                }
+                else // Empty slot
+                {
+                    Report("NTR: Empty pokémon data");
+                    return -1;
+                }
             }
-            if (readcount == timeout * 10)
+            catch (Exception ex)
             {
-                Report("NTR: Read failed");
+                Report("NTR: Read failed with exception:");
+                Report(ex.Message);
                 return -2; // No data received
-            }
-            else if (validator.Species != 0)
-            {
-                Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
-                Program.gCmdWindow.updateTabs();
-                Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
-                return validator.PID;
-            }
-            else // Empty slot
-            {
-                Report("NTR: Empty pokémon data");
-                return -1;
             }
         }
 
@@ -436,7 +445,7 @@ namespace ntrbase.Helpers
         public async Task<bool> memoryinrange(uint address, uint value, uint range)
         {
             Report("NTR: Read data at address 0x" + address.ToString("X8"));
-            Report("NTR: Expected value 0x" + value.ToString("X8") + " to 0x" + (value + range - 1));
+            Report("NTR: Expected value 0x" + value.ToString("X8") + " to 0x" + (value + range - 1).ToString("X8"));
             lastRead = 0;
             WriteLastLog("");
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMemoryRead, null);
@@ -472,7 +481,7 @@ namespace ntrbase.Helpers
         public async Task<bool> timememoryinrange(uint address, uint value, uint range, int tick, int maxtime)
         {
             Report("NTR: Read data at address 0x" + address.ToString("X8") + " during " + maxtime + " ms");
-            Report("NTR: Expected value 0x" + value.ToString("X8") + " to 0x" + (value + range - 1));
+            Report("NTR: Expected value 0x" + value.ToString("X8") + " to 0x" + (value + range - 1).ToString("X8"));
             int time = 0;
             while (time < maxtime)
             { // Ask for data

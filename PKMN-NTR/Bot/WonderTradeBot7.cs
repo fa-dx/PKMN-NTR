@@ -413,7 +413,15 @@ namespace ntrbase.Bot
                         case (int)botstates.waitfortrade:
                             Report("Bot: Wait for trade");
                             waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
-                            uint newPID = Convert.ToUInt32(await waitTaskint);
+                            uint newPID;
+                            try
+                            {
+                                newPID = Convert.ToUInt32(await waitTaskint);
+                            }
+                            catch
+                            {
+                                newPID = currentPID;
+                            }
                             if (currentPID == newPID)
                             {
                                 await Task.Delay(2000);
@@ -441,8 +449,6 @@ namespace ntrbase.Bot
                                 attempts = 0;
                                 if (collectFC && !notradepartner)
                                     botstate = (int)botstates.collectFC1;
-                                else if (notradepartner)
-                                    botstate = (int)botstates.tryfinish;
                                 else
                                     botstate = (int)botstates.finishtrade;
                             }
@@ -620,12 +626,13 @@ namespace ntrbase.Bot
                             botstop = true;
                         }
                     }
-                    tradeTimer.Stop();
                 }
+                tradeTimer.Stop();
                 return botresult;
             }
             catch (Exception ex)
             {
+                tradeTimer.Stop();
                 Report("Bot: Exception detected:");
                 Report(ex.Source);
                 Report(ex.Message);
