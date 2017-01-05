@@ -1805,6 +1805,14 @@ namespace ntrbase
                 dumpedPKHeX.Species = species.SelectedIndex + 1;
                 dumpedPKHeX.Nature = nature.SelectedIndex;
                 dumpedPKHeX.Gender = genderBox.SelectedIndex;
+                if (dumpedPKHeX.CurrentHandler == 0)
+                {
+                    dumpedPKHeX.OT_Friendship = (int)friendship.Value;
+                }
+                else
+                {
+                    dumpedPKHeX.HT_Friendship = (int)friendship.Value;
+                }
 
                 switch (ability.SelectedIndex)
                 {
