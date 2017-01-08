@@ -410,6 +410,46 @@ namespace ntrbase.Helpers
             }
         }
 
+        public async Task<long> waitPokeRead(uint offset)
+        {
+            try
+            {
+                Report("NTR: Read pokémon data at offset 0x" + offset.ToString("X8"));
+                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
+                Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(offset, POKEBYTES, pid), myArgs);
+                int readcount = 0;
+                for (readcount = 0; readcount < timeout * 10; readcount++)
+                {
+                    await Task.Delay(100);
+                    if (CompareLastLog("finished"))
+                        break;
+                }
+                if (readcount == timeout * 10)
+                {
+                    Report("NTR: Read failed");
+                    return -2; // No data received
+                }
+                else if (validator.Species != 0)
+                {
+                    Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
+                    Program.gCmdWindow.updateTabs();
+                    Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
+                    return validator.PID;
+                }
+                else // Empty slot
+                {
+                    Report("NTR: Empty pokémon data");
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Report("NTR: Read failed with exception:");
+                Report(ex.Message);
+                return -2; // No data received
+            }
+        }
+
         public async Task<long> waitPartyRead(uint partyOff, int slot)
         {
             Report("NTR: Read pokémon data at party slot " + (slot + 1));

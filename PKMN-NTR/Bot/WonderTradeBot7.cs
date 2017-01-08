@@ -6,7 +6,7 @@ namespace ntrbase.Bot
 {
     class WonderTradeBot7
     {
-        private enum botstates { startbot, initializeFC1, initializeFC2, readpoke, writelastbox,  presstradebutton, testtrademenu, pressWTbutton, testWTscreen, pressWTstart, testboxes, touchpoke, testpoke,  starttrade, confirmtrade, testboxesout, waitfortrade, testtradefinish, tryfinish, finishtrade, collectFC1, collectFC2, collectFC3, collectFC4, collectFC5, exitbot };
+        private enum botstates { startbot, initializeFC1, initializeFC2, readpoke, writelastbox, presstradebutton, testtrademenu, pressWTbutton, testWTscreen, pressWTstart, testboxes, touchpoke, canceltouch, testpoke, starttrade, confirmtrade, testboxesout, waitfortrade, testtradefinish, tryfinish, finishtrade, collectFC1, collectFC2, collectFC3, collectFC4, collectFC5, exitbot };
 
         // Bot variables
         public int botresult;
@@ -57,7 +57,7 @@ namespace ntrbase.Bot
         private uint dialogOff = 0x63DD68;
         private uint dialogIn = 0x0C;
         private uint dialogOut = 0x0B;
-        //private uint toppkmOff = 0x30000298;
+        private uint toppkmOff = 0x30000298;
         private uint currentboxOff = 0x330D982F;
 
         #region FCtable
@@ -296,13 +296,57 @@ namespace ntrbase.Bot
                             waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[currentslot], LookupTable.pokeposY7[currentslot]);
                             if (await waitTaskbool)
                             {
-                                attempts = 0;
-                                botstate = (int)botstates.starttrade;
+                                botstate = (int)botstates.testpoke;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 6;
+                                botstate = (int)botstates.touchpoke;
+                            }
+                            break;
+
+                        case (int)botstates.testpoke:
+                            Report("Bot: Test if pokemon is selected");
+                            waitTaskint = Program.helper.waitPokeRead(toppkmOff);
+                            long dataready2 = await waitTaskint;
+                            switch (dataready2)
+                            {
+                                case -2:
+                                case -1:
+                                    botresult = 2;
+                                    Report("Bot: Error detected or slot is empty");
+                                    attempts = 11;
+                                    break;
+                                default:
+                                    {
+                                        if (Convert.ToUInt32(dataready2) == currentPID)
+                                        {
+                                            attempts = 0;
+                                            botstate = (int)botstates.starttrade;
+                                        }
+                                        else
+                                        {
+                                            attempts++;
+                                            botresult = -1;
+                                            botstate = (int)botstates.canceltouch;
+                                        }
+                                    }
+                                    break;
+                            }
+                            break;
+
+                        case (int)botstates.canceltouch:
+                            Report("Bot: Cancel selection");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
+                            if (await waitTaskbool)
+                            {
+                                botstate = (int)botstates.touchpoke;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
                                 botstate = (int)botstates.touchpoke;
                             }
                             break;
@@ -405,7 +449,7 @@ namespace ntrbase.Bot
                                     {
                                         Report("Bot: Communication error detected");
                                         botresult = 4;
-                                        botstate = (int)botstates.exitbot;
+                                        attempts = 11;
                                     }
                                     else
                                     {
