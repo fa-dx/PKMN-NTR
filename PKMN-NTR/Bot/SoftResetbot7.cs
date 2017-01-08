@@ -6,7 +6,7 @@ namespace ntrbase.Bot
 {
     class SoftResetbot7
     {
-        public enum srbotStates { botstart, startdialog, testdialog1, readparty, continuedialog, testdialog2, exitdialog, filter, testspassed, softreset, reconnect, connpatch, nickname, botexit };
+        public enum srbotStates { botstart, selectmode, startdialog, testdialog1, readparty, continuedialog, testdialog2, exitdialog, filter, testspassed, softreset, reconnect, connpatch, nickname, triggerbattle, testdialog3, continuedialog2, readopp, botexit };
 
         // Bot variables
         public int botresult;
@@ -17,6 +17,7 @@ namespace ntrbase.Bot
         private int botState;
         private int attempts;
         private int maxreconnect;
+        private long dataready;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
 
@@ -28,6 +29,7 @@ namespace ntrbase.Bot
         private uint dialogIn = 0x09;
         private uint dialogOut = 0x08;
         private uint partyOff = 0x34195E10;
+        private uint opponentOff = 0x3254F4AC;
 
         public SoftResetbot7(int selectedmode)
         {
@@ -52,8 +54,14 @@ namespace ntrbase.Bot
                     {
                         case (int)srbotStates.botstart:
                             Report("Bot: START Gen 7 Soft-reset bot");
+                            botState = (int)srbotStates.selectmode;
+                            break;
+
+                        case (int)srbotStates.selectmode:
                             if (mode == 0 || mode == 1)
                                 botState = (int)srbotStates.startdialog;
+                            else if (mode == 2)
+                                botState = (int)srbotStates.triggerbattle;
                             else
                                 botState = (int)srbotStates.botexit;
                             break;
@@ -145,7 +153,7 @@ namespace ntrbase.Bot
                         case (int)srbotStates.readparty:
                             Report("Bot: Try to read party");
                             waitTaskint = Program.helper.waitPartyRead(partyOff, 1);
-                            long dataready = await waitTaskint;
+                            dataready = await waitTaskint;
                             if (dataready >= 0)
                             {
                                 attempts = 0;
@@ -209,7 +217,7 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)srbotStates.startdialog;
+                                botState = (int)srbotStates.selectmode;
                             }
                             else
                             {
@@ -231,6 +239,65 @@ namespace ntrbase.Bot
                                 attempts++;
                                 botresult = 7;
                                 botState = (int)srbotStates.nickname;
+                            }
+                            break;
+
+                        case (int)srbotStates.triggerbattle:
+                            Report("Bot: Try to trigger battle");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botState = (int)srbotStates.testdialog3;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotStates.triggerbattle;
+                            }
+                            break;
+
+                        case (int)srbotStates.testdialog3:
+                            Report("Bot: Test if dialog has started");
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botState = (int)srbotStates.continuedialog2;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 3;
+                                botState = (int)srbotStates.triggerbattle;
+                            }
+                            break;
+
+                        case (int)srbotStates.continuedialog2:
+                            Report("Bot: Continue dialog");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botState = (int)srbotStates.readopp;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotStates.continuedialog2;
+                            }
+                            break;
+
+                        case (int)srbotStates.readopp:
+                            Report("Bot: Try to read opponent");
+                            waitTaskint = Program.helper.waitPokeRead(opponentOff);
+                            dataready = await waitTaskint;
+                            if (dataready >= 0)
+                            {
+                                attempts = 0;
+                                botState = (int)srbotStates.filter;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 3;
+                                botState = (int)srbotStates.continuedialog2;
                             }
                             break;
 

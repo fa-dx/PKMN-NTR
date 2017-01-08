@@ -389,7 +389,7 @@ namespace ntrbase.Helpers
                     Report("NTR: Read failed");
                     return -2; // No data received
                 }
-                else if (validator.Species != 0)
+                else if (validator.Species != 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
                 {
                     Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                     Program.gCmdWindow.updateTabs();
@@ -429,7 +429,7 @@ namespace ntrbase.Helpers
                     Report("NTR: Read failed");
                     return -2; // No data received
                 }
-                else if (validator.Species != 0)
+                else if (validator.Species != 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
                 {
                     Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                     Program.gCmdWindow.updateTabs();
@@ -468,7 +468,7 @@ namespace ntrbase.Helpers
                 Report("NTR: Read failed");
                 return -2; // No data received
             }
-            else if (validator.Species != 0)
+            else if (validator.Species != 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
             {
                 Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                 Program.gCmdWindow.updateTabs();

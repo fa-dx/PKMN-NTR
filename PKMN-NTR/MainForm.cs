@@ -35,6 +35,7 @@ namespace ntrbase
         // Program-wide variables
         public enum GameType { None, X, Y, OR, AS, SM };
         public bool gen7;
+        public int MAXSPECIES;
         public uint BOXES;
         public const int BOXSIZE = 30;
         public const int POKEBYTES = 232;
@@ -731,6 +732,7 @@ namespace ntrbase
             {
                 PKXEXT = ".pk7";
                 BOXEXT = "_boxes.ek7";
+                MAXSPECIES = 802;
                 BOXES = 32;
                 fillGen7();
                 dumpAllData7();
@@ -741,6 +743,7 @@ namespace ntrbase
             {
                 PKXEXT = ".pk6";
                 BOXEXT = "_boxes.ek6";
+                MAXSPECIES = 721;
                 BOXES = 31;
                 fillGen6();
                 dumpAllData();
@@ -3662,6 +3665,18 @@ namespace ntrbase
                         radioParty.Checked = true;
                         SetValue(boxDump, 1);
                         SetValue(slotDump, 2);
+                        break;
+                    case 1:
+                        typemessage = "Type: Null - Make sure you are in front of Gladion at the Aether Paradise. Also, you must only have one pokémon in your party.\r\n\r\nThis mode can also be used for event pokémon.";
+                        radioParty.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 2);
+                        break;
+                    case 2:
+                        typemessage = "Tapus - Make sure you are in front of the statue in the ruins.";
+                        radioOpponent.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 1);
                         break;
                     default:
                         typemessage = "No type - Select one type of soft-reset and try again.";
