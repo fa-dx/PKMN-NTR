@@ -6,7 +6,7 @@ namespace ntrbase.Bot
 {
     class SoftResetbot7
     {
-        public enum srbotStates { botstart, selectmode, startdialog, testdialog1, readparty, continuedialog, testdialog2, exitdialog, filter, testspassed, softreset, reconnect, connpatch, nickname, triggerbattle, testdialog3, continuedialog2, readopp, botexit };
+        public enum srbotStates { botstart, selectmode, startdialog, testdialog1, readparty, continuedialog, testdialog2, exitdialog, filter, testspassed, softreset, reconnect, connpatch, nickname, triggerbattle, testdialog3, continuedialog2, readopp, soluna1, soluna2, soluna3, soluna4, runbattle1, runbattle2, runbattle3, botexit };
 
         // Bot variables
         public int botresult;
@@ -28,6 +28,9 @@ namespace ntrbase.Bot
         private uint dialogOff = 0x63DD68;
         private uint dialogIn = 0x09;
         private uint dialogOut = 0x08;
+        private uint battleOff = 0x68536C;
+        private uint battleIn = 0x02;
+        private uint battleOut = 0x04;
         private uint partyOff = 0x34195E10;
         private uint opponentOff = 0x3254F4AC;
 
@@ -62,6 +65,11 @@ namespace ntrbase.Bot
                                 botState = (int)srbotStates.startdialog;
                             else if (mode == 2)
                                 botState = (int)srbotStates.triggerbattle;
+                            else if (mode == 3)
+                            {
+                                resetNo = 1;
+                                botState = (int)srbotStates.soluna1;
+                            }
                             else
                                 botState = (int)srbotStates.botexit;
                             break;
@@ -171,6 +179,12 @@ namespace ntrbase.Bot
                             bool testsok = Program.gCmdWindow.CheckSoftResetFilters();
                             if (testsok)
                                 botState = (int)srbotStates.testspassed;
+                            else if (mode == 3)
+                            {
+                                Report("Bot: Wait 13 seconds");
+                                await Task.Delay(13000);
+                                botState = (int)srbotStates.runbattle1;
+                            }
                             else
                                 botState = (int)srbotStates.softreset;
                             break;
@@ -298,6 +312,108 @@ namespace ntrbase.Bot
                                 attempts++;
                                 botresult = 3;
                                 botState = (int)srbotStates.continuedialog2;
+                            }
+                            break;
+
+                        case (int)srbotStates.soluna1:
+                            Report("Bot: Walk to legendary pokemon");
+                            waitTaskbool = Program.helper.waitsitck(0, 100);
+                            if (await waitTaskbool)
+                                botState = (int)srbotStates.soluna2;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotStates.soluna1;
+                            }
+                            break;
+
+                        case (int)srbotStates.soluna2:
+                            Report("Bot: Trigger battle #" + resetNo);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botState = (int)srbotStates.soluna3;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotStates.soluna2;
+                            }
+                            break;
+
+                        case (int)srbotStates.soluna3:
+                            Report("Bot: Test if battle has started");
+                            waitTaskbool = Program.helper.timememoryinrange(battleOff, battleIn, 0x01, 1000, 10000);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botState = (int)srbotStates.soluna4;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 3;
+                                botState = (int)srbotStates.soluna1;
+                            }
+                            break;
+
+                        case (int)srbotStates.soluna4:
+                            Report("Bot: Try to read opponent");
+                            waitTaskint = Program.helper.waitPokeRead(opponentOff);
+                            dataready = await waitTaskint;
+                            if (dataready >= 0)
+                            {
+                                attempts = 0;
+                                botState = (int)srbotStates.filter;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 3;
+                                botState = (int)srbotStates.soluna4;
+                            }
+                            break;
+
+                        case (int)srbotStates.runbattle1:
+                            Report("Bot: Run from battle");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.DpadDOWN);
+                            if (await waitTaskbool)
+                                botState = (int)srbotStates.runbattle2;
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botState = (int)srbotStates.runbattle1;
+                            }
+                            break;
+
+                        case (int)srbotStates.runbattle2:
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botState = (int)srbotStates.runbattle3;
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botState = (int)srbotStates.runbattle2;
+                            }
+                            break;
+
+                        case (int)srbotStates.runbattle3:
+                            Report("Bot: Test out from battle");
+                            waitTaskbool = Program.helper.timememoryinrange(battleOff, battleOut, 0x01, 1000, 10000);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botState = (int)srbotStates.soluna1;
+                                resetNo++;
+                                await Task.Delay(1000);
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 3;
+                                botState = (int)srbotStates.runbattle1;
                             }
                             break;
 

@@ -2900,7 +2900,7 @@ namespace ntrbase
 
         public static string[] SoftResetModes6 = { "Regular", "Mirage Spot", "Event", "Groudon/Kyogre", "Walk" };
 
-        public static string[] SoftResetModes7 = { "Event", "Type:Null", "Tapus" };
+        public static string[] SoftResetModes7 = { "Event", "Type:Null", "Tapus", "Solgaleo/Lunala" };
 
         #endregion Bots
     }

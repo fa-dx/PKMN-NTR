@@ -3673,7 +3673,13 @@ namespace ntrbase
                         SetValue(slotDump, 2);
                         break;
                     case 2:
-                        typemessage = "Tapus - Make sure you are in front of the statue in the ruins.";
+                        typemessage = "Tapus - Make sure you are in front of the statue at the ruins.";
+                        radioOpponent.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 1);
+                        break;
+                    case 3:
+                        typemessage = "Solgaleo/Lunala - Make sure you are in front of Solgaleo/Lunala at the Altar of the Sunne/Moone.";
                         radioOpponent.Checked = true;
                         SetValue(boxDump, 1);
                         SetValue(slotDump, 1);
