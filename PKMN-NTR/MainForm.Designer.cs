@@ -248,6 +248,7 @@
             this.EggSeed = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.PokeDiggerBtn = new System.Windows.Forms.Button();
+            this.ReloadFields = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label55 = new System.Windows.Forms.Label();
             this.pokeTotalFC = new System.Windows.Forms.Button();
@@ -371,6 +372,8 @@
             this.bFilterLoad = new System.Windows.Forms.Button();
             this.runBreedingBot = new System.Windows.Forms.Button();
             this.tabSoftReset = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.sr_Species = new System.Windows.Forms.ComboBox();
             this.srClear = new System.Windows.Forms.Button();
             this.filtersSoftReset = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -398,7 +401,6 @@
             this.buttonWTStartEndless = new System.Windows.Forms.Button();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
-            this.ReloadFields = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
@@ -2848,13 +2850,14 @@
             this.typeLSR.Name = "typeLSR";
             this.typeLSR.Size = new System.Drawing.Size(222, 21);
             this.typeLSR.TabIndex = 0;
+            this.typeLSR.SelectedIndexChanged += new System.EventHandler(this.typeLSR_SelectedIndexChanged);
             // 
             // RunLSRbot
             // 
             this.RunLSRbot.Location = new System.Drawing.Point(271, 5);
             this.RunLSRbot.Name = "RunLSRbot";
             this.RunLSRbot.Size = new System.Drawing.Size(210, 23);
-            this.RunLSRbot.TabIndex = 1;
+            this.RunLSRbot.TabIndex = 2;
             this.RunLSRbot.Text = "Run";
             this.RunLSRbot.UseVisualStyleBackColor = true;
             this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click_1);
@@ -2865,7 +2868,7 @@
             this.resumeLSR.Location = new System.Drawing.Point(487, 9);
             this.resumeLSR.Name = "resumeLSR";
             this.resumeLSR.Size = new System.Drawing.Size(65, 17);
-            this.resumeLSR.TabIndex = 2;
+            this.resumeLSR.TabIndex = 3;
             this.resumeLSR.Text = "Resume";
             this.resumeLSR.UseVisualStyleBackColor = true;
             // 
@@ -3204,6 +3207,16 @@
             this.PokeDiggerBtn.Text = "PokeDigger";
             this.PokeDiggerBtn.UseVisualStyleBackColor = true;
             this.PokeDiggerBtn.Click += new System.EventHandler(this.PokeDiggerBtn_Click);
+            // 
+            // ReloadFields
+            // 
+            this.ReloadFields.Location = new System.Drawing.Point(336, 343);
+            this.ReloadFields.Name = "ReloadFields";
+            this.ReloadFields.Size = new System.Drawing.Size(215, 23);
+            this.ReloadFields.TabIndex = 3;
+            this.ReloadFields.Text = "Reload Fields";
+            this.ReloadFields.UseVisualStyleBackColor = true;
+            this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
             // 
             // groupBox5
             // 
@@ -4630,6 +4643,8 @@
             // tabSoftReset
             // 
             this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSoftReset.Controls.Add(this.label8);
+            this.tabSoftReset.Controls.Add(this.sr_Species);
             this.tabSoftReset.Controls.Add(this.srClear);
             this.tabSoftReset.Controls.Add(this.filtersSoftReset);
             this.tabSoftReset.Controls.Add(this.srFilterLoad);
@@ -4644,12 +4659,33 @@
             this.tabSoftReset.TabIndex = 3;
             this.tabSoftReset.Text = "Soft-reset";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(90, 39);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Species:";
+            this.label8.Visible = false;
+            // 
+            // sr_Species
+            // 
+            this.sr_Species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.sr_Species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.sr_Species.FormattingEnabled = true;
+            this.sr_Species.Location = new System.Drawing.Point(144, 36);
+            this.sr_Species.Name = "sr_Species";
+            this.sr_Species.Size = new System.Drawing.Size(121, 21);
+            this.sr_Species.TabIndex = 1;
+            this.sr_Species.Visible = false;
+            // 
             // srClear
             // 
             this.srClear.Location = new System.Drawing.Point(271, 34);
             this.srClear.Name = "srClear";
             this.srClear.Size = new System.Drawing.Size(155, 23);
-            this.srClear.TabIndex = 3;
+            this.srClear.TabIndex = 4;
             this.srClear.Text = "Reset all fields";
             this.srClear.UseVisualStyleBackColor = true;
             this.srClear.Click += new System.EventHandler(this.srClear_Click);
@@ -4686,7 +4722,7 @@
             this.filtersSoftReset.ReadOnly = true;
             this.filtersSoftReset.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.filtersSoftReset.Size = new System.Drawing.Size(546, 146);
-            this.filtersSoftReset.TabIndex = 5;
+            this.filtersSoftReset.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn32
             // 
@@ -4826,7 +4862,7 @@
             this.srFilterLoad.Location = new System.Drawing.Point(432, 34);
             this.srFilterLoad.Name = "srFilterLoad";
             this.srFilterLoad.Size = new System.Drawing.Size(120, 23);
-            this.srFilterLoad.TabIndex = 4;
+            this.srFilterLoad.TabIndex = 5;
             this.srFilterLoad.Text = "Load filter set...";
             this.srFilterLoad.UseVisualStyleBackColor = true;
             this.srFilterLoad.Click += new System.EventHandler(this.srFilterLoad_Click);
@@ -4892,16 +4928,6 @@
             this.tabNTRlog.Size = new System.Drawing.Size(558, 378);
             this.tabNTRlog.TabIndex = 5;
             this.tabNTRlog.Text = "NTR Log";
-            // 
-            // ReloadFields
-            // 
-            this.ReloadFields.Location = new System.Drawing.Point(336, 343);
-            this.ReloadFields.Name = "ReloadFields";
-            this.ReloadFields.Size = new System.Drawing.Size(215, 23);
-            this.ReloadFields.TabIndex = 3;
-            this.ReloadFields.Text = "Reload Fields";
-            this.ReloadFields.UseVisualStyleBackColor = true;
-            this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
             // 
             // pictureBox2
             // 
@@ -5444,6 +5470,8 @@
         private System.Windows.Forms.Button DumpInstructionsBtn;
         private System.Windows.Forms.TextBox EggSeed;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox sr_Species;
     }
 }
 

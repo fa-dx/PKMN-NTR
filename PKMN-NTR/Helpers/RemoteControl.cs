@@ -391,6 +391,7 @@ namespace ntrbase.Helpers
                 }
                 else if (validator.Species != 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
                 {
+                    lastRead = (uint)validator.Species;
                     Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                     Program.gCmdWindow.updateTabs();
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
@@ -431,6 +432,7 @@ namespace ntrbase.Helpers
                 }
                 else if (validator.Species != 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
                 {
+                    lastRead = (uint)validator.Species;
                     Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                     Program.gCmdWindow.updateTabs();
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
@@ -470,6 +472,7 @@ namespace ntrbase.Helpers
             }
             else if (validator.Species != 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
             {
+                lastRead = (uint)validator.Species;
                 Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                 Program.gCmdWindow.updateTabs();
                 Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));

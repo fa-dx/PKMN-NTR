@@ -294,7 +294,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, WriteBtn, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, PokeDiggerBtn,  ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless };
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, WriteBtn, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, WriteBtn, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, sr_Species, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -807,6 +807,7 @@ namespace ntrbase
             ComboboxFill(relearnmove3, LookupTable.Moves7);
             ComboboxFill(relearnmove4, LookupTable.Moves7);
             ComboboxFill(typeLSR, LookupTable.SoftResetModes7);
+            ComboboxFill(sr_Species, LookupTable.Species7);
             SetVisible(itemsView7, true);
             SetVisible(itemsGridView, false);
             SetVisible(keysGridView, false);
@@ -2679,6 +2680,21 @@ namespace ntrbase
             StickX.Value = (int)StickNumX.Value;
         }
 
+        // Roaming soft-reset
+        private void typeLSR_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (gen7 && (typeLSR.SelectedIndex == 4 || typeLSR.SelectedIndex == 5))
+            {
+                SetVisible(label8, true);
+                SetVisible(sr_Species, true);
+            }
+            else
+            {
+                SetVisible(label8, false);
+                SetVisible(sr_Species, false);
+            }
+        }
+
         // Update pokémon editing tabs 
         public void updateTabs()
         {
@@ -3684,6 +3700,18 @@ namespace ntrbase
                         SetValue(boxDump, 1);
                         SetValue(slotDump, 1);
                         break;
+                    case 4:
+                        typemessage = "Wild Pokémon - Make sure you are in the place where wild pokémon can appear. Also, check that Honey is the item at the top of your Item list and can be selected by just opening the menu and pressing A.";
+                        radioOpponent.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 1);
+                        break;
+                    case 5:
+                        typemessage = "Ultra Beast/Necrozma - Make sure you are in the place where the Ultra Beast / Necrozma appears. Also, check that Honey is the item at the top of your Item list and can be selected by just opening the menu and pressing A.";
+                        radioOpponent.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 1);
+                        break;
                     default:
                         typemessage = "No type - Select one type of soft-reset and try again.";
                         resumemessage = "";
@@ -3737,7 +3765,7 @@ namespace ntrbase
                 Task<int> Bot;
                 if (gen7)
                 {
-                    SRBot7 = new SoftResetbot7(typeLSR.SelectedIndex);
+                    SRBot7 = new SoftResetbot7(typeLSR.SelectedIndex, sr_Species.SelectedIndex);
                     Bot = SRBot7.RunBot();
                 }
                 else
@@ -4109,6 +4137,7 @@ namespace ntrbase
         }
 
         #endregion Bots
+
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
