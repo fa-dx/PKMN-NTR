@@ -262,7 +262,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.connpatch:
                             Report("Bot: Apply NFC patch");
-                            waitTaskbool = Program.helper.waitNTRwrite(0x3DFFD0, 0xE3A01000, Program.gCmdWindow.pid);
+                            waitTaskbool = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;

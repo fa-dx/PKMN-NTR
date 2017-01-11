@@ -827,8 +827,8 @@ namespace ntrbase
             SetText(label3, "Current FC:");
             SetText(radioDaycare, "Nursery");
 
-            // Apply connection patch, 1.0 offset was 0x3DFFD0
-            Task<bool> Patch = Program.helper.waitNTRwrite(0x3E14C0, 0xE3A01000, pid);
+            // Apply connection patch
+            Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
             if (!(await Patch))
                 MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
