@@ -6,7 +6,7 @@ namespace ntrbase.Bot
 {
     class SoftResetbot6
     {
-        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tev_start, tev_dialog, tev_cont1, tev_check, twk_start, botexit };
+        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, miragespot, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tev_start, tev_dialog, tev_cont1, tev_check, twk_start, botexit };
 
         // Bot variables
         public int botresult;
@@ -23,7 +23,7 @@ namespace ntrbase.Bot
 
         // Bot constants
         private readonly int commandtime = 250;
-        private readonly int commanddelay = 250;
+        private readonly int commanddelay = 400;
 
         // Input variables
         private int mode;
@@ -126,7 +126,7 @@ namespace ntrbase.Bot
                                     break;
                                 case 1:
                                     if (resume)
-                                        botState = (int)srbotstates.trigger;
+                                        botState = (int)srbotstates.miragespot;
                                     else
                                         botState = (int)srbotstates.pssmenush;
 
@@ -191,6 +191,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.touchpssset:
                             Report("Bot: Touch Box View");
+                            await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waittouch(240, 180);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.testpssset;
@@ -220,6 +221,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.touchpssdis:
                             Report("Bot: Touch Disable PSS communication");
+                            await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waittouch(160, pssdisableY);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.testpssdis;
@@ -249,6 +251,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.touchpssconf:
                             Report("Bot: Touch Yes");
+                            await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waittouch(160, 120);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.testpssout;
@@ -278,7 +281,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.returncontrol:
                             Report("Bot: Return contol to character");
-                            await Task.Delay(1500);
+                            await Task.Delay(2000);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.touchsave;
@@ -292,7 +295,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.touchsave:
                             Report("Bot: Touch Save button");
-                            await Task.Delay(1000);
+                            await Task.Delay(1500);
                             waitTaskbool = Program.helper.waittouch(220, 220);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.testsave;
@@ -322,7 +325,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.saveconf:
                             Report("Bot: Press Yes");
-                            await Task.Delay(2000);
+                            await Task.Delay(2500);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.saveout;
@@ -363,7 +366,7 @@ namespace ntrbase.Bot
                                     botState = (int)srbotstates.trigger;
                                     break;
                                 case 1:
-                                    botState = (int)srbotstates.trigger;
+                                    botState = (int)srbotstates.miragespot;
                                     break;
                                 case 2:
                                     botState = (int)srbotstates.tev_start;
@@ -382,6 +385,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.trigger:
                             Report("Bot: Try to trigger encounter");
+                            await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.readopp;
@@ -393,9 +397,29 @@ namespace ntrbase.Bot
                             }
                             break;
 
+                        case (int)srbotstates.miragespot:
+                            Report("Bot: Try to trigger encounter in mirage spot");
+                            int i;
+                            for (i = 0; i < 4; i++)
+                            {
+                                await Task.Delay(commanddelay);
+                                waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                                if (!(await waitTaskbool))
+                                {
+                                    break;
+                                }
+                            }
+                            if (i == 4)
+                                botState = (int)srbotstates.readopp;
+                            else
+                            {
+                                botState = (int)srbotstates.trigger;
+                            }
+                            break;
+
                         case (int)srbotstates.readopp:
                             Report("Bot: Try to read opponent");
-                            await Task.Delay(500); // Wait for pokémon data
+                            await Task.Delay(1000); // Wait for pokémon data
                             waitTaskint = Program.gCmdWindow.ReadOpponent();
                             dataready = await waitTaskint;
                             if (dataready >= 0)
@@ -468,7 +492,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.reconnect:
-                            await Task.Delay(3000);
+                            await Task.Delay(4000);
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             if (await waitTaskbool)
                             {
@@ -484,6 +508,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.tev_start:
                             Report("Bot: Trigger Dialog");
+                            await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.tev_dialog;
@@ -512,7 +537,6 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.tev_cont1:
-                            await Task.Delay(1000);
                             Report("Bot: Talk to lady");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
@@ -543,8 +567,8 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.twk_start:
-                            await Task.Delay(1000);
                             Report("Bot: Walk one step");
+                            await Task.Delay(1500);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.runUP);
                             if (await waitTaskbool)
                             {
