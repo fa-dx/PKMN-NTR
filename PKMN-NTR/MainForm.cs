@@ -59,6 +59,7 @@ namespace ntrbase
         // Variables for bots
         public bool botWorking = false;
         public bool botStop = false;
+        public bool readoperation = false;
         public int botnumber = -1;
         public int botState = 0;
         public static readonly int timeout = 10;
@@ -413,9 +414,11 @@ namespace ntrbase
             lastlog = l;
             if (l.Contains("Server disconnected") && !botWorking && game != GameType.None)
                 PerformDisconnect();
-            if (!l.Contains("\r\n"))
+            if (l.Contains("finished") && readoperation) // Súpress "finished" messages on read operations because it makes log look weird
+                l.Replace("finished", "");
+            if (!l.Contains("\r\n") && l.Length > 1)
                 l = l.Replace("\n", "\r\n");
-            if (!l.EndsWith("\n"))
+            if (!l.EndsWith("\n") && l.Length > 1)
                 l += "\r\n";
             txtLog.AppendText(l);
         }
@@ -3112,7 +3115,6 @@ namespace ntrbase
         {
             addtoLog("NTR: Read sucessful - 0x" + value.ToString("X8"));
             SetText(readResult, "0x" + value.ToString("X8"));
-            isreading = false;
         }
 
         public void addwaitingForData(uint newkey, DataReadyWaiting newvalue)

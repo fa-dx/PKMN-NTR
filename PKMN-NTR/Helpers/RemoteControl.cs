@@ -89,6 +89,7 @@ namespace ntrbase.Helpers
                 }
                 else // Return sucess
                 {
+                    NTRtimer.Stop();
                     Report("NTR: Button command sent correctly");
                     return true;
                 }
@@ -147,6 +148,7 @@ namespace ntrbase.Helpers
                 }
                 else // Return sucess
                 {
+                    NTRtimer.Stop();
                     Report("NTR: Soft-reset command sent correctly");
                     return true;
                 }
@@ -195,6 +197,7 @@ namespace ntrbase.Helpers
                 }
                 else // Return sucess
                 {
+                    NTRtimer.Stop();
                     Report("NTR: Touch screen command sent correctly");
                     return true;
                 }
@@ -223,6 +226,7 @@ namespace ntrbase.Helpers
             }
             else // Return sucess
             {
+                NTRtimer.Stop();
                 Report("NTR: Touch screen command sent correctly");
                 return true;
             }
@@ -250,6 +254,7 @@ namespace ntrbase.Helpers
             }
             else // Return sucess
             {
+                NTRtimer.Stop();
                 Report("NTR: Touch screen command sent correctly");
                 return true;
             }
@@ -334,6 +339,7 @@ namespace ntrbase.Helpers
                 }
                 else // Return sucess
                 {
+                    NTRtimer.Stop();
                     Report("NTR: Control Stick command sent correctly");
                     return true;
                 }
@@ -365,12 +371,14 @@ namespace ntrbase.Helpers
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             lastRead = BitConverter.ToUInt32(args.data, 0);
+            Program.gCmdWindow.isreading = false;
             Program.gCmdWindow.HandleRAMread(lastRead);
         }
 
         public async Task<bool> waitNTRread(uint address)
         {
             Report("NTR: Read data at address 0x" + address.ToString("X8"));
+            Program.gCmdWindow.readoperation = true;
             lastRead = 0;
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMemoryRead, null);
             Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(address, 0x04, pid), myArgs);
@@ -386,10 +394,12 @@ namespace ntrbase.Helpers
             if (Program.gCmdWindow.isreading || timeout)
             {
                 Report("NTR: Read failed");
+                Program.gCmdWindow.readoperation = false;
                 return false;
             }
             else
             {
+                Program.gCmdWindow.readoperation = false;
                 return true;
             }
         }
@@ -406,6 +416,8 @@ namespace ntrbase.Helpers
             try
             {
                 Report("NTR: Read pokémon data at box " + (box + 1) + ", slot " + (slot + 1));
+                Program.gCmdWindow.readoperation = true;
+                // Get offset
                 uint dumpOff = Program.gCmdWindow.boxOff + (Convert.ToUInt32(box * BOXSIZE + slot) * POKEBYTES);
                 DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
                 Program.gCmdWindow.updateDumpBoxes(box, slot);
@@ -422,24 +434,30 @@ namespace ntrbase.Helpers
                 if (Program.gCmdWindow.isreading || timeout)
                 {
                     Report("NTR: Read failed");
+                    Program.gCmdWindow.readoperation = false;
                     return -2;
                 }
                 else if (validator.Species > 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
                 {
+                    NTRtimer.Stop();
                     lastRead = (uint)validator.Species;
                     Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                     Program.gCmdWindow.updateTabs();
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
+                    Program.gCmdWindow.readoperation = false;
                     return validator.PID;
                 }
                 else // Empty slot
                 {
+                    NTRtimer.Stop();
                     Report("NTR: Empty pokémon data");
+                    Program.gCmdWindow.readoperation = false;
                     return -1;
                 }
             }
             catch (Exception ex)
             {
+                NTRtimer.Stop();
                 Report("NTR: Read failed with exception:");
                 Report(ex.Message);
                 return -2; // No data received
@@ -451,6 +469,7 @@ namespace ntrbase.Helpers
             try
             {
                 Report("NTR: Read pokémon data at offset 0x" + offset.ToString("X8"));
+                Program.gCmdWindow.readoperation = true;
                 DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
                 Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(offset, POKEBYTES, pid), myArgs);
                 setTimer(maxtimeout);
@@ -465,24 +484,30 @@ namespace ntrbase.Helpers
                 if (Program.gCmdWindow.isreading || timeout)
                 {
                     Report("NTR: Read failed");
+                    Program.gCmdWindow.readoperation = false;
                     return -2;
                 }
                 else if (validator.Species > 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
                 {
+                    NTRtimer.Stop();
                     lastRead = (uint)validator.Species;
                     Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                     Program.gCmdWindow.updateTabs();
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
+                    Program.gCmdWindow.readoperation = false;
                     return validator.PID;
                 }
                 else // Empty slot
                 {
+                    NTRtimer.Stop();
                     Report("NTR: Empty pokémon data");
+                    Program.gCmdWindow.readoperation = false;
                     return -1;
                 }
             }
             catch (Exception ex)
             {
+                NTRtimer.Stop();
                 Report("NTR: Read failed with exception:");
                 Report(ex.Message);
                 return -2; // No data received
@@ -494,6 +519,7 @@ namespace ntrbase.Helpers
             try
             {
                 Report("NTR: Read pokémon data at party slot " + (slot + 1));
+                Program.gCmdWindow.readoperation = true;
                 uint dumpOff = Program.gCmdWindow.partyOff + Convert.ToUInt32(slot * 484);
                 DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePokeRead, null);
                 Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(dumpOff, POKEBYTES, pid), myArgs);
@@ -509,24 +535,30 @@ namespace ntrbase.Helpers
                 if (Program.gCmdWindow.isreading || timeout)
                 {
                     Report("NTR: Read failed");
+                    Program.gCmdWindow.readoperation = false;
                     return -2;
                 }
                 else if (validator.Species > 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
                 {
+                    NTRtimer.Stop();
                     lastRead = (uint)validator.Species;
                     Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                     Program.gCmdWindow.updateTabs();
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
+                    Program.gCmdWindow.readoperation = false;
                     return validator.PID;
                 }
                 else // Empty slot
                 {
+                    NTRtimer.Stop();
                     Report("NTR: Empty pokémon data");
+                    Program.gCmdWindow.readoperation = false;
                     return -1;
                 }
             }
             catch (Exception ex)
             {
+                NTRtimer.Stop();
                 Report("NTR: Read failed with exception:");
                 Report(ex.Message);
                 return -2; // No data received
@@ -537,6 +569,7 @@ namespace ntrbase.Helpers
         {
             Report("NTR: Read data at address 0x" + address.ToString("X8"));
             Report("NTR: Expected value 0x" + value.ToString("X8") + " to 0x" + (value + range - 1).ToString("X8"));
+            Program.gCmdWindow.readoperation = true;
             lastRead = value + range;
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMemoryRead, null);
             Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(address, 0x04, pid), myArgs);
@@ -553,18 +586,22 @@ namespace ntrbase.Helpers
             { // Data received
                 if (lastRead >= value && lastRead < value + range)
                 {
+                    NTRtimer.Stop();
                     Report("NTR: Value in range: YES");
+                    Program.gCmdWindow.readoperation = false;
                     return true;
                 }
                 else
                 {
                     Report("NTR: Value in range: NO");
+                    Program.gCmdWindow.readoperation = false;
                     return false;
                 }
             }
             else // No data received
             {
                 Report("NTR: Read failed");
+                Program.gCmdWindow.readoperation = false;
                 return false;
             }
         }
@@ -573,6 +610,7 @@ namespace ntrbase.Helpers
         {
             Report("NTR: Read data at address 0x" + address.ToString("X8") + " during " + maxtime + " ms");
             Report("NTR: Expected value 0x" + value.ToString("X8") + " to 0x" + (value + range - 1).ToString("X8"));
+            Program.gCmdWindow.readoperation = true;
             setTimer(maxtime);
             while (!timeout)
             { // Ask for data
@@ -592,7 +630,9 @@ namespace ntrbase.Helpers
                 { // Data received
                     if (lastRead >= value && lastRead < value + range)
                     {
+                        NTRtimer.Stop();
                         Report("NTR: Value in range: YES");
+                        Program.gCmdWindow.readoperation = false;
                         return true;
                     }
                     else
@@ -607,6 +647,7 @@ namespace ntrbase.Helpers
                 }
             }
             Report("NTR: Read failed or outside of range");
+            Program.gCmdWindow.readoperation = false;
             return false;
         }
 
@@ -627,6 +668,7 @@ namespace ntrbase.Helpers
             }
             if (!timeout)
             {
+                NTRtimer.Stop();
                 Report("NTR: Write sucessful");
                 return true;
             }
