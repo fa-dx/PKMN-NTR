@@ -1,8 +1,8 @@
 # PKMN-NTR
 
-**SUN/MOON USERS: Update 1.1 breaks the connection if you're not connected to internet on Festival Plaza. Might have changed some other offsets.**
+**SUN/MOON USERS: Update 1.1 breaks the connection if you're not connected to internet on Festival Plaza. Might have changed some other offsets. This was fixed on a recent commit.**
 
-**DO NOT WRITE ANY VALUES TO THE GAME UNTIL I REMOVE THIS WARNING.**
+**DO NOT WRITE ANY VALUES USING THE LATEST PREVIEW RELEASE TO THE GAME UNTIL I REMOVE THIS WARNING.**
 
 A real-time memory editing tool for Nintendo 3DS Pokémon games from Generation VI and VII using with NTR-CFW. Discuss this tool on [GBATemp](http://gbatemp.net/threads/wip-pkmn-ntr-pok%C3%A9mon-gen-6-memory-editor.441892/).
 
