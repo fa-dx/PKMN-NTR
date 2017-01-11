@@ -30,9 +30,6 @@ namespace ntrbase.Bot
         private uint dialogOff = 0x63DD68;
         private uint dialogIn = 0x09;
         private uint dialogOut = 0x08;
-        //private uint battleOff = 0x68536C;
-        //private uint battleIn = 0x02;
-        //private uint battleOut = 0x04;
         private uint battleOff = 0x6731A4;
         private uint battleIn = 0x00000000;
         private uint battleOut = 0x00FFFFFF;
@@ -207,8 +204,8 @@ namespace ntrbase.Bot
                                 botState = (int)srbotStates.testspassed;
                             else if (mode == 3)
                             {
-                                Report("Bot: Wait 10 seconds");
-                                await Task.Delay(10000);
+                                Report("Bot: Wait 13 seconds");
+                                await Task.Delay(13000);
                                 botState = (int)srbotStates.runbattle1;
                             }
                             else if (mode == 4)
@@ -451,13 +448,13 @@ namespace ntrbase.Bot
                                 }
                                 else if (mode == 4)
                                 {
-                                    botState = (int)srbotStates.dismissmsg;
-                                    await Task.Delay(2000);
+                                    botState = (int)srbotStates.writehoney;
+                                    await Task.Delay(1000);
                                 }
                                 else if (mode == 5)
                                 {
-                                    botState = (int)srbotStates.writehoney;
-                                    await Task.Delay(1000);
+                                    botState = (int)srbotStates.dismissmsg;
+                                    await Task.Delay(2000);
                                 }
 
                             }

@@ -35,6 +35,7 @@ namespace ntrbase
         // Program-wide variables
         public enum GameType { None, X, Y, OR, AS, SM };
         public bool gen7;
+        public bool isreading;
         public int MAXSPECIES;
         public uint BOXES;
         public const int BOXSIZE = 30;
@@ -3111,6 +3112,7 @@ namespace ntrbase
         {
             addtoLog("NTR: Read sucessful - 0x" + value.ToString("X8"));
             SetText(readResult, "0x" + value.ToString("X8"));
+            isreading = false;
         }
 
         public void addwaitingForData(uint newkey, DataReadyWaiting newvalue)
