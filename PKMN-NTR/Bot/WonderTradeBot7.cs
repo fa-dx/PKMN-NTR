@@ -37,26 +37,27 @@ namespace ntrbase.Bot
 
         // Class constants
         private readonly int commandtime = 250;
-        private readonly int delaytime = 150;
+        private readonly int delaytime = 400;
 
         // Data offsets
         private uint totalFCoff = 0x33124D5C;
         private uint currentFCoff = 0x33124D58;
-        private uint trademenuOff = 0x672790;
-        private uint trademenuIN = 0x41200000;
-        private uint trademenuOUT = 0x41B80000;
-        private uint wtscreenOff = 0x10F1D0;
-        private uint wtscreenIN = 0x520000;
-        //private uint wtscreenOUT = 0x720000;
-        private uint boxesOff = 0x10F1A0;
-        private uint boxesIN = 0x6F0000;
-        private uint boxesOUT = 0x520000;
+        private uint trademenuOff = 0x6749D4; // 1.0: 0x672790;
+        private uint trademenuIN = 0xC2D00000; // 1.0 :0x41200000;
+        private uint trademenuOUT = 0xC2C00000; // 1.0: 0x41B80000;
+        private uint tradeready = 0x3F800000;
+        private uint wtscreenOff = 0x6703E8; // 1.0: 0x10F1D0;
+        private uint wtscreenIN = 0x00; // 1.0: 0x520000;
+        //private uint wtscreenOUT = 0x01; // 1.0 0x720000;
+        private uint boxesOff = 0x674820; //1.0: 0x10F1A0;
+        private uint boxesIN = 0x42210000; // 1.0: 0x6F0000;
+        private uint boxesOUT = 0x42220000; // 1.0: 0x520000;
         //private uint boxesviewOff = 0x672D04;
         //private uint boxesviewIN = 0x00000000;
         //private uint boxesviewOUT = 0x41000000;
-        private uint dialogOff = 0x63DD68;
-        private uint dialogIn = 0x0C;
-        private uint dialogOut = 0x0B;
+        private uint dialogOff = 0x6747D8; // 1.0: 0x63DD68;
+        private uint dialogIn = 0x00000000; // 1.0: 0x0C;
+        private uint dialogOut = 0x41B80000; // 1.0: 0x0B;
         private uint toppkmOff = 0x30000298;
         private uint currentboxOff = 0x330D982F;
 
@@ -82,7 +83,7 @@ namespace ntrbase.Bot
             currentFC = 0;
             nextFC = 0;
             tradeTimer = new Timer();
-            tradeTimer.Interval = 95000; // Trade timeout
+            tradeTimer.Interval = 100000; // Trade timeout, 100 s
             tradeTimer.Tick += tradeTimer_Tick;
 
             currentbox = StartBox - 1;
@@ -207,6 +208,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.presstradebutton:
                             Report("Bot: Press Trade Button");
+                            await Task.Delay(delaytime);
                             waitTaskbool = Program.helper.waittouch(200, 120);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testtrademenu;
@@ -220,7 +222,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.testtrademenu:
                             Report("Bot: Test if the trademenu is shown");
-                            waitTaskbool = Program.helper.timememoryinrange(trademenuOff, trademenuIN, 0x1000000, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(trademenuOff, trademenuIN, 0x100000, 100, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -237,6 +239,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.pressWTbutton:
                             Report("Bot: Press Wonder Trade");
+                            await Task.Delay(delaytime);
                             waitTaskbool = Program.helper.waittouch(160, 160);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testWTscreen;
@@ -250,7 +253,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.testWTscreen:
                             Report("Bot: Test if the Wonder Trade screen is shown");
-                            waitTaskbool = Program.helper.timememoryinrange(wtscreenOff, wtscreenIN, 0x10000, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(wtscreenOff, wtscreenIN, 0x01, 100, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -267,7 +270,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.pressWTstart:
                             Report("Bot: Press Start");
-                            await Task.Delay(1000);
+                            await Task.Delay(1500);
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + delaytime);
                             botstate = (int)botstates.testboxes;
@@ -337,7 +340,13 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.canceltouch:
-                            Report("Bot: Cancel selection");
+                            Report("Bot: Cancel selection and check again");
+                            waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
+                            long dataready3 = await waitTaskint;
+                            if (dataready3 > 0)
+                            {
+                                currentPID = Convert.ToUInt32(dataready3);
+                            }
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                             {
@@ -397,31 +406,25 @@ namespace ntrbase.Bot
 
                         case (int)botstates.waitfortrade:
                             Report("Bot: Wait for trade");
-                            waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
-                            uint newPID;
-                            try
+                            waitTaskbool = Program.helper.memoryinrange(trademenuOff, tradeready, 0x10000);
+                            taskresultbool = await waitTaskbool;
+                            if (taskresultbool)
                             {
-                                newPID = Convert.ToUInt32(await waitTaskint);
+                                tradeTimer.Stop();
+                                Report("Bot: Trade detected");
+                                await Program.helper.waitPokeRead(currentbox, currentslot);
+                                Report("Bot: Wait 30 seconds");
+                                await Task.Delay(30000);
+                                botstate = (int)botstates.testtradefinish;
                             }
-                            catch
-                            {
-                                newPID = currentPID;
-                            }
-                            if (currentPID == newPID)
-                            {
-                                await Task.Delay(2000);
-                                if (notradepartner) // Too much time passed
-                                {
-                                    boxchange = true; // Might fix a couple of errors
-                                    botstate = (int)botstates.testtradefinish;
-                                }
+                            else if (notradepartner)
+                            { // Timeout
+                                boxchange = true; // Might fix a couple of errors
+                                botstate = (int)botstates.testtradefinish;
                             }
                             else
                             {
-                                Report("Bot: Wait 35 seconds");
-                                tradeTimer.Stop();
-                                await Task.Delay(35000);
-                                botstate = (int)botstates.testtradefinish;
+                                await Task.Delay(2000);
                             }
                             break;
 
@@ -443,7 +446,7 @@ namespace ntrbase.Bot
                                 attempts++;
                                 botresult = -1;
                                 botstate = (int)botstates.tryfinish;
-                                if (Program.helper.lastRead == 0x3F800000 || Program.helper.lastRead == 0x00000000)
+                                if (Program.helper.lastRead == 0x00000000)
                                 { // Communication error, will try again
                                     if (iscomerror)
                                     {
@@ -457,7 +460,7 @@ namespace ntrbase.Bot
                                         iscomerror = true;
                                     }
                                 }
-                                else if (Program.helper.lastRead == 0x40D40000)
+                                if (Program.helper.lastRead == 0xBF800000)
                                 {
                                     iscomerror = false;
                                     tradeevo = true;
@@ -524,7 +527,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.collectFC2:
                             Report("Bot: Test if dialog has started");
-                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x010000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -553,7 +556,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.collectFC4:
                             Report("Bot: Test if dialog has finished");
-                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x01);
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x010000);
                             if (await waitTaskbool || Program.helper.lastRead == 0x0D)
                             {
                                 attempts = 0;

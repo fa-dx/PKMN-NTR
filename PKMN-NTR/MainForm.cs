@@ -59,7 +59,6 @@ namespace ntrbase
         // Variables for bots
         public bool botWorking = false;
         public bool botStop = false;
-        public bool readoperation = false;
         public int botnumber = -1;
         public int botState = 0;
         public static readonly int timeout = 10;
@@ -414,11 +413,11 @@ namespace ntrbase
             lastlog = l;
             if (l.Contains("Server disconnected") && !botWorking && game != GameType.None)
                 PerformDisconnect();
-            if (l.Contains("finished") && readoperation) // Súpress "finished" messages on read operations because it makes log look weird
-                l.Replace("finished", "");
-            if (!l.Contains("\r\n") && l.Length > 1)
+            if (l.Contains("finished") && botWorking) // Supress "finished" messages on bots
+                l = l.Replace("finished", null);
+            if (!l.Contains("\r\n") && l.Length > 2)
                 l = l.Replace("\n", "\r\n");
-            if (!l.EndsWith("\n") && l.Length > 1)
+            if (!l.EndsWith("\n") && l.Length > 2)
                 l += "\r\n";
             txtLog.AppendText(l);
         }
