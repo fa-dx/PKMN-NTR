@@ -6,7 +6,7 @@ namespace ntrbase.Bot
 {
     class SoftResetbot7
     {
-        public enum srbotStates { botstart, selectmode, startdialog, testdialog1, readparty, continuedialog, testdialog2, exitdialog, filter, testspassed, softreset, reconnect, connpatch, nickname, triggerbattle, testdialog3, continuedialog2, readopp, soluna1, soluna2, soluna3, soluna4, runbattle1, runbattle2, runbattle3, writehoney, openmenu, testmenu, openbag, testbag, selecthoney, activatehoney, testwild, readwild, dismissmsg, botexit };
+        public enum srbotStates { botstart, selectmode, startdialog, testdialog1, readparty, continuedialog, testdialog2, exitdialog, filter, testspassed, softreset, skiptitle, reconnect, connpatch, startgame, nickname, triggerbattle, testdialog3, continuedialog2, readopp, soluna1, soluna2, soluna3, soluna4, soluna5, runbattle1, runbattle2, runbattle3, writehoney, openmenu, testmenu, openbag, testbag, selecthoney, activatehoney, testwild, waitwild, readwild, dismissmsg, botexit };
 
         // Bot variables
         public int botresult;
@@ -19,6 +19,7 @@ namespace ntrbase.Bot
         private int honeynum;
         private int maxreconnect;
         private long dataready;
+        private bool isub;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
 
@@ -27,22 +28,22 @@ namespace ntrbase.Bot
         private int species;
 
         // DataoOffsets
-        private uint dialogOff = 0x63DD68;
-        private uint dialogIn = 0x09;
-        private uint dialogOut = 0x08;
-        private uint battleOff = 0x6731A4;
-        private uint battleIn = 0x00000000;
-        private uint battleOut = 0x00FFFFFF;
+        private uint dialogOff = 0x67499C; // 1.0: 0x63DD68;
+        private uint dialogIn = 0x80000000; // 1.0: 0x0C;
+        private uint dialogOut = 0x00000000; // 1.0: 0x0B;
+        private uint battleOff = 0x6747D8;// 1.0: 0x6731A4;
+        private uint battleIn = 0x40400000; // 1.0: 0x00000000;
+        private uint battleOut = 0x00000000; // 1.0: 0x00FFFFFF;
         private uint partyOff = 0x34195E10;
         private uint opponentOff = 0x3254F4AC;
         private uint itemOff = 0x330D5934;
         private uint honey = 0x000F9C5E;
-        private uint menuOff = 0x672920;
+        private uint menuOff = 0x67496C; // 1.0: 0x672920;
         private uint menuIn = 0x80000000;
         private uint menuOut = 0x00000000;
-        private uint bagOff = 0x67DF74;
-        private uint bagIn = 0x01;
-        private uint bagOut = 0x03;
+        private uint bagOff = 0x6747F8; // 1.0: 0x67DF74;
+        private uint bagIn = 0x41280000; // 1.0: 0x01;
+        private uint bagOut = 0x00000000; // 1.0: 0x03;
 
         public SoftResetbot7(int selectedmode, int selectedspecies)
         {
@@ -50,6 +51,7 @@ namespace ntrbase.Bot
             resetNo = 0;
             botstop = false;
             honeynum = 0;
+            isub = false;
 
             botState = (int)srbotStates.botstart;
             attempts = 0;
@@ -112,13 +114,13 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.testdialog1:
                             Report("Bot: Test if dialog has started");
-                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x10000000);
                             if (await waitTaskbool)
                             {
                                 if (mode == 1)
-                                    attempts = -15; // Type:Null dialog is longer
+                                    attempts = -40; // Type:Null dialog is longer
                                 else
-                                    attempts = 0;
+                                    attempts = -15;
                                 botState = (int)srbotStates.continuedialog;
                             }
                             else
@@ -144,18 +146,18 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.testdialog2:
                             Report("Bot: Test if dialog has finished");
-                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x01);
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x10000000);
                             if (await waitTaskbool)
                             {
-                                attempts = 0;
+                                attempts = -10;
                                 botState = (int)srbotStates.readparty;
                             }
-                            else if (Program.helper.lastRead == 0x0F || Program.helper.lastRead == 0x03)
+                            else if (Program.helper.lastRead >= 0x3F000000 && Program.helper.lastRead < 0x40000000)
                             {
-                                attempts = 0;
+                                attempts = -10;
                                 botState = (int)srbotStates.exitdialog;
                             }
-                            else if (Program.helper.lastRead == 0x11)
+                            else if (Program.helper.lastRead >= 0x3D000000 && Program.helper.lastRead < 0x3E000000)
                             {
                                 attempts = 0;
                                 botState = (int)srbotStates.nickname;
@@ -204,20 +206,14 @@ namespace ntrbase.Bot
                                 botState = (int)srbotStates.testspassed;
                             else if (mode == 3)
                             {
-                                Report("Bot: Wait 13 seconds");
-                                await Task.Delay(13000);
                                 botState = (int)srbotStates.runbattle1;
                             }
                             else if (mode == 4)
                             {
-                                Report("Bot: Wait 10 seconds");
-                                await Task.Delay(10000);
                                 botState = (int)srbotStates.runbattle1;
                             }
                             else if (mode == 5)
                             {
-                                Report("Bot: Wait 16 seconds");
-                                await Task.Delay(16000);
                                 botState = (int)srbotStates.runbattle1;
                             }
                             else
@@ -236,7 +232,7 @@ namespace ntrbase.Bot
                             waitTaskbool = Program.helper.waitSoftReset();
                             if (await waitTaskbool)
                             {
-                                botState = (int)srbotStates.reconnect;
+                                botState = (int)srbotStates.skiptitle;
                             }
                             else
                             {
@@ -245,8 +241,24 @@ namespace ntrbase.Bot
                             }
                             break;
 
+                        case (int)srbotStates.skiptitle:
+                            await Task.Delay(7000);
+                            Report("Bot: Open Menu");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botState = (int)srbotStates.reconnect;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotStates.skiptitle;
+                            }
+                            break;
+
                         case (int)srbotStates.reconnect:
-                            await Task.Delay(6000);
                             Report("Bot: Try reconnect");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             if (await waitTaskbool)
@@ -266,13 +278,31 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)srbotStates.selectmode;
+                                botState = (int)srbotStates.startgame;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 1;
                                 botState = (int)srbotStates.connpatch;
+                            }
+                            break;
+
+                        case (int)srbotStates.startgame:
+                            Report("Bot: Start the game");
+                            await Task.Delay(1000);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                            {
+                                await Task.Delay(3000);
+                                attempts = 0;
+                                botState = (int)srbotStates.selectmode;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotStates.startgame;
                             }
                             break;
 
@@ -306,7 +336,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.testdialog3:
                             Report("Bot: Test if dialog has started");
-                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x10000000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -377,12 +407,28 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.soluna3:
-                            Report("Bot: Test if battle has started");
-                            waitTaskbool = Program.helper.timememoryinrange(battleOff, battleIn, 0x01, 1000, 15000);
+                            Report("Bot: Test if dialog has started");
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x10000000);
+                            if (await waitTaskbool)
+                            {
+                                attempts = -0;
+                                botState = (int)srbotStates.soluna4;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 3;
+                                botState = (int)srbotStates.soluna2;
+                            }
+                            break;
+
+                        case (int)srbotStates.soluna4:
+                            Report("Bot: Test if data is available");
+                            waitTaskbool = Program.helper.timememoryinrange(battleOff, battleIn, 0x10000, 1000, 20000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)srbotStates.soluna4;
+                                botState = (int)srbotStates.soluna5;
                             }
                             else
                             {
@@ -392,7 +438,7 @@ namespace ntrbase.Bot
                             }
                             break;
 
-                        case (int)srbotStates.soluna4:
+                        case (int)srbotStates.soluna5:
                             Report("Bot: Try to read opponent");
                             waitTaskint = Program.helper.waitPokeRead(opponentOff);
                             dataready = await waitTaskint;
@@ -405,7 +451,7 @@ namespace ntrbase.Bot
                             {
                                 attempts++;
                                 botresult = 3;
-                                botState = (int)srbotStates.soluna4;
+                                botState = (int)srbotStates.soluna2;
                             }
                             break;
 
@@ -436,7 +482,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.runbattle3:
                             Report("Bot: Test out from battle");
-                            waitTaskbool = Program.helper.timememoryinrange(battleOff, battleOut, 0x01, 1000, 10000);
+                            waitTaskbool = Program.helper.timememoryinrange(battleOff, battleOut, 0x10000, 1000, 10000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -444,17 +490,17 @@ namespace ntrbase.Bot
                                 if (mode == 3)
                                 {
                                     botState = (int)srbotStates.soluna1;
-                                    await Task.Delay(1000);
+                                    await Task.Delay(5000);
                                 }
-                                else if (mode == 4)
-                                {
-                                    botState = (int)srbotStates.writehoney;
-                                    await Task.Delay(1000);
-                                }
-                                else if (mode == 5)
+                                else if (isub)
                                 {
                                     botState = (int)srbotStates.dismissmsg;
-                                    await Task.Delay(2000);
+                                    await Task.Delay(5000);
+                                }
+                                else
+                                {
+                                    botState = (int)srbotStates.writehoney;
+                                    await Task.Delay(4000);
                                 }
 
                             }
@@ -505,7 +551,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.testmenu:
                             Report("Bot: Test if the menu is open");
-                            waitTaskbool = Program.helper.timememoryinrange(menuOff, menuIn, 0x01, 1000, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(menuOff, menuIn, 0x10000000, 1000, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -534,7 +580,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.testbag:
                             Report("Bot: Test if the bag is open");
-                            waitTaskbool = Program.helper.timememoryinrange(bagOff, bagIn, 0x01, 1000, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(bagOff, bagIn, 0x10000, 1000, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -575,12 +621,28 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotStates.testwild:
-                            Report("Bot: Test if battle has started");
-                            waitTaskbool = Program.helper.timememoryinrange(battleOff, battleIn, 0x01, 1000, 15000);
+                            Report("Bot: Test if battle is triggered");
+                            waitTaskbool = Program.helper.timememoryinrange(bagOff, bagOut, 0x10000, 1000, 10000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
                                 honeynum--;
+                                botState = (int)srbotStates.waitwild;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 3;
+                                botState = (int)srbotStates.activatehoney;
+                            }
+                            break;
+
+                        case (int)srbotStates.waitwild:
+                            Report("Bot: Test if data is available");
+                            waitTaskbool = Program.helper.timememoryinrange(battleOff, battleIn, 0x10000, 1000, 20000);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
                                 botState = (int)srbotStates.readwild;
                             }
                             else
@@ -600,12 +662,15 @@ namespace ntrbase.Bot
                                 attempts = 0;
                                 if (Program.helper.lastRead == species)
                                 {
+                                    if (mode == 5)
+                                    {
+                                        isub = true;
+                                    }
                                     botState = (int)srbotStates.filter;
                                 }
                                 else
                                 {
-                                    Report("Bot: Incorrect species - Wait 10 seconds");
-                                    await Task.Delay(10000);
+                                    isub = false;
                                     botState = (int)srbotStates.runbattle1;
                                 }
                             }
@@ -678,7 +743,7 @@ namespace ntrbase.Bot
                 Report(ex.Source);
                 Report(ex.Message);
                 Report(ex.StackTrace);
-                Report("Bot: STOP Gen 6 Soft-reset bot");
+                Report("Bot: STOP Gen 7 Soft-reset bot");
                 MessageBox.Show(ex.Message);
                 return -1;
             }
