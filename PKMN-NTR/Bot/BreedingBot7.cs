@@ -32,8 +32,8 @@ namespace ntrbase.Bot
         // Data offsets
         private uint eggOff = 0x3313EDD8;
         private uint dialogOff = 0x67499C; // 1.0: 0x63DD68;
-        private uint dialogIn = 0x80000000; // 1.0: 0x0C;
-        private uint dialogOut = 0x00000000; // 1.0: 0x0B;
+        private uint dialogIn = 0x80000000; // 1.0: 0x09;
+        private uint dialogOut = 0x00000000; // 1.0: 0x08;
         private uint currentboxOff = 0x330D982F;
         private uint eggseedOff = 0x3313EDDC;
 
