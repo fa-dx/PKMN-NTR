@@ -6,7 +6,7 @@ namespace ntrbase.Bot
 {
     class BreedingBot7
     {
-        public enum breedbotstates { botstart, selectbox, readslot, quickegg, triggerdialog, testdialog1, continuedialog, fixdialog, checknoegg, exitdialog, testdialog2, filter, testspassed, botexit };
+        public enum breedbotstates { botstart, selectbox, readslot, eggseed, quickegg, triggerdialog, testdialog1, continuedialog, fixdialog, checknoegg, exitdialog, testdialog2, filter, testspassed, botexit };
 
         // Bot variables
         public int botresult;
@@ -31,10 +31,11 @@ namespace ntrbase.Bot
 
         // Data offsets
         private uint eggOff = 0x3313EDD8;
-        private uint dialogOff = 0x63DD68;
-        private uint dialogIn = 0x09;
-        private uint dialogOut = 0x08;
+        private uint dialogOff = 0x67499C; // 1.0: 0x63DD68;
+        private uint dialogIn = 0x80000000; // 1.0: 0x0C;
+        private uint dialogOut = 0x00000000; // 1.0: 0x0B;
         private uint currentboxOff = 0x330D982F;
+        private uint eggseedOff = 0x3313EDDC;
 
         //private uint boxesOff = 0x10F1A0;
         //private uint boxesIN = 0x6F0000;
@@ -109,13 +110,30 @@ namespace ntrbase.Bot
                                     attempts = 11;
                                     break;
                                 case -1: // Empty slot
-                                    botState = (int)breedbotstates.quickegg;
+                                    botState = (int)breedbotstates.eggseed;
                                     break;
                                 default: // Not empty slot
                                     Report("Bot: Space is not empty");
                                     getNextSlot();
                                     botState = (int)breedbotstates.readslot;
                                     break;
+                            }
+                            break;
+
+                        case (int)breedbotstates.eggseed:
+                            Report("Bot: Update Egg seed");
+                            waitTaskbool = Program.helper.waitNTRmultiread(eggseedOff, 0x10);
+                            if (await waitTaskbool)
+                            {
+                                Report("Bot: Current seed - " + Program.gCmdWindow.updateSeed(Program.helper.lastmultiread));
+                                attempts = 0;
+                                botState = (int)breedbotstates.quickegg;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botState = (int)breedbotstates.eggseed;
                             }
                             break;
 
@@ -150,7 +168,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.testdialog1:
                             Report("Bot: Test if dialog has started");
-                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x01);
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogIn, 0x10000000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -209,13 +227,15 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.exitdialog:
                             Report("Bot: Exit dialog");
-                            await Task.Delay(1000);
+                            await Task.Delay(3000);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                             {
                                 waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                                 if (await waitTaskbool)
+                                {
                                     botState = (int)breedbotstates.testdialog2;
+                                }
                                 else
                                 {
                                     attempts++;
@@ -232,7 +252,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.testdialog2:
-                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x01);
+                            waitTaskbool = Program.helper.memoryinrange(dialogOff, dialogOut, 0x10000000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;

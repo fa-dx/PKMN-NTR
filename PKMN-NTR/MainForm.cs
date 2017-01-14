@@ -1114,6 +1114,13 @@ namespace ntrbase
             SetText(EggSeed, BitConverter.ToString(args.data.Reverse().ToArray()).Replace("-", ""));
         }
 
+        public string updateSeed(byte[] data)
+        {
+            string str = BitConverter.ToString(data.Reverse().ToArray()).Replace("-", "");
+            SetText(EggSeed, str);
+            return str;
+        }
+
         // Item handling
         public void dumpItems()
         {

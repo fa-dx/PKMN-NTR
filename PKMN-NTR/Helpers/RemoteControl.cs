@@ -9,6 +9,7 @@ namespace ntrbase.Helpers
         // Class variables
         private int maxtimeout = 5000; // Max timeout in ms
         public uint lastRead = 0; // Last read from RAM
+        public byte[] lastmultiread;
         public int pid = 0;
         PKHeX validator = new PKHeX();
         private Timer NTRtimer;
@@ -375,12 +376,45 @@ namespace ntrbase.Helpers
             Program.gCmdWindow.HandleRAMread(lastRead);
         }
 
+        private void handlemulitMemoryRead(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            lastmultiread = args.data;
+            Program.gCmdWindow.isreading = false;
+        }
+
         public async Task<bool> waitNTRread(uint address)
         {
             Report("NTR: Read data at address 0x" + address.ToString("X8"));
             lastRead = 0;
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMemoryRead, null);
             Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(address, 0x04, pid), myArgs);
+            setTimer(maxtimeout);
+            while (!timeout)
+            {
+                await Task.Delay(100);
+                if (!Program.gCmdWindow.isreading)
+                {
+                    break;
+                }
+            }
+            if (Program.gCmdWindow.isreading || timeout)
+            {
+                Report("NTR: Read failed");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public async Task<bool> waitNTRmultiread(uint address, uint size)
+        {
+            Report("NTR: Read " + size + " bytes of data starting at address 0x" + address.ToString("X8"));
+            lastmultiread = new byte[] { };
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[size], handlemulitMemoryRead, null);
+            Program.gCmdWindow.addwaitingForData(Program.scriptHelper.data(address, size, pid), myArgs);
             setTimer(maxtimeout);
             while (!timeout)
             {
