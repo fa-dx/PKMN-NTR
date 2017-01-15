@@ -3113,6 +3113,7 @@ namespace ntrbase
                         WTBot6.botstop = true;
                     break;
             }
+            addtoLog("Bot: Stopping bot, please wait");
             stopBotButton.Enabled = false;
             botStop = true;
         }
@@ -3548,7 +3549,10 @@ namespace ntrbase
                 }
                 int result = await Bot;
                 if (botStop)
+                {
+                    addtoLog("Bot: STOP Wonder Trade bot by user command");
                     result = 8;
+                }
                 switch (result)
                 {
                     case 0: // General finish message
@@ -3790,7 +3794,10 @@ namespace ntrbase
                 }
                 int result = await Bot;
                 if (botStop)
+                {
+                    addtoLog("Bot: STOP Soft-reset bot by user command");
                     result = 8;
+                }
                 int totalresets;
                 if (gen7)
                     totalresets = SRBot7.resetNo;
@@ -3958,7 +3965,10 @@ namespace ntrbase
                 }
                 int result = await Bot;
                 if (botStop)
+                {
+                    addtoLog("Bot: STOP Breeding bot by user command");
                     result = 8;
+                }
                 switch (await Bot)
                 {
                     case 0: // Finished
