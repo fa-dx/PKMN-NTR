@@ -30,7 +30,7 @@ namespace ntrbase.Bot
 
         // Class constants
         private readonly int commandtime = 250;
-        private readonly int delaytime = 150;
+        private readonly int delaytime = 400;
 
         // Data offsets
         private uint psssmenu1Off;
@@ -165,14 +165,21 @@ namespace ntrbase.Bot
 
                         case (int)botstates.pressWTbutton:
                             Report("Bot: Touch Wonder Trade button");
-                            Program.helper.quicktouch(240, 120, commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.testsavescrn;
+                            waitTaskbool = Program.helper.waittouch(240, 120);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testsavescrn;
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.pressWTbutton;
+                            }
                             break;
 
                         case (int)botstates.testsavescrn:
                             Report("Bot: Test if the save screen is shown");
-                            waitTaskbool = Program.helper.timememoryinrange(savescrnOff, savescrnIN, 0x10000, 100, 5000);
+                            await Task.Delay(delaytime);
+                            waitTaskbool = Program.helper.timememoryinrange(savescrnOff, savescrnIN, 0x10000, 500, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -189,15 +196,21 @@ namespace ntrbase.Bot
 
                         case (int)botstates.confirmsave:
                             Report("Bot: Press Yes");
-                            await Task.Delay(500);
-                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.testwtscrn;
+                            await Task.Delay(delaytime);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testwtscrn;
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.confirmsave;
+                            }
                             break;
 
                         case (int)botstates.testwtscrn:
                             Report("Bot: Test if Wonder Trade screen is shown");
-                            waitTaskbool = Program.helper.timememoryinrange(wtconfirmationOff, wtconfirmationIN, 0x10000, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(wtconfirmationOff, wtconfirmationIN, 0x10000, 500, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -214,15 +227,21 @@ namespace ntrbase.Bot
 
                         case (int)botstates.confirmwt:
                             Report("Bot: Touch Yes");
-                            await Task.Delay(500);
-                            Program.helper.quicktouch(160, 100, commandtime);
                             await Task.Delay(delaytime);
-                            botstate = (int)botstates.testboxes;
+                            waitTaskbool = Program.helper.waittouch(160, 100);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testboxes;
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.confirmwt;
+                            }
                             break;
 
                         case (int)botstates.testboxes:
                             Report("Bot: Test if the boxes are shown");
-                            waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, wtboxesIN, 0x10000, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, wtboxesIN, 0x10000, 500, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -250,14 +269,20 @@ namespace ntrbase.Bot
 
                         case (int)botstates.touchboxview:
                             Report("Bot: Touch Box View");
-                            Program.helper.quicktouch(30, 220, commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.testboxview;
+                            waitTaskbool = Program.helper.waittouch(30, 220);
+                            if (await waitTaskbool)
+                                botstate = (int)botstates.testboxview;
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.touchboxview;
+                            }
                             break;
 
                         case (int)botstates.testboxview:
                             Report("Bot: Test if box view is shown");
-                            waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewIN, wtboxviewRange, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewIN, wtboxviewRange, 500, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -273,29 +298,46 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.touchnewbox:
-                            await Task.Delay(500);
                             Report("Bot: Touch New Box");
-                            Program.helper.quicktouch(LookupTable.boxposX6[currentbox], LookupTable.boxposY6[currentbox], commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.selectnewbox;
+                            await Task.Delay(delaytime);
+                            waitTaskbool = Program.helper.waittouch(LookupTable.boxposX6[currentbox], LookupTable.boxposY6[currentbox]);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.selectnewbox;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.touchboxview;
+                            }
                             break;
 
                         case (int)botstates.selectnewbox:
                             Report("Bot: Select New Box");
-                            await Task.Delay(500);
-                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.testboxviewout;
+                            await Task.Delay(delaytime);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                            {
+                                botstate = (int)botstates.testboxviewout;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.confirmsave;
+                            }
                             break;
 
                         case (int)botstates.testboxviewout:
                             Report("Bot: Test if box view is not shown");
-                            waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewOUT, wtboxviewRange, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewOUT, wtboxviewRange, 500, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
                                 attempts = 0;
-                                botstate = (int)botstates.touchpoke;
+                                botstate = (int)botstates.endbot;
                             }
                             else
                             {
@@ -307,31 +349,58 @@ namespace ntrbase.Bot
 
                         case (int)botstates.touchpoke:
                             Report("Bot: Touch Pokémon");
-                            await Task.Delay(500);
-                            Program.helper.quicktouch(LookupTable.pokeposX6[currentslot], LookupTable.pokeposY6[currentslot], commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.selectrade;
+                            await Task.Delay(delaytime);
+                            waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX6[currentslot], LookupTable.pokeposY6[currentslot]);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.selectrade;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 6;
+                                botstate = (int)botstates.touchpoke;
+                            }
                             break;
 
                         case (int)botstates.selectrade:
                             Report("Bot: Select Trade");
-                            await Task.Delay(750);
-                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.confirmsend;
+                            await Task.Delay(2 * delaytime);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.confirmsend;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.selectrade;
+                            }
                             break;
 
                         case (int)botstates.confirmsend:
                             Report("Bot: Select Yes");
-                            await Task.Delay(750);
-                            Program.helper.quickbuton(LookupTable.keyA, commandtime);
-                            await Task.Delay(commandtime + delaytime);
-                            botstate = (int)botstates.testboxesout;
+                            await Task.Delay(2 * delaytime);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.testboxesout;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botstate = (int)botstates.confirmsend;
+                            }
                             break;
 
                         case (int)botstates.testboxesout:
                             Report("Bot: Test if the boxes are not shown");
-                            waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, wtboxesOUT, 0x10000, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, wtboxesOUT, 0x10000, 500, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {

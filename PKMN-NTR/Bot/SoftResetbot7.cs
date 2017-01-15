@@ -457,6 +457,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.runbattle1:
                             Report("Bot: Run from battle");
+                            await Task.Delay(1500);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.DpadDOWN);
                             if (await waitTaskbool)
                                 botState = (int)srbotStates.runbattle2;
