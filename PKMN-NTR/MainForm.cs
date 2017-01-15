@@ -64,6 +64,7 @@ namespace ntrbase
         public static readonly int timeout = 10;
         public uint lastmemoryread;
         public string lastlog;
+        private string filterstr;
         public int currentfilter = 0;
         public static readonly string readerror = "An error has ocurred while reading data from your 3DS RAM, please check connection and try again.";
         public static readonly string toucherror = "An error has ocurred while sending a Touch Screen command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
@@ -3168,116 +3169,128 @@ namespace ntrbase
                     addtoLog("Filter: Analyze pokémon using filter # " + currentfilter);
                     failedtests = 0;
                     // Test shiny
+                    filterstr = " (PSV: " + getPSV(dumpedPKHeX.PID).ToString("D4") + " TSV: " + getTSV(TIDNum.Value, SIDNum.Value).ToString("D4") + ")";
                     if ((int)row.Cells[0].Value == 1)
                     {
                         if (dumpedPKHeX.isShiny)
-                            addtoLog("Filter: Shiny - PASS");
+                            addtoLog("Filter: Shiny - PASS" + filterstr);
                         else
                         {
-                            addtoLog("Filter: Shiny - FAIL");
+                            addtoLog("Filter: Shiny - FAIL" + filterstr);
                             failedtests++;
                         }
                     }
                     else
-                        addtoLog("Filter: Shiny - Don't care");
+                        addtoLog("Filter: Shiny - Don't care" + filterstr);
                     // Test nature
+                    filterstr = " (" + LookupTable.getNature(dumpedPKHeX.Nature) + " -> " + LookupTable.getNature((int)row.Cells[1].Value) + ")";
                     if ((int)row.Cells[1].Value < 0 || dumpedPKHeX.Nature == (int)row.Cells[1].Value)
-                        addtoLog("Filter: Nature - PASS");
+                        addtoLog("Filter: Nature - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Nature - FAIL");
+                        addtoLog("Filter: Nature - FAIL" + filterstr);
                         failedtests++;
                     }
                     // Test Ability
-                    if ((int)row.Cells[2].Value < 0 || (dumpedPKHeX.Ability - 1) == (int)row.Cells[2].Value)
-                        addtoLog("Filter: Ability - PASS");
+                    if (gen7)
+                    {
+                        filterstr = " (" + LookupTable.getAbil7(dumpedPKHeX.Ability) + " -> " + LookupTable.getAbil7((int)row.Cells[2].Value) + ")";
+                    }
                     else
                     {
-                        addtoLog("Filter: Ability - FAIL");
+                        filterstr = " (" + LookupTable.getAbil6(dumpedPKHeX.Ability) + " -> " + LookupTable.getAbil6((int)row.Cells[2].Value) + ")";
+                    }
+                    if ((int)row.Cells[2].Value < 0 || (dumpedPKHeX.Ability - 1) == (int)row.Cells[2].Value)
+                        addtoLog("Filter: Ability - PASS" + filterstr);
+                    else
+                    {
+                        addtoLog("Filter: Ability - FAIL" + filterstr);
                         failedtests++;
                     }
                     // Test Hidden Power
+                    filterstr = " (" + LookupTable.getHPName(getHiddenPower()) + " -> " + LookupTable.getAbil7((int)row.Cells[3].Value) + ")";
                     if ((int)row.Cells[3].Value < 0 || getHiddenPower() == (int)row.Cells[3].Value)
-                        addtoLog("Filter: Hidden Power - PASS");
+                        addtoLog("Filter: Hidden Power - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Hidden Power - FAIL");
+                        addtoLog("Filter: Hidden Power - FAIL" + filterstr);
                         failedtests++;
                     }
                     // Test Gender
+                    filterstr = " (" + LookupTable.getGender(dumpedPKHeX.Gender) + " -> " + LookupTable.getAbil7((int)row.Cells[4].Value) + ")";
                     if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == dumpedPKHeX.Gender)
-                        addtoLog("Filter: Gender - PASS");
+                        addtoLog("Filter: Gender - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Gender - FAIL");
+                        addtoLog("Filter: Gender - FAIL" + filterstr);
                         failedtests++;
                     }
                     // Test HP
                     if (IVCheck((int)row.Cells[5].Value, dumpedPKHeX.IV_HP, (int)row.Cells[6].Value))
-                        addtoLog("Filter: Hit Points IV - PASS");
+                        addtoLog("Filter: Hit Points IV - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Hit Points IV - FAIL");
+                        addtoLog("Filter: Hit Points IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_HP == 31)
                         perfectIVs++;
                     // Test Atk
                     if (IVCheck((int)row.Cells[7].Value, dumpedPKHeX.IV_ATK, (int)row.Cells[8].Value))
-                        addtoLog("Filter: Attack IV - PASS");
+                        addtoLog("Filter: Attack IV - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Attack IV - FAIL");
+                        addtoLog("Filter: Attack IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_ATK == 31)
                         perfectIVs++;
                     // Test Def
                     if (IVCheck((int)row.Cells[9].Value, dumpedPKHeX.IV_DEF, (int)row.Cells[10].Value))
-                        addtoLog("Filter: Defense IV - PASS");
+                        addtoLog("Filter: Defense IV - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Defense IV - FAIL");
+                        addtoLog("Filter: Defense IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_DEF == 31)
                         perfectIVs++;
                     // Test SpA
                     if (IVCheck((int)row.Cells[11].Value, dumpedPKHeX.IV_SPA, (int)row.Cells[12].Value))
-                        addtoLog("Filter: Special Attack IV - PASS");
+                        addtoLog("Filter: Special Attack IV - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Special Attack IV - FAIL");
+                        addtoLog("Filter: Special Attack IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPA == 31)
                         perfectIVs++;
                     // Test SpD
                     if (IVCheck((int)row.Cells[13].Value, dumpedPKHeX.IV_SPD, (int)row.Cells[14].Value))
-                        addtoLog("Filter: Special Defense IV - PASS");
+                        addtoLog("Filter: Special Defense IV - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Special Defense IV - FAIL");
+                        addtoLog("Filter: Special Defense IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPD == 31)
                         perfectIVs++;
                     // Test Spe
                     if (IVCheck((int)row.Cells[15].Value, dumpedPKHeX.IV_SPE, (int)row.Cells[16].Value))
-                        addtoLog("Filter: Speed IV - PASS");
+                        addtoLog("Filter: Speed IV - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Speed IV - FAIL");
+                        addtoLog("Filter: Speed IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPE == 31)
                         perfectIVs++;
                     // Test Perfect IVs
                     if (IVCheck((int)row.Cells[17].Value, perfectIVs, (int)row.Cells[18].Value))
-                        addtoLog("Filter: Perfect IVs - PASS");
+                        addtoLog("Filter: Perfect IVs - PASS" + filterstr);
                     else
                     {
-                        addtoLog("Filter: Perfect IVs - FAIL");
+                        addtoLog("Filter: Perfect IVs - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (failedtests == 0)
@@ -3294,41 +3307,49 @@ namespace ntrbase
             switch (logic)
             {
                 case 0: // Greater or equal
+                    filterstr = " (" + actualiv + " >= " + refiv + ")";
                     if (actualiv >= refiv)
                         return true;
                     else
                         return false;
                 case 1: // Greater
+                    filterstr = " (" + actualiv + " > " + refiv + ")";
                     if (actualiv > refiv)
                         return true;
                     else
                         return false;
                 case 2: // Equal
+                    filterstr = " (" + actualiv + " = " + refiv + ")";
                     if (actualiv == refiv)
                         return true;
                     else
                         return false;
                 case 3: // Less
+                    filterstr = " (" + actualiv + " < " + refiv + ")";
                     if (actualiv < refiv)
                         return true;
                     else
                         return false;
                 case 4: // Less or equal
+                    filterstr = " (" + actualiv + " <= " + refiv + ")";
                     if (actualiv <= refiv)
                         return true;
                     else
                         return false;
                 case 5: // Different
+                    filterstr = " (" + actualiv + " != " + refiv + ")";
                     if (actualiv != refiv)
                         return true;
                     else
                         return false;
                 case 6: // Even
+                    filterstr = " (" + actualiv + " -> Even)";
                     if (actualiv % 2 == 0)
                         return true;
                     else
                         return false;
                 case 7: // Odd
+                    filterstr = " (" + actualiv + " -> Odd)";
                     if (actualiv % 2 == 1)
                         return true;
                     else

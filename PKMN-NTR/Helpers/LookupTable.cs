@@ -1876,6 +1876,30 @@ namespace ntrbase
             }
         }
 
+        public static string getAbil6(int index)
+        {
+            if (index >= 0 && index < Ability6.Length)
+            {
+                return Ability6[index];
+            }
+            else
+            {
+                return "Any";
+            }
+        }
+
+        public static string getAbil7(int index)
+        {
+            if (index >= 0 && index < Ability7.Length)
+            {
+                return Ability7[index];
+            }
+            else
+            {
+                return "Any";
+            }
+        }
+
         #endregion Ability
 
         #region Species
@@ -1907,6 +1931,18 @@ namespace ntrbase
         public static string[] HPName = { "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fire", "Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", };
 
         public static Color[] HPColor = { Color.FromArgb(192, 48, 40), Color.FromArgb(168, 144, 240), Color.FromArgb(160, 64, 160), Color.FromArgb(224, 192, 104), Color.FromArgb(184, 160, 56), Color.FromArgb(168, 184, 32), Color.FromArgb(112, 88, 152), Color.FromArgb(184, 184, 208), Color.FromArgb(240, 128, 48), Color.FromArgb(104, 144, 240), Color.FromArgb(120, 200, 80), Color.FromArgb(248, 208, 48), Color.FromArgb(248, 88, 136), Color.FromArgb(152, 216, 216), Color.FromArgb(112, 56, 248), Color.FromArgb(112, 88, 72) };
+
+        public static string getHPName(int index)
+        {
+            if (index >= 0 && index < HPName.Length)
+            {
+                return HPName[index];
+            }
+            else
+            {
+                return "Any";
+            }
+        }
 
         #endregion Hidden Power
 
@@ -2863,6 +2899,39 @@ namespace ntrbase
         }
 
         #endregion Experience
+
+        #region Nature
+
+        public static string[] natureList = { "Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky" };
+
+        public static string getNature(int index)
+        {
+            if (index >= 0 && index < natureList.Length)
+            {
+                return natureList[index];
+            }
+            else
+            {
+                return "Any";
+            }
+        }
+
+        #region Gender
+
+        public static string getGender(int index)
+        {
+            switch (index)
+            {
+                case 0: return "Male";
+                case 1: return "Female";
+                case 2: return "Genderless";
+                default: return "Any";
+            }
+        }
+
+        #endregion Gender
+
+        #endregion Nature
 
         #region Buttons
 
