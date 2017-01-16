@@ -30,7 +30,7 @@ namespace ntrbase.Bot
 
         // Class constants
         private readonly int commandtime = 250;
-        private readonly int delaytime = 400;
+        private readonly int delaytime = 250;
 
         // Data offsets
         private uint psssmenu1Off;
@@ -257,7 +257,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)botstates.gotoboxchange:
-                            await Task.Delay(2000);
+                            await Task.Delay(8 * delaytime);
                             if (boxchange)
                             {
                                 botstate = (int)botstates.touchboxview;
@@ -422,7 +422,7 @@ namespace ntrbase.Bot
                             uint newPID = Convert.ToUInt32(await waitTaskint);
                             if (currentPID == newPID)
                             {
-                                await Task.Delay(2000);
+                                await Task.Delay(8 * delaytime);
                                 tradewait++;
                                 if (tradewait > 30) // Too much time passed
                                 {
@@ -502,7 +502,7 @@ namespace ntrbase.Bot
                             maxreconnect--;
                             if (await waitTaskbool)
                             {
-                                await Task.Delay(5000);
+                                await Task.Delay(10 * delaytime);
                                 attempts = 0;
                             }
                             else

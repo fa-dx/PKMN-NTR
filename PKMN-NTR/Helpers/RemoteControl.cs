@@ -372,7 +372,6 @@ namespace ntrbase.Helpers
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             lastRead = BitConverter.ToUInt32(args.data, 0);
-            Program.gCmdWindow.isreading = false;
             Program.gCmdWindow.HandleRAMread(lastRead);
         }
 
@@ -380,7 +379,6 @@ namespace ntrbase.Helpers
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             lastmultiread = args.data;
-            Program.gCmdWindow.isreading = false;
         }
 
         public async Task<bool> waitNTRread(uint address)
@@ -393,12 +391,12 @@ namespace ntrbase.Helpers
             while (!timeout)
             {
                 await Task.Delay(100);
-                if (!Program.gCmdWindow.isreading)
+                if (CompareLastLog("finished"))
                 {
                     break;
                 }
             }
-            if (Program.gCmdWindow.isreading || timeout)
+            if (timeout)
             {
                 Report("NTR: Read failed");
                 return false;
@@ -419,12 +417,12 @@ namespace ntrbase.Helpers
             while (!timeout)
             {
                 await Task.Delay(100);
-                if (!Program.gCmdWindow.isreading)
+                if (CompareLastLog("finished"))
                 {
                     break;
                 }
             }
-            if (Program.gCmdWindow.isreading || timeout)
+            if (timeout)
             {
                 Report("NTR: Read failed");
                 return false;
@@ -439,7 +437,6 @@ namespace ntrbase.Helpers
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             validator.Data = PKHeX.decryptArray(args.data);
-            Program.gCmdWindow.isreading = false;
         }
 
         public async Task<long> waitPokeRead(int box, int slot)
@@ -456,12 +453,12 @@ namespace ntrbase.Helpers
                 while (!timeout)
                 {
                     await Task.Delay(100);
-                    if (!Program.gCmdWindow.isreading)
+                    if (CompareLastLog("finished"))
                     {
                         break;
                     }
                 }
-                if (Program.gCmdWindow.isreading || timeout)
+                if (timeout)
                 {
                     Report("NTR: Read failed");
                     return -2;
@@ -502,12 +499,12 @@ namespace ntrbase.Helpers
                 while (!timeout)
                 {
                     await Task.Delay(100);
-                    if (!Program.gCmdWindow.isreading)
+                    if (CompareLastLog("finished"))
                     {
                         break;
                     }
                 }
-                if (Program.gCmdWindow.isreading || timeout)
+                if (timeout)
                 {
                     Report("NTR: Read failed");
                     return -2;
@@ -549,12 +546,12 @@ namespace ntrbase.Helpers
                 while (!timeout)
                 {
                     await Task.Delay(100);
-                    if (!Program.gCmdWindow.isreading)
+                    if (CompareLastLog("finished"))
                     {
                         break;
                     }
                 }
-                if (Program.gCmdWindow.isreading || timeout)
+                if (timeout)
                 {
                     Report("NTR: Read failed");
                     return -2;
@@ -595,12 +592,12 @@ namespace ntrbase.Helpers
             while (!timeout)
             {
                 await Task.Delay(100);
-                if (!Program.gCmdWindow.isreading)
+                if (CompareLastLog("finished"))
                 {
                     break;
                 }
             }
-            if (!Program.gCmdWindow.isreading)
+            if (!timeout)
             { // Data received
                 if (lastRead >= value && lastRead < value + range)
                 {
@@ -635,12 +632,12 @@ namespace ntrbase.Helpers
                 while (!timeout)
                 {
                     await Task.Delay(100);
-                    if (!Program.gCmdWindow.isreading)
+                    if (CompareLastLog("finished"))
                     {
                         break;
                     }
                 }
-                if (!Program.gCmdWindow.isreading)
+                if (!timeout)
                 { // Data received
                     if (lastRead >= value && lastRead < value + range)
                     {

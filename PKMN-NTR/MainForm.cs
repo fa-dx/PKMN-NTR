@@ -35,7 +35,6 @@ namespace ntrbase
         // Program-wide variables
         public enum GameType { None, X, Y, OR, AS, SM };
         public bool gen7;
-        public bool isreading;
         public int MAXSPECIES;
         public uint BOXES;
         public const int BOXSIZE = 30;

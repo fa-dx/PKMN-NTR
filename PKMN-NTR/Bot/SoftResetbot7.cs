@@ -263,6 +263,7 @@ namespace ntrbase.Bot
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             if (await waitTaskbool)
                             {
+                                await Task.Delay(1000);
                                 botState = (int)srbotStates.connpatch;
                             }
                             else
@@ -457,7 +458,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotStates.runbattle1:
                             Report("Bot: Run from battle");
-                            await Task.Delay(1500);
+                            await Task.Delay(2000);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.DpadDOWN);
                             if (await waitTaskbool)
                                 botState = (int)srbotStates.runbattle2;
@@ -491,17 +492,17 @@ namespace ntrbase.Bot
                                 if (mode == 3)
                                 {
                                     botState = (int)srbotStates.soluna1;
-                                    await Task.Delay(5000);
+                                    await Task.Delay(6000);
                                 }
                                 else if (isub)
                                 {
                                     botState = (int)srbotStates.dismissmsg;
-                                    await Task.Delay(5000);
+                                    await Task.Delay(6000);
                                 }
                                 else
                                 {
                                     botState = (int)srbotStates.writehoney;
-                                    await Task.Delay(4000);
+                                    await Task.Delay(5000);
                                 }
 
                             }
@@ -720,7 +721,7 @@ namespace ntrbase.Bot
                             maxreconnect--;
                             if (await waitTaskbool)
                             {
-                                await Task.Delay(5000);
+                                await Task.Delay(2500);
                                 attempts = 0;
                             }
                             else

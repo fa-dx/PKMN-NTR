@@ -227,7 +227,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.exitdialog:
                             Report("Bot: Exit dialog");
-                            await Task.Delay(3000);
+                            await Task.Delay(1500);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                             {

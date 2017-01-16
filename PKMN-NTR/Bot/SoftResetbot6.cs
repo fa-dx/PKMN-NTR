@@ -23,7 +23,7 @@ namespace ntrbase.Bot
 
         // Bot constants
         private readonly int commandtime = 250;
-        private readonly int commanddelay = 400;
+        private readonly int commanddelay = 250;
 
         // Input variables
         private int mode;
@@ -281,7 +281,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.returncontrol:
                             Report("Bot: Return contol to character");
-                            await Task.Delay(2000);
+                            await Task.Delay(6 * commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.touchsave;
@@ -295,7 +295,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.touchsave:
                             Report("Bot: Touch Save button");
-                            await Task.Delay(1500);
+                            await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.waittouch(220, 220);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.testsave;
@@ -325,7 +325,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.saveconf:
                             Report("Bot: Press Yes");
-                            await Task.Delay(2500);
+                            await Task.Delay(8 * commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.saveout;
@@ -419,7 +419,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.readopp:
                             Report("Bot: Try to read opponent");
-                            await Task.Delay(1000); // Wait for pokémon data
+                            await Task.Delay(2 * commanddelay); // Wait for pokémon data
                             waitTaskint = Program.gCmdWindow.ReadOpponent();
                             dataready = await waitTaskint;
                             if (dataready >= 0)
@@ -465,7 +465,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.skipintro:
-                            await Task.Delay(9000);
+                            await Task.Delay(36 * commanddelay);
                             Report("Bot: Skip intro cutscene");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
@@ -476,7 +476,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.skiptitle:
-                            await Task.Delay(4000);
+                            await Task.Delay(16 * commanddelay);
                             Report("Bot: Skip title screen");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
@@ -484,7 +484,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.startgame:
-                            await Task.Delay(5000);
+                            await Task.Delay(20 * commanddelay);
                             Report("Bot: Start game");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
@@ -492,11 +492,11 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.reconnect:
-                            await Task.Delay(4000);
+                            await Task.Delay(16 * commanddelay);
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             if (await waitTaskbool)
                             {
-                                await Task.Delay(2000);
+                                await Task.Delay(8 * commanddelay);
                                 botState = (int)srbotstates.typesr;
                             }
                             else
@@ -538,6 +538,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.tev_cont1:
                             Report("Bot: Talk to lady");
+                            await Task.Delay(2 * commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                                 botState = (int)srbotstates.tev_check;
@@ -568,7 +569,7 @@ namespace ntrbase.Bot
 
                         case (int)srbotstates.twk_start:
                             Report("Bot: Walk one step");
-                            await Task.Delay(1500);
+                            await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.runUP);
                             if (await waitTaskbool)
                             {
@@ -603,7 +604,7 @@ namespace ntrbase.Bot
                             maxreconnect--;
                             if (await waitTaskbool)
                             {
-                                await Task.Delay(1000);
+                                await Task.Delay(10 * commanddelay);
                                 attempts = 0;
                                 if (botState == (int)srbotstates.tev_check || botState == (int)srbotstates.tev_cont1)
                                     botState = (int)srbotstates.tev_dialog;

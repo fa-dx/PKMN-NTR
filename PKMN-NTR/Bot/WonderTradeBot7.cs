@@ -37,7 +37,7 @@ namespace ntrbase.Bot
 
         // Class constants
         private readonly int commandtime = 250;
-        private readonly int delaytime = 400;
+        private readonly int delaytime = 250;
 
         // Data offsets
         private uint totalFCoff = 0x33124D5C;
@@ -83,7 +83,7 @@ namespace ntrbase.Bot
             currentFC = 0;
             nextFC = 0;
             tradeTimer = new Timer();
-            tradeTimer.Interval = 100000; // Trade timeout, 100 s
+            tradeTimer.Interval = 95000; // Trade timeout, 100 s
             tradeTimer.Tick += tradeTimer_Tick;
 
             currentbox = StartBox - 1;
@@ -270,7 +270,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.pressWTstart:
                             Report("Bot: Press Start");
-                            await Task.Delay(1500);
+                            await Task.Delay(6 * delaytime);
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + delaytime);
                             botstate = (int)botstates.testboxes;
@@ -295,7 +295,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.touchpoke:
                             Report("Bot: Touch pokémon");
-                            await Task.Delay(2000);
+                            await Task.Delay(8 * delaytime);
                             waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[currentslot], LookupTable.pokeposY7[currentslot]);
                             if (await waitTaskbool)
                             {
@@ -424,7 +424,7 @@ namespace ntrbase.Bot
                             }
                             else
                             {
-                                await Task.Delay(2000);
+                                await Task.Delay(8 * delaytime);
                             }
                             break;
 
@@ -513,7 +513,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.collectFC1:
                             Report("Bot: Trigger Dialog");
-                            await Task.Delay(1000);
+                            await Task.Delay(4 * delaytime);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.collectFC2;
@@ -616,7 +616,7 @@ namespace ntrbase.Bot
                             maxreconnect--;
                             if (await waitTaskbool)
                             {
-                                await Task.Delay(5000);
+                                await Task.Delay(10 * delaytime);
                                 attempts = 0;
                             }
                             else

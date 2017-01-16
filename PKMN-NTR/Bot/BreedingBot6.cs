@@ -32,8 +32,7 @@ namespace ntrbase.Bot
 
         // Class constants
         private readonly int walktime = 100;
-        private readonly int commandtime = 250;
-        private readonly int commanddelay = 400;
+        private readonly int commanddelay = 250;
         private readonly int longcommandtime = 1000;
 
         // Input variables
@@ -337,7 +336,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.exitdialog:
                             Report("Bot: Exit dialog");
-                            await Task.Delay(2500);
+                            await Task.Delay(5 * commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
                             {
@@ -392,8 +391,8 @@ namespace ntrbase.Bot
                             else if (lastposition == Program.helper.lastRead)
                             {
                                 Report("Bot: No movement detected, still on dialog?");
-                                Program.helper.quickbuton(LookupTable.keyB, commandtime);
-                                await Task.Delay(commandtime + commanddelay);
+                                Program.helper.quickbuton(LookupTable.keyB, 250);
+                                await Task.Delay(2 * commanddelay);
                                 attempts++;
                                 botresult = -1;
                                 botState = (int)breedbotstates.walktodaycare;
@@ -543,7 +542,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.testcomputer:
                             Report("Bot: Test if the PC is on");
-                            await Task.Delay(2000); // Wait for PC on
+                            await Task.Delay(8 * commanddelay); // Wait for PC on
                             waitTaskbool = Program.helper.timememoryinrange(computerOff, computerIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -594,7 +593,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.touchOrganize:
                             Report("Bot: Touch Organize boxes");
-                            await Task.Delay(750);
+                            await Task.Delay(2 * commanddelay);
                             if (oras && organizeboxes)
                                 waitTaskbool = Program.helper.waittouch(160, 40);
                             else
@@ -611,7 +610,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.testboxes:
                             Report("Test if the boxes are shown");
-                            await Task.Delay(1250);
+                            await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, organizeBoxIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -673,7 +672,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.testboxview:
                             Report("Bot: Test if box view is shown");
-                            await Task.Delay(1000);
+                            await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewIN, wtboxviewRange, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -721,7 +720,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.testviewout:
                             Report("Bot: Test if box view is not shown");
-                            await Task.Delay(1250);
+                            await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewOUT, wtboxviewRange, 100, 5000);
                             if (await waitTaskbool)
                             {
@@ -738,7 +737,7 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.touchegg:
                             Report("Bot: Select Egg");
-                            await Task.Delay(750);
+                            await Task.Delay(2 * commanddelay);
                             waitTaskbool = Program.helper.waitholdtouch(300, 100);
                             if (await waitTaskbool)
                                 botState = (int)breedbotstates.moveegg;
@@ -1065,7 +1064,7 @@ namespace ntrbase.Bot
                             maxreconnect--;
                             if (await waitTaskbool)
                             {
-                                await Task.Delay(1000);
+                                await Task.Delay(10 * commanddelay);
                                 attempts = 0;
                             }
                             else
