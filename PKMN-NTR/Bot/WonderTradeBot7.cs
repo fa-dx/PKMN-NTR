@@ -208,7 +208,6 @@ namespace ntrbase.Bot
 
                         case (int)botstates.presstradebutton:
                             Report("Bot: Press Trade Button");
-                            await Task.Delay(delaytime);
                             waitTaskbool = Program.helper.waittouch(200, 120);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testtrademenu;
@@ -239,7 +238,6 @@ namespace ntrbase.Bot
 
                         case (int)botstates.pressWTbutton:
                             Report("Bot: Press Wonder Trade");
-                            await Task.Delay(delaytime);
                             waitTaskbool = Program.helper.waittouch(160, 160);
                             if (await waitTaskbool)
                                 botstate = (int)botstates.testWTscreen;
@@ -253,7 +251,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.testWTscreen:
                             Report("Bot: Test if the Wonder Trade screen is shown");
-                            waitTaskbool = Program.helper.timememoryinrange(wtscreenOff, wtscreenIN, 0x01, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(wtscreenOff, wtscreenIN, 0x01, 250, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -270,7 +268,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.pressWTstart:
                             Report("Bot: Press Start");
-                            await Task.Delay(6 * delaytime);
+                            await Task.Delay(4 * delaytime);
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + delaytime);
                             botstate = (int)botstates.testboxes;
@@ -278,7 +276,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.testboxes:
                             Report("Bot: Test if the boxes are shown");
-                            waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesIN, 0x10000, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesIN, 0x10000, 250, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -295,7 +293,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.touchpoke:
                             Report("Bot: Touch pokémon");
-                            await Task.Delay(8 * delaytime);
+                            await Task.Delay(4 * delaytime);
                             waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[currentslot], LookupTable.pokeposY7[currentslot]);
                             if (await waitTaskbool)
                             {
@@ -388,7 +386,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.testboxesout:
                             Report("Bot: Test if the boxes are not shown");
-                            waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesOUT, 0x10000, 100, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesOUT, 0x10000, 250, 5000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
