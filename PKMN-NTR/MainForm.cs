@@ -294,7 +294,7 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, WriteBtn, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, PokeDiggerBtn,  ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless };
+            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, WriteBtn, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless };
             enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, WriteBtn, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, sr_Species, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless, WTcollectFC };
 
             disableControls();
@@ -2518,6 +2518,7 @@ namespace ntrbase
                 dumpedPKHeX.EXP = newexp;
             }
             setSprite(species.SelectedIndex + 1, 0, false);
+            updateName();
         }
 
         private void setSprite(int speciesindex, int formindex, bool isegg)
@@ -2554,6 +2555,64 @@ namespace ntrbase
             SetValue(ExpPoints, newexp);
             HyperTrainBoxes();
             ExpPoints.ValueChanged += ExpPoints_ValueChanged;
+        }
+
+        // Nickname
+        private void nickBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((pkLang.SelectedIndex == 7 || pkLang.SelectedIndex == 8) && !nickBox.Checked)
+            { // Chinese language handling
+                SetEnabled(nickBox, false);
+                SetReadOnly(nickname, true);
+            }
+            else
+            {
+                SetEnabled(nickBox, true);
+                SetReadOnly(nickname, false);
+            }
+            updateName();
+        }
+
+        private void pkLang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((pkLang.SelectedIndex == 7 || pkLang.SelectedIndex == 8) && !nickBox.Checked)
+            { // Chinese language handling
+                SetEnabled(nickBox, false);
+                SetReadOnly(nickname, true);
+            }
+            else
+            {
+                SetEnabled(nickBox, true);
+                SetReadOnly(nickname, false);
+            }
+            updateName();
+        }
+
+        public void updateName()
+        {
+            if (!nickBox.Checked)
+            {
+                int currentlang;
+                switch (pkLang.SelectedIndex)
+                {
+                    case 0: currentlang = 0x01; break;
+                    case 1: currentlang = 0x02; break;
+                    case 2: currentlang = 0x03; break;
+                    case 3: currentlang = 0x04; break;
+                    case 4: currentlang = 0x05; break;
+                    case 5: currentlang = 0x07; break;
+                    case 6: currentlang = 0x08; break;
+                    case 7: currentlang = 0x09; break;
+                    case 8: currentlang = 0x0A; break;
+                    default: currentlang = 0x02; break;
+                }
+                SetText(nickname, LookupTable.getSpeciesName(species.SelectedIndex + 1, currentlang, isEgg.Checked));
+            }
+        }
+
+        private void nickname_TextChanged(object sender, EventArgs e)
+        {
+            SetChecked(nickBox, true);
         }
 
         // Poké ball image
@@ -2710,10 +2769,14 @@ namespace ntrbase
         {
             species.SelectedIndexChanged -= species_SelectedIndexChanged;
             level.ValueChanged -= level_ValueChanged;
+            nickname.TextChanged -= nickname_TextChanged;
+            nickBox.CheckedChanged -= nickBox_CheckedChanged;
+            pkLang.SelectedIndexChanged -= pkLang_SelectedIndexChanged;
 
             SetSelectedIndex(species, dumpedPKHeX.Species - 1);
             setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
             SetText(nickname, dumpedPKHeX.Nickname);
+            SetChecked(nickBox, dumpedPKHeX.IsNicknamed);
             SetSelectedIndex(nature, dumpedPKHeX.Nature);
             updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
             SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
@@ -2789,8 +2852,12 @@ namespace ntrbase
 
             species.SelectedIndexChanged += species_SelectedIndexChanged;
             level.ValueChanged += level_ValueChanged;
+            nickname.TextChanged += nickname_TextChanged;
+            nickBox.CheckedChanged += nickBox_CheckedChanged;
+            pkLang.SelectedIndexChanged += pkLang_SelectedIndexChanged;
         }
 
+        // PokeDigger
         private void PokeDiggerBtn_Click(object sender, EventArgs e)
         {
             new PokeDigger(pid, game != GameType.None).Show();
@@ -2824,6 +2891,19 @@ namespace ntrbase
             }
             else
                 ctrl.Text = text;
+        }
+
+        delegate void SetReadOnlyDelegate(TextBox ctrl, bool en);
+
+        public static void SetReadOnly(TextBox ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetReadOnlyDelegate del = new SetReadOnlyDelegate(SetReadOnly);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.ReadOnly = en;
         }
 
         delegate void SetTooltipDelegate(ToolTip source, Control ctrl, string text);

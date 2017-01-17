@@ -40,7 +40,7 @@ namespace ntrbase.Bot
         private uint honey = 0x000F9C5E;
         private uint menuOff = 0x67496C; // 1.0: 0x672920;
         private uint menuIn = 0x80000000;
-        private uint menuOut = 0x00000000;
+        //private uint menuOut = 0x00000000;
         private uint bagOff = 0x6747F8; // 1.0: 0x67DF74;
         private uint bagIn = 0x41280000; // 1.0: 0x01;
         private uint bagOut = 0x00000000; // 1.0: 0x03;

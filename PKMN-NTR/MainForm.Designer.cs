@@ -83,7 +83,6 @@
             this.ivDEFNum = new System.Windows.Forms.NumericUpDown();
             this.label25 = new System.Windows.Forms.Label();
             this.ivATKNum = new System.Windows.Forms.NumericUpDown();
-            this.label30 = new System.Windows.Forms.Label();
             this.ivHPNum = new System.Windows.Forms.NumericUpDown();
             this.hiddenPower = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
@@ -152,6 +151,7 @@
             this.randomPID = new System.Windows.Forms.Button();
             this.DumpedEdit = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.nickBox = new System.Windows.Forms.CheckBox();
             this.genderBox = new System.Windows.Forms.ComboBox();
             this.shinyBox = new System.Windows.Forms.CheckBox();
             this.level = new System.Windows.Forms.NumericUpDown();
@@ -909,7 +909,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(37, 148);
+            this.label44.Location = new System.Drawing.Point(27, 149);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(27, 13);
             this.label44.TabIndex = 20;
@@ -920,9 +920,9 @@
             this.ball.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.ball.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.ball.FormattingEnabled = true;
-            this.ball.Location = new System.Drawing.Point(70, 145);
+            this.ball.Location = new System.Drawing.Point(60, 145);
             this.ball.Name = "ball";
-            this.ball.Size = new System.Drawing.Size(81, 21);
+            this.ball.Size = new System.Drawing.Size(91, 21);
             this.ball.TabIndex = 5;
             this.ball.SelectedIndexChanged += new System.EventHandler(this.ball_SelectedIndexChanged);
             // 
@@ -977,9 +977,9 @@
             this.ability.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.ability.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.ability.FormattingEnabled = true;
-            this.ability.Location = new System.Drawing.Point(70, 91);
+            this.ability.Location = new System.Drawing.Point(60, 91);
             this.ability.Name = "ability";
-            this.ability.Size = new System.Drawing.Size(81, 21);
+            this.ability.Size = new System.Drawing.Size(91, 21);
             this.ability.TabIndex = 3;
             // 
             // move3
@@ -1027,9 +1027,9 @@
             this.species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.species.FormattingEnabled = true;
-            this.species.Location = new System.Drawing.Point(70, 11);
+            this.species.Location = new System.Drawing.Point(60, 11);
             this.species.Name = "species";
-            this.species.Size = new System.Drawing.Size(81, 21);
+            this.species.Size = new System.Drawing.Size(91, 21);
             this.species.TabIndex = 0;
             this.species.SelectedIndexChanged += new System.EventHandler(this.species_SelectedIndexChanged);
             // 
@@ -1046,7 +1046,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(16, 14);
+            this.label32.Location = new System.Drawing.Point(6, 14);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(48, 13);
             this.label32.TabIndex = 15;
@@ -1081,9 +1081,9 @@
             this.heldItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.heldItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.heldItem.FormattingEnabled = true;
-            this.heldItem.Location = new System.Drawing.Point(70, 118);
+            this.heldItem.Location = new System.Drawing.Point(60, 118);
             this.heldItem.Name = "heldItem";
-            this.heldItem.Size = new System.Drawing.Size(81, 21);
+            this.heldItem.Size = new System.Drawing.Size(91, 21);
             this.heldItem.TabIndex = 4;
             // 
             // evSPANum
@@ -1161,7 +1161,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(22, 67);
+            this.label23.Location = new System.Drawing.Point(12, 67);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(42, 13);
             this.label23.TabIndex = 17;
@@ -1183,7 +1183,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(34, 121);
+            this.label24.Location = new System.Drawing.Point(24, 121);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(30, 13);
             this.label24.TabIndex = 19;
@@ -1233,9 +1233,9 @@
             "Sassy",
             "Careful",
             "Quirky"});
-            this.nature.Location = new System.Drawing.Point(70, 64);
+            this.nature.Location = new System.Drawing.Point(60, 64);
             this.nature.Name = "nature";
-            this.nature.Size = new System.Drawing.Size(81, 21);
+            this.nature.Size = new System.Drawing.Size(91, 21);
             this.nature.TabIndex = 2;
             // 
             // ivDEFNum
@@ -1254,7 +1254,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(27, 94);
+            this.label25.Location = new System.Drawing.Point(17, 94);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(37, 13);
             this.label25.TabIndex = 18;
@@ -1272,15 +1272,6 @@
             this.ivATKNum.Size = new System.Drawing.Size(33, 20);
             this.ivATKNum.TabIndex = 1;
             this.ivATKNum.ValueChanged += new System.EventHandler(this.ivChanged);
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(6, 41);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(58, 13);
-            this.label30.TabIndex = 16;
-            this.label30.Text = "Nickname:";
             // 
             // ivHPNum
             // 
@@ -1317,11 +1308,14 @@
             // 
             // nickname
             // 
-            this.nickname.Location = new System.Drawing.Point(70, 38);
+            this.nickname.Location = new System.Drawing.Point(60, 38);
             this.nickname.MaxLength = 12;
             this.nickname.Name = "nickname";
-            this.nickname.Size = new System.Drawing.Size(81, 20);
+            this.nickname.Size = new System.Drawing.Size(91, 20);
             this.nickname.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.nickname, "Remember that available characters are determined by Language.\r\nNickname editing " +
+        "for Chinese pokémon is disabled.");
+            this.nickname.TextChanged += new System.EventHandler(this.nickname_TextChanged);
             // 
             // label22
             // 
@@ -2040,6 +2034,7 @@
             // Main
             // 
             this.Main.BackColor = System.Drawing.SystemColors.Control;
+            this.Main.Controls.Add(this.nickBox);
             this.Main.Controls.Add(this.genderBox);
             this.Main.Controls.Add(this.shinyBox);
             this.Main.Controls.Add(this.level);
@@ -2053,7 +2048,6 @@
             this.Main.Controls.Add(this.label32);
             this.Main.Controls.Add(this.friendship);
             this.Main.Controls.Add(this.species);
-            this.Main.Controls.Add(this.label30);
             this.Main.Controls.Add(this.ability);
             this.Main.Controls.Add(this.label23);
             this.Main.Controls.Add(this.pictureBox1);
@@ -2072,6 +2066,17 @@
             this.Main.Size = new System.Drawing.Size(299, 172);
             this.Main.TabIndex = 2;
             this.Main.Text = "Main";
+            // 
+            // nickBox
+            // 
+            this.nickBox.AutoSize = true;
+            this.nickBox.Location = new System.Drawing.Point(6, 40);
+            this.nickBox.Name = "nickBox";
+            this.nickBox.Size = new System.Drawing.Size(51, 17);
+            this.nickBox.TabIndex = 94;
+            this.nickBox.Text = "Nick:";
+            this.nickBox.UseVisualStyleBackColor = true;
+            this.nickBox.CheckedChanged += new System.EventHandler(this.nickBox_CheckedChanged);
             // 
             // genderBox
             // 
@@ -2382,6 +2387,7 @@
             this.pkLang.Name = "pkLang";
             this.pkLang.Size = new System.Drawing.Size(80, 21);
             this.pkLang.TabIndex = 3;
+            this.pkLang.SelectedIndexChanged += new System.EventHandler(this.pkLang_SelectedIndexChanged);
             // 
             // label31
             // 
@@ -5168,7 +5174,6 @@
         private System.Windows.Forms.TextBox hiddenPower;
         private System.Windows.Forms.TextBox nickname;
         private System.Windows.Forms.Button WriteBtn;
-        private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ComboBox nature;
         private System.Windows.Forms.NumericUpDown ivSPENum;
         private System.Windows.Forms.NumericUpDown ivSPDNum;
@@ -5472,6 +5477,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox sr_Species;
+        private System.Windows.Forms.CheckBox nickBox;
     }
 }
 
