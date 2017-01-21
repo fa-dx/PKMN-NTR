@@ -515,7 +515,7 @@ namespace ntrbase.Helpers
                     lastRead = (uint)validator.Species;
                     Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
                     Program.gCmdWindow.updateTabs();
-                    Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));;
+                    Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8")); ;
                     return validator.PID;
                 }
                 else // Empty slot
@@ -622,8 +622,9 @@ namespace ntrbase.Helpers
         {
             Report("NTR: Read data at address 0x" + address.ToString("X8") + " during " + maxtime + " ms");
             Report("NTR: Expected value 0x" + value.ToString("X8") + " to 0x" + (value + range - 1).ToString("X8"));
+            int readcount = 0;
             setTimer(maxtime);
-            while (!timeout)
+            while (!timeout || readcount < 5)
             { // Ask for data
                 lastRead = value + range;
                 DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMemoryRead, null);
@@ -636,25 +637,30 @@ namespace ntrbase.Helpers
                     {
                         break;
                     }
+                    if (timeout && readcount < 5)
+                    {
+                        Report("NTR: Restarting timeout");
+                        setTimer(maxtimeout);
+                        break;
+                    }
                 }
-                if (!timeout)
-                { // Data received
-                    if (lastRead >= value && lastRead < value + range)
-                    {
-                        NTRtimer.Stop();
-                        Report("NTR: Value in range: YES");
-                        return true;
-                    }
-                    else
-                    {
-                        Report("NTR: Value in range: No");
-                        await Task.Delay(tick);
-                    }
-                } // If no data received or not in range, try again
+                if (lastRead >= value && lastRead < value + range)
+                {
+                    NTRtimer.Stop();
+                    Report("NTR: Value in range: YES");
+                    return true;
+                }
                 else
                 {
-                    Report("NTR: Read failed, try again");
+                    Report("NTR: Value in range: No");
+                    await Task.Delay(tick);
                 }
+                if (timeout && readcount < 5)
+                {
+                    Report("NTR: Restarting timeout");
+                    setTimer(maxtimeout);
+                }
+                readcount++;
             }
             Report("NTR: Read failed or outside of range");
             return false;

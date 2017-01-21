@@ -20,7 +20,6 @@ namespace ntrbase.Bot
         private bool notradepartner;
         private bool tradeevo;
         private bool taskresultbool;
-        private bool iscomerror;
         private uint currentPID;
         private uint currentTotalFC;
         private uint currentFC;
@@ -77,7 +76,6 @@ namespace ntrbase.Bot
             notradepartner = false;
             tradeevo = false;
             taskresultbool = false;
-            iscomerror = false;
             currentPID = 0;
             currentTotalFC = 0;
             currentFC = 0;
@@ -315,9 +313,10 @@ namespace ntrbase.Bot
                             {
                                 case -2:
                                 case -1:
-                                    botresult = 2;
                                     Report("Bot: Error detected or slot is empty");
-                                    attempts = 11;
+                                    attempts++;
+                                    botresult = 2;
+                                    botstate = (int)botstates.canceltouch;
                                     break;
                                 default:
                                     {
@@ -386,7 +385,7 @@ namespace ntrbase.Bot
 
                         case (int)botstates.testboxesout:
                             Report("Bot: Test if the boxes are not shown");
-                            waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesOUT, 0x10000, 250, 5000);
+                            waitTaskbool = Program.helper.timememoryinrange(boxesOff, boxesOUT, 0x10000, 500, 10000);
                             taskresultbool = await waitTaskbool;
                             if (taskresultbool)
                             {
@@ -433,7 +432,6 @@ namespace ntrbase.Bot
                             if (taskresultbool)
                             {
                                 attempts = 0;
-                                iscomerror = false;
                                 if (collectFC && !notradepartner)
                                     botstate = (int)botstates.collectFC1;
                                 else
@@ -444,28 +442,9 @@ namespace ntrbase.Bot
                                 attempts++;
                                 botresult = -1;
                                 botstate = (int)botstates.tryfinish;
-                                if (Program.helper.lastRead == 0x00000000)
-                                { // Communication error, will try again
-                                    if (iscomerror)
-                                    {
-                                        Report("Bot: Communication error detected");
-                                        botresult = 4;
-                                        attempts = 11;
-                                    }
-                                    else
-                                    {
-                                        Report("Bot: Communication error? Test again");
-                                        iscomerror = true;
-                                    }
-                                }
                                 if (Program.helper.lastRead == 0xBF800000)
                                 {
-                                    iscomerror = false;
                                     tradeevo = true;
-                                }
-                                else
-                                {
-                                    iscomerror = false;
                                 }
                             }
                             break;
