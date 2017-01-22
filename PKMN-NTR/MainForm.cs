@@ -3370,7 +3370,7 @@ namespace ntrbase
                         failedtests++;
                     }
                     // Test Hidden Power
-                    filterstr = " (" + LookupTable.getHPName(getHiddenPower()) + " -> " + LookupTable.getAbil7((int)row.Cells[3].Value) + ")";
+                    filterstr = " (" + LookupTable.getHPName(getHiddenPower()) + " -> " + LookupTable.getHPName((int)row.Cells[3].Value) + ")";
                     if ((int)row.Cells[3].Value < 0 || getHiddenPower() == (int)row.Cells[3].Value)
                         addtoLog("Filter: Hidden Power - PASS" + filterstr);
                     else
@@ -3379,7 +3379,7 @@ namespace ntrbase
                         failedtests++;
                     }
                     // Test Gender
-                    filterstr = " (" + LookupTable.getGender(dumpedPKHeX.Gender) + " -> " + LookupTable.getAbil7((int)row.Cells[4].Value) + ")";
+                    filterstr = " (" + LookupTable.getGender(dumpedPKHeX.Gender) + " -> " + LookupTable.getGender((int)row.Cells[4].Value) + ")";
                     if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == dumpedPKHeX.Gender)
                         addtoLog("Filter: Gender - PASS" + filterstr);
                     else
