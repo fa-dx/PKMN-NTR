@@ -730,6 +730,22 @@ namespace ntrbase
             else // not a process list or game not found - ignore packet
                 return;
 
+            // Clear tabs to avoid writting wrong data
+            if (!botWorking)
+            {
+                clearTabs();
+                SetSelectedIndex(typeLSR, -1);
+                SetSelectedIndex(modeBreed, -1);
+                if (gen7)
+                {
+                    dumpedPKHeX.Data = PKHeX.decryptArray(LookupTable.EmptyPoke7);
+                }
+                else
+                {
+                    dumpedPKHeX.Data = PKHeX.decryptArray(LookupTable.EmptyPoke6);
+                }
+            }
+
             // Fill fields in the form according to gen
             Program.helper.pid = pid;
             if (game != GameType.None && gen7 && !botWorking)
@@ -780,8 +796,6 @@ namespace ntrbase
             SetVisible(tmsGridView, false);
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
-            SetSelectedIndex(modeBreed, -1);
-            SetSelectedIndex(typeLSR, -1);
             if (radioBoxes.Checked)
                 SetMaximum(boxDump, BOXES);
             SetMaximum(cloneBoxTo, BOXES);
@@ -818,8 +832,6 @@ namespace ntrbase
             SetVisible(tmsGridView, false);
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
-            SetSelectedIndex(modeBreed, -1);
-            SetSelectedIndex(typeLSR, -1);
             if (radioBoxes.Checked)
                 SetMaximum(boxDump, BOXES);
             SetMaximum(cloneBoxTo, BOXES);
@@ -2858,6 +2870,73 @@ namespace ntrbase
             pkLang.SelectedIndexChanged += pkLang_SelectedIndexChanged;
         }
 
+        public void clearTabs()
+        {
+            species.SelectedIndexChanged -= species_SelectedIndexChanged;
+            level.ValueChanged -= level_ValueChanged;
+            nickname.TextChanged -= nickname_TextChanged;
+            nickBox.CheckedChanged -= nickBox_CheckedChanged;
+            pkLang.SelectedIndexChanged -= pkLang_SelectedIndexChanged;
+
+            SetSelectedIndex(species, -1);
+            setSprite(-1, -1, false);
+            SetText(nickname, null);
+            SetChecked(nickBox, false);
+            SetSelectedIndex(nature, -1);
+            ComboboxFill(ability, null);
+            SetSelectedIndex(ability, -1);
+            SetSelectedIndex(heldItem, -1);
+            SetSelectedIndex(ball, -1);
+
+            SetText(dPID, "");
+            SetSelectedIndex(genderBox, -1);
+            SetChecked(isEgg, false);
+            SetMaximum(ExpPoints, 1640000);
+            SetValue(ExpPoints, 0);
+            SetValue(friendship, 0);
+            SetColor(friendship, Color.White, true);
+
+            SetValue(ivHPNum, 0);
+            SetValue(ivATKNum, 0);
+            SetValue(ivDEFNum, 0);
+            SetValue(ivSPANum, 0);
+            SetValue(ivSPDNum, 0);
+            SetValue(ivSPENum, 0);
+            SetValue(evHPNum, 0);
+            SetValue(evATKNum, 0);
+            SetValue(evDEFNum, 0);
+            SetValue(evSPANum, 0);
+            SetValue(evSPDNum, 0);
+            SetValue(evSPENum, 0);
+            SetChecked(HypT_HP, false);
+            SetChecked(HypT_Atk, false);
+            SetChecked(HypT_Def, false);
+            SetChecked(HypT_SpA, false);
+            SetChecked(HypT_SpD, false);
+            SetChecked(HypT_Spe, false);
+
+            SetSelectedIndex(move1, -1);
+            SetSelectedIndex(move2, -1);
+            SetSelectedIndex(move3, -1);
+            SetSelectedIndex(move4, -1);
+            SetSelectedIndex(relearnmove1, -1);
+            SetSelectedIndex(relearnmove2, -1);
+            SetSelectedIndex(relearnmove3, -1);
+            SetSelectedIndex(relearnmove4, -1);
+
+            SetText(otName, "");
+            SetValue(dTIDNum, 0);
+            SetValue(dSIDNum, 0);
+
+            SetSelectedIndex(pkLang, -1);
+
+            species.SelectedIndexChanged += species_SelectedIndexChanged;
+            level.ValueChanged += level_ValueChanged;
+            nickname.TextChanged += nickname_TextChanged;
+            nickBox.CheckedChanged += nickBox_CheckedChanged;
+            pkLang.SelectedIndexChanged += pkLang_SelectedIndexChanged;
+        }
+
         // PokeDigger
         private void PokeDiggerBtn_Click(object sender, EventArgs e)
         {
@@ -3036,7 +3115,10 @@ namespace ntrbase
             else
             {
                 ctrl.Items.Clear();
-                ctrl.Items.AddRange(val);
+                if (val != null)
+                {
+                    ctrl.Items.AddRange(val);
+                }
             }
         }
 
