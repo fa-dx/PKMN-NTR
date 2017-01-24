@@ -1832,14 +1832,7 @@ namespace ntrbase
                 dumpedPKHeX.Species = species.SelectedIndex + 1;
                 dumpedPKHeX.Nature = nature.SelectedIndex;
                 dumpedPKHeX.Gender = genderBox.SelectedIndex;
-                if (dumpedPKHeX.CurrentHandler == 0)
-                {
-                    dumpedPKHeX.OT_Friendship = (int)friendship.Value;
-                }
-                else
-                {
-                    dumpedPKHeX.HT_Friendship = (int)friendship.Value;
-                }
+                dumpedPKHeX.CurrentFriendship = (int)friendship.Value;
 
                 switch (ability.SelectedIndex)
                 {
@@ -2801,14 +2794,13 @@ namespace ntrbase
             SetChecked(isEgg, dumpedPKHeX.IsEgg);
             SetMaximum(ExpPoints, LookupTable.getExp(dumpedPKHeX.Species, 100));
             SetValue(ExpPoints, dumpedPKHeX.EXP);
+            SetValue(friendship, dumpedPKHeX.CurrentFriendship);
             if (dumpedPKHeX.CurrentHandler == 0)
             {
-                SetValue(friendship, dumpedPKHeX.OT_Friendship);
                 SetColor(friendship, Color.Cornsilk, true);
             }
             else
             {
-                SetValue(friendship, dumpedPKHeX.HT_Friendship);
                 SetColor(friendship, Color.White, true);
             }
 

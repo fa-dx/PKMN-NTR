@@ -159,7 +159,7 @@ namespace ntrbase
         public byte[] Data { get; set; }
 
         ////////////////////////////
-        ///Begin PKHeX PK6 Layout///
+        ///Begin PKHeX PKM Layout///
         ////////////////////////////
         #region Block A
         public uint EncryptionConstant
@@ -529,8 +529,20 @@ namespace ntrbase
         public int ConsoleRegion { get { return Data[0xE2]; } set { Data[0xE2] = (byte)value; } }
         public int Language { get { return Data[0xE3]; } set { Data[0xE3] = (byte)value; } }
         #endregion
+
+        // Simple Generated Attributes
+        public int CurrentFriendship
+        {
+            get { return CurrentHandler == 0 ? OT_Friendship : HT_Friendship; }
+            set { if (CurrentHandler == 0) OT_Friendship = value; else HT_Friendship = value; }
+        }
+        public int OppositeFriendship
+        {
+            get { return CurrentHandler == 1 ? OT_Friendship : HT_Friendship; }
+            set { if (CurrentHandler == 1) OT_Friendship = value; else HT_Friendship = value; }
+        }
         //////////////////////////
-        ///End PKHeX PK6 Layout///
+        ///End PKHeX PKM Layout///
         //////////////////////////
 
         internal static readonly Random rand = new Random();
