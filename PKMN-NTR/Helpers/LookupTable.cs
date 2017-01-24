@@ -1,5 +1,4 @@
-﻿using ntrbase.Properties;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace ntrbase
 {

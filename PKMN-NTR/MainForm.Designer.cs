@@ -1292,7 +1292,7 @@
             this.hiddenPower.Location = new System.Drawing.Point(64, 146);
             this.hiddenPower.Name = "hiddenPower";
             this.hiddenPower.ReadOnly = true;
-            this.hiddenPower.Size = new System.Drawing.Size(56, 20);
+            this.hiddenPower.Size = new System.Drawing.Size(81, 20);
             this.hiddenPower.TabIndex = 18;
             this.hiddenPower.TabStop = false;
             this.hiddenPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -2075,6 +2075,8 @@
             this.nickBox.Size = new System.Drawing.Size(51, 17);
             this.nickBox.TabIndex = 94;
             this.nickBox.Text = "Nick:";
+            this.toolTip1.SetToolTip(this.nickBox, "This box is checked when the pokémon has a nickname.\r\nUncheck it to restore its o" +
+        "rignal name.\r\n");
             this.nickBox.UseVisualStyleBackColor = true;
             this.nickBox.CheckedChanged += new System.EventHandler(this.nickBox_CheckedChanged);
             // 
@@ -2601,6 +2603,8 @@
             // writeAutoInc
             // 
             this.writeAutoInc.AutoSize = true;
+            this.writeAutoInc.Checked = true;
+            this.writeAutoInc.CheckState = System.Windows.Forms.CheckState.Checked;
             this.writeAutoInc.Location = new System.Drawing.Point(9, 31);
             this.writeAutoInc.Name = "writeAutoInc";
             this.writeAutoInc.Size = new System.Drawing.Size(97, 17);
@@ -2987,7 +2991,7 @@
             // stopBotButton
             // 
             this.stopBotButton.Enabled = false;
-            this.stopBotButton.Location = new System.Drawing.Point(797, 5);
+            this.stopBotButton.Location = new System.Drawing.Point(804, 5);
             this.stopBotButton.Name = "stopBotButton";
             this.stopBotButton.Size = new System.Drawing.Size(75, 23);
             this.stopBotButton.TabIndex = 4;
