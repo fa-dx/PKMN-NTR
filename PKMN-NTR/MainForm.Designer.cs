@@ -398,6 +398,11 @@
             this.srFilterLoad = new System.Windows.Forms.Button();
             this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
+            this.WT_After = new System.Windows.Forms.GroupBox();
+            this.WTafter_Delete = new System.Windows.Forms.RadioButton();
+            this.WTafter_Restore = new System.Windows.Forms.RadioButton();
+            this.WTafter_DoNothing = new System.Windows.Forms.RadioButton();
+            this.WTafter_Dump = new System.Windows.Forms.CheckBox();
             this.WT_RunEndless = new System.Windows.Forms.CheckBox();
             this.WT_Sources = new System.Windows.Forms.GroupBox();
             this.WTsource_Random = new System.Windows.Forms.RadioButton();
@@ -407,11 +412,6 @@
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
-            this.WT_After = new System.Windows.Forms.GroupBox();
-            this.WTafter_Dump = new System.Windows.Forms.CheckBox();
-            this.WTafter_DoNothing = new System.Windows.Forms.RadioButton();
-            this.WTafter_Restore = new System.Windows.Forms.RadioButton();
-            this.WTafter_Delete = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -504,11 +504,11 @@
             this.tabSoftReset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).BeginInit();
             this.tabWonderTrade.SuspendLayout();
+            this.WT_After.SuspendLayout();
             this.WT_Sources.SuspendLayout();
             this.tabNTRlog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shinypic)).BeginInit();
-            this.WT_After.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -4917,6 +4917,63 @@
             this.tabWonderTrade.TabIndex = 2;
             this.tabWonderTrade.Text = "Wonder Trade";
             // 
+            // WT_After
+            // 
+            this.WT_After.AutoSize = true;
+            this.WT_After.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.WT_After.Controls.Add(this.WTafter_Delete);
+            this.WT_After.Controls.Add(this.WTafter_Restore);
+            this.WT_After.Controls.Add(this.WTafter_DoNothing);
+            this.WT_After.Controls.Add(this.WTafter_Dump);
+            this.WT_After.Location = new System.Drawing.Point(156, 55);
+            this.WT_After.Name = "WT_After";
+            this.WT_After.Size = new System.Drawing.Size(148, 124);
+            this.WT_After.TabIndex = 10;
+            this.WT_After.TabStop = false;
+            this.WT_After.Text = "After trading";
+            // 
+            // WTafter_Delete
+            // 
+            this.WTafter_Delete.AutoSize = true;
+            this.WTafter_Delete.Location = new System.Drawing.Point(6, 88);
+            this.WTafter_Delete.Name = "WTafter_Delete";
+            this.WTafter_Delete.Size = new System.Drawing.Size(136, 17);
+            this.WTafter_Delete.TabIndex = 1;
+            this.WTafter_Delete.Text = "Delete traded pokémon";
+            this.WTafter_Delete.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_Restore
+            // 
+            this.WTafter_Restore.AutoSize = true;
+            this.WTafter_Restore.Location = new System.Drawing.Point(6, 65);
+            this.WTafter_Restore.Name = "WTafter_Restore";
+            this.WTafter_Restore.Size = new System.Drawing.Size(101, 17);
+            this.WTafter_Restore.TabIndex = 1;
+            this.WTafter_Restore.Text = "Restore backup";
+            this.WTafter_Restore.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_DoNothing
+            // 
+            this.WTafter_DoNothing.AutoSize = true;
+            this.WTafter_DoNothing.Checked = true;
+            this.WTafter_DoNothing.Location = new System.Drawing.Point(6, 42);
+            this.WTafter_DoNothing.Name = "WTafter_DoNothing";
+            this.WTafter_DoNothing.Size = new System.Drawing.Size(77, 17);
+            this.WTafter_DoNothing.TabIndex = 1;
+            this.WTafter_DoNothing.TabStop = true;
+            this.WTafter_DoNothing.Text = "Do nothing";
+            this.WTafter_DoNothing.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_Dump
+            // 
+            this.WTafter_Dump.AutoSize = true;
+            this.WTafter_Dump.Location = new System.Drawing.Point(6, 20);
+            this.WTafter_Dump.Name = "WTafter_Dump";
+            this.WTafter_Dump.Size = new System.Drawing.Size(109, 17);
+            this.WTafter_Dump.TabIndex = 0;
+            this.WTafter_Dump.Text = "Dump boxes and:";
+            this.WTafter_Dump.UseVisualStyleBackColor = true;
+            // 
             // WT_RunEndless
             // 
             this.WT_RunEndless.AutoSize = true;
@@ -4950,7 +5007,6 @@
             this.WTsource_Random.TabIndex = 2;
             this.WTsource_Random.Text = "WT Folder (Random)";
             this.WTsource_Random.UseVisualStyleBackColor = true;
-            this.WTsource_Random.CheckedChanged += new System.EventHandler(this.WTsource_Folder_CheckedChanged);
             // 
             // WTsource_Folder
             // 
@@ -4961,7 +5017,6 @@
             this.WTsource_Folder.TabIndex = 1;
             this.WTsource_Folder.Text = "Wonder Trade Folder";
             this.WTsource_Folder.UseVisualStyleBackColor = true;
-            this.WTsource_Folder.CheckedChanged += new System.EventHandler(this.WTsource_Folder_CheckedChanged);
             // 
             // WTsource_Boxes
             // 
@@ -5015,63 +5070,6 @@
             this.shinypic.Size = new System.Drawing.Size(10, 10);
             this.shinypic.TabIndex = 19;
             this.shinypic.TabStop = false;
-            // 
-            // WT_After
-            // 
-            this.WT_After.AutoSize = true;
-            this.WT_After.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.WT_After.Controls.Add(this.WTafter_Delete);
-            this.WT_After.Controls.Add(this.WTafter_Restore);
-            this.WT_After.Controls.Add(this.WTafter_DoNothing);
-            this.WT_After.Controls.Add(this.WTafter_Dump);
-            this.WT_After.Location = new System.Drawing.Point(156, 55);
-            this.WT_After.Name = "WT_After";
-            this.WT_After.Size = new System.Drawing.Size(148, 124);
-            this.WT_After.TabIndex = 10;
-            this.WT_After.TabStop = false;
-            this.WT_After.Text = "After trading";
-            // 
-            // WTafter_Dump
-            // 
-            this.WTafter_Dump.AutoSize = true;
-            this.WTafter_Dump.Location = new System.Drawing.Point(6, 20);
-            this.WTafter_Dump.Name = "WTafter_Dump";
-            this.WTafter_Dump.Size = new System.Drawing.Size(109, 17);
-            this.WTafter_Dump.TabIndex = 0;
-            this.WTafter_Dump.Text = "Dump boxes and:";
-            this.WTafter_Dump.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_DoNothing
-            // 
-            this.WTafter_DoNothing.AutoSize = true;
-            this.WTafter_DoNothing.Checked = true;
-            this.WTafter_DoNothing.Location = new System.Drawing.Point(6, 42);
-            this.WTafter_DoNothing.Name = "WTafter_DoNothing";
-            this.WTafter_DoNothing.Size = new System.Drawing.Size(77, 17);
-            this.WTafter_DoNothing.TabIndex = 1;
-            this.WTafter_DoNothing.TabStop = true;
-            this.WTafter_DoNothing.Text = "Do nothing";
-            this.WTafter_DoNothing.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_Restore
-            // 
-            this.WTafter_Restore.AutoSize = true;
-            this.WTafter_Restore.Location = new System.Drawing.Point(6, 65);
-            this.WTafter_Restore.Name = "WTafter_Restore";
-            this.WTafter_Restore.Size = new System.Drawing.Size(101, 17);
-            this.WTafter_Restore.TabIndex = 1;
-            this.WTafter_Restore.Text = "Restore backup";
-            this.WTafter_Restore.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_Delete
-            // 
-            this.WTafter_Delete.AutoSize = true;
-            this.WTafter_Delete.Location = new System.Drawing.Point(6, 88);
-            this.WTafter_Delete.Name = "WTafter_Delete";
-            this.WTafter_Delete.Size = new System.Drawing.Size(136, 17);
-            this.WTafter_Delete.TabIndex = 1;
-            this.WTafter_Delete.Text = "Delete traded pokémon";
-            this.WTafter_Delete.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -5205,14 +5203,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).EndInit();
             this.tabWonderTrade.ResumeLayout(false);
             this.tabWonderTrade.PerformLayout();
+            this.WT_After.ResumeLayout(false);
+            this.WT_After.PerformLayout();
             this.WT_Sources.ResumeLayout(false);
             this.WT_Sources.PerformLayout();
             this.tabNTRlog.ResumeLayout(false);
             this.tabNTRlog.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shinypic)).EndInit();
-            this.WT_After.ResumeLayout(false);
-            this.WT_After.PerformLayout();
             this.ResumeLayout(false);
 
         }

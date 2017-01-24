@@ -4006,6 +4006,9 @@ namespace ntrbase
                 botnumber = 3;
                 radioBoxes.Checked = true;
 
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERWT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+
                 int wtmode = 0;
                 if (WTsource_Boxes.Checked)
                 {
