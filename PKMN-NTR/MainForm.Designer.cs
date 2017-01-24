@@ -238,7 +238,6 @@
             this.manualR = new System.Windows.Forms.Button();
             this.manualSelect = new System.Windows.Forms.Button();
             this.manualDRight = new System.Windows.Forms.Button();
-            this.label54 = new System.Windows.Forms.Label();
             this.ManualDDown = new System.Windows.Forms.Button();
             this.manualStart = new System.Windows.Forms.Button();
             this.label69 = new System.Windows.Forms.Label();
@@ -254,16 +253,19 @@
             this.pokeTotalFC = new System.Windows.Forms.Button();
             this.totalFCNum = new System.Windows.Forms.NumericUpDown();
             this.tabControls = new System.Windows.Forms.TabPage();
+            this.Remote_Stick = new System.Windows.Forms.GroupBox();
+            this.StickX = new System.Windows.Forms.TrackBar();
+            this.StickY = new System.Windows.Forms.TrackBar();
+            this.StickNumY = new System.Windows.Forms.NumericUpDown();
             this.StickSend = new System.Windows.Forms.Button();
+            this.StickNumX = new System.Windows.Forms.NumericUpDown();
             this.label62 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
-            this.StickNumX = new System.Windows.Forms.NumericUpDown();
-            this.StickNumY = new System.Windows.Forms.NumericUpDown();
-            this.label60 = new System.Windows.Forms.Label();
-            this.StickY = new System.Windows.Forms.TrackBar();
-            this.StickX = new System.Windows.Forms.TrackBar();
+            this.Remote_touch = new System.Windows.Forms.GroupBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.Remote_buttons = new System.Windows.Forms.GroupBox();
             this.manualSR = new System.Windows.Forms.Button();
-            this.label92 = new System.Windows.Forms.Label();
             this.tabFilters = new System.Windows.Forms.TabPage();
             this.filterReset = new System.Windows.Forms.Button();
             this.filterRead = new System.Windows.Forms.Button();
@@ -324,8 +326,31 @@
             this.filterATKvalue = new System.Windows.Forms.NumericUpDown();
             this.label112 = new System.Windows.Forms.Label();
             this.tabBreeding = new System.Windows.Forms.TabPage();
-            this.breedingClear = new System.Windows.Forms.Button();
+            this.Breed_esvtsv = new System.Windows.Forms.GroupBox();
             this.label50 = new System.Windows.Forms.Label();
+            this.ESVlist = new System.Windows.Forms.DataGridView();
+            this.ESVlistBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESVlistSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESVlistValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESVlistSave = new System.Windows.Forms.Button();
+            this.TSVlist = new System.Windows.Forms.ListBox();
+            this.TSVlistNum = new System.Windows.Forms.NumericUpDown();
+            this.TSVlistAdd = new System.Windows.Forms.Button();
+            this.TSVlistLoad = new System.Windows.Forms.Button();
+            this.TSVlistRemove = new System.Windows.Forms.Button();
+            this.TSVlistSave = new System.Windows.Forms.Button();
+            this.Breed_options = new System.Windows.Forms.GroupBox();
+            this.modeBreed = new System.Windows.Forms.ComboBox();
+            this.readESV = new System.Windows.Forms.CheckBox();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.quickBreed = new System.Windows.Forms.CheckBox();
+            this.slotBreed = new System.Windows.Forms.NumericUpDown();
+            this.label84 = new System.Windows.Forms.Label();
+            this.boxBreed = new System.Windows.Forms.NumericUpDown();
+            this.label77 = new System.Windows.Forms.Label();
+            this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
+            this.breedingClear = new System.Windows.Forms.Button();
             this.filterBreeding = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -346,32 +371,10 @@
             this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quickBreed = new System.Windows.Forms.CheckBox();
-            this.label95 = new System.Windows.Forms.Label();
-            this.TSVlistLoad = new System.Windows.Forms.Button();
-            this.TSVlistSave = new System.Windows.Forms.Button();
-            this.TSVlistRemove = new System.Windows.Forms.Button();
-            this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
-            this.TSVlistAdd = new System.Windows.Forms.Button();
-            this.label77 = new System.Windows.Forms.Label();
-            this.modeBreed = new System.Windows.Forms.ComboBox();
-            this.boxBreed = new System.Windows.Forms.NumericUpDown();
-            this.label84 = new System.Windows.Forms.Label();
-            this.slotBreed = new System.Windows.Forms.NumericUpDown();
-            this.TSVlistNum = new System.Windows.Forms.NumericUpDown();
-            this.label76 = new System.Windows.Forms.Label();
-            this.label75 = new System.Windows.Forms.Label();
-            this.TSVlist = new System.Windows.Forms.ListBox();
-            this.ESVlistSave = new System.Windows.Forms.Button();
-            this.ESVlist = new System.Windows.Forms.DataGridView();
-            this.ESVlistBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readESV = new System.Windows.Forms.CheckBox();
-            this.label94 = new System.Windows.Forms.Label();
             this.bFilterLoad = new System.Windows.Forms.Button();
             this.runBreedingBot = new System.Windows.Forms.Button();
             this.tabSoftReset = new System.Windows.Forms.TabPage();
+            this.SR_options = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.sr_Species = new System.Windows.Forms.ComboBox();
             this.srClear = new System.Windows.Forms.Button();
@@ -396,19 +399,19 @@
             this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.srFilterLoad = new System.Windows.Forms.Button();
-            this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
+            this.WT_options = new System.Windows.Forms.GroupBox();
             this.WT_After = new System.Windows.Forms.GroupBox();
             this.WTafter_Delete = new System.Windows.Forms.RadioButton();
             this.WTafter_Restore = new System.Windows.Forms.RadioButton();
             this.WTafter_DoNothing = new System.Windows.Forms.RadioButton();
             this.WTafter_Dump = new System.Windows.Forms.CheckBox();
-            this.WT_RunEndless = new System.Windows.Forms.CheckBox();
             this.WT_Sources = new System.Windows.Forms.GroupBox();
             this.WTsource_Random = new System.Windows.Forms.RadioButton();
             this.WTsource_Folder = new System.Windows.Forms.RadioButton();
             this.WTsource_Boxes = new System.Windows.Forms.RadioButton();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
+            this.WT_RunEndless = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
@@ -481,10 +484,13 @@
             this.Edit_Trainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.totalFCNum)).BeginInit();
             this.tabControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickY)).BeginInit();
+            this.Remote_Stick.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StickX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).BeginInit();
+            this.Remote_touch.SuspendLayout();
+            this.Remote_buttons.SuspendLayout();
             this.tabFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterPerIVvalue)).BeginInit();
@@ -495,15 +501,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.filterHPvalue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).BeginInit();
             this.tabBreeding.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).BeginInit();
+            this.Breed_esvtsv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).BeginInit();
+            this.Breed_options.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).BeginInit();
             this.tabSoftReset.SuspendLayout();
+            this.SR_options.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).BeginInit();
             this.tabWonderTrade.SuspendLayout();
+            this.WT_options.SuspendLayout();
             this.WT_After.SuspendLayout();
             this.WT_Sources.SuspendLayout();
             this.tabNTRlog.SuspendLayout();
@@ -2748,27 +2758,27 @@
             // 
             // touchX
             // 
-            this.touchX.Location = new System.Drawing.Point(351, 14);
+            this.touchX.Location = new System.Drawing.Point(6, 19);
             this.touchX.Maximum = new decimal(new int[] {
             319,
             0,
             0,
             0});
             this.touchX.Name = "touchX";
-            this.touchX.Size = new System.Drawing.Size(62, 20);
+            this.touchX.Size = new System.Drawing.Size(60, 20);
             this.touchX.TabIndex = 12;
             this.toolTip1.SetToolTip(this.touchX, "X (horizontal) coordinate, from the left part of the screen.");
             // 
             // touchY
             // 
-            this.touchY.Location = new System.Drawing.Point(419, 14);
+            this.touchY.Location = new System.Drawing.Point(72, 19);
             this.touchY.Maximum = new decimal(new int[] {
             239,
             0,
             0,
             0});
             this.touchY.Name = "touchY";
-            this.touchY.Size = new System.Drawing.Size(62, 20);
+            this.touchY.Size = new System.Drawing.Size(60, 20);
             this.touchY.TabIndex = 13;
             this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
             // 
@@ -2776,9 +2786,9 @@
             // 
             this.daycare_select.Controls.Add(this.radioDayCare1);
             this.daycare_select.Controls.Add(this.radioDayCare2);
-            this.daycare_select.Location = new System.Drawing.Point(172, 61);
+            this.daycare_select.Location = new System.Drawing.Point(150, 72);
             this.daycare_select.Name = "daycare_select";
-            this.daycare_select.Size = new System.Drawing.Size(94, 70);
+            this.daycare_select.Size = new System.Drawing.Size(104, 70);
             this.daycare_select.TabIndex = 5;
             this.daycare_select.TabStop = false;
             this.daycare_select.Text = "Daycare:";
@@ -2811,9 +2821,9 @@
             this.orgbox_pos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.orgbox_pos.Controls.Add(this.OrganizeMiddle);
             this.orgbox_pos.Controls.Add(this.OrganizeTop);
-            this.orgbox_pos.Location = new System.Drawing.Point(6, 61);
+            this.orgbox_pos.Location = new System.Drawing.Point(6, 71);
             this.orgbox_pos.Name = "orgbox_pos";
-            this.orgbox_pos.Size = new System.Drawing.Size(157, 70);
+            this.orgbox_pos.Size = new System.Drawing.Size(138, 71);
             this.orgbox_pos.TabIndex = 4;
             this.orgbox_pos.TabStop = false;
             this.orgbox_pos.Text = "Organize Boxes position:";
@@ -2856,18 +2866,18 @@
             // label72
             // 
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(3, 10);
+            this.label72.Location = new System.Drawing.Point(6, 20);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(34, 13);
+            this.label72.Size = new System.Drawing.Size(37, 13);
             this.label72.TabIndex = 6;
-            this.label72.Text = "Type:";
+            this.label72.Text = "Mode:";
             // 
             // typeLSR
             // 
             this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.typeLSR.FormattingEnabled = true;
-            this.typeLSR.Location = new System.Drawing.Point(43, 7);
+            this.typeLSR.Location = new System.Drawing.Point(49, 17);
             this.typeLSR.Name = "typeLSR";
             this.typeLSR.Size = new System.Drawing.Size(222, 21);
             this.typeLSR.TabIndex = 0;
@@ -2875,9 +2885,9 @@
             // 
             // RunLSRbot
             // 
-            this.RunLSRbot.Location = new System.Drawing.Point(271, 5);
+            this.RunLSRbot.Location = new System.Drawing.Point(6, 65);
             this.RunLSRbot.Name = "RunLSRbot";
-            this.RunLSRbot.Size = new System.Drawing.Size(210, 23);
+            this.RunLSRbot.Size = new System.Drawing.Size(271, 23);
             this.RunLSRbot.TabIndex = 2;
             this.RunLSRbot.Text = "Start Bot";
             this.RunLSRbot.UseVisualStyleBackColor = true;
@@ -2886,17 +2896,17 @@
             // resumeLSR
             // 
             this.resumeLSR.AutoSize = true;
-            this.resumeLSR.Location = new System.Drawing.Point(487, 9);
+            this.resumeLSR.Location = new System.Drawing.Point(457, 19);
             this.resumeLSR.Name = "resumeLSR";
-            this.resumeLSR.Size = new System.Drawing.Size(65, 17);
+            this.resumeLSR.Size = new System.Drawing.Size(83, 17);
             this.resumeLSR.TabIndex = 3;
-            this.resumeLSR.Text = "Resume";
+            this.resumeLSR.Text = "Resume bot";
             this.resumeLSR.UseVisualStyleBackColor = true;
             // 
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(101, 10);
+            this.label59.Location = new System.Drawing.Point(95, 16);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(49, 13);
             this.label59.TabIndex = 6;
@@ -2904,9 +2914,9 @@
             // 
             // RunWTbot
             // 
-            this.RunWTbot.Location = new System.Drawing.Point(156, 26);
+            this.RunWTbot.Location = new System.Drawing.Point(6, 187);
             this.RunWTbot.Name = "RunWTbot";
-            this.RunWTbot.Size = new System.Drawing.Size(148, 23);
+            this.RunWTbot.Size = new System.Drawing.Size(208, 23);
             this.RunWTbot.TabIndex = 3;
             this.RunWTbot.Text = "Start Bot";
             this.RunWTbot.UseVisualStyleBackColor = true;
@@ -2914,7 +2924,7 @@
             // 
             // WTtradesNo
             // 
-            this.WTtradesNo.Location = new System.Drawing.Point(104, 29);
+            this.WTtradesNo.Location = new System.Drawing.Point(98, 35);
             this.WTtradesNo.Maximum = new decimal(new int[] {
             300,
             0,
@@ -2932,7 +2942,7 @@
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(55, 10);
+            this.label57.Location = new System.Drawing.Point(49, 16);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(28, 13);
             this.label57.TabIndex = 5;
@@ -2940,7 +2950,7 @@
             // 
             // WTBox
             // 
-            this.WTBox.Location = new System.Drawing.Point(12, 29);
+            this.WTBox.Location = new System.Drawing.Point(6, 35);
             this.WTBox.Maximum = new decimal(new int[] {
             31,
             0,
@@ -2962,7 +2972,7 @@
             // 
             // WTSlot
             // 
-            this.WTSlot.Location = new System.Drawing.Point(58, 29);
+            this.WTSlot.Location = new System.Drawing.Point(52, 35);
             this.WTSlot.Maximum = new decimal(new int[] {
             30,
             0,
@@ -2985,7 +2995,7 @@
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(12, 10);
+            this.label58.Location = new System.Drawing.Point(6, 16);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(28, 13);
             this.label58.TabIndex = 4;
@@ -3012,7 +3022,7 @@
             // 
             // manualDLeft
             // 
-            this.manualDLeft.Location = new System.Drawing.Point(6, 38);
+            this.manualDLeft.Location = new System.Drawing.Point(6, 46);
             this.manualDLeft.Name = "manualDLeft";
             this.manualDLeft.Size = new System.Drawing.Size(23, 23);
             this.manualDLeft.TabIndex = 2;
@@ -3022,9 +3032,9 @@
             // 
             // manualTouch
             // 
-            this.manualTouch.Location = new System.Drawing.Point(487, 16);
+            this.manualTouch.Location = new System.Drawing.Point(138, 16);
             this.manualTouch.Name = "manualTouch";
-            this.manualTouch.Size = new System.Drawing.Size(65, 23);
+            this.manualTouch.Size = new System.Drawing.Size(128, 23);
             this.manualTouch.TabIndex = 14;
             this.manualTouch.Text = "Touch";
             this.manualTouch.UseVisualStyleBackColor = true;
@@ -3032,7 +3042,7 @@
             // 
             // manualX
             // 
-            this.manualX.Location = new System.Drawing.Point(214, 11);
+            this.manualX.Location = new System.Drawing.Point(214, 19);
             this.manualX.Name = "manualX";
             this.manualX.Size = new System.Drawing.Size(23, 23);
             this.manualX.TabIndex = 6;
@@ -3042,7 +3052,7 @@
             // 
             // manualY
             // 
-            this.manualY.Location = new System.Drawing.Point(185, 38);
+            this.manualY.Location = new System.Drawing.Point(185, 46);
             this.manualY.Name = "manualY";
             this.manualY.Size = new System.Drawing.Size(23, 23);
             this.manualY.TabIndex = 7;
@@ -3052,7 +3062,7 @@
             // 
             // manualDUp
             // 
-            this.manualDUp.Location = new System.Drawing.Point(35, 11);
+            this.manualDUp.Location = new System.Drawing.Point(35, 19);
             this.manualDUp.Name = "manualDUp";
             this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.manualDUp.Size = new System.Drawing.Size(23, 23);
@@ -3063,7 +3073,7 @@
             // 
             // manualL
             // 
-            this.manualL.Location = new System.Drawing.Point(103, 11);
+            this.manualL.Location = new System.Drawing.Point(103, 19);
             this.manualL.Name = "manualL";
             this.manualL.Size = new System.Drawing.Size(23, 23);
             this.manualL.TabIndex = 8;
@@ -3073,7 +3083,7 @@
             // 
             // manualB
             // 
-            this.manualB.Location = new System.Drawing.Point(214, 66);
+            this.manualB.Location = new System.Drawing.Point(214, 74);
             this.manualB.Name = "manualB";
             this.manualB.Size = new System.Drawing.Size(23, 23);
             this.manualB.TabIndex = 5;
@@ -3083,7 +3093,7 @@
             // 
             // manualA
             // 
-            this.manualA.Location = new System.Drawing.Point(243, 38);
+            this.manualA.Location = new System.Drawing.Point(243, 46);
             this.manualA.Name = "manualA";
             this.manualA.Size = new System.Drawing.Size(23, 23);
             this.manualA.TabIndex = 4;
@@ -3093,7 +3103,7 @@
             // 
             // manualR
             // 
-            this.manualR.Location = new System.Drawing.Point(146, 11);
+            this.manualR.Location = new System.Drawing.Point(146, 19);
             this.manualR.Name = "manualR";
             this.manualR.Size = new System.Drawing.Size(23, 23);
             this.manualR.TabIndex = 9;
@@ -3103,7 +3113,7 @@
             // 
             // manualSelect
             // 
-            this.manualSelect.Location = new System.Drawing.Point(146, 66);
+            this.manualSelect.Location = new System.Drawing.Point(146, 74);
             this.manualSelect.Name = "manualSelect";
             this.manualSelect.Size = new System.Drawing.Size(62, 23);
             this.manualSelect.TabIndex = 11;
@@ -3113,7 +3123,7 @@
             // 
             // manualDRight
             // 
-            this.manualDRight.Location = new System.Drawing.Point(64, 38);
+            this.manualDRight.Location = new System.Drawing.Point(64, 46);
             this.manualDRight.Name = "manualDRight";
             this.manualDRight.Size = new System.Drawing.Size(23, 23);
             this.manualDRight.TabIndex = 3;
@@ -3121,18 +3131,9 @@
             this.manualDRight.UseVisualStyleBackColor = true;
             this.manualDRight.Click += new System.EventHandler(this.manualDRight_Click);
             // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(272, 16);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(73, 13);
-            this.label54.TabIndex = 21;
-            this.label54.Text = "Touchscreen:";
-            // 
             // ManualDDown
             // 
-            this.ManualDDown.Location = new System.Drawing.Point(35, 66);
+            this.ManualDDown.Location = new System.Drawing.Point(35, 74);
             this.ManualDDown.Name = "ManualDDown";
             this.ManualDDown.Size = new System.Drawing.Size(23, 23);
             this.ManualDDown.TabIndex = 1;
@@ -3142,7 +3143,7 @@
             // 
             // manualStart
             // 
-            this.manualStart.Location = new System.Drawing.Point(64, 66);
+            this.manualStart.Location = new System.Drawing.Point(64, 74);
             this.manualStart.Name = "manualStart";
             this.manualStart.Size = new System.Drawing.Size(62, 23);
             this.manualStart.TabIndex = 10;
@@ -3320,32 +3321,10 @@
             // tabControls
             // 
             this.tabControls.BackColor = System.Drawing.SystemColors.Control;
-            this.tabControls.Controls.Add(this.StickSend);
-            this.tabControls.Controls.Add(this.label62);
-            this.tabControls.Controls.Add(this.label61);
-            this.tabControls.Controls.Add(this.StickNumX);
-            this.tabControls.Controls.Add(this.StickNumY);
-            this.tabControls.Controls.Add(this.label60);
-            this.tabControls.Controls.Add(this.StickY);
-            this.tabControls.Controls.Add(this.StickX);
+            this.tabControls.Controls.Add(this.Remote_Stick);
+            this.tabControls.Controls.Add(this.Remote_touch);
+            this.tabControls.Controls.Add(this.Remote_buttons);
             this.tabControls.Controls.Add(this.manualSR);
-            this.tabControls.Controls.Add(this.label92);
-            this.tabControls.Controls.Add(this.manualDLeft);
-            this.tabControls.Controls.Add(this.manualTouch);
-            this.tabControls.Controls.Add(this.manualDUp);
-            this.tabControls.Controls.Add(this.manualX);
-            this.tabControls.Controls.Add(this.manualStart);
-            this.tabControls.Controls.Add(this.manualY);
-            this.tabControls.Controls.Add(this.ManualDDown);
-            this.tabControls.Controls.Add(this.label54);
-            this.tabControls.Controls.Add(this.manualDRight);
-            this.tabControls.Controls.Add(this.manualSelect);
-            this.tabControls.Controls.Add(this.manualL);
-            this.tabControls.Controls.Add(this.touchX);
-            this.tabControls.Controls.Add(this.manualB);
-            this.tabControls.Controls.Add(this.manualR);
-            this.tabControls.Controls.Add(this.touchY);
-            this.tabControls.Controls.Add(this.manualA);
             this.tabControls.Location = new System.Drawing.Point(4, 22);
             this.tabControls.Name = "tabControls";
             this.tabControls.Padding = new System.Windows.Forms.Padding(3);
@@ -3353,112 +3332,166 @@
             this.tabControls.TabIndex = 1;
             this.tabControls.Text = "Controls";
             // 
-            // StickSend
+            // Remote_Stick
             // 
-            this.StickSend.Location = new System.Drawing.Point(64, 162);
-            this.StickSend.Name = "StickSend";
-            this.StickSend.Size = new System.Drawing.Size(144, 23);
-            this.StickSend.TabIndex = 20;
-            this.StickSend.Text = "Send Command";
-            this.StickSend.UseVisualStyleBackColor = true;
-            this.StickSend.Click += new System.EventHandler(this.StickSend_Click);
+            this.Remote_Stick.Controls.Add(this.StickX);
+            this.Remote_Stick.Controls.Add(this.StickY);
+            this.Remote_Stick.Controls.Add(this.StickNumY);
+            this.Remote_Stick.Controls.Add(this.StickSend);
+            this.Remote_Stick.Controls.Add(this.StickNumX);
+            this.Remote_Stick.Controls.Add(this.label62);
+            this.Remote_Stick.Controls.Add(this.label61);
+            this.Remote_Stick.Location = new System.Drawing.Point(284, 6);
+            this.Remote_Stick.Name = "Remote_Stick";
+            this.Remote_Stick.Size = new System.Drawing.Size(268, 154);
+            this.Remote_Stick.TabIndex = 28;
+            this.Remote_Stick.TabStop = false;
+            this.Remote_Stick.Text = "Control Stick";
             // 
-            // label62
+            // StickX
             // 
-            this.label62.Location = new System.Drawing.Point(146, 141);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(62, 18);
-            this.label62.TabIndex = 25;
-            this.label62.Text = "Horizontal";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.StickX.Location = new System.Drawing.Point(57, 103);
+            this.StickX.Maximum = 100;
+            this.StickX.Minimum = -100;
+            this.StickX.Name = "StickX";
+            this.StickX.Size = new System.Drawing.Size(205, 45);
+            this.StickX.TabIndex = 17;
+            this.StickX.TickFrequency = 25;
+            this.StickX.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.StickX.Scroll += new System.EventHandler(this.StickX_Scroll);
             // 
-            // label61
+            // StickY
             // 
-            this.label61.Location = new System.Drawing.Point(64, 141);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(62, 18);
-            this.label61.TabIndex = 24;
-            this.label61.Text = "Vertical";
-            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // StickNumX
-            // 
-            this.StickNumX.Location = new System.Drawing.Point(146, 118);
-            this.StickNumX.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.StickNumX.Name = "StickNumX";
-            this.StickNumX.Size = new System.Drawing.Size(62, 20);
-            this.StickNumX.TabIndex = 19;
-            this.StickNumX.ValueChanged += new System.EventHandler(this.StickNumX_ValueChanged);
+            this.StickY.Location = new System.Drawing.Point(6, 19);
+            this.StickY.Maximum = 100;
+            this.StickY.Minimum = -100;
+            this.StickY.Name = "StickY";
+            this.StickY.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.StickY.Size = new System.Drawing.Size(45, 129);
+            this.StickY.TabIndex = 16;
+            this.StickY.TickFrequency = 25;
+            this.StickY.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.StickY.Scroll += new System.EventHandler(this.StickY_Scroll);
             // 
             // StickNumY
             // 
-            this.StickNumY.Location = new System.Drawing.Point(64, 118);
+            this.StickNumY.Location = new System.Drawing.Point(57, 22);
             this.StickNumY.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.StickNumY.Name = "StickNumY";
-            this.StickNumY.Size = new System.Drawing.Size(62, 20);
+            this.StickNumY.Size = new System.Drawing.Size(100, 20);
             this.StickNumY.TabIndex = 18;
             this.StickNumY.ValueChanged += new System.EventHandler(this.StickNumY_ValueChanged);
             // 
-            // label60
+            // StickSend
             // 
-            this.label60.Location = new System.Drawing.Point(64, 102);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(144, 23);
-            this.label60.TabIndex = 23;
-            this.label60.Text = "Control Stick";
-            this.label60.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.StickSend.Location = new System.Drawing.Point(57, 63);
+            this.StickSend.Name = "StickSend";
+            this.StickSend.Size = new System.Drawing.Size(205, 23);
+            this.StickSend.TabIndex = 20;
+            this.StickSend.Text = "Send Command";
+            this.StickSend.UseVisualStyleBackColor = true;
+            this.StickSend.Click += new System.EventHandler(this.StickSend_Click);
             // 
-            // StickY
+            // StickNumX
             // 
-            this.StickY.Location = new System.Drawing.Point(6, 95);
-            this.StickY.Maximum = 100;
-            this.StickY.Minimum = -100;
-            this.StickY.Name = "StickY";
-            this.StickY.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.StickY.Size = new System.Drawing.Size(45, 141);
-            this.StickY.TabIndex = 16;
-            this.StickY.TickFrequency = 25;
-            this.StickY.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.StickY.Scroll += new System.EventHandler(this.StickY_Scroll);
+            this.StickNumX.Location = new System.Drawing.Point(163, 22);
+            this.StickNumX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.StickNumX.Name = "StickNumX";
+            this.StickNumX.Size = new System.Drawing.Size(99, 20);
+            this.StickNumX.TabIndex = 19;
+            this.StickNumX.ValueChanged += new System.EventHandler(this.StickNumX_ValueChanged);
             // 
-            // StickX
+            // label62
             // 
-            this.StickX.Location = new System.Drawing.Point(57, 191);
-            this.StickX.Maximum = 100;
-            this.StickX.Minimum = -100;
-            this.StickX.Name = "StickX";
-            this.StickX.Size = new System.Drawing.Size(151, 45);
-            this.StickX.TabIndex = 17;
-            this.StickX.TickFrequency = 25;
-            this.StickX.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.StickX.Scroll += new System.EventHandler(this.StickX_Scroll);
+            this.label62.Location = new System.Drawing.Point(163, 45);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(99, 18);
+            this.label62.TabIndex = 25;
+            this.label62.Text = "Horizontal";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label61
+            // 
+            this.label61.Location = new System.Drawing.Point(57, 45);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(100, 18);
+            this.label61.TabIndex = 24;
+            this.label61.Text = "Vertical";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // Remote_touch
+            // 
+            this.Remote_touch.AutoSize = true;
+            this.Remote_touch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Remote_touch.Controls.Add(this.label54);
+            this.Remote_touch.Controls.Add(this.label30);
+            this.Remote_touch.Controls.Add(this.touchX);
+            this.Remote_touch.Controls.Add(this.touchY);
+            this.Remote_touch.Controls.Add(this.manualTouch);
+            this.Remote_touch.Location = new System.Drawing.Point(6, 121);
+            this.Remote_touch.Name = "Remote_touch";
+            this.Remote_touch.Size = new System.Drawing.Size(272, 71);
+            this.Remote_touch.TabIndex = 27;
+            this.Remote_touch.TabStop = false;
+            this.Remote_touch.Text = "Touchscreen";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(72, 42);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(61, 13);
+            this.label54.TabIndex = 15;
+            this.label54.Text = "Y (from top)";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(6, 42);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(60, 13);
+            this.label30.TabIndex = 15;
+            this.label30.Text = "X (from left)";
+            // 
+            // Remote_buttons
+            // 
+            this.Remote_buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Remote_buttons.Controls.Add(this.manualDUp);
+            this.Remote_buttons.Controls.Add(this.manualA);
+            this.Remote_buttons.Controls.Add(this.manualR);
+            this.Remote_buttons.Controls.Add(this.manualB);
+            this.Remote_buttons.Controls.Add(this.manualL);
+            this.Remote_buttons.Controls.Add(this.manualSelect);
+            this.Remote_buttons.Controls.Add(this.manualDRight);
+            this.Remote_buttons.Controls.Add(this.ManualDDown);
+            this.Remote_buttons.Controls.Add(this.manualY);
+            this.Remote_buttons.Controls.Add(this.manualStart);
+            this.Remote_buttons.Controls.Add(this.manualX);
+            this.Remote_buttons.Controls.Add(this.manualDLeft);
+            this.Remote_buttons.Location = new System.Drawing.Point(6, 6);
+            this.Remote_buttons.Name = "Remote_buttons";
+            this.Remote_buttons.Size = new System.Drawing.Size(272, 109);
+            this.Remote_buttons.TabIndex = 26;
+            this.Remote_buttons.TabStop = false;
+            this.Remote_buttons.Text = "Buttons";
             // 
             // manualSR
             // 
-            this.manualSR.Location = new System.Drawing.Point(351, 40);
+            this.manualSR.Location = new System.Drawing.Point(284, 169);
             this.manualSR.Name = "manualSR";
-            this.manualSR.Size = new System.Drawing.Size(201, 23);
+            this.manualSR.Size = new System.Drawing.Size(268, 23);
             this.manualSR.TabIndex = 15;
             this.manualSR.Text = "Soft-Reset";
             this.manualSR.UseVisualStyleBackColor = true;
             this.manualSR.Click += new System.EventHandler(this.manualSR_Click);
-            // 
-            // label92
-            // 
-            this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(271, 44);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(74, 13);
-            this.label92.TabIndex = 22;
-            this.label92.Text = "Special Inputs";
             // 
             // tabFilters
             // 
@@ -4161,31 +4194,10 @@
             // tabBreeding
             // 
             this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.Breed_esvtsv);
+            this.tabBreeding.Controls.Add(this.Breed_options);
             this.tabBreeding.Controls.Add(this.breedingClear);
-            this.tabBreeding.Controls.Add(this.label50);
             this.tabBreeding.Controls.Add(this.filterBreeding);
-            this.tabBreeding.Controls.Add(this.quickBreed);
-            this.tabBreeding.Controls.Add(this.label95);
-            this.tabBreeding.Controls.Add(this.TSVlistLoad);
-            this.tabBreeding.Controls.Add(this.TSVlistSave);
-            this.tabBreeding.Controls.Add(this.TSVlistRemove);
-            this.tabBreeding.Controls.Add(this.daycare_select);
-            this.tabBreeding.Controls.Add(this.orgbox_pos);
-            this.tabBreeding.Controls.Add(this.eggsNoBreed);
-            this.tabBreeding.Controls.Add(this.TSVlistAdd);
-            this.tabBreeding.Controls.Add(this.label77);
-            this.tabBreeding.Controls.Add(this.modeBreed);
-            this.tabBreeding.Controls.Add(this.boxBreed);
-            this.tabBreeding.Controls.Add(this.label84);
-            this.tabBreeding.Controls.Add(this.slotBreed);
-            this.tabBreeding.Controls.Add(this.TSVlistNum);
-            this.tabBreeding.Controls.Add(this.label76);
-            this.tabBreeding.Controls.Add(this.label75);
-            this.tabBreeding.Controls.Add(this.TSVlist);
-            this.tabBreeding.Controls.Add(this.ESVlistSave);
-            this.tabBreeding.Controls.Add(this.ESVlist);
-            this.tabBreeding.Controls.Add(this.readESV);
-            this.tabBreeding.Controls.Add(this.label94);
             this.tabBreeding.Controls.Add(this.bFilterLoad);
             this.tabBreeding.Controls.Add(this.runBreedingBot);
             this.tabBreeding.Location = new System.Drawing.Point(4, 22);
@@ -4194,24 +4206,306 @@
             this.tabBreeding.TabIndex = 4;
             this.tabBreeding.Text = "Breeding";
             // 
-            // breedingClear
+            // Breed_esvtsv
             // 
-            this.breedingClear.Location = new System.Drawing.Point(272, 189);
-            this.breedingClear.Name = "breedingClear";
-            this.breedingClear.Size = new System.Drawing.Size(158, 23);
-            this.breedingClear.TabIndex = 16;
-            this.breedingClear.Text = "Reset all fields";
-            this.breedingClear.UseVisualStyleBackColor = true;
-            this.breedingClear.Click += new System.EventHandler(this.breedingClear_Click);
+            this.Breed_esvtsv.Controls.Add(this.label50);
+            this.Breed_esvtsv.Controls.Add(this.ESVlist);
+            this.Breed_esvtsv.Controls.Add(this.ESVlistSave);
+            this.Breed_esvtsv.Controls.Add(this.TSVlist);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistNum);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistAdd);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistLoad);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistRemove);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistSave);
+            this.Breed_esvtsv.Location = new System.Drawing.Point(272, 6);
+            this.Breed_esvtsv.Name = "Breed_esvtsv";
+            this.Breed_esvtsv.Size = new System.Drawing.Size(280, 177);
+            this.Breed_esvtsv.TabIndex = 28;
+            this.Breed_esvtsv.TabStop = false;
+            this.Breed_esvtsv.Text = "ESV/TSV";
             // 
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(3, 197);
+            this.label50.Location = new System.Drawing.Point(218, 16);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(73, 13);
-            this.label50.TabIndex = 26;
-            this.label50.Text = "Loaded Filters";
+            this.label50.Size = new System.Drawing.Size(31, 13);
+            this.label50.TabIndex = 16;
+            this.label50.Text = "TSV:";
+            // 
+            // ESVlist
+            // 
+            this.ESVlist.AllowUserToAddRows = false;
+            this.ESVlist.AllowUserToDeleteRows = false;
+            this.ESVlist.AllowUserToResizeColumns = false;
+            this.ESVlist.AllowUserToResizeRows = false;
+            this.ESVlist.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ESVlist.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.ESVlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ESVlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ESVlistBox,
+            this.ESVlistSlot,
+            this.ESVlistValue});
+            this.ESVlist.Location = new System.Drawing.Point(6, 17);
+            this.ESVlist.Name = "ESVlist";
+            this.ESVlist.ReadOnly = true;
+            this.ESVlist.RowHeadersWidth = 21;
+            this.ESVlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.ESVlist.Size = new System.Drawing.Size(150, 125);
+            this.ESVlist.TabIndex = 8;
+            // 
+            // ESVlistBox
+            // 
+            this.ESVlistBox.FillWeight = 50F;
+            this.ESVlistBox.HeaderText = "Box";
+            this.ESVlistBox.Name = "ESVlistBox";
+            this.ESVlistBox.ReadOnly = true;
+            // 
+            // ESVlistSlot
+            // 
+            this.ESVlistSlot.FillWeight = 50F;
+            this.ESVlistSlot.HeaderText = "Slot";
+            this.ESVlistSlot.Name = "ESVlistSlot";
+            this.ESVlistSlot.ReadOnly = true;
+            // 
+            // ESVlistValue
+            // 
+            this.ESVlistValue.HeaderText = "ESV";
+            this.ESVlistValue.Name = "ESVlistValue";
+            this.ESVlistValue.ReadOnly = true;
+            // 
+            // ESVlistSave
+            // 
+            this.ESVlistSave.Location = new System.Drawing.Point(6, 148);
+            this.ESVlistSave.Name = "ESVlistSave";
+            this.ESVlistSave.Size = new System.Drawing.Size(150, 23);
+            this.ESVlistSave.TabIndex = 9;
+            this.ESVlistSave.Text = "Save ESV List";
+            this.ESVlistSave.UseVisualStyleBackColor = true;
+            this.ESVlistSave.Click += new System.EventHandler(this.ESVlistSave_Click);
+            // 
+            // TSVlist
+            // 
+            this.TSVlist.FormattingEnabled = true;
+            this.TSVlist.Location = new System.Drawing.Point(162, 17);
+            this.TSVlist.Name = "TSVlist";
+            this.TSVlist.Size = new System.Drawing.Size(50, 147);
+            this.TSVlist.TabIndex = 10;
+            // 
+            // TSVlistNum
+            // 
+            this.TSVlistNum.Location = new System.Drawing.Point(218, 32);
+            this.TSVlistNum.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.TSVlistNum.Name = "TSVlistNum";
+            this.TSVlistNum.Size = new System.Drawing.Size(56, 20);
+            this.TSVlistNum.TabIndex = 11;
+            // 
+            // TSVlistAdd
+            // 
+            this.TSVlistAdd.Location = new System.Drawing.Point(218, 58);
+            this.TSVlistAdd.Name = "TSVlistAdd";
+            this.TSVlistAdd.Size = new System.Drawing.Size(56, 23);
+            this.TSVlistAdd.TabIndex = 12;
+            this.TSVlistAdd.Text = "Add";
+            this.TSVlistAdd.UseVisualStyleBackColor = true;
+            this.TSVlistAdd.Click += new System.EventHandler(this.TSVlistAdd_Click);
+            // 
+            // TSVlistLoad
+            // 
+            this.TSVlistLoad.Location = new System.Drawing.Point(218, 145);
+            this.TSVlistLoad.Name = "TSVlistLoad";
+            this.TSVlistLoad.Size = new System.Drawing.Size(56, 23);
+            this.TSVlistLoad.TabIndex = 15;
+            this.TSVlistLoad.Text = "Load";
+            this.TSVlistLoad.UseVisualStyleBackColor = true;
+            this.TSVlistLoad.Click += new System.EventHandler(this.TSVlistLoad_Click);
+            // 
+            // TSVlistRemove
+            // 
+            this.TSVlistRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.TSVlistRemove.Location = new System.Drawing.Point(218, 87);
+            this.TSVlistRemove.Name = "TSVlistRemove";
+            this.TSVlistRemove.Size = new System.Drawing.Size(56, 23);
+            this.TSVlistRemove.TabIndex = 13;
+            this.TSVlistRemove.Text = "Remove";
+            this.TSVlistRemove.UseVisualStyleBackColor = true;
+            this.TSVlistRemove.Click += new System.EventHandler(this.TSVlistRemove_Click);
+            // 
+            // TSVlistSave
+            // 
+            this.TSVlistSave.Location = new System.Drawing.Point(218, 116);
+            this.TSVlistSave.Name = "TSVlistSave";
+            this.TSVlistSave.Size = new System.Drawing.Size(56, 23);
+            this.TSVlistSave.TabIndex = 14;
+            this.TSVlistSave.Text = "Save";
+            this.TSVlistSave.UseVisualStyleBackColor = true;
+            this.TSVlistSave.Click += new System.EventHandler(this.TSVlistSave_Click);
+            // 
+            // Breed_options
+            // 
+            this.Breed_options.Controls.Add(this.modeBreed);
+            this.Breed_options.Controls.Add(this.readESV);
+            this.Breed_options.Controls.Add(this.label75);
+            this.Breed_options.Controls.Add(this.label76);
+            this.Breed_options.Controls.Add(this.quickBreed);
+            this.Breed_options.Controls.Add(this.slotBreed);
+            this.Breed_options.Controls.Add(this.label84);
+            this.Breed_options.Controls.Add(this.boxBreed);
+            this.Breed_options.Controls.Add(this.label77);
+            this.Breed_options.Controls.Add(this.eggsNoBreed);
+            this.Breed_options.Controls.Add(this.daycare_select);
+            this.Breed_options.Controls.Add(this.orgbox_pos);
+            this.Breed_options.Location = new System.Drawing.Point(6, 6);
+            this.Breed_options.Name = "Breed_options";
+            this.Breed_options.Size = new System.Drawing.Size(260, 177);
+            this.Breed_options.TabIndex = 27;
+            this.Breed_options.TabStop = false;
+            this.Breed_options.Text = "Options";
+            // 
+            // modeBreed
+            // 
+            this.modeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.modeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.modeBreed.FormattingEnabled = true;
+            this.modeBreed.Items.AddRange(new object[] {
+            "Simple",
+            "Filter",
+            "ESV/TSV"});
+            this.modeBreed.Location = new System.Drawing.Point(49, 17);
+            this.modeBreed.Name = "modeBreed";
+            this.modeBreed.Size = new System.Drawing.Size(205, 21);
+            this.modeBreed.TabIndex = 0;
+            // 
+            // readESV
+            // 
+            this.readESV.AutoSize = true;
+            this.readESV.Location = new System.Drawing.Point(6, 148);
+            this.readESV.Name = "readESV";
+            this.readESV.Size = new System.Drawing.Size(137, 17);
+            this.readESV.TabIndex = 6;
+            this.readESV.Text = "Read ESV after deposit";
+            this.readESV.UseVisualStyleBackColor = true;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(153, 48);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(43, 13);
+            this.label75.TabIndex = 23;
+            this.label75.Text = "# eggs:";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(6, 48);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(28, 13);
+            this.label76.TabIndex = 21;
+            this.label76.Text = "Box:";
+            // 
+            // quickBreed
+            // 
+            this.quickBreed.AutoSize = true;
+            this.quickBreed.Location = new System.Drawing.Point(150, 148);
+            this.quickBreed.Name = "quickBreed";
+            this.quickBreed.Size = new System.Drawing.Size(85, 17);
+            this.quickBreed.TabIndex = 7;
+            this.quickBreed.Text = "Quick Breed";
+            this.quickBreed.UseVisualStyleBackColor = true;
+            // 
+            // slotBreed
+            // 
+            this.slotBreed.Location = new System.Drawing.Point(112, 45);
+            this.slotBreed.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.slotBreed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.slotBreed.Name = "slotBreed";
+            this.slotBreed.Size = new System.Drawing.Size(35, 20);
+            this.slotBreed.TabIndex = 2;
+            this.slotBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(6, 20);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(37, 13);
+            this.label84.TabIndex = 20;
+            this.label84.Text = "Mode:";
+            // 
+            // boxBreed
+            // 
+            this.boxBreed.Location = new System.Drawing.Point(37, 45);
+            this.boxBreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.boxBreed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.boxBreed.Name = "boxBreed";
+            this.boxBreed.Size = new System.Drawing.Size(35, 20);
+            this.boxBreed.TabIndex = 1;
+            this.boxBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(78, 48);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(28, 13);
+            this.label77.TabIndex = 22;
+            this.label77.Text = "Slot:";
+            // 
+            // eggsNoBreed
+            // 
+            this.eggsNoBreed.Location = new System.Drawing.Point(202, 46);
+            this.eggsNoBreed.Maximum = new decimal(new int[] {
+            930,
+            0,
+            0,
+            0});
+            this.eggsNoBreed.Name = "eggsNoBreed";
+            this.eggsNoBreed.Size = new System.Drawing.Size(52, 20);
+            this.eggsNoBreed.TabIndex = 3;
+            this.eggsNoBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // breedingClear
+            // 
+            this.breedingClear.Location = new System.Drawing.Point(278, 189);
+            this.breedingClear.Name = "breedingClear";
+            this.breedingClear.Size = new System.Drawing.Size(150, 23);
+            this.breedingClear.TabIndex = 16;
+            this.breedingClear.Text = "Reset all fields";
+            this.breedingClear.UseVisualStyleBackColor = true;
+            this.breedingClear.Click += new System.EventHandler(this.breedingClear_Click);
             // 
             // filterBreeding
             // 
@@ -4380,267 +4674,6 @@
             this.dataGridViewTextBoxColumn31.ReadOnly = true;
             this.dataGridViewTextBoxColumn31.Width = 80;
             // 
-            // quickBreed
-            // 
-            this.quickBreed.AutoSize = true;
-            this.quickBreed.Location = new System.Drawing.Point(172, 137);
-            this.quickBreed.Name = "quickBreed";
-            this.quickBreed.Size = new System.Drawing.Size(85, 17);
-            this.quickBreed.TabIndex = 7;
-            this.quickBreed.Text = "Quick Breed";
-            this.quickBreed.UseVisualStyleBackColor = true;
-            // 
-            // label95
-            // 
-            this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(436, 6);
-            this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(47, 13);
-            this.label95.TabIndex = 25;
-            this.label95.Text = "TSV List";
-            // 
-            // TSVlistLoad
-            // 
-            this.TSVlistLoad.Location = new System.Drawing.Point(495, 136);
-            this.TSVlistLoad.Name = "TSVlistLoad";
-            this.TSVlistLoad.Size = new System.Drawing.Size(57, 23);
-            this.TSVlistLoad.TabIndex = 15;
-            this.TSVlistLoad.Text = "Load";
-            this.TSVlistLoad.UseVisualStyleBackColor = true;
-            this.TSVlistLoad.Click += new System.EventHandler(this.TSVlistLoad_Click);
-            // 
-            // TSVlistSave
-            // 
-            this.TSVlistSave.Location = new System.Drawing.Point(495, 107);
-            this.TSVlistSave.Name = "TSVlistSave";
-            this.TSVlistSave.Size = new System.Drawing.Size(57, 23);
-            this.TSVlistSave.TabIndex = 14;
-            this.TSVlistSave.Text = "Save";
-            this.TSVlistSave.UseVisualStyleBackColor = true;
-            this.TSVlistSave.Click += new System.EventHandler(this.TSVlistSave_Click);
-            // 
-            // TSVlistRemove
-            // 
-            this.TSVlistRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.TSVlistRemove.Location = new System.Drawing.Point(495, 78);
-            this.TSVlistRemove.Name = "TSVlistRemove";
-            this.TSVlistRemove.Size = new System.Drawing.Size(57, 23);
-            this.TSVlistRemove.TabIndex = 13;
-            this.TSVlistRemove.Text = "Remove";
-            this.TSVlistRemove.UseVisualStyleBackColor = true;
-            this.TSVlistRemove.Click += new System.EventHandler(this.TSVlistRemove_Click);
-            // 
-            // eggsNoBreed
-            // 
-            this.eggsNoBreed.Location = new System.Drawing.Point(218, 35);
-            this.eggsNoBreed.Maximum = new decimal(new int[] {
-            930,
-            0,
-            0,
-            0});
-            this.eggsNoBreed.Name = "eggsNoBreed";
-            this.eggsNoBreed.Size = new System.Drawing.Size(48, 20);
-            this.eggsNoBreed.TabIndex = 3;
-            this.eggsNoBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // TSVlistAdd
-            // 
-            this.TSVlistAdd.Location = new System.Drawing.Point(495, 49);
-            this.TSVlistAdd.Name = "TSVlistAdd";
-            this.TSVlistAdd.Size = new System.Drawing.Size(57, 23);
-            this.TSVlistAdd.TabIndex = 12;
-            this.TSVlistAdd.Text = "Add";
-            this.TSVlistAdd.UseVisualStyleBackColor = true;
-            this.TSVlistAdd.Click += new System.EventHandler(this.TSVlistAdd_Click);
-            // 
-            // label77
-            // 
-            this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(89, 37);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(28, 13);
-            this.label77.TabIndex = 22;
-            this.label77.Text = "Slot:";
-            // 
-            // modeBreed
-            // 
-            this.modeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.modeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.modeBreed.FormattingEnabled = true;
-            this.modeBreed.Items.AddRange(new object[] {
-            "Simple",
-            "Filter",
-            "ESV/TSV"});
-            this.modeBreed.Location = new System.Drawing.Point(43, 7);
-            this.modeBreed.Name = "modeBreed";
-            this.modeBreed.Size = new System.Drawing.Size(223, 21);
-            this.modeBreed.TabIndex = 0;
-            // 
-            // boxBreed
-            // 
-            this.boxBreed.Location = new System.Drawing.Point(43, 34);
-            this.boxBreed.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.boxBreed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.boxBreed.Name = "boxBreed";
-            this.boxBreed.Size = new System.Drawing.Size(40, 20);
-            this.boxBreed.TabIndex = 1;
-            this.boxBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label84
-            // 
-            this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(3, 10);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(37, 13);
-            this.label84.TabIndex = 20;
-            this.label84.Text = "Mode:";
-            // 
-            // slotBreed
-            // 
-            this.slotBreed.Location = new System.Drawing.Point(123, 35);
-            this.slotBreed.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.slotBreed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.slotBreed.Name = "slotBreed";
-            this.slotBreed.Size = new System.Drawing.Size(40, 20);
-            this.slotBreed.TabIndex = 2;
-            this.slotBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // TSVlistNum
-            // 
-            this.TSVlistNum.Location = new System.Drawing.Point(495, 23);
-            this.TSVlistNum.Maximum = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.TSVlistNum.Name = "TSVlistNum";
-            this.TSVlistNum.Size = new System.Drawing.Size(57, 20);
-            this.TSVlistNum.TabIndex = 11;
-            // 
-            // label76
-            // 
-            this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(12, 37);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(28, 13);
-            this.label76.TabIndex = 21;
-            this.label76.Text = "Box:";
-            // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(169, 37);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(43, 13);
-            this.label75.TabIndex = 23;
-            this.label75.Text = "# eggs:";
-            // 
-            // TSVlist
-            // 
-            this.TSVlist.FormattingEnabled = true;
-            this.TSVlist.Location = new System.Drawing.Point(439, 23);
-            this.TSVlist.Name = "TSVlist";
-            this.TSVlist.Size = new System.Drawing.Size(50, 160);
-            this.TSVlist.TabIndex = 10;
-            // 
-            // ESVlistSave
-            // 
-            this.ESVlistSave.Location = new System.Drawing.Point(272, 160);
-            this.ESVlistSave.Name = "ESVlistSave";
-            this.ESVlistSave.Size = new System.Drawing.Size(158, 23);
-            this.ESVlistSave.TabIndex = 9;
-            this.ESVlistSave.Text = "Save ESV List";
-            this.ESVlistSave.UseVisualStyleBackColor = true;
-            this.ESVlistSave.Click += new System.EventHandler(this.ESVlistSave_Click);
-            // 
-            // ESVlist
-            // 
-            this.ESVlist.AllowUserToAddRows = false;
-            this.ESVlist.AllowUserToDeleteRows = false;
-            this.ESVlist.AllowUserToResizeColumns = false;
-            this.ESVlist.AllowUserToResizeRows = false;
-            this.ESVlist.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.ESVlist.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.ESVlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ESVlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ESVlistBox,
-            this.ESVlistSlot,
-            this.ESVlistValue});
-            this.ESVlist.Location = new System.Drawing.Point(272, 26);
-            this.ESVlist.Name = "ESVlist";
-            this.ESVlist.ReadOnly = true;
-            this.ESVlist.RowHeadersWidth = 21;
-            this.ESVlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.ESVlist.Size = new System.Drawing.Size(158, 128);
-            this.ESVlist.TabIndex = 8;
-            // 
-            // ESVlistBox
-            // 
-            this.ESVlistBox.FillWeight = 50F;
-            this.ESVlistBox.HeaderText = "Box";
-            this.ESVlistBox.Name = "ESVlistBox";
-            this.ESVlistBox.ReadOnly = true;
-            // 
-            // ESVlistSlot
-            // 
-            this.ESVlistSlot.FillWeight = 50F;
-            this.ESVlistSlot.HeaderText = "Slot";
-            this.ESVlistSlot.Name = "ESVlistSlot";
-            this.ESVlistSlot.ReadOnly = true;
-            // 
-            // ESVlistValue
-            // 
-            this.ESVlistValue.HeaderText = "ESV";
-            this.ESVlistValue.Name = "ESVlistValue";
-            this.ESVlistValue.ReadOnly = true;
-            // 
-            // readESV
-            // 
-            this.readESV.AutoSize = true;
-            this.readESV.Location = new System.Drawing.Point(6, 137);
-            this.readESV.Name = "readESV";
-            this.readESV.Size = new System.Drawing.Size(137, 17);
-            this.readESV.TabIndex = 6;
-            this.readESV.Text = "Read ESV after deposit";
-            this.readESV.UseVisualStyleBackColor = true;
-            // 
-            // label94
-            // 
-            this.label94.AutoSize = true;
-            this.label94.Location = new System.Drawing.Point(272, 10);
-            this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(47, 13);
-            this.label94.TabIndex = 24;
-            this.label94.Text = "ESV List";
-            // 
             // bFilterLoad
             // 
             this.bFilterLoad.Location = new System.Drawing.Point(439, 189);
@@ -4653,7 +4686,7 @@
             // 
             // runBreedingBot
             // 
-            this.runBreedingBot.Location = new System.Drawing.Point(6, 160);
+            this.runBreedingBot.Location = new System.Drawing.Point(6, 189);
             this.runBreedingBot.Name = "runBreedingBot";
             this.runBreedingBot.Size = new System.Drawing.Size(260, 23);
             this.runBreedingBot.TabIndex = 19;
@@ -4664,26 +4697,36 @@
             // tabSoftReset
             // 
             this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSoftReset.Controls.Add(this.label8);
-            this.tabSoftReset.Controls.Add(this.sr_Species);
+            this.tabSoftReset.Controls.Add(this.SR_options);
             this.tabSoftReset.Controls.Add(this.srClear);
             this.tabSoftReset.Controls.Add(this.filtersSoftReset);
             this.tabSoftReset.Controls.Add(this.srFilterLoad);
-            this.tabSoftReset.Controls.Add(this.resumeLSR);
-            this.tabSoftReset.Controls.Add(this.label93);
-            this.tabSoftReset.Controls.Add(this.label72);
             this.tabSoftReset.Controls.Add(this.RunLSRbot);
-            this.tabSoftReset.Controls.Add(this.typeLSR);
             this.tabSoftReset.Location = new System.Drawing.Point(4, 22);
             this.tabSoftReset.Name = "tabSoftReset";
             this.tabSoftReset.Size = new System.Drawing.Size(558, 378);
             this.tabSoftReset.TabIndex = 3;
             this.tabSoftReset.Text = "Soft-reset";
             // 
+            // SR_options
+            // 
+            this.SR_options.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SR_options.Controls.Add(this.label72);
+            this.SR_options.Controls.Add(this.label8);
+            this.SR_options.Controls.Add(this.typeLSR);
+            this.SR_options.Controls.Add(this.sr_Species);
+            this.SR_options.Controls.Add(this.resumeLSR);
+            this.SR_options.Location = new System.Drawing.Point(6, 6);
+            this.SR_options.Name = "SR_options";
+            this.SR_options.Size = new System.Drawing.Size(546, 53);
+            this.SR_options.TabIndex = 10;
+            this.SR_options.TabStop = false;
+            this.SR_options.Text = "Options";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(90, 39);
+            this.label8.Location = new System.Drawing.Point(277, 20);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 13);
             this.label8.TabIndex = 9;
@@ -4695,17 +4738,17 @@
             this.sr_Species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.sr_Species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.sr_Species.FormattingEnabled = true;
-            this.sr_Species.Location = new System.Drawing.Point(144, 36);
+            this.sr_Species.Location = new System.Drawing.Point(331, 17);
             this.sr_Species.Name = "sr_Species";
-            this.sr_Species.Size = new System.Drawing.Size(121, 21);
+            this.sr_Species.Size = new System.Drawing.Size(120, 21);
             this.sr_Species.TabIndex = 1;
             this.sr_Species.Visible = false;
             // 
             // srClear
             // 
-            this.srClear.Location = new System.Drawing.Point(271, 34);
+            this.srClear.Location = new System.Drawing.Point(283, 65);
             this.srClear.Name = "srClear";
-            this.srClear.Size = new System.Drawing.Size(155, 23);
+            this.srClear.Size = new System.Drawing.Size(143, 23);
             this.srClear.TabIndex = 4;
             this.srClear.Text = "Reset all fields";
             this.srClear.UseVisualStyleBackColor = true;
@@ -4737,7 +4780,7 @@
             this.dataGridViewTextBoxColumn48,
             this.dataGridViewTextBoxColumn49,
             this.dataGridViewTextBoxColumn50});
-            this.filtersSoftReset.Location = new System.Drawing.Point(6, 63);
+            this.filtersSoftReset.Location = new System.Drawing.Point(6, 94);
             this.filtersSoftReset.MultiSelect = false;
             this.filtersSoftReset.Name = "filtersSoftReset";
             this.filtersSoftReset.ReadOnly = true;
@@ -4880,7 +4923,7 @@
             // 
             // srFilterLoad
             // 
-            this.srFilterLoad.Location = new System.Drawing.Point(432, 34);
+            this.srFilterLoad.Location = new System.Drawing.Point(432, 65);
             this.srFilterLoad.Name = "srFilterLoad";
             this.srFilterLoad.Size = new System.Drawing.Size(120, 23);
             this.srFilterLoad.TabIndex = 5;
@@ -4888,46 +4931,46 @@
             this.srFilterLoad.UseVisualStyleBackColor = true;
             this.srFilterLoad.Click += new System.EventHandler(this.srFilterLoad_Click);
             // 
-            // label93
-            // 
-            this.label93.AutoSize = true;
-            this.label93.Location = new System.Drawing.Point(3, 39);
-            this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(73, 13);
-            this.label93.TabIndex = 7;
-            this.label93.Text = "Loaded Filters";
-            // 
             // tabWonderTrade
             // 
             this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
-            this.tabWonderTrade.Controls.Add(this.WT_After);
+            this.tabWonderTrade.Controls.Add(this.WT_options);
             this.tabWonderTrade.Controls.Add(this.WT_RunEndless);
-            this.tabWonderTrade.Controls.Add(this.WT_Sources);
-            this.tabWonderTrade.Controls.Add(this.WTcollectFC);
-            this.tabWonderTrade.Controls.Add(this.label59);
-            this.tabWonderTrade.Controls.Add(this.label58);
             this.tabWonderTrade.Controls.Add(this.RunWTbot);
-            this.tabWonderTrade.Controls.Add(this.WTSlot);
-            this.tabWonderTrade.Controls.Add(this.WTtradesNo);
-            this.tabWonderTrade.Controls.Add(this.WTBox);
-            this.tabWonderTrade.Controls.Add(this.label57);
             this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
             this.tabWonderTrade.Name = "tabWonderTrade";
             this.tabWonderTrade.Size = new System.Drawing.Size(558, 378);
             this.tabWonderTrade.TabIndex = 2;
             this.tabWonderTrade.Text = "Wonder Trade";
             // 
+            // WT_options
+            // 
+            this.WT_options.Controls.Add(this.label58);
+            this.WT_options.Controls.Add(this.WT_After);
+            this.WT_options.Controls.Add(this.label57);
+            this.WT_options.Controls.Add(this.WTBox);
+            this.WT_options.Controls.Add(this.WT_Sources);
+            this.WT_options.Controls.Add(this.WTtradesNo);
+            this.WT_options.Controls.Add(this.WTcollectFC);
+            this.WT_options.Controls.Add(this.WTSlot);
+            this.WT_options.Controls.Add(this.label59);
+            this.WT_options.Location = new System.Drawing.Point(6, 6);
+            this.WT_options.Name = "WT_options";
+            this.WT_options.Size = new System.Drawing.Size(304, 175);
+            this.WT_options.TabIndex = 11;
+            this.WT_options.TabStop = false;
+            this.WT_options.Text = "Options";
+            // 
             // WT_After
             // 
-            this.WT_After.AutoSize = true;
             this.WT_After.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.WT_After.Controls.Add(this.WTafter_Delete);
             this.WT_After.Controls.Add(this.WTafter_Restore);
             this.WT_After.Controls.Add(this.WTafter_DoNothing);
             this.WT_After.Controls.Add(this.WTafter_Dump);
-            this.WT_After.Location = new System.Drawing.Point(156, 55);
+            this.WT_After.Location = new System.Drawing.Point(150, 16);
             this.WT_After.Name = "WT_After";
-            this.WT_After.Size = new System.Drawing.Size(148, 124);
+            this.WT_After.Size = new System.Drawing.Size(148, 123);
             this.WT_After.TabIndex = 10;
             this.WT_After.TabStop = false;
             this.WT_After.Text = "After trading";
@@ -4974,16 +5017,6 @@
             this.WTafter_Dump.Text = "Dump boxes and:";
             this.WTafter_Dump.UseVisualStyleBackColor = true;
             // 
-            // WT_RunEndless
-            // 
-            this.WT_RunEndless.AutoSize = true;
-            this.WT_RunEndless.Location = new System.Drawing.Point(310, 30);
-            this.WT_RunEndless.Name = "WT_RunEndless";
-            this.WT_RunEndless.Size = new System.Drawing.Size(90, 17);
-            this.WT_RunEndless.TabIndex = 9;
-            this.WT_RunEndless.Text = "Run endessly";
-            this.WT_RunEndless.UseVisualStyleBackColor = true;
-            // 
             // WT_Sources
             // 
             this.WT_Sources.AutoSize = true;
@@ -4991,7 +5024,7 @@
             this.WT_Sources.Controls.Add(this.WTsource_Random);
             this.WT_Sources.Controls.Add(this.WTsource_Folder);
             this.WT_Sources.Controls.Add(this.WTsource_Boxes);
-            this.WT_Sources.Location = new System.Drawing.Point(12, 55);
+            this.WT_Sources.Location = new System.Drawing.Point(6, 61);
             this.WT_Sources.Name = "WT_Sources";
             this.WT_Sources.Size = new System.Drawing.Size(138, 101);
             this.WT_Sources.TabIndex = 8;
@@ -5034,12 +5067,22 @@
             // 
             this.WTcollectFC.AutoSize = true;
             this.WTcollectFC.Enabled = false;
-            this.WTcollectFC.Location = new System.Drawing.Point(12, 162);
+            this.WTcollectFC.Location = new System.Drawing.Point(150, 145);
             this.WTcollectFC.Name = "WTcollectFC";
             this.WTcollectFC.Size = new System.Drawing.Size(134, 17);
             this.WTcollectFC.TabIndex = 7;
             this.WTcollectFC.Text = "Collect FC after a trade";
             this.WTcollectFC.UseVisualStyleBackColor = true;
+            // 
+            // WT_RunEndless
+            // 
+            this.WT_RunEndless.AutoSize = true;
+            this.WT_RunEndless.Location = new System.Drawing.Point(220, 191);
+            this.WT_RunEndless.Name = "WT_RunEndless";
+            this.WT_RunEndless.Size = new System.Drawing.Size(90, 17);
+            this.WT_RunEndless.TabIndex = 9;
+            this.WT_RunEndless.Text = "Run endessly";
+            this.WT_RunEndless.UseVisualStyleBackColor = true;
             // 
             // tabNTRlog
             // 
@@ -5176,10 +5219,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.totalFCNum)).EndInit();
             this.tabControls.ResumeLayout(false);
             this.tabControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickY)).EndInit();
+            this.Remote_Stick.ResumeLayout(false);
+            this.Remote_Stick.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StickX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).EndInit();
+            this.Remote_touch.ResumeLayout(false);
+            this.Remote_touch.PerformLayout();
+            this.Remote_buttons.ResumeLayout(false);
             this.tabFilters.ResumeLayout(false);
             this.tabFilters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).EndInit();
@@ -5191,18 +5239,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.filterHPvalue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).EndInit();
             this.tabBreeding.ResumeLayout(false);
-            this.tabBreeding.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).EndInit();
+            this.Breed_esvtsv.ResumeLayout(false);
+            this.Breed_esvtsv.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).EndInit();
+            this.Breed_options.ResumeLayout(false);
+            this.Breed_options.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).EndInit();
             this.tabSoftReset.ResumeLayout(false);
-            this.tabSoftReset.PerformLayout();
+            this.SR_options.ResumeLayout(false);
+            this.SR_options.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).EndInit();
             this.tabWonderTrade.ResumeLayout(false);
             this.tabWonderTrade.PerformLayout();
+            this.WT_options.ResumeLayout(false);
+            this.WT_options.PerformLayout();
             this.WT_After.ResumeLayout(false);
             this.WT_After.PerformLayout();
             this.WT_Sources.ResumeLayout(false);
@@ -5399,7 +5453,6 @@
         private System.Windows.Forms.NumericUpDown touchX;
         private System.Windows.Forms.Button manualSelect;
         private System.Windows.Forms.Button manualDRight;
-        private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Button ManualDDown;
         private System.Windows.Forms.Button manualStart;
         private System.Windows.Forms.Label label69;
@@ -5417,9 +5470,7 @@
         private System.Windows.Forms.GroupBox Edit_Trainer;
         private System.Windows.Forms.TabPage tabNTRlog;
         private System.Windows.Forms.Button manualSR;
-        private System.Windows.Forms.Label label92;
         private System.Windows.Forms.Button srFilterLoad;
-        private System.Windows.Forms.Label label93;
         private System.Windows.Forms.ComboBox relearnmove1;
         private System.Windows.Forms.ComboBox relearnmove2;
         private System.Windows.Forms.ComboBox relearnmove3;
@@ -5430,7 +5481,6 @@
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.TabPage tabBreeding;
         private System.Windows.Forms.CheckBox quickBreed;
-        private System.Windows.Forms.Label label95;
         private System.Windows.Forms.Button TSVlistLoad;
         private System.Windows.Forms.Button TSVlistSave;
         private System.Windows.Forms.Button TSVlistRemove;
@@ -5443,7 +5493,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistSlot;
         private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistValue;
         private System.Windows.Forms.CheckBox readESV;
-        private System.Windows.Forms.Label label94;
         private System.Windows.Forms.Button bFilterLoad;
         private System.Windows.Forms.GroupBox daycare_select;
         private System.Windows.Forms.RadioButton radioDayCare1;
@@ -5518,7 +5567,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SPElogic;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn PerfectIVlogic;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.DataGridView filterBreeding;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
@@ -5573,7 +5621,6 @@
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.NumericUpDown StickNumX;
         private System.Windows.Forms.NumericUpDown StickNumY;
-        private System.Windows.Forms.Label label60;
         private System.Windows.Forms.TrackBar StickY;
         private System.Windows.Forms.TrackBar StickX;
         private System.Windows.Forms.PictureBox pictureBox2;
@@ -5611,6 +5658,16 @@
         private System.Windows.Forms.RadioButton WTafter_Restore;
         private System.Windows.Forms.RadioButton WTafter_DoNothing;
         private System.Windows.Forms.CheckBox WTafter_Dump;
+        private System.Windows.Forms.GroupBox Remote_Stick;
+        private System.Windows.Forms.GroupBox Remote_touch;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.GroupBox Remote_buttons;
+        private System.Windows.Forms.GroupBox Breed_options;
+        private System.Windows.Forms.GroupBox Breed_esvtsv;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.GroupBox SR_options;
+        private System.Windows.Forms.GroupBox WT_options;
     }
 }
 

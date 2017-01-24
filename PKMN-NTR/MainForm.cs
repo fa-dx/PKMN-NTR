@@ -156,6 +156,7 @@ namespace ntrbase
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
         Control[] enableWhenConnected7 = new Control[] { };
+        Control[] gen6onlyControls = new Control[] { };
 
         // Tooltips for TSV and ESV
         public ToolTip ToolTipTSVpoke = new ToolTip();
@@ -297,9 +298,11 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, WriteBtn, species, nickBox, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
+            enableWhenConnected = new Control[] { dumpBox, DumpedEdit, Edit_Items, Edit_Trainer, cloneWriteTabs, PokeDiggerBtn, ReloadFields, Remote_buttons, Remote_touch, Remote_Stick, manualSR, Breed_options, Breed_esvtsv, runBreedingBot, breedingClear, bFilterLoad, SR_options, RunLSRbot, srClear, srFilterLoad, WT_options, RunWTbot, WT_RunEndless };
 
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, WriteBtn, species, nickBox, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, sr_Species, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
+            enableWhenConnected7 = new Control[] { dumpBox, DumpedEdit, Edit_Items, Edit_Trainer, cloneWriteTabs, PokeDiggerBtn, ReloadFields, Remote_buttons, Remote_touch, Remote_Stick, manualSR, Breed_options, Breed_esvtsv, runBreedingBot, breedingClear, bFilterLoad, SR_options, RunLSRbot, srClear, srFilterLoad, WT_options, RunWTbot, WT_RunEndless, totalFCNum, pokeTotalFC, WTcollectFC };
+
+            gen6onlyControls = new Control[] {radioBattleBox, orgbox_pos, daycare_select };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -395,6 +398,10 @@ namespace ntrbase
                 foreach (Control c in enableWhenConnected7)
                 {
                     SetEnabled(c, true);
+                }
+                foreach (Control c in gen6onlyControls)
+                {
+                    SetEnabled(c, false);
                 }
             }
             else
