@@ -125,7 +125,7 @@
             this.tmsGridView = new System.Windows.Forms.DataGridView();
             this.medsGridView = new System.Windows.Forms.DataGridView();
             this.bersGridView = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Edit_Items = new System.Windows.Forms.GroupBox();
             this.itemsView7 = new System.Windows.Forms.DataGridView();
             this.nameItem7 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.countItem7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -207,10 +207,10 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.touchX = new System.Windows.Forms.NumericUpDown();
             this.touchY = new System.Windows.Forms.NumericUpDown();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.daycare_select = new System.Windows.Forms.GroupBox();
             this.radioDayCare1 = new System.Windows.Forms.RadioButton();
             this.radioDayCare2 = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.orgbox_pos = new System.Windows.Forms.GroupBox();
             this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
             this.OrganizeTop = new System.Windows.Forms.RadioButton();
             this.updateLabel = new System.Windows.Forms.Label();
@@ -249,7 +249,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.PokeDiggerBtn = new System.Windows.Forms.Button();
             this.ReloadFields = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.Edit_Trainer = new System.Windows.Forms.GroupBox();
             this.label55 = new System.Windows.Forms.Label();
             this.pokeTotalFC = new System.Windows.Forms.Button();
             this.totalFCNum = new System.Windows.Forms.NumericUpDown();
@@ -398,11 +398,20 @@
             this.srFilterLoad = new System.Windows.Forms.Button();
             this.label93 = new System.Windows.Forms.Label();
             this.tabWonderTrade = new System.Windows.Forms.TabPage();
-            this.buttonWTStartEndless = new System.Windows.Forms.Button();
+            this.WT_RunEndless = new System.Windows.Forms.CheckBox();
+            this.WT_Sources = new System.Windows.Forms.GroupBox();
+            this.WTsource_Random = new System.Windows.Forms.RadioButton();
+            this.WTsource_Folder = new System.Windows.Forms.RadioButton();
+            this.WTsource_Boxes = new System.Windows.Forms.RadioButton();
             this.WTcollectFC = new System.Windows.Forms.CheckBox();
             this.tabNTRlog = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
+            this.WT_After = new System.Windows.Forms.GroupBox();
+            this.WTafter_Dump = new System.Windows.Forms.CheckBox();
+            this.WTafter_DoNothing = new System.Windows.Forms.RadioButton();
+            this.WTafter_Restore = new System.Windows.Forms.RadioButton();
+            this.WTafter_Delete = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.moneyNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.milesNum)).BeginInit();
@@ -433,7 +442,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tmsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.medsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).BeginInit();
-            this.groupBox3.SuspendLayout();
+            this.Edit_Items.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsView7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).BeginInit();
@@ -462,14 +471,14 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
-            this.groupBox4.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.daycare_select.SuspendLayout();
+            this.orgbox_pos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
             this.miscTabs.SuspendLayout();
             this.tabEditTrainer.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.Edit_Trainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.totalFCNum)).BeginInit();
             this.tabControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).BeginInit();
@@ -495,9 +504,11 @@
             this.tabSoftReset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).BeginInit();
             this.tabWonderTrade.SuspendLayout();
+            this.WT_Sources.SuspendLayout();
             this.tabNTRlog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shinypic)).BeginInit();
+            this.WT_After.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -1720,29 +1731,29 @@
             this.bersGridView.TabIndex = 0;
             this.bersGridView.Visible = false;
             // 
-            // groupBox3
+            // Edit_Items
             // 
-            this.groupBox3.AutoSize = true;
-            this.groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox3.Controls.Add(this.itemsView7);
-            this.groupBox3.Controls.Add(this.itemAdd);
-            this.groupBox3.Controls.Add(this.showKeys);
-            this.groupBox3.Controls.Add(this.itemWrite);
-            this.groupBox3.Controls.Add(this.showBerries);
-            this.groupBox3.Controls.Add(this.showTMs);
-            this.groupBox3.Controls.Add(this.showItems);
-            this.groupBox3.Controls.Add(this.showMedicine);
-            this.groupBox3.Controls.Add(this.itemsGridView);
-            this.groupBox3.Controls.Add(this.medsGridView);
-            this.groupBox3.Controls.Add(this.tmsGridView);
-            this.groupBox3.Controls.Add(this.keysGridView);
-            this.groupBox3.Controls.Add(this.bersGridView);
-            this.groupBox3.Location = new System.Drawing.Point(6, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(324, 215);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Edit Items";
+            this.Edit_Items.AutoSize = true;
+            this.Edit_Items.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Edit_Items.Controls.Add(this.itemsView7);
+            this.Edit_Items.Controls.Add(this.itemAdd);
+            this.Edit_Items.Controls.Add(this.showKeys);
+            this.Edit_Items.Controls.Add(this.itemWrite);
+            this.Edit_Items.Controls.Add(this.showBerries);
+            this.Edit_Items.Controls.Add(this.showTMs);
+            this.Edit_Items.Controls.Add(this.showItems);
+            this.Edit_Items.Controls.Add(this.showMedicine);
+            this.Edit_Items.Controls.Add(this.itemsGridView);
+            this.Edit_Items.Controls.Add(this.medsGridView);
+            this.Edit_Items.Controls.Add(this.tmsGridView);
+            this.Edit_Items.Controls.Add(this.keysGridView);
+            this.Edit_Items.Controls.Add(this.bersGridView);
+            this.Edit_Items.Location = new System.Drawing.Point(6, 6);
+            this.Edit_Items.Name = "Edit_Items";
+            this.Edit_Items.Size = new System.Drawing.Size(324, 215);
+            this.Edit_Items.TabIndex = 0;
+            this.Edit_Items.TabStop = false;
+            this.Edit_Items.Text = "Edit Items";
             // 
             // itemsView7
             // 
@@ -2761,17 +2772,17 @@
             this.touchY.TabIndex = 13;
             this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
             // 
-            // groupBox4
+            // daycare_select
             // 
-            this.groupBox4.Controls.Add(this.radioDayCare1);
-            this.groupBox4.Controls.Add(this.radioDayCare2);
-            this.groupBox4.Location = new System.Drawing.Point(172, 61);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(94, 70);
-            this.groupBox4.TabIndex = 5;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Daycare:";
-            this.toolTip1.SetToolTip(this.groupBox4, "Ignore this field if you\'re playing in X/Y or S/M.");
+            this.daycare_select.Controls.Add(this.radioDayCare1);
+            this.daycare_select.Controls.Add(this.radioDayCare2);
+            this.daycare_select.Location = new System.Drawing.Point(172, 61);
+            this.daycare_select.Name = "daycare_select";
+            this.daycare_select.Size = new System.Drawing.Size(94, 70);
+            this.daycare_select.TabIndex = 5;
+            this.daycare_select.TabStop = false;
+            this.daycare_select.Text = "Daycare:";
+            this.toolTip1.SetToolTip(this.daycare_select, "Ignore this field if you\'re playing in X/Y or S/M.");
             // 
             // radioDayCare1
             // 
@@ -2795,18 +2806,18 @@
             this.radioDayCare2.Text = "Battle Resort";
             this.radioDayCare2.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // orgbox_pos
             // 
-            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox2.Controls.Add(this.OrganizeMiddle);
-            this.groupBox2.Controls.Add(this.OrganizeTop);
-            this.groupBox2.Location = new System.Drawing.Point(6, 61);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(157, 70);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Organize Boxes position:";
-            this.toolTip1.SetToolTip(this.groupBox2, "Ignore this field if you\'re playing in X/Y or S/M.");
+            this.orgbox_pos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.orgbox_pos.Controls.Add(this.OrganizeMiddle);
+            this.orgbox_pos.Controls.Add(this.OrganizeTop);
+            this.orgbox_pos.Location = new System.Drawing.Point(6, 61);
+            this.orgbox_pos.Name = "orgbox_pos";
+            this.orgbox_pos.Size = new System.Drawing.Size(157, 70);
+            this.orgbox_pos.TabIndex = 4;
+            this.orgbox_pos.TabStop = false;
+            this.orgbox_pos.Text = "Organize Boxes position:";
+            this.toolTip1.SetToolTip(this.orgbox_pos, "Ignore this field if you\'re playing in X/Y or S/M.");
             // 
             // OrganizeMiddle
             // 
@@ -2868,7 +2879,7 @@
             this.RunLSRbot.Name = "RunLSRbot";
             this.RunLSRbot.Size = new System.Drawing.Size(210, 23);
             this.RunLSRbot.TabIndex = 2;
-            this.RunLSRbot.Text = "Run";
+            this.RunLSRbot.Text = "Start Bot";
             this.RunLSRbot.UseVisualStyleBackColor = true;
             this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click_1);
             // 
@@ -2893,11 +2904,11 @@
             // 
             // RunWTbot
             // 
-            this.RunWTbot.Location = new System.Drawing.Point(150, 26);
+            this.RunWTbot.Location = new System.Drawing.Point(156, 26);
             this.RunWTbot.Name = "RunWTbot";
-            this.RunWTbot.Size = new System.Drawing.Size(90, 23);
+            this.RunWTbot.Size = new System.Drawing.Size(148, 23);
             this.RunWTbot.TabIndex = 3;
-            this.RunWTbot.Text = "Run once";
+            this.RunWTbot.Text = "Start Bot";
             this.RunWTbot.UseVisualStyleBackColor = true;
             this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click_1);
             // 
@@ -2910,7 +2921,7 @@
             0,
             0});
             this.WTtradesNo.Name = "WTtradesNo";
-            this.WTtradesNo.Size = new System.Drawing.Size(40, 20);
+            this.WTtradesNo.Size = new System.Drawing.Size(46, 20);
             this.WTtradesNo.TabIndex = 2;
             this.WTtradesNo.Value = new decimal(new int[] {
             1,
@@ -3181,9 +3192,9 @@
             this.tabEditTrainer.Controls.Add(this.label7);
             this.tabEditTrainer.Controls.Add(this.PokeDiggerBtn);
             this.tabEditTrainer.Controls.Add(this.ReloadFields);
-            this.tabEditTrainer.Controls.Add(this.groupBox5);
+            this.tabEditTrainer.Controls.Add(this.Edit_Trainer);
             this.tabEditTrainer.Controls.Add(this.cloneWriteTabs);
-            this.tabEditTrainer.Controls.Add(this.groupBox3);
+            this.tabEditTrainer.Controls.Add(this.Edit_Items);
             this.tabEditTrainer.Location = new System.Drawing.Point(4, 22);
             this.tabEditTrainer.Name = "tabEditTrainer";
             this.tabEditTrainer.Padding = new System.Windows.Forms.Padding(3);
@@ -3228,47 +3239,47 @@
             this.ReloadFields.UseVisualStyleBackColor = true;
             this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
             // 
-            // groupBox5
+            // Edit_Trainer
             // 
-            this.groupBox5.AutoSize = true;
-            this.groupBox5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox5.Controls.Add(this.label55);
-            this.groupBox5.Controls.Add(this.pokeTotalFC);
-            this.groupBox5.Controls.Add(this.totalFCNum);
-            this.groupBox5.Controls.Add(this.label10);
-            this.groupBox5.Controls.Add(this.label12);
-            this.groupBox5.Controls.Add(this.label2);
-            this.groupBox5.Controls.Add(this.pokeName);
-            this.groupBox5.Controls.Add(this.label11);
-            this.groupBox5.Controls.Add(this.hourNum);
-            this.groupBox5.Controls.Add(this.label15);
-            this.groupBox5.Controls.Add(this.pokeTID);
-            this.groupBox5.Controls.Add(this.pokeTime);
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Controls.Add(this.minNum);
-            this.groupBox5.Controls.Add(this.label28);
-            this.groupBox5.Controls.Add(this.secNum);
-            this.groupBox5.Controls.Add(this.label14);
-            this.groupBox5.Controls.Add(this.pokeBP);
-            this.groupBox5.Controls.Add(this.pokeSID);
-            this.groupBox5.Controls.Add(this.TIDNum);
-            this.groupBox5.Controls.Add(this.playerName);
-            this.groupBox5.Controls.Add(this.SIDNum);
-            this.groupBox5.Controls.Add(this.label13);
-            this.groupBox5.Controls.Add(this.pokeLang);
-            this.groupBox5.Controls.Add(this.moneyNum);
-            this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Controls.Add(this.pokeMoney);
-            this.groupBox5.Controls.Add(this.pokeMiles);
-            this.groupBox5.Controls.Add(this.milesNum);
-            this.groupBox5.Controls.Add(this.bpNum);
-            this.groupBox5.Controls.Add(this.Lang);
-            this.groupBox5.Location = new System.Drawing.Point(336, 6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(215, 304);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Edit Trainer";
+            this.Edit_Trainer.AutoSize = true;
+            this.Edit_Trainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Edit_Trainer.Controls.Add(this.label55);
+            this.Edit_Trainer.Controls.Add(this.pokeTotalFC);
+            this.Edit_Trainer.Controls.Add(this.totalFCNum);
+            this.Edit_Trainer.Controls.Add(this.label10);
+            this.Edit_Trainer.Controls.Add(this.label12);
+            this.Edit_Trainer.Controls.Add(this.label2);
+            this.Edit_Trainer.Controls.Add(this.pokeName);
+            this.Edit_Trainer.Controls.Add(this.label11);
+            this.Edit_Trainer.Controls.Add(this.hourNum);
+            this.Edit_Trainer.Controls.Add(this.label15);
+            this.Edit_Trainer.Controls.Add(this.pokeTID);
+            this.Edit_Trainer.Controls.Add(this.pokeTime);
+            this.Edit_Trainer.Controls.Add(this.label4);
+            this.Edit_Trainer.Controls.Add(this.minNum);
+            this.Edit_Trainer.Controls.Add(this.label28);
+            this.Edit_Trainer.Controls.Add(this.secNum);
+            this.Edit_Trainer.Controls.Add(this.label14);
+            this.Edit_Trainer.Controls.Add(this.pokeBP);
+            this.Edit_Trainer.Controls.Add(this.pokeSID);
+            this.Edit_Trainer.Controls.Add(this.TIDNum);
+            this.Edit_Trainer.Controls.Add(this.playerName);
+            this.Edit_Trainer.Controls.Add(this.SIDNum);
+            this.Edit_Trainer.Controls.Add(this.label13);
+            this.Edit_Trainer.Controls.Add(this.pokeLang);
+            this.Edit_Trainer.Controls.Add(this.moneyNum);
+            this.Edit_Trainer.Controls.Add(this.label3);
+            this.Edit_Trainer.Controls.Add(this.pokeMoney);
+            this.Edit_Trainer.Controls.Add(this.pokeMiles);
+            this.Edit_Trainer.Controls.Add(this.milesNum);
+            this.Edit_Trainer.Controls.Add(this.bpNum);
+            this.Edit_Trainer.Controls.Add(this.Lang);
+            this.Edit_Trainer.Location = new System.Drawing.Point(336, 6);
+            this.Edit_Trainer.Name = "Edit_Trainer";
+            this.Edit_Trainer.Size = new System.Drawing.Size(215, 304);
+            this.Edit_Trainer.TabIndex = 1;
+            this.Edit_Trainer.TabStop = false;
+            this.Edit_Trainer.Text = "Edit Trainer";
             // 
             // label55
             // 
@@ -4158,8 +4169,8 @@
             this.tabBreeding.Controls.Add(this.TSVlistLoad);
             this.tabBreeding.Controls.Add(this.TSVlistSave);
             this.tabBreeding.Controls.Add(this.TSVlistRemove);
-            this.tabBreeding.Controls.Add(this.groupBox4);
-            this.tabBreeding.Controls.Add(this.groupBox2);
+            this.tabBreeding.Controls.Add(this.daycare_select);
+            this.tabBreeding.Controls.Add(this.orgbox_pos);
             this.tabBreeding.Controls.Add(this.eggsNoBreed);
             this.tabBreeding.Controls.Add(this.TSVlistAdd);
             this.tabBreeding.Controls.Add(this.label77);
@@ -4646,7 +4657,7 @@
             this.runBreedingBot.Name = "runBreedingBot";
             this.runBreedingBot.Size = new System.Drawing.Size(260, 23);
             this.runBreedingBot.TabIndex = 19;
-            this.runBreedingBot.Text = "Run";
+            this.runBreedingBot.Text = "Start Bot";
             this.runBreedingBot.UseVisualStyleBackColor = true;
             this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click_1);
             // 
@@ -4889,7 +4900,9 @@
             // tabWonderTrade
             // 
             this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
-            this.tabWonderTrade.Controls.Add(this.buttonWTStartEndless);
+            this.tabWonderTrade.Controls.Add(this.WT_After);
+            this.tabWonderTrade.Controls.Add(this.WT_RunEndless);
+            this.tabWonderTrade.Controls.Add(this.WT_Sources);
             this.tabWonderTrade.Controls.Add(this.WTcollectFC);
             this.tabWonderTrade.Controls.Add(this.label59);
             this.tabWonderTrade.Controls.Add(this.label58);
@@ -4904,21 +4917,69 @@
             this.tabWonderTrade.TabIndex = 2;
             this.tabWonderTrade.Text = "Wonder Trade";
             // 
-            // buttonWTStartEndless
+            // WT_RunEndless
             // 
-            this.buttonWTStartEndless.Location = new System.Drawing.Point(246, 26);
-            this.buttonWTStartEndless.Name = "buttonWTStartEndless";
-            this.buttonWTStartEndless.Size = new System.Drawing.Size(90, 23);
-            this.buttonWTStartEndless.TabIndex = 9;
-            this.buttonWTStartEndless.Text = "Run endlessly";
-            this.buttonWTStartEndless.UseVisualStyleBackColor = true;
-            this.buttonWTStartEndless.Click += new System.EventHandler(this.buttonWTStartEndless_Click);
+            this.WT_RunEndless.AutoSize = true;
+            this.WT_RunEndless.Location = new System.Drawing.Point(310, 30);
+            this.WT_RunEndless.Name = "WT_RunEndless";
+            this.WT_RunEndless.Size = new System.Drawing.Size(90, 17);
+            this.WT_RunEndless.TabIndex = 9;
+            this.WT_RunEndless.Text = "Run endessly";
+            this.WT_RunEndless.UseVisualStyleBackColor = true;
+            // 
+            // WT_Sources
+            // 
+            this.WT_Sources.AutoSize = true;
+            this.WT_Sources.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.WT_Sources.Controls.Add(this.WTsource_Random);
+            this.WT_Sources.Controls.Add(this.WTsource_Folder);
+            this.WT_Sources.Controls.Add(this.WTsource_Boxes);
+            this.WT_Sources.Location = new System.Drawing.Point(12, 55);
+            this.WT_Sources.Name = "WT_Sources";
+            this.WT_Sources.Size = new System.Drawing.Size(138, 101);
+            this.WT_Sources.TabIndex = 8;
+            this.WT_Sources.TabStop = false;
+            this.WT_Sources.Text = "Pokémon Source";
+            // 
+            // WTsource_Random
+            // 
+            this.WTsource_Random.AutoSize = true;
+            this.WTsource_Random.Location = new System.Drawing.Point(6, 65);
+            this.WTsource_Random.Name = "WTsource_Random";
+            this.WTsource_Random.Size = new System.Drawing.Size(124, 17);
+            this.WTsource_Random.TabIndex = 2;
+            this.WTsource_Random.Text = "WT Folder (Random)";
+            this.WTsource_Random.UseVisualStyleBackColor = true;
+            this.WTsource_Random.CheckedChanged += new System.EventHandler(this.WTsource_Folder_CheckedChanged);
+            // 
+            // WTsource_Folder
+            // 
+            this.WTsource_Folder.AutoSize = true;
+            this.WTsource_Folder.Location = new System.Drawing.Point(6, 42);
+            this.WTsource_Folder.Name = "WTsource_Folder";
+            this.WTsource_Folder.Size = new System.Drawing.Size(126, 17);
+            this.WTsource_Folder.TabIndex = 1;
+            this.WTsource_Folder.Text = "Wonder Trade Folder";
+            this.WTsource_Folder.UseVisualStyleBackColor = true;
+            this.WTsource_Folder.CheckedChanged += new System.EventHandler(this.WTsource_Folder_CheckedChanged);
+            // 
+            // WTsource_Boxes
+            // 
+            this.WTsource_Boxes.AutoSize = true;
+            this.WTsource_Boxes.Checked = true;
+            this.WTsource_Boxes.Location = new System.Drawing.Point(6, 19);
+            this.WTsource_Boxes.Name = "WTsource_Boxes";
+            this.WTsource_Boxes.Size = new System.Drawing.Size(71, 17);
+            this.WTsource_Boxes.TabIndex = 0;
+            this.WTsource_Boxes.TabStop = true;
+            this.WTsource_Boxes.Text = "PC Boxes";
+            this.WTsource_Boxes.UseVisualStyleBackColor = true;
             // 
             // WTcollectFC
             // 
             this.WTcollectFC.AutoSize = true;
             this.WTcollectFC.Enabled = false;
-            this.WTcollectFC.Location = new System.Drawing.Point(12, 55);
+            this.WTcollectFC.Location = new System.Drawing.Point(12, 162);
             this.WTcollectFC.Name = "WTcollectFC";
             this.WTcollectFC.Size = new System.Drawing.Size(134, 17);
             this.WTcollectFC.TabIndex = 7;
@@ -4954,6 +5015,63 @@
             this.shinypic.Size = new System.Drawing.Size(10, 10);
             this.shinypic.TabIndex = 19;
             this.shinypic.TabStop = false;
+            // 
+            // WT_After
+            // 
+            this.WT_After.AutoSize = true;
+            this.WT_After.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.WT_After.Controls.Add(this.WTafter_Delete);
+            this.WT_After.Controls.Add(this.WTafter_Restore);
+            this.WT_After.Controls.Add(this.WTafter_DoNothing);
+            this.WT_After.Controls.Add(this.WTafter_Dump);
+            this.WT_After.Location = new System.Drawing.Point(156, 55);
+            this.WT_After.Name = "WT_After";
+            this.WT_After.Size = new System.Drawing.Size(148, 124);
+            this.WT_After.TabIndex = 10;
+            this.WT_After.TabStop = false;
+            this.WT_After.Text = "After trading";
+            // 
+            // WTafter_Dump
+            // 
+            this.WTafter_Dump.AutoSize = true;
+            this.WTafter_Dump.Location = new System.Drawing.Point(6, 20);
+            this.WTafter_Dump.Name = "WTafter_Dump";
+            this.WTafter_Dump.Size = new System.Drawing.Size(109, 17);
+            this.WTafter_Dump.TabIndex = 0;
+            this.WTafter_Dump.Text = "Dump boxes and:";
+            this.WTafter_Dump.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_DoNothing
+            // 
+            this.WTafter_DoNothing.AutoSize = true;
+            this.WTafter_DoNothing.Checked = true;
+            this.WTafter_DoNothing.Location = new System.Drawing.Point(6, 42);
+            this.WTafter_DoNothing.Name = "WTafter_DoNothing";
+            this.WTafter_DoNothing.Size = new System.Drawing.Size(77, 17);
+            this.WTafter_DoNothing.TabIndex = 1;
+            this.WTafter_DoNothing.TabStop = true;
+            this.WTafter_DoNothing.Text = "Do nothing";
+            this.WTafter_DoNothing.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_Restore
+            // 
+            this.WTafter_Restore.AutoSize = true;
+            this.WTafter_Restore.Location = new System.Drawing.Point(6, 65);
+            this.WTafter_Restore.Name = "WTafter_Restore";
+            this.WTafter_Restore.Size = new System.Drawing.Size(101, 17);
+            this.WTafter_Restore.TabIndex = 1;
+            this.WTafter_Restore.Text = "Restore backup";
+            this.WTafter_Restore.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_Delete
+            // 
+            this.WTafter_Delete.AutoSize = true;
+            this.WTafter_Delete.Location = new System.Drawing.Point(6, 88);
+            this.WTafter_Delete.Name = "WTafter_Delete";
+            this.WTafter_Delete.Size = new System.Drawing.Size(136, 17);
+            this.WTafter_Delete.TabIndex = 1;
+            this.WTafter_Delete.Text = "Delete traded pokémon";
+            this.WTafter_Delete.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -5009,7 +5127,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tmsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.medsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).EndInit();
-            this.groupBox3.ResumeLayout(false);
+            this.Edit_Items.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsView7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).EndInit();
@@ -5045,18 +5163,18 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.daycare_select.ResumeLayout(false);
+            this.daycare_select.PerformLayout();
+            this.orgbox_pos.ResumeLayout(false);
+            this.orgbox_pos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).EndInit();
             this.miscTabs.ResumeLayout(false);
             this.tabEditTrainer.ResumeLayout(false);
             this.tabEditTrainer.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            this.Edit_Trainer.ResumeLayout(false);
+            this.Edit_Trainer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.totalFCNum)).EndInit();
             this.tabControls.ResumeLayout(false);
             this.tabControls.PerformLayout();
@@ -5087,10 +5205,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).EndInit();
             this.tabWonderTrade.ResumeLayout(false);
             this.tabWonderTrade.PerformLayout();
+            this.WT_Sources.ResumeLayout(false);
+            this.WT_Sources.PerformLayout();
             this.tabNTRlog.ResumeLayout(false);
             this.tabNTRlog.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shinypic)).EndInit();
+            this.WT_After.ResumeLayout(false);
+            this.WT_After.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -5146,7 +5268,7 @@
         private System.Windows.Forms.DataGridView tmsGridView;
         private System.Windows.Forms.DataGridView medsGridView;
         private System.Windows.Forms.DataGridView bersGridView;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox Edit_Items;
         private System.Windows.Forms.Button itemWrite;
         private System.Windows.Forms.Button itemAdd;
         private System.Windows.Forms.RadioButton radioOpponent;
@@ -5294,7 +5416,7 @@
         private System.Windows.Forms.TabPage tabControls;
         private System.Windows.Forms.TabPage tabWonderTrade;
         private System.Windows.Forms.TabPage tabSoftReset;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox Edit_Trainer;
         private System.Windows.Forms.TabPage tabNTRlog;
         private System.Windows.Forms.Button manualSR;
         private System.Windows.Forms.Label label92;
@@ -5325,10 +5447,10 @@
         private System.Windows.Forms.CheckBox readESV;
         private System.Windows.Forms.Label label94;
         private System.Windows.Forms.Button bFilterLoad;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox daycare_select;
         private System.Windows.Forms.RadioButton radioDayCare1;
         private System.Windows.Forms.RadioButton radioDayCare2;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox orgbox_pos;
         private System.Windows.Forms.RadioButton OrganizeMiddle;
         private System.Windows.Forms.RadioButton OrganizeTop;
         private System.Windows.Forms.Label label84;
@@ -5475,13 +5597,22 @@
         private System.Windows.Forms.Button breedingClear;
         private System.Windows.Forms.Button srClear;
         private System.Windows.Forms.Label updateLabel;
-        private System.Windows.Forms.Button buttonWTStartEndless;
         private System.Windows.Forms.Button DumpInstructionsBtn;
         private System.Windows.Forms.TextBox EggSeed;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox sr_Species;
         private System.Windows.Forms.CheckBox nickBox;
+        private System.Windows.Forms.GroupBox WT_Sources;
+        private System.Windows.Forms.RadioButton WTsource_Random;
+        private System.Windows.Forms.RadioButton WTsource_Folder;
+        private System.Windows.Forms.RadioButton WTsource_Boxes;
+        private System.Windows.Forms.CheckBox WT_RunEndless;
+        private System.Windows.Forms.GroupBox WT_After;
+        private System.Windows.Forms.RadioButton WTafter_Delete;
+        private System.Windows.Forms.RadioButton WTafter_Restore;
+        private System.Windows.Forms.RadioButton WTafter_DoNothing;
+        private System.Windows.Forms.CheckBox WTafter_Dump;
     }
 }
 

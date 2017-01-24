@@ -42,6 +42,7 @@ namespace ntrbase
         public const string FOLDERPOKE = "Pokemon";
         public const string FOLDERDELETE = "Deleted";
         public const string FOLDERBOT = "Bot";
+        public const string FOLDERWT = "Wonder Trade";
         public string PKXEXT;
         public string BOXEXT;
         public PKHeX dumpedPKHeX = new PKHeX();
@@ -296,9 +297,9 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, WriteBtn, species, nickBox, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless };
+            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, WriteBtn, species, nickBox, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot };
 
-            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, WriteBtn, species, nickBox, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, sr_Species, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless, WTcollectFC };
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, WriteBtn, species, nickBox, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, sr_Species, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, WTcollectFC };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -1784,7 +1785,7 @@ namespace ntrbase
             nameek6.Enabled = !onlyView.Checked;
         }
 
-        private void writePokemonToFile(byte[] data, string fileName, bool overwrite = false)
+        public void writePokemonToFile(byte[] data, string fileName, bool overwrite = false)
         {
             try
             {
@@ -4004,10 +4005,39 @@ namespace ntrbase
                 startBot();
                 botnumber = 3;
                 radioBoxes.Checked = true;
+
+                int wtmode = 0;
+                if (WTsource_Boxes.Checked)
+                {
+                    wtmode = 1;
+                }
+                else if (WTsource_Folder.Checked)
+                {
+                    wtmode = 2;
+                }
+                else if (WTsource_Random.Checked)
+                {
+                    wtmode = 3;
+                }
+
+                int wtafter = 0;
+                if (WTafter_DoNothing.Checked)
+                {
+                    wtafter = 1;
+                }
+                else if (WTafter_Restore.Checked)
+                {
+                    wtafter = 2;
+                }
+                else if (WTafter_Delete.Checked)
+                {
+                    wtafter = 3;
+                }
+
                 Task<int> Bot;
                 if (gen7)
                 {
-                    WTBot7 = new WonderTradeBot7((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, WTcollectFC.Checked);
+                    WTBot7 = new WonderTradeBot7((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, WTcollectFC.Checked, wtmode, WT_RunEndless.Checked, WTafter_Dump.Checked, wtafter);
                     Bot = WTBot7.RunBot();
                 }
                 else
@@ -4064,92 +4094,6 @@ namespace ntrbase
             }
         }
 
-        // when the start button is pressed the endless wondertrade will start
-        private async void buttonWTStartEndless_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + WTtradesNo.Value + " pokémon, starting from the slot " + WTSlot.Value + " of box " + WTBox.Value + ".\r\n" +
-                "Caution: This bot will trade endlessly. When all Pokemon you selected are traded, the bot will return to its initial values and all Pokemon will be traded again.", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.Cancel && WTtradesNo.Value > 0)
-            {
-                return;
-            }
-
-            // get standard value
-            int standardBox = (int)WTBox.Value;
-            int standardSlot = (int)WTSlot.Value;
-            int standardTradeNO = (int)WTtradesNo.Value;
-
-            bool EndlessBotRunning = true;
-
-            while (EndlessBotRunning)
-            {
-                startBot();
-                botnumber = 3;
-                radioBoxes.Checked = true;
-                Task<int> Bot;
-                if (gen7)
-                {
-                    WTBot7 = new WonderTradeBot7((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, WTcollectFC.Checked);
-                    Bot = WTBot7.RunBot();
-                }
-                else
-                {
-                    bool oras;
-                    if (game == GameType.X || game == GameType.Y)
-                    {
-                        oras = false;
-                    }
-                    else
-                    {
-                        oras = true;
-                    }
-                    WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras);
-                    Bot = WTBot6.RunBot();
-                }
-                int result = await Bot;
-                if (botStop)
-                {
-                    addtoLog("Bot: STOP Wonder Trade bot by user command");
-                    result = 8;
-                }
-                switch (result)
-                {
-                    case 0: // General finish message
-                        //MessageBox.Show("Bot finished sucessfully", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case 1: // PSS error
-                        MessageBox.Show("Please go to the PSS menu and try again.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        break;
-                    case 2: // Read error
-                        MessageBox.Show(readerror, "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 3: // Festival plaza level-up
-                        MessageBox.Show("Bot finished due level up in Festival Plaza", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        break;
-                    case 4: // Communication error
-                        MessageBox.Show("A communication error has ocurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 6: // Touch screen error
-                        MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 7: // Button error
-                        MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 8: // User stop
-                        MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        EndlessBotRunning = false;
-                        break;
-                    default: // General error message
-                        MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
-                WTBox.Value = standardBox;
-                WTSlot.Value = standardSlot;
-                WTtradesNo.Value = standardTradeNO;
-            }
-            finishBot();
-        }
-
         public void updateWTslots(int box, int slot, int quantity)
         {
             SetValue(WTBox, box + 1);
@@ -4161,6 +4105,19 @@ namespace ntrbase
         {
             SetValue(milesNum, currentFC);
             SetValue(totalFCNum, totalFC);
+        }
+
+        private void WTsource_Folder_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERWT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         // Soft-reset bot
@@ -4681,7 +4638,6 @@ namespace ntrbase
         }
 
         #endregion Bots
-
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 

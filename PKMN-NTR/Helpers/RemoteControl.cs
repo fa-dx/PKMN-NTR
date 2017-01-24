@@ -694,6 +694,32 @@ namespace ntrbase.Helpers
             }
         }
 
+        public async Task<bool> waitNTRwrite(uint address, byte[] data, int pid)
+        {
+            Report("NTR: Write " + data.Length + " bytes at address 0x" + address.ToString("X8"));
+            Program.scriptHelper.write(address, data, pid);
+            setTimer(maxtimeout);
+            while (!timeout)
+            { // Timeout 1
+                await Task.Delay(100);
+                if (CompareLastLog("finished"))
+                {
+                    break;
+                }
+            }
+            if (!timeout)
+            {
+                NTRtimer.Stop();
+                Report("NTR: Write sucessful");
+                return true;
+            }
+            else
+            {
+                Report("NTR: Write failed");
+                return false;
+            }
+        }
+
         // Timer
         private void setTimer(int time)
         {
