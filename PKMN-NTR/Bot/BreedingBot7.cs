@@ -77,9 +77,13 @@ namespace ntrbase.Bot
                         case (int)breedbotstates.botstart:
                             Report("Bot: START Gen 7 Breding bot");
                             if (mode >= 0)
+                            {
                                 botState = (int)breedbotstates.selectbox;
+                            }
                             else
+                            {
                                 botState = (int)breedbotstates.botexit;
+                            }
                             break;
 
                         case (int)breedbotstates.selectbox:
@@ -157,7 +161,9 @@ namespace ntrbase.Bot
                             Report("Bot: Start dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.testdialog1;
+                            }
                             else
                             {
                                 attempts++;
@@ -189,18 +195,26 @@ namespace ntrbase.Bot
                             {
                                 waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                                 if (!(await waitTaskbool))
+                                {
                                     break;
+                                }
                             }
                             if (i == 6)
+                            {
                                 botState = (int)breedbotstates.checknoegg;
+                            }
                             else
+                            {
                                 botState = (int)breedbotstates.fixdialog;
+                            }
                             break;
 
                         case (int)breedbotstates.fixdialog:
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.checknoegg;
+                            }
                             else
                             {
                                 attempts++;
@@ -288,7 +302,9 @@ namespace ntrbase.Bot
                                     }
                                 }
                                 if (mode == 1)
+                                {
                                     testsok = Program.gCmdWindow.CheckBreedingFilters();
+                                }
                             }
                             else
                             {
@@ -297,7 +313,9 @@ namespace ntrbase.Bot
                                 attempts = 11;
                             }
                             if (testsok)
+                            {
                                 botState = (int)breedbotstates.testspassed;
+                            }
                             else if (quantity > 0)
                             {
                                 getNextSlot();
@@ -311,7 +329,9 @@ namespace ntrbase.Bot
                                     botresult = 3;
                                 }
                                 else
+                                {
                                     botresult = 0;
+                                }
                                 botState = (int)breedbotstates.botexit;
                             }
                             break;
@@ -395,7 +415,9 @@ namespace ntrbase.Bot
                 currentbox++;
                 currentslot = 0;
                 if (currentbox >= 32)
+                {
                     currentbox = 0;
+                }
             }
             Program.gCmdWindow.updateBreedingslots(currentbox, currentslot, quantity);
         }

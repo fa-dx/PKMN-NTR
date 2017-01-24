@@ -201,11 +201,17 @@ namespace ntrbase.Bot
                         case (int)breedbotstates.botstart:
                             Report("Bot: START Gen 6 Breding bot");
                             if (quickbreed)
+                            {
                                 botState = (int)breedbotstates.facedaycareman;
+                            }
                             else if (mode >= 0)
+                            {
                                 botState = (int)breedbotstates.walk1;
+                            }
                             else
+                            {
                                 botState = (int)breedbotstates.botexit;
+                            }
                             break;
 
                         case (int)breedbotstates.facedaycareman:
@@ -262,7 +268,9 @@ namespace ntrbase.Bot
                                 botState = (int)breedbotstates.checkmap1;
                             }
                             else
+                            {
                                 botState = (int)breedbotstates.walk1;
+                            }
                             break;
 
                         case (int)breedbotstates.checkmap1:
@@ -299,9 +307,13 @@ namespace ntrbase.Bot
                                     break;
                             }
                             if (i == 7)
+                            {
                                 botState = (int)breedbotstates.checknoegg;
+                            }
                             else
+                            {
                                 botState = (int)breedbotstates.continuedialog;
+                            }
                             break;
 
                         case (int)breedbotstates.continuedialog:
@@ -309,7 +321,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.checknoegg;
+                            }
                             else
                             {
                                 attempts++;
@@ -350,9 +364,13 @@ namespace ntrbase.Bot
                                         botState = (int)breedbotstates.walktodaycare;
                                     }
                                     else if (quickbreed)
+                                    {
                                         botState = (int)breedbotstates.quickegg;
+                                    }
                                     else
+                                    {
                                         botState = (int)breedbotstates.walk1;
+                                    }
                                 }
                                 else
                                 {
@@ -373,9 +391,13 @@ namespace ntrbase.Bot
                             Report("Bot: Walk to Day Care");
                             await Task.Delay(commanddelay);
                             if (oras && !mauvdaycare)
+                            {
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
+                            }
                             else
+                            {
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
+                            }
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap2;
                             break;
@@ -421,9 +443,13 @@ namespace ntrbase.Bot
                             Report("Bot: Missed day care, return");
                             await Task.Delay(commanddelay);
                             if (oras && !mauvdaycare)
+                            {
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
+                            }
                             else
+                            {
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
+                            }
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap2;
                             break;
@@ -531,7 +557,9 @@ namespace ntrbase.Bot
                         case (int)breedbotstates.startcomputer:
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.testcomputer;
+                            }
                             else
                             {
                                 attempts++;
@@ -595,11 +623,17 @@ namespace ntrbase.Bot
                             Report("Bot: Touch Organize boxes");
                             await Task.Delay(2 * commanddelay);
                             if (oras && organizeboxes)
+                            {
                                 waitTaskbool = Program.helper.waittouch(160, 40);
+                            }
                             else
+                            {
                                 waitTaskbool = Program.helper.waittouch(160, 120);
+                            }
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.testboxes;
+                            }
                             else
                             {
                                 attempts++;
@@ -653,7 +687,9 @@ namespace ntrbase.Bot
                                 boxchange = false;
                             }
                             else
+                            {
                                 botState = (int)breedbotstates.touchegg;
+                            }
                             break;
 
                         case (int)breedbotstates.touchboxview:
@@ -661,7 +697,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waittouch(30, 220);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.testboxview;
+                            }
                             else
                             {
                                 attempts++;
@@ -709,7 +747,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.testviewout;
+                            }
                             else
                             {
                                 attempts++;
@@ -740,7 +780,9 @@ namespace ntrbase.Bot
                             await Task.Delay(2 * commanddelay);
                             waitTaskbool = Program.helper.waitholdtouch(300, 100);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.moveegg;
+                            }
                             else
                             {
                                 botresult = 6;
@@ -754,7 +796,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitholdtouch(LookupTable.pokeposX6[currentslot], LookupTable.pokeposY6[currentslot]);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.releaseegg;
+                            }
                             else
                             {
                                 botresult = 6;
@@ -775,9 +819,13 @@ namespace ntrbase.Bot
                                 getNextSlot();
                                 eggsinparty--;
                                 if (eggsinparty > 0)
+                                {
                                     botState = (int)breedbotstates.readslot;
+                                }
                                 else
+                                {
                                     botState = (int)breedbotstates.exitcomputer;
+                                }
                             }
                             else
                             {
@@ -792,7 +840,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyX);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)breedbotstates.testexit;
+                            }
                             else
                             {
                                 attempts++;
@@ -808,9 +858,13 @@ namespace ntrbase.Bot
                             {
                                 attempts = 0;
                                 if (mode == 1 || mode == 2 || readesv)
+                                {
                                     botState = (int)breedbotstates.filter;
+                                }
                                 else if (quantity > 0)
+                                {
                                     botState = (int)breedbotstates.retirefromcomputer;
+                                }
                                 else
                                 {
                                     Report("Bot: Error detected");
@@ -927,9 +981,13 @@ namespace ntrbase.Bot
                             Report("Bot: Walk to Day Care Man");
                             await Task.Delay(commanddelay);
                             if (oras && !mauvdaycare)
+                            {
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
+                            }
                             else
+                            {
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
+                            }
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap9;
                             break;
@@ -939,9 +997,13 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 if (quickbreed)
+                                {
                                     botState = (int)breedbotstates.facedaycareman;
+                                }
                                 else
+                                {
                                     botState = (int)breedbotstates.walk1;
+                                }
                                 attempts = 0;
                             }
                             else if (Program.helper.lastRead > daycaremanx && oras && !mauvdaycare)
@@ -968,9 +1030,13 @@ namespace ntrbase.Bot
                             Report("Bot: Missed Day Care Man, return");
                             await Task.Delay(commanddelay);
                             if (oras && !mauvdaycare)
+                            {
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
+                            }
                             else
+                            {
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
+                            }
                             await Task.Delay(walktime + commanddelay);
                             botState = (int)breedbotstates.checkmap9;
                             break;
@@ -998,7 +1064,9 @@ namespace ntrbase.Bot
                                         }
                                     }
                                     if (mode == 1)
+                                    {
                                         testsok = Program.gCmdWindow.CheckBreedingFilters();
+                                    }
                                 }
                                 else
                                 {
@@ -1013,7 +1081,9 @@ namespace ntrbase.Bot
                                     break;
                                 }
                                 else if (quantity > 0)
+                                {
                                     botState = (int)breedbotstates.retirefromcomputer;
+                                }
                                 else
                                 {
                                     if (mode == 1 || mode == 2)
@@ -1022,7 +1092,9 @@ namespace ntrbase.Bot
                                         botresult = 3;
                                     }
                                     else
+                                    {
                                         botresult = 0;
+                                    }
                                     botState = (int)breedbotstates.botexit;
                                 }
                             }
@@ -1108,7 +1180,9 @@ namespace ntrbase.Bot
                 currentslot = 0;
                 boxchange = true;
                 if (currentbox >= 31)
+                {
                     currentbox = 0;
+                }
             }
             Program.gCmdWindow.updateBreedingslots(currentbox, currentslot, quantity);
         }

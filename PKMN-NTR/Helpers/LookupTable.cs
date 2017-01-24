@@ -3710,20 +3710,28 @@ namespace ntrbase
                         break;
                     }
                     else if (currentexp == exp)
+                    {
                         break;
+                    }
                 }
                 return lvl;
             }
             else
+            {
                 return 1;
+            }
         }
 
         public static uint getExp(int species, int lvl)
         {
             if (species > 0)
+            {
                 return getExpLevel(lvl)[getExpGroup(species)];
+            }
             else
+            {
                 return 0;
+            }
         }
 
         #endregion Experience
@@ -3744,6 +3752,8 @@ namespace ntrbase
             }
         }
 
+        #endregion Nature
+
         #region Gender
 
         public static string getGender(int index)
@@ -3758,8 +3768,6 @@ namespace ntrbase
         }
 
         #endregion Gender
-
-        #endregion Nature
 
         #region Buttons
 

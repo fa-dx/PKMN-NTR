@@ -101,9 +101,13 @@ namespace ntrbase.Bot
                         case (int)botstates.startbot:
                             Report("Bot: START Gen 7 Wonder Trade bot");
                             if (collectFC)
+                            {
                                 botstate = (int)botstates.initializeFC1;
+                            }
                             else
+                            {
                                 botstate = (int)botstates.readpoke;
+                            }
                             break;
 
                         case (int)botstates.initializeFC1:
@@ -208,7 +212,9 @@ namespace ntrbase.Bot
                             Report("Bot: Press Trade Button");
                             waitTaskbool = Program.helper.waittouch(200, 120);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.testtrademenu;
+                            }
                             else
                             {
                                 attempts++;
@@ -361,7 +367,9 @@ namespace ntrbase.Bot
                             Report("Bot: Press Start");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.confirmtrade;
+                            }
                             else
                             {
                                 attempts++;
@@ -374,7 +382,9 @@ namespace ntrbase.Bot
                             Report("Bot: Press Yes");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.testboxesout;
+                            }
                             else
                             {
                                 attempts++;
@@ -433,9 +443,13 @@ namespace ntrbase.Bot
                             {
                                 attempts = 0;
                                 if (collectFC && !notradepartner)
+                                {
                                     botstate = (int)botstates.collectFC1;
+                                }
                                 else
+                                {
                                     botstate = (int)botstates.finishtrade;
+                                }
                             }
                             else
                             {
@@ -472,7 +486,9 @@ namespace ntrbase.Bot
 
                         case (int)botstates.finishtrade:
                             if (!notradepartner)
+                            {
                                 getNextSlot();
+                            }
                             notradepartner = false;
                             tradeevo = false;
                             if (quantity > 0) // Test if there are more trades
@@ -493,7 +509,9 @@ namespace ntrbase.Bot
                             await Task.Delay(4 * delaytime);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.collectFC2;
+                            }
                             else
                             {
                                 attempts++;
@@ -522,7 +540,9 @@ namespace ntrbase.Bot
                             Report("Bot: Continue dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.collectFC4;
+                            }
                             else
                             {
                                 attempts++;
@@ -563,7 +583,9 @@ namespace ntrbase.Bot
                                     botstate = (int)botstates.exitbot;
                                 }
                                 else
+                                {
                                     botstate = (int)botstates.finishtrade;
+                                }
                             }
                             else
                             {
@@ -639,7 +661,9 @@ namespace ntrbase.Bot
                 currentslot = 0;
                 boxchange = true;
                 if (currentbox >= 32)
+                {
                     currentbox = 0;
+                }
             }
             quantity--;
             Program.gCmdWindow.updateWTslots(currentbox, currentslot, quantity);

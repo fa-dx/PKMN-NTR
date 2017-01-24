@@ -120,16 +120,23 @@ namespace ntrbase.Bot
                             {
                                 case 0:
                                     if (resume)
+                                    {
                                         botState = (int)srbotstates.trigger;
+                                    }
                                     else
+                                    {
                                         botState = (int)srbotstates.pssmenush;
+                                    }
                                     break;
                                 case 1:
                                     if (resume)
+                                    {
                                         botState = (int)srbotstates.miragespot;
+                                    }
                                     else
+                                    {
                                         botState = (int)srbotstates.pssmenush;
-
+                                    }
                                     break;
                                 case 2:
                                     if (resume)
@@ -144,15 +151,23 @@ namespace ntrbase.Bot
                                     break;
                                 case 3:
                                     if (resume)
+                                    {
                                         botState = (int)srbotstates.trigger;
+                                    }
                                     else
+                                    {
                                         botState = (int)srbotstates.fixwifi;
+                                    }
                                     break;
                                 case 4:
                                     if (resume)
+                                    {
                                         botState = (int)srbotstates.twk_start;
+                                    }
                                     else
+                                    {
                                         botState = (int)srbotstates.pssmenush;
+                                    }
                                     break;
                                 default:
                                     botState = (int)srbotstates.botexit;
@@ -164,7 +179,9 @@ namespace ntrbase.Bot
                             Report("Bot: Test if the PSS menu is shown");
                             waitTaskbool = Program.helper.memoryinrange(psssmenu1Off, psssmenu1IN, 0x10000);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotstates.fixwifi;
+                            }
                             else
                             {
                                 botresult = 1;
@@ -177,9 +194,13 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 if (mode == 3)
+                                {
                                     botState = (int)srbotstates.trigger;
+                                }
                                 else
+                                {
                                     botState = (int)srbotstates.touchpssset;
+                                }
                             }
                             else
                             {
@@ -194,7 +215,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waittouch(240, 180);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotstates.testpssset;
+                            }
                             else
                             {
                                 attempts++;
@@ -224,7 +247,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waittouch(160, pssdisableY);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotstates.testpssdis;
+                            }
                             else
                             {
                                 attempts++;
@@ -254,7 +279,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waittouch(160, 120);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotstates.testpssout;
+                            }
                             else
                             {
                                 attempts++;
@@ -284,7 +311,9 @@ namespace ntrbase.Bot
                             await Task.Delay(6 * commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotstates.touchsave;
+                            }
                             else
                             {
                                 attempts++;
@@ -298,7 +327,9 @@ namespace ntrbase.Bot
                             await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.waittouch(220, 220);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotstates.testsave;
+                            }
                             else
                             {
                                 attempts++;
@@ -328,7 +359,9 @@ namespace ntrbase.Bot
                             await Task.Delay(8 * commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotstates.saveout;
+                            }
                             else
                             {
                                 attempts++;
@@ -349,7 +382,9 @@ namespace ntrbase.Bot
                                     botState = (int)srbotstates.softreset;
                                 }
                                 else
+                                {
                                     botState = (int)srbotstates.typesr;
+                                }
                             }
                             else
                             {
@@ -388,7 +423,9 @@ namespace ntrbase.Bot
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotstates.readopp;
+                            }
                             else
                             {
                                 attempts++;
@@ -410,7 +447,9 @@ namespace ntrbase.Bot
                                 }
                             }
                             if (i == 4)
+                            {
                                 botState = (int)srbotstates.readopp;
+                            }
                             else
                             {
                                 botState = (int)srbotstates.trigger;
@@ -438,9 +477,13 @@ namespace ntrbase.Bot
                         case (int)srbotstates.filter:
                             bool testsok = Program.gCmdWindow.CheckSoftResetFilters();
                             if (testsok)
+                            {
                                 botState = (int)srbotstates.testspassed;
+                            }
                             else
+                            {
                                 botState = (int)srbotstates.softreset;
+                            }
                             break;
 
                         case (int)srbotstates.testspassed:
@@ -470,9 +513,13 @@ namespace ntrbase.Bot
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
                             if (!oras)
+                            {
                                 botState = (int)srbotstates.startgame;
+                            }
                             else
+                            {
                                 botState = (int)srbotstates.skiptitle;
+                            }
                             break;
 
                         case (int)srbotstates.skiptitle:

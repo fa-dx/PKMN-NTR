@@ -103,7 +103,9 @@ namespace ntrbase.Bot
                             Report("Bot: Start dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.testdialog1;
+                            }
                             else
                             {
                                 attempts++;
@@ -118,9 +120,13 @@ namespace ntrbase.Bot
                             if (await waitTaskbool)
                             {
                                 if (mode == 1)
+                                {
                                     attempts = -40; // Type:Null dialog is longer
+                                }
                                 else
+                                {
                                     attempts = -15;
+                                }
                                 botState = (int)srbotStates.continuedialog;
                             }
                             else
@@ -135,7 +141,9 @@ namespace ntrbase.Bot
                             Report("Bot: Continue dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.testdialog2;
+                            }
                             else
                             {
                                 attempts++;
@@ -174,7 +182,9 @@ namespace ntrbase.Bot
                             Report("Bot: Exit dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.readparty;
+                            }
                             else
                             {
                                 attempts++;
@@ -203,21 +213,17 @@ namespace ntrbase.Bot
                         case (int)srbotStates.filter:
                             bool testsok = Program.gCmdWindow.CheckSoftResetFilters();
                             if (testsok)
+                            {
                                 botState = (int)srbotStates.testspassed;
-                            else if (mode == 3)
-                            {
-                                botState = (int)srbotStates.runbattle1;
                             }
-                            else if (mode == 4)
-                            {
-                                botState = (int)srbotStates.runbattle1;
-                            }
-                            else if (mode == 5)
+                            else if (mode == 3 || mode == 4 || mode == 5)
                             {
                                 botState = (int)srbotStates.runbattle1;
                             }
                             else
+                            {
                                 botState = (int)srbotStates.softreset;
+                            }
                             break;
 
                         case (int)srbotStates.testspassed:
@@ -313,7 +319,10 @@ namespace ntrbase.Bot
                             await Task.Delay(250);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+
+                            {
                                 botState = (int)srbotStates.testdialog2;
+                            }
                             else
                             {
                                 attempts++;
@@ -326,7 +335,9 @@ namespace ntrbase.Bot
                             Report("Bot: Try to trigger battle");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.testdialog3;
+                            }
                             else
                             {
                                 attempts++;
@@ -355,7 +366,9 @@ namespace ntrbase.Bot
                             Report("Bot: Continue dialog");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.readopp;
+                            }
                             else
                             {
                                 attempts++;
@@ -385,7 +398,9 @@ namespace ntrbase.Bot
                             Report("Bot: Walk to legendary pokemon");
                             waitTaskbool = Program.helper.waitsitck(0, 100);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.soluna2;
+                            }
                             else
                             {
                                 attempts++;
@@ -398,7 +413,9 @@ namespace ntrbase.Bot
                             Report("Bot: Trigger battle #" + resetNo);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.soluna3;
+                            }
                             else
                             {
                                 attempts++;
@@ -461,7 +478,9 @@ namespace ntrbase.Bot
                             await Task.Delay(2000);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.DpadDOWN);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.runbattle2;
+                            }
                             else
                             {
                                 attempts++;
@@ -473,7 +492,9 @@ namespace ntrbase.Bot
                         case (int)srbotStates.runbattle2:
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.runbattle3;
+                            }
                             else
                             {
                                 attempts++;
@@ -542,7 +563,9 @@ namespace ntrbase.Bot
                             Report("Bot: Open Menu");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyX);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.testmenu;
+                            }
                             else
                             {
                                 attempts++;
@@ -571,7 +594,9 @@ namespace ntrbase.Bot
                             Report("Bot: Open Bag");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.testbag;
+                            }
                             else
                             {
                                 attempts++;
@@ -600,7 +625,9 @@ namespace ntrbase.Bot
                             Report("Bot: Select Honey");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.activatehoney;
+                            }
                             else
                             {
                                 attempts++;
@@ -613,7 +640,9 @@ namespace ntrbase.Bot
                             Report("Bot: Trigger battle #" + resetNo);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botState = (int)srbotStates.testwild;
+                            }
                             else
                             {
                                 attempts++;

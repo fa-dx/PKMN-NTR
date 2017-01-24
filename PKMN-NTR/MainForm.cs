@@ -273,7 +273,9 @@ namespace ntrbase
             }
 
             foreach (string t in LookupTable.Item7)
+            {
                 nameItem7.Items.Add(t);
+            }
 
             nameItem7.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
             nameItem7.DisplayIndex = 0;
@@ -295,6 +297,7 @@ namespace ntrbase
             InitializeComponent();
 
             enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, WriteBtn, species, nickBox, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless };
+
             enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, WriteBtn, species, nickBox, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, PokeDiggerBtn, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, sr_Species, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless, WTcollectFC };
 
             disableControls();
@@ -333,7 +336,9 @@ namespace ntrbase
                     updateURL = lateststable.HtmlUrl;
                     DialogResult result = MessageBox.Show("Version " + lateststable.TagName + " is available.\r\nDo you want to go to GitHub and download it?", "Update Available", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
+                    {
                         System.Diagnostics.Process.Start(updateURL);
+                    }
                 }
                 else
                 { // Look for beta
@@ -377,7 +382,9 @@ namespace ntrbase
         private void updateLabel_Click(object sender, EventArgs e)
         {
             if (updateURL != null)
+            {
                 System.Diagnostics.Process.Start(updateURL);
+            }
         }
 
         private void enableControls()
@@ -385,12 +392,16 @@ namespace ntrbase
             if (gen7)
             {
                 foreach (Control c in enableWhenConnected7)
+                {
                     SetEnabled(c, true);
+                }
             }
             else
             {
                 foreach (Control c in enableWhenConnected)
+                {
                     SetEnabled(c, true);
+                }
             }
             HyperTrainBoxes();
         }
@@ -400,12 +411,16 @@ namespace ntrbase
             if (gen7)
             {
                 foreach (Control c in enableWhenConnected7)
+                {
                     SetEnabled(c, false);
+                }
             }
             else
             {
                 foreach (Control c in enableWhenConnected)
+                {
                     SetEnabled(c, false);
+                }
             }
         }
 
@@ -413,13 +428,21 @@ namespace ntrbase
         {
             lastlog = l;
             if (l.Contains("Server disconnected") && !botWorking && game != GameType.None)
+            {
                 PerformDisconnect();
+            }
             if (l.Contains("finished") && botWorking) // Supress "finished" messages on bots
+            {
                 l = l.Replace("finished", null);
+            }
             if (!l.Contains("\r\n") && l.Length > 2)
+            {
                 l = l.Replace("\n", "\r\n");
+            }
             if (!l.EndsWith("\n") && l.Length > 2)
+            {
                 l += "\r\n";
+            }
             txtLog.AppendText(l);
         }
 
@@ -509,6 +532,7 @@ namespace ntrbase
             }
 
             if (ability.Items.Count == 3)
+            {
                 switch (abnumber)
                 {
                     case 1:
@@ -524,6 +548,7 @@ namespace ntrbase
                         SetSelectedIndex(ability, 0);
                         break;
                 }
+            }
         }
 
         #endregion Functions
@@ -728,7 +753,9 @@ namespace ntrbase
                 partyOff = 0x34195E10;
             }
             else // not a process list or game not found - ignore packet
+            {
                 return;
+            }
 
             // Clear tabs to avoid writting wrong data
             if (!botWorking)
@@ -797,7 +824,9 @@ namespace ntrbase
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
+            {
                 SetMaximum(boxDump, BOXES);
+            }
             SetMaximum(cloneBoxTo, BOXES);
             SetMaximum(cloneBoxFrom, BOXES);
             SetMaximum(writeBoxTo, BOXES);
@@ -833,7 +862,9 @@ namespace ntrbase
             SetVisible(medsGridView, false);
             SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
+            {
                 SetMaximum(boxDump, BOXES);
+            }
             SetMaximum(cloneBoxTo, BOXES);
             SetMaximum(cloneBoxFrom, BOXES);
             SetMaximum(writeBoxTo, BOXES);
@@ -845,7 +876,9 @@ namespace ntrbase
             // Apply connection patch
             Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
             if (!(await Patch))
+            {
                 MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion Connection
@@ -892,7 +925,9 @@ namespace ntrbase
                 showKeys.ForeColor = Color.Black;
             }
             else
+            {
                 dumpAllData();
+            }
         }
 
         // Name handling
@@ -917,7 +952,9 @@ namespace ntrbase
                 Program.scriptHelper.write(nameoff, nameBytes, pid);
             }
             else
+            {
                 MessageBox.Show("That name is too long, please choose a trainer name of 12 character or less.", "Name too long!");
+            }
         }
 
         // TID handling
@@ -1153,9 +1190,13 @@ namespace ntrbase
         private void ItemDumpFinished()
         {
             if (itemsGridView.InvokeRequired)
+            {
                 itemsGridView.Invoke((MethodInvoker)delegate { readItems(); });
+            }
             else
+            {
                 readItems();
+            }
         }
 
         public void readItems()
@@ -1168,7 +1209,9 @@ namespace ntrbase
             const int totalLength = itemsLength + keysLength + tmsLength + medsLength + bersLength;
 
             if (items == null || items.Length != totalLength)
+            {
                 throw new ArgumentOutOfRangeException("Item data array is of wrong length");
+            }
 
             itemData = items.Skip(0).Take(itemsLength).ToArray();
             keyData = items.Skip((int)(keysoff - itemsoff)).Take(keysLength).ToArray();
@@ -1217,41 +1260,61 @@ namespace ntrbase
             if (itemsGridView.Visible == true)
             {
                 if (itemsGridView.RowCount >= 400)
+                {
                     MessageBox.Show("You already have the max amount of items!", "Too many items");
+                }
                 else
+                {
                     itemsGridView.Rows.Add("[None]", 0);
+                }
             }
 
-            if (keysGridView.Visible == true)
+            else if (keysGridView.Visible == true)
             {
                 if (keysGridView.RowCount >= 96)
+                {
                     MessageBox.Show("You already have the max amount of key items!", "Too many items");
+                }
                 else
+                {
                     keysGridView.Rows.Add("[None]", 0);
+                }
             }
 
-            if (tmsGridView.Visible == true)
+            else if (tmsGridView.Visible == true)
             {
                 if (tmsGridView.RowCount >= 96)
+                {
                     MessageBox.Show("You already have the max amount of medicine items!", "Too many items");
+                }
                 else
+                {
                     tmsGridView.Rows.Add("[None]", 0);
+                }
             }
 
-            if (medsGridView.Visible == true)
+            else if (medsGridView.Visible == true)
             {
                 if (medsGridView.RowCount >= 108)
+                {
                     MessageBox.Show("You already have the max amount of TMs & HMs!", "Too many items");
+                }
                 else
+                {
                     medsGridView.Rows.Add("[None]", 0);
+                }
             }
 
-            if (bersGridView.Visible == true)
+            else if (bersGridView.Visible == true)
             {
                 if (bersGridView.RowCount >= 72)
+                {
                     MessageBox.Show("You already have the max amount of berries!", "Too many items");
+                }
                 else
+                {
                     bersGridView.Rows.Add("[None]", 0);
+                }
             }
         }
 
@@ -1313,7 +1376,7 @@ namespace ntrbase
                     offsetToWrite = itemsoff;
                 }
 
-                if (keysGridView.Visible == true)
+                else if (keysGridView.Visible == true)
                 {
                     keyData = new byte[384];
                     for (int i = 0; i < keysGridView.RowCount; i++)
@@ -1330,7 +1393,7 @@ namespace ntrbase
                     offsetToWrite = keysoff;
                 }
 
-                if (tmsGridView.Visible == true)
+                else if (tmsGridView.Visible == true)
                 {
                     tmData = new byte[432];
                     for (int i = 0; i < tmsGridView.RowCount; i++)
@@ -1347,7 +1410,7 @@ namespace ntrbase
                     offsetToWrite = tmsoff;
                 }
 
-                if (medsGridView.Visible == true)
+                else if (medsGridView.Visible == true)
                 {
                     medData = new byte[256];
                     for (int i = 0; i < medsGridView.RowCount; i++)
@@ -1364,7 +1427,7 @@ namespace ntrbase
                     offsetToWrite = medsoff;
                 }
 
-                if (bersGridView.Visible == true)
+                else if (bersGridView.Visible == true)
                 {
                     berryData = new byte[288];
                     for (int i = 0; i < bersGridView.RowCount; i++)
@@ -1464,9 +1527,13 @@ namespace ntrbase
         private void ItemDumpFinished7(int[,] itemdata)
         {
             if (itemsView7.InvokeRequired)
+            {
                 itemsView7.Invoke((MethodInvoker)delegate { readItems7(itemdata); });
+            }
             else
+            {
                 readItems7(itemdata);
+            }
         }
 
         private void readItems7(int[,] itemdata)
@@ -1506,7 +1573,9 @@ namespace ntrbase
                 }
             }
             else if (radioBattleBox.Checked)
+            {
                 dumpOff = battleBoxOff + ((decimal.ToUInt32(slotDump.Value) - 1) * POKEBYTES);
+            }
             else if (radioTrade.Checked)
             {
                 if (!gen7)
@@ -1556,7 +1625,9 @@ namespace ntrbase
                 }
             }
             else if (radioParty.Checked)
+            {
                 dumpOff = partyOff + (decimal.ToUInt32(slotDump.Value) - 1) * 484;
+            }
 
             // Read at offset
             if (radioParty.Checked)
@@ -1598,15 +1669,22 @@ namespace ntrbase
                     }
                 }
                 else if (!dataCorrect && !botWorking)
+                {
                     MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 if (!dataCorrect)
+                {
                     return;
+                }
 
                 dumpedPKHeX.Data = validator.Data;
                 updateTabs();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void handleTradeData(object args_obj)
@@ -1633,7 +1711,10 @@ namespace ntrbase
             foreach (uint occurence in occurences)
             {
                 count++;
-                if (count != 2) continue;
+                if (count != 2)
+                {
+                    continue;
+                }
                 int dataOffset = (int)(occurence + offsetAfter);
                 DataReadyWaiting args_pkm = new DataReadyWaiting(args.data.Skip(dataOffset).Take(POKEBYTES).ToArray(), handlePkmData, null);
                 handlePkmData(args_pkm);
@@ -1708,7 +1789,9 @@ namespace ntrbase
             try
             {
                 if (!overwrite) // If current filename is available, it won't be changed
+                {
                     fileName = NextAvailableFilename(fileName);
+                }
 
                 FileStream fs = File.OpenWrite(fileName);
                 fs.Write(data, 0, data.Length);
@@ -1723,10 +1806,14 @@ namespace ntrbase
         public static string NextAvailableFilename(string path)
         {
             if (!File.Exists(path))
+            {
                 return path;
+            }
 
             if (Path.HasExtension(path))
+            {
                 return GetNextFilename(path.Insert(path.LastIndexOf(Path.GetExtension(path)), numberPattern));
+            }
 
             return GetNextFilename(path + numberPattern);
         }
@@ -1735,10 +1822,14 @@ namespace ntrbase
         {
             string tmp = string.Format(pattern, 1);
             if (tmp == pattern)
+            {
                 throw new ArgumentException("The pattern must include an index place-holder", "pattern");
+            }
 
             if (!File.Exists(tmp))
+            {
                 return tmp;
+            }
 
             int min = 1, max = 2;
 
@@ -1752,9 +1843,13 @@ namespace ntrbase
             {
                 int pivot = (max + min) / 2;
                 if (File.Exists(string.Format(pattern, pivot)))
+                {
                     min = pivot;
+                }
                 else
+                {
                     max = pivot;
+                }
             }
 
             return string.Format(pattern, max);
@@ -1780,15 +1875,25 @@ namespace ntrbase
         private void pokeEkx_Click(object sender, EventArgs e)
         { //TODO: are all these Array.Copy() really necessary? Shouldn't PKHeX just handle everything?
             if (dumpedPKHeX.Data == null)
+            {
                 MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
+            }
             else if (dumpedPKHeX.Data.Length != POKEBYTES)
+            {
                 MessageBox.Show("The data size of this pokémon data is invalid. If you dumped it from the party, please deposit it in a box before editing and try again.", "Invalid data size");
+            }
             else if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value >= 511)
+            {
                 MessageBox.Show("Pokemon EV count is too high, the sum of all EVs should be 510 or less!", "EVs too high");
+            }
             else if (nickname.Text.Length > 12)
+            {
                 MessageBox.Show("Pokemon name length too long! Please use a name with a length of 12 or less.", "Name too long");
+            }
             else if (otName.Text.Length > 12)
+            {
                 MessageBox.Show("OT name length too long! Please use a name with a length of 12 or less.", "Name too long");
+            }
             else
             {
                 dumpedPKHeX.Nickname = nickname.Text.PadRight(12, '\0');
@@ -1992,9 +2097,13 @@ namespace ntrbase
             {
                 bool isEncrypted = false;
                 if (extension == ".pk6" || extension == ".pk7")
+                {
                     isEncrypted = false;
+                }
                 else if (extension == ".ek6" || extension == ".ek7")
+                {
                     isEncrypted = true;
+                }
                 else
                 {
                     MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
@@ -2005,9 +2114,13 @@ namespace ntrbase
                 if (tmpBytes.Length == 260 || tmpBytes.Length == 232)
                 { // All OK, commit
                     if (isEncrypted)
+                    {
                         tmpBytes.CopyTo(result, 0);
+                    }
                     else
+                    {
                         PKHeX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
+                    }
                 }
                 else
                 {
@@ -2032,16 +2145,24 @@ namespace ntrbase
             }
             int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
             if (ret > 0)
+            {
                 MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
+            }
             else if (ret <= 0)
+            {
                 if (writeAutoInc.Checked)
+                {
                     writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+                }
+            }
         }
 
         private int writePokemonToBox(byte[] data, uint boxFrom, uint count)
         { //Returns 0 on success, positive value represents how many copies could not be written.
             if (data.Length != POKEBYTES)
+            {
                 return -1;
+            }
 
             int ret = 0;
             if (boxFrom + count > BOXES * BOXSIZE)
@@ -2053,7 +2174,9 @@ namespace ntrbase
 
             byte[] dataToWrite = new byte[count * POKEBYTES];
             for (int i = 0; i < count; i++)
+            {
                 data.CopyTo(dataToWrite, i * POKEBYTES);
+            }
             uint offset = boxOff + boxFrom * POKEBYTES;
             Program.scriptHelper.write(offset, dataToWrite, pid);
             return ret;
@@ -2062,14 +2185,18 @@ namespace ntrbase
         void writeTab_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
                 e.Effect = DragDropEffects.Copy;
+            }
         }
 
         void writeTab_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             if (files.Length <= 0)
+            {
                 return;
+            }
             int fails = 0;
             foreach (string filename in files)
             {
@@ -2078,16 +2205,24 @@ namespace ntrbase
                 {
                     int ret = writePokemonToBox(data, writeGetBoxIndex(), writeGetCopies());
                     if (ret > 0)
+                    {
                         fails += ret;
+                    }
                     else if (ret < 0)
+                    {
                         return;
+                    }
                 }
 
                 if (writeAutoInc.Checked)
+                {
                     writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+                }
             }
             if (fails > 0)
+            {
                 MessageBox.Show(fails + " write(s) failed because end of boxes was reached.", "Error");
+            }
         }
 
         private uint writeGetCopies()
@@ -2103,7 +2238,9 @@ namespace ntrbase
         private void writeSetBoxIndex(uint index)
         {
             if (index >= BOXES * BOXSIZE)
+            {
                 index = BOXES * BOXSIZE - 1;
+            }
             uint box = index / BOXSIZE;
             uint slot = index % BOXSIZE;
             SetValue(writeBoxTo, box + 1);
@@ -2146,12 +2283,18 @@ namespace ntrbase
                     {
                         validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
                         if (validator.Species == 0)
+                        {
                             continue;
+                        }
                         string fileName;
                         if (gen7)
+                        {
                             fileName = folderPath + "backup.pk7";
+                        }
                         else
+                        {
                             fileName = folderPath + "backup.pk6";
+                        }
                         writePokemonToFile(validator.Data, fileName);
                     }
                 }
@@ -2161,9 +2304,13 @@ namespace ntrbase
                 }
             }
             if (gen7)
+            {
                 writePokemonToBox(LookupTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
+            }
             else
+            {
                 writePokemonToBox(LookupTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
+            }
         }
 
         private uint deleteGetAmount()
@@ -2230,9 +2377,13 @@ namespace ntrbase
                 boxDump.Maximum = 2;
                 slotDump.Minimum = 1;
                 if (game == GameType.OR || game == GameType.AS) // Handle ORAS Battle Resort Daycare
+                {
                     slotDump.Maximum = 4;
+                }
                 else
+                {
                     slotDump.Maximum = 2;
+                }
                 boxDump.Enabled = false;
                 slotDump.Enabled = true;
                 dumpBoxes.Enabled = false;
@@ -2531,15 +2682,23 @@ namespace ntrbase
         {
             string resname;
             if (isegg)
+            {
                 resname = "egg";
+            }
             else if (formindex == 0 || speciesindex == 493 || speciesindex == 773) // All Arceus / Silvally formes have same sprite
+            {
                 resname = "_" + speciesindex;
+            }
             else
+            {
                 resname = "_" + speciesindex + "_" + formindex;
+            }
             Bitmap data;
             data = (Bitmap)Resources.ResourceManager.GetObject(resname);
             if (data == null)
+            {
                 data = (Bitmap)Resources.ResourceManager.GetObject("unknown");
+            }
             pictureBox2.Image = data;
         }
 
@@ -2625,9 +2784,13 @@ namespace ntrbase
         private void ball_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ball.SelectedIndex >= 0)
+            {
                 pictureBox1.Image = (Bitmap)Resources.ResourceManager.GetObject("ball" + ball.SelectedIndex);
+            }
             else
+            {
                 pictureBox1.Image = null;
+            }
         }
 
         // Shiny pokémon mark
@@ -2637,26 +2800,40 @@ namespace ntrbase
             SetChecked(shinyBox, dumpedPKHeX.isShiny);
             shinyBox.CheckedChanged += shinyBox_CheckedChanged;
             if (dumpedPKHeX.isShiny)
+            {
                 shinypic.Image = Resources.shiny;
+            }
             else
+            {
                 shinypic.Image = null;
+            }
         }
 
         private void setShinySprite()
         {
             if (dumpedPKHeX.isShiny)
+            {
                 shinypic.Image = Resources.shiny;
+            }
             else
+            {
                 shinypic.Image = null;
+            }
         }
 
         private void shinyBox_CheckedChanged(object sender, EventArgs e)
         {
             if (shinyBox.Checked == true)
+            {
                 dumpedPKHeX.setShinyPID();
+            }
             else
+            {
                 while (dumpedPKHeX.isShiny)
+                {
                     dumpedPKHeX.setRandomPID();
+                }
+            }
             dPID.Text = dumpedPKHeX.PID.ToString("X8");
             setShinySprite();
         }
@@ -2680,42 +2857,59 @@ namespace ntrbase
                     HypT_HP.Enabled = false;
                 }
                 else
+                {
                     HypT_HP.Enabled = true;
+                }
+
                 if (ivATKNum.Value == 31)
                 {
                     HypT_Atk.Checked = false;
                     HypT_Atk.Enabled = false;
                 }
                 else
+                {
                     HypT_Atk.Enabled = true;
+                }
+
                 if (ivDEFNum.Value == 31)
                 {
                     HypT_Def.Checked = false;
                     HypT_Def.Enabled = false;
                 }
                 else
+                {
                     HypT_Def.Enabled = true;
+                }
+
                 if (ivSPANum.Value == 31)
                 {
                     HypT_SpA.Checked = false;
                     HypT_SpA.Enabled = false;
                 }
                 else
+                {
                     HypT_SpA.Enabled = true;
+                }
+
                 if (ivSPDNum.Value == 31)
                 {
                     HypT_SpD.Checked = false;
                     HypT_SpD.Enabled = false;
                 }
                 else
+                {
                     HypT_SpD.Enabled = true;
+                }
+
                 if (ivSPENum.Value == 31)
                 {
                     HypT_Spe.Checked = false;
                     HypT_Spe.Enabled = false;
                 }
                 else
+                {
                     HypT_Spe.Enabled = true;
+                }
             }
             else
             {
@@ -3251,21 +3445,33 @@ namespace ntrbase
             {
                 case 1: // Breeding bot
                     if (gen7)
+                    {
                         BreedBot7.botstop = true;
+                    }
                     else
+                    {
                         BreedBot6.botstop = true;
+                    }
                     break;
                 case 2: // Soft-reset bot
                     if (gen7)
+                    {
                         SRBot7.botstop = true;
+                    }
                     else
+                    {
                         SRBot6.botstop = true;
+                    }
                     break;
                 case 3: // Wonder Trade bot
                     if (gen7)
+                    {
                         WTBot7.botstop = true;
+                    }
                     else
+                    {
                         WTBot6.botstop = true;
+                    }
                     break;
             }
             addtoLog("Bot: Stopping bot, please wait");
@@ -3322,12 +3528,15 @@ namespace ntrbase
                     currentfilter++;
                     addtoLog("Filter: Analyze pokémon using filter # " + currentfilter);
                     failedtests = 0;
+
                     // Test shiny
                     filterstr = " (PSV: " + getPSV(dumpedPKHeX.PID).ToString("D4") + " TSV: " + getTSV(TIDNum.Value, SIDNum.Value).ToString("D4") + ")";
                     if ((int)row.Cells[0].Value == 1)
                     {
                         if (dumpedPKHeX.isShiny)
+                        {
                             addtoLog("Filter: Shiny - PASS" + filterstr);
+                        }
                         else
                         {
                             addtoLog("Filter: Shiny - FAIL" + filterstr);
@@ -3335,16 +3544,22 @@ namespace ntrbase
                         }
                     }
                     else
+                    {
                         addtoLog("Filter: Shiny - Don't care" + filterstr);
+                    }
+
                     // Test nature
                     filterstr = " (" + LookupTable.getNature(dumpedPKHeX.Nature) + " -> " + LookupTable.getNature((int)row.Cells[1].Value) + ")";
                     if ((int)row.Cells[1].Value < 0 || dumpedPKHeX.Nature == (int)row.Cells[1].Value)
+                    {
                         addtoLog("Filter: Nature - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Nature - FAIL" + filterstr);
                         failedtests++;
                     }
+
                     // Test Ability
                     if (gen7)
                     {
@@ -3355,105 +3570,150 @@ namespace ntrbase
                         filterstr = " (" + LookupTable.getAbil6(dumpedPKHeX.Ability) + " -> " + LookupTable.getAbil6((int)row.Cells[2].Value) + ")";
                     }
                     if ((int)row.Cells[2].Value < 0 || (dumpedPKHeX.Ability - 1) == (int)row.Cells[2].Value)
+                    {
                         addtoLog("Filter: Ability - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Ability - FAIL" + filterstr);
                         failedtests++;
                     }
+
                     // Test Hidden Power
                     filterstr = " (" + LookupTable.getHPName(getHiddenPower()) + " -> " + LookupTable.getHPName((int)row.Cells[3].Value) + ")";
                     if ((int)row.Cells[3].Value < 0 || getHiddenPower() == (int)row.Cells[3].Value)
+                    {
                         addtoLog("Filter: Hidden Power - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Hidden Power - FAIL" + filterstr);
                         failedtests++;
                     }
+
                     // Test Gender
                     filterstr = " (" + LookupTable.getGender(dumpedPKHeX.Gender) + " -> " + LookupTable.getGender((int)row.Cells[4].Value) + ")";
                     if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == dumpedPKHeX.Gender)
+                    {
                         addtoLog("Filter: Gender - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Gender - FAIL" + filterstr);
                         failedtests++;
                     }
+
                     // Test HP
                     if (IVCheck((int)row.Cells[5].Value, dumpedPKHeX.IV_HP, (int)row.Cells[6].Value))
+                    {
                         addtoLog("Filter: Hit Points IV - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Hit Points IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_HP == 31)
+                    {
                         perfectIVs++;
+                    }
+
                     // Test Atk
                     if (IVCheck((int)row.Cells[7].Value, dumpedPKHeX.IV_ATK, (int)row.Cells[8].Value))
+                    {
                         addtoLog("Filter: Attack IV - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Attack IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_ATK == 31)
+                    {
                         perfectIVs++;
+                    }
+
                     // Test Def
                     if (IVCheck((int)row.Cells[9].Value, dumpedPKHeX.IV_DEF, (int)row.Cells[10].Value))
+                    {
                         addtoLog("Filter: Defense IV - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Defense IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_DEF == 31)
+                    {
                         perfectIVs++;
+                    }
+
                     // Test SpA
                     if (IVCheck((int)row.Cells[11].Value, dumpedPKHeX.IV_SPA, (int)row.Cells[12].Value))
+                    {
                         addtoLog("Filter: Special Attack IV - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Special Attack IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPA == 31)
+                    {
                         perfectIVs++;
+                    }
+
                     // Test SpD
                     if (IVCheck((int)row.Cells[13].Value, dumpedPKHeX.IV_SPD, (int)row.Cells[14].Value))
+                    {
                         addtoLog("Filter: Special Defense IV - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Special Defense IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPD == 31)
+                    {
                         perfectIVs++;
+                    }
+
                     // Test Spe
                     if (IVCheck((int)row.Cells[15].Value, dumpedPKHeX.IV_SPE, (int)row.Cells[16].Value))
+                    {
                         addtoLog("Filter: Speed IV - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Speed IV - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (dumpedPKHeX.IV_SPE == 31)
+                    {
                         perfectIVs++;
+                    }
+
                     // Test Perfect IVs
                     if (IVCheck((int)row.Cells[17].Value, perfectIVs, (int)row.Cells[18].Value))
+                    {
                         addtoLog("Filter: Perfect IVs - PASS" + filterstr);
+                    }
                     else
                     {
                         addtoLog("Filter: Perfect IVs - FAIL" + filterstr);
                         failedtests++;
                     }
                     if (failedtests == 0)
+                    {
                         return true;
+                    }
                 }
                 return false;
             }
             else
+            {
                 return true;
+            }
         }
 
         public bool IVCheck(int refiv, int actualiv, int logic)
@@ -3463,51 +3723,83 @@ namespace ntrbase
                 case 0: // Greater or equal
                     filterstr = " (" + actualiv + " >= " + refiv + ")";
                     if (actualiv >= refiv)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 case 1: // Greater
                     filterstr = " (" + actualiv + " > " + refiv + ")";
                     if (actualiv > refiv)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 case 2: // Equal
                     filterstr = " (" + actualiv + " = " + refiv + ")";
                     if (actualiv == refiv)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 case 3: // Less
                     filterstr = " (" + actualiv + " < " + refiv + ")";
                     if (actualiv < refiv)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 case 4: // Less or equal
                     filterstr = " (" + actualiv + " <= " + refiv + ")";
                     if (actualiv <= refiv)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 case 5: // Different
                     filterstr = " (" + actualiv + " != " + refiv + ")";
                     if (actualiv != refiv)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 case 6: // Even
                     filterstr = " (" + actualiv + " -> Even)";
                     if (actualiv % 2 == 0)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 case 7: // Odd
                     filterstr = " (" + actualiv + " -> Odd)";
                     if (actualiv % 2 == 1)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 default:
                     return true;
             }
@@ -3521,7 +3813,9 @@ namespace ntrbase
         private void filterRemove_Click(object sender, EventArgs e)
         {
             if (filterList.SelectedRows.Count > 0 && filterList.Rows.Count > 0)
+            {
                 filterList.Rows.RemoveAt(filterList.SelectedRows[0].Index);
+            }
             else
                 MessageBox.Show("There is no filter selected.");
         }
@@ -3531,9 +3825,13 @@ namespace ntrbase
             if (filterList.SelectedRows.Count > 0)
             {
                 if ((int)filterList.SelectedRows[0].Cells[0].Value == 1)
+                {
                     SetChecked(filterShiny, true);
+                }
                 else
+                {
                     SetChecked(filterShiny, false);
+                }
                 SetSelectedIndex(filterNature, (int)filterList.SelectedRows[0].Cells[1].Value);
                 SetSelectedIndex(filterAbility, (int)filterList.SelectedRows[0].Cells[2].Value);
                 SetSelectedIndex(filterHPtype, (int)filterList.SelectedRows[0].Cells[3].Value);
@@ -3716,9 +4014,13 @@ namespace ntrbase
                 {
                     bool oras;
                     if (game == GameType.X || game == GameType.Y)
+                    {
                         oras = false;
+                    }
                     else
+                    {
                         oras = true;
+                    }
                     WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras);
                     Bot = WTBot6.RunBot();
                 }
@@ -3794,15 +4096,22 @@ namespace ntrbase
                 {
                     bool oras;
                     if (game == GameType.X || game == GameType.Y)
+                    {
                         oras = false;
+                    }
                     else
+                    {
                         oras = true;
+                    }
                     WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras);
                     Bot = WTBot6.RunBot();
                 }
                 int result = await Bot;
                 if (botStop)
+                {
+                    addtoLog("Bot: STOP Wonder Trade bot by user command");
                     result = 8;
+                }
                 switch (result)
                 {
                     case 0: // General finish message
@@ -3961,9 +4270,13 @@ namespace ntrbase
                 {
                     bool oras;
                     if (game == GameType.X || game == GameType.Y)
+                    {
                         oras = false;
+                    }
                     else
+                    {
                         oras = true;
+                    }
                     SRBot6 = new SoftResetbot6(typeLSR.SelectedIndex, resumeLSR.Checked, oras);
                     Bot = SRBot6.RunBot();
                 }
@@ -3975,9 +4288,13 @@ namespace ntrbase
                 }
                 int totalresets;
                 if (gen7)
+                {
                     totalresets = SRBot7.resetNo;
+                }
                 else
+                {
                     totalresets = SRBot6.resetNo;
+                }
                 switch (result)
                 {
                     case 0: // General finish message
@@ -4020,7 +4337,9 @@ namespace ntrbase
             {
                 await Task.Delay(100);
                 if (lastlog.Contains("finished"))
+                {
                     break;
+                }
             }
             if (readcount == timeout * 10)
             {
@@ -4031,7 +4350,9 @@ namespace ntrbase
             {
                 await Task.Delay(100);
                 if (dPID.Text.Length > 1)
+                {
                     break;
+                }
             }
             if (readcount == 10)
             {
@@ -4059,7 +4380,9 @@ namespace ntrbase
             {
                 await Task.Delay(500);
                 if (lastlog.Contains("end of process list"))
+                {
                     break;
+                }
             }
             if (waittimeout < timeout * 10)
             {
@@ -4090,7 +4413,9 @@ namespace ntrbase
         {
             string modemessage;
             if (gen7)
+            {
                 SetValue(slotBreed, 1);
+            }
             switch (modeBreed.SelectedIndex)
             {
                 case 0:
@@ -4132,9 +4457,13 @@ namespace ntrbase
                 {
                     bool oras;
                     if (game == GameType.X || game == GameType.Y)
+                    {
                         oras = false;
+                    }
                     else
+                    {
                         oras = true;
+                    }
                     BreedBot6 = new BreedingBot6(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, OrganizeTop.Checked, radioDayCare1.Checked, readESV.Checked, quickBreed.Checked, oras);
                     Bot = BreedBot6.RunBot();
                 }
@@ -4225,7 +4554,9 @@ namespace ntrbase
                     MessageBox.Show("ESV list saved");
                 }
                 else
+                {
                     MessageBox.Show("There are no eggs on the ESV list");
+                }
             }
             catch (Exception ex)
             {
@@ -4241,9 +4572,13 @@ namespace ntrbase
         private void TSVlistRemove_Click(object sender, EventArgs e)
         {
             if (TSVlist.SelectedIndices.Count > 0)
+            {
                 TSVlist.Items.RemoveAt(TSVlist.SelectedIndices[0]);
+            }
             else
+            {
                 MessageBox.Show("No TSV selected for remove");
+            }
         }
 
         private void TSVlistSave_Click(object sender, EventArgs e)
@@ -4256,9 +4591,13 @@ namespace ntrbase
                     (new FileInfo(folderPath)).Directory.Create();
                     string fileName;
                     if (gen7)
+                    {
                         fileName = "TSVlist.csv";
+                    }
                     else
+                    {
                         fileName = "TSVlist7.csv";
+                    }
                     var tsvlst = new StringBuilder();
                     foreach (var value in TSVlist.Items)
                     {
@@ -4268,7 +4607,9 @@ namespace ntrbase
                     MessageBox.Show("TSV list saved");
                 }
                 else
+                {
                     MessageBox.Show("There are no numbers on the TSV list");
+                }
             }
             catch (Exception ex)
             {
@@ -4284,9 +4625,13 @@ namespace ntrbase
                 (new FileInfo(folderPath)).Directory.Create();
                 string fileName;
                 if (gen7)
+                {
                     fileName = "TSVlist.csv";
+                }
                 else
+                {
                     fileName = "TSVlist7.csv";
+                }
                 if (File.Exists(folderPath + fileName))
                 {
                     string[] values = File.ReadAllLines(folderPath + fileName);
@@ -4308,12 +4653,16 @@ namespace ntrbase
                 foreach (var tsv in TSVlist.Items)
                 {
                     if (Convert.ToInt32(tsv) == esv)
+                    {
                         return true;
+                    }
                 }
                 return false;
             }
             else
+            {
                 return true;
+            }
         }
 
         private void breedingClear_Click(object sender, EventArgs e)

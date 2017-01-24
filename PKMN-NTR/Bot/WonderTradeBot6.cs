@@ -124,7 +124,9 @@ namespace ntrbase.Bot
                             Report("Bot: Test if the PSS menu is shown");
                             waitTaskbool = Program.helper.memoryinrange(psssmenu1Off, psssmenu1IN, 0x10000);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.readpoke;
+                            }
                             else
                             {
                                 botresult = 1;
@@ -146,7 +148,9 @@ namespace ntrbase.Bot
                                     Report("Bot: Slot is empty");
                                     getNextSlot();
                                     if (quantity > 0) // Test if there are more trades
+                                    {
                                         botstate = (int)botstates.readpoke;
+                                    }
                                     else
                                     { // Stop if no more trades
                                         botresult = 0;
@@ -167,7 +171,9 @@ namespace ntrbase.Bot
                             Report("Bot: Touch Wonder Trade button");
                             waitTaskbool = Program.helper.waittouch(240, 120);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.testsavescrn;
+                            }
                             else
                             {
                                 attempts++;
@@ -199,7 +205,9 @@ namespace ntrbase.Bot
                             await Task.Delay(delaytime);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.testwtscrn;
+                            }
                             else
                             {
                                 attempts++;
@@ -230,7 +238,9 @@ namespace ntrbase.Bot
                             await Task.Delay(delaytime);
                             waitTaskbool = Program.helper.waittouch(160, 100);
                             if (await waitTaskbool)
+                            {
                                 botstate = (int)botstates.testboxes;
+                            }
                             else
                             {
                                 attempts++;
@@ -264,7 +274,9 @@ namespace ntrbase.Bot
                                 boxchange = false;
                             }
                             else
+                            {
                                 botstate = (int)botstates.touchpoke;
+                            }
                             break;
 
                         case (int)botstates.touchboxview:
@@ -546,7 +558,9 @@ namespace ntrbase.Bot
                 currentslot = 0;
                 boxchange = true;
                 if (currentbox >= 31)
+                {
                     currentbox = 0;
+                }
             }
             quantity--;
             Program.gCmdWindow.updateWTslots(currentbox, currentslot, quantity);
