@@ -339,9 +339,9 @@ namespace ntrbase
                 { // Look for beta
                     IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("drgoku282", "PKMN-NTR");
                     Release latestbeta = releases.FirstOrDefault(rel => rel.Prerelease);
-                    addtoLog("GUI: Last preview: " + latestbeta.TagName);
                     if (latestbeta != null)
                     {
+                        addtoLog("GUI: Last preview: " + latestbeta.TagName);
                         int[] verbeta = Array.ConvertAll(latestbeta.TagName.Split('.'), int.Parse);
                         if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build || verbeta[3] > revision)
                         {
