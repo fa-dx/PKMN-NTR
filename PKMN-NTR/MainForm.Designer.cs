@@ -343,12 +343,12 @@
             this.modeBreed = new System.Windows.Forms.ComboBox();
             this.readESV = new System.Windows.Forms.CheckBox();
             this.label75 = new System.Windows.Forms.Label();
-            this.label76 = new System.Windows.Forms.Label();
+            this.Breed_labelBox = new System.Windows.Forms.Label();
             this.quickBreed = new System.Windows.Forms.CheckBox();
             this.slotBreed = new System.Windows.Forms.NumericUpDown();
             this.label84 = new System.Windows.Forms.Label();
             this.boxBreed = new System.Windows.Forms.NumericUpDown();
-            this.label77 = new System.Windows.Forms.Label();
+            this.Breed_labelSlot = new System.Windows.Forms.Label();
             this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
             this.breedingClear = new System.Windows.Forms.Button();
             this.filterBreeding = new System.Windows.Forms.DataGridView();
@@ -4350,12 +4350,12 @@
             this.Breed_options.Controls.Add(this.modeBreed);
             this.Breed_options.Controls.Add(this.readESV);
             this.Breed_options.Controls.Add(this.label75);
-            this.Breed_options.Controls.Add(this.label76);
+            this.Breed_options.Controls.Add(this.Breed_labelBox);
             this.Breed_options.Controls.Add(this.quickBreed);
             this.Breed_options.Controls.Add(this.slotBreed);
             this.Breed_options.Controls.Add(this.label84);
             this.Breed_options.Controls.Add(this.boxBreed);
-            this.Breed_options.Controls.Add(this.label77);
+            this.Breed_options.Controls.Add(this.Breed_labelSlot);
             this.Breed_options.Controls.Add(this.eggsNoBreed);
             this.Breed_options.Controls.Add(this.daycare_select);
             this.Breed_options.Controls.Add(this.orgbox_pos);
@@ -4371,14 +4371,11 @@
             this.modeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.modeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.modeBreed.FormattingEnabled = true;
-            this.modeBreed.Items.AddRange(new object[] {
-            "Simple",
-            "Filter",
-            "ESV/TSV"});
             this.modeBreed.Location = new System.Drawing.Point(49, 17);
             this.modeBreed.Name = "modeBreed";
             this.modeBreed.Size = new System.Drawing.Size(205, 21);
             this.modeBreed.TabIndex = 0;
+            this.modeBreed.SelectedIndexChanged += new System.EventHandler(this.modeBreed_SelectedIndexChanged);
             // 
             // readESV
             // 
@@ -4399,14 +4396,14 @@
             this.label75.TabIndex = 23;
             this.label75.Text = "# eggs:";
             // 
-            // label76
+            // Breed_labelBox
             // 
-            this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(6, 48);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(28, 13);
-            this.label76.TabIndex = 21;
-            this.label76.Text = "Box:";
+            this.Breed_labelBox.AutoSize = true;
+            this.Breed_labelBox.Location = new System.Drawing.Point(6, 48);
+            this.Breed_labelBox.Name = "Breed_labelBox";
+            this.Breed_labelBox.Size = new System.Drawing.Size(28, 13);
+            this.Breed_labelBox.TabIndex = 21;
+            this.Breed_labelBox.Text = "Box:";
             // 
             // quickBreed
             // 
@@ -4471,14 +4468,14 @@
             0,
             0});
             // 
-            // label77
+            // Breed_labelSlot
             // 
-            this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(78, 48);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(28, 13);
-            this.label77.TabIndex = 22;
-            this.label77.Text = "Slot:";
+            this.Breed_labelSlot.AutoSize = true;
+            this.Breed_labelSlot.Location = new System.Drawing.Point(78, 48);
+            this.Breed_labelSlot.Name = "Breed_labelSlot";
+            this.Breed_labelSlot.Size = new System.Drawing.Size(28, 13);
+            this.Breed_labelSlot.TabIndex = 22;
+            this.Breed_labelSlot.Text = "Slot:";
             // 
             // eggsNoBreed
             // 
@@ -5504,11 +5501,11 @@
         private System.Windows.Forms.Button runBreedingBot;
         private System.Windows.Forms.ComboBox modeBreed;
         private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label Breed_labelBox;
         private System.Windows.Forms.NumericUpDown slotBreed;
         private System.Windows.Forms.NumericUpDown eggsNoBreed;
         private System.Windows.Forms.NumericUpDown boxBreed;
-        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label Breed_labelSlot;
         private System.Windows.Forms.TabPage tabFilters;
         private System.Windows.Forms.ComboBox filterPerIVlogic;
         private System.Windows.Forms.ComboBox filterSPElogic;

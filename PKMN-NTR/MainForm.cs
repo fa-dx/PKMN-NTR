@@ -302,7 +302,7 @@ namespace ntrbase
 
             enableWhenConnected7 = new Control[] { dumpBox, DumpedEdit, Edit_Items, Edit_Trainer, cloneWriteTabs, PokeDiggerBtn, ReloadFields, Remote_buttons, Remote_touch, Remote_Stick, manualSR, Breed_options, Breed_esvtsv, runBreedingBot, breedingClear, bFilterLoad, SR_options, RunLSRbot, srClear, srFilterLoad, WT_options, RunWTbot, WT_RunEndless, totalFCNum, pokeTotalFC, WTcollectFC };
 
-            gen6onlyControls = new Control[] {radioBattleBox, orgbox_pos, daycare_select };
+            gen6onlyControls = new Control[] {radioBattleBox, slotBreed, orgbox_pos, daycare_select };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -825,6 +825,7 @@ namespace ntrbase
             ComboboxFill(relearnmove3, LookupTable.Moves6);
             ComboboxFill(relearnmove4, LookupTable.Moves6);
             ComboboxFill(typeLSR, LookupTable.SoftResetModes6);
+            ComboboxFill(modeBreed, LookupTable.BreedingModes6);
             SetVisible(itemsView7, false);
             SetVisible(itemsGridView, true);
             SetVisible(keysGridView, false);
@@ -863,6 +864,7 @@ namespace ntrbase
             ComboboxFill(relearnmove4, LookupTable.Moves7);
             ComboboxFill(typeLSR, LookupTable.SoftResetModes7);
             ComboboxFill(sr_Species, LookupTable.Species7);
+            ComboboxFill(modeBreed, LookupTable.BreedingModes7);
             SetVisible(itemsView7, true);
             SetVisible(itemsGridView, false);
             SetVisible(keysGridView, false);
@@ -3284,6 +3286,19 @@ namespace ntrbase
                 ctrl.Maximum = val;
         }
 
+        delegate void SetMinimumDelegate(NumericUpDown ctrl, decimal val);
+
+        public static void SetMinimum(NumericUpDown ctrl, decimal val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetMinimumDelegate del = new SetMinimumDelegate(SetMinimum);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+                ctrl.Minimum = val;
+        }
+
         delegate void SetSelectedIndexDelegate(ComboBox ctrl, int i);
 
         public static void SetSelectedIndex(ComboBox ctrl, int i)
@@ -4379,10 +4394,6 @@ namespace ntrbase
         private async void runBreedingBot_Click_1(object sender, EventArgs e)
         {
             string modemessage;
-            if (gen7)
-            {
-                SetValue(slotBreed, 1);
-            }
             switch (modeBreed.SelectedIndex)
             {
                 case 0:
@@ -4393,6 +4404,9 @@ namespace ntrbase
                     break;
                 case 2:
                     modemessage = "ESV/TSV: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check the egg's ESV and if it finds a match with the values in the TSV list, the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
+                    break;
+                case 3:
+                    modemessage = "Accept/Reject: This bot will talk to the Nursery Lady and accept " + boxBreed.Value + " eggs, then it will reject " + slotBreed.Value + " eggs and stop.\r\n\r\n";
                     break;
                 default:
                     modemessage = "No mode selected. Select one and try again.\r\n\r\n";
@@ -4417,7 +4431,7 @@ namespace ntrbase
                 Task<int> Bot;
                 if (gen7)
                 {
-                    BreedBot7 = new BreedingBot7(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)eggsNoBreed.Value, readESV.Checked);
+                    BreedBot7 = new BreedingBot7(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, readESV.Checked);
                     Bot = BreedBot7.RunBot();
                 }
                 else
@@ -4647,7 +4661,34 @@ namespace ntrbase
             filterBreeding.Rows.Clear();
         }
 
+        private void modeBreed_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (gen7 && modeBreed.SelectedIndex == 3)
+            {
+                SetText(Breed_labelBox, "Acc:");
+                SetText(Breed_labelSlot, "Rej:");
+                SetEnabled(slotBreed, true);
+                SetMaximum(boxBreed, 99);
+                SetMaximum(slotBreed, 99);
+                SetMinimum(boxBreed, 0);
+                SetMinimum(slotBreed, 0);
+                SetEnabled(eggsNoBreed, false);
+            }
+            else
+            {
+                SetText(Breed_labelBox, "Box:");
+                SetText(Breed_labelSlot, "Slot:");
+                SetEnabled(slotBreed, false);
+                SetMaximum(boxBreed, 30);
+                SetMaximum(slotBreed, BOXES);
+                SetMinimum(boxBreed, 1);
+                SetMinimum(slotBreed, 1);
+                SetEnabled(eggsNoBreed, true);
+            }
+        }
+
         #endregion Bots
+
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 

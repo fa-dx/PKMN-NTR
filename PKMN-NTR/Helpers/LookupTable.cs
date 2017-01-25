@@ -3815,6 +3815,10 @@ namespace ntrbase
 
         public static string[] SoftResetModes7 = { "Event", "Type:Null", "Tapus", "Solgaleo/Lunala", "Wild Pokemon", "Ultra Beast/Necrozma" };
 
+        public static string[] BreedingModes6 = { "Simple", "Filter", "ESV/TSV" };
+
+        public static string[] BreedingModes7 = { "Simple", "Filter", "ESV/TSV", "Accept/Reject" };
+
         #endregion Bots
     }
 

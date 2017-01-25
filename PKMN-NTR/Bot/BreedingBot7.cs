@@ -18,7 +18,9 @@ namespace ntrbase.Bot
         private int attempts;
         private int maxreconnect;
         private int currentesv;
+        private uint key;
         private long dataready;
+        private bool acceptegg;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
 
@@ -47,7 +49,7 @@ namespace ntrbase.Bot
         //private uint posYOff = 0x3319E2C4;
         //private uint posZOff = 0x330D6744;
 
-        public BreedingBot7(int selectedmode, int startbox, int amount, bool readesvafterdep)
+        public BreedingBot7(int selectedmode, int startbox, int startslot, int amount, bool readesvafterdep)
         {
             botresult = 0;
             botstop = false;
@@ -60,8 +62,16 @@ namespace ntrbase.Bot
             dataready = 0;
 
             mode = selectedmode;
-            currentbox = startbox - 1;
-            currentslot = 0;
+            if (mode != 3)
+            {
+                currentbox = startbox - 1;
+                currentslot = 0;
+            }
+            else
+            {
+                currentbox = startbox;
+                currentslot = startslot;
+            }
             quantity = amount;
             readesv = readesvafterdep;
         }
@@ -76,9 +86,13 @@ namespace ntrbase.Bot
                     {
                         case (int)breedbotstates.botstart:
                             Report("Bot: START Gen 7 Breding bot");
-                            if (mode >= 0)
+                            if (mode == 0 || mode == 1 || mode == 2)
                             {
                                 botState = (int)breedbotstates.selectbox;
+                            }
+                            else if (mode == 3)
+                            {
+                                botState = (int)breedbotstates.eggseed;
                             }
                             else
                             {
@@ -131,7 +145,23 @@ namespace ntrbase.Bot
                             {
                                 Report("Bot: Current seed - " + Program.gCmdWindow.updateSeed(Program.helper.lastmultiread));
                                 attempts = 0;
-                                botState = (int)breedbotstates.quickegg;
+                                if (mode != 3)
+                                {
+                                    botState = (int)breedbotstates.quickegg;
+                                }
+                                else
+                                {
+                                    Program.gCmdWindow.updateBreedingslots(currentbox - 1, currentslot - 1, quantity);
+                                    if (currentbox == 0 && currentslot == 0)
+                                    {
+                                        botresult = 0;
+                                        botState = (int)breedbotstates.botexit;
+                                    }
+                                    else
+                                    {
+                                        botState = (int)breedbotstates.quickegg;
+                                    }
+                                }
                             }
                             else
                             {
@@ -190,10 +220,21 @@ namespace ntrbase.Bot
 
                         case (int)breedbotstates.continuedialog:
                             Report("Bot: Continue dialog");
-                            int i;
-                            for (i = 0; i < 6; i++)
+                            int maxi;
+                            if (mode == 3 && currentbox == 0)
                             {
-                                waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                                key = LookupTable.keyB;
+                                maxi = 9;
+                            }
+                            else
+                            {
+                                key = LookupTable.keyA;
+                                maxi = 6;
+                            }
+                            int i;
+                            for (i = 0; i < maxi ; i++)
+                            {
+                                waitTaskbool = Program.helper.waitbutton(key);
                                 if (!(await waitTaskbool))
                                 {
                                     break;
@@ -203,6 +244,10 @@ namespace ntrbase.Bot
                             {
                                 botState = (int)breedbotstates.checknoegg;
                             }
+                            if (i == 9)
+                            {
+                                botState = (int)breedbotstates.testdialog2;
+                            }
                             else
                             {
                                 botState = (int)breedbotstates.fixdialog;
@@ -210,7 +255,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)breedbotstates.fixdialog:
-                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            waitTaskbool = Program.helper.waitbutton(key);
                             if (await waitTaskbool)
                             {
                                 botState = (int)breedbotstates.checknoegg;
@@ -271,7 +316,22 @@ namespace ntrbase.Bot
                             {
                                 attempts = 0;
                                 Report("Bot: Dialog finished");
-                                botState = (int)breedbotstates.filter;
+                                if (mode != 3)
+                                {
+                                    botState = (int)breedbotstates.filter;
+                                }
+                                else
+                                {
+                                    if (currentbox > 0)
+                                    {
+                                        currentbox--;
+                                    }
+                                    else
+                                    {
+                                        currentslot--;
+                                    }
+                                    botState = (int)breedbotstates.eggseed;
+                                }
                             }
                             else
                             {
