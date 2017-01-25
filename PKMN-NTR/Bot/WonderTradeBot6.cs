@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -6,7 +8,7 @@ namespace ntrbase.Bot
 {
     class WonderTradeBot6
     {
-        private enum botstates { botstart, testpssmenu, readpoke, pressWTbutton, testsavescrn, confirmsave, testwtscrn, confirmwt, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, selectrade, confirmsend, testboxesout, waitfortrade, testbackpssmenu, notradepartner, endbot };
+        private enum botstates { botstart, backup, testpssmenu, readpoke, readfolder, writefromfolder, pressWTbutton, testsavescrn, confirmsave, testwtscrn, confirmwt, testboxes, gotoboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testboxviewout, touchpoke, selectrade, confirmsend, testboxesout, waitfortrade, testbackpssmenu, notradepartner, dumpafter, actionafter, restorebackup, delete1, delete2, endbot };
 
         // Bot variables
         public int botresult;
@@ -17,20 +19,33 @@ namespace ntrbase.Bot
         private int attempts;
         private int tradewait;
         private int maxreconnect;
+        private int currentfile;
         private bool boxchange;
         private bool taskresultbool;
         private uint currentPID;
-        Task<bool> waitTaskbool;
-        Task<long> waitTaskint;
+        private string backuppath;
+        private string[] pkfiles;
+        private Random rng;
+        private Task<bool> waitTaskbool;
+        private Task<long> waitTaskint;
+        private List<byte[]> pklist;
 
         // Input variables
         private int currentbox;
         private int currentslot;
         private int quantity;
+        private int startbox;
+        private int startslot;
+        private int starttrades;
+        private int source;
+        private int afteraction;
+        private bool endless;
+        private bool afterdump;
 
         // Class constants
         private readonly int commandtime = 250;
         private readonly int delaytime = 250;
+        private string wtfolderpath = @Application.StartupPath + "\\Wonder Trade\\";
 
         // Data offsets
         private uint psssmenu1Off;
@@ -49,8 +64,9 @@ namespace ntrbase.Bot
         public uint wtboxviewIN;
         public uint wtboxviewOUT;
         public uint wtboxviewRange;
+        private uint pcpkmOff;
 
-        public WonderTradeBot6(int StartBox, int StartSlot, int Amount, bool oras)
+        public WonderTradeBot6(int StartBox, int StartSlot, int Amount, bool oras, int Sourcepkm, bool endlessrun, int inputafteraction, bool inputdumpafter)
         {
             botresult = 0;
             botstop = false;
@@ -62,10 +78,20 @@ namespace ntrbase.Bot
             boxchange = true;
             taskresultbool = false;
             currentPID = 0;
+            currentfile = 0;
 
             currentbox = StartBox - 1;
             currentslot = StartSlot - 1;
             quantity = Amount;
+            startbox = StartBox - 1;
+            startslot = StartSlot - 1;
+            starttrades = Amount;
+            source = Sourcepkm;
+            endless = endlessrun;
+            afteraction = inputafteraction;
+            afterdump = inputdumpafter;
+            pklist = new List<byte[]> { };
+            rng = new Random();
 
             if (!oras)
             { // XY
@@ -85,6 +111,7 @@ namespace ntrbase.Bot
                 wtboxviewIN = 0x00000000;
                 wtboxviewOUT = 0x20000000;
                 wtboxviewRange = 0x1000000;
+                pcpkmOff = 0x8C861C8;
             }
             else
             { // ORAS
@@ -104,6 +131,7 @@ namespace ntrbase.Bot
                 wtboxviewIN = 0xC000;
                 wtboxviewOUT = 0x4000;
                 wtboxviewRange = 0x1000;
+                pcpkmOff = 0x8C9E134;
             }
         }
 
@@ -117,7 +145,26 @@ namespace ntrbase.Bot
                     {
                         case (int)botstates.botstart:
                             Report("Bot: START Gen 6 Wonder Trade bot");
-                            botstate = (int)botstates.testpssmenu;
+                            botstate = (int)botstates.backup;
+                            break;
+
+                        case (int)botstates.backup:
+                            Report("Bot: Backup boxes");
+                            waitTaskbool = Program.helper.waitNTRmultiread(pcpkmOff, 232 * 30 * 31);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                string fileName = "WTBefore-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".ek6";
+                                backuppath = wtfolderpath + fileName;
+                                Program.gCmdWindow.writePokemonToFile(Program.helper.lastmultiread, backuppath);
+                                botstate = (int)botstates.testpssmenu;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 2;
+                                botstate = (int)botstates.backup;
+                            }
                             break;
 
                         case (int)botstates.testpssmenu:
@@ -125,7 +172,14 @@ namespace ntrbase.Bot
                             waitTaskbool = Program.helper.memoryinrange(psssmenu1Off, psssmenu1IN, 0x10000);
                             if (await waitTaskbool)
                             {
-                                botstate = (int)botstates.readpoke;
+                                if (source == 1)
+                                {
+                                    botstate = (int)botstates.readpoke;
+                                }
+                                else
+                                {
+                                    botstate = (int)botstates.readfolder;
+                                }
                             }
                             else
                             {
@@ -151,10 +205,17 @@ namespace ntrbase.Bot
                                     {
                                         botstate = (int)botstates.readpoke;
                                     }
+                                    else if (endless)
+                                    {
+                                        currentbox = startbox;
+                                        currentslot = startslot;
+                                        quantity = starttrades;
+                                        Program.gCmdWindow.updateWTslots(currentbox, currentslot, quantity);
+                                        botstate = (int)botstates.readpoke;
+                                    }
                                     else
                                     { // Stop if no more trades
-                                        botresult = 0;
-                                        botstate = (int)botstates.endbot;
+                                        botstate = (int)botstates.dumpafter;
                                     }
                                     break;
                                 default:
@@ -164,6 +225,77 @@ namespace ntrbase.Bot
                                         botstate = (int)botstates.pressWTbutton;
                                     }
                                     break;
+                            }
+                            break;
+
+                        case (int)botstates.readfolder:
+                            Report("Bot: Reading Wonder Trade folder");
+                            pkfiles = Directory.GetFiles(wtfolderpath, "*.pk6");
+                            if (pkfiles.Length > 0)
+                            {
+                                PKHeX validator = new PKHeX();
+                                foreach (string pkf in pkfiles)
+                                {
+                                    byte[] temp = File.ReadAllBytes(pkf);
+                                    if (temp.Length == 232)
+                                    {
+                                        validator.Data = temp;
+                                        if (validator.Species > 0 && validator.Species <= 721)
+                                        { // Valid looking file
+                                            pklist.Add(temp);
+                                        }
+                                        else
+                                        { // Not valid file
+                                            Report("Bot: File " + pkf + " is not a valid pk6 file");
+                                        }
+                                    }
+                                    else
+                                    { // Not valid file
+                                        Report("Bot: File " + pkf + " is not a valid pk6 file");
+                                    }
+                                }
+                            }
+                            if (pklist.Count > 0)
+                            {
+                                botstate = (int)botstates.writefromfolder;
+                            }
+                            else
+                            {
+                                Report("Bot: No files detected");
+                                botresult = 0;
+                                botstate = (int)botstates.endbot;
+                            }
+                            break;
+
+                        case (int)botstates.writefromfolder:
+                            Report("Bot: Write pkm file from list");
+                            if (source == 3)
+                            { // Select a random file
+                                currentfile = rng.Next() % pklist.Count;
+                            }
+                            waitTaskbool = Program.helper.waitNTRwrite(pcpkmOff + (uint)(30 * 232 * currentbox) + (uint)(232 * currentslot), PKHeX.encryptArray(pklist[currentfile]), Program.gCmdWindow.pid);
+                            if (await waitTaskbool)
+                            {
+                                Program.gCmdWindow.updateDumpBoxes(currentbox, currentslot);
+                                Program.gCmdWindow.dumpedPKHeX.Data = pklist[currentfile];
+                                Program.gCmdWindow.updateTabs();
+                                currentPID = Program.gCmdWindow.dumpedPKHeX.PID;
+                                if (source == 2)
+                                {
+                                    currentfile++;
+                                    if (currentfile > pklist.Count - 1)
+                                    {
+                                        currentfile = 0;
+                                    }
+                                }
+                                attempts = 0;
+                                botstate = (int)botstates.pressWTbutton;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 1;
+                                botstate = (int)botstates.writefromfolder;
                             }
                             break;
 
@@ -349,7 +481,7 @@ namespace ntrbase.Bot
                             if (taskresultbool)
                             {
                                 attempts = 0;
-                                botstate = (int)botstates.endbot;
+                                botstate = (int)botstates.touchpoke;
                             }
                             else
                             {
@@ -459,11 +591,36 @@ namespace ntrbase.Bot
                                 attempts = 0;
                                 getNextSlot();
                                 if (quantity > 0) // Test if there are more trades
-                                    botstate = (int)botstates.readpoke;
+                                {
+                                    if (source == 1)
+                                    {
+                                        botstate = (int)botstates.readpoke;
+                                    }
+                                    else
+                                    {
+                                        botstate = (int)botstates.writefromfolder;
+                                    }
+                                    attempts = 0;
+                                }
+                                else if (endless)
+                                {
+                                    currentbox = startbox;
+                                    currentslot = startslot;
+                                    quantity = starttrades;
+                                    Program.gCmdWindow.updateWTslots(currentbox, currentslot, quantity);
+                                    if (source == 1)
+                                    {
+                                        botstate = (int)botstates.readpoke;
+                                    }
+                                    else
+                                    {
+                                        botstate = (int)botstates.writefromfolder;
+                                    }
+                                    attempts = 0;
+                                }
                                 else
                                 { // Stop if no more trades
-                                    botresult = 0;
-                                    botstate = (int)botstates.endbot;
+                                    botstate = (int)botstates.dumpafter;
                                 }
                             }
                             else
@@ -491,6 +648,127 @@ namespace ntrbase.Bot
                                 Program.helper.quickbuton(LookupTable.keyA, commandtime);
                                 await Task.Delay(commandtime + delaytime);
                                 botstate = (int)botstates.notradepartner;
+                            }
+                            break;
+
+                        case (int)botstates.dumpafter:
+                            if (afterdump)
+                            {
+                                Report("Bot: Dump boxes");
+                                waitTaskbool = Program.helper.waitNTRmultiread(pcpkmOff, 232 * 30 * 31);
+                                if (await waitTaskbool)
+                                {
+                                    attempts = 0;
+                                    string fileName = "WTAfter-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".ek6";
+                                    Program.gCmdWindow.writePokemonToFile(Program.helper.lastmultiread, wtfolderpath + fileName);
+                                    botstate = (int)botstates.actionafter;
+                                }
+                                else
+                                {
+                                    attempts++;
+                                    botresult = 2;
+                                    botstate = (int)botstates.dumpafter;
+                                }
+                            }
+                            else
+                            {
+                                botstate = (int)botstates.actionafter;
+                            }
+                            break;
+
+                        case (int)botstates.actionafter:
+                            switch (afteraction)
+                            {
+                                case 2:
+                                    botstate = (int)botstates.restorebackup;
+                                    break;
+                                case 3:
+                                    botstate = (int)botstates.delete1;
+                                    break;
+                                default:
+                                    botresult = 0;
+                                    botstate = (int)botstates.endbot;
+                                    break;
+                            }
+                            break;
+
+                        case (int)botstates.restorebackup:
+                            Report("Bot: Restore boxes backup");
+                            byte[] restore = File.ReadAllBytes(backuppath);
+                            if (restore.Length == 232 * 30 * 31)
+                            {
+                                waitTaskbool = Program.helper.waitNTRwrite(pcpkmOff, restore, Program.gCmdWindow.pid);
+                                if (await waitTaskbool)
+                                {
+                                    attempts = 0;
+                                    botresult = 0;
+                                    botstate = (int)botstates.endbot;
+                                }
+                            }
+                            else
+                            {
+                                Report("Bot: Invalid boxes file");
+                                botresult = -1;
+                                botstate = (int)botstates.endbot;
+                            }
+                            break;
+
+                        case (int)botstates.delete1:
+                            Report("Bot: Delete traded pokémon");
+                            int todelete = 0;
+                            if (startbox * 30 + startslot + starttrades > 930)
+                            { // Check if it overflows position
+                                quantity = startbox * 30 + startslot + starttrades - 930;
+                                todelete = starttrades - quantity;
+                            }
+                            else
+                            {
+                                todelete = starttrades;
+                                quantity = 0;
+                            }
+                            byte[] deletearray = new byte[232 * todelete];
+                            for (int i = 0; i < todelete; i++)
+                            {
+                                LookupTable.EmptyPoke6.CopyTo(deletearray, i * 232);
+                            }
+                            waitTaskbool = Program.helper.waitNTRwrite(pcpkmOff + (uint)(30 * 232 * startbox) + (uint)(232 * startslot), deletearray, Program.gCmdWindow.pid);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botstate = (int)botstates.delete2;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botstate = (int)botstates.delete1;
+                            }
+                            break;
+
+                        case (int)botstates.delete2:
+                            if (quantity > 0)
+                            {
+                                byte[] remainarray = new byte[232 * quantity];
+                                for (int i = 0; i < quantity; i++)
+                                {
+                                    LookupTable.EmptyPoke6.CopyTo(remainarray, i * 232);
+                                }
+                                waitTaskbool = Program.helper.waitNTRwrite(pcpkmOff, remainarray, Program.gCmdWindow.pid);
+                                if (await waitTaskbool)
+                                {
+                                    attempts = 0;
+                                    botresult = 0;
+                                    botstate = (int)botstates.endbot;
+                                }
+                                else
+                                {
+                                    attempts++;
+                                    botstate = (int)botstates.delete2;
+                                }
+                            }
+                            else
+                            {
+                                botresult = 0;
+                                botstate = (int)botstates.endbot;
                             }
                             break;
 

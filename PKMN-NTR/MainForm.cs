@@ -4076,7 +4076,7 @@ namespace ntrbase
                     {
                         oras = true;
                     }
-                    WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras);
+                    WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras, wtmode, WT_RunEndless.Checked, wtafter, WTafter_Dump.Checked);
                     Bot = WTBot6.RunBot();
                 }
                 int result = await Bot;

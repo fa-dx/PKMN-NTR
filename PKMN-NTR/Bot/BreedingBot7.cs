@@ -20,7 +20,6 @@ namespace ntrbase.Bot
         private int currentesv;
         private uint key;
         private long dataready;
-        private bool acceptegg;
         Task<bool> waitTaskbool;
         Task<long> waitTaskint;
 
