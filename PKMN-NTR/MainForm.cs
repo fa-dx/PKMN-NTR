@@ -298,11 +298,11 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            enableWhenConnected = new Control[] { dumpBox, DumpedEdit, Edit_Items, Edit_Trainer, cloneWriteTabs, PokeDiggerBtn, ReloadFields, Remote_buttons, Remote_touch, Remote_Stick, manualSR, Breed_options, Breed_esvtsv, runBreedingBot, breedingClear, bFilterLoad, SR_options, RunLSRbot, srClear, srFilterLoad, WT_options, RunWTbot, WT_RunEndless };
+            enableWhenConnected = new Control[] { dumpBox, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView };
 
-            enableWhenConnected7 = new Control[] { dumpBox, DumpedEdit, Edit_Items, Edit_Trainer, cloneWriteTabs, PokeDiggerBtn, ReloadFields, Remote_buttons, Remote_touch, Remote_Stick, manualSR, Breed_options, Breed_esvtsv, runBreedingBot, breedingClear, bFilterLoad, SR_options, RunLSRbot, srClear, srFilterLoad, WT_options, RunWTbot, WT_RunEndless, totalFCNum, pokeTotalFC, WTcollectFC };
+            enableWhenConnected7 = new Control[] { dumpBox, totalFCNum, pokeTotalFC, WTcollectFC };
 
-            gen6onlyControls = new Control[] {radioBattleBox, slotBreed, orgbox_pos, daycare_select };
+            gen6onlyControls = new Control[] { radioBattleBox, orgbox_pos, daycare_select };
 
             disableControls();
             SetSelectedIndex(filterHPlogic, 0);
@@ -399,10 +399,6 @@ namespace ntrbase
                 {
                     SetEnabled(c, true);
                 }
-                foreach (Control c in gen6onlyControls)
-                {
-                    SetEnabled(c, false);
-                }
             }
             else
             {
@@ -410,6 +406,18 @@ namespace ntrbase
                 {
                     SetEnabled(c, true);
                 }
+            }
+            foreach (Control c in gen6onlyControls)
+            {
+                SetEnabled(c, false);
+            }
+            foreach (TabPage tab in DumpedEdit.TabPages)
+            {
+                SetEnabled(tab, true);
+            }
+            foreach (TabPage tab in miscTabs.TabPages)
+            {
+                SetEnabled(tab, true);
             }
             HyperTrainBoxes();
         }
@@ -428,6 +436,17 @@ namespace ntrbase
                 foreach (Control c in enableWhenConnected)
                 {
                     SetEnabled(c, false);
+                }
+            }
+            foreach (TabPage tab in DumpedEdit.TabPages)
+            {
+                SetEnabled(tab, false);
+            }
+            foreach (TabPage tab in miscTabs.TabPages)
+            {
+                if (!(tab.Name == "tabFilters" || tab.Name == "tabNTRlog"))
+                {
+                    SetEnabled(tab, false);
                 }
             }
         }

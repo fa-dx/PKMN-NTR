@@ -1826,7 +1826,6 @@
             // 
             // deleteAmount
             // 
-            this.deleteAmount.Enabled = false;
             this.deleteAmount.Location = new System.Drawing.Point(242, 5);
             this.deleteAmount.Maximum = new decimal(new int[] {
             930,
@@ -1867,7 +1866,6 @@
             // 
             // delPkm
             // 
-            this.delPkm.Enabled = false;
             this.delPkm.ForeColor = System.Drawing.Color.Red;
             this.delPkm.Location = new System.Drawing.Point(228, 66);
             this.delPkm.Name = "delPkm";
@@ -1879,7 +1877,6 @@
             // 
             // deleteBox
             // 
-            this.deleteBox.Enabled = false;
             this.deleteBox.Location = new System.Drawing.Point(37, 5);
             this.deleteBox.Maximum = new decimal(new int[] {
             31,
@@ -1903,7 +1900,6 @@
             // 
             // deleteSlot
             // 
-            this.deleteSlot.Enabled = false;
             this.deleteSlot.Location = new System.Drawing.Point(124, 5);
             this.deleteSlot.Maximum = new decimal(new int[] {
             30,
@@ -3185,6 +3181,7 @@
             this.miscTabs.Size = new System.Drawing.Size(566, 404);
             this.miscTabs.TabIndex = 3;
             this.miscTabs.TabStop = false;
+            this.miscTabs.Tag = "";
             // 
             // tabEditTrainer
             // 
@@ -3538,6 +3535,7 @@
             this.tabFilters.Name = "tabFilters";
             this.tabFilters.Size = new System.Drawing.Size(558, 378);
             this.tabFilters.TabIndex = 6;
+            this.tabFilters.Tag = "";
             this.tabFilters.Text = "Filters";
             // 
             // filterReset
@@ -5093,6 +5091,7 @@
             this.tabNTRlog.Name = "tabNTRlog";
             this.tabNTRlog.Size = new System.Drawing.Size(558, 378);
             this.tabNTRlog.TabIndex = 5;
+            this.tabNTRlog.Tag = "1";
             this.tabNTRlog.Text = "NTR Log";
             // 
             // pictureBox2
