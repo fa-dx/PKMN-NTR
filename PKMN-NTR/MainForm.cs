@@ -399,6 +399,10 @@ namespace ntrbase
                 {
                     SetEnabled(c, true);
                 }
+                foreach (Control c in gen6onlyControls)
+                {
+                    SetEnabled(c, false);
+                }
             }
             else
             {
@@ -406,10 +410,6 @@ namespace ntrbase
                 {
                     SetEnabled(c, true);
                 }
-            }
-            foreach (Control c in gen6onlyControls)
-            {
-                SetEnabled(c, false);
             }
             foreach (TabPage tab in DumpedEdit.TabPages)
             {
