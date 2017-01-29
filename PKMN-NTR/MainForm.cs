@@ -2992,22 +2992,23 @@ namespace ntrbase
             nickBox.CheckedChanged -= nickBox_CheckedChanged;
             pkLang.SelectedIndexChanged -= pkLang_SelectedIndexChanged;
 
+            // Main tab
             SetSelectedIndex(species, dumpedPKHeX.Species - 1);
-            setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
             SetText(nickname, dumpedPKHeX.Nickname);
             SetChecked(nickBox, dumpedPKHeX.IsNicknamed);
             SetSelectedIndex(nature, dumpedPKHeX.Nature);
             updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
             SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
             SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
-
             SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
-            setShinyMark();
             SetSelectedIndex(genderBox, dumpedPKHeX.Gender);
             SetChecked(isEgg, dumpedPKHeX.IsEgg);
             SetMaximum(ExpPoints, LookupTable.getExp(dumpedPKHeX.Species, 100));
             SetValue(ExpPoints, dumpedPKHeX.EXP);
             SetValue(friendship, dumpedPKHeX.CurrentFriendship);
+
+            setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
+            setShinyMark();
             if (dumpedPKHeX.CurrentHandler == 0)
             {
                 SetColor(friendship, Color.Cornsilk, true);
@@ -3017,6 +3018,7 @@ namespace ntrbase
                 SetColor(friendship, Color.White, true);
             }
 
+            // Stats tab
             SetValue(ivHPNum, dumpedPKHeX.IV_HP);
             SetValue(ivATKNum, dumpedPKHeX.IV_ATK);
             SetValue(ivDEFNum, dumpedPKHeX.IV_DEF);
@@ -3039,6 +3041,7 @@ namespace ntrbase
                 SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
             }
 
+            // Moves tab
             SetSelectedIndex(move1, dumpedPKHeX.Move1);
             SetSelectedIndex(move2, dumpedPKHeX.Move2);
             SetSelectedIndex(move3, dumpedPKHeX.Move3);
@@ -3048,10 +3051,10 @@ namespace ntrbase
             SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
             SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
 
+            // Misc tab
             SetText(otName, dumpedPKHeX.OT_Name);
             SetValue(dTIDNum, dumpedPKHeX.TID);
             SetValue(dSIDNum, dumpedPKHeX.SID);
-
             int i;
             switch (dumpedPKHeX.Language)
             {
@@ -3083,6 +3086,16 @@ namespace ntrbase
             nickBox.CheckedChanged -= nickBox_CheckedChanged;
             pkLang.SelectedIndexChanged -= pkLang_SelectedIndexChanged;
 
+            if (gen7)
+            {
+                dumpedPKHeX.Data = LookupTable.EmptyPoke7;
+            }
+            else
+            {
+                dumpedPKHeX.Data = LookupTable.EmptyPoke6;
+            }
+
+            // Main Tab
             SetSelectedIndex(species, -1);
             setSprite(-1, -1, false);
             SetText(nickname, null);
@@ -3092,7 +3105,6 @@ namespace ntrbase
             SetSelectedIndex(ability, -1);
             SetSelectedIndex(heldItem, -1);
             SetSelectedIndex(ball, -1);
-
             SetText(dPID, "");
             SetSelectedIndex(genderBox, -1);
             SetChecked(isEgg, false);
@@ -3101,6 +3113,7 @@ namespace ntrbase
             SetValue(friendship, 0);
             SetColor(friendship, Color.White, true);
 
+            // Stats tab
             SetValue(ivHPNum, 0);
             SetValue(ivATKNum, 0);
             SetValue(ivDEFNum, 0);
@@ -3113,13 +3126,8 @@ namespace ntrbase
             SetValue(evSPANum, 0);
             SetValue(evSPDNum, 0);
             SetValue(evSPENum, 0);
-            SetChecked(HypT_HP, false);
-            SetChecked(HypT_Atk, false);
-            SetChecked(HypT_Def, false);
-            SetChecked(HypT_SpA, false);
-            SetChecked(HypT_SpD, false);
-            SetChecked(HypT_Spe, false);
 
+            // Moves tab
             SetSelectedIndex(move1, -1);
             SetSelectedIndex(move2, -1);
             SetSelectedIndex(move3, -1);
@@ -3129,10 +3137,10 @@ namespace ntrbase
             SetSelectedIndex(relearnmove3, -1);
             SetSelectedIndex(relearnmove4, -1);
 
+            // Misc tab
             SetText(otName, "");
             SetValue(dTIDNum, 0);
             SetValue(dSIDNum, 0);
-
             SetSelectedIndex(pkLang, -1);
 
             species.SelectedIndexChanged += species_SelectedIndexChanged;
