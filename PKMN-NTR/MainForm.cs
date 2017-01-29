@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Data;
 using ntrbase.Helpers;
 using Octokit;
+using System.Diagnostics;
 
 namespace ntrbase
 {
@@ -285,8 +286,8 @@ namespace ntrbase
             countItem7.DisplayIndex = 1;
 
             checkUpdate();
-
             host.Text = Settings.Default.IP;
+            callIP();
             host.Focus();
         }
 
@@ -499,6 +500,15 @@ namespace ntrbase
             disconnectTimer.Enabled = false;
             Program.ntrClient.disconnect();
             game = GameType.None;
+        }
+
+        [Conditional("DEBUG")]
+        private void callIP()
+        {
+            addtoLog("THIS IS A DEBUG VERSION - ONLY FOR TESTING");
+            StreamReader sr = new StreamReader("D:\\IP.txt");
+            host.Text = sr.ReadLine();
+            sr.Close();
         }
 
         #endregion window
