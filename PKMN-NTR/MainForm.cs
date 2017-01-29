@@ -172,7 +172,7 @@ namespace ntrbase
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            label69.Text = "Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            label69.Text = "NTR Version: " + System.Windows.Forms.Application.ProductVersion;
 
             DataGridViewComboBoxColumn itemItem = new DataGridViewComboBoxColumn
             {
@@ -323,7 +323,6 @@ namespace ntrbase
                 int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
                 int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
                 int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
-                int revision = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
                 addtoLog("GUI: Current version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
 
                 // Get latest stable
@@ -352,7 +351,7 @@ namespace ntrbase
                     {
                         addtoLog("GUI: Last preview: " + latestbeta.TagName);
                         int[] verbeta = Array.ConvertAll(latestbeta.TagName.Split('.'), int.Parse);
-                        if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build || verbeta[3] > revision)
+                        if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build)
                         {
                             addtoLog("GUI: New preview version found");
                             SetText(updateLabel, "Preview version " + latestbeta.TagName + " is available.");
