@@ -342,8 +342,8 @@
             this.Breed_options = new System.Windows.Forms.GroupBox();
             this.modeBreed = new System.Windows.Forms.ComboBox();
             this.readESV = new System.Windows.Forms.CheckBox();
-            this.label75 = new System.Windows.Forms.Label();
             this.Breed_labelBox = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
             this.quickBreed = new System.Windows.Forms.CheckBox();
             this.slotBreed = new System.Windows.Forms.NumericUpDown();
             this.label84 = new System.Windows.Forms.Label();
@@ -4385,15 +4385,6 @@
             this.readESV.Text = "Read ESV after deposit";
             this.readESV.UseVisualStyleBackColor = true;
             // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(165, 48);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(43, 13);
-            this.label75.TabIndex = 23;
-            this.label75.Text = "# eggs:";
-            // 
             // Breed_labelBox
             // 
             this.Breed_labelBox.AutoSize = true;
@@ -4402,6 +4393,15 @@
             this.Breed_labelBox.Size = new System.Drawing.Size(28, 13);
             this.Breed_labelBox.TabIndex = 21;
             this.Breed_labelBox.Text = "Box:";
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(165, 48);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(43, 13);
+            this.label75.TabIndex = 23;
+            this.label75.Text = "# eggs:";
             // 
             // quickBreed
             // 
@@ -5129,7 +5129,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "PKMN NTR with Bots";
+            this.Text = "PKMN-NTR";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
