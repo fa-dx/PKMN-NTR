@@ -11,7 +11,7 @@ namespace ntrbase
 {
     public class PKHeX
     {
-        public bool Gen7 => Version >= 30 && Version <= 31;
+        public bool Gen7 => Version >= 30 && Version <= 33;
         public bool Gen6 => Version >= 24 && Version <= 29;
         public bool Gen5 => Version >= 20 && Version <= 23;
         public bool Gen4 => Version >= 7 && Version <= 12 && Version != 9;
@@ -125,15 +125,6 @@ namespace ntrbase
 
             // Done
             return ekx;
-        }
-
-        public static ushort getCHK(byte[] data)
-        {
-            ushort chk = 0;
-            for (int i = 8; i < 232; i += 2) // Loop through the entire PKX
-                chk += BitConverter.ToUInt16(data, i);
-
-            return chk;
         }
 
         public static readonly int[,] hpivs =
@@ -545,6 +536,84 @@ namespace ntrbase
         ///End PKHeX PKM Layout///
         //////////////////////////
 
+        // Fix methods
+
+        private ushort CalculateChecksum()
+        {
+            ushort chk = 0;
+            for (int i = 8; i < 232; i += 2)
+                chk += BitConverter.ToUInt16(Data, i);
+            return chk;
+        }
+
+        public void RefreshChecksum() {
+            Checksum = CalculateChecksum();
+        }
+
+        public void FixMoves()
+        {
+            ReorderMoves();
+
+            if (Move1 == 0) { Move1_PP = 0; Move1_PPUps = 0; }
+            if (Move2 == 0) { Move2_PP = 0; Move2_PPUps = 0; }
+            if (Move3 == 0) { Move3_PP = 0; Move3_PPUps = 0; }
+            if (Move4 == 0) { Move4_PP = 0; Move4_PPUps = 0; }
+        }
+
+        private void ReorderMoves()
+        {
+            if (Move4 != 0 && Move3 == 0)
+            {
+                Move3 = Move4;
+                Move3_PP = Move4_PP;
+                Move3_PPUps = Move4_PPUps;
+                Move4 = 0;
+            }
+            if (Move3 != 0 && Move2 == 0)
+            {
+                Move2 = Move3;
+                Move2_PP = Move3_PP;
+                Move2_PPUps = Move3_PPUps;
+                Move3 = 0;
+                ReorderMoves();
+            }
+            if (Move2 != 0 && Move1 == 0)
+            {
+                Move1 = Move2;
+                Move1_PP = Move2_PP;
+                Move1_PPUps = Move2_PPUps;
+                Move2 = 0;
+                ReorderMoves();
+            }
+        }
+
+        public void FixRelearn()
+        {
+            while (true)
+            {
+                if (RelearnMove4 != 0 && RelearnMove3 == 0)
+                {
+                    RelearnMove3 = RelearnMove4;
+                    RelearnMove4 = 0;
+                }
+                if (RelearnMove3 != 0 && RelearnMove2 == 0)
+                {
+                    RelearnMove2 = RelearnMove3;
+                    RelearnMove3 = 0;
+                    continue;
+                }
+                if (RelearnMove2 != 0 && RelearnMove1 == 0)
+                {
+                    RelearnMove1 = RelearnMove2;
+                    RelearnMove2 = 0;
+                    continue;
+                }
+                break;
+            }
+        }
+
+        // Other methods
+
         internal static readonly Random rand = new Random();
         internal static uint rnd32()
         {
@@ -599,7 +668,6 @@ namespace ntrbase
         {
             return string.IsNullOrWhiteSpace(s) ? "0" : s.Select(char.ToUpper).Where("0123456789ABCDEF".Contains).Aggregate("", (str, c) => str + c);
         }
-
 
         public virtual bool isShiny => ((TID ^ SID) >> 4) == ((int)((PID >> 16 ^ PID & 0xFFFF) >> 4));
 

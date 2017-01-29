@@ -172,7 +172,7 @@ namespace ntrbase
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            label69.Text = "NTR Version: " + System.Windows.Forms.Application.ProductVersion;
+            label69.Text = "Version: " + System.Windows.Forms.Application.ProductVersion;
 
             DataGridViewComboBoxColumn itemItem = new DataGridViewComboBoxColumn
             {
@@ -1901,7 +1901,7 @@ namespace ntrbase
 
         // Write single pokémon from tabs
         private void pokeEkx_Click(object sender, EventArgs e)
-        { //TODO: are all these Array.Copy() really necessary? Shouldn't PKHeX just handle everything?
+        {
             if (dumpedPKHeX.Data == null)
             {
                 MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
@@ -1924,49 +1924,11 @@ namespace ntrbase
             }
             else
             {
-                dumpedPKHeX.Nickname = nickname.Text.PadRight(12, '\0');
-                dumpedPKHeX.OT_Name = otName.Text.PadRight(12, '\0');
-                byte[] pkmToEdit = dumpedPKHeX.Data;
-                Array.Copy(Encoding.Unicode.GetBytes(dumpedPKHeX.Nickname), 0, pkmToEdit, 64, 24);
-                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.Nature), 0, pkmToEdit, 28, 1);
-                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.HeldItem), 0, pkmToEdit, 10, 2);
-
-                dumpedPKHeX.IV_HP = (int)ivHPNum.Value;
-                dumpedPKHeX.IV_ATK = (int)ivATKNum.Value;
-                dumpedPKHeX.IV_DEF = (int)ivDEFNum.Value;
-                dumpedPKHeX.IV_SPE = (int)ivSPENum.Value;
-                dumpedPKHeX.IV_SPA = (int)ivSPANum.Value;
-                dumpedPKHeX.IV_SPD = (int)ivSPDNum.Value;
-
-                dumpedPKHeX.EV_HP = (int)evHPNum.Value;
-                dumpedPKHeX.EV_ATK = (int)evATKNum.Value;
-                dumpedPKHeX.EV_DEF = (int)evDEFNum.Value;
-                dumpedPKHeX.EV_SPE = (int)evSPENum.Value;
-                dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
-                dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
-
-                if (gen7 && level.Value == 100)
-                {
-                    dumpedPKHeX.HT_HP = HypT_HP.Checked;
-                    dumpedPKHeX.HT_ATK = HypT_Atk.Checked;
-                    dumpedPKHeX.HT_DEF = HypT_Def.Checked;
-                    dumpedPKHeX.HT_SPA = HypT_SpA.Checked;
-                    dumpedPKHeX.HT_SPD = HypT_SpD.Checked;
-                    dumpedPKHeX.HT_SPE = HypT_Spe.Checked;
-                }
-
-                dumpedPKHeX.EXP = (uint)ExpPoints.Value;
-                dumpedPKHeX.Ball = ball.SelectedIndex + 1;
-                dumpedPKHeX.SID = (int)dSIDNum.Value;
-                dumpedPKHeX.TID = (int)dTIDNum.Value;
-                dumpedPKHeX.PID = PKHeX.getHEXval(dPID.Text);
-                if (isEgg.Checked == true) { dumpedPKHeX.IsEgg = true; }
-                if (isEgg.Checked == false) { dumpedPKHeX.IsEgg = false; }
+                // Main Tab
                 dumpedPKHeX.Species = species.SelectedIndex + 1;
+                dumpedPKHeX.Nickname = nickname.Text.PadRight(12, '\0');
+                dumpedPKHeX.IsNicknamed = nickBox.Checked;
                 dumpedPKHeX.Nature = nature.SelectedIndex;
-                dumpedPKHeX.Gender = genderBox.SelectedIndex;
-                dumpedPKHeX.CurrentFriendship = (int)friendship.Value;
-
                 switch (ability.SelectedIndex)
                 {
                     case 0:
@@ -1986,9 +1948,38 @@ namespace ntrbase
                         dumpedPKHeX.Ability = absno[0];
                         break;
                 }
-
                 dumpedPKHeX.HeldItem = heldItem.SelectedIndex;
+                dumpedPKHeX.Ball = ball.SelectedIndex + 1;
+                dumpedPKHeX.PID = PKHeX.getHEXval(dPID.Text);
+                dumpedPKHeX.Gender = genderBox.SelectedIndex;
+                dumpedPKHeX.IsEgg = isEgg.Checked;
+                dumpedPKHeX.EXP = (uint)ExpPoints.Value;
+                dumpedPKHeX.CurrentFriendship = (int)friendship.Value;
 
+                // Stats Tab
+                dumpedPKHeX.IV_HP = (int)ivHPNum.Value;
+                dumpedPKHeX.IV_ATK = (int)ivATKNum.Value;
+                dumpedPKHeX.IV_DEF = (int)ivDEFNum.Value;
+                dumpedPKHeX.IV_SPE = (int)ivSPENum.Value;
+                dumpedPKHeX.IV_SPA = (int)ivSPANum.Value;
+                dumpedPKHeX.IV_SPD = (int)ivSPDNum.Value;
+                dumpedPKHeX.EV_HP = (int)evHPNum.Value;
+                dumpedPKHeX.EV_ATK = (int)evATKNum.Value;
+                dumpedPKHeX.EV_DEF = (int)evDEFNum.Value;
+                dumpedPKHeX.EV_SPE = (int)evSPENum.Value;
+                dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
+                dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
+                if (gen7 && level.Value == 100)
+                {
+                    dumpedPKHeX.HT_HP = HypT_HP.Checked;
+                    dumpedPKHeX.HT_ATK = HypT_Atk.Checked;
+                    dumpedPKHeX.HT_DEF = HypT_Def.Checked;
+                    dumpedPKHeX.HT_SPA = HypT_SpA.Checked;
+                    dumpedPKHeX.HT_SPD = HypT_SpD.Checked;
+                    dumpedPKHeX.HT_SPE = HypT_Spe.Checked;
+                }
+
+                // Moves Tab
                 dumpedPKHeX.Move1 = move1.SelectedIndex;
                 dumpedPKHeX.Move2 = move2.SelectedIndex;
                 dumpedPKHeX.Move3 = move3.SelectedIndex;
@@ -1997,7 +1988,13 @@ namespace ntrbase
                 dumpedPKHeX.RelearnMove2 = relearnmove2.SelectedIndex;
                 dumpedPKHeX.RelearnMove3 = relearnmove3.SelectedIndex;
                 dumpedPKHeX.RelearnMove4 = relearnmove4.SelectedIndex;
+                dumpedPKHeX.FixMoves();
+                dumpedPKHeX.FixRelearn();
 
+                // Misc Tab
+                dumpedPKHeX.OT_Name = otName.Text.PadRight(12, '\0');
+                dumpedPKHeX.SID = (int)dSIDNum.Value;
+                dumpedPKHeX.TID = (int)dTIDNum.Value;
                 switch (pkLang.SelectedIndex)
                 {
                     case 0: dumpedPKHeX.Language = 0x01; break;
@@ -2011,10 +2008,9 @@ namespace ntrbase
                     case 8: dumpedPKHeX.Language = 0x0A; break;
                 }
 
-                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.IV32), 0, pkmToEdit, 116, 4);
-                byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);
-                byte[] chkSum = BitConverter.GetBytes(PKHeX.getCHK(pkmToEdit));
-                Array.Copy(chkSum, 0, pkmEdited, 6, 2);
+                dumpedPKHeX.RefreshChecksum();
+
+                byte[] pkmEdited = PKHeX.encryptArray(dumpedPKHeX.Data);
 
                 if (radioBoxes.Checked)
                 {
@@ -2028,7 +2024,7 @@ namespace ntrbase
                     Program.scriptHelper.write(offset, pkmEdited, pid);
                 }
 
-                else if (radioParty.Checked)
+                else if (radioParty.Checked && enablepartywrite)
                 {
                     uint offset = partyOff + ((uint)slotDump.Value - 1) * 484;
                     Program.scriptHelper.write(offset, pkmEdited, pid);
@@ -2139,7 +2135,7 @@ namespace ntrbase
                 }
 
                 byte[] tmpBytes = File.ReadAllBytes(filename);
-                if (tmpBytes.Length == 260 || tmpBytes.Length == 232)
+                if (tmpBytes.Length == 260 || tmpBytes.Length == POKEBYTES)
                 { // All OK, commit
                     if (isEncrypted)
                     {
@@ -2521,7 +2517,6 @@ namespace ntrbase
                 if (!botWorking && !enablepartywrite)
                 {
                     MessageBox.Show("Important:\r\n\r\nThis feature is experimental, the slots that is selected in this application might not be the same slots that are shown in your party. Due the unkonown mechanics of this, the write feature has been disabled.\r\n\r\nIf you wish to edit a pokémon in your party, deposit it the PC.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    WriteBtn.Enabled = false;
                     boxDump.Minimum = 1;
                     boxDump.Maximum = 1;
                     slotDump.Minimum = 1;
@@ -2532,10 +2527,6 @@ namespace ntrbase
                     onlyView.Enabled = false;
                     boxDump.Value = ((LastBoxSlot)radioParty.Tag).box;
                     slotDump.Value = ((LastBoxSlot)radioParty.Tag).slot;
-                }
-                else if (!botWorking)
-                {
-                    WriteBtn.Enabled = true;
                 }
             }
             else
