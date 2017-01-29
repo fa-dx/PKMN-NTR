@@ -4685,8 +4685,8 @@ namespace ntrbase
                 SetText(Breed_labelBox, "Acc:");
                 SetText(Breed_labelSlot, "Rej:");
                 SetEnabled(slotBreed, true);
-                SetMaximum(boxBreed, 99);
-                SetMaximum(slotBreed, 99);
+                SetMaximum(boxBreed, 999);
+                SetMaximum(slotBreed, 999);
                 SetMinimum(boxBreed, 0);
                 SetMinimum(slotBreed, 0);
                 SetEnabled(eggsNoBreed, false);

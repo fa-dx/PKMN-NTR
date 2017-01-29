@@ -4347,8 +4347,8 @@
             // 
             this.Breed_options.Controls.Add(this.modeBreed);
             this.Breed_options.Controls.Add(this.readESV);
-            this.Breed_options.Controls.Add(this.label75);
             this.Breed_options.Controls.Add(this.Breed_labelBox);
+            this.Breed_options.Controls.Add(this.label75);
             this.Breed_options.Controls.Add(this.quickBreed);
             this.Breed_options.Controls.Add(this.slotBreed);
             this.Breed_options.Controls.Add(this.label84);
@@ -4388,7 +4388,7 @@
             // label75
             // 
             this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(153, 48);
+            this.label75.Location = new System.Drawing.Point(165, 48);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(43, 13);
             this.label75.TabIndex = 23;
@@ -4397,7 +4397,7 @@
             // Breed_labelBox
             // 
             this.Breed_labelBox.AutoSize = true;
-            this.Breed_labelBox.Location = new System.Drawing.Point(6, 48);
+            this.Breed_labelBox.Location = new System.Drawing.Point(3, 48);
             this.Breed_labelBox.Name = "Breed_labelBox";
             this.Breed_labelBox.Size = new System.Drawing.Size(28, 13);
             this.Breed_labelBox.TabIndex = 21;
@@ -4415,7 +4415,7 @@
             // 
             // slotBreed
             // 
-            this.slotBreed.Location = new System.Drawing.Point(112, 45);
+            this.slotBreed.Location = new System.Drawing.Point(118, 46);
             this.slotBreed.Maximum = new decimal(new int[] {
             30,
             0,
@@ -4427,7 +4427,7 @@
             0,
             0});
             this.slotBreed.Name = "slotBreed";
-            this.slotBreed.Size = new System.Drawing.Size(35, 20);
+            this.slotBreed.Size = new System.Drawing.Size(41, 20);
             this.slotBreed.TabIndex = 2;
             this.slotBreed.Value = new decimal(new int[] {
             1,
@@ -4446,7 +4446,7 @@
             // 
             // boxBreed
             // 
-            this.boxBreed.Location = new System.Drawing.Point(37, 45);
+            this.boxBreed.Location = new System.Drawing.Point(37, 46);
             this.boxBreed.Maximum = new decimal(new int[] {
             31,
             0,
@@ -4458,7 +4458,7 @@
             0,
             0});
             this.boxBreed.Name = "boxBreed";
-            this.boxBreed.Size = new System.Drawing.Size(35, 20);
+            this.boxBreed.Size = new System.Drawing.Size(41, 20);
             this.boxBreed.TabIndex = 1;
             this.boxBreed.Value = new decimal(new int[] {
             1,
@@ -4469,7 +4469,7 @@
             // Breed_labelSlot
             // 
             this.Breed_labelSlot.AutoSize = true;
-            this.Breed_labelSlot.Location = new System.Drawing.Point(78, 48);
+            this.Breed_labelSlot.Location = new System.Drawing.Point(84, 48);
             this.Breed_labelSlot.Name = "Breed_labelSlot";
             this.Breed_labelSlot.Size = new System.Drawing.Size(28, 13);
             this.Breed_labelSlot.TabIndex = 22;
@@ -4477,14 +4477,14 @@
             // 
             // eggsNoBreed
             // 
-            this.eggsNoBreed.Location = new System.Drawing.Point(202, 46);
+            this.eggsNoBreed.Location = new System.Drawing.Point(214, 46);
             this.eggsNoBreed.Maximum = new decimal(new int[] {
             930,
             0,
             0,
             0});
             this.eggsNoBreed.Name = "eggsNoBreed";
-            this.eggsNoBreed.Size = new System.Drawing.Size(52, 20);
+            this.eggsNoBreed.Size = new System.Drawing.Size(40, 20);
             this.eggsNoBreed.TabIndex = 3;
             this.eggsNoBreed.Value = new decimal(new int[] {
             1,
