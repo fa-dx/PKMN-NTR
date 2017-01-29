@@ -118,7 +118,7 @@ namespace ntrbase.Helpers
             while (!timeout)
             { // Timeout 1
                 await Task.Delay(100);
-                if (CompareLastLog("finished") || CompareLastLog("patching smdh"))
+                if (CompareLastLog("patching smdh"))
                 {
                     break;
                 }
@@ -349,7 +349,7 @@ namespace ntrbase.Helpers
 
         public async void quickstick(int Xvalue, int Yvalue, int time)
         {
-            Report("NTR: Move Control Stick to " + Xvalue.ToString("D3") + "," + Yvalue.ToString("D3") + " during" + time + " ms");
+            Report("NTR: Move Control Stick to " + Xvalue.ToString("D3") + "," + Yvalue.ToString("D3") + " during " + time + " ms");
             byte[] buttonByte = BitConverter.GetBytes(getstickhex(Xvalue, Yvalue));
             Program.scriptHelper.write(stickOff, buttonByte, hid_pid);
             await Task.Delay(time);

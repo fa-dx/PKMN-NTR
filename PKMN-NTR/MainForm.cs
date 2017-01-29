@@ -4246,6 +4246,16 @@ namespace ntrbase
                         resumemessage = "One step south of the pokémon, will press up to trigger dialog";
                         radioOpponent.Checked = true;
                         break;
+                    case 5:
+                        typemessage = "Dialga/Palkia/Giratina - Make sure you are anywhere in Dewford Town and the Eon Flute is the only registered item.";
+                        resumemessage = "In Dewford Town, will press Y to activate the Eon Flute";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 6:
+                        typemessage = "Tornadus/Thundurus/Landorus - Make sure you are anywhere in Route 120 and the Eon Flute is the only registered item.";
+                        resumemessage = "In Dewford Town, will press Y to activate the Eon Flute";
+                        radioOpponent.Checked = true;
+                        break;
                     default:
                         typemessage = "No type - Select one type of soft-reset and try again.";
                         resumemessage = "";
@@ -4271,6 +4281,12 @@ namespace ntrbase
                     if (game == GameType.X || game == GameType.Y)
                     {
                         oras = false;
+                        if (typeLSR.SelectedIndex == 3 || typeLSR.SelectedIndex == 5 || typeLSR.SelectedIndex == 6)
+                        {
+                            MessageBox.Show("This bot only works in ORAS", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            finishBot();
+                            return;
+                        }
                     }
                     else
                     {
@@ -4318,7 +4334,10 @@ namespace ntrbase
                         MessageBox.Show(buttonerror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 8: // User stop
-                        MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Bot stopped by user", "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    default: // General error message
+                        MessageBox.Show("An error has occurred.", "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
                 finishBot();

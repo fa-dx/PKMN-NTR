@@ -6,12 +6,15 @@ namespace ntrbase.Bot
 {
     class SoftResetbot6
     {
-        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, miragespot, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tev_start, tev_dialog, tev_cont1, tev_check, twk_start, botexit };
+        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, miragespot, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tev_start, tev_dialog, tev_cont1, tev_check, twk_start, soaring_start, soaring_cont, soaring_check, soaring_move, soaring_dialog, botexit };
 
         // Bot variables
         public int botresult;
         public int resetNo;
         public bool botstop;
+        public int soaringX;
+        public int soaringY;
+        public int soaringTime;
 
         // Class variables
         private int botState;
@@ -48,6 +51,12 @@ namespace ntrbase.Bot
         public uint dialogOff;
         public uint dialogIN;
         public uint dialogOUT;
+        public uint soaringOff;
+        public uint soaringIN;
+        public uint soaringOUT;
+        public uint soaringdialogOff;
+        public uint soaringdialogIN;
+        public uint soaringdialogOUT;
 
         public SoftResetbot6(int botmode, bool botresume, bool orasgame)
         {
@@ -103,6 +112,12 @@ namespace ntrbase.Bot
                 dialogOff = 0x62C2F4;
                 dialogIN = 0x0D;
                 dialogOUT = 0x0A;
+                soaringOff = 0x62C2EC;
+                soaringIN = 0x040DF1E0;
+                soaringOUT = 0x00000000;
+                soaringdialogOff = 0x62C2E4;
+                soaringdialogIN = 0x200010;
+                soaringdialogOUT = 0x200020;
             }
         }
 
@@ -163,6 +178,32 @@ namespace ntrbase.Bot
                                     if (resume)
                                     {
                                         botState = (int)srbotstates.twk_start;
+                                    }
+                                    else
+                                    {
+                                        botState = (int)srbotstates.pssmenush;
+                                    }
+                                    break;
+                                case 5:
+                                    soaringX = 30;
+                                    soaringY = -100;
+                                    soaringTime = 4000;
+                                    if (resume)
+                                    {
+                                        botState = (int)srbotstates.soaring_start;
+                                    }
+                                    else
+                                    {
+                                        botState = (int)srbotstates.pssmenush;
+                                    }
+                                    break;
+                                case 6:
+                                    soaringX = 0;
+                                    soaringY = 100;
+                                    soaringTime = 5000;
+                                    if (resume)
+                                    {
+                                        botState = (int)srbotstates.soaring_start;
                                     }
                                     else
                                     {
@@ -412,6 +453,10 @@ namespace ntrbase.Bot
                                 case 4:
                                     botState = (int)srbotstates.twk_start;
                                     break;
+                                case 5:
+                                case 6:
+                                    botState = (int)srbotstates.soaring_start;
+                                    break;
                                 default:
                                     botState = (int)srbotstates.trigger;
                                     break;
@@ -628,6 +673,76 @@ namespace ntrbase.Bot
                                 attempts++;
                                 botresult = 7;
                                 botState = (int)srbotstates.twk_start;
+                            }
+                            break;
+
+                        case (int)srbotstates.soaring_start:
+                            Report("Bot: Activate Eon Flute");
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyY);
+                            if (await waitTaskbool)
+                            {
+                                botState = (int)srbotstates.soaring_cont;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotstates.soaring_start;
+                            }
+                            break;
+
+                        case (int)srbotstates.soaring_cont:
+                            Report("Bot: Start cutscene");
+                            await Task.Delay(commanddelay);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                            {
+                                botState = (int)srbotstates.soaring_check;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotstates.soaring_cont;
+                            }
+                            break;
+
+                        case (int)srbotstates.soaring_check:
+                            await Task.Delay(8000);
+                            Report("Bot: Test if ready to move");
+                            waitTaskbool = Program.helper.timememoryinrange(soaringOff, soaringIN, 0x10000, 1000, 10000);
+                            if (await waitTaskbool)
+                            {
+                                attempts = 0;
+                                botState = (int)srbotstates.soaring_move;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 3;
+                                botState = (int)srbotstates.soaring_start;
+                            }
+                            break;
+
+                        case (int)srbotstates.soaring_move:
+                            Report("Bot: Start movement");
+                            Program.helper.quickstick(soaringX, soaringY, soaringTime);
+                            await Task.Delay(soaringTime + 2 * commanddelay);
+                            botState = (int)srbotstates.soaring_dialog;
+                            break;
+
+                        case (int)srbotstates.soaring_dialog:
+                            Report("Bot: Test dialog has started");
+                            waitTaskbool = Program.helper.timememoryinrange(soaringdialogOff, soaringdialogIN, 0x10, 500, 5000);
+                            if (await waitTaskbool)
+                            {
+                                botState = (int)srbotstates.miragespot;
+                            }
+                            else
+                            {
+                                Report("Bot: Dialog failed, imposible to check position to continue");
+                                botresult = -1;
+                                botState = (int)srbotstates.botexit;
                             }
                             break;
 
