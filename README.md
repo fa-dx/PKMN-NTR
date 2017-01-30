@@ -40,6 +40,6 @@ This the list of people who have contributed to this application.
 
 ###  Additional tools used in this application
 - **44670**: NTR CFW & NTRClient, this tool is based off a modified [NTRClient](https://github.com/fa-dx/NTR-Base).
-- **Kaphotics**: Helping with a few pieces of code, PKM Encrypt & Decrypt code + variables from the PKM layout from PKHeX, inspiration (most Pokemon Editing features were inspired by his save editing tool [PKHeX](https://github.com/kwsch/PKHeX)).
+- **Kaphotics and PKHeX dev team**: [PKHeX.Core](https://github.com/kwsch/PKHeX), used for pokémon data manipulation .
 - **Stary2001 and Kazo**: For [InputRedirection](https://github.com/Stary2001/InputRedirection) which was the base for the Remote Controls and the Bots.
 - **Octokit dev team**: Their [GitHub API client](https://github.com/octokit/octokit.net) was used for update checking.
