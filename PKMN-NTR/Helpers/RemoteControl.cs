@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Timers;
+using PKHeX.Core;
 
 namespace ntrbase.Helpers
 {
@@ -11,7 +12,7 @@ namespace ntrbase.Helpers
         public uint lastRead = 0; // Last read from RAM
         public byte[] lastmultiread;
         public int pid = 0;
-        PKHeX validator = new PKHeX();
+        PKM validator;
         private Timer NTRtimer;
         private bool timeout = false;
 
@@ -436,7 +437,7 @@ namespace ntrbase.Helpers
         private void handlePokeRead(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            validator.Data = PKHeX.decryptArray(args.data);
+            validator.Data = PKX.decryptArray(args.data);
         }
 
         public async Task<long> waitPokeRead(int box, int slot)
@@ -467,8 +468,8 @@ namespace ntrbase.Helpers
                 {
                     NTRtimer.Stop();
                     lastRead = (uint)validator.Species;
-                    Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
-                    Program.gCmdWindow.updateTabs();
+                    Program.gCmdWindow.pkm.Data = validator.Data;
+                    //Program.gCmdWindow.updateTabs();
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
                     return validator.PID;
                 }
@@ -513,8 +514,8 @@ namespace ntrbase.Helpers
                 {
                     NTRtimer.Stop();
                     lastRead = (uint)validator.Species;
-                    Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
-                    Program.gCmdWindow.updateTabs();
+                    Program.gCmdWindow.pkm.Data = validator.Data;
+                    //Program.gCmdWindow.updateTabs();
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8")); ;
                     return validator.PID;
                 }
@@ -560,8 +561,8 @@ namespace ntrbase.Helpers
                 {
                     NTRtimer.Stop();
                     lastRead = (uint)validator.Species;
-                    Program.gCmdWindow.dumpedPKHeX.Data = validator.Data;
-                    Program.gCmdWindow.updateTabs();
+                    Program.gCmdWindow.pkm.Data = validator.Data;
+                    //Program.gCmdWindow.updateTabs();
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
                     return validator.PID;
                 }

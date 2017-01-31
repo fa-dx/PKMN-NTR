@@ -51,7 +51,6 @@ namespace ntrbase
         public const string FOLDERWT = "Wonder Trade";
         public string PKXEXT;
         public string BOXEXT;
-        public PKHeX dumpedPKHeX = new PKHeX();
         private static string numberPattern = " ({0})";
 
         // Variables for update checking
@@ -154,10 +153,6 @@ namespace ntrbase
         private int keyscount7 = 24;
         private byte[] keysData7 = new byte[24 * 4];
         private int[,] keys7 = new int[24, 2];
-
-        // Variables for ability change
-        int[] absno;
-        string[] abstr = new string[3];
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
@@ -416,15 +411,10 @@ namespace ntrbase
                     SetEnabled(c, true);
                 }
             }
-            foreach (TabPage tab in DumpedEdit.TabPages)
-            {
-                SetEnabled(tab, true);
-            }
             foreach (TabPage tab in miscTabs.TabPages)
             {
                 SetEnabled(tab, true);
             }
-            HyperTrainBoxes();
         }
 
         private void disableControls()
@@ -442,10 +432,6 @@ namespace ntrbase
                 {
                     SetEnabled(c, false);
                 }
-            }
-            foreach (TabPage tab in DumpedEdit.TabPages)
-            {
-                SetEnabled(tab, false);
             }
             foreach (TabPage tab in miscTabs.TabPages)
             {
@@ -532,12 +518,6 @@ namespace ntrbase
             }
         }
 
-        public int getHiddenPower()
-        {
-            int hp = (15 * ((dumpedPKHeX.IV_HP & 1) + 2 * (dumpedPKHeX.IV_ATK & 1) + 4 * (dumpedPKHeX.IV_DEF & 1) + 8 * (dumpedPKHeX.IV_SPE & 1) + 16 * (dumpedPKHeX.IV_SPA & 1) + 32 * (dumpedPKHeX.IV_SPD & 1)) / 63);
-            return hp;
-        }
-
         public int getTSV(decimal TID, decimal SID)
         {
             return ((int)TID ^ (int)SID) >> 4;
@@ -551,45 +531,6 @@ namespace ntrbase
         public uint getPSV(uint PID)
         {
             return ((PID >> 16 ^ PID & 0xFFFF) >> 4);
-        }
-
-        public void updateAbility(int speciesno, int formeno, int abnumber)
-        {
-            if (gen7)
-            {
-                absno = LookupTable.getAbilities7(speciesno, formeno);
-                abstr[0] = LookupTable.Ability7[absno[0] - 1] + " (1)";
-                abstr[1] = LookupTable.Ability7[absno[1] - 1] + " (2)";
-                abstr[2] = LookupTable.Ability7[absno[2] - 1] + " (H)";
-                ComboboxFill(ability, abstr);
-            }
-            else
-            {
-                absno = LookupTable.getAbilities(speciesno, formeno);
-                abstr[0] = LookupTable.Ability6[absno[0] - 1] + " (1)";
-                abstr[1] = LookupTable.Ability6[absno[1] - 1] + " (2)";
-                abstr[2] = LookupTable.Ability6[absno[2] - 1] + " (H)";
-                ComboboxFill(ability, abstr);
-            }
-
-            if (ability.Items.Count == 3)
-            {
-                switch (abnumber)
-                {
-                    case 1:
-                        SetSelectedIndex(ability, 0);
-                        break;
-                    case 2:
-                        SetSelectedIndex(ability, 1);
-                        break;
-                    case 4:
-                        SetSelectedIndex(ability, 2);
-                        break;
-                    default:
-                        SetSelectedIndex(ability, 0);
-                        break;
-                }
-            }
         }
 
         #endregion Functions
@@ -801,17 +742,10 @@ namespace ntrbase
             // Clear tabs to avoid writting wrong data
             if (!botWorking)
             {
-                clearTabs();
+                //clearTabs();
                 SetSelectedIndex(typeLSR, -1);
                 SetSelectedIndex(modeBreed, -1);
-                if (gen7)
-                {
-                    dumpedPKHeX.Data = PKHeX.decryptArray(LookupTable.EmptyPoke7);
-                }
-                else
-                {
-                    dumpedPKHeX.Data = PKHeX.decryptArray(LookupTable.EmptyPoke6);
-                }
+                pkm = SAV.BlankPKM;
             }
 
             // Fill fields in the form according to gen
@@ -842,21 +776,6 @@ namespace ntrbase
 
         private void fillGen6()
         {
-            ComboboxFill(Lang, LookupTable.Lang6);
-            ComboboxFill(pkLang, LookupTable.Lang6);
-            ComboboxFill(species, LookupTable.Species6);
-            ComboboxFill(ability, LookupTable.Ability6);
-            ComboboxFill(filterAbility, LookupTable.Ability6);
-            ComboboxFill(heldItem, LookupTable.Item6);
-            ComboboxFill(ball, LookupTable.Balls6);
-            ComboboxFill(move1, LookupTable.Moves6);
-            ComboboxFill(move2, LookupTable.Moves6);
-            ComboboxFill(move3, LookupTable.Moves6);
-            ComboboxFill(move4, LookupTable.Moves6);
-            ComboboxFill(relearnmove1, LookupTable.Moves6);
-            ComboboxFill(relearnmove2, LookupTable.Moves6);
-            ComboboxFill(relearnmove3, LookupTable.Moves6);
-            ComboboxFill(relearnmove4, LookupTable.Moves6);
             ComboboxFill(typeLSR, LookupTable.SoftResetModes6);
             ComboboxFill(modeBreed, LookupTable.BreedingModes6);
             SetVisible(itemsView7, false);
@@ -880,21 +799,6 @@ namespace ntrbase
 
         private async void fillGen7()
         {
-            ComboboxFill(Lang, LookupTable.Lang7);
-            ComboboxFill(pkLang, LookupTable.Lang7);
-            ComboboxFill(species, LookupTable.Species7);
-            ComboboxFill(ability, LookupTable.Ability7);
-            ComboboxFill(filterAbility, LookupTable.Ability7);
-            ComboboxFill(heldItem, LookupTable.Item7);
-            ComboboxFill(ball, LookupTable.Balls7);
-            ComboboxFill(move1, LookupTable.Moves7);
-            ComboboxFill(move2, LookupTable.Moves7);
-            ComboboxFill(move3, LookupTable.Moves7);
-            ComboboxFill(move4, LookupTable.Moves7);
-            ComboboxFill(relearnmove1, LookupTable.Moves7);
-            ComboboxFill(relearnmove2, LookupTable.Moves7);
-            ComboboxFill(relearnmove3, LookupTable.Moves7);
-            ComboboxFill(relearnmove4, LookupTable.Moves7);
             ComboboxFill(typeLSR, LookupTable.SoftResetModes7);
             ComboboxFill(sr_Species, LookupTable.Species7);
             ComboboxFill(modeBreed, LookupTable.BreedingModes7);
@@ -1706,8 +1610,8 @@ namespace ntrbase
             try
             { //TODO: TEMPORARY HACK, DO PROPER ERROR HANDLING
                 DataReadyWaiting args = (DataReadyWaiting)args_obj;
-                PKHeX validator = new PKHeX();
-                validator.Data = PKHeX.decryptArray(args.data);
+                PKM validator = SAV.BlankPKM;
+                validator.Data = PKX.decryptArray(args.data);
                 bool dataCorrect = validator.Species != 0;
                 if (!onlyView.Checked && !botWorking)
                 {
@@ -1735,8 +1639,8 @@ namespace ntrbase
                     return;
                 }
 
-                dumpedPKHeX.Data = validator.Data;
-                updateTabs();
+                pkm = validator;
+                //updateTabs();
             }
             catch (Exception ex)
             {
@@ -1931,115 +1835,17 @@ namespace ntrbase
         // Write single pokémon from tabs
         private void pokeEkx_Click(object sender, EventArgs e)
         {
-            if (dumpedPKHeX.Data == null)
+            if (pkm == null)
             {
                 MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
             }
-            else if (dumpedPKHeX.Data.Length != POKEBYTES)
-            {
-                MessageBox.Show("The data size of this pokémon data is invalid. If you dumped it from the party, please deposit it in a box before editing and try again.", "Invalid data size");
-            }
-            else if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value >= 511)
-            {
-                MessageBox.Show("Pokemon EV count is too high, the sum of all EVs should be 510 or less!", "EVs too high");
-            }
-            else if (nickname.Text.Length > 12)
-            {
-                MessageBox.Show("Pokemon name length too long! Please use a name with a length of 12 or less.", "Name too long");
-            }
-            else if (otName.Text.Length > 12)
-            {
-                MessageBox.Show("OT name length too long! Please use a name with a length of 12 or less.", "Name too long");
-            }
             else
             {
-                // Main Tab
-                dumpedPKHeX.Species = species.SelectedIndex + 1;
-                dumpedPKHeX.Nickname = nickname.Text.PadRight(12, '\0');
-                dumpedPKHeX.IsNicknamed = nickBox.Checked;
-                dumpedPKHeX.Nature = nature.SelectedIndex;
-                switch (ability.SelectedIndex)
-                {
-                    case 0:
-                        dumpedPKHeX.AbilityNumber = 1;
-                        dumpedPKHeX.Ability = absno[0];
-                        break;
-                    case 1:
-                        dumpedPKHeX.AbilityNumber = 2;
-                        dumpedPKHeX.Ability = absno[1];
-                        break;
-                    case 2:
-                        dumpedPKHeX.AbilityNumber = 4;
-                        dumpedPKHeX.Ability = absno[2];
-                        break;
-                    default:
-                        dumpedPKHeX.AbilityNumber = 1;
-                        dumpedPKHeX.Ability = absno[0];
-                        break;
-                }
-                dumpedPKHeX.HeldItem = heldItem.SelectedIndex;
-                dumpedPKHeX.Ball = ball.SelectedIndex + 1;
-                dumpedPKHeX.PID = PKHeX.getHEXval(dPID.Text);
-                dumpedPKHeX.Gender = genderBox.SelectedIndex;
-                dumpedPKHeX.IsEgg = isEgg.Checked;
-                dumpedPKHeX.EXP = (uint)ExpPoints.Value;
-                dumpedPKHeX.CurrentFriendship = (int)friendship.Value;
+                // TO DO: Read data from fields to pkm
 
-                // Stats Tab
-                dumpedPKHeX.IV_HP = (int)ivHPNum.Value;
-                dumpedPKHeX.IV_ATK = (int)ivATKNum.Value;
-                dumpedPKHeX.IV_DEF = (int)ivDEFNum.Value;
-                dumpedPKHeX.IV_SPE = (int)ivSPENum.Value;
-                dumpedPKHeX.IV_SPA = (int)ivSPANum.Value;
-                dumpedPKHeX.IV_SPD = (int)ivSPDNum.Value;
-                dumpedPKHeX.EV_HP = (int)evHPNum.Value;
-                dumpedPKHeX.EV_ATK = (int)evATKNum.Value;
-                dumpedPKHeX.EV_DEF = (int)evDEFNum.Value;
-                dumpedPKHeX.EV_SPE = (int)evSPENum.Value;
-                dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
-                dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
-                if (gen7 && level.Value == 100)
-                {
-                    dumpedPKHeX.HT_HP = HypT_HP.Checked;
-                    dumpedPKHeX.HT_ATK = HypT_Atk.Checked;
-                    dumpedPKHeX.HT_DEF = HypT_Def.Checked;
-                    dumpedPKHeX.HT_SPA = HypT_SpA.Checked;
-                    dumpedPKHeX.HT_SPD = HypT_SpD.Checked;
-                    dumpedPKHeX.HT_SPE = HypT_Spe.Checked;
-                }
+                pkm.RefreshChecksum();
 
-                // Moves Tab
-                dumpedPKHeX.Move1 = move1.SelectedIndex;
-                dumpedPKHeX.Move2 = move2.SelectedIndex;
-                dumpedPKHeX.Move3 = move3.SelectedIndex;
-                dumpedPKHeX.Move4 = move4.SelectedIndex;
-                dumpedPKHeX.RelearnMove1 = relearnmove1.SelectedIndex;
-                dumpedPKHeX.RelearnMove2 = relearnmove2.SelectedIndex;
-                dumpedPKHeX.RelearnMove3 = relearnmove3.SelectedIndex;
-                dumpedPKHeX.RelearnMove4 = relearnmove4.SelectedIndex;
-                dumpedPKHeX.FixMoves();
-                dumpedPKHeX.FixRelearn();
-
-                // Misc Tab
-                dumpedPKHeX.OT_Name = otName.Text.PadRight(12, '\0');
-                dumpedPKHeX.SID = (int)dSIDNum.Value;
-                dumpedPKHeX.TID = (int)dTIDNum.Value;
-                switch (pkLang.SelectedIndex)
-                {
-                    case 0: dumpedPKHeX.Language = 0x01; break;
-                    case 1: dumpedPKHeX.Language = 0x02; break;
-                    case 2: dumpedPKHeX.Language = 0x03; break;
-                    case 3: dumpedPKHeX.Language = 0x04; break;
-                    case 4: dumpedPKHeX.Language = 0x05; break;
-                    case 5: dumpedPKHeX.Language = 0x07; break;
-                    case 6: dumpedPKHeX.Language = 0x08; break;
-                    case 7: dumpedPKHeX.Language = 0x09; break;
-                    case 8: dumpedPKHeX.Language = 0x0A; break;
-                }
-
-                dumpedPKHeX.RefreshChecksum();
-
-                byte[] pkmEdited = PKHeX.encryptArray(dumpedPKHeX.Data);
+                byte[] pkmEdited = PKX.encryptArray(pkm.DecryptedBoxData);
 
                 if (radioBoxes.Checked)
                 {
@@ -2063,13 +1869,6 @@ namespace ntrbase
                     MessageBox.Show("No editing support for this source.", "Editing Unavailable");
                 }
             }
-        }
-
-        private void randomPID_Click(object sender, EventArgs e)
-        {
-            dumpedPKHeX.setRandomPID();
-            dPID.Text = dumpedPKHeX.PID.ToString("X8");
-            setShinyMark();
         }
 
         // Clone pokémon
@@ -2172,7 +1971,7 @@ namespace ntrbase
                     }
                     else
                     {
-                        PKHeX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
+                        PKX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
                     }
                 }
                 else
@@ -2331,10 +2130,10 @@ namespace ntrbase
                     string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
                     FileInfo folder = new FileInfo(folderPath);
                     folder.Directory.Create();
-                    PKHeX validator = new PKHeX();
+                    PKM validator = SAV.BlankPKM;
                     for (int i = 0; i < args.data.Length; i += POKEBYTES)
                     {
-                        validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
+                        validator.Data = PKX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
                         if (validator.Species == 0)
                         {
                             continue;
@@ -2692,54 +2491,26 @@ namespace ntrbase
             }
         }
 
-        private void dTIDNum_ValueChanged(object sender, EventArgs e)
-        { // Handles pokémon OT's TID/SID fields
-            setTSVToolTip(dTIDNum, dSIDNum);
-        }
-
         private void TIDNum_ValueChanged(object sender, EventArgs e)
         { // Handles Trainer's TID/SID fields
             setTSVToolTip(TIDNum, SIDNum);
         }
 
-        private void dPID_TextChanged(object sender, EventArgs e)
-        {
-            SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(PKHeX.getHEXval(dPID.Text)).ToString("D4"));
-        }
-
-        // Ability, Exp and sprite update on species change
-        private void species_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            updateAbility(species.SelectedIndex + 1, 0, 1);
-            uint newexp = LookupTable.getExp(species.SelectedIndex + 1, (int)level.Value);
-            SetValue(ExpPoints, newexp);
-            ExpPoints.Maximum = LookupTable.getExp(species.SelectedIndex + 1, 100);
-            if (dumpedPKHeX.Data != null)
-            {
-                dumpedPKHeX.Species = species.SelectedIndex + 1;
-                dumpedPKHeX.AltForm = 0;
-                dumpedPKHeX.AbilityNumber = 1;
-                dumpedPKHeX.Ability = absno[0];
-                dumpedPKHeX.EXP = newexp;
-            }
-            setSprite(species.SelectedIndex + 1, 0, false);
-            updateName();
-        }
-
-        private void setSprite(int speciesindex, int formindex, bool isegg)
+        // Sprite handling
+        private void RefreshSprite()
         {
             string resname;
-            if (isegg)
+            if (pkm.IsEgg)
             {
                 resname = "egg";
             }
-            else if (formindex == 0 || speciesindex == 493 || speciesindex == 773) // All Arceus / Silvally formes have same sprite
+            else if (pkm.AltForm == 0 || pkm.Species == 493 || pkm.Species == 773) // All Arceus / Silvally formes have same sprite
             {
-                resname = "_" + speciesindex;
+                resname = "_" + pkm.Species;
             }
             else
             {
-                resname = "_" + speciesindex + "_" + formindex;
+                resname = "_" + pkm.Species + "_" + pkm.AltForm;
             }
             Bitmap data;
             data = (Bitmap)Resources.ResourceManager.GetObject(resname);
@@ -2748,231 +2519,13 @@ namespace ntrbase
                 data = (Bitmap)Resources.ResourceManager.GetObject("unknown");
             }
             pictureBox2.Image = data;
-        }
-
-        private void ExpPoints_ValueChanged(object sender, EventArgs e)
-        {
-            level.ValueChanged -= level_ValueChanged;
-            int speciesno = 0;
-            Invoke(new MethodInvoker(delegate () { speciesno = species.SelectedIndex; }));
-            int newlevel = LookupTable.getLevel(speciesno + 1, (int)ExpPoints.Value);
-            SetValue(level, newlevel);
-            HyperTrainBoxes();
-            level.ValueChanged += level_ValueChanged;
-        }
-
-        private void level_ValueChanged(object sender, EventArgs e)
-        {
-            ExpPoints.ValueChanged -= ExpPoints_ValueChanged;
-            uint newexp = LookupTable.getExp(species.SelectedIndex + 1, (int)level.Value);
-            SetValue(ExpPoints, newexp);
-            HyperTrainBoxes();
-            ExpPoints.ValueChanged += ExpPoints_ValueChanged;
-        }
-
-        // Nickname
-        private void nickBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if ((pkLang.SelectedIndex == 7 || pkLang.SelectedIndex == 8) && !nickBox.Checked)
-            { // Chinese language handling
-                SetEnabled(nickBox, false);
-                SetReadOnly(nickname, true);
-            }
-            else
-            {
-                SetEnabled(nickBox, true);
-                SetReadOnly(nickname, false);
-            }
-            updateName();
-        }
-
-        private void pkLang_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if ((pkLang.SelectedIndex == 7 || pkLang.SelectedIndex == 8) && !nickBox.Checked)
-            { // Chinese language handling
-                SetEnabled(nickBox, false);
-                SetReadOnly(nickname, true);
-            }
-            else
-            {
-                SetEnabled(nickBox, true);
-                SetReadOnly(nickname, false);
-            }
-            updateName();
-        }
-
-        public void updateName()
-        {
-            if (!nickBox.Checked)
-            {
-                int currentlang;
-                switch (pkLang.SelectedIndex)
-                {
-                    case 0: currentlang = 0x01; break;
-                    case 1: currentlang = 0x02; break;
-                    case 2: currentlang = 0x03; break;
-                    case 3: currentlang = 0x04; break;
-                    case 4: currentlang = 0x05; break;
-                    case 5: currentlang = 0x07; break;
-                    case 6: currentlang = 0x08; break;
-                    case 7: currentlang = 0x09; break;
-                    case 8: currentlang = 0x0A; break;
-                    default: currentlang = 0x02; break;
-                }
-                SetText(nickname, LookupTable.getSpeciesName(species.SelectedIndex + 1, currentlang, isEgg.Checked));
-            }
-        }
-
-        private void nickname_TextChanged(object sender, EventArgs e)
-        {
-            SetChecked(nickBox, true);
-        }
-
-        // Poké ball image
-        private void ball_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ball.SelectedIndex >= 0)
-            {
-                pictureBox1.Image = (Bitmap)Resources.ResourceManager.GetObject("ball" + ball.SelectedIndex);
-            }
-            else
-            {
-                pictureBox1.Image = null;
-            }
-        }
-
-        // Shiny pokémon mark
-        private void setShinyMark()
-        {
-            shinyBox.CheckedChanged -= shinyBox_CheckedChanged;
-            SetChecked(shinyBox, dumpedPKHeX.isShiny);
-            shinyBox.CheckedChanged += shinyBox_CheckedChanged;
-            if (dumpedPKHeX.isShiny)
+            if (pkm.IsShiny)
             {
                 shinypic.Image = Resources.shiny;
             }
             else
             {
                 shinypic.Image = null;
-            }
-        }
-
-        private void setShinySprite()
-        {
-            if (dumpedPKHeX.isShiny)
-            {
-                shinypic.Image = Resources.shiny;
-            }
-            else
-            {
-                shinypic.Image = null;
-            }
-        }
-
-        private void shinyBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (shinyBox.Checked == true)
-            {
-                dumpedPKHeX.setShinyPID();
-            }
-            else
-            {
-                while (dumpedPKHeX.isShiny)
-                {
-                    dumpedPKHeX.setRandomPID();
-                }
-            }
-            dPID.Text = dumpedPKHeX.PID.ToString("X8");
-            setShinySprite();
-        }
-
-        // Automatic Hidden Power Calculation and Hyper Training Boxes
-        private void ivChanged(object sender, EventArgs e)
-        {
-            int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
-            SetText(hiddenPower, LookupTable.HPName[hp]);
-            SetColor(hiddenPower, LookupTable.HPColor[hp], true);
-            HyperTrainBoxes();
-        }
-
-        private void HyperTrainBoxes()
-        {
-            if (gen7 && level.Value == 100 && !botWorking)
-            {
-                if (ivHPNum.Value == 31)
-                {
-                    HypT_HP.Checked = false;
-                    HypT_HP.Enabled = false;
-                }
-                else
-                {
-                    HypT_HP.Enabled = true;
-                }
-
-                if (ivATKNum.Value == 31)
-                {
-                    HypT_Atk.Checked = false;
-                    HypT_Atk.Enabled = false;
-                }
-                else
-                {
-                    HypT_Atk.Enabled = true;
-                }
-
-                if (ivDEFNum.Value == 31)
-                {
-                    HypT_Def.Checked = false;
-                    HypT_Def.Enabled = false;
-                }
-                else
-                {
-                    HypT_Def.Enabled = true;
-                }
-
-                if (ivSPANum.Value == 31)
-                {
-                    HypT_SpA.Checked = false;
-                    HypT_SpA.Enabled = false;
-                }
-                else
-                {
-                    HypT_SpA.Enabled = true;
-                }
-
-                if (ivSPDNum.Value == 31)
-                {
-                    HypT_SpD.Checked = false;
-                    HypT_SpD.Enabled = false;
-                }
-                else
-                {
-                    HypT_SpD.Enabled = true;
-                }
-
-                if (ivSPENum.Value == 31)
-                {
-                    HypT_Spe.Checked = false;
-                    HypT_Spe.Enabled = false;
-                }
-                else
-                {
-                    HypT_Spe.Enabled = true;
-                }
-            }
-            else
-            {
-                HypT_HP.Checked = false;
-                HypT_Atk.Checked = false;
-                HypT_Def.Checked = false;
-                HypT_SpA.Checked = false;
-                HypT_SpD.Checked = false;
-                HypT_Spe.Checked = false;
-                HypT_HP.Enabled = false;
-                HypT_Atk.Enabled = false;
-                HypT_Def.Enabled = false;
-                HypT_SpA.Enabled = false;
-                HypT_SpD.Enabled = false;
-                HypT_Spe.Enabled = false;
             }
         }
 
@@ -3012,172 +2565,9 @@ namespace ntrbase
             }
         }
 
-        // Update pokémon editing tabs 
-        public void updateTabs()
-        {
-            species.SelectedIndexChanged -= species_SelectedIndexChanged;
-            level.ValueChanged -= level_ValueChanged;
-            nickname.TextChanged -= nickname_TextChanged;
-            nickBox.CheckedChanged -= nickBox_CheckedChanged;
-            pkLang.SelectedIndexChanged -= pkLang_SelectedIndexChanged;
+        #endregion GUI handling
 
-            // Main tab
-            SetSelectedIndex(species, dumpedPKHeX.Species - 1);
-            SetText(nickname, dumpedPKHeX.Nickname);
-            SetChecked(nickBox, dumpedPKHeX.IsNicknamed);
-            SetSelectedIndex(nature, dumpedPKHeX.Nature);
-            updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
-            SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
-            SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
-            SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
-            SetSelectedIndex(genderBox, dumpedPKHeX.Gender);
-            SetChecked(isEgg, dumpedPKHeX.IsEgg);
-            SetMaximum(ExpPoints, LookupTable.getExp(dumpedPKHeX.Species, 100));
-            SetValue(ExpPoints, dumpedPKHeX.EXP);
-            SetValue(friendship, dumpedPKHeX.CurrentFriendship);
-
-            setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
-            setShinyMark();
-            if (dumpedPKHeX.CurrentHandler == 0)
-            {
-                SetColor(friendship, Color.Cornsilk, true);
-            }
-            else
-            {
-                SetColor(friendship, Color.White, true);
-            }
-
-            // Stats tab
-            SetValue(ivHPNum, dumpedPKHeX.IV_HP);
-            SetValue(ivATKNum, dumpedPKHeX.IV_ATK);
-            SetValue(ivDEFNum, dumpedPKHeX.IV_DEF);
-            SetValue(ivSPANum, dumpedPKHeX.IV_SPA);
-            SetValue(ivSPDNum, dumpedPKHeX.IV_SPD);
-            SetValue(ivSPENum, dumpedPKHeX.IV_SPE);
-            SetValue(evHPNum, dumpedPKHeX.EV_HP);
-            SetValue(evATKNum, dumpedPKHeX.EV_ATK);
-            SetValue(evDEFNum, dumpedPKHeX.EV_DEF);
-            SetValue(evSPANum, dumpedPKHeX.EV_SPA);
-            SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
-            SetValue(evSPENum, dumpedPKHeX.EV_SPE);
-            if (gen7)
-            {
-                SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
-                SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
-                SetChecked(HypT_Def, dumpedPKHeX.HT_DEF);
-                SetChecked(HypT_SpA, dumpedPKHeX.HT_SPA);
-                SetChecked(HypT_SpD, dumpedPKHeX.HT_SPD);
-                SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
-            }
-
-            // Moves tab
-            SetSelectedIndex(move1, dumpedPKHeX.Move1);
-            SetSelectedIndex(move2, dumpedPKHeX.Move2);
-            SetSelectedIndex(move3, dumpedPKHeX.Move3);
-            SetSelectedIndex(move4, dumpedPKHeX.Move4);
-            SetSelectedIndex(relearnmove1, dumpedPKHeX.RelearnMove1);
-            SetSelectedIndex(relearnmove2, dumpedPKHeX.RelearnMove2);
-            SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
-            SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
-
-            // Misc tab
-            SetText(otName, dumpedPKHeX.OT_Name);
-            SetValue(dTIDNum, dumpedPKHeX.TID);
-            SetValue(dSIDNum, dumpedPKHeX.SID);
-            int i;
-            switch (dumpedPKHeX.Language)
-            {
-                case 1: i = 0; break;
-                case 2: i = 1; break;
-                case 3: i = 2; break;
-                case 4: i = 3; break;
-                case 5: i = 4; break;
-                case 7: i = 5; break;
-                case 8: i = 6; break;
-                case 9: i = 7; break;
-                case 10: i = 8; break;
-                default: i = -1; break;
-            }
-            SetSelectedIndex(pkLang, i);
-
-            species.SelectedIndexChanged += species_SelectedIndexChanged;
-            level.ValueChanged += level_ValueChanged;
-            nickname.TextChanged += nickname_TextChanged;
-            nickBox.CheckedChanged += nickBox_CheckedChanged;
-            pkLang.SelectedIndexChanged += pkLang_SelectedIndexChanged;
-        }
-
-        public void clearTabs()
-        {
-            species.SelectedIndexChanged -= species_SelectedIndexChanged;
-            level.ValueChanged -= level_ValueChanged;
-            nickname.TextChanged -= nickname_TextChanged;
-            nickBox.CheckedChanged -= nickBox_CheckedChanged;
-            pkLang.SelectedIndexChanged -= pkLang_SelectedIndexChanged;
-
-            if (gen7)
-            {
-                dumpedPKHeX.Data = LookupTable.EmptyPoke7;
-            }
-            else
-            {
-                dumpedPKHeX.Data = LookupTable.EmptyPoke6;
-            }
-
-            // Main Tab
-            SetSelectedIndex(species, -1);
-            setSprite(-1, -1, false);
-            SetText(nickname, null);
-            SetChecked(nickBox, false);
-            SetSelectedIndex(nature, -1);
-            ComboboxFill(ability, null);
-            SetSelectedIndex(ability, -1);
-            SetSelectedIndex(heldItem, -1);
-            SetSelectedIndex(ball, -1);
-            SetText(dPID, "");
-            SetSelectedIndex(genderBox, -1);
-            SetChecked(isEgg, false);
-            SetMaximum(ExpPoints, 1640000);
-            SetValue(ExpPoints, 0);
-            SetValue(friendship, 0);
-            SetColor(friendship, Color.White, true);
-
-            // Stats tab
-            SetValue(ivHPNum, 0);
-            SetValue(ivATKNum, 0);
-            SetValue(ivDEFNum, 0);
-            SetValue(ivSPANum, 0);
-            SetValue(ivSPDNum, 0);
-            SetValue(ivSPENum, 0);
-            SetValue(evHPNum, 0);
-            SetValue(evATKNum, 0);
-            SetValue(evDEFNum, 0);
-            SetValue(evSPANum, 0);
-            SetValue(evSPDNum, 0);
-            SetValue(evSPENum, 0);
-
-            // Moves tab
-            SetSelectedIndex(move1, -1);
-            SetSelectedIndex(move2, -1);
-            SetSelectedIndex(move3, -1);
-            SetSelectedIndex(move4, -1);
-            SetSelectedIndex(relearnmove1, -1);
-            SetSelectedIndex(relearnmove2, -1);
-            SetSelectedIndex(relearnmove3, -1);
-            SetSelectedIndex(relearnmove4, -1);
-
-            // Misc tab
-            SetText(otName, "");
-            SetValue(dTIDNum, 0);
-            SetValue(dSIDNum, 0);
-            SetSelectedIndex(pkLang, -1);
-
-            species.SelectedIndexChanged += species_SelectedIndexChanged;
-            level.ValueChanged += level_ValueChanged;
-            nickname.TextChanged += nickname_TextChanged;
-            nickBox.CheckedChanged += nickBox_CheckedChanged;
-            pkLang.SelectedIndexChanged += pkLang_SelectedIndexChanged;
-        }
+        #region Sub-forms
 
         // PokeDigger
         private void PokeDiggerBtn_Click(object sender, EventArgs e)
@@ -3193,7 +2583,7 @@ namespace ntrbase
             }
         }
 
-        #endregion GUI handling
+        #endregion Sub-forms
 
         #region Thread Safety
 
@@ -3599,10 +2989,10 @@ namespace ntrbase
                     failedtests = 0;
 
                     // Test shiny
-                    filterstr = " (PSV: " + getPSV(dumpedPKHeX.PID).ToString("D4") + " TSV: " + getTSV(TIDNum.Value, SIDNum.Value).ToString("D4") + ")";
+                    filterstr = " (PSV: " + getPSV(pkm.PID).ToString("D4") + " TSV: " + getTSV(TIDNum.Value, SIDNum.Value).ToString("D4") + ")";
                     if ((int)row.Cells[0].Value == 1)
                     {
-                        if (dumpedPKHeX.isShiny)
+                        if (pkm.IsShiny)
                         {
                             addtoLog("Filter: Shiny - PASS" + filterstr);
                         }
@@ -3618,8 +3008,8 @@ namespace ntrbase
                     }
 
                     // Test nature
-                    filterstr = " (" + LookupTable.getNature(dumpedPKHeX.Nature) + " -> " + LookupTable.getNature((int)row.Cells[1].Value) + ")";
-                    if ((int)row.Cells[1].Value < 0 || dumpedPKHeX.Nature == (int)row.Cells[1].Value)
+                    filterstr = " (" + LookupTable.getNature(pkm.Nature) + " -> " + LookupTable.getNature((int)row.Cells[1].Value) + ")";
+                    if ((int)row.Cells[1].Value < 0 || pkm.Nature == (int)row.Cells[1].Value)
                     {
                         addtoLog("Filter: Nature - PASS" + filterstr);
                     }
@@ -3632,13 +3022,13 @@ namespace ntrbase
                     // Test Ability
                     if (gen7)
                     {
-                        filterstr = " (" + LookupTable.getAbil7(dumpedPKHeX.Ability) + " -> " + LookupTable.getAbil7((int)row.Cells[2].Value) + ")";
+                        filterstr = " (" + LookupTable.getAbil7(pkm.Ability) + " -> " + LookupTable.getAbil7((int)row.Cells[2].Value) + ")";
                     }
                     else
                     {
-                        filterstr = " (" + LookupTable.getAbil6(dumpedPKHeX.Ability) + " -> " + LookupTable.getAbil6((int)row.Cells[2].Value) + ")";
+                        filterstr = " (" + LookupTable.getAbil6(pkm.Ability) + " -> " + LookupTable.getAbil6((int)row.Cells[2].Value) + ")";
                     }
-                    if ((int)row.Cells[2].Value < 0 || (dumpedPKHeX.Ability - 1) == (int)row.Cells[2].Value)
+                    if ((int)row.Cells[2].Value < 0 || (pkm.Ability - 1) == (int)row.Cells[2].Value)
                     {
                         addtoLog("Filter: Ability - PASS" + filterstr);
                     }
@@ -3649,8 +3039,8 @@ namespace ntrbase
                     }
 
                     // Test Hidden Power
-                    filterstr = " (" + LookupTable.getHPName(getHiddenPower()) + " -> " + LookupTable.getHPName((int)row.Cells[3].Value) + ")";
-                    if ((int)row.Cells[3].Value < 0 || getHiddenPower() == (int)row.Cells[3].Value)
+                    filterstr = " (" + LookupTable.getHPName(pkm.HPType) + " -> " + LookupTable.getHPName((int)row.Cells[3].Value) + ")";
+                    if ((int)row.Cells[3].Value < 0 || pkm.HPType == (int)row.Cells[3].Value)
                     {
                         addtoLog("Filter: Hidden Power - PASS" + filterstr);
                     }
@@ -3661,8 +3051,8 @@ namespace ntrbase
                     }
 
                     // Test Gender
-                    filterstr = " (" + LookupTable.getGender(dumpedPKHeX.Gender) + " -> " + LookupTable.getGender((int)row.Cells[4].Value) + ")";
-                    if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == dumpedPKHeX.Gender)
+                    filterstr = " (" + LookupTable.getGender(pkm.Gender) + " -> " + LookupTable.getGender((int)row.Cells[4].Value) + ")";
+                    if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == pkm.Gender)
                     {
                         addtoLog("Filter: Gender - PASS" + filterstr);
                     }
@@ -3673,7 +3063,7 @@ namespace ntrbase
                     }
 
                     // Test HP
-                    if (IVCheck((int)row.Cells[5].Value, dumpedPKHeX.IV_HP, (int)row.Cells[6].Value))
+                    if (IVCheck((int)row.Cells[5].Value, pkm.IV_HP, (int)row.Cells[6].Value))
                     {
                         addtoLog("Filter: Hit Points IV - PASS" + filterstr);
                     }
@@ -3682,13 +3072,13 @@ namespace ntrbase
                         addtoLog("Filter: Hit Points IV - FAIL" + filterstr);
                         failedtests++;
                     }
-                    if (dumpedPKHeX.IV_HP == 31)
+                    if (pkm.IV_HP == 31)
                     {
                         perfectIVs++;
                     }
 
                     // Test Atk
-                    if (IVCheck((int)row.Cells[7].Value, dumpedPKHeX.IV_ATK, (int)row.Cells[8].Value))
+                    if (IVCheck((int)row.Cells[7].Value, pkm.IV_ATK, (int)row.Cells[8].Value))
                     {
                         addtoLog("Filter: Attack IV - PASS" + filterstr);
                     }
@@ -3697,13 +3087,13 @@ namespace ntrbase
                         addtoLog("Filter: Attack IV - FAIL" + filterstr);
                         failedtests++;
                     }
-                    if (dumpedPKHeX.IV_ATK == 31)
+                    if (pkm.IV_ATK == 31)
                     {
                         perfectIVs++;
                     }
 
                     // Test Def
-                    if (IVCheck((int)row.Cells[9].Value, dumpedPKHeX.IV_DEF, (int)row.Cells[10].Value))
+                    if (IVCheck((int)row.Cells[9].Value, pkm.IV_DEF, (int)row.Cells[10].Value))
                     {
                         addtoLog("Filter: Defense IV - PASS" + filterstr);
                     }
@@ -3712,13 +3102,13 @@ namespace ntrbase
                         addtoLog("Filter: Defense IV - FAIL" + filterstr);
                         failedtests++;
                     }
-                    if (dumpedPKHeX.IV_DEF == 31)
+                    if (pkm.IV_DEF == 31)
                     {
                         perfectIVs++;
                     }
 
                     // Test SpA
-                    if (IVCheck((int)row.Cells[11].Value, dumpedPKHeX.IV_SPA, (int)row.Cells[12].Value))
+                    if (IVCheck((int)row.Cells[11].Value, pkm.IV_SPA, (int)row.Cells[12].Value))
                     {
                         addtoLog("Filter: Special Attack IV - PASS" + filterstr);
                     }
@@ -3727,13 +3117,13 @@ namespace ntrbase
                         addtoLog("Filter: Special Attack IV - FAIL" + filterstr);
                         failedtests++;
                     }
-                    if (dumpedPKHeX.IV_SPA == 31)
+                    if (pkm.IV_SPA == 31)
                     {
                         perfectIVs++;
                     }
 
                     // Test SpD
-                    if (IVCheck((int)row.Cells[13].Value, dumpedPKHeX.IV_SPD, (int)row.Cells[14].Value))
+                    if (IVCheck((int)row.Cells[13].Value, pkm.IV_SPD, (int)row.Cells[14].Value))
                     {
                         addtoLog("Filter: Special Defense IV - PASS" + filterstr);
                     }
@@ -3742,13 +3132,13 @@ namespace ntrbase
                         addtoLog("Filter: Special Defense IV - FAIL" + filterstr);
                         failedtests++;
                     }
-                    if (dumpedPKHeX.IV_SPD == 31)
+                    if (pkm.IV_SPD == 31)
                     {
                         perfectIVs++;
                     }
 
                     // Test Spe
-                    if (IVCheck((int)row.Cells[15].Value, dumpedPKHeX.IV_SPE, (int)row.Cells[16].Value))
+                    if (IVCheck((int)row.Cells[15].Value, pkm.IV_SPE, (int)row.Cells[16].Value))
                     {
                         addtoLog("Filter: Speed IV - PASS" + filterstr);
                     }
@@ -3757,7 +3147,7 @@ namespace ntrbase
                         addtoLog("Filter: Speed IV - FAIL" + filterstr);
                         failedtests++;
                     }
-                    if (dumpedPKHeX.IV_SPE == 31)
+                    if (pkm.IV_SPE == 31)
                     {
                         perfectIVs++;
                     }
@@ -4376,7 +3766,6 @@ namespace ntrbase
         public async Task<long> ReadOpponent()
         {
             addtoLog("NTR: Read opponent pokémon data");
-            SetText(dPID, "");
             DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
             waitingForData.Add(Program.scriptHelper.data(0x8800000, 0x1FFFF, pid), myArgs);
             int readcount = 0;
@@ -4396,7 +3785,7 @@ namespace ntrbase
             for (readcount = 0; readcount < 10; readcount++)
             {
                 await Task.Delay(100);
-                if (dPID.Text.Length > 1)
+                if (pkm.ChecksumValid)
                 {
                     break;
                 }
@@ -4406,10 +3795,10 @@ namespace ntrbase
                 addtoLog("NTR: Read failed");
                 return -2; // No data received
             }
-            else if (dumpedPKHeX.Species != 0)
+            else if (pkm.Species != 0)
             {
-                addtoLog("NTR: Read sucessful - PID 0x" + dumpedPKHeX.PID.ToString("X8"));
-                return dumpedPKHeX.PID;
+                addtoLog("NTR: Read sucessful - Checksum 0x" + pkm.Checksum.ToString("X8"));
+                return pkm.Checksum;
             }
             else // Empty slot
             {

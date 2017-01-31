@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using ntrbase.Properties;
+using PKHeX.Core;
 
 namespace ntrbase.Helpers
 {
@@ -161,8 +158,8 @@ namespace ntrbase.Helpers
                             byte[] dataFound = new byte[POKEBYTES];
                             Array.Copy(source, i, dataFound, 0, POKEBYTES);
                             //Decrypt it properly this time
-                            dataFound = PKHeX.decryptArray(dataFound);
-                            PKHeX pkFound = new PKHeX();
+                            dataFound = PKX.decryptArray(dataFound);
+                            PKM pkFound = Program.gCmdWindow.SAV.BlankPKM;
                             pkFound.Data = dataFound;
 
                             if (pkFound.Species >= 1 && pkFound.Species <= 802)
@@ -209,7 +206,7 @@ namespace ntrbase.Helpers
 
             int i = 0;
             foreach (Result r in allResults) {
-                PKHeX pkInfo = new PKHeX();
+                PKM pkInfo = Program.gCmdWindow.SAV.BlankPKM;
                 pkInfo.Data = r.data;
 
                 ResultsGrid.Rows[i].Tag = r.data;

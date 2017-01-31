@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PKHeX.Core;
 
 namespace ntrbase.Bot
 {
@@ -233,7 +234,7 @@ namespace ntrbase.Bot
                             pkfiles = Directory.GetFiles(wtfolderpath, "*.pk6");
                             if (pkfiles.Length > 0)
                             {
-                                PKHeX validator = new PKHeX();
+                                PKM validator = Program.gCmdWindow.SAV.BlankPKM;
                                 foreach (string pkf in pkfiles)
                                 {
                                     byte[] temp = File.ReadAllBytes(pkf);
@@ -273,13 +274,13 @@ namespace ntrbase.Bot
                             { // Select a random file
                                 currentfile = rng.Next() % pklist.Count;
                             }
-                            waitTaskbool = Program.helper.waitNTRwrite(pcpkmOff + (uint)(30 * 232 * currentbox) + (uint)(232 * currentslot), PKHeX.encryptArray(pklist[currentfile]), Program.gCmdWindow.pid);
+                            waitTaskbool = Program.helper.waitNTRwrite(pcpkmOff + (uint)(30 * 232 * currentbox) + (uint)(232 * currentslot), PKX.encryptArray(pklist[currentfile]), Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
                                 Program.gCmdWindow.updateDumpBoxes(currentbox, currentslot);
-                                Program.gCmdWindow.dumpedPKHeX.Data = pklist[currentfile];
-                                Program.gCmdWindow.updateTabs();
-                                currentPID = Program.gCmdWindow.dumpedPKHeX.PID;
+                                Program.gCmdWindow.pkm.Data = pklist[currentfile];
+                                //Program.gCmdWindow.updateTabs();
+                                currentPID = Program.gCmdWindow.pkm.PID;
                                 if (source == 2)
                                 {
                                     currentfile++;
