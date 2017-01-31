@@ -387,7 +387,7 @@ namespace ntrbase
         {
             if (updateURL != null)
             {
-                System.Diagnostics.Process.Start(updateURL);
+                Process.Start(updateURL);
             }
         }
 
