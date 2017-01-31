@@ -10,9 +10,10 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Data;
-using ntrbase.Helpers;
-using Octokit;
 using System.Diagnostics;
+using ntrbase.Helpers;
+using PKHeX.Core;
+using Octokit;
 
 namespace ntrbase
 {
@@ -32,6 +33,10 @@ namespace ntrbase
             public decimal box { get; set; }
             public decimal slot { get; set; }
         }
+
+        // New program-wide varialbes for PKHeX.Core
+        public SaveFile SAV;
+        public PKM pkm;
 
         // Program-wide variables
         public enum GameType { None, X, Y, OR, AS, SM };
