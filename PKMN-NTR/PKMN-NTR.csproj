@@ -79,17 +79,17 @@
     <Compile Include="Bot\SoftResetbot7.cs" />
     <Compile Include="Bot\WonderTradeBot6.cs" />
     <Compile Include="Bot\WonderTradeBot7.cs" />
-    <Compile Include="Helpers\DumpOpponentHelp.cs">
+    <Compile Include="Sub-forms\DumpOpponentHelp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helpers\DumpOpponentHelp.Designer.cs">
+    <Compile Include="Sub-forms\DumpOpponentHelp.Designer.cs">
       <DependentUpon>DumpOpponentHelp.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LookupTable.cs" />
-    <Compile Include="Helpers\PokeDigger.cs">
+    <Compile Include="Sub-forms\PokeDigger.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helpers\PokeDigger.Designer.cs">
+    <Compile Include="Sub-forms\PokeDigger.Designer.cs">
       <DependentUpon>PokeDigger.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\RemoteControl.cs" />
@@ -103,11 +103,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\ScriptHelper.cs" />
-    <EmbeddedResource Include="Helpers\DumpOpponentHelp.resx">
+    <EmbeddedResource Include="Sub-forms\DumpOpponentHelp.resx">
       <DependentUpon>DumpOpponentHelp.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\PokeDigger.resx">
+    <EmbeddedResource Include="Sub-forms\PokeDigger.resx">
       <DependentUpon>PokeDigger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

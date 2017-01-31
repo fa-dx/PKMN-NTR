@@ -285,7 +285,7 @@ namespace ntrbase
             nameItem7.FlatStyle = FlatStyle.Flat;
             countItem7.DisplayIndex = 1;
 
-            checkUpdate();
+            //checkUpdate();
             host.Text = Settings.Default.IP;
             callIP();
             host.Focus();
