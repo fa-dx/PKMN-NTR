@@ -948,6 +948,7 @@ namespace ntrbase
             dumpLang();
             dumpTime();
             dumpEggSeed();
+            dumpRNGSeed();
             dumpItems7();
         }
 
@@ -1207,6 +1208,19 @@ namespace ntrbase
             string str = BitConverter.ToString(data.Reverse().ToArray()).Replace("-", "");
             SetText(EggSeed, str);
             return str;
+        }
+
+        // RNG Seed
+        public void dumpRNGSeed()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleRNGSeed, null);
+            waitingForData.Add(Program.scriptHelper.data(0x325A3838, 0x04, pid), myArgs);
+        }
+
+        public void handleRNGSeed(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetText(seedRNG, BitConverter.ToUInt32(args.data, 0).ToString("X8"));
         }
 
         // Item handling

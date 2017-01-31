@@ -244,6 +244,8 @@
             this.label71 = new System.Windows.Forms.Label();
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
+            this.seedRNG = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
             this.EggSeed = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.PokeDiggerBtn = new System.Windows.Forms.Button();
@@ -3186,6 +3188,8 @@
             // tabEditTrainer
             // 
             this.tabEditTrainer.BackColor = System.Drawing.SystemColors.Control;
+            this.tabEditTrainer.Controls.Add(this.seedRNG);
+            this.tabEditTrainer.Controls.Add(this.label60);
             this.tabEditTrainer.Controls.Add(this.EggSeed);
             this.tabEditTrainer.Controls.Add(this.label7);
             this.tabEditTrainer.Controls.Add(this.PokeDiggerBtn);
@@ -3199,6 +3203,23 @@
             this.tabEditTrainer.Size = new System.Drawing.Size(558, 378);
             this.tabEditTrainer.TabIndex = 0;
             this.tabEditTrainer.Text = "Edit Save";
+            // 
+            // seedRNG
+            // 
+            this.seedRNG.Location = new System.Drawing.Point(159, 353);
+            this.seedRNG.Name = "seedRNG";
+            this.seedRNG.ReadOnly = true;
+            this.seedRNG.Size = new System.Drawing.Size(100, 20);
+            this.seedRNG.TabIndex = 8;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(91, 356);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(62, 13);
+            this.label60.TabIndex = 7;
+            this.label60.Text = "RNG Seed:";
             // 
             // EggSeed
             // 
@@ -5664,6 +5685,8 @@
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.GroupBox SR_options;
         private System.Windows.Forms.GroupBox WT_options;
+        private System.Windows.Forms.TextBox seedRNG;
+        private System.Windows.Forms.Label label60;
     }
 }
 
