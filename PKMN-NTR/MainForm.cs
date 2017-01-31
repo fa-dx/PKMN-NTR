@@ -1,4 +1,5 @@
 ﻿using ntrbase.Properties;
+using ntrbase.Sub_forms;
 using ntrbase.Bot;
 using System;
 using System.Collections.Generic;
@@ -303,7 +304,7 @@ namespace ntrbase
 
             enableWhenConnected = new Control[] { itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView };
 
-            enableWhenConnected7 = new Control[] { totalFCNum, pokeTotalFC, WTcollectFC };
+            enableWhenConnected7 = new Control[] { WTcollectFC };
 
             gen6onlyControls = new Control[] { radioBattleBox, orgbox_pos, daycare_select };
 
@@ -709,13 +710,11 @@ namespace ntrbase
             else if (args.info.Contains("niji_loc")) // Sun/Moon
             {
                 game = GameType.SM;
-                gen7 = true;
+                SAV = SaveUtil.getBlankSAV(GameVersion.SN, "PKHeX");
                 string log = args.info;
                 pname = ", pname: niji_loc";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
-                moneyoff = 0x330D8FC0;
-                currentFCoff = 0x33124D58;
                 totalFCoff = 0x33124D5C;
                 bpoff = 0x330D90D8;
                 boxOff = 0x330D9838;
@@ -752,7 +751,7 @@ namespace ntrbase
 
             // Fill fields in the form according to gen
             Program.helper.pid = pid;
-            if (game != GameType.None && gen7 && !botWorking)
+            if ((SAV.Version == GameVersion.SN || SAV.Version == GameVersion.MN) && !botWorking)
             {
                 PKXEXT = ".pk7";
                 BOXEXT = "_boxes.ek7";
@@ -770,7 +769,7 @@ namespace ntrbase
                 MAXSPECIES = 721;
                 BOXES = 31;
                 fillGen6();
-                dumpAllData();
+                //dumpAllData();
                 enableControls();
                 SetCheckedRadio(radioBoxes, true);
             }
@@ -795,7 +794,7 @@ namespace ntrbase
             SetMaximum(writeBoxTo, BOXES);
             SetMaximum(boxBreed, BOXES);
             SetMaximum(WTBox, BOXES);
-            SetText(label3, "Poké Miles:");
+            //SetText(label3, "Poké Miles:");
             SetText(radioDaycare, "Daycare");
         }
 
@@ -819,320 +818,335 @@ namespace ntrbase
             SetMaximum(writeBoxTo, BOXES);
             SetMaximum(boxBreed, BOXES);
             SetMaximum(WTBox, BOXES);
-            SetText(label3, "Current FC:");
+            //SetText(label3, "Current FC:");
             SetText(radioDaycare, "Nursery");
 
-            // Apply connection patch
-            Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
-            if (!(await Patch))
-            {
-                MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //Apply connection patch
+            //Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
+            //if (!(await Patch))
+            //{
+            //    MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         #endregion Connection
 
         #region R/W trainer data
 
-        // Dump data according to generation
-        public void dumpAllData()
-        {
-            dumpName();
-            dumpTID();
-            dumpSID();
-            dumpMoney();
-            dumpMiles();
-            dumpBP();
-            dumpLang();
-            dumpTime();
-            dumpItems();
-        }
+        //// Dump data according to generation
+        //public void dumpAllData()
+        //{
+        //    dumpName();
+        //    dumpTID();
+        //    dumpSID();
+        //    dumpMoney();
+        //    dumpMiles();
+        //    dumpBP();
+        //    dumpLang();
+        //    dumpTime();
+        //    dumpItems();
+        //}
 
         public void dumpAllData7()
         {
-            dumpName();
-            dumpTID();
-            dumpSID();
-            dumpMoney();
-            dumpBP();
-            dumpFC();
-            dumpLang();
-            dumpTime();
-            dumpEggSeed();
-            dumpRNGSeed();
-            dumpItems7();
+            dumpTrainerCard();
+            //dumpName();
+            //dumpTID();
+            //dumpSID();
+            //dumpMoney();
+            //dumpBP();
+            //dumpFC();
+            //dumpLang();
+            //dumpTime();
+            //dumpEggSeed();
+            //dumpRNGSeed();
+            //dumpItems7();
         }
 
-        private void ReloadFields_Click(object sender, EventArgs e)
-        {
-            if (gen7)
-            {
-                dumpAllData7();
-                showItems.ForeColor = Color.Green;
-                showMedicine.ForeColor = Color.Black;
-                showTMs.ForeColor = Color.Black;
-                showBerries.ForeColor = Color.Black;
-                showKeys.ForeColor = Color.Black;
-            }
-            else
-            {
-                dumpAllData();
-            }
-        }
+        //private void ReloadFields_Click(object sender, EventArgs e)
+        //{
+        //    if (gen7)
+        //    {
+        //        dumpAllData7();
+        //        showItems.ForeColor = Color.Green;
+        //        showMedicine.ForeColor = Color.Black;
+        //        showTMs.ForeColor = Color.Black;
+        //        showBerries.ForeColor = Color.Black;
+        //        showKeys.ForeColor = Color.Black;
+        //    }
+        //    else
+        //    {
+        //        dumpAllData();
+        //    }
+        //}
 
         // Name handling
-        public void dumpName()
+        public void dumpTrainerCard()
         {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x18], handleNameData, null);
-            waitingForData.Add(Program.scriptHelper.data(nameoff, 0x18, pid), myArgs);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x0C0], handleTrainerCard, null);
+            waitingForData.Add(Program.scriptHelper.data(0x330D67D0, 0x0C0, pid), myArgs);
         }
 
-        public void handleNameData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetText(playerName, Encoding.Unicode.GetString(args.data));
-        }
-
-        private void pokeName_Click(object sender, EventArgs e)
-        {
-            if (playerName.Text.Length <= 12)
-            {
-                string nameS = playerName.Text.PadRight(12, '\0');
-                byte[] nameBytes = Encoding.Unicode.GetBytes(nameS);
-                Program.scriptHelper.write(nameoff, nameBytes, pid);
-            }
-            else
-            {
-                MessageBox.Show("That name is too long, please choose a trainer name of 12 character or less.", "Name too long!");
-            }
-        }
-
-        // TID handling
-        public void dumpTID()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x02], handleTIDData, null);
-            waitingForData.Add(Program.scriptHelper.data(tidoff, 0x02, pid), myArgs);
-        }
-
-        public void handleTIDData(object args_obj)
+        public void handleTrainerCard(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetValue(TIDNum, BitConverter.ToUInt16(args.data, 0));
+            Array.Copy(args.data, 0, SAV.Data, 0x01200, 0x0C0);
         }
 
-        private void pokeTID_Click(object sender, EventArgs e)
-        {
-            byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16(TIDNum.Value));
-            Program.scriptHelper.write(tidoff, tidbyte, pid);
-        }
 
-        // SID handling
-        public void dumpSID()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x02], handleSIDData, null);
-            waitingForData.Add(Program.scriptHelper.data(sidoff, 0x02, pid), myArgs);
-        }
+        //// Name handling
+        //public void dumpName()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x18], handleNameData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(nameoff, 0x18, pid), myArgs);
+        //}
 
-        public void handleSIDData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetValue(SIDNum, BitConverter.ToUInt16(args.data, 0));
-        }
+        //public void handleNameData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetText(playerName, Encoding.Unicode.GetString(args.data));
+        //}
 
-        private void pokeSID_Click(object sender, EventArgs e)
-        {
-            byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16(SIDNum.Value));
-            Program.scriptHelper.write(sidoff, sidbyte, pid);
-        }
+        //private void pokeName_Click(object sender, EventArgs e)
+        //{
+        //    if (playerName.Text.Length <= 12)
+        //    {
+        //        string nameS = playerName.Text.PadRight(12, '\0');
+        //        byte[] nameBytes = Encoding.Unicode.GetBytes(nameS);
+        //        Program.scriptHelper.write(nameoff, nameBytes, pid);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("That name is too long, please choose a trainer name of 12 character or less.", "Name too long!");
+        //    }
+        //}
 
-        // Money handling
-        public void dumpMoney()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMoneyData, null);
-            waitingForData.Add(Program.scriptHelper.data(moneyoff, 0x04, pid), myArgs);
-        }
+        //// TID handling
+        //public void dumpTID()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x02], handleTIDData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(tidoff, 0x02, pid), myArgs);
+        //}
 
-        public void handleMoneyData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetValue(moneyNum, BitConverter.ToInt32(args.data, 0));
-        }
+        //public void handleTIDData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetValue(TIDNum, BitConverter.ToUInt16(args.data, 0));
+        //}
 
-        private void pokeMoney_Click(object sender, EventArgs e)
-        {
-            byte[] moneybyte = BitConverter.GetBytes(Convert.ToInt32(moneyNum.Value));
-            Program.scriptHelper.write(moneyoff, moneybyte, pid);
-        }
+        //private void pokeTID_Click(object sender, EventArgs e)
+        //{
+        //    byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16(TIDNum.Value));
+        //    Program.scriptHelper.write(tidoff, tidbyte, pid);
+        //}
 
-        // Battle Points Handling
-        public void dumpBP()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleBPData, null);
-            waitingForData.Add(Program.scriptHelper.data(bpoff, 0x04, pid), myArgs);
-        }
+        //// SID handling
+        //public void dumpSID()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x02], handleSIDData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(sidoff, 0x02, pid), myArgs);
+        //}
 
-        public void handleBPData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetValue(bpNum, BitConverter.ToInt32(args.data, 0));
-        }
+        //public void handleSIDData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetValue(SIDNum, BitConverter.ToUInt16(args.data, 0));
+        //}
 
-        private void pokeBP_Click(object sender, EventArgs e)
-        {
-            byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-            Program.scriptHelper.write(bpoff, bpbyte, pid);
-        }
+        //private void pokeSID_Click(object sender, EventArgs e)
+        //{
+        //    byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16(SIDNum.Value));
+        //    Program.scriptHelper.write(sidoff, sidbyte, pid);
+        //}
 
-        // Poké Miles and Current FC handling
-        public void dumpMiles()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
-            waitingForData.Add(Program.scriptHelper.data(milesoff, 0x04, pid), myArgs);
-        }
+        //// Money handling
+        //public void dumpMoney()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMoneyData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(moneyoff, 0x04, pid), myArgs);
+        //}
 
-        public void handleMilesData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
-        }
+        //public void handleMoneyData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetValue(moneyNum, BitConverter.ToInt32(args.data, 0));
+        //}
 
-        private void pokeMiles_Click(object sender, EventArgs e)
-        {
-            if (gen7)
-            { // Current Festival Coins
-                byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
-                Program.scriptHelper.write(currentFCoff, FCbyte, pid);
-            }
-            else
-            { // Poké Miles
-                byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
-                Program.scriptHelper.write(milesoff, milesbyte, pid);
-            }
-        }
+        //private void pokeMoney_Click(object sender, EventArgs e)
+        //{
+        //    byte[] moneybyte = BitConverter.GetBytes(Convert.ToInt32(moneyNum.Value));
+        //    Program.scriptHelper.write(moneyoff, moneybyte, pid);
+        //}
 
-        // Total Festival Coins handling
-        public void dumpFC()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
-            waitingForData.Add(Program.scriptHelper.data(currentFCoff, 0x04, pid), myArgs);
-            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleFC, null);
-            waitingForData.Add(Program.scriptHelper.data(totalFCoff, 0x04, pid), myArgs2);
-        }
+        //// Battle Points Handling
+        //public void dumpBP()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleBPData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(bpoff, 0x04, pid), myArgs);
+        //}
 
-        public void handleFC(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetValue(totalFCNum, BitConverter.ToInt32(args.data, 0));
-        }
+        //public void handleBPData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetValue(bpNum, BitConverter.ToInt32(args.data, 0));
+        //}
 
-        private void pokeTotalFC_Click(object sender, EventArgs e)
-        {
-            byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(totalFCNum.Value));
-            Program.scriptHelper.write(totalFCoff, FCbyte, pid);
-        }
+        //private void pokeBP_Click(object sender, EventArgs e)
+        //{
+        //    byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
+        //    Program.scriptHelper.write(bpoff, bpbyte, pid);
+        //}
 
-        // Language handling
-        public void dumpLang()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x01], handleLangData, null);
-            waitingForData.Add(Program.scriptHelper.data(langoff, 0x01, pid), myArgs);
-        }
+        //// Poké Miles and Current FC handling
+        //public void dumpMiles()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(milesoff, 0x04, pid), myArgs);
+        //}
 
-        public void handleLangData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //public void handleMilesData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
+        //}
 
-            byte langbyte = args.data[0];
-            int i = 0;
-            switch (langbyte)
-            {
-                case 1: i = 0; break;
-                case 2: i = 1; break;
-                case 3: i = 2; break;
-                case 4: i = 3; break;
-                case 5: i = 4; break;
-                case 7: i = 5; break;
-                case 8: i = 6; break;
-                case 9: i = 7; break;
-                case 10: i = 8; break;
-                default: i = -1; break;
-            }
-            SetSelectedIndex(Lang, i);
-        }
+        //private void pokeMiles_Click(object sender, EventArgs e)
+        //{
+        //    if (gen7)
+        //    { // Current Festival Coins
+        //        byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
+        //        Program.scriptHelper.write(currentFCoff, FCbyte, pid);
+        //    }
+        //    else
+        //    { // Poké Miles
+        //        byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
+        //        Program.scriptHelper.write(milesoff, milesbyte, pid);
+        //    }
+        //}
 
-        private void pokeLang_Click(object sender, EventArgs e)
-        {
-            switch (Lang.SelectedIndex)
-            {
-                case 0: lang = 0x01; break;
-                case 1: lang = 0x02; break;
-                case 2: lang = 0x03; break;
-                case 3: lang = 0x04; break;
-                case 4: lang = 0x05; break;
-                case 5: lang = 0x07; break;
-                case 6: lang = 0x08; break;
-                case 7: lang = 0x09; break;
-                case 8: lang = 0x0A; break;
-            }
-            Program.scriptHelper.writebyte(langoff, lang, pid);
-        }
+        //// Total Festival Coins handling
+        //public void dumpFC()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(currentFCoff, 0x04, pid), myArgs);
+        //    DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleFC, null);
+        //    waitingForData.Add(Program.scriptHelper.data(totalFCoff, 0x04, pid), myArgs2);
+        //}
 
-        // Time handling
-        public void dumpTime()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleTimeData, null);
-            waitingForData.Add(Program.scriptHelper.data(timeoff, 0x04, pid), myArgs);
-        }
+        //public void handleFC(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetValue(totalFCNum, BitConverter.ToInt32(args.data, 0));
+        //}
 
-        public void handleTimeData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetValue(hourNum, BitConverter.ToUInt16(args.data, 0));
-            SetValue(minNum, args.data[2]);
-            SetValue(secNum, args.data[3]);
-        }
+        //private void pokeTotalFC_Click(object sender, EventArgs e)
+        //{
+        //    byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(totalFCNum.Value));
+        //    Program.scriptHelper.write(totalFCoff, FCbyte, pid);
+        //}
 
-        private void pokeTime_Click(object sender, EventArgs e)
-        {
-            byte[] timeData = new byte[4];
-            BitConverter.GetBytes(Convert.ToUInt16(hourNum.Value)).CopyTo(timeData, 0);
-            timeData[2] = Convert.ToByte(minNum.Value);
-            timeData[3] = Convert.ToByte(secNum.Value);
-            Program.scriptHelper.write(timeoff, timeData, pid);
-        }
+        //// Language handling
+        //public void dumpLang()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x01], handleLangData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(langoff, 0x01, pid), myArgs);
+        //}
 
-        // Egg Seed handling
-        public void dumpEggSeed()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x10], handleEggSeed, null);
-            waitingForData.Add(Program.scriptHelper.data(eggseedOff, 0x10, pid), myArgs);
-        }
+        //public void handleLangData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
 
-        public void handleEggSeed(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetText(EggSeed, BitConverter.ToString(args.data.Reverse().ToArray()).Replace("-", ""));
-        }
+        //    byte langbyte = args.data[0];
+        //    int i = 0;
+        //    switch (langbyte)
+        //    {
+        //        case 1: i = 0; break;
+        //        case 2: i = 1; break;
+        //        case 3: i = 2; break;
+        //        case 4: i = 3; break;
+        //        case 5: i = 4; break;
+        //        case 7: i = 5; break;
+        //        case 8: i = 6; break;
+        //        case 9: i = 7; break;
+        //        case 10: i = 8; break;
+        //        default: i = -1; break;
+        //    }
+        //    SetSelectedIndex(Lang, i);
+        //}
 
-        public string updateSeed(byte[] data)
-        {
-            string str = BitConverter.ToString(data.Reverse().ToArray()).Replace("-", "");
-            SetText(EggSeed, str);
-            return str;
-        }
+        //private void pokeLang_Click(object sender, EventArgs e)
+        //{
+        //    switch (Lang.SelectedIndex)
+        //    {
+        //        case 0: lang = 0x01; break;
+        //        case 1: lang = 0x02; break;
+        //        case 2: lang = 0x03; break;
+        //        case 3: lang = 0x04; break;
+        //        case 4: lang = 0x05; break;
+        //        case 5: lang = 0x07; break;
+        //        case 6: lang = 0x08; break;
+        //        case 7: lang = 0x09; break;
+        //        case 8: lang = 0x0A; break;
+        //    }
+        //    Program.scriptHelper.writebyte(langoff, lang, pid);
+        //}
 
-        // RNG Seed
-        public void dumpRNGSeed()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleRNGSeed, null);
-            waitingForData.Add(Program.scriptHelper.data(0x325A3838, 0x04, pid), myArgs);
-        }
+        //// Time handling
+        //public void dumpTime()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleTimeData, null);
+        //    waitingForData.Add(Program.scriptHelper.data(timeoff, 0x04, pid), myArgs);
+        //}
 
-        public void handleRNGSeed(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            SetText(seedRNG, BitConverter.ToUInt32(args.data, 0).ToString("X8"));
-        }
+        //public void handleTimeData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetValue(hourNum, BitConverter.ToUInt16(args.data, 0));
+        //    SetValue(minNum, args.data[2]);
+        //    SetValue(secNum, args.data[3]);
+        //}
+
+        //private void pokeTime_Click(object sender, EventArgs e)
+        //{
+        //    byte[] timeData = new byte[4];
+        //    BitConverter.GetBytes(Convert.ToUInt16(hourNum.Value)).CopyTo(timeData, 0);
+        //    timeData[2] = Convert.ToByte(minNum.Value);
+        //    timeData[3] = Convert.ToByte(secNum.Value);
+        //    Program.scriptHelper.write(timeoff, timeData, pid);
+        //}
+
+        //// Egg Seed handling
+        //public void dumpEggSeed()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x10], handleEggSeed, null);
+        //    waitingForData.Add(Program.scriptHelper.data(eggseedOff, 0x10, pid), myArgs);
+        //}
+
+        //public void handleEggSeed(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetText(EggSeed, BitConverter.ToString(args.data.Reverse().ToArray()).Replace("-", ""));
+        //}
+
+        //public string updateSeed(byte[] data)
+        //{
+        //    string str = BitConverter.ToString(data.Reverse().ToArray()).Replace("-", "");
+        //    SetText(EggSeed, str);
+        //    return str;
+        //}
+
+        //// RNG Seed
+        //public void dumpRNGSeed()
+        //{
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleRNGSeed, null);
+        //    waitingForData.Add(Program.scriptHelper.data(0x325A3838, 0x04, pid), myArgs);
+        //}
+
+        //public void handleRNGSeed(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    SetText(seedRNG, BitConverter.ToUInt32(args.data, 0).ToString("X8"));
+        //}
 
         // Item handling
         public void dumpItems()
@@ -2482,9 +2496,9 @@ namespace ntrbase
             int TSV = getTSV(TID.Value, SID.Value);
             if (gen7)
             {
-                int G7ID = getGen7ID(TID.Value, SIDNum.Value);
-                SetTooltip(ToolTipTSVpoke, TID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
-                SetTooltip(ToolTipTSVpoke, SID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+                //int G7ID = getGen7ID(TID.Value, SIDNum.Value);
+                //SetTooltip(ToolTipTSVpoke, TID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+                //SetTooltip(ToolTipTSVpoke, SID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
             }
             else
             {
@@ -2493,10 +2507,10 @@ namespace ntrbase
             }
         }
 
-        private void TIDNum_ValueChanged(object sender, EventArgs e)
-        { // Handles Trainer's TID/SID fields
-            setTSVToolTip(TIDNum, SIDNum);
-        }
+        //private void TIDNum_ValueChanged(object sender, EventArgs e)
+        //{ // Handles Trainer's TID/SID fields
+        //    setTSVToolTip(TIDNum, SIDNum);
+        //}
 
         // Sprite handling
         private void RefreshSprite()
@@ -2570,6 +2584,12 @@ namespace ntrbase
         #endregion GUI handling
 
         #region Sub-forms
+
+        // Trainer Editor
+        private void Tool_Trainer_Click(object sender, EventArgs e)
+        {
+            new Edit_Trainer(SAV.Version).Show();
+        }
 
         // PokeDigger
         private void PokeDiggerBtn_Click(object sender, EventArgs e)
@@ -2991,7 +3011,7 @@ namespace ntrbase
                     failedtests = 0;
 
                     // Test shiny
-                    filterstr = " (PSV: " + getPSV(pkm.PID).ToString("D4") + " TSV: " + getTSV(TIDNum.Value, SIDNum.Value).ToString("D4") + ")";
+                    //filterstr = " (PSV: " + getPSV(pkm.PID).ToString("D4") + " TSV: " + getTSV(TIDNum.Value, SIDNum.Value).ToString("D4") + ")";
                     if ((int)row.Cells[0].Value == 1)
                     {
                         if (pkm.IsShiny)
@@ -3564,11 +3584,11 @@ namespace ntrbase
             SetValue(WTtradesNo, quantity);
         }
 
-        public void updateFCfields(uint totalFC, uint currentFC)
-        {
-            SetValue(milesNum, currentFC);
-            SetValue(totalFCNum, totalFC);
-        }
+        //public void updateFCfields(uint totalFC, uint currentFC)
+        //{
+        //    SetValue(milesNum, currentFC);
+        //    SetValue(totalFCNum, totalFC);
+        //}
 
         private void WTsource_Folder_CheckedChanged(object sender, EventArgs e)
         {
@@ -4144,7 +4164,6 @@ namespace ntrbase
         }
 
         #endregion Bots
-
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 

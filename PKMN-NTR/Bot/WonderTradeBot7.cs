@@ -188,7 +188,7 @@ namespace ntrbase.Bot
                                 attempts = 0;
                                 currentFC = Program.helper.lastRead;
                                 Report("Bot: Current FC: " + currentFC);
-                                Program.gCmdWindow.updateFCfields(currentTotalFC, currentFC);
+                                //Program.gCmdWindow.updateFCfields(currentTotalFC, currentFC);
                                 int i = 0;
                                 while (currentTotalFC >= nextFC)
                                 {

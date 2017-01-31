@@ -1,9 +1,11 @@
 ﻿using System.Drawing;
+using PKHeX.Core;
 
 namespace ntrbase
 {
     class LookupTable
     {
+
         #region NFC Patch
 
         public static readonly uint nfcOff = 0x3E14C0;
@@ -12,6 +14,28 @@ namespace ntrbase
         public static readonly uint nfcVal = 0xE3A01000;
 
         #endregion NFC Patch
+
+        #region RAM Address
+
+        public static uint nameOff(GameVersion game)
+        {
+            switch (game)
+            {
+                case GameVersion.X:
+                case GameVersion.Y:
+                    return 0x8C79C84;
+                case GameVersion.OR:
+                case GameVersion.AS:
+                    return 0x8C81388;
+                case GameVersion.SN:
+                case GameVersion.MN:
+                    return 0x330D6808;
+                default:
+                    return 0;
+            }
+        }
+
+        #endregion RAM Address
 
         #region Empty poke
 

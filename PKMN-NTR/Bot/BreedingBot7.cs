@@ -142,7 +142,7 @@ namespace ntrbase.Bot
                             waitTaskbool = Program.helper.waitNTRmultiread(eggseedOff, 0x10);
                             if (await waitTaskbool)
                             {
-                                Report("Bot: Current seed - " + Program.gCmdWindow.updateSeed(Program.helper.lastmultiread));
+                                //Report("Bot: Current seed - " + Program.gCmdWindow.updateSeed(Program.helper.lastmultiread));
                                 attempts = 0;
                                 if (mode != 3)
                                 {
