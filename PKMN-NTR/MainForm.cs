@@ -301,9 +301,9 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            enableWhenConnected = new Control[] { dumpBox, itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView };
+            enableWhenConnected = new Control[] { itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView };
 
-            enableWhenConnected7 = new Control[] { dumpBox, totalFCNum, pokeTotalFC, WTcollectFC };
+            enableWhenConnected7 = new Control[] { totalFCNum, pokeTotalFC, WTcollectFC };
 
             gen6onlyControls = new Control[] { radioBattleBox, orgbox_pos, daycare_select };
 
