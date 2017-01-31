@@ -1768,9 +1768,9 @@
             this.updateLabel.AutoSize = true;
             this.updateLabel.Location = new System.Drawing.Point(224, 356);
             this.updateLabel.Name = "updateLabel";
-            this.updateLabel.Size = new System.Drawing.Size(110, 13);
+            this.updateLabel.Size = new System.Drawing.Size(88, 13);
             this.updateLabel.TabIndex = 4;
-            this.updateLabel.Text = "Looking for updates...";
+            this.updateLabel.Text = "Feature disabled.";
             this.toolTip1.SetToolTip(this.updateLabel, "If an update is available, you can click here to go to the release page in GitHub" +
         ".");
             this.updateLabel.Click += new System.EventHandler(this.updateLabel_Click);

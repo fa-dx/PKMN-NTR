@@ -173,7 +173,9 @@ namespace ntrbase
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            label69.Text = "Version: " + System.Windows.Forms.Application.ProductVersion;
+            label69.Text = "Version: " + System.Windows.Forms.Application.ProductVersion + " - DEVELOPMENT BUILD";
+
+            addtoLog("THIS IS A BUILD FOR A DEVEOPMENT BRANCH - DO NOT EXPECT IT TO WORK");
 
             DataGridViewComboBoxColumn itemItem = new DataGridViewComboBoxColumn
             {
