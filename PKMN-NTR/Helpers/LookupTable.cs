@@ -17,21 +17,207 @@ namespace ntrbase
 
         #region RAM Address
 
-        public static uint nameOff(GameVersion game)
+        public static uint nameOff
         {
-            switch (game)
+            get
             {
-                case GameVersion.X:
-                case GameVersion.Y:
-                    return 0x8C79C84;
-                case GameVersion.OR:
-                case GameVersion.AS:
-                    return 0x8C81388;
-                case GameVersion.SN:
-                case GameVersion.MN:
-                    return 0x330D6808;
-                default:
-                    return 0;
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C79C84;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C81388;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x330D6808;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint tidOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C79C3C;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C81340;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x330D67D0;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint sidOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C79C3E;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C81342;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x330D67D2;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint moneyOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C6A6AC;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C71DC0;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x330D8FC0;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint festivalcoinsOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x33124D58;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint totalfcOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x33124D5C;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint milesOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C82BA0;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C8B36C;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint bpOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C6A6E0;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C71DE8;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x330D90D8;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint timeOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8CE2814;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8CFBD88;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x34197648;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint eggseedOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x3313EDDC;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint rngseedOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x325A3838;
+                    default:
+                        return 0;
+                }
             }
         }
 

@@ -430,6 +430,7 @@ namespace ntrbase.Helpers
             }
             else
             {
+                NTRtimer.Stop();
                 return true;
             }
         }

@@ -38,6 +38,7 @@ namespace ntrbase
         // New program-wide varialbes for PKHeX.Core
         public SaveFile SAV;
         public PKM pkm;
+        public byte[] fileinfo;
 
         // Program-wide variables
         public enum GameType { None, X, Y, OR, AS, SM };
@@ -90,17 +91,7 @@ namespace ntrbase
         public string pname;
         public GameType game = GameType.None;
         //Offsets for basic data
-        public uint nameoff;
-        public uint tidoff;
-        public uint sidoff;
-        public uint timeoff;
         public uint langoff;
-        public uint moneyoff;
-        public uint milesoff;
-        public uint currentFCoff;
-        public uint totalFCoff;
-        public uint bpoff;
-        public uint eggseedOff;
         //Offsets for items data
         public uint itemsoff;
         public uint medsoff;
@@ -414,7 +405,7 @@ namespace ntrbase
                     SetEnabled(c, true);
                 }
             }
-            foreach (TabPage tab in miscTabs.TabPages)
+            foreach (TabPage tab in Tabs_General.TabPages)
             {
                 SetEnabled(tab, true);
             }
@@ -436,12 +427,9 @@ namespace ntrbase
                     SetEnabled(c, false);
                 }
             }
-            foreach (TabPage tab in miscTabs.TabPages)
+            foreach (TabPage tab in Tabs_General.TabPages)
             {
-                if (!(tab.Name == "tabFilters" || tab.Name == "tabNTRlog"))
-                {
-                    SetEnabled(tab, false);
-                }
+                SetEnabled(tab, false);
             }
         }
 
@@ -595,9 +583,7 @@ namespace ntrbase
                 pname = ", pname: kujira-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
-                moneyoff = 0x8C6A6AC;
-                milesoff = 0x8C82BA0;
-                bpoff = 0x8C6A6E0;
+                SAV = SaveUtil.getBlankSAV(GameVersion.X, "PKMN-NTR");
                 boxOff = 0x8C861C8;
                 daycare1Off = 0x8C7FF4C;
                 daycare2Off = 0x8C8003C;
@@ -606,10 +592,6 @@ namespace ntrbase
                 keysoff = 0x8C67BA4;
                 tmsoff = 0x8C67D24;
                 bersoff = 0x8C67FCC;
-                nameoff = 0x8C79C84;
-                tidoff = 0x8C79C3C;
-                sidoff = 0x8C79C3E;
-                timeoff = 0x8CE2814;
                 langoff = 0x8C79C69;
                 tradeOff = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
@@ -624,9 +606,7 @@ namespace ntrbase
                 pname = ", pname: kujira-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
-                moneyoff = 0x8C6A6AC;
-                milesoff = 0x8C82BA0;
-                bpoff = 0x8C6A6E0;
+                SAV = SaveUtil.getBlankSAV(GameVersion.Y, "PKMN-NTR");
                 boxOff = 0x8C861C8;
                 daycare1Off = 0x8C7FF4C;
                 daycare2Off = 0x8C8003C;
@@ -635,10 +615,6 @@ namespace ntrbase
                 keysoff = 0x8C67BA4;
                 tmsoff = 0x8C67D24;
                 bersoff = 0x8C67FCC;
-                nameoff = 0x8C79C84;
-                tidoff = 0x8C79C3C;
-                sidoff = 0x8C79C3E;
-                timeoff = 0x8CE2814;
                 langoff = 0x8C79C69;
                 tradeOff = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
@@ -653,9 +629,7 @@ namespace ntrbase
                 pname = ", pname:  sango-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
-                moneyoff = 0x8C71DC0;
-                milesoff = 0x8C8B36C;
-                bpoff = 0x8C71DE8;
+                SAV = SaveUtil.getBlankSAV(GameVersion.OR, "PKMN-NTR");
                 boxOff = 0x8C9E134;
                 daycare1Off = 0x8C88180;
                 daycare2Off = 0x8C88270;
@@ -666,10 +640,6 @@ namespace ntrbase
                 keysoff = 0x8C6F2B0;
                 tmsoff = 0x8C6F430;
                 bersoff = 0x8C6F6E0;
-                nameoff = 0x8C81388;
-                tidoff = 0x8C81340;
-                sidoff = 0x8C81342;
-                timeoff = 0x8CFBD88;
                 langoff = 0x8C8136D;
                 tradeOff = 0x8520000;
                 battleBoxOff = 0x8C72330;
@@ -684,9 +654,7 @@ namespace ntrbase
                 pname = ", pname:  sango-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
-                moneyoff = 0x8C71DC0;
-                milesoff = 0x8C8B36C;
-                bpoff = 0x8C71DE8;
+                SAV = SaveUtil.getBlankSAV(GameVersion.AS, "PKMN-NTR");
                 boxOff = 0x8C9E134;
                 daycare1Off = 0x8C88180;
                 daycare2Off = 0x8C88270;
@@ -697,10 +665,6 @@ namespace ntrbase
                 keysoff = 0x8C6F2B0;
                 tmsoff = 0x8C6F430;
                 bersoff = 0x8C6F6E0;
-                nameoff = 0x8C81388;
-                tidoff = 0x8C81340;
-                sidoff = 0x8C81342;
-                timeoff = 0x8CFBD88;
                 langoff = 0x8C8136D;
                 tradeOff = 0x8520000;
                 battleBoxOff = 0x8C72330;
@@ -710,13 +674,11 @@ namespace ntrbase
             else if (args.info.Contains("niji_loc")) // Sun/Moon
             {
                 game = GameType.SM;
-                SAV = SaveUtil.getBlankSAV(GameVersion.SN, "PKHeX");
                 string log = args.info;
                 pname = ", pname: niji_loc";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
                 pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
-                totalFCoff = 0x33124D5C;
-                bpoff = 0x330D90D8;
+                SAV = SaveUtil.getBlankSAV(GameVersion.SN, "PKMN-NTR");
                 boxOff = 0x330D9838;
                 daycare1Off = 0x3313EC01;
                 daycare2Off = 0x3313ECEA;
@@ -725,12 +687,7 @@ namespace ntrbase
                 keysoff = 0x330D5FEC;
                 tmsoff = 0x330D62CC;
                 bersoff = 0x330D657C;
-                nameoff = 0x330D6808;
-                tidoff = 0x330D67D0;
-                sidoff = 0x330D67D2;
-                timeoff = 0x34197648;
                 langoff = 0x330D6805;
-                eggseedOff = 0x3313EDDC;
                 tradeOff = 0x32A870C8;
                 opponentOff = 0x3254F4AC;
                 partyOff = 0x34195E10;
@@ -769,7 +726,7 @@ namespace ntrbase
                 MAXSPECIES = 721;
                 BOXES = 31;
                 fillGen6();
-                //dumpAllData();
+                dumpAllData6();
                 enableControls();
                 SetCheckedRadio(radioBoxes, true);
             }
@@ -822,63 +779,27 @@ namespace ntrbase
             SetText(radioDaycare, "Nursery");
 
             //Apply connection patch
-            //Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
-            //if (!(await Patch))
-            //{
-            //    MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
+            if (!(await Patch))
+            {
+                MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion Connection
 
         #region R/W trainer data
 
-        //// Dump data according to generation
-        //public void dumpAllData()
-        //{
-        //    dumpName();
-        //    dumpTID();
-        //    dumpSID();
-        //    dumpMoney();
-        //    dumpMiles();
-        //    dumpBP();
-        //    dumpLang();
-        //    dumpTime();
-        //    dumpItems();
-        //}
+        // Dump data according to generation
+        public void dumpAllData6()
+        {
+
+        }
 
         public void dumpAllData7()
         {
-            dumpTrainerCard();
-            //dumpName();
-            //dumpTID();
-            //dumpSID();
-            //dumpMoney();
-            //dumpBP();
-            //dumpFC();
-            //dumpLang();
-            //dumpTime();
-            //dumpEggSeed();
-            //dumpRNGSeed();
-            //dumpItems7();
-        }
 
-        //private void ReloadFields_Click(object sender, EventArgs e)
-        //{
-        //    if (gen7)
-        //    {
-        //        dumpAllData7();
-        //        showItems.ForeColor = Color.Green;
-        //        showMedicine.ForeColor = Color.Black;
-        //        showTMs.ForeColor = Color.Black;
-        //        showBerries.ForeColor = Color.Black;
-        //        showKeys.ForeColor = Color.Black;
-        //    }
-        //    else
-        //    {
-        //        dumpAllData();
-        //    }
-        //}
+        }
 
         // Name handling
         public void dumpTrainerCard()
@@ -894,19 +815,7 @@ namespace ntrbase
         }
 
 
-        //// Name handling
-        //public void dumpName()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x18], handleNameData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(nameoff, 0x18, pid), myArgs);
-        //}
-
-        //public void handleNameData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetText(playerName, Encoding.Unicode.GetString(args.data));
-        //}
-
+        // Name handling
         //private void pokeName_Click(object sender, EventArgs e)
         //{
         //    if (playerName.Text.Length <= 12)
@@ -922,18 +831,6 @@ namespace ntrbase
         //}
 
         //// TID handling
-        //public void dumpTID()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x02], handleTIDData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(tidoff, 0x02, pid), myArgs);
-        //}
-
-        //public void handleTIDData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetValue(TIDNum, BitConverter.ToUInt16(args.data, 0));
-        //}
-
         //private void pokeTID_Click(object sender, EventArgs e)
         //{
         //    byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16(TIDNum.Value));
@@ -941,18 +838,6 @@ namespace ntrbase
         //}
 
         //// SID handling
-        //public void dumpSID()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x02], handleSIDData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(sidoff, 0x02, pid), myArgs);
-        //}
-
-        //public void handleSIDData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetValue(SIDNum, BitConverter.ToUInt16(args.data, 0));
-        //}
-
         //private void pokeSID_Click(object sender, EventArgs e)
         //{
         //    byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16(SIDNum.Value));
@@ -961,17 +846,6 @@ namespace ntrbase
 
         //// Money handling
         //public void dumpMoney()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMoneyData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(moneyoff, 0x04, pid), myArgs);
-        //}
-
-        //public void handleMoneyData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetValue(moneyNum, BitConverter.ToInt32(args.data, 0));
-        //}
-
         //private void pokeMoney_Click(object sender, EventArgs e)
         //{
         //    byte[] moneybyte = BitConverter.GetBytes(Convert.ToInt32(moneyNum.Value));
@@ -979,18 +853,6 @@ namespace ntrbase
         //}
 
         //// Battle Points Handling
-        //public void dumpBP()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleBPData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(bpoff, 0x04, pid), myArgs);
-        //}
-
-        //public void handleBPData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetValue(bpNum, BitConverter.ToInt32(args.data, 0));
-        //}
-
         //private void pokeBP_Click(object sender, EventArgs e)
         //{
         //    byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
@@ -998,18 +860,6 @@ namespace ntrbase
         //}
 
         //// Poké Miles and Current FC handling
-        //public void dumpMiles()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(milesoff, 0x04, pid), myArgs);
-        //}
-
-        //public void handleMilesData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
-        //}
-
         //private void pokeMiles_Click(object sender, EventArgs e)
         //{
         //    if (gen7)
@@ -1025,20 +875,6 @@ namespace ntrbase
         //}
 
         //// Total Festival Coins handling
-        //public void dumpFC()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(currentFCoff, 0x04, pid), myArgs);
-        //    DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleFC, null);
-        //    waitingForData.Add(Program.scriptHelper.data(totalFCoff, 0x04, pid), myArgs2);
-        //}
-
-        //public void handleFC(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetValue(totalFCNum, BitConverter.ToInt32(args.data, 0));
-        //}
-
         //private void pokeTotalFC_Click(object sender, EventArgs e)
         //{
         //    byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(totalFCNum.Value));
@@ -1092,20 +928,6 @@ namespace ntrbase
         //}
 
         //// Time handling
-        //public void dumpTime()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleTimeData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(timeoff, 0x04, pid), myArgs);
-        //}
-
-        //public void handleTimeData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetValue(hourNum, BitConverter.ToUInt16(args.data, 0));
-        //    SetValue(minNum, args.data[2]);
-        //    SetValue(secNum, args.data[3]);
-        //}
-
         //private void pokeTime_Click(object sender, EventArgs e)
         //{
         //    byte[] timeData = new byte[4];
@@ -1113,39 +935,6 @@ namespace ntrbase
         //    timeData[2] = Convert.ToByte(minNum.Value);
         //    timeData[3] = Convert.ToByte(secNum.Value);
         //    Program.scriptHelper.write(timeoff, timeData, pid);
-        //}
-
-        //// Egg Seed handling
-        //public void dumpEggSeed()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x10], handleEggSeed, null);
-        //    waitingForData.Add(Program.scriptHelper.data(eggseedOff, 0x10, pid), myArgs);
-        //}
-
-        //public void handleEggSeed(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetText(EggSeed, BitConverter.ToString(args.data.Reverse().ToArray()).Replace("-", ""));
-        //}
-
-        //public string updateSeed(byte[] data)
-        //{
-        //    string str = BitConverter.ToString(data.Reverse().ToArray()).Replace("-", "");
-        //    SetText(EggSeed, str);
-        //    return str;
-        //}
-
-        //// RNG Seed
-        //public void dumpRNGSeed()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleRNGSeed, null);
-        //    waitingForData.Add(Program.scriptHelper.data(0x325A3838, 0x04, pid), myArgs);
-        //}
-
-        //public void handleRNGSeed(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    SetText(seedRNG, BitConverter.ToUInt32(args.data, 0).ToString("X8"));
         //}
 
         // Item handling
@@ -2588,7 +2377,8 @@ namespace ntrbase
         // Trainer Editor
         private void Tool_Trainer_Click(object sender, EventArgs e)
         {
-            new Edit_Trainer(SAV.Version).Show();
+            txtLog.Clear();
+            new Edit_Trainer().Show();
         }
 
         // PokeDigger

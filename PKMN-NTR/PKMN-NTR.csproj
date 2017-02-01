@@ -79,6 +79,7 @@
     <Compile Include="Bot\SoftResetbot7.cs" />
     <Compile Include="Bot\WonderTradeBot6.cs" />
     <Compile Include="Bot\WonderTradeBot7.cs" />
+    <Compile Include="Helpers\Delg.cs" />
     <Compile Include="Sub-forms\DumpOpponentHelp.cs">
       <SubType>Form</SubType>
     </Compile>
