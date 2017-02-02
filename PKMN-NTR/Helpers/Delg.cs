@@ -58,6 +58,32 @@ namespace ntrbase.Helpers
                 ctrl.Value = val;
         }
 
+        delegate void SetMaximumDelegate(NumericUpDown ctrl, decimal val);
+
+        public static void SetMaximum(NumericUpDown ctrl, decimal val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetMaximumDelegate del = new SetMaximumDelegate(SetMaximum);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+                ctrl.Maximum = val;
+        }
+
+        delegate void SetMinimumDelegate(NumericUpDown ctrl, decimal val);
+
+        public static void SetMinimum(NumericUpDown ctrl, decimal val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetMinimumDelegate del = new SetMinimumDelegate(SetMinimum);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+                ctrl.Minimum = val;
+        }
+
         // Tooltip
         delegate void SetTooltipDelegate(ToolTip source, Control ctrl, string text);
 

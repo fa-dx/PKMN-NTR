@@ -17,6 +17,67 @@ namespace ntrbase
 
         #region RAM Address
 
+        public static uint trainercardOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C79C3C;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C81340;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x330D67D0;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint trainercardSize
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x200;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0xC0;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint trainercardLocation
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x14000;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x01200;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
         public static uint nameOff
         {
             get
@@ -233,6 +294,22 @@ namespace ntrbase
         public static int getG7ID(ushort TID, ushort SID)
         {
             return (int)((uint)(TID | (SID << 16)) % 1000000);
+        }
+
+        public static int getMaxSpace(int box, int slot)
+        {
+            int result = 0;
+            result += (31 - slot);
+            switch (Program.gCmdWindow.SAV.Generation)
+            {
+                case 6:
+                    result += (31 - box) * 30;
+                    break;
+                case 7:
+                    result += (32 - box) * 30;
+                    break;
+            }
+            return result;
         }
 
         #endregion Formula

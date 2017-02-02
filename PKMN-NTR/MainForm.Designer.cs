@@ -44,39 +44,6 @@
             this.countItem7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemAdd = new System.Windows.Forms.Button();
             this.itemWrite = new System.Windows.Forms.Button();
-            this.label38 = new System.Windows.Forms.Label();
-            this.deleteAmount = new System.Windows.Forms.NumericUpDown();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.delPkm = new System.Windows.Forms.Button();
-            this.deleteBox = new System.Windows.Forms.NumericUpDown();
-            this.deleteSlot = new System.Windows.Forms.NumericUpDown();
-            this.cloneWriteTabs = new System.Windows.Forms.TabControl();
-            this.cloneTab = new System.Windows.Forms.TabPage();
-            this.cloneDoIt = new System.Windows.Forms.Button();
-            this.cloneSlotFrom = new System.Windows.Forms.NumericUpDown();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.cloneBoxFrom = new System.Windows.Forms.NumericUpDown();
-            this.label40 = new System.Windows.Forms.Label();
-            this.cloneCopiesNo = new System.Windows.Forms.NumericUpDown();
-            this.label36 = new System.Windows.Forms.Label();
-            this.cloneSlotTo = new System.Windows.Forms.NumericUpDown();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.cloneBoxTo = new System.Windows.Forms.NumericUpDown();
-            this.writeTab = new System.Windows.Forms.TabPage();
-            this.writeDoIt = new System.Windows.Forms.Button();
-            this.writeBrowse = new System.Windows.Forms.Button();
-            this.writeAutoInc = new System.Windows.Forms.CheckBox();
-            this.writeCopiesNo = new System.Windows.Forms.NumericUpDown();
-            this.label35 = new System.Windows.Forms.Label();
-            this.writeSlotTo = new System.Windows.Forms.NumericUpDown();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.writeBoxTo = new System.Windows.Forms.NumericUpDown();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.deleteKeepBackup = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.touchX = new System.Windows.Forms.NumericUpDown();
             this.touchY = new System.Windows.Forms.NumericUpDown();
@@ -86,7 +53,7 @@
             this.orgbox_pos = new System.Windows.Forms.GroupBox();
             this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
             this.OrganizeTop = new System.Windows.Forms.RadioButton();
-            this.updateLabel = new System.Windows.Forms.Label();
+            this.lb_update = new System.Windows.Forms.Label();
             this.onlyView = new System.Windows.Forms.CheckBox();
             this.label72 = new System.Windows.Forms.Label();
             this.typeLSR = new System.Windows.Forms.ComboBox();
@@ -114,7 +81,6 @@
             this.manualDRight = new System.Windows.Forms.Button();
             this.ManualDDown = new System.Windows.Forms.Button();
             this.manualStart = new System.Windows.Forms.Button();
-            this.label69 = new System.Windows.Forms.Label();
             this.label71 = new System.Windows.Forms.Label();
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
@@ -558,9 +524,38 @@
             this.Tools_Filter = new System.Windows.Forms.Button();
             this.Tools_PokeDigger = new System.Windows.Forms.Button();
             this.Tab_Clone = new System.Windows.Forms.TabPage();
+            this.Btn_CDstart = new System.Windows.Forms.Button();
+            this.CB_CDBackup = new System.Windows.Forms.CheckBox();
+            this.GB_CDmode = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.CD_CloneMode = new System.Windows.Forms.RadioButton();
+            this.Num_CDBox = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.Num_CDAmount = new System.Windows.Forms.NumericUpDown();
+            this.Num_CDSlot = new System.Windows.Forms.NumericUpDown();
             this.Tab_Log = new System.Windows.Forms.TabPage();
             this.Log_Export = new System.Windows.Forms.Button();
             this.Tab_About = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lb_name = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lb_version = new System.Windows.Forms.Label();
+            this.lb_tid = new System.Windows.Forms.Label();
+            this.lb_sid = new System.Windows.Forms.Label();
+            this.lb_g7id = new System.Windows.Forms.Label();
+            this.lb_tsv = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lb_pkmnntrver = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsGridView)).BeginInit();
@@ -570,21 +565,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).BeginInit();
             this.Edit_Items.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsView7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).BeginInit();
-            this.cloneWriteTabs.SuspendLayout();
-            this.cloneTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneSlotFrom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneBoxFrom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneCopiesNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneSlotTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneBoxTo)).BeginInit();
-            this.writeTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.writeCopiesNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.writeSlotTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).BeginInit();
-            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
             this.daycare_select.SuspendLayout();
@@ -730,8 +710,14 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.Tab_Tools.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.Tab_Clone.SuspendLayout();
+            this.GB_CDmode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Num_CDBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Num_CDAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Num_CDSlot)).BeginInit();
             this.Tab_Log.SuspendLayout();
             this.Tab_About.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -829,7 +815,7 @@
             // 
             // DumpInstructionsBtn
             // 
-            this.DumpInstructionsBtn.Location = new System.Drawing.Point(90, 28);
+            this.DumpInstructionsBtn.Location = new System.Drawing.Point(211, 235);
             this.DumpInstructionsBtn.Name = "DumpInstructionsBtn";
             this.DumpInstructionsBtn.Size = new System.Drawing.Size(75, 23);
             this.DumpInstructionsBtn.TabIndex = 15;
@@ -1050,447 +1036,6 @@
             this.itemWrite.UseVisualStyleBackColor = true;
             this.itemWrite.Click += new System.EventHandler(this.itemWrite_Click);
             // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(180, 7);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(61, 13);
-            this.label38.TabIndex = 7;
-            this.label38.Text = "# to delete:";
-            // 
-            // deleteAmount
-            // 
-            this.deleteAmount.Location = new System.Drawing.Point(242, 5);
-            this.deleteAmount.Maximum = new decimal(new int[] {
-            930,
-            0,
-            0,
-            0});
-            this.deleteAmount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.deleteAmount.Name = "deleteAmount";
-            this.deleteAmount.Size = new System.Drawing.Size(50, 20);
-            this.deleteAmount.TabIndex = 2;
-            this.deleteAmount.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(93, 7);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(25, 13);
-            this.label26.TabIndex = 6;
-            this.label26.Text = "Slot";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(6, 7);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(25, 13);
-            this.label27.TabIndex = 5;
-            this.label27.Text = "Box";
-            // 
-            // delPkm
-            // 
-            this.delPkm.ForeColor = System.Drawing.Color.Red;
-            this.delPkm.Location = new System.Drawing.Point(228, 66);
-            this.delPkm.Name = "delPkm";
-            this.delPkm.Size = new System.Drawing.Size(75, 23);
-            this.delPkm.TabIndex = 4;
-            this.delPkm.Text = "Delete";
-            this.delPkm.UseVisualStyleBackColor = true;
-            this.delPkm.Click += new System.EventHandler(this.delPkm_Click);
-            // 
-            // deleteBox
-            // 
-            this.deleteBox.Location = new System.Drawing.Point(37, 5);
-            this.deleteBox.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.deleteBox.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.deleteBox.Name = "deleteBox";
-            this.deleteBox.Size = new System.Drawing.Size(50, 20);
-            this.deleteBox.TabIndex = 0;
-            this.deleteBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.deleteBox.ValueChanged += new System.EventHandler(this.deleteBox_ValueChanged);
-            // 
-            // deleteSlot
-            // 
-            this.deleteSlot.Location = new System.Drawing.Point(124, 5);
-            this.deleteSlot.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.deleteSlot.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.deleteSlot.Name = "deleteSlot";
-            this.deleteSlot.Size = new System.Drawing.Size(50, 20);
-            this.deleteSlot.TabIndex = 1;
-            this.deleteSlot.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.deleteSlot.ValueChanged += new System.EventHandler(this.deleteSlot_ValueChanged);
-            // 
-            // cloneWriteTabs
-            // 
-            this.cloneWriteTabs.Controls.Add(this.cloneTab);
-            this.cloneWriteTabs.Controls.Add(this.writeTab);
-            this.cloneWriteTabs.Controls.Add(this.tabPage1);
-            this.cloneWriteTabs.Location = new System.Drawing.Point(6, 227);
-            this.cloneWriteTabs.Name = "cloneWriteTabs";
-            this.cloneWriteTabs.SelectedIndex = 0;
-            this.cloneWriteTabs.Size = new System.Drawing.Size(317, 121);
-            this.cloneWriteTabs.TabIndex = 2;
-            this.cloneWriteTabs.TabStop = false;
-            // 
-            // cloneTab
-            // 
-            this.cloneTab.Controls.Add(this.cloneDoIt);
-            this.cloneTab.Controls.Add(this.cloneSlotFrom);
-            this.cloneTab.Controls.Add(this.label52);
-            this.cloneTab.Controls.Add(this.label53);
-            this.cloneTab.Controls.Add(this.cloneBoxFrom);
-            this.cloneTab.Controls.Add(this.label40);
-            this.cloneTab.Controls.Add(this.cloneCopiesNo);
-            this.cloneTab.Controls.Add(this.label36);
-            this.cloneTab.Controls.Add(this.cloneSlotTo);
-            this.cloneTab.Controls.Add(this.label37);
-            this.cloneTab.Controls.Add(this.label39);
-            this.cloneTab.Controls.Add(this.cloneBoxTo);
-            this.cloneTab.Location = new System.Drawing.Point(4, 22);
-            this.cloneTab.Name = "cloneTab";
-            this.cloneTab.Padding = new System.Windows.Forms.Padding(3);
-            this.cloneTab.Size = new System.Drawing.Size(309, 95);
-            this.cloneTab.TabIndex = 0;
-            this.cloneTab.Text = "Clone";
-            this.cloneTab.UseVisualStyleBackColor = true;
-            // 
-            // cloneDoIt
-            // 
-            this.cloneDoIt.Location = new System.Drawing.Point(228, 65);
-            this.cloneDoIt.Name = "cloneDoIt";
-            this.cloneDoIt.Size = new System.Drawing.Size(75, 23);
-            this.cloneDoIt.TabIndex = 17;
-            this.cloneDoIt.Text = "Clone";
-            this.cloneDoIt.UseVisualStyleBackColor = true;
-            this.cloneDoIt.Click += new System.EventHandler(this.cloneDoIt_Click);
-            // 
-            // cloneSlotFrom
-            // 
-            this.cloneSlotFrom.Location = new System.Drawing.Point(124, 50);
-            this.cloneSlotFrom.Name = "cloneSlotFrom";
-            this.cloneSlotFrom.Size = new System.Drawing.Size(50, 20);
-            this.cloneSlotFrom.TabIndex = 16;
-            this.cloneSlotFrom.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(93, 52);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(25, 13);
-            this.label52.TabIndex = 15;
-            this.label52.Text = "Slot";
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(6, 52);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(25, 13);
-            this.label53.TabIndex = 14;
-            this.label53.Text = "Box";
-            // 
-            // cloneBoxFrom
-            // 
-            this.cloneBoxFrom.Location = new System.Drawing.Point(37, 50);
-            this.cloneBoxFrom.Name = "cloneBoxFrom";
-            this.cloneBoxFrom.Size = new System.Drawing.Size(50, 20);
-            this.cloneBoxFrom.TabIndex = 13;
-            this.cloneBoxFrom.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(5, 30);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(33, 13);
-            this.label40.TabIndex = 12;
-            this.label40.Text = "From:";
-            // 
-            // cloneCopiesNo
-            // 
-            this.cloneCopiesNo.Location = new System.Drawing.Point(234, 5);
-            this.cloneCopiesNo.Name = "cloneCopiesNo";
-            this.cloneCopiesNo.Size = new System.Drawing.Size(50, 20);
-            this.cloneCopiesNo.TabIndex = 11;
-            this.cloneCopiesNo.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(180, 7);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(48, 13);
-            this.label36.TabIndex = 10;
-            this.label36.Text = "# copies";
-            // 
-            // cloneSlotTo
-            // 
-            this.cloneSlotTo.Location = new System.Drawing.Point(124, 5);
-            this.cloneSlotTo.Name = "cloneSlotTo";
-            this.cloneSlotTo.Size = new System.Drawing.Size(50, 20);
-            this.cloneSlotTo.TabIndex = 9;
-            this.cloneSlotTo.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(93, 7);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(25, 13);
-            this.label37.TabIndex = 8;
-            this.label37.Text = "Slot";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(6, 7);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(25, 13);
-            this.label39.TabIndex = 7;
-            this.label39.Text = "Box";
-            // 
-            // cloneBoxTo
-            // 
-            this.cloneBoxTo.Location = new System.Drawing.Point(37, 5);
-            this.cloneBoxTo.Name = "cloneBoxTo";
-            this.cloneBoxTo.Size = new System.Drawing.Size(50, 20);
-            this.cloneBoxTo.TabIndex = 6;
-            this.cloneBoxTo.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // writeTab
-            // 
-            this.writeTab.AllowDrop = true;
-            this.writeTab.Controls.Add(this.writeDoIt);
-            this.writeTab.Controls.Add(this.writeBrowse);
-            this.writeTab.Controls.Add(this.writeAutoInc);
-            this.writeTab.Controls.Add(this.writeCopiesNo);
-            this.writeTab.Controls.Add(this.label35);
-            this.writeTab.Controls.Add(this.writeSlotTo);
-            this.writeTab.Controls.Add(this.label34);
-            this.writeTab.Controls.Add(this.label33);
-            this.writeTab.Controls.Add(this.writeBoxTo);
-            this.writeTab.Location = new System.Drawing.Point(4, 22);
-            this.writeTab.Name = "writeTab";
-            this.writeTab.Padding = new System.Windows.Forms.Padding(3);
-            this.writeTab.Size = new System.Drawing.Size(309, 95);
-            this.writeTab.TabIndex = 1;
-            this.writeTab.Text = "Write file";
-            this.writeTab.UseVisualStyleBackColor = true;
-            this.writeTab.DragDrop += new System.Windows.Forms.DragEventHandler(this.writeTab_DragDrop);
-            this.writeTab.DragEnter += new System.Windows.Forms.DragEventHandler(this.writeTab_DragEnter);
-            // 
-            // writeDoIt
-            // 
-            this.writeDoIt.Location = new System.Drawing.Point(228, 66);
-            this.writeDoIt.Name = "writeDoIt";
-            this.writeDoIt.Size = new System.Drawing.Size(75, 23);
-            this.writeDoIt.TabIndex = 5;
-            this.writeDoIt.Text = "Write";
-            this.writeDoIt.UseVisualStyleBackColor = true;
-            this.writeDoIt.Click += new System.EventHandler(this.writeDoIt_Click);
-            // 
-            // writeBrowse
-            // 
-            this.writeBrowse.Location = new System.Drawing.Point(9, 66);
-            this.writeBrowse.Name = "writeBrowse";
-            this.writeBrowse.Size = new System.Drawing.Size(75, 23);
-            this.writeBrowse.TabIndex = 4;
-            this.writeBrowse.Text = "Browse...";
-            this.writeBrowse.UseVisualStyleBackColor = true;
-            this.writeBrowse.Click += new System.EventHandler(this.writeBrowse_Click);
-            // 
-            // writeAutoInc
-            // 
-            this.writeAutoInc.AutoSize = true;
-            this.writeAutoInc.Checked = true;
-            this.writeAutoInc.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.writeAutoInc.Location = new System.Drawing.Point(9, 31);
-            this.writeAutoInc.Name = "writeAutoInc";
-            this.writeAutoInc.Size = new System.Drawing.Size(97, 17);
-            this.writeAutoInc.TabIndex = 3;
-            this.writeAutoInc.Text = "Auto-increment";
-            this.toolTip1.SetToolTip(this.writeAutoInc, "Automatically go to next slot after writing.\r\nMust be enabled when importing mult" +
-        "iple Pokemon.");
-            this.writeAutoInc.UseVisualStyleBackColor = true;
-            // 
-            // writeCopiesNo
-            // 
-            this.writeCopiesNo.Location = new System.Drawing.Point(234, 5);
-            this.writeCopiesNo.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.writeCopiesNo.Name = "writeCopiesNo";
-            this.writeCopiesNo.Size = new System.Drawing.Size(50, 20);
-            this.writeCopiesNo.TabIndex = 2;
-            this.writeCopiesNo.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(180, 7);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(48, 13);
-            this.label35.TabIndex = 8;
-            this.label35.Text = "# copies";
-            // 
-            // writeSlotTo
-            // 
-            this.writeSlotTo.Location = new System.Drawing.Point(124, 5);
-            this.writeSlotTo.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.writeSlotTo.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.writeSlotTo.Name = "writeSlotTo";
-            this.writeSlotTo.Size = new System.Drawing.Size(50, 20);
-            this.writeSlotTo.TabIndex = 1;
-            this.writeSlotTo.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.writeSlotTo.ValueChanged += new System.EventHandler(this.writeSlotTo_ValueChanged);
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(93, 7);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(25, 13);
-            this.label34.TabIndex = 7;
-            this.label34.Text = "Slot";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(6, 7);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(25, 13);
-            this.label33.TabIndex = 6;
-            this.label33.Text = "Box";
-            // 
-            // writeBoxTo
-            // 
-            this.writeBoxTo.Location = new System.Drawing.Point(37, 5);
-            this.writeBoxTo.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.writeBoxTo.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.writeBoxTo.Name = "writeBoxTo";
-            this.writeBoxTo.Size = new System.Drawing.Size(50, 20);
-            this.writeBoxTo.TabIndex = 0;
-            this.writeBoxTo.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.writeBoxTo.ValueChanged += new System.EventHandler(this.writeBoxTo_ValueChanged);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.deleteKeepBackup);
-            this.tabPage1.Controls.Add(this.label38);
-            this.tabPage1.Controls.Add(this.label26);
-            this.tabPage1.Controls.Add(this.deleteBox);
-            this.tabPage1.Controls.Add(this.label27);
-            this.tabPage1.Controls.Add(this.deleteAmount);
-            this.tabPage1.Controls.Add(this.deleteSlot);
-            this.tabPage1.Controls.Add(this.delPkm);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(309, 95);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Delete";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // deleteKeepBackup
-            // 
-            this.deleteKeepBackup.AutoSize = true;
-            this.deleteKeepBackup.Checked = true;
-            this.deleteKeepBackup.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.deleteKeepBackup.Location = new System.Drawing.Point(9, 31);
-            this.deleteKeepBackup.Name = "deleteKeepBackup";
-            this.deleteKeepBackup.Size = new System.Drawing.Size(90, 17);
-            this.deleteKeepBackup.TabIndex = 3;
-            this.deleteKeepBackup.Text = "Keep backup";
-            this.toolTip1.SetToolTip(this.deleteKeepBackup, "Backup to file before deleting");
-            this.deleteKeepBackup.UseVisualStyleBackColor = true;
-            // 
             // touchX
             // 
             this.touchX.Location = new System.Drawing.Point(6, 19);
@@ -1586,17 +1131,19 @@
             this.OrganizeTop.Text = "Top";
             this.OrganizeTop.UseVisualStyleBackColor = true;
             // 
-            // updateLabel
+            // lb_update
             // 
-            this.updateLabel.AutoSize = true;
-            this.updateLabel.Location = new System.Drawing.Point(6, 3);
-            this.updateLabel.Name = "updateLabel";
-            this.updateLabel.Size = new System.Drawing.Size(88, 13);
-            this.updateLabel.TabIndex = 4;
-            this.updateLabel.Text = "Feature disabled.";
-            this.toolTip1.SetToolTip(this.updateLabel, "If an update is available, you can click here to go to the release page in GitHub" +
+            this.lb_update.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_update.AutoSize = true;
+            this.lb_update.Location = new System.Drawing.Point(73, 203);
+            this.lb_update.Name = "lb_update";
+            this.lb_update.Size = new System.Drawing.Size(210, 13);
+            this.lb_update.TabIndex = 4;
+            this.lb_update.Text = "Feature disabled.";
+            this.lb_update.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.lb_update, "If an update is available, you can click here to go to the release page in GitHub" +
         ".");
-            this.updateLabel.Click += new System.EventHandler(this.updateLabel_Click);
+            this.lb_update.Click += new System.EventHandler(this.updateLabel_Click);
             // 
             // onlyView
             // 
@@ -1762,12 +1309,13 @@
             // stopBotButton
             // 
             this.stopBotButton.Enabled = false;
-            this.stopBotButton.Location = new System.Drawing.Point(9, 28);
+            this.stopBotButton.Location = new System.Drawing.Point(6, 237);
             this.stopBotButton.Name = "stopBotButton";
             this.stopBotButton.Size = new System.Drawing.Size(75, 23);
             this.stopBotButton.TabIndex = 4;
             this.stopBotButton.Text = "Stop Bot";
             this.stopBotButton.UseVisualStyleBackColor = true;
+            this.stopBotButton.Visible = false;
             this.stopBotButton.Click += new System.EventHandler(this.stopBotButton_Click);
             // 
             // manualDLeft
@@ -1901,16 +1449,6 @@
             this.manualStart.UseVisualStyleBackColor = true;
             this.manualStart.Click += new System.EventHandler(this.manualStart_Click);
             // 
-            // label69
-            // 
-            this.label69.Location = new System.Drawing.Point(6, 242);
-            this.label69.Name = "label69";
-            this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label69.Size = new System.Drawing.Size(280, 19);
-            this.label69.TabIndex = 3;
-            this.label69.Text = "Version: ";
-            this.label69.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // label71
             // 
             this.label71.AutoSize = true;
@@ -1943,7 +1481,6 @@
             this.tabEditTrainer.Controls.Add(this.seedRNG);
             this.tabEditTrainer.Controls.Add(this.label60);
             this.tabEditTrainer.Controls.Add(this.PokeDiggerBtn);
-            this.tabEditTrainer.Controls.Add(this.cloneWriteTabs);
             this.tabEditTrainer.Controls.Add(this.Edit_Items);
             this.tabEditTrainer.Location = new System.Drawing.Point(4, 22);
             this.tabEditTrainer.Name = "tabEditTrainer";
@@ -6778,6 +6315,7 @@
             this.Tab_Dump.Controls.Add(this.Write_PKM);
             this.Tab_Dump.Controls.Add(this.dumpBoxes);
             this.Tab_Dump.Controls.Add(this.dumpPokemon);
+            this.Tab_Dump.Controls.Add(this.DumpInstructionsBtn);
             this.Tab_Dump.Controls.Add(this.onlyView);
             this.Tab_Dump.Controls.Add(this.nameek6);
             this.Tab_Dump.Controls.Add(this.slotDump);
@@ -6916,12 +6454,176 @@
             // Tab_Clone
             // 
             this.Tab_Clone.BackColor = System.Drawing.SystemColors.Control;
+            this.Tab_Clone.Controls.Add(this.Btn_CDstart);
+            this.Tab_Clone.Controls.Add(this.CB_CDBackup);
+            this.Tab_Clone.Controls.Add(this.GB_CDmode);
+            this.Tab_Clone.Controls.Add(this.Num_CDBox);
+            this.Tab_Clone.Controls.Add(this.label16);
+            this.Tab_Clone.Controls.Add(this.label14);
+            this.Tab_Clone.Controls.Add(this.label15);
+            this.Tab_Clone.Controls.Add(this.Num_CDAmount);
+            this.Tab_Clone.Controls.Add(this.Num_CDSlot);
             this.Tab_Clone.Location = new System.Drawing.Point(4, 22);
             this.Tab_Clone.Name = "Tab_Clone";
             this.Tab_Clone.Padding = new System.Windows.Forms.Padding(3);
             this.Tab_Clone.Size = new System.Drawing.Size(292, 264);
             this.Tab_Clone.TabIndex = 1;
             this.Tab_Clone.Text = "Clone/Delete";
+            // 
+            // Btn_CDstart
+            // 
+            this.Btn_CDstart.Location = new System.Drawing.Point(157, 71);
+            this.Btn_CDstart.Name = "Btn_CDstart";
+            this.Btn_CDstart.Size = new System.Drawing.Size(129, 23);
+            this.Btn_CDstart.TabIndex = 14;
+            this.Btn_CDstart.Text = "Go!";
+            this.Btn_CDstart.UseVisualStyleBackColor = true;
+            // 
+            // CB_CDBackup
+            // 
+            this.CB_CDBackup.AutoSize = true;
+            this.CB_CDBackup.Location = new System.Drawing.Point(157, 26);
+            this.CB_CDBackup.Name = "CB_CDBackup";
+            this.CB_CDBackup.Size = new System.Drawing.Size(90, 17);
+            this.CB_CDBackup.TabIndex = 1;
+            this.CB_CDBackup.Text = "Keep backup";
+            this.CB_CDBackup.UseVisualStyleBackColor = true;
+            // 
+            // GB_CDmode
+            // 
+            this.GB_CDmode.Controls.Add(this.radioButton1);
+            this.GB_CDmode.Controls.Add(this.CD_CloneMode);
+            this.GB_CDmode.Location = new System.Drawing.Point(6, 6);
+            this.GB_CDmode.Name = "GB_CDmode";
+            this.GB_CDmode.Size = new System.Drawing.Size(145, 49);
+            this.GB_CDmode.TabIndex = 0;
+            this.GB_CDmode.TabStop = false;
+            this.GB_CDmode.Text = "Mode";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(83, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(56, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.Text = "Delete";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // CD_CloneMode
+            // 
+            this.CD_CloneMode.AutoSize = true;
+            this.CD_CloneMode.Checked = true;
+            this.CD_CloneMode.Location = new System.Drawing.Point(6, 19);
+            this.CD_CloneMode.Name = "CD_CloneMode";
+            this.CD_CloneMode.Size = new System.Drawing.Size(52, 17);
+            this.CD_CloneMode.TabIndex = 0;
+            this.CD_CloneMode.TabStop = true;
+            this.CD_CloneMode.Text = "Clone";
+            this.CD_CloneMode.UseVisualStyleBackColor = true;
+            // 
+            // Num_CDBox
+            // 
+            this.Num_CDBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.Num_CDBox.Location = new System.Drawing.Point(9, 74);
+            this.Num_CDBox.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.Num_CDBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.Num_CDBox.Name = "Num_CDBox";
+            this.Num_CDBox.Size = new System.Drawing.Size(40, 20);
+            this.Num_CDBox.TabIndex = 0;
+            this.Num_CDBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.Num_CDBox.ValueChanged += new System.EventHandler(this.clonedelete_Changed);
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(98, 58);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(46, 13);
+            this.label16.TabIndex = 13;
+            this.label16.Text = "Amount:";
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(52, 58);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(28, 13);
+            this.label14.TabIndex = 13;
+            this.label14.Text = "Slot:";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 58);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(28, 13);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Box:";
+            // 
+            // Num_CDAmount
+            // 
+            this.Num_CDAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.Num_CDAmount.AutoSize = true;
+            this.Num_CDAmount.Location = new System.Drawing.Point(101, 74);
+            this.Num_CDAmount.Maximum = new decimal(new int[] {
+            930,
+            0,
+            0,
+            0});
+            this.Num_CDAmount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.Num_CDAmount.Name = "Num_CDAmount";
+            this.Num_CDAmount.Size = new System.Drawing.Size(50, 20);
+            this.Num_CDAmount.TabIndex = 1;
+            this.Num_CDAmount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // Num_CDSlot
+            // 
+            this.Num_CDSlot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.Num_CDSlot.AutoSize = true;
+            this.Num_CDSlot.Location = new System.Drawing.Point(55, 74);
+            this.Num_CDSlot.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.Num_CDSlot.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.Num_CDSlot.Name = "Num_CDSlot";
+            this.Num_CDSlot.Size = new System.Drawing.Size(40, 20);
+            this.Num_CDSlot.TabIndex = 1;
+            this.Num_CDSlot.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.Num_CDSlot.ValueChanged += new System.EventHandler(this.clonedelete_Changed);
             // 
             // Tab_Log
             // 
@@ -6949,16 +6651,235 @@
             // Tab_About
             // 
             this.Tab_About.BackColor = System.Drawing.SystemColors.Control;
-            this.Tab_About.Controls.Add(this.label69);
-            this.Tab_About.Controls.Add(this.updateLabel);
+            this.Tab_About.Controls.Add(this.tableLayoutPanel2);
             this.Tab_About.Controls.Add(this.stopBotButton);
-            this.Tab_About.Controls.Add(this.DumpInstructionsBtn);
             this.Tab_About.Location = new System.Drawing.Point(4, 22);
+            this.Tab_About.Margin = new System.Windows.Forms.Padding(6);
             this.Tab_About.Name = "Tab_About";
             this.Tab_About.Padding = new System.Windows.Forms.Padding(3);
             this.Tab_About.Size = new System.Drawing.Size(292, 264);
             this.Tab_About.TabIndex = 3;
             this.Tab_About.Text = "About";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lb_name, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.lb_version, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lb_tid, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.lb_sid, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lb_g7id, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.lb_tsv, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 9);
+            this.tableLayoutPanel2.Controls.Add(this.lb_update, 1, 9);
+            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 8);
+            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.lb_pkmnntrver, 1, 8);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 10;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(286, 220);
+            this.tableLayoutPanel2.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Game Data";
+            // 
+            // lb_name
+            // 
+            this.lb_name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_name.AutoSize = true;
+            this.lb_name.Location = new System.Drawing.Point(73, 23);
+            this.lb_name.Name = "lb_name";
+            this.lb_name.Size = new System.Drawing.Size(210, 13);
+            this.lb_name.TabIndex = 0;
+            this.lb_name.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Name:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 43);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Version:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 63);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "TID:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 83);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(64, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "SID:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 103);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "G7ID:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 123);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(64, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "TSV:";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lb_version
+            // 
+            this.lb_version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_version.AutoSize = true;
+            this.lb_version.Location = new System.Drawing.Point(73, 43);
+            this.lb_version.Name = "lb_version";
+            this.lb_version.Size = new System.Drawing.Size(210, 13);
+            this.lb_version.TabIndex = 0;
+            this.lb_version.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lb_tid
+            // 
+            this.lb_tid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_tid.AutoSize = true;
+            this.lb_tid.Location = new System.Drawing.Point(73, 63);
+            this.lb_tid.Name = "lb_tid";
+            this.lb_tid.Size = new System.Drawing.Size(210, 13);
+            this.lb_tid.TabIndex = 0;
+            this.lb_tid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lb_sid
+            // 
+            this.lb_sid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_sid.AutoSize = true;
+            this.lb_sid.Location = new System.Drawing.Point(73, 83);
+            this.lb_sid.Name = "lb_sid";
+            this.lb_sid.Size = new System.Drawing.Size(210, 13);
+            this.lb_sid.TabIndex = 0;
+            this.lb_sid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lb_g7id
+            // 
+            this.lb_g7id.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_g7id.AutoSize = true;
+            this.lb_g7id.Location = new System.Drawing.Point(73, 103);
+            this.lb_g7id.Name = "lb_g7id";
+            this.lb_g7id.Size = new System.Drawing.Size(210, 13);
+            this.lb_g7id.TabIndex = 0;
+            this.lb_g7id.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lb_tsv
+            // 
+            this.lb_tsv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_tsv.AutoSize = true;
+            this.lb_tsv.Location = new System.Drawing.Point(73, 123);
+            this.lb_tsv.Name = "lb_tsv";
+            this.lb_tsv.Size = new System.Drawing.Size(210, 13);
+            this.lb_tsv.TabIndex = 0;
+            this.lb_tsv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 203);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(64, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Updates:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 183);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Version:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label13.Location = new System.Drawing.Point(3, 167);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(64, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "PKMN-NTR";
+            // 
+            // lb_pkmnntrver
+            // 
+            this.lb_pkmnntrver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_pkmnntrver.AutoSize = true;
+            this.lb_pkmnntrver.Location = new System.Drawing.Point(73, 183);
+            this.lb_pkmnntrver.Name = "lb_pkmnntrver";
+            this.lb_pkmnntrver.Size = new System.Drawing.Size(210, 13);
+            this.lb_pkmnntrver.TabIndex = 4;
+            this.lb_pkmnntrver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lb_pkmnntrver.Click += new System.EventHandler(this.updateLabel_Click);
             // 
             // MainForm
             // 
@@ -6993,24 +6914,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).EndInit();
             this.Edit_Items.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsView7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteSlot)).EndInit();
-            this.cloneWriteTabs.ResumeLayout(false);
-            this.cloneTab.ResumeLayout(false);
-            this.cloneTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneSlotFrom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneBoxFrom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneCopiesNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneSlotTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cloneBoxTo)).EndInit();
-            this.writeTab.ResumeLayout(false);
-            this.writeTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.writeCopiesNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.writeSlotTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.writeBoxTo)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
             this.daycare_select.ResumeLayout(false);
@@ -7201,10 +7104,19 @@
             this.Tab_Tools.ResumeLayout(false);
             this.Tab_Tools.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.Tab_Clone.ResumeLayout(false);
+            this.Tab_Clone.PerformLayout();
+            this.GB_CDmode.ResumeLayout(false);
+            this.GB_CDmode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Num_CDBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Num_CDAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Num_CDSlot)).EndInit();
             this.Tab_Log.ResumeLayout(false);
             this.Tab_Log.PerformLayout();
             this.Tab_About.ResumeLayout(false);
             this.Tab_About.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -7232,40 +7144,7 @@
         private System.Windows.Forms.GroupBox Edit_Items;
         private System.Windows.Forms.Button itemWrite;
         private System.Windows.Forms.Button itemAdd;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Button delPkm;
-        private System.Windows.Forms.NumericUpDown deleteBox;
-        private System.Windows.Forms.NumericUpDown deleteSlot;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.NumericUpDown deleteAmount;
-        private System.Windows.Forms.TabControl cloneWriteTabs;
-        private System.Windows.Forms.TabPage cloneTab;
-        private System.Windows.Forms.TabPage writeTab;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.NumericUpDown writeBoxTo;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.NumericUpDown writeSlotTo;
-        private System.Windows.Forms.NumericUpDown writeCopiesNo;
-        private System.Windows.Forms.Button writeDoIt;
-        private System.Windows.Forms.Button writeBrowse;
-        private System.Windows.Forms.CheckBox writeAutoInc;
-        private System.Windows.Forms.Button cloneDoIt;
-        private System.Windows.Forms.NumericUpDown cloneSlotFrom;
-        private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.Label label53;
-        private System.Windows.Forms.NumericUpDown cloneBoxFrom;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.NumericUpDown cloneCopiesNo;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.NumericUpDown cloneSlotTo;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.NumericUpDown cloneBoxTo;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.CheckBox deleteKeepBackup;
         private System.Windows.Forms.Button RunLSRbot;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.Button RunWTbot;
@@ -7289,7 +7168,6 @@
         private System.Windows.Forms.Button manualDRight;
         private System.Windows.Forms.Button ManualDDown;
         private System.Windows.Forms.Button manualStart;
-        private System.Windows.Forms.Label label69;
         private System.Windows.Forms.Button stopBotButton;
         private System.Windows.Forms.TextBox readResult;
         private System.Windows.Forms.Label label71;
@@ -7448,7 +7326,7 @@
         private System.Windows.Forms.Button filterReset;
         private System.Windows.Forms.Button breedingClear;
         private System.Windows.Forms.Button srClear;
-        private System.Windows.Forms.Label updateLabel;
+        private System.Windows.Forms.Label lb_update;
         private System.Windows.Forms.Button DumpInstructionsBtn;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox sr_Species;
@@ -7754,6 +7632,35 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button Tools_PokeDigger;
         private System.Windows.Forms.Button Write_PKM;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lb_name;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lb_version;
+        private System.Windows.Forms.Label lb_tid;
+        private System.Windows.Forms.Label lb_sid;
+        private System.Windows.Forms.Label lb_g7id;
+        private System.Windows.Forms.Label lb_tsv;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lb_pkmnntrver;
+        private System.Windows.Forms.Button Btn_CDstart;
+        private System.Windows.Forms.CheckBox CB_CDBackup;
+        private System.Windows.Forms.GroupBox GB_CDmode;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton CD_CloneMode;
+        private System.Windows.Forms.NumericUpDown Num_CDBox;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown Num_CDAmount;
+        private System.Windows.Forms.NumericUpDown Num_CDSlot;
     }
 }
 

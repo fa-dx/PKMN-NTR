@@ -165,7 +165,7 @@ namespace ntrbase
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            label69.Text = "Version: " + System.Windows.Forms.Application.ProductVersion + " - DEVELOPMENT BUILD";
+            lb_pkmnntrver.Text = System.Windows.Forms.Application.ProductVersion + " - DEV BUILD";
 
             addtoLog("THIS IS A BUILD FOR A DEVEOPMENT BRANCH - DO NOT EXPECT IT TO WORK");
 
@@ -330,7 +330,7 @@ namespace ntrbase
                 if (verlatest[0] > major || verlatest[1] > minor || verlatest[2] > build)
                 {
                     addtoLog("GUI: Update found!");
-                    Delg.SetText(updateLabel, "Version " + lateststable.TagName + " is available.");
+                    Delg.SetText(lb_update, "Version " + lateststable.TagName + " is available.");
                     updateURL = lateststable.HtmlUrl;
                     DialogResult result = MessageBox.Show("Version " + lateststable.TagName + " is available.\r\nDo you want to go to GitHub and download it?", "Update Available", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
@@ -349,20 +349,20 @@ namespace ntrbase
                         if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build)
                         {
                             addtoLog("GUI: New preview version found");
-                            Delg.SetText(updateLabel, "Preview version " + latestbeta.TagName + " is available.");
+                            Delg.SetText(lb_update, "Preview version " + latestbeta.TagName + " is available.");
                             updateURL = latestbeta.HtmlUrl;
                         }
                         else
                         {
                             addtoLog("GUI: PKMN-NTR is up to date");
-                            Delg.SetText(updateLabel, "PKMN-NTR is up to date.");
+                            Delg.SetText(lb_update, "PKMN-NTR is up to date.");
                             updateURL = null;
                         }
                     }
                     else
                     {
                         addtoLog("GUI: PKMN-NTR is up to date");
-                        Delg.SetText(updateLabel, "PKMN-NTR is up to date.");
+                        Delg.SetText(lb_update, "PKMN-NTR is up to date.");
                         updateURL = null;
                     }
                 }
@@ -373,7 +373,7 @@ namespace ntrbase
                 addtoLog("GUI: An error has ocurred while checking for updates:");
                 addtoLog(ex.Message);
                 MessageBox.Show(ex.Message);
-                Delg.SetText(updateLabel, "Update not found.");
+                Delg.SetText(lb_update, "Update not found.");
             }
         }
 
@@ -429,7 +429,10 @@ namespace ntrbase
             }
             foreach (TabPage tab in Tabs_General.TabPages)
             {
-                Delg.SetEnabled(tab, false);
+                if (!(tab.Name == "Tab_Log" || tab.Name == "Tab_About"))
+                {
+                    Delg.SetEnabled(tab, false);
+                }
             }
         }
 
@@ -708,22 +711,22 @@ namespace ntrbase
 
             // Fill fields in the form according to gen
             Program.helper.pid = pid;
-            if ((SAV.Version == GameVersion.SN || SAV.Version == GameVersion.MN) && !botWorking)
+            if (SAV.Generation == 7 && !botWorking)
             {
                 PKXEXT = ".pk7";
                 BOXEXT = "_boxes.ek7";
-                MAXSPECIES = 802;
+                MAXSPECIES = SAV.MaxSpeciesID;
                 BOXES = 32;
                 fillGen7();
                 dumpAllData7();
                 enableControls();
                 SetCheckedRadio(radioBoxes, true);
             }
-            else if (game != GameType.None && !gen7 && !botWorking)
+            else if (SAV.Generation == 6 && !botWorking)
             {
                 PKXEXT = ".pk6";
                 BOXEXT = "_boxes.ek6";
-                MAXSPECIES = 721;
+                MAXSPECIES = SAV.MaxSpeciesID;
                 BOXES = 31;
                 fillGen6();
                 dumpAllData6();
@@ -734,50 +737,25 @@ namespace ntrbase
 
         private void fillGen6()
         {
-            ComboboxFill(typeLSR, LookupTable.SoftResetModes6);
-            ComboboxFill(modeBreed, LookupTable.BreedingModes6);
-            Delg.SetVisible(itemsView7, false);
-            Delg.SetVisible(itemsGridView, true);
-            Delg.SetVisible(keysGridView, false);
-            Delg.SetVisible(tmsGridView, false);
-            Delg.SetVisible(medsGridView, false);
-            Delg.SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
             {
-                SetMaximum(boxDump, BOXES);
+                Delg.SetMaximum(boxDump, BOXES);
             }
-            SetMaximum(cloneBoxTo, BOXES);
-            SetMaximum(cloneBoxFrom, BOXES);
-            SetMaximum(writeBoxTo, BOXES);
-            SetMaximum(boxBreed, BOXES);
-            SetMaximum(WTBox, BOXES);
-            //Delg.SetText(label3, "Poké Miles:");
             Delg.SetText(radioDaycare, "Daycare");
+            Delg.SetMaximum(Num_CDBox, BOXES);
+            Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
         }
 
         private async void fillGen7()
         {
-            ComboboxFill(typeLSR, LookupTable.SoftResetModes7);
-            ComboboxFill(sr_Species, LookupTable.Species7);
-            ComboboxFill(modeBreed, LookupTable.BreedingModes7);
-            Delg.SetVisible(itemsView7, true);
-            Delg.SetVisible(itemsGridView, false);
-            Delg.SetVisible(keysGridView, false);
-            Delg.SetVisible(tmsGridView, false);
-            Delg.SetVisible(medsGridView, false);
-            Delg.SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
             {
-                SetMaximum(boxDump, BOXES);
+                Delg.SetMaximum(boxDump, BOXES);
             }
-            SetMaximum(cloneBoxTo, BOXES);
-            SetMaximum(cloneBoxFrom, BOXES);
-            SetMaximum(writeBoxTo, BOXES);
-            SetMaximum(boxBreed, BOXES);
-            SetMaximum(WTBox, BOXES);
-            //Delg.SetText(label3, "Current FC:");
             Delg.SetText(radioDaycare, "Nursery");
-
+            Delg.SetMaximum(Num_CDBox, BOXES);
+            Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
+            
             //Apply connection patch
             Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
             if (!(await Patch))
@@ -793,93 +771,57 @@ namespace ntrbase
         // Dump data according to generation
         public void dumpAllData6()
         {
-
+            dumpTrainerCard();
         }
 
         public void dumpAllData7()
         {
-
+            dumpTrainerCard();
         }
 
-        // Name handling
+        // Game save data handling
         public void dumpTrainerCard()
         {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x0C0], handleTrainerCard, null);
-            waitingForData.Add(Program.scriptHelper.data(0x330D67D0, 0x0C0, pid), myArgs);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[LookupTable.trainercardSize], handleTrainerCard, null);
+            waitingForData.Add(Program.scriptHelper.data(LookupTable.trainercardOff, LookupTable.trainercardSize, pid), myArgs);
         }
 
         public void handleTrainerCard(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            Array.Copy(args.data, 0, SAV.Data, 0x01200, 0x0C0);
+            Array.Copy(args.data, 0, SAV.Data, LookupTable.trainercardLocation, LookupTable.trainercardSize);
+            Delg.SetText(lb_name, SAV.OT);
+            Delg.SetText(lb_tid, SAV.TID.ToString("D4"));
+            Delg.SetText(lb_sid, SAV.SID.ToString("D4"));
+            Delg.SetText(lb_tsv, LookupTable.getTSV(SAV.TID, SAV.SID).ToString("D4"));
+            switch (SAV.Version)
+            {
+                case GameVersion.X:
+                    Delg.SetText(lb_version, "X");
+                    Delg.SetText(lb_g7id, null);
+                    break;
+                case GameVersion.Y:
+                    Delg.SetText(lb_version, "Y");
+                    Delg.SetText(lb_g7id, null);
+                    break;
+                case GameVersion.OR:
+                    Delg.SetText(lb_version, "Omega Ruby");
+                    Delg.SetText(lb_g7id, null);
+                    break;
+                case GameVersion.AS:
+                    Delg.SetText(lb_version, "Alpha Sapphire");
+                    Delg.SetText(lb_g7id, null);
+                    break;
+                case GameVersion.SN:
+                    Delg.SetText(lb_version, "Sun");
+                    Delg.SetText(lb_g7id, LookupTable.getG7ID(SAV.TID, SAV.SID).ToString("D6"));
+                    break;
+                case GameVersion.MN:
+                    Delg.SetText(lb_version, "Moon");
+                    Delg.SetText(lb_g7id, LookupTable.getG7ID(SAV.TID, SAV.SID).ToString("D6"));
+                    break;
+            }
         }
-
-
-        // Name handling
-        //private void pokeName_Click(object sender, EventArgs e)
-        //{
-        //    if (playerName.Text.Length <= 12)
-        //    {
-        //        string nameS = playerName.Text.PadRight(12, '\0');
-        //        byte[] nameBytes = Encoding.Unicode.GetBytes(nameS);
-        //        Program.scriptHelper.write(nameoff, nameBytes, pid);
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("That name is too long, please choose a trainer name of 12 character or less.", "Name too long!");
-        //    }
-        //}
-
-        //// TID handling
-        //private void pokeTID_Click(object sender, EventArgs e)
-        //{
-        //    byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16(TIDNum.Value));
-        //    Program.scriptHelper.write(tidoff, tidbyte, pid);
-        //}
-
-        //// SID handling
-        //private void pokeSID_Click(object sender, EventArgs e)
-        //{
-        //    byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16(SIDNum.Value));
-        //    Program.scriptHelper.write(sidoff, sidbyte, pid);
-        //}
-
-        //// Money handling
-        //public void dumpMoney()
-        //private void pokeMoney_Click(object sender, EventArgs e)
-        //{
-        //    byte[] moneybyte = BitConverter.GetBytes(Convert.ToInt32(moneyNum.Value));
-        //    Program.scriptHelper.write(moneyoff, moneybyte, pid);
-        //}
-
-        //// Battle Points Handling
-        //private void pokeBP_Click(object sender, EventArgs e)
-        //{
-        //    byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-        //    Program.scriptHelper.write(bpoff, bpbyte, pid);
-        //}
-
-        //// Poké Miles and Current FC handling
-        //private void pokeMiles_Click(object sender, EventArgs e)
-        //{
-        //    if (gen7)
-        //    { // Current Festival Coins
-        //        byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
-        //        Program.scriptHelper.write(currentFCoff, FCbyte, pid);
-        //    }
-        //    else
-        //    { // Poké Miles
-        //        byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
-        //        Program.scriptHelper.write(milesoff, milesbyte, pid);
-        //    }
-        //}
-
-        //// Total Festival Coins handling
-        //private void pokeTotalFC_Click(object sender, EventArgs e)
-        //{
-        //    byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(totalFCNum.Value));
-        //    Program.scriptHelper.write(totalFCoff, FCbyte, pid);
-        //}
 
         //// Language handling
         //public void dumpLang()
@@ -925,16 +867,6 @@ namespace ntrbase
         //        case 8: lang = 0x0A; break;
         //    }
         //    Program.scriptHelper.writebyte(langoff, lang, pid);
-        //}
-
-        //// Time handling
-        //private void pokeTime_Click(object sender, EventArgs e)
-        //{
-        //    byte[] timeData = new byte[4];
-        //    BitConverter.GetBytes(Convert.ToUInt16(hourNum.Value)).CopyTo(timeData, 0);
-        //    timeData[2] = Convert.ToByte(minNum.Value);
-        //    timeData[3] = Convert.ToByte(secNum.Value);
-        //    Program.scriptHelper.write(timeoff, timeData, pid);
         //}
 
         // Item handling
@@ -1676,319 +1608,319 @@ namespace ntrbase
             }
         }
 
-        // Clone pokémon
-        private void cloneDoIt_Click(object sender, EventArgs e)
-        {
-            uint offset = boxOff + cloneGetBoxIndexFrom() * POKEBYTES;
-            uint mySeq = Program.scriptHelper.data(offset, POKEBYTES, pid);
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handleCloneData, null);
-            waitingForData.Add(mySeq, myArgs);
-        }
+        //// Clone pokémon
+        //private void cloneDoIt_Click(object sender, EventArgs e)
+        //{
+        //    uint offset = boxOff + cloneGetBoxIndexFrom() * POKEBYTES;
+        //    uint mySeq = Program.scriptHelper.data(offset, POKEBYTES, pid);
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handleCloneData, null);
+        //    waitingForData.Add(mySeq, myArgs);
+        //}
 
-        private void handleCloneData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            writePokemonToBox(args.data, cloneGetBoxIndexTo(), cloneGetCopies());
-        }
+        //private void handleCloneData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    writePokemonToBox(args.data, cloneGetBoxIndexTo(), cloneGetCopies());
+        //}
 
-        private uint cloneGetCopies()
-        {
-            return decimal.ToUInt32(cloneCopiesNo.Value);
-        }
+        //private uint cloneGetCopies()
+        //{
+        //    return decimal.ToUInt32(cloneCopiesNo.Value);
+        //}
 
-        private uint cloneGetBoxIndexTo()
-        {
-            return decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
-        }
+        //private uint cloneGetBoxIndexTo()
+        //{
+        //    return decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
+        //}
 
-        private uint cloneGetBoxIndexFrom()
-        {
-            return decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
-        }
+        //private uint cloneGetBoxIndexFrom()
+        //{
+        //    return decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
+        //}
 
-        private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
-        {
-            cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
-        }
+        //private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
+        //{
+        //    cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
+        //}
 
-        private void cloneSlotTo_ValueChanged(object sender, EventArgs e)
-        {
-            cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
-        }
+        //private void cloneSlotTo_ValueChanged(object sender, EventArgs e)
+        //{
+        //    cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
+        //}
 
-        // Write pokémon from file
-        private void writeBrowse_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenFileDialog selectWriteDialog = new OpenFileDialog();
-                selectWriteDialog.Title = "Select an EKX/PKX file";
-                if (gen7)
-                {
-                    selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
-                }
-                else
-                {
-                    selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
-                }
-                string path = System.Windows.Forms.@Application.StartupPath + "\\Pokemon";
-                selectWriteDialog.InitialDirectory = path;
-                if (selectWriteDialog.ShowDialog() == DialogResult.OK)
-                {
-                    selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //// Write pokémon from file
+        //private void writeBrowse_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        OpenFileDialog selectWriteDialog = new OpenFileDialog();
+        //        selectWriteDialog.Title = "Select an EKX/PKX file";
+        //        if (gen7)
+        //        {
+        //            selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
+        //        }
+        //        else
+        //        {
+        //            selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
+        //        }
+        //        string path = System.Windows.Forms.@Application.StartupPath + "\\Pokemon";
+        //        selectWriteDialog.InitialDirectory = path;
+        //        if (selectWriteDialog.ShowDialog() == DialogResult.OK)
+        //        {
+        //            selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
 
-        private int readPokemonFromFile(string filename, out byte[] result)
-        { //Returns 0 on success, other values on failure
-            string extension = Path.GetExtension(filename);
-            result = new byte[POKEBYTES];
+        //private int readPokemonFromFile(string filename, out byte[] result)
+        //{ //Returns 0 on success, other values on failure
+        //    string extension = Path.GetExtension(filename);
+        //    result = new byte[POKEBYTES];
 
-            // Test if correct generation format
-            if ((gen7 && (extension == ".pk7" || extension == ".ek7")) || (!gen7 && (extension == ".pk6" || extension == ".ek6")))
-            {
-                bool isEncrypted = false;
-                if (extension == ".pk6" || extension == ".pk7")
-                {
-                    isEncrypted = false;
-                }
-                else if (extension == ".ek6" || extension == ".ek7")
-                {
-                    isEncrypted = true;
-                }
-                else
-                {
-                    MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
-                    return 1;
-                }
+        //    // Test if correct generation format
+        //    if ((gen7 && (extension == ".pk7" || extension == ".ek7")) || (!gen7 && (extension == ".pk6" || extension == ".ek6")))
+        //    {
+        //        bool isEncrypted = false;
+        //        if (extension == ".pk6" || extension == ".pk7")
+        //        {
+        //            isEncrypted = false;
+        //        }
+        //        else if (extension == ".ek6" || extension == ".ek7")
+        //        {
+        //            isEncrypted = true;
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
+        //            return 1;
+        //        }
 
-                byte[] tmpBytes = File.ReadAllBytes(filename);
-                if (tmpBytes.Length == 260 || tmpBytes.Length == POKEBYTES)
-                { // All OK, commit
-                    if (isEncrypted)
-                    {
-                        tmpBytes.CopyTo(result, 0);
-                    }
-                    else
-                    {
-                        PKX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
-                    return 2;
-                }
-                return 0;
-            }
-            else
-            {
-                MessageBox.Show("This program does not support conversion of pokémon files between generations.", "Incorrect Generation Number");
-                return 3;
-            }
-        }
+        //        byte[] tmpBytes = File.ReadAllBytes(filename);
+        //        if (tmpBytes.Length == 260 || tmpBytes.Length == POKEBYTES)
+        //        { // All OK, commit
+        //            if (isEncrypted)
+        //            {
+        //                tmpBytes.CopyTo(result, 0);
+        //            }
+        //            else
+        //            {
+        //                PKX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
+        //            return 2;
+        //        }
+        //        return 0;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("This program does not support conversion of pokémon files between generations.", "Incorrect Generation Number");
+        //        return 3;
+        //    }
+        //}
 
-        private void writeDoIt_Click(object sender, EventArgs e)
-        {
-            if (!selectedCloneValid)
-            {
-                MessageBox.Show("No Pokemon selected!", "Error");
-                return;
-            }
-            int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
-            if (ret > 0)
-            {
-                MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
-            }
-            else if (ret <= 0)
-            {
-                if (writeAutoInc.Checked)
-                {
-                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
-                }
-            }
-        }
+        //private void writeDoIt_Click(object sender, EventArgs e)
+        //{
+        //    if (!selectedCloneValid)
+        //    {
+        //        MessageBox.Show("No Pokemon selected!", "Error");
+        //        return;
+        //    }
+        //    int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
+        //    if (ret > 0)
+        //    {
+        //        MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
+        //    }
+        //    else if (ret <= 0)
+        //    {
+        //        if (writeAutoInc.Checked)
+        //        {
+        //            writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+        //        }
+        //    }
+        //}
 
-        private int writePokemonToBox(byte[] data, uint boxFrom, uint count)
-        { //Returns 0 on success, positive value represents how many copies could not be written.
-            if (data.Length != POKEBYTES)
-            {
-                return -1;
-            }
+        //private int writePokemonToBox(byte[] data, uint boxFrom, uint count)
+        //{ //Returns 0 on success, positive value represents how many copies could not be written.
+        //    if (data.Length != POKEBYTES)
+        //    {
+        //        return -1;
+        //    }
 
-            int ret = 0;
-            if (boxFrom + count > BOXES * BOXSIZE)
-            {
-                uint newCount = BOXES * BOXSIZE - boxFrom;
-                ret = (int)(count - newCount);
-                count = newCount;
-            }
+        //    int ret = 0;
+        //    if (boxFrom + count > BOXES * BOXSIZE)
+        //    {
+        //        uint newCount = BOXES * BOXSIZE - boxFrom;
+        //        ret = (int)(count - newCount);
+        //        count = newCount;
+        //    }
 
-            byte[] dataToWrite = new byte[count * POKEBYTES];
-            for (int i = 0; i < count; i++)
-            {
-                data.CopyTo(dataToWrite, i * POKEBYTES);
-            }
-            uint offset = boxOff + boxFrom * POKEBYTES;
-            Program.scriptHelper.write(offset, dataToWrite, pid);
-            return ret;
-        }
+        //    byte[] dataToWrite = new byte[count * POKEBYTES];
+        //    for (int i = 0; i < count; i++)
+        //    {
+        //        data.CopyTo(dataToWrite, i * POKEBYTES);
+        //    }
+        //    uint offset = boxOff + boxFrom * POKEBYTES;
+        //    Program.scriptHelper.write(offset, dataToWrite, pid);
+        //    return ret;
+        //}
 
-        void writeTab_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-        }
+        //void writeTab_DragEnter(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        //    {
+        //        e.Effect = DragDropEffects.Copy;
+        //    }
+        //}
 
-        void writeTab_DragDrop(object sender, DragEventArgs e)
-        {
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            if (files.Length <= 0)
-            {
-                return;
-            }
-            int fails = 0;
-            foreach (string filename in files)
-            {
-                byte[] data = new byte[POKEBYTES];
-                if (readPokemonFromFile(filename, out data) == 0)
-                {
-                    int ret = writePokemonToBox(data, writeGetBoxIndex(), writeGetCopies());
-                    if (ret > 0)
-                    {
-                        fails += ret;
-                    }
-                    else if (ret < 0)
-                    {
-                        return;
-                    }
-                }
+        //void writeTab_DragDrop(object sender, DragEventArgs e)
+        //{
+        //    string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+        //    if (files.Length <= 0)
+        //    {
+        //        return;
+        //    }
+        //    int fails = 0;
+        //    foreach (string filename in files)
+        //    {
+        //        byte[] data = new byte[POKEBYTES];
+        //        if (readPokemonFromFile(filename, out data) == 0)
+        //        {
+        //            int ret = writePokemonToBox(data, writeGetBoxIndex(), writeGetCopies());
+        //            if (ret > 0)
+        //            {
+        //                fails += ret;
+        //            }
+        //            else if (ret < 0)
+        //            {
+        //                return;
+        //            }
+        //        }
 
-                if (writeAutoInc.Checked)
-                {
-                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
-                }
-            }
-            if (fails > 0)
-            {
-                MessageBox.Show(fails + " write(s) failed because end of boxes was reached.", "Error");
-            }
-        }
+        //        if (writeAutoInc.Checked)
+        //        {
+        //            writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+        //        }
+        //    }
+        //    if (fails > 0)
+        //    {
+        //        MessageBox.Show(fails + " write(s) failed because end of boxes was reached.", "Error");
+        //    }
+        //}
 
-        private uint writeGetCopies()
-        {
-            return decimal.ToUInt32(writeCopiesNo.Value);
-        }
+        //private uint writeGetCopies()
+        //{
+        //    return decimal.ToUInt32(writeCopiesNo.Value);
+        //}
 
-        private uint writeGetBoxIndex()
-        {
-            return decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
-        }
+        //private uint writeGetBoxIndex()
+        //{
+        //    return decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
+        //}
 
-        private void writeSetBoxIndex(uint index)
-        {
-            if (index >= BOXES * BOXSIZE)
-            {
-                index = BOXES * BOXSIZE - 1;
-            }
-            uint box = index / BOXSIZE;
-            uint slot = index % BOXSIZE;
-            SetValue(writeBoxTo, box + 1);
-            SetValue(writeSlotTo, slot + 1);
-        }
+        //private void writeSetBoxIndex(uint index)
+        //{
+        //    if (index >= BOXES * BOXSIZE)
+        //    {
+        //        index = BOXES * BOXSIZE - 1;
+        //    }
+        //    uint box = index / BOXSIZE;
+        //    uint slot = index % BOXSIZE;
+        //    Delg.SetValue(writeBoxTo, box + 1);
+        //    Delg.SetValue(writeSlotTo, slot + 1);
+        //}
 
-        private void writeBoxTo_ValueChanged(object sender, EventArgs e)
-        {
-            writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
-        }
+        //private void writeBoxTo_ValueChanged(object sender, EventArgs e)
+        //{
+        //    writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
+        //}
 
-        private void writeSlotTo_ValueChanged(object sender, EventArgs e)
-        {
-            writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
-        }
+        //private void writeSlotTo_ValueChanged(object sender, EventArgs e)
+        //{
+        //    writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
+        //}
 
-        // Delete pokémon
-        private void delPkm_Click(object sender, EventArgs e)
-        {
-            uint offset = boxOff + deleteGetIndex() * POKEBYTES;
-            uint size = POKEBYTES * deleteGetAmount();
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[size], handleDeleteData, null);
-            uint mySeq = Program.scriptHelper.data(offset, size, pid);
-            waitingForData.Add(mySeq, myArgs);
-        }
+        //// Delete pokémon
+        //private void delPkm_Click(object sender, EventArgs e)
+        //{
+        //    uint offset = boxOff + deleteGetIndex() * POKEBYTES;
+        //    uint size = POKEBYTES * deleteGetAmount();
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[size], handleDeleteData, null);
+        //    uint mySeq = Program.scriptHelper.data(offset, size, pid);
+        //    waitingForData.Add(mySeq, myArgs);
+        //}
 
-        private void handleDeleteData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //private void handleDeleteData(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
 
-            if (deleteKeepBackup.Checked)
-            {
-                try
-                {
-                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
-                    FileInfo folder = new FileInfo(folderPath);
-                    folder.Directory.Create();
-                    PKM validator = SAV.BlankPKM;
-                    for (int i = 0; i < args.data.Length; i += POKEBYTES)
-                    {
-                        validator.Data = PKX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
-                        if (validator.Species == 0)
-                        {
-                            continue;
-                        }
-                        string fileName;
-                        if (gen7)
-                        {
-                            fileName = folderPath + "backup.pk7";
-                        }
-                        else
-                        {
-                            fileName = folderPath + "backup.pk6";
-                        }
-                        writePokemonToFile(validator.Data, fileName);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            if (gen7)
-            {
-                writePokemonToBox(LookupTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
-            }
-            else
-            {
-                writePokemonToBox(LookupTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
-            }
-        }
+        //    if (deleteKeepBackup.Checked)
+        //    {
+        //        try
+        //        {
+        //            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
+        //            FileInfo folder = new FileInfo(folderPath);
+        //            folder.Directory.Create();
+        //            PKM validator = SAV.BlankPKM;
+        //            for (int i = 0; i < args.data.Length; i += POKEBYTES)
+        //            {
+        //                validator.Data = PKX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
+        //                if (validator.Species == 0)
+        //                {
+        //                    continue;
+        //                }
+        //                string fileName;
+        //                if (gen7)
+        //                {
+        //                    fileName = folderPath + "backup.pk7";
+        //                }
+        //                else
+        //                {
+        //                    fileName = folderPath + "backup.pk6";
+        //                }
+        //                writePokemonToFile(validator.Data, fileName);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //    }
+        //    if (gen7)
+        //    {
+        //        writePokemonToBox(LookupTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
+        //    }
+        //    else
+        //    {
+        //        writePokemonToBox(LookupTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
+        //    }
+        //}
 
-        private uint deleteGetAmount()
-        {
-            return decimal.ToUInt32(deleteAmount.Value);
-        }
+        //private uint deleteGetAmount()
+        //{
+        //    return decimal.ToUInt32(deleteAmount.Value);
+        //}
 
-        private uint deleteGetIndex()
-        {
-            return decimal.ToUInt32((deleteBox.Value - 1) * BOXSIZE + deleteSlot.Value - 1);
-        }
+        //private uint deleteGetIndex()
+        //{
+        //    return decimal.ToUInt32((deleteBox.Value - 1) * BOXSIZE + deleteSlot.Value - 1);
+        //}
 
-        private void deleteBox_ValueChanged(object sender, EventArgs e)
-        {
-            deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
-        }
+        //private void deleteBox_ValueChanged(object sender, EventArgs e)
+        //{
+        //    deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
+        //}
 
-        private void deleteSlot_ValueChanged(object sender, EventArgs e)
-        {
-            deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
-        }
+        //private void deleteSlot_ValueChanged(object sender, EventArgs e)
+        //{
+        //    deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
+        //}
 
         #endregion R/W pokémon data
 
@@ -2166,6 +2098,13 @@ namespace ntrbase
             {
                 radioParty.Tag = new LastBoxSlot { box = boxDump.Value, slot = slotDump.Value };
             }
+        }
+
+        // Clone/Delete tab
+
+        private void clonedelete_Changed(object sender, EventArgs e)
+        {
+            Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
         }
 
         // Item buttons
@@ -2443,45 +2382,6 @@ namespace ntrbase
                 ctrl.Checked = en;
         }
 
-        delegate void SetValueDelegate(NumericUpDown ctrl, decimal val);
-
-        public static void SetValue(NumericUpDown ctrl, decimal val)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetValueDelegate del = new SetValueDelegate(SetValue);
-                ctrl.Invoke(del, ctrl, val);
-            }
-            else
-                ctrl.Value = val;
-        }
-
-        delegate void SetMaximumDelegate(NumericUpDown ctrl, decimal val);
-
-        public static void SetMaximum(NumericUpDown ctrl, decimal val)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetMaximumDelegate del = new SetMaximumDelegate(SetMaximum);
-                ctrl.Invoke(del, ctrl, val);
-            }
-            else
-                ctrl.Maximum = val;
-        }
-
-        delegate void SetMinimumDelegate(NumericUpDown ctrl, decimal val);
-
-        public static void SetMinimum(NumericUpDown ctrl, decimal val)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetMinimumDelegate del = new SetMinimumDelegate(SetMinimum);
-                ctrl.Invoke(del, ctrl, val);
-            }
-            else
-                ctrl.Minimum = val;
-        }
-
         delegate void SetSelectedIndexDelegate(ComboBox ctrl, int i);
 
         public static void SetSelectedIndex(ComboBox ctrl, int i)
@@ -2698,8 +2598,8 @@ namespace ntrbase
 
         public void updateDumpBoxes(int box, int slot)
         {
-            SetValue(boxDump, box + 1);
-            SetValue(slotDump, slot + 1);
+            Delg.SetValue(boxDump, box + 1);
+            Delg.SetValue(slotDump, slot + 1);
         }
 
         private void startBot()
@@ -3042,19 +2942,19 @@ namespace ntrbase
                 SetSelectedIndex(filterAbility, (int)filterList.SelectedRows[0].Cells[2].Value);
                 SetSelectedIndex(filterHPtype, (int)filterList.SelectedRows[0].Cells[3].Value);
                 SetSelectedIndex(filterGender, (int)filterList.SelectedRows[0].Cells[4].Value);
-                SetValue(filterHPvalue, (int)filterList.SelectedRows[0].Cells[5].Value);
+                Delg.SetValue(filterHPvalue, (int)filterList.SelectedRows[0].Cells[5].Value);
                 SetSelectedIndex(filterHPlogic, (int)filterList.SelectedRows[0].Cells[6].Value);
-                SetValue(filterATKvalue, (int)filterList.SelectedRows[0].Cells[7].Value);
+                Delg.SetValue(filterATKvalue, (int)filterList.SelectedRows[0].Cells[7].Value);
                 SetSelectedIndex(filterATKlogic, (int)filterList.SelectedRows[0].Cells[8].Value);
-                SetValue(filterDEFvalue, (int)filterList.SelectedRows[0].Cells[9].Value);
+                Delg.SetValue(filterDEFvalue, (int)filterList.SelectedRows[0].Cells[9].Value);
                 SetSelectedIndex(filterDEFlogic, (int)filterList.SelectedRows[0].Cells[10].Value);
-                SetValue(filterSPAvalue, (int)filterList.SelectedRows[0].Cells[11].Value);
+                Delg.SetValue(filterSPAvalue, (int)filterList.SelectedRows[0].Cells[11].Value);
                 SetSelectedIndex(filterSPAlogic, (int)filterList.SelectedRows[0].Cells[12].Value);
-                SetValue(filterSPDvalue, (int)filterList.SelectedRows[0].Cells[13].Value);
+                Delg.SetValue(filterSPDvalue, (int)filterList.SelectedRows[0].Cells[13].Value);
                 SetSelectedIndex(filterSPDlogic, (int)filterList.SelectedRows[0].Cells[14].Value);
-                SetValue(filterSPEvalue, (int)filterList.SelectedRows[0].Cells[15].Value);
+                Delg.SetValue(filterSPEvalue, (int)filterList.SelectedRows[0].Cells[15].Value);
                 SetSelectedIndex(filterSPElogic, (int)filterList.SelectedRows[0].Cells[16].Value);
-                SetValue(filterPerIVvalue, (int)filterList.SelectedRows[0].Cells[17].Value);
+                Delg.SetValue(filterPerIVvalue, (int)filterList.SelectedRows[0].Cells[17].Value);
                 SetSelectedIndex(filterPerIVlogic, (int)filterList.SelectedRows[0].Cells[18].Value);
             }
             else
@@ -3136,12 +3036,12 @@ namespace ntrbase
             SetSelectedIndex(filterSPDlogic, 0);
             SetSelectedIndex(filterSPElogic, 0);
             SetSelectedIndex(filterPerIVlogic, 0);
-            SetValue(filterHPvalue, 0);
-            SetValue(filterATKvalue, 0);
-            SetValue(filterDEFvalue, 0);
-            SetValue(filterSPAvalue, 0);
-            SetValue(filterSPDvalue, 0);
-            SetValue(filterSPEvalue, 0);
+            Delg.SetValue(filterHPvalue, 0);
+            Delg.SetValue(filterATKvalue, 0);
+            Delg.SetValue(filterDEFvalue, 0);
+            Delg.SetValue(filterSPAvalue, 0);
+            Delg.SetValue(filterSPDvalue, 0);
+            Delg.SetValue(filterSPEvalue, 0);
         }
 
         private void bFilterLoad_Click(object sender, EventArgs e)
@@ -3304,15 +3204,15 @@ namespace ntrbase
 
         public void updateWTslots(int box, int slot, int quantity)
         {
-            SetValue(WTBox, box + 1);
-            SetValue(WTSlot, slot + 1);
-            SetValue(WTtradesNo, quantity);
+            Delg.SetValue(WTBox, box + 1);
+            Delg.SetValue(WTSlot, slot + 1);
+            Delg.SetValue(WTtradesNo, quantity);
         }
 
         //public void updateFCfields(uint totalFC, uint currentFC)
         //{
-        //    SetValue(milesNum, currentFC);
-        //    SetValue(totalFCNum, totalFC);
+        //    Delg.SetValue(milesNum, currentFC);
+        //    Delg.SetValue(totalFCNum, totalFC);
         //}
 
         private void WTsource_Folder_CheckedChanged(object sender, EventArgs e)
@@ -3342,38 +3242,38 @@ namespace ntrbase
                     case 0:
                         typemessage = "Event - Make sure you are in front of the man in the Pokémon Center. Also, you must only have one pokémon in your party.";
                         radioParty.Checked = true;
-                        SetValue(boxDump, 1);
-                        SetValue(slotDump, 2);
+                        Delg.SetValue(boxDump, 1);
+                        Delg.SetValue(slotDump, 2);
                         break;
                     case 1:
                         typemessage = "Type: Null - Make sure you are in front of Gladion at the Aether Paradise. Also, you must only have one pokémon in your party.\r\n\r\nThis mode can also be used for event pokémon.";
                         radioParty.Checked = true;
-                        SetValue(boxDump, 1);
-                        SetValue(slotDump, 2);
+                        Delg.SetValue(boxDump, 1);
+                        Delg.SetValue(slotDump, 2);
                         break;
                     case 2:
                         typemessage = "Tapus - Make sure you are in front of the statue at the ruins.";
                         radioOpponent.Checked = true;
-                        SetValue(boxDump, 1);
-                        SetValue(slotDump, 1);
+                        Delg.SetValue(boxDump, 1);
+                        Delg.SetValue(slotDump, 1);
                         break;
                     case 3:
                         typemessage = "Solgaleo/Lunala - Make sure you are in front of Solgaleo/Lunala at the Altar of the Sunne/Moone.";
                         radioOpponent.Checked = true;
-                        SetValue(boxDump, 1);
-                        SetValue(slotDump, 1);
+                        Delg.SetValue(boxDump, 1);
+                        Delg.SetValue(slotDump, 1);
                         break;
                     case 4:
                         typemessage = "Wild Pokémon - Make sure you are in the place where wild pokémon can appear. Also, check that Honey is the item at the top of your Item list and can be selected by just opening the menu and pressing A.";
                         radioOpponent.Checked = true;
-                        SetValue(boxDump, 1);
-                        SetValue(slotDump, 1);
+                        Delg.SetValue(boxDump, 1);
+                        Delg.SetValue(slotDump, 1);
                         break;
                     case 5:
                         typemessage = "Ultra Beast/Necrozma - Make sure you are in the place where the Ultra Beast / Necrozma appears. Also, check that Honey is the item at the top of your Item list and can be selected by just opening the menu and pressing A.";
                         radioOpponent.Checked = true;
-                        SetValue(boxDump, 1);
-                        SetValue(slotDump, 1);
+                        Delg.SetValue(boxDump, 1);
+                        Delg.SetValue(slotDump, 1);
                         break;
                     default:
                         typemessage = "No type - Select one type of soft-reset and try again.";
@@ -3399,8 +3299,8 @@ namespace ntrbase
                         typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
                         resumemessage = "In front of the lady, will press A to trigger dialog";
                         radioParty.Checked = true;
-                        SetValue(boxDump, 1);
-                        SetValue(slotDump, 2);
+                        Delg.SetValue(boxDump, 1);
+                        Delg.SetValue(slotDump, 2);
                         break;
                     case 3:
                         typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
@@ -3700,9 +3600,9 @@ namespace ntrbase
 
         public void updateBreedingslots(int box, int slot, int quantity)
         {
-            SetValue(boxBreed, box + 1);
-            SetValue(slotBreed, slot + 1);
-            SetValue(eggsNoBreed, quantity);
+            Delg.SetValue(boxBreed, box + 1);
+            Delg.SetValue(slotBreed, slot + 1);
+            Delg.SetValue(eggsNoBreed, quantity);
         }
 
         public void AddESVrow(int row, int slot, int tsv)
@@ -3850,9 +3750,9 @@ namespace ntrbase
         private void breedingClear_Click(object sender, EventArgs e)
         {
             SetSelectedIndex(modeBreed, -1);
-            SetValue(boxBreed, 1);
-            SetValue(slotBreed, 1);
-            SetValue(eggsNoBreed, 1);
+            Delg.SetValue(boxBreed, 1);
+            Delg.SetValue(slotBreed, 1);
+            Delg.SetValue(eggsNoBreed, 1);
             OrganizeMiddle.Checked = true;
             radioDayCare1.Checked = true;
             SetChecked(readESV, false);
@@ -3869,10 +3769,10 @@ namespace ntrbase
                 Delg.SetText(Breed_labelBox, "Acc:");
                 Delg.SetText(Breed_labelSlot, "Rej:");
                 Delg.SetEnabled(slotBreed, true);
-                SetMaximum(boxBreed, 999);
-                SetMaximum(slotBreed, 999);
-                SetMinimum(boxBreed, 0);
-                SetMinimum(slotBreed, 0);
+                Delg.SetMaximum(boxBreed, 999);
+                Delg.SetMaximum(slotBreed, 999);
+                Delg.SetMinimum(boxBreed, 0);
+                Delg.SetMinimum(slotBreed, 0);
                 Delg.SetEnabled(eggsNoBreed, false);
             }
             else
@@ -3880,10 +3780,10 @@ namespace ntrbase
                 Delg.SetText(Breed_labelBox, "Box:");
                 Delg.SetText(Breed_labelSlot, "Slot:");
                 Delg.SetEnabled(slotBreed, false);
-                SetMaximum(boxBreed, 30);
-                SetMaximum(slotBreed, BOXES);
-                SetMinimum(boxBreed, 1);
-                SetMinimum(slotBreed, 1);
+                Delg.SetMaximum(boxBreed, 30);
+                Delg.SetMaximum(slotBreed, BOXES);
+                Delg.SetMinimum(boxBreed, 1);
+                Delg.SetMinimum(slotBreed, 1);
                 Delg.SetEnabled(eggsNoBreed, true);
             }
         }
