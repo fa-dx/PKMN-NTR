@@ -17,7 +17,7 @@ namespace ntrbase.Sub_forms
         public Edit_Trainer()
         {
             InitializeComponent();
-            Ctrls = new Control[] { TB_Name, Write_Name, Num_TID, Write_TID, Num_SID, Write_SID, Num_Money, Write_Money, Num_Miles, Write_Miles, Num_FestivalCoins, Num_FestivalCoins, Num_TotalFC,  Write_TotalFC, Num_Miles, Write_Miles, Num_BP, Write_BP, LB_Lang, Write_Lang, Num_Hour, Num_Min, Num_Sec, Write_Time, ReloadFields };
+            Ctrls = new Control[] { TB_Name, Write_Name, Num_TID, Write_TID, Num_SID, Write_SID, Num_Money, Write_Money, Num_Miles, Write_Miles, Num_FestivalCoins, Num_FestivalCoins, Num_TotalFC, Write_TotalFC, Num_Miles, Write_Miles, Num_BP, Write_BP, LB_Lang, Write_Lang, Num_Hour, Num_Min, Num_Sec, Write_Time, ReloadFields };
         }
 
         private void Edit_Trainer_Load(object sender, EventArgs e)
@@ -230,7 +230,8 @@ namespace ntrbase.Sub_forms
         {
             RAMreader = Program.helper.waitNTRmultiread(LookupTable.rngseedOff, 0x04);
             if (await RAMreader)
-            {;
+            {
+                ;
                 return BitConverter.ToUInt32(Program.helper.lastmultiread, 0).ToString("X8");
             }
             else
@@ -249,6 +250,203 @@ namespace ntrbase.Sub_forms
             {
                 Fill7();
             }
+        }
+
+        private void setTSV(object sender, EventArgs e)
+        {
+            int TSV = LookupTable.getTSV((ushort)Num_TID.Value, (ushort)Num_SID.Value);
+            int G7ID = LookupTable.getG7ID((ushort)Num_TID.Value, (ushort)Num_SID.Value);
+            if (Num_TID.Value > ushort.MaxValue)
+            {
+                Num_TID.Value = ushort.MaxValue;
+            }
+            if (Num_SID.Value > ushort.MaxValue)
+            {
+                Num_SID.Value = ushort.MaxValue;
+            }
+            if (Program.gCmdWindow.SAV.Generation == 6)
+            {
+                Delg.SetTooltip(toolTip1, Num_TID, "TSV: " + TSV.ToString("D4"));
+                Delg.SetTooltip(toolTip1, Num_SID, "TSV: " + TSV.ToString("D4"));
+            }
+            else if (Program.gCmdWindow.SAV.Generation == 7)
+            {
+                Delg.SetTooltip(toolTip1, Num_TID, "TSV: " + TSV.ToString("D4") + "\r\nG7ID: " + G7ID.ToString("D6"));
+                Delg.SetTooltip(toolTip1, Num_SID, "TSV: " + TSV.ToString("D4") + "\r\nG7ID: " + G7ID.ToString("D6"));
+            }
+        }
+
+        private async void Write_Name_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(TB_Name, false);
+            Delg.SetEnabled(Write_Name, false);
+            byte[] data = Encoding.Unicode.GetBytes(TB_Name.Text.PadRight(13, '\0'));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.nameOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(TB_Name, true);
+            Delg.SetEnabled(Write_Name, true);
+        }
+
+        private async void Write_TID_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(Num_TID, false);
+            Delg.SetEnabled(Write_TID, false);
+            if (Num_TID.Value > ushort.MaxValue)
+            {
+                Num_TID.Value = ushort.MaxValue;
+            }
+            byte[] data = BitConverter.GetBytes(Convert.ToUInt16(Num_TID.Value));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.tidOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(Num_TID, true);
+            Delg.SetEnabled(Write_TID, true);
+        }
+
+        private async void Write_SID_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(Num_SID, false);
+            Delg.SetEnabled(Write_SID, false);
+            if (Num_SID.Value > ushort.MaxValue)
+            {
+                Num_SID.Value = ushort.MaxValue;
+            }
+            byte[] data = BitConverter.GetBytes(Convert.ToUInt16(Num_SID.Value));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.sidOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(Num_SID, true);
+            Delg.SetEnabled(Write_SID, true);
+        }
+
+        private async void Write_Money_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(Num_Money, false);
+            Delg.SetEnabled(Write_Money, false);
+            if (Num_Money.Value > ushort.MaxValue)
+            {
+                Num_Money.Value = ushort.MaxValue;
+            }
+            byte[] data = BitConverter.GetBytes(Convert.ToUInt32(Num_Money.Value));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.moneyOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(Num_Money, true);
+            Delg.SetEnabled(Write_Money, true);
+        }
+
+        private async void Write_Miles_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(Num_Miles, false);
+            Delg.SetEnabled(Write_Miles, false);
+            if (Num_Miles.Value > 9999999)
+            {
+                Num_Miles.Value = 9999999;
+            }
+            byte[] data = BitConverter.GetBytes(Convert.ToUInt32(Num_Miles.Value));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.milesOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(Num_Miles, true);
+            Delg.SetEnabled(Write_Miles, true);
+        }
+
+        private async void Write_FestivalCoins_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(Num_FestivalCoins, false);
+            Delg.SetEnabled(Write_FestivalCoins, false);
+            if (Num_FestivalCoins.Value > 9999999)
+            {
+                Num_FestivalCoins.Value = 9999999;
+            }
+            byte[] data = BitConverter.GetBytes(Convert.ToUInt32(Num_FestivalCoins.Value));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.festivalcoinsOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(Num_FestivalCoins, true);
+            Delg.SetEnabled(Write_FestivalCoins, true);
+        }
+
+        private async void Write_TotalFC_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(Num_TotalFC, false);
+            Delg.SetEnabled(Write_TotalFC, false);
+            if (Num_TotalFC.Value > 9999999)
+            {
+                Num_TotalFC.Value = 9999999;
+            }
+            byte[] data = BitConverter.GetBytes(Convert.ToUInt32(Num_TotalFC.Value));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.totalfcOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(Num_TotalFC, true);
+            Delg.SetEnabled(Write_TotalFC, true);
+        }
+
+        private async void Write_BP_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(Num_BP, false);
+            Delg.SetEnabled(Write_BP, false);
+            if (Num_BP.Value > 9999)
+            {
+                Num_BP.Value = 9999;
+            }
+            byte[] data = BitConverter.GetBytes(Convert.ToUInt32(Num_BP.Value));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.bpOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(Num_BP, true);
+            Delg.SetEnabled(Write_BP, true);
+        }
+
+        private async void Write_Time_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(Num_Hour, false);
+            Delg.SetEnabled(Num_Min, false);
+            Delg.SetEnabled(Num_Sec, false);
+            Delg.SetEnabled(Write_Time, false);
+            if (Num_Hour.Value > 999)
+            {
+                Num_BP.Value = 999;
+            }
+            if (Num_Min.Value > 59)
+            {
+                Num_Min.Value = 59;
+            }
+            if (Num_Sec.Value > 59)
+            {
+                Num_Sec.Value = 59;
+            }
+            byte[] data = new byte[4];
+            BitConverter.GetBytes(Convert.ToUInt16(Num_Hour.Value)).CopyTo(data, 0);
+            data[2] = Convert.ToByte(Num_Min.Value);
+            data[3] = Convert.ToByte(Num_Sec.Value);
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.timeOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(Num_Hour, true);
+            Delg.SetEnabled(Num_Min, true);
+            Delg.SetEnabled(Num_Sec, true);
+            Delg.SetEnabled(Write_Time, true);
         }
     }
 }

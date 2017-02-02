@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Edit_Trainer));
             this.label55 = new System.Windows.Forms.Label();
             this.Write_TotalFC = new System.Windows.Forms.Button();
@@ -61,6 +62,9 @@
             this.Num_BP = new System.Windows.Forms.NumericUpDown();
             this.LB_Lang = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Write_FestivalCoins = new System.Windows.Forms.Button();
+            this.Num_FestivalCoins = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.TB_EggSeed = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -68,9 +72,7 @@
             this.label60 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.ReloadFields = new System.Windows.Forms.Button();
-            this.Write_FestivalCoins = new System.Windows.Forms.Button();
-            this.Num_FestivalCoins = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Num_TotalFC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Hour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Min)).BeginInit();
@@ -81,16 +83,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.Num_Miles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_BP)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Num_FestivalCoins)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Num_FestivalCoins)).BeginInit();
             this.SuspendLayout();
             // 
             // label55
             // 
             this.label55.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(3, 175);
+            this.label55.Location = new System.Drawing.Point(3, 182);
             this.label55.Margin = new System.Windows.Forms.Padding(3);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(78, 13);
@@ -103,18 +105,19 @@
             this.Write_TotalFC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Write_TotalFC.AutoSize = true;
             this.Write_TotalFC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Write_TotalFC.Location = new System.Drawing.Point(176, 171);
+            this.Write_TotalFC.Location = new System.Drawing.Point(176, 177);
             this.Write_TotalFC.Name = "Write_TotalFC";
-            this.Write_TotalFC.Size = new System.Drawing.Size(42, 22);
+            this.Write_TotalFC.Size = new System.Drawing.Size(42, 23);
             this.Write_TotalFC.TabIndex = 42;
             this.Write_TotalFC.Text = "Write";
             this.Write_TotalFC.UseVisualStyleBackColor = true;
+            this.Write_TotalFC.Click += new System.EventHandler(this.Write_TotalFC_Click);
             // 
             // Num_TotalFC
             // 
             this.Num_TotalFC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Num_TotalFC.AutoSize = true;
-            this.Num_TotalFC.Location = new System.Drawing.Point(87, 172);
+            this.Num_TotalFC.Location = new System.Drawing.Point(87, 178);
             this.Num_TotalFC.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -129,7 +132,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 7);
+            this.label10.Location = new System.Drawing.Point(3, 8);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(78, 13);
             this.label10.TabIndex = 51;
@@ -150,7 +153,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 91);
+            this.label2.Location = new System.Drawing.Point(3, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 54;
@@ -164,16 +167,17 @@
             this.Write_Name.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Write_Name.Location = new System.Drawing.Point(176, 3);
             this.Write_Name.Name = "Write_Name";
-            this.Write_Name.Size = new System.Drawing.Size(42, 22);
+            this.Write_Name.Size = new System.Drawing.Size(42, 23);
             this.Write_Name.TabIndex = 32;
             this.Write_Name.Text = "Write";
             this.Write_Name.UseVisualStyleBackColor = true;
+            this.Write_Name.Click += new System.EventHandler(this.Write_Name_Click);
             // 
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 35);
+            this.label11.Location = new System.Drawing.Point(3, 37);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(78, 13);
             this.label11.TabIndex = 52;
@@ -198,7 +202,7 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 63);
+            this.label15.Location = new System.Drawing.Point(3, 66);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(78, 13);
             this.label15.TabIndex = 53;
@@ -210,12 +214,13 @@
             this.Write_TID.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Write_TID.AutoSize = true;
             this.Write_TID.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Write_TID.Location = new System.Drawing.Point(176, 31);
+            this.Write_TID.Location = new System.Drawing.Point(176, 32);
             this.Write_TID.Name = "Write_TID";
-            this.Write_TID.Size = new System.Drawing.Size(42, 22);
+            this.Write_TID.Size = new System.Drawing.Size(42, 23);
             this.Write_TID.TabIndex = 34;
             this.Write_TID.Text = "Write";
             this.Write_TID.UseVisualStyleBackColor = true;
+            this.Write_TID.Click += new System.EventHandler(this.Write_TID_Click);
             // 
             // Write_Time
             // 
@@ -228,12 +233,13 @@
             this.Write_Time.TabIndex = 50;
             this.Write_Time.Text = "Write";
             this.Write_Time.UseVisualStyleBackColor = true;
+            this.Write_Time.Click += new System.EventHandler(this.Write_Time_Click);
             // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 203);
+            this.label4.Location = new System.Drawing.Point(3, 211);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 57;
@@ -258,7 +264,7 @@
             // 
             this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(3, 236);
+            this.label28.Location = new System.Drawing.Point(3, 240);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(78, 13);
             this.label28.TabIndex = 58;
@@ -294,30 +300,32 @@
             this.Write_BP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Write_BP.AutoSize = true;
             this.Write_BP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Write_BP.Location = new System.Drawing.Point(176, 199);
+            this.Write_BP.Location = new System.Drawing.Point(176, 206);
             this.Write_BP.Name = "Write_BP";
-            this.Write_BP.Size = new System.Drawing.Size(42, 22);
+            this.Write_BP.Size = new System.Drawing.Size(42, 23);
             this.Write_BP.TabIndex = 44;
             this.Write_BP.Text = "Write";
             this.Write_BP.UseVisualStyleBackColor = true;
+            this.Write_BP.Click += new System.EventHandler(this.Write_BP_Click);
             // 
             // Write_SID
             // 
             this.Write_SID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Write_SID.AutoSize = true;
             this.Write_SID.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Write_SID.Location = new System.Drawing.Point(176, 59);
+            this.Write_SID.Location = new System.Drawing.Point(176, 61);
             this.Write_SID.Name = "Write_SID";
-            this.Write_SID.Size = new System.Drawing.Size(42, 22);
+            this.Write_SID.Size = new System.Drawing.Size(42, 23);
             this.Write_SID.TabIndex = 36;
             this.Write_SID.Text = "Write";
             this.Write_SID.UseVisualStyleBackColor = true;
+            this.Write_SID.Click += new System.EventHandler(this.Write_SID_Click);
             // 
             // Num_TID
             // 
             this.Num_TID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Num_TID.AutoSize = true;
-            this.Num_TID.Location = new System.Drawing.Point(87, 32);
+            this.Num_TID.Location = new System.Drawing.Point(87, 33);
             this.Num_TID.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -326,11 +334,13 @@
             this.Num_TID.Name = "Num_TID";
             this.Num_TID.Size = new System.Drawing.Size(83, 20);
             this.Num_TID.TabIndex = 33;
+            this.Num_TID.ValueChanged += new System.EventHandler(this.setTSV);
             // 
             // TB_Name
             // 
             this.TB_Name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TB_Name.Location = new System.Drawing.Point(87, 4);
+            this.TB_Name.MaxLength = 13;
             this.TB_Name.Name = "TB_Name";
             this.TB_Name.Size = new System.Drawing.Size(83, 20);
             this.TB_Name.TabIndex = 31;
@@ -338,7 +348,7 @@
             // Num_SID
             // 
             this.Num_SID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.Num_SID.Location = new System.Drawing.Point(87, 60);
+            this.Num_SID.Location = new System.Drawing.Point(87, 62);
             this.Num_SID.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -347,6 +357,7 @@
             this.Num_SID.Name = "Num_SID";
             this.Num_SID.Size = new System.Drawing.Size(83, 20);
             this.Num_SID.TabIndex = 35;
+            this.Num_SID.ValueChanged += new System.EventHandler(this.setTSV);
             // 
             // label13
             // 
@@ -363,7 +374,7 @@
             this.Write_Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Write_Lang.AutoSize = true;
             this.Write_Lang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Write_Lang.Location = new System.Drawing.Point(176, 231);
+            this.Write_Lang.Location = new System.Drawing.Point(176, 235);
             this.Write_Lang.Name = "Write_Lang";
             this.Write_Lang.Size = new System.Drawing.Size(42, 23);
             this.Write_Lang.TabIndex = 46;
@@ -373,7 +384,7 @@
             // Num_Money
             // 
             this.Num_Money.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.Num_Money.Location = new System.Drawing.Point(87, 88);
+            this.Num_Money.Location = new System.Drawing.Point(87, 91);
             this.Num_Money.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -388,7 +399,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 119);
+            this.label3.Location = new System.Drawing.Point(3, 124);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 55;
@@ -400,30 +411,32 @@
             this.Write_Money.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Write_Money.AutoSize = true;
             this.Write_Money.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Write_Money.Location = new System.Drawing.Point(176, 87);
+            this.Write_Money.Location = new System.Drawing.Point(176, 90);
             this.Write_Money.Name = "Write_Money";
-            this.Write_Money.Size = new System.Drawing.Size(42, 22);
+            this.Write_Money.Size = new System.Drawing.Size(42, 23);
             this.Write_Money.TabIndex = 38;
             this.Write_Money.Text = "Write";
             this.Write_Money.UseVisualStyleBackColor = true;
+            this.Write_Money.Click += new System.EventHandler(this.Write_Money_Click);
             // 
             // Write_Miles
             // 
             this.Write_Miles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Write_Miles.AutoSize = true;
             this.Write_Miles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Write_Miles.Location = new System.Drawing.Point(176, 115);
+            this.Write_Miles.Location = new System.Drawing.Point(176, 119);
             this.Write_Miles.Name = "Write_Miles";
-            this.Write_Miles.Size = new System.Drawing.Size(42, 22);
+            this.Write_Miles.Size = new System.Drawing.Size(42, 23);
             this.Write_Miles.TabIndex = 40;
             this.Write_Miles.Text = "Write";
             this.Write_Miles.UseVisualStyleBackColor = true;
+            this.Write_Miles.Click += new System.EventHandler(this.Write_Miles_Click);
             // 
             // Num_Miles
             // 
             this.Num_Miles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Num_Miles.AutoSize = true;
-            this.Num_Miles.Location = new System.Drawing.Point(87, 116);
+            this.Num_Miles.Location = new System.Drawing.Point(87, 120);
             this.Num_Miles.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -438,7 +451,7 @@
             // 
             this.Num_BP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Num_BP.AutoSize = true;
-            this.Num_BP.Location = new System.Drawing.Point(87, 200);
+            this.Num_BP.Location = new System.Drawing.Point(87, 207);
             this.Num_BP.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -452,7 +465,7 @@
             // 
             this.LB_Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LB_Lang.FormattingEnabled = true;
-            this.LB_Lang.Location = new System.Drawing.Point(87, 232);
+            this.LB_Lang.Location = new System.Drawing.Point(87, 236);
             this.LB_Lang.Name = "LB_Lang";
             this.LB_Lang.Size = new System.Drawing.Size(83, 21);
             this.LB_Lang.TabIndex = 45;
@@ -505,6 +518,46 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(221, 261);
             this.tableLayoutPanel1.TabIndex = 62;
+            // 
+            // Write_FestivalCoins
+            // 
+            this.Write_FestivalCoins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.Write_FestivalCoins.AutoSize = true;
+            this.Write_FestivalCoins.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Write_FestivalCoins.Location = new System.Drawing.Point(176, 148);
+            this.Write_FestivalCoins.Name = "Write_FestivalCoins";
+            this.Write_FestivalCoins.Size = new System.Drawing.Size(42, 23);
+            this.Write_FestivalCoins.TabIndex = 42;
+            this.Write_FestivalCoins.Text = "Write";
+            this.Write_FestivalCoins.UseVisualStyleBackColor = true;
+            this.Write_FestivalCoins.Click += new System.EventHandler(this.Write_FestivalCoins_Click);
+            // 
+            // Num_FestivalCoins
+            // 
+            this.Num_FestivalCoins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.Num_FestivalCoins.AutoSize = true;
+            this.Num_FestivalCoins.Location = new System.Drawing.Point(87, 149);
+            this.Num_FestivalCoins.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.Num_FestivalCoins.Name = "Num_FestivalCoins";
+            this.Num_FestivalCoins.Size = new System.Drawing.Size(83, 20);
+            this.Num_FestivalCoins.TabIndex = 41;
+            this.Num_FestivalCoins.ThousandsSeparator = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 153);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.TabIndex = 56;
+            this.label1.Text = "Festival Coins::";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel2
             // 
@@ -596,45 +649,6 @@
             this.ReloadFields.UseVisualStyleBackColor = true;
             this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
             // 
-            // Write_FestivalCoins
-            // 
-            this.Write_FestivalCoins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.Write_FestivalCoins.AutoSize = true;
-            this.Write_FestivalCoins.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Write_FestivalCoins.Location = new System.Drawing.Point(176, 143);
-            this.Write_FestivalCoins.Name = "Write_FestivalCoins";
-            this.Write_FestivalCoins.Size = new System.Drawing.Size(42, 22);
-            this.Write_FestivalCoins.TabIndex = 42;
-            this.Write_FestivalCoins.Text = "Write";
-            this.Write_FestivalCoins.UseVisualStyleBackColor = true;
-            // 
-            // Num_FestivalCoins
-            // 
-            this.Num_FestivalCoins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.Num_FestivalCoins.AutoSize = true;
-            this.Num_FestivalCoins.Location = new System.Drawing.Point(87, 144);
-            this.Num_FestivalCoins.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.Num_FestivalCoins.Name = "Num_FestivalCoins";
-            this.Num_FestivalCoins.Size = new System.Drawing.Size(83, 20);
-            this.Num_FestivalCoins.TabIndex = 41;
-            this.Num_FestivalCoins.ThousandsSeparator = true;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 147);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 56;
-            this.label1.Text = "Festival Coins::";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Edit_Trainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -661,11 +675,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.Num_BP)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Num_FestivalCoins)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Num_FestivalCoins)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -715,5 +729,6 @@
         private System.Windows.Forms.Button Write_FestivalCoins;
         private System.Windows.Forms.NumericUpDown Num_FestivalCoins;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

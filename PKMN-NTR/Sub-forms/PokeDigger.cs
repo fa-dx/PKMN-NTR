@@ -111,7 +111,7 @@ namespace ntrbase.Helpers
             }
             //Thanks to this, processing will be done in GUI thread
             //so we don't need to use SetBlahblahblah functions everywhere
-            MainForm.SetText(UglyMultithreadingHack, "b");
+            Delg.SetText(UglyMultithreadingHack, "b");
         }
 
         private void UglyMultithreadingHack_TextChanged(object sender, EventArgs e)

@@ -57,5 +57,32 @@ namespace ntrbase.Helpers
             else
                 ctrl.Value = val;
         }
+
+        // Tooltip
+        delegate void SetTooltipDelegate(ToolTip source, Control ctrl, string text);
+
+        public static void SetTooltip(ToolTip source, Control ctrl, string text)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetTooltipDelegate del = new SetTooltipDelegate(SetTooltip);
+                ctrl.Invoke(del, source, ctrl, text);
+            }
+            else
+                source.SetToolTip(ctrl, text);
+        }
+
+        delegate void RemoveTooltipDelegate(ToolTip source, Control ctrl);
+
+        public static void RemoveTooltip(ToolTip source, Control ctrl)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                RemoveTooltipDelegate del = new RemoveTooltipDelegate(RemoveTooltip);
+                ctrl.Invoke(del, source, ctrl);
+            }
+            else
+                source.RemoveAll();
+        }
     }
 }

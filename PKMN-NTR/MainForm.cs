@@ -330,7 +330,7 @@ namespace ntrbase
                 if (verlatest[0] > major || verlatest[1] > minor || verlatest[2] > build)
                 {
                     addtoLog("GUI: Update found!");
-                    SetText(updateLabel, "Version " + lateststable.TagName + " is available.");
+                    Delg.SetText(updateLabel, "Version " + lateststable.TagName + " is available.");
                     updateURL = lateststable.HtmlUrl;
                     DialogResult result = MessageBox.Show("Version " + lateststable.TagName + " is available.\r\nDo you want to go to GitHub and download it?", "Update Available", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
@@ -349,20 +349,20 @@ namespace ntrbase
                         if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build)
                         {
                             addtoLog("GUI: New preview version found");
-                            SetText(updateLabel, "Preview version " + latestbeta.TagName + " is available.");
+                            Delg.SetText(updateLabel, "Preview version " + latestbeta.TagName + " is available.");
                             updateURL = latestbeta.HtmlUrl;
                         }
                         else
                         {
                             addtoLog("GUI: PKMN-NTR is up to date");
-                            SetText(updateLabel, "PKMN-NTR is up to date.");
+                            Delg.SetText(updateLabel, "PKMN-NTR is up to date.");
                             updateURL = null;
                         }
                     }
                     else
                     {
                         addtoLog("GUI: PKMN-NTR is up to date");
-                        SetText(updateLabel, "PKMN-NTR is up to date.");
+                        Delg.SetText(updateLabel, "PKMN-NTR is up to date.");
                         updateURL = null;
                     }
                 }
@@ -373,7 +373,7 @@ namespace ntrbase
                 addtoLog("GUI: An error has ocurred while checking for updates:");
                 addtoLog(ex.Message);
                 MessageBox.Show(ex.Message);
-                SetText(updateLabel, "Update not found.");
+                Delg.SetText(updateLabel, "Update not found.");
             }
         }
 
@@ -391,23 +391,23 @@ namespace ntrbase
             {
                 foreach (Control c in enableWhenConnected7)
                 {
-                    SetEnabled(c, true);
+                    Delg.SetEnabled(c, true);
                 }
                 foreach (Control c in gen6onlyControls)
                 {
-                    SetEnabled(c, false);
+                    Delg.SetEnabled(c, false);
                 }
             }
             else
             {
                 foreach (Control c in enableWhenConnected)
                 {
-                    SetEnabled(c, true);
+                    Delg.SetEnabled(c, true);
                 }
             }
             foreach (TabPage tab in Tabs_General.TabPages)
             {
-                SetEnabled(tab, true);
+                Delg.SetEnabled(tab, true);
             }
         }
 
@@ -417,19 +417,19 @@ namespace ntrbase
             {
                 foreach (Control c in enableWhenConnected7)
                 {
-                    SetEnabled(c, false);
+                    Delg.SetEnabled(c, false);
                 }
             }
             else
             {
                 foreach (Control c in enableWhenConnected)
                 {
-                    SetEnabled(c, false);
+                    Delg.SetEnabled(c, false);
                 }
             }
             foreach (TabPage tab in Tabs_General.TabPages)
             {
-                SetEnabled(tab, false);
+                Delg.SetEnabled(tab, false);
             }
         }
 
@@ -736,12 +736,12 @@ namespace ntrbase
         {
             ComboboxFill(typeLSR, LookupTable.SoftResetModes6);
             ComboboxFill(modeBreed, LookupTable.BreedingModes6);
-            SetVisible(itemsView7, false);
-            SetVisible(itemsGridView, true);
-            SetVisible(keysGridView, false);
-            SetVisible(tmsGridView, false);
-            SetVisible(medsGridView, false);
-            SetVisible(bersGridView, false);
+            Delg.SetVisible(itemsView7, false);
+            Delg.SetVisible(itemsGridView, true);
+            Delg.SetVisible(keysGridView, false);
+            Delg.SetVisible(tmsGridView, false);
+            Delg.SetVisible(medsGridView, false);
+            Delg.SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
             {
                 SetMaximum(boxDump, BOXES);
@@ -751,8 +751,8 @@ namespace ntrbase
             SetMaximum(writeBoxTo, BOXES);
             SetMaximum(boxBreed, BOXES);
             SetMaximum(WTBox, BOXES);
-            //SetText(label3, "Poké Miles:");
-            SetText(radioDaycare, "Daycare");
+            //Delg.SetText(label3, "Poké Miles:");
+            Delg.SetText(radioDaycare, "Daycare");
         }
 
         private async void fillGen7()
@@ -760,12 +760,12 @@ namespace ntrbase
             ComboboxFill(typeLSR, LookupTable.SoftResetModes7);
             ComboboxFill(sr_Species, LookupTable.Species7);
             ComboboxFill(modeBreed, LookupTable.BreedingModes7);
-            SetVisible(itemsView7, true);
-            SetVisible(itemsGridView, false);
-            SetVisible(keysGridView, false);
-            SetVisible(tmsGridView, false);
-            SetVisible(medsGridView, false);
-            SetVisible(bersGridView, false);
+            Delg.SetVisible(itemsView7, true);
+            Delg.SetVisible(itemsGridView, false);
+            Delg.SetVisible(keysGridView, false);
+            Delg.SetVisible(tmsGridView, false);
+            Delg.SetVisible(medsGridView, false);
+            Delg.SetVisible(bersGridView, false);
             if (radioBoxes.Checked)
             {
                 SetMaximum(boxDump, BOXES);
@@ -775,8 +775,8 @@ namespace ntrbase
             SetMaximum(writeBoxTo, BOXES);
             SetMaximum(boxBreed, BOXES);
             SetMaximum(WTBox, BOXES);
-            //SetText(label3, "Current FC:");
-            SetText(radioDaycare, "Nursery");
+            //Delg.SetText(label3, "Current FC:");
+            Delg.SetText(radioDaycare, "Nursery");
 
             //Apply connection patch
             Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
@@ -2286,13 +2286,13 @@ namespace ntrbase
             if (gen7)
             {
                 //int G7ID = getGen7ID(TID.Value, SIDNum.Value);
-                //SetTooltip(ToolTipTSVpoke, TID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
-                //SetTooltip(ToolTipTSVpoke, SID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+                //Delg.SetTooltip(ToolTipTSVpoke, TID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+                //Delg.SetTooltip(ToolTipTSVpoke, SID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
             }
             else
             {
-                SetTooltip(ToolTipTSVpoke, TID, "TSV: " + TSV.ToString("D4"));
-                SetTooltip(ToolTipTSVpoke, SID, "TSV: " + TSV.ToString("D4"));
+                Delg.SetTooltip(ToolTipTSVpoke, TID, "TSV: " + TSV.ToString("D4"));
+                Delg.SetTooltip(ToolTipTSVpoke, SID, "TSV: " + TSV.ToString("D4"));
             }
         }
 
@@ -2360,13 +2360,13 @@ namespace ntrbase
         {
             if (gen7 && (typeLSR.SelectedIndex == 4 || typeLSR.SelectedIndex == 5))
             {
-                SetVisible(label8, true);
-                SetVisible(sr_Species, true);
+                Delg.SetVisible(label8, true);
+                Delg.SetVisible(sr_Species, true);
             }
             else
             {
-                SetVisible(label8, false);
-                SetVisible(sr_Species, false);
+                Delg.SetVisible(label8, false);
+                Delg.SetVisible(sr_Species, false);
             }
         }
 
@@ -2404,19 +2404,6 @@ namespace ntrbase
             Program.gCmdWindow.BeginInvoke(Program.gCmdWindow.delAddLog, msg);
         }
 
-        delegate void SetTextDelegate(Control ctrl, string text);
-
-        public static void SetText(Control ctrl, string text)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetTextDelegate del = new SetTextDelegate(SetText);
-                ctrl.Invoke(del, ctrl, text);
-            }
-            else
-                ctrl.Text = text;
-        }
-
         delegate void SetReadOnlyDelegate(TextBox ctrl, bool en);
 
         public static void SetReadOnly(TextBox ctrl, bool en)
@@ -2428,58 +2415,6 @@ namespace ntrbase
             }
             else
                 ctrl.ReadOnly = en;
-        }
-
-        delegate void SetTooltipDelegate(ToolTip source, Control ctrl, string text);
-
-        public static void SetTooltip(ToolTip source, Control ctrl, string text)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetTooltipDelegate del = new SetTooltipDelegate(SetTooltip);
-                ctrl.Invoke(del, source, ctrl, text);
-            }
-            else
-                source.SetToolTip(ctrl, text);
-        }
-
-        delegate void RemoveTooltipDelegate(ToolTip source, Control ctrl);
-
-        public static void RemoveTooltip(ToolTip source, Control ctrl)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                RemoveTooltipDelegate del = new RemoveTooltipDelegate(RemoveTooltip);
-                ctrl.Invoke(del, source, ctrl);
-            }
-            else
-                source.RemoveAll();
-        }
-
-        delegate void SetEnabledDelegate(Control ctrl, bool en);
-
-        public static void SetEnabled(Control ctrl, bool en)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetEnabledDelegate del = new SetEnabledDelegate(SetEnabled);
-                ctrl.Invoke(del, ctrl, en);
-            }
-            else
-                ctrl.Enabled = en;
-        }
-
-        delegate void SeVisibleDelegate(Control ctrl, bool en);
-
-        public static void SetVisible(Control ctrl, bool en)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SeVisibleDelegate del = new SeVisibleDelegate(SetVisible);
-                ctrl.Invoke(del, ctrl, en);
-            }
-            else
-                ctrl.Visible = en;
         }
 
         delegate void SetCheckedDelegate(CheckBox ctrl, bool en);
@@ -2753,7 +2688,7 @@ namespace ntrbase
         public void HandleRAMread(uint value)
         {
             addtoLog("NTR: Read sucessful - 0x" + value.ToString("X8"));
-            SetText(readResult, "0x" + value.ToString("X8"));
+            Delg.SetText(readResult, "0x" + value.ToString("X8"));
         }
 
         public void addwaitingForData(uint newkey, DataReadyWaiting newvalue)
@@ -2774,7 +2709,7 @@ namespace ntrbase
             txtLog.Clear();
             disableControls();
             timer1.Interval = 500;
-            SetEnabled(stopBotButton, true);
+            Delg.SetEnabled(stopBotButton, true);
         }
 
         private void finishBot()
@@ -2783,7 +2718,7 @@ namespace ntrbase
             botnumber = -1;
             enableControls();
             timer1.Interval = 1000;
-            SetEnabled(stopBotButton, false);
+            Delg.SetEnabled(stopBotButton, false);
         }
 
         // Filter handlers
@@ -3931,25 +3866,25 @@ namespace ntrbase
         {
             if (gen7 && modeBreed.SelectedIndex == 3)
             {
-                SetText(Breed_labelBox, "Acc:");
-                SetText(Breed_labelSlot, "Rej:");
-                SetEnabled(slotBreed, true);
+                Delg.SetText(Breed_labelBox, "Acc:");
+                Delg.SetText(Breed_labelSlot, "Rej:");
+                Delg.SetEnabled(slotBreed, true);
                 SetMaximum(boxBreed, 999);
                 SetMaximum(slotBreed, 999);
                 SetMinimum(boxBreed, 0);
                 SetMinimum(slotBreed, 0);
-                SetEnabled(eggsNoBreed, false);
+                Delg.SetEnabled(eggsNoBreed, false);
             }
             else
             {
-                SetText(Breed_labelBox, "Box:");
-                SetText(Breed_labelSlot, "Slot:");
-                SetEnabled(slotBreed, false);
+                Delg.SetText(Breed_labelBox, "Box:");
+                Delg.SetText(Breed_labelSlot, "Slot:");
+                Delg.SetEnabled(slotBreed, false);
                 SetMaximum(boxBreed, 30);
                 SetMaximum(slotBreed, BOXES);
                 SetMinimum(boxBreed, 1);
                 SetMinimum(slotBreed, 1);
-                SetEnabled(eggsNoBreed, true);
+                Delg.SetEnabled(eggsNoBreed, true);
             }
         }
 
