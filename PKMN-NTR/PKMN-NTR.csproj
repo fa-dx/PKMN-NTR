@@ -117,6 +117,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\ScriptHelper.cs" />
+    <Compile Include="Sub-forms\Remote_Control.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\Remote_Control.Designer.cs">
+      <DependentUpon>Remote_Control.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Sub-forms\DumpOpponentHelp.resx">
       <DependentUpon>DumpOpponentHelp.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -144,6 +150,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sub-forms\Remote_Control.resx">
+      <DependentUpon>Remote_Control.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

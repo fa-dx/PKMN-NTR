@@ -205,18 +205,18 @@
             this.giveAll,
             this.giveNone});
             this.giveMenu.Name = "modifyMenu";
-            this.giveMenu.Size = new System.Drawing.Size(153, 70);
+            this.giveMenu.Size = new System.Drawing.Size(104, 48);
             // 
             // giveAll
             // 
             this.giveAll.Name = "giveAll";
-            this.giveAll.Size = new System.Drawing.Size(152, 22);
+            this.giveAll.Size = new System.Drawing.Size(103, 22);
             this.giveAll.Text = "All";
             // 
             // giveNone
             // 
             this.giveNone.Name = "giveNone";
-            this.giveNone.Size = new System.Drawing.Size(152, 22);
+            this.giveNone.Size = new System.Drawing.Size(103, 22);
             this.giveNone.Text = "None";
             // 
             // Edit_Items
@@ -232,9 +232,11 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.B_Save);
             this.Controls.Add(this.B_Cancel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Edit_Items";
             this.Padding = new System.Windows.Forms.Padding(3);
-            this.Text = "Edit_Items";
+            this.Text = "Item Editor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Edit_Items_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.NUD_Count)).EndInit();
             this.sortMenu.ResumeLayout(false);
             this.giveMenu.ResumeLayout(false);

@@ -37,8 +37,6 @@
             this.daycare_select = new System.Windows.Forms.GroupBox();
             this.radioDayCare1 = new System.Windows.Forms.RadioButton();
             this.radioDayCare2 = new System.Windows.Forms.RadioButton();
-            this.touchY = new System.Windows.Forms.NumericUpDown();
-            this.touchX = new System.Windows.Forms.NumericUpDown();
             this.readResult = new System.Windows.Forms.TextBox();
             this.stopBotButton = new System.Windows.Forms.Button();
             this.label71 = new System.Windows.Forms.Label();
@@ -63,6 +61,7 @@
             this.FLP_PIDLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_PID = new System.Windows.Forms.Label();
             this.BTN_Shinytize = new System.Windows.Forms.Button();
+            this.Label_IsShiny = new System.Windows.Forms.PictureBox();
             this.FLP_PIDRight = new System.Windows.Forms.FlowLayoutPanel();
             this.TB_PID = new System.Windows.Forms.TextBox();
             this.Label_Gender = new System.Windows.Forms.Label();
@@ -143,6 +142,7 @@
             this.FLP_Ball = new System.Windows.Forms.FlowLayoutPanel();
             this.FLP_BallLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_Ball = new System.Windows.Forms.Label();
+            this.PB_Ball = new System.Windows.Forms.PictureBox();
             this.CB_Ball = new System.Windows.Forms.ComboBox();
             this.FLP_MetLevel = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_MetLevel = new System.Windows.Forms.Label();
@@ -235,7 +235,15 @@
             this.BTN_RandomEVs = new System.Windows.Forms.Button();
             this.BTN_RandomIVs = new System.Windows.Forms.Button();
             this.Tab_Attacks = new System.Windows.Forms.TabPage();
+            this.PB_WarnMove4 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove3 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove2 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove1 = new System.Windows.Forms.PictureBox();
             this.GB_RelearnMoves = new System.Windows.Forms.GroupBox();
+            this.PB_WarnRelearn4 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn3 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn2 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn1 = new System.Windows.Forms.PictureBox();
             this.CB_RelearnMove4 = new System.Windows.Forms.ComboBox();
             this.CB_RelearnMove3 = new System.Windows.Forms.ComboBox();
             this.CB_RelearnMove2 = new System.Windows.Forms.ComboBox();
@@ -267,6 +275,18 @@
             this.Label_PrevOT = new System.Windows.Forms.Label();
             this.BTN_RerollEC = new System.Windows.Forms.Button();
             this.GB_Markings = new System.Windows.Forms.GroupBox();
+            this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
+            this.PB_MarkVC = new System.Windows.Forms.PictureBox();
+            this.PB_MarkAlola = new System.Windows.Forms.PictureBox();
+            this.PB_Mark6 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkPentagon = new System.Windows.Forms.PictureBox();
+            this.PB_Mark3 = new System.Windows.Forms.PictureBox();
+            this.PB_Mark5 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkCured = new System.Windows.Forms.PictureBox();
+            this.PB_Mark2 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
+            this.PB_Mark1 = new System.Windows.Forms.PictureBox();
+            this.PB_Mark4 = new System.Windows.Forms.PictureBox();
             this.GB_ExtraBytes = new System.Windows.Forms.GroupBox();
             this.TB_ExtraByte = new System.Windows.Forms.MaskedTextBox();
             this.CB_ExtraBytes = new System.Windows.Forms.ComboBox();
@@ -483,65 +503,14 @@
             this.label111 = new System.Windows.Forms.Label();
             this.filterATKvalue = new System.Windows.Forms.NumericUpDown();
             this.label112 = new System.Windows.Forms.Label();
-            this.tabControls = new System.Windows.Forms.TabPage();
-            this.Remote_Stick = new System.Windows.Forms.GroupBox();
-            this.StickX = new System.Windows.Forms.TrackBar();
-            this.StickY = new System.Windows.Forms.TrackBar();
-            this.StickNumY = new System.Windows.Forms.NumericUpDown();
-            this.StickSend = new System.Windows.Forms.Button();
-            this.StickNumX = new System.Windows.Forms.NumericUpDown();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label61 = new System.Windows.Forms.Label();
-            this.Remote_touch = new System.Windows.Forms.GroupBox();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.manualTouch = new System.Windows.Forms.Button();
-            this.Remote_buttons = new System.Windows.Forms.GroupBox();
-            this.manualDUp = new System.Windows.Forms.Button();
-            this.manualA = new System.Windows.Forms.Button();
-            this.manualR = new System.Windows.Forms.Button();
-            this.manualB = new System.Windows.Forms.Button();
-            this.manualL = new System.Windows.Forms.Button();
-            this.manualSelect = new System.Windows.Forms.Button();
-            this.manualDRight = new System.Windows.Forms.Button();
-            this.ManualDDown = new System.Windows.Forms.Button();
-            this.manualY = new System.Windows.Forms.Button();
-            this.manualStart = new System.Windows.Forms.Button();
-            this.manualX = new System.Windows.Forms.Button();
-            this.manualDLeft = new System.Windows.Forms.Button();
-            this.manualSR = new System.Windows.Forms.Button();
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.Label_IsShiny = new System.Windows.Forms.PictureBox();
-            this.PB_Ball = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove4 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove3 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove2 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove1 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn4 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn3 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn2 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn1 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
-            this.PB_MarkVC = new System.Windows.Forms.PictureBox();
-            this.PB_MarkAlola = new System.Windows.Forms.PictureBox();
-            this.PB_Mark6 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkPentagon = new System.Windows.Forms.PictureBox();
-            this.PB_Mark3 = new System.Windows.Forms.PictureBox();
-            this.PB_Mark5 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkCured = new System.Windows.Forms.PictureBox();
-            this.PB_Mark2 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
-            this.PB_Mark1 = new System.Windows.Forms.PictureBox();
-            this.PB_Mark4 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.orgbox_pos.SuspendLayout();
             this.daycare_select.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -549,6 +518,7 @@
             this.FLP_Main.SuspendLayout();
             this.FLP_PID.SuspendLayout();
             this.FLP_PIDLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).BeginInit();
             this.FLP_PIDRight.SuspendLayout();
             this.FLP_Species.SuspendLayout();
             this.FLP_Nickname.SuspendLayout();
@@ -578,6 +548,7 @@
             this.FLP_MetLocation.SuspendLayout();
             this.FLP_Ball.SuspendLayout();
             this.FLP_BallLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).BeginInit();
             this.FLP_MetLevel.SuspendLayout();
             this.FLP_MetDate.SuspendLayout();
             this.FLP_Fateful.SuspendLayout();
@@ -607,12 +578,32 @@
             this.FLP_HPType.SuspendLayout();
             this.FLP_Characteristic.SuspendLayout();
             this.Tab_Attacks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).BeginInit();
             this.GB_RelearnMoves.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
             this.GB_CurrentMoves.SuspendLayout();
             this.Tab_OTMisc.SuspendLayout();
             this.FLP_PKMEditors.SuspendLayout();
             this.GB_nOT.SuspendLayout();
             this.GB_Markings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
             this.GB_ExtraBytes.SuspendLayout();
             this.GB_OT.SuspendLayout();
             this.Tabs_General.SuspendLayout();
@@ -656,40 +647,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.filterSPAvalue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterHPvalue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).BeginInit();
-            this.tabControls.SuspendLayout();
-            this.Remote_Stick.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.StickX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).BeginInit();
-            this.Remote_touch.SuspendLayout();
-            this.Remote_buttons.SuspendLayout();
             this.miscTabs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shinypic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -901,32 +862,6 @@
             this.radioDayCare2.TabIndex = 1;
             this.radioDayCare2.Text = "Battle Resort";
             this.radioDayCare2.UseVisualStyleBackColor = true;
-            // 
-            // touchY
-            // 
-            this.touchY.Location = new System.Drawing.Point(72, 19);
-            this.touchY.Maximum = new decimal(new int[] {
-            239,
-            0,
-            0,
-            0});
-            this.touchY.Name = "touchY";
-            this.touchY.Size = new System.Drawing.Size(60, 20);
-            this.touchY.TabIndex = 13;
-            this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
-            // 
-            // touchX
-            // 
-            this.touchX.Location = new System.Drawing.Point(6, 19);
-            this.touchX.Maximum = new decimal(new int[] {
-            319,
-            0,
-            0,
-            0});
-            this.touchX.Name = "touchX";
-            this.touchX.Size = new System.Drawing.Size(60, 20);
-            this.touchX.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.touchX, "X (horizontal) coordinate, from the left part of the screen.");
             // 
             // readResult
             // 
@@ -1236,6 +1171,20 @@
             this.BTN_Shinytize.TabIndex = 1;
             this.BTN_Shinytize.Text = "☆";
             this.BTN_Shinytize.UseVisualStyleBackColor = true;
+            // 
+            // Label_IsShiny
+            // 
+            this.Label_IsShiny.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.Label_IsShiny.Image = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.Image")));
+            this.Label_IsShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.InitialImage")));
+            this.Label_IsShiny.Location = new System.Drawing.Point(36, 2);
+            this.Label_IsShiny.Margin = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.Label_IsShiny.Name = "Label_IsShiny";
+            this.Label_IsShiny.Size = new System.Drawing.Size(20, 20);
+            this.Label_IsShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Label_IsShiny.TabIndex = 62;
+            this.Label_IsShiny.TabStop = false;
+            this.Label_IsShiny.Visible = false;
             // 
             // FLP_PIDRight
             // 
@@ -2158,6 +2107,15 @@
             this.Label_Ball.TabIndex = 2;
             this.Label_Ball.Text = "Ball:";
             this.Label_Ball.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // PB_Ball
+            // 
+            this.PB_Ball.Location = new System.Drawing.Point(60, 0);
+            this.PB_Ball.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.PB_Ball.Name = "PB_Ball";
+            this.PB_Ball.Size = new System.Drawing.Size(20, 20);
+            this.PB_Ball.TabIndex = 3;
+            this.PB_Ball.TabStop = false;
             // 
             // CB_Ball
             // 
@@ -3185,6 +3143,46 @@
             this.Tab_Attacks.Text = "Attacks";
             this.Tab_Attacks.UseVisualStyleBackColor = true;
             // 
+            // PB_WarnMove4
+            // 
+            this.PB_WarnMove4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove4.Image")));
+            this.PB_WarnMove4.Location = new System.Drawing.Point(8, 113);
+            this.PB_WarnMove4.Name = "PB_WarnMove4";
+            this.PB_WarnMove4.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove4.TabIndex = 5;
+            this.PB_WarnMove4.TabStop = false;
+            this.PB_WarnMove4.Visible = false;
+            // 
+            // PB_WarnMove3
+            // 
+            this.PB_WarnMove3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove3.Image")));
+            this.PB_WarnMove3.Location = new System.Drawing.Point(8, 91);
+            this.PB_WarnMove3.Name = "PB_WarnMove3";
+            this.PB_WarnMove3.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove3.TabIndex = 4;
+            this.PB_WarnMove3.TabStop = false;
+            this.PB_WarnMove3.Visible = false;
+            // 
+            // PB_WarnMove2
+            // 
+            this.PB_WarnMove2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove2.Image")));
+            this.PB_WarnMove2.Location = new System.Drawing.Point(8, 69);
+            this.PB_WarnMove2.Name = "PB_WarnMove2";
+            this.PB_WarnMove2.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove2.TabIndex = 3;
+            this.PB_WarnMove2.TabStop = false;
+            this.PB_WarnMove2.Visible = false;
+            // 
+            // PB_WarnMove1
+            // 
+            this.PB_WarnMove1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove1.Image")));
+            this.PB_WarnMove1.Location = new System.Drawing.Point(8, 47);
+            this.PB_WarnMove1.Name = "PB_WarnMove1";
+            this.PB_WarnMove1.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove1.TabIndex = 2;
+            this.PB_WarnMove1.TabStop = false;
+            this.PB_WarnMove1.Visible = false;
+            // 
             // GB_RelearnMoves
             // 
             this.GB_RelearnMoves.Controls.Add(this.PB_WarnRelearn4);
@@ -3201,6 +3199,46 @@
             this.GB_RelearnMoves.TabIndex = 1;
             this.GB_RelearnMoves.TabStop = false;
             this.GB_RelearnMoves.Text = "Relearn Moves";
+            // 
+            // PB_WarnRelearn4
+            // 
+            this.PB_WarnRelearn4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn4.Image")));
+            this.PB_WarnRelearn4.Location = new System.Drawing.Point(22, 93);
+            this.PB_WarnRelearn4.Name = "PB_WarnRelearn4";
+            this.PB_WarnRelearn4.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn4.TabIndex = 19;
+            this.PB_WarnRelearn4.TabStop = false;
+            this.PB_WarnRelearn4.Visible = false;
+            // 
+            // PB_WarnRelearn3
+            // 
+            this.PB_WarnRelearn3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn3.Image")));
+            this.PB_WarnRelearn3.Location = new System.Drawing.Point(22, 71);
+            this.PB_WarnRelearn3.Name = "PB_WarnRelearn3";
+            this.PB_WarnRelearn3.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn3.TabIndex = 18;
+            this.PB_WarnRelearn3.TabStop = false;
+            this.PB_WarnRelearn3.Visible = false;
+            // 
+            // PB_WarnRelearn2
+            // 
+            this.PB_WarnRelearn2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn2.Image")));
+            this.PB_WarnRelearn2.Location = new System.Drawing.Point(22, 49);
+            this.PB_WarnRelearn2.Name = "PB_WarnRelearn2";
+            this.PB_WarnRelearn2.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn2.TabIndex = 17;
+            this.PB_WarnRelearn2.TabStop = false;
+            this.PB_WarnRelearn2.Visible = false;
+            // 
+            // PB_WarnRelearn1
+            // 
+            this.PB_WarnRelearn1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn1.Image")));
+            this.PB_WarnRelearn1.Location = new System.Drawing.Point(22, 27);
+            this.PB_WarnRelearn1.Name = "PB_WarnRelearn1";
+            this.PB_WarnRelearn1.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn1.TabIndex = 6;
+            this.PB_WarnRelearn1.TabStop = false;
+            this.PB_WarnRelearn1.Visible = false;
             // 
             // CB_RelearnMove4
             // 
@@ -3581,6 +3619,140 @@
             this.GB_Markings.TabStop = false;
             this.GB_Markings.Text = "Markings";
             // 
+            // PB_MarkHorohoro
+            // 
+            this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
+            this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
+            this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkHorohoro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkHorohoro.TabIndex = 11;
+            this.PB_MarkHorohoro.TabStop = false;
+            // 
+            // PB_MarkVC
+            // 
+            this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
+            this.PB_MarkVC.Name = "PB_MarkVC";
+            this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkVC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkVC.TabIndex = 10;
+            this.PB_MarkVC.TabStop = false;
+            // 
+            // PB_MarkAlola
+            // 
+            this.PB_MarkAlola.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.Image")));
+            this.PB_MarkAlola.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.InitialImage")));
+            this.PB_MarkAlola.Location = new System.Drawing.Point(68, 15);
+            this.PB_MarkAlola.Name = "PB_MarkAlola";
+            this.PB_MarkAlola.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkAlola.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkAlola.TabIndex = 9;
+            this.PB_MarkAlola.TabStop = false;
+            // 
+            // PB_Mark6
+            // 
+            this.PB_Mark6.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.Image")));
+            this.PB_Mark6.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.InitialImage")));
+            this.PB_Mark6.Location = new System.Drawing.Point(110, 36);
+            this.PB_Mark6.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark6.Name = "PB_Mark6";
+            this.PB_Mark6.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark6.TabIndex = 5;
+            this.PB_Mark6.TabStop = false;
+            // 
+            // PB_MarkPentagon
+            // 
+            this.PB_MarkPentagon.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.Image")));
+            this.PB_MarkPentagon.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.InitialImage")));
+            this.PB_MarkPentagon.Location = new System.Drawing.Point(47, 15);
+            this.PB_MarkPentagon.Name = "PB_MarkPentagon";
+            this.PB_MarkPentagon.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkPentagon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkPentagon.TabIndex = 8;
+            this.PB_MarkPentagon.TabStop = false;
+            // 
+            // PB_Mark3
+            // 
+            this.PB_Mark3.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.Image")));
+            this.PB_Mark3.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.InitialImage")));
+            this.PB_Mark3.Location = new System.Drawing.Point(47, 36);
+            this.PB_Mark3.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark3.Name = "PB_Mark3";
+            this.PB_Mark3.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark3.TabIndex = 2;
+            this.PB_Mark3.TabStop = false;
+            // 
+            // PB_Mark5
+            // 
+            this.PB_Mark5.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.Image")));
+            this.PB_Mark5.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.InitialImage")));
+            this.PB_Mark5.Location = new System.Drawing.Point(89, 36);
+            this.PB_Mark5.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark5.Name = "PB_Mark5";
+            this.PB_Mark5.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark5.TabIndex = 4;
+            this.PB_Mark5.TabStop = false;
+            // 
+            // PB_MarkCured
+            // 
+            this.PB_MarkCured.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.Image")));
+            this.PB_MarkCured.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.InitialImage")));
+            this.PB_MarkCured.Location = new System.Drawing.Point(26, 15);
+            this.PB_MarkCured.Name = "PB_MarkCured";
+            this.PB_MarkCured.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkCured.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkCured.TabIndex = 7;
+            this.PB_MarkCured.TabStop = false;
+            // 
+            // PB_Mark2
+            // 
+            this.PB_Mark2.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.Image")));
+            this.PB_Mark2.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.InitialImage")));
+            this.PB_Mark2.Location = new System.Drawing.Point(26, 36);
+            this.PB_Mark2.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark2.Name = "PB_Mark2";
+            this.PB_Mark2.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark2.TabIndex = 1;
+            this.PB_Mark2.TabStop = false;
+            // 
+            // PB_MarkShiny
+            // 
+            this.PB_MarkShiny.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.Image")));
+            this.PB_MarkShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.InitialImage")));
+            this.PB_MarkShiny.Location = new System.Drawing.Point(5, 15);
+            this.PB_MarkShiny.Name = "PB_MarkShiny";
+            this.PB_MarkShiny.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkShiny.TabIndex = 6;
+            this.PB_MarkShiny.TabStop = false;
+            // 
+            // PB_Mark1
+            // 
+            this.PB_Mark1.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.Image")));
+            this.PB_Mark1.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.InitialImage")));
+            this.PB_Mark1.Location = new System.Drawing.Point(5, 36);
+            this.PB_Mark1.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark1.Name = "PB_Mark1";
+            this.PB_Mark1.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark1.TabIndex = 0;
+            this.PB_Mark1.TabStop = false;
+            // 
+            // PB_Mark4
+            // 
+            this.PB_Mark4.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.Image")));
+            this.PB_Mark4.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.InitialImage")));
+            this.PB_Mark4.Location = new System.Drawing.Point(68, 36);
+            this.PB_Mark4.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark4.Name = "PB_Mark4";
+            this.PB_Mark4.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark4.TabIndex = 3;
+            this.PB_Mark4.TabStop = false;
+            // 
             // GB_ExtraBytes
             // 
             this.GB_ExtraBytes.Controls.Add(this.TB_ExtraByte);
@@ -3815,13 +3987,13 @@
             // 
             // Tool_Controls
             // 
-            this.Tool_Controls.Enabled = false;
             this.Tool_Controls.Location = new System.Drawing.Point(193, 3);
             this.Tool_Controls.Name = "Tool_Controls";
             this.Tool_Controls.Size = new System.Drawing.Size(89, 23);
             this.Tool_Controls.TabIndex = 1;
             this.Tool_Controls.Text = "Remote Control";
             this.Tool_Controls.UseVisualStyleBackColor = true;
+            this.Tool_Controls.Click += new System.EventHandler(this.Tool_Controls_Click);
             // 
             // Tools_Breeding
             // 
@@ -4706,7 +4878,7 @@
             this.dataGridViewTextBoxColumn35.HeaderText = "HP type";
             this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
             this.dataGridViewTextBoxColumn35.ReadOnly = true;
-            this.dataGridViewTextBoxColumn35.Width = 70;
+            this.dataGridViewTextBoxColumn35.Width = 65;
             // 
             // dataGridViewTextBoxColumn36
             // 
@@ -4727,7 +4899,7 @@
             this.dataGridViewTextBoxColumn38.HeaderText = "HP Logic";
             this.dataGridViewTextBoxColumn38.Name = "dataGridViewTextBoxColumn38";
             this.dataGridViewTextBoxColumn38.ReadOnly = true;
-            this.dataGridViewTextBoxColumn38.Width = 76;
+            this.dataGridViewTextBoxColumn38.Width = 70;
             // 
             // dataGridViewTextBoxColumn39
             // 
@@ -4741,7 +4913,7 @@
             this.dataGridViewTextBoxColumn40.HeaderText = "Atk Logic";
             this.dataGridViewTextBoxColumn40.Name = "dataGridViewTextBoxColumn40";
             this.dataGridViewTextBoxColumn40.ReadOnly = true;
-            this.dataGridViewTextBoxColumn40.Width = 77;
+            this.dataGridViewTextBoxColumn40.Width = 71;
             // 
             // dataGridViewTextBoxColumn41
             // 
@@ -4755,7 +4927,7 @@
             this.dataGridViewTextBoxColumn42.HeaderText = "Def Logic";
             this.dataGridViewTextBoxColumn42.Name = "dataGridViewTextBoxColumn42";
             this.dataGridViewTextBoxColumn42.ReadOnly = true;
-            this.dataGridViewTextBoxColumn42.Width = 78;
+            this.dataGridViewTextBoxColumn42.Width = 72;
             // 
             // dataGridViewTextBoxColumn43
             // 
@@ -4769,7 +4941,7 @@
             this.dataGridViewTextBoxColumn44.HeaderText = "SpA Logic";
             this.dataGridViewTextBoxColumn44.Name = "dataGridViewTextBoxColumn44";
             this.dataGridViewTextBoxColumn44.ReadOnly = true;
-            this.dataGridViewTextBoxColumn44.Width = 81;
+            this.dataGridViewTextBoxColumn44.Width = 75;
             // 
             // dataGridViewTextBoxColumn45
             // 
@@ -4783,7 +4955,7 @@
             this.dataGridViewTextBoxColumn46.HeaderText = "SpD Logic";
             this.dataGridViewTextBoxColumn46.Name = "dataGridViewTextBoxColumn46";
             this.dataGridViewTextBoxColumn46.ReadOnly = true;
-            this.dataGridViewTextBoxColumn46.Width = 82;
+            this.dataGridViewTextBoxColumn46.Width = 76;
             // 
             // dataGridViewTextBoxColumn47
             // 
@@ -4797,14 +4969,14 @@
             this.dataGridViewTextBoxColumn48.HeaderText = "Spe Logic";
             this.dataGridViewTextBoxColumn48.Name = "dataGridViewTextBoxColumn48";
             this.dataGridViewTextBoxColumn48.ReadOnly = true;
-            this.dataGridViewTextBoxColumn48.Width = 80;
+            this.dataGridViewTextBoxColumn48.Width = 74;
             // 
             // dataGridViewTextBoxColumn49
             // 
             this.dataGridViewTextBoxColumn49.HeaderText = "Perfect IVs";
             this.dataGridViewTextBoxColumn49.Name = "dataGridViewTextBoxColumn49";
             this.dataGridViewTextBoxColumn49.ReadOnly = true;
-            this.dataGridViewTextBoxColumn49.Width = 84;
+            this.dataGridViewTextBoxColumn49.Width = 78;
             // 
             // dataGridViewTextBoxColumn50
             // 
@@ -5206,7 +5378,7 @@
             this.dataGridViewTextBoxColumn16.HeaderText = "HP type";
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.Width = 70;
+            this.dataGridViewTextBoxColumn16.Width = 65;
             // 
             // dataGridViewTextBoxColumn17
             // 
@@ -5227,7 +5399,7 @@
             this.dataGridViewTextBoxColumn19.HeaderText = "HP Logic";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            this.dataGridViewTextBoxColumn19.Width = 76;
+            this.dataGridViewTextBoxColumn19.Width = 70;
             // 
             // dataGridViewTextBoxColumn20
             // 
@@ -5241,7 +5413,7 @@
             this.dataGridViewTextBoxColumn21.HeaderText = "Atk Logic";
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            this.dataGridViewTextBoxColumn21.Width = 77;
+            this.dataGridViewTextBoxColumn21.Width = 71;
             // 
             // dataGridViewTextBoxColumn22
             // 
@@ -5255,7 +5427,7 @@
             this.dataGridViewTextBoxColumn23.HeaderText = "Def Logic";
             this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
             this.dataGridViewTextBoxColumn23.ReadOnly = true;
-            this.dataGridViewTextBoxColumn23.Width = 78;
+            this.dataGridViewTextBoxColumn23.Width = 72;
             // 
             // dataGridViewTextBoxColumn24
             // 
@@ -5269,7 +5441,7 @@
             this.dataGridViewTextBoxColumn25.HeaderText = "SpA Logic";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
             this.dataGridViewTextBoxColumn25.ReadOnly = true;
-            this.dataGridViewTextBoxColumn25.Width = 81;
+            this.dataGridViewTextBoxColumn25.Width = 75;
             // 
             // dataGridViewTextBoxColumn26
             // 
@@ -5283,7 +5455,7 @@
             this.dataGridViewTextBoxColumn27.HeaderText = "SpD Logic";
             this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
             this.dataGridViewTextBoxColumn27.ReadOnly = true;
-            this.dataGridViewTextBoxColumn27.Width = 82;
+            this.dataGridViewTextBoxColumn27.Width = 76;
             // 
             // dataGridViewTextBoxColumn28
             // 
@@ -5297,14 +5469,14 @@
             this.dataGridViewTextBoxColumn29.HeaderText = "Spe Logic";
             this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
             this.dataGridViewTextBoxColumn29.ReadOnly = true;
-            this.dataGridViewTextBoxColumn29.Width = 80;
+            this.dataGridViewTextBoxColumn29.Width = 74;
             // 
             // dataGridViewTextBoxColumn30
             // 
             this.dataGridViewTextBoxColumn30.HeaderText = "Perfect IVs";
             this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
             this.dataGridViewTextBoxColumn30.ReadOnly = true;
-            this.dataGridViewTextBoxColumn30.Width = 84;
+            this.dataGridViewTextBoxColumn30.Width = 78;
             // 
             // dataGridViewTextBoxColumn31
             // 
@@ -5503,7 +5675,7 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "HP type";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 70;
+            this.dataGridViewTextBoxColumn4.Width = 65;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -5524,7 +5696,7 @@
             this.HPlogic.HeaderText = "HP Logic";
             this.HPlogic.Name = "HPlogic";
             this.HPlogic.ReadOnly = true;
-            this.HPlogic.Width = 76;
+            this.HPlogic.Width = 70;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -5538,7 +5710,7 @@
             this.ATKlogic.HeaderText = "Atk Logic";
             this.ATKlogic.Name = "ATKlogic";
             this.ATKlogic.ReadOnly = true;
-            this.ATKlogic.Width = 77;
+            this.ATKlogic.Width = 71;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -5552,7 +5724,7 @@
             this.DEFlogic.HeaderText = "Def Logic";
             this.DEFlogic.Name = "DEFlogic";
             this.DEFlogic.ReadOnly = true;
-            this.DEFlogic.Width = 78;
+            this.DEFlogic.Width = 72;
             // 
             // dataGridViewTextBoxColumn9
             // 
@@ -5566,7 +5738,7 @@
             this.SPAlogic.HeaderText = "SpA Logic";
             this.SPAlogic.Name = "SPAlogic";
             this.SPAlogic.ReadOnly = true;
-            this.SPAlogic.Width = 81;
+            this.SPAlogic.Width = 75;
             // 
             // dataGridViewTextBoxColumn10
             // 
@@ -5580,7 +5752,7 @@
             this.SPDlogic.HeaderText = "SpD Logic";
             this.SPDlogic.Name = "SPDlogic";
             this.SPDlogic.ReadOnly = true;
-            this.SPDlogic.Width = 82;
+            this.SPDlogic.Width = 76;
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -5594,14 +5766,14 @@
             this.SPElogic.HeaderText = "Spe Logic";
             this.SPElogic.Name = "SPElogic";
             this.SPElogic.ReadOnly = true;
-            this.SPElogic.Width = 80;
+            this.SPElogic.Width = 74;
             // 
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.HeaderText = "Perfect IVs";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            this.dataGridViewTextBoxColumn12.Width = 84;
+            this.dataGridViewTextBoxColumn12.Width = 78;
             // 
             // PerfectIVlogic
             // 
@@ -6032,315 +6204,8 @@
             this.label112.TabIndex = 35;
             this.label112.Text = "Special Defense:";
             // 
-            // tabControls
-            // 
-            this.tabControls.BackColor = System.Drawing.SystemColors.Control;
-            this.tabControls.Controls.Add(this.Remote_Stick);
-            this.tabControls.Controls.Add(this.Remote_touch);
-            this.tabControls.Controls.Add(this.Remote_buttons);
-            this.tabControls.Controls.Add(this.manualSR);
-            this.tabControls.Location = new System.Drawing.Point(4, 22);
-            this.tabControls.Name = "tabControls";
-            this.tabControls.Padding = new System.Windows.Forms.Padding(3);
-            this.tabControls.Size = new System.Drawing.Size(558, 378);
-            this.tabControls.TabIndex = 1;
-            this.tabControls.Text = "Controls";
-            // 
-            // Remote_Stick
-            // 
-            this.Remote_Stick.Controls.Add(this.StickX);
-            this.Remote_Stick.Controls.Add(this.StickY);
-            this.Remote_Stick.Controls.Add(this.StickNumY);
-            this.Remote_Stick.Controls.Add(this.StickSend);
-            this.Remote_Stick.Controls.Add(this.StickNumX);
-            this.Remote_Stick.Controls.Add(this.label62);
-            this.Remote_Stick.Controls.Add(this.label61);
-            this.Remote_Stick.Location = new System.Drawing.Point(284, 6);
-            this.Remote_Stick.Name = "Remote_Stick";
-            this.Remote_Stick.Size = new System.Drawing.Size(268, 154);
-            this.Remote_Stick.TabIndex = 28;
-            this.Remote_Stick.TabStop = false;
-            this.Remote_Stick.Text = "Control Stick";
-            // 
-            // StickX
-            // 
-            this.StickX.Location = new System.Drawing.Point(57, 103);
-            this.StickX.Maximum = 100;
-            this.StickX.Minimum = -100;
-            this.StickX.Name = "StickX";
-            this.StickX.Size = new System.Drawing.Size(205, 45);
-            this.StickX.TabIndex = 17;
-            this.StickX.TickFrequency = 25;
-            this.StickX.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.StickX.Scroll += new System.EventHandler(this.StickX_Scroll);
-            // 
-            // StickY
-            // 
-            this.StickY.Location = new System.Drawing.Point(6, 19);
-            this.StickY.Maximum = 100;
-            this.StickY.Minimum = -100;
-            this.StickY.Name = "StickY";
-            this.StickY.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.StickY.Size = new System.Drawing.Size(45, 129);
-            this.StickY.TabIndex = 16;
-            this.StickY.TickFrequency = 25;
-            this.StickY.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.StickY.Scroll += new System.EventHandler(this.StickY_Scroll);
-            // 
-            // StickNumY
-            // 
-            this.StickNumY.Location = new System.Drawing.Point(57, 22);
-            this.StickNumY.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.StickNumY.Name = "StickNumY";
-            this.StickNumY.Size = new System.Drawing.Size(100, 20);
-            this.StickNumY.TabIndex = 18;
-            this.StickNumY.ValueChanged += new System.EventHandler(this.StickNumY_ValueChanged);
-            // 
-            // StickSend
-            // 
-            this.StickSend.Location = new System.Drawing.Point(57, 63);
-            this.StickSend.Name = "StickSend";
-            this.StickSend.Size = new System.Drawing.Size(205, 23);
-            this.StickSend.TabIndex = 20;
-            this.StickSend.Text = "Send Command";
-            this.StickSend.UseVisualStyleBackColor = true;
-            this.StickSend.Click += new System.EventHandler(this.StickSend_Click);
-            // 
-            // StickNumX
-            // 
-            this.StickNumX.Location = new System.Drawing.Point(163, 22);
-            this.StickNumX.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.StickNumX.Name = "StickNumX";
-            this.StickNumX.Size = new System.Drawing.Size(99, 20);
-            this.StickNumX.TabIndex = 19;
-            this.StickNumX.ValueChanged += new System.EventHandler(this.StickNumX_ValueChanged);
-            // 
-            // label62
-            // 
-            this.label62.Location = new System.Drawing.Point(163, 45);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(99, 18);
-            this.label62.TabIndex = 25;
-            this.label62.Text = "Horizontal";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label61
-            // 
-            this.label61.Location = new System.Drawing.Point(57, 45);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(100, 18);
-            this.label61.TabIndex = 24;
-            this.label61.Text = "Vertical";
-            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // Remote_touch
-            // 
-            this.Remote_touch.AutoSize = true;
-            this.Remote_touch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Remote_touch.Controls.Add(this.label54);
-            this.Remote_touch.Controls.Add(this.label30);
-            this.Remote_touch.Controls.Add(this.touchX);
-            this.Remote_touch.Controls.Add(this.touchY);
-            this.Remote_touch.Controls.Add(this.manualTouch);
-            this.Remote_touch.Location = new System.Drawing.Point(6, 121);
-            this.Remote_touch.Name = "Remote_touch";
-            this.Remote_touch.Size = new System.Drawing.Size(272, 71);
-            this.Remote_touch.TabIndex = 27;
-            this.Remote_touch.TabStop = false;
-            this.Remote_touch.Text = "Touchscreen";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(72, 42);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(61, 13);
-            this.label54.TabIndex = 15;
-            this.label54.Text = "Y (from top)";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(6, 42);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(60, 13);
-            this.label30.TabIndex = 15;
-            this.label30.Text = "X (from left)";
-            // 
-            // manualTouch
-            // 
-            this.manualTouch.Location = new System.Drawing.Point(138, 16);
-            this.manualTouch.Name = "manualTouch";
-            this.manualTouch.Size = new System.Drawing.Size(128, 23);
-            this.manualTouch.TabIndex = 14;
-            this.manualTouch.Text = "Touch";
-            this.manualTouch.UseVisualStyleBackColor = true;
-            this.manualTouch.Click += new System.EventHandler(this.manualTouch_Click);
-            // 
-            // Remote_buttons
-            // 
-            this.Remote_buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Remote_buttons.Controls.Add(this.manualDUp);
-            this.Remote_buttons.Controls.Add(this.manualA);
-            this.Remote_buttons.Controls.Add(this.manualR);
-            this.Remote_buttons.Controls.Add(this.manualB);
-            this.Remote_buttons.Controls.Add(this.manualL);
-            this.Remote_buttons.Controls.Add(this.manualSelect);
-            this.Remote_buttons.Controls.Add(this.manualDRight);
-            this.Remote_buttons.Controls.Add(this.ManualDDown);
-            this.Remote_buttons.Controls.Add(this.manualY);
-            this.Remote_buttons.Controls.Add(this.manualStart);
-            this.Remote_buttons.Controls.Add(this.manualX);
-            this.Remote_buttons.Controls.Add(this.manualDLeft);
-            this.Remote_buttons.Location = new System.Drawing.Point(6, 6);
-            this.Remote_buttons.Name = "Remote_buttons";
-            this.Remote_buttons.Size = new System.Drawing.Size(272, 109);
-            this.Remote_buttons.TabIndex = 26;
-            this.Remote_buttons.TabStop = false;
-            this.Remote_buttons.Text = "Buttons";
-            // 
-            // manualDUp
-            // 
-            this.manualDUp.Location = new System.Drawing.Point(35, 19);
-            this.manualDUp.Name = "manualDUp";
-            this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.manualDUp.Size = new System.Drawing.Size(23, 23);
-            this.manualDUp.TabIndex = 0;
-            this.manualDUp.Text = "↑";
-            this.manualDUp.UseVisualStyleBackColor = true;
-            this.manualDUp.Click += new System.EventHandler(this.manualDUp_Click);
-            // 
-            // manualA
-            // 
-            this.manualA.Location = new System.Drawing.Point(243, 46);
-            this.manualA.Name = "manualA";
-            this.manualA.Size = new System.Drawing.Size(23, 23);
-            this.manualA.TabIndex = 4;
-            this.manualA.Text = "A";
-            this.manualA.UseVisualStyleBackColor = true;
-            this.manualA.Click += new System.EventHandler(this.manualA_Click);
-            // 
-            // manualR
-            // 
-            this.manualR.Location = new System.Drawing.Point(146, 19);
-            this.manualR.Name = "manualR";
-            this.manualR.Size = new System.Drawing.Size(23, 23);
-            this.manualR.TabIndex = 9;
-            this.manualR.Text = "R";
-            this.manualR.UseVisualStyleBackColor = true;
-            this.manualR.Click += new System.EventHandler(this.manualR_Click);
-            // 
-            // manualB
-            // 
-            this.manualB.Location = new System.Drawing.Point(214, 74);
-            this.manualB.Name = "manualB";
-            this.manualB.Size = new System.Drawing.Size(23, 23);
-            this.manualB.TabIndex = 5;
-            this.manualB.Text = "B";
-            this.manualB.UseVisualStyleBackColor = true;
-            this.manualB.Click += new System.EventHandler(this.manualB_Click);
-            // 
-            // manualL
-            // 
-            this.manualL.Location = new System.Drawing.Point(103, 19);
-            this.manualL.Name = "manualL";
-            this.manualL.Size = new System.Drawing.Size(23, 23);
-            this.manualL.TabIndex = 8;
-            this.manualL.Text = "L";
-            this.manualL.UseVisualStyleBackColor = true;
-            this.manualL.Click += new System.EventHandler(this.manualL_Click);
-            // 
-            // manualSelect
-            // 
-            this.manualSelect.Location = new System.Drawing.Point(146, 74);
-            this.manualSelect.Name = "manualSelect";
-            this.manualSelect.Size = new System.Drawing.Size(62, 23);
-            this.manualSelect.TabIndex = 11;
-            this.manualSelect.Text = "SELECT";
-            this.manualSelect.UseVisualStyleBackColor = true;
-            this.manualSelect.Click += new System.EventHandler(this.manualSelect_Click);
-            // 
-            // manualDRight
-            // 
-            this.manualDRight.Location = new System.Drawing.Point(64, 46);
-            this.manualDRight.Name = "manualDRight";
-            this.manualDRight.Size = new System.Drawing.Size(23, 23);
-            this.manualDRight.TabIndex = 3;
-            this.manualDRight.Text = "→";
-            this.manualDRight.UseVisualStyleBackColor = true;
-            this.manualDRight.Click += new System.EventHandler(this.manualDRight_Click);
-            // 
-            // ManualDDown
-            // 
-            this.ManualDDown.Location = new System.Drawing.Point(35, 74);
-            this.ManualDDown.Name = "ManualDDown";
-            this.ManualDDown.Size = new System.Drawing.Size(23, 23);
-            this.ManualDDown.TabIndex = 1;
-            this.ManualDDown.Text = "↓";
-            this.ManualDDown.UseVisualStyleBackColor = true;
-            this.ManualDDown.Click += new System.EventHandler(this.ManualDDown_Click);
-            // 
-            // manualY
-            // 
-            this.manualY.Location = new System.Drawing.Point(185, 46);
-            this.manualY.Name = "manualY";
-            this.manualY.Size = new System.Drawing.Size(23, 23);
-            this.manualY.TabIndex = 7;
-            this.manualY.Text = "Y";
-            this.manualY.UseVisualStyleBackColor = true;
-            this.manualY.Click += new System.EventHandler(this.manualY_Click);
-            // 
-            // manualStart
-            // 
-            this.manualStart.Location = new System.Drawing.Point(64, 74);
-            this.manualStart.Name = "manualStart";
-            this.manualStart.Size = new System.Drawing.Size(62, 23);
-            this.manualStart.TabIndex = 10;
-            this.manualStart.Text = "START";
-            this.manualStart.UseVisualStyleBackColor = true;
-            this.manualStart.Click += new System.EventHandler(this.manualStart_Click);
-            // 
-            // manualX
-            // 
-            this.manualX.Location = new System.Drawing.Point(214, 19);
-            this.manualX.Name = "manualX";
-            this.manualX.Size = new System.Drawing.Size(23, 23);
-            this.manualX.TabIndex = 6;
-            this.manualX.Text = "X";
-            this.manualX.UseVisualStyleBackColor = true;
-            this.manualX.Click += new System.EventHandler(this.manualX_Click);
-            // 
-            // manualDLeft
-            // 
-            this.manualDLeft.Location = new System.Drawing.Point(6, 46);
-            this.manualDLeft.Name = "manualDLeft";
-            this.manualDLeft.Size = new System.Drawing.Size(23, 23);
-            this.manualDLeft.TabIndex = 2;
-            this.manualDLeft.Text = "←";
-            this.manualDLeft.UseVisualStyleBackColor = true;
-            this.manualDLeft.Click += new System.EventHandler(this.manualDLeft_Click);
-            // 
-            // manualSR
-            // 
-            this.manualSR.Location = new System.Drawing.Point(284, 169);
-            this.manualSR.Name = "manualSR";
-            this.manualSR.Size = new System.Drawing.Size(268, 23);
-            this.manualSR.TabIndex = 15;
-            this.manualSR.Text = "Soft-Reset";
-            this.manualSR.UseVisualStyleBackColor = true;
-            this.manualSR.Click += new System.EventHandler(this.manualSR_Click);
-            // 
             // miscTabs
             // 
-            this.miscTabs.Controls.Add(this.tabControls);
             this.miscTabs.Controls.Add(this.tabFilters);
             this.miscTabs.Controls.Add(this.tabBreeding);
             this.miscTabs.Controls.Add(this.tabSoftReset);
@@ -6379,243 +6244,6 @@
             this.pictureBox2.TabIndex = 18;
             this.pictureBox2.TabStop = false;
             // 
-            // Label_IsShiny
-            // 
-            this.Label_IsShiny.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.Label_IsShiny.Image = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.Image")));
-            this.Label_IsShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.InitialImage")));
-            this.Label_IsShiny.Location = new System.Drawing.Point(36, 2);
-            this.Label_IsShiny.Margin = new System.Windows.Forms.Padding(0, 2, 2, 0);
-            this.Label_IsShiny.Name = "Label_IsShiny";
-            this.Label_IsShiny.Size = new System.Drawing.Size(20, 20);
-            this.Label_IsShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Label_IsShiny.TabIndex = 62;
-            this.Label_IsShiny.TabStop = false;
-            this.Label_IsShiny.Visible = false;
-            // 
-            // PB_Ball
-            // 
-            this.PB_Ball.Location = new System.Drawing.Point(60, 0);
-            this.PB_Ball.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.PB_Ball.Name = "PB_Ball";
-            this.PB_Ball.Size = new System.Drawing.Size(20, 20);
-            this.PB_Ball.TabIndex = 3;
-            this.PB_Ball.TabStop = false;
-            // 
-            // PB_WarnMove4
-            // 
-            this.PB_WarnMove4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove4.Image")));
-            this.PB_WarnMove4.Location = new System.Drawing.Point(8, 113);
-            this.PB_WarnMove4.Name = "PB_WarnMove4";
-            this.PB_WarnMove4.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove4.TabIndex = 5;
-            this.PB_WarnMove4.TabStop = false;
-            this.PB_WarnMove4.Visible = false;
-            // 
-            // PB_WarnMove3
-            // 
-            this.PB_WarnMove3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove3.Image")));
-            this.PB_WarnMove3.Location = new System.Drawing.Point(8, 91);
-            this.PB_WarnMove3.Name = "PB_WarnMove3";
-            this.PB_WarnMove3.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove3.TabIndex = 4;
-            this.PB_WarnMove3.TabStop = false;
-            this.PB_WarnMove3.Visible = false;
-            // 
-            // PB_WarnMove2
-            // 
-            this.PB_WarnMove2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove2.Image")));
-            this.PB_WarnMove2.Location = new System.Drawing.Point(8, 69);
-            this.PB_WarnMove2.Name = "PB_WarnMove2";
-            this.PB_WarnMove2.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove2.TabIndex = 3;
-            this.PB_WarnMove2.TabStop = false;
-            this.PB_WarnMove2.Visible = false;
-            // 
-            // PB_WarnMove1
-            // 
-            this.PB_WarnMove1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove1.Image")));
-            this.PB_WarnMove1.Location = new System.Drawing.Point(8, 47);
-            this.PB_WarnMove1.Name = "PB_WarnMove1";
-            this.PB_WarnMove1.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove1.TabIndex = 2;
-            this.PB_WarnMove1.TabStop = false;
-            this.PB_WarnMove1.Visible = false;
-            // 
-            // PB_WarnRelearn4
-            // 
-            this.PB_WarnRelearn4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn4.Image")));
-            this.PB_WarnRelearn4.Location = new System.Drawing.Point(22, 93);
-            this.PB_WarnRelearn4.Name = "PB_WarnRelearn4";
-            this.PB_WarnRelearn4.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn4.TabIndex = 19;
-            this.PB_WarnRelearn4.TabStop = false;
-            this.PB_WarnRelearn4.Visible = false;
-            // 
-            // PB_WarnRelearn3
-            // 
-            this.PB_WarnRelearn3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn3.Image")));
-            this.PB_WarnRelearn3.Location = new System.Drawing.Point(22, 71);
-            this.PB_WarnRelearn3.Name = "PB_WarnRelearn3";
-            this.PB_WarnRelearn3.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn3.TabIndex = 18;
-            this.PB_WarnRelearn3.TabStop = false;
-            this.PB_WarnRelearn3.Visible = false;
-            // 
-            // PB_WarnRelearn2
-            // 
-            this.PB_WarnRelearn2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn2.Image")));
-            this.PB_WarnRelearn2.Location = new System.Drawing.Point(22, 49);
-            this.PB_WarnRelearn2.Name = "PB_WarnRelearn2";
-            this.PB_WarnRelearn2.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn2.TabIndex = 17;
-            this.PB_WarnRelearn2.TabStop = false;
-            this.PB_WarnRelearn2.Visible = false;
-            // 
-            // PB_WarnRelearn1
-            // 
-            this.PB_WarnRelearn1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn1.Image")));
-            this.PB_WarnRelearn1.Location = new System.Drawing.Point(22, 27);
-            this.PB_WarnRelearn1.Name = "PB_WarnRelearn1";
-            this.PB_WarnRelearn1.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn1.TabIndex = 6;
-            this.PB_WarnRelearn1.TabStop = false;
-            this.PB_WarnRelearn1.Visible = false;
-            // 
-            // PB_MarkHorohoro
-            // 
-            this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
-            this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
-            this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkHorohoro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkHorohoro.TabIndex = 11;
-            this.PB_MarkHorohoro.TabStop = false;
-            // 
-            // PB_MarkVC
-            // 
-            this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
-            this.PB_MarkVC.Name = "PB_MarkVC";
-            this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkVC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkVC.TabIndex = 10;
-            this.PB_MarkVC.TabStop = false;
-            // 
-            // PB_MarkAlola
-            // 
-            this.PB_MarkAlola.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.Image")));
-            this.PB_MarkAlola.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.InitialImage")));
-            this.PB_MarkAlola.Location = new System.Drawing.Point(68, 15);
-            this.PB_MarkAlola.Name = "PB_MarkAlola";
-            this.PB_MarkAlola.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkAlola.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkAlola.TabIndex = 9;
-            this.PB_MarkAlola.TabStop = false;
-            // 
-            // PB_Mark6
-            // 
-            this.PB_Mark6.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.Image")));
-            this.PB_Mark6.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.InitialImage")));
-            this.PB_Mark6.Location = new System.Drawing.Point(110, 36);
-            this.PB_Mark6.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark6.Name = "PB_Mark6";
-            this.PB_Mark6.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark6.TabIndex = 5;
-            this.PB_Mark6.TabStop = false;
-            // 
-            // PB_MarkPentagon
-            // 
-            this.PB_MarkPentagon.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.Image")));
-            this.PB_MarkPentagon.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.InitialImage")));
-            this.PB_MarkPentagon.Location = new System.Drawing.Point(47, 15);
-            this.PB_MarkPentagon.Name = "PB_MarkPentagon";
-            this.PB_MarkPentagon.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkPentagon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkPentagon.TabIndex = 8;
-            this.PB_MarkPentagon.TabStop = false;
-            // 
-            // PB_Mark3
-            // 
-            this.PB_Mark3.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.Image")));
-            this.PB_Mark3.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.InitialImage")));
-            this.PB_Mark3.Location = new System.Drawing.Point(47, 36);
-            this.PB_Mark3.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark3.Name = "PB_Mark3";
-            this.PB_Mark3.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark3.TabIndex = 2;
-            this.PB_Mark3.TabStop = false;
-            // 
-            // PB_Mark5
-            // 
-            this.PB_Mark5.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.Image")));
-            this.PB_Mark5.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.InitialImage")));
-            this.PB_Mark5.Location = new System.Drawing.Point(89, 36);
-            this.PB_Mark5.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark5.Name = "PB_Mark5";
-            this.PB_Mark5.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark5.TabIndex = 4;
-            this.PB_Mark5.TabStop = false;
-            // 
-            // PB_MarkCured
-            // 
-            this.PB_MarkCured.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.Image")));
-            this.PB_MarkCured.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.InitialImage")));
-            this.PB_MarkCured.Location = new System.Drawing.Point(26, 15);
-            this.PB_MarkCured.Name = "PB_MarkCured";
-            this.PB_MarkCured.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkCured.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkCured.TabIndex = 7;
-            this.PB_MarkCured.TabStop = false;
-            // 
-            // PB_Mark2
-            // 
-            this.PB_Mark2.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.Image")));
-            this.PB_Mark2.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.InitialImage")));
-            this.PB_Mark2.Location = new System.Drawing.Point(26, 36);
-            this.PB_Mark2.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark2.Name = "PB_Mark2";
-            this.PB_Mark2.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark2.TabIndex = 1;
-            this.PB_Mark2.TabStop = false;
-            // 
-            // PB_MarkShiny
-            // 
-            this.PB_MarkShiny.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.Image")));
-            this.PB_MarkShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.InitialImage")));
-            this.PB_MarkShiny.Location = new System.Drawing.Point(5, 15);
-            this.PB_MarkShiny.Name = "PB_MarkShiny";
-            this.PB_MarkShiny.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkShiny.TabIndex = 6;
-            this.PB_MarkShiny.TabStop = false;
-            // 
-            // PB_Mark1
-            // 
-            this.PB_Mark1.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.Image")));
-            this.PB_Mark1.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.InitialImage")));
-            this.PB_Mark1.Location = new System.Drawing.Point(5, 36);
-            this.PB_Mark1.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark1.Name = "PB_Mark1";
-            this.PB_Mark1.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark1.TabIndex = 0;
-            this.PB_Mark1.TabStop = false;
-            // 
-            // PB_Mark4
-            // 
-            this.PB_Mark4.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.Image")));
-            this.PB_Mark4.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.InitialImage")));
-            this.PB_Mark4.Location = new System.Drawing.Point(68, 36);
-            this.PB_Mark4.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark4.Name = "PB_Mark4";
-            this.PB_Mark4.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark4.TabIndex = 3;
-            this.PB_Mark4.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6646,8 +6274,6 @@
             this.orgbox_pos.PerformLayout();
             this.daycare_select.ResumeLayout(false);
             this.daycare_select.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).EndInit();
             this.tabMain.ResumeLayout(false);
@@ -6656,6 +6282,7 @@
             this.FLP_PID.ResumeLayout(false);
             this.FLP_PIDLeft.ResumeLayout(false);
             this.FLP_PIDLeft.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).EndInit();
             this.FLP_PIDRight.ResumeLayout(false);
             this.FLP_PIDRight.PerformLayout();
             this.FLP_Species.ResumeLayout(false);
@@ -6695,6 +6322,7 @@
             this.FLP_Ball.ResumeLayout(false);
             this.FLP_BallLeft.ResumeLayout(false);
             this.FLP_BallLeft.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).EndInit();
             this.FLP_MetLevel.ResumeLayout(false);
             this.FLP_MetLevel.PerformLayout();
             this.FLP_MetDate.ResumeLayout(false);
@@ -6735,7 +6363,15 @@
             this.FLP_HPType.ResumeLayout(false);
             this.FLP_Characteristic.ResumeLayout(false);
             this.Tab_Attacks.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).EndInit();
             this.GB_RelearnMoves.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).EndInit();
             this.GB_CurrentMoves.ResumeLayout(false);
             this.GB_CurrentMoves.PerformLayout();
             this.Tab_OTMisc.ResumeLayout(false);
@@ -6745,6 +6381,18 @@
             this.GB_nOT.ResumeLayout(false);
             this.GB_nOT.PerformLayout();
             this.GB_Markings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
             this.GB_ExtraBytes.ResumeLayout(false);
             this.GB_ExtraBytes.PerformLayout();
             this.GB_OT.ResumeLayout(false);
@@ -6806,43 +6454,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.filterSPAvalue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterHPvalue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).EndInit();
-            this.tabControls.ResumeLayout(false);
-            this.tabControls.PerformLayout();
-            this.Remote_Stick.ResumeLayout(false);
-            this.Remote_Stick.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.StickX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).EndInit();
-            this.Remote_touch.ResumeLayout(false);
-            this.Remote_touch.PerformLayout();
-            this.Remote_buttons.ResumeLayout(false);
             this.miscTabs.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shinypic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -7335,35 +6950,6 @@
         private System.Windows.Forms.Label label111;
         private System.Windows.Forms.NumericUpDown filterATKvalue;
         private System.Windows.Forms.Label label112;
-        private System.Windows.Forms.TabPage tabControls;
-        private System.Windows.Forms.GroupBox Remote_Stick;
-        private System.Windows.Forms.TrackBar StickX;
-        private System.Windows.Forms.TrackBar StickY;
-        private System.Windows.Forms.NumericUpDown StickNumY;
-        private System.Windows.Forms.Button StickSend;
-        private System.Windows.Forms.NumericUpDown StickNumX;
-        private System.Windows.Forms.Label label62;
-        private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.GroupBox Remote_touch;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.NumericUpDown touchX;
-        private System.Windows.Forms.NumericUpDown touchY;
-        private System.Windows.Forms.Button manualTouch;
-        private System.Windows.Forms.GroupBox Remote_buttons;
-        private System.Windows.Forms.Button manualDUp;
-        private System.Windows.Forms.Button manualA;
-        private System.Windows.Forms.Button manualR;
-        private System.Windows.Forms.Button manualB;
-        private System.Windows.Forms.Button manualL;
-        private System.Windows.Forms.Button manualSelect;
-        private System.Windows.Forms.Button manualDRight;
-        private System.Windows.Forms.Button ManualDDown;
-        private System.Windows.Forms.Button manualY;
-        private System.Windows.Forms.Button manualStart;
-        private System.Windows.Forms.Button manualX;
-        private System.Windows.Forms.Button manualDLeft;
-        private System.Windows.Forms.Button manualSR;
         private System.Windows.Forms.TabControl miscTabs;
         private System.Windows.Forms.RadioButton radioDaycare;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

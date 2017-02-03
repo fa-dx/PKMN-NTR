@@ -365,5 +365,10 @@ namespace ntrbase.Sub_forms
             Task<bool> worker = Program.helper.waitNTRwrite(LookupTable.itemsOff, data, Program.gCmdWindow.pid);
             return await worker;
         }
+
+        private void Edit_Items_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.gCmdWindow.Tool_Finish();
+        }
     }
 }

@@ -38,6 +38,7 @@ namespace ntrbase.Helpers
         private void PokeDigger_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.ntrClient.DataReady -= handleDataReady;
+            Program.gCmdWindow.Tool_Finish();
         }
 
         private void GUISetReady()

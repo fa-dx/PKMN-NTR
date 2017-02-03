@@ -448,5 +448,10 @@ namespace ntrbase.Sub_forms
             Delg.SetEnabled(Num_Sec, true);
             Delg.SetEnabled(Write_Time, true);
         }
+
+        private void Edit_Trainer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.gCmdWindow.Tool_Finish();
+        }
     }
 }

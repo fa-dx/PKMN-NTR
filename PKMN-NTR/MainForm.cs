@@ -387,7 +387,7 @@ namespace ntrbase
             PerformDisconnect();
         }
 
-        private void PerformDisconnect()
+        public void PerformDisconnect()
         {
             Program.scriptHelper.disconnect();
             game = GameType.None;
@@ -397,7 +397,7 @@ namespace ntrbase
             disableControls();
         }
 
-        public void connectCheck(object sender, EventArgs e)
+        private void connectCheck(object sender, EventArgs e)
         {
             Program.scriptHelper.listprocess();
             buttonConnect.Text = "Connected";
@@ -1548,7 +1548,6 @@ namespace ntrbase
         }
 
         // Clone/Delete tab
-
         private void clonedelete_Changed(object sender, EventArgs e)
         {
             Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
@@ -1587,27 +1586,6 @@ namespace ntrbase
             }
         }
 
-        // Control Stick controls
-        private void StickY_Scroll(object sender, EventArgs e)
-        {
-            StickNumY.Value = StickY.Value;
-        }
-
-        private void StickX_Scroll(object sender, EventArgs e)
-        {
-            StickNumX.Value = StickX.Value;
-        }
-
-        private void StickNumY_ValueChanged(object sender, EventArgs e)
-        {
-            StickY.Value = (int)StickNumY.Value;
-        }
-
-        private void StickNumX_ValueChanged(object sender, EventArgs e)
-        {
-            StickX.Value = (int)StickNumX.Value;
-        }
-
         // Roaming soft-reset
         private void typeLSR_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1627,17 +1605,29 @@ namespace ntrbase
 
         #region Sub-forms
 
+        // Tool start/finish
+        private void Tool_Start()
+        {
+            txtLog.Clear();
+            disableControls();
+        }
+
+        public void Tool_Finish()
+        {
+            enableControls();
+        }
+
         // Trainer Editor
         private void Tool_Trainer_Click(object sender, EventArgs e)
         {
-            txtLog.Clear();
+            Tool_Start();
             new Edit_Trainer().Show();
         }
 
         // Item Editor
         private async void Tool_Items_Click(object sender, EventArgs e)
         {
-            txtLog.Clear();
+            Tool_Start();
             iteminfo = await dumpItems();
             if (iteminfo == null)
             {
@@ -1666,6 +1656,7 @@ namespace ntrbase
         // PokeDigger
         private void Tools_PokeDigger_Click(object sender, EventArgs e)
         {
+            Tool_Start();
             new PokeDigger(pid, game != GameType.None).Show();
         }
 
@@ -1677,100 +1668,13 @@ namespace ntrbase
             }
         }
 
+        // Remote Control
+        private void Tool_Controls_Click(object sender, EventArgs e)
+        {
+            Tool_Start();
+            new Remote_Control().Show();
+        }
         #endregion Sub-forms
-
-        #region Remote control
-
-        // Manual button presses
-        private void sendButton(uint command)
-        {
-            Program.helper.quickbuton(command, 200);
-        }
-
-        private void manualA_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.keyA);
-        }
-
-        private void manualB_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.keyB);
-        }
-
-        private void manualX_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.keyX);
-        }
-
-        private void manualY_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.keyY);
-        }
-
-        private void manualDUp_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.DpadUP);
-        }
-
-        private void ManualDDown_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.DpadDOWN);
-        }
-
-        private void manualDLeft_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.DpadLEFT);
-        }
-
-        private void manualDRight_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.DpadRIGHT);
-        }
-
-        private void manualStart_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.keySTART);
-        }
-
-        private void manualSelect_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.keySELECT);
-        }
-
-        private void manualL_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.keyL);
-        }
-
-        private void manualR_Click(object sender, EventArgs e)
-        {
-            sendButton(LookupTable.keyR);
-        }
-
-        private async void manualSR_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogr = MessageBox.Show("Are you sure that you want to send a soft-reset command? The application will automatically disconnect from the game afterwards.", "Remote Control", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialogr == DialogResult.Yes)
-            {
-                sendButton(LookupTable.softReset);
-                await Task.Delay(1000);
-                PerformDisconnect();
-            }
-        }
-
-        // Send manual touch command
-        private void manualTouch_Click(object sender, EventArgs e)
-        {
-            Program.helper.quicktouch(touchX.Value, touchY.Value, 200);
-        }
-
-        // Send Control Stick command
-        private void StickSend_Click(object sender, EventArgs e)
-        {
-            Program.helper.quickstick(StickX.Value, StickY.Value, 500);
-        }
-
-        #endregion Remote control
 
         #region Bots
 
