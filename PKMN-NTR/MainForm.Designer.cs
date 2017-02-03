@@ -26,226 +26,22 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.DumpInstructionsBtn = new System.Windows.Forms.Button();
-            this.itemsGridView = new System.Windows.Forms.DataGridView();
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.showKeys = new System.Windows.Forms.Button();
-            this.showBerries = new System.Windows.Forms.Button();
-            this.showTMs = new System.Windows.Forms.Button();
-            this.showMedicine = new System.Windows.Forms.Button();
-            this.showItems = new System.Windows.Forms.Button();
-            this.keysGridView = new System.Windows.Forms.DataGridView();
-            this.tmsGridView = new System.Windows.Forms.DataGridView();
-            this.medsGridView = new System.Windows.Forms.DataGridView();
-            this.bersGridView = new System.Windows.Forms.DataGridView();
-            this.Edit_Items = new System.Windows.Forms.GroupBox();
-            this.itemsView7 = new System.Windows.Forms.DataGridView();
-            this.nameItem7 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.countItem7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemAdd = new System.Windows.Forms.Button();
-            this.itemWrite = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.touchX = new System.Windows.Forms.NumericUpDown();
-            this.touchY = new System.Windows.Forms.NumericUpDown();
-            this.daycare_select = new System.Windows.Forms.GroupBox();
-            this.radioDayCare1 = new System.Windows.Forms.RadioButton();
-            this.radioDayCare2 = new System.Windows.Forms.RadioButton();
+            this.lb_update = new System.Windows.Forms.Label();
+            this.onlyView = new System.Windows.Forms.CheckBox();
             this.orgbox_pos = new System.Windows.Forms.GroupBox();
             this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
             this.OrganizeTop = new System.Windows.Forms.RadioButton();
-            this.lb_update = new System.Windows.Forms.Label();
-            this.onlyView = new System.Windows.Forms.CheckBox();
-            this.label72 = new System.Windows.Forms.Label();
-            this.typeLSR = new System.Windows.Forms.ComboBox();
-            this.RunLSRbot = new System.Windows.Forms.Button();
-            this.resumeLSR = new System.Windows.Forms.CheckBox();
-            this.label59 = new System.Windows.Forms.Label();
-            this.RunWTbot = new System.Windows.Forms.Button();
-            this.WTtradesNo = new System.Windows.Forms.NumericUpDown();
-            this.label57 = new System.Windows.Forms.Label();
-            this.WTBox = new System.Windows.Forms.NumericUpDown();
-            this.WTSlot = new System.Windows.Forms.NumericUpDown();
-            this.label58 = new System.Windows.Forms.Label();
+            this.daycare_select = new System.Windows.Forms.GroupBox();
+            this.radioDayCare1 = new System.Windows.Forms.RadioButton();
+            this.radioDayCare2 = new System.Windows.Forms.RadioButton();
+            this.touchY = new System.Windows.Forms.NumericUpDown();
+            this.touchX = new System.Windows.Forms.NumericUpDown();
             this.readResult = new System.Windows.Forms.TextBox();
             this.stopBotButton = new System.Windows.Forms.Button();
-            this.manualDLeft = new System.Windows.Forms.Button();
-            this.manualTouch = new System.Windows.Forms.Button();
-            this.manualX = new System.Windows.Forms.Button();
-            this.manualY = new System.Windows.Forms.Button();
-            this.manualDUp = new System.Windows.Forms.Button();
-            this.manualL = new System.Windows.Forms.Button();
-            this.manualB = new System.Windows.Forms.Button();
-            this.manualA = new System.Windows.Forms.Button();
-            this.manualR = new System.Windows.Forms.Button();
-            this.manualSelect = new System.Windows.Forms.Button();
-            this.manualDRight = new System.Windows.Forms.Button();
-            this.ManualDDown = new System.Windows.Forms.Button();
-            this.manualStart = new System.Windows.Forms.Button();
             this.label71 = new System.Windows.Forms.Label();
-            this.miscTabs = new System.Windows.Forms.TabControl();
-            this.tabEditTrainer = new System.Windows.Forms.TabPage();
-            this.tabControls = new System.Windows.Forms.TabPage();
-            this.Remote_Stick = new System.Windows.Forms.GroupBox();
-            this.StickX = new System.Windows.Forms.TrackBar();
-            this.StickY = new System.Windows.Forms.TrackBar();
-            this.StickNumY = new System.Windows.Forms.NumericUpDown();
-            this.StickSend = new System.Windows.Forms.Button();
-            this.StickNumX = new System.Windows.Forms.NumericUpDown();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label61 = new System.Windows.Forms.Label();
-            this.Remote_touch = new System.Windows.Forms.GroupBox();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.Remote_buttons = new System.Windows.Forms.GroupBox();
-            this.manualSR = new System.Windows.Forms.Button();
-            this.tabFilters = new System.Windows.Forms.TabPage();
-            this.filterReset = new System.Windows.Forms.Button();
-            this.filterRead = new System.Windows.Forms.Button();
-            this.filterLoad = new System.Windows.Forms.Button();
-            this.filterSave = new System.Windows.Forms.Button();
-            this.filterRemove = new System.Windows.Forms.Button();
-            this.filterAdd = new System.Windows.Forms.Button();
-            this.filterList = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HPlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ATKlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DEFlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SPAlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SPDlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SPElogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PerfectIVlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filterPerIVlogic = new System.Windows.Forms.ComboBox();
-            this.filterSPElogic = new System.Windows.Forms.ComboBox();
-            this.filterSPDlogic = new System.Windows.Forms.ComboBox();
-            this.filterSPAlogic = new System.Windows.Forms.ComboBox();
-            this.filterDEFlogic = new System.Windows.Forms.ComboBox();
-            this.filterATKlogic = new System.Windows.Forms.ComboBox();
-            this.filterHPlogic = new System.Windows.Forms.ComboBox();
-            this.label81 = new System.Windows.Forms.Label();
-            this.filterPerIVvalue = new System.Windows.Forms.NumericUpDown();
-            this.label101 = new System.Windows.Forms.Label();
-            this.filterShiny = new System.Windows.Forms.CheckBox();
-            this.filterGender = new System.Windows.Forms.ComboBox();
-            this.label102 = new System.Windows.Forms.Label();
-            this.label103 = new System.Windows.Forms.Label();
-            this.filterSPEvalue = new System.Windows.Forms.NumericUpDown();
-            this.filterSPDvalue = new System.Windows.Forms.NumericUpDown();
-            this.label104 = new System.Windows.Forms.Label();
-            this.label105 = new System.Windows.Forms.Label();
-            this.label106 = new System.Windows.Forms.Label();
-            this.filterAbility = new System.Windows.Forms.ComboBox();
-            this.filterDEFvalue = new System.Windows.Forms.NumericUpDown();
-            this.label107 = new System.Windows.Forms.Label();
-            this.label108 = new System.Windows.Forms.Label();
-            this.filterNature = new System.Windows.Forms.ComboBox();
-            this.filterSPAvalue = new System.Windows.Forms.NumericUpDown();
-            this.filterHPtype = new System.Windows.Forms.ComboBox();
-            this.filterHPvalue = new System.Windows.Forms.NumericUpDown();
-            this.label109 = new System.Windows.Forms.Label();
-            this.label110 = new System.Windows.Forms.Label();
-            this.label111 = new System.Windows.Forms.Label();
-            this.filterATKvalue = new System.Windows.Forms.NumericUpDown();
-            this.label112 = new System.Windows.Forms.Label();
-            this.tabBreeding = new System.Windows.Forms.TabPage();
-            this.Breed_esvtsv = new System.Windows.Forms.GroupBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.ESVlist = new System.Windows.Forms.DataGridView();
-            this.ESVlistBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistSave = new System.Windows.Forms.Button();
-            this.TSVlist = new System.Windows.Forms.ListBox();
-            this.TSVlistNum = new System.Windows.Forms.NumericUpDown();
-            this.TSVlistAdd = new System.Windows.Forms.Button();
-            this.TSVlistLoad = new System.Windows.Forms.Button();
-            this.TSVlistRemove = new System.Windows.Forms.Button();
-            this.TSVlistSave = new System.Windows.Forms.Button();
-            this.Breed_options = new System.Windows.Forms.GroupBox();
-            this.modeBreed = new System.Windows.Forms.ComboBox();
-            this.readESV = new System.Windows.Forms.CheckBox();
-            this.Breed_labelBox = new System.Windows.Forms.Label();
-            this.label75 = new System.Windows.Forms.Label();
-            this.quickBreed = new System.Windows.Forms.CheckBox();
-            this.slotBreed = new System.Windows.Forms.NumericUpDown();
-            this.label84 = new System.Windows.Forms.Label();
-            this.boxBreed = new System.Windows.Forms.NumericUpDown();
-            this.Breed_labelSlot = new System.Windows.Forms.Label();
-            this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
-            this.breedingClear = new System.Windows.Forms.Button();
-            this.filterBreeding = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bFilterLoad = new System.Windows.Forms.Button();
-            this.runBreedingBot = new System.Windows.Forms.Button();
-            this.tabSoftReset = new System.Windows.Forms.TabPage();
-            this.SR_options = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.sr_Species = new System.Windows.Forms.ComboBox();
-            this.srClear = new System.Windows.Forms.Button();
-            this.filtersSoftReset = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn42 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn43 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn44 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn46 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.srFilterLoad = new System.Windows.Forms.Button();
-            this.tabWonderTrade = new System.Windows.Forms.TabPage();
-            this.WT_options = new System.Windows.Forms.GroupBox();
-            this.WT_After = new System.Windows.Forms.GroupBox();
-            this.WTafter_Delete = new System.Windows.Forms.RadioButton();
-            this.WTafter_Restore = new System.Windows.Forms.RadioButton();
-            this.WTafter_DoNothing = new System.Windows.Forms.RadioButton();
-            this.WTafter_Dump = new System.Windows.Forms.CheckBox();
-            this.WT_Sources = new System.Windows.Forms.GroupBox();
-            this.WTsource_Random = new System.Windows.Forms.RadioButton();
-            this.WTsource_Folder = new System.Windows.Forms.RadioButton();
-            this.WTsource_Boxes = new System.Windows.Forms.RadioButton();
-            this.WTcollectFC = new System.Windows.Forms.CheckBox();
-            this.WT_RunEndless = new System.Windows.Forms.CheckBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.shinypic = new System.Windows.Forms.PictureBox();
             this.radioBoxes = new System.Windows.Forms.RadioButton();
             this.radioDaycare = new System.Windows.Forms.RadioButton();
             this.dumpBoxes = new System.Windows.Forms.Button();
@@ -267,7 +63,6 @@
             this.FLP_PIDLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_PID = new System.Windows.Forms.Label();
             this.BTN_Shinytize = new System.Windows.Forms.Button();
-            this.Label_IsShiny = new System.Windows.Forms.PictureBox();
             this.FLP_PIDRight = new System.Windows.Forms.FlowLayoutPanel();
             this.TB_PID = new System.Windows.Forms.TextBox();
             this.Label_Gender = new System.Windows.Forms.Label();
@@ -348,7 +143,6 @@
             this.FLP_Ball = new System.Windows.Forms.FlowLayoutPanel();
             this.FLP_BallLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_Ball = new System.Windows.Forms.Label();
-            this.PB_Ball = new System.Windows.Forms.PictureBox();
             this.CB_Ball = new System.Windows.Forms.ComboBox();
             this.FLP_MetLevel = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_MetLevel = new System.Windows.Forms.Label();
@@ -441,15 +235,7 @@
             this.BTN_RandomEVs = new System.Windows.Forms.Button();
             this.BTN_RandomIVs = new System.Windows.Forms.Button();
             this.Tab_Attacks = new System.Windows.Forms.TabPage();
-            this.PB_WarnMove4 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove3 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove2 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove1 = new System.Windows.Forms.PictureBox();
             this.GB_RelearnMoves = new System.Windows.Forms.GroupBox();
-            this.PB_WarnRelearn4 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn3 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn2 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn1 = new System.Windows.Forms.PictureBox();
             this.CB_RelearnMove4 = new System.Windows.Forms.ComboBox();
             this.CB_RelearnMove3 = new System.Windows.Forms.ComboBox();
             this.CB_RelearnMove2 = new System.Windows.Forms.ComboBox();
@@ -481,18 +267,6 @@
             this.Label_PrevOT = new System.Windows.Forms.Label();
             this.BTN_RerollEC = new System.Windows.Forms.Button();
             this.GB_Markings = new System.Windows.Forms.GroupBox();
-            this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
-            this.PB_MarkVC = new System.Windows.Forms.PictureBox();
-            this.PB_MarkAlola = new System.Windows.Forms.PictureBox();
-            this.PB_Mark6 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkPentagon = new System.Windows.Forms.PictureBox();
-            this.PB_Mark3 = new System.Windows.Forms.PictureBox();
-            this.PB_Mark5 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkCured = new System.Windows.Forms.PictureBox();
-            this.PB_Mark2 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
-            this.PB_Mark1 = new System.Windows.Forms.PictureBox();
-            this.PB_Mark4 = new System.Windows.Forms.PictureBox();
             this.GB_ExtraBytes = new System.Windows.Forms.GroupBox();
             this.TB_ExtraByte = new System.Windows.Forms.MaskedTextBox();
             this.CB_ExtraBytes = new System.Windows.Forms.ComboBox();
@@ -505,7 +279,6 @@
             this.Label_SID = new System.Windows.Forms.Label();
             this.Label_TID = new System.Windows.Forms.Label();
             this.Label_EncryptionConstant = new System.Windows.Forms.Label();
-            this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.Tool_Trainer = new System.Windows.Forms.Button();
             this.Tabs_General = new System.Windows.Forms.TabControl();
             this.Tab_Dump = new System.Windows.Forms.TabPage();
@@ -553,59 +326,222 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lb_pkmnntrver = new System.Windows.Forms.Label();
+            this.tabWonderTrade = new System.Windows.Forms.TabPage();
+            this.WT_options = new System.Windows.Forms.GroupBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.WT_After = new System.Windows.Forms.GroupBox();
+            this.WTafter_Delete = new System.Windows.Forms.RadioButton();
+            this.WTafter_Restore = new System.Windows.Forms.RadioButton();
+            this.WTafter_DoNothing = new System.Windows.Forms.RadioButton();
+            this.WTafter_Dump = new System.Windows.Forms.CheckBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.WTBox = new System.Windows.Forms.NumericUpDown();
+            this.WT_Sources = new System.Windows.Forms.GroupBox();
+            this.WTsource_Random = new System.Windows.Forms.RadioButton();
+            this.WTsource_Folder = new System.Windows.Forms.RadioButton();
+            this.WTsource_Boxes = new System.Windows.Forms.RadioButton();
+            this.WTtradesNo = new System.Windows.Forms.NumericUpDown();
+            this.WTcollectFC = new System.Windows.Forms.CheckBox();
+            this.WTSlot = new System.Windows.Forms.NumericUpDown();
+            this.label59 = new System.Windows.Forms.Label();
+            this.WT_RunEndless = new System.Windows.Forms.CheckBox();
+            this.RunWTbot = new System.Windows.Forms.Button();
+            this.tabSoftReset = new System.Windows.Forms.TabPage();
+            this.SR_options = new System.Windows.Forms.GroupBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.typeLSR = new System.Windows.Forms.ComboBox();
+            this.sr_Species = new System.Windows.Forms.ComboBox();
+            this.resumeLSR = new System.Windows.Forms.CheckBox();
+            this.srClear = new System.Windows.Forms.Button();
+            this.filtersSoftReset = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn42 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn43 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn44 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn46 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.srFilterLoad = new System.Windows.Forms.Button();
+            this.RunLSRbot = new System.Windows.Forms.Button();
+            this.tabBreeding = new System.Windows.Forms.TabPage();
+            this.Breed_esvtsv = new System.Windows.Forms.GroupBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.ESVlist = new System.Windows.Forms.DataGridView();
+            this.ESVlistBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESVlistSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESVlistValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESVlistSave = new System.Windows.Forms.Button();
+            this.TSVlist = new System.Windows.Forms.ListBox();
+            this.TSVlistNum = new System.Windows.Forms.NumericUpDown();
+            this.TSVlistAdd = new System.Windows.Forms.Button();
+            this.TSVlistLoad = new System.Windows.Forms.Button();
+            this.TSVlistRemove = new System.Windows.Forms.Button();
+            this.TSVlistSave = new System.Windows.Forms.Button();
+            this.Breed_options = new System.Windows.Forms.GroupBox();
+            this.modeBreed = new System.Windows.Forms.ComboBox();
+            this.readESV = new System.Windows.Forms.CheckBox();
+            this.Breed_labelBox = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.quickBreed = new System.Windows.Forms.CheckBox();
+            this.slotBreed = new System.Windows.Forms.NumericUpDown();
+            this.label84 = new System.Windows.Forms.Label();
+            this.boxBreed = new System.Windows.Forms.NumericUpDown();
+            this.Breed_labelSlot = new System.Windows.Forms.Label();
+            this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
+            this.breedingClear = new System.Windows.Forms.Button();
+            this.filterBreeding = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFilterLoad = new System.Windows.Forms.Button();
+            this.runBreedingBot = new System.Windows.Forms.Button();
+            this.tabFilters = new System.Windows.Forms.TabPage();
+            this.filterReset = new System.Windows.Forms.Button();
+            this.filterRead = new System.Windows.Forms.Button();
+            this.filterLoad = new System.Windows.Forms.Button();
+            this.filterSave = new System.Windows.Forms.Button();
+            this.filterRemove = new System.Windows.Forms.Button();
+            this.filterAdd = new System.Windows.Forms.Button();
+            this.filterList = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HPlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ATKlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DEFlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SPAlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SPDlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SPElogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PerfectIVlogic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.filterPerIVlogic = new System.Windows.Forms.ComboBox();
+            this.filterSPElogic = new System.Windows.Forms.ComboBox();
+            this.filterSPDlogic = new System.Windows.Forms.ComboBox();
+            this.filterSPAlogic = new System.Windows.Forms.ComboBox();
+            this.filterDEFlogic = new System.Windows.Forms.ComboBox();
+            this.filterATKlogic = new System.Windows.Forms.ComboBox();
+            this.filterHPlogic = new System.Windows.Forms.ComboBox();
+            this.label81 = new System.Windows.Forms.Label();
+            this.filterPerIVvalue = new System.Windows.Forms.NumericUpDown();
+            this.label101 = new System.Windows.Forms.Label();
+            this.filterShiny = new System.Windows.Forms.CheckBox();
+            this.filterGender = new System.Windows.Forms.ComboBox();
+            this.label102 = new System.Windows.Forms.Label();
+            this.label103 = new System.Windows.Forms.Label();
+            this.filterSPEvalue = new System.Windows.Forms.NumericUpDown();
+            this.filterSPDvalue = new System.Windows.Forms.NumericUpDown();
+            this.label104 = new System.Windows.Forms.Label();
+            this.label105 = new System.Windows.Forms.Label();
+            this.label106 = new System.Windows.Forms.Label();
+            this.filterAbility = new System.Windows.Forms.ComboBox();
+            this.filterDEFvalue = new System.Windows.Forms.NumericUpDown();
+            this.label107 = new System.Windows.Forms.Label();
+            this.label108 = new System.Windows.Forms.Label();
+            this.filterNature = new System.Windows.Forms.ComboBox();
+            this.filterSPAvalue = new System.Windows.Forms.NumericUpDown();
+            this.filterHPtype = new System.Windows.Forms.ComboBox();
+            this.filterHPvalue = new System.Windows.Forms.NumericUpDown();
+            this.label109 = new System.Windows.Forms.Label();
+            this.label110 = new System.Windows.Forms.Label();
+            this.label111 = new System.Windows.Forms.Label();
+            this.filterATKvalue = new System.Windows.Forms.NumericUpDown();
+            this.label112 = new System.Windows.Forms.Label();
+            this.tabControls = new System.Windows.Forms.TabPage();
+            this.Remote_Stick = new System.Windows.Forms.GroupBox();
+            this.StickX = new System.Windows.Forms.TrackBar();
+            this.StickY = new System.Windows.Forms.TrackBar();
+            this.StickNumY = new System.Windows.Forms.NumericUpDown();
+            this.StickSend = new System.Windows.Forms.Button();
+            this.StickNumX = new System.Windows.Forms.NumericUpDown();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.Remote_touch = new System.Windows.Forms.GroupBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.manualTouch = new System.Windows.Forms.Button();
+            this.Remote_buttons = new System.Windows.Forms.GroupBox();
+            this.manualDUp = new System.Windows.Forms.Button();
+            this.manualA = new System.Windows.Forms.Button();
+            this.manualR = new System.Windows.Forms.Button();
+            this.manualB = new System.Windows.Forms.Button();
+            this.manualL = new System.Windows.Forms.Button();
+            this.manualSelect = new System.Windows.Forms.Button();
+            this.manualDRight = new System.Windows.Forms.Button();
+            this.ManualDDown = new System.Windows.Forms.Button();
+            this.manualY = new System.Windows.Forms.Button();
+            this.manualStart = new System.Windows.Forms.Button();
+            this.manualX = new System.Windows.Forms.Button();
+            this.manualDLeft = new System.Windows.Forms.Button();
+            this.manualSR = new System.Windows.Forms.Button();
+            this.miscTabs = new System.Windows.Forms.TabControl();
+            this.PB_Legal = new System.Windows.Forms.PictureBox();
+            this.shinypic = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.Label_IsShiny = new System.Windows.Forms.PictureBox();
+            this.PB_Ball = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove4 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove3 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove2 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove1 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn4 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn3 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn2 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn1 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
+            this.PB_MarkVC = new System.Windows.Forms.PictureBox();
+            this.PB_MarkAlola = new System.Windows.Forms.PictureBox();
+            this.PB_Mark6 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkPentagon = new System.Windows.Forms.PictureBox();
+            this.PB_Mark3 = new System.Windows.Forms.PictureBox();
+            this.PB_Mark5 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkCured = new System.Windows.Forms.PictureBox();
+            this.PB_Mark2 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
+            this.PB_Mark1 = new System.Windows.Forms.PictureBox();
+            this.PB_Mark4 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.keysGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tmsGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.medsGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).BeginInit();
-            this.Edit_Items.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsView7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
-            this.daycare_select.SuspendLayout();
             this.orgbox_pos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
-            this.miscTabs.SuspendLayout();
-            this.tabEditTrainer.SuspendLayout();
-            this.tabControls.SuspendLayout();
-            this.Remote_Stick.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.StickX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).BeginInit();
-            this.Remote_touch.SuspendLayout();
-            this.Remote_buttons.SuspendLayout();
-            this.tabFilters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterPerIVvalue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterSPEvalue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterSPDvalue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterDEFvalue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterSPAvalue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterHPvalue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).BeginInit();
-            this.tabBreeding.SuspendLayout();
-            this.Breed_esvtsv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).BeginInit();
-            this.Breed_options.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).BeginInit();
-            this.tabSoftReset.SuspendLayout();
-            this.SR_options.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).BeginInit();
-            this.tabWonderTrade.SuspendLayout();
-            this.WT_options.SuspendLayout();
-            this.WT_After.SuspendLayout();
-            this.WT_Sources.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.shinypic)).BeginInit();
+            this.daycare_select.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.touchY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.touchX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -613,7 +549,6 @@
             this.FLP_Main.SuspendLayout();
             this.FLP_PID.SuspendLayout();
             this.FLP_PIDLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).BeginInit();
             this.FLP_PIDRight.SuspendLayout();
             this.FLP_Species.SuspendLayout();
             this.FLP_Nickname.SuspendLayout();
@@ -643,7 +578,6 @@
             this.FLP_MetLocation.SuspendLayout();
             this.FLP_Ball.SuspendLayout();
             this.FLP_BallLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).BeginInit();
             this.FLP_MetLevel.SuspendLayout();
             this.FLP_MetDate.SuspendLayout();
             this.FLP_Fateful.SuspendLayout();
@@ -673,35 +607,14 @@
             this.FLP_HPType.SuspendLayout();
             this.FLP_Characteristic.SuspendLayout();
             this.Tab_Attacks.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).BeginInit();
             this.GB_RelearnMoves.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
             this.GB_CurrentMoves.SuspendLayout();
             this.Tab_OTMisc.SuspendLayout();
             this.FLP_PKMEditors.SuspendLayout();
             this.GB_nOT.SuspendLayout();
             this.GB_Markings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
             this.GB_ExtraBytes.SuspendLayout();
             this.GB_OT.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).BeginInit();
             this.Tabs_General.SuspendLayout();
             this.Tab_Dump.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -715,6 +628,68 @@
             this.Tab_Log.SuspendLayout();
             this.Tab_About.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tabWonderTrade.SuspendLayout();
+            this.WT_options.SuspendLayout();
+            this.WT_After.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
+            this.WT_Sources.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
+            this.tabSoftReset.SuspendLayout();
+            this.SR_options.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).BeginInit();
+            this.tabBreeding.SuspendLayout();
+            this.Breed_esvtsv.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).BeginInit();
+            this.Breed_options.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).BeginInit();
+            this.tabFilters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterPerIVvalue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterSPEvalue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterSPDvalue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterDEFvalue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterSPAvalue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterHPvalue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).BeginInit();
+            this.tabControls.SuspendLayout();
+            this.Remote_Stick.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StickX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).BeginInit();
+            this.Remote_touch.SuspendLayout();
+            this.Remote_buttons.SuspendLayout();
+            this.miscTabs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shinypic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -821,21 +796,6 @@
             this.DumpInstructionsBtn.Visible = false;
             this.DumpInstructionsBtn.Click += new System.EventHandler(this.DumpInstructionsBtn_Click);
             // 
-            // itemsGridView
-            // 
-            this.itemsGridView.AllowUserToAddRows = false;
-            this.itemsGridView.AllowUserToDeleteRows = false;
-            this.itemsGridView.AllowUserToResizeColumns = false;
-            this.itemsGridView.AllowUserToResizeRows = false;
-            this.itemsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.itemsGridView.Enabled = false;
-            this.itemsGridView.Location = new System.Drawing.Point(6, 19);
-            this.itemsGridView.Name = "itemsGridView";
-            this.itemsGridView.RowHeadersVisible = false;
-            this.itemsGridView.ShowEditingIcon = false;
-            this.itemsGridView.Size = new System.Drawing.Size(191, 177);
-            this.itemsGridView.TabIndex = 0;
-            // 
             // Item
             // 
             this.Item.Name = "Item";
@@ -844,254 +804,34 @@
             // 
             this.Amount.Name = "Amount";
             // 
-            // showKeys
+            // lb_update
             // 
-            this.showKeys.Location = new System.Drawing.Point(203, 135);
-            this.showKeys.Name = "showKeys";
-            this.showKeys.Size = new System.Drawing.Size(115, 23);
-            this.showKeys.TabIndex = 5;
-            this.showKeys.Text = "KEY ITEMS";
-            this.showKeys.UseVisualStyleBackColor = true;
-            this.showKeys.Click += new System.EventHandler(this.showKeys_Click);
+            this.lb_update.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_update.AutoSize = true;
+            this.lb_update.Location = new System.Drawing.Point(73, 203);
+            this.lb_update.Name = "lb_update";
+            this.lb_update.Size = new System.Drawing.Size(210, 13);
+            this.lb_update.TabIndex = 4;
+            this.lb_update.Text = "Feature disabled.";
+            this.lb_update.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.lb_update, "If an update is available, you can click here to go to the release page in GitHub" +
+        ".");
+            this.lb_update.Click += new System.EventHandler(this.updateLabel_Click);
             // 
-            // showBerries
+            // onlyView
             // 
-            this.showBerries.Location = new System.Drawing.Point(203, 106);
-            this.showBerries.Name = "showBerries";
-            this.showBerries.Size = new System.Drawing.Size(115, 23);
-            this.showBerries.TabIndex = 4;
-            this.showBerries.Text = "BERRIES";
-            this.showBerries.UseVisualStyleBackColor = true;
-            this.showBerries.Click += new System.EventHandler(this.showBerries_Click);
-            // 
-            // showTMs
-            // 
-            this.showTMs.Location = new System.Drawing.Point(203, 77);
-            this.showTMs.Name = "showTMs";
-            this.showTMs.Size = new System.Drawing.Size(115, 23);
-            this.showTMs.TabIndex = 3;
-            this.showTMs.Text = "TMs && HMs";
-            this.showTMs.UseVisualStyleBackColor = true;
-            this.showTMs.Click += new System.EventHandler(this.showTMs_Click);
-            // 
-            // showMedicine
-            // 
-            this.showMedicine.Location = new System.Drawing.Point(203, 48);
-            this.showMedicine.Name = "showMedicine";
-            this.showMedicine.Size = new System.Drawing.Size(115, 23);
-            this.showMedicine.TabIndex = 2;
-            this.showMedicine.Text = "MEDICINE";
-            this.showMedicine.UseVisualStyleBackColor = true;
-            this.showMedicine.Click += new System.EventHandler(this.showMedicine_Click);
-            // 
-            // showItems
-            // 
-            this.showItems.ForeColor = System.Drawing.Color.Green;
-            this.showItems.Location = new System.Drawing.Point(203, 19);
-            this.showItems.Name = "showItems";
-            this.showItems.Size = new System.Drawing.Size(115, 23);
-            this.showItems.TabIndex = 1;
-            this.showItems.Text = "ITEMS";
-            this.showItems.UseVisualStyleBackColor = true;
-            this.showItems.Click += new System.EventHandler(this.showItems_Click);
-            // 
-            // keysGridView
-            // 
-            this.keysGridView.AllowUserToAddRows = false;
-            this.keysGridView.AllowUserToDeleteRows = false;
-            this.keysGridView.AllowUserToResizeColumns = false;
-            this.keysGridView.AllowUserToResizeRows = false;
-            this.keysGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.keysGridView.Enabled = false;
-            this.keysGridView.Location = new System.Drawing.Point(6, 19);
-            this.keysGridView.Name = "keysGridView";
-            this.keysGridView.RowHeadersVisible = false;
-            this.keysGridView.ShowEditingIcon = false;
-            this.keysGridView.Size = new System.Drawing.Size(191, 177);
-            this.keysGridView.TabIndex = 0;
-            this.keysGridView.Visible = false;
-            // 
-            // tmsGridView
-            // 
-            this.tmsGridView.AllowUserToAddRows = false;
-            this.tmsGridView.AllowUserToDeleteRows = false;
-            this.tmsGridView.AllowUserToResizeColumns = false;
-            this.tmsGridView.AllowUserToResizeRows = false;
-            this.tmsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tmsGridView.Enabled = false;
-            this.tmsGridView.Location = new System.Drawing.Point(6, 19);
-            this.tmsGridView.Name = "tmsGridView";
-            this.tmsGridView.RowHeadersVisible = false;
-            this.tmsGridView.ShowEditingIcon = false;
-            this.tmsGridView.Size = new System.Drawing.Size(191, 177);
-            this.tmsGridView.TabIndex = 0;
-            this.tmsGridView.Visible = false;
-            // 
-            // medsGridView
-            // 
-            this.medsGridView.AllowUserToAddRows = false;
-            this.medsGridView.AllowUserToDeleteRows = false;
-            this.medsGridView.AllowUserToResizeColumns = false;
-            this.medsGridView.AllowUserToResizeRows = false;
-            this.medsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.medsGridView.Enabled = false;
-            this.medsGridView.Location = new System.Drawing.Point(6, 19);
-            this.medsGridView.Name = "medsGridView";
-            this.medsGridView.RowHeadersVisible = false;
-            this.medsGridView.ShowEditingIcon = false;
-            this.medsGridView.Size = new System.Drawing.Size(191, 177);
-            this.medsGridView.TabIndex = 0;
-            this.medsGridView.Visible = false;
-            // 
-            // bersGridView
-            // 
-            this.bersGridView.AllowUserToAddRows = false;
-            this.bersGridView.AllowUserToDeleteRows = false;
-            this.bersGridView.AllowUserToResizeColumns = false;
-            this.bersGridView.AllowUserToResizeRows = false;
-            this.bersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.bersGridView.Enabled = false;
-            this.bersGridView.Location = new System.Drawing.Point(6, 19);
-            this.bersGridView.Name = "bersGridView";
-            this.bersGridView.RowHeadersVisible = false;
-            this.bersGridView.ShowEditingIcon = false;
-            this.bersGridView.Size = new System.Drawing.Size(191, 177);
-            this.bersGridView.TabIndex = 0;
-            this.bersGridView.Visible = false;
-            // 
-            // Edit_Items
-            // 
-            this.Edit_Items.AutoSize = true;
-            this.Edit_Items.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Edit_Items.Controls.Add(this.itemsView7);
-            this.Edit_Items.Controls.Add(this.itemAdd);
-            this.Edit_Items.Controls.Add(this.showKeys);
-            this.Edit_Items.Controls.Add(this.itemWrite);
-            this.Edit_Items.Controls.Add(this.showBerries);
-            this.Edit_Items.Controls.Add(this.showTMs);
-            this.Edit_Items.Controls.Add(this.showItems);
-            this.Edit_Items.Controls.Add(this.showMedicine);
-            this.Edit_Items.Controls.Add(this.itemsGridView);
-            this.Edit_Items.Controls.Add(this.medsGridView);
-            this.Edit_Items.Controls.Add(this.tmsGridView);
-            this.Edit_Items.Controls.Add(this.keysGridView);
-            this.Edit_Items.Controls.Add(this.bersGridView);
-            this.Edit_Items.Location = new System.Drawing.Point(6, 6);
-            this.Edit_Items.Name = "Edit_Items";
-            this.Edit_Items.Size = new System.Drawing.Size(324, 215);
-            this.Edit_Items.TabIndex = 0;
-            this.Edit_Items.TabStop = false;
-            this.Edit_Items.Text = "Edit Items";
-            // 
-            // itemsView7
-            // 
-            this.itemsView7.AllowUserToAddRows = false;
-            this.itemsView7.AllowUserToDeleteRows = false;
-            this.itemsView7.AllowUserToResizeColumns = false;
-            this.itemsView7.AllowUserToResizeRows = false;
-            this.itemsView7.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.itemsView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.itemsView7.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameItem7,
-            this.countItem7});
-            this.itemsView7.Location = new System.Drawing.Point(6, 19);
-            this.itemsView7.Name = "itemsView7";
-            this.itemsView7.RowHeadersVisible = false;
-            this.itemsView7.ShowEditingIcon = false;
-            this.itemsView7.Size = new System.Drawing.Size(191, 177);
-            this.itemsView7.TabIndex = 8;
-            // 
-            // nameItem7
-            // 
-            this.nameItem7.FillWeight = 3F;
-            this.nameItem7.HeaderText = "Item";
-            this.nameItem7.Name = "nameItem7";
-            // 
-            // countItem7
-            // 
-            this.countItem7.FillWeight = 1F;
-            this.countItem7.HeaderText = "Count";
-            this.countItem7.Name = "countItem7";
-            // 
-            // itemAdd
-            // 
-            this.itemAdd.Location = new System.Drawing.Point(260, 164);
-            this.itemAdd.Name = "itemAdd";
-            this.itemAdd.Size = new System.Drawing.Size(57, 23);
-            this.itemAdd.TabIndex = 7;
-            this.itemAdd.Text = "Add Item";
-            this.itemAdd.UseVisualStyleBackColor = true;
-            this.itemAdd.Click += new System.EventHandler(this.itemAdd_Click);
-            // 
-            // itemWrite
-            // 
-            this.itemWrite.Location = new System.Drawing.Point(203, 164);
-            this.itemWrite.Name = "itemWrite";
-            this.itemWrite.Size = new System.Drawing.Size(57, 23);
-            this.itemWrite.TabIndex = 6;
-            this.itemWrite.Text = "Write";
-            this.itemWrite.UseVisualStyleBackColor = true;
-            this.itemWrite.Click += new System.EventHandler(this.itemWrite_Click);
-            // 
-            // touchX
-            // 
-            this.touchX.Location = new System.Drawing.Point(6, 19);
-            this.touchX.Maximum = new decimal(new int[] {
-            319,
-            0,
-            0,
-            0});
-            this.touchX.Name = "touchX";
-            this.touchX.Size = new System.Drawing.Size(60, 20);
-            this.touchX.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.touchX, "X (horizontal) coordinate, from the left part of the screen.");
-            // 
-            // touchY
-            // 
-            this.touchY.Location = new System.Drawing.Point(72, 19);
-            this.touchY.Maximum = new decimal(new int[] {
-            239,
-            0,
-            0,
-            0});
-            this.touchY.Name = "touchY";
-            this.touchY.Size = new System.Drawing.Size(60, 20);
-            this.touchY.TabIndex = 13;
-            this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
-            // 
-            // daycare_select
-            // 
-            this.daycare_select.Controls.Add(this.radioDayCare1);
-            this.daycare_select.Controls.Add(this.radioDayCare2);
-            this.daycare_select.Location = new System.Drawing.Point(150, 72);
-            this.daycare_select.Name = "daycare_select";
-            this.daycare_select.Size = new System.Drawing.Size(104, 70);
-            this.daycare_select.TabIndex = 5;
-            this.daycare_select.TabStop = false;
-            this.daycare_select.Text = "Daycare:";
-            this.toolTip1.SetToolTip(this.daycare_select, "Ignore this field if you\'re playing in X/Y or S/M.");
-            // 
-            // radioDayCare1
-            // 
-            this.radioDayCare1.AutoSize = true;
-            this.radioDayCare1.Checked = true;
-            this.radioDayCare1.Location = new System.Drawing.Point(6, 19);
-            this.radioDayCare1.Name = "radioDayCare1";
-            this.radioDayCare1.Size = new System.Drawing.Size(75, 17);
-            this.radioDayCare1.TabIndex = 0;
-            this.radioDayCare1.TabStop = true;
-            this.radioDayCare1.Text = "Route 117";
-            this.radioDayCare1.UseVisualStyleBackColor = true;
-            // 
-            // radioDayCare2
-            // 
-            this.radioDayCare2.AutoSize = true;
-            this.radioDayCare2.Location = new System.Drawing.Point(6, 42);
-            this.radioDayCare2.Name = "radioDayCare2";
-            this.radioDayCare2.Size = new System.Drawing.Size(86, 17);
-            this.radioDayCare2.TabIndex = 1;
-            this.radioDayCare2.Text = "Battle Resort";
-            this.radioDayCare2.UseVisualStyleBackColor = true;
+            this.onlyView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.onlyView.AutoSize = true;
+            this.onlyView.Checked = true;
+            this.onlyView.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.onlyView.Location = new System.Drawing.Point(219, 27);
+            this.onlyView.Name = "onlyView";
+            this.onlyView.Size = new System.Drawing.Size(67, 17);
+            this.onlyView.TabIndex = 11;
+            this.onlyView.Text = "Only edit";
+            this.toolTip1.SetToolTip(this.onlyView, "If checked, Pokemon won\'t be dumped to file");
+            this.onlyView.UseVisualStyleBackColor = true;
+            this.onlyView.CheckedChanged += new System.EventHandler(this.onlyView_CheckedChanged);
             // 
             // orgbox_pos
             // 
@@ -1128,172 +868,65 @@
             this.OrganizeTop.Text = "Top";
             this.OrganizeTop.UseVisualStyleBackColor = true;
             // 
-            // lb_update
+            // daycare_select
             // 
-            this.lb_update.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_update.AutoSize = true;
-            this.lb_update.Location = new System.Drawing.Point(73, 203);
-            this.lb_update.Name = "lb_update";
-            this.lb_update.Size = new System.Drawing.Size(210, 13);
-            this.lb_update.TabIndex = 4;
-            this.lb_update.Text = "Feature disabled.";
-            this.lb_update.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.lb_update, "If an update is available, you can click here to go to the release page in GitHub" +
-        ".");
-            this.lb_update.Click += new System.EventHandler(this.updateLabel_Click);
+            this.daycare_select.Controls.Add(this.radioDayCare1);
+            this.daycare_select.Controls.Add(this.radioDayCare2);
+            this.daycare_select.Location = new System.Drawing.Point(150, 72);
+            this.daycare_select.Name = "daycare_select";
+            this.daycare_select.Size = new System.Drawing.Size(104, 70);
+            this.daycare_select.TabIndex = 5;
+            this.daycare_select.TabStop = false;
+            this.daycare_select.Text = "Daycare:";
+            this.toolTip1.SetToolTip(this.daycare_select, "Ignore this field if you\'re playing in X/Y or S/M.");
             // 
-            // onlyView
+            // radioDayCare1
             // 
-            this.onlyView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.onlyView.AutoSize = true;
-            this.onlyView.Checked = true;
-            this.onlyView.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.onlyView.Location = new System.Drawing.Point(219, 27);
-            this.onlyView.Name = "onlyView";
-            this.onlyView.Size = new System.Drawing.Size(67, 17);
-            this.onlyView.TabIndex = 11;
-            this.onlyView.Text = "Only edit";
-            this.toolTip1.SetToolTip(this.onlyView, "If checked, Pokemon won\'t be dumped to file");
-            this.onlyView.UseVisualStyleBackColor = true;
-            this.onlyView.CheckedChanged += new System.EventHandler(this.onlyView_CheckedChanged);
+            this.radioDayCare1.AutoSize = true;
+            this.radioDayCare1.Checked = true;
+            this.radioDayCare1.Location = new System.Drawing.Point(6, 19);
+            this.radioDayCare1.Name = "radioDayCare1";
+            this.radioDayCare1.Size = new System.Drawing.Size(75, 17);
+            this.radioDayCare1.TabIndex = 0;
+            this.radioDayCare1.TabStop = true;
+            this.radioDayCare1.Text = "Route 117";
+            this.radioDayCare1.UseVisualStyleBackColor = true;
             // 
-            // label72
+            // radioDayCare2
             // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(6, 20);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(37, 13);
-            this.label72.TabIndex = 6;
-            this.label72.Text = "Mode:";
+            this.radioDayCare2.AutoSize = true;
+            this.radioDayCare2.Location = new System.Drawing.Point(6, 42);
+            this.radioDayCare2.Name = "radioDayCare2";
+            this.radioDayCare2.Size = new System.Drawing.Size(86, 17);
+            this.radioDayCare2.TabIndex = 1;
+            this.radioDayCare2.Text = "Battle Resort";
+            this.radioDayCare2.UseVisualStyleBackColor = true;
             // 
-            // typeLSR
+            // touchY
             // 
-            this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.typeLSR.FormattingEnabled = true;
-            this.typeLSR.Location = new System.Drawing.Point(49, 17);
-            this.typeLSR.Name = "typeLSR";
-            this.typeLSR.Size = new System.Drawing.Size(222, 21);
-            this.typeLSR.TabIndex = 0;
-            this.typeLSR.SelectedIndexChanged += new System.EventHandler(this.typeLSR_SelectedIndexChanged);
-            // 
-            // RunLSRbot
-            // 
-            this.RunLSRbot.Location = new System.Drawing.Point(6, 65);
-            this.RunLSRbot.Name = "RunLSRbot";
-            this.RunLSRbot.Size = new System.Drawing.Size(271, 23);
-            this.RunLSRbot.TabIndex = 2;
-            this.RunLSRbot.Text = "Start Bot";
-            this.RunLSRbot.UseVisualStyleBackColor = true;
-            this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click_1);
-            // 
-            // resumeLSR
-            // 
-            this.resumeLSR.AutoSize = true;
-            this.resumeLSR.Location = new System.Drawing.Point(457, 19);
-            this.resumeLSR.Name = "resumeLSR";
-            this.resumeLSR.Size = new System.Drawing.Size(83, 17);
-            this.resumeLSR.TabIndex = 3;
-            this.resumeLSR.Text = "Resume bot";
-            this.resumeLSR.UseVisualStyleBackColor = true;
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(95, 16);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(49, 13);
-            this.label59.TabIndex = 6;
-            this.label59.Text = "# trades:";
-            // 
-            // RunWTbot
-            // 
-            this.RunWTbot.Location = new System.Drawing.Point(6, 187);
-            this.RunWTbot.Name = "RunWTbot";
-            this.RunWTbot.Size = new System.Drawing.Size(208, 23);
-            this.RunWTbot.TabIndex = 3;
-            this.RunWTbot.Text = "Start Bot";
-            this.RunWTbot.UseVisualStyleBackColor = true;
-            this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click_1);
-            // 
-            // WTtradesNo
-            // 
-            this.WTtradesNo.Location = new System.Drawing.Point(98, 35);
-            this.WTtradesNo.Maximum = new decimal(new int[] {
-            300,
+            this.touchY.Location = new System.Drawing.Point(72, 19);
+            this.touchY.Maximum = new decimal(new int[] {
+            239,
             0,
             0,
             0});
-            this.WTtradesNo.Name = "WTtradesNo";
-            this.WTtradesNo.Size = new System.Drawing.Size(46, 20);
-            this.WTtradesNo.TabIndex = 2;
-            this.WTtradesNo.Value = new decimal(new int[] {
-            1,
+            this.touchY.Name = "touchY";
+            this.touchY.Size = new System.Drawing.Size(60, 20);
+            this.touchY.TabIndex = 13;
+            this.toolTip1.SetToolTip(this.touchY, "Y (vertical) coordinate, from the top part of the screen.");
+            // 
+            // touchX
+            // 
+            this.touchX.Location = new System.Drawing.Point(6, 19);
+            this.touchX.Maximum = new decimal(new int[] {
+            319,
             0,
             0,
             0});
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(49, 16);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(28, 13);
-            this.label57.TabIndex = 5;
-            this.label57.Text = "Slot:";
-            // 
-            // WTBox
-            // 
-            this.WTBox.Location = new System.Drawing.Point(6, 35);
-            this.WTBox.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.WTBox.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.WTBox.Name = "WTBox";
-            this.WTBox.Size = new System.Drawing.Size(40, 20);
-            this.WTBox.TabIndex = 0;
-            this.WTBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // WTSlot
-            // 
-            this.WTSlot.Location = new System.Drawing.Point(52, 35);
-            this.WTSlot.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.WTSlot.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.WTSlot.Name = "WTSlot";
-            this.WTSlot.Size = new System.Drawing.Size(40, 20);
-            this.WTSlot.TabIndex = 1;
-            this.WTSlot.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(6, 16);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(28, 13);
-            this.label58.TabIndex = 4;
-            this.label58.Text = "Box:";
+            this.touchX.Name = "touchX";
+            this.touchX.Size = new System.Drawing.Size(60, 20);
+            this.touchX.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.touchX, "X (horizontal) coordinate, from the left part of the screen.");
             // 
             // readResult
             // 
@@ -1315,137 +948,6 @@
             this.stopBotButton.Visible = false;
             this.stopBotButton.Click += new System.EventHandler(this.stopBotButton_Click);
             // 
-            // manualDLeft
-            // 
-            this.manualDLeft.Location = new System.Drawing.Point(6, 46);
-            this.manualDLeft.Name = "manualDLeft";
-            this.manualDLeft.Size = new System.Drawing.Size(23, 23);
-            this.manualDLeft.TabIndex = 2;
-            this.manualDLeft.Text = "←";
-            this.manualDLeft.UseVisualStyleBackColor = true;
-            this.manualDLeft.Click += new System.EventHandler(this.manualDLeft_Click);
-            // 
-            // manualTouch
-            // 
-            this.manualTouch.Location = new System.Drawing.Point(138, 16);
-            this.manualTouch.Name = "manualTouch";
-            this.manualTouch.Size = new System.Drawing.Size(128, 23);
-            this.manualTouch.TabIndex = 14;
-            this.manualTouch.Text = "Touch";
-            this.manualTouch.UseVisualStyleBackColor = true;
-            this.manualTouch.Click += new System.EventHandler(this.manualTouch_Click);
-            // 
-            // manualX
-            // 
-            this.manualX.Location = new System.Drawing.Point(214, 19);
-            this.manualX.Name = "manualX";
-            this.manualX.Size = new System.Drawing.Size(23, 23);
-            this.manualX.TabIndex = 6;
-            this.manualX.Text = "X";
-            this.manualX.UseVisualStyleBackColor = true;
-            this.manualX.Click += new System.EventHandler(this.manualX_Click);
-            // 
-            // manualY
-            // 
-            this.manualY.Location = new System.Drawing.Point(185, 46);
-            this.manualY.Name = "manualY";
-            this.manualY.Size = new System.Drawing.Size(23, 23);
-            this.manualY.TabIndex = 7;
-            this.manualY.Text = "Y";
-            this.manualY.UseVisualStyleBackColor = true;
-            this.manualY.Click += new System.EventHandler(this.manualY_Click);
-            // 
-            // manualDUp
-            // 
-            this.manualDUp.Location = new System.Drawing.Point(35, 19);
-            this.manualDUp.Name = "manualDUp";
-            this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.manualDUp.Size = new System.Drawing.Size(23, 23);
-            this.manualDUp.TabIndex = 0;
-            this.manualDUp.Text = "↑";
-            this.manualDUp.UseVisualStyleBackColor = true;
-            this.manualDUp.Click += new System.EventHandler(this.manualDUp_Click);
-            // 
-            // manualL
-            // 
-            this.manualL.Location = new System.Drawing.Point(103, 19);
-            this.manualL.Name = "manualL";
-            this.manualL.Size = new System.Drawing.Size(23, 23);
-            this.manualL.TabIndex = 8;
-            this.manualL.Text = "L";
-            this.manualL.UseVisualStyleBackColor = true;
-            this.manualL.Click += new System.EventHandler(this.manualL_Click);
-            // 
-            // manualB
-            // 
-            this.manualB.Location = new System.Drawing.Point(214, 74);
-            this.manualB.Name = "manualB";
-            this.manualB.Size = new System.Drawing.Size(23, 23);
-            this.manualB.TabIndex = 5;
-            this.manualB.Text = "B";
-            this.manualB.UseVisualStyleBackColor = true;
-            this.manualB.Click += new System.EventHandler(this.manualB_Click);
-            // 
-            // manualA
-            // 
-            this.manualA.Location = new System.Drawing.Point(243, 46);
-            this.manualA.Name = "manualA";
-            this.manualA.Size = new System.Drawing.Size(23, 23);
-            this.manualA.TabIndex = 4;
-            this.manualA.Text = "A";
-            this.manualA.UseVisualStyleBackColor = true;
-            this.manualA.Click += new System.EventHandler(this.manualA_Click);
-            // 
-            // manualR
-            // 
-            this.manualR.Location = new System.Drawing.Point(146, 19);
-            this.manualR.Name = "manualR";
-            this.manualR.Size = new System.Drawing.Size(23, 23);
-            this.manualR.TabIndex = 9;
-            this.manualR.Text = "R";
-            this.manualR.UseVisualStyleBackColor = true;
-            this.manualR.Click += new System.EventHandler(this.manualR_Click);
-            // 
-            // manualSelect
-            // 
-            this.manualSelect.Location = new System.Drawing.Point(146, 74);
-            this.manualSelect.Name = "manualSelect";
-            this.manualSelect.Size = new System.Drawing.Size(62, 23);
-            this.manualSelect.TabIndex = 11;
-            this.manualSelect.Text = "SELECT";
-            this.manualSelect.UseVisualStyleBackColor = true;
-            this.manualSelect.Click += new System.EventHandler(this.manualSelect_Click);
-            // 
-            // manualDRight
-            // 
-            this.manualDRight.Location = new System.Drawing.Point(64, 46);
-            this.manualDRight.Name = "manualDRight";
-            this.manualDRight.Size = new System.Drawing.Size(23, 23);
-            this.manualDRight.TabIndex = 3;
-            this.manualDRight.Text = "→";
-            this.manualDRight.UseVisualStyleBackColor = true;
-            this.manualDRight.Click += new System.EventHandler(this.manualDRight_Click);
-            // 
-            // ManualDDown
-            // 
-            this.ManualDDown.Location = new System.Drawing.Point(35, 74);
-            this.ManualDDown.Name = "ManualDDown";
-            this.ManualDDown.Size = new System.Drawing.Size(23, 23);
-            this.ManualDDown.TabIndex = 1;
-            this.ManualDDown.Text = "↓";
-            this.ManualDDown.UseVisualStyleBackColor = true;
-            this.ManualDDown.Click += new System.EventHandler(this.ManualDDown_Click);
-            // 
-            // manualStart
-            // 
-            this.manualStart.Location = new System.Drawing.Point(64, 74);
-            this.manualStart.Name = "manualStart";
-            this.manualStart.Size = new System.Drawing.Size(62, 23);
-            this.manualStart.TabIndex = 10;
-            this.manualStart.Text = "START";
-            this.manualStart.UseVisualStyleBackColor = true;
-            this.manualStart.Click += new System.EventHandler(this.manualStart_Click);
-            // 
             // label71
             // 
             this.label71.AutoSize = true;
@@ -1454,1814 +956,6 @@
             this.label71.Size = new System.Drawing.Size(86, 13);
             this.label71.TabIndex = 2;
             this.label71.Text = "Last RAM Read:";
-            // 
-            // miscTabs
-            // 
-            this.miscTabs.Controls.Add(this.tabEditTrainer);
-            this.miscTabs.Controls.Add(this.tabControls);
-            this.miscTabs.Controls.Add(this.tabFilters);
-            this.miscTabs.Controls.Add(this.tabBreeding);
-            this.miscTabs.Controls.Add(this.tabSoftReset);
-            this.miscTabs.Controls.Add(this.tabWonderTrade);
-            this.miscTabs.Location = new System.Drawing.Point(615, 14);
-            this.miscTabs.Name = "miscTabs";
-            this.miscTabs.SelectedIndex = 0;
-            this.miscTabs.Size = new System.Drawing.Size(566, 404);
-            this.miscTabs.TabIndex = 3;
-            this.miscTabs.TabStop = false;
-            this.miscTabs.Tag = "";
-            this.miscTabs.Visible = false;
-            // 
-            // tabEditTrainer
-            // 
-            this.tabEditTrainer.BackColor = System.Drawing.SystemColors.Control;
-            this.tabEditTrainer.Controls.Add(this.Edit_Items);
-            this.tabEditTrainer.Location = new System.Drawing.Point(4, 22);
-            this.tabEditTrainer.Name = "tabEditTrainer";
-            this.tabEditTrainer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditTrainer.Size = new System.Drawing.Size(558, 378);
-            this.tabEditTrainer.TabIndex = 0;
-            this.tabEditTrainer.Text = "Edit Save";
-            // 
-            // tabControls
-            // 
-            this.tabControls.BackColor = System.Drawing.SystemColors.Control;
-            this.tabControls.Controls.Add(this.Remote_Stick);
-            this.tabControls.Controls.Add(this.Remote_touch);
-            this.tabControls.Controls.Add(this.Remote_buttons);
-            this.tabControls.Controls.Add(this.manualSR);
-            this.tabControls.Location = new System.Drawing.Point(4, 22);
-            this.tabControls.Name = "tabControls";
-            this.tabControls.Padding = new System.Windows.Forms.Padding(3);
-            this.tabControls.Size = new System.Drawing.Size(558, 378);
-            this.tabControls.TabIndex = 1;
-            this.tabControls.Text = "Controls";
-            // 
-            // Remote_Stick
-            // 
-            this.Remote_Stick.Controls.Add(this.StickX);
-            this.Remote_Stick.Controls.Add(this.StickY);
-            this.Remote_Stick.Controls.Add(this.StickNumY);
-            this.Remote_Stick.Controls.Add(this.StickSend);
-            this.Remote_Stick.Controls.Add(this.StickNumX);
-            this.Remote_Stick.Controls.Add(this.label62);
-            this.Remote_Stick.Controls.Add(this.label61);
-            this.Remote_Stick.Location = new System.Drawing.Point(284, 6);
-            this.Remote_Stick.Name = "Remote_Stick";
-            this.Remote_Stick.Size = new System.Drawing.Size(268, 154);
-            this.Remote_Stick.TabIndex = 28;
-            this.Remote_Stick.TabStop = false;
-            this.Remote_Stick.Text = "Control Stick";
-            // 
-            // StickX
-            // 
-            this.StickX.Location = new System.Drawing.Point(57, 103);
-            this.StickX.Maximum = 100;
-            this.StickX.Minimum = -100;
-            this.StickX.Name = "StickX";
-            this.StickX.Size = new System.Drawing.Size(205, 45);
-            this.StickX.TabIndex = 17;
-            this.StickX.TickFrequency = 25;
-            this.StickX.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.StickX.Scroll += new System.EventHandler(this.StickX_Scroll);
-            // 
-            // StickY
-            // 
-            this.StickY.Location = new System.Drawing.Point(6, 19);
-            this.StickY.Maximum = 100;
-            this.StickY.Minimum = -100;
-            this.StickY.Name = "StickY";
-            this.StickY.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.StickY.Size = new System.Drawing.Size(45, 129);
-            this.StickY.TabIndex = 16;
-            this.StickY.TickFrequency = 25;
-            this.StickY.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.StickY.Scroll += new System.EventHandler(this.StickY_Scroll);
-            // 
-            // StickNumY
-            // 
-            this.StickNumY.Location = new System.Drawing.Point(57, 22);
-            this.StickNumY.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.StickNumY.Name = "StickNumY";
-            this.StickNumY.Size = new System.Drawing.Size(100, 20);
-            this.StickNumY.TabIndex = 18;
-            this.StickNumY.ValueChanged += new System.EventHandler(this.StickNumY_ValueChanged);
-            // 
-            // StickSend
-            // 
-            this.StickSend.Location = new System.Drawing.Point(57, 63);
-            this.StickSend.Name = "StickSend";
-            this.StickSend.Size = new System.Drawing.Size(205, 23);
-            this.StickSend.TabIndex = 20;
-            this.StickSend.Text = "Send Command";
-            this.StickSend.UseVisualStyleBackColor = true;
-            this.StickSend.Click += new System.EventHandler(this.StickSend_Click);
-            // 
-            // StickNumX
-            // 
-            this.StickNumX.Location = new System.Drawing.Point(163, 22);
-            this.StickNumX.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.StickNumX.Name = "StickNumX";
-            this.StickNumX.Size = new System.Drawing.Size(99, 20);
-            this.StickNumX.TabIndex = 19;
-            this.StickNumX.ValueChanged += new System.EventHandler(this.StickNumX_ValueChanged);
-            // 
-            // label62
-            // 
-            this.label62.Location = new System.Drawing.Point(163, 45);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(99, 18);
-            this.label62.TabIndex = 25;
-            this.label62.Text = "Horizontal";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label61
-            // 
-            this.label61.Location = new System.Drawing.Point(57, 45);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(100, 18);
-            this.label61.TabIndex = 24;
-            this.label61.Text = "Vertical";
-            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // Remote_touch
-            // 
-            this.Remote_touch.AutoSize = true;
-            this.Remote_touch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Remote_touch.Controls.Add(this.label54);
-            this.Remote_touch.Controls.Add(this.label30);
-            this.Remote_touch.Controls.Add(this.touchX);
-            this.Remote_touch.Controls.Add(this.touchY);
-            this.Remote_touch.Controls.Add(this.manualTouch);
-            this.Remote_touch.Location = new System.Drawing.Point(6, 121);
-            this.Remote_touch.Name = "Remote_touch";
-            this.Remote_touch.Size = new System.Drawing.Size(272, 71);
-            this.Remote_touch.TabIndex = 27;
-            this.Remote_touch.TabStop = false;
-            this.Remote_touch.Text = "Touchscreen";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(72, 42);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(61, 13);
-            this.label54.TabIndex = 15;
-            this.label54.Text = "Y (from top)";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(6, 42);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(60, 13);
-            this.label30.TabIndex = 15;
-            this.label30.Text = "X (from left)";
-            // 
-            // Remote_buttons
-            // 
-            this.Remote_buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Remote_buttons.Controls.Add(this.manualDUp);
-            this.Remote_buttons.Controls.Add(this.manualA);
-            this.Remote_buttons.Controls.Add(this.manualR);
-            this.Remote_buttons.Controls.Add(this.manualB);
-            this.Remote_buttons.Controls.Add(this.manualL);
-            this.Remote_buttons.Controls.Add(this.manualSelect);
-            this.Remote_buttons.Controls.Add(this.manualDRight);
-            this.Remote_buttons.Controls.Add(this.ManualDDown);
-            this.Remote_buttons.Controls.Add(this.manualY);
-            this.Remote_buttons.Controls.Add(this.manualStart);
-            this.Remote_buttons.Controls.Add(this.manualX);
-            this.Remote_buttons.Controls.Add(this.manualDLeft);
-            this.Remote_buttons.Location = new System.Drawing.Point(6, 6);
-            this.Remote_buttons.Name = "Remote_buttons";
-            this.Remote_buttons.Size = new System.Drawing.Size(272, 109);
-            this.Remote_buttons.TabIndex = 26;
-            this.Remote_buttons.TabStop = false;
-            this.Remote_buttons.Text = "Buttons";
-            // 
-            // manualSR
-            // 
-            this.manualSR.Location = new System.Drawing.Point(284, 169);
-            this.manualSR.Name = "manualSR";
-            this.manualSR.Size = new System.Drawing.Size(268, 23);
-            this.manualSR.TabIndex = 15;
-            this.manualSR.Text = "Soft-Reset";
-            this.manualSR.UseVisualStyleBackColor = true;
-            this.manualSR.Click += new System.EventHandler(this.manualSR_Click);
-            // 
-            // tabFilters
-            // 
-            this.tabFilters.Controls.Add(this.filterReset);
-            this.tabFilters.Controls.Add(this.filterRead);
-            this.tabFilters.Controls.Add(this.filterLoad);
-            this.tabFilters.Controls.Add(this.filterSave);
-            this.tabFilters.Controls.Add(this.filterRemove);
-            this.tabFilters.Controls.Add(this.filterAdd);
-            this.tabFilters.Controls.Add(this.filterList);
-            this.tabFilters.Controls.Add(this.filterPerIVlogic);
-            this.tabFilters.Controls.Add(this.filterSPElogic);
-            this.tabFilters.Controls.Add(this.filterSPDlogic);
-            this.tabFilters.Controls.Add(this.filterSPAlogic);
-            this.tabFilters.Controls.Add(this.filterDEFlogic);
-            this.tabFilters.Controls.Add(this.filterATKlogic);
-            this.tabFilters.Controls.Add(this.filterHPlogic);
-            this.tabFilters.Controls.Add(this.label81);
-            this.tabFilters.Controls.Add(this.filterPerIVvalue);
-            this.tabFilters.Controls.Add(this.label101);
-            this.tabFilters.Controls.Add(this.filterShiny);
-            this.tabFilters.Controls.Add(this.filterGender);
-            this.tabFilters.Controls.Add(this.label102);
-            this.tabFilters.Controls.Add(this.label103);
-            this.tabFilters.Controls.Add(this.filterSPEvalue);
-            this.tabFilters.Controls.Add(this.filterSPDvalue);
-            this.tabFilters.Controls.Add(this.label104);
-            this.tabFilters.Controls.Add(this.label105);
-            this.tabFilters.Controls.Add(this.label106);
-            this.tabFilters.Controls.Add(this.filterAbility);
-            this.tabFilters.Controls.Add(this.filterDEFvalue);
-            this.tabFilters.Controls.Add(this.label107);
-            this.tabFilters.Controls.Add(this.label108);
-            this.tabFilters.Controls.Add(this.filterNature);
-            this.tabFilters.Controls.Add(this.filterSPAvalue);
-            this.tabFilters.Controls.Add(this.filterHPtype);
-            this.tabFilters.Controls.Add(this.filterHPvalue);
-            this.tabFilters.Controls.Add(this.label109);
-            this.tabFilters.Controls.Add(this.label110);
-            this.tabFilters.Controls.Add(this.label111);
-            this.tabFilters.Controls.Add(this.filterATKvalue);
-            this.tabFilters.Controls.Add(this.label112);
-            this.tabFilters.Location = new System.Drawing.Point(4, 22);
-            this.tabFilters.Name = "tabFilters";
-            this.tabFilters.Size = new System.Drawing.Size(558, 378);
-            this.tabFilters.TabIndex = 6;
-            this.tabFilters.Tag = "";
-            this.tabFilters.Text = "Filters";
-            // 
-            // filterReset
-            // 
-            this.filterReset.Location = new System.Drawing.Point(346, 161);
-            this.filterReset.Name = "filterReset";
-            this.filterReset.Size = new System.Drawing.Size(209, 23);
-            this.filterReset.TabIndex = 22;
-            this.filterReset.Text = "Reset constructor";
-            this.filterReset.UseVisualStyleBackColor = true;
-            this.filterReset.Click += new System.EventHandler(this.filterReset_Click);
-            // 
-            // filterRead
-            // 
-            this.filterRead.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.filterRead.Location = new System.Drawing.Point(6, 192);
-            this.filterRead.Name = "filterRead";
-            this.filterRead.Size = new System.Drawing.Size(132, 23);
-            this.filterRead.TabIndex = 21;
-            this.filterRead.Text = "Read Filter";
-            this.filterRead.UseVisualStyleBackColor = true;
-            this.filterRead.Click += new System.EventHandler(this.filterRead_Click);
-            // 
-            // filterLoad
-            // 
-            this.filterLoad.Location = new System.Drawing.Point(455, 190);
-            this.filterLoad.Name = "filterLoad";
-            this.filterLoad.Size = new System.Drawing.Size(100, 23);
-            this.filterLoad.TabIndex = 24;
-            this.filterLoad.Text = "Load filter set...";
-            this.filterLoad.UseVisualStyleBackColor = true;
-            this.filterLoad.Click += new System.EventHandler(this.filterLoad_Click);
-            // 
-            // filterSave
-            // 
-            this.filterSave.Location = new System.Drawing.Point(346, 190);
-            this.filterSave.Name = "filterSave";
-            this.filterSave.Size = new System.Drawing.Size(100, 23);
-            this.filterSave.TabIndex = 23;
-            this.filterSave.Text = "Save filter set...";
-            this.filterSave.UseVisualStyleBackColor = true;
-            this.filterSave.Click += new System.EventHandler(this.filterSave_Click);
-            // 
-            // filterRemove
-            // 
-            this.filterRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.filterRemove.Location = new System.Drawing.Point(6, 163);
-            this.filterRemove.Name = "filterRemove";
-            this.filterRemove.Size = new System.Drawing.Size(132, 23);
-            this.filterRemove.TabIndex = 20;
-            this.filterRemove.Text = "Remove Filter";
-            this.filterRemove.UseVisualStyleBackColor = true;
-            this.filterRemove.Click += new System.EventHandler(this.filterRemove_Click);
-            // 
-            // filterAdd
-            // 
-            this.filterAdd.Location = new System.Drawing.Point(6, 135);
-            this.filterAdd.Name = "filterAdd";
-            this.filterAdd.Size = new System.Drawing.Size(132, 23);
-            this.filterAdd.TabIndex = 19;
-            this.filterAdd.Text = "Add Filter";
-            this.filterAdd.UseVisualStyleBackColor = true;
-            this.filterAdd.Click += new System.EventHandler(this.filterAdd_Click);
-            // 
-            // filterList
-            // 
-            this.filterList.AllowUserToAddRows = false;
-            this.filterList.AllowUserToDeleteRows = false;
-            this.filterList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.filterList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.filterList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.HPlogic,
-            this.dataGridViewTextBoxColumn7,
-            this.ATKlogic,
-            this.dataGridViewTextBoxColumn8,
-            this.DEFlogic,
-            this.dataGridViewTextBoxColumn9,
-            this.SPAlogic,
-            this.dataGridViewTextBoxColumn10,
-            this.SPDlogic,
-            this.dataGridViewTextBoxColumn11,
-            this.SPElogic,
-            this.dataGridViewTextBoxColumn12,
-            this.PerfectIVlogic});
-            this.filterList.Location = new System.Drawing.Point(6, 219);
-            this.filterList.MultiSelect = false;
-            this.filterList.Name = "filterList";
-            this.filterList.ReadOnly = true;
-            this.filterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.filterList.Size = new System.Drawing.Size(549, 145);
-            this.filterList.TabIndex = 25;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Shiny";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 58;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Nature";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 64;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Ability";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 59;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "HP type";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Gender";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "HP";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 47;
-            // 
-            // HPlogic
-            // 
-            this.HPlogic.HeaderText = "HP Logic";
-            this.HPlogic.Name = "HPlogic";
-            this.HPlogic.ReadOnly = true;
-            this.HPlogic.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Atk";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 48;
-            // 
-            // ATKlogic
-            // 
-            this.ATKlogic.HeaderText = "Atk Logic";
-            this.ATKlogic.Name = "ATKlogic";
-            this.ATKlogic.ReadOnly = true;
-            this.ATKlogic.Width = 71;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Def";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 49;
-            // 
-            // DEFlogic
-            // 
-            this.DEFlogic.HeaderText = "Def Logic";
-            this.DEFlogic.Name = "DEFlogic";
-            this.DEFlogic.ReadOnly = true;
-            this.DEFlogic.Width = 72;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "SpA";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 52;
-            // 
-            // SPAlogic
-            // 
-            this.SPAlogic.HeaderText = "SpA Logic";
-            this.SPAlogic.Name = "SPAlogic";
-            this.SPAlogic.ReadOnly = true;
-            this.SPAlogic.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "SpD";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            this.dataGridViewTextBoxColumn10.Width = 53;
-            // 
-            // SPDlogic
-            // 
-            this.SPDlogic.HeaderText = "SpD Logic";
-            this.SPDlogic.Name = "SPDlogic";
-            this.SPDlogic.ReadOnly = true;
-            this.SPDlogic.Width = 76;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Spe";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            this.dataGridViewTextBoxColumn11.Width = 51;
-            // 
-            // SPElogic
-            // 
-            this.SPElogic.HeaderText = "Spe Logic";
-            this.SPElogic.Name = "SPElogic";
-            this.SPElogic.ReadOnly = true;
-            this.SPElogic.Width = 74;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Perfect IVs";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            this.dataGridViewTextBoxColumn12.Width = 78;
-            // 
-            // PerfectIVlogic
-            // 
-            this.PerfectIVlogic.HeaderText = "Perfect IVs Logic";
-            this.PerfectIVlogic.Name = "PerfectIVlogic";
-            this.PerfectIVlogic.ReadOnly = true;
-            this.PerfectIVlogic.Width = 80;
-            // 
-            // filterPerIVlogic
-            // 
-            this.filterPerIVlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterPerIVlogic.FormattingEnabled = true;
-            this.filterPerIVlogic.Items.AddRange(new object[] {
-            ">=",
-            ">",
-            "=",
-            "<",
-            "<=",
-            "!="});
-            this.filterPerIVlogic.Location = new System.Drawing.Point(241, 192);
-            this.filterPerIVlogic.Name = "filterPerIVlogic";
-            this.filterPerIVlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterPerIVlogic.TabIndex = 17;
-            // 
-            // filterSPElogic
-            // 
-            this.filterSPElogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterSPElogic.FormattingEnabled = true;
-            this.filterSPElogic.Items.AddRange(new object[] {
-            ">=",
-            ">",
-            "=",
-            "<",
-            "<=",
-            "!=",
-            "Even",
-            "Odd"});
-            this.filterSPElogic.Location = new System.Drawing.Point(241, 165);
-            this.filterSPElogic.Name = "filterSPElogic";
-            this.filterSPElogic.Size = new System.Drawing.Size(60, 21);
-            this.filterSPElogic.TabIndex = 15;
-            // 
-            // filterSPDlogic
-            // 
-            this.filterSPDlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterSPDlogic.FormattingEnabled = true;
-            this.filterSPDlogic.Items.AddRange(new object[] {
-            ">=",
-            ">",
-            "=",
-            "<",
-            "<=",
-            "!=",
-            "Even",
-            "Odd"});
-            this.filterSPDlogic.Location = new System.Drawing.Point(241, 138);
-            this.filterSPDlogic.Name = "filterSPDlogic";
-            this.filterSPDlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterSPDlogic.TabIndex = 13;
-            // 
-            // filterSPAlogic
-            // 
-            this.filterSPAlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterSPAlogic.FormattingEnabled = true;
-            this.filterSPAlogic.Items.AddRange(new object[] {
-            ">=",
-            ">",
-            "=",
-            "<",
-            "<=",
-            "!=",
-            "Even",
-            "Odd"});
-            this.filterSPAlogic.Location = new System.Drawing.Point(241, 111);
-            this.filterSPAlogic.Name = "filterSPAlogic";
-            this.filterSPAlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterSPAlogic.TabIndex = 11;
-            // 
-            // filterDEFlogic
-            // 
-            this.filterDEFlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterDEFlogic.FormattingEnabled = true;
-            this.filterDEFlogic.Items.AddRange(new object[] {
-            ">=",
-            ">",
-            "=",
-            "<",
-            "<=",
-            "!=",
-            "Even",
-            "Odd"});
-            this.filterDEFlogic.Location = new System.Drawing.Point(241, 84);
-            this.filterDEFlogic.Name = "filterDEFlogic";
-            this.filterDEFlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterDEFlogic.TabIndex = 9;
-            // 
-            // filterATKlogic
-            // 
-            this.filterATKlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterATKlogic.FormattingEnabled = true;
-            this.filterATKlogic.Items.AddRange(new object[] {
-            ">=",
-            ">",
-            "=",
-            "<",
-            "<=",
-            "!=",
-            "Even",
-            "Odd"});
-            this.filterATKlogic.Location = new System.Drawing.Point(241, 57);
-            this.filterATKlogic.Name = "filterATKlogic";
-            this.filterATKlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterATKlogic.TabIndex = 7;
-            // 
-            // filterHPlogic
-            // 
-            this.filterHPlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterHPlogic.FormattingEnabled = true;
-            this.filterHPlogic.Items.AddRange(new object[] {
-            ">=",
-            ">",
-            "=",
-            "<",
-            "<=",
-            "!=",
-            "Even",
-            "Odd"});
-            this.filterHPlogic.Location = new System.Drawing.Point(241, 30);
-            this.filterHPlogic.Name = "filterHPlogic";
-            this.filterHPlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterHPlogic.TabIndex = 5;
-            // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(3, 10);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(61, 13);
-            this.label81.TabIndex = 25;
-            this.label81.Text = "Constructor";
-            // 
-            // filterPerIVvalue
-            // 
-            this.filterPerIVvalue.Location = new System.Drawing.Point(307, 193);
-            this.filterPerIVvalue.Maximum = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.filterPerIVvalue.Name = "filterPerIVvalue";
-            this.filterPerIVvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterPerIVvalue.TabIndex = 18;
-            // 
-            // label101
-            // 
-            this.label101.AutoSize = true;
-            this.label101.Location = new System.Drawing.Point(171, 195);
-            this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(64, 13);
-            this.label101.TabIndex = 37;
-            this.label101.Text = "Perfect IV\'s:";
-            // 
-            // filterShiny
-            // 
-            this.filterShiny.AutoSize = true;
-            this.filterShiny.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.filterShiny.Location = new System.Drawing.Point(86, 10);
-            this.filterShiny.Name = "filterShiny";
-            this.filterShiny.Size = new System.Drawing.Size(52, 17);
-            this.filterShiny.TabIndex = 0;
-            this.filterShiny.Text = "Shiny";
-            this.filterShiny.UseVisualStyleBackColor = true;
-            // 
-            // filterGender
-            // 
-            this.filterGender.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterGender.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.filterGender.FormattingEnabled = true;
-            this.filterGender.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.filterGender.Location = new System.Drawing.Point(61, 108);
-            this.filterGender.Name = "filterGender";
-            this.filterGender.Size = new System.Drawing.Size(77, 21);
-            this.filterGender.TabIndex = 4;
-            // 
-            // label102
-            // 
-            this.label102.AutoSize = true;
-            this.label102.Location = new System.Drawing.Point(10, 111);
-            this.label102.Name = "label102";
-            this.label102.Size = new System.Drawing.Size(45, 13);
-            this.label102.TabIndex = 29;
-            this.label102.Text = "Gender:";
-            // 
-            // label103
-            // 
-            this.label103.AutoSize = true;
-            this.label103.Location = new System.Drawing.Point(238, 11);
-            this.label103.Name = "label103";
-            this.label103.Size = new System.Drawing.Size(44, 13);
-            this.label103.TabIndex = 30;
-            this.label103.Text = "IV filters";
-            // 
-            // filterSPEvalue
-            // 
-            this.filterSPEvalue.Location = new System.Drawing.Point(307, 165);
-            this.filterSPEvalue.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.filterSPEvalue.Name = "filterSPEvalue";
-            this.filterSPEvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterSPEvalue.TabIndex = 16;
-            // 
-            // filterSPDvalue
-            // 
-            this.filterSPDvalue.Location = new System.Drawing.Point(307, 139);
-            this.filterSPDvalue.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.filterSPDvalue.Name = "filterSPDvalue";
-            this.filterSPDvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterSPDvalue.TabIndex = 14;
-            // 
-            // label104
-            // 
-            this.label104.AutoSize = true;
-            this.label104.Location = new System.Drawing.Point(18, 57);
-            this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(37, 13);
-            this.label104.TabIndex = 27;
-            this.label104.Text = "Ability:";
-            // 
-            // label105
-            // 
-            this.label105.AutoSize = true;
-            this.label105.Location = new System.Drawing.Point(194, 168);
-            this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(41, 13);
-            this.label105.TabIndex = 36;
-            this.label105.Text = "Speed:";
-            // 
-            // label106
-            // 
-            this.label106.AutoSize = true;
-            this.label106.Location = new System.Drawing.Point(185, 87);
-            this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(50, 13);
-            this.label106.TabIndex = 33;
-            this.label106.Text = "Defense:";
-            // 
-            // filterAbility
-            // 
-            this.filterAbility.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterAbility.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.filterAbility.FormattingEnabled = true;
-            this.filterAbility.Location = new System.Drawing.Point(61, 54);
-            this.filterAbility.Name = "filterAbility";
-            this.filterAbility.Size = new System.Drawing.Size(77, 21);
-            this.filterAbility.TabIndex = 2;
-            // 
-            // filterDEFvalue
-            // 
-            this.filterDEFvalue.Location = new System.Drawing.Point(307, 85);
-            this.filterDEFvalue.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.filterDEFvalue.Name = "filterDEFvalue";
-            this.filterDEFvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterDEFvalue.TabIndex = 10;
-            // 
-            // label107
-            // 
-            this.label107.AutoSize = true;
-            this.label107.Location = new System.Drawing.Point(13, 30);
-            this.label107.Name = "label107";
-            this.label107.Size = new System.Drawing.Size(42, 13);
-            this.label107.TabIndex = 26;
-            this.label107.Text = "Nature:";
-            // 
-            // label108
-            // 
-            this.label108.AutoSize = true;
-            this.label108.Location = new System.Drawing.Point(180, 33);
-            this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(55, 13);
-            this.label108.TabIndex = 31;
-            this.label108.Text = "Hit Points:";
-            // 
-            // filterNature
-            // 
-            this.filterNature.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterNature.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.filterNature.FormattingEnabled = true;
-            this.filterNature.Items.AddRange(new object[] {
-            "Hardy",
-            "Lonely",
-            "Brave",
-            "Adamant",
-            "Naughty",
-            "Bold",
-            "Docile",
-            "Relaxed",
-            "Impish",
-            "Lax",
-            "Timid",
-            "Hasty",
-            "Serious",
-            "Jolly",
-            "Naive",
-            "Modest",
-            "Mild",
-            "Quiet",
-            "Bashful",
-            "Rash",
-            "Calm",
-            "Gentle",
-            "Sassy",
-            "Careful",
-            "Quirky"});
-            this.filterNature.Location = new System.Drawing.Point(61, 27);
-            this.filterNature.Name = "filterNature";
-            this.filterNature.Size = new System.Drawing.Size(77, 21);
-            this.filterNature.TabIndex = 1;
-            // 
-            // filterSPAvalue
-            // 
-            this.filterSPAvalue.Location = new System.Drawing.Point(307, 113);
-            this.filterSPAvalue.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.filterSPAvalue.Name = "filterSPAvalue";
-            this.filterSPAvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterSPAvalue.TabIndex = 12;
-            // 
-            // filterHPtype
-            // 
-            this.filterHPtype.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.filterHPtype.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.filterHPtype.FormattingEnabled = true;
-            this.filterHPtype.Items.AddRange(new object[] {
-            "Fighting",
-            "Flying",
-            "Poison",
-            "Ground",
-            "Rock",
-            "Bug",
-            "Ghost",
-            "Steel",
-            "Fire",
-            "Water",
-            "Grass",
-            "Electric",
-            "Psychic",
-            "Ice",
-            "Dragon",
-            "Dark"});
-            this.filterHPtype.Location = new System.Drawing.Point(61, 81);
-            this.filterHPtype.Name = "filterHPtype";
-            this.filterHPtype.Size = new System.Drawing.Size(77, 21);
-            this.filterHPtype.TabIndex = 3;
-            // 
-            // filterHPvalue
-            // 
-            this.filterHPvalue.Location = new System.Drawing.Point(307, 31);
-            this.filterHPvalue.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.filterHPvalue.Name = "filterHPvalue";
-            this.filterHPvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterHPvalue.TabIndex = 6;
-            // 
-            // label109
-            // 
-            this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(3, 84);
-            this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(52, 13);
-            this.label109.TabIndex = 28;
-            this.label109.Text = "HP Type:";
-            // 
-            // label110
-            // 
-            this.label110.AutoSize = true;
-            this.label110.Location = new System.Drawing.Point(156, 115);
-            this.label110.Name = "label110";
-            this.label110.Size = new System.Drawing.Size(79, 13);
-            this.label110.TabIndex = 34;
-            this.label110.Text = "Special Attack:";
-            // 
-            // label111
-            // 
-            this.label111.AutoSize = true;
-            this.label111.Location = new System.Drawing.Point(194, 60);
-            this.label111.Name = "label111";
-            this.label111.Size = new System.Drawing.Size(41, 13);
-            this.label111.TabIndex = 32;
-            this.label111.Text = "Attack:";
-            // 
-            // filterATKvalue
-            // 
-            this.filterATKvalue.Location = new System.Drawing.Point(307, 58);
-            this.filterATKvalue.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.filterATKvalue.Name = "filterATKvalue";
-            this.filterATKvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterATKvalue.TabIndex = 8;
-            // 
-            // label112
-            // 
-            this.label112.AutoSize = true;
-            this.label112.Location = new System.Drawing.Point(147, 141);
-            this.label112.Name = "label112";
-            this.label112.Size = new System.Drawing.Size(88, 13);
-            this.label112.TabIndex = 35;
-            this.label112.Text = "Special Defense:";
-            // 
-            // tabBreeding
-            // 
-            this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
-            this.tabBreeding.Controls.Add(this.Breed_esvtsv);
-            this.tabBreeding.Controls.Add(this.Breed_options);
-            this.tabBreeding.Controls.Add(this.breedingClear);
-            this.tabBreeding.Controls.Add(this.filterBreeding);
-            this.tabBreeding.Controls.Add(this.bFilterLoad);
-            this.tabBreeding.Controls.Add(this.runBreedingBot);
-            this.tabBreeding.Location = new System.Drawing.Point(4, 22);
-            this.tabBreeding.Name = "tabBreeding";
-            this.tabBreeding.Size = new System.Drawing.Size(558, 378);
-            this.tabBreeding.TabIndex = 4;
-            this.tabBreeding.Text = "Breeding";
-            // 
-            // Breed_esvtsv
-            // 
-            this.Breed_esvtsv.Controls.Add(this.label50);
-            this.Breed_esvtsv.Controls.Add(this.ESVlist);
-            this.Breed_esvtsv.Controls.Add(this.ESVlistSave);
-            this.Breed_esvtsv.Controls.Add(this.TSVlist);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistNum);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistAdd);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistLoad);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistRemove);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistSave);
-            this.Breed_esvtsv.Location = new System.Drawing.Point(272, 6);
-            this.Breed_esvtsv.Name = "Breed_esvtsv";
-            this.Breed_esvtsv.Size = new System.Drawing.Size(280, 177);
-            this.Breed_esvtsv.TabIndex = 28;
-            this.Breed_esvtsv.TabStop = false;
-            this.Breed_esvtsv.Text = "ESV/TSV";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(218, 16);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(31, 13);
-            this.label50.TabIndex = 16;
-            this.label50.Text = "TSV:";
-            // 
-            // ESVlist
-            // 
-            this.ESVlist.AllowUserToAddRows = false;
-            this.ESVlist.AllowUserToDeleteRows = false;
-            this.ESVlist.AllowUserToResizeColumns = false;
-            this.ESVlist.AllowUserToResizeRows = false;
-            this.ESVlist.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.ESVlist.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.ESVlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ESVlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ESVlistBox,
-            this.ESVlistSlot,
-            this.ESVlistValue});
-            this.ESVlist.Location = new System.Drawing.Point(6, 17);
-            this.ESVlist.Name = "ESVlist";
-            this.ESVlist.ReadOnly = true;
-            this.ESVlist.RowHeadersWidth = 21;
-            this.ESVlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.ESVlist.Size = new System.Drawing.Size(150, 125);
-            this.ESVlist.TabIndex = 8;
-            // 
-            // ESVlistBox
-            // 
-            this.ESVlistBox.FillWeight = 50F;
-            this.ESVlistBox.HeaderText = "Box";
-            this.ESVlistBox.Name = "ESVlistBox";
-            this.ESVlistBox.ReadOnly = true;
-            // 
-            // ESVlistSlot
-            // 
-            this.ESVlistSlot.FillWeight = 50F;
-            this.ESVlistSlot.HeaderText = "Slot";
-            this.ESVlistSlot.Name = "ESVlistSlot";
-            this.ESVlistSlot.ReadOnly = true;
-            // 
-            // ESVlistValue
-            // 
-            this.ESVlistValue.HeaderText = "ESV";
-            this.ESVlistValue.Name = "ESVlistValue";
-            this.ESVlistValue.ReadOnly = true;
-            // 
-            // ESVlistSave
-            // 
-            this.ESVlistSave.Location = new System.Drawing.Point(6, 148);
-            this.ESVlistSave.Name = "ESVlistSave";
-            this.ESVlistSave.Size = new System.Drawing.Size(150, 23);
-            this.ESVlistSave.TabIndex = 9;
-            this.ESVlistSave.Text = "Save ESV List";
-            this.ESVlistSave.UseVisualStyleBackColor = true;
-            this.ESVlistSave.Click += new System.EventHandler(this.ESVlistSave_Click);
-            // 
-            // TSVlist
-            // 
-            this.TSVlist.FormattingEnabled = true;
-            this.TSVlist.Location = new System.Drawing.Point(162, 17);
-            this.TSVlist.Name = "TSVlist";
-            this.TSVlist.Size = new System.Drawing.Size(50, 147);
-            this.TSVlist.TabIndex = 10;
-            // 
-            // TSVlistNum
-            // 
-            this.TSVlistNum.Location = new System.Drawing.Point(218, 32);
-            this.TSVlistNum.Maximum = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.TSVlistNum.Name = "TSVlistNum";
-            this.TSVlistNum.Size = new System.Drawing.Size(56, 20);
-            this.TSVlistNum.TabIndex = 11;
-            // 
-            // TSVlistAdd
-            // 
-            this.TSVlistAdd.Location = new System.Drawing.Point(218, 58);
-            this.TSVlistAdd.Name = "TSVlistAdd";
-            this.TSVlistAdd.Size = new System.Drawing.Size(56, 23);
-            this.TSVlistAdd.TabIndex = 12;
-            this.TSVlistAdd.Text = "Add";
-            this.TSVlistAdd.UseVisualStyleBackColor = true;
-            this.TSVlistAdd.Click += new System.EventHandler(this.TSVlistAdd_Click);
-            // 
-            // TSVlistLoad
-            // 
-            this.TSVlistLoad.Location = new System.Drawing.Point(218, 145);
-            this.TSVlistLoad.Name = "TSVlistLoad";
-            this.TSVlistLoad.Size = new System.Drawing.Size(56, 23);
-            this.TSVlistLoad.TabIndex = 15;
-            this.TSVlistLoad.Text = "Load";
-            this.TSVlistLoad.UseVisualStyleBackColor = true;
-            this.TSVlistLoad.Click += new System.EventHandler(this.TSVlistLoad_Click);
-            // 
-            // TSVlistRemove
-            // 
-            this.TSVlistRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.TSVlistRemove.Location = new System.Drawing.Point(218, 87);
-            this.TSVlistRemove.Name = "TSVlistRemove";
-            this.TSVlistRemove.Size = new System.Drawing.Size(56, 23);
-            this.TSVlistRemove.TabIndex = 13;
-            this.TSVlistRemove.Text = "Remove";
-            this.TSVlistRemove.UseVisualStyleBackColor = true;
-            this.TSVlistRemove.Click += new System.EventHandler(this.TSVlistRemove_Click);
-            // 
-            // TSVlistSave
-            // 
-            this.TSVlistSave.Location = new System.Drawing.Point(218, 116);
-            this.TSVlistSave.Name = "TSVlistSave";
-            this.TSVlistSave.Size = new System.Drawing.Size(56, 23);
-            this.TSVlistSave.TabIndex = 14;
-            this.TSVlistSave.Text = "Save";
-            this.TSVlistSave.UseVisualStyleBackColor = true;
-            this.TSVlistSave.Click += new System.EventHandler(this.TSVlistSave_Click);
-            // 
-            // Breed_options
-            // 
-            this.Breed_options.Controls.Add(this.modeBreed);
-            this.Breed_options.Controls.Add(this.readESV);
-            this.Breed_options.Controls.Add(this.Breed_labelBox);
-            this.Breed_options.Controls.Add(this.label75);
-            this.Breed_options.Controls.Add(this.quickBreed);
-            this.Breed_options.Controls.Add(this.slotBreed);
-            this.Breed_options.Controls.Add(this.label84);
-            this.Breed_options.Controls.Add(this.boxBreed);
-            this.Breed_options.Controls.Add(this.Breed_labelSlot);
-            this.Breed_options.Controls.Add(this.eggsNoBreed);
-            this.Breed_options.Controls.Add(this.daycare_select);
-            this.Breed_options.Controls.Add(this.orgbox_pos);
-            this.Breed_options.Location = new System.Drawing.Point(6, 6);
-            this.Breed_options.Name = "Breed_options";
-            this.Breed_options.Size = new System.Drawing.Size(260, 177);
-            this.Breed_options.TabIndex = 27;
-            this.Breed_options.TabStop = false;
-            this.Breed_options.Text = "Options";
-            // 
-            // modeBreed
-            // 
-            this.modeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.modeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.modeBreed.FormattingEnabled = true;
-            this.modeBreed.Location = new System.Drawing.Point(49, 17);
-            this.modeBreed.Name = "modeBreed";
-            this.modeBreed.Size = new System.Drawing.Size(205, 21);
-            this.modeBreed.TabIndex = 0;
-            this.modeBreed.SelectedIndexChanged += new System.EventHandler(this.modeBreed_SelectedIndexChanged);
-            // 
-            // readESV
-            // 
-            this.readESV.AutoSize = true;
-            this.readESV.Location = new System.Drawing.Point(6, 148);
-            this.readESV.Name = "readESV";
-            this.readESV.Size = new System.Drawing.Size(137, 17);
-            this.readESV.TabIndex = 6;
-            this.readESV.Text = "Read ESV after deposit";
-            this.readESV.UseVisualStyleBackColor = true;
-            // 
-            // Breed_labelBox
-            // 
-            this.Breed_labelBox.AutoSize = true;
-            this.Breed_labelBox.Location = new System.Drawing.Point(3, 48);
-            this.Breed_labelBox.Name = "Breed_labelBox";
-            this.Breed_labelBox.Size = new System.Drawing.Size(28, 13);
-            this.Breed_labelBox.TabIndex = 21;
-            this.Breed_labelBox.Text = "Box:";
-            // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(165, 48);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(43, 13);
-            this.label75.TabIndex = 23;
-            this.label75.Text = "# eggs:";
-            // 
-            // quickBreed
-            // 
-            this.quickBreed.AutoSize = true;
-            this.quickBreed.Location = new System.Drawing.Point(150, 148);
-            this.quickBreed.Name = "quickBreed";
-            this.quickBreed.Size = new System.Drawing.Size(85, 17);
-            this.quickBreed.TabIndex = 7;
-            this.quickBreed.Text = "Quick Breed";
-            this.quickBreed.UseVisualStyleBackColor = true;
-            // 
-            // slotBreed
-            // 
-            this.slotBreed.Location = new System.Drawing.Point(118, 46);
-            this.slotBreed.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.slotBreed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.slotBreed.Name = "slotBreed";
-            this.slotBreed.Size = new System.Drawing.Size(41, 20);
-            this.slotBreed.TabIndex = 2;
-            this.slotBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label84
-            // 
-            this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(6, 20);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(37, 13);
-            this.label84.TabIndex = 20;
-            this.label84.Text = "Mode:";
-            // 
-            // boxBreed
-            // 
-            this.boxBreed.Location = new System.Drawing.Point(37, 46);
-            this.boxBreed.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.boxBreed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.boxBreed.Name = "boxBreed";
-            this.boxBreed.Size = new System.Drawing.Size(41, 20);
-            this.boxBreed.TabIndex = 1;
-            this.boxBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // Breed_labelSlot
-            // 
-            this.Breed_labelSlot.AutoSize = true;
-            this.Breed_labelSlot.Location = new System.Drawing.Point(84, 48);
-            this.Breed_labelSlot.Name = "Breed_labelSlot";
-            this.Breed_labelSlot.Size = new System.Drawing.Size(28, 13);
-            this.Breed_labelSlot.TabIndex = 22;
-            this.Breed_labelSlot.Text = "Slot:";
-            // 
-            // eggsNoBreed
-            // 
-            this.eggsNoBreed.Location = new System.Drawing.Point(214, 46);
-            this.eggsNoBreed.Maximum = new decimal(new int[] {
-            930,
-            0,
-            0,
-            0});
-            this.eggsNoBreed.Name = "eggsNoBreed";
-            this.eggsNoBreed.Size = new System.Drawing.Size(40, 20);
-            this.eggsNoBreed.TabIndex = 3;
-            this.eggsNoBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // breedingClear
-            // 
-            this.breedingClear.Location = new System.Drawing.Point(278, 189);
-            this.breedingClear.Name = "breedingClear";
-            this.breedingClear.Size = new System.Drawing.Size(150, 23);
-            this.breedingClear.TabIndex = 16;
-            this.breedingClear.Text = "Reset all fields";
-            this.breedingClear.UseVisualStyleBackColor = true;
-            this.breedingClear.Click += new System.EventHandler(this.breedingClear_Click);
-            // 
-            // filterBreeding
-            // 
-            this.filterBreeding.AllowUserToAddRows = false;
-            this.filterBreeding.AllowUserToDeleteRows = false;
-            this.filterBreeding.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.filterBreeding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.filterBreeding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16,
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewTextBoxColumn18,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20,
-            this.dataGridViewTextBoxColumn21,
-            this.dataGridViewTextBoxColumn22,
-            this.dataGridViewTextBoxColumn23,
-            this.dataGridViewTextBoxColumn24,
-            this.dataGridViewTextBoxColumn25,
-            this.dataGridViewTextBoxColumn26,
-            this.dataGridViewTextBoxColumn27,
-            this.dataGridViewTextBoxColumn28,
-            this.dataGridViewTextBoxColumn29,
-            this.dataGridViewTextBoxColumn30,
-            this.dataGridViewTextBoxColumn31});
-            this.filterBreeding.Location = new System.Drawing.Point(73, 218);
-            this.filterBreeding.MultiSelect = false;
-            this.filterBreeding.Name = "filterBreeding";
-            this.filterBreeding.ReadOnly = true;
-            this.filterBreeding.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.filterBreeding.Size = new System.Drawing.Size(546, 146);
-            this.filterBreeding.TabIndex = 18;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Shiny";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            this.dataGridViewTextBoxColumn13.Width = 58;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.HeaderText = "Nature";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            this.dataGridViewTextBoxColumn14.Width = 64;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "Ability";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.Width = 59;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "HP type";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.HeaderText = "Gender";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            this.dataGridViewTextBoxColumn17.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.HeaderText = "HP";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            this.dataGridViewTextBoxColumn18.Width = 47;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.HeaderText = "HP Logic";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            this.dataGridViewTextBoxColumn19.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.HeaderText = "Atk";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            this.dataGridViewTextBoxColumn20.Width = 48;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.HeaderText = "Atk Logic";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            this.dataGridViewTextBoxColumn21.Width = 71;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.HeaderText = "Def";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            this.dataGridViewTextBoxColumn22.Width = 49;
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.HeaderText = "Def Logic";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            this.dataGridViewTextBoxColumn23.ReadOnly = true;
-            this.dataGridViewTextBoxColumn23.Width = 72;
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            this.dataGridViewTextBoxColumn24.HeaderText = "SpA";
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            this.dataGridViewTextBoxColumn24.ReadOnly = true;
-            this.dataGridViewTextBoxColumn24.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn25
-            // 
-            this.dataGridViewTextBoxColumn25.HeaderText = "SpA Logic";
-            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-            this.dataGridViewTextBoxColumn25.ReadOnly = true;
-            this.dataGridViewTextBoxColumn25.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn26
-            // 
-            this.dataGridViewTextBoxColumn26.HeaderText = "SpD";
-            this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
-            this.dataGridViewTextBoxColumn26.ReadOnly = true;
-            this.dataGridViewTextBoxColumn26.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn27
-            // 
-            this.dataGridViewTextBoxColumn27.HeaderText = "SpD Logic";
-            this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
-            this.dataGridViewTextBoxColumn27.ReadOnly = true;
-            this.dataGridViewTextBoxColumn27.Width = 76;
-            // 
-            // dataGridViewTextBoxColumn28
-            // 
-            this.dataGridViewTextBoxColumn28.HeaderText = "Spe";
-            this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
-            this.dataGridViewTextBoxColumn28.ReadOnly = true;
-            this.dataGridViewTextBoxColumn28.Width = 51;
-            // 
-            // dataGridViewTextBoxColumn29
-            // 
-            this.dataGridViewTextBoxColumn29.HeaderText = "Spe Logic";
-            this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
-            this.dataGridViewTextBoxColumn29.ReadOnly = true;
-            this.dataGridViewTextBoxColumn29.Width = 74;
-            // 
-            // dataGridViewTextBoxColumn30
-            // 
-            this.dataGridViewTextBoxColumn30.HeaderText = "Perfect IVs";
-            this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
-            this.dataGridViewTextBoxColumn30.ReadOnly = true;
-            this.dataGridViewTextBoxColumn30.Width = 78;
-            // 
-            // dataGridViewTextBoxColumn31
-            // 
-            this.dataGridViewTextBoxColumn31.HeaderText = "Perfect IVs Logic";
-            this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
-            this.dataGridViewTextBoxColumn31.ReadOnly = true;
-            this.dataGridViewTextBoxColumn31.Width = 80;
-            // 
-            // bFilterLoad
-            // 
-            this.bFilterLoad.Location = new System.Drawing.Point(439, 189);
-            this.bFilterLoad.Name = "bFilterLoad";
-            this.bFilterLoad.Size = new System.Drawing.Size(113, 23);
-            this.bFilterLoad.TabIndex = 17;
-            this.bFilterLoad.Text = "Load filter set...";
-            this.bFilterLoad.UseVisualStyleBackColor = true;
-            this.bFilterLoad.Click += new System.EventHandler(this.bFilterLoad_Click);
-            // 
-            // runBreedingBot
-            // 
-            this.runBreedingBot.Location = new System.Drawing.Point(6, 189);
-            this.runBreedingBot.Name = "runBreedingBot";
-            this.runBreedingBot.Size = new System.Drawing.Size(260, 23);
-            this.runBreedingBot.TabIndex = 19;
-            this.runBreedingBot.Text = "Start Bot";
-            this.runBreedingBot.UseVisualStyleBackColor = true;
-            this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click_1);
-            // 
-            // tabSoftReset
-            // 
-            this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSoftReset.Controls.Add(this.SR_options);
-            this.tabSoftReset.Controls.Add(this.srClear);
-            this.tabSoftReset.Controls.Add(this.filtersSoftReset);
-            this.tabSoftReset.Controls.Add(this.srFilterLoad);
-            this.tabSoftReset.Controls.Add(this.RunLSRbot);
-            this.tabSoftReset.Location = new System.Drawing.Point(4, 22);
-            this.tabSoftReset.Name = "tabSoftReset";
-            this.tabSoftReset.Size = new System.Drawing.Size(558, 378);
-            this.tabSoftReset.TabIndex = 3;
-            this.tabSoftReset.Text = "Soft-reset";
-            // 
-            // SR_options
-            // 
-            this.SR_options.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.SR_options.Controls.Add(this.label72);
-            this.SR_options.Controls.Add(this.label8);
-            this.SR_options.Controls.Add(this.typeLSR);
-            this.SR_options.Controls.Add(this.sr_Species);
-            this.SR_options.Controls.Add(this.resumeLSR);
-            this.SR_options.Location = new System.Drawing.Point(6, 6);
-            this.SR_options.Name = "SR_options";
-            this.SR_options.Size = new System.Drawing.Size(546, 53);
-            this.SR_options.TabIndex = 10;
-            this.SR_options.TabStop = false;
-            this.SR_options.Text = "Options";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(277, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(48, 13);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Species:";
-            this.label8.Visible = false;
-            // 
-            // sr_Species
-            // 
-            this.sr_Species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.sr_Species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.sr_Species.FormattingEnabled = true;
-            this.sr_Species.Location = new System.Drawing.Point(331, 17);
-            this.sr_Species.Name = "sr_Species";
-            this.sr_Species.Size = new System.Drawing.Size(120, 21);
-            this.sr_Species.TabIndex = 1;
-            this.sr_Species.Visible = false;
-            // 
-            // srClear
-            // 
-            this.srClear.Location = new System.Drawing.Point(283, 65);
-            this.srClear.Name = "srClear";
-            this.srClear.Size = new System.Drawing.Size(143, 23);
-            this.srClear.TabIndex = 4;
-            this.srClear.Text = "Reset all fields";
-            this.srClear.UseVisualStyleBackColor = true;
-            this.srClear.Click += new System.EventHandler(this.srClear_Click);
-            // 
-            // filtersSoftReset
-            // 
-            this.filtersSoftReset.AllowUserToAddRows = false;
-            this.filtersSoftReset.AllowUserToDeleteRows = false;
-            this.filtersSoftReset.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.filtersSoftReset.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.filtersSoftReset.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn32,
-            this.dataGridViewTextBoxColumn33,
-            this.dataGridViewTextBoxColumn34,
-            this.dataGridViewTextBoxColumn35,
-            this.dataGridViewTextBoxColumn36,
-            this.dataGridViewTextBoxColumn37,
-            this.dataGridViewTextBoxColumn38,
-            this.dataGridViewTextBoxColumn39,
-            this.dataGridViewTextBoxColumn40,
-            this.dataGridViewTextBoxColumn41,
-            this.dataGridViewTextBoxColumn42,
-            this.dataGridViewTextBoxColumn43,
-            this.dataGridViewTextBoxColumn44,
-            this.dataGridViewTextBoxColumn45,
-            this.dataGridViewTextBoxColumn46,
-            this.dataGridViewTextBoxColumn47,
-            this.dataGridViewTextBoxColumn48,
-            this.dataGridViewTextBoxColumn49,
-            this.dataGridViewTextBoxColumn50});
-            this.filtersSoftReset.Location = new System.Drawing.Point(6, 94);
-            this.filtersSoftReset.MultiSelect = false;
-            this.filtersSoftReset.Name = "filtersSoftReset";
-            this.filtersSoftReset.ReadOnly = true;
-            this.filtersSoftReset.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.filtersSoftReset.Size = new System.Drawing.Size(546, 146);
-            this.filtersSoftReset.TabIndex = 6;
-            // 
-            // dataGridViewTextBoxColumn32
-            // 
-            this.dataGridViewTextBoxColumn32.HeaderText = "Shiny";
-            this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
-            this.dataGridViewTextBoxColumn32.ReadOnly = true;
-            this.dataGridViewTextBoxColumn32.Width = 58;
-            // 
-            // dataGridViewTextBoxColumn33
-            // 
-            this.dataGridViewTextBoxColumn33.HeaderText = "Nature";
-            this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
-            this.dataGridViewTextBoxColumn33.ReadOnly = true;
-            this.dataGridViewTextBoxColumn33.Width = 64;
-            // 
-            // dataGridViewTextBoxColumn34
-            // 
-            this.dataGridViewTextBoxColumn34.HeaderText = "Ability";
-            this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
-            this.dataGridViewTextBoxColumn34.ReadOnly = true;
-            this.dataGridViewTextBoxColumn34.Width = 59;
-            // 
-            // dataGridViewTextBoxColumn35
-            // 
-            this.dataGridViewTextBoxColumn35.HeaderText = "HP type";
-            this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
-            this.dataGridViewTextBoxColumn35.ReadOnly = true;
-            this.dataGridViewTextBoxColumn35.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn36
-            // 
-            this.dataGridViewTextBoxColumn36.HeaderText = "Gender";
-            this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
-            this.dataGridViewTextBoxColumn36.ReadOnly = true;
-            this.dataGridViewTextBoxColumn36.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn37
-            // 
-            this.dataGridViewTextBoxColumn37.HeaderText = "HP";
-            this.dataGridViewTextBoxColumn37.Name = "dataGridViewTextBoxColumn37";
-            this.dataGridViewTextBoxColumn37.ReadOnly = true;
-            this.dataGridViewTextBoxColumn37.Width = 47;
-            // 
-            // dataGridViewTextBoxColumn38
-            // 
-            this.dataGridViewTextBoxColumn38.HeaderText = "HP Logic";
-            this.dataGridViewTextBoxColumn38.Name = "dataGridViewTextBoxColumn38";
-            this.dataGridViewTextBoxColumn38.ReadOnly = true;
-            this.dataGridViewTextBoxColumn38.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn39
-            // 
-            this.dataGridViewTextBoxColumn39.HeaderText = "Atk";
-            this.dataGridViewTextBoxColumn39.Name = "dataGridViewTextBoxColumn39";
-            this.dataGridViewTextBoxColumn39.ReadOnly = true;
-            this.dataGridViewTextBoxColumn39.Width = 48;
-            // 
-            // dataGridViewTextBoxColumn40
-            // 
-            this.dataGridViewTextBoxColumn40.HeaderText = "Atk Logic";
-            this.dataGridViewTextBoxColumn40.Name = "dataGridViewTextBoxColumn40";
-            this.dataGridViewTextBoxColumn40.ReadOnly = true;
-            this.dataGridViewTextBoxColumn40.Width = 71;
-            // 
-            // dataGridViewTextBoxColumn41
-            // 
-            this.dataGridViewTextBoxColumn41.HeaderText = "Def";
-            this.dataGridViewTextBoxColumn41.Name = "dataGridViewTextBoxColumn41";
-            this.dataGridViewTextBoxColumn41.ReadOnly = true;
-            this.dataGridViewTextBoxColumn41.Width = 49;
-            // 
-            // dataGridViewTextBoxColumn42
-            // 
-            this.dataGridViewTextBoxColumn42.HeaderText = "Def Logic";
-            this.dataGridViewTextBoxColumn42.Name = "dataGridViewTextBoxColumn42";
-            this.dataGridViewTextBoxColumn42.ReadOnly = true;
-            this.dataGridViewTextBoxColumn42.Width = 72;
-            // 
-            // dataGridViewTextBoxColumn43
-            // 
-            this.dataGridViewTextBoxColumn43.HeaderText = "SpA";
-            this.dataGridViewTextBoxColumn43.Name = "dataGridViewTextBoxColumn43";
-            this.dataGridViewTextBoxColumn43.ReadOnly = true;
-            this.dataGridViewTextBoxColumn43.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn44
-            // 
-            this.dataGridViewTextBoxColumn44.HeaderText = "SpA Logic";
-            this.dataGridViewTextBoxColumn44.Name = "dataGridViewTextBoxColumn44";
-            this.dataGridViewTextBoxColumn44.ReadOnly = true;
-            this.dataGridViewTextBoxColumn44.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn45
-            // 
-            this.dataGridViewTextBoxColumn45.HeaderText = "SpD";
-            this.dataGridViewTextBoxColumn45.Name = "dataGridViewTextBoxColumn45";
-            this.dataGridViewTextBoxColumn45.ReadOnly = true;
-            this.dataGridViewTextBoxColumn45.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn46
-            // 
-            this.dataGridViewTextBoxColumn46.HeaderText = "SpD Logic";
-            this.dataGridViewTextBoxColumn46.Name = "dataGridViewTextBoxColumn46";
-            this.dataGridViewTextBoxColumn46.ReadOnly = true;
-            this.dataGridViewTextBoxColumn46.Width = 76;
-            // 
-            // dataGridViewTextBoxColumn47
-            // 
-            this.dataGridViewTextBoxColumn47.HeaderText = "Spe";
-            this.dataGridViewTextBoxColumn47.Name = "dataGridViewTextBoxColumn47";
-            this.dataGridViewTextBoxColumn47.ReadOnly = true;
-            this.dataGridViewTextBoxColumn47.Width = 51;
-            // 
-            // dataGridViewTextBoxColumn48
-            // 
-            this.dataGridViewTextBoxColumn48.HeaderText = "Spe Logic";
-            this.dataGridViewTextBoxColumn48.Name = "dataGridViewTextBoxColumn48";
-            this.dataGridViewTextBoxColumn48.ReadOnly = true;
-            this.dataGridViewTextBoxColumn48.Width = 74;
-            // 
-            // dataGridViewTextBoxColumn49
-            // 
-            this.dataGridViewTextBoxColumn49.HeaderText = "Perfect IVs";
-            this.dataGridViewTextBoxColumn49.Name = "dataGridViewTextBoxColumn49";
-            this.dataGridViewTextBoxColumn49.ReadOnly = true;
-            this.dataGridViewTextBoxColumn49.Width = 78;
-            // 
-            // dataGridViewTextBoxColumn50
-            // 
-            this.dataGridViewTextBoxColumn50.HeaderText = "Perfect IVs Logic";
-            this.dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
-            this.dataGridViewTextBoxColumn50.ReadOnly = true;
-            this.dataGridViewTextBoxColumn50.Width = 80;
-            // 
-            // srFilterLoad
-            // 
-            this.srFilterLoad.Location = new System.Drawing.Point(432, 65);
-            this.srFilterLoad.Name = "srFilterLoad";
-            this.srFilterLoad.Size = new System.Drawing.Size(120, 23);
-            this.srFilterLoad.TabIndex = 5;
-            this.srFilterLoad.Text = "Load filter set...";
-            this.srFilterLoad.UseVisualStyleBackColor = true;
-            this.srFilterLoad.Click += new System.EventHandler(this.srFilterLoad_Click);
-            // 
-            // tabWonderTrade
-            // 
-            this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
-            this.tabWonderTrade.Controls.Add(this.WT_options);
-            this.tabWonderTrade.Controls.Add(this.WT_RunEndless);
-            this.tabWonderTrade.Controls.Add(this.RunWTbot);
-            this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
-            this.tabWonderTrade.Name = "tabWonderTrade";
-            this.tabWonderTrade.Size = new System.Drawing.Size(558, 378);
-            this.tabWonderTrade.TabIndex = 2;
-            this.tabWonderTrade.Text = "Wonder Trade";
-            // 
-            // WT_options
-            // 
-            this.WT_options.Controls.Add(this.label58);
-            this.WT_options.Controls.Add(this.WT_After);
-            this.WT_options.Controls.Add(this.label57);
-            this.WT_options.Controls.Add(this.WTBox);
-            this.WT_options.Controls.Add(this.WT_Sources);
-            this.WT_options.Controls.Add(this.WTtradesNo);
-            this.WT_options.Controls.Add(this.WTcollectFC);
-            this.WT_options.Controls.Add(this.WTSlot);
-            this.WT_options.Controls.Add(this.label59);
-            this.WT_options.Location = new System.Drawing.Point(6, 6);
-            this.WT_options.Name = "WT_options";
-            this.WT_options.Size = new System.Drawing.Size(304, 175);
-            this.WT_options.TabIndex = 11;
-            this.WT_options.TabStop = false;
-            this.WT_options.Text = "Options";
-            // 
-            // WT_After
-            // 
-            this.WT_After.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.WT_After.Controls.Add(this.WTafter_Delete);
-            this.WT_After.Controls.Add(this.WTafter_Restore);
-            this.WT_After.Controls.Add(this.WTafter_DoNothing);
-            this.WT_After.Controls.Add(this.WTafter_Dump);
-            this.WT_After.Location = new System.Drawing.Point(150, 16);
-            this.WT_After.Name = "WT_After";
-            this.WT_After.Size = new System.Drawing.Size(148, 123);
-            this.WT_After.TabIndex = 10;
-            this.WT_After.TabStop = false;
-            this.WT_After.Text = "After trading";
-            // 
-            // WTafter_Delete
-            // 
-            this.WTafter_Delete.AutoSize = true;
-            this.WTafter_Delete.Location = new System.Drawing.Point(6, 88);
-            this.WTafter_Delete.Name = "WTafter_Delete";
-            this.WTafter_Delete.Size = new System.Drawing.Size(136, 17);
-            this.WTafter_Delete.TabIndex = 1;
-            this.WTafter_Delete.Text = "Delete traded pokémon";
-            this.WTafter_Delete.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_Restore
-            // 
-            this.WTafter_Restore.AutoSize = true;
-            this.WTafter_Restore.Location = new System.Drawing.Point(6, 65);
-            this.WTafter_Restore.Name = "WTafter_Restore";
-            this.WTafter_Restore.Size = new System.Drawing.Size(101, 17);
-            this.WTafter_Restore.TabIndex = 1;
-            this.WTafter_Restore.Text = "Restore backup";
-            this.WTafter_Restore.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_DoNothing
-            // 
-            this.WTafter_DoNothing.AutoSize = true;
-            this.WTafter_DoNothing.Checked = true;
-            this.WTafter_DoNothing.Location = new System.Drawing.Point(6, 42);
-            this.WTafter_DoNothing.Name = "WTafter_DoNothing";
-            this.WTafter_DoNothing.Size = new System.Drawing.Size(77, 17);
-            this.WTafter_DoNothing.TabIndex = 1;
-            this.WTafter_DoNothing.TabStop = true;
-            this.WTafter_DoNothing.Text = "Do nothing";
-            this.WTafter_DoNothing.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_Dump
-            // 
-            this.WTafter_Dump.AutoSize = true;
-            this.WTafter_Dump.Location = new System.Drawing.Point(6, 20);
-            this.WTafter_Dump.Name = "WTafter_Dump";
-            this.WTafter_Dump.Size = new System.Drawing.Size(109, 17);
-            this.WTafter_Dump.TabIndex = 0;
-            this.WTafter_Dump.Text = "Dump boxes and:";
-            this.WTafter_Dump.UseVisualStyleBackColor = true;
-            // 
-            // WT_Sources
-            // 
-            this.WT_Sources.AutoSize = true;
-            this.WT_Sources.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.WT_Sources.Controls.Add(this.WTsource_Random);
-            this.WT_Sources.Controls.Add(this.WTsource_Folder);
-            this.WT_Sources.Controls.Add(this.WTsource_Boxes);
-            this.WT_Sources.Location = new System.Drawing.Point(6, 61);
-            this.WT_Sources.Name = "WT_Sources";
-            this.WT_Sources.Size = new System.Drawing.Size(138, 101);
-            this.WT_Sources.TabIndex = 8;
-            this.WT_Sources.TabStop = false;
-            this.WT_Sources.Text = "Pokémon Source";
-            // 
-            // WTsource_Random
-            // 
-            this.WTsource_Random.AutoSize = true;
-            this.WTsource_Random.Location = new System.Drawing.Point(6, 65);
-            this.WTsource_Random.Name = "WTsource_Random";
-            this.WTsource_Random.Size = new System.Drawing.Size(124, 17);
-            this.WTsource_Random.TabIndex = 2;
-            this.WTsource_Random.Text = "WT Folder (Random)";
-            this.WTsource_Random.UseVisualStyleBackColor = true;
-            // 
-            // WTsource_Folder
-            // 
-            this.WTsource_Folder.AutoSize = true;
-            this.WTsource_Folder.Location = new System.Drawing.Point(6, 42);
-            this.WTsource_Folder.Name = "WTsource_Folder";
-            this.WTsource_Folder.Size = new System.Drawing.Size(126, 17);
-            this.WTsource_Folder.TabIndex = 1;
-            this.WTsource_Folder.Text = "Wonder Trade Folder";
-            this.WTsource_Folder.UseVisualStyleBackColor = true;
-            // 
-            // WTsource_Boxes
-            // 
-            this.WTsource_Boxes.AutoSize = true;
-            this.WTsource_Boxes.Checked = true;
-            this.WTsource_Boxes.Location = new System.Drawing.Point(6, 19);
-            this.WTsource_Boxes.Name = "WTsource_Boxes";
-            this.WTsource_Boxes.Size = new System.Drawing.Size(71, 17);
-            this.WTsource_Boxes.TabIndex = 0;
-            this.WTsource_Boxes.TabStop = true;
-            this.WTsource_Boxes.Text = "PC Boxes";
-            this.WTsource_Boxes.UseVisualStyleBackColor = true;
-            // 
-            // WTcollectFC
-            // 
-            this.WTcollectFC.AutoSize = true;
-            this.WTcollectFC.Enabled = false;
-            this.WTcollectFC.Location = new System.Drawing.Point(150, 145);
-            this.WTcollectFC.Name = "WTcollectFC";
-            this.WTcollectFC.Size = new System.Drawing.Size(134, 17);
-            this.WTcollectFC.TabIndex = 7;
-            this.WTcollectFC.Text = "Collect FC after a trade";
-            this.WTcollectFC.UseVisualStyleBackColor = true;
-            // 
-            // WT_RunEndless
-            // 
-            this.WT_RunEndless.AutoSize = true;
-            this.WT_RunEndless.Location = new System.Drawing.Point(220, 191);
-            this.WT_RunEndless.Name = "WT_RunEndless";
-            this.WT_RunEndless.Size = new System.Drawing.Size(90, 17);
-            this.WT_RunEndless.TabIndex = 9;
-            this.WT_RunEndless.Text = "Run endessly";
-            this.WT_RunEndless.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(551, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 30);
-            this.pictureBox2.TabIndex = 18;
-            this.pictureBox2.TabStop = false;
-            // 
-            // shinypic
-            // 
-            this.shinypic.Location = new System.Drawing.Point(551, 12);
-            this.shinypic.Name = "shinypic";
-            this.shinypic.Size = new System.Drawing.Size(10, 10);
-            this.shinypic.TabIndex = 19;
-            this.shinypic.TabStop = false;
             // 
             // radioBoxes
             // 
@@ -3542,20 +1236,6 @@
             this.BTN_Shinytize.TabIndex = 1;
             this.BTN_Shinytize.Text = "☆";
             this.BTN_Shinytize.UseVisualStyleBackColor = true;
-            // 
-            // Label_IsShiny
-            // 
-            this.Label_IsShiny.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.Label_IsShiny.Image = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.Image")));
-            this.Label_IsShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.InitialImage")));
-            this.Label_IsShiny.Location = new System.Drawing.Point(36, 2);
-            this.Label_IsShiny.Margin = new System.Windows.Forms.Padding(0, 2, 2, 0);
-            this.Label_IsShiny.Name = "Label_IsShiny";
-            this.Label_IsShiny.Size = new System.Drawing.Size(20, 20);
-            this.Label_IsShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Label_IsShiny.TabIndex = 62;
-            this.Label_IsShiny.TabStop = false;
-            this.Label_IsShiny.Visible = false;
             // 
             // FLP_PIDRight
             // 
@@ -4478,15 +2158,6 @@
             this.Label_Ball.TabIndex = 2;
             this.Label_Ball.Text = "Ball:";
             this.Label_Ball.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // PB_Ball
-            // 
-            this.PB_Ball.Location = new System.Drawing.Point(60, 0);
-            this.PB_Ball.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.PB_Ball.Name = "PB_Ball";
-            this.PB_Ball.Size = new System.Drawing.Size(20, 20);
-            this.PB_Ball.TabIndex = 3;
-            this.PB_Ball.TabStop = false;
             // 
             // CB_Ball
             // 
@@ -5514,46 +3185,6 @@
             this.Tab_Attacks.Text = "Attacks";
             this.Tab_Attacks.UseVisualStyleBackColor = true;
             // 
-            // PB_WarnMove4
-            // 
-            this.PB_WarnMove4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove4.Image")));
-            this.PB_WarnMove4.Location = new System.Drawing.Point(8, 113);
-            this.PB_WarnMove4.Name = "PB_WarnMove4";
-            this.PB_WarnMove4.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove4.TabIndex = 5;
-            this.PB_WarnMove4.TabStop = false;
-            this.PB_WarnMove4.Visible = false;
-            // 
-            // PB_WarnMove3
-            // 
-            this.PB_WarnMove3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove3.Image")));
-            this.PB_WarnMove3.Location = new System.Drawing.Point(8, 91);
-            this.PB_WarnMove3.Name = "PB_WarnMove3";
-            this.PB_WarnMove3.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove3.TabIndex = 4;
-            this.PB_WarnMove3.TabStop = false;
-            this.PB_WarnMove3.Visible = false;
-            // 
-            // PB_WarnMove2
-            // 
-            this.PB_WarnMove2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove2.Image")));
-            this.PB_WarnMove2.Location = new System.Drawing.Point(8, 69);
-            this.PB_WarnMove2.Name = "PB_WarnMove2";
-            this.PB_WarnMove2.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove2.TabIndex = 3;
-            this.PB_WarnMove2.TabStop = false;
-            this.PB_WarnMove2.Visible = false;
-            // 
-            // PB_WarnMove1
-            // 
-            this.PB_WarnMove1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove1.Image")));
-            this.PB_WarnMove1.Location = new System.Drawing.Point(8, 47);
-            this.PB_WarnMove1.Name = "PB_WarnMove1";
-            this.PB_WarnMove1.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove1.TabIndex = 2;
-            this.PB_WarnMove1.TabStop = false;
-            this.PB_WarnMove1.Visible = false;
-            // 
             // GB_RelearnMoves
             // 
             this.GB_RelearnMoves.Controls.Add(this.PB_WarnRelearn4);
@@ -5570,46 +3201,6 @@
             this.GB_RelearnMoves.TabIndex = 1;
             this.GB_RelearnMoves.TabStop = false;
             this.GB_RelearnMoves.Text = "Relearn Moves";
-            // 
-            // PB_WarnRelearn4
-            // 
-            this.PB_WarnRelearn4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn4.Image")));
-            this.PB_WarnRelearn4.Location = new System.Drawing.Point(22, 93);
-            this.PB_WarnRelearn4.Name = "PB_WarnRelearn4";
-            this.PB_WarnRelearn4.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn4.TabIndex = 19;
-            this.PB_WarnRelearn4.TabStop = false;
-            this.PB_WarnRelearn4.Visible = false;
-            // 
-            // PB_WarnRelearn3
-            // 
-            this.PB_WarnRelearn3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn3.Image")));
-            this.PB_WarnRelearn3.Location = new System.Drawing.Point(22, 71);
-            this.PB_WarnRelearn3.Name = "PB_WarnRelearn3";
-            this.PB_WarnRelearn3.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn3.TabIndex = 18;
-            this.PB_WarnRelearn3.TabStop = false;
-            this.PB_WarnRelearn3.Visible = false;
-            // 
-            // PB_WarnRelearn2
-            // 
-            this.PB_WarnRelearn2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn2.Image")));
-            this.PB_WarnRelearn2.Location = new System.Drawing.Point(22, 49);
-            this.PB_WarnRelearn2.Name = "PB_WarnRelearn2";
-            this.PB_WarnRelearn2.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn2.TabIndex = 17;
-            this.PB_WarnRelearn2.TabStop = false;
-            this.PB_WarnRelearn2.Visible = false;
-            // 
-            // PB_WarnRelearn1
-            // 
-            this.PB_WarnRelearn1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn1.Image")));
-            this.PB_WarnRelearn1.Location = new System.Drawing.Point(22, 27);
-            this.PB_WarnRelearn1.Name = "PB_WarnRelearn1";
-            this.PB_WarnRelearn1.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn1.TabIndex = 6;
-            this.PB_WarnRelearn1.TabStop = false;
-            this.PB_WarnRelearn1.Visible = false;
             // 
             // CB_RelearnMove4
             // 
@@ -5990,140 +3581,6 @@
             this.GB_Markings.TabStop = false;
             this.GB_Markings.Text = "Markings";
             // 
-            // PB_MarkHorohoro
-            // 
-            this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
-            this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
-            this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkHorohoro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkHorohoro.TabIndex = 11;
-            this.PB_MarkHorohoro.TabStop = false;
-            // 
-            // PB_MarkVC
-            // 
-            this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
-            this.PB_MarkVC.Name = "PB_MarkVC";
-            this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkVC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkVC.TabIndex = 10;
-            this.PB_MarkVC.TabStop = false;
-            // 
-            // PB_MarkAlola
-            // 
-            this.PB_MarkAlola.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.Image")));
-            this.PB_MarkAlola.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.InitialImage")));
-            this.PB_MarkAlola.Location = new System.Drawing.Point(68, 15);
-            this.PB_MarkAlola.Name = "PB_MarkAlola";
-            this.PB_MarkAlola.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkAlola.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkAlola.TabIndex = 9;
-            this.PB_MarkAlola.TabStop = false;
-            // 
-            // PB_Mark6
-            // 
-            this.PB_Mark6.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.Image")));
-            this.PB_Mark6.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.InitialImage")));
-            this.PB_Mark6.Location = new System.Drawing.Point(110, 36);
-            this.PB_Mark6.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark6.Name = "PB_Mark6";
-            this.PB_Mark6.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark6.TabIndex = 5;
-            this.PB_Mark6.TabStop = false;
-            // 
-            // PB_MarkPentagon
-            // 
-            this.PB_MarkPentagon.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.Image")));
-            this.PB_MarkPentagon.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.InitialImage")));
-            this.PB_MarkPentagon.Location = new System.Drawing.Point(47, 15);
-            this.PB_MarkPentagon.Name = "PB_MarkPentagon";
-            this.PB_MarkPentagon.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkPentagon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkPentagon.TabIndex = 8;
-            this.PB_MarkPentagon.TabStop = false;
-            // 
-            // PB_Mark3
-            // 
-            this.PB_Mark3.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.Image")));
-            this.PB_Mark3.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.InitialImage")));
-            this.PB_Mark3.Location = new System.Drawing.Point(47, 36);
-            this.PB_Mark3.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark3.Name = "PB_Mark3";
-            this.PB_Mark3.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark3.TabIndex = 2;
-            this.PB_Mark3.TabStop = false;
-            // 
-            // PB_Mark5
-            // 
-            this.PB_Mark5.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.Image")));
-            this.PB_Mark5.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.InitialImage")));
-            this.PB_Mark5.Location = new System.Drawing.Point(89, 36);
-            this.PB_Mark5.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark5.Name = "PB_Mark5";
-            this.PB_Mark5.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark5.TabIndex = 4;
-            this.PB_Mark5.TabStop = false;
-            // 
-            // PB_MarkCured
-            // 
-            this.PB_MarkCured.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.Image")));
-            this.PB_MarkCured.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.InitialImage")));
-            this.PB_MarkCured.Location = new System.Drawing.Point(26, 15);
-            this.PB_MarkCured.Name = "PB_MarkCured";
-            this.PB_MarkCured.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkCured.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkCured.TabIndex = 7;
-            this.PB_MarkCured.TabStop = false;
-            // 
-            // PB_Mark2
-            // 
-            this.PB_Mark2.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.Image")));
-            this.PB_Mark2.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.InitialImage")));
-            this.PB_Mark2.Location = new System.Drawing.Point(26, 36);
-            this.PB_Mark2.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark2.Name = "PB_Mark2";
-            this.PB_Mark2.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark2.TabIndex = 1;
-            this.PB_Mark2.TabStop = false;
-            // 
-            // PB_MarkShiny
-            // 
-            this.PB_MarkShiny.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.Image")));
-            this.PB_MarkShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.InitialImage")));
-            this.PB_MarkShiny.Location = new System.Drawing.Point(5, 15);
-            this.PB_MarkShiny.Name = "PB_MarkShiny";
-            this.PB_MarkShiny.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkShiny.TabIndex = 6;
-            this.PB_MarkShiny.TabStop = false;
-            // 
-            // PB_Mark1
-            // 
-            this.PB_Mark1.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.Image")));
-            this.PB_Mark1.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.InitialImage")));
-            this.PB_Mark1.Location = new System.Drawing.Point(5, 36);
-            this.PB_Mark1.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark1.Name = "PB_Mark1";
-            this.PB_Mark1.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark1.TabIndex = 0;
-            this.PB_Mark1.TabStop = false;
-            // 
-            // PB_Mark4
-            // 
-            this.PB_Mark4.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.Image")));
-            this.PB_Mark4.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.InitialImage")));
-            this.PB_Mark4.Location = new System.Drawing.Point(68, 36);
-            this.PB_Mark4.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark4.Name = "PB_Mark4";
-            this.PB_Mark4.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark4.TabIndex = 3;
-            this.PB_Mark4.TabStop = false;
-            // 
             // GB_ExtraBytes
             // 
             this.GB_ExtraBytes.Controls.Add(this.TB_ExtraByte);
@@ -6244,15 +3701,6 @@
             this.Label_EncryptionConstant.Text = "Encryption Constant:";
             this.Label_EncryptionConstant.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // PB_Legal
-            // 
-            this.PB_Legal.Image = ((System.Drawing.Image)(resources.GetObject("PB_Legal.Image")));
-            this.PB_Legal.Location = new System.Drawing.Point(529, 12);
-            this.PB_Legal.Name = "PB_Legal";
-            this.PB_Legal.Size = new System.Drawing.Size(16, 16);
-            this.PB_Legal.TabIndex = 102;
-            this.PB_Legal.TabStop = false;
-            // 
             // Tool_Trainer
             // 
             this.Tool_Trainer.Location = new System.Drawing.Point(3, 3);
@@ -6357,13 +3805,13 @@
             // 
             // Tool_Items
             // 
-            this.Tool_Items.Enabled = false;
             this.Tool_Items.Location = new System.Drawing.Point(98, 3);
             this.Tool_Items.Name = "Tool_Items";
             this.Tool_Items.Size = new System.Drawing.Size(89, 23);
             this.Tool_Items.TabIndex = 1;
             this.Tool_Items.Text = "Edit Items";
             this.Tool_Items.UseVisualStyleBackColor = true;
+            this.Tool_Items.Click += new System.EventHandler(this.Tool_Items_Click);
             // 
             // Tool_Controls
             // 
@@ -6857,6 +4305,2317 @@
             this.lb_pkmnntrver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lb_pkmnntrver.Click += new System.EventHandler(this.updateLabel_Click);
             // 
+            // tabWonderTrade
+            // 
+            this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
+            this.tabWonderTrade.Controls.Add(this.WT_options);
+            this.tabWonderTrade.Controls.Add(this.WT_RunEndless);
+            this.tabWonderTrade.Controls.Add(this.RunWTbot);
+            this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
+            this.tabWonderTrade.Name = "tabWonderTrade";
+            this.tabWonderTrade.Size = new System.Drawing.Size(558, 378);
+            this.tabWonderTrade.TabIndex = 2;
+            this.tabWonderTrade.Text = "Wonder Trade";
+            // 
+            // WT_options
+            // 
+            this.WT_options.Controls.Add(this.label58);
+            this.WT_options.Controls.Add(this.WT_After);
+            this.WT_options.Controls.Add(this.label57);
+            this.WT_options.Controls.Add(this.WTBox);
+            this.WT_options.Controls.Add(this.WT_Sources);
+            this.WT_options.Controls.Add(this.WTtradesNo);
+            this.WT_options.Controls.Add(this.WTcollectFC);
+            this.WT_options.Controls.Add(this.WTSlot);
+            this.WT_options.Controls.Add(this.label59);
+            this.WT_options.Location = new System.Drawing.Point(6, 6);
+            this.WT_options.Name = "WT_options";
+            this.WT_options.Size = new System.Drawing.Size(304, 175);
+            this.WT_options.TabIndex = 11;
+            this.WT_options.TabStop = false;
+            this.WT_options.Text = "Options";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(6, 16);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(28, 13);
+            this.label58.TabIndex = 4;
+            this.label58.Text = "Box:";
+            // 
+            // WT_After
+            // 
+            this.WT_After.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.WT_After.Controls.Add(this.WTafter_Delete);
+            this.WT_After.Controls.Add(this.WTafter_Restore);
+            this.WT_After.Controls.Add(this.WTafter_DoNothing);
+            this.WT_After.Controls.Add(this.WTafter_Dump);
+            this.WT_After.Location = new System.Drawing.Point(150, 16);
+            this.WT_After.Name = "WT_After";
+            this.WT_After.Size = new System.Drawing.Size(148, 123);
+            this.WT_After.TabIndex = 10;
+            this.WT_After.TabStop = false;
+            this.WT_After.Text = "After trading";
+            // 
+            // WTafter_Delete
+            // 
+            this.WTafter_Delete.AutoSize = true;
+            this.WTafter_Delete.Location = new System.Drawing.Point(6, 88);
+            this.WTafter_Delete.Name = "WTafter_Delete";
+            this.WTafter_Delete.Size = new System.Drawing.Size(136, 17);
+            this.WTafter_Delete.TabIndex = 1;
+            this.WTafter_Delete.Text = "Delete traded pokémon";
+            this.WTafter_Delete.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_Restore
+            // 
+            this.WTafter_Restore.AutoSize = true;
+            this.WTafter_Restore.Location = new System.Drawing.Point(6, 65);
+            this.WTafter_Restore.Name = "WTafter_Restore";
+            this.WTafter_Restore.Size = new System.Drawing.Size(101, 17);
+            this.WTafter_Restore.TabIndex = 1;
+            this.WTafter_Restore.Text = "Restore backup";
+            this.WTafter_Restore.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_DoNothing
+            // 
+            this.WTafter_DoNothing.AutoSize = true;
+            this.WTafter_DoNothing.Checked = true;
+            this.WTafter_DoNothing.Location = new System.Drawing.Point(6, 42);
+            this.WTafter_DoNothing.Name = "WTafter_DoNothing";
+            this.WTafter_DoNothing.Size = new System.Drawing.Size(77, 17);
+            this.WTafter_DoNothing.TabIndex = 1;
+            this.WTafter_DoNothing.TabStop = true;
+            this.WTafter_DoNothing.Text = "Do nothing";
+            this.WTafter_DoNothing.UseVisualStyleBackColor = true;
+            // 
+            // WTafter_Dump
+            // 
+            this.WTafter_Dump.AutoSize = true;
+            this.WTafter_Dump.Location = new System.Drawing.Point(6, 20);
+            this.WTafter_Dump.Name = "WTafter_Dump";
+            this.WTafter_Dump.Size = new System.Drawing.Size(109, 17);
+            this.WTafter_Dump.TabIndex = 0;
+            this.WTafter_Dump.Text = "Dump boxes and:";
+            this.WTafter_Dump.UseVisualStyleBackColor = true;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(49, 16);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(28, 13);
+            this.label57.TabIndex = 5;
+            this.label57.Text = "Slot:";
+            // 
+            // WTBox
+            // 
+            this.WTBox.Location = new System.Drawing.Point(6, 35);
+            this.WTBox.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.WTBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.WTBox.Name = "WTBox";
+            this.WTBox.Size = new System.Drawing.Size(40, 20);
+            this.WTBox.TabIndex = 0;
+            this.WTBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // WT_Sources
+            // 
+            this.WT_Sources.AutoSize = true;
+            this.WT_Sources.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.WT_Sources.Controls.Add(this.WTsource_Random);
+            this.WT_Sources.Controls.Add(this.WTsource_Folder);
+            this.WT_Sources.Controls.Add(this.WTsource_Boxes);
+            this.WT_Sources.Location = new System.Drawing.Point(6, 61);
+            this.WT_Sources.Name = "WT_Sources";
+            this.WT_Sources.Size = new System.Drawing.Size(138, 101);
+            this.WT_Sources.TabIndex = 8;
+            this.WT_Sources.TabStop = false;
+            this.WT_Sources.Text = "Pokémon Source";
+            // 
+            // WTsource_Random
+            // 
+            this.WTsource_Random.AutoSize = true;
+            this.WTsource_Random.Location = new System.Drawing.Point(6, 65);
+            this.WTsource_Random.Name = "WTsource_Random";
+            this.WTsource_Random.Size = new System.Drawing.Size(124, 17);
+            this.WTsource_Random.TabIndex = 2;
+            this.WTsource_Random.Text = "WT Folder (Random)";
+            this.WTsource_Random.UseVisualStyleBackColor = true;
+            // 
+            // WTsource_Folder
+            // 
+            this.WTsource_Folder.AutoSize = true;
+            this.WTsource_Folder.Location = new System.Drawing.Point(6, 42);
+            this.WTsource_Folder.Name = "WTsource_Folder";
+            this.WTsource_Folder.Size = new System.Drawing.Size(126, 17);
+            this.WTsource_Folder.TabIndex = 1;
+            this.WTsource_Folder.Text = "Wonder Trade Folder";
+            this.WTsource_Folder.UseVisualStyleBackColor = true;
+            // 
+            // WTsource_Boxes
+            // 
+            this.WTsource_Boxes.AutoSize = true;
+            this.WTsource_Boxes.Checked = true;
+            this.WTsource_Boxes.Location = new System.Drawing.Point(6, 19);
+            this.WTsource_Boxes.Name = "WTsource_Boxes";
+            this.WTsource_Boxes.Size = new System.Drawing.Size(71, 17);
+            this.WTsource_Boxes.TabIndex = 0;
+            this.WTsource_Boxes.TabStop = true;
+            this.WTsource_Boxes.Text = "PC Boxes";
+            this.WTsource_Boxes.UseVisualStyleBackColor = true;
+            // 
+            // WTtradesNo
+            // 
+            this.WTtradesNo.Location = new System.Drawing.Point(98, 35);
+            this.WTtradesNo.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.WTtradesNo.Name = "WTtradesNo";
+            this.WTtradesNo.Size = new System.Drawing.Size(46, 20);
+            this.WTtradesNo.TabIndex = 2;
+            this.WTtradesNo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // WTcollectFC
+            // 
+            this.WTcollectFC.AutoSize = true;
+            this.WTcollectFC.Enabled = false;
+            this.WTcollectFC.Location = new System.Drawing.Point(150, 145);
+            this.WTcollectFC.Name = "WTcollectFC";
+            this.WTcollectFC.Size = new System.Drawing.Size(134, 17);
+            this.WTcollectFC.TabIndex = 7;
+            this.WTcollectFC.Text = "Collect FC after a trade";
+            this.WTcollectFC.UseVisualStyleBackColor = true;
+            // 
+            // WTSlot
+            // 
+            this.WTSlot.Location = new System.Drawing.Point(52, 35);
+            this.WTSlot.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.WTSlot.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.WTSlot.Name = "WTSlot";
+            this.WTSlot.Size = new System.Drawing.Size(40, 20);
+            this.WTSlot.TabIndex = 1;
+            this.WTSlot.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(95, 16);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(49, 13);
+            this.label59.TabIndex = 6;
+            this.label59.Text = "# trades:";
+            // 
+            // WT_RunEndless
+            // 
+            this.WT_RunEndless.AutoSize = true;
+            this.WT_RunEndless.Location = new System.Drawing.Point(220, 191);
+            this.WT_RunEndless.Name = "WT_RunEndless";
+            this.WT_RunEndless.Size = new System.Drawing.Size(90, 17);
+            this.WT_RunEndless.TabIndex = 9;
+            this.WT_RunEndless.Text = "Run endessly";
+            this.WT_RunEndless.UseVisualStyleBackColor = true;
+            // 
+            // RunWTbot
+            // 
+            this.RunWTbot.Location = new System.Drawing.Point(6, 187);
+            this.RunWTbot.Name = "RunWTbot";
+            this.RunWTbot.Size = new System.Drawing.Size(208, 23);
+            this.RunWTbot.TabIndex = 3;
+            this.RunWTbot.Text = "Start Bot";
+            this.RunWTbot.UseVisualStyleBackColor = true;
+            this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click_1);
+            // 
+            // tabSoftReset
+            // 
+            this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSoftReset.Controls.Add(this.SR_options);
+            this.tabSoftReset.Controls.Add(this.srClear);
+            this.tabSoftReset.Controls.Add(this.filtersSoftReset);
+            this.tabSoftReset.Controls.Add(this.srFilterLoad);
+            this.tabSoftReset.Controls.Add(this.RunLSRbot);
+            this.tabSoftReset.Location = new System.Drawing.Point(4, 22);
+            this.tabSoftReset.Name = "tabSoftReset";
+            this.tabSoftReset.Size = new System.Drawing.Size(558, 378);
+            this.tabSoftReset.TabIndex = 3;
+            this.tabSoftReset.Text = "Soft-reset";
+            // 
+            // SR_options
+            // 
+            this.SR_options.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SR_options.Controls.Add(this.label72);
+            this.SR_options.Controls.Add(this.label8);
+            this.SR_options.Controls.Add(this.typeLSR);
+            this.SR_options.Controls.Add(this.sr_Species);
+            this.SR_options.Controls.Add(this.resumeLSR);
+            this.SR_options.Location = new System.Drawing.Point(6, 6);
+            this.SR_options.Name = "SR_options";
+            this.SR_options.Size = new System.Drawing.Size(546, 53);
+            this.SR_options.TabIndex = 10;
+            this.SR_options.TabStop = false;
+            this.SR_options.Text = "Options";
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(6, 20);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(37, 13);
+            this.label72.TabIndex = 6;
+            this.label72.Text = "Mode:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(277, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Species:";
+            this.label8.Visible = false;
+            // 
+            // typeLSR
+            // 
+            this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.typeLSR.FormattingEnabled = true;
+            this.typeLSR.Location = new System.Drawing.Point(49, 17);
+            this.typeLSR.Name = "typeLSR";
+            this.typeLSR.Size = new System.Drawing.Size(222, 21);
+            this.typeLSR.TabIndex = 0;
+            this.typeLSR.SelectedIndexChanged += new System.EventHandler(this.typeLSR_SelectedIndexChanged);
+            // 
+            // sr_Species
+            // 
+            this.sr_Species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.sr_Species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.sr_Species.FormattingEnabled = true;
+            this.sr_Species.Location = new System.Drawing.Point(331, 17);
+            this.sr_Species.Name = "sr_Species";
+            this.sr_Species.Size = new System.Drawing.Size(120, 21);
+            this.sr_Species.TabIndex = 1;
+            this.sr_Species.Visible = false;
+            // 
+            // resumeLSR
+            // 
+            this.resumeLSR.AutoSize = true;
+            this.resumeLSR.Location = new System.Drawing.Point(457, 19);
+            this.resumeLSR.Name = "resumeLSR";
+            this.resumeLSR.Size = new System.Drawing.Size(83, 17);
+            this.resumeLSR.TabIndex = 3;
+            this.resumeLSR.Text = "Resume bot";
+            this.resumeLSR.UseVisualStyleBackColor = true;
+            // 
+            // srClear
+            // 
+            this.srClear.Location = new System.Drawing.Point(283, 65);
+            this.srClear.Name = "srClear";
+            this.srClear.Size = new System.Drawing.Size(143, 23);
+            this.srClear.TabIndex = 4;
+            this.srClear.Text = "Reset all fields";
+            this.srClear.UseVisualStyleBackColor = true;
+            this.srClear.Click += new System.EventHandler(this.srClear_Click);
+            // 
+            // filtersSoftReset
+            // 
+            this.filtersSoftReset.AllowUserToAddRows = false;
+            this.filtersSoftReset.AllowUserToDeleteRows = false;
+            this.filtersSoftReset.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.filtersSoftReset.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.filtersSoftReset.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn32,
+            this.dataGridViewTextBoxColumn33,
+            this.dataGridViewTextBoxColumn34,
+            this.dataGridViewTextBoxColumn35,
+            this.dataGridViewTextBoxColumn36,
+            this.dataGridViewTextBoxColumn37,
+            this.dataGridViewTextBoxColumn38,
+            this.dataGridViewTextBoxColumn39,
+            this.dataGridViewTextBoxColumn40,
+            this.dataGridViewTextBoxColumn41,
+            this.dataGridViewTextBoxColumn42,
+            this.dataGridViewTextBoxColumn43,
+            this.dataGridViewTextBoxColumn44,
+            this.dataGridViewTextBoxColumn45,
+            this.dataGridViewTextBoxColumn46,
+            this.dataGridViewTextBoxColumn47,
+            this.dataGridViewTextBoxColumn48,
+            this.dataGridViewTextBoxColumn49,
+            this.dataGridViewTextBoxColumn50});
+            this.filtersSoftReset.Location = new System.Drawing.Point(6, 94);
+            this.filtersSoftReset.MultiSelect = false;
+            this.filtersSoftReset.Name = "filtersSoftReset";
+            this.filtersSoftReset.ReadOnly = true;
+            this.filtersSoftReset.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.filtersSoftReset.Size = new System.Drawing.Size(546, 146);
+            this.filtersSoftReset.TabIndex = 6;
+            // 
+            // dataGridViewTextBoxColumn32
+            // 
+            this.dataGridViewTextBoxColumn32.HeaderText = "Shiny";
+            this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
+            this.dataGridViewTextBoxColumn32.ReadOnly = true;
+            this.dataGridViewTextBoxColumn32.Width = 58;
+            // 
+            // dataGridViewTextBoxColumn33
+            // 
+            this.dataGridViewTextBoxColumn33.HeaderText = "Nature";
+            this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
+            this.dataGridViewTextBoxColumn33.ReadOnly = true;
+            this.dataGridViewTextBoxColumn33.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn34
+            // 
+            this.dataGridViewTextBoxColumn34.HeaderText = "Ability";
+            this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
+            this.dataGridViewTextBoxColumn34.ReadOnly = true;
+            this.dataGridViewTextBoxColumn34.Width = 59;
+            // 
+            // dataGridViewTextBoxColumn35
+            // 
+            this.dataGridViewTextBoxColumn35.HeaderText = "HP type";
+            this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
+            this.dataGridViewTextBoxColumn35.ReadOnly = true;
+            this.dataGridViewTextBoxColumn35.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn36
+            // 
+            this.dataGridViewTextBoxColumn36.HeaderText = "Gender";
+            this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
+            this.dataGridViewTextBoxColumn36.ReadOnly = true;
+            this.dataGridViewTextBoxColumn36.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn37
+            // 
+            this.dataGridViewTextBoxColumn37.HeaderText = "HP";
+            this.dataGridViewTextBoxColumn37.Name = "dataGridViewTextBoxColumn37";
+            this.dataGridViewTextBoxColumn37.ReadOnly = true;
+            this.dataGridViewTextBoxColumn37.Width = 47;
+            // 
+            // dataGridViewTextBoxColumn38
+            // 
+            this.dataGridViewTextBoxColumn38.HeaderText = "HP Logic";
+            this.dataGridViewTextBoxColumn38.Name = "dataGridViewTextBoxColumn38";
+            this.dataGridViewTextBoxColumn38.ReadOnly = true;
+            this.dataGridViewTextBoxColumn38.Width = 76;
+            // 
+            // dataGridViewTextBoxColumn39
+            // 
+            this.dataGridViewTextBoxColumn39.HeaderText = "Atk";
+            this.dataGridViewTextBoxColumn39.Name = "dataGridViewTextBoxColumn39";
+            this.dataGridViewTextBoxColumn39.ReadOnly = true;
+            this.dataGridViewTextBoxColumn39.Width = 48;
+            // 
+            // dataGridViewTextBoxColumn40
+            // 
+            this.dataGridViewTextBoxColumn40.HeaderText = "Atk Logic";
+            this.dataGridViewTextBoxColumn40.Name = "dataGridViewTextBoxColumn40";
+            this.dataGridViewTextBoxColumn40.ReadOnly = true;
+            this.dataGridViewTextBoxColumn40.Width = 77;
+            // 
+            // dataGridViewTextBoxColumn41
+            // 
+            this.dataGridViewTextBoxColumn41.HeaderText = "Def";
+            this.dataGridViewTextBoxColumn41.Name = "dataGridViewTextBoxColumn41";
+            this.dataGridViewTextBoxColumn41.ReadOnly = true;
+            this.dataGridViewTextBoxColumn41.Width = 49;
+            // 
+            // dataGridViewTextBoxColumn42
+            // 
+            this.dataGridViewTextBoxColumn42.HeaderText = "Def Logic";
+            this.dataGridViewTextBoxColumn42.Name = "dataGridViewTextBoxColumn42";
+            this.dataGridViewTextBoxColumn42.ReadOnly = true;
+            this.dataGridViewTextBoxColumn42.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn43
+            // 
+            this.dataGridViewTextBoxColumn43.HeaderText = "SpA";
+            this.dataGridViewTextBoxColumn43.Name = "dataGridViewTextBoxColumn43";
+            this.dataGridViewTextBoxColumn43.ReadOnly = true;
+            this.dataGridViewTextBoxColumn43.Width = 52;
+            // 
+            // dataGridViewTextBoxColumn44
+            // 
+            this.dataGridViewTextBoxColumn44.HeaderText = "SpA Logic";
+            this.dataGridViewTextBoxColumn44.Name = "dataGridViewTextBoxColumn44";
+            this.dataGridViewTextBoxColumn44.ReadOnly = true;
+            this.dataGridViewTextBoxColumn44.Width = 81;
+            // 
+            // dataGridViewTextBoxColumn45
+            // 
+            this.dataGridViewTextBoxColumn45.HeaderText = "SpD";
+            this.dataGridViewTextBoxColumn45.Name = "dataGridViewTextBoxColumn45";
+            this.dataGridViewTextBoxColumn45.ReadOnly = true;
+            this.dataGridViewTextBoxColumn45.Width = 53;
+            // 
+            // dataGridViewTextBoxColumn46
+            // 
+            this.dataGridViewTextBoxColumn46.HeaderText = "SpD Logic";
+            this.dataGridViewTextBoxColumn46.Name = "dataGridViewTextBoxColumn46";
+            this.dataGridViewTextBoxColumn46.ReadOnly = true;
+            this.dataGridViewTextBoxColumn46.Width = 82;
+            // 
+            // dataGridViewTextBoxColumn47
+            // 
+            this.dataGridViewTextBoxColumn47.HeaderText = "Spe";
+            this.dataGridViewTextBoxColumn47.Name = "dataGridViewTextBoxColumn47";
+            this.dataGridViewTextBoxColumn47.ReadOnly = true;
+            this.dataGridViewTextBoxColumn47.Width = 51;
+            // 
+            // dataGridViewTextBoxColumn48
+            // 
+            this.dataGridViewTextBoxColumn48.HeaderText = "Spe Logic";
+            this.dataGridViewTextBoxColumn48.Name = "dataGridViewTextBoxColumn48";
+            this.dataGridViewTextBoxColumn48.ReadOnly = true;
+            this.dataGridViewTextBoxColumn48.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn49
+            // 
+            this.dataGridViewTextBoxColumn49.HeaderText = "Perfect IVs";
+            this.dataGridViewTextBoxColumn49.Name = "dataGridViewTextBoxColumn49";
+            this.dataGridViewTextBoxColumn49.ReadOnly = true;
+            this.dataGridViewTextBoxColumn49.Width = 84;
+            // 
+            // dataGridViewTextBoxColumn50
+            // 
+            this.dataGridViewTextBoxColumn50.HeaderText = "Perfect IVs Logic";
+            this.dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
+            this.dataGridViewTextBoxColumn50.ReadOnly = true;
+            this.dataGridViewTextBoxColumn50.Width = 80;
+            // 
+            // srFilterLoad
+            // 
+            this.srFilterLoad.Location = new System.Drawing.Point(432, 65);
+            this.srFilterLoad.Name = "srFilterLoad";
+            this.srFilterLoad.Size = new System.Drawing.Size(120, 23);
+            this.srFilterLoad.TabIndex = 5;
+            this.srFilterLoad.Text = "Load filter set...";
+            this.srFilterLoad.UseVisualStyleBackColor = true;
+            this.srFilterLoad.Click += new System.EventHandler(this.srFilterLoad_Click);
+            // 
+            // RunLSRbot
+            // 
+            this.RunLSRbot.Location = new System.Drawing.Point(6, 65);
+            this.RunLSRbot.Name = "RunLSRbot";
+            this.RunLSRbot.Size = new System.Drawing.Size(271, 23);
+            this.RunLSRbot.TabIndex = 2;
+            this.RunLSRbot.Text = "Start Bot";
+            this.RunLSRbot.UseVisualStyleBackColor = true;
+            this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click_1);
+            // 
+            // tabBreeding
+            // 
+            this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBreeding.Controls.Add(this.Breed_esvtsv);
+            this.tabBreeding.Controls.Add(this.Breed_options);
+            this.tabBreeding.Controls.Add(this.breedingClear);
+            this.tabBreeding.Controls.Add(this.filterBreeding);
+            this.tabBreeding.Controls.Add(this.bFilterLoad);
+            this.tabBreeding.Controls.Add(this.runBreedingBot);
+            this.tabBreeding.Location = new System.Drawing.Point(4, 22);
+            this.tabBreeding.Name = "tabBreeding";
+            this.tabBreeding.Size = new System.Drawing.Size(558, 378);
+            this.tabBreeding.TabIndex = 4;
+            this.tabBreeding.Text = "Breeding";
+            // 
+            // Breed_esvtsv
+            // 
+            this.Breed_esvtsv.Controls.Add(this.label50);
+            this.Breed_esvtsv.Controls.Add(this.ESVlist);
+            this.Breed_esvtsv.Controls.Add(this.ESVlistSave);
+            this.Breed_esvtsv.Controls.Add(this.TSVlist);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistNum);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistAdd);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistLoad);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistRemove);
+            this.Breed_esvtsv.Controls.Add(this.TSVlistSave);
+            this.Breed_esvtsv.Location = new System.Drawing.Point(272, 6);
+            this.Breed_esvtsv.Name = "Breed_esvtsv";
+            this.Breed_esvtsv.Size = new System.Drawing.Size(280, 177);
+            this.Breed_esvtsv.TabIndex = 28;
+            this.Breed_esvtsv.TabStop = false;
+            this.Breed_esvtsv.Text = "ESV/TSV";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(218, 16);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(31, 13);
+            this.label50.TabIndex = 16;
+            this.label50.Text = "TSV:";
+            // 
+            // ESVlist
+            // 
+            this.ESVlist.AllowUserToAddRows = false;
+            this.ESVlist.AllowUserToDeleteRows = false;
+            this.ESVlist.AllowUserToResizeColumns = false;
+            this.ESVlist.AllowUserToResizeRows = false;
+            this.ESVlist.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ESVlist.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.ESVlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ESVlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ESVlistBox,
+            this.ESVlistSlot,
+            this.ESVlistValue});
+            this.ESVlist.Location = new System.Drawing.Point(6, 17);
+            this.ESVlist.Name = "ESVlist";
+            this.ESVlist.ReadOnly = true;
+            this.ESVlist.RowHeadersWidth = 21;
+            this.ESVlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.ESVlist.Size = new System.Drawing.Size(150, 125);
+            this.ESVlist.TabIndex = 8;
+            // 
+            // ESVlistBox
+            // 
+            this.ESVlistBox.FillWeight = 50F;
+            this.ESVlistBox.HeaderText = "Box";
+            this.ESVlistBox.Name = "ESVlistBox";
+            this.ESVlistBox.ReadOnly = true;
+            // 
+            // ESVlistSlot
+            // 
+            this.ESVlistSlot.FillWeight = 50F;
+            this.ESVlistSlot.HeaderText = "Slot";
+            this.ESVlistSlot.Name = "ESVlistSlot";
+            this.ESVlistSlot.ReadOnly = true;
+            // 
+            // ESVlistValue
+            // 
+            this.ESVlistValue.HeaderText = "ESV";
+            this.ESVlistValue.Name = "ESVlistValue";
+            this.ESVlistValue.ReadOnly = true;
+            // 
+            // ESVlistSave
+            // 
+            this.ESVlistSave.Location = new System.Drawing.Point(6, 148);
+            this.ESVlistSave.Name = "ESVlistSave";
+            this.ESVlistSave.Size = new System.Drawing.Size(150, 23);
+            this.ESVlistSave.TabIndex = 9;
+            this.ESVlistSave.Text = "Save ESV List";
+            this.ESVlistSave.UseVisualStyleBackColor = true;
+            this.ESVlistSave.Click += new System.EventHandler(this.ESVlistSave_Click);
+            // 
+            // TSVlist
+            // 
+            this.TSVlist.FormattingEnabled = true;
+            this.TSVlist.Location = new System.Drawing.Point(162, 17);
+            this.TSVlist.Name = "TSVlist";
+            this.TSVlist.Size = new System.Drawing.Size(50, 147);
+            this.TSVlist.TabIndex = 10;
+            // 
+            // TSVlistNum
+            // 
+            this.TSVlistNum.Location = new System.Drawing.Point(218, 32);
+            this.TSVlistNum.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.TSVlistNum.Name = "TSVlistNum";
+            this.TSVlistNum.Size = new System.Drawing.Size(56, 20);
+            this.TSVlistNum.TabIndex = 11;
+            // 
+            // TSVlistAdd
+            // 
+            this.TSVlistAdd.Location = new System.Drawing.Point(218, 58);
+            this.TSVlistAdd.Name = "TSVlistAdd";
+            this.TSVlistAdd.Size = new System.Drawing.Size(56, 23);
+            this.TSVlistAdd.TabIndex = 12;
+            this.TSVlistAdd.Text = "Add";
+            this.TSVlistAdd.UseVisualStyleBackColor = true;
+            this.TSVlistAdd.Click += new System.EventHandler(this.TSVlistAdd_Click);
+            // 
+            // TSVlistLoad
+            // 
+            this.TSVlistLoad.Location = new System.Drawing.Point(218, 145);
+            this.TSVlistLoad.Name = "TSVlistLoad";
+            this.TSVlistLoad.Size = new System.Drawing.Size(56, 23);
+            this.TSVlistLoad.TabIndex = 15;
+            this.TSVlistLoad.Text = "Load";
+            this.TSVlistLoad.UseVisualStyleBackColor = true;
+            this.TSVlistLoad.Click += new System.EventHandler(this.TSVlistLoad_Click);
+            // 
+            // TSVlistRemove
+            // 
+            this.TSVlistRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.TSVlistRemove.Location = new System.Drawing.Point(218, 87);
+            this.TSVlistRemove.Name = "TSVlistRemove";
+            this.TSVlistRemove.Size = new System.Drawing.Size(56, 23);
+            this.TSVlistRemove.TabIndex = 13;
+            this.TSVlistRemove.Text = "Remove";
+            this.TSVlistRemove.UseVisualStyleBackColor = true;
+            this.TSVlistRemove.Click += new System.EventHandler(this.TSVlistRemove_Click);
+            // 
+            // TSVlistSave
+            // 
+            this.TSVlistSave.Location = new System.Drawing.Point(218, 116);
+            this.TSVlistSave.Name = "TSVlistSave";
+            this.TSVlistSave.Size = new System.Drawing.Size(56, 23);
+            this.TSVlistSave.TabIndex = 14;
+            this.TSVlistSave.Text = "Save";
+            this.TSVlistSave.UseVisualStyleBackColor = true;
+            this.TSVlistSave.Click += new System.EventHandler(this.TSVlistSave_Click);
+            // 
+            // Breed_options
+            // 
+            this.Breed_options.Controls.Add(this.modeBreed);
+            this.Breed_options.Controls.Add(this.readESV);
+            this.Breed_options.Controls.Add(this.Breed_labelBox);
+            this.Breed_options.Controls.Add(this.label75);
+            this.Breed_options.Controls.Add(this.quickBreed);
+            this.Breed_options.Controls.Add(this.slotBreed);
+            this.Breed_options.Controls.Add(this.label84);
+            this.Breed_options.Controls.Add(this.boxBreed);
+            this.Breed_options.Controls.Add(this.Breed_labelSlot);
+            this.Breed_options.Controls.Add(this.eggsNoBreed);
+            this.Breed_options.Controls.Add(this.daycare_select);
+            this.Breed_options.Controls.Add(this.orgbox_pos);
+            this.Breed_options.Location = new System.Drawing.Point(6, 6);
+            this.Breed_options.Name = "Breed_options";
+            this.Breed_options.Size = new System.Drawing.Size(260, 177);
+            this.Breed_options.TabIndex = 27;
+            this.Breed_options.TabStop = false;
+            this.Breed_options.Text = "Options";
+            // 
+            // modeBreed
+            // 
+            this.modeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.modeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.modeBreed.FormattingEnabled = true;
+            this.modeBreed.Location = new System.Drawing.Point(49, 17);
+            this.modeBreed.Name = "modeBreed";
+            this.modeBreed.Size = new System.Drawing.Size(205, 21);
+            this.modeBreed.TabIndex = 0;
+            this.modeBreed.SelectedIndexChanged += new System.EventHandler(this.modeBreed_SelectedIndexChanged);
+            // 
+            // readESV
+            // 
+            this.readESV.AutoSize = true;
+            this.readESV.Location = new System.Drawing.Point(6, 148);
+            this.readESV.Name = "readESV";
+            this.readESV.Size = new System.Drawing.Size(137, 17);
+            this.readESV.TabIndex = 6;
+            this.readESV.Text = "Read ESV after deposit";
+            this.readESV.UseVisualStyleBackColor = true;
+            // 
+            // Breed_labelBox
+            // 
+            this.Breed_labelBox.AutoSize = true;
+            this.Breed_labelBox.Location = new System.Drawing.Point(3, 48);
+            this.Breed_labelBox.Name = "Breed_labelBox";
+            this.Breed_labelBox.Size = new System.Drawing.Size(28, 13);
+            this.Breed_labelBox.TabIndex = 21;
+            this.Breed_labelBox.Text = "Box:";
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(165, 48);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(43, 13);
+            this.label75.TabIndex = 23;
+            this.label75.Text = "# eggs:";
+            // 
+            // quickBreed
+            // 
+            this.quickBreed.AutoSize = true;
+            this.quickBreed.Location = new System.Drawing.Point(150, 148);
+            this.quickBreed.Name = "quickBreed";
+            this.quickBreed.Size = new System.Drawing.Size(85, 17);
+            this.quickBreed.TabIndex = 7;
+            this.quickBreed.Text = "Quick Breed";
+            this.quickBreed.UseVisualStyleBackColor = true;
+            // 
+            // slotBreed
+            // 
+            this.slotBreed.Location = new System.Drawing.Point(118, 46);
+            this.slotBreed.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.slotBreed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.slotBreed.Name = "slotBreed";
+            this.slotBreed.Size = new System.Drawing.Size(41, 20);
+            this.slotBreed.TabIndex = 2;
+            this.slotBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(6, 20);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(37, 13);
+            this.label84.TabIndex = 20;
+            this.label84.Text = "Mode:";
+            // 
+            // boxBreed
+            // 
+            this.boxBreed.Location = new System.Drawing.Point(37, 46);
+            this.boxBreed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.boxBreed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.boxBreed.Name = "boxBreed";
+            this.boxBreed.Size = new System.Drawing.Size(41, 20);
+            this.boxBreed.TabIndex = 1;
+            this.boxBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // Breed_labelSlot
+            // 
+            this.Breed_labelSlot.AutoSize = true;
+            this.Breed_labelSlot.Location = new System.Drawing.Point(84, 48);
+            this.Breed_labelSlot.Name = "Breed_labelSlot";
+            this.Breed_labelSlot.Size = new System.Drawing.Size(28, 13);
+            this.Breed_labelSlot.TabIndex = 22;
+            this.Breed_labelSlot.Text = "Slot:";
+            // 
+            // eggsNoBreed
+            // 
+            this.eggsNoBreed.Location = new System.Drawing.Point(214, 46);
+            this.eggsNoBreed.Maximum = new decimal(new int[] {
+            930,
+            0,
+            0,
+            0});
+            this.eggsNoBreed.Name = "eggsNoBreed";
+            this.eggsNoBreed.Size = new System.Drawing.Size(40, 20);
+            this.eggsNoBreed.TabIndex = 3;
+            this.eggsNoBreed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // breedingClear
+            // 
+            this.breedingClear.Location = new System.Drawing.Point(278, 189);
+            this.breedingClear.Name = "breedingClear";
+            this.breedingClear.Size = new System.Drawing.Size(150, 23);
+            this.breedingClear.TabIndex = 16;
+            this.breedingClear.Text = "Reset all fields";
+            this.breedingClear.UseVisualStyleBackColor = true;
+            this.breedingClear.Click += new System.EventHandler(this.breedingClear_Click);
+            // 
+            // filterBreeding
+            // 
+            this.filterBreeding.AllowUserToAddRows = false;
+            this.filterBreeding.AllowUserToDeleteRows = false;
+            this.filterBreeding.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.filterBreeding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.filterBreeding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20,
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewTextBoxColumn22,
+            this.dataGridViewTextBoxColumn23,
+            this.dataGridViewTextBoxColumn24,
+            this.dataGridViewTextBoxColumn25,
+            this.dataGridViewTextBoxColumn26,
+            this.dataGridViewTextBoxColumn27,
+            this.dataGridViewTextBoxColumn28,
+            this.dataGridViewTextBoxColumn29,
+            this.dataGridViewTextBoxColumn30,
+            this.dataGridViewTextBoxColumn31});
+            this.filterBreeding.Location = new System.Drawing.Point(73, 218);
+            this.filterBreeding.MultiSelect = false;
+            this.filterBreeding.Name = "filterBreeding";
+            this.filterBreeding.ReadOnly = true;
+            this.filterBreeding.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.filterBreeding.Size = new System.Drawing.Size(546, 146);
+            this.filterBreeding.TabIndex = 18;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "Shiny";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.dataGridViewTextBoxColumn13.Width = 58;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "Nature";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "Ability";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.Width = 59;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "HP type";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            this.dataGridViewTextBoxColumn16.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "Gender";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            this.dataGridViewTextBoxColumn17.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.HeaderText = "HP";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            this.dataGridViewTextBoxColumn18.Width = 47;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.HeaderText = "HP Logic";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            this.dataGridViewTextBoxColumn19.Width = 76;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.HeaderText = "Atk";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            this.dataGridViewTextBoxColumn20.Width = 48;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.HeaderText = "Atk Logic";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            this.dataGridViewTextBoxColumn21.Width = 77;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.HeaderText = "Def";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.ReadOnly = true;
+            this.dataGridViewTextBoxColumn22.Width = 49;
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.HeaderText = "Def Logic";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            this.dataGridViewTextBoxColumn23.ReadOnly = true;
+            this.dataGridViewTextBoxColumn23.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.HeaderText = "SpA";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            this.dataGridViewTextBoxColumn24.ReadOnly = true;
+            this.dataGridViewTextBoxColumn24.Width = 52;
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            this.dataGridViewTextBoxColumn25.HeaderText = "SpA Logic";
+            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            this.dataGridViewTextBoxColumn25.ReadOnly = true;
+            this.dataGridViewTextBoxColumn25.Width = 81;
+            // 
+            // dataGridViewTextBoxColumn26
+            // 
+            this.dataGridViewTextBoxColumn26.HeaderText = "SpD";
+            this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+            this.dataGridViewTextBoxColumn26.ReadOnly = true;
+            this.dataGridViewTextBoxColumn26.Width = 53;
+            // 
+            // dataGridViewTextBoxColumn27
+            // 
+            this.dataGridViewTextBoxColumn27.HeaderText = "SpD Logic";
+            this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+            this.dataGridViewTextBoxColumn27.ReadOnly = true;
+            this.dataGridViewTextBoxColumn27.Width = 82;
+            // 
+            // dataGridViewTextBoxColumn28
+            // 
+            this.dataGridViewTextBoxColumn28.HeaderText = "Spe";
+            this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
+            this.dataGridViewTextBoxColumn28.ReadOnly = true;
+            this.dataGridViewTextBoxColumn28.Width = 51;
+            // 
+            // dataGridViewTextBoxColumn29
+            // 
+            this.dataGridViewTextBoxColumn29.HeaderText = "Spe Logic";
+            this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
+            this.dataGridViewTextBoxColumn29.ReadOnly = true;
+            this.dataGridViewTextBoxColumn29.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn30
+            // 
+            this.dataGridViewTextBoxColumn30.HeaderText = "Perfect IVs";
+            this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
+            this.dataGridViewTextBoxColumn30.ReadOnly = true;
+            this.dataGridViewTextBoxColumn30.Width = 84;
+            // 
+            // dataGridViewTextBoxColumn31
+            // 
+            this.dataGridViewTextBoxColumn31.HeaderText = "Perfect IVs Logic";
+            this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
+            this.dataGridViewTextBoxColumn31.ReadOnly = true;
+            this.dataGridViewTextBoxColumn31.Width = 80;
+            // 
+            // bFilterLoad
+            // 
+            this.bFilterLoad.Location = new System.Drawing.Point(439, 189);
+            this.bFilterLoad.Name = "bFilterLoad";
+            this.bFilterLoad.Size = new System.Drawing.Size(113, 23);
+            this.bFilterLoad.TabIndex = 17;
+            this.bFilterLoad.Text = "Load filter set...";
+            this.bFilterLoad.UseVisualStyleBackColor = true;
+            this.bFilterLoad.Click += new System.EventHandler(this.bFilterLoad_Click);
+            // 
+            // runBreedingBot
+            // 
+            this.runBreedingBot.Location = new System.Drawing.Point(6, 189);
+            this.runBreedingBot.Name = "runBreedingBot";
+            this.runBreedingBot.Size = new System.Drawing.Size(260, 23);
+            this.runBreedingBot.TabIndex = 19;
+            this.runBreedingBot.Text = "Start Bot";
+            this.runBreedingBot.UseVisualStyleBackColor = true;
+            this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click_1);
+            // 
+            // tabFilters
+            // 
+            this.tabFilters.Controls.Add(this.filterReset);
+            this.tabFilters.Controls.Add(this.filterRead);
+            this.tabFilters.Controls.Add(this.filterLoad);
+            this.tabFilters.Controls.Add(this.filterSave);
+            this.tabFilters.Controls.Add(this.filterRemove);
+            this.tabFilters.Controls.Add(this.filterAdd);
+            this.tabFilters.Controls.Add(this.filterList);
+            this.tabFilters.Controls.Add(this.filterPerIVlogic);
+            this.tabFilters.Controls.Add(this.filterSPElogic);
+            this.tabFilters.Controls.Add(this.filterSPDlogic);
+            this.tabFilters.Controls.Add(this.filterSPAlogic);
+            this.tabFilters.Controls.Add(this.filterDEFlogic);
+            this.tabFilters.Controls.Add(this.filterATKlogic);
+            this.tabFilters.Controls.Add(this.filterHPlogic);
+            this.tabFilters.Controls.Add(this.label81);
+            this.tabFilters.Controls.Add(this.filterPerIVvalue);
+            this.tabFilters.Controls.Add(this.label101);
+            this.tabFilters.Controls.Add(this.filterShiny);
+            this.tabFilters.Controls.Add(this.filterGender);
+            this.tabFilters.Controls.Add(this.label102);
+            this.tabFilters.Controls.Add(this.label103);
+            this.tabFilters.Controls.Add(this.filterSPEvalue);
+            this.tabFilters.Controls.Add(this.filterSPDvalue);
+            this.tabFilters.Controls.Add(this.label104);
+            this.tabFilters.Controls.Add(this.label105);
+            this.tabFilters.Controls.Add(this.label106);
+            this.tabFilters.Controls.Add(this.filterAbility);
+            this.tabFilters.Controls.Add(this.filterDEFvalue);
+            this.tabFilters.Controls.Add(this.label107);
+            this.tabFilters.Controls.Add(this.label108);
+            this.tabFilters.Controls.Add(this.filterNature);
+            this.tabFilters.Controls.Add(this.filterSPAvalue);
+            this.tabFilters.Controls.Add(this.filterHPtype);
+            this.tabFilters.Controls.Add(this.filterHPvalue);
+            this.tabFilters.Controls.Add(this.label109);
+            this.tabFilters.Controls.Add(this.label110);
+            this.tabFilters.Controls.Add(this.label111);
+            this.tabFilters.Controls.Add(this.filterATKvalue);
+            this.tabFilters.Controls.Add(this.label112);
+            this.tabFilters.Location = new System.Drawing.Point(4, 22);
+            this.tabFilters.Name = "tabFilters";
+            this.tabFilters.Size = new System.Drawing.Size(558, 378);
+            this.tabFilters.TabIndex = 6;
+            this.tabFilters.Tag = "";
+            this.tabFilters.Text = "Filters";
+            // 
+            // filterReset
+            // 
+            this.filterReset.Location = new System.Drawing.Point(346, 161);
+            this.filterReset.Name = "filterReset";
+            this.filterReset.Size = new System.Drawing.Size(209, 23);
+            this.filterReset.TabIndex = 22;
+            this.filterReset.Text = "Reset constructor";
+            this.filterReset.UseVisualStyleBackColor = true;
+            this.filterReset.Click += new System.EventHandler(this.filterReset_Click);
+            // 
+            // filterRead
+            // 
+            this.filterRead.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.filterRead.Location = new System.Drawing.Point(6, 192);
+            this.filterRead.Name = "filterRead";
+            this.filterRead.Size = new System.Drawing.Size(132, 23);
+            this.filterRead.TabIndex = 21;
+            this.filterRead.Text = "Read Filter";
+            this.filterRead.UseVisualStyleBackColor = true;
+            this.filterRead.Click += new System.EventHandler(this.filterRead_Click);
+            // 
+            // filterLoad
+            // 
+            this.filterLoad.Location = new System.Drawing.Point(455, 190);
+            this.filterLoad.Name = "filterLoad";
+            this.filterLoad.Size = new System.Drawing.Size(100, 23);
+            this.filterLoad.TabIndex = 24;
+            this.filterLoad.Text = "Load filter set...";
+            this.filterLoad.UseVisualStyleBackColor = true;
+            this.filterLoad.Click += new System.EventHandler(this.filterLoad_Click);
+            // 
+            // filterSave
+            // 
+            this.filterSave.Location = new System.Drawing.Point(346, 190);
+            this.filterSave.Name = "filterSave";
+            this.filterSave.Size = new System.Drawing.Size(100, 23);
+            this.filterSave.TabIndex = 23;
+            this.filterSave.Text = "Save filter set...";
+            this.filterSave.UseVisualStyleBackColor = true;
+            this.filterSave.Click += new System.EventHandler(this.filterSave_Click);
+            // 
+            // filterRemove
+            // 
+            this.filterRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.filterRemove.Location = new System.Drawing.Point(6, 163);
+            this.filterRemove.Name = "filterRemove";
+            this.filterRemove.Size = new System.Drawing.Size(132, 23);
+            this.filterRemove.TabIndex = 20;
+            this.filterRemove.Text = "Remove Filter";
+            this.filterRemove.UseVisualStyleBackColor = true;
+            this.filterRemove.Click += new System.EventHandler(this.filterRemove_Click);
+            // 
+            // filterAdd
+            // 
+            this.filterAdd.Location = new System.Drawing.Point(6, 135);
+            this.filterAdd.Name = "filterAdd";
+            this.filterAdd.Size = new System.Drawing.Size(132, 23);
+            this.filterAdd.TabIndex = 19;
+            this.filterAdd.Text = "Add Filter";
+            this.filterAdd.UseVisualStyleBackColor = true;
+            this.filterAdd.Click += new System.EventHandler(this.filterAdd_Click);
+            // 
+            // filterList
+            // 
+            this.filterList.AllowUserToAddRows = false;
+            this.filterList.AllowUserToDeleteRows = false;
+            this.filterList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.filterList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.filterList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.HPlogic,
+            this.dataGridViewTextBoxColumn7,
+            this.ATKlogic,
+            this.dataGridViewTextBoxColumn8,
+            this.DEFlogic,
+            this.dataGridViewTextBoxColumn9,
+            this.SPAlogic,
+            this.dataGridViewTextBoxColumn10,
+            this.SPDlogic,
+            this.dataGridViewTextBoxColumn11,
+            this.SPElogic,
+            this.dataGridViewTextBoxColumn12,
+            this.PerfectIVlogic});
+            this.filterList.Location = new System.Drawing.Point(6, 219);
+            this.filterList.MultiSelect = false;
+            this.filterList.Name = "filterList";
+            this.filterList.ReadOnly = true;
+            this.filterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.filterList.Size = new System.Drawing.Size(549, 145);
+            this.filterList.TabIndex = 25;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Shiny";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 58;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Nature";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Ability";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 59;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "HP type";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Gender";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "HP";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 47;
+            // 
+            // HPlogic
+            // 
+            this.HPlogic.HeaderText = "HP Logic";
+            this.HPlogic.Name = "HPlogic";
+            this.HPlogic.ReadOnly = true;
+            this.HPlogic.Width = 76;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Atk";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 48;
+            // 
+            // ATKlogic
+            // 
+            this.ATKlogic.HeaderText = "Atk Logic";
+            this.ATKlogic.Name = "ATKlogic";
+            this.ATKlogic.ReadOnly = true;
+            this.ATKlogic.Width = 77;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Def";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 49;
+            // 
+            // DEFlogic
+            // 
+            this.DEFlogic.HeaderText = "Def Logic";
+            this.DEFlogic.Name = "DEFlogic";
+            this.DEFlogic.ReadOnly = true;
+            this.DEFlogic.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "SpA";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 52;
+            // 
+            // SPAlogic
+            // 
+            this.SPAlogic.HeaderText = "SpA Logic";
+            this.SPAlogic.Name = "SPAlogic";
+            this.SPAlogic.ReadOnly = true;
+            this.SPAlogic.Width = 81;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "SpD";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 53;
+            // 
+            // SPDlogic
+            // 
+            this.SPDlogic.HeaderText = "SpD Logic";
+            this.SPDlogic.Name = "SPDlogic";
+            this.SPDlogic.ReadOnly = true;
+            this.SPDlogic.Width = 82;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Spe";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.Width = 51;
+            // 
+            // SPElogic
+            // 
+            this.SPElogic.HeaderText = "Spe Logic";
+            this.SPElogic.Name = "SPElogic";
+            this.SPElogic.ReadOnly = true;
+            this.SPElogic.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Perfect IVs";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.dataGridViewTextBoxColumn12.Width = 84;
+            // 
+            // PerfectIVlogic
+            // 
+            this.PerfectIVlogic.HeaderText = "Perfect IVs Logic";
+            this.PerfectIVlogic.Name = "PerfectIVlogic";
+            this.PerfectIVlogic.ReadOnly = true;
+            this.PerfectIVlogic.Width = 80;
+            // 
+            // filterPerIVlogic
+            // 
+            this.filterPerIVlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterPerIVlogic.FormattingEnabled = true;
+            this.filterPerIVlogic.Items.AddRange(new object[] {
+            ">=",
+            ">",
+            "=",
+            "<",
+            "<=",
+            "!="});
+            this.filterPerIVlogic.Location = new System.Drawing.Point(241, 192);
+            this.filterPerIVlogic.Name = "filterPerIVlogic";
+            this.filterPerIVlogic.Size = new System.Drawing.Size(60, 21);
+            this.filterPerIVlogic.TabIndex = 17;
+            // 
+            // filterSPElogic
+            // 
+            this.filterSPElogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterSPElogic.FormattingEnabled = true;
+            this.filterSPElogic.Items.AddRange(new object[] {
+            ">=",
+            ">",
+            "=",
+            "<",
+            "<=",
+            "!=",
+            "Even",
+            "Odd"});
+            this.filterSPElogic.Location = new System.Drawing.Point(241, 165);
+            this.filterSPElogic.Name = "filterSPElogic";
+            this.filterSPElogic.Size = new System.Drawing.Size(60, 21);
+            this.filterSPElogic.TabIndex = 15;
+            // 
+            // filterSPDlogic
+            // 
+            this.filterSPDlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterSPDlogic.FormattingEnabled = true;
+            this.filterSPDlogic.Items.AddRange(new object[] {
+            ">=",
+            ">",
+            "=",
+            "<",
+            "<=",
+            "!=",
+            "Even",
+            "Odd"});
+            this.filterSPDlogic.Location = new System.Drawing.Point(241, 138);
+            this.filterSPDlogic.Name = "filterSPDlogic";
+            this.filterSPDlogic.Size = new System.Drawing.Size(60, 21);
+            this.filterSPDlogic.TabIndex = 13;
+            // 
+            // filterSPAlogic
+            // 
+            this.filterSPAlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterSPAlogic.FormattingEnabled = true;
+            this.filterSPAlogic.Items.AddRange(new object[] {
+            ">=",
+            ">",
+            "=",
+            "<",
+            "<=",
+            "!=",
+            "Even",
+            "Odd"});
+            this.filterSPAlogic.Location = new System.Drawing.Point(241, 111);
+            this.filterSPAlogic.Name = "filterSPAlogic";
+            this.filterSPAlogic.Size = new System.Drawing.Size(60, 21);
+            this.filterSPAlogic.TabIndex = 11;
+            // 
+            // filterDEFlogic
+            // 
+            this.filterDEFlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterDEFlogic.FormattingEnabled = true;
+            this.filterDEFlogic.Items.AddRange(new object[] {
+            ">=",
+            ">",
+            "=",
+            "<",
+            "<=",
+            "!=",
+            "Even",
+            "Odd"});
+            this.filterDEFlogic.Location = new System.Drawing.Point(241, 84);
+            this.filterDEFlogic.Name = "filterDEFlogic";
+            this.filterDEFlogic.Size = new System.Drawing.Size(60, 21);
+            this.filterDEFlogic.TabIndex = 9;
+            // 
+            // filterATKlogic
+            // 
+            this.filterATKlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterATKlogic.FormattingEnabled = true;
+            this.filterATKlogic.Items.AddRange(new object[] {
+            ">=",
+            ">",
+            "=",
+            "<",
+            "<=",
+            "!=",
+            "Even",
+            "Odd"});
+            this.filterATKlogic.Location = new System.Drawing.Point(241, 57);
+            this.filterATKlogic.Name = "filterATKlogic";
+            this.filterATKlogic.Size = new System.Drawing.Size(60, 21);
+            this.filterATKlogic.TabIndex = 7;
+            // 
+            // filterHPlogic
+            // 
+            this.filterHPlogic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterHPlogic.FormattingEnabled = true;
+            this.filterHPlogic.Items.AddRange(new object[] {
+            ">=",
+            ">",
+            "=",
+            "<",
+            "<=",
+            "!=",
+            "Even",
+            "Odd"});
+            this.filterHPlogic.Location = new System.Drawing.Point(241, 30);
+            this.filterHPlogic.Name = "filterHPlogic";
+            this.filterHPlogic.Size = new System.Drawing.Size(60, 21);
+            this.filterHPlogic.TabIndex = 5;
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(3, 10);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(61, 13);
+            this.label81.TabIndex = 25;
+            this.label81.Text = "Constructor";
+            // 
+            // filterPerIVvalue
+            // 
+            this.filterPerIVvalue.Location = new System.Drawing.Point(307, 193);
+            this.filterPerIVvalue.Maximum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.filterPerIVvalue.Name = "filterPerIVvalue";
+            this.filterPerIVvalue.Size = new System.Drawing.Size(33, 20);
+            this.filterPerIVvalue.TabIndex = 18;
+            // 
+            // label101
+            // 
+            this.label101.AutoSize = true;
+            this.label101.Location = new System.Drawing.Point(171, 195);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(64, 13);
+            this.label101.TabIndex = 37;
+            this.label101.Text = "Perfect IV\'s:";
+            // 
+            // filterShiny
+            // 
+            this.filterShiny.AutoSize = true;
+            this.filterShiny.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.filterShiny.Location = new System.Drawing.Point(86, 10);
+            this.filterShiny.Name = "filterShiny";
+            this.filterShiny.Size = new System.Drawing.Size(52, 17);
+            this.filterShiny.TabIndex = 0;
+            this.filterShiny.Text = "Shiny";
+            this.filterShiny.UseVisualStyleBackColor = true;
+            // 
+            // filterGender
+            // 
+            this.filterGender.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterGender.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.filterGender.FormattingEnabled = true;
+            this.filterGender.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.filterGender.Location = new System.Drawing.Point(61, 108);
+            this.filterGender.Name = "filterGender";
+            this.filterGender.Size = new System.Drawing.Size(77, 21);
+            this.filterGender.TabIndex = 4;
+            // 
+            // label102
+            // 
+            this.label102.AutoSize = true;
+            this.label102.Location = new System.Drawing.Point(10, 111);
+            this.label102.Name = "label102";
+            this.label102.Size = new System.Drawing.Size(45, 13);
+            this.label102.TabIndex = 29;
+            this.label102.Text = "Gender:";
+            // 
+            // label103
+            // 
+            this.label103.AutoSize = true;
+            this.label103.Location = new System.Drawing.Point(238, 11);
+            this.label103.Name = "label103";
+            this.label103.Size = new System.Drawing.Size(44, 13);
+            this.label103.TabIndex = 30;
+            this.label103.Text = "IV filters";
+            // 
+            // filterSPEvalue
+            // 
+            this.filterSPEvalue.Location = new System.Drawing.Point(307, 165);
+            this.filterSPEvalue.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.filterSPEvalue.Name = "filterSPEvalue";
+            this.filterSPEvalue.Size = new System.Drawing.Size(33, 20);
+            this.filterSPEvalue.TabIndex = 16;
+            // 
+            // filterSPDvalue
+            // 
+            this.filterSPDvalue.Location = new System.Drawing.Point(307, 139);
+            this.filterSPDvalue.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.filterSPDvalue.Name = "filterSPDvalue";
+            this.filterSPDvalue.Size = new System.Drawing.Size(33, 20);
+            this.filterSPDvalue.TabIndex = 14;
+            // 
+            // label104
+            // 
+            this.label104.AutoSize = true;
+            this.label104.Location = new System.Drawing.Point(18, 57);
+            this.label104.Name = "label104";
+            this.label104.Size = new System.Drawing.Size(37, 13);
+            this.label104.TabIndex = 27;
+            this.label104.Text = "Ability:";
+            // 
+            // label105
+            // 
+            this.label105.AutoSize = true;
+            this.label105.Location = new System.Drawing.Point(194, 168);
+            this.label105.Name = "label105";
+            this.label105.Size = new System.Drawing.Size(41, 13);
+            this.label105.TabIndex = 36;
+            this.label105.Text = "Speed:";
+            // 
+            // label106
+            // 
+            this.label106.AutoSize = true;
+            this.label106.Location = new System.Drawing.Point(185, 87);
+            this.label106.Name = "label106";
+            this.label106.Size = new System.Drawing.Size(50, 13);
+            this.label106.TabIndex = 33;
+            this.label106.Text = "Defense:";
+            // 
+            // filterAbility
+            // 
+            this.filterAbility.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterAbility.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.filterAbility.FormattingEnabled = true;
+            this.filterAbility.Location = new System.Drawing.Point(61, 54);
+            this.filterAbility.Name = "filterAbility";
+            this.filterAbility.Size = new System.Drawing.Size(77, 21);
+            this.filterAbility.TabIndex = 2;
+            // 
+            // filterDEFvalue
+            // 
+            this.filterDEFvalue.Location = new System.Drawing.Point(307, 85);
+            this.filterDEFvalue.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.filterDEFvalue.Name = "filterDEFvalue";
+            this.filterDEFvalue.Size = new System.Drawing.Size(33, 20);
+            this.filterDEFvalue.TabIndex = 10;
+            // 
+            // label107
+            // 
+            this.label107.AutoSize = true;
+            this.label107.Location = new System.Drawing.Point(13, 30);
+            this.label107.Name = "label107";
+            this.label107.Size = new System.Drawing.Size(42, 13);
+            this.label107.TabIndex = 26;
+            this.label107.Text = "Nature:";
+            // 
+            // label108
+            // 
+            this.label108.AutoSize = true;
+            this.label108.Location = new System.Drawing.Point(180, 33);
+            this.label108.Name = "label108";
+            this.label108.Size = new System.Drawing.Size(55, 13);
+            this.label108.TabIndex = 31;
+            this.label108.Text = "Hit Points:";
+            // 
+            // filterNature
+            // 
+            this.filterNature.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterNature.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.filterNature.FormattingEnabled = true;
+            this.filterNature.Items.AddRange(new object[] {
+            "Hardy",
+            "Lonely",
+            "Brave",
+            "Adamant",
+            "Naughty",
+            "Bold",
+            "Docile",
+            "Relaxed",
+            "Impish",
+            "Lax",
+            "Timid",
+            "Hasty",
+            "Serious",
+            "Jolly",
+            "Naive",
+            "Modest",
+            "Mild",
+            "Quiet",
+            "Bashful",
+            "Rash",
+            "Calm",
+            "Gentle",
+            "Sassy",
+            "Careful",
+            "Quirky"});
+            this.filterNature.Location = new System.Drawing.Point(61, 27);
+            this.filterNature.Name = "filterNature";
+            this.filterNature.Size = new System.Drawing.Size(77, 21);
+            this.filterNature.TabIndex = 1;
+            // 
+            // filterSPAvalue
+            // 
+            this.filterSPAvalue.Location = new System.Drawing.Point(307, 113);
+            this.filterSPAvalue.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.filterSPAvalue.Name = "filterSPAvalue";
+            this.filterSPAvalue.Size = new System.Drawing.Size(33, 20);
+            this.filterSPAvalue.TabIndex = 12;
+            // 
+            // filterHPtype
+            // 
+            this.filterHPtype.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.filterHPtype.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.filterHPtype.FormattingEnabled = true;
+            this.filterHPtype.Items.AddRange(new object[] {
+            "Fighting",
+            "Flying",
+            "Poison",
+            "Ground",
+            "Rock",
+            "Bug",
+            "Ghost",
+            "Steel",
+            "Fire",
+            "Water",
+            "Grass",
+            "Electric",
+            "Psychic",
+            "Ice",
+            "Dragon",
+            "Dark"});
+            this.filterHPtype.Location = new System.Drawing.Point(61, 81);
+            this.filterHPtype.Name = "filterHPtype";
+            this.filterHPtype.Size = new System.Drawing.Size(77, 21);
+            this.filterHPtype.TabIndex = 3;
+            // 
+            // filterHPvalue
+            // 
+            this.filterHPvalue.Location = new System.Drawing.Point(307, 31);
+            this.filterHPvalue.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.filterHPvalue.Name = "filterHPvalue";
+            this.filterHPvalue.Size = new System.Drawing.Size(33, 20);
+            this.filterHPvalue.TabIndex = 6;
+            // 
+            // label109
+            // 
+            this.label109.AutoSize = true;
+            this.label109.Location = new System.Drawing.Point(3, 84);
+            this.label109.Name = "label109";
+            this.label109.Size = new System.Drawing.Size(52, 13);
+            this.label109.TabIndex = 28;
+            this.label109.Text = "HP Type:";
+            // 
+            // label110
+            // 
+            this.label110.AutoSize = true;
+            this.label110.Location = new System.Drawing.Point(156, 115);
+            this.label110.Name = "label110";
+            this.label110.Size = new System.Drawing.Size(79, 13);
+            this.label110.TabIndex = 34;
+            this.label110.Text = "Special Attack:";
+            // 
+            // label111
+            // 
+            this.label111.AutoSize = true;
+            this.label111.Location = new System.Drawing.Point(194, 60);
+            this.label111.Name = "label111";
+            this.label111.Size = new System.Drawing.Size(41, 13);
+            this.label111.TabIndex = 32;
+            this.label111.Text = "Attack:";
+            // 
+            // filterATKvalue
+            // 
+            this.filterATKvalue.Location = new System.Drawing.Point(307, 58);
+            this.filterATKvalue.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.filterATKvalue.Name = "filterATKvalue";
+            this.filterATKvalue.Size = new System.Drawing.Size(33, 20);
+            this.filterATKvalue.TabIndex = 8;
+            // 
+            // label112
+            // 
+            this.label112.AutoSize = true;
+            this.label112.Location = new System.Drawing.Point(147, 141);
+            this.label112.Name = "label112";
+            this.label112.Size = new System.Drawing.Size(88, 13);
+            this.label112.TabIndex = 35;
+            this.label112.Text = "Special Defense:";
+            // 
+            // tabControls
+            // 
+            this.tabControls.BackColor = System.Drawing.SystemColors.Control;
+            this.tabControls.Controls.Add(this.Remote_Stick);
+            this.tabControls.Controls.Add(this.Remote_touch);
+            this.tabControls.Controls.Add(this.Remote_buttons);
+            this.tabControls.Controls.Add(this.manualSR);
+            this.tabControls.Location = new System.Drawing.Point(4, 22);
+            this.tabControls.Name = "tabControls";
+            this.tabControls.Padding = new System.Windows.Forms.Padding(3);
+            this.tabControls.Size = new System.Drawing.Size(558, 378);
+            this.tabControls.TabIndex = 1;
+            this.tabControls.Text = "Controls";
+            // 
+            // Remote_Stick
+            // 
+            this.Remote_Stick.Controls.Add(this.StickX);
+            this.Remote_Stick.Controls.Add(this.StickY);
+            this.Remote_Stick.Controls.Add(this.StickNumY);
+            this.Remote_Stick.Controls.Add(this.StickSend);
+            this.Remote_Stick.Controls.Add(this.StickNumX);
+            this.Remote_Stick.Controls.Add(this.label62);
+            this.Remote_Stick.Controls.Add(this.label61);
+            this.Remote_Stick.Location = new System.Drawing.Point(284, 6);
+            this.Remote_Stick.Name = "Remote_Stick";
+            this.Remote_Stick.Size = new System.Drawing.Size(268, 154);
+            this.Remote_Stick.TabIndex = 28;
+            this.Remote_Stick.TabStop = false;
+            this.Remote_Stick.Text = "Control Stick";
+            // 
+            // StickX
+            // 
+            this.StickX.Location = new System.Drawing.Point(57, 103);
+            this.StickX.Maximum = 100;
+            this.StickX.Minimum = -100;
+            this.StickX.Name = "StickX";
+            this.StickX.Size = new System.Drawing.Size(205, 45);
+            this.StickX.TabIndex = 17;
+            this.StickX.TickFrequency = 25;
+            this.StickX.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.StickX.Scroll += new System.EventHandler(this.StickX_Scroll);
+            // 
+            // StickY
+            // 
+            this.StickY.Location = new System.Drawing.Point(6, 19);
+            this.StickY.Maximum = 100;
+            this.StickY.Minimum = -100;
+            this.StickY.Name = "StickY";
+            this.StickY.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.StickY.Size = new System.Drawing.Size(45, 129);
+            this.StickY.TabIndex = 16;
+            this.StickY.TickFrequency = 25;
+            this.StickY.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.StickY.Scroll += new System.EventHandler(this.StickY_Scroll);
+            // 
+            // StickNumY
+            // 
+            this.StickNumY.Location = new System.Drawing.Point(57, 22);
+            this.StickNumY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.StickNumY.Name = "StickNumY";
+            this.StickNumY.Size = new System.Drawing.Size(100, 20);
+            this.StickNumY.TabIndex = 18;
+            this.StickNumY.ValueChanged += new System.EventHandler(this.StickNumY_ValueChanged);
+            // 
+            // StickSend
+            // 
+            this.StickSend.Location = new System.Drawing.Point(57, 63);
+            this.StickSend.Name = "StickSend";
+            this.StickSend.Size = new System.Drawing.Size(205, 23);
+            this.StickSend.TabIndex = 20;
+            this.StickSend.Text = "Send Command";
+            this.StickSend.UseVisualStyleBackColor = true;
+            this.StickSend.Click += new System.EventHandler(this.StickSend_Click);
+            // 
+            // StickNumX
+            // 
+            this.StickNumX.Location = new System.Drawing.Point(163, 22);
+            this.StickNumX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.StickNumX.Name = "StickNumX";
+            this.StickNumX.Size = new System.Drawing.Size(99, 20);
+            this.StickNumX.TabIndex = 19;
+            this.StickNumX.ValueChanged += new System.EventHandler(this.StickNumX_ValueChanged);
+            // 
+            // label62
+            // 
+            this.label62.Location = new System.Drawing.Point(163, 45);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(99, 18);
+            this.label62.TabIndex = 25;
+            this.label62.Text = "Horizontal";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label61
+            // 
+            this.label61.Location = new System.Drawing.Point(57, 45);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(100, 18);
+            this.label61.TabIndex = 24;
+            this.label61.Text = "Vertical";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // Remote_touch
+            // 
+            this.Remote_touch.AutoSize = true;
+            this.Remote_touch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Remote_touch.Controls.Add(this.label54);
+            this.Remote_touch.Controls.Add(this.label30);
+            this.Remote_touch.Controls.Add(this.touchX);
+            this.Remote_touch.Controls.Add(this.touchY);
+            this.Remote_touch.Controls.Add(this.manualTouch);
+            this.Remote_touch.Location = new System.Drawing.Point(6, 121);
+            this.Remote_touch.Name = "Remote_touch";
+            this.Remote_touch.Size = new System.Drawing.Size(272, 71);
+            this.Remote_touch.TabIndex = 27;
+            this.Remote_touch.TabStop = false;
+            this.Remote_touch.Text = "Touchscreen";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(72, 42);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(61, 13);
+            this.label54.TabIndex = 15;
+            this.label54.Text = "Y (from top)";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(6, 42);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(60, 13);
+            this.label30.TabIndex = 15;
+            this.label30.Text = "X (from left)";
+            // 
+            // manualTouch
+            // 
+            this.manualTouch.Location = new System.Drawing.Point(138, 16);
+            this.manualTouch.Name = "manualTouch";
+            this.manualTouch.Size = new System.Drawing.Size(128, 23);
+            this.manualTouch.TabIndex = 14;
+            this.manualTouch.Text = "Touch";
+            this.manualTouch.UseVisualStyleBackColor = true;
+            this.manualTouch.Click += new System.EventHandler(this.manualTouch_Click);
+            // 
+            // Remote_buttons
+            // 
+            this.Remote_buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Remote_buttons.Controls.Add(this.manualDUp);
+            this.Remote_buttons.Controls.Add(this.manualA);
+            this.Remote_buttons.Controls.Add(this.manualR);
+            this.Remote_buttons.Controls.Add(this.manualB);
+            this.Remote_buttons.Controls.Add(this.manualL);
+            this.Remote_buttons.Controls.Add(this.manualSelect);
+            this.Remote_buttons.Controls.Add(this.manualDRight);
+            this.Remote_buttons.Controls.Add(this.ManualDDown);
+            this.Remote_buttons.Controls.Add(this.manualY);
+            this.Remote_buttons.Controls.Add(this.manualStart);
+            this.Remote_buttons.Controls.Add(this.manualX);
+            this.Remote_buttons.Controls.Add(this.manualDLeft);
+            this.Remote_buttons.Location = new System.Drawing.Point(6, 6);
+            this.Remote_buttons.Name = "Remote_buttons";
+            this.Remote_buttons.Size = new System.Drawing.Size(272, 109);
+            this.Remote_buttons.TabIndex = 26;
+            this.Remote_buttons.TabStop = false;
+            this.Remote_buttons.Text = "Buttons";
+            // 
+            // manualDUp
+            // 
+            this.manualDUp.Location = new System.Drawing.Point(35, 19);
+            this.manualDUp.Name = "manualDUp";
+            this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.manualDUp.Size = new System.Drawing.Size(23, 23);
+            this.manualDUp.TabIndex = 0;
+            this.manualDUp.Text = "↑";
+            this.manualDUp.UseVisualStyleBackColor = true;
+            this.manualDUp.Click += new System.EventHandler(this.manualDUp_Click);
+            // 
+            // manualA
+            // 
+            this.manualA.Location = new System.Drawing.Point(243, 46);
+            this.manualA.Name = "manualA";
+            this.manualA.Size = new System.Drawing.Size(23, 23);
+            this.manualA.TabIndex = 4;
+            this.manualA.Text = "A";
+            this.manualA.UseVisualStyleBackColor = true;
+            this.manualA.Click += new System.EventHandler(this.manualA_Click);
+            // 
+            // manualR
+            // 
+            this.manualR.Location = new System.Drawing.Point(146, 19);
+            this.manualR.Name = "manualR";
+            this.manualR.Size = new System.Drawing.Size(23, 23);
+            this.manualR.TabIndex = 9;
+            this.manualR.Text = "R";
+            this.manualR.UseVisualStyleBackColor = true;
+            this.manualR.Click += new System.EventHandler(this.manualR_Click);
+            // 
+            // manualB
+            // 
+            this.manualB.Location = new System.Drawing.Point(214, 74);
+            this.manualB.Name = "manualB";
+            this.manualB.Size = new System.Drawing.Size(23, 23);
+            this.manualB.TabIndex = 5;
+            this.manualB.Text = "B";
+            this.manualB.UseVisualStyleBackColor = true;
+            this.manualB.Click += new System.EventHandler(this.manualB_Click);
+            // 
+            // manualL
+            // 
+            this.manualL.Location = new System.Drawing.Point(103, 19);
+            this.manualL.Name = "manualL";
+            this.manualL.Size = new System.Drawing.Size(23, 23);
+            this.manualL.TabIndex = 8;
+            this.manualL.Text = "L";
+            this.manualL.UseVisualStyleBackColor = true;
+            this.manualL.Click += new System.EventHandler(this.manualL_Click);
+            // 
+            // manualSelect
+            // 
+            this.manualSelect.Location = new System.Drawing.Point(146, 74);
+            this.manualSelect.Name = "manualSelect";
+            this.manualSelect.Size = new System.Drawing.Size(62, 23);
+            this.manualSelect.TabIndex = 11;
+            this.manualSelect.Text = "SELECT";
+            this.manualSelect.UseVisualStyleBackColor = true;
+            this.manualSelect.Click += new System.EventHandler(this.manualSelect_Click);
+            // 
+            // manualDRight
+            // 
+            this.manualDRight.Location = new System.Drawing.Point(64, 46);
+            this.manualDRight.Name = "manualDRight";
+            this.manualDRight.Size = new System.Drawing.Size(23, 23);
+            this.manualDRight.TabIndex = 3;
+            this.manualDRight.Text = "→";
+            this.manualDRight.UseVisualStyleBackColor = true;
+            this.manualDRight.Click += new System.EventHandler(this.manualDRight_Click);
+            // 
+            // ManualDDown
+            // 
+            this.ManualDDown.Location = new System.Drawing.Point(35, 74);
+            this.ManualDDown.Name = "ManualDDown";
+            this.ManualDDown.Size = new System.Drawing.Size(23, 23);
+            this.ManualDDown.TabIndex = 1;
+            this.ManualDDown.Text = "↓";
+            this.ManualDDown.UseVisualStyleBackColor = true;
+            this.ManualDDown.Click += new System.EventHandler(this.ManualDDown_Click);
+            // 
+            // manualY
+            // 
+            this.manualY.Location = new System.Drawing.Point(185, 46);
+            this.manualY.Name = "manualY";
+            this.manualY.Size = new System.Drawing.Size(23, 23);
+            this.manualY.TabIndex = 7;
+            this.manualY.Text = "Y";
+            this.manualY.UseVisualStyleBackColor = true;
+            this.manualY.Click += new System.EventHandler(this.manualY_Click);
+            // 
+            // manualStart
+            // 
+            this.manualStart.Location = new System.Drawing.Point(64, 74);
+            this.manualStart.Name = "manualStart";
+            this.manualStart.Size = new System.Drawing.Size(62, 23);
+            this.manualStart.TabIndex = 10;
+            this.manualStart.Text = "START";
+            this.manualStart.UseVisualStyleBackColor = true;
+            this.manualStart.Click += new System.EventHandler(this.manualStart_Click);
+            // 
+            // manualX
+            // 
+            this.manualX.Location = new System.Drawing.Point(214, 19);
+            this.manualX.Name = "manualX";
+            this.manualX.Size = new System.Drawing.Size(23, 23);
+            this.manualX.TabIndex = 6;
+            this.manualX.Text = "X";
+            this.manualX.UseVisualStyleBackColor = true;
+            this.manualX.Click += new System.EventHandler(this.manualX_Click);
+            // 
+            // manualDLeft
+            // 
+            this.manualDLeft.Location = new System.Drawing.Point(6, 46);
+            this.manualDLeft.Name = "manualDLeft";
+            this.manualDLeft.Size = new System.Drawing.Size(23, 23);
+            this.manualDLeft.TabIndex = 2;
+            this.manualDLeft.Text = "←";
+            this.manualDLeft.UseVisualStyleBackColor = true;
+            this.manualDLeft.Click += new System.EventHandler(this.manualDLeft_Click);
+            // 
+            // manualSR
+            // 
+            this.manualSR.Location = new System.Drawing.Point(284, 169);
+            this.manualSR.Name = "manualSR";
+            this.manualSR.Size = new System.Drawing.Size(268, 23);
+            this.manualSR.TabIndex = 15;
+            this.manualSR.Text = "Soft-Reset";
+            this.manualSR.UseVisualStyleBackColor = true;
+            this.manualSR.Click += new System.EventHandler(this.manualSR_Click);
+            // 
+            // miscTabs
+            // 
+            this.miscTabs.Controls.Add(this.tabControls);
+            this.miscTabs.Controls.Add(this.tabFilters);
+            this.miscTabs.Controls.Add(this.tabBreeding);
+            this.miscTabs.Controls.Add(this.tabSoftReset);
+            this.miscTabs.Controls.Add(this.tabWonderTrade);
+            this.miscTabs.Location = new System.Drawing.Point(615, 14);
+            this.miscTabs.Name = "miscTabs";
+            this.miscTabs.SelectedIndex = 0;
+            this.miscTabs.Size = new System.Drawing.Size(566, 404);
+            this.miscTabs.TabIndex = 3;
+            this.miscTabs.TabStop = false;
+            this.miscTabs.Tag = "";
+            this.miscTabs.Visible = false;
+            // 
+            // PB_Legal
+            // 
+            this.PB_Legal.Image = ((System.Drawing.Image)(resources.GetObject("PB_Legal.Image")));
+            this.PB_Legal.Location = new System.Drawing.Point(529, 12);
+            this.PB_Legal.Name = "PB_Legal";
+            this.PB_Legal.Size = new System.Drawing.Size(16, 16);
+            this.PB_Legal.TabIndex = 102;
+            this.PB_Legal.TabStop = false;
+            // 
+            // shinypic
+            // 
+            this.shinypic.Location = new System.Drawing.Point(551, 12);
+            this.shinypic.Name = "shinypic";
+            this.shinypic.Size = new System.Drawing.Size(10, 10);
+            this.shinypic.TabIndex = 19;
+            this.shinypic.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(551, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 30);
+            this.pictureBox2.TabIndex = 18;
+            this.pictureBox2.TabStop = false;
+            // 
+            // Label_IsShiny
+            // 
+            this.Label_IsShiny.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.Label_IsShiny.Image = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.Image")));
+            this.Label_IsShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.InitialImage")));
+            this.Label_IsShiny.Location = new System.Drawing.Point(36, 2);
+            this.Label_IsShiny.Margin = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.Label_IsShiny.Name = "Label_IsShiny";
+            this.Label_IsShiny.Size = new System.Drawing.Size(20, 20);
+            this.Label_IsShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Label_IsShiny.TabIndex = 62;
+            this.Label_IsShiny.TabStop = false;
+            this.Label_IsShiny.Visible = false;
+            // 
+            // PB_Ball
+            // 
+            this.PB_Ball.Location = new System.Drawing.Point(60, 0);
+            this.PB_Ball.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.PB_Ball.Name = "PB_Ball";
+            this.PB_Ball.Size = new System.Drawing.Size(20, 20);
+            this.PB_Ball.TabIndex = 3;
+            this.PB_Ball.TabStop = false;
+            // 
+            // PB_WarnMove4
+            // 
+            this.PB_WarnMove4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove4.Image")));
+            this.PB_WarnMove4.Location = new System.Drawing.Point(8, 113);
+            this.PB_WarnMove4.Name = "PB_WarnMove4";
+            this.PB_WarnMove4.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove4.TabIndex = 5;
+            this.PB_WarnMove4.TabStop = false;
+            this.PB_WarnMove4.Visible = false;
+            // 
+            // PB_WarnMove3
+            // 
+            this.PB_WarnMove3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove3.Image")));
+            this.PB_WarnMove3.Location = new System.Drawing.Point(8, 91);
+            this.PB_WarnMove3.Name = "PB_WarnMove3";
+            this.PB_WarnMove3.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove3.TabIndex = 4;
+            this.PB_WarnMove3.TabStop = false;
+            this.PB_WarnMove3.Visible = false;
+            // 
+            // PB_WarnMove2
+            // 
+            this.PB_WarnMove2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove2.Image")));
+            this.PB_WarnMove2.Location = new System.Drawing.Point(8, 69);
+            this.PB_WarnMove2.Name = "PB_WarnMove2";
+            this.PB_WarnMove2.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove2.TabIndex = 3;
+            this.PB_WarnMove2.TabStop = false;
+            this.PB_WarnMove2.Visible = false;
+            // 
+            // PB_WarnMove1
+            // 
+            this.PB_WarnMove1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove1.Image")));
+            this.PB_WarnMove1.Location = new System.Drawing.Point(8, 47);
+            this.PB_WarnMove1.Name = "PB_WarnMove1";
+            this.PB_WarnMove1.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove1.TabIndex = 2;
+            this.PB_WarnMove1.TabStop = false;
+            this.PB_WarnMove1.Visible = false;
+            // 
+            // PB_WarnRelearn4
+            // 
+            this.PB_WarnRelearn4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn4.Image")));
+            this.PB_WarnRelearn4.Location = new System.Drawing.Point(22, 93);
+            this.PB_WarnRelearn4.Name = "PB_WarnRelearn4";
+            this.PB_WarnRelearn4.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn4.TabIndex = 19;
+            this.PB_WarnRelearn4.TabStop = false;
+            this.PB_WarnRelearn4.Visible = false;
+            // 
+            // PB_WarnRelearn3
+            // 
+            this.PB_WarnRelearn3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn3.Image")));
+            this.PB_WarnRelearn3.Location = new System.Drawing.Point(22, 71);
+            this.PB_WarnRelearn3.Name = "PB_WarnRelearn3";
+            this.PB_WarnRelearn3.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn3.TabIndex = 18;
+            this.PB_WarnRelearn3.TabStop = false;
+            this.PB_WarnRelearn3.Visible = false;
+            // 
+            // PB_WarnRelearn2
+            // 
+            this.PB_WarnRelearn2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn2.Image")));
+            this.PB_WarnRelearn2.Location = new System.Drawing.Point(22, 49);
+            this.PB_WarnRelearn2.Name = "PB_WarnRelearn2";
+            this.PB_WarnRelearn2.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn2.TabIndex = 17;
+            this.PB_WarnRelearn2.TabStop = false;
+            this.PB_WarnRelearn2.Visible = false;
+            // 
+            // PB_WarnRelearn1
+            // 
+            this.PB_WarnRelearn1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn1.Image")));
+            this.PB_WarnRelearn1.Location = new System.Drawing.Point(22, 27);
+            this.PB_WarnRelearn1.Name = "PB_WarnRelearn1";
+            this.PB_WarnRelearn1.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn1.TabIndex = 6;
+            this.PB_WarnRelearn1.TabStop = false;
+            this.PB_WarnRelearn1.Visible = false;
+            // 
+            // PB_MarkHorohoro
+            // 
+            this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
+            this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
+            this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkHorohoro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkHorohoro.TabIndex = 11;
+            this.PB_MarkHorohoro.TabStop = false;
+            // 
+            // PB_MarkVC
+            // 
+            this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
+            this.PB_MarkVC.Name = "PB_MarkVC";
+            this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkVC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkVC.TabIndex = 10;
+            this.PB_MarkVC.TabStop = false;
+            // 
+            // PB_MarkAlola
+            // 
+            this.PB_MarkAlola.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.Image")));
+            this.PB_MarkAlola.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.InitialImage")));
+            this.PB_MarkAlola.Location = new System.Drawing.Point(68, 15);
+            this.PB_MarkAlola.Name = "PB_MarkAlola";
+            this.PB_MarkAlola.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkAlola.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkAlola.TabIndex = 9;
+            this.PB_MarkAlola.TabStop = false;
+            // 
+            // PB_Mark6
+            // 
+            this.PB_Mark6.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.Image")));
+            this.PB_Mark6.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.InitialImage")));
+            this.PB_Mark6.Location = new System.Drawing.Point(110, 36);
+            this.PB_Mark6.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark6.Name = "PB_Mark6";
+            this.PB_Mark6.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark6.TabIndex = 5;
+            this.PB_Mark6.TabStop = false;
+            // 
+            // PB_MarkPentagon
+            // 
+            this.PB_MarkPentagon.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.Image")));
+            this.PB_MarkPentagon.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.InitialImage")));
+            this.PB_MarkPentagon.Location = new System.Drawing.Point(47, 15);
+            this.PB_MarkPentagon.Name = "PB_MarkPentagon";
+            this.PB_MarkPentagon.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkPentagon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkPentagon.TabIndex = 8;
+            this.PB_MarkPentagon.TabStop = false;
+            // 
+            // PB_Mark3
+            // 
+            this.PB_Mark3.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.Image")));
+            this.PB_Mark3.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.InitialImage")));
+            this.PB_Mark3.Location = new System.Drawing.Point(47, 36);
+            this.PB_Mark3.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark3.Name = "PB_Mark3";
+            this.PB_Mark3.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark3.TabIndex = 2;
+            this.PB_Mark3.TabStop = false;
+            // 
+            // PB_Mark5
+            // 
+            this.PB_Mark5.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.Image")));
+            this.PB_Mark5.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.InitialImage")));
+            this.PB_Mark5.Location = new System.Drawing.Point(89, 36);
+            this.PB_Mark5.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark5.Name = "PB_Mark5";
+            this.PB_Mark5.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark5.TabIndex = 4;
+            this.PB_Mark5.TabStop = false;
+            // 
+            // PB_MarkCured
+            // 
+            this.PB_MarkCured.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.Image")));
+            this.PB_MarkCured.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.InitialImage")));
+            this.PB_MarkCured.Location = new System.Drawing.Point(26, 15);
+            this.PB_MarkCured.Name = "PB_MarkCured";
+            this.PB_MarkCured.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkCured.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkCured.TabIndex = 7;
+            this.PB_MarkCured.TabStop = false;
+            // 
+            // PB_Mark2
+            // 
+            this.PB_Mark2.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.Image")));
+            this.PB_Mark2.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.InitialImage")));
+            this.PB_Mark2.Location = new System.Drawing.Point(26, 36);
+            this.PB_Mark2.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark2.Name = "PB_Mark2";
+            this.PB_Mark2.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark2.TabIndex = 1;
+            this.PB_Mark2.TabStop = false;
+            // 
+            // PB_MarkShiny
+            // 
+            this.PB_MarkShiny.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.Image")));
+            this.PB_MarkShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.InitialImage")));
+            this.PB_MarkShiny.Location = new System.Drawing.Point(5, 15);
+            this.PB_MarkShiny.Name = "PB_MarkShiny";
+            this.PB_MarkShiny.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkShiny.TabIndex = 6;
+            this.PB_MarkShiny.TabStop = false;
+            // 
+            // PB_Mark1
+            // 
+            this.PB_Mark1.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.Image")));
+            this.PB_Mark1.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.InitialImage")));
+            this.PB_Mark1.Location = new System.Drawing.Point(5, 36);
+            this.PB_Mark1.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark1.Name = "PB_Mark1";
+            this.PB_Mark1.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark1.TabIndex = 0;
+            this.PB_Mark1.TabStop = false;
+            // 
+            // PB_Mark4
+            // 
+            this.PB_Mark4.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.Image")));
+            this.PB_Mark4.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.InitialImage")));
+            this.PB_Mark4.Location = new System.Drawing.Point(68, 36);
+            this.PB_Mark4.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark4.Name = "PB_Mark4";
+            this.PB_Mark4.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark4.TabIndex = 3;
+            this.PB_Mark4.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6883,71 +6642,12 @@
             this.groupBox1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.keysGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tmsGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.medsGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bersGridView)).EndInit();
-            this.Edit_Items.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.itemsView7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
-            this.daycare_select.ResumeLayout(false);
-            this.daycare_select.PerformLayout();
             this.orgbox_pos.ResumeLayout(false);
             this.orgbox_pos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).EndInit();
-            this.miscTabs.ResumeLayout(false);
-            this.tabEditTrainer.ResumeLayout(false);
-            this.tabEditTrainer.PerformLayout();
-            this.tabControls.ResumeLayout(false);
-            this.tabControls.PerformLayout();
-            this.Remote_Stick.ResumeLayout(false);
-            this.Remote_Stick.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.StickX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).EndInit();
-            this.Remote_touch.ResumeLayout(false);
-            this.Remote_touch.PerformLayout();
-            this.Remote_buttons.ResumeLayout(false);
-            this.tabFilters.ResumeLayout(false);
-            this.tabFilters.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filterList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterPerIVvalue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterSPEvalue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterSPDvalue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterDEFvalue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterSPAvalue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterHPvalue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).EndInit();
-            this.tabBreeding.ResumeLayout(false);
-            this.Breed_esvtsv.ResumeLayout(false);
-            this.Breed_esvtsv.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).EndInit();
-            this.Breed_options.ResumeLayout(false);
-            this.Breed_options.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).EndInit();
-            this.tabSoftReset.ResumeLayout(false);
-            this.SR_options.ResumeLayout(false);
-            this.SR_options.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).EndInit();
-            this.tabWonderTrade.ResumeLayout(false);
-            this.tabWonderTrade.PerformLayout();
-            this.WT_options.ResumeLayout(false);
-            this.WT_options.PerformLayout();
-            this.WT_After.ResumeLayout(false);
-            this.WT_After.PerformLayout();
-            this.WT_Sources.ResumeLayout(false);
-            this.WT_Sources.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.shinypic)).EndInit();
+            this.daycare_select.ResumeLayout(false);
+            this.daycare_select.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.touchY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.touchX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).EndInit();
             this.tabMain.ResumeLayout(false);
@@ -6956,7 +6656,6 @@
             this.FLP_PID.ResumeLayout(false);
             this.FLP_PIDLeft.ResumeLayout(false);
             this.FLP_PIDLeft.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).EndInit();
             this.FLP_PIDRight.ResumeLayout(false);
             this.FLP_PIDRight.PerformLayout();
             this.FLP_Species.ResumeLayout(false);
@@ -6996,7 +6695,6 @@
             this.FLP_Ball.ResumeLayout(false);
             this.FLP_BallLeft.ResumeLayout(false);
             this.FLP_BallLeft.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).EndInit();
             this.FLP_MetLevel.ResumeLayout(false);
             this.FLP_MetLevel.PerformLayout();
             this.FLP_MetDate.ResumeLayout(false);
@@ -7037,15 +6735,7 @@
             this.FLP_HPType.ResumeLayout(false);
             this.FLP_Characteristic.ResumeLayout(false);
             this.Tab_Attacks.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).EndInit();
             this.GB_RelearnMoves.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).EndInit();
             this.GB_CurrentMoves.ResumeLayout(false);
             this.GB_CurrentMoves.PerformLayout();
             this.Tab_OTMisc.ResumeLayout(false);
@@ -7055,23 +6745,10 @@
             this.GB_nOT.ResumeLayout(false);
             this.GB_nOT.PerformLayout();
             this.GB_Markings.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
             this.GB_ExtraBytes.ResumeLayout(false);
             this.GB_ExtraBytes.PerformLayout();
             this.GB_OT.ResumeLayout(false);
             this.GB_OT.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).EndInit();
             this.Tabs_General.ResumeLayout(false);
             this.Tab_Dump.ResumeLayout(false);
             this.Tab_Dump.PerformLayout();
@@ -7093,6 +6770,79 @@
             this.Tab_About.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tabWonderTrade.ResumeLayout(false);
+            this.tabWonderTrade.PerformLayout();
+            this.WT_options.ResumeLayout(false);
+            this.WT_options.PerformLayout();
+            this.WT_After.ResumeLayout(false);
+            this.WT_After.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).EndInit();
+            this.WT_Sources.ResumeLayout(false);
+            this.WT_Sources.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).EndInit();
+            this.tabSoftReset.ResumeLayout(false);
+            this.SR_options.ResumeLayout(false);
+            this.SR_options.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).EndInit();
+            this.tabBreeding.ResumeLayout(false);
+            this.Breed_esvtsv.ResumeLayout(false);
+            this.Breed_esvtsv.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).EndInit();
+            this.Breed_options.ResumeLayout(false);
+            this.Breed_options.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).EndInit();
+            this.tabFilters.ResumeLayout(false);
+            this.tabFilters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filterList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterPerIVvalue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterSPEvalue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterSPDvalue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterDEFvalue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterSPAvalue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterHPvalue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterATKvalue)).EndInit();
+            this.tabControls.ResumeLayout(false);
+            this.tabControls.PerformLayout();
+            this.Remote_Stick.ResumeLayout(false);
+            this.Remote_Stick.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StickX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StickNumX)).EndInit();
+            this.Remote_touch.ResumeLayout(false);
+            this.Remote_touch.PerformLayout();
+            this.Remote_buttons.ResumeLayout(false);
+            this.miscTabs.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shinypic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -7105,226 +6855,16 @@
         private System.Windows.Forms.TextBox host;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView itemsGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        private System.Windows.Forms.Button showKeys;
-        private System.Windows.Forms.Button showBerries;
-        private System.Windows.Forms.Button showTMs;
-        private System.Windows.Forms.Button showMedicine;
-        private System.Windows.Forms.Button showItems;
-        private System.Windows.Forms.DataGridView keysGridView;
-        private System.Windows.Forms.DataGridView tmsGridView;
-        private System.Windows.Forms.DataGridView medsGridView;
-        private System.Windows.Forms.DataGridView bersGridView;
-        private System.Windows.Forms.GroupBox Edit_Items;
-        private System.Windows.Forms.Button itemWrite;
-        private System.Windows.Forms.Button itemAdd;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button RunLSRbot;
-        private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.Button RunWTbot;
-        private System.Windows.Forms.NumericUpDown WTtradesNo;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.NumericUpDown WTBox;
-        private System.Windows.Forms.NumericUpDown WTSlot;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Button manualDLeft;
-        private System.Windows.Forms.Button manualTouch;
-        private System.Windows.Forms.Button manualX;
-        private System.Windows.Forms.Button manualY;
-        private System.Windows.Forms.Button manualDUp;
-        private System.Windows.Forms.Button manualL;
-        private System.Windows.Forms.Button manualB;
-        private System.Windows.Forms.NumericUpDown touchY;
-        private System.Windows.Forms.Button manualA;
-        private System.Windows.Forms.Button manualR;
-        private System.Windows.Forms.NumericUpDown touchX;
-        private System.Windows.Forms.Button manualSelect;
-        private System.Windows.Forms.Button manualDRight;
-        private System.Windows.Forms.Button ManualDDown;
-        private System.Windows.Forms.Button manualStart;
         private System.Windows.Forms.Button stopBotButton;
         private System.Windows.Forms.TextBox readResult;
         private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.Label label72;
-        private System.Windows.Forms.ComboBox typeLSR;
-        private System.Windows.Forms.CheckBox resumeLSR;
-        private System.Windows.Forms.TabControl miscTabs;
-        private System.Windows.Forms.TabPage tabEditTrainer;
-        private System.Windows.Forms.TabPage tabControls;
-        private System.Windows.Forms.TabPage tabWonderTrade;
-        private System.Windows.Forms.TabPage tabSoftReset;
-        private System.Windows.Forms.Button manualSR;
-        private System.Windows.Forms.Button srFilterLoad;
-        private System.Windows.Forms.TabPage tabBreeding;
-        private System.Windows.Forms.CheckBox quickBreed;
-        private System.Windows.Forms.Button TSVlistLoad;
-        private System.Windows.Forms.Button TSVlistSave;
-        private System.Windows.Forms.Button TSVlistRemove;
-        private System.Windows.Forms.Button TSVlistAdd;
-        private System.Windows.Forms.NumericUpDown TSVlistNum;
-        private System.Windows.Forms.ListBox TSVlist;
-        private System.Windows.Forms.Button ESVlistSave;
-        private System.Windows.Forms.DataGridView ESVlist;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistSlot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistValue;
-        private System.Windows.Forms.CheckBox readESV;
-        private System.Windows.Forms.Button bFilterLoad;
-        private System.Windows.Forms.GroupBox daycare_select;
-        private System.Windows.Forms.RadioButton radioDayCare1;
-        private System.Windows.Forms.RadioButton radioDayCare2;
-        private System.Windows.Forms.GroupBox orgbox_pos;
-        private System.Windows.Forms.RadioButton OrganizeMiddle;
-        private System.Windows.Forms.RadioButton OrganizeTop;
-        private System.Windows.Forms.Label label84;
-        private System.Windows.Forms.Button runBreedingBot;
-        private System.Windows.Forms.ComboBox modeBreed;
-        private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.Label Breed_labelBox;
-        private System.Windows.Forms.NumericUpDown slotBreed;
-        private System.Windows.Forms.NumericUpDown eggsNoBreed;
-        private System.Windows.Forms.NumericUpDown boxBreed;
-        private System.Windows.Forms.Label Breed_labelSlot;
-        private System.Windows.Forms.TabPage tabFilters;
-        private System.Windows.Forms.ComboBox filterPerIVlogic;
-        private System.Windows.Forms.ComboBox filterSPElogic;
-        private System.Windows.Forms.ComboBox filterSPDlogic;
-        private System.Windows.Forms.ComboBox filterSPAlogic;
-        private System.Windows.Forms.ComboBox filterDEFlogic;
-        private System.Windows.Forms.ComboBox filterATKlogic;
-        private System.Windows.Forms.ComboBox filterHPlogic;
-        private System.Windows.Forms.Label label81;
-        private System.Windows.Forms.NumericUpDown filterPerIVvalue;
-        private System.Windows.Forms.Label label101;
-        private System.Windows.Forms.CheckBox filterShiny;
-        private System.Windows.Forms.ComboBox filterGender;
-        private System.Windows.Forms.Label label102;
-        private System.Windows.Forms.Label label103;
-        private System.Windows.Forms.NumericUpDown filterSPEvalue;
-        private System.Windows.Forms.NumericUpDown filterSPDvalue;
-        private System.Windows.Forms.Label label104;
-        private System.Windows.Forms.Label label105;
-        private System.Windows.Forms.Label label106;
-        private System.Windows.Forms.ComboBox filterAbility;
-        private System.Windows.Forms.NumericUpDown filterDEFvalue;
-        private System.Windows.Forms.Label label107;
-        private System.Windows.Forms.Label label108;
-        private System.Windows.Forms.ComboBox filterNature;
-        private System.Windows.Forms.NumericUpDown filterSPAvalue;
-        private System.Windows.Forms.ComboBox filterHPtype;
-        private System.Windows.Forms.NumericUpDown filterHPvalue;
-        private System.Windows.Forms.Label label109;
-        private System.Windows.Forms.Label label110;
-        private System.Windows.Forms.Label label111;
-        private System.Windows.Forms.NumericUpDown filterATKvalue;
-        private System.Windows.Forms.Label label112;
-        private System.Windows.Forms.Button filterRead;
-        private System.Windows.Forms.Button filterLoad;
-        private System.Windows.Forms.Button filterSave;
-        private System.Windows.Forms.Button filterRemove;
-        private System.Windows.Forms.Button filterAdd;
-        private System.Windows.Forms.DataGridView filterList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HPlogic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ATKlogic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DEFlogic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SPAlogic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SPDlogic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SPElogic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PerfectIVlogic;
-        private System.Windows.Forms.DataGridView filterBreeding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
-        private System.Windows.Forms.DataGridView filtersSoftReset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn39;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn40;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn41;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn42;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn43;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn44;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn45;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn46;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
-        private System.Windows.Forms.CheckBox WTcollectFC;
-        private System.Windows.Forms.DataGridView itemsView7;
-        private System.Windows.Forms.DataGridViewComboBoxColumn nameItem7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn countItem7;
-        private System.Windows.Forms.Button StickSend;
-        private System.Windows.Forms.Label label62;
-        private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.NumericUpDown StickNumX;
-        private System.Windows.Forms.NumericUpDown StickNumY;
-        private System.Windows.Forms.TrackBar StickY;
-        private System.Windows.Forms.TrackBar StickX;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox shinypic;
-        private System.Windows.Forms.Button filterReset;
-        private System.Windows.Forms.Button breedingClear;
-        private System.Windows.Forms.Button srClear;
         private System.Windows.Forms.Label lb_update;
         private System.Windows.Forms.Button DumpInstructionsBtn;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox sr_Species;
-        private System.Windows.Forms.GroupBox WT_Sources;
-        private System.Windows.Forms.RadioButton WTsource_Random;
-        private System.Windows.Forms.RadioButton WTsource_Folder;
-        private System.Windows.Forms.RadioButton WTsource_Boxes;
-        private System.Windows.Forms.CheckBox WT_RunEndless;
-        private System.Windows.Forms.GroupBox WT_After;
-        private System.Windows.Forms.RadioButton WTafter_Delete;
-        private System.Windows.Forms.RadioButton WTafter_Restore;
-        private System.Windows.Forms.RadioButton WTafter_DoNothing;
-        private System.Windows.Forms.CheckBox WTafter_Dump;
-        private System.Windows.Forms.GroupBox Remote_Stick;
-        private System.Windows.Forms.GroupBox Remote_touch;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.GroupBox Remote_buttons;
-        private System.Windows.Forms.GroupBox Breed_options;
-        private System.Windows.Forms.GroupBox Breed_esvtsv;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.GroupBox SR_options;
-        private System.Windows.Forms.GroupBox WT_options;
         private System.Windows.Forms.Label BoxLabel;
         private System.Windows.Forms.Button dumpPokemon;
         private System.Windows.Forms.Label SlotLabel;
@@ -7335,12 +6875,10 @@
         private System.Windows.Forms.TextBox nameek6;
         private System.Windows.Forms.Button dumpBoxes;
         private System.Windows.Forms.RadioButton radioBoxes;
-        private System.Windows.Forms.RadioButton radioDaycare;
         private System.Windows.Forms.RadioButton radioOpponent;
         private System.Windows.Forms.RadioButton radioTrade;
         private System.Windows.Forms.RadioButton radioParty;
         private System.Windows.Forms.RadioButton radioBattleBox;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TabControl tabMain;
         private System.Windows.Forms.TabPage Tab_Main;
         private System.Windows.Forms.FlowLayoutPanel FLP_Main;
@@ -7634,6 +7172,201 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown Num_CDAmount;
         private System.Windows.Forms.NumericUpDown Num_CDSlot;
+        private System.Windows.Forms.TabPage tabWonderTrade;
+        private System.Windows.Forms.GroupBox WT_options;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.GroupBox WT_After;
+        private System.Windows.Forms.RadioButton WTafter_Delete;
+        private System.Windows.Forms.RadioButton WTafter_Restore;
+        private System.Windows.Forms.RadioButton WTafter_DoNothing;
+        private System.Windows.Forms.CheckBox WTafter_Dump;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.NumericUpDown WTBox;
+        private System.Windows.Forms.GroupBox WT_Sources;
+        private System.Windows.Forms.RadioButton WTsource_Random;
+        private System.Windows.Forms.RadioButton WTsource_Folder;
+        private System.Windows.Forms.RadioButton WTsource_Boxes;
+        private System.Windows.Forms.NumericUpDown WTtradesNo;
+        private System.Windows.Forms.CheckBox WTcollectFC;
+        private System.Windows.Forms.NumericUpDown WTSlot;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.CheckBox WT_RunEndless;
+        private System.Windows.Forms.Button RunWTbot;
+        private System.Windows.Forms.TabPage tabSoftReset;
+        private System.Windows.Forms.GroupBox SR_options;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox typeLSR;
+        private System.Windows.Forms.ComboBox sr_Species;
+        private System.Windows.Forms.CheckBox resumeLSR;
+        private System.Windows.Forms.Button srClear;
+        private System.Windows.Forms.DataGridView filtersSoftReset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn39;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn40;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn41;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn42;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn43;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn44;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn45;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn46;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
+        private System.Windows.Forms.Button srFilterLoad;
+        private System.Windows.Forms.Button RunLSRbot;
+        private System.Windows.Forms.TabPage tabBreeding;
+        private System.Windows.Forms.GroupBox Breed_esvtsv;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.DataGridView ESVlist;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistSlot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistValue;
+        private System.Windows.Forms.Button ESVlistSave;
+        private System.Windows.Forms.ListBox TSVlist;
+        private System.Windows.Forms.NumericUpDown TSVlistNum;
+        private System.Windows.Forms.Button TSVlistAdd;
+        private System.Windows.Forms.Button TSVlistLoad;
+        private System.Windows.Forms.Button TSVlistRemove;
+        private System.Windows.Forms.Button TSVlistSave;
+        private System.Windows.Forms.GroupBox Breed_options;
+        private System.Windows.Forms.ComboBox modeBreed;
+        private System.Windows.Forms.CheckBox readESV;
+        private System.Windows.Forms.Label Breed_labelBox;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.CheckBox quickBreed;
+        private System.Windows.Forms.NumericUpDown slotBreed;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.NumericUpDown boxBreed;
+        private System.Windows.Forms.Label Breed_labelSlot;
+        private System.Windows.Forms.NumericUpDown eggsNoBreed;
+        private System.Windows.Forms.GroupBox daycare_select;
+        private System.Windows.Forms.RadioButton radioDayCare1;
+        private System.Windows.Forms.RadioButton radioDayCare2;
+        private System.Windows.Forms.GroupBox orgbox_pos;
+        private System.Windows.Forms.RadioButton OrganizeMiddle;
+        private System.Windows.Forms.RadioButton OrganizeTop;
+        private System.Windows.Forms.Button breedingClear;
+        private System.Windows.Forms.DataGridView filterBreeding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+        private System.Windows.Forms.Button bFilterLoad;
+        private System.Windows.Forms.Button runBreedingBot;
+        private System.Windows.Forms.TabPage tabFilters;
+        private System.Windows.Forms.Button filterReset;
+        private System.Windows.Forms.Button filterRead;
+        private System.Windows.Forms.Button filterLoad;
+        private System.Windows.Forms.Button filterSave;
+        private System.Windows.Forms.Button filterRemove;
+        private System.Windows.Forms.Button filterAdd;
+        private System.Windows.Forms.DataGridView filterList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HPlogic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ATKlogic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DEFlogic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SPAlogic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SPDlogic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SPElogic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PerfectIVlogic;
+        private System.Windows.Forms.ComboBox filterPerIVlogic;
+        private System.Windows.Forms.ComboBox filterSPElogic;
+        private System.Windows.Forms.ComboBox filterSPDlogic;
+        private System.Windows.Forms.ComboBox filterSPAlogic;
+        private System.Windows.Forms.ComboBox filterDEFlogic;
+        private System.Windows.Forms.ComboBox filterATKlogic;
+        private System.Windows.Forms.ComboBox filterHPlogic;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.NumericUpDown filterPerIVvalue;
+        private System.Windows.Forms.Label label101;
+        private System.Windows.Forms.CheckBox filterShiny;
+        private System.Windows.Forms.ComboBox filterGender;
+        private System.Windows.Forms.Label label102;
+        private System.Windows.Forms.Label label103;
+        private System.Windows.Forms.NumericUpDown filterSPEvalue;
+        private System.Windows.Forms.NumericUpDown filterSPDvalue;
+        private System.Windows.Forms.Label label104;
+        private System.Windows.Forms.Label label105;
+        private System.Windows.Forms.Label label106;
+        private System.Windows.Forms.ComboBox filterAbility;
+        private System.Windows.Forms.NumericUpDown filterDEFvalue;
+        private System.Windows.Forms.Label label107;
+        private System.Windows.Forms.Label label108;
+        private System.Windows.Forms.ComboBox filterNature;
+        private System.Windows.Forms.NumericUpDown filterSPAvalue;
+        private System.Windows.Forms.ComboBox filterHPtype;
+        private System.Windows.Forms.NumericUpDown filterHPvalue;
+        private System.Windows.Forms.Label label109;
+        private System.Windows.Forms.Label label110;
+        private System.Windows.Forms.Label label111;
+        private System.Windows.Forms.NumericUpDown filterATKvalue;
+        private System.Windows.Forms.Label label112;
+        private System.Windows.Forms.TabPage tabControls;
+        private System.Windows.Forms.GroupBox Remote_Stick;
+        private System.Windows.Forms.TrackBar StickX;
+        private System.Windows.Forms.TrackBar StickY;
+        private System.Windows.Forms.NumericUpDown StickNumY;
+        private System.Windows.Forms.Button StickSend;
+        private System.Windows.Forms.NumericUpDown StickNumX;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.GroupBox Remote_touch;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.NumericUpDown touchX;
+        private System.Windows.Forms.NumericUpDown touchY;
+        private System.Windows.Forms.Button manualTouch;
+        private System.Windows.Forms.GroupBox Remote_buttons;
+        private System.Windows.Forms.Button manualDUp;
+        private System.Windows.Forms.Button manualA;
+        private System.Windows.Forms.Button manualR;
+        private System.Windows.Forms.Button manualB;
+        private System.Windows.Forms.Button manualL;
+        private System.Windows.Forms.Button manualSelect;
+        private System.Windows.Forms.Button manualDRight;
+        private System.Windows.Forms.Button ManualDDown;
+        private System.Windows.Forms.Button manualY;
+        private System.Windows.Forms.Button manualStart;
+        private System.Windows.Forms.Button manualX;
+        private System.Windows.Forms.Button manualDLeft;
+        private System.Windows.Forms.Button manualSR;
+        private System.Windows.Forms.TabControl miscTabs;
+        private System.Windows.Forms.RadioButton radioDaycare;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 

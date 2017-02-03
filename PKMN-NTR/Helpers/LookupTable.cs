@@ -78,6 +78,67 @@ namespace ntrbase
             }
         }
 
+        public static uint itemsOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C67564;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C6EC70;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x330D5934;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint itemsSize
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0xC00;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0xDE0;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public static uint itemsLocation
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x0400;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x00;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
         public static uint nameOff
         {
             get

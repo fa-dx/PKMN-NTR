@@ -38,7 +38,9 @@ namespace ntrbase
         // New program-wide varialbes for PKHeX.Core
         public SaveFile SAV;
         public PKM pkm;
+        private string pkhexlang = "en";
         public byte[] fileinfo;
+        public byte[] iteminfo;
 
         // Program-wide variables
         public enum GameType { None, X, Y, OR, AS, SM };
@@ -92,12 +94,6 @@ namespace ntrbase
         public GameType game = GameType.None;
         //Offsets for basic data
         public uint langoff;
-        //Offsets for items data
-        public uint itemsoff;
-        public uint medsoff;
-        public uint keysoff;
-        public uint tmsoff;
-        public uint bersoff;
         //Offsets for Pokemon sources
         public uint tradeOff;
         public uint opponentOff;
@@ -108,43 +104,6 @@ namespace ntrbase
         public uint daycare3Off; // Battle Resort Daycare
         public uint daycare4Off; // Battle Resort Daycare
         public uint battleBoxOff;
-
-        // Variables for inventory (Gen 6)
-        private byte[] itemData = new byte[1600];
-        private byte[] keyData = new byte[384];
-        private byte[] tmData = new byte[432];
-        private byte[] medData = new byte[256];
-        private byte[] berryData = new byte[288];
-        public byte[] items;
-
-        public DataGridViewComboBoxColumn itemItem;
-        public DataGridViewColumn itemAmount;
-        public DataGridViewComboBoxColumn keyItem;
-        public DataGridViewColumn keyAmount;
-        public DataGridViewComboBoxColumn tmItem;
-        public DataGridViewColumn tmAmount;
-        public DataGridViewComboBoxColumn medItem;
-        public DataGridViewColumn medAmount;
-        public DataGridViewComboBoxColumn berItem;
-        public DataGridViewColumn berAmount;
-
-        // Variables for inventory (Gen 7)
-        private int currentpouch = 0;
-        private int medcount7 = 53;
-        private byte[] medData7 = new byte[53 * 4];
-        private int[,] meds7 = new int[53, 2];
-        private int itemcount7 = 336;
-        private byte[] itemData7 = new byte[336 * 4];
-        private int[,] items7 = new int[336, 2];
-        private int tmscount7 = 100;
-        private byte[] tmsData7 = new byte[100 * 4];
-        private int[,] tms7 = new int[100, 2];
-        private int berscount7 = 67;
-        private byte[] bersData7 = new byte[67 * 4];
-        private int[,] bers7 = new int[67, 2];
-        private int keyscount7 = 24;
-        private byte[] keysData7 = new byte[24 * 4];
-        private int[,] keys7 = new int[24, 2];
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
         Control[] enableWhenConnected = new Control[] { };
@@ -169,116 +128,6 @@ namespace ntrbase
 
             addtoLog("THIS IS A BUILD FOR A DEVEOPMENT BRANCH - DO NOT EXPECT IT TO WORK");
 
-            DataGridViewComboBoxColumn itemItem = new DataGridViewComboBoxColumn
-            {
-                DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing,
-                DisplayIndex = 0,
-                FlatStyle = FlatStyle.Flat,
-                HeaderText = "Items",
-                Width = 120,
-            };
-
-            DataGridViewColumn itemAmount = new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Amount",
-                DisplayIndex = 1,
-                Width = 51,
-            };
-
-            DataGridViewComboBoxColumn keyItem = new DataGridViewComboBoxColumn
-            {
-                DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing,
-                DisplayIndex = 0,
-                FlatStyle = FlatStyle.Flat,
-                HeaderText = "Items",
-                Width = 120,
-            };
-
-            DataGridViewColumn keyAmount = new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Amount",
-                DisplayIndex = 1,
-                Width = 51,
-            };
-
-            DataGridViewComboBoxColumn tmItem = new DataGridViewComboBoxColumn
-            {
-                DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing,
-                DisplayIndex = 0,
-                FlatStyle = FlatStyle.Flat,
-                HeaderText = "Items",
-                Width = 120,
-            };
-
-            DataGridViewColumn tmAmount = new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Amount",
-                DisplayIndex = 1,
-                Width = 51,
-            };
-
-            DataGridViewComboBoxColumn medItem = new DataGridViewComboBoxColumn
-            {
-                DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing,
-                DisplayIndex = 0,
-                FlatStyle = FlatStyle.Flat,
-                HeaderText = "Items",
-                Width = 120,
-            };
-
-            DataGridViewColumn medAmount = new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Amount",
-                DisplayIndex = 1,
-                Width = 51,
-            };
-
-            DataGridViewComboBoxColumn berItem = new DataGridViewComboBoxColumn
-            {
-                DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing,
-                DisplayIndex = 0,
-                FlatStyle = FlatStyle.Flat,
-                HeaderText = "Items",
-                Width = 120,
-            };
-
-            DataGridViewColumn berAmount = new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Amount",
-                DisplayIndex = 1,
-                Width = 51,
-            };
-
-            itemsGridView.Columns.Add(itemItem);
-            itemsGridView.Columns.Add(itemAmount);
-            keysGridView.Columns.Add(keyItem);
-            keysGridView.Columns.Add(keyAmount);
-            tmsGridView.Columns.Add(tmItem);
-            tmsGridView.Columns.Add(tmAmount);
-            medsGridView.Columns.Add(medItem);
-            medsGridView.Columns.Add(medAmount);
-            bersGridView.Columns.Add(berItem);
-            bersGridView.Columns.Add(berAmount);
-
-            foreach (string t in LookupTable.Item6)
-            {
-                itemItem.Items.Add(t);
-                keyItem.Items.Add(t);
-                tmItem.Items.Add(t);
-                medItem.Items.Add(t);
-                berItem.Items.Add(t);
-            }
-
-            foreach (string t in LookupTable.Item7)
-            {
-                nameItem7.Items.Add(t);
-            }
-
-            nameItem7.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
-            nameItem7.DisplayIndex = 0;
-            nameItem7.FlatStyle = FlatStyle.Flat;
-            countItem7.DisplayIndex = 1;
-
             //checkUpdate();
             host.Text = Settings.Default.IP;
             callIP();
@@ -293,7 +142,7 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            enableWhenConnected = new Control[] { itemsGridView, keysGridView, tmsGridView, medsGridView, bersGridView };
+            enableWhenConnected = new Control[] {  };
 
             enableWhenConnected7 = new Control[] { WTcollectFC };
 
@@ -556,12 +405,6 @@ namespace ntrbase
             buttonConnect.Enabled = true;
             buttonDisconnect.Enabled = false;
             disableControls();
-            itemsGridView.Rows.Clear();
-            keysGridView.Rows.Clear();
-            tmsGridView.Rows.Clear();
-            medsGridView.Rows.Clear();
-            bersGridView.Rows.Clear();
-            itemsView7.Rows.Clear();
         }
 
         public void connectCheck(object sender, EventArgs e)
@@ -590,11 +433,6 @@ namespace ntrbase
                 boxOff = 0x8C861C8;
                 daycare1Off = 0x8C7FF4C;
                 daycare2Off = 0x8C8003C;
-                itemsoff = 0x8C67564;
-                medsoff = 0x8C67ECC;
-                keysoff = 0x8C67BA4;
-                tmsoff = 0x8C67D24;
-                bersoff = 0x8C67FCC;
                 langoff = 0x8C79C69;
                 tradeOff = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
@@ -613,11 +451,6 @@ namespace ntrbase
                 boxOff = 0x8C861C8;
                 daycare1Off = 0x8C7FF4C;
                 daycare2Off = 0x8C8003C;
-                itemsoff = 0x8C67564;
-                medsoff = 0x8C67ECC;
-                keysoff = 0x8C67BA4;
-                tmsoff = 0x8C67D24;
-                bersoff = 0x8C67FCC;
                 langoff = 0x8C79C69;
                 tradeOff = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
@@ -638,11 +471,6 @@ namespace ntrbase
                 daycare2Off = 0x8C88270;
                 daycare3Off = 0x8C88370;
                 daycare4Off = 0x8C88460;
-                itemsoff = 0x8C6EC70;
-                medsoff = 0x8C6F5E0;
-                keysoff = 0x8C6F2B0;
-                tmsoff = 0x8C6F430;
-                bersoff = 0x8C6F6E0;
                 langoff = 0x8C8136D;
                 tradeOff = 0x8520000;
                 battleBoxOff = 0x8C72330;
@@ -663,12 +491,6 @@ namespace ntrbase
                 daycare2Off = 0x8C88270;
                 daycare3Off = 0x8C88370;
                 daycare4Off = 0x8C88460;
-                itemsoff = 0x8C6EC70;
-                medsoff = 0x8C6F5E0;
-                keysoff = 0x8C6F2B0;
-                tmsoff = 0x8C6F430;
-                bersoff = 0x8C6F6E0;
-                langoff = 0x8C8136D;
                 tradeOff = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
@@ -685,11 +507,6 @@ namespace ntrbase
                 boxOff = 0x330D9838;
                 daycare1Off = 0x3313EC01;
                 daycare2Off = 0x3313ECEA;
-                itemsoff = 0x330D5934;
-                medsoff = 0x330D647C;
-                keysoff = 0x330D5FEC;
-                tmsoff = 0x330D62CC;
-                bersoff = 0x330D657C;
                 langoff = 0x330D6805;
                 tradeOff = 0x32A870C8;
                 opponentOff = 0x3254F4AC;
@@ -703,7 +520,6 @@ namespace ntrbase
             // Clear tabs to avoid writting wrong data
             if (!botWorking)
             {
-                //clearTabs();
                 SetSelectedIndex(typeLSR, -1);
                 SetSelectedIndex(modeBreed, -1);
                 pkm = SAV.BlankPKM;
@@ -711,6 +527,8 @@ namespace ntrbase
 
             // Fill fields in the form according to gen
             Program.helper.pid = pid;
+            GameInfo.Strings = GameInfo.getStrings(pkhexlang);
+            GameInfo.InitializeDataSources(GameInfo.Strings);
             if (SAV.Generation == 7 && !botWorking)
             {
                 PKXEXT = ".pk7";
@@ -823,6 +641,21 @@ namespace ntrbase
             }
         }
 
+        // Item data handling
+        //public void dumpItems()
+        //{
+        //    iteminfo = null;
+        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[LookupTable.itemsSize], handleItems, null);
+        //    waitingForData.Add(Program.scriptHelper.data(LookupTable.itemsOff, LookupTable.itemsSize, pid), myArgs);
+        //}
+
+        //public void handleItems(object args_obj)
+        //{
+        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
+        //    iteminfo = args.data;
+        //    Array.Copy(args.data, 0, SAV.Data, LookupTable.itemsLocation, LookupTable.itemsSize);
+        //}
+
         //// Language handling
         //public void dumpLang()
         //{
@@ -868,382 +701,6 @@ namespace ntrbase
         //    }
         //    Program.scriptHelper.writebyte(langoff, lang, pid);
         //}
-
-        // Item handling
-        public void dumpItems()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0xB90], handleItemData, null);
-            waitingForData.Add(Program.scriptHelper.data(itemsoff, 0xB90, pid), myArgs);
-        }
-
-        public void handleItemData(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            items = new byte[args.data.Length];
-            Array.Copy(args.data, items, args.data.Length);
-            //Final data processing will be done in GUI thread
-            ItemDumpFinished();
-        }
-
-        private void ItemDumpFinished()
-        {
-            if (itemsGridView.InvokeRequired)
-            {
-                itemsGridView.Invoke((MethodInvoker)delegate { readItems(); });
-            }
-            else
-            {
-                readItems();
-            }
-        }
-
-        public void readItems()
-        {
-            const int itemsLength = 1600;
-            const int keysLength = 384;
-            const int tmsLength = 432;
-            const int medsLength = 256;
-            const int bersLength = 288;
-            const int totalLength = itemsLength + keysLength + tmsLength + medsLength + bersLength;
-
-            if (items == null || items.Length != totalLength)
-            {
-                throw new ArgumentOutOfRangeException("Item data array is of wrong length");
-            }
-
-            itemData = items.Skip(0).Take(itemsLength).ToArray();
-            keyData = items.Skip((int)(keysoff - itemsoff)).Take(keysLength).ToArray();
-            tmData = items.Skip((int)(tmsoff - itemsoff)).Take(tmsLength).ToArray();
-            medData = items.Skip((int)(medsoff - itemsoff)).Take(medsLength).ToArray();
-            berryData = items.Skip((int)(bersoff - itemsoff)).Take(bersLength).ToArray();
-
-            addItemsToGridView(itemData, itemsGridView);
-            addItemsToGridView(keyData, keysGridView);
-            addItemsToGridView(tmData, tmsGridView);
-            addItemsToGridView(medData, medsGridView);
-            addItemsToGridView(berryData, bersGridView);
-        }
-
-        private void addItemsToGridView(byte[] data, DataGridView gv)
-        {
-            int numOfItems = countItems(data);
-            if (numOfItems > 0)
-            {
-                gv.Rows.Add(numOfItems);
-                for (int i = 0; i < numOfItems; i++)
-                {
-                    int itemsfinal = BitConverter.ToUInt16(data, i * 4);
-                    int amountfinal = BitConverter.ToUInt16(data, (i * 4) + 2);
-                    gv.Rows[i].Cells[0].Value = LookupTable.Item6[itemsfinal];
-                    gv.Rows[i].Cells[1].Value = amountfinal;
-                }
-            }
-        }
-
-        private int countItems(byte[] data)
-        {
-            int i = 0;
-            for (i = 0; i < data.Length; i += 4)
-            {
-                uint type = BitConverter.ToUInt16(data, i);
-                uint amount = BitConverter.ToUInt16(data, i + 2);
-                if (type == 0 && amount == 0)
-                    break;
-            }
-            return i / 4;
-        }
-
-        private void itemAdd_Click(object sender, EventArgs e)
-        {
-            if (itemsGridView.Visible == true)
-            {
-                if (itemsGridView.RowCount >= 400)
-                {
-                    MessageBox.Show("You already have the max amount of items!", "Too many items");
-                }
-                else
-                {
-                    itemsGridView.Rows.Add("[None]", 0);
-                }
-            }
-
-            else if (keysGridView.Visible == true)
-            {
-                if (keysGridView.RowCount >= 96)
-                {
-                    MessageBox.Show("You already have the max amount of key items!", "Too many items");
-                }
-                else
-                {
-                    keysGridView.Rows.Add("[None]", 0);
-                }
-            }
-
-            else if (tmsGridView.Visible == true)
-            {
-                if (tmsGridView.RowCount >= 96)
-                {
-                    MessageBox.Show("You already have the max amount of medicine items!", "Too many items");
-                }
-                else
-                {
-                    tmsGridView.Rows.Add("[None]", 0);
-                }
-            }
-
-            else if (medsGridView.Visible == true)
-            {
-                if (medsGridView.RowCount >= 108)
-                {
-                    MessageBox.Show("You already have the max amount of TMs & HMs!", "Too many items");
-                }
-                else
-                {
-                    medsGridView.Rows.Add("[None]", 0);
-                }
-            }
-
-            else if (bersGridView.Visible == true)
-            {
-                if (bersGridView.RowCount >= 72)
-                {
-                    MessageBox.Show("You already have the max amount of berries!", "Too many items");
-                }
-                else
-                {
-                    bersGridView.Rows.Add("[None]", 0);
-                }
-            }
-        }
-
-        public void itemWrite_Click(object sender, EventArgs e)
-        {
-            byte[] dataToWrite = new byte[0] { };
-            uint offsetToWrite = 0;
-            if (gen7)
-            {
-                itemData = new byte[itemsView7.Rows.Count * 4];
-                for (int i = 0; i < itemsView7.Rows.Count; i++)
-                {
-                    // Build Item Value
-                    uint val = 0;
-                    string datastring = itemsView7.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(LookupTable.Item7, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToInt32(itemsView7.Rows[i].Cells[1].Value.ToString());
-                    val |= (uint)(itemIndex & 0x3FF);
-                    val |= (uint)(itemcnt & 0x3FF) << 10;
-                    BitConverter.GetBytes(val).CopyTo(itemData, i * 4);
-                }
-                dataToWrite = itemData;
-                switch (currentpouch)
-                {
-                    case 0:
-                        offsetToWrite = medsoff;
-                        break;
-                    case 1:
-                        offsetToWrite = itemsoff;
-                        break;
-                    case 2:
-                        offsetToWrite = tmsoff;
-                        break;
-                    case 3:
-                        offsetToWrite = bersoff;
-                        break;
-                    case 4:
-                        offsetToWrite = keysoff;
-                        break;
-                }
-            }
-            else
-            {
-                if (itemsGridView.Visible == true)
-                {
-                    itemData = new byte[1600];
-                    for (int i = 0; i < itemsGridView.RowCount; i++)
-                    {
-                        string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
-                        int itemcnt;
-                        itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
-
-                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
-                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
-                    }
-                    dataToWrite = itemData;
-                    offsetToWrite = itemsoff;
-                }
-
-                else if (keysGridView.Visible == true)
-                {
-                    keyData = new byte[384];
-                    for (int i = 0; i < keysGridView.RowCount; i++)
-                    {
-                        string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
-                        int itemcnt;
-                        itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
-
-                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
-                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
-                    }
-                    dataToWrite = keyData;
-                    offsetToWrite = keysoff;
-                }
-
-                else if (tmsGridView.Visible == true)
-                {
-                    tmData = new byte[432];
-                    for (int i = 0; i < tmsGridView.RowCount; i++)
-                    {
-                        string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
-                        int itemcnt;
-                        itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
-
-                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
-                        BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
-                    }
-                    dataToWrite = tmData;
-                    offsetToWrite = tmsoff;
-                }
-
-                else if (medsGridView.Visible == true)
-                {
-                    medData = new byte[256];
-                    for (int i = 0; i < medsGridView.RowCount; i++)
-                    {
-                        string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
-                        int itemcnt;
-                        itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
-
-                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
-                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
-                    }
-                    dataToWrite = medData;
-                    offsetToWrite = medsoff;
-                }
-
-                else if (bersGridView.Visible == true)
-                {
-                    berryData = new byte[288];
-                    for (int i = 0; i < bersGridView.RowCount; i++)
-                    {
-                        string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
-                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
-                        int itemcnt;
-                        itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
-
-                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
-                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
-                    }
-                    dataToWrite = berryData;
-                    offsetToWrite = bersoff;
-                }
-            }
-            Program.scriptHelper.write(offsetToWrite, dataToWrite, pid);
-        }
-
-        // Item handling Gen 7
-        public void dumpItems7()
-        {
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[53 * 4], handleMeds7, null);
-            waitingForData.Add(Program.scriptHelper.data(medsoff, 53 * 4, pid), myArgs);
-            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[336 * 4], handleItems7, null);
-            waitingForData.Add(Program.scriptHelper.data(itemsoff, 336 * 4, pid), myArgs2);
-            DataReadyWaiting myArgs3 = new DataReadyWaiting(new byte[100 * 4], handleTMs7, null);
-            waitingForData.Add(Program.scriptHelper.data(tmsoff, 100 * 4, pid), myArgs3);
-            DataReadyWaiting myArgs4 = new DataReadyWaiting(new byte[67 * 4], handleBerries7, null);
-            waitingForData.Add(Program.scriptHelper.data(bersoff, 67 * 4, pid), myArgs4);
-            DataReadyWaiting myArgs5 = new DataReadyWaiting(new byte[24 * 4], handleKeyItems7, null);
-            waitingForData.Add(Program.scriptHelper.data(keysoff, 24 * 4, pid), myArgs5);
-        }
-
-        public void handleMeds7(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            Array.Copy(args.data, medData7, args.data.Length);
-            for (int i = 0; i < medcount7; i++)
-            {
-                uint val = BitConverter.ToUInt32(medData7, i * 4);
-                meds7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
-                meds7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
-            }
-        }
-
-        public void handleItems7(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            Array.Copy(args.data, itemData7, args.data.Length);
-            for (int i = 0; i < itemcount7; i++)
-            {
-                uint val = BitConverter.ToUInt32(itemData7, i * 4);
-                items7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
-                items7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
-            }
-            ItemDumpFinished7(items7);
-            currentpouch = 1;
-        }
-
-        public void handleTMs7(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            Array.Copy(args.data, tmsData7, args.data.Length);
-            for (int i = 0; i < tmscount7; i++)
-            {
-                uint val = BitConverter.ToUInt32(tmsData7, i * 4);
-                tms7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
-                tms7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
-            }
-        }
-
-        public void handleBerries7(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            Array.Copy(args.data, bersData7, args.data.Length);
-            for (int i = 0; i < berscount7; i++)
-            {
-                uint val = BitConverter.ToUInt32(bersData7, i * 4);
-                bers7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
-                bers7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
-            }
-        }
-
-        public void handleKeyItems7(object args_obj)
-        {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            Array.Copy(args.data, keysData7, args.data.Length);
-            for (int i = 0; i < keyscount7; i++)
-            {
-                uint val = BitConverter.ToUInt32(keysData7, i * 4);
-                keys7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
-                keys7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
-            }
-        }
-
-        private void ItemDumpFinished7(int[,] itemdata)
-        {
-            if (itemsView7.InvokeRequired)
-            {
-                itemsView7.Invoke((MethodInvoker)delegate { readItems7(itemdata); });
-            }
-            else
-            {
-                readItems7(itemdata);
-            }
-        }
-
-        private void readItems7(int[,] itemdata)
-        {
-            itemsView7.Rows.Clear();
-            for (int i = 0; i < itemdata.GetLength(0); i++)
-            {
-                itemsView7.Rows.Add();
-                itemsView7.Rows[i].Cells[0].Value = LookupTable.Item7[itemdata[i, 0]];
-                itemsView7.Rows[i].Cells[1].Value = itemdata[i, 1];
-            }
-        }
 
         #endregion R/W trainer data
 
@@ -2107,117 +1564,6 @@ namespace ntrbase
             Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
         }
 
-        // Item buttons
-        private void showItems_Click(object sender, EventArgs e)
-        {
-            if (gen7)
-            {
-                readItems7(items7);
-                currentpouch = 1;
-            }
-            else
-            {
-                itemsGridView.Visible = true;
-                keysGridView.Visible = false;
-                tmsGridView.Visible = false;
-                medsGridView.Visible = false;
-                bersGridView.Visible = false;
-            }
-            showItems.ForeColor = Color.Green;
-            showMedicine.ForeColor = Color.Black;
-            showTMs.ForeColor = Color.Black;
-            showBerries.ForeColor = Color.Black;
-            showKeys.ForeColor = Color.Black;
-        }
-
-        private void showMedicine_Click(object sender, EventArgs e)
-        {
-            if (gen7)
-            {
-                readItems7(meds7);
-                currentpouch = 0;
-            }
-            else
-            {
-                itemsGridView.Visible = false;
-                keysGridView.Visible = false;
-                tmsGridView.Visible = false;
-                medsGridView.Visible = true;
-                bersGridView.Visible = false;
-            }
-            showItems.ForeColor = Color.Black;
-            showMedicine.ForeColor = Color.Green;
-            showTMs.ForeColor = Color.Black;
-            showBerries.ForeColor = Color.Black;
-            showKeys.ForeColor = Color.Black;
-        }
-
-        private void showTMs_Click(object sender, EventArgs e)
-        {
-            if (gen7)
-            {
-                readItems7(tms7);
-                currentpouch = 2;
-            }
-            else
-            {
-                itemsGridView.Visible = false;
-                keysGridView.Visible = false;
-                tmsGridView.Visible = true;
-                medsGridView.Visible = false;
-                bersGridView.Visible = false;
-            }
-            showItems.ForeColor = Color.Black;
-            showMedicine.ForeColor = Color.Black;
-            showTMs.ForeColor = Color.Green;
-            showBerries.ForeColor = Color.Black;
-            showKeys.ForeColor = Color.Black;
-        }
-
-        private void showBerries_Click(object sender, EventArgs e)
-        {
-            if (gen7)
-            {
-                readItems7(bers7);
-                currentpouch = 3;
-            }
-            else
-            {
-                itemsGridView.Visible = false;
-                keysGridView.Visible = false;
-                tmsGridView.Visible = false;
-                medsGridView.Visible = false;
-                bersGridView.Visible = true;
-            }
-            showItems.ForeColor = Color.Black;
-            showMedicine.ForeColor = Color.Black;
-            showTMs.ForeColor = Color.Black;
-            showBerries.ForeColor = Color.Green;
-            showKeys.ForeColor = Color.Black;
-        }
-
-        private void showKeys_Click(object sender, EventArgs e)
-        {
-            if (gen7)
-            {
-                readItems7(keys7);
-                currentpouch = 4;
-            }
-            else
-            {
-                itemsGridView.Visible = false;
-                keysGridView.Visible = true;
-                tmsGridView.Visible = false;
-                medsGridView.Visible = false;
-                bersGridView.Visible = false;
-            }
-            showItems.ForeColor = Color.Black;
-            showMedicine.ForeColor = Color.Black;
-            showTMs.ForeColor = Color.Black;
-            showBerries.ForeColor = Color.Black;
-            showKeys.ForeColor = Color.Green;
-        }
-
         // Tooltips for TSV / ESV / G7ID
         private void setTSVToolTip(NumericUpDown TID, NumericUpDown SID)
         {
@@ -2318,6 +1664,35 @@ namespace ntrbase
         {
             txtLog.Clear();
             new Edit_Trainer().Show();
+        }
+
+        // Item Editor
+        private async void Tool_Items_Click(object sender, EventArgs e)
+        {
+            txtLog.Clear();
+            iteminfo = await dumpItems();
+            if (iteminfo == null)
+            {
+                MessageBox.Show("A error ocurred while dumping items", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Array.Copy(iteminfo, 0, SAV.Data, LookupTable.itemsLocation, LookupTable.itemsSize);
+                new Edit_Items().Show();
+            }
+        }
+
+        public async Task<byte[]> dumpItems()
+        {
+            Task<bool> worker = Program.helper.waitNTRmultiread(LookupTable.itemsOff, LookupTable.itemsSize);
+            if (await worker)
+            {
+                return Program.helper.lastmultiread;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         // PokeDigger
