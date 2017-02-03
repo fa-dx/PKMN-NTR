@@ -730,7 +730,7 @@ namespace ntrbase.Bot
                             byte[] deletearray = new byte[232 * todelete];
                             for (int i = 0; i < todelete; i++)
                             {
-                                LookupTable.EmptyPoke6.CopyTo(deletearray, i * 232);
+                                //LookupTable.EmptyPoke6.CopyTo(deletearray, i * 232);
                             }
                             waitTaskbool = Program.helper.waitNTRwrite(pcpkmOff + (uint)(30 * 232 * startbox) + (uint)(232 * startslot), deletearray, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
@@ -751,7 +751,7 @@ namespace ntrbase.Bot
                                 byte[] remainarray = new byte[232 * quantity];
                                 for (int i = 0; i < quantity; i++)
                                 {
-                                    LookupTable.EmptyPoke6.CopyTo(remainarray, i * 232);
+                                    //LookupTable.EmptyPoke6.CopyTo(remainarray, i * 232);
                                 }
                                 waitTaskbool = Program.helper.waitNTRwrite(pcpkmOff, remainarray, Program.gCmdWindow.pid);
                                 if (await waitTaskbool)

@@ -1789,7 +1789,7 @@ namespace ntrbase
                     }
 
                     // Test nature
-                    filterstr = " (" + LookupTable.getNature(pkm.Nature) + " -> " + LookupTable.getNature((int)row.Cells[1].Value) + ")";
+                    //filterstr = " (" + LookupTable.getNature(pkm.Nature) + " -> " + LookupTable.getNature((int)row.Cells[1].Value) + ")";
                     if ((int)row.Cells[1].Value < 0 || pkm.Nature == (int)row.Cells[1].Value)
                     {
                         addtoLog("Filter: Nature - PASS" + filterstr);
@@ -1803,11 +1803,11 @@ namespace ntrbase
                     // Test Ability
                     if (gen7)
                     {
-                        filterstr = " (" + LookupTable.getAbil7(pkm.Ability) + " -> " + LookupTable.getAbil7((int)row.Cells[2].Value) + ")";
+                        //filterstr = " (" + LookupTable.getAbil7(pkm.Ability) + " -> " + LookupTable.getAbil7((int)row.Cells[2].Value) + ")";
                     }
                     else
                     {
-                        filterstr = " (" + LookupTable.getAbil6(pkm.Ability) + " -> " + LookupTable.getAbil6((int)row.Cells[2].Value) + ")";
+                        //filterstr = " (" + LookupTable.getAbil6(pkm.Ability) + " -> " + LookupTable.getAbil6((int)row.Cells[2].Value) + ")";
                     }
                     if ((int)row.Cells[2].Value < 0 || (pkm.Ability - 1) == (int)row.Cells[2].Value)
                     {
@@ -1820,7 +1820,7 @@ namespace ntrbase
                     }
 
                     // Test Hidden Power
-                    filterstr = " (" + LookupTable.getHPName(pkm.HPType) + " -> " + LookupTable.getHPName((int)row.Cells[3].Value) + ")";
+                    //filterstr = " (" + LookupTable.getHPName(pkm.HPType) + " -> " + LookupTable.getHPName((int)row.Cells[3].Value) + ")";
                     if ((int)row.Cells[3].Value < 0 || pkm.HPType == (int)row.Cells[3].Value)
                     {
                         addtoLog("Filter: Hidden Power - PASS" + filterstr);
@@ -1832,7 +1832,7 @@ namespace ntrbase
                     }
 
                     // Test Gender
-                    filterstr = " (" + LookupTable.getGender(pkm.Gender) + " -> " + LookupTable.getGender((int)row.Cells[4].Value) + ")";
+                    //filterstr = " (" + LookupTable.getGender(pkm.Gender) + " -> " + LookupTable.getGender((int)row.Cells[4].Value) + ")";
                     if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == pkm.Gender)
                     {
                         addtoLog("Filter: Gender - PASS" + filterstr);
