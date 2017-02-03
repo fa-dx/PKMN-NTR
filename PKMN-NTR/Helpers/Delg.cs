@@ -1,10 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace ntrbase.Helpers
 {
     class Delg
     {
-        // For all controls
+        #region All controls
+
         delegate void SetTextDelegate(Control ctrl, string text);
 
         public static void SetText(Control ctrl, string text)
@@ -44,7 +46,100 @@ namespace ntrbase.Helpers
                 ctrl.Enabled = en;
         }
 
-        // NumericUpDown
+        delegate void SetColorDelegate(Control ctrl, Color c, bool back);
+
+        public static void SetColor(Control ctrl, Color c, bool back)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetColorDelegate del = new SetColorDelegate(SetColor);
+                ctrl.Invoke(del, ctrl, c, back);
+            }
+            else
+            {
+                if (back)
+                    ctrl.BackColor = c;
+                else
+                    ctrl.ForeColor = c;
+            }
+        }
+
+        #endregion All controls
+
+        #region CheckBox
+
+        delegate void SetCheckedDelegate(CheckBox ctrl, bool en);
+
+        public static void SetChecked(CheckBox ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetCheckedDelegate del = new SetCheckedDelegate(SetChecked);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.Checked = en;
+        }
+
+        #endregion Checkbox
+
+        #region ComboBox
+
+        delegate void SetSelectedIndexDelegate(ComboBox ctrl, int i);
+
+        public static void SetSelectedIndex(ComboBox ctrl, int i)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetSelectedIndexDelegate del = new SetSelectedIndexDelegate(SetSelectedIndex);
+                ctrl.Invoke(del, ctrl, i);
+            }
+            else
+                ctrl.SelectedIndex = i;
+        }
+
+        delegate void ComboboxFillDelegate(ComboBox ctrl, string[] val);
+
+        public static void ComboboxFill(ComboBox ctrl, string[] val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                ComboboxFillDelegate del = new ComboboxFillDelegate(ComboboxFill);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+            {
+                ctrl.Items.Clear();
+                if (val != null)
+                {
+                    ctrl.Items.AddRange(val);
+                }
+            }
+        }
+
+        #endregion ComboBox
+
+        #region DataGridView
+
+        delegate void DataGridViewAddRowDelegate(DataGridView ctrl, params object[] args);
+
+        public static void DataGridViewAddRow(DataGridView ctrl, params object[] args)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                DataGridViewAddRowDelegate del = new DataGridViewAddRowDelegate(DataGridViewAddRow);
+                ctrl.Invoke(del, args);
+            }
+            else
+            {
+                ctrl.Rows.Add(args);
+            }
+        }
+
+        #endregion DataGridView
+
+        #region NumericUpDown
+
         delegate void SetValueDelegate(NumericUpDown ctrl, decimal val);
 
         public static void SetValue(NumericUpDown ctrl, decimal val)
@@ -84,7 +179,44 @@ namespace ntrbase.Helpers
                 ctrl.Minimum = val;
         }
 
-        // Tooltip
+        #endregion NumericUpDown
+
+        #region RadioButton
+
+        delegate void SetCheckedRadioDelegate(RadioButton ctrl, bool en);
+
+        public static void SetCheckedRadio(RadioButton ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetCheckedRadioDelegate del = new SetCheckedRadioDelegate(SetCheckedRadio);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.Checked = en;
+        }
+
+        #endregion RadioButton
+
+        #region TextBox
+
+        delegate void SetReadOnlyDelegate(TextBox ctrl, bool en);
+
+        public static void SetReadOnly(TextBox ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetReadOnlyDelegate del = new SetReadOnlyDelegate(SetReadOnly);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.ReadOnly = en;
+        }
+
+        #endregion TextBox
+
+        #region ToolTip
+
         delegate void SetTooltipDelegate(ToolTip source, Control ctrl, string text);
 
         public static void SetTooltip(ToolTip source, Control ctrl, string text)
@@ -110,5 +242,7 @@ namespace ntrbase.Helpers
             else
                 source.RemoveAll();
         }
+
+        #endregion Tooltip
     }
 }

@@ -149,13 +149,13 @@ namespace ntrbase
             gen6onlyControls = new Control[] { radioBattleBox, orgbox_pos, daycare_select };
 
             disableControls();
-            SetSelectedIndex(filterHPlogic, 0);
-            SetSelectedIndex(filterATKlogic, 0);
-            SetSelectedIndex(filterDEFlogic, 0);
-            SetSelectedIndex(filterSPAlogic, 0);
-            SetSelectedIndex(filterSPDlogic, 0);
-            SetSelectedIndex(filterSPElogic, 0);
-            SetSelectedIndex(filterPerIVlogic, 0);
+            Delg.SetSelectedIndex(filterHPlogic, 0);
+            Delg.SetSelectedIndex(filterATKlogic, 0);
+            Delg.SetSelectedIndex(filterDEFlogic, 0);
+            Delg.SetSelectedIndex(filterSPAlogic, 0);
+            Delg.SetSelectedIndex(filterSPDlogic, 0);
+            Delg.SetSelectedIndex(filterSPElogic, 0);
+            Delg.SetSelectedIndex(filterPerIVlogic, 0);
         }
 
         private async void checkUpdate()
@@ -361,19 +361,9 @@ namespace ntrbase
             }
         }
 
-        public int getTSV(decimal TID, decimal SID)
+        public void addtoLog(string msg)
         {
-            return ((int)TID ^ (int)SID) >> 4;
-        }
-
-        public int getGen7ID(decimal TID, decimal SID)
-        {
-            return (int)((uint)((int)TID | ((int)SID << 16)) % 1000000);
-        }
-
-        public uint getPSV(uint PID)
-        {
-            return ((PID >> 16 ^ PID & 0xFFFF) >> 4);
+            Program.gCmdWindow.BeginInvoke(Program.gCmdWindow.delAddLog, msg);
         }
 
         #endregion Functions
@@ -520,8 +510,8 @@ namespace ntrbase
             // Clear tabs to avoid writting wrong data
             if (!botWorking)
             {
-                SetSelectedIndex(typeLSR, -1);
-                SetSelectedIndex(modeBreed, -1);
+                Delg.SetSelectedIndex(typeLSR, -1);
+                Delg.SetSelectedIndex(modeBreed, -1);
                 pkm = SAV.BlankPKM;
             }
 
@@ -538,7 +528,7 @@ namespace ntrbase
                 fillGen7();
                 dumpAllData7();
                 enableControls();
-                SetCheckedRadio(radioBoxes, true);
+                Delg.SetCheckedRadio(radioBoxes, true);
             }
             else if (SAV.Generation == 6 && !botWorking)
             {
@@ -549,7 +539,7 @@ namespace ntrbase
                 fillGen6();
                 dumpAllData6();
                 enableControls();
-                SetCheckedRadio(radioBoxes, true);
+                Delg.SetCheckedRadio(radioBoxes, true);
             }
         }
 
@@ -682,7 +672,7 @@ namespace ntrbase
         //        case 10: i = 8; break;
         //        default: i = -1; break;
         //    }
-        //    SetSelectedIndex(Lang, i);
+        //    Delg.SetSelectedIndex(Lang, i);
         //}
 
         //private void pokeLang_Click(object sender, EventArgs e)
@@ -1564,28 +1554,6 @@ namespace ntrbase
             Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
         }
 
-        // Tooltips for TSV / ESV / G7ID
-        private void setTSVToolTip(NumericUpDown TID, NumericUpDown SID)
-        {
-            int TSV = getTSV(TID.Value, SID.Value);
-            if (gen7)
-            {
-                //int G7ID = getGen7ID(TID.Value, SIDNum.Value);
-                //Delg.SetTooltip(ToolTipTSVpoke, TID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
-                //Delg.SetTooltip(ToolTipTSVpoke, SID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
-            }
-            else
-            {
-                Delg.SetTooltip(ToolTipTSVpoke, TID, "TSV: " + TSV.ToString("D4"));
-                Delg.SetTooltip(ToolTipTSVpoke, SID, "TSV: " + TSV.ToString("D4"));
-            }
-        }
-
-        //private void TIDNum_ValueChanged(object sender, EventArgs e)
-        //{ // Handles Trainer's TID/SID fields
-        //    setTSVToolTip(TIDNum, SIDNum);
-        //}
-
         // Sprite handling
         private void RefreshSprite()
         {
@@ -1710,119 +1678,6 @@ namespace ntrbase
         }
 
         #endregion Sub-forms
-
-        #region Thread Safety
-
-        public void addtoLog(string msg)
-        {
-            Program.gCmdWindow.BeginInvoke(Program.gCmdWindow.delAddLog, msg);
-        }
-
-        delegate void SetReadOnlyDelegate(TextBox ctrl, bool en);
-
-        public static void SetReadOnly(TextBox ctrl, bool en)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetReadOnlyDelegate del = new SetReadOnlyDelegate(SetReadOnly);
-                ctrl.Invoke(del, ctrl, en);
-            }
-            else
-                ctrl.ReadOnly = en;
-        }
-
-        delegate void SetCheckedDelegate(CheckBox ctrl, bool en);
-
-        public static void SetChecked(CheckBox ctrl, bool en)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetCheckedDelegate del = new SetCheckedDelegate(SetChecked);
-                ctrl.Invoke(del, ctrl, en);
-            }
-            else
-                ctrl.Checked = en;
-        }
-
-        delegate void SetCheckedRadioDelegate(RadioButton ctrl, bool en);
-
-        public static void SetCheckedRadio(RadioButton ctrl, bool en)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetCheckedRadioDelegate del = new SetCheckedRadioDelegate(SetCheckedRadio);
-                ctrl.Invoke(del, ctrl, en);
-            }
-            else
-                ctrl.Checked = en;
-        }
-
-        delegate void SetSelectedIndexDelegate(ComboBox ctrl, int i);
-
-        public static void SetSelectedIndex(ComboBox ctrl, int i)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetSelectedIndexDelegate del = new SetSelectedIndexDelegate(SetSelectedIndex);
-                ctrl.Invoke(del, ctrl, i);
-            }
-            else
-                ctrl.SelectedIndex = i;
-        }
-
-        delegate void ComboboxFillDelegate(ComboBox ctrl, string[] val);
-
-        public static void ComboboxFill(ComboBox ctrl, string[] val)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                ComboboxFillDelegate del = new ComboboxFillDelegate(ComboboxFill);
-                ctrl.Invoke(del, ctrl, val);
-            }
-            else
-            {
-                ctrl.Items.Clear();
-                if (val != null)
-                {
-                    ctrl.Items.AddRange(val);
-                }
-            }
-        }
-
-        delegate void DataGridViewAddRowDelegate(DataGridView ctrl, params object[] args);
-
-        public static void DataGridViewAddRow(DataGridView ctrl, params object[] args)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                DataGridViewAddRowDelegate del = new DataGridViewAddRowDelegate(DataGridViewAddRow);
-                ctrl.Invoke(del, args);
-            }
-            else
-            {
-                ctrl.Rows.Add(args);
-            }
-        }
-
-        delegate void SetColorDelegate(Control ctrl, Color c, bool back);
-
-        public static void SetColor(Control ctrl, Color c, bool back)
-        {
-            if (ctrl.InvokeRequired)
-            {
-                SetColorDelegate del = new SetColorDelegate(SetColor);
-                ctrl.Invoke(del, ctrl, c, back);
-            }
-            else
-            {
-                if (back)
-                    ctrl.BackColor = c;
-                else
-                    ctrl.ForeColor = c;
-            }
-        }
-
-        #endregion Thread Safety
 
         #region Remote control
 
@@ -2307,30 +2162,30 @@ namespace ntrbase
             {
                 if ((int)filterList.SelectedRows[0].Cells[0].Value == 1)
                 {
-                    SetChecked(filterShiny, true);
+                    Delg.SetChecked(filterShiny, true);
                 }
                 else
                 {
-                    SetChecked(filterShiny, false);
+                    Delg.SetChecked(filterShiny, false);
                 }
-                SetSelectedIndex(filterNature, (int)filterList.SelectedRows[0].Cells[1].Value);
-                SetSelectedIndex(filterAbility, (int)filterList.SelectedRows[0].Cells[2].Value);
-                SetSelectedIndex(filterHPtype, (int)filterList.SelectedRows[0].Cells[3].Value);
-                SetSelectedIndex(filterGender, (int)filterList.SelectedRows[0].Cells[4].Value);
+                Delg.SetSelectedIndex(filterNature, (int)filterList.SelectedRows[0].Cells[1].Value);
+                Delg.SetSelectedIndex(filterAbility, (int)filterList.SelectedRows[0].Cells[2].Value);
+                Delg.SetSelectedIndex(filterHPtype, (int)filterList.SelectedRows[0].Cells[3].Value);
+                Delg.SetSelectedIndex(filterGender, (int)filterList.SelectedRows[0].Cells[4].Value);
                 Delg.SetValue(filterHPvalue, (int)filterList.SelectedRows[0].Cells[5].Value);
-                SetSelectedIndex(filterHPlogic, (int)filterList.SelectedRows[0].Cells[6].Value);
+                Delg.SetSelectedIndex(filterHPlogic, (int)filterList.SelectedRows[0].Cells[6].Value);
                 Delg.SetValue(filterATKvalue, (int)filterList.SelectedRows[0].Cells[7].Value);
-                SetSelectedIndex(filterATKlogic, (int)filterList.SelectedRows[0].Cells[8].Value);
+                Delg.SetSelectedIndex(filterATKlogic, (int)filterList.SelectedRows[0].Cells[8].Value);
                 Delg.SetValue(filterDEFvalue, (int)filterList.SelectedRows[0].Cells[9].Value);
-                SetSelectedIndex(filterDEFlogic, (int)filterList.SelectedRows[0].Cells[10].Value);
+                Delg.SetSelectedIndex(filterDEFlogic, (int)filterList.SelectedRows[0].Cells[10].Value);
                 Delg.SetValue(filterSPAvalue, (int)filterList.SelectedRows[0].Cells[11].Value);
-                SetSelectedIndex(filterSPAlogic, (int)filterList.SelectedRows[0].Cells[12].Value);
+                Delg.SetSelectedIndex(filterSPAlogic, (int)filterList.SelectedRows[0].Cells[12].Value);
                 Delg.SetValue(filterSPDvalue, (int)filterList.SelectedRows[0].Cells[13].Value);
-                SetSelectedIndex(filterSPDlogic, (int)filterList.SelectedRows[0].Cells[14].Value);
+                Delg.SetSelectedIndex(filterSPDlogic, (int)filterList.SelectedRows[0].Cells[14].Value);
                 Delg.SetValue(filterSPEvalue, (int)filterList.SelectedRows[0].Cells[15].Value);
-                SetSelectedIndex(filterSPElogic, (int)filterList.SelectedRows[0].Cells[16].Value);
+                Delg.SetSelectedIndex(filterSPElogic, (int)filterList.SelectedRows[0].Cells[16].Value);
                 Delg.SetValue(filterPerIVvalue, (int)filterList.SelectedRows[0].Cells[17].Value);
-                SetSelectedIndex(filterPerIVlogic, (int)filterList.SelectedRows[0].Cells[18].Value);
+                Delg.SetSelectedIndex(filterPerIVlogic, (int)filterList.SelectedRows[0].Cells[18].Value);
             }
             else
             {
@@ -2399,18 +2254,18 @@ namespace ntrbase
 
         private void filterReset_Click(object sender, EventArgs e)
         {
-            SetChecked(filterShiny, false);
-            SetSelectedIndex(filterNature, -1);
-            SetSelectedIndex(filterAbility, -1);
-            SetSelectedIndex(filterHPtype, -1);
-            SetSelectedIndex(filterGender, -1);
-            SetSelectedIndex(filterHPlogic, 0);
-            SetSelectedIndex(filterATKlogic, 0);
-            SetSelectedIndex(filterDEFlogic, 0);
-            SetSelectedIndex(filterSPAlogic, 0);
-            SetSelectedIndex(filterSPDlogic, 0);
-            SetSelectedIndex(filterSPElogic, 0);
-            SetSelectedIndex(filterPerIVlogic, 0);
+            Delg.SetChecked(filterShiny, false);
+            Delg.SetSelectedIndex(filterNature, -1);
+            Delg.SetSelectedIndex(filterAbility, -1);
+            Delg.SetSelectedIndex(filterHPtype, -1);
+            Delg.SetSelectedIndex(filterGender, -1);
+            Delg.SetSelectedIndex(filterHPlogic, 0);
+            Delg.SetSelectedIndex(filterATKlogic, 0);
+            Delg.SetSelectedIndex(filterDEFlogic, 0);
+            Delg.SetSelectedIndex(filterSPAlogic, 0);
+            Delg.SetSelectedIndex(filterSPDlogic, 0);
+            Delg.SetSelectedIndex(filterSPElogic, 0);
+            Delg.SetSelectedIndex(filterPerIVlogic, 0);
             Delg.SetValue(filterHPvalue, 0);
             Delg.SetValue(filterATKvalue, 0);
             Delg.SetValue(filterDEFvalue, 0);
@@ -2861,8 +2716,8 @@ namespace ntrbase
 
         private void srClear_Click(object sender, EventArgs e)
         {
-            SetSelectedIndex(typeLSR, -1);
-            SetChecked(resumeLSR, false);
+            Delg.SetSelectedIndex(typeLSR, -1);
+            Delg.SetChecked(resumeLSR, false);
             filtersSoftReset.Rows.Clear();
         }
 
@@ -2982,7 +2837,7 @@ namespace ntrbase
 
         public void AddESVrow(int row, int slot, int tsv)
         {
-            DataGridViewAddRow(ESVlist, row + 1, slot + 1, tsv.ToString("D4"));
+            Delg.DataGridViewAddRow(ESVlist, row + 1, slot + 1, tsv.ToString("D4"));
         }
 
         public bool CheckBreedingFilters()
@@ -3124,14 +2979,14 @@ namespace ntrbase
 
         private void breedingClear_Click(object sender, EventArgs e)
         {
-            SetSelectedIndex(modeBreed, -1);
+            Delg.SetSelectedIndex(modeBreed, -1);
             Delg.SetValue(boxBreed, 1);
             Delg.SetValue(slotBreed, 1);
             Delg.SetValue(eggsNoBreed, 1);
             OrganizeMiddle.Checked = true;
             radioDayCare1.Checked = true;
-            SetChecked(readESV, false);
-            SetChecked(quickBreed, false);
+            Delg.SetChecked(readESV, false);
+            Delg.SetChecked(quickBreed, false);
             ESVlist.Rows.Clear();
             TSVlist.Items.Clear();
             filterBreeding.Rows.Clear();
