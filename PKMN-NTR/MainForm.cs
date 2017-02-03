@@ -2321,7 +2321,7 @@ namespace ntrbase
         }
 
         // PokeDigger
-        private void PokeDiggerBtn_Click(object sender, EventArgs e)
+        private void Tools_PokeDigger_Click(object sender, EventArgs e)
         {
             new PokeDigger(pid, game != GameType.None).Show();
         }
@@ -3789,6 +3789,7 @@ namespace ntrbase
         }
 
         #endregion Bots
+
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 

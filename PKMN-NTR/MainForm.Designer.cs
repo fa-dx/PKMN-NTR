@@ -84,9 +84,6 @@
             this.label71 = new System.Windows.Forms.Label();
             this.miscTabs = new System.Windows.Forms.TabControl();
             this.tabEditTrainer = new System.Windows.Forms.TabPage();
-            this.seedRNG = new System.Windows.Forms.TextBox();
-            this.label60 = new System.Windows.Forms.Label();
-            this.PokeDiggerBtn = new System.Windows.Forms.Button();
             this.tabControls = new System.Windows.Forms.TabPage();
             this.Remote_Stick = new System.Windows.Forms.GroupBox();
             this.StickX = new System.Windows.Forms.TrackBar();
@@ -1478,9 +1475,6 @@
             // tabEditTrainer
             // 
             this.tabEditTrainer.BackColor = System.Drawing.SystemColors.Control;
-            this.tabEditTrainer.Controls.Add(this.seedRNG);
-            this.tabEditTrainer.Controls.Add(this.label60);
-            this.tabEditTrainer.Controls.Add(this.PokeDiggerBtn);
             this.tabEditTrainer.Controls.Add(this.Edit_Items);
             this.tabEditTrainer.Location = new System.Drawing.Point(4, 22);
             this.tabEditTrainer.Name = "tabEditTrainer";
@@ -1488,33 +1482,6 @@
             this.tabEditTrainer.Size = new System.Drawing.Size(558, 378);
             this.tabEditTrainer.TabIndex = 0;
             this.tabEditTrainer.Text = "Edit Save";
-            // 
-            // seedRNG
-            // 
-            this.seedRNG.Location = new System.Drawing.Point(159, 353);
-            this.seedRNG.Name = "seedRNG";
-            this.seedRNG.ReadOnly = true;
-            this.seedRNG.Size = new System.Drawing.Size(100, 20);
-            this.seedRNG.TabIndex = 8;
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(91, 356);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(62, 13);
-            this.label60.TabIndex = 7;
-            this.label60.Text = "RNG Seed:";
-            // 
-            // PokeDiggerBtn
-            // 
-            this.PokeDiggerBtn.Location = new System.Drawing.Point(10, 351);
-            this.PokeDiggerBtn.Name = "PokeDiggerBtn";
-            this.PokeDiggerBtn.Size = new System.Drawing.Size(75, 23);
-            this.PokeDiggerBtn.TabIndex = 4;
-            this.PokeDiggerBtn.Text = "PokeDigger";
-            this.PokeDiggerBtn.UseVisualStyleBackColor = true;
-            this.PokeDiggerBtn.Click += new System.EventHandler(this.PokeDiggerBtn_Click);
             // 
             // tabControls
             // 
@@ -6390,6 +6357,7 @@
             // 
             // Tool_Items
             // 
+            this.Tool_Items.Enabled = false;
             this.Tool_Items.Location = new System.Drawing.Point(98, 3);
             this.Tool_Items.Name = "Tool_Items";
             this.Tool_Items.Size = new System.Drawing.Size(89, 23);
@@ -6399,6 +6367,7 @@
             // 
             // Tool_Controls
             // 
+            this.Tool_Controls.Enabled = false;
             this.Tool_Controls.Location = new System.Drawing.Point(193, 3);
             this.Tool_Controls.Name = "Tool_Controls";
             this.Tool_Controls.Size = new System.Drawing.Size(89, 23);
@@ -6408,6 +6377,7 @@
             // 
             // Tools_Breeding
             // 
+            this.Tools_Breeding.Enabled = false;
             this.Tools_Breeding.Location = new System.Drawing.Point(3, 32);
             this.Tools_Breeding.Name = "Tools_Breeding";
             this.Tools_Breeding.Size = new System.Drawing.Size(89, 23);
@@ -6417,6 +6387,7 @@
             // 
             // Tools_SoftReset
             // 
+            this.Tools_SoftReset.Enabled = false;
             this.Tools_SoftReset.Location = new System.Drawing.Point(98, 32);
             this.Tools_SoftReset.Name = "Tools_SoftReset";
             this.Tools_SoftReset.Size = new System.Drawing.Size(89, 23);
@@ -6426,6 +6397,7 @@
             // 
             // Tools_WonderTrade
             // 
+            this.Tools_WonderTrade.Enabled = false;
             this.Tools_WonderTrade.Location = new System.Drawing.Point(193, 32);
             this.Tools_WonderTrade.Name = "Tools_WonderTrade";
             this.Tools_WonderTrade.Size = new System.Drawing.Size(89, 23);
@@ -6435,6 +6407,7 @@
             // 
             // Tools_Filter
             // 
+            this.Tools_Filter.Enabled = false;
             this.Tools_Filter.Location = new System.Drawing.Point(3, 61);
             this.Tools_Filter.Name = "Tools_Filter";
             this.Tools_Filter.Size = new System.Drawing.Size(89, 23);
@@ -6444,12 +6417,14 @@
             // 
             // Tools_PokeDigger
             // 
+            this.Tools_PokeDigger.Enabled = false;
             this.Tools_PokeDigger.Location = new System.Drawing.Point(98, 61);
             this.Tools_PokeDigger.Name = "Tools_PokeDigger";
             this.Tools_PokeDigger.Size = new System.Drawing.Size(89, 23);
             this.Tools_PokeDigger.TabIndex = 6;
             this.Tools_PokeDigger.Text = "PokéDigger";
             this.Tools_PokeDigger.UseVisualStyleBackColor = true;
+            this.Tools_PokeDigger.Click += new System.EventHandler(this.Tools_PokeDigger_Click);
             // 
             // Tab_Clone
             // 
@@ -6472,6 +6447,7 @@
             // 
             // Btn_CDstart
             // 
+            this.Btn_CDstart.Enabled = false;
             this.Btn_CDstart.Location = new System.Drawing.Point(157, 71);
             this.Btn_CDstart.Name = "Btn_CDstart";
             this.Btn_CDstart.Size = new System.Drawing.Size(129, 23);
@@ -7322,7 +7298,6 @@
         private System.Windows.Forms.TrackBar StickX;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox shinypic;
-        private System.Windows.Forms.Button PokeDiggerBtn;
         private System.Windows.Forms.Button filterReset;
         private System.Windows.Forms.Button breedingClear;
         private System.Windows.Forms.Button srClear;
@@ -7350,8 +7325,6 @@
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.GroupBox SR_options;
         private System.Windows.Forms.GroupBox WT_options;
-        private System.Windows.Forms.TextBox seedRNG;
-        private System.Windows.Forms.Label label60;
         private System.Windows.Forms.Label BoxLabel;
         private System.Windows.Forms.Button dumpPokemon;
         private System.Windows.Forms.Label SlotLabel;
