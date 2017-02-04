@@ -36,6 +36,7 @@ This the list of people who have contributed to this application.
 ### Other contributions
 - **danne2**: Box offsets for Gen 7.
 - **xSillusx**: Endless Wonder Trade bot.
+- **MichiS97**: Improvements for Gen 6 SR Bot.
 - **GBATemp and GitHub users**: Testing and bug reports.
 
 ###  Additional tools used in this application
