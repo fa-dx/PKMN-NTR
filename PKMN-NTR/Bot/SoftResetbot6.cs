@@ -6,7 +6,7 @@ namespace ntrbase.Bot
 {
     class SoftResetbot6
     {
-        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, miragespot, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tev_start, tev_dialog, tev_cont1, tev_check, twk_start, soaring_start, soaring_cont, soaring_check, soaring_move, soaring_dialog, botexit };
+        public enum srbotstates { botstart, pssmenush, fixwifi, touchpssset, testpssset, touchpssdis, testpssdis, touchpssconf, testpssout, returncontrol, touchsave, testsave, saveconf, saveout, typesr, trigger, miragespot, readopp, filter, testspassed, testshiny, testnature, testhp, testatk, testdef, testspa, testspd, testspe, testhdnpwr, testability, testgender, alltestsok, softreset, skipintro, skiptitle, startgame, reconnect, tev_start, tev_dialog, tev_cont1, tev_check, twk_start, soaring_start, soaring_cont, soaring_check, soaring_move, soaring_dialog, random_enc_check, flee1, flee2, flee3, botexit };
 
         // Bot variables
         public int botresult;
@@ -125,7 +125,6 @@ namespace ntrbase.Bot
         {
             int steps = 0;
             bool walk = false;
-            bool wrong_enc = false;
             try
             {
                 while (!botstop)
@@ -196,6 +195,7 @@ namespace ntrbase.Bot
                                     soaringX = 30;
                                     soaringY = -100;
                                     soaringTime = 4000;
+                                    
                                     if (resume)
                                     {
                                         botState = (int)srbotstates.soaring_start;
@@ -576,9 +576,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.softreset:
-                            if(!wrong_enc)
                             resetNo++;
-                            wrong_enc = false;
                             Report("Bot: Sof-reset #" + resetNo.ToString());
                             waitTaskbool = Program.helper.waitSoftReset();
                             if (await waitTaskbool)
@@ -780,9 +778,73 @@ namespace ntrbase.Bot
                             }
                             else
                             {
-                                Report("Bot: Dialog failed, imposible to check position to continue, probably different encounter");
-                                wrong_enc = true;
-                                botState = (int)srbotstates.softreset;
+                                Report("Bot: Dialog failed, imposible to check position to continue, will check random encounter");
+                                botState = (int)srbotstates.random_enc_check;
+                            }
+                            break;
+
+                        case (int)srbotstates.random_enc_check:
+                            Report("Bot: Test if random sky encounter");
+                            await Task.Delay(2 * commanddelay); // Wait for pokémon data
+                            waitTaskint = Program.gCmdWindow.ReadOpponent();
+                            if (dataready >= 0)
+                            {
+                                botState = (int)srbotstates.flee1;
+                            }
+                            else
+                            {
+                                Report("Bot: No random encounter, bot cannot continue");
+                                botresult = -1;
+                                botState = (int)srbotstates.botexit;
+                            }
+
+                            break;
+
+                        case (int)srbotstates.flee1:
+                            Report("Bot: Fleeing from random encounter, pressing down");
+                            await Task.Delay(30*commanddelay);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.DpadDOWN);
+                            if (await waitTaskbool)
+                            {
+                                botState = (int)srbotstates.flee2;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotstates.flee1;
+                            }
+                            break;
+
+                        case (int)srbotstates.flee2:
+                            Report("Bot: Fleeing from random encounter, pressing right");
+                            await Task.Delay(10*commanddelay);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.DpadRIGHT);
+                            if (await waitTaskbool)
+                            {
+                                botState = (int)srbotstates.flee3;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotstates.flee2;
+                            }
+                            break;
+                        case (int)srbotstates.flee3:
+                            Report("Bot: Fleeing from random encounter, pressing A");
+                            await Task.Delay(commanddelay);
+                            waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
+                            if (await waitTaskbool)
+                            {
+                                await Task.Delay(8*commanddelay);
+                                botState = (int)srbotstates.soaring_move;
+                            }
+                            else
+                            {
+                                attempts++;
+                                botresult = 7;
+                                botState = (int)srbotstates.flee3;
                             }
                             break;
 
