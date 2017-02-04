@@ -105,10 +105,10 @@ namespace ntrbase.Bot
                 pssettingsOff = 0x19C244;
                 pssettingsIN = 0x830000;
                 pssettingsOUT = 0x500000;
-                pssdisableOff = 0x630DA5;
                 pssdisableY = 120;
                 pssdisableIN = 0x33000000;
                 pssdisableOUT = 0x33100000;
+                pssdisableOff = 0x630DA5;
                 dialogOff = 0x62C2F4;
                 dialogIN = 0x0D;
                 dialogOUT = 0x0A;
@@ -123,6 +123,9 @@ namespace ntrbase.Bot
 
         public async Task<int> RunBot()
         {
+            int steps = 0;
+            bool walk = false;
+            bool wrong_enc = false;
             try
             {
                 while (!botstop)
@@ -177,10 +180,15 @@ namespace ntrbase.Bot
                                 case 4:
                                     if (resume)
                                     {
+                                        steps = 0;
+                                        walk = true;
                                         botState = (int)srbotstates.twk_start;
+                                        
                                     }
                                     else
                                     {
+                                        steps = 0;
+                                        walk = true;
                                         botState = (int)srbotstates.pssmenush;
                                     }
                                     break;
@@ -476,6 +484,7 @@ namespace ntrbase.Bot
                                 attempts++;
                                 botresult = 7;
                                 botState = (int)srbotstates.trigger;
+
                             }
                             break;
 
@@ -513,13 +522,42 @@ namespace ntrbase.Bot
                             }
                             else
                             {
-                                attempts++;
-                                botresult = 3;
-                                botState = (int)srbotstates.trigger;
+                                if (walk)
+                                {
+                                    steps++;
+                                    Report("Steps: " + steps);
+                                    if (steps >= 10)
+                                    {
+                                        steps = 0;
+                                        attempts++;
+                                        botresult = 7;
+                                        botState = (int)srbotstates.twk_start;
+                                    }
+                                    else
+                                    {
+                                        attempts++;
+                                        botresult = 3;
+                                        botState = (int)srbotstates.trigger;
+                                    }
+
+                                }
+                                else
+                                {
+                                    attempts++;
+                                    botresult = 3;
+                                    botState = (int)srbotstates.trigger;
+
+                                }
+                                
+                            
                             }
                             break;
 
                         case (int)srbotstates.filter:
+                            if(walk)
+                            {
+                                steps = 0;
+                            }
                             bool testsok = Program.gCmdWindow.CheckSoftResetFilters();
                             if (testsok)
                             {
@@ -538,7 +576,9 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.softreset:
+                            if(!wrong_enc)
                             resetNo++;
+                            wrong_enc = false;
                             Report("Bot: Sof-reset #" + resetNo.ToString());
                             waitTaskbool = Program.helper.waitSoftReset();
                             if (await waitTaskbool)
@@ -553,7 +593,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.skipintro:
-                            await Task.Delay(36 * commanddelay);
+                            await Task.Delay(44 * commanddelay);
                             Report("Bot: Skip intro cutscene");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
@@ -568,7 +608,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.skiptitle:
-                            await Task.Delay(16 * commanddelay);
+                            await Task.Delay(20 * commanddelay);
                             Report("Bot: Skip title screen");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
@@ -576,7 +616,7 @@ namespace ntrbase.Bot
                             break;
 
                         case (int)srbotstates.startgame:
-                            await Task.Delay(20 * commanddelay);
+                            await Task.Delay(24 * commanddelay);
                             Report("Bot: Start game");
                             Program.helper.quickbuton(LookupTable.keyA, commandtime);
                             await Task.Delay(commandtime + commanddelay);
@@ -740,9 +780,9 @@ namespace ntrbase.Bot
                             }
                             else
                             {
-                                Report("Bot: Dialog failed, imposible to check position to continue");
-                                botresult = -1;
-                                botState = (int)srbotstates.botexit;
+                                Report("Bot: Dialog failed, imposible to check position to continue, probably different encounter");
+                                wrong_enc = true;
+                                botState = (int)srbotstates.softreset;
                             }
                             break;
 
