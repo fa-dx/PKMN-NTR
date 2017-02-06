@@ -2871,6 +2871,45 @@ namespace ntrbase
         }
 
         // Stats tab
+        private void clickStatLabel(object sender, MouseEventArgs e)
+        {
+            if (!(ModifierKeys == Keys.Control || ModifierKeys == Keys.Alt))
+                return;
+
+            if (sender == Label_SPC)
+                sender = Label_SPA;
+            int index = Array.IndexOf(new[] { Label_HP, Label_ATK, Label_DEF, Label_SPA, Label_SPD, Label_SPE }, sender);
+
+            if (ModifierKeys == Keys.Alt) // EV
+            {
+                var mt = new[] { TB_HPEV, TB_ATKEV, TB_DEFEV, TB_SPAEV, TB_SPDEV, TB_SPEEV }[index];
+                if (e.Button == MouseButtons.Left) // max
+                    mt.Text = SAV.Generation >= 3
+                        ? Math.Min(Math.Max(510 - Util.ToInt32(TB_EVTotal.Text) + Util.ToInt32(mt.Text), 0), 252).ToString()
+                        : ushort.MaxValue.ToString();
+                else // min
+                    mt.Text = 0.ToString();
+            }
+            else
+                new[] { TB_HPIV, TB_ATKIV, TB_DEFIV, TB_SPAIV, TB_SPDIV, TB_SPEIV }[index].Text =
+                    (e.Button == MouseButtons.Left ? SAV.MaxIV : 0).ToString();
+        }
+
+        private void clickIV(object sender, EventArgs e)
+        {
+            if (ModifierKeys == Keys.Control)
+                if (SAV.Generation < 7)
+                    ((MaskedTextBox)sender).Text = SAV.MaxIV.ToString();
+                else
+                {
+                    var index = Array.IndexOf(new[] { TB_HPIV, TB_ATKIV, TB_DEFIV, TB_SPAIV, TB_SPDIV, TB_SPEIV }, sender);
+                    pkm.HyperTrainInvert(index);
+                    updateIVs(sender, e);
+                }
+            else if (ModifierKeys == Keys.Alt)
+                ((MaskedTextBox)sender).Text = 0.ToString();
+        }
+
         private void updateIVs(object sender, EventArgs e)
         {
             if (changingFields || !fieldsInitialized) return;
@@ -2927,6 +2966,17 @@ namespace ntrbase
             updateStats();
         }
 
+        private void clickEV(object sender, EventArgs e)
+        {
+            MaskedTextBox mt = (MaskedTextBox)sender;
+            if (ModifierKeys == Keys.Control) // EV
+                mt.Text = SAV.Generation >= 3
+                    ? Math.Min(Math.Max(510 - Util.ToInt32(TB_EVTotal.Text) + Util.ToInt32(mt.Text), 0), 252).ToString()
+                    : ushort.MaxValue.ToString();
+            else if (ModifierKeys == Keys.Alt)
+                mt.Text = 0.ToString();
+        }
+
         private void updateEVs(object sender, EventArgs e)
         {
             if (sender is MaskedTextBox)
@@ -2963,6 +3013,30 @@ namespace ntrbase
             updateStats();
         }
 
+        private void updateHPType(object sender, EventArgs e)
+        {
+            if (changingFields || !fieldsInitialized) return;
+            changingFields = true;
+            int[] ivs =
+            {
+                Util.ToInt32(TB_HPIV.Text), Util.ToInt32(TB_ATKIV.Text), Util.ToInt32(TB_DEFIV.Text),
+                Util.ToInt32(TB_SPAIV.Text), Util.ToInt32(TB_SPDIV.Text), Util.ToInt32(TB_SPEIV.Text)
+            };
+
+            // Change IVs to match the new Hidden Power
+            int[] newIVs = PKX.setHPIVs(WinFormsUtil.getIndex(CB_HPType), ivs);
+            TB_HPIV.Text = newIVs[0].ToString();
+            TB_ATKIV.Text = newIVs[1].ToString();
+            TB_DEFIV.Text = newIVs[2].ToString();
+            TB_SPAIV.Text = newIVs[3].ToString();
+            TB_SPDIV.Text = newIVs[4].ToString();
+            TB_SPEIV.Text = newIVs[5].ToString();
+
+            // Refresh View
+            changingFields = false;
+            updateIVs(null, null);
+        }
+
         private void updateRandomIVs(object sender, EventArgs e)
         {
             changingFields = true;
@@ -2994,6 +3068,20 @@ namespace ntrbase
             }
             changingFields = false;
             updateIVs(null, e);
+        }
+
+        private void updateRandomEVs(object sender, EventArgs e)
+        {
+            changingFields = true;
+
+            var tb = new[] { TB_HPEV, TB_ATKEV, TB_DEFEV, TB_SPAEV, TB_SPDEV, TB_SPEEV };
+            bool zero = ModifierKeys == Keys.Control || ModifierKeys == Keys.Shift;
+            var evs = zero ? new uint[6] : PKX.getRandomEVs(SAV.Generation);
+            for (int i = 0; i < 6; i++)
+                tb[i].Text = evs[i].ToString();
+
+            changingFields = false;
+            updateEVs(null, null);
         }
 
         private void updateStats()

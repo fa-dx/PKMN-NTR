@@ -168,7 +168,6 @@
             this.FLP_Stats = new System.Windows.Forms.FlowLayoutPanel();
             this.FLP_StatHeader = new System.Windows.Forms.FlowLayoutPanel();
             this.FLP_HackedStats = new System.Windows.Forms.FlowLayoutPanel();
-            this.CHK_HackedStats = new System.Windows.Forms.CheckBox();
             this.FLP_StatsHeaderRight = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_IVs = new System.Windows.Forms.Label();
             this.Label_EVs = new System.Windows.Forms.Label();
@@ -388,7 +387,6 @@
             this.PAN_Contest.SuspendLayout();
             this.FLP_Stats.SuspendLayout();
             this.FLP_StatHeader.SuspendLayout();
-            this.FLP_HackedStats.SuspendLayout();
             this.FLP_StatsHeaderRight.SuspendLayout();
             this.FLP_HP.SuspendLayout();
             this.FLP_HPRight.SuspendLayout();
@@ -2232,25 +2230,11 @@
             // FLP_HackedStats
             // 
             this.FLP_HackedStats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.FLP_HackedStats.Controls.Add(this.CHK_HackedStats);
             this.FLP_HackedStats.Location = new System.Drawing.Point(0, 0);
             this.FLP_HackedStats.Margin = new System.Windows.Forms.Padding(0);
             this.FLP_HackedStats.Name = "FLP_HackedStats";
             this.FLP_HackedStats.Size = new System.Drawing.Size(107, 21);
             this.FLP_HackedStats.TabIndex = 122;
-            // 
-            // CHK_HackedStats
-            // 
-            this.CHK_HackedStats.AutoSize = true;
-            this.CHK_HackedStats.Enabled = false;
-            this.CHK_HackedStats.Location = new System.Drawing.Point(0, 3);
-            this.CHK_HackedStats.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.CHK_HackedStats.Name = "CHK_HackedStats";
-            this.CHK_HackedStats.Size = new System.Drawing.Size(91, 17);
-            this.CHK_HackedStats.TabIndex = 18;
-            this.CHK_HackedStats.Text = "Hacked Stats";
-            this.CHK_HackedStats.UseVisualStyleBackColor = true;
-            this.CHK_HackedStats.Visible = false;
             // 
             // FLP_StatsHeaderRight
             // 
@@ -2314,6 +2298,7 @@
             this.Label_HP.TabIndex = 19;
             this.Label_HP.Text = "HP:";
             this.Label_HP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_HP.MouseDown += new System.Windows.Forms.MouseEventHandler(this.clickStatLabel);
             // 
             // FLP_HPRight
             // 
@@ -2337,6 +2322,8 @@
             this.TB_HPIV.Size = new System.Drawing.Size(22, 20);
             this.TB_HPIV.TabIndex = 1;
             this.TB_HPIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_HPIV.Click += new System.EventHandler(this.clickIV);
+            this.TB_HPIV.TextChanged += new System.EventHandler(this.updateIVs);
             // 
             // TB_HPEV
             // 
@@ -2348,6 +2335,8 @@
             this.TB_HPEV.Size = new System.Drawing.Size(28, 20);
             this.TB_HPEV.TabIndex = 7;
             this.TB_HPEV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_HPEV.Click += new System.EventHandler(this.clickEV);
+            this.TB_HPEV.TextChanged += new System.EventHandler(this.updateEVs);
             // 
             // Stat_HP
             // 
@@ -2382,6 +2371,7 @@
             this.Label_ATK.TabIndex = 20;
             this.Label_ATK.Text = "Atk:";
             this.Label_ATK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_ATK.MouseDown += new System.Windows.Forms.MouseEventHandler(this.clickStatLabel);
             // 
             // FLP_AtkRight
             // 
@@ -2405,6 +2395,8 @@
             this.TB_ATKIV.Size = new System.Drawing.Size(22, 20);
             this.TB_ATKIV.TabIndex = 2;
             this.TB_ATKIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_ATKIV.Click += new System.EventHandler(this.clickIV);
+            this.TB_ATKIV.TextChanged += new System.EventHandler(this.updateIVs);
             // 
             // TB_ATKEV
             // 
@@ -2416,6 +2408,8 @@
             this.TB_ATKEV.Size = new System.Drawing.Size(28, 20);
             this.TB_ATKEV.TabIndex = 8;
             this.TB_ATKEV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_ATKEV.Click += new System.EventHandler(this.clickEV);
+            this.TB_ATKEV.TextChanged += new System.EventHandler(this.updateEVs);
             // 
             // Stat_ATK
             // 
@@ -2450,6 +2444,7 @@
             this.Label_DEF.TabIndex = 21;
             this.Label_DEF.Text = "Def:";
             this.Label_DEF.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_DEF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.clickStatLabel);
             // 
             // FLP_DefRight
             // 
@@ -2473,6 +2468,8 @@
             this.TB_DEFIV.Size = new System.Drawing.Size(22, 20);
             this.TB_DEFIV.TabIndex = 3;
             this.TB_DEFIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_DEFIV.Click += new System.EventHandler(this.clickIV);
+            this.TB_DEFIV.TextChanged += new System.EventHandler(this.updateIVs);
             // 
             // TB_DEFEV
             // 
@@ -2484,6 +2481,8 @@
             this.TB_DEFEV.Size = new System.Drawing.Size(28, 20);
             this.TB_DEFEV.TabIndex = 9;
             this.TB_DEFEV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_DEFEV.Click += new System.EventHandler(this.clickEV);
+            this.TB_DEFEV.TextChanged += new System.EventHandler(this.updateEVs);
             // 
             // Stat_DEF
             // 
@@ -2530,6 +2529,7 @@
             this.Label_SPA.TabIndex = 22;
             this.Label_SPA.Text = "SpA:";
             this.Label_SPA.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_SPA.MouseDown += new System.Windows.Forms.MouseEventHandler(this.clickStatLabel);
             // 
             // Label_SPC
             // 
@@ -2563,6 +2563,8 @@
             this.TB_SPAIV.Size = new System.Drawing.Size(22, 20);
             this.TB_SPAIV.TabIndex = 4;
             this.TB_SPAIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_SPAIV.Click += new System.EventHandler(this.clickIV);
+            this.TB_SPAIV.TextChanged += new System.EventHandler(this.updateIVs);
             // 
             // TB_SPAEV
             // 
@@ -2574,6 +2576,8 @@
             this.TB_SPAEV.Size = new System.Drawing.Size(28, 20);
             this.TB_SPAEV.TabIndex = 10;
             this.TB_SPAEV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_SPAEV.Click += new System.EventHandler(this.clickEV);
+            this.TB_SPAEV.TextChanged += new System.EventHandler(this.updateEVs);
             // 
             // Stat_SPA
             // 
@@ -2608,6 +2612,7 @@
             this.Label_SPD.TabIndex = 23;
             this.Label_SPD.Text = "SpD:";
             this.Label_SPD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_SPD.MouseDown += new System.Windows.Forms.MouseEventHandler(this.clickStatLabel);
             // 
             // FLP_SpDRight
             // 
@@ -2631,6 +2636,8 @@
             this.TB_SPDIV.Size = new System.Drawing.Size(22, 20);
             this.TB_SPDIV.TabIndex = 5;
             this.TB_SPDIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_SPDIV.Click += new System.EventHandler(this.clickIV);
+            this.TB_SPDIV.TextChanged += new System.EventHandler(this.updateIVs);
             // 
             // TB_SPDEV
             // 
@@ -2642,6 +2649,8 @@
             this.TB_SPDEV.Size = new System.Drawing.Size(28, 20);
             this.TB_SPDEV.TabIndex = 11;
             this.TB_SPDEV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_SPDEV.Click += new System.EventHandler(this.clickEV);
+            this.TB_SPDEV.TextChanged += new System.EventHandler(this.updateEVs);
             // 
             // Stat_SPD
             // 
@@ -2676,6 +2685,7 @@
             this.Label_SPE.TabIndex = 24;
             this.Label_SPE.Text = "Spe:";
             this.Label_SPE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_SPE.MouseDown += new System.Windows.Forms.MouseEventHandler(this.clickStatLabel);
             // 
             // FLP_SpeRight
             // 
@@ -2699,6 +2709,8 @@
             this.TB_SPEIV.Size = new System.Drawing.Size(22, 20);
             this.TB_SPEIV.TabIndex = 6;
             this.TB_SPEIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_SPEIV.Click += new System.EventHandler(this.clickIV);
+            this.TB_SPEIV.TextChanged += new System.EventHandler(this.updateIVs);
             // 
             // TB_SPEEV
             // 
@@ -2710,6 +2722,8 @@
             this.TB_SPEEV.Size = new System.Drawing.Size(28, 20);
             this.TB_SPEEV.TabIndex = 12;
             this.TB_SPEEV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_SPEEV.Click += new System.EventHandler(this.clickEV);
+            this.TB_SPEEV.TextChanged += new System.EventHandler(this.updateEVs);
             // 
             // Stat_SPE
             // 
@@ -2824,6 +2838,7 @@
             this.CB_HPType.Name = "CB_HPType";
             this.CB_HPType.Size = new System.Drawing.Size(70, 21);
             this.CB_HPType.TabIndex = 44;
+            this.CB_HPType.SelectedIndexChanged += new System.EventHandler(this.updateHPType);
             // 
             // FLP_Characteristic
             // 
@@ -2864,6 +2879,7 @@
             this.BTN_RandomEVs.TabIndex = 14;
             this.BTN_RandomEVs.Text = "Randomize EVs";
             this.BTN_RandomEVs.UseVisualStyleBackColor = true;
+            this.BTN_RandomEVs.Click += new System.EventHandler(this.updateRandomEVs);
             // 
             // BTN_RandomIVs
             // 
@@ -2873,6 +2889,7 @@
             this.BTN_RandomIVs.TabIndex = 13;
             this.BTN_RandomIVs.Text = "Randomize IVs";
             this.BTN_RandomIVs.UseVisualStyleBackColor = true;
+            this.BTN_RandomIVs.Click += new System.EventHandler(this.updateRandomIVs);
             // 
             // Tab_Attacks
             // 
@@ -4327,8 +4344,6 @@
             this.PAN_Contest.PerformLayout();
             this.FLP_Stats.ResumeLayout(false);
             this.FLP_StatHeader.ResumeLayout(false);
-            this.FLP_HackedStats.ResumeLayout(false);
-            this.FLP_HackedStats.PerformLayout();
             this.FLP_StatsHeaderRight.ResumeLayout(false);
             this.FLP_HP.ResumeLayout(false);
             this.FLP_HPRight.ResumeLayout(false);
@@ -4567,7 +4582,6 @@
         private System.Windows.Forms.FlowLayoutPanel FLP_Stats;
         private System.Windows.Forms.FlowLayoutPanel FLP_StatHeader;
         private System.Windows.Forms.FlowLayoutPanel FLP_HackedStats;
-        private System.Windows.Forms.CheckBox CHK_HackedStats;
         private System.Windows.Forms.FlowLayoutPanel FLP_StatsHeaderRight;
         private System.Windows.Forms.Label Label_IVs;
         private System.Windows.Forms.Label Label_EVs;
