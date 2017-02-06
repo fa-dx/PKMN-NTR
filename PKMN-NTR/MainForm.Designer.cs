@@ -31,7 +31,6 @@
             this.lb_update = new System.Windows.Forms.Label();
             this.onlyView = new System.Windows.Forms.CheckBox();
             this.readResult = new System.Windows.Forms.TextBox();
-            this.stopBotButton = new System.Windows.Forms.Button();
             this.label71 = new System.Windows.Forms.Label();
             this.radioBoxes = new System.Windows.Forms.RadioButton();
             this.radioDaycare = new System.Windows.Forms.RadioButton();
@@ -54,6 +53,7 @@
             this.FLP_PIDLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_PID = new System.Windows.Forms.Label();
             this.BTN_Shinytize = new System.Windows.Forms.Button();
+            this.Label_IsShiny = new System.Windows.Forms.PictureBox();
             this.FLP_PIDRight = new System.Windows.Forms.FlowLayoutPanel();
             this.TB_PID = new System.Windows.Forms.TextBox();
             this.Label_Gender = new System.Windows.Forms.Label();
@@ -86,7 +86,6 @@
             this.TB_Friendship = new System.Windows.Forms.MaskedTextBox();
             this.Label_Form = new System.Windows.Forms.Label();
             this.CB_Form = new System.Windows.Forms.ComboBox();
-            this.MT_Form = new System.Windows.Forms.MaskedTextBox();
             this.FLP_Ability = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_Ability = new System.Windows.Forms.Label();
             this.FLP_AbilityRight = new System.Windows.Forms.FlowLayoutPanel();
@@ -134,6 +133,7 @@
             this.FLP_Ball = new System.Windows.Forms.FlowLayoutPanel();
             this.FLP_BallLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_Ball = new System.Windows.Forms.Label();
+            this.PB_Ball = new System.Windows.Forms.PictureBox();
             this.CB_Ball = new System.Windows.Forms.ComboBox();
             this.FLP_MetLevel = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_MetLevel = new System.Windows.Forms.Label();
@@ -226,7 +226,15 @@
             this.BTN_RandomEVs = new System.Windows.Forms.Button();
             this.BTN_RandomIVs = new System.Windows.Forms.Button();
             this.Tab_Attacks = new System.Windows.Forms.TabPage();
+            this.PB_WarnMove4 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove3 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove2 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove1 = new System.Windows.Forms.PictureBox();
             this.GB_RelearnMoves = new System.Windows.Forms.GroupBox();
+            this.PB_WarnRelearn4 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn3 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn2 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn1 = new System.Windows.Forms.PictureBox();
             this.CB_RelearnMove4 = new System.Windows.Forms.ComboBox();
             this.CB_RelearnMove3 = new System.Windows.Forms.ComboBox();
             this.CB_RelearnMove2 = new System.Windows.Forms.ComboBox();
@@ -258,6 +266,18 @@
             this.Label_PrevOT = new System.Windows.Forms.Label();
             this.BTN_RerollEC = new System.Windows.Forms.Button();
             this.GB_Markings = new System.Windows.Forms.GroupBox();
+            this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
+            this.PB_MarkVC = new System.Windows.Forms.PictureBox();
+            this.PB_MarkAlola = new System.Windows.Forms.PictureBox();
+            this.PB_Mark6 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkPentagon = new System.Windows.Forms.PictureBox();
+            this.PB_Mark3 = new System.Windows.Forms.PictureBox();
+            this.PB_Mark5 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkCured = new System.Windows.Forms.PictureBox();
+            this.PB_Mark2 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
+            this.PB_Mark1 = new System.Windows.Forms.PictureBox();
+            this.PB_Mark4 = new System.Windows.Forms.PictureBox();
             this.GB_ExtraBytes = new System.Windows.Forms.GroupBox();
             this.TB_ExtraByte = new System.Windows.Forms.MaskedTextBox();
             this.CB_ExtraBytes = new System.Windows.Forms.ComboBox();
@@ -318,30 +338,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.lb_pkmnntrver = new System.Windows.Forms.Label();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
-            this.shinypic = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.Label_IsShiny = new System.Windows.Forms.PictureBox();
-            this.PB_Ball = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove4 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove3 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove2 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove1 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn4 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn3 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn2 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn1 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
-            this.PB_MarkVC = new System.Windows.Forms.PictureBox();
-            this.PB_MarkAlola = new System.Windows.Forms.PictureBox();
-            this.PB_Mark6 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkPentagon = new System.Windows.Forms.PictureBox();
-            this.PB_Mark3 = new System.Windows.Forms.PictureBox();
-            this.PB_Mark5 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkCured = new System.Windows.Forms.PictureBox();
-            this.PB_Mark2 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
-            this.PB_Mark1 = new System.Windows.Forms.PictureBox();
-            this.PB_Mark4 = new System.Windows.Forms.PictureBox();
+            this.dragout = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
@@ -351,6 +348,7 @@
             this.FLP_Main.SuspendLayout();
             this.FLP_PID.SuspendLayout();
             this.FLP_PIDLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).BeginInit();
             this.FLP_PIDRight.SuspendLayout();
             this.FLP_Species.SuspendLayout();
             this.FLP_Nickname.SuspendLayout();
@@ -380,6 +378,7 @@
             this.FLP_MetLocation.SuspendLayout();
             this.FLP_Ball.SuspendLayout();
             this.FLP_BallLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).BeginInit();
             this.FLP_MetLevel.SuspendLayout();
             this.FLP_MetDate.SuspendLayout();
             this.FLP_Fateful.SuspendLayout();
@@ -409,12 +408,32 @@
             this.FLP_HPType.SuspendLayout();
             this.FLP_Characteristic.SuspendLayout();
             this.Tab_Attacks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).BeginInit();
             this.GB_RelearnMoves.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
             this.GB_CurrentMoves.SuspendLayout();
             this.Tab_OTMisc.SuspendLayout();
             this.FLP_PKMEditors.SuspendLayout();
             this.GB_nOT.SuspendLayout();
             this.GB_Markings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
             this.GB_ExtraBytes.SuspendLayout();
             this.GB_OT.SuspendLayout();
             this.Tabs_General.SuspendLayout();
@@ -431,30 +450,7 @@
             this.Tab_About.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.shinypic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dragout)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -600,18 +596,6 @@
             this.readResult.ReadOnly = true;
             this.readResult.Size = new System.Drawing.Size(90, 20);
             this.readResult.TabIndex = 1;
-            // 
-            // stopBotButton
-            // 
-            this.stopBotButton.Enabled = false;
-            this.stopBotButton.Location = new System.Drawing.Point(6, 237);
-            this.stopBotButton.Name = "stopBotButton";
-            this.stopBotButton.Size = new System.Drawing.Size(75, 23);
-            this.stopBotButton.TabIndex = 4;
-            this.stopBotButton.Text = "Stop Bot";
-            this.stopBotButton.UseVisualStyleBackColor = true;
-            this.stopBotButton.Visible = false;
-            this.stopBotButton.Click += new System.EventHandler(this.stopBotButton_Click);
             // 
             // label71
             // 
@@ -901,6 +885,21 @@
             this.BTN_Shinytize.TabIndex = 1;
             this.BTN_Shinytize.Text = "☆";
             this.BTN_Shinytize.UseVisualStyleBackColor = true;
+            this.BTN_Shinytize.Click += new System.EventHandler(this.updateShinyPID);
+            // 
+            // Label_IsShiny
+            // 
+            this.Label_IsShiny.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.Label_IsShiny.Image = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.Image")));
+            this.Label_IsShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.InitialImage")));
+            this.Label_IsShiny.Location = new System.Drawing.Point(36, 2);
+            this.Label_IsShiny.Margin = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.Label_IsShiny.Name = "Label_IsShiny";
+            this.Label_IsShiny.Size = new System.Drawing.Size(20, 20);
+            this.Label_IsShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Label_IsShiny.TabIndex = 62;
+            this.Label_IsShiny.TabStop = false;
+            this.Label_IsShiny.Visible = false;
             // 
             // FLP_PIDRight
             // 
@@ -926,6 +925,8 @@
             this.TB_PID.Size = new System.Drawing.Size(60, 20);
             this.TB_PID.TabIndex = 1;
             this.TB_PID.Text = "12345678";
+            this.TB_PID.TextChanged += new System.EventHandler(this.update_ID);
+            this.TB_PID.MouseHover += new System.EventHandler(this.updateTSV);
             // 
             // Label_Gender
             // 
@@ -938,6 +939,7 @@
             this.Label_Gender.TabIndex = 55;
             this.Label_Gender.Text = "-";
             this.Label_Gender.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Label_Gender.Click += new System.EventHandler(this.clickGender);
             // 
             // BTN_RerollPID
             // 
@@ -950,6 +952,7 @@
             this.BTN_RerollPID.TabIndex = 1;
             this.BTN_RerollPID.Text = "Reroll";
             this.BTN_RerollPID.UseVisualStyleBackColor = true;
+            this.BTN_RerollPID.Click += new System.EventHandler(this.updateRandomPID);
             // 
             // FLP_Species
             // 
@@ -972,6 +975,7 @@
             this.Label_Species.TabIndex = 1;
             this.Label_Species.Text = "Species:";
             this.Label_Species.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_Species.Click += new System.EventHandler(this.updateNickname);
             // 
             // CB_Species
             // 
@@ -983,6 +987,10 @@
             this.CB_Species.Name = "CB_Species";
             this.CB_Species.Size = new System.Drawing.Size(126, 21);
             this.CB_Species.TabIndex = 3;
+            this.CB_Species.SelectedIndexChanged += new System.EventHandler(this.validateComboBox2);
+            this.CB_Species.SelectedValueChanged += new System.EventHandler(this.updateSpecies);
+            this.CB_Species.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_Species.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // FLP_Nickname
             // 
@@ -1017,6 +1025,7 @@
             this.CHK_Nicknamed.Text = "Nickname";
             this.CHK_Nicknamed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.CHK_Nicknamed.UseVisualStyleBackColor = true;
+            this.CHK_Nicknamed.CheckedChanged += new System.EventHandler(this.updateNickname);
             // 
             // TB_Nickname
             // 
@@ -1027,6 +1036,8 @@
             this.TB_Nickname.Name = "TB_Nickname";
             this.TB_Nickname.Size = new System.Drawing.Size(126, 20);
             this.TB_Nickname.TabIndex = 5;
+            this.TB_Nickname.TextChanged += new System.EventHandler(this.updateIsNicknamed);
+            this.TB_Nickname.MouseDown += new System.Windows.Forms.MouseEventHandler(this.updateNicknameClick);
             // 
             // FLP_EXPLevel
             // 
@@ -1094,6 +1105,7 @@
             this.TB_Level.Size = new System.Drawing.Size(22, 20);
             this.TB_Level.TabIndex = 8;
             this.TB_Level.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_Level.TextChanged += new System.EventHandler(this.updateEXPLevel);
             // 
             // MT_Level
             // 
@@ -1106,6 +1118,7 @@
             this.MT_Level.Size = new System.Drawing.Size(22, 20);
             this.MT_Level.TabIndex = 17;
             this.MT_Level.Visible = false;
+            this.MT_Level.TextChanged += new System.EventHandler(this.updateEXPLevel);
             // 
             // FLP_Nature
             // 
@@ -1138,6 +1151,10 @@
             this.CB_Nature.Name = "CB_Nature";
             this.CB_Nature.Size = new System.Drawing.Size(126, 21);
             this.CB_Nature.TabIndex = 9;
+            this.CB_Nature.SelectedIndexChanged += new System.EventHandler(this.validateComboBox2);
+            this.CB_Nature.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_Nature.MouseHover += new System.EventHandler(this.updateNatureModification);
+            this.CB_Nature.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // FLP_HeldItem
             // 
@@ -1171,6 +1188,9 @@
             this.CB_HeldItem.Name = "CB_HeldItem";
             this.CB_HeldItem.Size = new System.Drawing.Size(126, 21);
             this.CB_HeldItem.TabIndex = 10;
+            this.CB_HeldItem.SelectedIndexChanged += new System.EventHandler(this.validateComboBox2);
+            this.CB_HeldItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_HeldItem.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // FLP_FriendshipForm
             // 
@@ -1221,7 +1241,6 @@
             this.FLP_FriendshipFormRight.Controls.Add(this.TB_Friendship);
             this.FLP_FriendshipFormRight.Controls.Add(this.Label_Form);
             this.FLP_FriendshipFormRight.Controls.Add(this.CB_Form);
-            this.FLP_FriendshipFormRight.Controls.Add(this.MT_Form);
             this.FLP_FriendshipFormRight.Location = new System.Drawing.Point(110, 0);
             this.FLP_FriendshipFormRight.Margin = new System.Windows.Forms.Padding(0);
             this.FLP_FriendshipFormRight.Name = "FLP_FriendshipFormRight";
@@ -1238,6 +1257,7 @@
             this.TB_Friendship.Size = new System.Drawing.Size(22, 20);
             this.TB_Friendship.TabIndex = 11;
             this.TB_Friendship.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_Friendship.TextChanged += new System.EventHandler(this.update255_MTB);
             // 
             // Label_Form
             // 
@@ -1262,18 +1282,7 @@
             this.CB_Form.Name = "CB_Form";
             this.CB_Form.Size = new System.Drawing.Size(71, 21);
             this.CB_Form.TabIndex = 12;
-            // 
-            // MT_Form
-            // 
-            this.MT_Form.Enabled = false;
-            this.MT_Form.Location = new System.Drawing.Point(126, 0);
-            this.MT_Form.Margin = new System.Windows.Forms.Padding(0);
-            this.MT_Form.Mask = "00";
-            this.MT_Form.Name = "MT_Form";
-            this.MT_Form.Size = new System.Drawing.Size(19, 20);
-            this.MT_Form.TabIndex = 18;
-            this.MT_Form.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.MT_Form.Visible = false;
+            this.CB_Form.SelectedIndexChanged += new System.EventHandler(this.updateForm);
             // 
             // FLP_Ability
             // 
@@ -1320,6 +1329,9 @@
             this.CB_Ability.Name = "CB_Ability";
             this.CB_Ability.Size = new System.Drawing.Size(126, 21);
             this.CB_Ability.TabIndex = 13;
+            this.CB_Ability.SelectedIndexChanged += new System.EventHandler(this.validateComboBox2);
+            this.CB_Ability.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_Ability.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // DEV_Ability
             // 
@@ -1379,6 +1391,7 @@
             this.CB_Language.Name = "CB_Language";
             this.CB_Language.Size = new System.Drawing.Size(126, 21);
             this.CB_Language.TabIndex = 15;
+            this.CB_Language.SelectedIndexChanged += new System.EventHandler(this.updateNickname);
             // 
             // FLP_EggPKRS
             // 
@@ -1436,6 +1449,7 @@
             this.CHK_Infected.Text = "Infected";
             this.CHK_Infected.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.CHK_Infected.UseVisualStyleBackColor = true;
+            this.CHK_Infected.CheckedChanged += new System.EventHandler(this.updatePKRSInfected);
             // 
             // CHK_Cured
             // 
@@ -1448,6 +1462,7 @@
             this.CHK_Cured.Text = "Cured";
             this.CHK_Cured.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.CHK_Cured.UseVisualStyleBackColor = true;
+            this.CHK_Cured.CheckedChanged += new System.EventHandler(this.updatePKRSCured);
             // 
             // FLP_PKRS
             // 
@@ -1510,6 +1525,7 @@
             this.CB_PKRSStrain.Size = new System.Drawing.Size(43, 21);
             this.CB_PKRSStrain.TabIndex = 19;
             this.CB_PKRSStrain.Visible = false;
+            this.CB_PKRSStrain.SelectedIndexChanged += new System.EventHandler(this.updatePKRSstrain);
             // 
             // Label_PKRSdays
             // 
@@ -1532,6 +1548,7 @@
             this.CB_PKRSDays.Size = new System.Drawing.Size(30, 21);
             this.CB_PKRSDays.TabIndex = 20;
             this.CB_PKRSDays.Visible = false;
+            this.CB_PKRSDays.SelectedIndexChanged += new System.EventHandler(this.updatePKRSdays);
             // 
             // FLP_Country
             // 
@@ -1565,6 +1582,8 @@
             this.CB_Country.Name = "CB_Country";
             this.CB_Country.Size = new System.Drawing.Size(126, 21);
             this.CB_Country.TabIndex = 21;
+            this.CB_Country.SelectedIndexChanged += new System.EventHandler(this.updateCountry);
+            this.CB_Country.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
             // 
             // FLP_SubRegion
             // 
@@ -1823,6 +1842,15 @@
             this.Label_Ball.TabIndex = 2;
             this.Label_Ball.Text = "Ball:";
             this.Label_Ball.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // PB_Ball
+            // 
+            this.PB_Ball.Location = new System.Drawing.Point(60, 0);
+            this.PB_Ball.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.PB_Ball.Name = "PB_Ball";
+            this.PB_Ball.Size = new System.Drawing.Size(20, 20);
+            this.PB_Ball.TabIndex = 3;
+            this.PB_Ball.TabStop = false;
             // 
             // CB_Ball
             // 
@@ -2850,6 +2878,46 @@
             this.Tab_Attacks.Text = "Attacks";
             this.Tab_Attacks.UseVisualStyleBackColor = true;
             // 
+            // PB_WarnMove4
+            // 
+            this.PB_WarnMove4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove4.Image")));
+            this.PB_WarnMove4.Location = new System.Drawing.Point(8, 113);
+            this.PB_WarnMove4.Name = "PB_WarnMove4";
+            this.PB_WarnMove4.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove4.TabIndex = 5;
+            this.PB_WarnMove4.TabStop = false;
+            this.PB_WarnMove4.Visible = false;
+            // 
+            // PB_WarnMove3
+            // 
+            this.PB_WarnMove3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove3.Image")));
+            this.PB_WarnMove3.Location = new System.Drawing.Point(8, 91);
+            this.PB_WarnMove3.Name = "PB_WarnMove3";
+            this.PB_WarnMove3.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove3.TabIndex = 4;
+            this.PB_WarnMove3.TabStop = false;
+            this.PB_WarnMove3.Visible = false;
+            // 
+            // PB_WarnMove2
+            // 
+            this.PB_WarnMove2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove2.Image")));
+            this.PB_WarnMove2.Location = new System.Drawing.Point(8, 69);
+            this.PB_WarnMove2.Name = "PB_WarnMove2";
+            this.PB_WarnMove2.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove2.TabIndex = 3;
+            this.PB_WarnMove2.TabStop = false;
+            this.PB_WarnMove2.Visible = false;
+            // 
+            // PB_WarnMove1
+            // 
+            this.PB_WarnMove1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove1.Image")));
+            this.PB_WarnMove1.Location = new System.Drawing.Point(8, 47);
+            this.PB_WarnMove1.Name = "PB_WarnMove1";
+            this.PB_WarnMove1.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove1.TabIndex = 2;
+            this.PB_WarnMove1.TabStop = false;
+            this.PB_WarnMove1.Visible = false;
+            // 
             // GB_RelearnMoves
             // 
             this.GB_RelearnMoves.Controls.Add(this.PB_WarnRelearn4);
@@ -2866,6 +2934,46 @@
             this.GB_RelearnMoves.TabIndex = 1;
             this.GB_RelearnMoves.TabStop = false;
             this.GB_RelearnMoves.Text = "Relearn Moves";
+            // 
+            // PB_WarnRelearn4
+            // 
+            this.PB_WarnRelearn4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn4.Image")));
+            this.PB_WarnRelearn4.Location = new System.Drawing.Point(22, 93);
+            this.PB_WarnRelearn4.Name = "PB_WarnRelearn4";
+            this.PB_WarnRelearn4.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn4.TabIndex = 19;
+            this.PB_WarnRelearn4.TabStop = false;
+            this.PB_WarnRelearn4.Visible = false;
+            // 
+            // PB_WarnRelearn3
+            // 
+            this.PB_WarnRelearn3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn3.Image")));
+            this.PB_WarnRelearn3.Location = new System.Drawing.Point(22, 71);
+            this.PB_WarnRelearn3.Name = "PB_WarnRelearn3";
+            this.PB_WarnRelearn3.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn3.TabIndex = 18;
+            this.PB_WarnRelearn3.TabStop = false;
+            this.PB_WarnRelearn3.Visible = false;
+            // 
+            // PB_WarnRelearn2
+            // 
+            this.PB_WarnRelearn2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn2.Image")));
+            this.PB_WarnRelearn2.Location = new System.Drawing.Point(22, 49);
+            this.PB_WarnRelearn2.Name = "PB_WarnRelearn2";
+            this.PB_WarnRelearn2.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn2.TabIndex = 17;
+            this.PB_WarnRelearn2.TabStop = false;
+            this.PB_WarnRelearn2.Visible = false;
+            // 
+            // PB_WarnRelearn1
+            // 
+            this.PB_WarnRelearn1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn1.Image")));
+            this.PB_WarnRelearn1.Location = new System.Drawing.Point(22, 27);
+            this.PB_WarnRelearn1.Name = "PB_WarnRelearn1";
+            this.PB_WarnRelearn1.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn1.TabIndex = 6;
+            this.PB_WarnRelearn1.TabStop = false;
+            this.PB_WarnRelearn1.Visible = false;
             // 
             // CB_RelearnMove4
             // 
@@ -3245,6 +3353,140 @@
             this.GB_Markings.TabIndex = 4;
             this.GB_Markings.TabStop = false;
             this.GB_Markings.Text = "Markings";
+            // 
+            // PB_MarkHorohoro
+            // 
+            this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
+            this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
+            this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkHorohoro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkHorohoro.TabIndex = 11;
+            this.PB_MarkHorohoro.TabStop = false;
+            // 
+            // PB_MarkVC
+            // 
+            this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
+            this.PB_MarkVC.Name = "PB_MarkVC";
+            this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkVC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkVC.TabIndex = 10;
+            this.PB_MarkVC.TabStop = false;
+            // 
+            // PB_MarkAlola
+            // 
+            this.PB_MarkAlola.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.Image")));
+            this.PB_MarkAlola.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.InitialImage")));
+            this.PB_MarkAlola.Location = new System.Drawing.Point(68, 15);
+            this.PB_MarkAlola.Name = "PB_MarkAlola";
+            this.PB_MarkAlola.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkAlola.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkAlola.TabIndex = 9;
+            this.PB_MarkAlola.TabStop = false;
+            // 
+            // PB_Mark6
+            // 
+            this.PB_Mark6.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.Image")));
+            this.PB_Mark6.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.InitialImage")));
+            this.PB_Mark6.Location = new System.Drawing.Point(110, 36);
+            this.PB_Mark6.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark6.Name = "PB_Mark6";
+            this.PB_Mark6.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark6.TabIndex = 5;
+            this.PB_Mark6.TabStop = false;
+            // 
+            // PB_MarkPentagon
+            // 
+            this.PB_MarkPentagon.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.Image")));
+            this.PB_MarkPentagon.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.InitialImage")));
+            this.PB_MarkPentagon.Location = new System.Drawing.Point(47, 15);
+            this.PB_MarkPentagon.Name = "PB_MarkPentagon";
+            this.PB_MarkPentagon.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkPentagon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkPentagon.TabIndex = 8;
+            this.PB_MarkPentagon.TabStop = false;
+            // 
+            // PB_Mark3
+            // 
+            this.PB_Mark3.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.Image")));
+            this.PB_Mark3.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.InitialImage")));
+            this.PB_Mark3.Location = new System.Drawing.Point(47, 36);
+            this.PB_Mark3.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark3.Name = "PB_Mark3";
+            this.PB_Mark3.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark3.TabIndex = 2;
+            this.PB_Mark3.TabStop = false;
+            // 
+            // PB_Mark5
+            // 
+            this.PB_Mark5.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.Image")));
+            this.PB_Mark5.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.InitialImage")));
+            this.PB_Mark5.Location = new System.Drawing.Point(89, 36);
+            this.PB_Mark5.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark5.Name = "PB_Mark5";
+            this.PB_Mark5.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark5.TabIndex = 4;
+            this.PB_Mark5.TabStop = false;
+            // 
+            // PB_MarkCured
+            // 
+            this.PB_MarkCured.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.Image")));
+            this.PB_MarkCured.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.InitialImage")));
+            this.PB_MarkCured.Location = new System.Drawing.Point(26, 15);
+            this.PB_MarkCured.Name = "PB_MarkCured";
+            this.PB_MarkCured.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkCured.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkCured.TabIndex = 7;
+            this.PB_MarkCured.TabStop = false;
+            // 
+            // PB_Mark2
+            // 
+            this.PB_Mark2.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.Image")));
+            this.PB_Mark2.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.InitialImage")));
+            this.PB_Mark2.Location = new System.Drawing.Point(26, 36);
+            this.PB_Mark2.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark2.Name = "PB_Mark2";
+            this.PB_Mark2.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark2.TabIndex = 1;
+            this.PB_Mark2.TabStop = false;
+            // 
+            // PB_MarkShiny
+            // 
+            this.PB_MarkShiny.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.Image")));
+            this.PB_MarkShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.InitialImage")));
+            this.PB_MarkShiny.Location = new System.Drawing.Point(5, 15);
+            this.PB_MarkShiny.Name = "PB_MarkShiny";
+            this.PB_MarkShiny.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkShiny.TabIndex = 6;
+            this.PB_MarkShiny.TabStop = false;
+            // 
+            // PB_Mark1
+            // 
+            this.PB_Mark1.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.Image")));
+            this.PB_Mark1.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.InitialImage")));
+            this.PB_Mark1.Location = new System.Drawing.Point(5, 36);
+            this.PB_Mark1.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark1.Name = "PB_Mark1";
+            this.PB_Mark1.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark1.TabIndex = 0;
+            this.PB_Mark1.TabStop = false;
+            // 
+            // PB_Mark4
+            // 
+            this.PB_Mark4.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.Image")));
+            this.PB_Mark4.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.InitialImage")));
+            this.PB_Mark4.Location = new System.Drawing.Point(68, 36);
+            this.PB_Mark4.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark4.Name = "PB_Mark4";
+            this.PB_Mark4.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark4.TabIndex = 3;
+            this.PB_Mark4.TabStop = false;
             // 
             // GB_ExtraBytes
             // 
@@ -3742,7 +3984,6 @@
             // 
             this.Tab_About.BackColor = System.Drawing.SystemColors.Control;
             this.Tab_About.Controls.Add(this.tableLayoutPanel2);
-            this.Tab_About.Controls.Add(this.stopBotButton);
             this.Tab_About.Location = new System.Drawing.Point(4, 22);
             this.Tab_About.Margin = new System.Windows.Forms.Padding(6);
             this.Tab_About.Name = "Tab_About";
@@ -3980,258 +4221,13 @@
             this.PB_Legal.TabIndex = 102;
             this.PB_Legal.TabStop = false;
             // 
-            // shinypic
+            // dragout
             // 
-            this.shinypic.Location = new System.Drawing.Point(551, 12);
-            this.shinypic.Name = "shinypic";
-            this.shinypic.Size = new System.Drawing.Size(10, 10);
-            this.shinypic.TabIndex = 19;
-            this.shinypic.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(551, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 30);
-            this.pictureBox2.TabIndex = 18;
-            this.pictureBox2.TabStop = false;
-            // 
-            // Label_IsShiny
-            // 
-            this.Label_IsShiny.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.Label_IsShiny.Image = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.Image")));
-            this.Label_IsShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.InitialImage")));
-            this.Label_IsShiny.Location = new System.Drawing.Point(36, 2);
-            this.Label_IsShiny.Margin = new System.Windows.Forms.Padding(0, 2, 2, 0);
-            this.Label_IsShiny.Name = "Label_IsShiny";
-            this.Label_IsShiny.Size = new System.Drawing.Size(20, 20);
-            this.Label_IsShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Label_IsShiny.TabIndex = 62;
-            this.Label_IsShiny.TabStop = false;
-            this.Label_IsShiny.Visible = false;
-            // 
-            // PB_Ball
-            // 
-            this.PB_Ball.Location = new System.Drawing.Point(60, 0);
-            this.PB_Ball.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.PB_Ball.Name = "PB_Ball";
-            this.PB_Ball.Size = new System.Drawing.Size(20, 20);
-            this.PB_Ball.TabIndex = 3;
-            this.PB_Ball.TabStop = false;
-            // 
-            // PB_WarnMove4
-            // 
-            this.PB_WarnMove4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove4.Image")));
-            this.PB_WarnMove4.Location = new System.Drawing.Point(8, 113);
-            this.PB_WarnMove4.Name = "PB_WarnMove4";
-            this.PB_WarnMove4.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove4.TabIndex = 5;
-            this.PB_WarnMove4.TabStop = false;
-            this.PB_WarnMove4.Visible = false;
-            // 
-            // PB_WarnMove3
-            // 
-            this.PB_WarnMove3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove3.Image")));
-            this.PB_WarnMove3.Location = new System.Drawing.Point(8, 91);
-            this.PB_WarnMove3.Name = "PB_WarnMove3";
-            this.PB_WarnMove3.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove3.TabIndex = 4;
-            this.PB_WarnMove3.TabStop = false;
-            this.PB_WarnMove3.Visible = false;
-            // 
-            // PB_WarnMove2
-            // 
-            this.PB_WarnMove2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove2.Image")));
-            this.PB_WarnMove2.Location = new System.Drawing.Point(8, 69);
-            this.PB_WarnMove2.Name = "PB_WarnMove2";
-            this.PB_WarnMove2.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove2.TabIndex = 3;
-            this.PB_WarnMove2.TabStop = false;
-            this.PB_WarnMove2.Visible = false;
-            // 
-            // PB_WarnMove1
-            // 
-            this.PB_WarnMove1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove1.Image")));
-            this.PB_WarnMove1.Location = new System.Drawing.Point(8, 47);
-            this.PB_WarnMove1.Name = "PB_WarnMove1";
-            this.PB_WarnMove1.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove1.TabIndex = 2;
-            this.PB_WarnMove1.TabStop = false;
-            this.PB_WarnMove1.Visible = false;
-            // 
-            // PB_WarnRelearn4
-            // 
-            this.PB_WarnRelearn4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn4.Image")));
-            this.PB_WarnRelearn4.Location = new System.Drawing.Point(22, 93);
-            this.PB_WarnRelearn4.Name = "PB_WarnRelearn4";
-            this.PB_WarnRelearn4.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn4.TabIndex = 19;
-            this.PB_WarnRelearn4.TabStop = false;
-            this.PB_WarnRelearn4.Visible = false;
-            // 
-            // PB_WarnRelearn3
-            // 
-            this.PB_WarnRelearn3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn3.Image")));
-            this.PB_WarnRelearn3.Location = new System.Drawing.Point(22, 71);
-            this.PB_WarnRelearn3.Name = "PB_WarnRelearn3";
-            this.PB_WarnRelearn3.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn3.TabIndex = 18;
-            this.PB_WarnRelearn3.TabStop = false;
-            this.PB_WarnRelearn3.Visible = false;
-            // 
-            // PB_WarnRelearn2
-            // 
-            this.PB_WarnRelearn2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn2.Image")));
-            this.PB_WarnRelearn2.Location = new System.Drawing.Point(22, 49);
-            this.PB_WarnRelearn2.Name = "PB_WarnRelearn2";
-            this.PB_WarnRelearn2.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn2.TabIndex = 17;
-            this.PB_WarnRelearn2.TabStop = false;
-            this.PB_WarnRelearn2.Visible = false;
-            // 
-            // PB_WarnRelearn1
-            // 
-            this.PB_WarnRelearn1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn1.Image")));
-            this.PB_WarnRelearn1.Location = new System.Drawing.Point(22, 27);
-            this.PB_WarnRelearn1.Name = "PB_WarnRelearn1";
-            this.PB_WarnRelearn1.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn1.TabIndex = 6;
-            this.PB_WarnRelearn1.TabStop = false;
-            this.PB_WarnRelearn1.Visible = false;
-            // 
-            // PB_MarkHorohoro
-            // 
-            this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
-            this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
-            this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkHorohoro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkHorohoro.TabIndex = 11;
-            this.PB_MarkHorohoro.TabStop = false;
-            // 
-            // PB_MarkVC
-            // 
-            this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
-            this.PB_MarkVC.Name = "PB_MarkVC";
-            this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkVC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkVC.TabIndex = 10;
-            this.PB_MarkVC.TabStop = false;
-            // 
-            // PB_MarkAlola
-            // 
-            this.PB_MarkAlola.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.Image")));
-            this.PB_MarkAlola.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.InitialImage")));
-            this.PB_MarkAlola.Location = new System.Drawing.Point(68, 15);
-            this.PB_MarkAlola.Name = "PB_MarkAlola";
-            this.PB_MarkAlola.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkAlola.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkAlola.TabIndex = 9;
-            this.PB_MarkAlola.TabStop = false;
-            // 
-            // PB_Mark6
-            // 
-            this.PB_Mark6.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.Image")));
-            this.PB_Mark6.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.InitialImage")));
-            this.PB_Mark6.Location = new System.Drawing.Point(110, 36);
-            this.PB_Mark6.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark6.Name = "PB_Mark6";
-            this.PB_Mark6.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark6.TabIndex = 5;
-            this.PB_Mark6.TabStop = false;
-            // 
-            // PB_MarkPentagon
-            // 
-            this.PB_MarkPentagon.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.Image")));
-            this.PB_MarkPentagon.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.InitialImage")));
-            this.PB_MarkPentagon.Location = new System.Drawing.Point(47, 15);
-            this.PB_MarkPentagon.Name = "PB_MarkPentagon";
-            this.PB_MarkPentagon.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkPentagon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkPentagon.TabIndex = 8;
-            this.PB_MarkPentagon.TabStop = false;
-            // 
-            // PB_Mark3
-            // 
-            this.PB_Mark3.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.Image")));
-            this.PB_Mark3.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.InitialImage")));
-            this.PB_Mark3.Location = new System.Drawing.Point(47, 36);
-            this.PB_Mark3.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark3.Name = "PB_Mark3";
-            this.PB_Mark3.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark3.TabIndex = 2;
-            this.PB_Mark3.TabStop = false;
-            // 
-            // PB_Mark5
-            // 
-            this.PB_Mark5.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.Image")));
-            this.PB_Mark5.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.InitialImage")));
-            this.PB_Mark5.Location = new System.Drawing.Point(89, 36);
-            this.PB_Mark5.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark5.Name = "PB_Mark5";
-            this.PB_Mark5.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark5.TabIndex = 4;
-            this.PB_Mark5.TabStop = false;
-            // 
-            // PB_MarkCured
-            // 
-            this.PB_MarkCured.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.Image")));
-            this.PB_MarkCured.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.InitialImage")));
-            this.PB_MarkCured.Location = new System.Drawing.Point(26, 15);
-            this.PB_MarkCured.Name = "PB_MarkCured";
-            this.PB_MarkCured.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkCured.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkCured.TabIndex = 7;
-            this.PB_MarkCured.TabStop = false;
-            // 
-            // PB_Mark2
-            // 
-            this.PB_Mark2.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.Image")));
-            this.PB_Mark2.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.InitialImage")));
-            this.PB_Mark2.Location = new System.Drawing.Point(26, 36);
-            this.PB_Mark2.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark2.Name = "PB_Mark2";
-            this.PB_Mark2.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark2.TabIndex = 1;
-            this.PB_Mark2.TabStop = false;
-            // 
-            // PB_MarkShiny
-            // 
-            this.PB_MarkShiny.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.Image")));
-            this.PB_MarkShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.InitialImage")));
-            this.PB_MarkShiny.Location = new System.Drawing.Point(5, 15);
-            this.PB_MarkShiny.Name = "PB_MarkShiny";
-            this.PB_MarkShiny.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkShiny.TabIndex = 6;
-            this.PB_MarkShiny.TabStop = false;
-            // 
-            // PB_Mark1
-            // 
-            this.PB_Mark1.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.Image")));
-            this.PB_Mark1.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.InitialImage")));
-            this.PB_Mark1.Location = new System.Drawing.Point(5, 36);
-            this.PB_Mark1.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark1.Name = "PB_Mark1";
-            this.PB_Mark1.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark1.TabIndex = 0;
-            this.PB_Mark1.TabStop = false;
-            // 
-            // PB_Mark4
-            // 
-            this.PB_Mark4.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.Image")));
-            this.PB_Mark4.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.InitialImage")));
-            this.PB_Mark4.Location = new System.Drawing.Point(68, 36);
-            this.PB_Mark4.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark4.Name = "PB_Mark4";
-            this.PB_Mark4.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark4.TabIndex = 3;
-            this.PB_Mark4.TabStop = false;
+            this.dragout.Location = new System.Drawing.Point(551, 12);
+            this.dragout.Name = "dragout";
+            this.dragout.Size = new System.Drawing.Size(40, 30);
+            this.dragout.TabIndex = 18;
+            this.dragout.TabStop = false;
             // 
             // MainForm
             // 
@@ -4242,9 +4238,8 @@
             this.ClientSize = new System.Drawing.Size(613, 368);
             this.Controls.Add(this.Tabs_General);
             this.Controls.Add(this.PB_Legal);
-            this.Controls.Add(this.shinypic);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.dragout);
             this.Controls.Add(this.tabMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -4266,6 +4261,7 @@
             this.FLP_PID.ResumeLayout(false);
             this.FLP_PIDLeft.ResumeLayout(false);
             this.FLP_PIDLeft.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).EndInit();
             this.FLP_PIDRight.ResumeLayout(false);
             this.FLP_PIDRight.PerformLayout();
             this.FLP_Species.ResumeLayout(false);
@@ -4305,6 +4301,7 @@
             this.FLP_Ball.ResumeLayout(false);
             this.FLP_BallLeft.ResumeLayout(false);
             this.FLP_BallLeft.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).EndInit();
             this.FLP_MetLevel.ResumeLayout(false);
             this.FLP_MetLevel.PerformLayout();
             this.FLP_MetDate.ResumeLayout(false);
@@ -4345,7 +4342,15 @@
             this.FLP_HPType.ResumeLayout(false);
             this.FLP_Characteristic.ResumeLayout(false);
             this.Tab_Attacks.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).EndInit();
             this.GB_RelearnMoves.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).EndInit();
             this.GB_CurrentMoves.ResumeLayout(false);
             this.GB_CurrentMoves.PerformLayout();
             this.Tab_OTMisc.ResumeLayout(false);
@@ -4355,6 +4360,18 @@
             this.GB_nOT.ResumeLayout(false);
             this.GB_nOT.PerformLayout();
             this.GB_Markings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
             this.GB_ExtraBytes.ResumeLayout(false);
             this.GB_ExtraBytes.PerformLayout();
             this.GB_OT.ResumeLayout(false);
@@ -4381,30 +4398,7 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.shinypic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dragout)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -4419,11 +4413,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        private System.Windows.Forms.Button stopBotButton;
         private System.Windows.Forms.TextBox readResult;
         private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox shinypic;
+        private System.Windows.Forms.PictureBox dragout;
         private System.Windows.Forms.Label lb_update;
         private System.Windows.Forms.Button DumpInstructionsBtn;
         private System.Windows.Forms.Label BoxLabel;
@@ -4480,7 +4472,6 @@
         private System.Windows.Forms.MaskedTextBox TB_Friendship;
         private System.Windows.Forms.Label Label_Form;
         private System.Windows.Forms.ComboBox CB_Form;
-        private System.Windows.Forms.MaskedTextBox MT_Form;
         private System.Windows.Forms.FlowLayoutPanel FLP_Ability;
         private System.Windows.Forms.Label Label_Ability;
         private System.Windows.Forms.FlowLayoutPanel FLP_AbilityRight;

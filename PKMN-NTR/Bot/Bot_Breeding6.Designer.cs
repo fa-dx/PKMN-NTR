@@ -640,7 +640,6 @@
             this.botStart.TabIndex = 32;
             this.botStart.Text = "Start Bot";
             this.botStart.UseVisualStyleBackColor = true;
-            this.botStart.Click += new System.EventHandler(this.runBreedingBot_Click);
             // 
             // Bot_Breeding6
             // 

@@ -410,18 +410,6 @@ namespace ntrbase
         public static uint[] boxposY7 = { 36, 36, 36, 36, 36, 36, 36, 36, 84, 84, 84, 84, 84, 84, 84, 84, 132, 132, 132, 132, 132, 132, 132, 132, 180, 180, 180, 180, 180, 180, 180, 180 };
 
         #endregion Box Position
-
-        #region Bots
-
-        public static string[] SoftResetModes6 = { "Regular", "Mirage Spot", "Event", "Groudon/Kyogre", "Walk", "Palkia/Dialga/Giratina", "Tornadus/Thundurus/Landorus" };
-
-        public static string[] SoftResetModes7 = { "Event", "Type:Null", "Tapus", "Solgaleo/Lunala", "Wild Pokemon", "Ultra Beast/Necrozma" };
-
-        public static string[] BreedingModes6 = { "Simple", "Filter", "ESV/TSV" };
-
-        public static string[] BreedingModes7 = { "Simple", "Filter", "ESV/TSV", "Accept/Reject" };
-
-        #endregion Bots
     }
 
 }

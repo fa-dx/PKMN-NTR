@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace ntrbase.Helpers
 {
-    class Delg
+    public static class Delg
     {
         #region All controls
 
