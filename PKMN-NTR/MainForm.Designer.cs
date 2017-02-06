@@ -1224,6 +1224,7 @@
             this.Label_Friendship.TabIndex = 9;
             this.Label_Friendship.Text = "Friendship:";
             this.Label_Friendship.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_Friendship.Click += new System.EventHandler(this.clickFriendship);
             // 
             // Label_HatchCounter
             // 
@@ -1672,6 +1673,7 @@
             this.CHK_AsEgg.TabIndex = 8;
             this.CHK_AsEgg.Text = "As Egg";
             this.CHK_AsEgg.UseVisualStyleBackColor = true;
+            this.CHK_AsEgg.Click += new System.EventHandler(this.updateMetAsEgg);
             // 
             // GB_EggConditions
             // 
@@ -1697,6 +1699,9 @@
             this.CB_EggLocation.Name = "CB_EggLocation";
             this.CB_EggLocation.Size = new System.Drawing.Size(122, 21);
             this.CB_EggLocation.TabIndex = 10;
+            this.CB_EggLocation.SelectedIndexChanged += new System.EventHandler(this.validateLocation);
+            this.CB_EggLocation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_EggLocation.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // CAL_EggDate
             // 
@@ -1773,6 +1778,7 @@
             this.CB_GameOrigin.Name = "CB_GameOrigin";
             this.CB_GameOrigin.Size = new System.Drawing.Size(126, 21);
             this.CB_GameOrigin.TabIndex = 1;
+            this.CB_GameOrigin.SelectedIndexChanged += new System.EventHandler(this.updateOriginGame);
             // 
             // FLP_MetLocation
             // 
@@ -1794,6 +1800,7 @@
             this.Label_MetLocation.TabIndex = 1;
             this.Label_MetLocation.Text = "Met Location:";
             this.Label_MetLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_MetLocation.Click += new System.EventHandler(this.clickMetLocation);
             // 
             // CB_MetLocation
             // 
@@ -1806,6 +1813,9 @@
             this.CB_MetLocation.Name = "CB_MetLocation";
             this.CB_MetLocation.Size = new System.Drawing.Size(126, 21);
             this.CB_MetLocation.TabIndex = 2;
+            this.CB_MetLocation.SelectedIndexChanged += new System.EventHandler(this.validateLocation);
+            this.CB_MetLocation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_MetLocation.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // FLP_Ball
             // 
@@ -1862,6 +1872,8 @@
             this.CB_Ball.Name = "CB_Ball";
             this.CB_Ball.Size = new System.Drawing.Size(126, 21);
             this.CB_Ball.TabIndex = 3;
+            this.CB_Ball.SelectedIndexChanged += new System.EventHandler(this.validateComboBox2);
+            this.CB_Ball.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
             // 
             // FLP_MetLevel
             // 
@@ -1893,6 +1905,7 @@
             this.TB_MetLevel.Name = "TB_MetLevel";
             this.TB_MetLevel.Size = new System.Drawing.Size(126, 20);
             this.TB_MetLevel.TabIndex = 4;
+            this.TB_MetLevel.TextChanged += new System.EventHandler(this.update255_MTB);
             // 
             // FLP_MetDate
             // 

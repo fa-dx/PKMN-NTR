@@ -2740,6 +2740,136 @@ namespace ntrbase
                 CB.SelectedIndex = index;
         }
 
+        // Met tab
+        private void updateOriginGame(object sender, EventArgs e)
+        {
+            GameVersion Version = (GameVersion)WinFormsUtil.getIndex(CB_GameOrigin);
+
+            // check if differs
+            GameVersion newTrack = GameUtil.getMetLocationVersionGroup(Version);
+            if (newTrack != origintrack)
+            {
+                var met_list = GameInfo.getLocationList(Version, SAV.Generation, egg: false);
+                CB_MetLocation.DisplayMember = "Text";
+                CB_MetLocation.ValueMember = "Value";
+                CB_MetLocation.DataSource = new BindingSource(met_list, null);
+
+                int metLoc = 0; // transporter or pal park for past gen pkm
+                switch (newTrack)
+                {
+                    case GameVersion.GO: metLoc = 30012; break;
+                    case GameVersion.RBY: metLoc = 30013; break;
+                }
+                if (metLoc != 0)
+                    CB_MetLocation.SelectedValue = metLoc;
+                else
+                    CB_MetLocation.SelectedIndex = metLoc;
+
+                var egg_list = GameInfo.getLocationList(Version, SAV.Generation, egg: true);
+                CB_EggLocation.DisplayMember = "Text";
+                CB_EggLocation.ValueMember = "Value";
+                CB_EggLocation.DataSource = new BindingSource(egg_list, null);
+                CB_EggLocation.SelectedIndex = CHK_AsEgg.Checked ? 1 : 0; // daycare : none
+
+                origintrack = newTrack;
+
+                // Stretch C/XD met location dropdowns
+                int width = CB_EggLocation.DropDownWidth;
+                if (Version == GameVersion.CXD && SAV.Generation == 3)
+                    width = 2 * width;
+                CB_MetLocation.DropDownWidth = width;
+            }
+
+            // Visibility logic for Gen 4 encounter type; only show for Gen 4 Pokemon.
+            if (SAV.Generation >= 4)
+            {
+                bool g4 = Version >= GameVersion.HG && Version <= GameVersion.Pt;
+                if ((int)Version == 9) // invalid
+                    g4 = false;
+                CB_EncounterType.Visible = Label_EncounterType.Visible = g4 && SAV.Generation < 7;
+                if (!g4)
+                    CB_EncounterType.SelectedValue = 0;
+            }
+
+            if (!fieldsLoaded)
+                return;
+            pkm.Version = (int)Version;
+            setMarkings(); // Set/Remove KB marking
+            updateLegality();
+        }
+
+        private void clickMetLocation(object sender, EventArgs e)
+        {
+            pkm = preparePKM();
+            var encounter = Legality.getSuggestedMetInfo();
+            if (encounter == null || encounter.Location < 0)
+            {
+                WinFormsUtil.Alert("Unable to provide a suggestion.");
+                return;
+            }
+
+            int level = encounter.Level;
+            int location = encounter.Location;
+            int minlvl = Legal.getLowestLevel(pkm, encounter.Species);
+
+            if (pkm.Met_Level == level && pkm.Met_Location == location && pkm.CurrentLevel >= minlvl)
+                return;
+
+            var met_list = GameInfo.getLocationList((GameVersion)pkm.Version, SAV.Generation, egg: false);
+            var locstr = met_list.FirstOrDefault(loc => loc.Value == location)?.Text;
+            string suggestion = $"Suggested:\nMet Location: {locstr}\nMet Level: {level}";
+            if (pkm.CurrentLevel < minlvl)
+                suggestion += $"\nCurrent Level {minlvl}";
+
+            if (WinFormsUtil.Prompt(MessageBoxButtons.YesNo, suggestion) != DialogResult.Yes)
+                return;
+
+            TB_MetLevel.Text = level.ToString();
+            CB_MetLocation.SelectedValue = location;
+
+            if (pkm.CurrentLevel < minlvl)
+                TB_Level.Text = minlvl.ToString();
+
+            pkm = preparePKM();
+            updateLegality();
+        }
+
+        private void validateLocation(object sender, EventArgs e)
+        {
+            validateComboBox(sender);
+            if (!fieldsLoaded)
+                return;
+
+            pkm.Met_Location = WinFormsUtil.getIndex(CB_MetLocation);
+            pkm.Egg_Location = WinFormsUtil.getIndex(CB_EggLocation);
+            updateLegality();
+        }
+
+        private void updateBall(object sender, EventArgs e)
+        {
+            PB_Ball.Image = PKMUtil.getBallSprite(WinFormsUtil.getIndex(CB_Ball));
+        }
+
+        private void updateMetAsEgg(object sender, EventArgs e)
+        {
+            GB_EggConditions.Enabled = CHK_AsEgg.Checked;
+            if (CHK_AsEgg.Checked)
+            {
+                if (!fieldsLoaded)
+                    return;
+
+                CAL_EggDate.Value = DateTime.Now;
+                CB_EggLocation.SelectedIndex = 1;
+                return;
+            }
+            // Remove egg met data
+            CHK_IsEgg.Checked = false;
+            CAL_EggDate.Value = new DateTime(2000, 01, 01);
+            CB_EggLocation.SelectedValue = 0;
+
+            updateLegality();
+        }
+
         // Stats tab
         private void updateIVs(object sender, EventArgs e)
         {
