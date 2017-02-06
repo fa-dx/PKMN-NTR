@@ -1,9 +1,8 @@
-﻿using System.Drawing;
-using PKHeX.Core;
+﻿using PKHeX.Core;
 
-namespace ntrbase
+namespace ntrbase.Helpers
 {
-    class LookupTable
+    public static class LookupTable
     {
         #region RAM Address
 

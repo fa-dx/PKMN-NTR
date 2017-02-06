@@ -36,7 +36,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CLICKONCE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -45,7 +45,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;CLICKONCE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -295,6 +295,8 @@
     <Content Include="FodyWeavers.xml" />
     <Content Include="Pkmn NTR.ico" />
     <Content Include="Resources\PKHeX.Core.dll" />
+    <None Include="Resources\slotDel.png" />
+    <None Include="Resources\slotTrans.png" />
     <None Include="Resources\slotSet.png" />
     <None Include="Resources\valid.png" />
     <None Include="Resources\warn.png" />

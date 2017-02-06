@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ntrbase.Helpers
+namespace ntrbase.Sub_forms
 {
     public partial class DumpOpponentHelp : Form
     {

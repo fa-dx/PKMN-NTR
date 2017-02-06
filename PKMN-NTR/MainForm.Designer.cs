@@ -4331,6 +4331,10 @@
             this.dragout.Size = new System.Drawing.Size(40, 30);
             this.dragout.TabIndex = 18;
             this.dragout.TabStop = false;
+            this.dragout.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragoutDrop);
+            this.dragout.DragOver += new System.Windows.Forms.DragEventHandler(this.dragout_DragOver);
+            this.dragout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragout_MouseDown);
+            this.dragout.MouseHover += new System.EventHandler(this.dragoutHover);
             // 
             // MainForm
             // 

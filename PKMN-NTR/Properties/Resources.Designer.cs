@@ -63,9 +63,29 @@ namespace ntrbase.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap slotDel {
+            get {
+                object obj = ResourceManager.GetObject("slotDel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap slotSet {
             get {
                 object obj = ResourceManager.GetObject("slotSet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap slotTrans {
+            get {
+                object obj = ResourceManager.GetObject("slotTrans", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

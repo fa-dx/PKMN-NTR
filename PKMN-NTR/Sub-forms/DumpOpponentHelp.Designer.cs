@@ -1,4 +1,4 @@
-﻿namespace ntrbase.Helpers
+﻿namespace ntrbase.Sub_forms
 {
     partial class DumpOpponentHelp
     {

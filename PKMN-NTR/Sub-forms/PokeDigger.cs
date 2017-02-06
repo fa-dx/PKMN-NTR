@@ -7,7 +7,7 @@ using System.IO;
 using ntrbase.Properties;
 using PKHeX.Core;
 
-namespace ntrbase.Helpers
+namespace ntrbase.Sub_forms
 {
     public partial class PokeDigger : Form
     {

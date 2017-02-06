@@ -1,4 +1,9 @@
-﻿using ntrbase.Helpers;
+﻿/// I do not own the code in this class. 
+/// All rights and credits for the code in this class belong to Kaphotics.
+/// All code within this class is taken from PKHeX https://github.com/kwsch/PKHeX
+/// with minor modifications
+
+using ntrbase.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

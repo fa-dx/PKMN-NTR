@@ -1,21 +1,23 @@
-﻿using ntrbase.Properties;
+﻿/// I do not own the code used for pokémon editing in this class. 
+/// All rights and credits for that code in this class belong to Kaphotics.
+/// Code was taken from PKHeX https://github.com/kwsch/PKHeX with minor modifications
+
+using ntrbase.Helpers;
+using ntrbase.Properties;
 using ntrbase.Sub_forms;
-using ntrbase.Bot;
+using Octokit;
+using PKHeX.Core;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Data;
-using System.Diagnostics;
-using ntrbase.Helpers;
-using PKHeX.Core;
-using Octokit;
-using System.Media;
+using System.Windows.Forms;
 
 namespace ntrbase
 {
@@ -1984,6 +1986,22 @@ namespace ntrbase
             updateLegality();
         }
 
+        private void TemplateFields()
+        {
+            CB_Species.SelectedValue = SAV.MaxSpeciesID;
+            CB_Move1.SelectedValue = 1;
+            TB_OT.Text = "PKMN-NTR";
+            TB_TID.Text = 00282.ToString();
+            TB_SID.Text = 00282.ToString();
+            CB_GameOrigin.SelectedIndex = 0;
+            int curlang = Array.IndexOf(GameInfo.lang_val, pkhexlang);
+            CB_Language.SelectedIndex = curlang > CB_Language.Items.Count - 1 ? 1 : curlang;
+            CB_Ball.SelectedIndex = Math.Min(0, CB_Ball.Items.Count - 1);
+            CB_Country.SelectedIndex = Math.Min(0, CB_Country.Items.Count - 1);
+            CAL_MetDate.Value = CAL_EggDate.Value = DateTime.Today;
+            CHK_Nicknamed.Checked = false;
+        }
+
         private void clickLegality(object sender, EventArgs e)
         {
             PKM pk;
@@ -2056,36 +2074,6 @@ namespace ntrbase
             WinFormsUtil.Alert(verbose ? la.VerboseReport : la.Report);
         }
 
-        private void setIsShiny(object sender)
-        {
-            if (sender == TB_PID)
-                pkm.PID = Util.getHEXval(TB_PID.Text);
-            else if (sender == TB_TID)
-                pkm.TID = (int)Util.ToUInt32(TB_TID.Text);
-            else if (sender == TB_SID)
-                pkm.SID = (int)Util.ToUInt32(TB_SID.Text);
-
-            bool isShiny = pkm.IsShiny;
-
-            // Set the Controls
-            BTN_Shinytize.Visible = BTN_Shinytize.Enabled = !isShiny;
-            Label_IsShiny.Visible = isShiny;
-
-            // Refresh Markings (for Shiny Star if applicable)
-            setMarkings();
-        }
-
-        private void getQuickFiller(PictureBox pb, PKM pk = null)
-        {
-            if (!fieldsInitialized) return;
-            pk = pk ?? preparePKM(false); // don't perform control loss click
-
-            var sprite = pk.Species != 0 ? pk.Sprite() : null;
-            pb.Image = sprite;
-            if (pb.BackColor == Color.Red)
-                pb.BackColor = Color.Transparent;
-        }
-
         public PKM preparePKM(bool click = true)
         {
             if (click)
@@ -2126,20 +2114,86 @@ namespace ntrbase
             return false;
         }
 
-        private void TemplateFields()
+        private void dragoutDrop(object sender, DragEventArgs e)
         {
-            CB_Species.SelectedValue = SAV.MaxSpeciesID;
-            CB_Move1.SelectedValue = 1;
-            TB_OT.Text = "PKMN-NTR";
-            TB_TID.Text = 00282.ToString();
-            TB_SID.Text = 00282.ToString();
-            CB_GameOrigin.SelectedIndex = 0;
-            int curlang = Array.IndexOf(GameInfo.lang_val, pkhexlang);
-            CB_Language.SelectedIndex = curlang > CB_Language.Items.Count - 1 ? 1 : curlang;
-            CB_Ball.SelectedIndex = Math.Min(0, CB_Ball.Items.Count - 1);
-            CB_Country.SelectedIndex = Math.Min(0, CB_Country.Items.Count - 1);
-            CAL_MetDate.Value = CAL_EggDate.Value = DateTime.Today;
-            CHK_Nicknamed.Checked = false;
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            openQuick(files[0]);
+            e.Effect = DragDropEffects.Copy;
+
+            Cursor = DefaultCursor;
+        }
+
+        private void dragout_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void dragout_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                return;
+            if (!verifiedPKM())
+                return;
+
+            // Create Temp File to Drag
+            PKM pkx = preparePKM();
+            bool encrypt = ModifierKeys == Keys.Control;
+            string fn = pkx.FileName; fn = fn.Substring(0, fn.LastIndexOf('.'));
+            string filename = $"{fn}{(encrypt ? ".ek" + pkx.Format : "." + pkx.Extension)}";
+            byte[] dragdata = encrypt ? pkx.EncryptedBoxData : pkx.DecryptedBoxData;
+            // Make file
+            string newfile = Path.Combine(Path.GetTempPath(), Util.CleanFileName(filename));
+            try
+            {
+                File.WriteAllBytes(newfile, dragdata);
+                PictureBox pb = (PictureBox)sender;
+                Cursor = DragInfo.Cursor = new Cursor(((Bitmap)pb.Image).GetHicon());
+                DoDragDrop(new DataObject(DataFormats.FileDrop, new[] { newfile }), DragDropEffects.Move);
+            }
+            catch (Exception x)
+            { WinFormsUtil.Error("Drag & Drop Error", x); }
+            Cursor = DragInfo.Cursor = DefaultCursor;
+            File.Delete(newfile);
+        }
+
+        private void dragoutHover(object sender, EventArgs e)
+        {
+            dragout.BackgroundImage = WinFormsUtil.getIndex(CB_Species) > 0 ? Resources.slotSet : Resources.slotDel;
+        }
+
+        private void dragoutLeave(object sender, EventArgs e)
+        {
+            dragout.BackgroundImage = Resources.slotTrans;
+        }
+
+        private void setIsShiny(object sender)
+        {
+            if (sender == TB_PID)
+                pkm.PID = Util.getHEXval(TB_PID.Text);
+            else if (sender == TB_TID)
+                pkm.TID = (int)Util.ToUInt32(TB_TID.Text);
+            else if (sender == TB_SID)
+                pkm.SID = (int)Util.ToUInt32(TB_SID.Text);
+
+            bool isShiny = pkm.IsShiny;
+
+            // Set the Controls
+            BTN_Shinytize.Visible = BTN_Shinytize.Enabled = !isShiny;
+            Label_IsShiny.Visible = isShiny;
+
+            // Refresh Markings (for Shiny Star if applicable)
+            setMarkings();
+        }
+
+        private void getQuickFiller(PictureBox pb, PKM pk = null)
+        {
+            if (!fieldsInitialized) return;
+            pk = pk ?? preparePKM(false); // don't perform control loss click
+
+            var sprite = pk.Species != 0 ? pk.Sprite() : null;
+            pb.Image = sprite;
+            if (pb.BackColor == Color.Red)
+                pb.BackColor = Color.Transparent;
         }
 
         private void removedropCB(object sender, KeyEventArgs e)
@@ -3553,6 +3607,107 @@ namespace ntrbase
             this.data = data_;
             this.handler = handler_;
             this.arguments = arguments_;
+        }
+    }
+
+    public static class DragInfo
+    {
+        public static bool slotLeftMouseIsDown;
+        public static bool slotRightMouseIsDown;
+        public static bool slotDragDropInProgress;
+
+        public static byte[] slotPkmSource;
+        public static byte[] slotPkmDestination;
+
+        public static object slotSource;
+        public static int slotSourceOffset = -1;
+        public static int slotSourceSlotNumber = -1;
+        public static int slotSourceBoxNumber = -1;
+
+        public static object slotDestination;
+        public static int slotDestinationOffset = -1;
+        public static int slotDestinationSlotNumber = -1;
+        public static int slotDestinationBoxNumber = -1;
+
+        public static Cursor Cursor;
+        public static string CurrentPath;
+
+        public static bool SameBox => slotSourceBoxNumber > -1 && slotSourceBoxNumber == slotDestinationBoxNumber;
+        public static bool SameSlot => slotSourceSlotNumber == slotDestinationSlotNumber && slotSourceBoxNumber == slotDestinationBoxNumber;
+        public static bool SourceValid => slotSourceSlotNumber > -1 && (slotSourceBoxNumber > -1 || SourceParty);
+        public static bool DestinationValid => slotDestinationSlotNumber > -1 && (slotDestinationBoxNumber > -1 || DestinationParty);
+        public static bool SourceParty => 30 <= slotSourceSlotNumber && slotSourceSlotNumber < 36;
+        public static bool DestinationParty => 30 <= slotDestinationSlotNumber && slotDestinationSlotNumber < 36;
+
+        // PKM Get Set
+        public static PKM getPKMfromSource(SaveFile SAV)
+        {
+            int o = slotSourceOffset;
+            return SourceParty ? SAV.getPartySlot(o) : SAV.getStoredSlot(o);
+        }
+        public static PKM getPKMfromDestination(SaveFile SAV)
+        {
+            int o = slotDestinationOffset;
+            return DestinationParty ? SAV.getPartySlot(o) : SAV.getStoredSlot(o);
+        }
+        public static void setPKMtoSource(SaveFile SAV, PKM pk)
+        {
+            int o = slotSourceOffset;
+            if (!SourceParty)
+            { SAV.setStoredSlot(pk, o); return; }
+
+            if (pk.Species == 0) // Empty Slot
+            { SAV.deletePartySlot(slotSourceSlotNumber - 30); return; }
+
+            if (pk.Stat_HPMax == 0) // Without Stats (Box)
+            {
+                pk.setStats(pk.getStats(SAV.Personal.getFormeEntry(pk.Species, pk.AltForm)));
+                pk.Stat_Level = pk.CurrentLevel;
+            }
+            SAV.setPartySlot(pk, o);
+        }
+        public static void setPKMtoDestination(SaveFile SAV, PKM pk)
+        {
+            int o = slotDestinationOffset;
+            if (!DestinationParty)
+            { SAV.setStoredSlot(pk, o); return; }
+
+            if (30 + SAV.PartyCount < slotDestinationSlotNumber)
+            {
+                o = SAV.getPartyOffset(SAV.PartyCount);
+                slotDestinationSlotNumber = 30 + SAV.PartyCount;
+            }
+            if (pk.Stat_HPMax == 0) // Without Stats (Box/File)
+            {
+                pk.setStats(pk.getStats(SAV.Personal.getFormeEntry(pk.Species, pk.AltForm)));
+                pk.Stat_Level = pk.CurrentLevel;
+            }
+            SAV.setPartySlot(pk, o);
+        }
+
+        public static void Reset()
+        {
+            slotLeftMouseIsDown = false;
+            slotRightMouseIsDown = false;
+            slotDragDropInProgress = false;
+
+            slotPkmSource = null;
+            slotSourceOffset = slotSourceSlotNumber = slotSourceBoxNumber = -1;
+            slotPkmDestination = null;
+            slotDestinationOffset = slotSourceBoxNumber = slotDestinationBoxNumber = -1;
+
+            Cursor = null;
+            CurrentPath = null;
+
+            slotSource = null;
+            slotDestination = null;
+        }
+
+        public static bool? WasDragParticipant(object form, int index)
+        {
+            if (slotDestinationBoxNumber != index && slotSourceBoxNumber != index)
+                return null; // form was not watching box
+            return slotSource == form || slotDestination == form; // form already updated?
         }
     }
 }
