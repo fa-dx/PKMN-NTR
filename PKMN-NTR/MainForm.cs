@@ -3114,6 +3114,43 @@ namespace ntrbase
         }
 
         // Moves tab
+        private void validateMovePaint(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            var i = (ComboItem)(sender as ComboBox).Items[e.Index];
+            var moves = Legality.AllSuggestedMovesAndRelearn;
+            bool vm = moves != null && moves.Contains(i.Value);
+
+            bool current = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+            Brush tBrush = current ? SystemBrushes.HighlightText : new SolidBrush(e.ForeColor);
+            Brush brush = current ? SystemBrushes.Highlight : vm ? Brushes.PaleGreen : new SolidBrush(e.BackColor);
+
+            e.Graphics.FillRectangle(brush, e.Bounds);
+            e.Graphics.DrawString(i.Text, e.Font, tBrush, e.Bounds, StringFormat.GenericDefault);
+            if (current) return;
+            tBrush.Dispose();
+            if (!vm)
+                brush.Dispose();
+        }
+
+        private void validateMove(object sender, EventArgs e)
+        {
+            if (!fieldsInitialized)
+                return;
+            validateComboBox(sender);
+            if (!fieldsLoaded)
+                return;
+
+            if (new[] { CB_Move1, CB_Move2, CB_Move3, CB_Move4 }.Contains(sender)) // Move
+                updatePP(sender, e);
+
+            // Legality
+            pkm.Moves = new[] { CB_Move1, CB_Move2, CB_Move3, CB_Move4 }.Select(WinFormsUtil.getIndex).ToArray();
+            pkm.RelearnMoves = new[] { CB_RelearnMove1, CB_RelearnMove2, CB_RelearnMove3, CB_RelearnMove4 }.Select(WinFormsUtil.getIndex).ToArray();
+            updateLegality(skipMoveRepop: true);
+        }
+
         private void clickMoves(object sender, EventArgs e)
         {
             updateLegality();
@@ -3166,6 +3203,35 @@ namespace ntrbase
             }
 
             updateLegality();
+        }
+
+        private void updatePP(object sender, EventArgs e)
+        {
+            ComboBox[] cbs = { CB_Move1, CB_Move2, CB_Move3, CB_Move4 };
+            ComboBox[] pps = { CB_PPu1, CB_PPu2, CB_PPu3, CB_PPu4 };
+            MaskedTextBox[] tbs = { TB_PP1, TB_PP2, TB_PP3, TB_PP4 };
+            int index = Array.IndexOf(cbs, sender);
+            if (index < 0)
+                index = Array.IndexOf(pps, sender);
+            if (index < 0)
+                return;
+
+            int move = WinFormsUtil.getIndex(cbs[index]);
+            int pp = pps[index].SelectedIndex;
+            if (move == 0 && pp != 0)
+            {
+                pps[index].SelectedIndex = 0;
+                return; // recursively triggers
+            }
+            tbs[index].Text = pkm.getMovePP(move, pp).ToString();
+        }
+
+        private void clickPPUps(object sender, EventArgs e)
+        {
+            CB_PPu1.SelectedIndex = ModifierKeys != Keys.Control && WinFormsUtil.getIndex(CB_Move1) > 0 ? 3 : 0;
+            CB_PPu2.SelectedIndex = ModifierKeys != Keys.Control && WinFormsUtil.getIndex(CB_Move2) > 0 ? 3 : 0;
+            CB_PPu3.SelectedIndex = ModifierKeys != Keys.Control && WinFormsUtil.getIndex(CB_Move3) > 0 ? 3 : 0;
+            CB_PPu4.SelectedIndex = ModifierKeys != Keys.Control && WinFormsUtil.getIndex(CB_Move4) > 0 ? 3 : 0;
         }
 
         // OT/Misc tab

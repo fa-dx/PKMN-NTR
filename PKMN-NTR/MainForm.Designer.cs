@@ -3014,6 +3014,10 @@
             this.CB_RelearnMove4.Name = "CB_RelearnMove4";
             this.CB_RelearnMove4.Size = new System.Drawing.Size(124, 21);
             this.CB_RelearnMove4.TabIndex = 16;
+            this.CB_RelearnMove4.SelectedIndexChanged += new System.EventHandler(this.validateMove);
+            this.CB_RelearnMove4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_RelearnMove4.Leave += new System.EventHandler(this.validateComboBox2);
+            this.CB_RelearnMove4.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // CB_RelearnMove3
             // 
@@ -3024,6 +3028,10 @@
             this.CB_RelearnMove3.Name = "CB_RelearnMove3";
             this.CB_RelearnMove3.Size = new System.Drawing.Size(124, 21);
             this.CB_RelearnMove3.TabIndex = 15;
+            this.CB_RelearnMove3.SelectedIndexChanged += new System.EventHandler(this.validateMove);
+            this.CB_RelearnMove3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_RelearnMove3.Leave += new System.EventHandler(this.validateComboBox2);
+            this.CB_RelearnMove3.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // CB_RelearnMove2
             // 
@@ -3034,6 +3042,10 @@
             this.CB_RelearnMove2.Name = "CB_RelearnMove2";
             this.CB_RelearnMove2.Size = new System.Drawing.Size(124, 21);
             this.CB_RelearnMove2.TabIndex = 14;
+            this.CB_RelearnMove2.SelectedIndexChanged += new System.EventHandler(this.validateMove);
+            this.CB_RelearnMove2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_RelearnMove2.Leave += new System.EventHandler(this.validateComboBox2);
+            this.CB_RelearnMove2.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // CB_RelearnMove1
             // 
@@ -3044,6 +3056,10 @@
             this.CB_RelearnMove1.Name = "CB_RelearnMove1";
             this.CB_RelearnMove1.Size = new System.Drawing.Size(124, 21);
             this.CB_RelearnMove1.TabIndex = 13;
+            this.CB_RelearnMove1.SelectedIndexChanged += new System.EventHandler(this.validateMove);
+            this.CB_RelearnMove1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_RelearnMove1.Leave += new System.EventHandler(this.validateComboBox2);
+            this.CB_RelearnMove1.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // GB_CurrentMoves
             // 
@@ -3076,6 +3092,7 @@
             this.TB_PP4.PromptChar = ' ';
             this.TB_PP4.Size = new System.Drawing.Size(31, 20);
             this.TB_PP4.TabIndex = 16;
+            this.TB_PP4.TextChanged += new System.EventHandler(this.update255_MTB);
             // 
             // TB_PP3
             // 
@@ -3085,6 +3102,7 @@
             this.TB_PP3.PromptChar = ' ';
             this.TB_PP3.Size = new System.Drawing.Size(31, 20);
             this.TB_PP3.TabIndex = 15;
+            this.TB_PP3.TextChanged += new System.EventHandler(this.update255_MTB);
             // 
             // TB_PP2
             // 
@@ -3094,6 +3112,7 @@
             this.TB_PP2.PromptChar = ' ';
             this.TB_PP2.Size = new System.Drawing.Size(31, 20);
             this.TB_PP2.TabIndex = 14;
+            this.TB_PP2.TextChanged += new System.EventHandler(this.update255_MTB);
             // 
             // TB_PP1
             // 
@@ -3103,6 +3122,7 @@
             this.TB_PP1.PromptChar = ' ';
             this.TB_PP1.Size = new System.Drawing.Size(31, 20);
             this.TB_PP1.TabIndex = 13;
+            this.TB_PP1.TextChanged += new System.EventHandler(this.update255_MTB);
             // 
             // Label_CurPP
             // 
@@ -3135,6 +3155,7 @@
             this.CB_PPu4.Name = "CB_PPu4";
             this.CB_PPu4.Size = new System.Drawing.Size(38, 21);
             this.CB_PPu4.TabIndex = 12;
+            this.CB_PPu4.SelectedIndexChanged += new System.EventHandler(this.updatePP);
             // 
             // CB_PPu3
             // 
@@ -3149,6 +3170,7 @@
             this.CB_PPu3.Name = "CB_PPu3";
             this.CB_PPu3.Size = new System.Drawing.Size(38, 21);
             this.CB_PPu3.TabIndex = 9;
+            this.CB_PPu3.SelectedIndexChanged += new System.EventHandler(this.updatePP);
             // 
             // CB_PPu2
             // 
@@ -3163,6 +3185,7 @@
             this.CB_PPu2.Name = "CB_PPu2";
             this.CB_PPu2.Size = new System.Drawing.Size(38, 21);
             this.CB_PPu2.TabIndex = 6;
+            this.CB_PPu2.SelectedIndexChanged += new System.EventHandler(this.updatePP);
             // 
             // CB_Move4
             // 
@@ -3174,6 +3197,11 @@
             this.CB_Move4.Name = "CB_Move4";
             this.CB_Move4.Size = new System.Drawing.Size(121, 21);
             this.CB_Move4.TabIndex = 10;
+            this.CB_Move4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.validateMovePaint);
+            this.CB_Move4.SelectedIndexChanged += new System.EventHandler(this.validateMove);
+            this.CB_Move4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_Move4.Leave += new System.EventHandler(this.validateComboBox2);
+            this.CB_Move4.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // CB_PPu1
             // 
@@ -3188,6 +3216,7 @@
             this.CB_PPu1.Name = "CB_PPu1";
             this.CB_PPu1.Size = new System.Drawing.Size(38, 21);
             this.CB_PPu1.TabIndex = 3;
+            this.CB_PPu1.SelectedIndexChanged += new System.EventHandler(this.updatePP);
             // 
             // CB_Move3
             // 
@@ -3199,6 +3228,11 @@
             this.CB_Move3.Name = "CB_Move3";
             this.CB_Move3.Size = new System.Drawing.Size(121, 21);
             this.CB_Move3.TabIndex = 7;
+            this.CB_Move3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.validateMovePaint);
+            this.CB_Move3.SelectedIndexChanged += new System.EventHandler(this.validateMove);
+            this.CB_Move3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_Move3.Leave += new System.EventHandler(this.validateComboBox2);
+            this.CB_Move3.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // CB_Move2
             // 
@@ -3210,6 +3244,11 @@
             this.CB_Move2.Name = "CB_Move2";
             this.CB_Move2.Size = new System.Drawing.Size(121, 21);
             this.CB_Move2.TabIndex = 4;
+            this.CB_Move2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.validateMovePaint);
+            this.CB_Move2.SelectedIndexChanged += new System.EventHandler(this.validateMove);
+            this.CB_Move2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_Move2.Leave += new System.EventHandler(this.validateComboBox2);
+            this.CB_Move2.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // CB_Move1
             // 
@@ -3221,6 +3260,11 @@
             this.CB_Move1.Name = "CB_Move1";
             this.CB_Move1.Size = new System.Drawing.Size(121, 21);
             this.CB_Move1.TabIndex = 1;
+            this.CB_Move1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.validateMovePaint);
+            this.CB_Move1.SelectedIndexChanged += new System.EventHandler(this.validateMove);
+            this.CB_Move1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removedropCB);
+            this.CB_Move1.Leave += new System.EventHandler(this.validateComboBox2);
+            this.CB_Move1.Validating += new System.ComponentModel.CancelEventHandler(this.validateComboBox);
             // 
             // Tab_OTMisc
             // 
