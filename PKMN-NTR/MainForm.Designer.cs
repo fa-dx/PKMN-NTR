@@ -254,16 +254,6 @@
             this.CB_Move2 = new System.Windows.Forms.ComboBox();
             this.CB_Move1 = new System.Windows.Forms.ComboBox();
             this.Tab_OTMisc = new System.Windows.Forms.TabPage();
-            this.FLP_PKMEditors = new System.Windows.Forms.FlowLayoutPanel();
-            this.BTN_Ribbons = new System.Windows.Forms.Button();
-            this.BTN_Medals = new System.Windows.Forms.Button();
-            this.BTN_History = new System.Windows.Forms.Button();
-            this.TB_EC = new System.Windows.Forms.TextBox();
-            this.GB_nOT = new System.Windows.Forms.GroupBox();
-            this.Label_CTGender = new System.Windows.Forms.Label();
-            this.TB_OTt2 = new System.Windows.Forms.TextBox();
-            this.Label_PrevOT = new System.Windows.Forms.Label();
-            this.BTN_RerollEC = new System.Windows.Forms.Button();
             this.GB_Markings = new System.Windows.Forms.GroupBox();
             this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
             this.PB_MarkVC = new System.Windows.Forms.PictureBox();
@@ -277,6 +267,16 @@
             this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
             this.PB_Mark1 = new System.Windows.Forms.PictureBox();
             this.PB_Mark4 = new System.Windows.Forms.PictureBox();
+            this.FLP_PKMEditors = new System.Windows.Forms.FlowLayoutPanel();
+            this.BTN_Ribbons = new System.Windows.Forms.Button();
+            this.BTN_Medals = new System.Windows.Forms.Button();
+            this.BTN_History = new System.Windows.Forms.Button();
+            this.TB_EC = new System.Windows.Forms.TextBox();
+            this.GB_nOT = new System.Windows.Forms.GroupBox();
+            this.Label_CTGender = new System.Windows.Forms.Label();
+            this.TB_OTt2 = new System.Windows.Forms.TextBox();
+            this.Label_PrevOT = new System.Windows.Forms.Label();
+            this.BTN_RerollEC = new System.Windows.Forms.Button();
             this.GB_ExtraBytes = new System.Windows.Forms.GroupBox();
             this.TB_ExtraByte = new System.Windows.Forms.MaskedTextBox();
             this.CB_ExtraBytes = new System.Windows.Forms.ComboBox();
@@ -417,8 +417,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
             this.GB_CurrentMoves.SuspendLayout();
             this.Tab_OTMisc.SuspendLayout();
-            this.FLP_PKMEditors.SuspendLayout();
-            this.GB_nOT.SuspendLayout();
             this.GB_Markings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
@@ -432,6 +430,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
+            this.FLP_PKMEditors.SuspendLayout();
+            this.GB_nOT.SuspendLayout();
             this.GB_ExtraBytes.SuspendLayout();
             this.GB_OT.SuspendLayout();
             this.Tabs_General.SuspendLayout();
@@ -3269,11 +3269,11 @@
             // Tab_OTMisc
             // 
             this.Tab_OTMisc.AllowDrop = true;
+            this.Tab_OTMisc.Controls.Add(this.GB_Markings);
             this.Tab_OTMisc.Controls.Add(this.FLP_PKMEditors);
             this.Tab_OTMisc.Controls.Add(this.TB_EC);
             this.Tab_OTMisc.Controls.Add(this.GB_nOT);
             this.Tab_OTMisc.Controls.Add(this.BTN_RerollEC);
-            this.Tab_OTMisc.Controls.Add(this.GB_Markings);
             this.Tab_OTMisc.Controls.Add(this.GB_ExtraBytes);
             this.Tab_OTMisc.Controls.Add(this.GB_OT);
             this.Tab_OTMisc.Controls.Add(this.Label_EncryptionConstant);
@@ -3284,128 +3284,6 @@
             this.Tab_OTMisc.TabIndex = 4;
             this.Tab_OTMisc.Text = "OT/Misc";
             this.Tab_OTMisc.UseVisualStyleBackColor = true;
-            // 
-            // FLP_PKMEditors
-            // 
-            this.FLP_PKMEditors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.FLP_PKMEditors.AutoSize = true;
-            this.FLP_PKMEditors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FLP_PKMEditors.Controls.Add(this.BTN_Ribbons);
-            this.FLP_PKMEditors.Controls.Add(this.BTN_Medals);
-            this.FLP_PKMEditors.Controls.Add(this.BTN_History);
-            this.FLP_PKMEditors.Location = new System.Drawing.Point(49, 245);
-            this.FLP_PKMEditors.Name = "FLP_PKMEditors";
-            this.FLP_PKMEditors.Size = new System.Drawing.Size(175, 25);
-            this.FLP_PKMEditors.TabIndex = 9;
-            this.FLP_PKMEditors.WrapContents = false;
-            // 
-            // BTN_Ribbons
-            // 
-            this.BTN_Ribbons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Ribbons.AutoSize = true;
-            this.BTN_Ribbons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BTN_Ribbons.Location = new System.Drawing.Point(1, 1);
-            this.BTN_Ribbons.Margin = new System.Windows.Forms.Padding(1);
-            this.BTN_Ribbons.Name = "BTN_Ribbons";
-            this.BTN_Ribbons.Size = new System.Drawing.Size(56, 23);
-            this.BTN_Ribbons.TabIndex = 5;
-            this.BTN_Ribbons.Text = "Ribbons";
-            this.BTN_Ribbons.UseVisualStyleBackColor = true;
-            // 
-            // BTN_Medals
-            // 
-            this.BTN_Medals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Medals.AutoSize = true;
-            this.BTN_Medals.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BTN_Medals.Location = new System.Drawing.Point(59, 1);
-            this.BTN_Medals.Margin = new System.Windows.Forms.Padding(1);
-            this.BTN_Medals.Name = "BTN_Medals";
-            this.BTN_Medals.Size = new System.Drawing.Size(51, 23);
-            this.BTN_Medals.TabIndex = 7;
-            this.BTN_Medals.Text = "Medals";
-            this.BTN_Medals.UseVisualStyleBackColor = true;
-            // 
-            // BTN_History
-            // 
-            this.BTN_History.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_History.AutoSize = true;
-            this.BTN_History.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BTN_History.Location = new System.Drawing.Point(112, 1);
-            this.BTN_History.Margin = new System.Windows.Forms.Padding(1);
-            this.BTN_History.Name = "BTN_History";
-            this.BTN_History.Size = new System.Drawing.Size(62, 23);
-            this.BTN_History.TabIndex = 6;
-            this.BTN_History.Text = "Memories";
-            this.BTN_History.UseVisualStyleBackColor = true;
-            // 
-            // TB_EC
-            // 
-            this.TB_EC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_EC.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_EC.Location = new System.Drawing.Point(176, 276);
-            this.TB_EC.MaxLength = 8;
-            this.TB_EC.Name = "TB_EC";
-            this.TB_EC.Size = new System.Drawing.Size(60, 20);
-            this.TB_EC.TabIndex = 8;
-            this.TB_EC.Text = "12345678";
-            // 
-            // GB_nOT
-            // 
-            this.GB_nOT.Controls.Add(this.Label_CTGender);
-            this.GB_nOT.Controls.Add(this.TB_OTt2);
-            this.GB_nOT.Controls.Add(this.Label_PrevOT);
-            this.GB_nOT.Location = new System.Drawing.Point(40, 85);
-            this.GB_nOT.Name = "GB_nOT";
-            this.GB_nOT.Size = new System.Drawing.Size(190, 50);
-            this.GB_nOT.TabIndex = 2;
-            this.GB_nOT.TabStop = false;
-            this.GB_nOT.Text = "Latest (not OT) Handler";
-            // 
-            // Label_CTGender
-            // 
-            this.Label_CTGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_CTGender.Location = new System.Drawing.Point(144, 23);
-            this.Label_CTGender.Name = "Label_CTGender";
-            this.Label_CTGender.Size = new System.Drawing.Size(16, 13);
-            this.Label_CTGender.TabIndex = 57;
-            this.Label_CTGender.Text = "G";
-            this.Label_CTGender.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TB_OTt2
-            // 
-            this.TB_OTt2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TB_OTt2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_OTt2.Location = new System.Drawing.Point(46, 20);
-            this.TB_OTt2.MaxLength = 12;
-            this.TB_OTt2.Name = "TB_OTt2";
-            this.TB_OTt2.Size = new System.Drawing.Size(94, 20);
-            this.TB_OTt2.TabIndex = 1;
-            this.TB_OTt2.WordWrap = false;
-            // 
-            // Label_PrevOT
-            // 
-            this.Label_PrevOT.Location = new System.Drawing.Point(4, 23);
-            this.Label_PrevOT.Name = "Label_PrevOT";
-            this.Label_PrevOT.Size = new System.Drawing.Size(40, 13);
-            this.Label_PrevOT.TabIndex = 42;
-            this.Label_PrevOT.Text = "OT:";
-            this.Label_PrevOT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // BTN_RerollEC
-            // 
-            this.BTN_RerollEC.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
-            this.BTN_RerollEC.Location = new System.Drawing.Point(138, 276);
-            this.BTN_RerollEC.Name = "BTN_RerollEC";
-            this.BTN_RerollEC.Size = new System.Drawing.Size(38, 20);
-            this.BTN_RerollEC.TabIndex = 7;
-            this.BTN_RerollEC.Text = "Reroll";
-            this.BTN_RerollEC.UseVisualStyleBackColor = true;
             // 
             // GB_Markings
             // 
@@ -3421,15 +3299,17 @@
             this.GB_Markings.Controls.Add(this.PB_MarkShiny);
             this.GB_Markings.Controls.Add(this.PB_Mark1);
             this.GB_Markings.Controls.Add(this.PB_Mark4);
-            this.GB_Markings.Location = new System.Drawing.Point(68, 183);
+            this.GB_Markings.Location = new System.Drawing.Point(68, 184);
             this.GB_Markings.Name = "GB_Markings";
             this.GB_Markings.Size = new System.Drawing.Size(135, 58);
-            this.GB_Markings.TabIndex = 4;
+            this.GB_Markings.TabIndex = 10;
             this.GB_Markings.TabStop = false;
             this.GB_Markings.Text = "Markings";
             // 
             // PB_MarkHorohoro
             // 
+            this.PB_MarkHorohoro.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkHorohoro.Image")));
+            this.PB_MarkHorohoro.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkHorohoro.InitialImage")));
             this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
             this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
             this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
@@ -3439,6 +3319,8 @@
             // 
             // PB_MarkVC
             // 
+            this.PB_MarkVC.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkVC.Image")));
+            this.PB_MarkVC.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkVC.InitialImage")));
             this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
             this.PB_MarkVC.Name = "PB_MarkVC";
             this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
@@ -3468,6 +3350,7 @@
             this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Mark6.TabIndex = 5;
             this.PB_Mark6.TabStop = false;
+            this.PB_Mark6.Click += new System.EventHandler(this.clickMarking);
             // 
             // PB_MarkPentagon
             // 
@@ -3491,6 +3374,7 @@
             this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Mark3.TabIndex = 2;
             this.PB_Mark3.TabStop = false;
+            this.PB_Mark3.Click += new System.EventHandler(this.clickMarking);
             // 
             // PB_Mark5
             // 
@@ -3503,6 +3387,7 @@
             this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Mark5.TabIndex = 4;
             this.PB_Mark5.TabStop = false;
+            this.PB_Mark5.Click += new System.EventHandler(this.clickMarking);
             // 
             // PB_MarkCured
             // 
@@ -3526,6 +3411,7 @@
             this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Mark2.TabIndex = 1;
             this.PB_Mark2.TabStop = false;
+            this.PB_Mark2.Click += new System.EventHandler(this.clickMarking);
             // 
             // PB_MarkShiny
             // 
@@ -3549,6 +3435,7 @@
             this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Mark1.TabIndex = 0;
             this.PB_Mark1.TabStop = false;
+            this.PB_Mark1.Click += new System.EventHandler(this.clickMarking);
             // 
             // PB_Mark4
             // 
@@ -3561,6 +3448,138 @@
             this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Mark4.TabIndex = 3;
             this.PB_Mark4.TabStop = false;
+            this.PB_Mark4.Click += new System.EventHandler(this.clickMarking);
+            // 
+            // FLP_PKMEditors
+            // 
+            this.FLP_PKMEditors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.FLP_PKMEditors.AutoSize = true;
+            this.FLP_PKMEditors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FLP_PKMEditors.Controls.Add(this.BTN_Ribbons);
+            this.FLP_PKMEditors.Controls.Add(this.BTN_Medals);
+            this.FLP_PKMEditors.Controls.Add(this.BTN_History);
+            this.FLP_PKMEditors.Location = new System.Drawing.Point(49, 245);
+            this.FLP_PKMEditors.Name = "FLP_PKMEditors";
+            this.FLP_PKMEditors.Size = new System.Drawing.Size(175, 25);
+            this.FLP_PKMEditors.TabIndex = 9;
+            this.FLP_PKMEditors.WrapContents = false;
+            // 
+            // BTN_Ribbons
+            // 
+            this.BTN_Ribbons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Ribbons.AutoSize = true;
+            this.BTN_Ribbons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BTN_Ribbons.Location = new System.Drawing.Point(1, 1);
+            this.BTN_Ribbons.Margin = new System.Windows.Forms.Padding(1);
+            this.BTN_Ribbons.Name = "BTN_Ribbons";
+            this.BTN_Ribbons.Size = new System.Drawing.Size(56, 23);
+            this.BTN_Ribbons.TabIndex = 5;
+            this.BTN_Ribbons.Text = "Ribbons";
+            this.BTN_Ribbons.UseVisualStyleBackColor = true;
+            this.BTN_Ribbons.Click += new System.EventHandler(this.openRibbons);
+            // 
+            // BTN_Medals
+            // 
+            this.BTN_Medals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Medals.AutoSize = true;
+            this.BTN_Medals.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BTN_Medals.Location = new System.Drawing.Point(59, 1);
+            this.BTN_Medals.Margin = new System.Windows.Forms.Padding(1);
+            this.BTN_Medals.Name = "BTN_Medals";
+            this.BTN_Medals.Size = new System.Drawing.Size(51, 23);
+            this.BTN_Medals.TabIndex = 7;
+            this.BTN_Medals.Text = "Medals";
+            this.BTN_Medals.UseVisualStyleBackColor = true;
+            this.BTN_Medals.Click += new System.EventHandler(this.openMedals);
+            // 
+            // BTN_History
+            // 
+            this.BTN_History.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_History.AutoSize = true;
+            this.BTN_History.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BTN_History.Location = new System.Drawing.Point(112, 1);
+            this.BTN_History.Margin = new System.Windows.Forms.Padding(1);
+            this.BTN_History.Name = "BTN_History";
+            this.BTN_History.Size = new System.Drawing.Size(62, 23);
+            this.BTN_History.TabIndex = 6;
+            this.BTN_History.Text = "Memories";
+            this.BTN_History.UseVisualStyleBackColor = true;
+            this.BTN_History.Click += new System.EventHandler(this.openHistory);
+            // 
+            // TB_EC
+            // 
+            this.TB_EC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TB_EC.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_EC.Location = new System.Drawing.Point(176, 276);
+            this.TB_EC.MaxLength = 8;
+            this.TB_EC.Name = "TB_EC";
+            this.TB_EC.Size = new System.Drawing.Size(60, 20);
+            this.TB_EC.TabIndex = 8;
+            this.TB_EC.Text = "12345678";
+            this.TB_EC.TextChanged += new System.EventHandler(this.update_ID);
+            // 
+            // GB_nOT
+            // 
+            this.GB_nOT.Controls.Add(this.Label_CTGender);
+            this.GB_nOT.Controls.Add(this.TB_OTt2);
+            this.GB_nOT.Controls.Add(this.Label_PrevOT);
+            this.GB_nOT.Location = new System.Drawing.Point(40, 85);
+            this.GB_nOT.Name = "GB_nOT";
+            this.GB_nOT.Size = new System.Drawing.Size(190, 50);
+            this.GB_nOT.TabIndex = 2;
+            this.GB_nOT.TabStop = false;
+            this.GB_nOT.Text = "Latest (not OT) Handler";
+            // 
+            // Label_CTGender
+            // 
+            this.Label_CTGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CTGender.Location = new System.Drawing.Point(144, 23);
+            this.Label_CTGender.Name = "Label_CTGender";
+            this.Label_CTGender.Size = new System.Drawing.Size(16, 13);
+            this.Label_CTGender.TabIndex = 57;
+            this.Label_CTGender.Text = "G";
+            this.Label_CTGender.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Label_CTGender.Click += new System.EventHandler(this.clickTRGender);
+            // 
+            // TB_OTt2
+            // 
+            this.TB_OTt2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TB_OTt2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TB_OTt2.Location = new System.Drawing.Point(46, 20);
+            this.TB_OTt2.MaxLength = 12;
+            this.TB_OTt2.Name = "TB_OTt2";
+            this.TB_OTt2.Size = new System.Drawing.Size(94, 20);
+            this.TB_OTt2.TabIndex = 1;
+            this.TB_OTt2.WordWrap = false;
+            this.TB_OTt2.TextChanged += new System.EventHandler(this.updateNotOT);
+            this.TB_OTt2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.updateNicknameClick);
+            // 
+            // Label_PrevOT
+            // 
+            this.Label_PrevOT.Location = new System.Drawing.Point(4, 23);
+            this.Label_PrevOT.Name = "Label_PrevOT";
+            this.Label_PrevOT.Size = new System.Drawing.Size(40, 13);
+            this.Label_PrevOT.TabIndex = 42;
+            this.Label_PrevOT.Text = "OT:";
+            this.Label_PrevOT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_PrevOT.Click += new System.EventHandler(this.clickCT);
+            // 
+            // BTN_RerollEC
+            // 
+            this.BTN_RerollEC.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
+            this.BTN_RerollEC.Location = new System.Drawing.Point(138, 276);
+            this.BTN_RerollEC.Name = "BTN_RerollEC";
+            this.BTN_RerollEC.Size = new System.Drawing.Size(38, 20);
+            this.BTN_RerollEC.TabIndex = 7;
+            this.BTN_RerollEC.Text = "Reroll";
+            this.BTN_RerollEC.UseVisualStyleBackColor = true;
+            this.BTN_RerollEC.Click += new System.EventHandler(this.updateRandomEC);
             // 
             // GB_ExtraBytes
             // 
@@ -3581,6 +3600,7 @@
             this.TB_ExtraByte.Size = new System.Drawing.Size(28, 20);
             this.TB_ExtraByte.TabIndex = 2;
             this.TB_ExtraByte.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_ExtraByte.TextChanged += new System.EventHandler(this.updateExtraByteValue);
             // 
             // CB_ExtraBytes
             // 
@@ -3590,6 +3610,7 @@
             this.CB_ExtraBytes.Name = "CB_ExtraBytes";
             this.CB_ExtraBytes.Size = new System.Drawing.Size(57, 21);
             this.CB_ExtraBytes.TabIndex = 1;
+            this.CB_ExtraBytes.SelectedIndexChanged += new System.EventHandler(this.updateExtraByteIndex);
             // 
             // GB_OT
             // 
@@ -3616,6 +3637,7 @@
             this.Label_OTGender.TabIndex = 56;
             this.Label_OTGender.Text = "G";
             this.Label_OTGender.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Label_OTGender.Click += new System.EventHandler(this.clickTRGender);
             // 
             // TB_OT
             // 
@@ -3625,6 +3647,7 @@
             this.TB_OT.Name = "TB_OT";
             this.TB_OT.Size = new System.Drawing.Size(94, 20);
             this.TB_OT.TabIndex = 3;
+            this.TB_OT.MouseDown += new System.Windows.Forms.MouseEventHandler(this.updateNicknameClick);
             // 
             // TB_SID
             // 
@@ -3635,6 +3658,8 @@
             this.TB_SID.Size = new System.Drawing.Size(40, 20);
             this.TB_SID.TabIndex = 2;
             this.TB_SID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_SID.TextChanged += new System.EventHandler(this.update_ID);
+            this.TB_SID.MouseHover += new System.EventHandler(this.updateTSV);
             // 
             // TB_TID
             // 
@@ -3645,6 +3670,8 @@
             this.TB_TID.Size = new System.Drawing.Size(40, 20);
             this.TB_TID.TabIndex = 1;
             this.TB_TID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_TID.TextChanged += new System.EventHandler(this.update_ID);
+            this.TB_TID.MouseHover += new System.EventHandler(this.updateTSV);
             // 
             // Label_OT
             // 
@@ -3654,6 +3681,7 @@
             this.Label_OT.TabIndex = 5;
             this.Label_OT.Text = "OT:";
             this.Label_OT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_OT.Click += new System.EventHandler(this.clickOT);
             // 
             // Label_SID
             // 
@@ -4294,6 +4322,7 @@
             this.PB_Legal.Size = new System.Drawing.Size(16, 16);
             this.PB_Legal.TabIndex = 102;
             this.PB_Legal.TabStop = false;
+            this.PB_Legal.Click += new System.EventHandler(this.clickLegality);
             // 
             // dragout
             // 
@@ -4427,10 +4456,6 @@
             this.GB_CurrentMoves.PerformLayout();
             this.Tab_OTMisc.ResumeLayout(false);
             this.Tab_OTMisc.PerformLayout();
-            this.FLP_PKMEditors.ResumeLayout(false);
-            this.FLP_PKMEditors.PerformLayout();
-            this.GB_nOT.ResumeLayout(false);
-            this.GB_nOT.PerformLayout();
             this.GB_Markings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
@@ -4444,6 +4469,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
+            this.FLP_PKMEditors.ResumeLayout(false);
+            this.FLP_PKMEditors.PerformLayout();
+            this.GB_nOT.ResumeLayout(false);
+            this.GB_nOT.PerformLayout();
             this.GB_ExtraBytes.ResumeLayout(false);
             this.GB_ExtraBytes.PerformLayout();
             this.GB_OT.ResumeLayout(false);
@@ -4722,19 +4751,6 @@
         private System.Windows.Forms.TextBox TB_OTt2;
         private System.Windows.Forms.Label Label_PrevOT;
         private System.Windows.Forms.Button BTN_RerollEC;
-        private System.Windows.Forms.GroupBox GB_Markings;
-        private System.Windows.Forms.PictureBox PB_MarkHorohoro;
-        private System.Windows.Forms.PictureBox PB_MarkVC;
-        private System.Windows.Forms.PictureBox PB_MarkAlola;
-        private System.Windows.Forms.PictureBox PB_Mark6;
-        private System.Windows.Forms.PictureBox PB_MarkPentagon;
-        private System.Windows.Forms.PictureBox PB_Mark3;
-        private System.Windows.Forms.PictureBox PB_Mark5;
-        private System.Windows.Forms.PictureBox PB_MarkCured;
-        private System.Windows.Forms.PictureBox PB_Mark2;
-        private System.Windows.Forms.PictureBox PB_MarkShiny;
-        private System.Windows.Forms.PictureBox PB_Mark1;
-        private System.Windows.Forms.PictureBox PB_Mark4;
         private System.Windows.Forms.GroupBox GB_ExtraBytes;
         private System.Windows.Forms.MaskedTextBox TB_ExtraByte;
         private System.Windows.Forms.ComboBox CB_ExtraBytes;
@@ -4797,6 +4813,19 @@
         private System.Windows.Forms.NumericUpDown Num_CDSlot;
         private System.Windows.Forms.RadioButton radioDaycare;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.GroupBox GB_Markings;
+        private System.Windows.Forms.PictureBox PB_MarkHorohoro;
+        private System.Windows.Forms.PictureBox PB_MarkVC;
+        private System.Windows.Forms.PictureBox PB_MarkAlola;
+        private System.Windows.Forms.PictureBox PB_Mark6;
+        private System.Windows.Forms.PictureBox PB_MarkPentagon;
+        private System.Windows.Forms.PictureBox PB_Mark3;
+        private System.Windows.Forms.PictureBox PB_Mark5;
+        private System.Windows.Forms.PictureBox PB_MarkCured;
+        private System.Windows.Forms.PictureBox PB_Mark2;
+        private System.Windows.Forms.PictureBox PB_MarkShiny;
+        private System.Windows.Forms.PictureBox PB_Mark1;
+        private System.Windows.Forms.PictureBox PB_Mark4;
     }
 }
 

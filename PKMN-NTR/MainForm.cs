@@ -1984,38 +1984,17 @@ namespace ntrbase
             updateLegality();
         }
 
-        private void setMarkings()
+        private void clickLegality(object sender, EventArgs e)
         {
-            Func<bool, double> getOpacity = b => b ? 1 : 0.175;
-            PictureBox[] pba = { PB_Mark1, PB_Mark2, PB_Mark3, PB_Mark4, PB_Mark5, PB_Mark6 };
-            for (int i = 0; i < pba.Length; i++)
-                pba[i].Image = ImageUtil.ChangeOpacity(pba[i].InitialImage, getOpacity(pkm.Markings[i] != 0));
-
-            PB_MarkShiny.Image = ImageUtil.ChangeOpacity(PB_MarkShiny.InitialImage, getOpacity(!BTN_Shinytize.Enabled));
-            PB_MarkCured.Image = ImageUtil.ChangeOpacity(PB_MarkCured.InitialImage, getOpacity(CHK_Cured.Checked));
-
-            PB_MarkPentagon.Image = ImageUtil.ChangeOpacity(PB_MarkPentagon.InitialImage, getOpacity(pkm.Gen6));
-
-            // Gen7 Markings
-            if (pkm.Format != 7)
+            PKM pk;
+            if (verifiedPKM())
+                pk = preparePKM();
+            else
                 return;
 
-            PB_MarkAlola.Image = ImageUtil.ChangeOpacity(PB_MarkAlola.InitialImage, getOpacity(pkm.Gen7));
-            PB_MarkVC.Image = ImageUtil.ChangeOpacity(PB_MarkVC.InitialImage, getOpacity(pkm.VC));
-            PB_MarkHorohoro.Image = ImageUtil.ChangeOpacity(PB_MarkHorohoro.InitialImage, getOpacity(pkm.Horohoro));
-
-            for (int i = 0; i < pba.Length; i++)
-            {
-                switch (pkm.Markings[i])
-                {
-                    case 1:
-                        pba[i].Image = ImageUtil.ChangeAllColorTo(pba[i].Image, Color.FromArgb(000, 191, 255));
-                        break;
-                    case 2:
-                        pba[i].Image = ImageUtil.ChangeAllColorTo(pba[i].Image, Color.FromArgb(255, 117, 179));
-                        break;
-                }
-            }
+            if (pk.Species == 0 || !pk.ChecksumValid)
+            { SystemSounds.Asterisk.Play(); return; }
+            showLegality(pk, true, ModifierKeys == Keys.Control);
         }
 
         private void updateLegality(LegalityAnalysis la = null, bool skipMoveRepop = false)
@@ -2064,6 +2043,19 @@ namespace ntrbase
             }
         }
 
+        private void showLegality(PKM pk, bool tabs, bool verbose, bool skipMoveRepop = false)
+        {
+            LegalityAnalysis la = new LegalityAnalysis(pk);
+            if (!la.Parsed)
+            {
+                WinFormsUtil.Alert($"Checking legality of PK{pk.Format} files that originated from Gen{pk.GenNumber} is not supported.");
+                return;
+            }
+            if (tabs)
+                updateLegality(la, skipMoveRepop);
+            WinFormsUtil.Alert(verbose ? la.VerboseReport : la.Report);
+        }
+
         private void setIsShiny(object sender)
         {
             if (sender == TB_PID)
@@ -2101,6 +2093,37 @@ namespace ntrbase
 
             PKM pk = getPKMfromFields();
             return pk?.Clone();
+        }
+
+        public bool verifiedPKM()
+        {
+            if (ModifierKeys == (Keys.Control | Keys.Shift | Keys.Alt))
+                return true; // Override
+            // Make sure the PKX Fields are filled out properly (color check)
+            ComboBox[] cba = {
+                                 CB_Species, CB_Nature, CB_HeldItem, CB_Ability, // Main Tab
+                                 CB_MetLocation, CB_EggLocation, CB_Ball,   // Met Tab
+                                 CB_Move1, CB_Move2, CB_Move3, CB_Move4,    // Moves
+                                 CB_RelearnMove1, CB_RelearnMove2, CB_RelearnMove3, CB_RelearnMove4 // Moves
+                             };
+
+            ComboBox cb = cba.FirstOrDefault(c => c.BackColor == Color.DarkSalmon);
+            if (cb != null)
+            {
+                Control c = cb.Parent;
+                while (!(c is TabPage))
+                    c = c.Parent;
+                tabMain.SelectedTab = c as TabPage;
+            }
+            else if (SAV.Generation >= 3 && Convert.ToUInt32(TB_EVTotal.Text) > 510)
+                tabMain.SelectedTab = Tab_Stats;
+            else if (WinFormsUtil.getIndex(CB_Species) == 0)
+                tabMain.SelectedTab = Tab_Main;
+            else
+                return true;
+
+            SystemSounds.Exclamation.Play();
+            return false;
         }
 
         private void TemplateFields()
@@ -2213,49 +2236,6 @@ namespace ntrbase
 
             getQuickFiller(dragout);
             updateLegality();
-        }
-
-        private void updateTSV(object sender, EventArgs e)
-        {
-            if (SAV.Generation < 6)
-                return;
-
-            var TSV = pkm.TSV.ToString("0000");
-            string IDstr = "TSV: " + TSV;
-            if (SAV.Generation > 6)
-                IDstr += Environment.NewLine + "G7TID: " + pkm.TrainerID7.ToString("000000");
-
-            Tip1.SetToolTip(TB_TID, IDstr);
-            Tip2.SetToolTip(TB_SID, IDstr);
-
-            pkm.PID = Util.getHEXval(TB_PID.Text);
-            var PSV = pkm.PSV;
-            Tip3.SetToolTip(TB_PID, "PSV: " + PSV.ToString("0000"));
-        }
-
-        private void update_ID(object sender, EventArgs e)
-        {
-            // Trim out nonhex characters
-            TB_PID.Text = Util.getHEXval(TB_PID.Text).ToString("X8");
-            TB_EC.Text = Util.getHEXval(TB_EC.Text).ToString("X8");
-
-            // Max TID/SID is 65535
-            if (Util.ToUInt32(TB_TID.Text) > ushort.MaxValue) TB_TID.Text = "65535";
-            if (Util.ToUInt32(TB_SID.Text) > ushort.MaxValue) TB_SID.Text = "65535";
-
-            setIsShiny(sender);
-            getQuickFiller(dragout);
-            updateIVs(null, null);   // If the EC is changed, EC%6 (Characteristic) might be changed. 
-            TB_PID.Select(60, 0);   // position cursor at end of field
-            if (SAV.Generation <= 4 && fieldsLoaded)
-            {
-                fieldsLoaded = false;
-                pkm.PID = Util.getHEXval(TB_PID.Text);
-                CB_Nature.SelectedValue = pkm.Nature;
-                Label_Gender.Text = gendersymbols[pkm.Gender];
-                Label_Gender.ForeColor = pkm.Gender == 2 ? Label_Species.ForeColor : (pkm.Gender == 1 ? Color.Red : Color.Blue);
-                fieldsLoaded = true;
-            }
         }
 
         private void clickGender(object sender, EventArgs e)
@@ -3251,6 +3231,227 @@ namespace ntrbase
                 GB_OT.BackgroundImage = null;
                 GB_nOT.BackgroundImage = mixedHighlight;
             }
+            TB_Friendship.Text = pkm.CurrentFriendship.ToString();
+        }
+
+        private void updateTSV(object sender, EventArgs e)
+        {
+            if (SAV.Generation < 6)
+                return;
+
+            var TSV = pkm.TSV.ToString("0000");
+            string IDstr = "TSV: " + TSV;
+            if (SAV.Generation > 6)
+                IDstr += Environment.NewLine + "G7TID: " + pkm.TrainerID7.ToString("000000");
+
+            Tip1.SetToolTip(TB_TID, IDstr);
+            Tip2.SetToolTip(TB_SID, IDstr);
+
+            pkm.PID = Util.getHEXval(TB_PID.Text);
+            var PSV = pkm.PSV;
+            Tip3.SetToolTip(TB_PID, "PSV: " + PSV.ToString("0000"));
+        }
+
+        private void update_ID(object sender, EventArgs e)
+        {
+            // Trim out nonhex characters
+            TB_PID.Text = Util.getHEXval(TB_PID.Text).ToString("X8");
+            TB_EC.Text = Util.getHEXval(TB_EC.Text).ToString("X8");
+
+            // Max TID/SID is 65535
+            if (Util.ToUInt32(TB_TID.Text) > ushort.MaxValue) TB_TID.Text = "65535";
+            if (Util.ToUInt32(TB_SID.Text) > ushort.MaxValue) TB_SID.Text = "65535";
+
+            setIsShiny(sender);
+            getQuickFiller(dragout);
+            updateIVs(null, null);   // If the EC is changed, EC%6 (Characteristic) might be changed. 
+            TB_PID.Select(60, 0);   // position cursor at end of field
+            if (SAV.Generation <= 4 && fieldsLoaded)
+            {
+                fieldsLoaded = false;
+                pkm.PID = Util.getHEXval(TB_PID.Text);
+                CB_Nature.SelectedValue = pkm.Nature;
+                Label_Gender.Text = gendersymbols[pkm.Gender];
+                Label_Gender.ForeColor = pkm.Gender == 2 ? Label_Species.ForeColor : (pkm.Gender == 1 ? Color.Red : Color.Blue);
+                fieldsLoaded = true;
+            }
+        }
+
+        private void clickOT(object sender, EventArgs e)
+        {
+            if (!SAV.Exportable)
+                return;
+
+            // Get Save Information
+            TB_OT.Text = SAV.OT;
+            Label_OTGender.Text = gendersymbols[SAV.Gender % 2];
+            Label_OTGender.ForeColor = SAV.Gender == 1 ? Color.Red : Color.Blue;
+            TB_TID.Text = SAV.TID.ToString("00000");
+            TB_SID.Text = SAV.SID.ToString("00000");
+
+            if (SAV.Game >= 0)
+                CB_GameOrigin.SelectedValue = SAV.Game;
+            if (SAV.Language >= 0)
+                CB_Language.SelectedValue = SAV.Language;
+            if (SAV.HasGeolocation)
+            {
+                CB_SubRegion.SelectedValue = SAV.SubRegion;
+                CB_Country.SelectedValue = SAV.Country;
+                CB_3DSReg.SelectedValue = SAV.ConsoleRegion;
+            }
+            updateNickname(null, null);
+        }
+
+        private void clickTRGender(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Label lbl = sender as System.Windows.Forms.Label;
+            if (!string.IsNullOrWhiteSpace(lbl?.Text)) // set gender label (toggle M/F)
+            {
+                int gender = PKX.getGender(lbl.Text) ^ 1;
+                lbl.Text = gendersymbols[gender];
+                lbl.ForeColor = gender == 1 ? Color.Red : Color.Blue;
+            }
+        }
+
+        private void clickCT(object sender, EventArgs e)
+        {
+            if (TB_OTt2.Text.Length > 0)
+                Label_CTGender.Text = gendersymbols[SAV.Gender % 2];
+        }
+
+        private void updateNotOT(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TB_OTt2.Text))
+            {
+                clickGT(GB_OT, null); // Switch CT over to OT.
+                Label_CTGender.Text = "";
+                TB_Friendship.Text = pkm.CurrentFriendship.ToString();
+            }
+            else if (string.IsNullOrWhiteSpace(Label_CTGender.Text))
+                Label_CTGender.Text = gendersymbols[0];
+        }
+
+        private void updateExtraByteIndex(object sender, EventArgs e)
+        {
+            if (CB_ExtraBytes.Items.Count == 0)
+                return;
+            // Byte changed, need to refresh the Text box for the byte's value.
+            TB_ExtraByte.Text = pkm.Data[Convert.ToInt32(CB_ExtraBytes.Text, 16)].ToString();
+        }
+
+        private void updateExtraByteValue(object sender, EventArgs e)
+        {
+            if (CB_ExtraBytes.Items.Count == 0)
+                return;
+            // Changed Extra Byte's Value
+            if (Util.ToInt32(((MaskedTextBox)sender).Text) > byte.MaxValue)
+                ((MaskedTextBox)sender).Text = "255";
+
+            int value = Util.ToInt32(TB_ExtraByte.Text);
+            int offset = Convert.ToInt32(CB_ExtraBytes.Text, 16);
+            pkm.Data[offset] = (byte)value;
+        }
+
+        private void clickMarking(object sender, EventArgs e)
+        {
+            PictureBox[] pba = { PB_Mark1, PB_Mark2, PB_Mark3, PB_Mark4, PB_Mark5, PB_Mark6 };
+            int index = Array.IndexOf(pba, sender);
+
+            // Handling Gens 3-6
+            int[] markings = pkm.Markings;
+            switch (pkm.Format)
+            {
+                case 3:
+                case 4:
+                case 5:
+                case 6: // on/off
+                    markings[index] ^= 1; // toggle
+                    pkm.Markings = markings;
+                    break;
+                case 7: // 0 (none) | 1 (blue) | 2 (pink)
+                    markings[index] = (markings[index] + 1) % 3; // cycle
+                    pkm.Markings = markings;
+                    break;
+                default:
+                    return;
+            }
+            setMarkings();
+        }
+
+        private void setMarkings()
+        {
+            Func<bool, double> getOpacity = b => b ? 1 : 0.175;
+            PictureBox[] pba = { PB_Mark1, PB_Mark2, PB_Mark3, PB_Mark4, PB_Mark5, PB_Mark6 };
+            for (int i = 0; i < pba.Length; i++)
+                pba[i].Image = ImageUtil.ChangeOpacity(pba[i].InitialImage, getOpacity(pkm.Markings[i] != 0));
+
+            PB_MarkShiny.Image = ImageUtil.ChangeOpacity(PB_MarkShiny.InitialImage, getOpacity(!BTN_Shinytize.Enabled));
+            PB_MarkCured.Image = ImageUtil.ChangeOpacity(PB_MarkCured.InitialImage, getOpacity(CHK_Cured.Checked));
+
+            PB_MarkPentagon.Image = ImageUtil.ChangeOpacity(PB_MarkPentagon.InitialImage, getOpacity(pkm.Gen6));
+
+            // Gen7 Markings
+            if (pkm.Format != 7)
+                return;
+
+            PB_MarkAlola.Image = ImageUtil.ChangeOpacity(PB_MarkAlola.InitialImage, getOpacity(pkm.Gen7));
+            PB_MarkVC.Image = ImageUtil.ChangeOpacity(PB_MarkVC.InitialImage, getOpacity(pkm.VC));
+            PB_MarkHorohoro.Image = ImageUtil.ChangeOpacity(PB_MarkHorohoro.InitialImage, getOpacity(pkm.Horohoro));
+
+            for (int i = 0; i < pba.Length; i++)
+            {
+                switch (pkm.Markings[i])
+                {
+                    case 1:
+                        pba[i].Image = ImageUtil.ChangeAllColorTo(pba[i].Image, Color.FromArgb(000, 191, 255));
+                        break;
+                    case 2:
+                        pba[i].Image = ImageUtil.ChangeAllColorTo(pba[i].Image, Color.FromArgb(255, 117, 179));
+                        break;
+                }
+            }
+        }
+
+        private void updateRandomEC(object sender, EventArgs e)
+        {
+            pkm.Version = WinFormsUtil.getIndex(CB_GameOrigin);
+            if (pkm.GenNumber < 6)
+            {
+                TB_EC.Text = TB_PID.Text;
+                WinFormsUtil.Alert("EC should match PID.");
+            }
+
+            int wIndex = Array.IndexOf(Legal.WurmpleEvolutions, WinFormsUtil.getIndex(CB_Species));
+            if (wIndex < 0)
+            {
+                TB_EC.Text = Util.rnd32().ToString("X8");
+            }
+            else
+            {
+                uint EC;
+                do { EC = Util.rnd32(); } while ((EC >> 16) % 10 / 5 != wIndex / 2);
+                TB_EC.Text = EC.ToString("X8");
+            }
+        }
+
+        private void openRibbons(object sender, EventArgs e)
+        {
+            new RibbonEditor().ShowDialog();
+        }
+
+        private void openMedals(object sender, EventArgs e)
+        {
+            new SuperTrainingEditor().ShowDialog();
+        }
+
+        private void openHistory(object sender, EventArgs e)
+        {
+            // Write back current values
+            pkm.HT_Name = TB_OTt2.Text;
+            pkm.OT_Name = TB_OT.Text;
+            pkm.IsEgg = CHK_IsEgg.Checked;
+            pkm.CurrentFriendship = Util.ToInt32(TB_Friendship.Text);
+            new MemoryAmie().ShowDialog();
             TB_Friendship.Text = pkm.CurrentFriendship.ToString();
         }
 

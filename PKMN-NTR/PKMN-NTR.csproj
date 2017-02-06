@@ -14,6 +14,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
     <PublishUrl>发布\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +29,6 @@
     <ApplicationVersion>1.0.4.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -153,6 +153,18 @@
     <Compile Include="Sub-forms\Filter_Constructor.Designer.cs">
       <DependentUpon>Filter_Constructor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sub-forms\MemoryAmie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\MemoryAmie.Designer.cs">
+      <DependentUpon>MemoryAmie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\SuperTrainingEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\SuperTrainingEditor.Designer.cs">
+      <DependentUpon>SuperTrainingEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sub-forms\PokeDigger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +187,12 @@
     </Compile>
     <Compile Include="Sub-forms\Remote_Control.Designer.cs">
       <DependentUpon>Remote_Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\RibbonEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\RibbonEditor.Designer.cs">
+      <DependentUpon>RibbonEditor.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Bot\Bot_Breeding7.resx">
       <DependentUpon>Bot_Breeding7.cs</DependentUpon>
@@ -213,6 +231,12 @@
     <EmbeddedResource Include="Sub-forms\Filter_Constructor.resx">
       <DependentUpon>Filter_Constructor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\MemoryAmie.resx">
+      <DependentUpon>MemoryAmie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\SuperTrainingEditor.resx">
+      <DependentUpon>SuperTrainingEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sub-forms\PokeDigger.resx">
       <DependentUpon>PokeDigger.cs</DependentUpon>
     </EmbeddedResource>
@@ -233,6 +257,9 @@
     <EmbeddedResource Include="Sub-forms\Remote_Control.resx">
       <DependentUpon>Remote_Control.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\RibbonEditor.resx">
+      <DependentUpon>RibbonEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -250,7 +277,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 y x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
