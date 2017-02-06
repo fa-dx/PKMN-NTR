@@ -74,12 +74,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bot\BreedingBot6.cs" />
-    <Compile Include="Bot\BreedingBot7.cs" />
-    <Compile Include="Bot\SoftResetbot6.cs" />
-    <Compile Include="Bot\SoftResetbot7.cs" />
-    <Compile Include="Bot\WonderTradeBot6.cs" />
-    <Compile Include="Bot\WonderTradeBot7.cs" />
+    <Compile Include="Bot\Bot.cs" />
+    <Compile Include="Bot\Bot_Breeding7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_Breeding7.Designer.cs">
+      <DependentUpon>Bot_Breeding7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_Breeding6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_Breeding6.Designer.cs">
+      <DependentUpon>Bot_Breeding6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_SoftReset6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_SoftReset6.Designer.cs">
+      <DependentUpon>Bot_SoftReset6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_SoftReset7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_SoftReset7.Designer.cs">
+      <DependentUpon>Bot_SoftReset7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_WonderTrade6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_WonderTrade6.Designer.cs">
+      <DependentUpon>Bot_WonderTrade6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_WonderTrade7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_WonderTrade7.Designer.cs">
+      <DependentUpon>Bot_WonderTrade7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Delg.cs" />
     <Compile Include="Sub-forms\DumpOpponentHelp.cs">
       <SubType>Form</SubType>
@@ -129,6 +160,24 @@
     <Compile Include="Sub-forms\Remote_Control.Designer.cs">
       <DependentUpon>Remote_Control.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Bot\Bot_Breeding7.resx">
+      <DependentUpon>Bot_Breeding7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_Breeding6.resx">
+      <DependentUpon>Bot_Breeding6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_SoftReset6.resx">
+      <DependentUpon>Bot_SoftReset6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_SoftReset7.resx">
+      <DependentUpon>Bot_SoftReset7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_WonderTrade6.resx">
+      <DependentUpon>Bot_WonderTrade6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_WonderTrade7.resx">
+      <DependentUpon>Bot_WonderTrade7.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sub-forms\DumpOpponentHelp.resx">
       <DependentUpon>DumpOpponentHelp.cs</DependentUpon>
       <SubType>Designer</SubType>

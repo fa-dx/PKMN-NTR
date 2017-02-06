@@ -1,50 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PKHeX.Core;
+using ntrbase.Helpers;
 
 namespace ntrbase.Bot
 {
-    class BreedingBot6
+    public partial class Bot_Breeding6 : Form
     {
         public enum breedbotstates { botstart, facedaycareman, quickegg, walk1, walk2, checkegg, walk3, checkmap1, triggerdialog, continuedialog, checknoegg, exitdialog, testparty, walktodaycare, checkmap2, fix1, entertodaycare, checkmap3, walktodesk, checkmap4, walktocomputer, checkmap5, fix2, facecomputer, startcomputer, testcomputer, computerdialog, pressPCstorage, touchOrganize, testboxes, readslot, testboxchange, touchboxview, testboxview, touchnewbox, selectnewbox, testviewout, touchegg, moveegg, releaseegg, exitcomputer, testexit, readegg, retirefromcomputer, checkmap6, fix3, retirefromdesk, checkmap7, retirefromdoor, checkmap8, fix5, walktodaycareman, checkmap9, fix4, filter, testspassed, botexit };
 
-        // Bot variables
-        public int botresult;
-        public bool botstop;
-        public string finishmessage;
-
-        // Class variables
-        private int botState;
+        // Initialize
         private int attempts;
-        private int maxreconnect;
-        private int eggsinbatch;
+        private int botresult;
         private int eggsinparty;
-        private int currentesv;
-        private int filterbox;
-        private int filterslot;
-        private int runtime;
-        private bool boxchange;
+        private int eggsinbatch;
+        private int maxreconnect;
         private uint lastposition;
-        private long dataready;
-        private int[,] egglocations = new int[5, 2];
-        Task<bool> waitTaskbool;
-        Task<long> waitTaskint;
+        private bool botWorking;
+        private bool boxchange;
+        private breedbotstates botState;
 
-        // Class constants
+        // Not initialize
+        private int runtime;
+        private bool oras;
+        private Task<bool> waitTaskbool;
+        private int[,] egglocations = new int[5, 2];
+
+        // Constant
         private readonly int walktime = 100;
         private readonly int commanddelay = 250;
         private readonly int longcommandtime = 1000;
-
-        // Input variables
-        private int mode;
-        private int currentbox;
-        private int currentslot;
-        private int quantity;
-        private bool organizeboxes;
-        private bool mauvdaycare;
-        private bool readesv;
-        private bool quickbreed;
-        private bool oras;
 
         // Data offsets
         private uint wtboxesOff;
@@ -73,231 +65,243 @@ namespace ntrbase.Bot
         private uint computery;
         private uint eggoff;
 
-        public BreedingBot6(int selectedmode, int startbox, int startslot, int amount, bool organizeboxesposition, bool mauvilledaycare, bool readesvafterdep, bool quickbreedflag, bool orasgame)
+        public Bot_Breeding6()
         {
-            botstop = false;
-            botState = (int)breedbotstates.botstart;
-            botresult = 0;
-            attempts = 0;
-            maxreconnect = 10;
-            finishmessage = "";
-
-            boxchange = true;
-            eggsinbatch = 0;
-            eggsinparty = 0;
-            currentesv = 0;
-            lastposition = 0;
-            dataready = 0;
-            filterbox = 0;
-            filterslot = 0;
-
-            mode = selectedmode;
-            currentbox = startbox - 1;
-            currentslot = startslot - 1;
-            quantity = amount;
-            organizeboxes = organizeboxesposition;
-            mauvdaycare = mauvilledaycare;
-            readesv = readesvafterdep;
-            quickbreed = quickbreedflag;
-            oras = orasgame;
-
-            if (!oras)
-            { // XY
-                computerOff = 0x19A918;
-                computerIN = 0x4D0000;
-                wtboxesOff = 0x19A988;
-                organizeBoxIN = 0x6C0000;
-                organizeBoxOUT = 0x4D0000;
-                wtboxviewOff = 0x627437;
-                wtboxviewIN = 0x00000000;
-                wtboxviewOUT = 0x20000000;
-                wtboxviewRange = 0x1000000;
-                mapidoff = 0x81828EC;
-                mapxoff = 0x818290C;
-                mapyoff = 0x8182914;
-                //mapzoff = 0x8182910;
-                routemapid = 0x108;
-                daycaremapid = 0x109;
-                daycaremanx = 0x46219400;
-                daycaremany = 0x460F9400;
-                daycaredoorx = 0x4622FC00;
-                //daycaredoory = 0x460F4C00;
-                daycareexitx = 0x43610000;
-                //daycareexity = 0x43AF8000;
-                computerx = 0x43828000;
-                computery = 0x43730000;
-                eggoff = 0x8C80124;
-                runtime = 1000;
-            }
-            else
-            { // ORAS
-                if (mauvdaycare)
-                { // Mauvile Day Care
-                    computerOff = 0x19BF5C;
-                    computerIN = 0x500000;
-                    wtboxesOff = 0x19BFCC;
-                    organizeBoxIN = 0x710000;
-                    organizeBoxOUT = 0x500000;
-                    wtboxviewOff = 0x66F5F2;
-                    wtboxviewIN = 0xC000;
-                    wtboxviewOUT = 0x4000;
-                    wtboxviewRange = 0x1000;
-                    mapidoff = 0x8187BD4;
-                    mapxoff = 0x8187BF4;
-                    mapyoff = 0x8187BFC;
-                    //mapzoff = 0x8187BF8;
-                    routemapid = 0x2C;
-                    daycaremapid = 0x187;
-                    daycaremanx = 0x45553000;
-                    daycaremany = 0x44D92000;
-                    daycaredoorx = 0x455AD000;
-                    //daycaredoory = 0x44D6E000;
+            InitializeComponent();
+            switch (Program.gCmdWindow.SAV.Version)
+            {
+                case GameVersion.X:
+                case GameVersion.Y:
+                    oras = false;
+                    Delg.SetEnabled(orgbox_pos, false);
+                    Delg.SetEnabled(daycare_select, false);
+                    computerOff = 0x19A918;
+                    computerIN = 0x4D0000;
+                    wtboxesOff = 0x19A988;
+                    organizeBoxIN = 0x6C0000;
+                    organizeBoxOUT = 0x4D0000;
+                    wtboxviewOff = 0x627437;
+                    wtboxviewIN = 0x00000000;
+                    wtboxviewOUT = 0x20000000;
+                    wtboxviewRange = 0x1000000;
+                    mapidoff = 0x81828EC;
+                    mapxoff = 0x818290C;
+                    mapyoff = 0x8182914;
+                    //mapzoff = 0x8182910;
+                    routemapid = 0x108;
+                    daycaremapid = 0x109;
+                    daycaremanx = 0x46219400;
+                    daycaremany = 0x460F9400;
+                    daycaredoorx = 0x4622FC00;
+                    //daycaredoory = 0x460F4C00;
                     daycareexitx = 0x43610000;
-                    //daycareexity = 0x43A68000;
+                    //daycareexity = 0x43AF8000;
                     computerx = 0x43828000;
                     computery = 0x43730000;
-                    eggoff = 0x8C88358;
+                    eggoff = 0x8C80124;
                     runtime = 1000;
-                }
-                else
-                { // Battle Resort Day Care
-                    computerOff = 0x19BF5C;
-                    computerIN = 0x500000;
-                    wtboxesOff = 0x19BFCC;
-                    organizeBoxIN = 0x710000;
-                    organizeBoxOUT = 0x500000;
-                    wtboxviewOff = 0x66F5F2;
-                    wtboxviewIN = 0xC000;
-                    wtboxviewOUT = 0x4000;
-                    wtboxviewRange = 0x1000;
-                    mapidoff = 0x8187BD4;
-                    mapxoff = 0x8187BF4;
-                    mapyoff = 0x8187BFC;
-                    //mapzoff = 0x8187BF8;
-                    routemapid = 0xD2;
-                    daycaremapid = 0x207;
-                    daycaremanx = 0x44A9E000;
-                    daycaremany = 0x44D92000;
-                    daycaredoorx = 0x449C6000;
-                    //daycaredoory = 0x44D4A000;
-                    daycareexitx = 0x43610000;
-                    //daycareexity = 0x43A68000;
-                    computerx = 0x43828000;
-                    computery = 0x43730000;
-                    eggoff = 0x8C88548;
-                    runtime = 2000;
-                }
+                    break;
+                case GameVersion.OR:
+                case GameVersion.AS:
+                    if (optionRoute117.Checked)
+                    {
+                        oras = true;
+                        computerOff = 0x19BF5C;
+                        computerIN = 0x500000;
+                        wtboxesOff = 0x19BFCC;
+                        organizeBoxIN = 0x710000;
+                        organizeBoxOUT = 0x500000;
+                        wtboxviewOff = 0x66F5F2;
+                        wtboxviewIN = 0xC000;
+                        wtboxviewOUT = 0x4000;
+                        wtboxviewRange = 0x1000;
+                        mapidoff = 0x8187BD4;
+                        mapxoff = 0x8187BF4;
+                        mapyoff = 0x8187BFC;
+                        //mapzoff = 0x8187BF8;
+                        routemapid = 0x2C;
+                        daycaremapid = 0x187;
+                        daycaremanx = 0x45553000;
+                        daycaremany = 0x44D92000;
+                        daycaredoorx = 0x455AD000;
+                        //daycaredoory = 0x44D6E000;
+                        daycareexitx = 0x43610000;
+                        //daycareexity = 0x43A68000;
+                        computerx = 0x43828000;
+                        computery = 0x43730000;
+                        eggoff = 0x8C88358;
+                        runtime = 1000;
+                    }
+                    else
+                    {
+                        computerOff = 0x19BF5C;
+                        computerIN = 0x500000;
+                        wtboxesOff = 0x19BFCC;
+                        organizeBoxIN = 0x710000;
+                        organizeBoxOUT = 0x500000;
+                        wtboxviewOff = 0x66F5F2;
+                        wtboxviewIN = 0xC000;
+                        wtboxviewOUT = 0x4000;
+                        wtboxviewRange = 0x1000;
+                        mapidoff = 0x8187BD4;
+                        mapxoff = 0x8187BF4;
+                        mapyoff = 0x8187BFC;
+                        //mapzoff = 0x8187BF8;
+                        routemapid = 0xD2;
+                        daycaremapid = 0x207;
+                        daycaremanx = 0x44A9E000;
+                        daycaremany = 0x44D92000;
+                        daycaredoorx = 0x449C6000;
+                        //daycaredoory = 0x44D4A000;
+                        daycareexitx = 0x43610000;
+                        //daycareexity = 0x43A68000;
+                        computerx = 0x43828000;
+                        computery = 0x43730000;
+                        eggoff = 0x8C88548;
+                        runtime = 2000;
+                    }
+                    break;
             }
         }
 
-        public async Task<int> RunBot()
+        private void runBreedingBot_Click(object sender, EventArgs e)
+        {
+            string modemessage;
+            switch (optionMode.SelectedIndex)
+            {
+                case 0:
+                    modemessage = "Simple: This bot will produce " + eggs.Value.ToString() + " eggs and deposit them in the pc, starting at box " + box.Value.ToString() + " slot " + slot.Value.ToString() + ".\r\n\r\n";
+                    break;
+                case 1:
+                    modemessage = "Filter: This bot will produce eggs and deposit them in the pc, starting at box " + box.Value.ToString() + " slot " + slot.Value.ToString() + ". Then it will check against the selected filters and if it finds a match the bot will stop. The bot will also stop if it produces " + eggs.Value.ToString() + " eggs before finding a match.\r\n\r\n";
+                    break;
+                case 2:
+                    modemessage = "ESV/TSV: This bot will produce eggs and deposit them in the pc, starting at box " + box.Value.ToString() + " slot " + slot.Value.ToString() + ". Then it will check the egg's ESV and if it finds a match with the values in the TSV list, the bot will stop. The bot will also stop if it produces " + eggs.Value.ToString() + " eggs before finding a match.\r\n\r\n";
+                    break;
+                default:
+                    modemessage = "No mode selected. Select one and try again.\r\n\r\n";
+                    return;
+            }
+            DialogResult dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.OK && eggs.Value > 0 && optionMode.SelectedIndex >= 0)
+            {
+                botWorking = true;
+                RunBot();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        public async void RunBot()
         {
             try
             {
-                while (!botstop)
+                while (botWorking)
                 {
                     switch (botState)
                     {
-                        case (int)breedbotstates.botstart:
-                            Report("Bot: START Gen 6 Breding bot");
-                            if (quickbreed)
+                        case breedbotstates.botstart:
+                            Bot.Report("Bot: START Gen 6 Breding bot");
+                            if (optionQuickBreed.Checked)
                             {
-                                botState = (int)breedbotstates.facedaycareman;
+                                botState = breedbotstates.facedaycareman;
                             }
-                            else if (mode >= 0)
+                            else if (optionMode.SelectedIndex >= 0)
                             {
-                                botState = (int)breedbotstates.walk1;
+                                botState = breedbotstates.walk1;
                             }
                             else
                             {
-                                botState = (int)breedbotstates.botexit;
+                                botState = breedbotstates.botexit;
                             }
                             break;
 
-                        case (int)breedbotstates.facedaycareman:
-                            Report("Bot: Turn to Day Care Man");
+                        case breedbotstates.facedaycareman:
+                            Bot.Report("Bot: Turn to Day Care Man");
                             waitTaskbool = Program.helper.waitbutton(LookupTable.DpadUP);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.quickegg;
+                                botState = breedbotstates.quickegg;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 7;
-                                botState = (int)breedbotstates.facedaycareman;
+                                botState = breedbotstates.facedaycareman;
                             }
                             break;
 
-                        case (int)breedbotstates.quickegg:
+                        case breedbotstates.quickegg:
                             waitTaskbool = Program.helper.waitNTRwrite(eggoff, 0x01, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
                                 attempts = -10;
-                                botState = (int)breedbotstates.triggerdialog;
+                                botState = breedbotstates.triggerdialog;
                             }
                             else
                             {
                                 botresult = 1;
-                                Report("Bot: Error detected");
+                                Bot.Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
-                        case (int)breedbotstates.walk1:
-                            Report("Bot: Run south");
+                        case breedbotstates.walk1:
+                            Bot.Report("Bot: Run south");
                             Program.helper.quickbuton(LookupTable.runDOWN, runtime);
                             await Task.Delay(runtime + commanddelay);
-                            botState = (int)breedbotstates.walk2;
+                            botState = breedbotstates.walk2;
                             break;
 
-                        case (int)breedbotstates.walk2:
-                            Report("Bot: Run north");
+                        case breedbotstates.walk2:
+                            Bot.Report("Bot: Run north");
                             Program.helper.quickbuton(LookupTable.runUP, runtime);
                             await Task.Delay(runtime + commanddelay);
-                            botState = (int)breedbotstates.checkegg;
+                            botState = breedbotstates.checkegg;
                             break;
 
-                        case (int)breedbotstates.checkegg:
-                            Report("Bot: Check if an egg is available");
+                        case breedbotstates.checkegg:
+                            Bot.Report("Bot: Check if an egg is available");
                             waitTaskbool = Program.helper.memoryinrange(eggoff, 0x01, 0x01);
                             if (await waitTaskbool)
                             {
-                                Report("Bot: Egg found");
-                                botState = (int)breedbotstates.checkmap1;
+                                Bot.Report("Bot: Egg found");
+                                botState = breedbotstates.checkmap1;
                             }
                             else
                             {
-                                botState = (int)breedbotstates.walk1;
+                                botState = breedbotstates.walk1;
                             }
                             break;
 
-                        case (int)breedbotstates.checkmap1:
+                        case breedbotstates.checkmap1:
                             waitTaskbool = Program.helper.timememoryinrange(mapyoff, daycaremany, 0x01, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = -10;
-                                Report("Bot: Egg found");
-                                botState = (int)breedbotstates.triggerdialog;
+                                Bot.Report("Bot: Egg found");
+                                botState = breedbotstates.triggerdialog;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.walk3;
+                                botState = breedbotstates.walk3;
                             }
                             break;
 
-                        case (int)breedbotstates.walk3:
-                            Report("Bot: Return to day care man");
+                        case breedbotstates.walk3:
+                            Bot.Report("Bot: Return to day care man");
                             Program.helper.quickbuton(LookupTable.runUP, longcommandtime);
                             await Task.Delay(longcommandtime + commanddelay);
-                            botState = (int)breedbotstates.checkmap1;
+                            botState = breedbotstates.checkmap1;
                             break;
 
-                        case (int)breedbotstates.triggerdialog:
-                            Report("Bot: Talk to Day Care Man");
+                        case breedbotstates.triggerdialog:
+                            Bot.Report("Bot: Talk to Day Care Man");
                             int i;
                             for (i = 0; i < 7; i++)
                             {
@@ -308,48 +312,48 @@ namespace ntrbase.Bot
                             }
                             if (i == 7)
                             {
-                                botState = (int)breedbotstates.checknoegg;
+                                botState = breedbotstates.checknoegg;
                             }
                             else
                             {
-                                botState = (int)breedbotstates.continuedialog;
+                                botState = breedbotstates.continuedialog;
                             }
                             break;
 
-                        case (int)breedbotstates.continuedialog:
-                            Report("Bot: Continue dialog");
+                        case breedbotstates.continuedialog:
+                            Bot.Report("Bot: Continue dialog");
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                             {
-                                botState = (int)breedbotstates.checknoegg;
+                                botState = breedbotstates.checknoegg;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 7;
-                                botState = (int)breedbotstates.continuedialog;
+                                botState = breedbotstates.continuedialog;
                             }
                             break;
 
-                        case (int)breedbotstates.checknoegg:
+                        case breedbotstates.checknoegg:
                             waitTaskbool = Program.helper.memoryinrange(eggoff, 0x00, 0x01);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                Report("Bot: Egg received");
-                                botState = (int)breedbotstates.exitdialog;
+                                Bot.Report("Bot: Egg received");
+                                botState = breedbotstates.exitdialog;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.triggerdialog;
+                                botState = breedbotstates.triggerdialog;
                             }
                             break;
 
-                        case (int)breedbotstates.exitdialog:
-                            Report("Bot: Exit dialog");
+                        case breedbotstates.exitdialog:
+                            Bot.Report("Bot: Exit dialog");
                             await Task.Delay(5 * commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyB);
                             if (await waitTaskbool)
@@ -358,39 +362,39 @@ namespace ntrbase.Bot
                                 if (await waitTaskbool)
                                 {
                                     addEggtoParty();
-                                    if (eggsinparty >= 5 || quantity == 0)
+                                    if (eggsinparty >= 5 || eggs.Value == 0)
                                     {
                                         attempts = -15; // Allow more attempts
-                                        botState = (int)breedbotstates.walktodaycare;
+                                        botState = breedbotstates.walktodaycare;
                                     }
-                                    else if (quickbreed)
+                                    else if (optionQuickBreed.Checked)
                                     {
-                                        botState = (int)breedbotstates.quickegg;
+                                        botState = breedbotstates.quickegg;
                                     }
                                     else
                                     {
-                                        botState = (int)breedbotstates.walk1;
+                                        botState = breedbotstates.walk1;
                                     }
                                 }
                                 else
                                 {
                                     attempts++;
                                     botresult = 7;
-                                    botState = (int)breedbotstates.exitdialog;
+                                    botState = breedbotstates.exitdialog;
                                 }
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 7;
-                                botState = (int)breedbotstates.exitdialog;
+                                botState = breedbotstates.exitdialog;
                             }
                             break;
 
-                        case (int)breedbotstates.walktodaycare:
-                            Report("Bot: Walk to Day Care");
+                        case breedbotstates.walktodaycare:
+                            Bot.Report("Bot: Walk to Day Care");
                             await Task.Delay(commanddelay);
-                            if (oras && !mauvdaycare)
+                            if (oras && optionBattleResort.Checked)
                             {
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             }
@@ -399,50 +403,50 @@ namespace ntrbase.Bot
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             }
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap2;
+                            botState = breedbotstates.checkmap2;
                             break;
 
-                        case (int)breedbotstates.checkmap2:
+                        case breedbotstates.checkmap2:
                             lastposition = Program.helper.lastRead;
                             waitTaskbool = Program.helper.memoryinrange(mapxoff, daycaredoorx, 0x01);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.entertodaycare;
+                                botState = breedbotstates.entertodaycare;
                             }
                             else if (lastposition == Program.helper.lastRead)
                             {
-                                Report("Bot: No movement detected, still on dialog?");
+                                Bot.Report("Bot: No movement detected, still on dialog?");
                                 Program.helper.quickbuton(LookupTable.keyB, 250);
                                 await Task.Delay(2 * commanddelay);
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.walktodaycare;
+                                botState = breedbotstates.walktodaycare;
                             }
-                            else if (Program.helper.lastRead < daycaredoorx && oras && !mauvdaycare)
+                            else if (Program.helper.lastRead < daycaredoorx && oras && optionBattleResort.Checked)
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.fix1;
+                                botState = breedbotstates.fix1;
                             }
-                            else if (Program.helper.lastRead > daycaredoorx && (!oras || mauvdaycare))
+                            else if (Program.helper.lastRead > daycaredoorx && (!oras || optionRoute117.Checked))
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.fix1;
+                                botState = breedbotstates.fix1;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.walktodaycare;
+                                botState = breedbotstates.walktodaycare;
                             }
                             break;
 
-                        case (int)breedbotstates.fix1:
-                            Report("Bot: Missed day care, return");
+                        case breedbotstates.fix1:
+                            Bot.Report("Bot: Missed day care, return");
                             await Task.Delay(commanddelay);
-                            if (oras && !mauvdaycare)
+                            if (oras && optionBattleResort.Checked)
                             {
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             }
@@ -451,178 +455,178 @@ namespace ntrbase.Bot
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             }
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap2;
+                            botState = breedbotstates.checkmap2;
                             break;
 
-                        case (int)breedbotstates.entertodaycare:
-                            Report("Bot: Enter to Day Care");
+                        case breedbotstates.entertodaycare:
+                            Bot.Report("Bot: Enter to Day Care");
                             await Task.Delay(commanddelay);
                             Program.helper.quickbuton(LookupTable.runUP, longcommandtime);
                             await Task.Delay(longcommandtime + commanddelay);
-                            botState = (int)breedbotstates.checkmap3;
+                            botState = breedbotstates.checkmap3;
                             break;
 
-                        case (int)breedbotstates.checkmap3:
+                        case breedbotstates.checkmap3:
                             waitTaskbool = Program.helper.timememoryinrange(mapidoff, daycaremapid, 0x01, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.walktodesk;
+                                botState = breedbotstates.walktodesk;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.entertodaycare;
+                                botState = breedbotstates.entertodaycare;
                             }
                             break;
 
-                        case (int)breedbotstates.walktodesk:
-                            Report("Bot: Run to desk");
+                        case breedbotstates.walktodesk:
+                            Bot.Report("Bot: Run to desk");
                             await Task.Delay(commanddelay);
                             Program.helper.quickbuton(LookupTable.runUP, longcommandtime);
                             await Task.Delay(longcommandtime + commanddelay);
-                            botState = (int)breedbotstates.checkmap4;
+                            botState = breedbotstates.checkmap4;
                             break;
 
-                        case (int)breedbotstates.checkmap4:
+                        case breedbotstates.checkmap4:
                             waitTaskbool = Program.helper.timememoryinrange(mapyoff, computery, 0x01, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.walktocomputer;
+                                botState = breedbotstates.walktocomputer;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.walktodesk;
+                                botState = breedbotstates.walktodesk;
                             }
                             break;
 
-                        case (int)breedbotstates.walktocomputer:
-                            Report("Bot: Walk to the PC");
+                        case breedbotstates.walktocomputer:
+                            Bot.Report("Bot: Walk to the PC");
                             await Task.Delay(commanddelay);
                             Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap5;
+                            botState = breedbotstates.checkmap5;
                             break;
 
-                        case (int)breedbotstates.checkmap5:
+                        case breedbotstates.checkmap5:
                             waitTaskbool = Program.helper.memoryinrange(mapxoff, computerx, 0x01);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.facecomputer;
+                                botState = breedbotstates.facecomputer;
                             }
                             else if (Program.helper.lastRead > computerx)
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.fix2;
+                                botState = breedbotstates.fix2;
                             }
                             else
                             { // Still far from computer
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.walktocomputer;
+                                botState = breedbotstates.walktocomputer;
                             }
                             break;
 
-                        case (int)breedbotstates.fix2:
-                            Report("Bot: Missed PC, return");
+                        case breedbotstates.fix2:
+                            Bot.Report("Bot: Missed PC, return");
                             await Task.Delay(commanddelay);
                             Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap5;
+                            botState = breedbotstates.checkmap5;
                             break;
 
-                        case (int)breedbotstates.facecomputer:
-                            Report("Bot: Turn on the PC");
+                        case breedbotstates.facecomputer:
+                            Bot.Report("Bot: Turn on the PC");
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.DpadUP);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.startcomputer;
+                                botState = breedbotstates.startcomputer;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 7;
-                                botState = (int)breedbotstates.facecomputer;
+                                botState = breedbotstates.facecomputer;
                             }
                             break;
 
-                        case (int)breedbotstates.startcomputer:
+                        case breedbotstates.startcomputer:
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                             {
-                                botState = (int)breedbotstates.testcomputer;
+                                botState = breedbotstates.testcomputer;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 7;
-                                botState = (int)breedbotstates.startcomputer;
+                                botState = breedbotstates.startcomputer;
                             }
                             break;
 
-                        case (int)breedbotstates.testcomputer:
-                            Report("Bot: Test if the PC is on");
+                        case breedbotstates.testcomputer:
+                            Bot.Report("Bot: Test if the PC is on");
                             await Task.Delay(8 * commanddelay); // Wait for PC on
                             waitTaskbool = Program.helper.timememoryinrange(computerOff, computerIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.computerdialog;
+                                botState = breedbotstates.computerdialog;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.facecomputer;
+                                botState = breedbotstates.facecomputer;
                             }
                             break;
 
-                        case (int)breedbotstates.computerdialog:
-                            Report("Bot: Skip PC dialog");
+                        case breedbotstates.computerdialog:
+                            Bot.Report("Bot: Skip PC dialog");
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.pressPCstorage;
+                                botState = breedbotstates.pressPCstorage;
                             }
                             else
                             {
                                 botresult = 7;
-                                Report("Bot: Error detected");
+                                Bot.Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
-                        case (int)breedbotstates.pressPCstorage:
-                            Report("Bot: Press Access PC storage");
+                        case breedbotstates.pressPCstorage:
+                            Bot.Report("Bot: Press Access PC storage");
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.touchOrganize;
+                                botState = breedbotstates.touchOrganize;
                             }
                             else
                             {
                                 botresult = 7;
-                                Report("Bot: Error detected");
+                                Bot.Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
-                        case (int)breedbotstates.touchOrganize:
-                            Report("Bot: Touch Organize boxes");
+                        case breedbotstates.touchOrganize:
+                            Bot.Report("Bot: Touch Organize boxes");
                             await Task.Delay(2 * commanddelay);
-                            if (oras && organizeboxes)
+                            if (oras && optionTop.Checked)
                             {
                                 waitTaskbool = Program.helper.waittouch(160, 40);
                             }
@@ -632,242 +636,242 @@ namespace ntrbase.Bot
                             }
                             if (await waitTaskbool)
                             {
-                                botState = (int)breedbotstates.testboxes;
+                                botState = breedbotstates.testboxes;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 6;
-                                botState = (int)breedbotstates.touchOrganize;
+                                botState = breedbotstates.touchOrganize;
                             }
                             break;
 
-                        case (int)breedbotstates.testboxes:
-                            Report("Test if the boxes are shown");
+                        case breedbotstates.testboxes:
+                            Bot.Report("Test if the boxes are shown");
                             await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, organizeBoxIN, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.readslot;
+                                botState = breedbotstates.readslot;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.touchOrganize;
+                                botState = breedbotstates.touchOrganize;
                             }
                             break;
 
-                        case (int)breedbotstates.readslot:
-                            Report("Bot: Search for empty slot");
-                            waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
-                            dataready = await waitTaskint;
-                            switch (dataready)
-                            {
-                                case -2: // Read error
-                                    botresult = 2;
-                                    Report("Bot: Error detected");
-                                    attempts = 11;
-                                    break;
-                                case -1: // Empty slot
-                                    botState = (int)breedbotstates.testboxchange;
-                                    break;
-                                default: // Not empty slot
-                                    getNextSlot();
-                                    botState = (int)breedbotstates.readslot;
-                                    break;
-                            }
+                        case breedbotstates.readslot:
+                            Bot.Report("Bot: Search for empty slot");
+                            //waitTaskint = Program.helper.waitPokeRead(currentbox, currentslot);
+                            //dataready = await waitTaskint;
+                            //switch (dataready)
+                            //{
+                            //    case -2: // Read error
+                            //        botresult = 2;
+                            //        Bot.Report("Bot: Error detected");
+                            //        attempts = 11;
+                            //        break;
+                            //    case -1: // Empty slot
+                            //        botState = breedbotstates.testboxchange;
+                            //        break;
+                            //    default: // Not empty slot
+                            //        getNextSlot();
+                            //        botState = breedbotstates.readslot;
+                            //        break;
+                            //}
                             break;
 
-                        case (int)breedbotstates.testboxchange:
+                        case breedbotstates.testboxchange:
                             if (boxchange)
                             {
-                                botState = (int)breedbotstates.touchboxview;
+                                botState = breedbotstates.touchboxview;
                                 boxchange = false;
                             }
                             else
                             {
-                                botState = (int)breedbotstates.touchegg;
+                                botState = breedbotstates.touchegg;
                             }
                             break;
 
-                        case (int)breedbotstates.touchboxview:
-                            Report("Bot: Touch Box View");
+                        case breedbotstates.touchboxview:
+                            Bot.Report("Bot: Touch Box View");
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waittouch(30, 220);
                             if (await waitTaskbool)
                             {
-                                botState = (int)breedbotstates.testboxview;
+                                botState = breedbotstates.testboxview;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 6;
-                                botState = (int)breedbotstates.touchboxview;
+                                botState = breedbotstates.touchboxview;
                             }
                             break;
 
-                        case (int)breedbotstates.testboxview:
-                            Report("Bot: Test if box view is shown");
+                        case breedbotstates.testboxview:
+                            Bot.Report("Bot: Test if box view is shown");
                             await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewIN, wtboxviewRange, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.touchnewbox;
+                                botState = breedbotstates.touchnewbox;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.touchboxview;
+                                botState = breedbotstates.touchboxview;
                             }
                             break;
 
-                        case (int)breedbotstates.touchnewbox:
-                            Report("Bot: Touch New Box");
+                        case breedbotstates.touchnewbox:
+                            Bot.Report("Bot: Touch New Box");
                             await Task.Delay(commanddelay);
-                            waitTaskbool = Program.helper.waittouch(LookupTable.boxposX6[currentbox], LookupTable.boxposY6[currentbox]);
+                            waitTaskbool = Program.helper.waittouch(LookupTable.boxposX6[(int)box.Value], LookupTable.boxposY6[(int)box.Value]);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.selectnewbox;
+                                botState = breedbotstates.selectnewbox;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 6;
-                                botState = (int)breedbotstates.touchnewbox;
+                                botState = breedbotstates.touchnewbox;
                             }
                             break;
 
-                        case (int)breedbotstates.selectnewbox:
-                            Report("Bot: Select New Box");
+                        case breedbotstates.selectnewbox:
+                            Bot.Report("Bot: Select New Box");
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             if (await waitTaskbool)
                             {
-                                botState = (int)breedbotstates.testviewout;
+                                botState = breedbotstates.testviewout;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 7;
-                                botState = (int)breedbotstates.selectnewbox;
+                                botState = breedbotstates.selectnewbox;
                             }
                             break;
 
-                        case (int)breedbotstates.testviewout:
-                            Report("Bot: Test if box view is not shown");
+                        case breedbotstates.testviewout:
+                            Bot.Report("Bot: Test if box view is not shown");
                             await Task.Delay(4 * commanddelay);
                             waitTaskbool = Program.helper.timememoryinrange(wtboxviewOff, wtboxviewOUT, wtboxviewRange, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.touchegg;
+                                botState = breedbotstates.touchegg;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.selectnewbox;
+                                botState = breedbotstates.selectnewbox;
                             }
                             break;
 
-                        case (int)breedbotstates.touchegg:
-                            Report("Bot: Select Egg");
+                        case breedbotstates.touchegg:
+                            Bot.Report("Bot: Select Egg");
                             await Task.Delay(2 * commanddelay);
                             waitTaskbool = Program.helper.waitholdtouch(300, 100);
                             if (await waitTaskbool)
                             {
-                                botState = (int)breedbotstates.moveegg;
+                                botState = breedbotstates.moveegg;
                             }
                             else
                             {
                                 botresult = 6;
-                                Report("Bot: Error detected");
+                                Bot.Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
-                        case (int)breedbotstates.moveegg:
-                            Report("Move Egg");
+                        case breedbotstates.moveegg:
+                            Bot.Report("Move Egg");
                             await Task.Delay(commanddelay);
-                            waitTaskbool = Program.helper.waitholdtouch(LookupTable.pokeposX6[currentslot], LookupTable.pokeposY6[currentslot]);
+                            waitTaskbool = Program.helper.waitholdtouch(LookupTable.pokeposX6[(int)slot.Value], LookupTable.pokeposY6[(int)slot.Value]);
                             if (await waitTaskbool)
                             {
-                                botState = (int)breedbotstates.releaseegg;
+                                botState = breedbotstates.releaseegg;
                             }
                             else
                             {
                                 botresult = 6;
-                                Report("Bot: Error detected");
+                                Bot.Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
-                        case (int)breedbotstates.releaseegg:
-                            Report("Bot: Release Egg");
+                        case breedbotstates.releaseegg:
+                            Bot.Report("Bot: Release Egg");
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitfreetouch();
                             if (await waitTaskbool)
                             {
-                                egglocations[eggsinbatch, 0] = currentbox;
-                                egglocations[eggsinbatch, 1] = currentslot;
+                                egglocations[eggsinbatch, 0] = (int)box.Value;
+                                egglocations[eggsinbatch, 1] = (int)slot.Value;
                                 eggsinbatch++;
                                 getNextSlot();
                                 eggsinparty--;
                                 if (eggsinparty > 0)
                                 {
-                                    botState = (int)breedbotstates.readslot;
+                                    botState = breedbotstates.readslot;
                                 }
                                 else
                                 {
-                                    botState = (int)breedbotstates.exitcomputer;
+                                    botState = breedbotstates.exitcomputer;
                                 }
                             }
                             else
                             {
                                 botresult = 6;
-                                Report("Bot: Error detected");
+                                Bot.Report("Bot: Error detected");
                                 attempts = 11;
                             }
                             break;
 
-                        case (int)breedbotstates.exitcomputer:
-                            Report("Bot: Exit from PC");
+                        case breedbotstates.exitcomputer:
+                            Bot.Report("Bot: Exit from PC");
                             await Task.Delay(commanddelay);
                             waitTaskbool = Program.helper.waitbutton(LookupTable.keyX);
                             if (await waitTaskbool)
                             {
-                                botState = (int)breedbotstates.testexit;
+                                botState = breedbotstates.testexit;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 7;
-                                botState = (int)breedbotstates.exitcomputer;
+                                botState = breedbotstates.exitcomputer;
                             }
                             break;
 
-                        case (int)breedbotstates.testexit:
-                            Report("Bot: Test if out from PC");
+                        case breedbotstates.testexit:
+                            Bot.Report("Bot: Test if out from PC");
                             waitTaskbool = Program.helper.timememoryinrange(wtboxesOff, organizeBoxOUT, 0x10000, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                if (mode == 1 || mode == 2 || readesv)
+                                if (optionMode.SelectedIndex == 1 || optionMode.SelectedIndex == 2 || optionReadESV.Checked)
                                 {
-                                    botState = (int)breedbotstates.filter;
+                                    botState = breedbotstates.filter;
                                 }
-                                else if (quantity > 0)
+                                else if (eggs.Value > 0)
                                 {
-                                    botState = (int)breedbotstates.retirefromcomputer;
+                                    botState = breedbotstates.retirefromcomputer;
                                 }
                                 else
                                 {
-                                    Report("Bot: Error detected");
+                                    Bot.Report("Bot: Error detected");
                                     attempts = 11;
                                 }
                             }
@@ -875,112 +879,112 @@ namespace ntrbase.Bot
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.exitcomputer;
+                                botState = breedbotstates.exitcomputer;
                             }
                             break;
 
-                        case (int)breedbotstates.retirefromcomputer:
-                            Report("Bot: Retire from PC");
+                        case breedbotstates.retirefromcomputer:
+                            Bot.Report("Bot: Retire from PC");
                             await Task.Delay(commanddelay);
                             eggsinbatch = 0;
                             Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap6;
+                            botState = breedbotstates.checkmap6;
                             break;
 
-                        case (int)breedbotstates.checkmap6:
+                        case breedbotstates.checkmap6:
                             waitTaskbool = Program.helper.memoryinrange(mapxoff, daycareexitx, 0x01);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.retirefromdesk;
+                                botState = breedbotstates.retirefromdesk;
                             }
                             else if (Program.helper.lastRead < daycareexitx)
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.fix3;
+                                botState = breedbotstates.fix3;
                             }
                             else
                             { // Still far from exit
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.retirefromcomputer;
+                                botState = breedbotstates.retirefromcomputer;
                             }
                             break;
 
-                        case (int)breedbotstates.fix3:
-                            Report("Bot: Missed exit, return");
+                        case breedbotstates.fix3:
+                            Bot.Report("Bot: Missed exit, return");
                             await Task.Delay(commanddelay);
                             Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap6;
+                            botState = breedbotstates.checkmap6;
                             break;
 
-                        case (int)breedbotstates.retirefromdesk:
-                            Report("Bot: Run to exit");
+                        case breedbotstates.retirefromdesk:
+                            Bot.Report("Bot: Run to exit");
                             await Task.Delay(commanddelay);
                             Program.helper.quickbuton(LookupTable.runDOWN, longcommandtime);
                             await Task.Delay(longcommandtime + commanddelay);
-                            botState = (int)breedbotstates.checkmap7;
+                            botState = breedbotstates.checkmap7;
                             break;
 
-                        case (int)breedbotstates.checkmap7:
+                        case breedbotstates.checkmap7:
                             waitTaskbool = Program.helper.timememoryinrange(mapidoff, routemapid, 0x01, 100, 5000);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
-                                botState = (int)breedbotstates.retirefromdoor;
+                                botState = breedbotstates.retirefromdoor;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = 2;
-                                botState = (int)breedbotstates.retirefromdesk;
+                                botState = breedbotstates.retirefromdesk;
                             }
                             break;
 
-                        case (int)breedbotstates.retirefromdoor:
-                            Report("Bot: Retire from door");
+                        case breedbotstates.retirefromdoor:
+                            Bot.Report("Bot: Retire from door");
                             await Task.Delay(commanddelay);
                             Program.helper.quickbuton(LookupTable.DpadDOWN, walktime);
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap8;
+                            botState = breedbotstates.checkmap8;
                             break;
 
-                        case (int)breedbotstates.checkmap8:
+                        case breedbotstates.checkmap8:
                             waitTaskbool = Program.helper.memoryinrange(mapyoff, daycaremany, 0x01);
                             if (await waitTaskbool)
                             {
                                 attempts = -10; // Allow more attempts
-                                botState = (int)breedbotstates.walktodaycareman;
+                                botState = breedbotstates.walktodaycareman;
                             }
                             else if (Program.helper.lastRead > daycaremany)
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.fix5;
+                                botState = breedbotstates.fix5;
                             }
                             else
                             { // Still far from exit
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.retirefromdoor;
+                                botState = breedbotstates.retirefromdoor;
                             }
                             break;
 
-                        case (int)breedbotstates.fix5:
-                            Report("Bot: Missed Day Care Man, return");
+                        case breedbotstates.fix5:
+                            Bot.Report("Bot: Missed Day Care Man, return");
                             await Task.Delay(commanddelay);
                             Program.helper.quickbuton(LookupTable.DpadUP, walktime);
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap8;
+                            botState = breedbotstates.checkmap8;
                             break;
 
-                        case (int)breedbotstates.walktodaycareman:
-                            Report("Bot: Walk to Day Care Man");
+                        case breedbotstates.walktodaycareman:
+                            Bot.Report("Bot: Walk to Day Care Man");
                             await Task.Delay(commanddelay);
-                            if (oras && !mauvdaycare)
+                            if (oras && optionBattleResort.Checked)
                             {
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             }
@@ -989,47 +993,47 @@ namespace ntrbase.Bot
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             }
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap9;
+                            botState = breedbotstates.checkmap9;
                             break;
 
-                        case (int)breedbotstates.checkmap9:
+                        case breedbotstates.checkmap9:
                             waitTaskbool = Program.helper.memoryinrange(mapxoff, daycaremanx, 0x01);
                             if (await waitTaskbool)
                             {
-                                if (quickbreed)
+                                if (optionQuickBreed.Checked)
                                 {
-                                    botState = (int)breedbotstates.facedaycareman;
+                                    botState = breedbotstates.facedaycareman;
                                 }
                                 else
                                 {
-                                    botState = (int)breedbotstates.walk1;
+                                    botState = breedbotstates.walk1;
                                 }
                                 attempts = 0;
                             }
-                            else if (Program.helper.lastRead > daycaremanx && oras && !mauvdaycare)
+                            else if (Program.helper.lastRead > daycaremanx && oras && optionBattleResort.Checked)
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.fix4;
+                                botState = breedbotstates.fix4;
                             }
-                            else if (Program.helper.lastRead > daycaremanx && (!oras || mauvdaycare))
+                            else if (Program.helper.lastRead > daycaremanx && (!oras || optionRoute117.Checked))
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.fix4;
+                                botState = breedbotstates.fix4;
                             }
                             else
                             {
                                 attempts++;
                                 botresult = -1;
-                                botState = (int)breedbotstates.walktodaycareman;
+                                botState = breedbotstates.walktodaycareman;
                             }
                             break;
 
-                        case (int)breedbotstates.fix4:
-                            Report("Bot: Missed Day Care Man, return");
+                        case breedbotstates.fix4:
+                            Bot.Report("Bot: Missed Day Care Man, return");
                             await Task.Delay(commanddelay);
-                            if (oras && !mauvdaycare)
+                            if (oras && optionBattleResort.Checked)
                             {
                                 Program.helper.quickbuton(LookupTable.DpadRIGHT, walktime);
                             }
@@ -1038,100 +1042,100 @@ namespace ntrbase.Bot
                                 Program.helper.quickbuton(LookupTable.DpadLEFT, walktime);
                             }
                             await Task.Delay(walktime + commanddelay);
-                            botState = (int)breedbotstates.checkmap9;
+                            botState = breedbotstates.checkmap9;
                             break;
 
-                        case (int)breedbotstates.filter:
-                            for (i = 0; i < eggsinbatch; i++)
-                            {
-                                filterbox = egglocations[i, 0];
-                                filterslot = egglocations[i, 1];
-                                bool testsok = false;
-                                Report("Bot: Check deposited egg");
-                                waitTaskint = Program.helper.waitPokeRead(filterbox, filterslot);
-                                dataready = await waitTaskint;
-                                if (dataready >= 0)
-                                {
-                                    uint PID = Convert.ToUInt32(dataready);
-                                    if (readesv || mode == 2)
-                                    {
-                                        int esv = (int)((PID >> 16 ^ PID & 0xFFFF) >> 4);
-                                        Program.gCmdWindow.AddESVrow(filterbox, filterslot, esv);
-                                        if (mode == 2)
-                                        {
-                                            currentesv = esv;
-                                            testsok = Program.gCmdWindow.ESV_TSV_check(esv);
-                                        }
-                                    }
-                                    if (mode == 1)
-                                    {
-                                        testsok = Program.gCmdWindow.CheckBreedingFilters();
-                                    }
-                                }
-                                else
-                                {
-                                    botresult = 2;
-                                    Report("Bot: Error detected");
-                                    attempts = 11;
-                                    break;
-                                }
-                                if (testsok)
-                                {
-                                    botState = (int)breedbotstates.testspassed;
-                                    break;
-                                }
-                                else if (quantity > 0)
-                                {
-                                    botState = (int)breedbotstates.retirefromcomputer;
-                                }
-                                else
-                                {
-                                    if (mode == 1 || mode == 2)
-                                    {
-                                        Report("Bot: No match found");
-                                        botresult = 3;
-                                    }
-                                    else
-                                    {
-                                        botresult = 0;
-                                    }
-                                    botState = (int)breedbotstates.botexit;
-                                }
-                            }
+                        case breedbotstates.filter:
+                            //for (i = 0; i < eggsinbatch; i++)
+                            //{
+                            //    filterbox = egglocations[i, 0];
+                            //    filterslot = egglocations[i, 1];
+                            //    bool testsok = false;
+                            //    Bot.Report("Bot: Check deposited egg");
+                            //    waitTaskint = Program.helper.waitPokeRead(filterbox, filterslot);
+                            //    dataready = await waitTaskint;
+                            //    if (dataready >= 0)
+                            //    {
+                            //        uint PID = Convert.ToUInt32(dataready);
+                            //        if (readesv || mode == 2)
+                            //        {
+                            //            int esv = ((PID >> 16 ^ PID & 0xFFFF) >> 4);
+                            //            Program.gCmdWindow.AddESVrow(filterbox, filterslot, esv);
+                            //            if (mode == 2)
+                            //            {
+                            //                currentesv = esv;
+                            //                testsok = Program.gCmdWindow.ESV_TSV_check(esv);
+                            //            }
+                            //        }
+                            //        if (mode == 1)
+                            //        {
+                            //            testsok = Program.gCmdWindow.CheckBreedingFilters();
+                            //        }
+                            //    }
+                            //    else
+                            //    {
+                            //        botresult = 2;
+                            //        Bot.Report("Bot: Error detected");
+                            //        attempts = 11;
+                            //        break;
+                            //    }
+                            //    if (testsok)
+                            //    {
+                            //        botState = breedbotstates.testspassed;
+                            //        break;
+                            //    }
+                            //    else if (quantity > 0)
+                            //    {
+                            //        botState = breedbotstates.retirefromcomputer;
+                            //    }
+                            //    else
+                            //    {
+                            //        if (mode == 1 || mode == 2)
+                            //        {
+                            //            Bot.Report("Bot: No match found");
+                            //            botresult = 3;
+                            //        }
+                            //        else
+                            //        {
+                            //            botresult = 0;
+                            //        }
+                            //        botState = breedbotstates.botexit;
+                            //    }
+                            //}
                             break;
 
-                        case (int)breedbotstates.testspassed:
-                            if (mode == 1)
-                            {
-                                Report("Bot: All tests passed");
-                                botresult = 4;
-                                finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", using filter #";
-                            }
-                            else if (mode == 2)
-                            {
-                                Report("Bot: ESV/TSV match found");
-                                botresult = 5;
-                                finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", the ESV/TSV value is: " + currentesv;
-                            }
-                            botState = (int)breedbotstates.botexit;
+                        case breedbotstates.testspassed:
+                            //if (optionMode.SelectedIndex == 1)
+                            //{
+                            //    Bot.Report("Bot: All tests passed");
+                            //    botresult = 4;
+                            //    finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", using filter #";
+                            //}
+                            //else if (mode == 2)
+                            //{
+                            //    Bot.Report("Bot: ESV/TSV match found");
+                            //    botresult = 5;
+                            //    finishmessage = "Finished. A match was found at box " + (filterbox + 1) + ", slot " + (filterslot + 1) + ", the ESV/TSV value is: " + currentesv;
+                            //}
+                            //botState = breedbotstates.botexit;
                             break;
 
-                        case (int)breedbotstates.botexit:
-                            Report("Bot: STOP Gen 6 Breding bot");
-                            botstop = true;
+                        case breedbotstates.botexit:
+                            Bot.Report("Bot: STOP Gen 6 Breding bot");
+                            botWorking = false;
                             break;
 
                         default:
-                            Report("Bot: STOP Gen 6 Breding bot");
+                            Bot.Report("Bot: STOP Gen 6 Breding bot");
                             botresult = 0;
-                            botstop = true;
+                            botWorking = false;
                             break;
                     }
                     if (attempts > 10)
                     { // Too many attempts
                         if (maxreconnect > 0)
                         {
-                            Report("Bot: Try reconnection to fix error");
+                            Bot.Report("Bot: Try reconnection to fix error");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             maxreconnect--;
                             if (await waitTaskbool)
@@ -1142,56 +1146,54 @@ namespace ntrbase.Bot
                             else
                             {
                                 botresult = -1;
-                                botstop = true;
+                                botWorking = false;
                             }
                         }
                         else
                         {
-                            Report("Bot: STOP Gen 6 Breding bot");
-                            botstop = true;
+                            Bot.Report("Bot: STOP Gen 6 Breding bot");
+                            botWorking = false;
                         }
                     }
                 }
-                return botresult;
             }
             catch (Exception ex)
             {
-                Report("Bot: Exception detected:");
-                Report(ex.Source);
-                Report(ex.Message);
-                Report(ex.StackTrace);
-                Report("Bot: STOP Gen 6 Breding bot");
+                Bot.Report("Bot: Exception detected:");
+                Bot.Report(ex.Source);
+                Bot.Report(ex.Message);
+                Bot.Report(ex.StackTrace);
+                Bot.Report("Bot: STOP Gen 6 Breding bot");
                 MessageBox.Show(ex.Message);
-                return -1;
+                botresult = -1;
             }
-        }
-
-        private void Report(string log)
-        {
-            Program.gCmdWindow.addtoLog(log);
         }
 
         private void getNextSlot()
         {
-            currentslot++;
-            if (currentslot >= 30)
+            if (slot.Value == 30)
             {
-                currentbox++;
-                currentslot = 0;
                 boxchange = true;
-                if (currentbox >= 31)
+                Delg.SetValue(slot, 1);
+                if (box.Value == 31)
                 {
-                    currentbox = 0;
+                    Delg.SetValue(box, 1);
+                }
+                else
+                {
+                    Delg.SetValue(box, box.Value + 1);
                 }
             }
-            Program.gCmdWindow.updateBreedingslots(currentbox, currentslot, quantity);
+            else
+            {
+                Delg.SetValue(slot, slot.Value + 1);
+            }
         }
 
         private void addEggtoParty()
         {
             eggsinparty++;
-            quantity--;
-            Program.gCmdWindow.updateBreedingslots(currentbox, currentslot, quantity);
+            Delg.SetValue(eggs, eggs.Value - 1);
         }
     }
 }

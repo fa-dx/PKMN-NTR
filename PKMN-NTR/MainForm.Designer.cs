@@ -30,12 +30,6 @@
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lb_update = new System.Windows.Forms.Label();
             this.onlyView = new System.Windows.Forms.CheckBox();
-            this.orgbox_pos = new System.Windows.Forms.GroupBox();
-            this.OrganizeMiddle = new System.Windows.Forms.RadioButton();
-            this.OrganizeTop = new System.Windows.Forms.RadioButton();
-            this.daycare_select = new System.Windows.Forms.GroupBox();
-            this.radioDayCare1 = new System.Windows.Forms.RadioButton();
-            this.radioDayCare2 = new System.Windows.Forms.RadioButton();
             this.readResult = new System.Windows.Forms.TextBox();
             this.stopBotButton = new System.Windows.Forms.Button();
             this.label71 = new System.Windows.Forms.Label();
@@ -60,7 +54,6 @@
             this.FLP_PIDLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_PID = new System.Windows.Forms.Label();
             this.BTN_Shinytize = new System.Windows.Forms.Button();
-            this.Label_IsShiny = new System.Windows.Forms.PictureBox();
             this.FLP_PIDRight = new System.Windows.Forms.FlowLayoutPanel();
             this.TB_PID = new System.Windows.Forms.TextBox();
             this.Label_Gender = new System.Windows.Forms.Label();
@@ -141,7 +134,6 @@
             this.FLP_Ball = new System.Windows.Forms.FlowLayoutPanel();
             this.FLP_BallLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_Ball = new System.Windows.Forms.Label();
-            this.PB_Ball = new System.Windows.Forms.PictureBox();
             this.CB_Ball = new System.Windows.Forms.ComboBox();
             this.FLP_MetLevel = new System.Windows.Forms.FlowLayoutPanel();
             this.Label_MetLevel = new System.Windows.Forms.Label();
@@ -234,15 +226,7 @@
             this.BTN_RandomEVs = new System.Windows.Forms.Button();
             this.BTN_RandomIVs = new System.Windows.Forms.Button();
             this.Tab_Attacks = new System.Windows.Forms.TabPage();
-            this.PB_WarnMove4 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove3 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove2 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnMove1 = new System.Windows.Forms.PictureBox();
             this.GB_RelearnMoves = new System.Windows.Forms.GroupBox();
-            this.PB_WarnRelearn4 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn3 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn2 = new System.Windows.Forms.PictureBox();
-            this.PB_WarnRelearn1 = new System.Windows.Forms.PictureBox();
             this.CB_RelearnMove4 = new System.Windows.Forms.ComboBox();
             this.CB_RelearnMove3 = new System.Windows.Forms.ComboBox();
             this.CB_RelearnMove2 = new System.Windows.Forms.ComboBox();
@@ -274,18 +258,6 @@
             this.Label_PrevOT = new System.Windows.Forms.Label();
             this.BTN_RerollEC = new System.Windows.Forms.Button();
             this.GB_Markings = new System.Windows.Forms.GroupBox();
-            this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
-            this.PB_MarkVC = new System.Windows.Forms.PictureBox();
-            this.PB_MarkAlola = new System.Windows.Forms.PictureBox();
-            this.PB_Mark6 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkPentagon = new System.Windows.Forms.PictureBox();
-            this.PB_Mark3 = new System.Windows.Forms.PictureBox();
-            this.PB_Mark5 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkCured = new System.Windows.Forms.PictureBox();
-            this.PB_Mark2 = new System.Windows.Forms.PictureBox();
-            this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
-            this.PB_Mark1 = new System.Windows.Forms.PictureBox();
-            this.PB_Mark4 = new System.Windows.Forms.PictureBox();
             this.GB_ExtraBytes = new System.Windows.Forms.GroupBox();
             this.TB_ExtraByte = new System.Windows.Forms.MaskedTextBox();
             this.CB_ExtraBytes = new System.Windows.Forms.ComboBox();
@@ -345,112 +317,33 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lb_pkmnntrver = new System.Windows.Forms.Label();
-            this.tabWonderTrade = new System.Windows.Forms.TabPage();
-            this.WT_options = new System.Windows.Forms.GroupBox();
-            this.label58 = new System.Windows.Forms.Label();
-            this.WT_After = new System.Windows.Forms.GroupBox();
-            this.WTafter_Delete = new System.Windows.Forms.RadioButton();
-            this.WTafter_Restore = new System.Windows.Forms.RadioButton();
-            this.WTafter_DoNothing = new System.Windows.Forms.RadioButton();
-            this.WTafter_Dump = new System.Windows.Forms.CheckBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.WTBox = new System.Windows.Forms.NumericUpDown();
-            this.WT_Sources = new System.Windows.Forms.GroupBox();
-            this.WTsource_Random = new System.Windows.Forms.RadioButton();
-            this.WTsource_Folder = new System.Windows.Forms.RadioButton();
-            this.WTsource_Boxes = new System.Windows.Forms.RadioButton();
-            this.WTtradesNo = new System.Windows.Forms.NumericUpDown();
-            this.WTcollectFC = new System.Windows.Forms.CheckBox();
-            this.WTSlot = new System.Windows.Forms.NumericUpDown();
-            this.label59 = new System.Windows.Forms.Label();
-            this.WT_RunEndless = new System.Windows.Forms.CheckBox();
-            this.RunWTbot = new System.Windows.Forms.Button();
-            this.tabSoftReset = new System.Windows.Forms.TabPage();
-            this.SR_options = new System.Windows.Forms.GroupBox();
-            this.label72 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.typeLSR = new System.Windows.Forms.ComboBox();
-            this.sr_Species = new System.Windows.Forms.ComboBox();
-            this.resumeLSR = new System.Windows.Forms.CheckBox();
-            this.srClear = new System.Windows.Forms.Button();
-            this.filtersSoftReset = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn42 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn43 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn44 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn46 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.srFilterLoad = new System.Windows.Forms.Button();
-            this.RunLSRbot = new System.Windows.Forms.Button();
-            this.tabBreeding = new System.Windows.Forms.TabPage();
-            this.Breed_esvtsv = new System.Windows.Forms.GroupBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.ESVlist = new System.Windows.Forms.DataGridView();
-            this.ESVlistBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESVlistSave = new System.Windows.Forms.Button();
-            this.TSVlist = new System.Windows.Forms.ListBox();
-            this.TSVlistNum = new System.Windows.Forms.NumericUpDown();
-            this.TSVlistAdd = new System.Windows.Forms.Button();
-            this.TSVlistLoad = new System.Windows.Forms.Button();
-            this.TSVlistRemove = new System.Windows.Forms.Button();
-            this.TSVlistSave = new System.Windows.Forms.Button();
-            this.Breed_options = new System.Windows.Forms.GroupBox();
-            this.modeBreed = new System.Windows.Forms.ComboBox();
-            this.readESV = new System.Windows.Forms.CheckBox();
-            this.Breed_labelBox = new System.Windows.Forms.Label();
-            this.label75 = new System.Windows.Forms.Label();
-            this.quickBreed = new System.Windows.Forms.CheckBox();
-            this.slotBreed = new System.Windows.Forms.NumericUpDown();
-            this.label84 = new System.Windows.Forms.Label();
-            this.boxBreed = new System.Windows.Forms.NumericUpDown();
-            this.Breed_labelSlot = new System.Windows.Forms.Label();
-            this.eggsNoBreed = new System.Windows.Forms.NumericUpDown();
-            this.breedingClear = new System.Windows.Forms.Button();
-            this.filterBreeding = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bFilterLoad = new System.Windows.Forms.Button();
-            this.runBreedingBot = new System.Windows.Forms.Button();
-            this.miscTabs = new System.Windows.Forms.TabControl();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.shinypic = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.Label_IsShiny = new System.Windows.Forms.PictureBox();
+            this.PB_Ball = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove4 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove3 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove2 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnMove1 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn4 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn3 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn2 = new System.Windows.Forms.PictureBox();
+            this.PB_WarnRelearn1 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkHorohoro = new System.Windows.Forms.PictureBox();
+            this.PB_MarkVC = new System.Windows.Forms.PictureBox();
+            this.PB_MarkAlola = new System.Windows.Forms.PictureBox();
+            this.PB_Mark6 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkPentagon = new System.Windows.Forms.PictureBox();
+            this.PB_Mark3 = new System.Windows.Forms.PictureBox();
+            this.PB_Mark5 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkCured = new System.Windows.Forms.PictureBox();
+            this.PB_Mark2 = new System.Windows.Forms.PictureBox();
+            this.PB_MarkShiny = new System.Windows.Forms.PictureBox();
+            this.PB_Mark1 = new System.Windows.Forms.PictureBox();
+            this.PB_Mark4 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.orgbox_pos.SuspendLayout();
-            this.daycare_select.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -458,7 +351,6 @@
             this.FLP_Main.SuspendLayout();
             this.FLP_PID.SuspendLayout();
             this.FLP_PIDLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).BeginInit();
             this.FLP_PIDRight.SuspendLayout();
             this.FLP_Species.SuspendLayout();
             this.FLP_Nickname.SuspendLayout();
@@ -488,7 +380,6 @@
             this.FLP_MetLocation.SuspendLayout();
             this.FLP_Ball.SuspendLayout();
             this.FLP_BallLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).BeginInit();
             this.FLP_MetLevel.SuspendLayout();
             this.FLP_MetDate.SuspendLayout();
             this.FLP_Fateful.SuspendLayout();
@@ -518,32 +409,12 @@
             this.FLP_HPType.SuspendLayout();
             this.FLP_Characteristic.SuspendLayout();
             this.Tab_Attacks.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).BeginInit();
             this.GB_RelearnMoves.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
             this.GB_CurrentMoves.SuspendLayout();
             this.Tab_OTMisc.SuspendLayout();
             this.FLP_PKMEditors.SuspendLayout();
             this.GB_nOT.SuspendLayout();
             this.GB_Markings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
             this.GB_ExtraBytes.SuspendLayout();
             this.GB_OT.SuspendLayout();
             this.Tabs_General.SuspendLayout();
@@ -559,29 +430,31 @@
             this.Tab_Log.SuspendLayout();
             this.Tab_About.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tabWonderTrade.SuspendLayout();
-            this.WT_options.SuspendLayout();
-            this.WT_After.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
-            this.WT_Sources.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
-            this.tabSoftReset.SuspendLayout();
-            this.SR_options.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).BeginInit();
-            this.tabBreeding.SuspendLayout();
-            this.Breed_esvtsv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).BeginInit();
-            this.Breed_options.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).BeginInit();
-            this.miscTabs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shinypic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -719,73 +592,6 @@
             this.onlyView.Text = "Only edit";
             this.onlyView.UseVisualStyleBackColor = true;
             this.onlyView.CheckedChanged += new System.EventHandler(this.onlyView_CheckedChanged);
-            // 
-            // orgbox_pos
-            // 
-            this.orgbox_pos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.orgbox_pos.Controls.Add(this.OrganizeMiddle);
-            this.orgbox_pos.Controls.Add(this.OrganizeTop);
-            this.orgbox_pos.Location = new System.Drawing.Point(6, 71);
-            this.orgbox_pos.Name = "orgbox_pos";
-            this.orgbox_pos.Size = new System.Drawing.Size(138, 71);
-            this.orgbox_pos.TabIndex = 4;
-            this.orgbox_pos.TabStop = false;
-            this.orgbox_pos.Text = "Organize Boxes position:";
-            // 
-            // OrganizeMiddle
-            // 
-            this.OrganizeMiddle.AutoSize = true;
-            this.OrganizeMiddle.Checked = true;
-            this.OrganizeMiddle.Location = new System.Drawing.Point(6, 19);
-            this.OrganizeMiddle.Name = "OrganizeMiddle";
-            this.OrganizeMiddle.Size = new System.Drawing.Size(56, 17);
-            this.OrganizeMiddle.TabIndex = 0;
-            this.OrganizeMiddle.TabStop = true;
-            this.OrganizeMiddle.Text = "Middle";
-            this.OrganizeMiddle.UseVisualStyleBackColor = true;
-            // 
-            // OrganizeTop
-            // 
-            this.OrganizeTop.AutoSize = true;
-            this.OrganizeTop.Location = new System.Drawing.Point(6, 42);
-            this.OrganizeTop.Name = "OrganizeTop";
-            this.OrganizeTop.Size = new System.Drawing.Size(44, 17);
-            this.OrganizeTop.TabIndex = 1;
-            this.OrganizeTop.Text = "Top";
-            this.OrganizeTop.UseVisualStyleBackColor = true;
-            // 
-            // daycare_select
-            // 
-            this.daycare_select.Controls.Add(this.radioDayCare1);
-            this.daycare_select.Controls.Add(this.radioDayCare2);
-            this.daycare_select.Location = new System.Drawing.Point(150, 72);
-            this.daycare_select.Name = "daycare_select";
-            this.daycare_select.Size = new System.Drawing.Size(104, 70);
-            this.daycare_select.TabIndex = 5;
-            this.daycare_select.TabStop = false;
-            this.daycare_select.Text = "Daycare:";
-            // 
-            // radioDayCare1
-            // 
-            this.radioDayCare1.AutoSize = true;
-            this.radioDayCare1.Checked = true;
-            this.radioDayCare1.Location = new System.Drawing.Point(6, 19);
-            this.radioDayCare1.Name = "radioDayCare1";
-            this.radioDayCare1.Size = new System.Drawing.Size(75, 17);
-            this.radioDayCare1.TabIndex = 0;
-            this.radioDayCare1.TabStop = true;
-            this.radioDayCare1.Text = "Route 117";
-            this.radioDayCare1.UseVisualStyleBackColor = true;
-            // 
-            // radioDayCare2
-            // 
-            this.radioDayCare2.AutoSize = true;
-            this.radioDayCare2.Location = new System.Drawing.Point(6, 42);
-            this.radioDayCare2.Name = "radioDayCare2";
-            this.radioDayCare2.Size = new System.Drawing.Size(86, 17);
-            this.radioDayCare2.TabIndex = 1;
-            this.radioDayCare2.Text = "Battle Resort";
-            this.radioDayCare2.UseVisualStyleBackColor = true;
             // 
             // readResult
             // 
@@ -1095,20 +901,6 @@
             this.BTN_Shinytize.TabIndex = 1;
             this.BTN_Shinytize.Text = "☆";
             this.BTN_Shinytize.UseVisualStyleBackColor = true;
-            // 
-            // Label_IsShiny
-            // 
-            this.Label_IsShiny.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.Label_IsShiny.Image = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.Image")));
-            this.Label_IsShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.InitialImage")));
-            this.Label_IsShiny.Location = new System.Drawing.Point(36, 2);
-            this.Label_IsShiny.Margin = new System.Windows.Forms.Padding(0, 2, 2, 0);
-            this.Label_IsShiny.Name = "Label_IsShiny";
-            this.Label_IsShiny.Size = new System.Drawing.Size(20, 20);
-            this.Label_IsShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Label_IsShiny.TabIndex = 62;
-            this.Label_IsShiny.TabStop = false;
-            this.Label_IsShiny.Visible = false;
             // 
             // FLP_PIDRight
             // 
@@ -2031,15 +1823,6 @@
             this.Label_Ball.TabIndex = 2;
             this.Label_Ball.Text = "Ball:";
             this.Label_Ball.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // PB_Ball
-            // 
-            this.PB_Ball.Location = new System.Drawing.Point(60, 0);
-            this.PB_Ball.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.PB_Ball.Name = "PB_Ball";
-            this.PB_Ball.Size = new System.Drawing.Size(20, 20);
-            this.PB_Ball.TabIndex = 3;
-            this.PB_Ball.TabStop = false;
             // 
             // CB_Ball
             // 
@@ -3067,46 +2850,6 @@
             this.Tab_Attacks.Text = "Attacks";
             this.Tab_Attacks.UseVisualStyleBackColor = true;
             // 
-            // PB_WarnMove4
-            // 
-            this.PB_WarnMove4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove4.Image")));
-            this.PB_WarnMove4.Location = new System.Drawing.Point(8, 113);
-            this.PB_WarnMove4.Name = "PB_WarnMove4";
-            this.PB_WarnMove4.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove4.TabIndex = 5;
-            this.PB_WarnMove4.TabStop = false;
-            this.PB_WarnMove4.Visible = false;
-            // 
-            // PB_WarnMove3
-            // 
-            this.PB_WarnMove3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove3.Image")));
-            this.PB_WarnMove3.Location = new System.Drawing.Point(8, 91);
-            this.PB_WarnMove3.Name = "PB_WarnMove3";
-            this.PB_WarnMove3.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove3.TabIndex = 4;
-            this.PB_WarnMove3.TabStop = false;
-            this.PB_WarnMove3.Visible = false;
-            // 
-            // PB_WarnMove2
-            // 
-            this.PB_WarnMove2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove2.Image")));
-            this.PB_WarnMove2.Location = new System.Drawing.Point(8, 69);
-            this.PB_WarnMove2.Name = "PB_WarnMove2";
-            this.PB_WarnMove2.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove2.TabIndex = 3;
-            this.PB_WarnMove2.TabStop = false;
-            this.PB_WarnMove2.Visible = false;
-            // 
-            // PB_WarnMove1
-            // 
-            this.PB_WarnMove1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove1.Image")));
-            this.PB_WarnMove1.Location = new System.Drawing.Point(8, 47);
-            this.PB_WarnMove1.Name = "PB_WarnMove1";
-            this.PB_WarnMove1.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnMove1.TabIndex = 2;
-            this.PB_WarnMove1.TabStop = false;
-            this.PB_WarnMove1.Visible = false;
-            // 
             // GB_RelearnMoves
             // 
             this.GB_RelearnMoves.Controls.Add(this.PB_WarnRelearn4);
@@ -3123,46 +2866,6 @@
             this.GB_RelearnMoves.TabIndex = 1;
             this.GB_RelearnMoves.TabStop = false;
             this.GB_RelearnMoves.Text = "Relearn Moves";
-            // 
-            // PB_WarnRelearn4
-            // 
-            this.PB_WarnRelearn4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn4.Image")));
-            this.PB_WarnRelearn4.Location = new System.Drawing.Point(22, 93);
-            this.PB_WarnRelearn4.Name = "PB_WarnRelearn4";
-            this.PB_WarnRelearn4.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn4.TabIndex = 19;
-            this.PB_WarnRelearn4.TabStop = false;
-            this.PB_WarnRelearn4.Visible = false;
-            // 
-            // PB_WarnRelearn3
-            // 
-            this.PB_WarnRelearn3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn3.Image")));
-            this.PB_WarnRelearn3.Location = new System.Drawing.Point(22, 71);
-            this.PB_WarnRelearn3.Name = "PB_WarnRelearn3";
-            this.PB_WarnRelearn3.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn3.TabIndex = 18;
-            this.PB_WarnRelearn3.TabStop = false;
-            this.PB_WarnRelearn3.Visible = false;
-            // 
-            // PB_WarnRelearn2
-            // 
-            this.PB_WarnRelearn2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn2.Image")));
-            this.PB_WarnRelearn2.Location = new System.Drawing.Point(22, 49);
-            this.PB_WarnRelearn2.Name = "PB_WarnRelearn2";
-            this.PB_WarnRelearn2.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn2.TabIndex = 17;
-            this.PB_WarnRelearn2.TabStop = false;
-            this.PB_WarnRelearn2.Visible = false;
-            // 
-            // PB_WarnRelearn1
-            // 
-            this.PB_WarnRelearn1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn1.Image")));
-            this.PB_WarnRelearn1.Location = new System.Drawing.Point(22, 27);
-            this.PB_WarnRelearn1.Name = "PB_WarnRelearn1";
-            this.PB_WarnRelearn1.Size = new System.Drawing.Size(16, 16);
-            this.PB_WarnRelearn1.TabIndex = 6;
-            this.PB_WarnRelearn1.TabStop = false;
-            this.PB_WarnRelearn1.Visible = false;
             // 
             // CB_RelearnMove4
             // 
@@ -3542,140 +3245,6 @@
             this.GB_Markings.TabIndex = 4;
             this.GB_Markings.TabStop = false;
             this.GB_Markings.Text = "Markings";
-            // 
-            // PB_MarkHorohoro
-            // 
-            this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
-            this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
-            this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkHorohoro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkHorohoro.TabIndex = 11;
-            this.PB_MarkHorohoro.TabStop = false;
-            // 
-            // PB_MarkVC
-            // 
-            this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
-            this.PB_MarkVC.Name = "PB_MarkVC";
-            this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkVC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkVC.TabIndex = 10;
-            this.PB_MarkVC.TabStop = false;
-            // 
-            // PB_MarkAlola
-            // 
-            this.PB_MarkAlola.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.Image")));
-            this.PB_MarkAlola.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.InitialImage")));
-            this.PB_MarkAlola.Location = new System.Drawing.Point(68, 15);
-            this.PB_MarkAlola.Name = "PB_MarkAlola";
-            this.PB_MarkAlola.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkAlola.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkAlola.TabIndex = 9;
-            this.PB_MarkAlola.TabStop = false;
-            // 
-            // PB_Mark6
-            // 
-            this.PB_Mark6.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.Image")));
-            this.PB_Mark6.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.InitialImage")));
-            this.PB_Mark6.Location = new System.Drawing.Point(110, 36);
-            this.PB_Mark6.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark6.Name = "PB_Mark6";
-            this.PB_Mark6.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark6.TabIndex = 5;
-            this.PB_Mark6.TabStop = false;
-            // 
-            // PB_MarkPentagon
-            // 
-            this.PB_MarkPentagon.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.Image")));
-            this.PB_MarkPentagon.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.InitialImage")));
-            this.PB_MarkPentagon.Location = new System.Drawing.Point(47, 15);
-            this.PB_MarkPentagon.Name = "PB_MarkPentagon";
-            this.PB_MarkPentagon.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkPentagon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkPentagon.TabIndex = 8;
-            this.PB_MarkPentagon.TabStop = false;
-            // 
-            // PB_Mark3
-            // 
-            this.PB_Mark3.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.Image")));
-            this.PB_Mark3.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.InitialImage")));
-            this.PB_Mark3.Location = new System.Drawing.Point(47, 36);
-            this.PB_Mark3.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark3.Name = "PB_Mark3";
-            this.PB_Mark3.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark3.TabIndex = 2;
-            this.PB_Mark3.TabStop = false;
-            // 
-            // PB_Mark5
-            // 
-            this.PB_Mark5.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.Image")));
-            this.PB_Mark5.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.InitialImage")));
-            this.PB_Mark5.Location = new System.Drawing.Point(89, 36);
-            this.PB_Mark5.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark5.Name = "PB_Mark5";
-            this.PB_Mark5.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark5.TabIndex = 4;
-            this.PB_Mark5.TabStop = false;
-            // 
-            // PB_MarkCured
-            // 
-            this.PB_MarkCured.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.Image")));
-            this.PB_MarkCured.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.InitialImage")));
-            this.PB_MarkCured.Location = new System.Drawing.Point(26, 15);
-            this.PB_MarkCured.Name = "PB_MarkCured";
-            this.PB_MarkCured.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkCured.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkCured.TabIndex = 7;
-            this.PB_MarkCured.TabStop = false;
-            // 
-            // PB_Mark2
-            // 
-            this.PB_Mark2.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.Image")));
-            this.PB_Mark2.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.InitialImage")));
-            this.PB_Mark2.Location = new System.Drawing.Point(26, 36);
-            this.PB_Mark2.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark2.Name = "PB_Mark2";
-            this.PB_Mark2.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark2.TabIndex = 1;
-            this.PB_Mark2.TabStop = false;
-            // 
-            // PB_MarkShiny
-            // 
-            this.PB_MarkShiny.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.Image")));
-            this.PB_MarkShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.InitialImage")));
-            this.PB_MarkShiny.Location = new System.Drawing.Point(5, 15);
-            this.PB_MarkShiny.Name = "PB_MarkShiny";
-            this.PB_MarkShiny.Size = new System.Drawing.Size(20, 20);
-            this.PB_MarkShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_MarkShiny.TabIndex = 6;
-            this.PB_MarkShiny.TabStop = false;
-            // 
-            // PB_Mark1
-            // 
-            this.PB_Mark1.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.Image")));
-            this.PB_Mark1.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.InitialImage")));
-            this.PB_Mark1.Location = new System.Drawing.Point(5, 36);
-            this.PB_Mark1.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark1.Name = "PB_Mark1";
-            this.PB_Mark1.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark1.TabIndex = 0;
-            this.PB_Mark1.TabStop = false;
-            // 
-            // PB_Mark4
-            // 
-            this.PB_Mark4.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.Image")));
-            this.PB_Mark4.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.InitialImage")));
-            this.PB_Mark4.Location = new System.Drawing.Point(68, 36);
-            this.PB_Mark4.Margin = new System.Windows.Forms.Padding(1);
-            this.PB_Mark4.Name = "PB_Mark4";
-            this.PB_Mark4.Size = new System.Drawing.Size(20, 20);
-            this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PB_Mark4.TabIndex = 3;
-            this.PB_Mark4.TabStop = false;
             // 
             // GB_ExtraBytes
             // 
@@ -4402,1048 +3971,6 @@
             this.lb_pkmnntrver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lb_pkmnntrver.Click += new System.EventHandler(this.updateLabel_Click);
             // 
-            // tabWonderTrade
-            // 
-            this.tabWonderTrade.BackColor = System.Drawing.SystemColors.Control;
-            this.tabWonderTrade.Controls.Add(this.WT_options);
-            this.tabWonderTrade.Controls.Add(this.WT_RunEndless);
-            this.tabWonderTrade.Controls.Add(this.RunWTbot);
-            this.tabWonderTrade.Location = new System.Drawing.Point(4, 22);
-            this.tabWonderTrade.Name = "tabWonderTrade";
-            this.tabWonderTrade.Size = new System.Drawing.Size(558, 378);
-            this.tabWonderTrade.TabIndex = 2;
-            this.tabWonderTrade.Text = "Wonder Trade";
-            // 
-            // WT_options
-            // 
-            this.WT_options.Controls.Add(this.label58);
-            this.WT_options.Controls.Add(this.WT_After);
-            this.WT_options.Controls.Add(this.label57);
-            this.WT_options.Controls.Add(this.WTBox);
-            this.WT_options.Controls.Add(this.WT_Sources);
-            this.WT_options.Controls.Add(this.WTtradesNo);
-            this.WT_options.Controls.Add(this.WTcollectFC);
-            this.WT_options.Controls.Add(this.WTSlot);
-            this.WT_options.Controls.Add(this.label59);
-            this.WT_options.Location = new System.Drawing.Point(6, 6);
-            this.WT_options.Name = "WT_options";
-            this.WT_options.Size = new System.Drawing.Size(304, 175);
-            this.WT_options.TabIndex = 11;
-            this.WT_options.TabStop = false;
-            this.WT_options.Text = "Options";
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(6, 16);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(28, 13);
-            this.label58.TabIndex = 4;
-            this.label58.Text = "Box:";
-            // 
-            // WT_After
-            // 
-            this.WT_After.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.WT_After.Controls.Add(this.WTafter_Delete);
-            this.WT_After.Controls.Add(this.WTafter_Restore);
-            this.WT_After.Controls.Add(this.WTafter_DoNothing);
-            this.WT_After.Controls.Add(this.WTafter_Dump);
-            this.WT_After.Location = new System.Drawing.Point(150, 16);
-            this.WT_After.Name = "WT_After";
-            this.WT_After.Size = new System.Drawing.Size(148, 123);
-            this.WT_After.TabIndex = 10;
-            this.WT_After.TabStop = false;
-            this.WT_After.Text = "After trading";
-            // 
-            // WTafter_Delete
-            // 
-            this.WTafter_Delete.AutoSize = true;
-            this.WTafter_Delete.Location = new System.Drawing.Point(6, 88);
-            this.WTafter_Delete.Name = "WTafter_Delete";
-            this.WTafter_Delete.Size = new System.Drawing.Size(136, 17);
-            this.WTafter_Delete.TabIndex = 1;
-            this.WTafter_Delete.Text = "Delete traded pokémon";
-            this.WTafter_Delete.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_Restore
-            // 
-            this.WTafter_Restore.AutoSize = true;
-            this.WTafter_Restore.Location = new System.Drawing.Point(6, 65);
-            this.WTafter_Restore.Name = "WTafter_Restore";
-            this.WTafter_Restore.Size = new System.Drawing.Size(101, 17);
-            this.WTafter_Restore.TabIndex = 1;
-            this.WTafter_Restore.Text = "Restore backup";
-            this.WTafter_Restore.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_DoNothing
-            // 
-            this.WTafter_DoNothing.AutoSize = true;
-            this.WTafter_DoNothing.Checked = true;
-            this.WTafter_DoNothing.Location = new System.Drawing.Point(6, 42);
-            this.WTafter_DoNothing.Name = "WTafter_DoNothing";
-            this.WTafter_DoNothing.Size = new System.Drawing.Size(77, 17);
-            this.WTafter_DoNothing.TabIndex = 1;
-            this.WTafter_DoNothing.TabStop = true;
-            this.WTafter_DoNothing.Text = "Do nothing";
-            this.WTafter_DoNothing.UseVisualStyleBackColor = true;
-            // 
-            // WTafter_Dump
-            // 
-            this.WTafter_Dump.AutoSize = true;
-            this.WTafter_Dump.Location = new System.Drawing.Point(6, 20);
-            this.WTafter_Dump.Name = "WTafter_Dump";
-            this.WTafter_Dump.Size = new System.Drawing.Size(109, 17);
-            this.WTafter_Dump.TabIndex = 0;
-            this.WTafter_Dump.Text = "Dump boxes and:";
-            this.WTafter_Dump.UseVisualStyleBackColor = true;
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(49, 16);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(28, 13);
-            this.label57.TabIndex = 5;
-            this.label57.Text = "Slot:";
-            // 
-            // WTBox
-            // 
-            this.WTBox.Location = new System.Drawing.Point(6, 35);
-            this.WTBox.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.WTBox.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.WTBox.Name = "WTBox";
-            this.WTBox.Size = new System.Drawing.Size(40, 20);
-            this.WTBox.TabIndex = 0;
-            this.WTBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // WT_Sources
-            // 
-            this.WT_Sources.AutoSize = true;
-            this.WT_Sources.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.WT_Sources.Controls.Add(this.WTsource_Random);
-            this.WT_Sources.Controls.Add(this.WTsource_Folder);
-            this.WT_Sources.Controls.Add(this.WTsource_Boxes);
-            this.WT_Sources.Location = new System.Drawing.Point(6, 61);
-            this.WT_Sources.Name = "WT_Sources";
-            this.WT_Sources.Size = new System.Drawing.Size(138, 101);
-            this.WT_Sources.TabIndex = 8;
-            this.WT_Sources.TabStop = false;
-            this.WT_Sources.Text = "Pokémon Source";
-            // 
-            // WTsource_Random
-            // 
-            this.WTsource_Random.AutoSize = true;
-            this.WTsource_Random.Location = new System.Drawing.Point(6, 65);
-            this.WTsource_Random.Name = "WTsource_Random";
-            this.WTsource_Random.Size = new System.Drawing.Size(124, 17);
-            this.WTsource_Random.TabIndex = 2;
-            this.WTsource_Random.Text = "WT Folder (Random)";
-            this.WTsource_Random.UseVisualStyleBackColor = true;
-            // 
-            // WTsource_Folder
-            // 
-            this.WTsource_Folder.AutoSize = true;
-            this.WTsource_Folder.Location = new System.Drawing.Point(6, 42);
-            this.WTsource_Folder.Name = "WTsource_Folder";
-            this.WTsource_Folder.Size = new System.Drawing.Size(126, 17);
-            this.WTsource_Folder.TabIndex = 1;
-            this.WTsource_Folder.Text = "Wonder Trade Folder";
-            this.WTsource_Folder.UseVisualStyleBackColor = true;
-            // 
-            // WTsource_Boxes
-            // 
-            this.WTsource_Boxes.AutoSize = true;
-            this.WTsource_Boxes.Checked = true;
-            this.WTsource_Boxes.Location = new System.Drawing.Point(6, 19);
-            this.WTsource_Boxes.Name = "WTsource_Boxes";
-            this.WTsource_Boxes.Size = new System.Drawing.Size(71, 17);
-            this.WTsource_Boxes.TabIndex = 0;
-            this.WTsource_Boxes.TabStop = true;
-            this.WTsource_Boxes.Text = "PC Boxes";
-            this.WTsource_Boxes.UseVisualStyleBackColor = true;
-            // 
-            // WTtradesNo
-            // 
-            this.WTtradesNo.Location = new System.Drawing.Point(98, 35);
-            this.WTtradesNo.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.WTtradesNo.Name = "WTtradesNo";
-            this.WTtradesNo.Size = new System.Drawing.Size(46, 20);
-            this.WTtradesNo.TabIndex = 2;
-            this.WTtradesNo.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // WTcollectFC
-            // 
-            this.WTcollectFC.AutoSize = true;
-            this.WTcollectFC.Enabled = false;
-            this.WTcollectFC.Location = new System.Drawing.Point(150, 145);
-            this.WTcollectFC.Name = "WTcollectFC";
-            this.WTcollectFC.Size = new System.Drawing.Size(134, 17);
-            this.WTcollectFC.TabIndex = 7;
-            this.WTcollectFC.Text = "Collect FC after a trade";
-            this.WTcollectFC.UseVisualStyleBackColor = true;
-            // 
-            // WTSlot
-            // 
-            this.WTSlot.Location = new System.Drawing.Point(52, 35);
-            this.WTSlot.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.WTSlot.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.WTSlot.Name = "WTSlot";
-            this.WTSlot.Size = new System.Drawing.Size(40, 20);
-            this.WTSlot.TabIndex = 1;
-            this.WTSlot.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(95, 16);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(49, 13);
-            this.label59.TabIndex = 6;
-            this.label59.Text = "# trades:";
-            // 
-            // WT_RunEndless
-            // 
-            this.WT_RunEndless.AutoSize = true;
-            this.WT_RunEndless.Location = new System.Drawing.Point(220, 191);
-            this.WT_RunEndless.Name = "WT_RunEndless";
-            this.WT_RunEndless.Size = new System.Drawing.Size(90, 17);
-            this.WT_RunEndless.TabIndex = 9;
-            this.WT_RunEndless.Text = "Run endessly";
-            this.WT_RunEndless.UseVisualStyleBackColor = true;
-            // 
-            // RunWTbot
-            // 
-            this.RunWTbot.Location = new System.Drawing.Point(6, 187);
-            this.RunWTbot.Name = "RunWTbot";
-            this.RunWTbot.Size = new System.Drawing.Size(208, 23);
-            this.RunWTbot.TabIndex = 3;
-            this.RunWTbot.Text = "Start Bot";
-            this.RunWTbot.UseVisualStyleBackColor = true;
-            this.RunWTbot.Click += new System.EventHandler(this.RunWTbot_Click_1);
-            // 
-            // tabSoftReset
-            // 
-            this.tabSoftReset.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSoftReset.Controls.Add(this.SR_options);
-            this.tabSoftReset.Controls.Add(this.srClear);
-            this.tabSoftReset.Controls.Add(this.filtersSoftReset);
-            this.tabSoftReset.Controls.Add(this.srFilterLoad);
-            this.tabSoftReset.Controls.Add(this.RunLSRbot);
-            this.tabSoftReset.Location = new System.Drawing.Point(4, 22);
-            this.tabSoftReset.Name = "tabSoftReset";
-            this.tabSoftReset.Size = new System.Drawing.Size(558, 378);
-            this.tabSoftReset.TabIndex = 3;
-            this.tabSoftReset.Text = "Soft-reset";
-            // 
-            // SR_options
-            // 
-            this.SR_options.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.SR_options.Controls.Add(this.label72);
-            this.SR_options.Controls.Add(this.label8);
-            this.SR_options.Controls.Add(this.typeLSR);
-            this.SR_options.Controls.Add(this.sr_Species);
-            this.SR_options.Controls.Add(this.resumeLSR);
-            this.SR_options.Location = new System.Drawing.Point(6, 6);
-            this.SR_options.Name = "SR_options";
-            this.SR_options.Size = new System.Drawing.Size(546, 53);
-            this.SR_options.TabIndex = 10;
-            this.SR_options.TabStop = false;
-            this.SR_options.Text = "Options";
-            // 
-            // label72
-            // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(6, 20);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(37, 13);
-            this.label72.TabIndex = 6;
-            this.label72.Text = "Mode:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(277, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(48, 13);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Species:";
-            this.label8.Visible = false;
-            // 
-            // typeLSR
-            // 
-            this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.typeLSR.FormattingEnabled = true;
-            this.typeLSR.Location = new System.Drawing.Point(49, 17);
-            this.typeLSR.Name = "typeLSR";
-            this.typeLSR.Size = new System.Drawing.Size(222, 21);
-            this.typeLSR.TabIndex = 0;
-            this.typeLSR.SelectedIndexChanged += new System.EventHandler(this.typeLSR_SelectedIndexChanged);
-            // 
-            // sr_Species
-            // 
-            this.sr_Species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.sr_Species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.sr_Species.FormattingEnabled = true;
-            this.sr_Species.Location = new System.Drawing.Point(331, 17);
-            this.sr_Species.Name = "sr_Species";
-            this.sr_Species.Size = new System.Drawing.Size(120, 21);
-            this.sr_Species.TabIndex = 1;
-            this.sr_Species.Visible = false;
-            // 
-            // resumeLSR
-            // 
-            this.resumeLSR.AutoSize = true;
-            this.resumeLSR.Location = new System.Drawing.Point(457, 19);
-            this.resumeLSR.Name = "resumeLSR";
-            this.resumeLSR.Size = new System.Drawing.Size(83, 17);
-            this.resumeLSR.TabIndex = 3;
-            this.resumeLSR.Text = "Resume bot";
-            this.resumeLSR.UseVisualStyleBackColor = true;
-            // 
-            // srClear
-            // 
-            this.srClear.Location = new System.Drawing.Point(283, 65);
-            this.srClear.Name = "srClear";
-            this.srClear.Size = new System.Drawing.Size(143, 23);
-            this.srClear.TabIndex = 4;
-            this.srClear.Text = "Reset all fields";
-            this.srClear.UseVisualStyleBackColor = true;
-            this.srClear.Click += new System.EventHandler(this.srClear_Click);
-            // 
-            // filtersSoftReset
-            // 
-            this.filtersSoftReset.AllowUserToAddRows = false;
-            this.filtersSoftReset.AllowUserToDeleteRows = false;
-            this.filtersSoftReset.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.filtersSoftReset.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.filtersSoftReset.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn32,
-            this.dataGridViewTextBoxColumn33,
-            this.dataGridViewTextBoxColumn34,
-            this.dataGridViewTextBoxColumn35,
-            this.dataGridViewTextBoxColumn36,
-            this.dataGridViewTextBoxColumn37,
-            this.dataGridViewTextBoxColumn38,
-            this.dataGridViewTextBoxColumn39,
-            this.dataGridViewTextBoxColumn40,
-            this.dataGridViewTextBoxColumn41,
-            this.dataGridViewTextBoxColumn42,
-            this.dataGridViewTextBoxColumn43,
-            this.dataGridViewTextBoxColumn44,
-            this.dataGridViewTextBoxColumn45,
-            this.dataGridViewTextBoxColumn46,
-            this.dataGridViewTextBoxColumn47,
-            this.dataGridViewTextBoxColumn48,
-            this.dataGridViewTextBoxColumn49,
-            this.dataGridViewTextBoxColumn50});
-            this.filtersSoftReset.Location = new System.Drawing.Point(6, 94);
-            this.filtersSoftReset.MultiSelect = false;
-            this.filtersSoftReset.Name = "filtersSoftReset";
-            this.filtersSoftReset.ReadOnly = true;
-            this.filtersSoftReset.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.filtersSoftReset.Size = new System.Drawing.Size(546, 146);
-            this.filtersSoftReset.TabIndex = 6;
-            // 
-            // dataGridViewTextBoxColumn32
-            // 
-            this.dataGridViewTextBoxColumn32.HeaderText = "Shiny";
-            this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
-            this.dataGridViewTextBoxColumn32.ReadOnly = true;
-            this.dataGridViewTextBoxColumn32.Width = 58;
-            // 
-            // dataGridViewTextBoxColumn33
-            // 
-            this.dataGridViewTextBoxColumn33.HeaderText = "Nature";
-            this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
-            this.dataGridViewTextBoxColumn33.ReadOnly = true;
-            this.dataGridViewTextBoxColumn33.Width = 64;
-            // 
-            // dataGridViewTextBoxColumn34
-            // 
-            this.dataGridViewTextBoxColumn34.HeaderText = "Ability";
-            this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
-            this.dataGridViewTextBoxColumn34.ReadOnly = true;
-            this.dataGridViewTextBoxColumn34.Width = 59;
-            // 
-            // dataGridViewTextBoxColumn35
-            // 
-            this.dataGridViewTextBoxColumn35.HeaderText = "HP type";
-            this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
-            this.dataGridViewTextBoxColumn35.ReadOnly = true;
-            this.dataGridViewTextBoxColumn35.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn36
-            // 
-            this.dataGridViewTextBoxColumn36.HeaderText = "Gender";
-            this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
-            this.dataGridViewTextBoxColumn36.ReadOnly = true;
-            this.dataGridViewTextBoxColumn36.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn37
-            // 
-            this.dataGridViewTextBoxColumn37.HeaderText = "HP";
-            this.dataGridViewTextBoxColumn37.Name = "dataGridViewTextBoxColumn37";
-            this.dataGridViewTextBoxColumn37.ReadOnly = true;
-            this.dataGridViewTextBoxColumn37.Width = 47;
-            // 
-            // dataGridViewTextBoxColumn38
-            // 
-            this.dataGridViewTextBoxColumn38.HeaderText = "HP Logic";
-            this.dataGridViewTextBoxColumn38.Name = "dataGridViewTextBoxColumn38";
-            this.dataGridViewTextBoxColumn38.ReadOnly = true;
-            this.dataGridViewTextBoxColumn38.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn39
-            // 
-            this.dataGridViewTextBoxColumn39.HeaderText = "Atk";
-            this.dataGridViewTextBoxColumn39.Name = "dataGridViewTextBoxColumn39";
-            this.dataGridViewTextBoxColumn39.ReadOnly = true;
-            this.dataGridViewTextBoxColumn39.Width = 48;
-            // 
-            // dataGridViewTextBoxColumn40
-            // 
-            this.dataGridViewTextBoxColumn40.HeaderText = "Atk Logic";
-            this.dataGridViewTextBoxColumn40.Name = "dataGridViewTextBoxColumn40";
-            this.dataGridViewTextBoxColumn40.ReadOnly = true;
-            this.dataGridViewTextBoxColumn40.Width = 71;
-            // 
-            // dataGridViewTextBoxColumn41
-            // 
-            this.dataGridViewTextBoxColumn41.HeaderText = "Def";
-            this.dataGridViewTextBoxColumn41.Name = "dataGridViewTextBoxColumn41";
-            this.dataGridViewTextBoxColumn41.ReadOnly = true;
-            this.dataGridViewTextBoxColumn41.Width = 49;
-            // 
-            // dataGridViewTextBoxColumn42
-            // 
-            this.dataGridViewTextBoxColumn42.HeaderText = "Def Logic";
-            this.dataGridViewTextBoxColumn42.Name = "dataGridViewTextBoxColumn42";
-            this.dataGridViewTextBoxColumn42.ReadOnly = true;
-            this.dataGridViewTextBoxColumn42.Width = 72;
-            // 
-            // dataGridViewTextBoxColumn43
-            // 
-            this.dataGridViewTextBoxColumn43.HeaderText = "SpA";
-            this.dataGridViewTextBoxColumn43.Name = "dataGridViewTextBoxColumn43";
-            this.dataGridViewTextBoxColumn43.ReadOnly = true;
-            this.dataGridViewTextBoxColumn43.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn44
-            // 
-            this.dataGridViewTextBoxColumn44.HeaderText = "SpA Logic";
-            this.dataGridViewTextBoxColumn44.Name = "dataGridViewTextBoxColumn44";
-            this.dataGridViewTextBoxColumn44.ReadOnly = true;
-            this.dataGridViewTextBoxColumn44.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn45
-            // 
-            this.dataGridViewTextBoxColumn45.HeaderText = "SpD";
-            this.dataGridViewTextBoxColumn45.Name = "dataGridViewTextBoxColumn45";
-            this.dataGridViewTextBoxColumn45.ReadOnly = true;
-            this.dataGridViewTextBoxColumn45.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn46
-            // 
-            this.dataGridViewTextBoxColumn46.HeaderText = "SpD Logic";
-            this.dataGridViewTextBoxColumn46.Name = "dataGridViewTextBoxColumn46";
-            this.dataGridViewTextBoxColumn46.ReadOnly = true;
-            this.dataGridViewTextBoxColumn46.Width = 76;
-            // 
-            // dataGridViewTextBoxColumn47
-            // 
-            this.dataGridViewTextBoxColumn47.HeaderText = "Spe";
-            this.dataGridViewTextBoxColumn47.Name = "dataGridViewTextBoxColumn47";
-            this.dataGridViewTextBoxColumn47.ReadOnly = true;
-            this.dataGridViewTextBoxColumn47.Width = 51;
-            // 
-            // dataGridViewTextBoxColumn48
-            // 
-            this.dataGridViewTextBoxColumn48.HeaderText = "Spe Logic";
-            this.dataGridViewTextBoxColumn48.Name = "dataGridViewTextBoxColumn48";
-            this.dataGridViewTextBoxColumn48.ReadOnly = true;
-            this.dataGridViewTextBoxColumn48.Width = 74;
-            // 
-            // dataGridViewTextBoxColumn49
-            // 
-            this.dataGridViewTextBoxColumn49.HeaderText = "Perfect IVs";
-            this.dataGridViewTextBoxColumn49.Name = "dataGridViewTextBoxColumn49";
-            this.dataGridViewTextBoxColumn49.ReadOnly = true;
-            this.dataGridViewTextBoxColumn49.Width = 78;
-            // 
-            // dataGridViewTextBoxColumn50
-            // 
-            this.dataGridViewTextBoxColumn50.HeaderText = "Perfect IVs Logic";
-            this.dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
-            this.dataGridViewTextBoxColumn50.ReadOnly = true;
-            this.dataGridViewTextBoxColumn50.Width = 80;
-            // 
-            // srFilterLoad
-            // 
-            this.srFilterLoad.Location = new System.Drawing.Point(432, 65);
-            this.srFilterLoad.Name = "srFilterLoad";
-            this.srFilterLoad.Size = new System.Drawing.Size(120, 23);
-            this.srFilterLoad.TabIndex = 5;
-            this.srFilterLoad.Text = "Load filter set...";
-            this.srFilterLoad.UseVisualStyleBackColor = true;
-            this.srFilterLoad.Click += new System.EventHandler(this.srFilterLoad_Click);
-            // 
-            // RunLSRbot
-            // 
-            this.RunLSRbot.Location = new System.Drawing.Point(6, 65);
-            this.RunLSRbot.Name = "RunLSRbot";
-            this.RunLSRbot.Size = new System.Drawing.Size(271, 23);
-            this.RunLSRbot.TabIndex = 2;
-            this.RunLSRbot.Text = "Start Bot";
-            this.RunLSRbot.UseVisualStyleBackColor = true;
-            this.RunLSRbot.Click += new System.EventHandler(this.RunLSRbot_Click_1);
-            // 
-            // tabBreeding
-            // 
-            this.tabBreeding.BackColor = System.Drawing.SystemColors.Control;
-            this.tabBreeding.Controls.Add(this.Breed_esvtsv);
-            this.tabBreeding.Controls.Add(this.Breed_options);
-            this.tabBreeding.Controls.Add(this.breedingClear);
-            this.tabBreeding.Controls.Add(this.filterBreeding);
-            this.tabBreeding.Controls.Add(this.bFilterLoad);
-            this.tabBreeding.Controls.Add(this.runBreedingBot);
-            this.tabBreeding.Location = new System.Drawing.Point(4, 22);
-            this.tabBreeding.Name = "tabBreeding";
-            this.tabBreeding.Size = new System.Drawing.Size(558, 378);
-            this.tabBreeding.TabIndex = 4;
-            this.tabBreeding.Text = "Breeding";
-            // 
-            // Breed_esvtsv
-            // 
-            this.Breed_esvtsv.Controls.Add(this.label50);
-            this.Breed_esvtsv.Controls.Add(this.ESVlist);
-            this.Breed_esvtsv.Controls.Add(this.ESVlistSave);
-            this.Breed_esvtsv.Controls.Add(this.TSVlist);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistNum);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistAdd);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistLoad);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistRemove);
-            this.Breed_esvtsv.Controls.Add(this.TSVlistSave);
-            this.Breed_esvtsv.Location = new System.Drawing.Point(272, 6);
-            this.Breed_esvtsv.Name = "Breed_esvtsv";
-            this.Breed_esvtsv.Size = new System.Drawing.Size(280, 177);
-            this.Breed_esvtsv.TabIndex = 28;
-            this.Breed_esvtsv.TabStop = false;
-            this.Breed_esvtsv.Text = "ESV/TSV";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(218, 16);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(31, 13);
-            this.label50.TabIndex = 16;
-            this.label50.Text = "TSV:";
-            // 
-            // ESVlist
-            // 
-            this.ESVlist.AllowUserToAddRows = false;
-            this.ESVlist.AllowUserToDeleteRows = false;
-            this.ESVlist.AllowUserToResizeColumns = false;
-            this.ESVlist.AllowUserToResizeRows = false;
-            this.ESVlist.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.ESVlist.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.ESVlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ESVlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ESVlistBox,
-            this.ESVlistSlot,
-            this.ESVlistValue});
-            this.ESVlist.Location = new System.Drawing.Point(6, 17);
-            this.ESVlist.Name = "ESVlist";
-            this.ESVlist.ReadOnly = true;
-            this.ESVlist.RowHeadersWidth = 21;
-            this.ESVlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.ESVlist.Size = new System.Drawing.Size(150, 125);
-            this.ESVlist.TabIndex = 8;
-            // 
-            // ESVlistBox
-            // 
-            this.ESVlistBox.FillWeight = 50F;
-            this.ESVlistBox.HeaderText = "Box";
-            this.ESVlistBox.Name = "ESVlistBox";
-            this.ESVlistBox.ReadOnly = true;
-            // 
-            // ESVlistSlot
-            // 
-            this.ESVlistSlot.FillWeight = 50F;
-            this.ESVlistSlot.HeaderText = "Slot";
-            this.ESVlistSlot.Name = "ESVlistSlot";
-            this.ESVlistSlot.ReadOnly = true;
-            // 
-            // ESVlistValue
-            // 
-            this.ESVlistValue.HeaderText = "ESV";
-            this.ESVlistValue.Name = "ESVlistValue";
-            this.ESVlistValue.ReadOnly = true;
-            // 
-            // ESVlistSave
-            // 
-            this.ESVlistSave.Location = new System.Drawing.Point(6, 148);
-            this.ESVlistSave.Name = "ESVlistSave";
-            this.ESVlistSave.Size = new System.Drawing.Size(150, 23);
-            this.ESVlistSave.TabIndex = 9;
-            this.ESVlistSave.Text = "Save ESV List";
-            this.ESVlistSave.UseVisualStyleBackColor = true;
-            this.ESVlistSave.Click += new System.EventHandler(this.ESVlistSave_Click);
-            // 
-            // TSVlist
-            // 
-            this.TSVlist.FormattingEnabled = true;
-            this.TSVlist.Location = new System.Drawing.Point(162, 17);
-            this.TSVlist.Name = "TSVlist";
-            this.TSVlist.Size = new System.Drawing.Size(50, 147);
-            this.TSVlist.TabIndex = 10;
-            // 
-            // TSVlistNum
-            // 
-            this.TSVlistNum.Location = new System.Drawing.Point(218, 32);
-            this.TSVlistNum.Maximum = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.TSVlistNum.Name = "TSVlistNum";
-            this.TSVlistNum.Size = new System.Drawing.Size(56, 20);
-            this.TSVlistNum.TabIndex = 11;
-            // 
-            // TSVlistAdd
-            // 
-            this.TSVlistAdd.Location = new System.Drawing.Point(218, 58);
-            this.TSVlistAdd.Name = "TSVlistAdd";
-            this.TSVlistAdd.Size = new System.Drawing.Size(56, 23);
-            this.TSVlistAdd.TabIndex = 12;
-            this.TSVlistAdd.Text = "Add";
-            this.TSVlistAdd.UseVisualStyleBackColor = true;
-            this.TSVlistAdd.Click += new System.EventHandler(this.TSVlistAdd_Click);
-            // 
-            // TSVlistLoad
-            // 
-            this.TSVlistLoad.Location = new System.Drawing.Point(218, 145);
-            this.TSVlistLoad.Name = "TSVlistLoad";
-            this.TSVlistLoad.Size = new System.Drawing.Size(56, 23);
-            this.TSVlistLoad.TabIndex = 15;
-            this.TSVlistLoad.Text = "Load";
-            this.TSVlistLoad.UseVisualStyleBackColor = true;
-            this.TSVlistLoad.Click += new System.EventHandler(this.TSVlistLoad_Click);
-            // 
-            // TSVlistRemove
-            // 
-            this.TSVlistRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.TSVlistRemove.Location = new System.Drawing.Point(218, 87);
-            this.TSVlistRemove.Name = "TSVlistRemove";
-            this.TSVlistRemove.Size = new System.Drawing.Size(56, 23);
-            this.TSVlistRemove.TabIndex = 13;
-            this.TSVlistRemove.Text = "Remove";
-            this.TSVlistRemove.UseVisualStyleBackColor = true;
-            this.TSVlistRemove.Click += new System.EventHandler(this.TSVlistRemove_Click);
-            // 
-            // TSVlistSave
-            // 
-            this.TSVlistSave.Location = new System.Drawing.Point(218, 116);
-            this.TSVlistSave.Name = "TSVlistSave";
-            this.TSVlistSave.Size = new System.Drawing.Size(56, 23);
-            this.TSVlistSave.TabIndex = 14;
-            this.TSVlistSave.Text = "Save";
-            this.TSVlistSave.UseVisualStyleBackColor = true;
-            this.TSVlistSave.Click += new System.EventHandler(this.TSVlistSave_Click);
-            // 
-            // Breed_options
-            // 
-            this.Breed_options.Controls.Add(this.modeBreed);
-            this.Breed_options.Controls.Add(this.readESV);
-            this.Breed_options.Controls.Add(this.Breed_labelBox);
-            this.Breed_options.Controls.Add(this.label75);
-            this.Breed_options.Controls.Add(this.quickBreed);
-            this.Breed_options.Controls.Add(this.slotBreed);
-            this.Breed_options.Controls.Add(this.label84);
-            this.Breed_options.Controls.Add(this.boxBreed);
-            this.Breed_options.Controls.Add(this.Breed_labelSlot);
-            this.Breed_options.Controls.Add(this.eggsNoBreed);
-            this.Breed_options.Controls.Add(this.daycare_select);
-            this.Breed_options.Controls.Add(this.orgbox_pos);
-            this.Breed_options.Location = new System.Drawing.Point(6, 6);
-            this.Breed_options.Name = "Breed_options";
-            this.Breed_options.Size = new System.Drawing.Size(260, 177);
-            this.Breed_options.TabIndex = 27;
-            this.Breed_options.TabStop = false;
-            this.Breed_options.Text = "Options";
-            // 
-            // modeBreed
-            // 
-            this.modeBreed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.modeBreed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.modeBreed.FormattingEnabled = true;
-            this.modeBreed.Location = new System.Drawing.Point(49, 17);
-            this.modeBreed.Name = "modeBreed";
-            this.modeBreed.Size = new System.Drawing.Size(205, 21);
-            this.modeBreed.TabIndex = 0;
-            this.modeBreed.SelectedIndexChanged += new System.EventHandler(this.modeBreed_SelectedIndexChanged);
-            // 
-            // readESV
-            // 
-            this.readESV.AutoSize = true;
-            this.readESV.Location = new System.Drawing.Point(6, 148);
-            this.readESV.Name = "readESV";
-            this.readESV.Size = new System.Drawing.Size(137, 17);
-            this.readESV.TabIndex = 6;
-            this.readESV.Text = "Read ESV after deposit";
-            this.readESV.UseVisualStyleBackColor = true;
-            // 
-            // Breed_labelBox
-            // 
-            this.Breed_labelBox.AutoSize = true;
-            this.Breed_labelBox.Location = new System.Drawing.Point(3, 48);
-            this.Breed_labelBox.Name = "Breed_labelBox";
-            this.Breed_labelBox.Size = new System.Drawing.Size(28, 13);
-            this.Breed_labelBox.TabIndex = 21;
-            this.Breed_labelBox.Text = "Box:";
-            // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(165, 48);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(43, 13);
-            this.label75.TabIndex = 23;
-            this.label75.Text = "# eggs:";
-            // 
-            // quickBreed
-            // 
-            this.quickBreed.AutoSize = true;
-            this.quickBreed.Location = new System.Drawing.Point(150, 148);
-            this.quickBreed.Name = "quickBreed";
-            this.quickBreed.Size = new System.Drawing.Size(85, 17);
-            this.quickBreed.TabIndex = 7;
-            this.quickBreed.Text = "Quick Breed";
-            this.quickBreed.UseVisualStyleBackColor = true;
-            // 
-            // slotBreed
-            // 
-            this.slotBreed.Location = new System.Drawing.Point(118, 46);
-            this.slotBreed.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.slotBreed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.slotBreed.Name = "slotBreed";
-            this.slotBreed.Size = new System.Drawing.Size(41, 20);
-            this.slotBreed.TabIndex = 2;
-            this.slotBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label84
-            // 
-            this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(6, 20);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(37, 13);
-            this.label84.TabIndex = 20;
-            this.label84.Text = "Mode:";
-            // 
-            // boxBreed
-            // 
-            this.boxBreed.Location = new System.Drawing.Point(37, 46);
-            this.boxBreed.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.boxBreed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.boxBreed.Name = "boxBreed";
-            this.boxBreed.Size = new System.Drawing.Size(41, 20);
-            this.boxBreed.TabIndex = 1;
-            this.boxBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // Breed_labelSlot
-            // 
-            this.Breed_labelSlot.AutoSize = true;
-            this.Breed_labelSlot.Location = new System.Drawing.Point(84, 48);
-            this.Breed_labelSlot.Name = "Breed_labelSlot";
-            this.Breed_labelSlot.Size = new System.Drawing.Size(28, 13);
-            this.Breed_labelSlot.TabIndex = 22;
-            this.Breed_labelSlot.Text = "Slot:";
-            // 
-            // eggsNoBreed
-            // 
-            this.eggsNoBreed.Location = new System.Drawing.Point(214, 46);
-            this.eggsNoBreed.Maximum = new decimal(new int[] {
-            930,
-            0,
-            0,
-            0});
-            this.eggsNoBreed.Name = "eggsNoBreed";
-            this.eggsNoBreed.Size = new System.Drawing.Size(40, 20);
-            this.eggsNoBreed.TabIndex = 3;
-            this.eggsNoBreed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // breedingClear
-            // 
-            this.breedingClear.Location = new System.Drawing.Point(278, 189);
-            this.breedingClear.Name = "breedingClear";
-            this.breedingClear.Size = new System.Drawing.Size(150, 23);
-            this.breedingClear.TabIndex = 16;
-            this.breedingClear.Text = "Reset all fields";
-            this.breedingClear.UseVisualStyleBackColor = true;
-            this.breedingClear.Click += new System.EventHandler(this.breedingClear_Click);
-            // 
-            // filterBreeding
-            // 
-            this.filterBreeding.AllowUserToAddRows = false;
-            this.filterBreeding.AllowUserToDeleteRows = false;
-            this.filterBreeding.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.filterBreeding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.filterBreeding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16,
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewTextBoxColumn18,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20,
-            this.dataGridViewTextBoxColumn21,
-            this.dataGridViewTextBoxColumn22,
-            this.dataGridViewTextBoxColumn23,
-            this.dataGridViewTextBoxColumn24,
-            this.dataGridViewTextBoxColumn25,
-            this.dataGridViewTextBoxColumn26,
-            this.dataGridViewTextBoxColumn27,
-            this.dataGridViewTextBoxColumn28,
-            this.dataGridViewTextBoxColumn29,
-            this.dataGridViewTextBoxColumn30,
-            this.dataGridViewTextBoxColumn31});
-            this.filterBreeding.Location = new System.Drawing.Point(73, 218);
-            this.filterBreeding.MultiSelect = false;
-            this.filterBreeding.Name = "filterBreeding";
-            this.filterBreeding.ReadOnly = true;
-            this.filterBreeding.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.filterBreeding.Size = new System.Drawing.Size(546, 146);
-            this.filterBreeding.TabIndex = 18;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Shiny";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            this.dataGridViewTextBoxColumn13.Width = 58;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.HeaderText = "Nature";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            this.dataGridViewTextBoxColumn14.Width = 64;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "Ability";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.Width = 59;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "HP type";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.HeaderText = "Gender";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            this.dataGridViewTextBoxColumn17.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.HeaderText = "HP";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            this.dataGridViewTextBoxColumn18.Width = 47;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.HeaderText = "HP Logic";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            this.dataGridViewTextBoxColumn19.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.HeaderText = "Atk";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            this.dataGridViewTextBoxColumn20.Width = 48;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.HeaderText = "Atk Logic";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            this.dataGridViewTextBoxColumn21.Width = 71;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.HeaderText = "Def";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            this.dataGridViewTextBoxColumn22.Width = 49;
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.HeaderText = "Def Logic";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            this.dataGridViewTextBoxColumn23.ReadOnly = true;
-            this.dataGridViewTextBoxColumn23.Width = 72;
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            this.dataGridViewTextBoxColumn24.HeaderText = "SpA";
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            this.dataGridViewTextBoxColumn24.ReadOnly = true;
-            this.dataGridViewTextBoxColumn24.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn25
-            // 
-            this.dataGridViewTextBoxColumn25.HeaderText = "SpA Logic";
-            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-            this.dataGridViewTextBoxColumn25.ReadOnly = true;
-            this.dataGridViewTextBoxColumn25.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn26
-            // 
-            this.dataGridViewTextBoxColumn26.HeaderText = "SpD";
-            this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
-            this.dataGridViewTextBoxColumn26.ReadOnly = true;
-            this.dataGridViewTextBoxColumn26.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn27
-            // 
-            this.dataGridViewTextBoxColumn27.HeaderText = "SpD Logic";
-            this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
-            this.dataGridViewTextBoxColumn27.ReadOnly = true;
-            this.dataGridViewTextBoxColumn27.Width = 76;
-            // 
-            // dataGridViewTextBoxColumn28
-            // 
-            this.dataGridViewTextBoxColumn28.HeaderText = "Spe";
-            this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
-            this.dataGridViewTextBoxColumn28.ReadOnly = true;
-            this.dataGridViewTextBoxColumn28.Width = 51;
-            // 
-            // dataGridViewTextBoxColumn29
-            // 
-            this.dataGridViewTextBoxColumn29.HeaderText = "Spe Logic";
-            this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
-            this.dataGridViewTextBoxColumn29.ReadOnly = true;
-            this.dataGridViewTextBoxColumn29.Width = 74;
-            // 
-            // dataGridViewTextBoxColumn30
-            // 
-            this.dataGridViewTextBoxColumn30.HeaderText = "Perfect IVs";
-            this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
-            this.dataGridViewTextBoxColumn30.ReadOnly = true;
-            this.dataGridViewTextBoxColumn30.Width = 78;
-            // 
-            // dataGridViewTextBoxColumn31
-            // 
-            this.dataGridViewTextBoxColumn31.HeaderText = "Perfect IVs Logic";
-            this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
-            this.dataGridViewTextBoxColumn31.ReadOnly = true;
-            this.dataGridViewTextBoxColumn31.Width = 80;
-            // 
-            // bFilterLoad
-            // 
-            this.bFilterLoad.Location = new System.Drawing.Point(439, 189);
-            this.bFilterLoad.Name = "bFilterLoad";
-            this.bFilterLoad.Size = new System.Drawing.Size(113, 23);
-            this.bFilterLoad.TabIndex = 17;
-            this.bFilterLoad.Text = "Load filter set...";
-            this.bFilterLoad.UseVisualStyleBackColor = true;
-            this.bFilterLoad.Click += new System.EventHandler(this.bFilterLoad_Click);
-            // 
-            // runBreedingBot
-            // 
-            this.runBreedingBot.Location = new System.Drawing.Point(6, 189);
-            this.runBreedingBot.Name = "runBreedingBot";
-            this.runBreedingBot.Size = new System.Drawing.Size(260, 23);
-            this.runBreedingBot.TabIndex = 19;
-            this.runBreedingBot.Text = "Start Bot";
-            this.runBreedingBot.UseVisualStyleBackColor = true;
-            this.runBreedingBot.Click += new System.EventHandler(this.runBreedingBot_Click_1);
-            // 
-            // miscTabs
-            // 
-            this.miscTabs.Controls.Add(this.tabBreeding);
-            this.miscTabs.Controls.Add(this.tabSoftReset);
-            this.miscTabs.Controls.Add(this.tabWonderTrade);
-            this.miscTabs.Location = new System.Drawing.Point(615, 14);
-            this.miscTabs.Name = "miscTabs";
-            this.miscTabs.SelectedIndex = 0;
-            this.miscTabs.Size = new System.Drawing.Size(566, 404);
-            this.miscTabs.TabIndex = 3;
-            this.miscTabs.TabStop = false;
-            this.miscTabs.Tag = "";
-            this.miscTabs.Visible = false;
-            // 
             // PB_Legal
             // 
             this.PB_Legal.Image = ((System.Drawing.Image)(resources.GetObject("PB_Legal.Image")));
@@ -5469,17 +3996,253 @@
             this.pictureBox2.TabIndex = 18;
             this.pictureBox2.TabStop = false;
             // 
+            // Label_IsShiny
+            // 
+            this.Label_IsShiny.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.Label_IsShiny.Image = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.Image")));
+            this.Label_IsShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("Label_IsShiny.InitialImage")));
+            this.Label_IsShiny.Location = new System.Drawing.Point(36, 2);
+            this.Label_IsShiny.Margin = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.Label_IsShiny.Name = "Label_IsShiny";
+            this.Label_IsShiny.Size = new System.Drawing.Size(20, 20);
+            this.Label_IsShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Label_IsShiny.TabIndex = 62;
+            this.Label_IsShiny.TabStop = false;
+            this.Label_IsShiny.Visible = false;
+            // 
+            // PB_Ball
+            // 
+            this.PB_Ball.Location = new System.Drawing.Point(60, 0);
+            this.PB_Ball.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.PB_Ball.Name = "PB_Ball";
+            this.PB_Ball.Size = new System.Drawing.Size(20, 20);
+            this.PB_Ball.TabIndex = 3;
+            this.PB_Ball.TabStop = false;
+            // 
+            // PB_WarnMove4
+            // 
+            this.PB_WarnMove4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove4.Image")));
+            this.PB_WarnMove4.Location = new System.Drawing.Point(8, 113);
+            this.PB_WarnMove4.Name = "PB_WarnMove4";
+            this.PB_WarnMove4.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove4.TabIndex = 5;
+            this.PB_WarnMove4.TabStop = false;
+            this.PB_WarnMove4.Visible = false;
+            // 
+            // PB_WarnMove3
+            // 
+            this.PB_WarnMove3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove3.Image")));
+            this.PB_WarnMove3.Location = new System.Drawing.Point(8, 91);
+            this.PB_WarnMove3.Name = "PB_WarnMove3";
+            this.PB_WarnMove3.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove3.TabIndex = 4;
+            this.PB_WarnMove3.TabStop = false;
+            this.PB_WarnMove3.Visible = false;
+            // 
+            // PB_WarnMove2
+            // 
+            this.PB_WarnMove2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove2.Image")));
+            this.PB_WarnMove2.Location = new System.Drawing.Point(8, 69);
+            this.PB_WarnMove2.Name = "PB_WarnMove2";
+            this.PB_WarnMove2.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove2.TabIndex = 3;
+            this.PB_WarnMove2.TabStop = false;
+            this.PB_WarnMove2.Visible = false;
+            // 
+            // PB_WarnMove1
+            // 
+            this.PB_WarnMove1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnMove1.Image")));
+            this.PB_WarnMove1.Location = new System.Drawing.Point(8, 47);
+            this.PB_WarnMove1.Name = "PB_WarnMove1";
+            this.PB_WarnMove1.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnMove1.TabIndex = 2;
+            this.PB_WarnMove1.TabStop = false;
+            this.PB_WarnMove1.Visible = false;
+            // 
+            // PB_WarnRelearn4
+            // 
+            this.PB_WarnRelearn4.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn4.Image")));
+            this.PB_WarnRelearn4.Location = new System.Drawing.Point(22, 93);
+            this.PB_WarnRelearn4.Name = "PB_WarnRelearn4";
+            this.PB_WarnRelearn4.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn4.TabIndex = 19;
+            this.PB_WarnRelearn4.TabStop = false;
+            this.PB_WarnRelearn4.Visible = false;
+            // 
+            // PB_WarnRelearn3
+            // 
+            this.PB_WarnRelearn3.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn3.Image")));
+            this.PB_WarnRelearn3.Location = new System.Drawing.Point(22, 71);
+            this.PB_WarnRelearn3.Name = "PB_WarnRelearn3";
+            this.PB_WarnRelearn3.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn3.TabIndex = 18;
+            this.PB_WarnRelearn3.TabStop = false;
+            this.PB_WarnRelearn3.Visible = false;
+            // 
+            // PB_WarnRelearn2
+            // 
+            this.PB_WarnRelearn2.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn2.Image")));
+            this.PB_WarnRelearn2.Location = new System.Drawing.Point(22, 49);
+            this.PB_WarnRelearn2.Name = "PB_WarnRelearn2";
+            this.PB_WarnRelearn2.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn2.TabIndex = 17;
+            this.PB_WarnRelearn2.TabStop = false;
+            this.PB_WarnRelearn2.Visible = false;
+            // 
+            // PB_WarnRelearn1
+            // 
+            this.PB_WarnRelearn1.Image = ((System.Drawing.Image)(resources.GetObject("PB_WarnRelearn1.Image")));
+            this.PB_WarnRelearn1.Location = new System.Drawing.Point(22, 27);
+            this.PB_WarnRelearn1.Name = "PB_WarnRelearn1";
+            this.PB_WarnRelearn1.Size = new System.Drawing.Size(16, 16);
+            this.PB_WarnRelearn1.TabIndex = 6;
+            this.PB_WarnRelearn1.TabStop = false;
+            this.PB_WarnRelearn1.Visible = false;
+            // 
+            // PB_MarkHorohoro
+            // 
+            this.PB_MarkHorohoro.Location = new System.Drawing.Point(110, 15);
+            this.PB_MarkHorohoro.Name = "PB_MarkHorohoro";
+            this.PB_MarkHorohoro.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkHorohoro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkHorohoro.TabIndex = 11;
+            this.PB_MarkHorohoro.TabStop = false;
+            // 
+            // PB_MarkVC
+            // 
+            this.PB_MarkVC.Location = new System.Drawing.Point(89, 15);
+            this.PB_MarkVC.Name = "PB_MarkVC";
+            this.PB_MarkVC.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkVC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkVC.TabIndex = 10;
+            this.PB_MarkVC.TabStop = false;
+            // 
+            // PB_MarkAlola
+            // 
+            this.PB_MarkAlola.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.Image")));
+            this.PB_MarkAlola.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkAlola.InitialImage")));
+            this.PB_MarkAlola.Location = new System.Drawing.Point(68, 15);
+            this.PB_MarkAlola.Name = "PB_MarkAlola";
+            this.PB_MarkAlola.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkAlola.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkAlola.TabIndex = 9;
+            this.PB_MarkAlola.TabStop = false;
+            // 
+            // PB_Mark6
+            // 
+            this.PB_Mark6.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.Image")));
+            this.PB_Mark6.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark6.InitialImage")));
+            this.PB_Mark6.Location = new System.Drawing.Point(110, 36);
+            this.PB_Mark6.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark6.Name = "PB_Mark6";
+            this.PB_Mark6.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark6.TabIndex = 5;
+            this.PB_Mark6.TabStop = false;
+            // 
+            // PB_MarkPentagon
+            // 
+            this.PB_MarkPentagon.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.Image")));
+            this.PB_MarkPentagon.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkPentagon.InitialImage")));
+            this.PB_MarkPentagon.Location = new System.Drawing.Point(47, 15);
+            this.PB_MarkPentagon.Name = "PB_MarkPentagon";
+            this.PB_MarkPentagon.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkPentagon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkPentagon.TabIndex = 8;
+            this.PB_MarkPentagon.TabStop = false;
+            // 
+            // PB_Mark3
+            // 
+            this.PB_Mark3.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.Image")));
+            this.PB_Mark3.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark3.InitialImage")));
+            this.PB_Mark3.Location = new System.Drawing.Point(47, 36);
+            this.PB_Mark3.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark3.Name = "PB_Mark3";
+            this.PB_Mark3.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark3.TabIndex = 2;
+            this.PB_Mark3.TabStop = false;
+            // 
+            // PB_Mark5
+            // 
+            this.PB_Mark5.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.Image")));
+            this.PB_Mark5.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark5.InitialImage")));
+            this.PB_Mark5.Location = new System.Drawing.Point(89, 36);
+            this.PB_Mark5.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark5.Name = "PB_Mark5";
+            this.PB_Mark5.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark5.TabIndex = 4;
+            this.PB_Mark5.TabStop = false;
+            // 
+            // PB_MarkCured
+            // 
+            this.PB_MarkCured.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.Image")));
+            this.PB_MarkCured.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkCured.InitialImage")));
+            this.PB_MarkCured.Location = new System.Drawing.Point(26, 15);
+            this.PB_MarkCured.Name = "PB_MarkCured";
+            this.PB_MarkCured.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkCured.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkCured.TabIndex = 7;
+            this.PB_MarkCured.TabStop = false;
+            // 
+            // PB_Mark2
+            // 
+            this.PB_Mark2.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.Image")));
+            this.PB_Mark2.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark2.InitialImage")));
+            this.PB_Mark2.Location = new System.Drawing.Point(26, 36);
+            this.PB_Mark2.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark2.Name = "PB_Mark2";
+            this.PB_Mark2.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark2.TabIndex = 1;
+            this.PB_Mark2.TabStop = false;
+            // 
+            // PB_MarkShiny
+            // 
+            this.PB_MarkShiny.Image = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.Image")));
+            this.PB_MarkShiny.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_MarkShiny.InitialImage")));
+            this.PB_MarkShiny.Location = new System.Drawing.Point(5, 15);
+            this.PB_MarkShiny.Name = "PB_MarkShiny";
+            this.PB_MarkShiny.Size = new System.Drawing.Size(20, 20);
+            this.PB_MarkShiny.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_MarkShiny.TabIndex = 6;
+            this.PB_MarkShiny.TabStop = false;
+            // 
+            // PB_Mark1
+            // 
+            this.PB_Mark1.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.Image")));
+            this.PB_Mark1.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark1.InitialImage")));
+            this.PB_Mark1.Location = new System.Drawing.Point(5, 36);
+            this.PB_Mark1.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark1.Name = "PB_Mark1";
+            this.PB_Mark1.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark1.TabIndex = 0;
+            this.PB_Mark1.TabStop = false;
+            // 
+            // PB_Mark4
+            // 
+            this.PB_Mark4.Image = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.Image")));
+            this.PB_Mark4.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Mark4.InitialImage")));
+            this.PB_Mark4.Location = new System.Drawing.Point(68, 36);
+            this.PB_Mark4.Margin = new System.Windows.Forms.Padding(1);
+            this.PB_Mark4.Name = "PB_Mark4";
+            this.PB_Mark4.Size = new System.Drawing.Size(20, 20);
+            this.PB_Mark4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PB_Mark4.TabIndex = 3;
+            this.PB_Mark4.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1301, 430);
+            this.ClientSize = new System.Drawing.Size(613, 368);
             this.Controls.Add(this.Tabs_General);
             this.Controls.Add(this.PB_Legal);
             this.Controls.Add(this.shinypic);
-            this.Controls.Add(this.miscTabs);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.tabMain);
@@ -5495,10 +4258,6 @@
             this.groupBox1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            this.orgbox_pos.ResumeLayout(false);
-            this.orgbox_pos.PerformLayout();
-            this.daycare_select.ResumeLayout(false);
-            this.daycare_select.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxDump)).EndInit();
             this.tabMain.ResumeLayout(false);
@@ -5507,7 +4266,6 @@
             this.FLP_PID.ResumeLayout(false);
             this.FLP_PIDLeft.ResumeLayout(false);
             this.FLP_PIDLeft.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).EndInit();
             this.FLP_PIDRight.ResumeLayout(false);
             this.FLP_PIDRight.PerformLayout();
             this.FLP_Species.ResumeLayout(false);
@@ -5547,7 +4305,6 @@
             this.FLP_Ball.ResumeLayout(false);
             this.FLP_BallLeft.ResumeLayout(false);
             this.FLP_BallLeft.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).EndInit();
             this.FLP_MetLevel.ResumeLayout(false);
             this.FLP_MetLevel.PerformLayout();
             this.FLP_MetDate.ResumeLayout(false);
@@ -5588,15 +4345,7 @@
             this.FLP_HPType.ResumeLayout(false);
             this.FLP_Characteristic.ResumeLayout(false);
             this.Tab_Attacks.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).EndInit();
             this.GB_RelearnMoves.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).EndInit();
             this.GB_CurrentMoves.ResumeLayout(false);
             this.GB_CurrentMoves.PerformLayout();
             this.Tab_OTMisc.ResumeLayout(false);
@@ -5606,18 +4355,6 @@
             this.GB_nOT.ResumeLayout(false);
             this.GB_nOT.PerformLayout();
             this.GB_Markings.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
             this.GB_ExtraBytes.ResumeLayout(false);
             this.GB_ExtraBytes.PerformLayout();
             this.GB_OT.ResumeLayout(false);
@@ -5643,36 +4380,31 @@
             this.Tab_About.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tabWonderTrade.ResumeLayout(false);
-            this.tabWonderTrade.PerformLayout();
-            this.WT_options.ResumeLayout(false);
-            this.WT_options.PerformLayout();
-            this.WT_After.ResumeLayout(false);
-            this.WT_After.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).EndInit();
-            this.WT_Sources.ResumeLayout(false);
-            this.WT_Sources.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).EndInit();
-            this.tabSoftReset.ResumeLayout(false);
-            this.SR_options.ResumeLayout(false);
-            this.SR_options.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).EndInit();
-            this.tabBreeding.ResumeLayout(false);
-            this.Breed_esvtsv.ResumeLayout(false);
-            this.Breed_esvtsv.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ESVlist)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).EndInit();
-            this.Breed_options.ResumeLayout(false);
-            this.Breed_options.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slotBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggsNoBreed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterBreeding)).EndInit();
-            this.miscTabs.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shinypic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Label_IsShiny)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Ball)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnMove1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_WarnRelearn1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkHorohoro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkVC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkAlola)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkPentagon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkCured)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_MarkShiny)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Mark4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -6001,111 +4733,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown Num_CDAmount;
         private System.Windows.Forms.NumericUpDown Num_CDSlot;
-        private System.Windows.Forms.TabPage tabWonderTrade;
-        private System.Windows.Forms.GroupBox WT_options;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.GroupBox WT_After;
-        private System.Windows.Forms.RadioButton WTafter_Delete;
-        private System.Windows.Forms.RadioButton WTafter_Restore;
-        private System.Windows.Forms.RadioButton WTafter_DoNothing;
-        private System.Windows.Forms.CheckBox WTafter_Dump;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.NumericUpDown WTBox;
-        private System.Windows.Forms.GroupBox WT_Sources;
-        private System.Windows.Forms.RadioButton WTsource_Random;
-        private System.Windows.Forms.RadioButton WTsource_Folder;
-        private System.Windows.Forms.RadioButton WTsource_Boxes;
-        private System.Windows.Forms.NumericUpDown WTtradesNo;
-        private System.Windows.Forms.CheckBox WTcollectFC;
-        private System.Windows.Forms.NumericUpDown WTSlot;
-        private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.CheckBox WT_RunEndless;
-        private System.Windows.Forms.Button RunWTbot;
-        private System.Windows.Forms.TabPage tabSoftReset;
-        private System.Windows.Forms.GroupBox SR_options;
-        private System.Windows.Forms.Label label72;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox typeLSR;
-        private System.Windows.Forms.ComboBox sr_Species;
-        private System.Windows.Forms.CheckBox resumeLSR;
-        private System.Windows.Forms.Button srClear;
-        private System.Windows.Forms.DataGridView filtersSoftReset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn39;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn40;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn41;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn42;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn43;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn44;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn45;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn46;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
-        private System.Windows.Forms.Button srFilterLoad;
-        private System.Windows.Forms.Button RunLSRbot;
-        private System.Windows.Forms.TabPage tabBreeding;
-        private System.Windows.Forms.GroupBox Breed_esvtsv;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.DataGridView ESVlist;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistSlot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ESVlistValue;
-        private System.Windows.Forms.Button ESVlistSave;
-        private System.Windows.Forms.ListBox TSVlist;
-        private System.Windows.Forms.NumericUpDown TSVlistNum;
-        private System.Windows.Forms.Button TSVlistAdd;
-        private System.Windows.Forms.Button TSVlistLoad;
-        private System.Windows.Forms.Button TSVlistRemove;
-        private System.Windows.Forms.Button TSVlistSave;
-        private System.Windows.Forms.GroupBox Breed_options;
-        private System.Windows.Forms.ComboBox modeBreed;
-        private System.Windows.Forms.CheckBox readESV;
-        private System.Windows.Forms.Label Breed_labelBox;
-        private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.CheckBox quickBreed;
-        private System.Windows.Forms.NumericUpDown slotBreed;
-        private System.Windows.Forms.Label label84;
-        private System.Windows.Forms.NumericUpDown boxBreed;
-        private System.Windows.Forms.Label Breed_labelSlot;
-        private System.Windows.Forms.NumericUpDown eggsNoBreed;
-        private System.Windows.Forms.GroupBox daycare_select;
-        private System.Windows.Forms.RadioButton radioDayCare1;
-        private System.Windows.Forms.RadioButton radioDayCare2;
-        private System.Windows.Forms.GroupBox orgbox_pos;
-        private System.Windows.Forms.RadioButton OrganizeMiddle;
-        private System.Windows.Forms.RadioButton OrganizeTop;
-        private System.Windows.Forms.Button breedingClear;
-        private System.Windows.Forms.DataGridView filterBreeding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
-        private System.Windows.Forms.Button bFilterLoad;
-        private System.Windows.Forms.Button runBreedingBot;
-        private System.Windows.Forms.TabControl miscTabs;
         private System.Windows.Forms.RadioButton radioDaycare;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }

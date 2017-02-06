@@ -38,15 +38,13 @@ namespace ntrbase
         // New program-wide varialbes for PKHeX.Core
         public SaveFile SAV;
         public PKM pkm;
-        private string pkhexlang = "en";
+        private const string pkhexlang = "en";
         public byte[] fileinfo;
         public byte[] iteminfo;
 
-        // Program-wide variables
-        public enum GameType { None, X, Y, OR, AS, SM };
-        public bool gen7;
-        public int MAXSPECIES;
+        // Program constants
         public uint BOXES;
+        public int MAXSPECIES;
         public const int BOXSIZE = 30;
         public const int POKEBYTES = 232;
         public const string FOLDERPOKE = "Pokemon";
@@ -58,39 +56,16 @@ namespace ntrbase
 
         // Variables for update checking
         internal GitHubClient Github;
-        public string updateURL = null;
+        private string updateURL = null;
 
         // Variables for cloning
         public byte[] selectedCloneData = new byte[POKEBYTES];
         public bool selectedCloneValid = false;
 
-        // Variables for bots
-        public bool botWorking = false;
-        public bool botStop = false;
-        public int botnumber = -1;
-        public int botState = 0;
-        public static readonly int timeout = 10;
-        public uint lastmemoryread;
-        public string lastlog;
-        private string filterstr;
-        public int currentfilter = 0;
-        public static readonly string readerror = "An error has ocurred while reading data from your 3DS RAM, please check connection and try again.";
-        public static readonly string toucherror = "An error has ocurred while sending a Touch Screen command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
-        public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
-        public static readonly string stickerror = "An error has ocurred while sending a Control Stick command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
-        public static readonly string writeerror = "An error has ocurred while writting data to your 3DS RAM, please check connection and try again.";
-        private WonderTradeBot6 WTBot6;
-        private WonderTradeBot7 WTBot7;
-        private BreedingBot6 BreedBot6;
-        private BreedingBot7 BreedBot7;
-        private SoftResetbot6 SRBot6;
-        private SoftResetbot7 SRBot7;
-
         //Game information
         public int pid;
         public byte lang;
         public string pname;
-        public GameType game = GameType.None;
         //Offsets for basic data
         public uint langoff;
         //Offsets for Pokemon sources
@@ -109,17 +84,34 @@ namespace ntrbase
         Control[] enableWhenConnected7 = new Control[] { };
         Control[] gen6onlyControls = new Control[] { };
 
-        // Tooltips for TSV and ESV
-        public ToolTip ToolTipTSVpoke = new ToolTip();
-        public ToolTip ToolTipPSV = new ToolTip();
-
         // Log handling
         public delegate void LogDelegate(string l);
         public LogDelegate delAddLog;
 
+        // Bot varialges
+        public bool botWorking;
+        public string lastlog;
+
         #endregion Class variables
 
         #region Main window
+
+        public MainForm()
+        {
+            Program.ntrClient.DataReady += handleDataReady;
+            Program.ntrClient.Connected += connectCheck;
+            Program.ntrClient.InfoReady += getGame;
+            delAddLog = new LogDelegate(Addlog);
+            InitializeComponent();
+
+            enableWhenConnected = new Control[] { };
+
+            enableWhenConnected7 = new Control[] { };
+
+            gen6onlyControls = new Control[] { };
+
+            disableControls();
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -131,23 +123,6 @@ namespace ntrbase
             host.Text = Settings.Default.IP;
             callIP();
             host.Focus();
-        }
-
-        public MainForm()
-        {
-            Program.ntrClient.DataReady += handleDataReady;
-            Program.ntrClient.Connected += connectCheck;
-            Program.ntrClient.InfoReady += getGame;
-            delAddLog = new LogDelegate(Addlog);
-            InitializeComponent();
-
-            enableWhenConnected = new Control[] {  };
-
-            enableWhenConnected7 = new Control[] { WTcollectFC };
-
-            gen6onlyControls = new Control[] { radioBattleBox, orgbox_pos, daycare_select };
-
-            disableControls();
         }
 
         private async void checkUpdate()
@@ -228,7 +203,7 @@ namespace ntrbase
 
         private void enableControls()
         {
-            if (gen7)
+            if (SAV.Generation == 7)
             {
                 foreach (Control c in enableWhenConnected7)
                 {
@@ -254,7 +229,7 @@ namespace ntrbase
 
         private void disableControls()
         {
-            if (gen7)
+            if (SAV.Generation == 7)
             {
                 foreach (Control c in enableWhenConnected7)
                 {
@@ -280,7 +255,7 @@ namespace ntrbase
         public void Addlog(string l)
         {
             lastlog = l;
-            if (l.Contains("Server disconnected") && !botWorking && game != GameType.None)
+            if (l.Contains("Server disconnected") && !botWorking && SAV.Version == GameVersion.Invalid)
             {
                 PerformDisconnect();
             }
@@ -325,7 +300,8 @@ namespace ntrbase
         {
             disconnectTimer.Enabled = false;
             Program.ntrClient.disconnect();
-            game = GameType.None;
+            SAV = SaveUtil.getBlankSAV(GameVersion.Invalid, "PKMN-NTR");
+            pkm = new PK7();
         }
 
         [Conditional("DEBUG")]
@@ -336,10 +312,6 @@ namespace ntrbase
             host.Text = sr.ReadLine();
             sr.Close();
         }
-
-        #endregion window
-
-        #region Functions
 
         static void handleDataReady(object sender, DataReadyEventArgs e)
         { // We move data processing to a separate thread. This way even if processing takes a long time, the netcode doesn't hang.
@@ -357,10 +329,6 @@ namespace ntrbase
         {
             Program.gCmdWindow.BeginInvoke(Program.gCmdWindow.delAddLog, msg);
         }
-
-        #endregion Functions
-
-        #region Connection
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
@@ -382,7 +350,8 @@ namespace ntrbase
         public void PerformDisconnect()
         {
             Program.scriptHelper.disconnect();
-            game = GameType.None;
+            SAV = SaveUtil.getBlankSAV(GameVersion.Invalid, "PKMN-NTR");
+            pkm = new PK7();
             buttonConnect.Text = "Connect";
             buttonConnect.Enabled = true;
             buttonDisconnect.Enabled = false;
@@ -405,8 +374,6 @@ namespace ntrbase
             InfoReadyEventArgs args = (InfoReadyEventArgs)e;
             if (args.info.Contains("kujira-1")) // X
             {
-                game = GameType.X;
-                gen7 = false;
                 string log = args.info;
                 pname = ", pname: kujira-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -423,8 +390,6 @@ namespace ntrbase
             }
             else if (args.info.Contains("kujira-2")) // Y
             {
-                game = GameType.Y;
-                gen7 = false;
                 string log = args.info;
                 pname = ", pname: kujira-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -441,8 +406,6 @@ namespace ntrbase
             }
             else if (args.info.Contains("sango-1")) // Omega Ruby
             {
-                game = GameType.OR;
-                gen7 = false;
                 string log = args.info;
                 pname = ", pname:  sango-1";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -461,8 +424,6 @@ namespace ntrbase
             }
             else if (args.info.Contains("sango-2")) // Alpha Sapphire
             {
-                game = GameType.AS;
-                gen7 = false;
                 string log = args.info;
                 pname = ", pname:  sango-2";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -480,7 +441,6 @@ namespace ntrbase
             }
             else if (args.info.Contains("niji_loc")) // Sun/Moon
             {
-                game = GameType.SM;
                 string log = args.info;
                 pname = ", pname: niji_loc";
                 string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
@@ -502,8 +462,6 @@ namespace ntrbase
             // Clear tabs to avoid writting wrong data
             if (!botWorking)
             {
-                Delg.SetSelectedIndex(typeLSR, -1);
-                Delg.SetSelectedIndex(modeBreed, -1);
                 pkm = SAV.BlankPKM;
             }
 
@@ -555,7 +513,7 @@ namespace ntrbase
             Delg.SetText(radioDaycare, "Nursery");
             Delg.SetMaximum(Num_CDBox, BOXES);
             Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
-            
+
             //Apply connection patch
             Task<bool> Patch = Program.helper.waitNTRwrite(LookupTable.nfcOff, LookupTable.nfcVal, pid);
             if (!(await Patch))
@@ -564,7 +522,7 @@ namespace ntrbase
             }
         }
 
-        #endregion Connection
+        #endregion Main Window
 
         #region R/W trainer data
 
@@ -622,68 +580,7 @@ namespace ntrbase
                     break;
             }
         }
-
-        // Item data handling
-        //public void dumpItems()
-        //{
-        //    iteminfo = null;
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[LookupTable.itemsSize], handleItems, null);
-        //    waitingForData.Add(Program.scriptHelper.data(LookupTable.itemsOff, LookupTable.itemsSize, pid), myArgs);
-        //}
-
-        //public void handleItems(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    iteminfo = args.data;
-        //    Array.Copy(args.data, 0, SAV.Data, LookupTable.itemsLocation, LookupTable.itemsSize);
-        //}
-
-        //// Language handling
-        //public void dumpLang()
-        //{
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x01], handleLangData, null);
-        //    waitingForData.Add(Program.scriptHelper.data(langoff, 0x01, pid), myArgs);
-        //}
-
-        //public void handleLangData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-
-        //    byte langbyte = args.data[0];
-        //    int i = 0;
-        //    switch (langbyte)
-        //    {
-        //        case 1: i = 0; break;
-        //        case 2: i = 1; break;
-        //        case 3: i = 2; break;
-        //        case 4: i = 3; break;
-        //        case 5: i = 4; break;
-        //        case 7: i = 5; break;
-        //        case 8: i = 6; break;
-        //        case 9: i = 7; break;
-        //        case 10: i = 8; break;
-        //        default: i = -1; break;
-        //    }
-        //    Delg.SetSelectedIndex(Lang, i);
-        //}
-
-        //private void pokeLang_Click(object sender, EventArgs e)
-        //{
-        //    switch (Lang.SelectedIndex)
-        //    {
-        //        case 0: lang = 0x01; break;
-        //        case 1: lang = 0x02; break;
-        //        case 2: lang = 0x03; break;
-        //        case 3: lang = 0x04; break;
-        //        case 4: lang = 0x05; break;
-        //        case 5: lang = 0x07; break;
-        //        case 6: lang = 0x08; break;
-        //        case 7: lang = 0x09; break;
-        //        case 8: lang = 0x0A; break;
-        //    }
-        //    Program.scriptHelper.writebyte(langoff, lang, pid);
-        //}
-
+        
         #endregion R/W trainer data
 
         #region R/W pokémon data
@@ -715,7 +612,7 @@ namespace ntrbase
             }
             else if (radioTrade.Checked)
             {
-                if (!gen7)
+                if (SAV.Generation == 6)
                 {
                     DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleTradeData, null);
                     waitingForData.Add(Program.scriptHelper.data(tradeOff, 0x1FFFF, pid), myArgs);
@@ -729,7 +626,7 @@ namespace ntrbase
             }
             else if (radioOpponent.Checked)
             {
-                if (!gen7)
+                if (SAV.Generation == 6)
                 {
                     DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
                     waitingForData.Add(Program.scriptHelper.data(opponentOff, 0x1FFFF, pid), myArgs);
@@ -831,13 +728,13 @@ namespace ntrbase
             byte[] relativePattern = null;
             uint offsetAfter = 0;
 
-            if (game == GameType.X || game == GameType.Y)
+            if (SAV.Version == GameVersion.X || SAV.Version == GameVersion.Y)
             {
                 relativePattern = new byte[] { 0x08, 0x1C, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD8, 0xBE, 0x59 };
                 offsetAfter += 98;
             }
 
-            if (game == GameType.OR || game == GameType.AS)
+            if (SAV.Version == GameVersion.OR || SAV.Version == GameVersion.AS)
             {
                 relativePattern = new byte[] { 0x08, 0x1E, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9C, 0xE8, 0x5D };
                 offsetAfter += 98;
@@ -865,12 +762,12 @@ namespace ntrbase
             byte[] relativePattern = null;
             uint offsetAfter = 0;
 
-            if (game == GameType.X || game == GameType.Y)
+            if (SAV.Version == GameVersion.X || SAV.Version == GameVersion.Y)
             {
                 relativePattern = new byte[] { 0x60, 0x75, 0xC6, 0x08, 0xDC, 0xA8, 0xC7, 0x08, 0xD0, 0xB6, 0xC7, 0x08 };
                 offsetAfter = 637;
             }
-            if (game == GameType.OR || game == GameType.AS)
+            if (SAV.Version == GameVersion.OR || SAV.Version == GameVersion.AS)
             {
                 relativePattern = new byte[] { 0x60, 0xE7, 0xC6, 0x08, 0x6C, 0xEC, 0xC6, 0x08, 0xE0, 0x1F, 0xC8, 0x08, 0x00, 0x39, 0xC8, 0x08 };
                 offsetAfter = 673;
@@ -1047,320 +944,6 @@ namespace ntrbase
             }
         }
 
-        //// Clone pokémon
-        //private void cloneDoIt_Click(object sender, EventArgs e)
-        //{
-        //    uint offset = boxOff + cloneGetBoxIndexFrom() * POKEBYTES;
-        //    uint mySeq = Program.scriptHelper.data(offset, POKEBYTES, pid);
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handleCloneData, null);
-        //    waitingForData.Add(mySeq, myArgs);
-        //}
-
-        //private void handleCloneData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-        //    writePokemonToBox(args.data, cloneGetBoxIndexTo(), cloneGetCopies());
-        //}
-
-        //private uint cloneGetCopies()
-        //{
-        //    return decimal.ToUInt32(cloneCopiesNo.Value);
-        //}
-
-        //private uint cloneGetBoxIndexTo()
-        //{
-        //    return decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
-        //}
-
-        //private uint cloneGetBoxIndexFrom()
-        //{
-        //    return decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
-        //}
-
-        //private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
-        //{
-        //    cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
-        //}
-
-        //private void cloneSlotTo_ValueChanged(object sender, EventArgs e)
-        //{
-        //    cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
-        //}
-
-        //// Write pokémon from file
-        //private void writeBrowse_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        OpenFileDialog selectWriteDialog = new OpenFileDialog();
-        //        selectWriteDialog.Title = "Select an EKX/PKX file";
-        //        if (gen7)
-        //        {
-        //            selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
-        //        }
-        //        else
-        //        {
-        //            selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
-        //        }
-        //        string path = System.Windows.Forms.@Application.StartupPath + "\\Pokemon";
-        //        selectWriteDialog.InitialDirectory = path;
-        //        if (selectWriteDialog.ShowDialog() == DialogResult.OK)
-        //        {
-        //            selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-
-        //private int readPokemonFromFile(string filename, out byte[] result)
-        //{ //Returns 0 on success, other values on failure
-        //    string extension = Path.GetExtension(filename);
-        //    result = new byte[POKEBYTES];
-
-        //    // Test if correct generation format
-        //    if ((gen7 && (extension == ".pk7" || extension == ".ek7")) || (!gen7 && (extension == ".pk6" || extension == ".ek6")))
-        //    {
-        //        bool isEncrypted = false;
-        //        if (extension == ".pk6" || extension == ".pk7")
-        //        {
-        //            isEncrypted = false;
-        //        }
-        //        else if (extension == ".ek6" || extension == ".ek7")
-        //        {
-        //            isEncrypted = true;
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
-        //            return 1;
-        //        }
-
-        //        byte[] tmpBytes = File.ReadAllBytes(filename);
-        //        if (tmpBytes.Length == 260 || tmpBytes.Length == POKEBYTES)
-        //        { // All OK, commit
-        //            if (isEncrypted)
-        //            {
-        //                tmpBytes.CopyTo(result, 0);
-        //            }
-        //            else
-        //            {
-        //                PKX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
-        //            return 2;
-        //        }
-        //        return 0;
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("This program does not support conversion of pokémon files between generations.", "Incorrect Generation Number");
-        //        return 3;
-        //    }
-        //}
-
-        //private void writeDoIt_Click(object sender, EventArgs e)
-        //{
-        //    if (!selectedCloneValid)
-        //    {
-        //        MessageBox.Show("No Pokemon selected!", "Error");
-        //        return;
-        //    }
-        //    int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
-        //    if (ret > 0)
-        //    {
-        //        MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
-        //    }
-        //    else if (ret <= 0)
-        //    {
-        //        if (writeAutoInc.Checked)
-        //        {
-        //            writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
-        //        }
-        //    }
-        //}
-
-        //private int writePokemonToBox(byte[] data, uint boxFrom, uint count)
-        //{ //Returns 0 on success, positive value represents how many copies could not be written.
-        //    if (data.Length != POKEBYTES)
-        //    {
-        //        return -1;
-        //    }
-
-        //    int ret = 0;
-        //    if (boxFrom + count > BOXES * BOXSIZE)
-        //    {
-        //        uint newCount = BOXES * BOXSIZE - boxFrom;
-        //        ret = (int)(count - newCount);
-        //        count = newCount;
-        //    }
-
-        //    byte[] dataToWrite = new byte[count * POKEBYTES];
-        //    for (int i = 0; i < count; i++)
-        //    {
-        //        data.CopyTo(dataToWrite, i * POKEBYTES);
-        //    }
-        //    uint offset = boxOff + boxFrom * POKEBYTES;
-        //    Program.scriptHelper.write(offset, dataToWrite, pid);
-        //    return ret;
-        //}
-
-        //void writeTab_DragEnter(object sender, DragEventArgs e)
-        //{
-        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
-        //    {
-        //        e.Effect = DragDropEffects.Copy;
-        //    }
-        //}
-
-        //void writeTab_DragDrop(object sender, DragEventArgs e)
-        //{
-        //    string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-        //    if (files.Length <= 0)
-        //    {
-        //        return;
-        //    }
-        //    int fails = 0;
-        //    foreach (string filename in files)
-        //    {
-        //        byte[] data = new byte[POKEBYTES];
-        //        if (readPokemonFromFile(filename, out data) == 0)
-        //        {
-        //            int ret = writePokemonToBox(data, writeGetBoxIndex(), writeGetCopies());
-        //            if (ret > 0)
-        //            {
-        //                fails += ret;
-        //            }
-        //            else if (ret < 0)
-        //            {
-        //                return;
-        //            }
-        //        }
-
-        //        if (writeAutoInc.Checked)
-        //        {
-        //            writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
-        //        }
-        //    }
-        //    if (fails > 0)
-        //    {
-        //        MessageBox.Show(fails + " write(s) failed because end of boxes was reached.", "Error");
-        //    }
-        //}
-
-        //private uint writeGetCopies()
-        //{
-        //    return decimal.ToUInt32(writeCopiesNo.Value);
-        //}
-
-        //private uint writeGetBoxIndex()
-        //{
-        //    return decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
-        //}
-
-        //private void writeSetBoxIndex(uint index)
-        //{
-        //    if (index >= BOXES * BOXSIZE)
-        //    {
-        //        index = BOXES * BOXSIZE - 1;
-        //    }
-        //    uint box = index / BOXSIZE;
-        //    uint slot = index % BOXSIZE;
-        //    Delg.SetValue(writeBoxTo, box + 1);
-        //    Delg.SetValue(writeSlotTo, slot + 1);
-        //}
-
-        //private void writeBoxTo_ValueChanged(object sender, EventArgs e)
-        //{
-        //    writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
-        //}
-
-        //private void writeSlotTo_ValueChanged(object sender, EventArgs e)
-        //{
-        //    writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
-        //}
-
-        //// Delete pokémon
-        //private void delPkm_Click(object sender, EventArgs e)
-        //{
-        //    uint offset = boxOff + deleteGetIndex() * POKEBYTES;
-        //    uint size = POKEBYTES * deleteGetAmount();
-        //    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[size], handleDeleteData, null);
-        //    uint mySeq = Program.scriptHelper.data(offset, size, pid);
-        //    waitingForData.Add(mySeq, myArgs);
-        //}
-
-        //private void handleDeleteData(object args_obj)
-        //{
-        //    DataReadyWaiting args = (DataReadyWaiting)args_obj;
-
-        //    if (deleteKeepBackup.Checked)
-        //    {
-        //        try
-        //        {
-        //            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
-        //            FileInfo folder = new FileInfo(folderPath);
-        //            folder.Directory.Create();
-        //            PKM validator = SAV.BlankPKM;
-        //            for (int i = 0; i < args.data.Length; i += POKEBYTES)
-        //            {
-        //                validator.Data = PKX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
-        //                if (validator.Species == 0)
-        //                {
-        //                    continue;
-        //                }
-        //                string fileName;
-        //                if (gen7)
-        //                {
-        //                    fileName = folderPath + "backup.pk7";
-        //                }
-        //                else
-        //                {
-        //                    fileName = folderPath + "backup.pk6";
-        //                }
-        //                writePokemonToFile(validator.Data, fileName);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //        }
-        //    }
-        //    if (gen7)
-        //    {
-        //        writePokemonToBox(LookupTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
-        //    }
-        //    else
-        //    {
-        //        writePokemonToBox(LookupTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
-        //    }
-        //}
-
-        //private uint deleteGetAmount()
-        //{
-        //    return decimal.ToUInt32(deleteAmount.Value);
-        //}
-
-        //private uint deleteGetIndex()
-        //{
-        //    return decimal.ToUInt32((deleteBox.Value - 1) * BOXSIZE + deleteSlot.Value - 1);
-        //}
-
-        //private void deleteBox_ValueChanged(object sender, EventArgs e)
-        //{
-        //    deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
-        //}
-
-        //private void deleteSlot_ValueChanged(object sender, EventArgs e)
-        //{
-        //    deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
-        //}
-
         #endregion R/W pokémon data
 
         #region GUI handling
@@ -1404,7 +987,7 @@ namespace ntrbase
                 boxDump.Minimum = 1;
                 boxDump.Maximum = 2;
                 slotDump.Minimum = 1;
-                if (game == GameType.OR || game == GameType.AS) // Handle ORAS Battle Resort Daycare
+                if (SAV.Version == GameVersion.OR || SAV.Version == GameVersion.AS) // Handle ORAS Battle Resort Daycare
                 {
                     slotDump.Maximum = 4;
                 }
@@ -1494,7 +1077,7 @@ namespace ntrbase
                 BoxLabel.Text = "Opp.:";
                 boxDump.Value = ((LastBoxSlot)radioOpponent.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioOpponent.Tag).slot;
-                if (gen7)
+                if (SAV.Generation == 7)
                 {
                     DumpInstructionsBtn.Visible = true;
                 }
@@ -1503,7 +1086,7 @@ namespace ntrbase
             {
                 radioOpponent.Tag = new LastBoxSlot { box = boxDump.Value, slot = slotDump.Value };
                 BoxLabel.Text = "Box:";
-                if (gen7)
+                if (SAV.Generation == 7)
                 {
                     DumpInstructionsBtn.Visible = false;
                 }
@@ -1578,21 +1161,6 @@ namespace ntrbase
             }
         }
 
-        // Roaming soft-reset
-        private void typeLSR_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (gen7 && (typeLSR.SelectedIndex == 4 || typeLSR.SelectedIndex == 5))
-            {
-                Delg.SetVisible(label8, true);
-                Delg.SetVisible(sr_Species, true);
-            }
-            else
-            {
-                Delg.SetVisible(label8, false);
-                Delg.SetVisible(sr_Species, false);
-            }
-        }
-
         #endregion GUI handling
 
         #region Sub-forms
@@ -1662,7 +1230,7 @@ namespace ntrbase
         private void Tools_PokeDigger_Click(object sender, EventArgs e)
         {
             Tool_Start();
-            new PokeDigger(pid, game != GameType.None).Show();
+            //new PokeDigger(pid, game != GameType.None).Show();
         }
 
         private void DumpInstructionsBtn_Click(object sender, EventArgs e)
@@ -1674,1127 +1242,6 @@ namespace ntrbase
         }
 
         #endregion Sub-forms
-
-        #region Bots
-
-        // General Bot functions
-        private void stopBotButton_Click(object sender, EventArgs e)
-        {
-            switch (botnumber)
-            {
-                case 1: // Breeding bot
-                    if (gen7)
-                    {
-                        BreedBot7.botstop = true;
-                    }
-                    else
-                    {
-                        BreedBot6.botstop = true;
-                    }
-                    break;
-                case 2: // Soft-reset bot
-                    if (gen7)
-                    {
-                        SRBot7.botstop = true;
-                    }
-                    else
-                    {
-                        SRBot6.botstop = true;
-                    }
-                    break;
-                case 3: // Wonder Trade bot
-                    if (gen7)
-                    {
-                        WTBot7.botstop = true;
-                    }
-                    else
-                    {
-                        WTBot6.botstop = true;
-                    }
-                    break;
-            }
-            addtoLog("Bot: Stopping bot, please wait");
-            stopBotButton.Enabled = false;
-            botStop = true;
-        }
-
-        public void HandleRAMread(uint value)
-        {
-            addtoLog("NTR: Read sucessful - 0x" + value.ToString("X8"));
-            Delg.SetText(readResult, "0x" + value.ToString("X8"));
-        }
-
-        public void addwaitingForData(uint newkey, DataReadyWaiting newvalue)
-        {
-            waitingForData.Add(newkey, newvalue);
-        }
-
-        public void updateDumpBoxes(int box, int slot)
-        {
-            Delg.SetValue(boxDump, box + 1);
-            Delg.SetValue(slotDump, slot + 1);
-        }
-
-        private void startBot()
-        {
-            botWorking = true;
-            botStop = false;
-            txtLog.Clear();
-            disableControls();
-            timer1.Interval = 500;
-            Delg.SetEnabled(stopBotButton, true);
-        }
-
-        private void finishBot()
-        {
-            botWorking = false;
-            botnumber = -1;
-            enableControls();
-            timer1.Interval = 1000;
-            Delg.SetEnabled(stopBotButton, false);
-        }
-
-        // Filter handlers
-        public bool FilterCheck(DataGridView filters)
-        {
-            if (filters.Rows.Count > 0)
-            {
-                currentfilter = 0;
-                int failedtests = 0;
-                int perfectIVs = 0;
-                foreach (DataGridViewRow row in filters.Rows)
-                {
-                    currentfilter++;
-                    addtoLog("Filter: Analyze pokémon using filter # " + currentfilter);
-                    failedtests = 0;
-
-                    // Test shiny
-                    //filterstr = " (PSV: " + getPSV(pkm.PID).ToString("D4") + " TSV: " + getTSV(TIDNum.Value, SIDNum.Value).ToString("D4") + ")";
-                    if ((int)row.Cells[0].Value == 1)
-                    {
-                        if (pkm.IsShiny)
-                        {
-                            addtoLog("Filter: Shiny - PASS" + filterstr);
-                        }
-                        else
-                        {
-                            addtoLog("Filter: Shiny - FAIL" + filterstr);
-                            failedtests++;
-                        }
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Shiny - Don't care" + filterstr);
-                    }
-
-                    // Test nature
-                    //filterstr = " (" + LookupTable.getNature(pkm.Nature) + " -> " + LookupTable.getNature((int)row.Cells[1].Value) + ")";
-                    if ((int)row.Cells[1].Value < 0 || pkm.Nature == (int)row.Cells[1].Value)
-                    {
-                        addtoLog("Filter: Nature - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Nature - FAIL" + filterstr);
-                        failedtests++;
-                    }
-
-                    // Test Ability
-                    if (gen7)
-                    {
-                        //filterstr = " (" + LookupTable.getAbil7(pkm.Ability) + " -> " + LookupTable.getAbil7((int)row.Cells[2].Value) + ")";
-                    }
-                    else
-                    {
-                        //filterstr = " (" + LookupTable.getAbil6(pkm.Ability) + " -> " + LookupTable.getAbil6((int)row.Cells[2].Value) + ")";
-                    }
-                    if ((int)row.Cells[2].Value < 0 || (pkm.Ability - 1) == (int)row.Cells[2].Value)
-                    {
-                        addtoLog("Filter: Ability - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Ability - FAIL" + filterstr);
-                        failedtests++;
-                    }
-
-                    // Test Hidden Power
-                    //filterstr = " (" + LookupTable.getHPName(pkm.HPType) + " -> " + LookupTable.getHPName((int)row.Cells[3].Value) + ")";
-                    if ((int)row.Cells[3].Value < 0 || pkm.HPType == (int)row.Cells[3].Value)
-                    {
-                        addtoLog("Filter: Hidden Power - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Hidden Power - FAIL" + filterstr);
-                        failedtests++;
-                    }
-
-                    // Test Gender
-                    //filterstr = " (" + LookupTable.getGender(pkm.Gender) + " -> " + LookupTable.getGender((int)row.Cells[4].Value) + ")";
-                    if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == pkm.Gender)
-                    {
-                        addtoLog("Filter: Gender - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Gender - FAIL" + filterstr);
-                        failedtests++;
-                    }
-
-                    // Test HP
-                    if (IVCheck((int)row.Cells[5].Value, pkm.IV_HP, (int)row.Cells[6].Value))
-                    {
-                        addtoLog("Filter: Hit Points IV - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Hit Points IV - FAIL" + filterstr);
-                        failedtests++;
-                    }
-                    if (pkm.IV_HP == 31)
-                    {
-                        perfectIVs++;
-                    }
-
-                    // Test Atk
-                    if (IVCheck((int)row.Cells[7].Value, pkm.IV_ATK, (int)row.Cells[8].Value))
-                    {
-                        addtoLog("Filter: Attack IV - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Attack IV - FAIL" + filterstr);
-                        failedtests++;
-                    }
-                    if (pkm.IV_ATK == 31)
-                    {
-                        perfectIVs++;
-                    }
-
-                    // Test Def
-                    if (IVCheck((int)row.Cells[9].Value, pkm.IV_DEF, (int)row.Cells[10].Value))
-                    {
-                        addtoLog("Filter: Defense IV - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Defense IV - FAIL" + filterstr);
-                        failedtests++;
-                    }
-                    if (pkm.IV_DEF == 31)
-                    {
-                        perfectIVs++;
-                    }
-
-                    // Test SpA
-                    if (IVCheck((int)row.Cells[11].Value, pkm.IV_SPA, (int)row.Cells[12].Value))
-                    {
-                        addtoLog("Filter: Special Attack IV - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Special Attack IV - FAIL" + filterstr);
-                        failedtests++;
-                    }
-                    if (pkm.IV_SPA == 31)
-                    {
-                        perfectIVs++;
-                    }
-
-                    // Test SpD
-                    if (IVCheck((int)row.Cells[13].Value, pkm.IV_SPD, (int)row.Cells[14].Value))
-                    {
-                        addtoLog("Filter: Special Defense IV - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Special Defense IV - FAIL" + filterstr);
-                        failedtests++;
-                    }
-                    if (pkm.IV_SPD == 31)
-                    {
-                        perfectIVs++;
-                    }
-
-                    // Test Spe
-                    if (IVCheck((int)row.Cells[15].Value, pkm.IV_SPE, (int)row.Cells[16].Value))
-                    {
-                        addtoLog("Filter: Speed IV - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Speed IV - FAIL" + filterstr);
-                        failedtests++;
-                    }
-                    if (pkm.IV_SPE == 31)
-                    {
-                        perfectIVs++;
-                    }
-
-                    // Test Perfect IVs
-                    if (IVCheck((int)row.Cells[17].Value, perfectIVs, (int)row.Cells[18].Value))
-                    {
-                        addtoLog("Filter: Perfect IVs - PASS" + filterstr);
-                    }
-                    else
-                    {
-                        addtoLog("Filter: Perfect IVs - FAIL" + filterstr);
-                        failedtests++;
-                    }
-                    if (failedtests == 0)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public bool IVCheck(int refiv, int actualiv, int logic)
-        {
-            switch (logic)
-            {
-                case 0: // Greater or equal
-                    filterstr = " (" + actualiv + " >= " + refiv + ")";
-                    if (actualiv >= refiv)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                case 1: // Greater
-                    filterstr = " (" + actualiv + " > " + refiv + ")";
-                    if (actualiv > refiv)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                case 2: // Equal
-                    filterstr = " (" + actualiv + " = " + refiv + ")";
-                    if (actualiv == refiv)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                case 3: // Less
-                    filterstr = " (" + actualiv + " < " + refiv + ")";
-                    if (actualiv < refiv)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                case 4: // Less or equal
-                    filterstr = " (" + actualiv + " <= " + refiv + ")";
-                    if (actualiv <= refiv)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                case 5: // Different
-                    filterstr = " (" + actualiv + " != " + refiv + ")";
-                    if (actualiv != refiv)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                case 6: // Even
-                    filterstr = " (" + actualiv + " -> Even)";
-                    if (actualiv % 2 == 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                case 7: // Odd
-                    filterstr = " (" + actualiv + " -> Odd)";
-                    if (actualiv % 2 == 1)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                default:
-                    return true;
-            }
-        }
-        
-        private void bFilterLoad_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                string folderPath = "";
-                (new FileInfo(folderPath)).Directory.Create();
-                OpenFileDialog openFileDialog1 = new OpenFileDialog();
-                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-                openFileDialog1.Title = "Select a filter set";
-                openFileDialog1.InitialDirectory = folderPath;
-                openFileDialog1.ShowDialog();
-                if (openFileDialog1.FileName != "")
-                {
-                    filterBreeding.Rows.Clear();
-                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                    foreach (int[] row in rows)
-                    {
-                        filterBreeding.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
-                    }
-                    MessageBox.Show("Filter Set loaded correctly.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void srFilterLoad_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                string folderPath = "";
-                (new FileInfo(folderPath)).Directory.Create();
-                OpenFileDialog openFileDialog1 = new OpenFileDialog();
-                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
-                openFileDialog1.Title = "Select a filter set";
-                openFileDialog1.InitialDirectory = folderPath;
-                openFileDialog1.ShowDialog();
-                if (openFileDialog1.FileName != "")
-                {
-                    filtersSoftReset.Rows.Clear();
-                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
-                    foreach (int[] row in rows)
-                    {
-                        filtersSoftReset.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
-                    }
-                    MessageBox.Show("Filter set loaded correctly");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        // Wonder Trade bot
-        private async void RunWTbot_Click_1(object sender, EventArgs e)
-        {
-            // Show warning
-            DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + WTtradesNo.Value + " pokémon, starting from the slot " + WTSlot.Value + " of box " + WTBox.Value + ". Remember to read the wiki for this bot in GitHub before starting.\r\n\r\nDo you want to continue?", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.OK && WTtradesNo.Value > 0)
-            {
-                startBot();
-                botnumber = 3;
-                radioBoxes.Checked = true;
-
-                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERWT + "\\";
-                (new FileInfo(folderPath)).Directory.Create();
-
-                int wtmode = 0;
-                if (WTsource_Boxes.Checked)
-                {
-                    wtmode = 1;
-                }
-                else if (WTsource_Folder.Checked)
-                {
-                    wtmode = 2;
-                }
-                else if (WTsource_Random.Checked)
-                {
-                    wtmode = 3;
-                }
-
-                int wtafter = 0;
-                if (WTafter_DoNothing.Checked)
-                {
-                    wtafter = 1;
-                }
-                else if (WTafter_Restore.Checked)
-                {
-                    wtafter = 2;
-                }
-                else if (WTafter_Delete.Checked)
-                {
-                    wtafter = 3;
-                }
-
-                Task<int> Bot;
-                if (gen7)
-                {
-                    WTBot7 = new WonderTradeBot7((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, WTcollectFC.Checked, wtmode, WT_RunEndless.Checked, WTafter_Dump.Checked, wtafter);
-                    Bot = WTBot7.RunBot();
-                }
-                else
-                {
-                    bool oras;
-                    if (game == GameType.X || game == GameType.Y)
-                    {
-                        oras = false;
-                    }
-                    else
-                    {
-                        oras = true;
-                    }
-                    WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras, wtmode, WT_RunEndless.Checked, wtafter, WTafter_Dump.Checked);
-                    Bot = WTBot6.RunBot();
-                }
-                int result = await Bot;
-                if (botStop)
-                {
-                    addtoLog("Bot: STOP Wonder Trade bot by user command");
-                    result = 8;
-                }
-                switch (result)
-                {
-                    case 0: // General finish message
-                        MessageBox.Show("Bot finished sucessfully", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case 1: // PSS error
-                        MessageBox.Show("Please go to the PSS menu and try again.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        break;
-                    case 2: // Read error
-                        MessageBox.Show(readerror, "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 3: // Festival plaza level-up
-                        MessageBox.Show("Bot finished due level up in Festival Plaza", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        break;
-                    case 4: // Communication error
-                        MessageBox.Show("A communication error has ocurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 6: // Touch screen error
-                        MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 7: // Button error
-                        MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 8: // User stop
-                        MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    default: // General error message
-                        MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
-                finishBot();
-            }
-        }
-
-        public void updateWTslots(int box, int slot, int quantity)
-        {
-            Delg.SetValue(WTBox, box + 1);
-            Delg.SetValue(WTSlot, slot + 1);
-            Delg.SetValue(WTtradesNo, quantity);
-        }
-
-        //public void updateFCfields(uint totalFC, uint currentFC)
-        //{
-        //    Delg.SetValue(milesNum, currentFC);
-        //    Delg.SetValue(totalFCNum, totalFC);
-        //}
-
-        private void WTsource_Folder_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERWT + "\\";
-                (new FileInfo(folderPath)).Directory.Create();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        // Soft-reset bot
-        private async void RunLSRbot_Click_1(object sender, EventArgs e)
-        {
-            string typemessage;
-            string resumemessage;
-            botWorking = true; // Supress warning messages
-            if (gen7)
-            {
-                resumemessage = "No resume support for Gen 7";
-                switch (typeLSR.SelectedIndex)
-                {
-                    case 0:
-                        typemessage = "Event - Make sure you are in front of the man in the Pokémon Center. Also, you must only have one pokémon in your party.";
-                        radioParty.Checked = true;
-                        Delg.SetValue(boxDump, 1);
-                        Delg.SetValue(slotDump, 2);
-                        break;
-                    case 1:
-                        typemessage = "Type: Null - Make sure you are in front of Gladion at the Aether Paradise. Also, you must only have one pokémon in your party.\r\n\r\nThis mode can also be used for event pokémon.";
-                        radioParty.Checked = true;
-                        Delg.SetValue(boxDump, 1);
-                        Delg.SetValue(slotDump, 2);
-                        break;
-                    case 2:
-                        typemessage = "Tapus - Make sure you are in front of the statue at the ruins.";
-                        radioOpponent.Checked = true;
-                        Delg.SetValue(boxDump, 1);
-                        Delg.SetValue(slotDump, 1);
-                        break;
-                    case 3:
-                        typemessage = "Solgaleo/Lunala - Make sure you are in front of Solgaleo/Lunala at the Altar of the Sunne/Moone.";
-                        radioOpponent.Checked = true;
-                        Delg.SetValue(boxDump, 1);
-                        Delg.SetValue(slotDump, 1);
-                        break;
-                    case 4:
-                        typemessage = "Wild Pokémon - Make sure you are in the place where wild pokémon can appear. Also, check that Honey is the item at the top of your Item list and can be selected by just opening the menu and pressing A.";
-                        radioOpponent.Checked = true;
-                        Delg.SetValue(boxDump, 1);
-                        Delg.SetValue(slotDump, 1);
-                        break;
-                    case 5:
-                        typemessage = "Ultra Beast/Necrozma - Make sure you are in the place where the Ultra Beast / Necrozma appears. Also, check that Honey is the item at the top of your Item list and can be selected by just opening the menu and pressing A.";
-                        radioOpponent.Checked = true;
-                        Delg.SetValue(boxDump, 1);
-                        Delg.SetValue(slotDump, 1);
-                        break;
-                    default:
-                        typemessage = "No type - Select one type of soft-reset and try again.";
-                        resumemessage = "";
-                        break;
-                }
-            }
-            else
-            {
-                switch (typeLSR.SelectedIndex)
-                {
-                    case 0:
-                        typemessage = "Regular - Make sure you are in front of the pokémon.";
-                        resumemessage = "In front of pokémon, will press A to trigger start the battle";
-                        radioOpponent.Checked = true;
-                        break;
-                    case 1:
-                        typemessage = "Mirage Spot - Make sure you are in front of the hole.";
-                        resumemessage = "In front of hole, will press A to trigger dialog";
-                        radioOpponent.Checked = true;
-                        break;
-                    case 2:
-                        typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
-                        resumemessage = "In front of the lady, will press A to trigger dialog";
-                        radioParty.Checked = true;
-                        Delg.SetValue(boxDump, 1);
-                        Delg.SetValue(slotDump, 2);
-                        break;
-                    case 3:
-                        typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
-                        resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
-                        radioOpponent.Checked = true;
-                        break;
-                    case 4:
-                        typemessage = "Walk - Make sure you are one step south of the pokémon.";
-                        resumemessage = "One step south of the pokémon, will press up to trigger dialog";
-                        radioOpponent.Checked = true;
-                        break;
-                    case 5:
-                        typemessage = "Dialga/Palkia/Giratina - Make sure you are anywhere in Dewford Town and the Eon Flute is the only registered item.";
-                        resumemessage = "In Dewford Town, will press Y to activate the Eon Flute";
-                        radioOpponent.Checked = true;
-                        break;
-                    case 6:
-                        typemessage = "Tornadus/Thundurus/Landorus - Make sure you are anywhere in Route 120 and the Eon Flute is the only registered item.";
-                        resumemessage = "In Dewford Town, will press Y to activate the Eon Flute";
-                        radioOpponent.Checked = true;
-                        break;
-                    default:
-                        typemessage = "No type - Select one type of soft-reset and try again.";
-                        resumemessage = "";
-                        break;
-                }
-            }
-            botWorking = false;
-            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
-            if (dialogResult == DialogResult.OK && typeLSR.SelectedIndex >= 0)
-            {
-                startBot();
-                botnumber = 2;
-                Task<int> Bot;
-                if (gen7)
-                {
-                    SRBot7 = new SoftResetbot7(typeLSR.SelectedIndex, sr_Species.SelectedIndex);
-                    Bot = SRBot7.RunBot();
-                }
-                else
-                {
-                    bool oras;
-                    if (game == GameType.X || game == GameType.Y)
-                    {
-                        oras = false;
-                        if (typeLSR.SelectedIndex == 3 || typeLSR.SelectedIndex == 5 || typeLSR.SelectedIndex == 6)
-                        {
-                            MessageBox.Show("This bot only works in ORAS", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            finishBot();
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        oras = true;
-                    }
-                    SRBot6 = new SoftResetbot6(typeLSR.SelectedIndex, resumeLSR.Checked, oras);
-                    Bot = SRBot6.RunBot();
-                }
-                int result = await Bot;
-                if (botStop)
-                {
-                    addtoLog("Bot: STOP Soft-reset bot by user command");
-                    result = 8;
-                }
-                int totalresets;
-                if (gen7)
-                {
-                    totalresets = SRBot7.resetNo;
-                }
-                else
-                {
-                    totalresets = SRBot6.resetNo;
-                }
-                switch (result)
-                {
-                    case 0: // General finish message
-                        MessageBox.Show("Bot finished sucessfully", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case 1: // PSS error
-                        MessageBox.Show("Please go to the PSS menu and try again.", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        break;
-                    case 2: // Write error
-                        MessageBox.Show(writeerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        break;
-                    case 3: // Read error
-                        MessageBox.Show(readerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        break;
-                    case 4: // Finish
-                        MessageBox.Show("Finished, number of resets: " + totalresets, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case 6: // Touch screen error
-                        MessageBox.Show(toucherror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 7: // Button error
-                        MessageBox.Show(buttonerror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 8: // User stop
-                        MessageBox.Show("Bot stopped by user", "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    default: // General error message
-                        MessageBox.Show("An error has occurred.", "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
-                finishBot();
-            }
-        }
-
-        public async Task<long> ReadOpponent()
-        {
-            addtoLog("NTR: Read opponent pokémon data");
-            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
-            waitingForData.Add(Program.scriptHelper.data(0x8800000, 0x1FFFF, pid), myArgs);
-            int readcount = 0;
-            for (readcount = 0; readcount < timeout * 10; readcount++)
-            {
-                await Task.Delay(100);
-                if (lastlog.Contains("finished"))
-                {
-                    break;
-                }
-            }
-            if (readcount == timeout * 10)
-            {
-                addtoLog("NTR: Read failed");
-                return -2; // No data received
-            }
-            for (readcount = 0; readcount < 10; readcount++)
-            {
-                await Task.Delay(100);
-                if (pkm.ChecksumValid)
-                {
-                    break;
-                }
-            }
-            if (readcount == 10)
-            {
-                addtoLog("NTR: Read failed");
-                return -2; // No data received
-            }
-            else if (pkm.Species != 0)
-            {
-                addtoLog("NTR: Read sucessful - Checksum 0x" + pkm.Checksum.ToString("X8"));
-                return pkm.Checksum;
-            }
-            else // Empty slot
-            {
-                addtoLog("NTR: Empty pokémon data");
-                return -1;
-            }
-        }
-
-        public async Task<bool> Reconnect()
-        {
-            addtoLog("NTR: Reconnect");
-            Program.scriptHelper.connect(host.Text, 8000);
-            int waittimeout;
-            for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
-            {
-                await Task.Delay(500);
-                if (lastlog.Contains("end of process list"))
-                {
-                    break;
-                }
-            }
-            if (waittimeout < timeout * 10)
-            {
-                addtoLog("NTR: Reconnect sucessful");
-                return true;
-            }
-            else
-            {
-                addtoLog("NTR: Reconnect failed");
-                return false;
-            }
-        }
-
-        public bool CheckSoftResetFilters()
-        {
-            return FilterCheck(filtersSoftReset);
-        }
-
-        private void srClear_Click(object sender, EventArgs e)
-        {
-            Delg.SetSelectedIndex(typeLSR, -1);
-            Delg.SetChecked(resumeLSR, false);
-            filtersSoftReset.Rows.Clear();
-        }
-
-        // Breeding bot
-        private async void runBreedingBot_Click_1(object sender, EventArgs e)
-        {
-            string modemessage;
-            switch (modeBreed.SelectedIndex)
-            {
-                case 0:
-                    modemessage = "Simple: This bot will produce " + eggsNoBreed.Value.ToString() + " eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ".\r\n\r\n";
-                    break;
-                case 1:
-                    modemessage = "Filter: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check against the selected filters and if it finds a match the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
-                    break;
-                case 2:
-                    modemessage = "ESV/TSV: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check the egg's ESV and if it finds a match with the values in the TSV list, the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
-                    break;
-                case 3:
-                    modemessage = "Accept/Reject: This bot will talk to the Nursery Lady and accept " + boxBreed.Value + " eggs, then it will reject " + slotBreed.Value + " eggs and stop.\r\n\r\n";
-                    break;
-                default:
-                    modemessage = "No mode selected. Select one and try again.\r\n\r\n";
-                    break;
-            }
-
-            DialogResult dialogResult;
-            if (gen7)
-            {
-                dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that your party is full. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            }
-
-            if (dialogResult == DialogResult.OK && eggsNoBreed.Value > 0 && modeBreed.SelectedIndex >= 0)
-            {
-                startBot();
-                botnumber = 1;
-                radioBoxes.Checked = true;
-                Task<int> Bot;
-                if (gen7)
-                {
-                    BreedBot7 = new BreedingBot7(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, readESV.Checked);
-                    Bot = BreedBot7.RunBot();
-                }
-                else
-                {
-                    bool oras;
-                    if (game == GameType.X || game == GameType.Y)
-                    {
-                        oras = false;
-                    }
-                    else
-                    {
-                        oras = true;
-                    }
-                    BreedBot6 = new BreedingBot6(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, OrganizeTop.Checked, radioDayCare1.Checked, readESV.Checked, quickBreed.Checked, oras);
-                    Bot = BreedBot6.RunBot();
-                }
-                int result = await Bot;
-                if (botStop)
-                {
-                    addtoLog("Bot: STOP Breeding bot by user command");
-                    result = 8;
-                }
-                switch (await Bot)
-                {
-                    case 0: // Finished
-                        MessageBox.Show("Bot finished sucessfully", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case 1: // Write error
-                        MessageBox.Show(writeerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 2: // Read error
-                        MessageBox.Show(readerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 3: // Finish with no matches
-                        MessageBox.Show("Finished. Maximum number of eggs reached without a match.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case 4: // Filter mode sucessful
-                        if (gen7)
-                            MessageBox.Show(BreedBot7.finishmessage + currentfilter, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        else
-                            MessageBox.Show(BreedBot6.finishmessage + currentfilter, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case 5: // ESV/TSV mode sucessful
-                        if (gen7)
-                            MessageBox.Show(BreedBot7.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        else
-                            MessageBox.Show(BreedBot6.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case 6: // Touch screen error
-                        MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 7: // Button error
-                        MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 8: // User stop
-                        MessageBox.Show("Bot stopped by user", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    default: // General error
-                        MessageBox.Show("An error has occurred.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
-                finishBot();
-            }
-        }
-
-        public void updateBreedingslots(int box, int slot, int quantity)
-        {
-            Delg.SetValue(boxBreed, box + 1);
-            Delg.SetValue(slotBreed, slot + 1);
-            Delg.SetValue(eggsNoBreed, quantity);
-        }
-
-        public void AddESVrow(int row, int slot, int tsv)
-        {
-            Delg.DataGridViewAddRow(ESVlist, row + 1, slot + 1, tsv.ToString("D4"));
-        }
-
-        public bool CheckBreedingFilters()
-        {
-            return FilterCheck(filterBreeding);
-        }
-
-        private void ESVlistSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ESVlist.Rows.Count > 0)
-                {
-                    //string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                    string folderPath = "";
-                    (new FileInfo(folderPath)).Directory.Create();
-                    string fileName = "ESVlist.csv";
-                    var esvlst = new StringBuilder();
-                    var headers = ESVlist.Columns.Cast<DataGridViewColumn>();
-                    esvlst.AppendLine(string.Join(",", headers.Select(column => column.HeaderText).ToArray()));
-                    foreach (DataGridViewRow row in ESVlist.Rows)
-                    {
-                        var cells = row.Cells.Cast<DataGridViewCell>();
-                        esvlst.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
-                    }
-                    File.WriteAllText(folderPath + fileName, esvlst.ToString());
-                    MessageBox.Show("ESV list saved");
-                }
-                else
-                {
-                    MessageBox.Show("There are no eggs on the ESV list");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void TSVlistAdd_Click(object sender, EventArgs e)
-        {
-            TSVlist.Items.Add(((int)TSVlistNum.Value).ToString("D4"));
-        }
-
-        private void TSVlistRemove_Click(object sender, EventArgs e)
-        {
-            if (TSVlist.SelectedIndices.Count > 0)
-            {
-                TSVlist.Items.RemoveAt(TSVlist.SelectedIndices[0]);
-            }
-            else
-            {
-                MessageBox.Show("No TSV selected for remove");
-            }
-        }
-
-        private void TSVlistSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (TSVlist.Items.Count > 0)
-                {
-                    //string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                    string folderPath = "";
-                    (new FileInfo(folderPath)).Directory.Create();
-                    string fileName;
-                    if (gen7)
-                    {
-                        fileName = "TSVlist.csv";
-                    }
-                    else
-                    {
-                        fileName = "TSVlist7.csv";
-                    }
-                    var tsvlst = new StringBuilder();
-                    foreach (var value in TSVlist.Items)
-                    {
-                        tsvlst.AppendLine(value.ToString());
-                    }
-                    File.WriteAllText(folderPath + fileName, tsvlst.ToString());
-                    MessageBox.Show("TSV list saved");
-                }
-                else
-                {
-                    MessageBox.Show("There are no numbers on the TSV list");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void TSVlistLoad_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
-                string folderPath = "";
-                (new FileInfo(folderPath)).Directory.Create();
-                string fileName;
-                if (gen7)
-                {
-                    fileName = "TSVlist.csv";
-                }
-                else
-                {
-                    fileName = "TSVlist7.csv";
-                }
-                if (File.Exists(folderPath + fileName))
-                {
-                    string[] values = File.ReadAllLines(folderPath + fileName);
-                    TSVlist.Items.Clear();
-                    TSVlist.Items.AddRange(values);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public bool ESV_TSV_check(int esv)
-        {
-            if (TSVlist.Items.Count > 0)
-            {
-                addtoLog("Filter: Checking egg with ESV: " + esv);
-                foreach (var tsv in TSVlist.Items)
-                {
-                    if (Convert.ToInt32(tsv) == esv)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private void breedingClear_Click(object sender, EventArgs e)
-        {
-            Delg.SetSelectedIndex(modeBreed, -1);
-            Delg.SetValue(boxBreed, 1);
-            Delg.SetValue(slotBreed, 1);
-            Delg.SetValue(eggsNoBreed, 1);
-            OrganizeMiddle.Checked = true;
-            radioDayCare1.Checked = true;
-            Delg.SetChecked(readESV, false);
-            Delg.SetChecked(quickBreed, false);
-            ESVlist.Rows.Clear();
-            TSVlist.Items.Clear();
-            filterBreeding.Rows.Clear();
-        }
-
-        private void modeBreed_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (gen7 && modeBreed.SelectedIndex == 3)
-            {
-                Delg.SetText(Breed_labelBox, "Acc:");
-                Delg.SetText(Breed_labelSlot, "Rej:");
-                Delg.SetEnabled(slotBreed, true);
-                Delg.SetMaximum(boxBreed, 999);
-                Delg.SetMaximum(slotBreed, 999);
-                Delg.SetMinimum(boxBreed, 0);
-                Delg.SetMinimum(slotBreed, 0);
-                Delg.SetEnabled(eggsNoBreed, false);
-            }
-            else
-            {
-                Delg.SetText(Breed_labelBox, "Box:");
-                Delg.SetText(Breed_labelSlot, "Slot:");
-                Delg.SetEnabled(slotBreed, false);
-                Delg.SetMaximum(boxBreed, 30);
-                Delg.SetMaximum(slotBreed, BOXES);
-                Delg.SetMinimum(boxBreed, 1);
-                Delg.SetMinimum(slotBreed, 1);
-                Delg.SetEnabled(eggsNoBreed, true);
-            }
-        }
-
-        #endregion Bots
-
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
