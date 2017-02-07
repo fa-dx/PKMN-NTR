@@ -229,7 +229,7 @@ namespace ntrbase
 
             addtoLog("THIS IS A BUILD FOR A DEVEOPMENT BRANCH - DO NOT EXPECT IT TO WORK");
 
-            //checkUpdate();
+            checkUpdate();
             host.Text = Settings.Default.IP;
             callIP();
             host.Focus();
@@ -240,10 +240,7 @@ namespace ntrbase
             try
             {
                 addtoLog("GUI: Look for updates");
-                // Get current
-                int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
-                int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
-                int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+                // Get current             
                 addtoLog("GUI: Current version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
 
                 // Get latest stable
@@ -253,7 +250,7 @@ namespace ntrbase
                 addtoLog("GUI: Last stable: " + lateststable.TagName);
 
                 // Look for latest stable
-                if (verlatest[0] > major || verlatest[1] > minor || verlatest[2] > build)
+                if (checkversions(verlatest))
                 {
                     addtoLog("GUI: Update found!");
                     Delg.SetText(lb_update, "Version " + lateststable.TagName + " is available.");
@@ -261,7 +258,7 @@ namespace ntrbase
                     DialogResult result = MessageBox.Show("Version " + lateststable.TagName + " is available.\r\nDo you want to go to GitHub and download it?", "Update Available", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        System.Diagnostics.Process.Start(updateURL);
+                        Process.Start(updateURL);
                     }
                 }
                 else
@@ -272,7 +269,7 @@ namespace ntrbase
                     {
                         addtoLog("GUI: Last preview: " + latestbeta.TagName);
                         int[] verbeta = Array.ConvertAll(latestbeta.TagName.Split('.'), int.Parse);
-                        if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build)
+                        if (checkversions(verbeta))
                         {
                             addtoLog("GUI: New preview version found");
                             Delg.SetText(lb_update, "Preview version " + latestbeta.TagName + " is available.");
@@ -298,7 +295,6 @@ namespace ntrbase
                 updateURL = null;
                 addtoLog("GUI: An error has ocurred while checking for updates:");
                 addtoLog(ex.Message);
-                MessageBox.Show(ex.Message);
                 Delg.SetText(lb_update, "Update not found.");
             }
         }
@@ -309,6 +305,30 @@ namespace ntrbase
             {
                 Process.Start(updateURL);
             }
+        }
+
+        private bool checkversions(int[] tag)
+        {
+            int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
+            int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
+            int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+
+            if (tag[0] > major)
+            {
+                return true;
+            }
+
+            if (tag[0] == major && tag[1] > minor)
+            {
+                return true;
+            }
+
+            if (tag[0] == major && tag[1] == minor && tag[2] > build)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void enableControls()
@@ -391,7 +411,6 @@ namespace ntrbase
         [Conditional("DEBUG")]
         private void callIP()
         {
-            addtoLog("THIS IS A DEBUG VERSION - ONLY FOR TESTING");
             StreamReader sr = new StreamReader(@System.Windows.Forms.Application.StartupPath + "\\IP.txt");
             host.Text = sr.ReadLine();
             sr.Close();

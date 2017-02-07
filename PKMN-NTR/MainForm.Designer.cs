@@ -332,14 +332,14 @@
             this.lb_sid = new System.Windows.Forms.Label();
             this.lb_g7id = new System.Windows.Forms.Label();
             this.lb_tsv = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lb_pkmnntrver = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.dragout = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
@@ -571,7 +571,7 @@
             this.lb_update.Name = "lb_update";
             this.lb_update.Size = new System.Drawing.Size(204, 13);
             this.lb_update.TabIndex = 4;
-            this.lb_update.Text = "Feature disabled.";
+            this.lb_update.Text = "Looking for updates...";
             this.lb_update.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lb_update.Click += new System.EventHandler(this.updateLabel_Click);
             // 
@@ -4276,17 +4276,6 @@
             this.lb_tsv.TabIndex = 0;
             this.lb_tsv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 213);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(70, 13);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Updates:";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -4319,6 +4308,40 @@
             this.lb_pkmnntrver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lb_pkmnntrver.Click += new System.EventHandler(this.updateLabel_Click);
             // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 193);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "PKHeX Core:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 213);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(70, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Updates:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(79, 193);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(204, 13);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "20170207";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label17.Click += new System.EventHandler(this.updateLabel_Click);
+            // 
             // PB_Legal
             // 
             this.PB_Legal.Image = ((System.Drawing.Image)(resources.GetObject("PB_Legal.Image")));
@@ -4340,29 +4363,6 @@
             this.dragout.DragOver += new System.Windows.Forms.DragEventHandler(this.dragout_DragOver);
             this.dragout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragout_MouseDown);
             this.dragout.MouseHover += new System.EventHandler(this.dragoutHover);
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 193);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "PKHeX Core:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label17
-            // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(79, 193);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(204, 13);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "20170207";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label17.Click += new System.EventHandler(this.updateLabel_Click);
             // 
             // MainForm
             // 
