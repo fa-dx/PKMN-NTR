@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.IO;
 using ntrbase.Properties;
 using PKHeX.Core;
+using ntrbase.Helpers;
 
 namespace ntrbase.Sub_forms
 {

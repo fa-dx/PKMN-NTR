@@ -39,7 +39,7 @@ namespace ntrbase
         }
 
         // New program-wide varialbes for PKHeX.Core
-        public SaveFile SAV;
+        public SaveFile SAV = SaveUtil.getBlankSAV(GameVersion.MN, "PKMN-NTR");
         public PKM pkm;
         private const string pkhexlang = "en";
         public static string[] gendersymbols = { "♂", "♀", "-" };
@@ -92,9 +92,9 @@ namespace ntrbase
         public uint battleBoxOff;
 
         //This array will contain controls that should be enabled when connected and disabled when disconnected.
-        Control[] enableWhenConnected = new Control[] { };
-        Control[] enableWhenConnected7 = new Control[] { };
-        Control[] gen6onlyControls = new Control[] { };
+        //Control[] enableWhenConnected = new Control[] { };
+        //Control[] enableWhenConnected7 = new Control[] { };
+        //Control[] gen6onlyControls = new Control[] { };
         private readonly PictureBox[] movePB, relearnPB;
 
         // Log handling
@@ -117,23 +117,20 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            enableWhenConnected = new Control[] { };
-            enableWhenConnected7 = new Control[] { };
-            gen6onlyControls = new Control[] { };
-            movePB = new PictureBox[] { PB_WarnMove1, PB_WarnMove2, PB_WarnMove3, PB_WarnMove4 };
-            relearnPB = new PictureBox[] { PB_WarnRelearn1, PB_WarnRelearn2, PB_WarnRelearn3, PB_WarnRelearn4 };
+            //enableWhenConnected = new Control[] { };
+            //enableWhenConnected7 = new Control[] { };
+            //gen6onlyControls = new Control[] { };
 
-            disableControls();
-
-            SAV = SaveUtil.getBlankSAV(GameVersion.MN, "PKMN-NTR");
-            pkm = new PK7();
-            InitializeTabs();
+            pkm = SAV.BlankPKM;
             setPKMFormatMode(SAV.Generation, SAV.Version);
 
+            relearnPB = new[] { PB_WarnRelearn1, PB_WarnRelearn2, PB_WarnRelearn3, PB_WarnRelearn4 };
+            movePB = new[] { PB_WarnMove1, PB_WarnMove2, PB_WarnMove3, PB_WarnMove4 };
             Label_Species.ResetForeColor();
             new ToolTip().SetToolTip(dragout, "PKM QuickSave");
             dragout.GiveFeedback += (sender, e) => { e.UseDefaultCursors = false; };
-            GiveFeedback += (sender, e) => { e.UseDefaultCursors = false; };
+            GiveFeedback += (sender, e) => { e.UseDefaultCursors = false; }
+            ;
             foreach (TabPage tab in tabMain.TabPages)
             {
                 tab.AllowDrop = true;
@@ -152,8 +149,78 @@ namespace ntrbase
 
             dragout.AllowDrop = true;
 
+            PKM pk = SAV.getPKM((fieldsInitialized ? preparePKM() : pkm).Data);
+            bool alreadyInit = fieldsInitialized;
+            fieldsInitialized = false;
+            InitializeStrings();
+            InitializeLanguage();
+            populateFields(pk); // put data back in form
+            fieldsInitialized |= alreadyInit;
             InitializeFields();
+
+            disableControls();
             formInitialized = true;
+        }
+
+        private void InitializeStrings()
+        {
+            GameInfo.Strings = GameInfo.getStrings("en");
+
+            // Force an update to the met locations
+            origintrack = GameVersion.Unknown;
+
+            // Update Legality Analysis strings
+            LegalityAnalysis.movelist = GameInfo.Strings.movelist;
+
+            if (fieldsInitialized)
+                updateIVs(null, null); // Prompt an update for the characteristics
+        }
+
+        private void InitializeLanguage()
+        {
+            ComboBox[] cbs =
+            {
+                CB_Country, CB_SubRegion, CB_3DSReg, CB_Language, CB_Ball, CB_HeldItem, CB_Species, DEV_Ability,
+                CB_Nature, CB_EncounterType, CB_GameOrigin, CB_HPType
+            };
+            foreach (var cb in cbs) { cb.DisplayMember = "Text"; cb.ValueMember = "Value"; }
+
+            // Set the various ComboBox DataSources up with their allowed entries
+            setCountrySubRegion(CB_Country, "countries");
+            CB_3DSReg.DataSource = Util.getUnsortedCBList("regions3ds");
+
+            GameInfo.InitializeDataSources(GameInfo.Strings);
+
+            CB_EncounterType.DataSource = Util.getCBList(GameInfo.Strings.encountertypelist, new[] { 0 }, Legal.Gen4EncounterTypes);
+            CB_HPType.DataSource = Util.getCBList(GameInfo.Strings.types.Skip(1).Take(16).ToArray(), null);
+            CB_Nature.DataSource = new BindingSource(GameInfo.NatureDataSource, null);
+
+            populateFilteredDataSources();
+        }
+
+        private void populateFilteredDataSources()
+        {
+            GameInfo.setItemDataSource(false, SAV.MaxItemID, SAV.HeldItems, SAV.Generation, SAV.Version, GameInfo.Strings);
+            if (SAV.Generation > 1)
+                CB_HeldItem.DataSource = new BindingSource(GameInfo.ItemDataSource.Where(i => i.Value <= SAV.MaxItemID).ToList(), null);
+
+            var languages = Util.getUnsortedCBList("languages");
+            if (SAV.Generation < 7)
+                languages = languages.Where(l => l.Value <= 8).ToList(); // Korean
+            CB_Language.DataSource = languages;
+
+            CB_Ball.DataSource = new BindingSource(GameInfo.BallDataSource.Where(b => b.Value <= SAV.MaxBallID).ToList(), null);
+            CB_Species.DataSource = new BindingSource(GameInfo.SpeciesDataSource.Where(s => s.Value <= SAV.MaxSpeciesID).ToList(), null);
+            DEV_Ability.DataSource = new BindingSource(GameInfo.AbilityDataSource.Where(a => a.Value <= SAV.MaxAbilityID).ToList(), null);
+            CB_GameOrigin.DataSource = new BindingSource(GameInfo.VersionDataSource.Where(g => g.Value <= SAV.MaxGameID || SAV.Generation >= 3 && g.Value == 15).ToList(), null);
+
+            // Set the Move ComboBoxes too..
+            var moves = GameInfo.MoveDataSource.Where(m => m.Value <= SAV.MaxMoveID).ToList(); // Filter Z-Moves if appropriate
+            foreach (ComboBox cb in new[] { CB_Move1, CB_Move2, CB_Move3, CB_Move4, CB_RelearnMove1, CB_RelearnMove2, CB_RelearnMove3, CB_RelearnMove4 })
+            {
+                cb.DisplayMember = "Text"; cb.ValueMember = "Value";
+                cb.DataSource = new BindingSource(moves, null);
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -250,6 +317,10 @@ namespace ntrbase
             {
                 Delg.SetEnabled(tab, true);
             }
+            foreach (TabPage tab in tabMain.TabPages)
+            {
+                Delg.SetEnabled(tab, true);
+            }
         }
 
         private void disableControls()
@@ -261,12 +332,16 @@ namespace ntrbase
                     Delg.SetEnabled(tab, false);
                 }
             }
+            foreach (TabPage tab in tabMain.TabPages)
+            {
+                Delg.SetEnabled(tab, false);
+            }
         }
 
         public void Addlog(string l)
         {
             lastlog = l;
-            if (l.Contains("Server disconnected") && !botWorking && SAV.Version == GameVersion.Invalid)
+            if (l.Contains("Server disconnected") && !botWorking)
             {
                 PerformDisconnect();
             }
@@ -311,15 +386,13 @@ namespace ntrbase
         {
             disconnectTimer.Enabled = false;
             Program.ntrClient.disconnect();
-            SAV = SaveUtil.getBlankSAV(GameVersion.Invalid, "PKMN-NTR");
-            pkm = new PK7();
         }
 
         [Conditional("DEBUG")]
         private void callIP()
         {
             addtoLog("THIS IS A DEBUG VERSION - ONLY FOR TESTING");
-            StreamReader sr = new StreamReader("D:\\IP.txt");
+            StreamReader sr = new StreamReader(@System.Windows.Forms.Application.StartupPath + "\\IP.txt");
             host.Text = sr.ReadLine();
             sr.Close();
         }
@@ -366,8 +439,6 @@ namespace ntrbase
         public void PerformDisconnect()
         {
             Program.scriptHelper.disconnect();
-            SAV = SaveUtil.getBlankSAV(GameVersion.Invalid, "PKMN-NTR");
-            pkm = new PK7();
             buttonConnect.Text = "Connect";
             buttonConnect.Enabled = true;
             buttonDisconnect.Enabled = false;
@@ -385,8 +456,19 @@ namespace ntrbase
         }
 
         //This functions handles additional information events from NTR netcode. We are only interested in them if they are a process list, containing our game's PID and game type.
+        delegate void getGameDelegate(object sender, EventArgs e);
+
         public void getGame(object sender, EventArgs e)
         {
+            if (this.InvokeRequired)
+            {
+                // Execute the same method, but this time on the GUI thread
+                BeginInvoke(new getGameDelegate(getGame), sender, e);
+
+                // we return immedeately
+                return;
+            }
+
             InfoReadyEventArgs args = (InfoReadyEventArgs)e;
             if (args.info.Contains("kujira-1")) // X
             {
@@ -478,10 +560,13 @@ namespace ntrbase
             // Clear tabs to avoid writting wrong data
             if (!botWorking)
             {
-                pkm = SAV.BlankPKM;
-                InitializeTabs();
                 setPKMFormatMode(SAV.Generation, SAV.Version);
-                Legality = new LegalityAnalysis(pkm);
+                pkm = SAV.BlankPKM;
+                bool init = fieldsInitialized;
+                fieldsInitialized = fieldsLoaded = false;
+                populateFilteredDataSources();
+                InitializeFields();
+                fieldsInitialized |= init;
 
                 MAXSPECIES = SAV.MaxSpeciesID;
 
@@ -492,7 +577,6 @@ namespace ntrbase
                     BOXES = 32;
                     fillGen7();
                     dumpAllData7();
-                    enableControls();
                     Delg.SetCheckedRadio(radioBoxes, true);
                 }
                 else if (SAV.Generation == 6)
@@ -502,9 +586,9 @@ namespace ntrbase
                     BOXES = 31;
                     fillGen6();
                     dumpAllData6();
-                    enableControls();
                     Delg.SetCheckedRadio(radioBoxes, true);
                 }
+                enableControls();
             }
 
             // Fill fields in the form according to gen
@@ -561,7 +645,11 @@ namespace ntrbase
                 CB_Country, CB_SubRegion, CB_3DSReg, CB_Language, CB_Ball, CB_HeldItem, CB_Species, DEV_Ability,
                 CB_Nature, CB_EncounterType, CB_GameOrigin, CB_HPType
             };
-            foreach (var cb in cbs) { cb.DisplayMember = "Text"; cb.ValueMember = "Value"; }
+            foreach (var cb in cbs)
+            {
+                cb.DisplayMember = "Text";
+                cb.ValueMember = "Value";
+            }
 
             // Set the various ComboBox DataSources up with their allowed entries
             setCountrySubRegion(CB_Country, "countries");
@@ -1941,8 +2029,18 @@ namespace ntrbase
             TemplateFields();
         }
 
+        delegate void populateDelegate(PKM pk, bool focus = true);
+
         public void populateFields(PKM pk, bool focus = true)
         {
+            if (this.InvokeRequired)
+            {
+                // Execute the same method, but this time on the GUI thread
+                BeginInvoke(new populateDelegate(populateFields), pk, focus);
+
+                // we return immedeately
+                return;
+            }
             if (pk == null) { WinFormsUtil.Error("Attempted to load a null file."); return; }
 
             if ((pk.Format >= 3 && pk.Format > SAV.Generation) // pk3-7, can't go backwards
@@ -1988,17 +2086,17 @@ namespace ntrbase
 
         private void TemplateFields()
         {
-            CB_Species.SelectedValue = SAV.MaxSpeciesID;
+            CB_GameOrigin.SelectedIndex = 0;
             CB_Move1.SelectedValue = 1;
             TB_OT.Text = "PKMN-NTR";
-            TB_TID.Text = 00282.ToString();
-            TB_SID.Text = 00282.ToString();
-            CB_GameOrigin.SelectedIndex = 0;
-            int curlang = Array.IndexOf(GameInfo.lang_val, pkhexlang);
+            TB_TID.Text = 12345.ToString();
+            TB_SID.Text = 54321.ToString();
+            int curlang = Array.IndexOf(GameInfo.lang_val, "en");
             CB_Language.SelectedIndex = curlang > CB_Language.Items.Count - 1 ? 1 : curlang;
             CB_Ball.SelectedIndex = Math.Min(0, CB_Ball.Items.Count - 1);
             CB_Country.SelectedIndex = Math.Min(0, CB_Country.Items.Count - 1);
             CAL_MetDate.Value = CAL_EggDate.Value = DateTime.Today;
+            CB_Species.SelectedValue = SAV.MaxSpeciesID;
             CHK_Nicknamed.Checked = false;
         }
 
