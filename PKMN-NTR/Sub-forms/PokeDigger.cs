@@ -105,11 +105,11 @@ namespace ntrbase.Sub_forms
                 string folderPath = @Application.StartupPath + "\\Digger\\";
                 (new FileInfo(folderPath)).Directory.Create();
                 string fileName = folderPath + "dump " + StartAddrText.Text + ".bin";
-                fileName = MainForm.NextAvailableFilename(fileName);
+                //fileName = MainForm.NextAvailableFilename(fileName);
             
-                FileStream fs = File.OpenWrite(fileName);
-                fs.Write(recvData, 0, recvData.Length);
-                fs.Close();
+                //FileStream fs = File.OpenWrite(fileName);
+                //fs.Write(recvData, 0, recvData.Length);
+                //fs.Close();
             }
             //Thanks to this, processing will be done in GUI thread
             //so we don't need to use SetBlahblahblah functions everywhere
@@ -251,12 +251,12 @@ namespace ntrbase.Sub_forms
                 string folderPath = @Application.StartupPath + "\\Digger\\";
                 (new FileInfo(folderPath)).Directory.Create();
                 string fileName = folderPath + "pkmn" + ".pk7";
-                fileName = MainForm.NextAvailableFilename(fileName);
+                //fileName = MainForm.NextAvailableFilename(fileName);
 
-                byte[] data = (byte[])r.Tag;
-                FileStream fs = File.OpenWrite(fileName);
-                fs.Write(data, 0, data.Length);
-                fs.Close();
+                //byte[] data = (byte[])r.Tag;
+                //FileStream fs = File.OpenWrite(fileName);
+                //fs.Write(data, 0, data.Length);
+                //fs.Close();
             }
         }
 

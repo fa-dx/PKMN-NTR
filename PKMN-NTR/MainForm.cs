@@ -51,6 +51,7 @@ namespace ntrbase
         private LegalityAnalysis Legality;
         public static volatile bool formInitialized, fieldsInitialized, fieldsLoaded;
         private bool changingFields;
+        private readonly PictureBox[] movePB, relearnPB;
         private readonly ToolTip Tip1 = new ToolTip(), Tip2 = new ToolTip(), Tip3 = new ToolTip(), NatureTip = new ToolTip(), EVTip = new ToolTip();
         private static readonly Image mixedHighlight = ImageUtil.ChangeOpacity(Resources.slotSet, 0.5);
 
@@ -70,10 +71,6 @@ namespace ntrbase
         internal GitHubClient Github;
         private string updateURL = null;
 
-        // Variables for cloning
-        public byte[] selectedCloneData = new byte[POKEBYTES];
-        public bool selectedCloneValid = false;
-
         //Game information
         public int pid;
         public byte lang;
@@ -90,8 +87,6 @@ namespace ntrbase
         public uint daycare3Off; // Battle Resort Daycare
         public uint daycare4Off; // Battle Resort Daycare
         public uint battleBoxOff;
-
-        private readonly PictureBox[] movePB, relearnPB;
 
         // Log handling
         public delegate void LogDelegate(string l);
@@ -229,6 +224,14 @@ namespace ntrbase
             host.Text = Settings.Default.IP;
             callIP();
             host.Focus();
+        }
+
+        [Conditional("DEBUG")]
+        private void callIP()
+        {
+            StreamReader sr = new StreamReader(@System.Windows.Forms.Application.StartupPath + "\\IP.txt");
+            host.Text = sr.ReadLine();
+            sr.Close();
         }
 
         private async void checkUpdate()
@@ -402,14 +405,6 @@ namespace ntrbase
         {
             disconnectTimer.Enabled = false;
             Program.ntrClient.disconnect();
-        }
-
-        [Conditional("DEBUG")]
-        private void callIP()
-        {
-            StreamReader sr = new StreamReader(@System.Windows.Forms.Application.StartupPath + "\\IP.txt");
-            host.Text = sr.ReadLine();
-            sr.Close();
         }
 
         static void handleDataReady(object sender, DataReadyEventArgs e)
@@ -1362,8 +1357,8 @@ namespace ntrbase
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             Array.Copy(args.data, 0, SAV.Data, LookupTable.trainercardLocation, LookupTable.trainercardSize);
             Delg.SetText(lb_name, SAV.OT);
-            Delg.SetText(lb_tid, SAV.TID.ToString("D4"));
-            Delg.SetText(lb_sid, SAV.SID.ToString("D4"));
+            Delg.SetText(lb_tid, SAV.TID.ToString("D5"));
+            Delg.SetText(lb_sid, SAV.SID.ToString("D5"));
             Delg.SetText(lb_tsv, LookupTable.getTSV(SAV.TID, SAV.SID).ToString("D4"));
             switch (SAV.Version)
             {
@@ -1534,20 +1529,27 @@ namespace ntrbase
 
         public void savePKMtoFile()
         {
-            if (!verifiedPKM())
-                return;
+            try
+            {
+                if (!verifiedPKM())
+                    return;
 
-            // Create Temp File to Drag
-            PKM pkx = preparePKM();
-            string fn = pkx.FileName; fn = fn.Substring(0, fn.LastIndexOf('.'));
-            string filename = $"{fn}{"." + pkx.Extension}";
-            byte[] data = pkx.DecryptedBoxData;
+                // Create Temp File to Drag
+                PKM pkx = preparePKM();
+                string fn = pkx.FileName; fn = fn.Substring(0, fn.LastIndexOf('.'));
+                string filename = $"{fn}{"." + pkx.Extension}";
+                byte[] data = pkx.DecryptedBoxData;
 
-            // Make file
-            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
-            new FileInfo(folderPath).Directory.Create();
-            string newfile = Path.Combine(folderPath, Util.CleanFileName(filename));
-            File.WriteAllBytes(newfile, data);
+                // Make file
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+                new FileInfo(folderPath).Directory.Create();
+                string newfile = Path.Combine(folderPath, Util.CleanFileName(filename));
+                File.WriteAllBytes(newfile, data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A error has ocurred:\r\n\r\n" + ex.Message);
+            }
         }
 
         public void handleTradeData(object args_obj)
@@ -1640,78 +1642,7 @@ namespace ntrbase
             }
             return occurences;
         }
-
-        public void writePokemonToFile(byte[] data, string fileName, bool overwrite = false)
-        {
-            try
-            {
-                if (!overwrite) // If current filename is available, it won't be changed
-                {
-                    fileName = NextAvailableFilename(fileName);
-                }
-
-                FileStream fs = File.OpenWrite(fileName);
-                fs.Write(data, 0, data.Length);
-                fs.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public static string NextAvailableFilename(string path)
-        {
-            if (!File.Exists(path))
-            {
-                return path;
-            }
-
-            if (Path.HasExtension(path))
-            {
-                return GetNextFilename(path.Insert(path.LastIndexOf(Path.GetExtension(path)), numberPattern));
-            }
-
-            return GetNextFilename(path + numberPattern);
-        }
-
-        private static string GetNextFilename(string pattern)
-        {
-            string tmp = string.Format(pattern, 1);
-            if (tmp == pattern)
-            {
-                throw new ArgumentException("The pattern must include an index place-holder", "pattern");
-            }
-
-            if (!File.Exists(tmp))
-            {
-                return tmp;
-            }
-
-            int min = 1, max = 2;
-
-            while (File.Exists(string.Format(pattern, max)))
-            {
-                min = max;
-                max *= 2;
-            }
-
-            while (max != min + 1)
-            {
-                int pivot = (max + min) / 2;
-                if (File.Exists(string.Format(pattern, pivot)))
-                {
-                    min = pivot;
-                }
-                else
-                {
-                    max = pivot;
-                }
-            }
-
-            return string.Format(pattern, max);
-        }
-
+        
         // Save all boxes
         private void dumpBoxes_Click(object sender, EventArgs e)
         {
@@ -1721,11 +1652,20 @@ namespace ntrbase
 
         public void handleAllBoxesData(object args_obj)
         {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
-            (new FileInfo(folderPath)).Directory.Create();
-            string fileName = SAV.OT + " (" + SAV.Version.ToString() + ") - " + DateTime.Now.ToString("yyyyMMddHHmmss") + BOXEXT;
-            writePokemonToFile(args.data, folderPath + fileName);
+            try
+            {
+                DataReadyWaiting args = (DataReadyWaiting)args_obj;
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+                string fileName = SAV.OT + " (" + SAV.Version.ToString() + ") - " + DateTime.Now.ToString("yyyyMMddHHmmss") + BOXEXT;
+                string newfile = Path.Combine(folderPath, Util.CleanFileName(fileName));
+                File.WriteAllBytes(newfile, args.data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A error has ocurred:\r\n\r\n" + ex.Message);
+            }
+
         }
 
         // Write single pokémon from tabs
