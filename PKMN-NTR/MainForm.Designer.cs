@@ -35,10 +35,8 @@
             this.radioBoxes = new System.Windows.Forms.RadioButton();
             this.radioDaycare = new System.Windows.Forms.RadioButton();
             this.dumpBoxes = new System.Windows.Forms.Button();
-            this.nameek6 = new System.Windows.Forms.TextBox();
             this.slotDump = new System.Windows.Forms.NumericUpDown();
             this.boxDump = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
             this.radioOpponent = new System.Windows.Forms.RadioButton();
             this.radioTrade = new System.Windows.Forms.RadioButton();
             this.SlotLabel = new System.Windows.Forms.Label();
@@ -587,7 +585,6 @@
             this.onlyView.TabIndex = 11;
             this.onlyView.Text = "Only edit";
             this.onlyView.UseVisualStyleBackColor = true;
-            this.onlyView.CheckedChanged += new System.EventHandler(this.onlyView_CheckedChanged);
             // 
             // readResult
             // 
@@ -644,15 +641,6 @@
             this.dumpBoxes.UseVisualStyleBackColor = true;
             this.dumpBoxes.Click += new System.EventHandler(this.dumpBoxes_Click);
             // 
-            // nameek6
-            // 
-            this.nameek6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.nameek6.Location = new System.Drawing.Point(64, 142);
-            this.nameek6.Name = "nameek6";
-            this.nameek6.Size = new System.Drawing.Size(125, 20);
-            this.nameek6.TabIndex = 2;
-            this.nameek6.Text = "pkmn";
-            // 
             // slotDump
             // 
             this.slotDump.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -699,16 +687,6 @@
             0,
             0,
             0});
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 146);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(52, 13);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "Filename:";
             // 
             // radioOpponent
             // 
@@ -3743,12 +3721,10 @@
             this.Tab_Dump.Controls.Add(this.dumpPokemon);
             this.Tab_Dump.Controls.Add(this.DumpInstructionsBtn);
             this.Tab_Dump.Controls.Add(this.onlyView);
-            this.Tab_Dump.Controls.Add(this.nameek6);
             this.Tab_Dump.Controls.Add(this.slotDump);
             this.Tab_Dump.Controls.Add(this.BoxLabel);
             this.Tab_Dump.Controls.Add(this.SlotLabel);
             this.Tab_Dump.Controls.Add(this.boxDump);
-            this.Tab_Dump.Controls.Add(this.label9);
             this.Tab_Dump.Controls.Add(this.tableLayoutPanel1);
             this.Tab_Dump.Location = new System.Drawing.Point(4, 22);
             this.Tab_Dump.Name = "Tab_Dump";
@@ -3759,6 +3735,7 @@
             // 
             // Write_PKM
             // 
+            this.Write_PKM.Enabled = false;
             this.Write_PKM.Location = new System.Drawing.Point(6, 111);
             this.Write_PKM.Name = "Write_PKM";
             this.Write_PKM.Size = new System.Drawing.Size(280, 23);
@@ -4555,10 +4532,8 @@
         private System.Windows.Forms.Button dumpPokemon;
         private System.Windows.Forms.Label SlotLabel;
         private System.Windows.Forms.CheckBox onlyView;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown boxDump;
         private System.Windows.Forms.NumericUpDown slotDump;
-        private System.Windows.Forms.TextBox nameek6;
         private System.Windows.Forms.Button dumpBoxes;
         private System.Windows.Forms.RadioButton radioBoxes;
         private System.Windows.Forms.RadioButton radioOpponent;

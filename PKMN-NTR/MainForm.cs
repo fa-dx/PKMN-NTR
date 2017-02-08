@@ -91,10 +91,6 @@ namespace ntrbase
         public uint daycare4Off; // Battle Resort Daycare
         public uint battleBoxOff;
 
-        //This array will contain controls that should be enabled when connected and disabled when disconnected.
-        //Control[] enableWhenConnected = new Control[] { };
-        //Control[] enableWhenConnected7 = new Control[] { };
-        //Control[] gen6onlyControls = new Control[] { };
         private readonly PictureBox[] movePB, relearnPB;
 
         // Log handling
@@ -481,10 +477,7 @@ namespace ntrbase
         {
             if (this.InvokeRequired)
             {
-                // Execute the same method, but this time on the GUI thread
                 BeginInvoke(new getGameDelegate(getGame), sender, e);
-
-                // we return immedeately
                 return;
             }
 
@@ -592,20 +585,18 @@ namespace ntrbase
                 if (SAV.Generation == 7)
                 {
                     PKXEXT = ".pk7";
-                    BOXEXT = "_boxes.ek7";
+                    BOXEXT = ".ek7";
                     BOXES = 32;
                     fillGen7();
                     dumpAllData7();
-                    Delg.SetCheckedRadio(radioBoxes, true);
                 }
                 else if (SAV.Generation == 6)
                 {
                     PKXEXT = ".pk6";
-                    BOXEXT = "_boxes.ek6";
+                    BOXEXT = ".ek6";
                     BOXES = 31;
                     fillGen6();
                     dumpAllData6();
-                    Delg.SetCheckedRadio(radioBoxes, true);
                 }
                 enableControls();
             }
@@ -616,10 +607,8 @@ namespace ntrbase
 
         private void fillGen6()
         {
-            if (radioBoxes.Checked)
-            {
-                Delg.SetMaximum(boxDump, BOXES);
-            }
+            Delg.SetEnabled(radioBattleBox, true);
+            Delg.SetCheckedRadio(radioBoxes, true);
             Delg.SetText(radioDaycare, "Daycare");
             Delg.SetMaximum(Num_CDBox, BOXES);
             Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
@@ -627,10 +616,8 @@ namespace ntrbase
 
         private async void fillGen7()
         {
-            if (radioBoxes.Checked)
-            {
-                Delg.SetMaximum(boxDump, BOXES);
-            }
+            Delg.SetEnabled(radioBattleBox, false);
+            Delg.SetCheckedRadio(radioBoxes, true);
             Delg.SetText(radioDaycare, "Nursery");
             Delg.SetMaximum(Num_CDBox, BOXES);
             Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
@@ -1492,7 +1479,7 @@ namespace ntrbase
             // Read at offset
             if (radioParty.Checked)
             {
-                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[260], handlePkmData, null);
+                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[2602], handlePkmData, null);
                 uint mySeq = Program.scriptHelper.data(dumpOff, 260, pid);
                 waitingForData.Add(mySeq, myArgs);
             }
@@ -1504,47 +1491,63 @@ namespace ntrbase
             }
         }
 
+        delegate void handlePkmDataDelegate(object args_obj);
+
         public void handlePkmData(object args_obj)
         {
+            if (this.InvokeRequired)
+            {
+                BeginInvoke(new handlePkmDataDelegate(handlePkmData), args_obj);
+                return;
+            }
             try
-            { //TODO: TEMPORARY HACK, DO PROPER ERROR HANDLING
+            {
                 DataReadyWaiting args = (DataReadyWaiting)args_obj;
                 PKM validator = SAV.BlankPKM;
+
                 validator.Data = PKX.decryptArray(args.data);
-                bool dataCorrect = validator.Species != 0;
-                if (!onlyView.Checked && !botWorking)
-                {
-                    DialogResult res = DialogResult.Cancel;
-                    if (!dataCorrect)
+                bool dataCorrect = validator.ChecksumValid && validator.Species > 0 && validator.Species < SAV.MaxSpeciesID;
+
+                if (dataCorrect)
+                { // Valid pkx file
+                    pkm = validator.Clone();
+                    populateFields(pkm);
+                    if (!onlyView.Checked)
                     {
-                        res = MessageBox.Show("This Pokemon's data seems to be empty.\r\nPress OK if you want to save it, Cancel if you don't.",
-                           "Empty data", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                    }
-                    if (dataCorrect || res == DialogResult.OK)
-                    {
-                        string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
-                        (new FileInfo(folderPath)).Directory.Create();
-                        string fileName = nameek6.Text + PKXEXT;
-                        writePokemonToFile(validator.Data, folderPath + fileName);
+                        savePKMtoFile();
                     }
                 }
-                else if (!dataCorrect && !botWorking)
-                {
-                    MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (validator.ChecksumValid && validator.Species == 0)
+                { // Empty data
+                    MessageBox.Show("This pokémon data is empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                if (!dataCorrect)
-                {
-                    return;
+                else
+                { // Invalid data
+                    MessageBox.Show("This pokémon data is invalid, please try again.", "Invalid data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
-                pkm = validator;
-                //updateTabs();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("A error has ocurred:\r\n\r\n" + ex.Message);
             }
+        }
+
+        public void savePKMtoFile()
+        {
+            if (!verifiedPKM())
+                return;
+
+            // Create Temp File to Drag
+            PKM pkx = preparePKM();
+            string fn = pkx.FileName; fn = fn.Substring(0, fn.LastIndexOf('.'));
+            string filename = $"{fn}{"." + pkx.Extension}";
+            byte[] data = pkx.DecryptedBoxData;
+
+            // Make file
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+            new FileInfo(folderPath).Directory.Create();
+            string newfile = Path.Combine(folderPath, Util.CleanFileName(filename));
+            File.WriteAllBytes(newfile, data);
         }
 
         public void handleTradeData(object args_obj)
@@ -1638,12 +1641,6 @@ namespace ntrbase
             return occurences;
         }
 
-        // Save single pokémon
-        private void onlyView_CheckedChanged(object sender, EventArgs e)
-        {
-            nameek6.Enabled = !onlyView.Checked;
-        }
-
         public void writePokemonToFile(byte[] data, string fileName, bool overwrite = false)
         {
             try
@@ -1727,7 +1724,7 @@ namespace ntrbase
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
             string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
             (new FileInfo(folderPath)).Directory.Create();
-            string fileName = nameek6.Text + BOXEXT;
+            string fileName = SAV.OT + " (" + SAV.Version.ToString() + ") - " + DateTime.Now.ToString("yyyyMMddHHmmss") + BOXEXT;
             writePokemonToFile(args.data, folderPath + fileName);
         }
 
@@ -1790,7 +1787,6 @@ namespace ntrbase
                 slotDump.Maximum = BOXSIZE;
                 boxDump.Enabled = true;
                 slotDump.Enabled = true;
-                dumpBoxes.Enabled = true;
                 onlyView.Enabled = true;
                 boxDump.Value = ((LastBoxSlot)radioBoxes.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioBoxes.Tag).slot;
@@ -1823,7 +1819,6 @@ namespace ntrbase
                 }
                 boxDump.Enabled = false;
                 slotDump.Enabled = true;
-                dumpBoxes.Enabled = false;
                 onlyView.Enabled = true;
                 boxDump.Value = ((LastBoxSlot)radioDaycare.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioDaycare.Tag).slot;
@@ -1848,7 +1843,6 @@ namespace ntrbase
                 slotDump.Maximum = 6;
                 boxDump.Enabled = false;
                 slotDump.Enabled = true;
-                dumpBoxes.Enabled = false;
                 onlyView.Enabled = true;
                 boxDump.Value = ((LastBoxSlot)radioBattleBox.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioBattleBox.Tag).slot;
@@ -1873,7 +1867,7 @@ namespace ntrbase
                 slotDump.Maximum = 1;
                 boxDump.Enabled = false;
                 slotDump.Enabled = false;
-                dumpBoxes.Enabled = false;
+                onlyView.Checked = true;
                 onlyView.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioTrade.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioTrade.Tag).slot;
@@ -1898,7 +1892,7 @@ namespace ntrbase
                 slotDump.Maximum = 6;
                 boxDump.Enabled = true;
                 slotDump.Enabled = true;
-                dumpBoxes.Enabled = false;
+                onlyView.Checked = true;
                 onlyView.Enabled = false;
                 BoxLabel.Text = "Opp.:";
                 boxDump.Value = ((LastBoxSlot)radioOpponent.Tag).box;
@@ -1936,8 +1930,7 @@ namespace ntrbase
                     slotDump.Maximum = 6;
                     boxDump.Enabled = false;
                     slotDump.Enabled = true;
-                    dumpBoxes.Enabled = false;
-                    onlyView.Enabled = false;
+                    onlyView.Enabled = true;
                     boxDump.Value = ((LastBoxSlot)radioParty.Tag).box;
                     slotDump.Value = ((LastBoxSlot)radioParty.Tag).slot;
                 }
@@ -2054,10 +2047,7 @@ namespace ntrbase
         {
             if (this.InvokeRequired)
             {
-                // Execute the same method, but this time on the GUI thread
                 BeginInvoke(new populateDelegate(populateFields), pk, focus);
-
-                // we return immedeately
                 return;
             }
             if (pk == null) { WinFormsUtil.Error("Attempted to load a null file."); return; }
