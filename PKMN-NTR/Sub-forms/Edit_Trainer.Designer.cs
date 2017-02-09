@@ -66,11 +66,6 @@
             this.Num_FestivalCoins = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.TB_EggSeed = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.TB_RNGSeed = new System.Windows.Forms.TextBox();
-            this.label60 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.ReloadFields = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Num_TotalFC)).BeginInit();
@@ -85,7 +80,6 @@
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Num_FestivalCoins)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label55
@@ -582,66 +576,9 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(210, 42);
             this.tableLayoutPanel2.TabIndex = 63;
             // 
-            // TB_EggSeed
-            // 
-            this.TB_EggSeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TB_EggSeed.Location = new System.Drawing.Point(71, 3);
-            this.TB_EggSeed.Name = "TB_EggSeed";
-            this.TB_EggSeed.ReadOnly = true;
-            this.TB_EggSeed.Size = new System.Drawing.Size(136, 20);
-            this.TB_EggSeed.TabIndex = 65;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 6);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 13);
-            this.label7.TabIndex = 64;
-            this.label7.Text = "Egg Seed:";
-            // 
-            // TB_RNGSeed
-            // 
-            this.TB_RNGSeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TB_RNGSeed.Location = new System.Drawing.Point(71, 29);
-            this.TB_RNGSeed.Name = "TB_RNGSeed";
-            this.TB_RNGSeed.ReadOnly = true;
-            this.TB_RNGSeed.Size = new System.Drawing.Size(136, 20);
-            this.TB_RNGSeed.TabIndex = 67;
-            // 
-            // label60
-            // 
-            this.label60.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(3, 32);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(62, 13);
-            this.label60.TabIndex = 66;
-            this.label60.Text = "RNG Seed:";
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.AutoSize = true;
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.TB_RNGSeed, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.TB_EggSeed, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label60, 0, 1);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(239, 60);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 52);
-            this.tableLayoutPanel3.TabIndex = 68;
-            // 
             // ReloadFields
             // 
-            this.ReloadFields.Location = new System.Drawing.Point(239, 118);
+            this.ReloadFields.Location = new System.Drawing.Point(239, 60);
             this.ReloadFields.Name = "ReloadFields";
             this.ReloadFields.Size = new System.Drawing.Size(207, 23);
             this.ReloadFields.TabIndex = 69;
@@ -657,7 +594,6 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(460, 282);
             this.Controls.Add(this.ReloadFields);
-            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -679,8 +615,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Num_FestivalCoins)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -721,11 +655,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.NumericUpDown Num_Sec;
-        private System.Windows.Forms.TextBox TB_EggSeed;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox TB_RNGSeed;
-        private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button ReloadFields;
         private System.Windows.Forms.Button Write_FestivalCoins;
         private System.Windows.Forms.NumericUpDown Num_FestivalCoins;

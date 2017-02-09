@@ -6,8 +6,7 @@ namespace ntrbase.Helpers
     {
         #region RAM Address
 
-        public static readonly uint nfcOff = 0x3E14C0;
-        // 1.0 offset was 0x3DFFD0
+        public static readonly uint nfcOff = 0x3E14C0; // 1.0 offset was 0x3DFFD0
 
         public static readonly uint nfcVal = 0xE3A01000;
 
@@ -322,7 +321,7 @@ namespace ntrbase.Helpers
             }
         }
 
-        public static uint rngseedOff
+        public static uint legseedOff
         {
             get
             {

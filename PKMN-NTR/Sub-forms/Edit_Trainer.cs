@@ -59,7 +59,6 @@ namespace ntrbase.Sub_forms
         private async void Fill7()
         {
             SetControls(false);
-            TB_EggSeed.Clear();
             Delg.SetText(TB_Name, await waitName());
             Delg.SetValue(Num_TID, await waitTID());
             Delg.SetValue(Num_SID, await waitSID());
@@ -71,8 +70,6 @@ namespace ntrbase.Sub_forms
             Delg.SetValue(Num_Hour, BitConverter.ToUInt16(time, 0));
             Delg.SetValue(Num_Min, time[2]);
             Delg.SetValue(Num_Sec, time[3]);
-            Delg.SetText(TB_EggSeed, await waitEggSeed());
-            Delg.SetText(TB_RNGSeed, await waitRNGSeed());
             Delg.SetEnabled(ReloadFields, true);
         }
 
@@ -210,33 +207,6 @@ namespace ntrbase.Sub_forms
             else
             {
                 return new byte[] { 0, 0, 0, 0 };
-            }
-        }
-
-        private async Task<string> waitEggSeed()
-        {
-            RAMreader = Program.helper.waitNTRmultiread(LookupTable.eggseedOff, 0x10);
-            if (await RAMreader)
-            {
-                return BitConverter.ToString(Program.helper.lastmultiread.Reverse().ToArray()).Replace("-", "");
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private async Task<string> waitRNGSeed()
-        {
-            RAMreader = Program.helper.waitNTRmultiread(LookupTable.rngseedOff, 0x04);
-            if (await RAMreader)
-            {
-                ;
-                return BitConverter.ToUInt32(Program.helper.lastmultiread, 0).ToString("X8");
-            }
-            else
-            {
-                return null;
             }
         }
 

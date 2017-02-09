@@ -1343,6 +1343,21 @@ namespace ntrbase
         public void dumpAllData7()
         {
             dumpTrainerCard();
+            dumpEggSeed();
+            dumpLegendarySeed();
+        }
+
+        // Reload fields
+        private void Btn_ReloadFields_Click(object sender, EventArgs e)
+        {
+            if (SAV.Generation == 6)
+            {
+                dumpAllData6();
+            }
+            else if (SAV.Generation == 7)
+            {
+                dumpAllData7();
+            }
         }
 
         // Game save data handling
@@ -1387,6 +1402,32 @@ namespace ntrbase
                     Delg.SetText(lb_g7id, LookupTable.getG7ID(SAV.TID, SAV.SID).ToString("D6"));
                     break;
             }
+        }
+
+        // Egg Seed handling
+        public void dumpEggSeed()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x10], handleEggSeed, null);
+            waitingForData.Add(Program.scriptHelper.data(LookupTable.eggseedOff, 0x10, pid), myArgs);
+        }
+
+        public void handleEggSeed(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Delg.SetText(Seed_Egg, BitConverter.ToString(args.data.Reverse().ToArray()).Replace("-", ""));
+        }
+
+        // RNG Seed
+        public void dumpLegendarySeed()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleLegendarySeed, null);
+            waitingForData.Add(Program.scriptHelper.data(LookupTable.legseedOff, 0x04, pid), myArgs);
+        }
+
+        public void handleLegendarySeed(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Delg.SetText(Seed_Legendary, BitConverter.ToUInt32(args.data, 0).ToString("X8"));
         }
 
         #endregion R/W trainer data

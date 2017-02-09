@@ -293,6 +293,10 @@
             this.Write_PKM = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Tab_Tools = new System.Windows.Forms.TabPage();
+            this.Seed_Legendary = new System.Windows.Forms.TextBox();
+            this.Seed_Egg = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.Tool_Items = new System.Windows.Forms.Button();
             this.Tool_Controls = new System.Windows.Forms.Button();
@@ -302,6 +306,7 @@
             this.Tools_Filter = new System.Windows.Forms.Button();
             this.Tools_PokeDigger = new System.Windows.Forms.Button();
             this.Tab_Clone = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.Btn_CDstart = new System.Windows.Forms.Button();
             this.CB_CDBackup = new System.Windows.Forms.CheckBox();
             this.GB_CDmode = new System.Windows.Forms.GroupBox();
@@ -338,7 +343,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.dragout = new System.Windows.Forms.PictureBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.Btn_ReloadFields = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
@@ -3768,6 +3773,11 @@
             // Tab_Tools
             // 
             this.Tab_Tools.BackColor = System.Drawing.SystemColors.Control;
+            this.Tab_Tools.Controls.Add(this.Btn_ReloadFields);
+            this.Tab_Tools.Controls.Add(this.Seed_Legendary);
+            this.Tab_Tools.Controls.Add(this.Seed_Egg);
+            this.Tab_Tools.Controls.Add(this.label19);
+            this.Tab_Tools.Controls.Add(this.label18);
             this.Tab_Tools.Controls.Add(this.flowLayoutPanel2);
             this.Tab_Tools.Location = new System.Drawing.Point(4, 22);
             this.Tab_Tools.Name = "Tab_Tools";
@@ -3775,6 +3785,40 @@
             this.Tab_Tools.Size = new System.Drawing.Size(292, 264);
             this.Tab_Tools.TabIndex = 0;
             this.Tab_Tools.Text = "Tools";
+            // 
+            // Seed_Legendary
+            // 
+            this.Seed_Legendary.Location = new System.Drawing.Point(6, 148);
+            this.Seed_Legendary.Name = "Seed_Legendary";
+            this.Seed_Legendary.ReadOnly = true;
+            this.Seed_Legendary.Size = new System.Drawing.Size(279, 20);
+            this.Seed_Legendary.TabIndex = 2;
+            // 
+            // Seed_Egg
+            // 
+            this.Seed_Egg.Location = new System.Drawing.Point(6, 109);
+            this.Seed_Egg.Name = "Seed_Egg";
+            this.Seed_Egg.ReadOnly = true;
+            this.Seed_Egg.Size = new System.Drawing.Size(279, 20);
+            this.Seed_Egg.TabIndex = 2;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 132);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(88, 13);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Legendary Seed:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 93);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(57, 13);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Egg Seed:";
             // 
             // flowLayoutPanel2
             // 
@@ -3884,6 +3928,15 @@
             this.Tab_Clone.Size = new System.Drawing.Size(292, 264);
             this.Tab_Clone.TabIndex = 1;
             this.Tab_Clone.Text = "Clone/Delete";
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(6, 214);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(280, 47);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Pokémon will be cloned or deleted starting at the specified position. In Clone mo" +
+    "de, the source is the pokémon shown in the tabs.\r\n\r\n";
             // 
             // Btn_CDstart
             // 
@@ -4344,14 +4397,15 @@
             this.dragout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragout_MouseDown);
             this.dragout.MouseHover += new System.EventHandler(this.dragoutHover);
             // 
-            // label9
+            // Btn_ReloadFields
             // 
-            this.label9.Location = new System.Drawing.Point(6, 214);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(280, 47);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "Pokémon will be cloned or deleted starting at the specified position. In Clone mo" +
-    "de, the source is the pokémon shown in the tabs.\r\n\r\n";
+            this.Btn_ReloadFields.Location = new System.Drawing.Point(196, 174);
+            this.Btn_ReloadFields.Name = "Btn_ReloadFields";
+            this.Btn_ReloadFields.Size = new System.Drawing.Size(89, 23);
+            this.Btn_ReloadFields.TabIndex = 3;
+            this.Btn_ReloadFields.Text = "Reload Fields";
+            this.Btn_ReloadFields.UseVisualStyleBackColor = true;
+            this.Btn_ReloadFields.Click += new System.EventHandler(this.Btn_ReloadFields_Click);
             // 
             // MainForm
             // 
@@ -4848,6 +4902,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox Seed_Legendary;
+        private System.Windows.Forms.TextBox Seed_Egg;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button Btn_ReloadFields;
     }
 }
 
