@@ -606,6 +606,7 @@ namespace ntrbase
             Delg.SetEnabled(Write_PKM, true);
             Delg.SetCheckedRadio(radioBoxes, true);
             Delg.SetText(radioDaycare, "Daycare");
+            Delg.SetMaximum(boxDump, BOXES);
             Delg.SetMaximum(Num_CDBox, BOXES);
             Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
         }
@@ -616,6 +617,7 @@ namespace ntrbase
             Delg.SetEnabled(Write_PKM, true);
             Delg.SetCheckedRadio(radioBoxes, true);
             Delg.SetText(radioDaycare, "Nursery");
+            Delg.SetMaximum(boxDump, BOXES);
             Delg.SetMaximum(Num_CDBox, BOXES);
             Delg.SetMaximum(Num_CDAmount, LookupTable.getMaxSpace((int)Num_CDBox.Value, (int)Num_CDSlot.Value));
 
