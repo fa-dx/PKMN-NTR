@@ -300,9 +300,9 @@ namespace ntrbase.Sub_forms
         {
             Delg.SetEnabled(Num_Money, false);
             Delg.SetEnabled(Write_Money, false);
-            if (Num_Money.Value > ushort.MaxValue)
+            if (Num_Money.Value > 9999999)
             {
-                Num_Money.Value = ushort.MaxValue;
+                Num_Money.Value = 9999999;
             }
             byte[] data = BitConverter.GetBytes(Convert.ToUInt32(Num_Money.Value));
             RAMreader = Program.helper.waitNTRwrite(LookupTable.moneyOff, data, Program.gCmdWindow.pid);
