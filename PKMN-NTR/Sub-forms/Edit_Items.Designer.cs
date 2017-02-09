@@ -157,7 +157,7 @@
             this.mnuSortCount,
             this.mnuSortCountReverse});
             this.sortMenu.Name = "modifyMenu";
-            this.sortMenu.Size = new System.Drawing.Size(159, 114);
+            this.sortMenu.Size = new System.Drawing.Size(159, 92);
             // 
             // mnuSortName
             // 
@@ -239,6 +239,7 @@
             this.Controls.Add(this.B_Save);
             this.Controls.Add(this.B_Cancel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Edit_Items";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "Item Editor";

@@ -18,6 +18,11 @@ namespace ntrbase.Sub_forms
             InitializeComponent();
         }
 
+        private void Filter_Constructor_Load(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
         private void filterAdd_Click(object sender, EventArgs e)
         {
             filterList.Rows.Add(filterShiny.Checked ? 1 : 0, Convert.ToInt32(filterNature.SelectedIndex), Convert.ToInt32(filterAbility.SelectedIndex), Convert.ToInt32(filterHPtype.SelectedIndex), Convert.ToInt32(filterGender.SelectedIndex), Convert.ToInt32(filterHPvalue.Value), Convert.ToInt32(filterHPlogic.SelectedIndex), Convert.ToInt32(filterATKvalue.Value), Convert.ToInt32(filterATKlogic.SelectedIndex), Convert.ToInt32(filterDEFvalue.Value), Convert.ToInt32(filterDEFlogic.SelectedIndex), Convert.ToInt32(filterSPAvalue.Value), Convert.ToInt32(filterSPAlogic.SelectedIndex), Convert.ToInt32(filterSPDvalue.Value), Convert.ToInt32(filterSPDlogic.SelectedIndex), Convert.ToInt32(filterSPEvalue.Value), Convert.ToInt32(filterSPElogic.SelectedIndex), Convert.ToInt32(filterPerIVvalue.Value), Convert.ToInt32(filterPerIVlogic.SelectedIndex));
@@ -131,6 +136,11 @@ namespace ntrbase.Sub_forms
 
         private void filterReset_Click(object sender, EventArgs e)
         {
+            ResetForm();
+        }
+
+        private void ResetForm()
+        {
             Delg.SetChecked(filterShiny, false);
             Delg.SetSelectedIndex(filterNature, -1);
             Delg.SetSelectedIndex(filterAbility, -1);
@@ -150,6 +160,5 @@ namespace ntrbase.Sub_forms
             Delg.SetValue(filterSPDvalue, 0);
             Delg.SetValue(filterSPEvalue, 0);
         }
-
     }
 }

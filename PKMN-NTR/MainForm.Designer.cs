@@ -3899,7 +3899,6 @@
             // 
             // Tools_Filter
             // 
-            this.Tools_Filter.Enabled = false;
             this.Tools_Filter.Location = new System.Drawing.Point(3, 61);
             this.Tools_Filter.Name = "Tools_Filter";
             this.Tools_Filter.Size = new System.Drawing.Size(89, 23);
@@ -4416,6 +4415,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "PKMN-NTR";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);

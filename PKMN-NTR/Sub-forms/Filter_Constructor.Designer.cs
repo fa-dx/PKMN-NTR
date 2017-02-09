@@ -62,7 +62,6 @@
             this.filterDEFlogic = new System.Windows.Forms.ComboBox();
             this.filterATKlogic = new System.Windows.Forms.ComboBox();
             this.filterHPlogic = new System.Windows.Forms.ComboBox();
-            this.label81 = new System.Windows.Forms.Label();
             this.filterPerIVvalue = new System.Windows.Forms.NumericUpDown();
             this.label101 = new System.Windows.Forms.Label();
             this.filterShiny = new System.Windows.Forms.CheckBox();
@@ -87,6 +86,7 @@
             this.label111 = new System.Windows.Forms.Label();
             this.filterATKvalue = new System.Windows.Forms.NumericUpDown();
             this.label112 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterPerIVvalue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterSPEvalue)).BeginInit();
@@ -105,6 +105,7 @@
             this.filterReset.TabIndex = 60;
             this.filterReset.Text = "Reset constructor";
             this.filterReset.UseVisualStyleBackColor = true;
+            this.filterReset.Click += new System.EventHandler(this.filterReset_Click);
             // 
             // filterRead
             // 
@@ -125,6 +126,7 @@
             this.filterLoad.TabIndex = 62;
             this.filterLoad.Text = "Load filter set...";
             this.filterLoad.UseVisualStyleBackColor = true;
+            this.filterLoad.Click += new System.EventHandler(this.filterLoad_Click);
             // 
             // filterSave
             // 
@@ -134,6 +136,7 @@
             this.filterSave.TabIndex = 61;
             this.filterSave.Text = "Save filter set...";
             this.filterSave.UseVisualStyleBackColor = true;
+            this.filterSave.Click += new System.EventHandler(this.filterSave_Click);
             // 
             // filterRemove
             // 
@@ -447,15 +450,6 @@
             this.filterHPlogic.Size = new System.Drawing.Size(60, 21);
             this.filterHPlogic.TabIndex = 43;
             // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(12, 9);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(61, 13);
-            this.label81.TabIndex = 64;
-            this.label81.Text = "Constructor";
-            // 
             // filterPerIVvalue
             // 
             this.filterPerIVvalue.Location = new System.Drawing.Point(316, 192);
@@ -481,11 +475,10 @@
             // 
             this.filterShiny.AutoSize = true;
             this.filterShiny.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.filterShiny.Location = new System.Drawing.Point(95, 9);
+            this.filterShiny.Location = new System.Drawing.Point(70, 6);
             this.filterShiny.Name = "filterShiny";
-            this.filterShiny.Size = new System.Drawing.Size(52, 17);
+            this.filterShiny.Size = new System.Drawing.Size(15, 14);
             this.filterShiny.TabIndex = 38;
-            this.filterShiny.Text = "Shiny";
             this.filterShiny.UseVisualStyleBackColor = true;
             // 
             // filterGender
@@ -745,13 +738,22 @@
             this.label112.TabIndex = 74;
             this.label112.Text = "Special Defense:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 13);
+            this.label1.TabIndex = 65;
+            this.label1.Text = "Shiny:";
+            // 
             // Filter_Constructor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(579, 380);
+            this.ClientSize = new System.Drawing.Size(595, 389);
             this.Controls.Add(this.filterReset);
             this.Controls.Add(this.filterRead);
             this.Controls.Add(this.filterLoad);
@@ -766,7 +768,6 @@
             this.Controls.Add(this.filterDEFlogic);
             this.Controls.Add(this.filterATKlogic);
             this.Controls.Add(this.filterHPlogic);
-            this.Controls.Add(this.label81);
             this.Controls.Add(this.filterPerIVvalue);
             this.Controls.Add(this.label101);
             this.Controls.Add(this.filterShiny);
@@ -780,6 +781,7 @@
             this.Controls.Add(this.label106);
             this.Controls.Add(this.filterAbility);
             this.Controls.Add(this.filterDEFvalue);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label107);
             this.Controls.Add(this.label108);
             this.Controls.Add(this.filterNature);
@@ -792,8 +794,11 @@
             this.Controls.Add(this.filterATKvalue);
             this.Controls.Add(this.label112);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Filter_Constructor";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "Filter Constructor";
+            this.Load += new System.EventHandler(this.Filter_Constructor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterPerIVvalue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterSPEvalue)).EndInit();
@@ -842,7 +847,6 @@
         private System.Windows.Forms.ComboBox filterDEFlogic;
         private System.Windows.Forms.ComboBox filterATKlogic;
         private System.Windows.Forms.ComboBox filterHPlogic;
-        private System.Windows.Forms.Label label81;
         private System.Windows.Forms.NumericUpDown filterPerIVvalue;
         private System.Windows.Forms.Label label101;
         private System.Windows.Forms.CheckBox filterShiny;
@@ -867,5 +871,6 @@
         private System.Windows.Forms.Label label111;
         private System.Windows.Forms.NumericUpDown filterATKvalue;
         private System.Windows.Forms.Label label112;
+        private System.Windows.Forms.Label label1;
     }
 }

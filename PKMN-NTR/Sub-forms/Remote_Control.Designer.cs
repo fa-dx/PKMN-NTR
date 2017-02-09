@@ -396,7 +396,9 @@
             this.Controls.Add(this.Remote_buttons);
             this.Controls.Add(this.manualSR);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Remote_Control";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "Remote Control";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Remote_Control_FormClosed);
             this.Remote_Stick.ResumeLayout(false);
