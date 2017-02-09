@@ -1669,42 +1669,81 @@ namespace ntrbase
         }
 
         // Write single pokémon from tabs
-        private void pokeEkx_Click(object sender, EventArgs e)
+        private void Write_PKM_Click(object sender, EventArgs e)
         {
-            if (pkm == null)
-            {
-                MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
-            }
-            else
-            {
-                // TO DO: Read data from fields to pkm
+            if (!verifiedPKM())
+                return;
 
-                pkm.RefreshChecksum();
+            pkm = preparePKM();
+            updateLegality();
 
+            if (Legality.Valid || PB_Legal.Visible == false)
+            { // Write only legal and Gen 5 or eariler pokemon
                 byte[] pkmEdited = PKX.encryptArray(pkm.DecryptedBoxData);
-
                 if (radioBoxes.Checked)
                 {
                     uint index = ((uint)boxDump.Value - 1) * BOXSIZE + (uint)slotDump.Value - 1;
                     uint offset = boxOff + (index * POKEBYTES);
                     Program.scriptHelper.write(offset, pkmEdited, pid);
                 }
-                else if (radioBattleBox.Checked)
+                else
                 {
-                    uint offset = battleBoxOff + ((uint)slotDump.Value - 1) * POKEBYTES;
-                    Program.scriptHelper.write(offset, pkmEdited, pid);
+                    MessageBox.Show("No support for this source, if you want to edit this pokémon, deposit it in the PC.", "No editing support", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            else
+            {
+                MessageBox.Show("This pokémon is illegal, it won't be written to the file.", "Illegal pokémon", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
-                else if (radioParty.Checked && enablepartywrite)
-                {
-                    uint offset = partyOff + ((uint)slotDump.Value - 1) * 484;
-                    Program.scriptHelper.write(offset, pkmEdited, pid);
+        // Clone and delete
+        private void Btn_CDstart_Click(object sender, EventArgs e)
+        {
+            if (!verifiedPKM())
+                return;
+
+            pkm = preparePKM();
+            updateLegality();
+            byte[] pkmsource;
+
+            if (CloneMode.Checked)
+            {
+                if (Legality.Valid || PB_Legal.Visible == false)
+                { // Write only legal and Gen 5 or eariler pokemon
+                    pkmsource = PKX.encryptArray(pkm.DecryptedBoxData);
                 }
                 else
                 {
-                    MessageBox.Show("No editing support for this source.", "Editing Unavailable");
+                    MessageBox.Show("This pokémon is illegal, it won't be written to the file.", "Illegal pokémon", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
             }
+            else if (DeleteMode.Checked)
+            {
+                pkmsource = PKX.encryptArray(SAV.BlankPKM.DecryptedBoxData);
+            }
+            else
+            {
+                return;
+            }
+
+            uint index = ((uint)Num_CDBox.Value - 1) * BOXSIZE + (uint)Num_CDSlot.Value - 1;
+            uint offset = boxOff + (index * POKEBYTES);
+            uint size = (uint)Num_CDAmount.Value * POKEBYTES;
+
+            if (CB_CDBackup.Checked)
+            {
+                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[size], handleAllBoxesData, null);
+                waitingForData.Add(Program.scriptHelper.data(offset, size, pid), myArgs);
+            }
+
+            byte[] data = new byte[size];
+            for (int i = 0; i < Num_CDAmount.Value; i++)
+            {
+                Array.Copy(pkmsource, 0, data, i * POKEBYTES, POKEBYTES);
+            }
+            Program.scriptHelper.write(offset, data, pid);
         }
 
         #endregion R/W pokémon data
@@ -1728,6 +1767,7 @@ namespace ntrbase
                 boxDump.Enabled = true;
                 slotDump.Enabled = true;
                 onlyView.Enabled = true;
+                Write_PKM.Enabled = true;
                 boxDump.Value = ((LastBoxSlot)radioBoxes.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioBoxes.Tag).slot;
             }
@@ -1760,6 +1800,7 @@ namespace ntrbase
                 boxDump.Enabled = false;
                 slotDump.Enabled = true;
                 onlyView.Enabled = true;
+                Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioDaycare.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioDaycare.Tag).slot;
             }
@@ -1784,6 +1825,7 @@ namespace ntrbase
                 boxDump.Enabled = false;
                 slotDump.Enabled = true;
                 onlyView.Enabled = true;
+                Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioBattleBox.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioBattleBox.Tag).slot;
             }
@@ -1809,6 +1851,7 @@ namespace ntrbase
                 slotDump.Enabled = false;
                 onlyView.Checked = true;
                 onlyView.Enabled = false;
+                Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioTrade.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioTrade.Tag).slot;
             }
@@ -1835,6 +1878,7 @@ namespace ntrbase
                 onlyView.Checked = true;
                 onlyView.Enabled = false;
                 BoxLabel.Text = "Opp.:";
+                Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioOpponent.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioOpponent.Tag).slot;
                 if (SAV.Generation == 7)
@@ -1871,6 +1915,7 @@ namespace ntrbase
                     boxDump.Enabled = false;
                     slotDump.Enabled = true;
                     onlyView.Enabled = true;
+                    Write_PKM.Enabled = false;
                     boxDump.Value = ((LastBoxSlot)radioParty.Tag).box;
                     slotDump.Value = ((LastBoxSlot)radioParty.Tag).slot;
                 }

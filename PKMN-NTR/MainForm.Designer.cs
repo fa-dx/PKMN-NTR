@@ -305,8 +305,8 @@
             this.Btn_CDstart = new System.Windows.Forms.Button();
             this.CB_CDBackup = new System.Windows.Forms.CheckBox();
             this.GB_CDmode = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.CD_CloneMode = new System.Windows.Forms.RadioButton();
+            this.DeleteMode = new System.Windows.Forms.RadioButton();
+            this.CloneMode = new System.Windows.Forms.RadioButton();
             this.Num_CDBox = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -338,6 +338,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.dragout = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
@@ -3742,6 +3743,7 @@
             this.Write_PKM.TabIndex = 16;
             this.Write_PKM.Text = "Write Pokémon";
             this.Write_PKM.UseVisualStyleBackColor = true;
+            this.Write_PKM.Click += new System.EventHandler(this.Write_PKM_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -3866,6 +3868,7 @@
             // Tab_Clone
             // 
             this.Tab_Clone.BackColor = System.Drawing.SystemColors.Control;
+            this.Tab_Clone.Controls.Add(this.label9);
             this.Tab_Clone.Controls.Add(this.Btn_CDstart);
             this.Tab_Clone.Controls.Add(this.CB_CDBackup);
             this.Tab_Clone.Controls.Add(this.GB_CDmode);
@@ -3884,13 +3887,13 @@
             // 
             // Btn_CDstart
             // 
-            this.Btn_CDstart.Enabled = false;
             this.Btn_CDstart.Location = new System.Drawing.Point(157, 71);
             this.Btn_CDstart.Name = "Btn_CDstart";
             this.Btn_CDstart.Size = new System.Drawing.Size(129, 23);
             this.Btn_CDstart.TabIndex = 14;
             this.Btn_CDstart.Text = "Go!";
             this.Btn_CDstart.UseVisualStyleBackColor = true;
+            this.Btn_CDstart.Click += new System.EventHandler(this.Btn_CDstart_Click);
             // 
             // CB_CDBackup
             // 
@@ -3904,8 +3907,8 @@
             // 
             // GB_CDmode
             // 
-            this.GB_CDmode.Controls.Add(this.radioButton1);
-            this.GB_CDmode.Controls.Add(this.CD_CloneMode);
+            this.GB_CDmode.Controls.Add(this.DeleteMode);
+            this.GB_CDmode.Controls.Add(this.CloneMode);
             this.GB_CDmode.Location = new System.Drawing.Point(6, 6);
             this.GB_CDmode.Name = "GB_CDmode";
             this.GB_CDmode.Size = new System.Drawing.Size(145, 49);
@@ -3913,27 +3916,27 @@
             this.GB_CDmode.TabStop = false;
             this.GB_CDmode.Text = "Mode";
             // 
-            // radioButton1
+            // DeleteMode
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(83, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(56, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.Text = "Delete";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.DeleteMode.AutoSize = true;
+            this.DeleteMode.Location = new System.Drawing.Point(83, 19);
+            this.DeleteMode.Name = "DeleteMode";
+            this.DeleteMode.Size = new System.Drawing.Size(56, 17);
+            this.DeleteMode.TabIndex = 0;
+            this.DeleteMode.Text = "Delete";
+            this.DeleteMode.UseVisualStyleBackColor = true;
             // 
-            // CD_CloneMode
+            // CloneMode
             // 
-            this.CD_CloneMode.AutoSize = true;
-            this.CD_CloneMode.Checked = true;
-            this.CD_CloneMode.Location = new System.Drawing.Point(6, 19);
-            this.CD_CloneMode.Name = "CD_CloneMode";
-            this.CD_CloneMode.Size = new System.Drawing.Size(52, 17);
-            this.CD_CloneMode.TabIndex = 0;
-            this.CD_CloneMode.TabStop = true;
-            this.CD_CloneMode.Text = "Clone";
-            this.CD_CloneMode.UseVisualStyleBackColor = true;
+            this.CloneMode.AutoSize = true;
+            this.CloneMode.Checked = true;
+            this.CloneMode.Location = new System.Drawing.Point(6, 19);
+            this.CloneMode.Name = "CloneMode";
+            this.CloneMode.Size = new System.Drawing.Size(52, 17);
+            this.CloneMode.TabIndex = 0;
+            this.CloneMode.TabStop = true;
+            this.CloneMode.Text = "Clone";
+            this.CloneMode.UseVisualStyleBackColor = true;
             // 
             // Num_CDBox
             // 
@@ -4340,6 +4343,15 @@
             this.dragout.DragOver += new System.Windows.Forms.DragEventHandler(this.dragout_DragOver);
             this.dragout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragout_MouseDown);
             this.dragout.MouseHover += new System.EventHandler(this.dragoutHover);
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(6, 214);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(280, 47);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Pokémon will be cloned or deleted starting at the specified position. In Clone mo" +
+    "de, the source is the pokémon shown in the tabs.\r\n\r\n";
             // 
             // MainForm
             // 
@@ -4810,8 +4822,8 @@
         private System.Windows.Forms.Button Btn_CDstart;
         private System.Windows.Forms.CheckBox CB_CDBackup;
         private System.Windows.Forms.GroupBox GB_CDmode;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton CD_CloneMode;
+        private System.Windows.Forms.RadioButton DeleteMode;
+        private System.Windows.Forms.RadioButton CloneMode;
         private System.Windows.Forms.NumericUpDown Num_CDBox;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label14;
@@ -4835,6 +4847,7 @@
         private System.Windows.Forms.PictureBox PB_Mark4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label9;
     }
 }
 
