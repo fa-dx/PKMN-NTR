@@ -157,31 +157,35 @@
             this.mnuSortCount,
             this.mnuSortCountReverse});
             this.sortMenu.Name = "modifyMenu";
-            this.sortMenu.Size = new System.Drawing.Size(159, 92);
+            this.sortMenu.Size = new System.Drawing.Size(159, 114);
             // 
             // mnuSortName
             // 
             this.mnuSortName.Name = "mnuSortName";
             this.mnuSortName.Size = new System.Drawing.Size(158, 22);
             this.mnuSortName.Text = "Name";
+            this.mnuSortName.Click += new System.EventHandler(this.sortByName);
             // 
             // mnuSortNameReverse
             // 
             this.mnuSortNameReverse.Name = "mnuSortNameReverse";
             this.mnuSortNameReverse.Size = new System.Drawing.Size(158, 22);
             this.mnuSortNameReverse.Text = "Name (Reverse)";
+            this.mnuSortNameReverse.Click += new System.EventHandler(this.sortByName);
             // 
             // mnuSortCount
             // 
             this.mnuSortCount.Name = "mnuSortCount";
             this.mnuSortCount.Size = new System.Drawing.Size(158, 22);
             this.mnuSortCount.Text = "Count";
+            this.mnuSortCount.Click += new System.EventHandler(this.sortByCount);
             // 
             // mnuSortCountReverse
             // 
             this.mnuSortCountReverse.Name = "mnuSortCountReverse";
             this.mnuSortCountReverse.Size = new System.Drawing.Size(158, 22);
             this.mnuSortCountReverse.Text = "Count (Reverse)";
+            this.mnuSortCountReverse.Click += new System.EventHandler(this.sortByCount);
             // 
             // IL_Pouch
             // 
@@ -212,12 +216,14 @@
             this.giveAll.Name = "giveAll";
             this.giveAll.Size = new System.Drawing.Size(103, 22);
             this.giveAll.Text = "All";
+            this.giveAll.Click += new System.EventHandler(this.giveAllItems);
             // 
             // giveNone
             // 
             this.giveNone.Name = "giveNone";
             this.giveNone.Size = new System.Drawing.Size(103, 22);
             this.giveNone.Text = "None";
+            this.giveNone.Click += new System.EventHandler(this.removeAllItems);
             // 
             // Edit_Items
             // 

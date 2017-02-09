@@ -105,7 +105,7 @@ namespace ntrbase.Sub_forms
         {
             try
             {
-                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
                 (new FileInfo(folderPath)).Directory.Create();
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
                 openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";

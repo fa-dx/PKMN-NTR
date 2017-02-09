@@ -234,6 +234,12 @@ namespace ntrbase
             sr.Close();
         }
 
+        [Conditional("DEBUG")]
+        private void saveIP()
+        {
+            File.WriteAllText(@System.Windows.Forms.Application.StartupPath + "\\IP.txt", host.Text);
+        }
+
         private async void checkUpdate()
         {
             try
@@ -463,6 +469,7 @@ namespace ntrbase
             buttonDisconnect.Enabled = true;
             Settings.Default.IP = host.Text;
             Settings.Default.Save();
+            saveIP();
         }
 
         //This functions handles additional information events from NTR netcode. We are only interested in them if they are a process list, containing our game's PID and game type.
@@ -3665,7 +3672,7 @@ namespace ntrbase
         private void Tool_Trainer_Click(object sender, EventArgs e)
         {
             Tool_Start();
-            new Edit_Trainer().Show();
+            new Edit_Trainer().ShowDialog();
         }
 
         // Item Editor
@@ -3680,7 +3687,7 @@ namespace ntrbase
             else
             {
                 Array.Copy(iteminfo, 0, SAV.Data, LookupTable.itemsLocation, LookupTable.itemsSize);
-                new Edit_Items().Show();
+                new Edit_Items().ShowDialog();
             }
         }
 
