@@ -29,7 +29,7 @@
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lb_update = new System.Windows.Forms.Label();
-            this.onlyView = new System.Windows.Forms.CheckBox();
+            this.backupPKM = new System.Windows.Forms.CheckBox();
             this.readResult = new System.Windows.Forms.TextBox();
             this.label71 = new System.Windows.Forms.Label();
             this.radioBoxes = new System.Windows.Forms.RadioButton();
@@ -293,6 +293,7 @@
             this.Write_PKM = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Tab_Tools = new System.Windows.Forms.TabPage();
+            this.Btn_ReloadFields = new System.Windows.Forms.Button();
             this.Seed_Legendary = new System.Windows.Forms.TextBox();
             this.Seed_Egg = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -306,7 +307,6 @@
             this.Tools_Filter = new System.Windows.Forms.Button();
             this.Tools_PokeDigger = new System.Windows.Forms.Button();
             this.Tab_Clone = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
             this.Btn_CDstart = new System.Windows.Forms.Button();
             this.CB_CDBackup = new System.Windows.Forms.CheckBox();
             this.GB_CDmode = new System.Windows.Forms.GroupBox();
@@ -343,7 +343,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.dragout = new System.Windows.Forms.PictureBox();
-            this.Btn_ReloadFields = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
@@ -579,18 +579,17 @@
             this.lb_update.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lb_update.Click += new System.EventHandler(this.updateLabel_Click);
             // 
-            // onlyView
+            // backupPKM
             // 
-            this.onlyView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.onlyView.AutoSize = true;
-            this.onlyView.Checked = true;
-            this.onlyView.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.onlyView.Location = new System.Drawing.Point(219, 27);
-            this.onlyView.Name = "onlyView";
-            this.onlyView.Size = new System.Drawing.Size(67, 17);
-            this.onlyView.TabIndex = 11;
-            this.onlyView.Text = "Only edit";
-            this.onlyView.UseVisualStyleBackColor = true;
+            this.backupPKM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.backupPKM.AutoSize = true;
+            this.backupPKM.Location = new System.Drawing.Point(219, 27);
+            this.backupPKM.Name = "backupPKM";
+            this.backupPKM.Size = new System.Drawing.Size(63, 17);
+            this.backupPKM.TabIndex = 11;
+            this.backupPKM.Text = "Backup";
+            this.toolTip1.SetToolTip(this.backupPKM, "When activated, it saves a copy of the dumped data in the \"Pokemon\" folder.");
+            this.backupPKM.UseVisualStyleBackColor = true;
             // 
             // readResult
             // 
@@ -3726,7 +3725,7 @@
             this.Tab_Dump.Controls.Add(this.dumpBoxes);
             this.Tab_Dump.Controls.Add(this.dumpPokemon);
             this.Tab_Dump.Controls.Add(this.DumpInstructionsBtn);
-            this.Tab_Dump.Controls.Add(this.onlyView);
+            this.Tab_Dump.Controls.Add(this.backupPKM);
             this.Tab_Dump.Controls.Add(this.slotDump);
             this.Tab_Dump.Controls.Add(this.BoxLabel);
             this.Tab_Dump.Controls.Add(this.SlotLabel);
@@ -3785,6 +3784,17 @@
             this.Tab_Tools.Size = new System.Drawing.Size(292, 264);
             this.Tab_Tools.TabIndex = 0;
             this.Tab_Tools.Text = "Tools";
+            // 
+            // Btn_ReloadFields
+            // 
+            this.Btn_ReloadFields.Location = new System.Drawing.Point(196, 174);
+            this.Btn_ReloadFields.Name = "Btn_ReloadFields";
+            this.Btn_ReloadFields.Size = new System.Drawing.Size(89, 23);
+            this.Btn_ReloadFields.TabIndex = 3;
+            this.Btn_ReloadFields.Text = "Reload Fields";
+            this.toolTip1.SetToolTip(this.Btn_ReloadFields, "Also reloads the \"About\" tab.");
+            this.Btn_ReloadFields.UseVisualStyleBackColor = true;
+            this.Btn_ReloadFields.Click += new System.EventHandler(this.Btn_ReloadFields_Click);
             // 
             // Seed_Legendary
             // 
@@ -3912,7 +3922,6 @@
             // Tab_Clone
             // 
             this.Tab_Clone.BackColor = System.Drawing.SystemColors.Control;
-            this.Tab_Clone.Controls.Add(this.label9);
             this.Tab_Clone.Controls.Add(this.Btn_CDstart);
             this.Tab_Clone.Controls.Add(this.CB_CDBackup);
             this.Tab_Clone.Controls.Add(this.GB_CDmode);
@@ -3929,15 +3938,6 @@
             this.Tab_Clone.TabIndex = 1;
             this.Tab_Clone.Text = "Clone/Delete";
             // 
-            // label9
-            // 
-            this.label9.Location = new System.Drawing.Point(6, 214);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(280, 47);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "Pokémon will be cloned or deleted starting at the specified position. In Clone mo" +
-    "de, the source is the pokémon shown in the tabs.\r\n\r\n";
-            // 
             // Btn_CDstart
             // 
             this.Btn_CDstart.Location = new System.Drawing.Point(157, 71);
@@ -3945,6 +3945,7 @@
             this.Btn_CDstart.Size = new System.Drawing.Size(129, 23);
             this.Btn_CDstart.TabIndex = 14;
             this.Btn_CDstart.Text = "Go!";
+            this.toolTip1.SetToolTip(this.Btn_CDstart, "Pokémon will be cloned or deleted starting at the specified position.");
             this.Btn_CDstart.UseVisualStyleBackColor = true;
             this.Btn_CDstart.Click += new System.EventHandler(this.Btn_CDstart_Click);
             // 
@@ -3989,6 +3990,7 @@
             this.CloneMode.TabIndex = 0;
             this.CloneMode.TabStop = true;
             this.CloneMode.Text = "Clone";
+            this.toolTip1.SetToolTip(this.CloneMode, "Source is the pokémon shown in the tabs.");
             this.CloneMode.UseVisualStyleBackColor = true;
             // 
             // Num_CDBox
@@ -4397,16 +4399,6 @@
             this.dragout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragout_MouseDown);
             this.dragout.MouseHover += new System.EventHandler(this.dragoutHover);
             // 
-            // Btn_ReloadFields
-            // 
-            this.Btn_ReloadFields.Location = new System.Drawing.Point(196, 174);
-            this.Btn_ReloadFields.Name = "Btn_ReloadFields";
-            this.Btn_ReloadFields.Size = new System.Drawing.Size(89, 23);
-            this.Btn_ReloadFields.TabIndex = 3;
-            this.Btn_ReloadFields.Text = "Reload Fields";
-            this.Btn_ReloadFields.UseVisualStyleBackColor = true;
-            this.Btn_ReloadFields.Click += new System.EventHandler(this.Btn_ReloadFields_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4597,7 +4589,7 @@
         private System.Windows.Forms.Label BoxLabel;
         private System.Windows.Forms.Button dumpPokemon;
         private System.Windows.Forms.Label SlotLabel;
-        private System.Windows.Forms.CheckBox onlyView;
+        private System.Windows.Forms.CheckBox backupPKM;
         private System.Windows.Forms.NumericUpDown boxDump;
         private System.Windows.Forms.NumericUpDown slotDump;
         private System.Windows.Forms.Button dumpBoxes;
@@ -4901,12 +4893,12 @@
         private System.Windows.Forms.PictureBox PB_Mark4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox Seed_Legendary;
         private System.Windows.Forms.TextBox Seed_Egg;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button Btn_ReloadFields;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

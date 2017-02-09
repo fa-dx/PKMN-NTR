@@ -1559,7 +1559,7 @@ namespace ntrbase
                 { // Valid pkx file
                     pkm = validator.Clone();
                     populateFields(pkm);
-                    if (!onlyView.Checked)
+                    if (backupPKM.Checked)
                     {
                         savePKMtoFile();
                     }
@@ -1818,7 +1818,7 @@ namespace ntrbase
                 slotDump.Maximum = BOXSIZE;
                 boxDump.Enabled = true;
                 slotDump.Enabled = true;
-                onlyView.Enabled = true;
+                backupPKM.Enabled = true;
                 Write_PKM.Enabled = true;
                 boxDump.Value = ((LastBoxSlot)radioBoxes.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioBoxes.Tag).slot;
@@ -1851,7 +1851,7 @@ namespace ntrbase
                 }
                 boxDump.Enabled = false;
                 slotDump.Enabled = true;
-                onlyView.Enabled = true;
+                backupPKM.Enabled = true;
                 Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioDaycare.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioDaycare.Tag).slot;
@@ -1876,7 +1876,7 @@ namespace ntrbase
                 slotDump.Maximum = 6;
                 boxDump.Enabled = false;
                 slotDump.Enabled = true;
-                onlyView.Enabled = true;
+                backupPKM.Enabled = true;
                 Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioBattleBox.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioBattleBox.Tag).slot;
@@ -1901,8 +1901,8 @@ namespace ntrbase
                 slotDump.Maximum = 1;
                 boxDump.Enabled = false;
                 slotDump.Enabled = false;
-                onlyView.Checked = true;
-                onlyView.Enabled = false;
+                backupPKM.Checked = true;
+                backupPKM.Enabled = false;
                 Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioTrade.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioTrade.Tag).slot;
@@ -1927,8 +1927,8 @@ namespace ntrbase
                 slotDump.Maximum = 6;
                 boxDump.Enabled = true;
                 slotDump.Enabled = true;
-                onlyView.Checked = true;
-                onlyView.Enabled = false;
+                backupPKM.Checked = true;
+                backupPKM.Enabled = false;
                 BoxLabel.Text = "Opp.:";
                 Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioOpponent.Tag).box;
@@ -1966,7 +1966,7 @@ namespace ntrbase
                     slotDump.Maximum = 6;
                     boxDump.Enabled = false;
                     slotDump.Enabled = true;
-                    onlyView.Enabled = true;
+                    backupPKM.Enabled = true;
                     Write_PKM.Enabled = false;
                     boxDump.Value = ((LastBoxSlot)radioParty.Tag).box;
                     slotDump.Value = ((LastBoxSlot)radioParty.Tag).slot;
