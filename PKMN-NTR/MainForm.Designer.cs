@@ -4115,8 +4115,9 @@
             this.Log_Export.Name = "Log_Export";
             this.Log_Export.Size = new System.Drawing.Size(92, 23);
             this.Log_Export.TabIndex = 3;
-            this.Log_Export.Text = "Export...";
+            this.Log_Export.Text = "Export Log";
             this.Log_Export.UseVisualStyleBackColor = true;
+            this.Log_Export.Click += new System.EventHandler(this.Log_Export_Click);
             // 
             // Tab_About
             // 

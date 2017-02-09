@@ -1802,6 +1802,19 @@ namespace ntrbase
 
         #region GUI handling
 
+        // Log export
+        private void Log_Export_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                File.WriteAllText(System.Windows.Forms.@Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_pkmn-ntr.txt", txtLog.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A error has ocurred:\r\n\r\n" + ex.Message);
+            }
+        }
+
         // Radio boxes for pokémon source
         private void radioBoxes_CheckedChanged(object sender, EventArgs e)
         {
