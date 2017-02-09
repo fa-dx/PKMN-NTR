@@ -603,6 +603,7 @@ namespace ntrbase
         private void fillGen6()
         {
             Delg.SetEnabled(radioBattleBox, true);
+            Delg.SetEnabled(Write_PKM, true);
             Delg.SetCheckedRadio(radioBoxes, true);
             Delg.SetText(radioDaycare, "Daycare");
             Delg.SetMaximum(Num_CDBox, BOXES);
@@ -612,6 +613,7 @@ namespace ntrbase
         private async void fillGen7()
         {
             Delg.SetEnabled(radioBattleBox, false);
+            Delg.SetEnabled(Write_PKM, true);
             Delg.SetCheckedRadio(radioBoxes, true);
             Delg.SetText(radioDaycare, "Nursery");
             Delg.SetMaximum(Num_CDBox, BOXES);
@@ -1974,7 +1976,6 @@ namespace ntrbase
         }
 
         // Bot functions
-
         public void HandleRAMread(uint value)
         {
             addtoLog("NTR: Read sucessful - 0x" + value.ToString("X8"));
