@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Timers;
 using PKHeX.Core;
+using System.Windows.Forms;
 
 namespace ntrbase.Helpers
 {
@@ -13,7 +14,7 @@ namespace ntrbase.Helpers
         public byte[] lastmultiread;
         public int pid = 0;
         PKM validator;
-        private Timer NTRtimer;
+        private System.Timers.Timer NTRtimer;
         private bool timeout = false;
 
         // Offsets for remote controls
@@ -27,7 +28,7 @@ namespace ntrbase.Helpers
         // Class constructor
         public RemoteControl()
         {
-            NTRtimer = new Timer(maxtimeout);
+            NTRtimer = new System.Timers.Timer(maxtimeout);
             NTRtimer.AutoReset = false;
             NTRtimer.Elapsed += NTRtimer_Tick;
             NTRtimer.Enabled = false;
@@ -438,13 +439,22 @@ namespace ntrbase.Helpers
         private void handlePokeRead(object args_obj)
         {
             DataReadyWaiting args = (DataReadyWaiting)args_obj;
-            validator.Data = PKX.decryptArray(args.data);
+            if (Program.gCmdWindow.SAV.Generation == 6)
+            {
+                validator = new PK6(PKX.decryptArray(args.data));
+            }
+            else
+            {
+                validator = new PK7(PKX.decryptArray(args.data));
+            }
         }
 
-        public async Task<long> waitPokeRead(int box, int slot)
+        public async Task<PKM> waitPokeRead(NumericUpDown boxCtrl, NumericUpDown slotCtrl)
         {
             try
             {
+                int box = (int)boxCtrl.Value - 1;
+                int slot = (int)boxCtrl.Value - 1;
                 Report("NTR: Read pokémon data at box " + (box + 1) + ", slot " + (slot + 1));
                 // Get offset
                 uint dumpOff = Program.gCmdWindow.boxOff + (Convert.ToUInt32(box * BOXSIZE + slot) * POKEBYTES);
@@ -461,24 +471,29 @@ namespace ntrbase.Helpers
                     }
                 }
                 if (timeout)
-                {
+                { // No read
                     Report("NTR: Read failed");
-                    return -2;
+                    return null;
                 }
-                else if (validator.Species > 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
-                {
+                if (validator.ChecksumValid && validator.Species > 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
+                { // Valid pokemon
                     NTRtimer.Stop();
-                    lastRead = (uint)validator.Species;
-                    Program.gCmdWindow.pkm.Data = validator.Data;
-                    //Program.gCmdWindow.updateTabs();
+                    lastRead = validator.Checksum;
+                    Program.gCmdWindow.populateFields(validator);
                     Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
-                    return validator.PID;
+                    return validator;
                 }
-                else // Empty slot
-                {
+                else if (validator.ChecksumValid && validator.Species == 0)
+                { // Empty slot
                     NTRtimer.Stop();
                     Report("NTR: Empty pokémon data");
-                    return -1;
+                    return Program.gCmdWindow.SAV.BlankPKM;
+                }
+                else
+                { // Invalid pokémon
+                    NTRtimer.Stop();
+                    Report("NTR: Invalid pokémon data");
+                    return null;
                 }
             }
             catch (Exception ex)
@@ -486,7 +501,7 @@ namespace ntrbase.Helpers
                 NTRtimer.Stop();
                 Report("NTR: Read failed with exception:");
                 Report(ex.Message);
-                return -2; // No data received
+                return null; // No data received
             }
         }
 

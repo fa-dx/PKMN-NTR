@@ -3889,13 +3889,13 @@
             // 
             // Tools_WonderTrade
             // 
-            this.Tools_WonderTrade.Enabled = false;
             this.Tools_WonderTrade.Location = new System.Drawing.Point(193, 32);
             this.Tools_WonderTrade.Name = "Tools_WonderTrade";
             this.Tools_WonderTrade.Size = new System.Drawing.Size(89, 23);
             this.Tools_WonderTrade.TabIndex = 5;
             this.Tools_WonderTrade.Text = "WT Bot";
             this.Tools_WonderTrade.UseVisualStyleBackColor = true;
+            this.Tools_WonderTrade.Click += new System.EventHandler(this.Tools_WonderTrade_Click);
             // 
             // Tools_Filter
             // 

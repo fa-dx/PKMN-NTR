@@ -1,7 +1,9 @@
 ﻿/// I do not own the code used for pokémon editing in this class. 
 /// All rights and credits for that code in this class belong to Kaphotics.
 /// Code was taken from PKHeX https://github.com/kwsch/PKHeX with minor modifications
+/// 
 
+using ntrbase.Bot;
 using ntrbase.Helpers;
 using ntrbase.Properties;
 using ntrbase.Sub_forms;
@@ -1720,6 +1722,18 @@ namespace ntrbase
 
         }
 
+        public void WriteDataToFile(byte[] data, string path)
+        {
+            try
+            {
+                File.WriteAllBytes(path, data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A error has ocurred:\r\n\r\n" + ex.Message);
+            }
+        }
+
         // Write single pokémon from tabs
         private void Write_PKM_Click(object sender, EventArgs e)
         {
@@ -2008,6 +2022,12 @@ namespace ntrbase
         {
             Delg.SetValue(boxDump, box + 1);
             Delg.SetValue(slotDump, slot + 1);
+        }
+
+        public void updateDumpBoxes(NumericUpDown box, NumericUpDown slot)
+        {
+            Delg.SetValue(boxDump, box.Value);
+            Delg.SetValue(slotDump, slot.Value);
         }
 
         #endregion GUI handling
@@ -3730,6 +3750,26 @@ namespace ntrbase
             new Filter_Constructor().Show();
         }
 
+        // Wonder Trade
+        private void Tools_WonderTrade_Click(object sender, EventArgs e)
+        {
+            Tool_Start();
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERWT + "\\";
+            (new FileInfo(folderPath)).Directory.Create();
+            if (SAV.Generation == 6)
+            {
+                new Bot_WonderTrade6().Show();
+            }
+            else if (SAV.Generation == 7)
+            {
+                new Bot_WonderTrade7().Show();
+            }
+            else
+            {
+                Tool_Finish();
+            }
+        }
+
         // PokeDigger
         private void Tools_PokeDigger_Click(object sender, EventArgs e)
         {
@@ -3747,6 +3787,34 @@ namespace ntrbase
 
         #endregion Sub-forms
 
+        #region Bots
+
+        public async Task<bool> Reconnect()
+        {
+            addtoLog("NTR: Reconnect");
+            Program.scriptHelper.connect(host.Text, 8000);
+            int waittimeout;
+            for (waittimeout = 0; waittimeout < 20; waittimeout++)
+            {
+                await Task.Delay(500);
+                if (lastlog.Contains("end of process list"))
+                {
+                    break;
+                }
+            }
+            if (waittimeout < 20)
+            {
+                addtoLog("NTR: Reconnect sucessful");
+                return true;
+            }
+            else
+            {
+                addtoLog("NTR: Reconnect failed");
+                return false;
+            }
+        }
+
+        #endregion Bots
     }
 
     //Objects of this class contains an array for data that have been acquired, a delegate function 
