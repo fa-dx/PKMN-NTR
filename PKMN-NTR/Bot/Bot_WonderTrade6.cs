@@ -143,6 +143,7 @@ namespace ntrbase.Bot
                     tradewait = 0;
                     pklist = new List<PKM> { };
                     // Run the bot
+                    Program.gCmdWindow.botMode(true);
                     RunBot();
                 }
                 else
@@ -176,6 +177,7 @@ namespace ntrbase.Bot
         {
             try
             {
+                Program.gCmdWindow.botMode(true);
                 while (botworking)
                 {
                     switch (botstate)
@@ -796,6 +798,7 @@ namespace ntrbase.Bot
             }
             showResult("Wonder Trade bot", botresult);
             Delg.SetText(RunStop, "Start Bot");
+            Program.gCmdWindow.botMode(false);
             EnableControls();
             Delg.SetEnabled(RunStop, true);
         }

@@ -4418,6 +4418,7 @@
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "PKMN-NTR";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);

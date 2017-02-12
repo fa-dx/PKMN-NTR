@@ -67,7 +67,6 @@ namespace ntrbase
         public const string FOLDERWT = "Wonder Trade";
         public string PKXEXT;
         public string BOXEXT;
-        private static string numberPattern = " ({0})";
 
         // Variables for update checking
         internal GitHubClient Github;
@@ -3811,6 +3810,32 @@ namespace ntrbase
             {
                 addtoLog("NTR: Reconnect failed");
                 return false;
+            }
+        }
+
+        public void botMode(bool state)
+        {
+            botWorking = state;
+            if (state)
+            {
+                timer1.Interval = 500;
+            }
+            else
+            {
+                timer1.Interval = 1000;
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (botWorking)
+            {
+                DialogResult closewindows;
+                closewindows = MessageBox.Show("A bot is currently wokring, do you still want to close the application?", "Bot in progress", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (closewindows == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
