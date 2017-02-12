@@ -454,7 +454,7 @@ namespace ntrbase.Helpers
             try
             {
                 int box = (int)boxCtrl.Value - 1;
-                int slot = (int)boxCtrl.Value - 1;
+                int slot = (int)slotCtrl.Value - 1;
                 Report("NTR: Read pokémon data at box " + (box + 1) + ", slot " + (slot + 1));
                 // Get offset
                 uint dumpOff = Program.gCmdWindow.boxOff + (Convert.ToUInt32(box * BOXSIZE + slot) * POKEBYTES);
@@ -505,7 +505,7 @@ namespace ntrbase.Helpers
             }
         }
 
-        public async Task<long> waitPokeRead(uint offset)
+        public async Task<PKM> waitPokeRead(uint offset)
         {
             try
             {
@@ -522,24 +522,28 @@ namespace ntrbase.Helpers
                     }
                 }
                 if (timeout)
-                {
+                { // No read
                     Report("NTR: Read failed");
-                    return -2;
+                    return null;
                 }
-                else if (validator.Species > 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
-                {
+                if (validator.ChecksumValid && validator.Species > 0 && validator.Species <= Program.gCmdWindow.MAXSPECIES)
+                { // Valid pokemon
                     NTRtimer.Stop();
-                    lastRead = (uint)validator.Species;
-                    Program.gCmdWindow.pkm.Data = validator.Data;
-                    //Program.gCmdWindow.updateTabs();
-                    Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8")); ;
-                    return validator.PID;
+                    lastRead = validator.Checksum;
+                    Report("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
+                    return validator;
                 }
-                else // Empty slot
-                {
+                else if (validator.ChecksumValid && validator.Species == 0)
+                { // Empty slot
                     NTRtimer.Stop();
                     Report("NTR: Empty pokémon data");
-                    return -1;
+                    return Program.gCmdWindow.SAV.BlankPKM;
+                }
+                else
+                { // Invalid pokémon
+                    NTRtimer.Stop();
+                    Report("NTR: Invalid pokémon data");
+                    return null;
                 }
             }
             catch (Exception ex)
@@ -547,7 +551,7 @@ namespace ntrbase.Helpers
                 NTRtimer.Stop();
                 Report("NTR: Read failed with exception:");
                 Report(ex.Message);
-                return -2; // No data received
+                return null; // No data received
             }
         }
 

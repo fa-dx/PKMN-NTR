@@ -159,7 +159,6 @@ namespace ntrbase.Bot
             Delg.SetEnabled(Trades, false);
             Delg.SetEnabled(WTSource, false);
             Delg.SetEnabled(WTAfter, false);
-            Delg.SetEnabled(WTAfter, false);
             Delg.SetEnabled(runEndless, false);
         }
 
@@ -169,7 +168,6 @@ namespace ntrbase.Bot
             Delg.SetEnabled(Slot, true);
             Delg.SetEnabled(Trades, true);
             Delg.SetEnabled(WTSource, true);
-            Delg.SetEnabled(WTAfter, true);
             Delg.SetEnabled(WTAfter, true);
             Delg.SetEnabled(runEndless, true);
         }
@@ -270,7 +268,7 @@ namespace ntrbase.Bot
                                     byte[] temp = File.ReadAllBytes(pkf);
                                     if (temp.Length == 232)
                                     {
-                                        PK7 pkmn = new PK7(temp);
+                                        PK6 pkmn = new PK6(temp);
                                         if (isLegal(pkmn))
                                         { // Legal pkm
                                             pklist.Add(pkmn);
@@ -813,6 +811,7 @@ namespace ntrbase.Bot
             {
                 Delg.SetValue(Box, Box.Value + 1);
                 Delg.SetValue(Slot, 1);
+                boxchange = true;
             }
             else
             {

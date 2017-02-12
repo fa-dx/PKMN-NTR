@@ -29,86 +29,86 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bot_WonderTrade7));
-            this.WT_After = new System.Windows.Forms.GroupBox();
-            this.WTafter_Delete = new System.Windows.Forms.RadioButton();
-            this.WTafter_Restore = new System.Windows.Forms.RadioButton();
-            this.WTafter_DoNothing = new System.Windows.Forms.RadioButton();
-            this.WTafter_Dump = new System.Windows.Forms.CheckBox();
+            this.WTAfter = new System.Windows.Forms.GroupBox();
+            this.afterDelete = new System.Windows.Forms.RadioButton();
+            this.afterRestore = new System.Windows.Forms.RadioButton();
+            this.afterNothing = new System.Windows.Forms.RadioButton();
+            this.afterDump = new System.Windows.Forms.CheckBox();
             this.label58 = new System.Windows.Forms.Label();
-            this.WT_RunEndless = new System.Windows.Forms.CheckBox();
+            this.runEndless = new System.Windows.Forms.CheckBox();
             this.label57 = new System.Windows.Forms.Label();
-            this.RunWTbot = new System.Windows.Forms.Button();
-            this.WTBox = new System.Windows.Forms.NumericUpDown();
-            this.WT_Sources = new System.Windows.Forms.GroupBox();
-            this.WTsource_Random = new System.Windows.Forms.RadioButton();
-            this.WTsource_Folder = new System.Windows.Forms.RadioButton();
-            this.WTsource_Boxes = new System.Windows.Forms.RadioButton();
+            this.RunStop = new System.Windows.Forms.Button();
+            this.Box = new System.Windows.Forms.NumericUpDown();
+            this.WTSource = new System.Windows.Forms.GroupBox();
+            this.sourceRandom = new System.Windows.Forms.RadioButton();
+            this.sourceFolder = new System.Windows.Forms.RadioButton();
+            this.sourceBox = new System.Windows.Forms.RadioButton();
             this.label59 = new System.Windows.Forms.Label();
-            this.WTtradesNo = new System.Windows.Forms.NumericUpDown();
-            this.WTSlot = new System.Windows.Forms.NumericUpDown();
-            this.WTcollectFC = new System.Windows.Forms.CheckBox();
-            this.WT_After.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).BeginInit();
-            this.WT_Sources.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).BeginInit();
+            this.Trades = new System.Windows.Forms.NumericUpDown();
+            this.Slot = new System.Windows.Forms.NumericUpDown();
+            this.collectFC = new System.Windows.Forms.CheckBox();
+            this.WTAfter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Box)).BeginInit();
+            this.WTSource.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Trades)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Slot)).BeginInit();
             this.SuspendLayout();
             // 
-            // WT_After
+            // WTAfter
             // 
-            this.WT_After.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.WT_After.Controls.Add(this.WTafter_Delete);
-            this.WT_After.Controls.Add(this.WTafter_Restore);
-            this.WT_After.Controls.Add(this.WTafter_DoNothing);
-            this.WT_After.Controls.Add(this.WTafter_Dump);
-            this.WT_After.Location = new System.Drawing.Point(156, 12);
-            this.WT_After.Name = "WT_After";
-            this.WT_After.Size = new System.Drawing.Size(148, 120);
-            this.WT_After.TabIndex = 21;
-            this.WT_After.TabStop = false;
-            this.WT_After.Text = "After trading";
+            this.WTAfter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.WTAfter.Controls.Add(this.afterDelete);
+            this.WTAfter.Controls.Add(this.afterRestore);
+            this.WTAfter.Controls.Add(this.afterNothing);
+            this.WTAfter.Controls.Add(this.afterDump);
+            this.WTAfter.Location = new System.Drawing.Point(156, 12);
+            this.WTAfter.Name = "WTAfter";
+            this.WTAfter.Size = new System.Drawing.Size(148, 120);
+            this.WTAfter.TabIndex = 21;
+            this.WTAfter.TabStop = false;
+            this.WTAfter.Text = "After trading";
             // 
-            // WTafter_Delete
+            // afterDelete
             // 
-            this.WTafter_Delete.AutoSize = true;
-            this.WTafter_Delete.Location = new System.Drawing.Point(6, 88);
-            this.WTafter_Delete.Name = "WTafter_Delete";
-            this.WTafter_Delete.Size = new System.Drawing.Size(136, 17);
-            this.WTafter_Delete.TabIndex = 1;
-            this.WTafter_Delete.Text = "Delete traded pokémon";
-            this.WTafter_Delete.UseVisualStyleBackColor = true;
+            this.afterDelete.AutoSize = true;
+            this.afterDelete.Location = new System.Drawing.Point(6, 88);
+            this.afterDelete.Name = "afterDelete";
+            this.afterDelete.Size = new System.Drawing.Size(136, 17);
+            this.afterDelete.TabIndex = 1;
+            this.afterDelete.Text = "Delete traded pokémon";
+            this.afterDelete.UseVisualStyleBackColor = true;
             // 
-            // WTafter_Restore
+            // afterRestore
             // 
-            this.WTafter_Restore.AutoSize = true;
-            this.WTafter_Restore.Location = new System.Drawing.Point(6, 65);
-            this.WTafter_Restore.Name = "WTafter_Restore";
-            this.WTafter_Restore.Size = new System.Drawing.Size(101, 17);
-            this.WTafter_Restore.TabIndex = 1;
-            this.WTafter_Restore.Text = "Restore backup";
-            this.WTafter_Restore.UseVisualStyleBackColor = true;
+            this.afterRestore.AutoSize = true;
+            this.afterRestore.Location = new System.Drawing.Point(6, 65);
+            this.afterRestore.Name = "afterRestore";
+            this.afterRestore.Size = new System.Drawing.Size(101, 17);
+            this.afterRestore.TabIndex = 1;
+            this.afterRestore.Text = "Restore backup";
+            this.afterRestore.UseVisualStyleBackColor = true;
             // 
-            // WTafter_DoNothing
+            // afterNothing
             // 
-            this.WTafter_DoNothing.AutoSize = true;
-            this.WTafter_DoNothing.Checked = true;
-            this.WTafter_DoNothing.Location = new System.Drawing.Point(6, 42);
-            this.WTafter_DoNothing.Name = "WTafter_DoNothing";
-            this.WTafter_DoNothing.Size = new System.Drawing.Size(77, 17);
-            this.WTafter_DoNothing.TabIndex = 1;
-            this.WTafter_DoNothing.TabStop = true;
-            this.WTafter_DoNothing.Text = "Do nothing";
-            this.WTafter_DoNothing.UseVisualStyleBackColor = true;
+            this.afterNothing.AutoSize = true;
+            this.afterNothing.Checked = true;
+            this.afterNothing.Location = new System.Drawing.Point(6, 42);
+            this.afterNothing.Name = "afterNothing";
+            this.afterNothing.Size = new System.Drawing.Size(77, 17);
+            this.afterNothing.TabIndex = 1;
+            this.afterNothing.TabStop = true;
+            this.afterNothing.Text = "Do nothing";
+            this.afterNothing.UseVisualStyleBackColor = true;
             // 
-            // WTafter_Dump
+            // afterDump
             // 
-            this.WTafter_Dump.AutoSize = true;
-            this.WTafter_Dump.Location = new System.Drawing.Point(6, 20);
-            this.WTafter_Dump.Name = "WTafter_Dump";
-            this.WTafter_Dump.Size = new System.Drawing.Size(109, 17);
-            this.WTafter_Dump.TabIndex = 0;
-            this.WTafter_Dump.Text = "Dump boxes and:";
-            this.WTafter_Dump.UseVisualStyleBackColor = true;
+            this.afterDump.AutoSize = true;
+            this.afterDump.Location = new System.Drawing.Point(6, 19);
+            this.afterDump.Name = "afterDump";
+            this.afterDump.Size = new System.Drawing.Size(109, 17);
+            this.afterDump.TabIndex = 0;
+            this.afterDump.Text = "Dump boxes and:";
+            this.afterDump.UseVisualStyleBackColor = true;
             // 
             // label58
             // 
@@ -119,15 +119,15 @@
             this.label58.TabIndex = 17;
             this.label58.Text = "Box:";
             // 
-            // WT_RunEndless
+            // runEndless
             // 
-            this.WT_RunEndless.AutoSize = true;
-            this.WT_RunEndless.Location = new System.Drawing.Point(214, 165);
-            this.WT_RunEndless.Name = "WT_RunEndless";
-            this.WT_RunEndless.Size = new System.Drawing.Size(90, 17);
-            this.WT_RunEndless.TabIndex = 23;
-            this.WT_RunEndless.Text = "Run endessly";
-            this.WT_RunEndless.UseVisualStyleBackColor = true;
+            this.runEndless.AutoSize = true;
+            this.runEndless.Location = new System.Drawing.Point(214, 165);
+            this.runEndless.Name = "runEndless";
+            this.runEndless.Size = new System.Drawing.Size(90, 17);
+            this.runEndless.TabIndex = 23;
+            this.runEndless.Text = "Run endessly";
+            this.runEndless.UseVisualStyleBackColor = true;
             // 
             // label57
             // 
@@ -138,82 +138,84 @@
             this.label57.TabIndex = 18;
             this.label57.Text = "Slot:";
             // 
-            // RunWTbot
+            // RunStop
             // 
-            this.RunWTbot.Location = new System.Drawing.Point(12, 161);
-            this.RunWTbot.Name = "RunWTbot";
-            this.RunWTbot.Size = new System.Drawing.Size(196, 23);
-            this.RunWTbot.TabIndex = 22;
-            this.RunWTbot.Text = "Start Bot";
-            this.RunWTbot.UseVisualStyleBackColor = true;
+            this.RunStop.Location = new System.Drawing.Point(12, 161);
+            this.RunStop.Name = "RunStop";
+            this.RunStop.Size = new System.Drawing.Size(196, 23);
+            this.RunStop.TabIndex = 22;
+            this.RunStop.Text = "Start Bot";
+            this.RunStop.UseVisualStyleBackColor = true;
+            this.RunStop.Click += new System.EventHandler(this.RunStop_Click);
             // 
-            // WTBox
+            // Box
             // 
-            this.WTBox.Location = new System.Drawing.Point(12, 28);
-            this.WTBox.Maximum = new decimal(new int[] {
+            this.Box.Location = new System.Drawing.Point(12, 28);
+            this.Box.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
-            this.WTBox.Minimum = new decimal(new int[] {
+            this.Box.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.WTBox.Name = "WTBox";
-            this.WTBox.Size = new System.Drawing.Size(40, 20);
-            this.WTBox.TabIndex = 14;
-            this.WTBox.Value = new decimal(new int[] {
+            this.Box.Name = "Box";
+            this.Box.Size = new System.Drawing.Size(40, 20);
+            this.Box.TabIndex = 14;
+            this.Box.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.Box.ValueChanged += new System.EventHandler(this.Box_ValueChanged);
             // 
-            // WT_Sources
+            // WTSource
             // 
-            this.WT_Sources.AutoSize = true;
-            this.WT_Sources.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.WT_Sources.Controls.Add(this.WTsource_Random);
-            this.WT_Sources.Controls.Add(this.WTsource_Folder);
-            this.WT_Sources.Controls.Add(this.WTsource_Boxes);
-            this.WT_Sources.Location = new System.Drawing.Point(12, 54);
-            this.WT_Sources.Name = "WT_Sources";
-            this.WT_Sources.Size = new System.Drawing.Size(138, 101);
-            this.WT_Sources.TabIndex = 20;
-            this.WT_Sources.TabStop = false;
-            this.WT_Sources.Text = "Pokémon Source";
+            this.WTSource.AutoSize = true;
+            this.WTSource.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.WTSource.Controls.Add(this.sourceRandom);
+            this.WTSource.Controls.Add(this.sourceFolder);
+            this.WTSource.Controls.Add(this.sourceBox);
+            this.WTSource.Location = new System.Drawing.Point(12, 54);
+            this.WTSource.Name = "WTSource";
+            this.WTSource.Size = new System.Drawing.Size(138, 101);
+            this.WTSource.TabIndex = 20;
+            this.WTSource.TabStop = false;
+            this.WTSource.Text = "Pokémon Source";
             // 
-            // WTsource_Random
+            // sourceRandom
             // 
-            this.WTsource_Random.AutoSize = true;
-            this.WTsource_Random.Location = new System.Drawing.Point(6, 65);
-            this.WTsource_Random.Name = "WTsource_Random";
-            this.WTsource_Random.Size = new System.Drawing.Size(124, 17);
-            this.WTsource_Random.TabIndex = 2;
-            this.WTsource_Random.Text = "WT Folder (Random)";
-            this.WTsource_Random.UseVisualStyleBackColor = true;
+            this.sourceRandom.AutoSize = true;
+            this.sourceRandom.Location = new System.Drawing.Point(6, 65);
+            this.sourceRandom.Name = "sourceRandom";
+            this.sourceRandom.Size = new System.Drawing.Size(124, 17);
+            this.sourceRandom.TabIndex = 2;
+            this.sourceRandom.Text = "WT Folder (Random)";
+            this.sourceRandom.UseVisualStyleBackColor = true;
             // 
-            // WTsource_Folder
+            // sourceFolder
             // 
-            this.WTsource_Folder.AutoSize = true;
-            this.WTsource_Folder.Location = new System.Drawing.Point(6, 42);
-            this.WTsource_Folder.Name = "WTsource_Folder";
-            this.WTsource_Folder.Size = new System.Drawing.Size(126, 17);
-            this.WTsource_Folder.TabIndex = 1;
-            this.WTsource_Folder.Text = "Wonder Trade Folder";
-            this.WTsource_Folder.UseVisualStyleBackColor = true;
+            this.sourceFolder.AutoSize = true;
+            this.sourceFolder.Location = new System.Drawing.Point(6, 42);
+            this.sourceFolder.Name = "sourceFolder";
+            this.sourceFolder.Size = new System.Drawing.Size(126, 17);
+            this.sourceFolder.TabIndex = 1;
+            this.sourceFolder.Text = "Wonder Trade Folder";
+            this.sourceFolder.UseVisualStyleBackColor = true;
             // 
-            // WTsource_Boxes
+            // sourceBox
             // 
-            this.WTsource_Boxes.AutoSize = true;
-            this.WTsource_Boxes.Checked = true;
-            this.WTsource_Boxes.Location = new System.Drawing.Point(6, 19);
-            this.WTsource_Boxes.Name = "WTsource_Boxes";
-            this.WTsource_Boxes.Size = new System.Drawing.Size(71, 17);
-            this.WTsource_Boxes.TabIndex = 0;
-            this.WTsource_Boxes.TabStop = true;
-            this.WTsource_Boxes.Text = "PC Boxes";
-            this.WTsource_Boxes.UseVisualStyleBackColor = true;
+            this.sourceBox.AutoSize = true;
+            this.sourceBox.Checked = true;
+            this.sourceBox.Location = new System.Drawing.Point(6, 19);
+            this.sourceBox.Name = "sourceBox";
+            this.sourceBox.Size = new System.Drawing.Size(71, 17);
+            this.sourceBox.TabIndex = 0;
+            this.sourceBox.TabStop = true;
+            this.sourceBox.Text = "PC Boxes";
+            this.sourceBox.UseVisualStyleBackColor = true;
             // 
             // label59
             // 
@@ -224,55 +226,55 @@
             this.label59.TabIndex = 19;
             this.label59.Text = "# trades:";
             // 
-            // WTtradesNo
+            // Trades
             // 
-            this.WTtradesNo.Location = new System.Drawing.Point(104, 28);
-            this.WTtradesNo.Maximum = new decimal(new int[] {
+            this.Trades.Location = new System.Drawing.Point(104, 28);
+            this.Trades.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
-            this.WTtradesNo.Name = "WTtradesNo";
-            this.WTtradesNo.Size = new System.Drawing.Size(46, 20);
-            this.WTtradesNo.TabIndex = 16;
-            this.WTtradesNo.Value = new decimal(new int[] {
+            this.Trades.Name = "Trades";
+            this.Trades.Size = new System.Drawing.Size(46, 20);
+            this.Trades.TabIndex = 16;
+            this.Trades.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // WTSlot
+            // Slot
             // 
-            this.WTSlot.Location = new System.Drawing.Point(58, 28);
-            this.WTSlot.Maximum = new decimal(new int[] {
+            this.Slot.Location = new System.Drawing.Point(58, 28);
+            this.Slot.Maximum = new decimal(new int[] {
             30,
             0,
             0,
             0});
-            this.WTSlot.Minimum = new decimal(new int[] {
+            this.Slot.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.WTSlot.Name = "WTSlot";
-            this.WTSlot.Size = new System.Drawing.Size(40, 20);
-            this.WTSlot.TabIndex = 15;
-            this.WTSlot.Value = new decimal(new int[] {
+            this.Slot.Name = "Slot";
+            this.Slot.Size = new System.Drawing.Size(40, 20);
+            this.Slot.TabIndex = 15;
+            this.Slot.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.Slot.ValueChanged += new System.EventHandler(this.Box_ValueChanged);
             // 
-            // WTcollectFC
+            // collectFC
             // 
-            this.WTcollectFC.AutoSize = true;
-            this.WTcollectFC.Enabled = false;
-            this.WTcollectFC.Location = new System.Drawing.Point(162, 138);
-            this.WTcollectFC.Name = "WTcollectFC";
-            this.WTcollectFC.Size = new System.Drawing.Size(134, 17);
-            this.WTcollectFC.TabIndex = 24;
-            this.WTcollectFC.Text = "Collect FC after a trade";
-            this.WTcollectFC.UseVisualStyleBackColor = true;
+            this.collectFC.AutoSize = true;
+            this.collectFC.Location = new System.Drawing.Point(162, 138);
+            this.collectFC.Name = "collectFC";
+            this.collectFC.Size = new System.Drawing.Size(134, 17);
+            this.collectFC.TabIndex = 24;
+            this.collectFC.Text = "Collect FC after a trade";
+            this.collectFC.UseVisualStyleBackColor = true;
             // 
             // Bot_WonderTrade7
             // 
@@ -281,27 +283,29 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(319, 197);
-            this.Controls.Add(this.WTcollectFC);
-            this.Controls.Add(this.WT_After);
+            this.Controls.Add(this.collectFC);
+            this.Controls.Add(this.WTAfter);
             this.Controls.Add(this.label58);
-            this.Controls.Add(this.WT_RunEndless);
+            this.Controls.Add(this.runEndless);
             this.Controls.Add(this.label57);
-            this.Controls.Add(this.RunWTbot);
-            this.Controls.Add(this.WTBox);
-            this.Controls.Add(this.WT_Sources);
+            this.Controls.Add(this.RunStop);
+            this.Controls.Add(this.Box);
+            this.Controls.Add(this.WTSource);
             this.Controls.Add(this.label59);
-            this.Controls.Add(this.WTtradesNo);
-            this.Controls.Add(this.WTSlot);
+            this.Controls.Add(this.Trades);
+            this.Controls.Add(this.Slot);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bot_WonderTrade7";
             this.Text = "Wonder Trade Bot";
-            this.WT_After.ResumeLayout(false);
-            this.WT_After.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTBox)).EndInit();
-            this.WT_Sources.ResumeLayout(false);
-            this.WT_Sources.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WTtradesNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WTSlot)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_WonderTrade7_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bot_WonderTrade7_FormClosed);
+            this.WTAfter.ResumeLayout(false);
+            this.WTAfter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Box)).EndInit();
+            this.WTSource.ResumeLayout(false);
+            this.WTSource.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Trades)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Slot)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,23 +313,23 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox WT_After;
-        private System.Windows.Forms.RadioButton WTafter_Delete;
-        private System.Windows.Forms.RadioButton WTafter_Restore;
-        private System.Windows.Forms.RadioButton WTafter_DoNothing;
-        private System.Windows.Forms.CheckBox WTafter_Dump;
+        private System.Windows.Forms.GroupBox WTAfter;
+        private System.Windows.Forms.RadioButton afterDelete;
+        private System.Windows.Forms.RadioButton afterRestore;
+        private System.Windows.Forms.RadioButton afterNothing;
+        private System.Windows.Forms.CheckBox afterDump;
         private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.CheckBox WT_RunEndless;
+        private System.Windows.Forms.CheckBox runEndless;
         private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.Button RunWTbot;
-        private System.Windows.Forms.NumericUpDown WTBox;
-        private System.Windows.Forms.GroupBox WT_Sources;
-        private System.Windows.Forms.RadioButton WTsource_Random;
-        private System.Windows.Forms.RadioButton WTsource_Folder;
-        private System.Windows.Forms.RadioButton WTsource_Boxes;
+        private System.Windows.Forms.Button RunStop;
+        private System.Windows.Forms.NumericUpDown Box;
+        private System.Windows.Forms.GroupBox WTSource;
+        private System.Windows.Forms.RadioButton sourceRandom;
+        private System.Windows.Forms.RadioButton sourceFolder;
+        private System.Windows.Forms.RadioButton sourceBox;
         private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.NumericUpDown WTtradesNo;
-        private System.Windows.Forms.NumericUpDown WTSlot;
-        private System.Windows.Forms.CheckBox WTcollectFC;
+        private System.Windows.Forms.NumericUpDown Trades;
+        private System.Windows.Forms.NumericUpDown Slot;
+        private System.Windows.Forms.CheckBox collectFC;
     }
 }

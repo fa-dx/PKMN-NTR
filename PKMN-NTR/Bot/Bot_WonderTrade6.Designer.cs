@@ -111,7 +111,7 @@
             // afterDump
             // 
             this.afterDump.AutoSize = true;
-            this.afterDump.Location = new System.Drawing.Point(6, 17);
+            this.afterDump.Location = new System.Drawing.Point(6, 19);
             this.afterDump.Name = "afterDump";
             this.afterDump.Size = new System.Drawing.Size(109, 17);
             this.afterDump.TabIndex = 0;
@@ -234,6 +234,7 @@
             0,
             0,
             0});
+            this.Slot.ValueChanged += new System.EventHandler(this.Box_ValueChanged);
             // 
             // label59
             // 

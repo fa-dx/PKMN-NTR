@@ -5,7 +5,7 @@ namespace ntrbase.Bot
 {
     public static class Bot
     {
-        public enum ErrorMessage { Finished, UserStop, ReadError, WriteError, ButtonError, TouchError, StickError, NotInPSS, GeneralError };
+        public enum ErrorMessage { Finished, UserStop, ReadError, WriteError, ButtonError, TouchError, StickError, NotInPSS, FestivalPlaza, GeneralError };
 
         public static void Report(string message)
         {
@@ -63,8 +63,14 @@ namespace ntrbase.Bot
                 case ErrorMessage.NotInPSS:
                     MessageBox.Show("Please go to the PSS menu and try again.", source, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
+                case ErrorMessage.FestivalPlaza:
+                    MessageBox.Show("Bot finished due level-up in Festival Plaza.", source, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
                 case ErrorMessage.GeneralError:
                     MessageBox.Show("A error has ocurred, see log for detals.", source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    MessageBox.Show("An unknown error has ocurred, please keep the log and report this error.", source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }
