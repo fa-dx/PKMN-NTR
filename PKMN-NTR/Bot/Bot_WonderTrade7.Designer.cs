@@ -152,7 +152,7 @@
             // 
             this.Box.Location = new System.Drawing.Point(12, 28);
             this.Box.Maximum = new decimal(new int[] {
-            31,
+            32,
             0,
             0,
             0});
