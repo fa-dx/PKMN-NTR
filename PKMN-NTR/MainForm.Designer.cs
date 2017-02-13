@@ -340,7 +340,7 @@
             this.lb_pkmnntrver = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lb_pkhexcorever = new System.Windows.Forms.Label();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.dragout = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -4155,7 +4155,7 @@
             this.tableLayoutPanel2.Controls.Add(this.lb_pkmnntrver, 1, 8);
             this.tableLayoutPanel2.Controls.Add(this.label8, 0, 9);
             this.tableLayoutPanel2.Controls.Add(this.label11, 0, 10);
-            this.tableLayoutPanel2.Controls.Add(this.label17, 1, 9);
+            this.tableLayoutPanel2.Controls.Add(this.lb_pkhexcorever, 1, 9);
             this.tableLayoutPanel2.Controls.Add(this.lb_update, 1, 10);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
@@ -4351,7 +4351,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 13);
             this.label8.TabIndex = 0;
-            this.label8.Text = "PKHeX Core:";
+            this.label8.Text = "PKHeX.Core:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label11
@@ -4365,17 +4365,16 @@
             this.label11.Text = "Updates:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label17
+            // lb_pkhexcorever
             // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(79, 193);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(204, 13);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "20170207";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label17.Click += new System.EventHandler(this.updateLabel_Click);
+            this.lb_pkhexcorever.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_pkhexcorever.AutoSize = true;
+            this.lb_pkhexcorever.Location = new System.Drawing.Point(79, 193);
+            this.lb_pkhexcorever.Name = "lb_pkhexcorever";
+            this.lb_pkhexcorever.Size = new System.Drawing.Size(204, 13);
+            this.lb_pkhexcorever.TabIndex = 4;
+            this.lb_pkhexcorever.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lb_pkhexcorever.Click += new System.EventHandler(this.updateLabel_Click);
             // 
             // PB_Legal
             // 
@@ -4894,7 +4893,7 @@
         private System.Windows.Forms.PictureBox PB_Mark1;
         private System.Windows.Forms.PictureBox PB_Mark4;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lb_pkhexcorever;
         private System.Windows.Forms.TextBox Seed_Legendary;
         private System.Windows.Forms.TextBox Seed_Egg;
         private System.Windows.Forms.Label label19;

@@ -240,6 +240,7 @@ namespace ntrbase
 
             Legal.MGDB_G6 = wc6db.Distinct().ToArray();
         }
+
         private static void refreshWC7DB()
         {
             List<MysteryGift> wc7db = new List<MysteryGift>();
@@ -264,6 +265,7 @@ namespace ntrbase
         private void MainForm_Load(object sender, EventArgs e)
         {
             lb_pkmnntrver.Text = System.Windows.Forms.Application.ProductVersion + " - DEV BUILD";
+            lb_pkhexcorever.Text = PKHeX.Core.Properties.Resources.ProgramVersion;
 
             addtoLog("THIS IS A BUILD FOR A DEVEOPMENT BRANCH - DO NOT EXPECT IT TO WORK");
 
