@@ -141,6 +141,11 @@ namespace ntrbase
 
             dragout.AllowDrop = true;
 
+            // Load WC6 folder to legality
+            refreshWC6DB();
+            // Load WC7 folder to legality
+            refreshWC7DB();
+
             PKM pk = SAV.getPKM((fieldsInitialized ? preparePKM() : pkm).Data);
             bool alreadyInit = fieldsInitialized;
             fieldsInitialized = false;
@@ -213,6 +218,47 @@ namespace ntrbase
                 cb.DisplayMember = "Text"; cb.ValueMember = "Value";
                 cb.DataSource = new BindingSource(moves, null);
             }
+        }
+
+        private static void refreshWC6DB()
+        {
+            List<MysteryGift> wc6db = new List<MysteryGift>();
+            byte[] wc6bin = PKHeX.Core.Properties.Resources.wc6;
+            for (int i = 0; i < wc6bin.Length; i += WC6.Size)
+            {
+                byte[] data = new byte[WC6.Size];
+                Array.Copy(wc6bin, i, data, 0, WC6.Size);
+                wc6db.Add(new WC6(data));
+            }
+            byte[] wc6full = PKHeX.Core.Properties.Resources.wc6full;
+            for (int i = 0; i < wc6full.Length; i += WC6.SizeFull)
+            {
+                byte[] data = new byte[WC6.SizeFull];
+                Array.Copy(wc6full, i, data, 0, WC6.SizeFull);
+                wc6db.Add(new WC6(data));
+            }
+
+            Legal.MGDB_G6 = wc6db.Distinct().ToArray();
+        }
+        private static void refreshWC7DB()
+        {
+            List<MysteryGift> wc7db = new List<MysteryGift>();
+            byte[] wc7bin = PKHeX.Core.Properties.Resources.wc7;
+            for (int i = 0; i < wc7bin.Length; i += WC7.Size)
+            {
+                byte[] data = new byte[WC7.Size];
+                Array.Copy(wc7bin, i, data, 0, WC7.Size);
+                wc7db.Add(new WC7(data));
+            }
+            byte[] wc7full = PKHeX.Core.Properties.Resources.wc7full;
+            for (int i = 0; i < wc7full.Length; i += WC7.SizeFull)
+            {
+                byte[] data = new byte[WC7.SizeFull];
+                Array.Copy(wc7full, i, data, 0, WC7.SizeFull);
+                wc7db.Add(new WC7(data));
+            }
+
+            Legal.MGDB_G7 = wc7db.Distinct().ToArray();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -2075,7 +2121,7 @@ namespace ntrbase
 
         private void openFile(byte[] input, string path, string ext)
         {
-            PKM temp; string c;
+            PKM temp; MysteryGift tg; string c;
             if ((temp = PKMConverter.getPKMfromBytes(input, prefer: SAV.Generation)) != null)
             {
                 PKM pk = PKMConverter.convertToFormat(temp, SAV.PKMType, out c);
@@ -2087,6 +2133,20 @@ namespace ntrbase
                     string pk_type = pk.GetType().Name;
                     WinFormsUtil.Alert($"Cannot load {a_lang} {pk_type} in {a_lang} save file.");
                 }
+                else
+                    populateFields(pk);
+                Console.WriteLine(c);
+            }
+            else if ((tg = MysteryGift.getMysteryGift(input, ext)) != null)
+            {
+                if (!tg.IsPokémon)
+                { WinFormsUtil.Alert("Mystery Gift is not a Pokémon.", path); return; }
+
+                temp = tg.convertToPKM(SAV);
+                PKM pk = PKMConverter.convertToFormat(temp, SAV.PKMType, out c);
+
+                if (pk == null)
+                    WinFormsUtil.Alert("Conversion failed.", c);
                 else
                     populateFields(pk);
                 Console.WriteLine(c);
