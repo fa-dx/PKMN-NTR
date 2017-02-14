@@ -98,6 +98,19 @@ namespace ntrbase.Helpers
                 ctrl.SelectedIndex = i;
         }
 
+        delegate void SetSelectedValueDelegate(ComboBox ctrl, int i);
+
+        public static void SetSelectedValue(ComboBox ctrl, int i)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetSelectedValueDelegate del = new SetSelectedValueDelegate(SetSelectedValue);
+                ctrl.Invoke(del, ctrl, i);
+            }
+            else
+                ctrl.SelectedValue = i;
+        }
+
         delegate void ComboboxFillDelegate(ComboBox ctrl, string[] val);
 
         public static void ComboboxFill(ComboBox ctrl, string[] val)

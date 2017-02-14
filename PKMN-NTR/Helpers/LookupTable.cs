@@ -285,6 +285,27 @@ namespace ntrbase.Helpers
             }
         }
 
+        public static uint langOff
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 0x8C79C69;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 0x8C8136D;
+                    case GameVersion.SN:
+                    case GameVersion.MN:
+                        return 0x330D6805;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
         public static uint timeOff
         {
             get

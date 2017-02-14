@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using PKHeX.Core;
 using ntrbase.Helpers;
+using System.Linq;
 
 namespace ntrbase.Sub_forms
 {
@@ -16,7 +17,13 @@ namespace ntrbase.Sub_forms
         public Edit_Trainer()
         {
             InitializeComponent();
-            Ctrls = new Control[] { TB_Name, Write_Name, Num_TID, Write_TID, Num_SID, Write_SID, Num_Money, Write_Money, Num_Miles, Write_Miles, Num_FestivalCoins, Num_FestivalCoins, Num_TotalFC, Write_TotalFC, Num_Miles, Write_Miles, Num_BP, Write_BP, LB_Lang, Write_Lang, Num_Hour, Num_Min, Num_Sec, Write_Time, ReloadFields };
+            Ctrls = new Control[] { TB_Name, Write_Name, Num_TID, Write_TID, Num_SID, Write_SID, Num_Money, Write_Money, Num_Miles, Write_Miles, Num_FestivalCoins, Num_FestivalCoins, Num_TotalFC, Write_TotalFC, Num_Miles, Write_Miles, Num_BP, Write_BP, CB_Language, Write_Lang, Num_Hour, Num_Min, Num_Sec, Write_Time, ReloadFields };
+            CB_Language.DisplayMember = "Text";
+            CB_Language.ValueMember = "Value";
+            var languages = Util.getUnsortedCBList("languages");
+            if (Program.gCmdWindow.SAV.Generation < 7)
+                languages = languages.Where(l => l.Value <= 8).ToList(); // Korean
+            CB_Language.DataSource = languages;
         }
 
         private void Edit_Trainer_Load(object sender, EventArgs e)
@@ -48,6 +55,7 @@ namespace ntrbase.Sub_forms
             Delg.SetValue(Num_Money, await waitMoney());
             Delg.SetValue(Num_Miles, await waitMiles());
             Delg.SetValue(Num_BP, await waitBP());
+            Delg.SetSelectedValue(CB_Language, await waitLang());
             byte[] time = await waitTime();
             Delg.SetValue(Num_Hour, BitConverter.ToUInt16(time, 0));
             Delg.SetValue(Num_Min, time[2]);
@@ -65,6 +73,7 @@ namespace ntrbase.Sub_forms
             Delg.SetValue(Num_FestivalCoins, await waitFestivalCoins());
             Delg.SetValue(Num_TotalFC, await waitTotalFC());
             Delg.SetValue(Num_BP, await waitBP());
+            Delg.SetSelectedValue(CB_Language, await waitLang());
             byte[] time = await waitTime();
             Delg.SetValue(Num_Hour, BitConverter.ToUInt16(time, 0));
             Delg.SetValue(Num_Min, time[2]);
@@ -185,6 +194,21 @@ namespace ntrbase.Sub_forms
                 Delg.SetEnabled(Num_BP, true);
                 Delg.SetEnabled(Write_BP, true);
                 return BitConverter.ToUInt32(Program.helper.lastmultiread, 0);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private async Task<int> waitLang()
+        {
+            RAMreader = Program.helper.waitNTRmultiread(LookupTable.langOff, 0x01);
+            if (await RAMreader)
+            {
+                Delg.SetEnabled(CB_Language, true);
+                Delg.SetEnabled(Write_Lang, true);
+                return Convert.ToInt32(Program.helper.lastmultiread[0]);
             }
             else
             {
@@ -383,6 +407,20 @@ namespace ntrbase.Sub_forms
             }
             Delg.SetEnabled(Num_BP, true);
             Delg.SetEnabled(Write_BP, true);
+        }
+
+        private async void Write_Lang_Click(object sender, EventArgs e)
+        {
+            Delg.SetEnabled(CB_Language, false);
+            Delg.SetEnabled(Write_Lang, false);
+            byte[] data = BitConverter.GetBytes(WinFormsUtil.getIndex(CB_Language));
+            RAMreader = Program.helper.waitNTRwrite(LookupTable.langOff, data, Program.gCmdWindow.pid);
+            if (!(await RAMreader))
+            {
+                MessageBox.Show("A error ocurred while writting data to RAM.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Delg.SetEnabled(CB_Language, true);
+            Delg.SetEnabled(Write_Lang, true);
         }
 
         private async void Write_Time_Click(object sender, EventArgs e)

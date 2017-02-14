@@ -76,8 +76,6 @@ namespace ntrbase
         public int pid;
         public byte lang;
         public string pname;
-        //Offsets for basic data
-        public uint langoff;
         //Offsets for Pokemon sources
         public uint tradeOff;
         public uint opponentOff;
@@ -543,7 +541,6 @@ namespace ntrbase
                 boxOff = 0x8C861C8;
                 daycare1Off = 0x8C7FF4C;
                 daycare2Off = 0x8C8003C;
-                langoff = 0x8C79C69;
                 tradeOff = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
@@ -559,7 +556,6 @@ namespace ntrbase
                 boxOff = 0x8C861C8;
                 daycare1Off = 0x8C7FF4C;
                 daycare2Off = 0x8C8003C;
-                langoff = 0x8C79C69;
                 tradeOff = 0x8500000;
                 battleBoxOff = 0x8C6AC2C;
                 partyOff = 0x8CE1CF8;
@@ -577,7 +573,6 @@ namespace ntrbase
                 daycare2Off = 0x8C88270;
                 daycare3Off = 0x8C88370;
                 daycare4Off = 0x8C88460;
-                langoff = 0x8C8136D;
                 tradeOff = 0x8520000;
                 battleBoxOff = 0x8C72330;
                 partyOff = 0x8CFB26C;
@@ -610,7 +605,6 @@ namespace ntrbase
                 boxOff = 0x330D9838;
                 daycare1Off = 0x3313EC01;
                 daycare2Off = 0x3313ECEA;
-                langoff = 0x330D6805;
                 tradeOff = 0x32A870C8;
                 opponentOff = 0x3254F4AC;
                 partyOff = 0x34195E10;

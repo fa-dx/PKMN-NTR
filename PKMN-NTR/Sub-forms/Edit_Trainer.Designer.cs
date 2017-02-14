@@ -60,7 +60,6 @@
             this.Write_Miles = new System.Windows.Forms.Button();
             this.Num_Miles = new System.Windows.Forms.NumericUpDown();
             this.Num_BP = new System.Windows.Forms.NumericUpDown();
-            this.LB_Lang = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Write_FestivalCoins = new System.Windows.Forms.Button();
             this.Num_FestivalCoins = new System.Windows.Forms.NumericUpDown();
@@ -68,6 +67,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.ReloadFields = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.CB_Language = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.Num_TotalFC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Hour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Min)).BeginInit();
@@ -374,6 +374,7 @@
             this.Write_Lang.TabIndex = 46;
             this.Write_Lang.Text = "Write";
             this.Write_Lang.UseVisualStyleBackColor = true;
+            this.Write_Lang.Click += new System.EventHandler(this.Write_Lang_Click);
             // 
             // Num_Money
             // 
@@ -455,15 +456,6 @@
             this.Num_BP.Size = new System.Drawing.Size(83, 20);
             this.Num_BP.TabIndex = 43;
             // 
-            // LB_Lang
-            // 
-            this.LB_Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LB_Lang.FormattingEnabled = true;
-            this.LB_Lang.Location = new System.Drawing.Point(87, 236);
-            this.LB_Lang.Name = "LB_Lang";
-            this.LB_Lang.Size = new System.Drawing.Size(83, 21);
-            this.LB_Lang.TabIndex = 45;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
@@ -471,6 +463,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel1.Controls.Add(this.CB_Language, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.Write_Name, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.Write_TID, 2, 1);
@@ -487,7 +480,6 @@
             this.tableLayoutPanel1.Controls.Add(this.Num_Money, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.Num_Miles, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label28, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.LB_Lang, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.Write_Lang, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.Write_BP, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.Num_BP, 1, 7);
@@ -586,6 +578,17 @@
             this.ReloadFields.UseVisualStyleBackColor = true;
             this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
             // 
+            // CB_Language
+            // 
+            this.CB_Language.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.CB_Language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_Language.FormattingEnabled = true;
+            this.CB_Language.Location = new System.Drawing.Point(84, 236);
+            this.CB_Language.Margin = new System.Windows.Forms.Padding(0);
+            this.CB_Language.Name = "CB_Language";
+            this.CB_Language.Size = new System.Drawing.Size(89, 21);
+            this.CB_Language.TabIndex = 70;
+            // 
             // Edit_Trainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -652,7 +655,6 @@
         private System.Windows.Forms.Button Write_Miles;
         private System.Windows.Forms.NumericUpDown Num_Miles;
         private System.Windows.Forms.NumericUpDown Num_BP;
-        private System.Windows.Forms.ComboBox LB_Lang;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.NumericUpDown Num_Sec;
@@ -661,5 +663,6 @@
         private System.Windows.Forms.NumericUpDown Num_FestivalCoins;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ComboBox CB_Language;
     }
 }
