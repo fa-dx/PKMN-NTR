@@ -473,14 +473,14 @@ namespace ntrbase.Bot
                             Report("Bot: Test if pokemon is selected");
                             waitTaskPKM = Program.helper.waitPokeRead(toppkmOff);
                             validator = (await waitTaskPKM).Clone();
-                            if (WTpoke == null)
+                            if (validator == null)
                             { // No data or invalid
                                 Report("Bot: Error detected or slot is empty");
                                 attempts++;
                                 botresult = ErrorMessage.ReadError;
                                 botstate = botstates.canceltouch;
                             }
-                            else if (WTpoke.Checksum != currentCHK)
+                            else if (validator.Checksum != currentCHK)
                             { // Different poke
                                 Report("Bot: Picked incorrect pokemon");
                                 attempts++;
