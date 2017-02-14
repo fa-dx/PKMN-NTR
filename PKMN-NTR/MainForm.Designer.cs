@@ -3708,8 +3708,8 @@
             // Tabs_General
             // 
             this.Tabs_General.Controls.Add(this.Tab_Dump);
-            this.Tabs_General.Controls.Add(this.Tab_Tools);
             this.Tabs_General.Controls.Add(this.Tab_Clone);
+            this.Tabs_General.Controls.Add(this.Tab_Tools);
             this.Tabs_General.Controls.Add(this.Tab_Log);
             this.Tabs_General.Controls.Add(this.Tab_About);
             this.Tabs_General.Location = new System.Drawing.Point(12, 12);
