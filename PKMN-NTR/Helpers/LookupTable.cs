@@ -1,4 +1,5 @@
 ﻿using PKHeX.Core;
+using System.Linq;
 
 namespace ntrbase.Helpers
 {

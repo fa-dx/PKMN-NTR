@@ -119,8 +119,7 @@ namespace ntrbase
             Label_Species.ResetForeColor();
             new ToolTip().SetToolTip(dragout, "PKM QuickSave");
             dragout.GiveFeedback += (sender, e) => { e.UseDefaultCursors = false; };
-            GiveFeedback += (sender, e) => { e.UseDefaultCursors = false; }
-            ;
+            GiveFeedback += (sender, e) => { e.UseDefaultCursors = false; };
             foreach (TabPage tab in tabMain.TabPages)
             {
                 tab.AllowDrop = true;
@@ -3824,6 +3823,25 @@ namespace ntrbase
                 Tool_Finish();
             }
         }
+
+        // Breeding
+        private void Tools_Breeding_Click(object sender, EventArgs e)
+        {
+            Tool_Start();
+            if (SAV.Generation == 6)
+            {
+                new Bot_Breeding6().Show();
+            }
+            else if (SAV.Generation == 7)
+            {
+                new Bot_Breeding7().Show();
+            }
+            else
+            {
+                Tool_Finish();
+            }
+        }
+
 
         // PokeDigger
         private void Tools_PokeDigger_Click(object sender, EventArgs e)

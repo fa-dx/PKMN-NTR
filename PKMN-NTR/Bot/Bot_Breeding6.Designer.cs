@@ -43,22 +43,22 @@
             this.tsvRemove = new System.Windows.Forms.Button();
             this.tsvSave = new System.Windows.Forms.Button();
             this.Breed_options = new System.Windows.Forms.GroupBox();
-            this.optionMode = new System.Windows.Forms.ComboBox();
-            this.optionReadESV = new System.Windows.Forms.CheckBox();
+            this.Mode = new System.Windows.Forms.ComboBox();
+            this.ReadESV = new System.Windows.Forms.CheckBox();
             this.Breed_labelBox = new System.Windows.Forms.Label();
             this.label75 = new System.Windows.Forms.Label();
-            this.optionQuickBreed = new System.Windows.Forms.CheckBox();
-            this.slot = new System.Windows.Forms.NumericUpDown();
+            this.QuickBreed = new System.Windows.Forms.CheckBox();
+            this.Slot = new System.Windows.Forms.NumericUpDown();
             this.label84 = new System.Windows.Forms.Label();
-            this.box = new System.Windows.Forms.NumericUpDown();
+            this.Box = new System.Windows.Forms.NumericUpDown();
             this.Breed_labelSlot = new System.Windows.Forms.Label();
-            this.eggs = new System.Windows.Forms.NumericUpDown();
+            this.Eggs = new System.Windows.Forms.NumericUpDown();
             this.daycare_select = new System.Windows.Forms.GroupBox();
-            this.optionRoute117 = new System.Windows.Forms.RadioButton();
-            this.optionBattleResort = new System.Windows.Forms.RadioButton();
+            this.daycareRoute117 = new System.Windows.Forms.RadioButton();
+            this.daycareBattleResort = new System.Windows.Forms.RadioButton();
             this.orgbox_pos = new System.Windows.Forms.GroupBox();
-            this.optionMiddle = new System.Windows.Forms.RadioButton();
-            this.optionTop = new System.Windows.Forms.RadioButton();
+            this.orgboxMiddle = new System.Windows.Forms.RadioButton();
+            this.orgboxTop = new System.Windows.Forms.RadioButton();
             this.clearAll = new System.Windows.Forms.Button();
             this.filterList = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,14 +81,14 @@
             this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filterLoad = new System.Windows.Forms.Button();
-            this.botStart = new System.Windows.Forms.Button();
+            this.RunStop = new System.Windows.Forms.Button();
             this.Breed_esvtsv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.esvList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).BeginInit();
             this.Breed_options.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slot)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.box)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Slot)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Box)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Eggs)).BeginInit();
             this.daycare_select.SuspendLayout();
             this.orgbox_pos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
@@ -170,6 +170,7 @@
             this.esvSave.TabIndex = 9;
             this.esvSave.Text = "Save ESV List";
             this.esvSave.UseVisualStyleBackColor = true;
+            this.esvSave.Click += new System.EventHandler(this.esvSave_Click);
             // 
             // TSVlist
             // 
@@ -199,6 +200,7 @@
             this.tsvAdd.TabIndex = 12;
             this.tsvAdd.Text = "Add";
             this.tsvAdd.UseVisualStyleBackColor = true;
+            this.tsvAdd.Click += new System.EventHandler(this.tsvAdd_Click);
             // 
             // tsvLoad
             // 
@@ -208,6 +210,7 @@
             this.tsvLoad.TabIndex = 15;
             this.tsvLoad.Text = "Load";
             this.tsvLoad.UseVisualStyleBackColor = true;
+            this.tsvLoad.Click += new System.EventHandler(this.tsvLoad_Click);
             // 
             // tsvRemove
             // 
@@ -218,6 +221,7 @@
             this.tsvRemove.TabIndex = 13;
             this.tsvRemove.Text = "Remove";
             this.tsvRemove.UseVisualStyleBackColor = true;
+            this.tsvRemove.Click += new System.EventHandler(this.tsvRemove_Click);
             // 
             // tsvSave
             // 
@@ -227,19 +231,20 @@
             this.tsvSave.TabIndex = 14;
             this.tsvSave.Text = "Save";
             this.tsvSave.UseVisualStyleBackColor = true;
+            this.tsvSave.Click += new System.EventHandler(this.tsvSave_Click);
             // 
             // Breed_options
             // 
-            this.Breed_options.Controls.Add(this.optionMode);
-            this.Breed_options.Controls.Add(this.optionReadESV);
+            this.Breed_options.Controls.Add(this.Mode);
+            this.Breed_options.Controls.Add(this.ReadESV);
             this.Breed_options.Controls.Add(this.Breed_labelBox);
             this.Breed_options.Controls.Add(this.label75);
-            this.Breed_options.Controls.Add(this.optionQuickBreed);
-            this.Breed_options.Controls.Add(this.slot);
+            this.Breed_options.Controls.Add(this.QuickBreed);
+            this.Breed_options.Controls.Add(this.Slot);
             this.Breed_options.Controls.Add(this.label84);
-            this.Breed_options.Controls.Add(this.box);
+            this.Breed_options.Controls.Add(this.Box);
             this.Breed_options.Controls.Add(this.Breed_labelSlot);
-            this.Breed_options.Controls.Add(this.eggs);
+            this.Breed_options.Controls.Add(this.Eggs);
             this.Breed_options.Controls.Add(this.daycare_select);
             this.Breed_options.Controls.Add(this.orgbox_pos);
             this.Breed_options.Location = new System.Drawing.Point(12, 12);
@@ -249,29 +254,29 @@
             this.Breed_options.TabStop = false;
             this.Breed_options.Text = "Options";
             // 
-            // optionMode
+            // Mode
             // 
-            this.optionMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.optionMode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.optionMode.FormattingEnabled = true;
-            this.optionMode.Items.AddRange(new object[] {
+            this.Mode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.Mode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.Mode.FormattingEnabled = true;
+            this.Mode.Items.AddRange(new object[] {
             "Simple",
             "Filter",
             "ESV/TSV"});
-            this.optionMode.Location = new System.Drawing.Point(49, 13);
-            this.optionMode.Name = "optionMode";
-            this.optionMode.Size = new System.Drawing.Size(205, 21);
-            this.optionMode.TabIndex = 0;
+            this.Mode.Location = new System.Drawing.Point(49, 13);
+            this.Mode.Name = "Mode";
+            this.Mode.Size = new System.Drawing.Size(205, 21);
+            this.Mode.TabIndex = 0;
             // 
-            // optionReadESV
+            // ReadESV
             // 
-            this.optionReadESV.AutoSize = true;
-            this.optionReadESV.Location = new System.Drawing.Point(6, 148);
-            this.optionReadESV.Name = "optionReadESV";
-            this.optionReadESV.Size = new System.Drawing.Size(137, 17);
-            this.optionReadESV.TabIndex = 6;
-            this.optionReadESV.Text = "Read ESV after deposit";
-            this.optionReadESV.UseVisualStyleBackColor = true;
+            this.ReadESV.AutoSize = true;
+            this.ReadESV.Location = new System.Drawing.Point(6, 148);
+            this.ReadESV.Name = "ReadESV";
+            this.ReadESV.Size = new System.Drawing.Size(137, 17);
+            this.ReadESV.TabIndex = 6;
+            this.ReadESV.Text = "Read ESV after deposit";
+            this.ReadESV.UseVisualStyleBackColor = true;
             // 
             // Breed_labelBox
             // 
@@ -291,37 +296,38 @@
             this.label75.TabIndex = 23;
             this.label75.Text = "# eggs:";
             // 
-            // optionQuickBreed
+            // QuickBreed
             // 
-            this.optionQuickBreed.AutoSize = true;
-            this.optionQuickBreed.Location = new System.Drawing.Point(150, 148);
-            this.optionQuickBreed.Name = "optionQuickBreed";
-            this.optionQuickBreed.Size = new System.Drawing.Size(85, 17);
-            this.optionQuickBreed.TabIndex = 7;
-            this.optionQuickBreed.Text = "Quick Breed";
-            this.optionQuickBreed.UseVisualStyleBackColor = true;
+            this.QuickBreed.AutoSize = true;
+            this.QuickBreed.Location = new System.Drawing.Point(150, 148);
+            this.QuickBreed.Name = "QuickBreed";
+            this.QuickBreed.Size = new System.Drawing.Size(85, 17);
+            this.QuickBreed.TabIndex = 7;
+            this.QuickBreed.Text = "Quick Breed";
+            this.QuickBreed.UseVisualStyleBackColor = true;
             // 
-            // slot
+            // Slot
             // 
-            this.slot.Location = new System.Drawing.Point(118, 46);
-            this.slot.Maximum = new decimal(new int[] {
+            this.Slot.Location = new System.Drawing.Point(118, 46);
+            this.Slot.Maximum = new decimal(new int[] {
             30,
             0,
             0,
             0});
-            this.slot.Minimum = new decimal(new int[] {
+            this.Slot.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.slot.Name = "slot";
-            this.slot.Size = new System.Drawing.Size(41, 20);
-            this.slot.TabIndex = 2;
-            this.slot.Value = new decimal(new int[] {
+            this.Slot.Name = "Slot";
+            this.Slot.Size = new System.Drawing.Size(41, 20);
+            this.Slot.TabIndex = 2;
+            this.Slot.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.Slot.ValueChanged += new System.EventHandler(this.Box_ValueChanged);
             // 
             // label84
             // 
@@ -332,27 +338,28 @@
             this.label84.TabIndex = 20;
             this.label84.Text = "Mode:";
             // 
-            // box
+            // Box
             // 
-            this.box.Location = new System.Drawing.Point(37, 46);
-            this.box.Maximum = new decimal(new int[] {
+            this.Box.Location = new System.Drawing.Point(37, 46);
+            this.Box.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
-            this.box.Minimum = new decimal(new int[] {
+            this.Box.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.box.Name = "box";
-            this.box.Size = new System.Drawing.Size(41, 20);
-            this.box.TabIndex = 1;
-            this.box.Value = new decimal(new int[] {
+            this.Box.Name = "Box";
+            this.Box.Size = new System.Drawing.Size(41, 20);
+            this.Box.TabIndex = 1;
+            this.Box.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.Box.ValueChanged += new System.EventHandler(this.Box_ValueChanged);
             // 
             // Breed_labelSlot
             // 
@@ -363,18 +370,18 @@
             this.Breed_labelSlot.TabIndex = 22;
             this.Breed_labelSlot.Text = "Slot:";
             // 
-            // eggs
+            // Eggs
             // 
-            this.eggs.Location = new System.Drawing.Point(214, 46);
-            this.eggs.Maximum = new decimal(new int[] {
-            1,
+            this.Eggs.Location = new System.Drawing.Point(214, 46);
+            this.Eggs.Maximum = new decimal(new int[] {
+            930,
             0,
             0,
             0});
-            this.eggs.Name = "eggs";
-            this.eggs.Size = new System.Drawing.Size(40, 20);
-            this.eggs.TabIndex = 3;
-            this.eggs.Value = new decimal(new int[] {
+            this.Eggs.Name = "Eggs";
+            this.Eggs.Size = new System.Drawing.Size(40, 20);
+            this.Eggs.TabIndex = 3;
+            this.Eggs.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -382,8 +389,8 @@
             // 
             // daycare_select
             // 
-            this.daycare_select.Controls.Add(this.optionRoute117);
-            this.daycare_select.Controls.Add(this.optionBattleResort);
+            this.daycare_select.Controls.Add(this.daycareRoute117);
+            this.daycare_select.Controls.Add(this.daycareBattleResort);
             this.daycare_select.Location = new System.Drawing.Point(150, 72);
             this.daycare_select.Name = "daycare_select";
             this.daycare_select.Size = new System.Drawing.Size(104, 70);
@@ -391,33 +398,33 @@
             this.daycare_select.TabStop = false;
             this.daycare_select.Text = "Daycare:";
             // 
-            // optionRoute117
+            // daycareRoute117
             // 
-            this.optionRoute117.AutoSize = true;
-            this.optionRoute117.Checked = true;
-            this.optionRoute117.Location = new System.Drawing.Point(6, 19);
-            this.optionRoute117.Name = "optionRoute117";
-            this.optionRoute117.Size = new System.Drawing.Size(75, 17);
-            this.optionRoute117.TabIndex = 0;
-            this.optionRoute117.TabStop = true;
-            this.optionRoute117.Text = "Route 117";
-            this.optionRoute117.UseVisualStyleBackColor = true;
+            this.daycareRoute117.AutoSize = true;
+            this.daycareRoute117.Checked = true;
+            this.daycareRoute117.Location = new System.Drawing.Point(6, 19);
+            this.daycareRoute117.Name = "daycareRoute117";
+            this.daycareRoute117.Size = new System.Drawing.Size(75, 17);
+            this.daycareRoute117.TabIndex = 0;
+            this.daycareRoute117.TabStop = true;
+            this.daycareRoute117.Text = "Route 117";
+            this.daycareRoute117.UseVisualStyleBackColor = true;
             // 
-            // optionBattleResort
+            // daycareBattleResort
             // 
-            this.optionBattleResort.AutoSize = true;
-            this.optionBattleResort.Location = new System.Drawing.Point(6, 42);
-            this.optionBattleResort.Name = "optionBattleResort";
-            this.optionBattleResort.Size = new System.Drawing.Size(86, 17);
-            this.optionBattleResort.TabIndex = 1;
-            this.optionBattleResort.Text = "Battle Resort";
-            this.optionBattleResort.UseVisualStyleBackColor = true;
+            this.daycareBattleResort.AutoSize = true;
+            this.daycareBattleResort.Location = new System.Drawing.Point(6, 42);
+            this.daycareBattleResort.Name = "daycareBattleResort";
+            this.daycareBattleResort.Size = new System.Drawing.Size(86, 17);
+            this.daycareBattleResort.TabIndex = 1;
+            this.daycareBattleResort.Text = "Battle Resort";
+            this.daycareBattleResort.UseVisualStyleBackColor = true;
             // 
             // orgbox_pos
             // 
             this.orgbox_pos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.orgbox_pos.Controls.Add(this.optionMiddle);
-            this.orgbox_pos.Controls.Add(this.optionTop);
+            this.orgbox_pos.Controls.Add(this.orgboxMiddle);
+            this.orgbox_pos.Controls.Add(this.orgboxTop);
             this.orgbox_pos.Location = new System.Drawing.Point(6, 71);
             this.orgbox_pos.Name = "orgbox_pos";
             this.orgbox_pos.Size = new System.Drawing.Size(138, 71);
@@ -425,27 +432,27 @@
             this.orgbox_pos.TabStop = false;
             this.orgbox_pos.Text = "Organize Boxes position:";
             // 
-            // optionMiddle
+            // orgboxMiddle
             // 
-            this.optionMiddle.AutoSize = true;
-            this.optionMiddle.Checked = true;
-            this.optionMiddle.Location = new System.Drawing.Point(6, 19);
-            this.optionMiddle.Name = "optionMiddle";
-            this.optionMiddle.Size = new System.Drawing.Size(56, 17);
-            this.optionMiddle.TabIndex = 0;
-            this.optionMiddle.TabStop = true;
-            this.optionMiddle.Text = "Middle";
-            this.optionMiddle.UseVisualStyleBackColor = true;
+            this.orgboxMiddle.AutoSize = true;
+            this.orgboxMiddle.Checked = true;
+            this.orgboxMiddle.Location = new System.Drawing.Point(6, 19);
+            this.orgboxMiddle.Name = "orgboxMiddle";
+            this.orgboxMiddle.Size = new System.Drawing.Size(56, 17);
+            this.orgboxMiddle.TabIndex = 0;
+            this.orgboxMiddle.TabStop = true;
+            this.orgboxMiddle.Text = "Middle";
+            this.orgboxMiddle.UseVisualStyleBackColor = true;
             // 
-            // optionTop
+            // orgboxTop
             // 
-            this.optionTop.AutoSize = true;
-            this.optionTop.Location = new System.Drawing.Point(6, 42);
-            this.optionTop.Name = "optionTop";
-            this.optionTop.Size = new System.Drawing.Size(44, 17);
-            this.optionTop.TabIndex = 1;
-            this.optionTop.Text = "Top";
-            this.optionTop.UseVisualStyleBackColor = true;
+            this.orgboxTop.AutoSize = true;
+            this.orgboxTop.Location = new System.Drawing.Point(6, 42);
+            this.orgboxTop.Name = "orgboxTop";
+            this.orgboxTop.Size = new System.Drawing.Size(44, 17);
+            this.orgboxTop.TabIndex = 1;
+            this.orgboxTop.Text = "Top";
+            this.orgboxTop.UseVisualStyleBackColor = true;
             // 
             // clearAll
             // 
@@ -455,6 +462,7 @@
             this.clearAll.TabIndex = 29;
             this.clearAll.Text = "Reset all fields";
             this.clearAll.UseVisualStyleBackColor = true;
+            this.clearAll.Click += new System.EventHandler(this.clearAll_Click);
             // 
             // filterList
             // 
@@ -631,15 +639,17 @@
             this.filterLoad.TabIndex = 30;
             this.filterLoad.Text = "Load filter set...";
             this.filterLoad.UseVisualStyleBackColor = true;
+            this.filterLoad.Click += new System.EventHandler(this.filterLoad_Click);
             // 
-            // botStart
+            // RunStop
             // 
-            this.botStart.Location = new System.Drawing.Point(12, 195);
-            this.botStart.Name = "botStart";
-            this.botStart.Size = new System.Drawing.Size(260, 23);
-            this.botStart.TabIndex = 32;
-            this.botStart.Text = "Start Bot";
-            this.botStart.UseVisualStyleBackColor = true;
+            this.RunStop.Location = new System.Drawing.Point(12, 195);
+            this.RunStop.Name = "RunStop";
+            this.RunStop.Size = new System.Drawing.Size(260, 23);
+            this.RunStop.TabIndex = 32;
+            this.RunStop.Text = "Start Bot";
+            this.RunStop.UseVisualStyleBackColor = true;
+            this.RunStop.Click += new System.EventHandler(this.RunStop_Click);
             // 
             // Bot_Breeding6
             // 
@@ -653,19 +663,22 @@
             this.Controls.Add(this.clearAll);
             this.Controls.Add(this.filterList);
             this.Controls.Add(this.filterLoad);
-            this.Controls.Add(this.botStart);
+            this.Controls.Add(this.RunStop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bot_Breeding6";
             this.Text = "Breeding Bot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_Breeding6_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bot_Breeding6_FormClosed);
+            this.Load += new System.EventHandler(this.Bot_Breeding6_Load);
             this.Breed_esvtsv.ResumeLayout(false);
             this.Breed_esvtsv.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.esvList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).EndInit();
             this.Breed_options.ResumeLayout(false);
             this.Breed_options.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slot)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.box)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Slot)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Box)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Eggs)).EndInit();
             this.daycare_select.ResumeLayout(false);
             this.daycare_select.PerformLayout();
             this.orgbox_pos.ResumeLayout(false);
@@ -691,22 +704,22 @@
         private System.Windows.Forms.Button tsvRemove;
         private System.Windows.Forms.Button tsvSave;
         private System.Windows.Forms.GroupBox Breed_options;
-        private System.Windows.Forms.ComboBox optionMode;
-        private System.Windows.Forms.CheckBox optionReadESV;
+        private System.Windows.Forms.ComboBox Mode;
+        private System.Windows.Forms.CheckBox ReadESV;
         private System.Windows.Forms.Label Breed_labelBox;
         private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.CheckBox optionQuickBreed;
-        private System.Windows.Forms.NumericUpDown slot;
+        private System.Windows.Forms.CheckBox QuickBreed;
+        private System.Windows.Forms.NumericUpDown Slot;
         private System.Windows.Forms.Label label84;
-        private System.Windows.Forms.NumericUpDown box;
+        private System.Windows.Forms.NumericUpDown Box;
         private System.Windows.Forms.Label Breed_labelSlot;
-        private System.Windows.Forms.NumericUpDown eggs;
+        private System.Windows.Forms.NumericUpDown Eggs;
         private System.Windows.Forms.GroupBox daycare_select;
-        private System.Windows.Forms.RadioButton optionRoute117;
-        private System.Windows.Forms.RadioButton optionBattleResort;
+        private System.Windows.Forms.RadioButton daycareRoute117;
+        private System.Windows.Forms.RadioButton daycareBattleResort;
         private System.Windows.Forms.GroupBox orgbox_pos;
-        private System.Windows.Forms.RadioButton optionMiddle;
-        private System.Windows.Forms.RadioButton optionTop;
+        private System.Windows.Forms.RadioButton orgboxMiddle;
+        private System.Windows.Forms.RadioButton orgboxTop;
         private System.Windows.Forms.Button clearAll;
         private System.Windows.Forms.DataGridView filterList;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
@@ -729,6 +742,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
         private System.Windows.Forms.Button filterLoad;
-        private System.Windows.Forms.Button botStart;
+        private System.Windows.Forms.Button RunStop;
     }
 }

@@ -292,6 +292,18 @@
             this.Tab_Dump = new System.Windows.Forms.TabPage();
             this.Write_PKM = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Tab_Clone = new System.Windows.Forms.TabPage();
+            this.Btn_CDstart = new System.Windows.Forms.Button();
+            this.CB_CDBackup = new System.Windows.Forms.CheckBox();
+            this.GB_CDmode = new System.Windows.Forms.GroupBox();
+            this.DeleteMode = new System.Windows.Forms.RadioButton();
+            this.CloneMode = new System.Windows.Forms.RadioButton();
+            this.Num_CDBox = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.Num_CDAmount = new System.Windows.Forms.NumericUpDown();
+            this.Num_CDSlot = new System.Windows.Forms.NumericUpDown();
             this.Tab_Tools = new System.Windows.Forms.TabPage();
             this.Btn_ReloadFields = new System.Windows.Forms.Button();
             this.Seed_Legendary = new System.Windows.Forms.TextBox();
@@ -306,18 +318,6 @@
             this.Tools_WonderTrade = new System.Windows.Forms.Button();
             this.Tools_Filter = new System.Windows.Forms.Button();
             this.Tools_PokeDigger = new System.Windows.Forms.Button();
-            this.Tab_Clone = new System.Windows.Forms.TabPage();
-            this.Btn_CDstart = new System.Windows.Forms.Button();
-            this.CB_CDBackup = new System.Windows.Forms.CheckBox();
-            this.GB_CDmode = new System.Windows.Forms.GroupBox();
-            this.DeleteMode = new System.Windows.Forms.RadioButton();
-            this.CloneMode = new System.Windows.Forms.RadioButton();
-            this.Num_CDBox = new System.Windows.Forms.NumericUpDown();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.Num_CDAmount = new System.Windows.Forms.NumericUpDown();
-            this.Num_CDSlot = new System.Windows.Forms.NumericUpDown();
             this.Tab_Log = new System.Windows.Forms.TabPage();
             this.Log_Export = new System.Windows.Forms.Button();
             this.Tab_About = new System.Windows.Forms.TabPage();
@@ -443,13 +443,13 @@
             this.Tabs_General.SuspendLayout();
             this.Tab_Dump.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.Tab_Tools.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             this.Tab_Clone.SuspendLayout();
             this.GB_CDmode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Num_CDBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_CDAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_CDSlot)).BeginInit();
+            this.Tab_Tools.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.Tab_Log.SuspendLayout();
             this.Tab_About.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -3769,155 +3769,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(280, 54);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
-            // Tab_Tools
-            // 
-            this.Tab_Tools.BackColor = System.Drawing.SystemColors.Control;
-            this.Tab_Tools.Controls.Add(this.Btn_ReloadFields);
-            this.Tab_Tools.Controls.Add(this.Seed_Legendary);
-            this.Tab_Tools.Controls.Add(this.Seed_Egg);
-            this.Tab_Tools.Controls.Add(this.label19);
-            this.Tab_Tools.Controls.Add(this.label18);
-            this.Tab_Tools.Controls.Add(this.flowLayoutPanel2);
-            this.Tab_Tools.Location = new System.Drawing.Point(4, 22);
-            this.Tab_Tools.Name = "Tab_Tools";
-            this.Tab_Tools.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_Tools.Size = new System.Drawing.Size(292, 264);
-            this.Tab_Tools.TabIndex = 0;
-            this.Tab_Tools.Text = "Tools";
-            // 
-            // Btn_ReloadFields
-            // 
-            this.Btn_ReloadFields.Location = new System.Drawing.Point(196, 174);
-            this.Btn_ReloadFields.Name = "Btn_ReloadFields";
-            this.Btn_ReloadFields.Size = new System.Drawing.Size(89, 23);
-            this.Btn_ReloadFields.TabIndex = 3;
-            this.Btn_ReloadFields.Text = "Reload Fields";
-            this.toolTip1.SetToolTip(this.Btn_ReloadFields, "Also reloads the \"About\" tab.");
-            this.Btn_ReloadFields.UseVisualStyleBackColor = true;
-            this.Btn_ReloadFields.Click += new System.EventHandler(this.Btn_ReloadFields_Click);
-            // 
-            // Seed_Legendary
-            // 
-            this.Seed_Legendary.Location = new System.Drawing.Point(6, 148);
-            this.Seed_Legendary.Name = "Seed_Legendary";
-            this.Seed_Legendary.ReadOnly = true;
-            this.Seed_Legendary.Size = new System.Drawing.Size(279, 20);
-            this.Seed_Legendary.TabIndex = 2;
-            // 
-            // Seed_Egg
-            // 
-            this.Seed_Egg.Location = new System.Drawing.Point(6, 109);
-            this.Seed_Egg.Name = "Seed_Egg";
-            this.Seed_Egg.ReadOnly = true;
-            this.Seed_Egg.Size = new System.Drawing.Size(279, 20);
-            this.Seed_Egg.TabIndex = 2;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 132);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(88, 13);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Legendary Seed:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 93);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(57, 13);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "Egg Seed:";
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoSize = true;
-            this.flowLayoutPanel2.Controls.Add(this.Tool_Trainer);
-            this.flowLayoutPanel2.Controls.Add(this.Tool_Items);
-            this.flowLayoutPanel2.Controls.Add(this.Tool_Controls);
-            this.flowLayoutPanel2.Controls.Add(this.Tools_Breeding);
-            this.flowLayoutPanel2.Controls.Add(this.Tools_SoftReset);
-            this.flowLayoutPanel2.Controls.Add(this.Tools_WonderTrade);
-            this.flowLayoutPanel2.Controls.Add(this.Tools_Filter);
-            this.flowLayoutPanel2.Controls.Add(this.Tools_PokeDigger);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(286, 87);
-            this.flowLayoutPanel2.TabIndex = 0;
-            // 
-            // Tool_Items
-            // 
-            this.Tool_Items.Location = new System.Drawing.Point(98, 3);
-            this.Tool_Items.Name = "Tool_Items";
-            this.Tool_Items.Size = new System.Drawing.Size(89, 23);
-            this.Tool_Items.TabIndex = 1;
-            this.Tool_Items.Text = "Edit Items";
-            this.Tool_Items.UseVisualStyleBackColor = true;
-            this.Tool_Items.Click += new System.EventHandler(this.Tool_Items_Click);
-            // 
-            // Tool_Controls
-            // 
-            this.Tool_Controls.Location = new System.Drawing.Point(193, 3);
-            this.Tool_Controls.Name = "Tool_Controls";
-            this.Tool_Controls.Size = new System.Drawing.Size(89, 23);
-            this.Tool_Controls.TabIndex = 1;
-            this.Tool_Controls.Text = "Remote Control";
-            this.Tool_Controls.UseVisualStyleBackColor = true;
-            this.Tool_Controls.Click += new System.EventHandler(this.Tool_Controls_Click);
-            // 
-            // Tools_Breeding
-            // 
-            this.Tools_Breeding.Enabled = false;
-            this.Tools_Breeding.Location = new System.Drawing.Point(3, 32);
-            this.Tools_Breeding.Name = "Tools_Breeding";
-            this.Tools_Breeding.Size = new System.Drawing.Size(89, 23);
-            this.Tools_Breeding.TabIndex = 3;
-            this.Tools_Breeding.Text = "Breeding Bot";
-            this.Tools_Breeding.UseVisualStyleBackColor = true;
-            // 
-            // Tools_SoftReset
-            // 
-            this.Tools_SoftReset.Enabled = false;
-            this.Tools_SoftReset.Location = new System.Drawing.Point(98, 32);
-            this.Tools_SoftReset.Name = "Tools_SoftReset";
-            this.Tools_SoftReset.Size = new System.Drawing.Size(89, 23);
-            this.Tools_SoftReset.TabIndex = 4;
-            this.Tools_SoftReset.Text = "Soft-reset Bot";
-            this.Tools_SoftReset.UseVisualStyleBackColor = true;
-            // 
-            // Tools_WonderTrade
-            // 
-            this.Tools_WonderTrade.Location = new System.Drawing.Point(193, 32);
-            this.Tools_WonderTrade.Name = "Tools_WonderTrade";
-            this.Tools_WonderTrade.Size = new System.Drawing.Size(89, 23);
-            this.Tools_WonderTrade.TabIndex = 5;
-            this.Tools_WonderTrade.Text = "WT Bot";
-            this.Tools_WonderTrade.UseVisualStyleBackColor = true;
-            this.Tools_WonderTrade.Click += new System.EventHandler(this.Tools_WonderTrade_Click);
-            // 
-            // Tools_Filter
-            // 
-            this.Tools_Filter.Location = new System.Drawing.Point(3, 61);
-            this.Tools_Filter.Name = "Tools_Filter";
-            this.Tools_Filter.Size = new System.Drawing.Size(89, 23);
-            this.Tools_Filter.TabIndex = 2;
-            this.Tools_Filter.Text = "Filters";
-            this.Tools_Filter.UseVisualStyleBackColor = true;
-            this.Tools_Filter.Click += new System.EventHandler(this.Tools_Filter_Click);
-            // 
-            // Tools_PokeDigger
-            // 
-            this.Tools_PokeDigger.Enabled = false;
-            this.Tools_PokeDigger.Location = new System.Drawing.Point(98, 61);
-            this.Tools_PokeDigger.Name = "Tools_PokeDigger";
-            this.Tools_PokeDigger.Size = new System.Drawing.Size(89, 23);
-            this.Tools_PokeDigger.TabIndex = 6;
-            this.Tools_PokeDigger.Text = "PokéDigger";
-            this.Tools_PokeDigger.UseVisualStyleBackColor = true;
-            this.Tools_PokeDigger.Click += new System.EventHandler(this.Tools_PokeDigger_Click);
-            // 
             // Tab_Clone
             // 
             this.Tab_Clone.BackColor = System.Drawing.SystemColors.Control;
@@ -4094,6 +3945,155 @@
             0,
             0});
             this.Num_CDSlot.ValueChanged += new System.EventHandler(this.clonedelete_Changed);
+            // 
+            // Tab_Tools
+            // 
+            this.Tab_Tools.BackColor = System.Drawing.SystemColors.Control;
+            this.Tab_Tools.Controls.Add(this.Btn_ReloadFields);
+            this.Tab_Tools.Controls.Add(this.Seed_Legendary);
+            this.Tab_Tools.Controls.Add(this.Seed_Egg);
+            this.Tab_Tools.Controls.Add(this.label19);
+            this.Tab_Tools.Controls.Add(this.label18);
+            this.Tab_Tools.Controls.Add(this.flowLayoutPanel2);
+            this.Tab_Tools.Location = new System.Drawing.Point(4, 22);
+            this.Tab_Tools.Name = "Tab_Tools";
+            this.Tab_Tools.Padding = new System.Windows.Forms.Padding(3);
+            this.Tab_Tools.Size = new System.Drawing.Size(292, 264);
+            this.Tab_Tools.TabIndex = 0;
+            this.Tab_Tools.Text = "Tools";
+            // 
+            // Btn_ReloadFields
+            // 
+            this.Btn_ReloadFields.Location = new System.Drawing.Point(196, 174);
+            this.Btn_ReloadFields.Name = "Btn_ReloadFields";
+            this.Btn_ReloadFields.Size = new System.Drawing.Size(89, 23);
+            this.Btn_ReloadFields.TabIndex = 3;
+            this.Btn_ReloadFields.Text = "Reload Fields";
+            this.toolTip1.SetToolTip(this.Btn_ReloadFields, "Also reloads the \"About\" tab.");
+            this.Btn_ReloadFields.UseVisualStyleBackColor = true;
+            this.Btn_ReloadFields.Click += new System.EventHandler(this.Btn_ReloadFields_Click);
+            // 
+            // Seed_Legendary
+            // 
+            this.Seed_Legendary.Location = new System.Drawing.Point(6, 148);
+            this.Seed_Legendary.Name = "Seed_Legendary";
+            this.Seed_Legendary.ReadOnly = true;
+            this.Seed_Legendary.Size = new System.Drawing.Size(279, 20);
+            this.Seed_Legendary.TabIndex = 2;
+            // 
+            // Seed_Egg
+            // 
+            this.Seed_Egg.Location = new System.Drawing.Point(6, 109);
+            this.Seed_Egg.Name = "Seed_Egg";
+            this.Seed_Egg.ReadOnly = true;
+            this.Seed_Egg.Size = new System.Drawing.Size(279, 20);
+            this.Seed_Egg.TabIndex = 2;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 132);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(88, 13);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Legendary Seed:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 93);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(57, 13);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Egg Seed:";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.Controls.Add(this.Tool_Trainer);
+            this.flowLayoutPanel2.Controls.Add(this.Tool_Items);
+            this.flowLayoutPanel2.Controls.Add(this.Tool_Controls);
+            this.flowLayoutPanel2.Controls.Add(this.Tools_Breeding);
+            this.flowLayoutPanel2.Controls.Add(this.Tools_SoftReset);
+            this.flowLayoutPanel2.Controls.Add(this.Tools_WonderTrade);
+            this.flowLayoutPanel2.Controls.Add(this.Tools_Filter);
+            this.flowLayoutPanel2.Controls.Add(this.Tools_PokeDigger);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(286, 87);
+            this.flowLayoutPanel2.TabIndex = 0;
+            // 
+            // Tool_Items
+            // 
+            this.Tool_Items.Location = new System.Drawing.Point(98, 3);
+            this.Tool_Items.Name = "Tool_Items";
+            this.Tool_Items.Size = new System.Drawing.Size(89, 23);
+            this.Tool_Items.TabIndex = 1;
+            this.Tool_Items.Text = "Edit Items";
+            this.Tool_Items.UseVisualStyleBackColor = true;
+            this.Tool_Items.Click += new System.EventHandler(this.Tool_Items_Click);
+            // 
+            // Tool_Controls
+            // 
+            this.Tool_Controls.Location = new System.Drawing.Point(193, 3);
+            this.Tool_Controls.Name = "Tool_Controls";
+            this.Tool_Controls.Size = new System.Drawing.Size(89, 23);
+            this.Tool_Controls.TabIndex = 1;
+            this.Tool_Controls.Text = "Remote Control";
+            this.Tool_Controls.UseVisualStyleBackColor = true;
+            this.Tool_Controls.Click += new System.EventHandler(this.Tool_Controls_Click);
+            // 
+            // Tools_Breeding
+            // 
+            this.Tools_Breeding.Location = new System.Drawing.Point(3, 32);
+            this.Tools_Breeding.Name = "Tools_Breeding";
+            this.Tools_Breeding.Size = new System.Drawing.Size(89, 23);
+            this.Tools_Breeding.TabIndex = 3;
+            this.Tools_Breeding.Text = "Breeding Bot";
+            this.Tools_Breeding.UseVisualStyleBackColor = true;
+            this.Tools_Breeding.Click += new System.EventHandler(this.Tools_Breeding_Click);
+            // 
+            // Tools_SoftReset
+            // 
+            this.Tools_SoftReset.Enabled = false;
+            this.Tools_SoftReset.Location = new System.Drawing.Point(98, 32);
+            this.Tools_SoftReset.Name = "Tools_SoftReset";
+            this.Tools_SoftReset.Size = new System.Drawing.Size(89, 23);
+            this.Tools_SoftReset.TabIndex = 4;
+            this.Tools_SoftReset.Text = "Soft-reset Bot";
+            this.Tools_SoftReset.UseVisualStyleBackColor = true;
+            // 
+            // Tools_WonderTrade
+            // 
+            this.Tools_WonderTrade.Location = new System.Drawing.Point(193, 32);
+            this.Tools_WonderTrade.Name = "Tools_WonderTrade";
+            this.Tools_WonderTrade.Size = new System.Drawing.Size(89, 23);
+            this.Tools_WonderTrade.TabIndex = 5;
+            this.Tools_WonderTrade.Text = "WT Bot";
+            this.Tools_WonderTrade.UseVisualStyleBackColor = true;
+            this.Tools_WonderTrade.Click += new System.EventHandler(this.Tools_WonderTrade_Click);
+            // 
+            // Tools_Filter
+            // 
+            this.Tools_Filter.Location = new System.Drawing.Point(3, 61);
+            this.Tools_Filter.Name = "Tools_Filter";
+            this.Tools_Filter.Size = new System.Drawing.Size(89, 23);
+            this.Tools_Filter.TabIndex = 2;
+            this.Tools_Filter.Text = "Filters";
+            this.Tools_Filter.UseVisualStyleBackColor = true;
+            this.Tools_Filter.Click += new System.EventHandler(this.Tools_Filter_Click);
+            // 
+            // Tools_PokeDigger
+            // 
+            this.Tools_PokeDigger.Enabled = false;
+            this.Tools_PokeDigger.Location = new System.Drawing.Point(98, 61);
+            this.Tools_PokeDigger.Name = "Tools_PokeDigger";
+            this.Tools_PokeDigger.Size = new System.Drawing.Size(89, 23);
+            this.Tools_PokeDigger.TabIndex = 6;
+            this.Tools_PokeDigger.Text = "PokéDigger";
+            this.Tools_PokeDigger.UseVisualStyleBackColor = true;
+            this.Tools_PokeDigger.Click += new System.EventHandler(this.Tools_PokeDigger_Click);
             // 
             // Tab_Log
             // 
@@ -4550,9 +4550,6 @@
             this.Tab_Dump.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.Tab_Tools.ResumeLayout(false);
-            this.Tab_Tools.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
             this.Tab_Clone.ResumeLayout(false);
             this.Tab_Clone.PerformLayout();
             this.GB_CDmode.ResumeLayout(false);
@@ -4560,6 +4557,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.Num_CDBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_CDAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_CDSlot)).EndInit();
+            this.Tab_Tools.ResumeLayout(false);
+            this.Tab_Tools.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.Tab_Log.ResumeLayout(false);
             this.Tab_Log.PerformLayout();
             this.Tab_About.ResumeLayout(false);
