@@ -3808,6 +3808,7 @@ namespace ntrbase
         private void Tools_WonderTrade_Click(object sender, EventArgs e)
         {
             Tool_Start();
+            Delg.SetCheckedRadio(radioBoxes, true);
             string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERWT + "\\";
             (new FileInfo(folderPath)).Directory.Create();
             if (SAV.Generation == 6)
@@ -3828,6 +3829,7 @@ namespace ntrbase
         private void Tools_Breeding_Click(object sender, EventArgs e)
         {
             Tool_Start();
+            Delg.SetCheckedRadio(radioBoxes, true);
             if (SAV.Generation == 6)
             {
                 new Bot_Breeding6().Show();
@@ -3841,7 +3843,6 @@ namespace ntrbase
                 Tool_Finish();
             }
         }
-
 
         // PokeDigger
         private void Tools_PokeDigger_Click(object sender, EventArgs e)

@@ -45,19 +45,19 @@
             this.Breed_options = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.EggSeed = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.optionMode = new System.Windows.Forms.ComboBox();
-            this.optionReadESV = new System.Windows.Forms.CheckBox();
+            this.Mode = new System.Windows.Forms.ComboBox();
+            this.ReadESV = new System.Windows.Forms.CheckBox();
             this.Breed_labelBox = new System.Windows.Forms.Label();
             this.label75 = new System.Windows.Forms.Label();
-            this.slot = new System.Windows.Forms.NumericUpDown();
+            this.Slot = new System.Windows.Forms.NumericUpDown();
             this.label84 = new System.Windows.Forms.Label();
-            this.reject = new System.Windows.Forms.NumericUpDown();
-            this.accept = new System.Windows.Forms.NumericUpDown();
-            this.box = new System.Windows.Forms.NumericUpDown();
+            this.Reject = new System.Windows.Forms.NumericUpDown();
+            this.Accept = new System.Windows.Forms.NumericUpDown();
+            this.Box = new System.Windows.Forms.NumericUpDown();
             this.Breed_labelSlot = new System.Windows.Forms.Label();
-            this.eggs = new System.Windows.Forms.NumericUpDown();
+            this.Eggs = new System.Windows.Forms.NumericUpDown();
             this.clearAll = new System.Windows.Forms.Button();
             this.filterList = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,16 +80,16 @@
             this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filterLoad = new System.Windows.Forms.Button();
-            this.botStart = new System.Windows.Forms.Button();
+            this.RunStop = new System.Windows.Forms.Button();
             this.Breed_esvtsv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.esvList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).BeginInit();
             this.Breed_options.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slot)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reject)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accept)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.box)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Slot)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Reject)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Accept)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Box)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Eggs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,6 +169,7 @@
             this.esvSave.TabIndex = 9;
             this.esvSave.Text = "Save ESV List";
             this.esvSave.UseVisualStyleBackColor = true;
+            this.esvSave.Click += new System.EventHandler(this.esvSave_Click);
             // 
             // TSVlist
             // 
@@ -198,6 +199,7 @@
             this.tsvAdd.TabIndex = 12;
             this.tsvAdd.Text = "Add";
             this.tsvAdd.UseVisualStyleBackColor = true;
+            this.tsvAdd.Click += new System.EventHandler(this.tsvAdd_Click);
             // 
             // tsvLoad
             // 
@@ -207,6 +209,7 @@
             this.tsvLoad.TabIndex = 15;
             this.tsvLoad.Text = "Load";
             this.tsvLoad.UseVisualStyleBackColor = true;
+            this.tsvLoad.Click += new System.EventHandler(this.tsvLoad_Click);
             // 
             // tsvRemove
             // 
@@ -217,6 +220,7 @@
             this.tsvRemove.TabIndex = 13;
             this.tsvRemove.Text = "Remove";
             this.tsvRemove.UseVisualStyleBackColor = true;
+            this.tsvRemove.Click += new System.EventHandler(this.tsvRemove_Click);
             // 
             // tsvSave
             // 
@@ -226,24 +230,25 @@
             this.tsvSave.TabIndex = 14;
             this.tsvSave.Text = "Save";
             this.tsvSave.UseVisualStyleBackColor = true;
+            this.tsvSave.Click += new System.EventHandler(this.tsvSave_Click);
             // 
             // Breed_options
             // 
             this.Breed_options.Controls.Add(this.label3);
             this.Breed_options.Controls.Add(this.label2);
-            this.Breed_options.Controls.Add(this.textBox1);
+            this.Breed_options.Controls.Add(this.EggSeed);
             this.Breed_options.Controls.Add(this.label1);
-            this.Breed_options.Controls.Add(this.optionMode);
-            this.Breed_options.Controls.Add(this.optionReadESV);
+            this.Breed_options.Controls.Add(this.Mode);
+            this.Breed_options.Controls.Add(this.ReadESV);
             this.Breed_options.Controls.Add(this.Breed_labelBox);
             this.Breed_options.Controls.Add(this.label75);
-            this.Breed_options.Controls.Add(this.slot);
+            this.Breed_options.Controls.Add(this.Slot);
             this.Breed_options.Controls.Add(this.label84);
-            this.Breed_options.Controls.Add(this.reject);
-            this.Breed_options.Controls.Add(this.accept);
-            this.Breed_options.Controls.Add(this.box);
+            this.Breed_options.Controls.Add(this.Reject);
+            this.Breed_options.Controls.Add(this.Accept);
+            this.Breed_options.Controls.Add(this.Box);
             this.Breed_options.Controls.Add(this.Breed_labelSlot);
-            this.Breed_options.Controls.Add(this.eggs);
+            this.Breed_options.Controls.Add(this.Eggs);
             this.Breed_options.Location = new System.Drawing.Point(12, 12);
             this.Breed_options.Name = "Breed_options";
             this.Breed_options.Size = new System.Drawing.Size(260, 177);
@@ -269,13 +274,13 @@
             this.label2.TabIndex = 26;
             this.label2.Text = "Accept:";
             // 
-            // textBox1
+            // EggSeed
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 122);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(248, 20);
-            this.textBox1.TabIndex = 25;
+            this.EggSeed.Location = new System.Drawing.Point(6, 122);
+            this.EggSeed.Name = "EggSeed";
+            this.EggSeed.ReadOnly = true;
+            this.EggSeed.Size = new System.Drawing.Size(248, 20);
+            this.EggSeed.TabIndex = 25;
             // 
             // label1
             // 
@@ -286,30 +291,30 @@
             this.label1.TabIndex = 24;
             this.label1.Text = "Egg Seed:";
             // 
-            // optionMode
+            // Mode
             // 
-            this.optionMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.optionMode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.optionMode.FormattingEnabled = true;
-            this.optionMode.Items.AddRange(new object[] {
+            this.Mode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.Mode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.Mode.FormattingEnabled = true;
+            this.Mode.Items.AddRange(new object[] {
             "Simple",
             "Filter",
             "ESV/TSV",
             "Accept/Reject"});
-            this.optionMode.Location = new System.Drawing.Point(49, 13);
-            this.optionMode.Name = "optionMode";
-            this.optionMode.Size = new System.Drawing.Size(205, 21);
-            this.optionMode.TabIndex = 0;
+            this.Mode.Location = new System.Drawing.Point(49, 13);
+            this.Mode.Name = "Mode";
+            this.Mode.Size = new System.Drawing.Size(205, 21);
+            this.Mode.TabIndex = 0;
             // 
-            // optionReadESV
+            // ReadESV
             // 
-            this.optionReadESV.AutoSize = true;
-            this.optionReadESV.Location = new System.Drawing.Point(6, 148);
-            this.optionReadESV.Name = "optionReadESV";
-            this.optionReadESV.Size = new System.Drawing.Size(137, 17);
-            this.optionReadESV.TabIndex = 6;
-            this.optionReadESV.Text = "Read ESV after deposit";
-            this.optionReadESV.UseVisualStyleBackColor = true;
+            this.ReadESV.AutoSize = true;
+            this.ReadESV.Location = new System.Drawing.Point(6, 148);
+            this.ReadESV.Name = "ReadESV";
+            this.ReadESV.Size = new System.Drawing.Size(137, 17);
+            this.ReadESV.TabIndex = 6;
+            this.ReadESV.Text = "Read ESV after deposit";
+            this.ReadESV.UseVisualStyleBackColor = true;
             // 
             // Breed_labelBox
             // 
@@ -329,23 +334,24 @@
             this.label75.TabIndex = 23;
             this.label75.Text = "# eggs:";
             // 
-            // slot
+            // Slot
             // 
-            this.slot.Location = new System.Drawing.Point(118, 46);
-            this.slot.Maximum = new decimal(new int[] {
+            this.Slot.Enabled = false;
+            this.Slot.Location = new System.Drawing.Point(118, 46);
+            this.Slot.Maximum = new decimal(new int[] {
             30,
             0,
             0,
             0});
-            this.slot.Minimum = new decimal(new int[] {
+            this.Slot.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.slot.Name = "slot";
-            this.slot.Size = new System.Drawing.Size(41, 20);
-            this.slot.TabIndex = 2;
-            this.slot.Value = new decimal(new int[] {
+            this.Slot.Name = "Slot";
+            this.Slot.Size = new System.Drawing.Size(41, 20);
+            this.Slot.TabIndex = 2;
+            this.Slot.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -360,51 +366,52 @@
             this.label84.TabIndex = 20;
             this.label84.Text = "Mode:";
             // 
-            // reject
+            // Reject
             // 
-            this.reject.Location = new System.Drawing.Point(172, 72);
-            this.reject.Maximum = new decimal(new int[] {
+            this.Reject.Location = new System.Drawing.Point(172, 72);
+            this.Reject.Maximum = new decimal(new int[] {
             9999,
             0,
             0,
             0});
-            this.reject.Name = "reject";
-            this.reject.Size = new System.Drawing.Size(60, 20);
-            this.reject.TabIndex = 1;
+            this.Reject.Name = "Reject";
+            this.Reject.Size = new System.Drawing.Size(60, 20);
+            this.Reject.TabIndex = 1;
             // 
-            // accept
+            // Accept
             // 
-            this.accept.Location = new System.Drawing.Point(53, 72);
-            this.accept.Maximum = new decimal(new int[] {
+            this.Accept.Location = new System.Drawing.Point(53, 72);
+            this.Accept.Maximum = new decimal(new int[] {
             9999,
             0,
             0,
             0});
-            this.accept.Name = "accept";
-            this.accept.Size = new System.Drawing.Size(60, 20);
-            this.accept.TabIndex = 1;
+            this.Accept.Name = "Accept";
+            this.Accept.Size = new System.Drawing.Size(60, 20);
+            this.Accept.TabIndex = 1;
             // 
-            // box
+            // Box
             // 
-            this.box.Location = new System.Drawing.Point(37, 46);
-            this.box.Maximum = new decimal(new int[] {
-            31,
+            this.Box.Location = new System.Drawing.Point(37, 46);
+            this.Box.Maximum = new decimal(new int[] {
+            32,
             0,
             0,
             0});
-            this.box.Minimum = new decimal(new int[] {
+            this.Box.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.box.Name = "box";
-            this.box.Size = new System.Drawing.Size(41, 20);
-            this.box.TabIndex = 1;
-            this.box.Value = new decimal(new int[] {
+            this.Box.Name = "Box";
+            this.Box.Size = new System.Drawing.Size(41, 20);
+            this.Box.TabIndex = 1;
+            this.Box.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.Box.ValueChanged += new System.EventHandler(this.Box_ValueChanged);
             // 
             // Breed_labelSlot
             // 
@@ -415,18 +422,18 @@
             this.Breed_labelSlot.TabIndex = 22;
             this.Breed_labelSlot.Text = "Slot:";
             // 
-            // eggs
+            // Eggs
             // 
-            this.eggs.Location = new System.Drawing.Point(214, 46);
-            this.eggs.Maximum = new decimal(new int[] {
-            1,
+            this.Eggs.Location = new System.Drawing.Point(214, 46);
+            this.Eggs.Maximum = new decimal(new int[] {
+            960,
             0,
             0,
             0});
-            this.eggs.Name = "eggs";
-            this.eggs.Size = new System.Drawing.Size(40, 20);
-            this.eggs.TabIndex = 3;
-            this.eggs.Value = new decimal(new int[] {
+            this.Eggs.Name = "Eggs";
+            this.Eggs.Size = new System.Drawing.Size(40, 20);
+            this.Eggs.TabIndex = 3;
+            this.Eggs.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -440,6 +447,7 @@
             this.clearAll.TabIndex = 29;
             this.clearAll.Text = "Reset all fields";
             this.clearAll.UseVisualStyleBackColor = true;
+            this.clearAll.Click += new System.EventHandler(this.clearAll_Click);
             // 
             // filterList
             // 
@@ -616,15 +624,17 @@
             this.filterLoad.TabIndex = 30;
             this.filterLoad.Text = "Load filter set...";
             this.filterLoad.UseVisualStyleBackColor = true;
+            this.filterLoad.Click += new System.EventHandler(this.filterLoad_Click);
             // 
-            // botStart
+            // RunStop
             // 
-            this.botStart.Location = new System.Drawing.Point(12, 195);
-            this.botStart.Name = "botStart";
-            this.botStart.Size = new System.Drawing.Size(260, 23);
-            this.botStart.TabIndex = 32;
-            this.botStart.Text = "Start Bot";
-            this.botStart.UseVisualStyleBackColor = true;
+            this.RunStop.Location = new System.Drawing.Point(12, 195);
+            this.RunStop.Name = "RunStop";
+            this.RunStop.Size = new System.Drawing.Size(260, 23);
+            this.RunStop.TabIndex = 32;
+            this.RunStop.Text = "Start Bot";
+            this.RunStop.UseVisualStyleBackColor = true;
+            this.RunStop.Click += new System.EventHandler(this.RunStop_Click);
             // 
             // Bot_Breeding7
             // 
@@ -638,21 +648,23 @@
             this.Controls.Add(this.clearAll);
             this.Controls.Add(this.filterList);
             this.Controls.Add(this.filterLoad);
-            this.Controls.Add(this.botStart);
+            this.Controls.Add(this.RunStop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bot_Breeding7";
             this.Text = "Breeding Bot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_Breeding7_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bot_Breeding7_FormClosed);
             this.Breed_esvtsv.ResumeLayout(false);
             this.Breed_esvtsv.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.esvList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSVlistNum)).EndInit();
             this.Breed_options.ResumeLayout(false);
             this.Breed_options.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slot)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reject)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accept)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.box)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eggs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Slot)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Reject)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Accept)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Box)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Eggs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).EndInit();
             this.ResumeLayout(false);
 
@@ -674,15 +686,15 @@
         private System.Windows.Forms.Button tsvRemove;
         private System.Windows.Forms.Button tsvSave;
         private System.Windows.Forms.GroupBox Breed_options;
-        private System.Windows.Forms.ComboBox optionMode;
-        private System.Windows.Forms.CheckBox optionReadESV;
+        private System.Windows.Forms.ComboBox Mode;
+        private System.Windows.Forms.CheckBox ReadESV;
         private System.Windows.Forms.Label Breed_labelBox;
         private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.NumericUpDown slot;
+        private System.Windows.Forms.NumericUpDown Slot;
         private System.Windows.Forms.Label label84;
-        private System.Windows.Forms.NumericUpDown box;
+        private System.Windows.Forms.NumericUpDown Box;
         private System.Windows.Forms.Label Breed_labelSlot;
-        private System.Windows.Forms.NumericUpDown eggs;
+        private System.Windows.Forms.NumericUpDown Eggs;
         private System.Windows.Forms.Button clearAll;
         private System.Windows.Forms.DataGridView filterList;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
@@ -705,12 +717,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
         private System.Windows.Forms.Button filterLoad;
-        private System.Windows.Forms.Button botStart;
+        private System.Windows.Forms.Button RunStop;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox EggSeed;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown reject;
-        private System.Windows.Forms.NumericUpDown accept;
+        private System.Windows.Forms.NumericUpDown Reject;
+        private System.Windows.Forms.NumericUpDown Accept;
     }
 }

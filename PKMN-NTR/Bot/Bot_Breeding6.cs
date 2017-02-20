@@ -197,7 +197,6 @@ namespace ntrbase.Bot
                     case 2:
                         modemessage = "ESV/TSV: This bot will produce eggs and deposit them in the pc, starting at box " + Box.Value.ToString() + " slot " + Slot.Value.ToString() + ". Then it will check the egg's ESV and if it finds a match with the values in the TSV list, the bot will stop. The bot will also stop if it produces " + Eggs.Value.ToString() + " eggs before finding a match.\r\n\r\n";
                         break;
-                    case 3:
                     default:
                         modemessage = "No mode selected. Select one and try again.\r\n\r\n";
                         break;
@@ -1133,9 +1132,10 @@ namespace ntrbase.Bot
                                 }
                                 else if (breedPoke.Species == 0)
                                 { // Empty space
-                                    botresult = ErrorMessage.GeneralError;
-                                    Report("Bot: Error detected, space is empty");
+                                    Report("Bot: Error detected - slot is empty");
                                     attempts = 11;
+                                    botresult = ErrorMessage.GeneralError;
+                                    botState = breedbotstates.botexit;
                                     break;
                                 }
                                 else
@@ -1385,7 +1385,7 @@ namespace ntrbase.Bot
         {
             try
             {
-                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
                 (new FileInfo(folderPath)).Directory.Create();
                 string fileName = "TSVlist6.csv";
                 if (File.Exists(folderPath + fileName))
@@ -1406,7 +1406,7 @@ namespace ntrbase.Bot
             Delg.SetSelectedIndex(Mode, -1);
             Delg.SetValue(Box, 1);
             Delg.SetValue(Slot, 1);
-            Delg.SetValue(Slot, 1);
+            Delg.SetValue(Eggs, 1);
             Delg.SetCheckedRadio(orgboxMiddle, true);
             Delg.SetCheckedRadio(daycareRoute117, true);
             Delg.SetChecked(ReadESV, false);
@@ -1420,7 +1420,7 @@ namespace ntrbase.Bot
         {
             try
             {
-                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                string folderPath = @Application.StartupPath + "\\" + FOLDERBOT + "\\";
                 (new FileInfo(folderPath)).Directory.Create();
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
                 openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
