@@ -31,7 +31,7 @@ namespace ntrbase
         public static Dictionary<uint, DataReadyWaiting> waitingForData = new Dictionary<uint, DataReadyWaiting>();
 
         // Set this boolean to true to enable the write feature for the party pokémon.
-        public static readonly bool enablepartywrite = false;
+        public const bool enablepartywrite = false;
 
         // Structure for box/slot last position
         struct LastBoxSlot
@@ -56,6 +56,7 @@ namespace ntrbase
         private readonly PictureBox[] movePB, relearnPB;
         private readonly ToolTip Tip1 = new ToolTip(), Tip2 = new ToolTip(), Tip3 = new ToolTip(), NatureTip = new ToolTip(), EVTip = new ToolTip();
         private static readonly Image mixedHighlight = ImageUtil.ChangeOpacity(Resources.slotSet, 0.5);
+        byte[] oppdata;
 
         // Program constants
         public uint BOXES;
@@ -1682,30 +1683,28 @@ namespace ntrbase
 
         public void handleOpponentData(object args_obj)
         {
-            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;            
 
-            byte[] relativePattern = null;
-            uint offsetAfter = 0;
-
-            if (SAV.Version == GameVersion.X || SAV.Version == GameVersion.Y)
-            {
-                relativePattern = new byte[] { 0x60, 0x75, 0xC6, 0x08, 0xDC, 0xA8, 0xC7, 0x08, 0xD0, 0xB6, 0xC7, 0x08 };
-                offsetAfter = 637;
-            }
-            if (SAV.Version == GameVersion.OR || SAV.Version == GameVersion.AS)
-            {
-                relativePattern = new byte[] { 0x60, 0xE7, 0xC6, 0x08, 0x6C, 0xEC, 0xC6, 0x08, 0xE0, 0x1F, 0xC8, 0x08, 0x00, 0x39, 0xC8, 0x08 };
-                offsetAfter = 673;
-            }
-
-            List<uint> occurences = findOccurences(args.data, relativePattern);
+            List<uint> occurences = findOccurences(args.data, LookupTable.oppPattern);
             int count = 0;
             foreach (uint occurence in occurences)
             {
                 count++;
-                int dataOffset = (int)(occurence + offsetAfter);
+                int dataOffset = (int)(occurence + LookupTable.offsetOpp);
                 DataReadyWaiting args_pkm = new DataReadyWaiting(args.data.Skip(dataOffset).Take(POKEBYTES).ToArray(), handlePkmData, null);
                 handlePkmData(args_pkm);
+            }
+        }
+
+        public void waitoppData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+
+            List<uint> occurences = findOccurences(args.data, LookupTable.oppPattern);
+            foreach (uint occurence in occurences)
+            {
+                int dataOffset = (int)(occurence + LookupTable.offsetOpp);
+                oppdata = args.data.Skip(dataOffset).Take(POKEBYTES).ToArray();
             }
         }
 
@@ -1988,22 +1987,32 @@ namespace ntrbase
             }
             if (radioOpponent.Checked)
             {
-                boxDump.Minimum = 1;
-                boxDump.Maximum = 4;
-                slotDump.Minimum = 1;
-                slotDump.Maximum = 6;
-                boxDump.Enabled = true;
-                slotDump.Enabled = true;
-                backupPKM.Checked = true;
+                if (SAV.Generation == 6)
+                {
+                    boxDump.Minimum = 1;
+                    boxDump.Maximum = 1;
+                    slotDump.Minimum = 1;
+                    slotDump.Maximum = 1;
+                    boxDump.Enabled = false;
+                    slotDump.Enabled = false;
+                    DumpInstructionsBtn.Visible = false;
+
+                }
+                if (SAV.Generation == 7)
+                {
+                    boxDump.Minimum = 1;
+                    boxDump.Maximum = 4;
+                    slotDump.Minimum = 1;
+                    slotDump.Maximum = 6;
+                    boxDump.Enabled = true;
+                    slotDump.Enabled = true;
+                    DumpInstructionsBtn.Visible = true;
+                }
                 backupPKM.Enabled = false;
                 BoxLabel.Text = "Opp.:";
                 Write_PKM.Enabled = false;
                 boxDump.Value = ((LastBoxSlot)radioOpponent.Tag).box;
                 slotDump.Value = ((LastBoxSlot)radioOpponent.Tag).slot;
-                if (SAV.Generation == 7)
-                {
-                    DumpInstructionsBtn.Visible = true;
-                }
             }
             else
             {
@@ -2024,20 +2033,20 @@ namespace ntrbase
             }
             if (radioParty.Checked)
             {
-                if (!botWorking && !enablepartywrite)
+                if (!enablepartywrite && Tabs_General.TabPages[0].Enabled)
                 {
                     MessageBox.Show("Important:\r\n\r\nThis feature is experimental, the slots that is selected in this application might not be the same slots that are shown in your party. Due the unkonown mechanics of this, the write feature has been disabled.\r\n\r\nIf you wish to edit a pokémon in your party, deposit it the PC.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    boxDump.Minimum = 1;
-                    boxDump.Maximum = 1;
-                    slotDump.Minimum = 1;
-                    slotDump.Maximum = 6;
-                    boxDump.Enabled = false;
-                    slotDump.Enabled = true;
-                    backupPKM.Enabled = true;
-                    Write_PKM.Enabled = false;
-                    boxDump.Value = ((LastBoxSlot)radioParty.Tag).box;
-                    slotDump.Value = ((LastBoxSlot)radioParty.Tag).slot;
                 }
+                boxDump.Minimum = 1;
+                boxDump.Maximum = 1;
+                slotDump.Minimum = 1;
+                slotDump.Maximum = 6;
+                boxDump.Enabled = false;
+                slotDump.Enabled = true;
+                backupPKM.Enabled = true;
+                Write_PKM.Enabled = false;
+                boxDump.Value = ((LastBoxSlot)radioParty.Tag).box;
+                slotDump.Value = ((LastBoxSlot)radioParty.Tag).slot;
             }
             else
             {
@@ -3844,6 +3853,24 @@ namespace ntrbase
             }
         }
 
+        // Soft-reset
+        private void Tools_SoftReset_Click(object sender, EventArgs e)
+        {
+            Tool_Start();
+            if (SAV.Generation == 6)
+            {
+                new Bot_SoftReset6().Show();
+            }
+            else if (SAV.Generation == 7)
+            {
+                new Bot_SoftReset7().Show();
+            }
+            else
+            {
+                Tool_Finish();
+            }
+        }
+
         // PokeDigger
         private void Tools_PokeDigger_Click(object sender, EventArgs e)
         {
@@ -3862,6 +3889,69 @@ namespace ntrbase
         #endregion Sub-forms
 
         #region Bots
+
+        public void botMode(bool state)
+        {
+            botWorking = state;
+            if (state)
+            {
+                timer1.Interval = 500;
+            }
+            else
+            {
+                timer1.Interval = 1000;
+            }
+        }
+
+        public async Task<PKM> ReadOpponent()
+        {
+            try
+            {
+                addtoLog("NTR: Read opponent pokémon data");
+                oppdata = null;
+                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], waitoppData, null);
+                waitingForData.Add(Program.scriptHelper.data(0x8800000, 0x1FFFF, pid), myArgs);
+                int readcount = 0;
+                for (readcount = 0; readcount < 100; readcount++)
+                {
+                    await Task.Delay(100);
+                    if (lastlog.Contains("finished"))
+                    {
+                        break;
+                    }
+                }
+                await Task.Delay(100);
+                if (readcount >= 100 || oppdata == null)
+                { // No read
+                    addtoLog("NTR: Read failed");
+                    return null;
+                }
+                PKM validator = new PK6(PKX.decryptArray(oppdata));
+                if (validator.ChecksumValid && validator.Species > 0 && validator.Species <= MAXSPECIES)
+                { // Valid pokemon
+                    Program.helper.lastRead = validator.Checksum;
+                    populateFields(validator);
+                    addtoLog("NTR: Read sucessful - PID 0x" + validator.PID.ToString("X8"));
+                    return validator;
+                }
+                else if (validator.ChecksumValid && validator.Species == 0)
+                { // Empty slot
+                    addtoLog("NTR: Empty pokémon data");
+                    return SAV.BlankPKM;
+                }
+                else
+                { // Invalid pokémon
+                    addtoLog("NTR: Invalid pokémon data");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                addtoLog("NTR: Read failed with exception:");
+                addtoLog(ex.Message);
+                return null; // No data received
+            }
+        }
 
         public async Task<bool> Reconnect()
         {
@@ -3888,17 +3978,16 @@ namespace ntrbase
             }
         }
 
-        public void botMode(bool state)
+        public void SetRadioOpponent()
         {
-            botWorking = state;
-            if (state)
-            {
-                timer1.Interval = 500;
-            }
-            else
-            {
-                timer1.Interval = 1000;
-            }
+            Delg.SetCheckedRadio(radioOpponent, true);
+        }
+
+        public void SetRadioParty()
+        {
+            Delg.SetCheckedRadio(radioParty, true);
+            Delg.SetValue(boxDump, 1);
+            Delg.SetValue(slotDump, 2);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

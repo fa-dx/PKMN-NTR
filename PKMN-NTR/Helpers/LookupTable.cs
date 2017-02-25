@@ -358,6 +358,42 @@ namespace ntrbase.Helpers
             }
         }
 
+        public static byte[] oppPattern
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return new byte[] { 0x60, 0x75, 0xC6, 0x08, 0xDC, 0xA8, 0xC7, 0x08, 0xD0, 0xB6, 0xC7, 0x08 };
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return new byte[] { 0x60, 0xE7, 0xC6, 0x08, 0x6C, 0xEC, 0xC6, 0x08, 0xE0, 0x1F, 0xC8, 0x08, 0x00, 0x39, 0xC8, 0x08 };
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        public static uint offsetOpp
+        {
+            get
+            {
+                switch (Program.gCmdWindow.SAV.Version)
+                {
+                    case GameVersion.X:
+                    case GameVersion.Y:
+                        return 637;
+                    case GameVersion.OR:
+                    case GameVersion.AS:
+                        return 673;
+                    default:
+                        return 0;
+                }
+            }
+        }
+
         #endregion RAM Address
 
         #region Formula

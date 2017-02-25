@@ -4056,13 +4056,13 @@
             // 
             // Tools_SoftReset
             // 
-            this.Tools_SoftReset.Enabled = false;
             this.Tools_SoftReset.Location = new System.Drawing.Point(98, 32);
             this.Tools_SoftReset.Name = "Tools_SoftReset";
             this.Tools_SoftReset.Size = new System.Drawing.Size(89, 23);
             this.Tools_SoftReset.TabIndex = 4;
             this.Tools_SoftReset.Text = "Soft-reset Bot";
             this.Tools_SoftReset.UseVisualStyleBackColor = true;
+            this.Tools_SoftReset.Click += new System.EventHandler(this.Tools_SoftReset_Click);
             // 
             // Tools_WonderTrade
             // 

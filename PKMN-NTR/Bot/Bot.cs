@@ -5,7 +5,7 @@ namespace ntrbase.Bot
 {
     public static class Bot
     {
-        public enum ErrorMessage { Finished, UserStop, ReadError, WriteError, ButtonError, TouchError, StickError, NotInPSS, FestivalPlaza, SVMatch, FilterMatch, NoMatch, GeneralError };
+        public enum ErrorMessage { Finished, UserStop, ReadError, WriteError, ButtonError, TouchError, StickError, NotInPSS, FestivalPlaza, SVMatch, FilterMatch, NoMatch, SRMatch, BattleMatch,  GeneralError };
 
         public static readonly string FOLDERBOT = "Bot";
 
@@ -290,6 +290,12 @@ namespace ntrbase.Bot
                     break;
                 case ErrorMessage.NoMatch:
                     MessageBox.Show("Bot finished sucessfuly without finding a match for the current settings.", source, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case ErrorMessage.SRMatch:
+                    MessageBox.Show($"Finished. The current pokémon matched filter #{info[0]} after {info[1]} soft-resets.", source, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case ErrorMessage.BattleMatch:
+                    MessageBox.Show($"Finished. The current pokémon matched filter #{info[0]} after {info[1]} battles.", source, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case ErrorMessage.GeneralError:
                     MessageBox.Show("A error has ocurred, see log for detals.", source, MessageBoxButtons.OK, MessageBoxIcon.Error);
