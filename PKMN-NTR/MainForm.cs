@@ -3981,6 +3981,11 @@ namespace ntrbase
         public void SetRadioOpponent()
         {
             Delg.SetCheckedRadio(radioOpponent, true);
+            if (SAV.Generation == 7)
+            {
+                Delg.SetValue(boxDump, 1);
+                Delg.SetValue(slotDump, 1);
+            }
         }
 
         public void SetRadioParty()

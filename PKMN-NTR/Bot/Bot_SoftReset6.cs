@@ -189,6 +189,7 @@ namespace ntrbase.Bot
                     resetNo = Mode.SelectedIndex == 2 ? -1 : 0;
                     walk = false;
                     steps = 0;
+                    finishmessage = null;
                     // Run the bot
                     Program.gCmdWindow.botMode(true);
                     RunBot();
@@ -939,7 +940,7 @@ namespace ntrbase.Bot
                             maxreconnect--;
                             if (await waitTaskbool)
                             {
-                                await Task.Delay(5 * commanddelay);
+                                await Task.Delay(10 * commanddelay);
                                 attempts = 0;
                             }
                             else
@@ -951,7 +952,7 @@ namespace ntrbase.Bot
                         else
                         {
                             Report("Bot: Maximum number of reconnection attempts reached");
-                            Report("Bot: Gen 6 Soft-reset bot");
+                            Report("Bot: STOP Gen 6 Soft-reset bot");
                             botworking = false;
                         }
                     }
@@ -963,7 +964,7 @@ namespace ntrbase.Bot
                 Report(ex.Source);
                 Report(ex.Message);
                 Report(ex.StackTrace);
-                Report("Bot: Gen 6 Soft-reset bot");
+                Report("Bot: STOP Gen 6 Soft-reset bot");
                 MessageBox.Show(ex.Message);
                 botworking = false;
                 botresult = ErrorMessage.GeneralError;

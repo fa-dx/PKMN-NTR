@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bot_SoftReset7));
             this.label72 = new System.Windows.Forms.Label();
-            this.srClear = new System.Windows.Forms.Button();
-            this.typeLSR = new System.Windows.Forms.ComboBox();
-            this.filtersSoftReset = new System.Windows.Forms.DataGridView();
+            this.ClearAll = new System.Windows.Forms.Button();
+            this.Mode = new System.Windows.Forms.ComboBox();
+            this.filterList = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,11 +52,11 @@
             this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.srFilterLoad = new System.Windows.Forms.Button();
-            this.RunLSRbot = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.LoadFilters = new System.Windows.Forms.Button();
+            this.RunStop = new System.Windows.Forms.Button();
+            this.Species = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
             this.SuspendLayout();
             // 
             // label72
@@ -68,40 +68,40 @@
             this.label72.TabIndex = 17;
             this.label72.Text = "Mode:";
             // 
-            // srClear
+            // ClearAll
             // 
-            this.srClear.Location = new System.Drawing.Point(458, 193);
-            this.srClear.Name = "srClear";
-            this.srClear.Size = new System.Drawing.Size(100, 23);
-            this.srClear.TabIndex = 19;
-            this.srClear.Text = "Reset all fields";
-            this.srClear.UseVisualStyleBackColor = true;
+            this.ClearAll.Location = new System.Drawing.Point(458, 193);
+            this.ClearAll.Name = "ClearAll";
+            this.ClearAll.Size = new System.Drawing.Size(100, 23);
+            this.ClearAll.TabIndex = 19;
+            this.ClearAll.Text = "Reset all fields";
+            this.ClearAll.UseVisualStyleBackColor = true;
+            this.ClearAll.Click += new System.EventHandler(this.ClearAll_Click);
             // 
-            // typeLSR
+            // Mode
             // 
-            this.typeLSR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.typeLSR.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.typeLSR.FormattingEnabled = true;
-            this.typeLSR.Items.AddRange(new object[] {
-            "Regular",
-            "Mirage Spot",
+            this.Mode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.Mode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.Mode.FormattingEnabled = true;
+            this.Mode.Items.AddRange(new object[] {
             "Event",
-            "Groudon/Kyogre",
-            "Walk",
-            "Palkia/Dialga/Giratina",
-            "Tornadus/Thundurus/Landorus"});
-            this.typeLSR.Location = new System.Drawing.Point(55, 12);
-            this.typeLSR.Name = "typeLSR";
-            this.typeLSR.Size = new System.Drawing.Size(180, 21);
-            this.typeLSR.TabIndex = 15;
+            "Type:Null",
+            "Tapus",
+            "Solgaleo/Lunala",
+            "Wild Pokémon",
+            "Ultra Beast/Necrozma"});
+            this.Mode.Location = new System.Drawing.Point(55, 12);
+            this.Mode.Name = "Mode";
+            this.Mode.Size = new System.Drawing.Size(180, 21);
+            this.Mode.TabIndex = 15;
             // 
-            // filtersSoftReset
+            // filterList
             // 
-            this.filtersSoftReset.AllowUserToAddRows = false;
-            this.filtersSoftReset.AllowUserToDeleteRows = false;
-            this.filtersSoftReset.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.filtersSoftReset.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.filtersSoftReset.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.filterList.AllowUserToAddRows = false;
+            this.filterList.AllowUserToDeleteRows = false;
+            this.filterList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.filterList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.filterList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn32,
             this.dataGridViewTextBoxColumn33,
             this.dataGridViewTextBoxColumn34,
@@ -121,13 +121,13 @@
             this.dataGridViewTextBoxColumn48,
             this.dataGridViewTextBoxColumn49,
             this.dataGridViewTextBoxColumn50});
-            this.filtersSoftReset.Location = new System.Drawing.Point(12, 41);
-            this.filtersSoftReset.MultiSelect = false;
-            this.filtersSoftReset.Name = "filtersSoftReset";
-            this.filtersSoftReset.ReadOnly = true;
-            this.filtersSoftReset.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.filtersSoftReset.Size = new System.Drawing.Size(546, 146);
-            this.filtersSoftReset.TabIndex = 21;
+            this.filterList.Location = new System.Drawing.Point(12, 41);
+            this.filterList.MultiSelect = false;
+            this.filterList.Name = "filterList";
+            this.filterList.ReadOnly = true;
+            this.filterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.filterList.Size = new System.Drawing.Size(546, 146);
+            this.filterList.TabIndex = 21;
             // 
             // dataGridViewTextBoxColumn32
             // 
@@ -262,30 +262,32 @@
             this.dataGridViewTextBoxColumn50.ReadOnly = true;
             this.dataGridViewTextBoxColumn50.Width = 80;
             // 
-            // srFilterLoad
+            // LoadFilters
             // 
-            this.srFilterLoad.Location = new System.Drawing.Point(352, 193);
-            this.srFilterLoad.Name = "srFilterLoad";
-            this.srFilterLoad.Size = new System.Drawing.Size(100, 23);
-            this.srFilterLoad.TabIndex = 20;
-            this.srFilterLoad.Text = "Load filter set...";
-            this.srFilterLoad.UseVisualStyleBackColor = true;
+            this.LoadFilters.Location = new System.Drawing.Point(352, 193);
+            this.LoadFilters.Name = "LoadFilters";
+            this.LoadFilters.Size = new System.Drawing.Size(100, 23);
+            this.LoadFilters.TabIndex = 20;
+            this.LoadFilters.Text = "Load filter set...";
+            this.LoadFilters.UseVisualStyleBackColor = true;
+            this.LoadFilters.Click += new System.EventHandler(this.LoadFilters_Click);
             // 
-            // RunLSRbot
+            // RunStop
             // 
-            this.RunLSRbot.Location = new System.Drawing.Point(421, 10);
-            this.RunLSRbot.Name = "RunLSRbot";
-            this.RunLSRbot.Size = new System.Drawing.Size(137, 23);
-            this.RunLSRbot.TabIndex = 18;
-            this.RunLSRbot.Text = "Start Bot";
-            this.RunLSRbot.UseVisualStyleBackColor = true;
+            this.RunStop.Location = new System.Drawing.Point(421, 10);
+            this.RunStop.Name = "RunStop";
+            this.RunStop.Size = new System.Drawing.Size(137, 23);
+            this.RunStop.TabIndex = 18;
+            this.RunStop.Text = "Start Bot";
+            this.RunStop.UseVisualStyleBackColor = true;
+            this.RunStop.Click += new System.EventHandler(this.RunStop_Click);
             // 
-            // comboBox1
+            // Species
             // 
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.Species.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.Species.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.Species.FormattingEnabled = true;
+            this.Species.Items.AddRange(new object[] {
             "Regular",
             "Mirage Spot",
             "Event",
@@ -293,10 +295,10 @@
             "Walk",
             "Palkia/Dialga/Giratina",
             "Tornadus/Thundurus/Landorus"});
-            this.comboBox1.Location = new System.Drawing.Point(295, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(120, 21);
-            this.comboBox1.TabIndex = 15;
+            this.Species.Location = new System.Drawing.Point(295, 12);
+            this.Species.Name = "Species";
+            this.Species.Size = new System.Drawing.Size(120, 21);
+            this.Species.TabIndex = 15;
             // 
             // label1
             // 
@@ -316,16 +318,20 @@
             this.ClientSize = new System.Drawing.Size(575, 228);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label72);
-            this.Controls.Add(this.srClear);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.typeLSR);
-            this.Controls.Add(this.filtersSoftReset);
-            this.Controls.Add(this.srFilterLoad);
-            this.Controls.Add(this.RunLSRbot);
+            this.Controls.Add(this.ClearAll);
+            this.Controls.Add(this.Species);
+            this.Controls.Add(this.Mode);
+            this.Controls.Add(this.filterList);
+            this.Controls.Add(this.LoadFilters);
+            this.Controls.Add(this.RunStop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "Bot_SoftReset7";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "Soft-reset Bot";
-            ((System.ComponentModel.ISupportInitialize)(this.filtersSoftReset)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_SoftReset7_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bot_SoftReset7_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.filterList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,9 +340,9 @@
         #endregion
 
         private System.Windows.Forms.Label label72;
-        private System.Windows.Forms.Button srClear;
-        private System.Windows.Forms.ComboBox typeLSR;
-        private System.Windows.Forms.DataGridView filtersSoftReset;
+        private System.Windows.Forms.Button ClearAll;
+        private System.Windows.Forms.ComboBox Mode;
+        private System.Windows.Forms.DataGridView filterList;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
@@ -356,9 +362,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
-        private System.Windows.Forms.Button srFilterLoad;
-        private System.Windows.Forms.Button RunLSRbot;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button LoadFilters;
+        private System.Windows.Forms.Button RunStop;
+        private System.Windows.Forms.ComboBox Species;
         private System.Windows.Forms.Label label1;
     }
 }
