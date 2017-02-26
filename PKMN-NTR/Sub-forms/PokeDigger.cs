@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using ntrbase.Properties;
 using PKHeX.Core;
 using ntrbase.Helpers;
 
@@ -104,12 +103,8 @@ namespace ntrbase.Sub_forms
             if (DumpSaveCB.Checked) { 
                 string folderPath = @Application.StartupPath + "\\Digger\\";
                 (new FileInfo(folderPath)).Directory.Create();
-                string fileName = folderPath + "dump " + StartAddrText.Text + ".bin";
-                //fileName = MainForm.NextAvailableFilename(fileName);
-            
-                //FileStream fs = File.OpenWrite(fileName);
-                //fs.Write(recvData, 0, recvData.Length);
-                //fs.Close();
+                string fileName = Path.Combine(folderPath, "dump " + StartAddrText.Text + DateTime.Now.ToString("yyyyMMddHHmmss") + ".bin");
+                File.WriteAllBytes(fileName, recvData);
             }
             //Thanks to this, processing will be done in GUI thread
             //so we don't need to use SetBlahblahblah functions everywhere
@@ -135,7 +130,9 @@ namespace ntrbase.Sub_forms
             int nextProgress = 0;
             int progressStep = (int)((double)length / 100.0);
             bool fullMode = !FastModeCB.Checked;
-            
+            bool gen7 = Program.gCmdWindow.SAV.Generation == 7;
+            int maxspecies = Program.gCmdWindow.SAV.MaxSpeciesID;
+
             for (int i = 0; i < length; i++)
             {
                 //Check sanity. Rejects ~50% of positions
@@ -145,31 +142,40 @@ namespace ntrbase.Sub_forms
                     //In fast mode skip if EC == 0. Rejects ~90% of positions
                     if (fullMode || seed != 0) 
                     {
-                        //Decrypt partially, calculate checksum
-                        //We don't need to deshuffle, it won't affect the checksum
-                        ushort checksum = 0;
-                        for (int j = 8; j < POKEBYTES; j += 2)
+                        PKM pkFound = Program.gCmdWindow.SAV.BlankPKM;
+                        byte[] dataFound = new byte[POKEBYTES];
+                        Array.Copy(source, i, dataFound, 0, POKEBYTES);
+                        dataFound = PKX.decryptArray(dataFound);
+                        pkFound.Data = dataFound;
+                        if (pkFound.ChecksumValid && pkFound.Species >= 1 && pkFound.Species <= maxspecies)
                         {
-                            seed = seed * 0x41C64E6D + 0x00006073;
-                            checksum += (ushort)(BitConverter.ToUInt16(source, i + j) ^ (ushort)(seed >> 16));
+                            results.Add(new Result { data = dataFound, offset = i });
                         }
+                        ////Decrypt partially, calculate checksum
+                        ////We don't need to deshuffle, it won't affect the checksum
+                        //ushort checksum = 0;
+                        //for (int j = 8; j < POKEBYTES; j += 2)
+                        //{
+                        //    seed = seed * 0x41C64E6D + 0x00006073;
+                        //    checksum += (ushort)(BitConverter.ToUInt16(source, i + j) ^ (ushort)(seed >> 16));
+                        //}
 
-                        //Allows very few positions, but there's still some garbage
-                        if (checksum == BitConverter.ToUInt16(source, i + 6))
-                        {
-                            byte[] dataFound = new byte[POKEBYTES];
-                            Array.Copy(source, i, dataFound, 0, POKEBYTES);
-                            //Decrypt it properly this time
-                            dataFound = PKX.decryptArray(dataFound);
-                            PKM pkFound = Program.gCmdWindow.SAV.BlankPKM;
-                            pkFound.Data = dataFound;
+                        ////Allows very few positions, but there's still some garbage
+                        //if (checksum == BitConverter.ToUInt16(source, i + 6))
+                        //{
+                        //    byte[] dataFound = new byte[POKEBYTES];
+                        //    Array.Copy(source, i, dataFound, 0, POKEBYTES);
+                        //    //Decrypt it properly this time
+                        //    dataFound = PKX.decryptArray(dataFound);
+                        //    PKM pkFound = Program.gCmdWindow.SAV.BlankPKM;
+                        //    pkFound.Data = dataFound;
 
-                            if (pkFound.Species >= 1 && pkFound.Species <= 802)
-                            {
-                                //Almost certainly valid
-                                results.Add(new Result { data = dataFound, offset = i });
-                            }
-                        }
+                        //    if (pkFound.Species >= 1 && pkFound.Species <= 802)
+                        //    {
+                        //        //Almost certainly valid
+                        //        results.Add(new Result { data = dataFound, offset = i });
+                        //    }
+                        //}
                     }
                 }
                 
@@ -207,36 +213,22 @@ namespace ntrbase.Sub_forms
             ResultsGrid.Rows.Add(resultsCount);
 
             int i = 0;
-            foreach (Result r in allResults) {
+            foreach (Result r in allResults)
+            {
                 PKM pkInfo = Program.gCmdWindow.SAV.BlankPKM;
                 pkInfo.Data = r.data;
 
                 ResultsGrid.Rows[i].Tag = r.data;
-                Bitmap sprite = getSprite(pkInfo.Species, pkInfo.AltForm, pkInfo.IsEgg);
+                Image sprite = pkInfo.Sprite();
+
                 ResultsGrid.Rows[i].Cells[0].Value = sprite;
                 ResultsGrid.Rows[i].Height = sprite.Height;
-                //ResultsGrid.Rows[i].Cells[1].Value = LookupTable.getLevel(pkInfo.Species, (int)pkInfo.EXP);
+                ResultsGrid.Rows[i].Cells[1].Value = pkInfo.CurrentLevel;
                 ResultsGrid.Rows[i].Cells[2].Value = pkInfo.Nickname;
                 ResultsGrid.Rows[i].Cells[4].Value = pkInfo.PID.ToString("X8");
                 ResultsGrid.Rows[i].Cells[5].Value = r.offset.ToString("X8");
                 i++;
             }
-        }
-
-        private Bitmap getSprite(int speciesindex, int formindex, bool isegg)
-        {
-            string resname;
-            if (isegg)
-                resname = "egg";
-            else if (formindex == 0 || speciesindex == 493 || speciesindex == 773) // All Arceus / Silvally formes have same sprite
-                resname = "_" + speciesindex;
-            else
-                resname = "_" + speciesindex + "_" + formindex;
-            Bitmap data;
-            data = (Bitmap)Resources.ResourceManager.GetObject(resname);
-            if (data == null)
-                data = (Bitmap)Resources.ResourceManager.GetObject("unknown");
-            return data;
         }
 
         private void DumpBtn_Click(object sender, EventArgs e)
@@ -250,13 +242,13 @@ namespace ntrbase.Sub_forms
                 }
                 string folderPath = @Application.StartupPath + "\\Digger\\";
                 (new FileInfo(folderPath)).Directory.Create();
-                string fileName = folderPath + "pkmn" + ".pk7";
-                //fileName = MainForm.NextAvailableFilename(fileName);
-
-                //byte[] data = (byte[])r.Tag;
-                //FileStream fs = File.OpenWrite(fileName);
-                //fs.Write(data, 0, data.Length);
-                //fs.Close();
+                PKM pkx = Program.gCmdWindow.SAV.BlankPKM;
+                pkx.Data = (byte[])r.Tag;
+                string fn = pkx.FileName;
+                fn = fn.Substring(0, fn.LastIndexOf('.'));
+                string filename = $"{fn}.{pkx.Extension}";
+                string newfile = Path.Combine(folderPath, Util.CleanFileName(filename));
+                File.WriteAllBytes(newfile, pkx.DecryptedBoxData);
             }
         }
 
@@ -323,5 +315,4 @@ namespace ntrbase.Sub_forms
             toolTip1.SetToolTip(HelpBtn, "Congratulations! You have demonstrated your ability to follow orders.");
         }
     }
-
 }

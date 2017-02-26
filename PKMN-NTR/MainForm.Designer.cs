@@ -4086,7 +4086,6 @@
             // 
             // Tools_PokeDigger
             // 
-            this.Tools_PokeDigger.Enabled = false;
             this.Tools_PokeDigger.Location = new System.Drawing.Point(98, 61);
             this.Tools_PokeDigger.Name = "Tools_PokeDigger";
             this.Tools_PokeDigger.Size = new System.Drawing.Size(89, 23);
