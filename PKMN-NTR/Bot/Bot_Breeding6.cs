@@ -259,7 +259,7 @@ namespace ntrbase.Bot
             try
             {
                 Program.gCmdWindow.botMode(true);
-                while (botworking)
+                while (botworking && Program.gCmdWindow.isConnected)
                 {
                     switch (botState)
                     {
@@ -1252,6 +1252,10 @@ namespace ntrbase.Bot
             if (userstop)
             {
                 botresult = ErrorMessage.UserStop;
+            }
+            else if (!Program.gCmdWindow.isConnected)
+            {
+                botresult = ErrorMessage.Disconnect;
             }
             showResult("Breeding bot", botresult, finishmessage);
             Delg.SetText(RunStop, "Start Bot");

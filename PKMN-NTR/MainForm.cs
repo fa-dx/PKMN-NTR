@@ -53,6 +53,7 @@ namespace ntrbase
         private LegalityAnalysis Legality;
         public static volatile bool formInitialized, fieldsInitialized, fieldsLoaded;
         private bool changingFields;
+        public bool isConnected = false;
         private readonly PictureBox[] movePB, relearnPB;
         private readonly ToolTip Tip1 = new ToolTip(), Tip2 = new ToolTip(), Tip3 = new ToolTip(), NatureTip = new ToolTip(), EVTip = new ToolTip();
         private static readonly Image mixedHighlight = ImageUtil.ChangeOpacity(Resources.slotSet, 0.5);
@@ -505,6 +506,7 @@ namespace ntrbase
             buttonConnect.Text = "Connect";
             buttonConnect.Enabled = true;
             buttonDisconnect.Enabled = false;
+            isConnected = false;
             disableControls();
         }
 
@@ -514,6 +516,7 @@ namespace ntrbase
             buttonConnect.Text = "Connected";
             buttonConnect.Enabled = false;
             buttonDisconnect.Enabled = true;
+            isConnected = true;
             Settings.Default.IP = host.Text;
             Settings.Default.Save();
             saveIP();
@@ -3761,7 +3764,10 @@ namespace ntrbase
 
         public void Tool_Finish()
         {
-            enableControls();
+            if (isConnected)
+            {
+                enableControls();
+            }
         }
 
         // Trainer Editor

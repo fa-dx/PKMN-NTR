@@ -5,7 +5,7 @@ namespace ntrbase.Bot
 {
     public static class Bot
     {
-        public enum ErrorMessage { Finished, UserStop, ReadError, WriteError, ButtonError, TouchError, StickError, NotInPSS, FestivalPlaza, SVMatch, FilterMatch, NoMatch, SRMatch, BattleMatch,  GeneralError };
+        public enum ErrorMessage { Finished, UserStop, ReadError, WriteError, ButtonError, TouchError, StickError, NotInPSS, FestivalPlaza, SVMatch, FilterMatch, NoMatch, SRMatch, BattleMatch, Disconnect, GeneralError };
 
         public static readonly string FOLDERBOT = "Bot";
 
@@ -296,6 +296,9 @@ namespace ntrbase.Bot
                     break;
                 case ErrorMessage.BattleMatch:
                     MessageBox.Show($"Finished. The current pokémon matched filter #{info[0]} after {info[1]} battles.", source, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case ErrorMessage.Disconnect:
+                    MessageBox.Show("Connection with the 3DS was lost.", source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 case ErrorMessage.GeneralError:
                     MessageBox.Show("A error has ocurred, see log for detals.", source, MessageBoxButtons.OK, MessageBoxIcon.Error);
