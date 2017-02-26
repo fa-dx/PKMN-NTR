@@ -665,7 +665,9 @@
             this.Controls.Add(this.filterLoad);
             this.Controls.Add(this.RunStop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Bot_Breeding6";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "Breeding Bot";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_Breeding6_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bot_Breeding6_FormClosed);

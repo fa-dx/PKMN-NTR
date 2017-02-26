@@ -295,7 +295,9 @@
             this.Controls.Add(this.Trades);
             this.Controls.Add(this.Slot);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Bot_WonderTrade7";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "Wonder Trade Bot";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_WonderTrade7_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bot_WonderTrade7_FormClosed);
