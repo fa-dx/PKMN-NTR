@@ -315,7 +315,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(575, 228);
+            this.ClientSize = new System.Drawing.Size(569, 223);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label72);
             this.Controls.Add(this.ClearAll);
@@ -325,7 +325,7 @@
             this.Controls.Add(this.LoadFilters);
             this.Controls.Add(this.RunStop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimizeBox = false;
+            this.MaximizeBox = false;
             this.Name = "Bot_SoftReset7";
             this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "Soft-reset Bot";

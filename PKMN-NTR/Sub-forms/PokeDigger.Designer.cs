@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PokeDigger));
             this.DoItBtn = new System.Windows.Forms.Button();
             this.InfoLabel = new System.Windows.Forms.Label();
             this.ResultsGrid = new System.Windows.Forms.DataGridView();
@@ -331,6 +332,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(484, 320);
             this.Controls.Add(this.HelpBtn);
             this.Controls.Add(this.DumpSaveCB);
@@ -352,7 +355,10 @@
             this.Controls.Add(this.ResultsGrid);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.DoItBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "PokeDigger";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 6);
             this.Text = "PokeDigger";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PokeDigger_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.ResultsGrid)).EndInit();

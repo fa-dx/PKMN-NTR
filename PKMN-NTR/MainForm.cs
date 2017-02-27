@@ -3896,7 +3896,7 @@ namespace ntrbase
         private void Tools_PokeDigger_Click(object sender, EventArgs e)
         {
             Tool_Start();
-            new PokeDigger(pid, isConnected).Show();
+            new PokeDigger(pid, isConnected).ShowDialog();
         }
 
         private void DumpInstructionsBtn_Click(object sender, EventArgs e)
