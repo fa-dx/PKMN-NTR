@@ -211,11 +211,11 @@ namespace ntrbase
             CB_GameOrigin.DataSource = new BindingSource(GameInfo.VersionDataSource.Where(g => g.Value <= SAV.MaxGameID || SAV.Generation >= 3 && g.Value == 15).ToList(), null);
 
             // Set the Move ComboBoxes too..
-            var moves = GameInfo.MoveDataSource.Where(m => m.Value <= SAV.MaxMoveID).ToList(); // Filter Z-Moves if appropriate
+            GameInfo.MoveDataSource = (GameInfo.LegalMoveDataSource).Where(m => m.Value <= SAV.MaxMoveID).ToList(); // Filter Z-Moves if appropriate
             foreach (ComboBox cb in new[] { CB_Move1, CB_Move2, CB_Move3, CB_Move4, CB_RelearnMove1, CB_RelearnMove2, CB_RelearnMove3, CB_RelearnMove4 })
             {
                 cb.DisplayMember = "Text"; cb.ValueMember = "Value";
-                cb.DataSource = new BindingSource(moves, null);
+                cb.DataSource = new BindingSource(GameInfo.MoveDataSource, null);
             }
         }
 
@@ -2115,7 +2115,9 @@ namespace ntrbase
             string ext = Path.GetExtension(path);
             FileInfo fi = new FileInfo(path);
             if (fi.Length > 0x10009C && fi.Length != 0x380000)
-                WinFormsUtil.Error("Input file is too large.", path);
+                WinFormsUtil.Error("Input file is too large." + Environment.NewLine + $"Size: {fi.Length} bytes", path);
+            else if (fi.Length < 32)
+                WinFormsUtil.Error("Input file is too small." + Environment.NewLine + $"Size: {fi.Length} bytes", path);
             else
             {
                 byte[] input; try { input = File.ReadAllBytes(path); }
@@ -2259,48 +2261,43 @@ namespace ntrbase
 
         private void updateLegality(LegalityAnalysis la = null, bool skipMoveRepop = false)
         {
-            if (pkm.GenNumber >= 6)
+            if (!fieldsLoaded)
+                return;
+
+            Legality = la ?? new LegalityAnalysis(pkm);
+            if (!Legality.Parsed)
             {
-                if (!fieldsLoaded)
-                    return;
-                Legality = la ?? new LegalityAnalysis(pkm);
-                if (!Legality.Parsed)
-                {
-                    PB_Legal.Visible = false;
-                    return;
-                }
-                PB_Legal.Visible = true;
-
-                PB_Legal.Image = Legality.Valid ? Resources.valid : Resources.warn;
-
-                // Refresh Move Legality
-                for (int i = 0; i < 4; i++)
-                    movePB[i].Visible = !Legality.vMoves[i].Valid;
-
-                for (int i = 0; i < 4; i++)
-                    relearnPB[i].Visible = !Legality.vRelearn[i].Valid;
-
-                if (skipMoveRepop)
-                    return;
-                // Resort moves
-                bool tmp = fieldsLoaded;
-                fieldsLoaded = false;
-                var cb = new[] { CB_Move1, CB_Move2, CB_Move3, CB_Move4 };
-                var moves = Legality.AllSuggestedMovesAndRelearn;
-                var moveList = GameInfo.MoveDataSource.OrderByDescending(m => moves.Contains(m.Value)).ToList();
-                foreach (ComboBox c in cb)
-                {
-                    var index = WinFormsUtil.getIndex(c);
-                    c.DataSource = new BindingSource(moveList, null);
-                    c.SelectedValue = index;
-                }
-                fieldsLoaded |= tmp;
-            }
-            else
-            {
-                PB_Legal.Visible = PB_WarnMove1.Visible = PB_WarnMove2.Visible = PB_WarnMove3.Visible = PB_WarnMove4.Visible =
+                PB_Legal.Visible =
+                PB_WarnMove1.Visible = PB_WarnMove2.Visible = PB_WarnMove3.Visible = PB_WarnMove4.Visible =
                 PB_WarnRelearn1.Visible = PB_WarnRelearn2.Visible = PB_WarnRelearn3.Visible = PB_WarnRelearn4.Visible = false;
+                return;
             }
+
+            PB_Legal.Visible = true;
+            PB_Legal.Image = Legality.Valid ? Resources.valid : Resources.warn;
+
+            // Refresh Move Legality
+            for (int i = 0; i < 4; i++)
+                movePB[i].Visible = !Legality.vMoves[i].Valid;
+
+            for (int i = 0; i < 4; i++)
+                relearnPB[i].Visible = !Legality.vRelearn[i].Valid && pkm.Format >= 6;
+
+            if (skipMoveRepop)
+                return;
+            // Resort moves
+            bool tmp = fieldsLoaded;
+            fieldsLoaded = false;
+            var cb = new[] { CB_Move1, CB_Move2, CB_Move3, CB_Move4 };
+            var moves = Legality.AllSuggestedMovesAndRelearn;
+            var moveList = GameInfo.MoveDataSource.OrderByDescending(m => moves.Contains(m.Value)).ToList();
+            foreach (ComboBox c in cb)
+            {
+                var index = WinFormsUtil.getIndex(c);
+                c.DataSource = new BindingSource(moveList, null);
+                c.SelectedValue = index;
+            }
+            fieldsLoaded |= tmp;
         }
 
         private void showLegality(PKM pk, bool tabs, bool verbose, bool skipMoveRepop = false)
@@ -2308,7 +2305,9 @@ namespace ntrbase
             LegalityAnalysis la = new LegalityAnalysis(pk);
             if (!la.Parsed)
             {
-                WinFormsUtil.Alert($"Checking legality of PK{pk.Format} files that originated from Gen{pk.GenNumber} is not supported.");
+                WinFormsUtil.Alert(pk.Format < 3
+                       ? $"Checking legality of PK{pk.Format} files is not supported."
+                       : $"Checking legality of PK{pk.Format} files that originated from Gen{pk.GenNumber} is not supported.");
                 return;
             }
             if (tabs)
@@ -2636,9 +2635,9 @@ namespace ntrbase
 
         private void updateNickname(object sender, EventArgs e)
         {
+            int lang = WinFormsUtil.getIndex(CB_Language);
             if (sender == CB_Language || sender == CHK_Nicknamed)
             {
-                int lang = WinFormsUtil.getIndex(CB_Language);
                 switch (lang)
                 {
                     case 9:
@@ -2657,24 +2656,20 @@ namespace ntrbase
             // Fetch Current Species and set it as Nickname Text
             int species = WinFormsUtil.getIndex(CB_Species);
             if (species < 1 || species > SAV.MaxSpeciesID)
-                TB_Nickname.Text = "";
-            else
-            {
-                // get language
-                int lang = WinFormsUtil.getIndex(CB_Language);
-                if (CHK_IsEgg.Checked) species = 0; // Set species to 0 to get the egg name.
-                string nick = PKX.getSpeciesName(CHK_IsEgg.Checked ? 0 : species, lang);
+            { TB_Nickname.Text = ""; return; }
 
-                if (SAV.Generation < 5) // All caps GenIV and previous
-                    nick = nick.ToUpper();
-                if (SAV.Generation < 3)
-                    nick = nick.Replace(" ", "");
-                TB_Nickname.Text = nick;
-                if (SAV.Generation == 1)
-                    ((PK1)pkm).setNotNicknamed();
-                if (SAV.Generation == 2)
-                    ((PK2)pkm).setNotNicknamed();
-            }
+            if (CHK_IsEgg.Checked)
+                species = 0; // get the egg name.
+
+            // If name is that of another language, don't replace the nickname
+            if (sender != CB_Language && species != 0 && !PKX.getIsNicknamedAnyLanguage(species, TB_Nickname.Text, SAV.Generation))
+                return;
+
+            TB_Nickname.Text = PKX.getSpeciesNameGeneration(species, lang, SAV.Generation);
+            if (SAV.Generation == 1)
+                ((PK1)pkm).setNotNicknamed();
+            if (SAV.Generation == 2)
+                ((PK2)pkm).setNotNicknamed();
         }
 
         private void updateNicknameClick(object sender, MouseEventArgs e)
@@ -3077,8 +3072,12 @@ namespace ntrbase
         private void clickMetLocation(object sender, EventArgs e)
         {
             pkm = preparePKM();
+            updateLegality();
+            if (Legality.Valid)
+                return;
+
             var encounter = Legality.getSuggestedMetInfo();
-            if (encounter == null || encounter.Location < 0)
+            if (encounter == null || (pkm.Format >= 3 && encounter.Location < 0))
             {
                 WinFormsUtil.Alert("Unable to provide a suggestion.");
                 return;
@@ -3087,21 +3086,37 @@ namespace ntrbase
             int level = encounter.Level;
             int location = encounter.Location;
             int minlvl = Legal.getLowestLevel(pkm, encounter.Species);
+            if (minlvl == 0)
+                minlvl = level;
 
-            if (pkm.Met_Level == level && pkm.Met_Location == location && pkm.CurrentLevel >= minlvl)
+            if (pkm.CurrentLevel >= minlvl && pkm.Met_Level == level && pkm.Met_Location == location)
                 return;
+            if (minlvl < level)
+                minlvl = level;
 
-            var met_list = GameInfo.getLocationList((GameVersion)pkm.Version, SAV.Generation, egg: false);
-            var locstr = met_list.FirstOrDefault(loc => loc.Value == location)?.Text;
-            string suggestion = $"Suggested:\nMet Location: {locstr}\nMet Level: {level}";
+            var suggestion = new List<string> { "Suggested:" };
+            if (pkm.Format >= 3)
+            {
+                var met_list = GameInfo.getLocationList((GameVersion)pkm.Version, SAV.Generation, egg: false);
+                var locstr = met_list.FirstOrDefault(loc => loc.Value == location)?.Text;
+                suggestion.Add($"Met Location: {locstr}");
+                suggestion.Add($"Met Level: {level}");
+            }
             if (pkm.CurrentLevel < minlvl)
-                suggestion += $"\nCurrent Level {minlvl}";
+                suggestion.Add($"Current Level: {minlvl}");
 
-            if (WinFormsUtil.Prompt(MessageBoxButtons.YesNo, suggestion) != DialogResult.Yes)
+            if (suggestion.Count == 1) // no suggestion
                 return;
 
-            TB_MetLevel.Text = level.ToString();
-            CB_MetLocation.SelectedValue = location;
+            string suggest = string.Join(Environment.NewLine, suggestion);
+            if (WinFormsUtil.Prompt(MessageBoxButtons.YesNo, suggest) != DialogResult.Yes)
+                return;
+
+            if (pkm.Format >= 3)
+            {
+                TB_MetLevel.Text = level.ToString();
+                CB_MetLocation.SelectedValue = location;
+            }
 
             if (pkm.CurrentLevel < minlvl)
                 TB_Level.Text = minlvl.ToString();
