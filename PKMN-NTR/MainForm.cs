@@ -112,10 +112,6 @@ namespace ntrbase
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            //enableWhenConnected = new Control[] { };
-            //enableWhenConnected7 = new Control[] { };
-            //gen6onlyControls = new Control[] { };
-
             pkm = SAV.BlankPKM;
             setPKMFormatMode(SAV.Generation, SAV.Version);
 
@@ -266,10 +262,8 @@ namespace ntrbase
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            lb_pkmnntrver.Text = System.Windows.Forms.Application.ProductVersion + " - DEV BUILD";
+            lb_pkmnntrver.Text = System.Windows.Forms.Application.ProductVersion;
             lb_pkhexcorever.Text = PKHeX.Core.Properties.Resources.ProgramVersion;
-
-            addtoLog("THIS IS A BUILD FOR A DEVEOPMENT BRANCH - DO NOT EXPECT IT TO WORK");
 
             checkUpdate();
             host.Text = Settings.Default.IP;
