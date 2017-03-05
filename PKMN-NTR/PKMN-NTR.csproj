@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ntrbase</RootNamespace>
     <AssemblyName>PKMN-NTR</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
     <PublishUrl>发布\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,21 +31,21 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CLICKONCE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;CLICKONCE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -69,23 +70,101 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bot\BreedingBot6.cs" />
-    <Compile Include="Bot\BreedingBot7.cs" />
-    <Compile Include="Bot\SoftResetbot6.cs" />
-    <Compile Include="Bot\SoftResetbot7.cs" />
-    <Compile Include="Bot\WonderTradeBot6.cs" />
-    <Compile Include="Bot\WonderTradeBot7.cs" />
-    <Compile Include="Helpers\DumpOpponentHelp.cs">
+    <Compile Include="Bot\Bot.cs" />
+    <Compile Include="Bot\Bot_Breeding7.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helpers\DumpOpponentHelp.Designer.cs">
+    <Compile Include="Bot\Bot_Breeding7.Designer.cs">
+      <DependentUpon>Bot_Breeding7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_Breeding6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_Breeding6.Designer.cs">
+      <DependentUpon>Bot_Breeding6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_SoftReset6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_SoftReset6.Designer.cs">
+      <DependentUpon>Bot_SoftReset6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_SoftReset7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_SoftReset7.Designer.cs">
+      <DependentUpon>Bot_SoftReset7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_WonderTrade6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_WonderTrade6.Designer.cs">
+      <DependentUpon>Bot_WonderTrade6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bot\Bot_WonderTrade7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bot\Bot_WonderTrade7.Designer.cs">
+      <DependentUpon>Bot_WonderTrade7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Delg.cs" />
+    <Compile Include="Helpers\FontUtil.cs" />
+    <Compile Include="Helpers\ImageUtil.cs" />
+    <Compile Include="Helpers\PKMUtil.cs" />
+    <Compile Include="Helpers\WinFormsUtil.cs" />
+    <Compile Include="Sub-forms\DumpOpponentHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\DumpOpponentHelp.Designer.cs">
       <DependentUpon>DumpOpponentHelp.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LookupTable.cs" />
-    <Compile Include="Helpers\PokeDigger.cs">
+    <Compile Include="Sub-forms\Edit_Items.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helpers\PokeDigger.Designer.cs">
+    <Compile Include="Sub-forms\Edit_Items.Designer.cs">
+      <DependentUpon>Edit_Items.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\Edit_Trainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\Edit_Trainer.Designer.cs">
+      <DependentUpon>Edit_Trainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\ErrorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\ErrorWindow.Designer.cs">
+      <DependentUpon>ErrorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\f2_Text.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\f2_Text.Designer.cs">
+      <DependentUpon>f2_Text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\Filter_Constructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\Filter_Constructor.Designer.cs">
+      <DependentUpon>Filter_Constructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\MemoryAmie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\MemoryAmie.Designer.cs">
+      <DependentUpon>MemoryAmie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\SuperTrainingEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\SuperTrainingEditor.Designer.cs">
+      <DependentUpon>SuperTrainingEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\PokeDigger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\PokeDigger.Designer.cs">
       <DependentUpon>PokeDigger.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\RemoteControl.cs" />
@@ -96,15 +175,65 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NTR.cs" />
-    <Compile Include="Helpers\PKHeX.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\ScriptHelper.cs" />
-    <EmbeddedResource Include="Helpers\DumpOpponentHelp.resx">
+    <Compile Include="Sub-forms\Remote_Control.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\Remote_Control.Designer.cs">
+      <DependentUpon>Remote_Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub-forms\RibbonEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\RibbonEditor.Designer.cs">
+      <DependentUpon>RibbonEditor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Bot\Bot_Breeding7.resx">
+      <DependentUpon>Bot_Breeding7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_Breeding6.resx">
+      <DependentUpon>Bot_Breeding6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_SoftReset6.resx">
+      <DependentUpon>Bot_SoftReset6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_SoftReset7.resx">
+      <DependentUpon>Bot_SoftReset7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_WonderTrade6.resx">
+      <DependentUpon>Bot_WonderTrade6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bot\Bot_WonderTrade7.resx">
+      <DependentUpon>Bot_WonderTrade7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\DumpOpponentHelp.resx">
       <DependentUpon>DumpOpponentHelp.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\PokeDigger.resx">
+    <EmbeddedResource Include="Sub-forms\Edit_Items.resx">
+      <DependentUpon>Edit_Items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\Edit_Trainer.resx">
+      <DependentUpon>Edit_Trainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\ErrorWindow.resx">
+      <DependentUpon>ErrorWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\f2_Text.resx">
+      <DependentUpon>f2_Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\Filter_Constructor.resx">
+      <DependentUpon>Filter_Constructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\MemoryAmie.resx">
+      <DependentUpon>MemoryAmie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\SuperTrainingEditor.resx">
+      <DependentUpon>SuperTrainingEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\PokeDigger.resx">
       <DependentUpon>PokeDigger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -121,6 +250,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sub-forms\Remote_Control.resx">
+      <DependentUpon>Remote_Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\RibbonEditor.resx">
+      <DependentUpon>RibbonEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -138,7 +273,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 y x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -155,1068 +290,18 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="Pkmn NTR.ico" />
-    <Content Include="Resources\Balls\ball25.png" />
-    <Content Include="Resources\Balls\ball0.png" />
-    <Content Include="Resources\Balls\ball1.png" />
-    <Content Include="Resources\Balls\ball10.png" />
-    <Content Include="Resources\Balls\ball11.png" />
-    <Content Include="Resources\Balls\ball12.png" />
-    <Content Include="Resources\Balls\ball13.png" />
-    <Content Include="Resources\Balls\ball14.png" />
-    <Content Include="Resources\Balls\ball15.png" />
-    <Content Include="Resources\Balls\ball16.png" />
-    <Content Include="Resources\Balls\ball17.png" />
-    <Content Include="Resources\Balls\ball18.png" />
-    <Content Include="Resources\Balls\ball19.png" />
-    <Content Include="Resources\Balls\ball2.png" />
-    <Content Include="Resources\Balls\ball20.png" />
-    <Content Include="Resources\Balls\ball21.png" />
-    <Content Include="Resources\Balls\ball22.png" />
-    <Content Include="Resources\Balls\ball23.png" />
-    <Content Include="Resources\Balls\ball24.png" />
-    <Content Include="Resources\Balls\ball3.png" />
-    <Content Include="Resources\Balls\ball4.png" />
-    <Content Include="Resources\Balls\ball5.png" />
-    <Content Include="Resources\Balls\ball6.png" />
-    <Content Include="Resources\Balls\ball7.png" />
-    <Content Include="Resources\Balls\ball8.png" />
-    <Content Include="Resources\Balls\ball9.png" />
-    <Content Include="Resources\Misc\shiny.png" />
-    <Content Include="Resources\Poke\0.png" />
-    <Content Include="Resources\Poke\1.png" />
-    <Content Include="Resources\Poke\10.png" />
-    <Content Include="Resources\Poke\100.png" />
-    <Content Include="Resources\Poke\101.png" />
-    <Content Include="Resources\Poke\102.png" />
-    <Content Include="Resources\Poke\103-1.png" />
-    <Content Include="Resources\Poke\103.png" />
-    <Content Include="Resources\Poke\104.png" />
-    <Content Include="Resources\Poke\105-1.png" />
-    <Content Include="Resources\Poke\105.png" />
-    <Content Include="Resources\Poke\106.png" />
-    <Content Include="Resources\Poke\107.png" />
-    <Content Include="Resources\Poke\108.png" />
-    <Content Include="Resources\Poke\109.png" />
-    <Content Include="Resources\Poke\11.png" />
-    <Content Include="Resources\Poke\110.png" />
-    <Content Include="Resources\Poke\111.png" />
-    <Content Include="Resources\Poke\112.png" />
-    <Content Include="Resources\Poke\113.png" />
-    <Content Include="Resources\Poke\114.png" />
-    <Content Include="Resources\Poke\115-1.png" />
-    <Content Include="Resources\Poke\115.png" />
-    <Content Include="Resources\Poke\116.png" />
-    <Content Include="Resources\Poke\117.png" />
-    <Content Include="Resources\Poke\118.png" />
-    <Content Include="Resources\Poke\119.png" />
-    <Content Include="Resources\Poke\12.png" />
-    <Content Include="Resources\Poke\120.png" />
-    <Content Include="Resources\Poke\121.png" />
-    <Content Include="Resources\Poke\122.png" />
-    <Content Include="Resources\Poke\123.png" />
-    <Content Include="Resources\Poke\124.png" />
-    <Content Include="Resources\Poke\125.png" />
-    <Content Include="Resources\Poke\126.png" />
-    <Content Include="Resources\Poke\127-1.png" />
-    <Content Include="Resources\Poke\127.png" />
-    <Content Include="Resources\Poke\128.png" />
-    <Content Include="Resources\Poke\129.png" />
-    <Content Include="Resources\Poke\13.png" />
-    <Content Include="Resources\Poke\130-1.png" />
-    <Content Include="Resources\Poke\130.png" />
-    <Content Include="Resources\Poke\131.png" />
-    <Content Include="Resources\Poke\132.png" />
-    <Content Include="Resources\Poke\133.png" />
-    <Content Include="Resources\Poke\134.png" />
-    <Content Include="Resources\Poke\135.png" />
-    <Content Include="Resources\Poke\136.png" />
-    <Content Include="Resources\Poke\137.png" />
-    <Content Include="Resources\Poke\138.png" />
-    <Content Include="Resources\Poke\139.png" />
-    <Content Include="Resources\Poke\14.png" />
-    <Content Include="Resources\Poke\140.png" />
-    <Content Include="Resources\Poke\141.png" />
-    <Content Include="Resources\Poke\142-1.png" />
-    <Content Include="Resources\Poke\142.png" />
-    <Content Include="Resources\Poke\143.png" />
-    <Content Include="Resources\Poke\144.png" />
-    <Content Include="Resources\Poke\145.png" />
-    <Content Include="Resources\Poke\146.png" />
-    <Content Include="Resources\Poke\147.png" />
-    <Content Include="Resources\Poke\148.png" />
-    <Content Include="Resources\Poke\149.png" />
-    <Content Include="Resources\Poke\15-1.png" />
-    <Content Include="Resources\Poke\15.png" />
-    <Content Include="Resources\Poke\150-1.png" />
-    <Content Include="Resources\Poke\150-2.png" />
-    <Content Include="Resources\Poke\150.png" />
-    <Content Include="Resources\Poke\151.png" />
-    <Content Include="Resources\Poke\152.png" />
-    <Content Include="Resources\Poke\153.png" />
-    <Content Include="Resources\Poke\154.png" />
-    <Content Include="Resources\Poke\155.png" />
-    <Content Include="Resources\Poke\156.png" />
-    <Content Include="Resources\Poke\157.png" />
-    <Content Include="Resources\Poke\158.png" />
-    <Content Include="Resources\Poke\159.png" />
-    <Content Include="Resources\Poke\16.png" />
-    <Content Include="Resources\Poke\160.png" />
-    <Content Include="Resources\Poke\161.png" />
-    <Content Include="Resources\Poke\162.png" />
-    <Content Include="Resources\Poke\163.png" />
-    <Content Include="Resources\Poke\164.png" />
-    <Content Include="Resources\Poke\165.png" />
-    <Content Include="Resources\Poke\166.png" />
-    <Content Include="Resources\Poke\167.png" />
-    <Content Include="Resources\Poke\168.png" />
-    <Content Include="Resources\Poke\169.png" />
-    <Content Include="Resources\Poke\17.png" />
-    <Content Include="Resources\Poke\170.png" />
-    <Content Include="Resources\Poke\171.png" />
-    <Content Include="Resources\Poke\172.png" />
-    <Content Include="Resources\Poke\172_1.png" />
-    <Content Include="Resources\Poke\173.png" />
-    <Content Include="Resources\Poke\174.png" />
-    <Content Include="Resources\Poke\175.png" />
-    <Content Include="Resources\Poke\176.png" />
-    <Content Include="Resources\Poke\177.png" />
-    <Content Include="Resources\Poke\178.png" />
-    <Content Include="Resources\Poke\179.png" />
-    <Content Include="Resources\Poke\18-1.png" />
-    <Content Include="Resources\Poke\18.png" />
-    <Content Include="Resources\Poke\180.png" />
-    <Content Include="Resources\Poke\181-1.png" />
-    <Content Include="Resources\Poke\181.png" />
-    <Content Include="Resources\Poke\182.png" />
-    <Content Include="Resources\Poke\183.png" />
-    <Content Include="Resources\Poke\184.png" />
-    <Content Include="Resources\Poke\185.png" />
-    <Content Include="Resources\Poke\186.png" />
-    <Content Include="Resources\Poke\187.png" />
-    <Content Include="Resources\Poke\188.png" />
-    <Content Include="Resources\Poke\189.png" />
-    <Content Include="Resources\Poke\19-1.png" />
-    <Content Include="Resources\Poke\19.png" />
-    <Content Include="Resources\Poke\190.png" />
-    <Content Include="Resources\Poke\191.png" />
-    <Content Include="Resources\Poke\192.png" />
-    <Content Include="Resources\Poke\193.png" />
-    <Content Include="Resources\Poke\194.png" />
-    <Content Include="Resources\Poke\195.png" />
-    <Content Include="Resources\Poke\196.png" />
-    <Content Include="Resources\Poke\197.png" />
-    <Content Include="Resources\Poke\198.png" />
-    <Content Include="Resources\Poke\199.png" />
-    <Content Include="Resources\Poke\2.png" />
-    <Content Include="Resources\Poke\20-1.png" />
-    <Content Include="Resources\Poke\20.png" />
-    <Content Include="Resources\Poke\200.png" />
-    <Content Include="Resources\Poke\201-1.png" />
-    <Content Include="Resources\Poke\201-10.png" />
-    <Content Include="Resources\Poke\201-11.png" />
-    <Content Include="Resources\Poke\201-12.png" />
-    <Content Include="Resources\Poke\201-13.png" />
-    <Content Include="Resources\Poke\201-14.png" />
-    <Content Include="Resources\Poke\201-15.png" />
-    <Content Include="Resources\Poke\201-16.png" />
-    <Content Include="Resources\Poke\201-17.png" />
-    <Content Include="Resources\Poke\201-18.png" />
-    <Content Include="Resources\Poke\201-19.png" />
-    <Content Include="Resources\Poke\201-2.png" />
-    <Content Include="Resources\Poke\201-20.png" />
-    <Content Include="Resources\Poke\201-21.png" />
-    <Content Include="Resources\Poke\201-22.png" />
-    <Content Include="Resources\Poke\201-23.png" />
-    <Content Include="Resources\Poke\201-24.png" />
-    <Content Include="Resources\Poke\201-25.png" />
-    <Content Include="Resources\Poke\201-26.png" />
-    <Content Include="Resources\Poke\201-27.png" />
-    <Content Include="Resources\Poke\201-3.png" />
-    <Content Include="Resources\Poke\201-4.png" />
-    <Content Include="Resources\Poke\201-5.png" />
-    <Content Include="Resources\Poke\201-6.png" />
-    <Content Include="Resources\Poke\201-7.png" />
-    <Content Include="Resources\Poke\201-8.png" />
-    <Content Include="Resources\Poke\201-9.png" />
-    <Content Include="Resources\Poke\201.png" />
-    <Content Include="Resources\Poke\202.png" />
-    <Content Include="Resources\Poke\203.png" />
-    <Content Include="Resources\Poke\204.png" />
-    <Content Include="Resources\Poke\205.png" />
-    <Content Include="Resources\Poke\206.png" />
-    <Content Include="Resources\Poke\207.png" />
-    <Content Include="Resources\Poke\208-1.png" />
-    <Content Include="Resources\Poke\208.png" />
-    <Content Include="Resources\Poke\209.png" />
-    <Content Include="Resources\Poke\21.png" />
-    <Content Include="Resources\Poke\210.png" />
-    <Content Include="Resources\Poke\211.png" />
-    <Content Include="Resources\Poke\212-1.png" />
-    <Content Include="Resources\Poke\212.png" />
-    <Content Include="Resources\Poke\213.png" />
-    <Content Include="Resources\Poke\214-1.png" />
-    <Content Include="Resources\Poke\214.png" />
-    <Content Include="Resources\Poke\215.png" />
-    <Content Include="Resources\Poke\216.png" />
-    <Content Include="Resources\Poke\217.png" />
-    <Content Include="Resources\Poke\218.png" />
-    <Content Include="Resources\Poke\219.png" />
-    <Content Include="Resources\Poke\22.png" />
-    <Content Include="Resources\Poke\220.png" />
-    <Content Include="Resources\Poke\221.png" />
-    <Content Include="Resources\Poke\222.png" />
-    <Content Include="Resources\Poke\223.png" />
-    <Content Include="Resources\Poke\224.png" />
-    <Content Include="Resources\Poke\225.png" />
-    <Content Include="Resources\Poke\226.png" />
-    <Content Include="Resources\Poke\227.png" />
-    <Content Include="Resources\Poke\228.png" />
-    <Content Include="Resources\Poke\229-1.png" />
-    <Content Include="Resources\Poke\229.png" />
-    <Content Include="Resources\Poke\23.png" />
-    <Content Include="Resources\Poke\230.png" />
-    <Content Include="Resources\Poke\231.png" />
-    <Content Include="Resources\Poke\232.png" />
-    <Content Include="Resources\Poke\233.png" />
-    <Content Include="Resources\Poke\234.png" />
-    <Content Include="Resources\Poke\235.png" />
-    <Content Include="Resources\Poke\236.png" />
-    <Content Include="Resources\Poke\237.png" />
-    <Content Include="Resources\Poke\238.png" />
-    <Content Include="Resources\Poke\239.png" />
-    <Content Include="Resources\Poke\24.png" />
-    <Content Include="Resources\Poke\240.png" />
-    <Content Include="Resources\Poke\241.png" />
-    <Content Include="Resources\Poke\242.png" />
-    <Content Include="Resources\Poke\243.png" />
-    <Content Include="Resources\Poke\244.png" />
-    <Content Include="Resources\Poke\245.png" />
-    <Content Include="Resources\Poke\246.png" />
-    <Content Include="Resources\Poke\247.png" />
-    <Content Include="Resources\Poke\248-1.png" />
-    <Content Include="Resources\Poke\248.png" />
-    <Content Include="Resources\Poke\249.png" />
-    <Content Include="Resources\Poke\25-1.png" />
-    <Content Include="Resources\Poke\25-1c.png" />
-    <Content Include="Resources\Poke\25-2.png" />
-    <Content Include="Resources\Poke\25-2c.png" />
-    <Content Include="Resources\Poke\25-3.png" />
-    <Content Include="Resources\Poke\25-3c.png" />
-    <Content Include="Resources\Poke\25-4.png" />
-    <Content Include="Resources\Poke\25-4c.png" />
-    <Content Include="Resources\Poke\25-5.png" />
-    <Content Include="Resources\Poke\25-5c.png" />
-    <Content Include="Resources\Poke\25-6.png" />
-    <Content Include="Resources\Poke\25-6c.png" />
-    <Content Include="Resources\Poke\25.png" />
-    <Content Include="Resources\Poke\250.png" />
-    <Content Include="Resources\Poke\251.png" />
-    <Content Include="Resources\Poke\252.png" />
-    <Content Include="Resources\Poke\253.png" />
-    <Content Include="Resources\Poke\254-1.png" />
-    <Content Include="Resources\Poke\254.png" />
-    <Content Include="Resources\Poke\255.png" />
-    <Content Include="Resources\Poke\256.png" />
-    <Content Include="Resources\Poke\257-1.png" />
-    <Content Include="Resources\Poke\257.png" />
-    <Content Include="Resources\Poke\258.png" />
-    <Content Include="Resources\Poke\259.png" />
-    <Content Include="Resources\Poke\26-1.png" />
-    <Content Include="Resources\Poke\26.png" />
-    <Content Include="Resources\Poke\260-1.png" />
-    <Content Include="Resources\Poke\260.png" />
-    <Content Include="Resources\Poke\261.png" />
-    <Content Include="Resources\Poke\262.png" />
-    <Content Include="Resources\Poke\263.png" />
-    <Content Include="Resources\Poke\264.png" />
-    <Content Include="Resources\Poke\265.png" />
-    <Content Include="Resources\Poke\266.png" />
-    <Content Include="Resources\Poke\267.png" />
-    <Content Include="Resources\Poke\268.png" />
-    <Content Include="Resources\Poke\269.png" />
-    <Content Include="Resources\Poke\27-1.png" />
-    <Content Include="Resources\Poke\27.png" />
-    <Content Include="Resources\Poke\270.png" />
-    <Content Include="Resources\Poke\271.png" />
-    <Content Include="Resources\Poke\272.png" />
-    <Content Include="Resources\Poke\273.png" />
-    <Content Include="Resources\Poke\274.png" />
-    <Content Include="Resources\Poke\275.png" />
-    <Content Include="Resources\Poke\276.png" />
-    <Content Include="Resources\Poke\277.png" />
-    <Content Include="Resources\Poke\278.png" />
-    <Content Include="Resources\Poke\279.png" />
-    <Content Include="Resources\Poke\28-1.png" />
-    <Content Include="Resources\Poke\28.png" />
-    <Content Include="Resources\Poke\280.png" />
-    <Content Include="Resources\Poke\281.png" />
-    <Content Include="Resources\Poke\282-1.png" />
-    <Content Include="Resources\Poke\282.png" />
-    <Content Include="Resources\Poke\283.png" />
-    <Content Include="Resources\Poke\284.png" />
-    <Content Include="Resources\Poke\285.png" />
-    <Content Include="Resources\Poke\286.png" />
-    <Content Include="Resources\Poke\287.png" />
-    <Content Include="Resources\Poke\288.png" />
-    <Content Include="Resources\Poke\289.png" />
-    <Content Include="Resources\Poke\29.png" />
-    <Content Include="Resources\Poke\290.png" />
-    <Content Include="Resources\Poke\291.png" />
-    <Content Include="Resources\Poke\292.png" />
-    <Content Include="Resources\Poke\293.png" />
-    <Content Include="Resources\Poke\294.png" />
-    <Content Include="Resources\Poke\295.png" />
-    <Content Include="Resources\Poke\296.png" />
-    <Content Include="Resources\Poke\297.png" />
-    <Content Include="Resources\Poke\298.png" />
-    <Content Include="Resources\Poke\299.png" />
-    <Content Include="Resources\Poke\3-1.png" />
-    <Content Include="Resources\Poke\3.png" />
-    <Content Include="Resources\Poke\30.png" />
-    <Content Include="Resources\Poke\300.png" />
-    <Content Include="Resources\Poke\301.png" />
-    <Content Include="Resources\Poke\302-1.png" />
-    <Content Include="Resources\Poke\302.png" />
-    <Content Include="Resources\Poke\303-1.png" />
-    <Content Include="Resources\Poke\303.png" />
-    <Content Include="Resources\Poke\304.png" />
-    <Content Include="Resources\Poke\305.png" />
-    <Content Include="Resources\Poke\306-1.png" />
-    <Content Include="Resources\Poke\306.png" />
-    <Content Include="Resources\Poke\307.png" />
-    <Content Include="Resources\Poke\308-1.png" />
-    <Content Include="Resources\Poke\308.png" />
-    <Content Include="Resources\Poke\309.png" />
-    <Content Include="Resources\Poke\31.png" />
-    <Content Include="Resources\Poke\310-1.png" />
-    <Content Include="Resources\Poke\310.png" />
-    <Content Include="Resources\Poke\311.png" />
-    <Content Include="Resources\Poke\312.png" />
-    <Content Include="Resources\Poke\313.png" />
-    <Content Include="Resources\Poke\314.png" />
-    <Content Include="Resources\Poke\315.png" />
-    <Content Include="Resources\Poke\316.png" />
-    <Content Include="Resources\Poke\317.png" />
-    <Content Include="Resources\Poke\318.png" />
-    <Content Include="Resources\Poke\319-1.png" />
-    <Content Include="Resources\Poke\319.png" />
-    <Content Include="Resources\Poke\32.png" />
-    <Content Include="Resources\Poke\320.png" />
-    <Content Include="Resources\Poke\321.png" />
-    <Content Include="Resources\Poke\322.png" />
-    <Content Include="Resources\Poke\323-1.png" />
-    <Content Include="Resources\Poke\323.png" />
-    <Content Include="Resources\Poke\324.png" />
-    <Content Include="Resources\Poke\325.png" />
-    <Content Include="Resources\Poke\326.png" />
-    <Content Include="Resources\Poke\327.png" />
-    <Content Include="Resources\Poke\328.png" />
-    <Content Include="Resources\Poke\329.png" />
-    <Content Include="Resources\Poke\33.png" />
-    <Content Include="Resources\Poke\330.png" />
-    <Content Include="Resources\Poke\331.png" />
-    <Content Include="Resources\Poke\332.png" />
-    <Content Include="Resources\Poke\333.png" />
-    <Content Include="Resources\Poke\334-1.png" />
-    <Content Include="Resources\Poke\334.png" />
-    <Content Include="Resources\Poke\335.png" />
-    <Content Include="Resources\Poke\336.png" />
-    <Content Include="Resources\Poke\337.png" />
-    <Content Include="Resources\Poke\338.png" />
-    <Content Include="Resources\Poke\339.png" />
-    <Content Include="Resources\Poke\34.png" />
-    <Content Include="Resources\Poke\340.png" />
-    <Content Include="Resources\Poke\341.png" />
-    <Content Include="Resources\Poke\342.png" />
-    <Content Include="Resources\Poke\343.png" />
-    <Content Include="Resources\Poke\344.png" />
-    <Content Include="Resources\Poke\345.png" />
-    <Content Include="Resources\Poke\346.png" />
-    <Content Include="Resources\Poke\347.png" />
-    <Content Include="Resources\Poke\348.png" />
-    <Content Include="Resources\Poke\349.png" />
-    <Content Include="Resources\Poke\35.png" />
-    <Content Include="Resources\Poke\350.png" />
-    <Content Include="Resources\Poke\351-1.png" />
-    <Content Include="Resources\Poke\351-2.png" />
-    <Content Include="Resources\Poke\351-3.png" />
-    <Content Include="Resources\Poke\351.png" />
-    <Content Include="Resources\Poke\352.png" />
-    <Content Include="Resources\Poke\353.png" />
-    <Content Include="Resources\Poke\354-1.png" />
-    <Content Include="Resources\Poke\354.png" />
-    <Content Include="Resources\Poke\355.png" />
-    <Content Include="Resources\Poke\356.png" />
-    <Content Include="Resources\Poke\357.png" />
-    <Content Include="Resources\Poke\358.png" />
-    <Content Include="Resources\Poke\359-1.png" />
-    <Content Include="Resources\Poke\359.png" />
-    <Content Include="Resources\Poke\36.png" />
-    <Content Include="Resources\Poke\360.png" />
-    <Content Include="Resources\Poke\361.png" />
-    <Content Include="Resources\Poke\362-1.png" />
-    <Content Include="Resources\Poke\362.png" />
-    <Content Include="Resources\Poke\363.png" />
-    <Content Include="Resources\Poke\364.png" />
-    <Content Include="Resources\Poke\365.png" />
-    <Content Include="Resources\Poke\366.png" />
-    <Content Include="Resources\Poke\367.png" />
-    <Content Include="Resources\Poke\368.png" />
-    <Content Include="Resources\Poke\369.png" />
-    <Content Include="Resources\Poke\37-1.png" />
-    <Content Include="Resources\Poke\37.png" />
-    <Content Include="Resources\Poke\370.png" />
-    <Content Include="Resources\Poke\371.png" />
-    <Content Include="Resources\Poke\372.png" />
-    <Content Include="Resources\Poke\373-1.png" />
-    <Content Include="Resources\Poke\373.png" />
-    <Content Include="Resources\Poke\374.png" />
-    <Content Include="Resources\Poke\375.png" />
-    <Content Include="Resources\Poke\376-1.png" />
-    <Content Include="Resources\Poke\376.png" />
-    <Content Include="Resources\Poke\377.png" />
-    <Content Include="Resources\Poke\378.png" />
-    <Content Include="Resources\Poke\379.png" />
-    <Content Include="Resources\Poke\38-1.png" />
-    <Content Include="Resources\Poke\38.png" />
-    <Content Include="Resources\Poke\380-1.png" />
-    <Content Include="Resources\Poke\380.png" />
-    <Content Include="Resources\Poke\381-1.png" />
-    <Content Include="Resources\Poke\381.png" />
-    <Content Include="Resources\Poke\382-1.png" />
-    <Content Include="Resources\Poke\382.png" />
-    <Content Include="Resources\Poke\383-1.png" />
-    <Content Include="Resources\Poke\383.png" />
-    <Content Include="Resources\Poke\384-1.png" />
-    <Content Include="Resources\Poke\384.png" />
-    <Content Include="Resources\Poke\385.png" />
-    <Content Include="Resources\Poke\386-1.png" />
-    <Content Include="Resources\Poke\386-2.png" />
-    <Content Include="Resources\Poke\386-3.png" />
-    <Content Include="Resources\Poke\386.png" />
-    <Content Include="Resources\Poke\387.png" />
-    <Content Include="Resources\Poke\388.png" />
-    <Content Include="Resources\Poke\389.png" />
-    <Content Include="Resources\Poke\39.png" />
-    <Content Include="Resources\Poke\390.png" />
-    <Content Include="Resources\Poke\391.png" />
-    <Content Include="Resources\Poke\392.png" />
-    <Content Include="Resources\Poke\393.png" />
-    <Content Include="Resources\Poke\394.png" />
-    <Content Include="Resources\Poke\395.png" />
-    <Content Include="Resources\Poke\396.png" />
-    <Content Include="Resources\Poke\397.png" />
-    <Content Include="Resources\Poke\398.png" />
-    <Content Include="Resources\Poke\399.png" />
-    <Content Include="Resources\Poke\4.png" />
-    <Content Include="Resources\Poke\40.png" />
-    <Content Include="Resources\Poke\400.png" />
-    <Content Include="Resources\Poke\401.png" />
-    <Content Include="Resources\Poke\402.png" />
-    <Content Include="Resources\Poke\403.png" />
-    <Content Include="Resources\Poke\404.png" />
-    <Content Include="Resources\Poke\405.png" />
-    <Content Include="Resources\Poke\406.png" />
-    <Content Include="Resources\Poke\407.png" />
-    <Content Include="Resources\Poke\408.png" />
-    <Content Include="Resources\Poke\409.png" />
-    <Content Include="Resources\Poke\41.png" />
-    <Content Include="Resources\Poke\410.png" />
-    <Content Include="Resources\Poke\411.png" />
-    <Content Include="Resources\Poke\412-1.png" />
-    <Content Include="Resources\Poke\412-2.png" />
-    <Content Include="Resources\Poke\412.png" />
-    <Content Include="Resources\Poke\413-1.png" />
-    <Content Include="Resources\Poke\413-2.png" />
-    <Content Include="Resources\Poke\413.png" />
-    <Content Include="Resources\Poke\414.png" />
-    <Content Include="Resources\Poke\415.png" />
-    <Content Include="Resources\Poke\416.png" />
-    <Content Include="Resources\Poke\417.png" />
-    <Content Include="Resources\Poke\418.png" />
-    <Content Include="Resources\Poke\419.png" />
-    <Content Include="Resources\Poke\42.png" />
-    <Content Include="Resources\Poke\420.png" />
-    <Content Include="Resources\Poke\421-1.png" />
-    <Content Include="Resources\Poke\421.png" />
-    <Content Include="Resources\Poke\422-1.png" />
-    <Content Include="Resources\Poke\422.png" />
-    <Content Include="Resources\Poke\423-1.png" />
-    <Content Include="Resources\Poke\423.png" />
-    <Content Include="Resources\Poke\424.png" />
-    <Content Include="Resources\Poke\425.png" />
-    <Content Include="Resources\Poke\426.png" />
-    <Content Include="Resources\Poke\427.png" />
-    <Content Include="Resources\Poke\428-1.png" />
-    <Content Include="Resources\Poke\428.png" />
-    <Content Include="Resources\Poke\429.png" />
-    <Content Include="Resources\Poke\43.png" />
-    <Content Include="Resources\Poke\430.png" />
-    <Content Include="Resources\Poke\431.png" />
-    <Content Include="Resources\Poke\432.png" />
-    <Content Include="Resources\Poke\433.png" />
-    <Content Include="Resources\Poke\434.png" />
-    <Content Include="Resources\Poke\435.png" />
-    <Content Include="Resources\Poke\436.png" />
-    <Content Include="Resources\Poke\437.png" />
-    <Content Include="Resources\Poke\438.png" />
-    <Content Include="Resources\Poke\439.png" />
-    <Content Include="Resources\Poke\44.png" />
-    <Content Include="Resources\Poke\440.png" />
-    <Content Include="Resources\Poke\441.png" />
-    <Content Include="Resources\Poke\442.png" />
-    <Content Include="Resources\Poke\443.png" />
-    <Content Include="Resources\Poke\444.png" />
-    <Content Include="Resources\Poke\445-1.png" />
-    <Content Include="Resources\Poke\445.png" />
-    <Content Include="Resources\Poke\446.png" />
-    <Content Include="Resources\Poke\447.png" />
-    <Content Include="Resources\Poke\448-1.png" />
-    <Content Include="Resources\Poke\448.png" />
-    <Content Include="Resources\Poke\449.png" />
-    <Content Include="Resources\Poke\45.png" />
-    <Content Include="Resources\Poke\450.png" />
-    <Content Include="Resources\Poke\451.png" />
-    <Content Include="Resources\Poke\452.png" />
-    <Content Include="Resources\Poke\453.png" />
-    <Content Include="Resources\Poke\454.png" />
-    <Content Include="Resources\Poke\455.png" />
-    <Content Include="Resources\Poke\456.png" />
-    <Content Include="Resources\Poke\457.png" />
-    <Content Include="Resources\Poke\458.png" />
-    <Content Include="Resources\Poke\459.png" />
-    <Content Include="Resources\Poke\46.png" />
-    <Content Include="Resources\Poke\460-1.png" />
-    <Content Include="Resources\Poke\460.png" />
-    <Content Include="Resources\Poke\461.png" />
-    <Content Include="Resources\Poke\462.png" />
-    <Content Include="Resources\Poke\463.png" />
-    <Content Include="Resources\Poke\464.png" />
-    <Content Include="Resources\Poke\465.png" />
-    <Content Include="Resources\Poke\466.png" />
-    <Content Include="Resources\Poke\467.png" />
-    <Content Include="Resources\Poke\468.png" />
-    <Content Include="Resources\Poke\469.png" />
-    <Content Include="Resources\Poke\47.png" />
-    <Content Include="Resources\Poke\470.png" />
-    <Content Include="Resources\Poke\471.png" />
-    <Content Include="Resources\Poke\472.png" />
-    <Content Include="Resources\Poke\473.png" />
-    <Content Include="Resources\Poke\474.png" />
-    <Content Include="Resources\Poke\475-1.png" />
-    <Content Include="Resources\Poke\475.png" />
-    <Content Include="Resources\Poke\476.png" />
-    <Content Include="Resources\Poke\477.png" />
-    <Content Include="Resources\Poke\478.png" />
-    <Content Include="Resources\Poke\479-1.png" />
-    <Content Include="Resources\Poke\479-2.png" />
-    <Content Include="Resources\Poke\479-3.png" />
-    <Content Include="Resources\Poke\479-4.png" />
-    <Content Include="Resources\Poke\479-5.png" />
-    <Content Include="Resources\Poke\479.png" />
-    <Content Include="Resources\Poke\48.png" />
-    <Content Include="Resources\Poke\480.png" />
-    <Content Include="Resources\Poke\481.png" />
-    <Content Include="Resources\Poke\482.png" />
-    <Content Include="Resources\Poke\483.png" />
-    <Content Include="Resources\Poke\484.png" />
-    <Content Include="Resources\Poke\485.png" />
-    <Content Include="Resources\Poke\486.png" />
-    <Content Include="Resources\Poke\487-1.png" />
-    <Content Include="Resources\Poke\487.png" />
-    <Content Include="Resources\Poke\488.png" />
-    <Content Include="Resources\Poke\489.png" />
-    <Content Include="Resources\Poke\49.png" />
-    <Content Include="Resources\Poke\490.png" />
-    <Content Include="Resources\Poke\491.png" />
-    <Content Include="Resources\Poke\492-1.png" />
-    <Content Include="Resources\Poke\492.png" />
-    <Content Include="Resources\Poke\493.png" />
-    <Content Include="Resources\Poke\494.png" />
-    <Content Include="Resources\Poke\495.png" />
-    <Content Include="Resources\Poke\496.png" />
-    <Content Include="Resources\Poke\497.png" />
-    <Content Include="Resources\Poke\498.png" />
-    <Content Include="Resources\Poke\499.png" />
-    <Content Include="Resources\Poke\5.png" />
-    <Content Include="Resources\Poke\50-1.png" />
-    <Content Include="Resources\Poke\50.png" />
-    <Content Include="Resources\Poke\500.png" />
-    <Content Include="Resources\Poke\501.png" />
-    <Content Include="Resources\Poke\502.png" />
-    <Content Include="Resources\Poke\503.png" />
-    <Content Include="Resources\Poke\504.png" />
-    <Content Include="Resources\Poke\505.png" />
-    <Content Include="Resources\Poke\506.png" />
-    <Content Include="Resources\Poke\507.png" />
-    <Content Include="Resources\Poke\508.png" />
-    <Content Include="Resources\Poke\509.png" />
-    <Content Include="Resources\Poke\51-1.png" />
-    <Content Include="Resources\Poke\51.png" />
-    <Content Include="Resources\Poke\510.png" />
-    <Content Include="Resources\Poke\511.png" />
-    <Content Include="Resources\Poke\512.png" />
-    <Content Include="Resources\Poke\513.png" />
-    <Content Include="Resources\Poke\514.png" />
-    <Content Include="Resources\Poke\515.png" />
-    <Content Include="Resources\Poke\516.png" />
-    <Content Include="Resources\Poke\517.png" />
-    <Content Include="Resources\Poke\518.png" />
-    <Content Include="Resources\Poke\519.png" />
-    <Content Include="Resources\Poke\52-1.png" />
-    <Content Include="Resources\Poke\52.png" />
-    <Content Include="Resources\Poke\520.png" />
-    <Content Include="Resources\Poke\521.png" />
-    <Content Include="Resources\Poke\521_1.png" />
-    <Content Include="Resources\Poke\522.png" />
-    <Content Include="Resources\Poke\523.png" />
-    <Content Include="Resources\Poke\524.png" />
-    <Content Include="Resources\Poke\525.png" />
-    <Content Include="Resources\Poke\526.png" />
-    <Content Include="Resources\Poke\527.png" />
-    <Content Include="Resources\Poke\528.png" />
-    <Content Include="Resources\Poke\529.png" />
-    <Content Include="Resources\Poke\53-1.png" />
-    <Content Include="Resources\Poke\53.png" />
-    <Content Include="Resources\Poke\530.png" />
-    <Content Include="Resources\Poke\531-1.png" />
-    <Content Include="Resources\Poke\531.png" />
-    <Content Include="Resources\Poke\532.png" />
-    <Content Include="Resources\Poke\533.png" />
-    <Content Include="Resources\Poke\534.png" />
-    <Content Include="Resources\Poke\535.png" />
-    <Content Include="Resources\Poke\536.png" />
-    <Content Include="Resources\Poke\537.png" />
-    <Content Include="Resources\Poke\538.png" />
-    <Content Include="Resources\Poke\539.png" />
-    <Content Include="Resources\Poke\54.png" />
-    <Content Include="Resources\Poke\540.png" />
-    <Content Include="Resources\Poke\541.png" />
-    <Content Include="Resources\Poke\542.png" />
-    <Content Include="Resources\Poke\543.png" />
-    <Content Include="Resources\Poke\544.png" />
-    <Content Include="Resources\Poke\545.png" />
-    <Content Include="Resources\Poke\546.png" />
-    <Content Include="Resources\Poke\547.png" />
-    <Content Include="Resources\Poke\548.png" />
-    <Content Include="Resources\Poke\549.png" />
-    <Content Include="Resources\Poke\55.png" />
-    <Content Include="Resources\Poke\550-1.png" />
-    <Content Include="Resources\Poke\550.png" />
-    <Content Include="Resources\Poke\551.png" />
-    <Content Include="Resources\Poke\552.png" />
-    <Content Include="Resources\Poke\553.png" />
-    <Content Include="Resources\Poke\554.png" />
-    <Content Include="Resources\Poke\555-1.png" />
-    <Content Include="Resources\Poke\555.png" />
-    <Content Include="Resources\Poke\556.png" />
-    <Content Include="Resources\Poke\557.png" />
-    <Content Include="Resources\Poke\558.png" />
-    <Content Include="Resources\Poke\559.png" />
-    <Content Include="Resources\Poke\56.png" />
-    <Content Include="Resources\Poke\560.png" />
-    <Content Include="Resources\Poke\561.png" />
-    <Content Include="Resources\Poke\562.png" />
-    <Content Include="Resources\Poke\563.png" />
-    <Content Include="Resources\Poke\564.png" />
-    <Content Include="Resources\Poke\565.png" />
-    <Content Include="Resources\Poke\566.png" />
-    <Content Include="Resources\Poke\567.png" />
-    <Content Include="Resources\Poke\568.png" />
-    <Content Include="Resources\Poke\569.png" />
-    <Content Include="Resources\Poke\57.png" />
-    <Content Include="Resources\Poke\570.png" />
-    <Content Include="Resources\Poke\571.png" />
-    <Content Include="Resources\Poke\572.png" />
-    <Content Include="Resources\Poke\573.png" />
-    <Content Include="Resources\Poke\574.png" />
-    <Content Include="Resources\Poke\575.png" />
-    <Content Include="Resources\Poke\576.png" />
-    <Content Include="Resources\Poke\577.png" />
-    <Content Include="Resources\Poke\578.png" />
-    <Content Include="Resources\Poke\579.png" />
-    <Content Include="Resources\Poke\58.png" />
-    <Content Include="Resources\Poke\580.png" />
-    <Content Include="Resources\Poke\581.png" />
-    <Content Include="Resources\Poke\582.png" />
-    <Content Include="Resources\Poke\583.png" />
-    <Content Include="Resources\Poke\584.png" />
-    <Content Include="Resources\Poke\585-1.png" />
-    <Content Include="Resources\Poke\585-2.png" />
-    <Content Include="Resources\Poke\585-3.png" />
-    <Content Include="Resources\Poke\585.png" />
-    <Content Include="Resources\Poke\586-1.png" />
-    <Content Include="Resources\Poke\586-2.png" />
-    <Content Include="Resources\Poke\586-3.png" />
-    <Content Include="Resources\Poke\586.png" />
-    <Content Include="Resources\Poke\587.png" />
-    <Content Include="Resources\Poke\588.png" />
-    <Content Include="Resources\Poke\589.png" />
-    <Content Include="Resources\Poke\59.png" />
-    <Content Include="Resources\Poke\590.png" />
-    <Content Include="Resources\Poke\591.png" />
-    <Content Include="Resources\Poke\592-1.png" />
-    <Content Include="Resources\Poke\592.png" />
-    <Content Include="Resources\Poke\593-1.png" />
-    <Content Include="Resources\Poke\593.png" />
-    <Content Include="Resources\Poke\594.png" />
-    <Content Include="Resources\Poke\595.png" />
-    <Content Include="Resources\Poke\596.png" />
-    <Content Include="Resources\Poke\597.png" />
-    <Content Include="Resources\Poke\598.png" />
-    <Content Include="Resources\Poke\599.png" />
-    <Content Include="Resources\Poke\6-1.png" />
-    <Content Include="Resources\Poke\6-2.png" />
-    <Content Include="Resources\Poke\6.png" />
-    <Content Include="Resources\Poke\60.png" />
-    <Content Include="Resources\Poke\600.png" />
-    <Content Include="Resources\Poke\601.png" />
-    <Content Include="Resources\Poke\602.png" />
-    <Content Include="Resources\Poke\603.png" />
-    <Content Include="Resources\Poke\604.png" />
-    <Content Include="Resources\Poke\605.png" />
-    <Content Include="Resources\Poke\606.png" />
-    <Content Include="Resources\Poke\607.png" />
-    <Content Include="Resources\Poke\608.png" />
-    <Content Include="Resources\Poke\609.png" />
-    <Content Include="Resources\Poke\61.png" />
-    <Content Include="Resources\Poke\610.png" />
-    <Content Include="Resources\Poke\611.png" />
-    <Content Include="Resources\Poke\612.png" />
-    <Content Include="Resources\Poke\613.png" />
-    <Content Include="Resources\Poke\614.png" />
-    <Content Include="Resources\Poke\615.png" />
-    <Content Include="Resources\Poke\616.png" />
-    <Content Include="Resources\Poke\617.png" />
-    <Content Include="Resources\Poke\618.png" />
-    <Content Include="Resources\Poke\619.png" />
-    <Content Include="Resources\Poke\62.png" />
-    <Content Include="Resources\Poke\620.png" />
-    <Content Include="Resources\Poke\621.png" />
-    <Content Include="Resources\Poke\622.png" />
-    <Content Include="Resources\Poke\623.png" />
-    <Content Include="Resources\Poke\624.png" />
-    <Content Include="Resources\Poke\625.png" />
-    <Content Include="Resources\Poke\626.png" />
-    <Content Include="Resources\Poke\627.png" />
-    <Content Include="Resources\Poke\628.png" />
-    <Content Include="Resources\Poke\629.png" />
-    <Content Include="Resources\Poke\63.png" />
-    <Content Include="Resources\Poke\630.png" />
-    <Content Include="Resources\Poke\631.png" />
-    <Content Include="Resources\Poke\632.png" />
-    <Content Include="Resources\Poke\633.png" />
-    <Content Include="Resources\Poke\634.png" />
-    <Content Include="Resources\Poke\635.png" />
-    <Content Include="Resources\Poke\636.png" />
-    <Content Include="Resources\Poke\637.png" />
-    <Content Include="Resources\Poke\638.png" />
-    <Content Include="Resources\Poke\639.png" />
-    <Content Include="Resources\Poke\64.png" />
-    <Content Include="Resources\Poke\640.png" />
-    <Content Include="Resources\Poke\641-1.png" />
-    <Content Include="Resources\Poke\641.png" />
-    <Content Include="Resources\Poke\642-1.png" />
-    <Content Include="Resources\Poke\642.png" />
-    <Content Include="Resources\Poke\643.png" />
-    <Content Include="Resources\Poke\644.png" />
-    <Content Include="Resources\Poke\645-1.png" />
-    <Content Include="Resources\Poke\645.png" />
-    <Content Include="Resources\Poke\646-1.png" />
-    <Content Include="Resources\Poke\646-2.png" />
-    <Content Include="Resources\Poke\646.png" />
-    <Content Include="Resources\Poke\647-1.png" />
-    <Content Include="Resources\Poke\647.png" />
-    <Content Include="Resources\Poke\648-1.png" />
-    <Content Include="Resources\Poke\648.png" />
-    <Content Include="Resources\Poke\649-1.png" />
-    <Content Include="Resources\Poke\649-2.png" />
-    <Content Include="Resources\Poke\649-3.png" />
-    <Content Include="Resources\Poke\649-4.png" />
-    <Content Include="Resources\Poke\649.png" />
-    <Content Include="Resources\Poke\65-1.png" />
-    <Content Include="Resources\Poke\65.png" />
-    <Content Include="Resources\Poke\650.png" />
-    <Content Include="Resources\Poke\651.png" />
-    <Content Include="Resources\Poke\652.png" />
-    <Content Include="Resources\Poke\653.png" />
-    <Content Include="Resources\Poke\654.png" />
-    <Content Include="Resources\Poke\655.png" />
-    <Content Include="Resources\Poke\656.png" />
-    <Content Include="Resources\Poke\657.png" />
-    <Content Include="Resources\Poke\658-1.png" />
-    <Content Include="Resources\Poke\658-2.png" />
-    <Content Include="Resources\Poke\658.png" />
-    <Content Include="Resources\Poke\659.png" />
-    <Content Include="Resources\Poke\66.png" />
-    <Content Include="Resources\Poke\660.png" />
-    <Content Include="Resources\Poke\661.png" />
-    <Content Include="Resources\Poke\662.png" />
-    <Content Include="Resources\Poke\663.png" />
-    <Content Include="Resources\Poke\664.png" />
-    <Content Include="Resources\Poke\665.png" />
-    <Content Include="Resources\Poke\666-1.png" />
-    <Content Include="Resources\Poke\666-10.png" />
-    <Content Include="Resources\Poke\666-11.png" />
-    <Content Include="Resources\Poke\666-12.png" />
-    <Content Include="Resources\Poke\666-13.png" />
-    <Content Include="Resources\Poke\666-14.png" />
-    <Content Include="Resources\Poke\666-15.png" />
-    <Content Include="Resources\Poke\666-16.png" />
-    <Content Include="Resources\Poke\666-17.png" />
-    <Content Include="Resources\Poke\666-18.png" />
-    <Content Include="Resources\Poke\666-19.png" />
-    <Content Include="Resources\Poke\666-2.png" />
-    <Content Include="Resources\Poke\666-3.png" />
-    <Content Include="Resources\Poke\666-4.png" />
-    <Content Include="Resources\Poke\666-5.png" />
-    <Content Include="Resources\Poke\666-6.png" />
-    <Content Include="Resources\Poke\666-7.png" />
-    <Content Include="Resources\Poke\666-8.png" />
-    <Content Include="Resources\Poke\666-9.png" />
-    <Content Include="Resources\Poke\666.png" />
-    <Content Include="Resources\Poke\667.png" />
-    <Content Include="Resources\Poke\668.png" />
-    <Content Include="Resources\Poke\668_1.png" />
-    <Content Include="Resources\Poke\669-1.png" />
-    <Content Include="Resources\Poke\669-2.png" />
-    <Content Include="Resources\Poke\669-3.png" />
-    <Content Include="Resources\Poke\669-4.png" />
-    <Content Include="Resources\Poke\669.png" />
-    <Content Include="Resources\Poke\67.png" />
-    <Content Include="Resources\Poke\670-1.png" />
-    <Content Include="Resources\Poke\670-2.png" />
-    <Content Include="Resources\Poke\670-3.png" />
-    <Content Include="Resources\Poke\670-4.png" />
-    <Content Include="Resources\Poke\670-5.png" />
-    <Content Include="Resources\Poke\670.png" />
-    <Content Include="Resources\Poke\671-1.png" />
-    <Content Include="Resources\Poke\671-2.png" />
-    <Content Include="Resources\Poke\671-3.png" />
-    <Content Include="Resources\Poke\671-4.png" />
-    <Content Include="Resources\Poke\671.png" />
-    <Content Include="Resources\Poke\672.png" />
-    <Content Include="Resources\Poke\673.png" />
-    <Content Include="Resources\Poke\674.png" />
-    <Content Include="Resources\Poke\675.png" />
-    <Content Include="Resources\Poke\676-1.png" />
-    <Content Include="Resources\Poke\676-2.png" />
-    <Content Include="Resources\Poke\676-3.png" />
-    <Content Include="Resources\Poke\676-4.png" />
-    <Content Include="Resources\Poke\676-5.png" />
-    <Content Include="Resources\Poke\676-6.png" />
-    <Content Include="Resources\Poke\676-7.png" />
-    <Content Include="Resources\Poke\676-8.png" />
-    <Content Include="Resources\Poke\676-9.png" />
-    <Content Include="Resources\Poke\676.png" />
-    <Content Include="Resources\Poke\677.png" />
-    <Content Include="Resources\Poke\678-1.png" />
-    <Content Include="Resources\Poke\678.png" />
-    <Content Include="Resources\Poke\679.png" />
-    <Content Include="Resources\Poke\68.png" />
-    <Content Include="Resources\Poke\680.png" />
-    <Content Include="Resources\Poke\681-1.png" />
-    <Content Include="Resources\Poke\681.png" />
-    <Content Include="Resources\Poke\682.png" />
-    <Content Include="Resources\Poke\683.png" />
-    <Content Include="Resources\Poke\684.png" />
-    <Content Include="Resources\Poke\685.png" />
-    <Content Include="Resources\Poke\686.png" />
-    <Content Include="Resources\Poke\687.png" />
-    <Content Include="Resources\Poke\688.png" />
-    <Content Include="Resources\Poke\689.png" />
-    <Content Include="Resources\Poke\69.png" />
-    <Content Include="Resources\Poke\690.png" />
-    <Content Include="Resources\Poke\691.png" />
-    <Content Include="Resources\Poke\692.png" />
-    <Content Include="Resources\Poke\693.png" />
-    <Content Include="Resources\Poke\694.png" />
-    <Content Include="Resources\Poke\695.png" />
-    <Content Include="Resources\Poke\696.png" />
-    <Content Include="Resources\Poke\697.png" />
-    <Content Include="Resources\Poke\698.png" />
-    <Content Include="Resources\Poke\699.png" />
-    <Content Include="Resources\Poke\7.png" />
-    <Content Include="Resources\Poke\70.png" />
-    <Content Include="Resources\Poke\700.png" />
-    <Content Include="Resources\Poke\701.png" />
-    <Content Include="Resources\Poke\702.png" />
-    <Content Include="Resources\Poke\703.png" />
-    <Content Include="Resources\Poke\704.png" />
-    <Content Include="Resources\Poke\705.png" />
-    <Content Include="Resources\Poke\706.png" />
-    <Content Include="Resources\Poke\707.png" />
-    <Content Include="Resources\Poke\708.png" />
-    <Content Include="Resources\Poke\709.png" />
-    <Content Include="Resources\Poke\71.png" />
-    <Content Include="Resources\Poke\710-1.png" />
-    <Content Include="Resources\Poke\710-2.png" />
-    <Content Include="Resources\Poke\710-3.png" />
-    <Content Include="Resources\Poke\710.png" />
-    <Content Include="Resources\Poke\711-1.png" />
-    <Content Include="Resources\Poke\711-2.png" />
-    <Content Include="Resources\Poke\711-3.png" />
-    <Content Include="Resources\Poke\711.png" />
-    <Content Include="Resources\Poke\712.png" />
-    <Content Include="Resources\Poke\713.png" />
-    <Content Include="Resources\Poke\714.png" />
-    <Content Include="Resources\Poke\715.png" />
-    <Content Include="Resources\Poke\716-1.png" />
-    <Content Include="Resources\Poke\716.png" />
-    <Content Include="Resources\Poke\717.png" />
-    <Content Include="Resources\Poke\718-1.png" />
-    <Content Include="Resources\Poke\718-2.png" />
-    <Content Include="Resources\Poke\718-3.png" />
-    <Content Include="Resources\Poke\718-4.png" />
-    <Content Include="Resources\Poke\718.png" />
-    <Content Include="Resources\Poke\719-1.png" />
-    <Content Include="Resources\Poke\719.png" />
-    <Content Include="Resources\Poke\72.png" />
-    <Content Include="Resources\Poke\720-1.png" />
-    <Content Include="Resources\Poke\720.png" />
-    <Content Include="Resources\Poke\721.png" />
-    <Content Include="Resources\Poke\722.png" />
-    <Content Include="Resources\Poke\723.png" />
-    <Content Include="Resources\Poke\724.png" />
-    <Content Include="Resources\Poke\725.png" />
-    <Content Include="Resources\Poke\726.png" />
-    <Content Include="Resources\Poke\727.png" />
-    <Content Include="Resources\Poke\728.png" />
-    <Content Include="Resources\Poke\729.png" />
-    <Content Include="Resources\Poke\73.png" />
-    <Content Include="Resources\Poke\730.png" />
-    <Content Include="Resources\Poke\731.png" />
-    <Content Include="Resources\Poke\732.png" />
-    <Content Include="Resources\Poke\733.png" />
-    <Content Include="Resources\Poke\734.png" />
-    <Content Include="Resources\Poke\735.png" />
-    <Content Include="Resources\Poke\736.png" />
-    <Content Include="Resources\Poke\737.png" />
-    <Content Include="Resources\Poke\738.png" />
-    <Content Include="Resources\Poke\739.png" />
-    <Content Include="Resources\Poke\74-1.png" />
-    <Content Include="Resources\Poke\74.png" />
-    <Content Include="Resources\Poke\740.png" />
-    <Content Include="Resources\Poke\741-1.png" />
-    <Content Include="Resources\Poke\741-2.png" />
-    <Content Include="Resources\Poke\741-3.png" />
-    <Content Include="Resources\Poke\741.png" />
-    <Content Include="Resources\Poke\742.png" />
-    <Content Include="Resources\Poke\743.png" />
-    <Content Include="Resources\Poke\744.png" />
-    <Content Include="Resources\Poke\745-1.png" />
-    <Content Include="Resources\Poke\745.png" />
-    <Content Include="Resources\Poke\746-1.png" />
-    <Content Include="Resources\Poke\746.png" />
-    <Content Include="Resources\Poke\747.png" />
-    <Content Include="Resources\Poke\748.png" />
-    <Content Include="Resources\Poke\749.png" />
-    <Content Include="Resources\Poke\75-1.png" />
-    <Content Include="Resources\Poke\75.png" />
-    <Content Include="Resources\Poke\750.png" />
-    <Content Include="Resources\Poke\751.png" />
-    <Content Include="Resources\Poke\752.png" />
-    <Content Include="Resources\Poke\753.png" />
-    <Content Include="Resources\Poke\754.png" />
-    <Content Include="Resources\Poke\755.png" />
-    <Content Include="Resources\Poke\756.png" />
-    <Content Include="Resources\Poke\757.png" />
-    <Content Include="Resources\Poke\758.png" />
-    <Content Include="Resources\Poke\759.png" />
-    <Content Include="Resources\Poke\76-1.png" />
-    <Content Include="Resources\Poke\76.png" />
-    <Content Include="Resources\Poke\760.png" />
-    <Content Include="Resources\Poke\761.png" />
-    <Content Include="Resources\Poke\762.png" />
-    <Content Include="Resources\Poke\763.png" />
-    <Content Include="Resources\Poke\764.png" />
-    <Content Include="Resources\Poke\765.png" />
-    <Content Include="Resources\Poke\766.png" />
-    <Content Include="Resources\Poke\767.png" />
-    <Content Include="Resources\Poke\768.png" />
-    <Content Include="Resources\Poke\769.png" />
-    <Content Include="Resources\Poke\77.png" />
-    <Content Include="Resources\Poke\770.png" />
-    <Content Include="Resources\Poke\771.png" />
-    <Content Include="Resources\Poke\772.png" />
-    <Content Include="Resources\Poke\773.png" />
-    <Content Include="Resources\Poke\774-1.png" />
-    <Content Include="Resources\Poke\774-10.png" />
-    <Content Include="Resources\Poke\774-11.png" />
-    <Content Include="Resources\Poke\774-12.png" />
-    <Content Include="Resources\Poke\774-13.png" />
-    <Content Include="Resources\Poke\774-2.png" />
-    <Content Include="Resources\Poke\774-3.png" />
-    <Content Include="Resources\Poke\774-4.png" />
-    <Content Include="Resources\Poke\774-5.png" />
-    <Content Include="Resources\Poke\774-6.png" />
-    <Content Include="Resources\Poke\774-7.png" />
-    <Content Include="Resources\Poke\774-8.png" />
-    <Content Include="Resources\Poke\774-9.png" />
-    <Content Include="Resources\Poke\774.png" />
-    <Content Include="Resources\Poke\775.png" />
-    <Content Include="Resources\Poke\776.png" />
-    <Content Include="Resources\Poke\777.png" />
-    <Content Include="Resources\Poke\778.png" />
-    <Content Include="Resources\Poke\779.png" />
-    <Content Include="Resources\Poke\78.png" />
-    <Content Include="Resources\Poke\780.png" />
-    <Content Include="Resources\Poke\781.png" />
-    <Content Include="Resources\Poke\782.png" />
-    <Content Include="Resources\Poke\783.png" />
-    <Content Include="Resources\Poke\784.png" />
-    <Content Include="Resources\Poke\785.png" />
-    <Content Include="Resources\Poke\786.png" />
-    <Content Include="Resources\Poke\787.png" />
-    <Content Include="Resources\Poke\788.png" />
-    <Content Include="Resources\Poke\789.png" />
-    <Content Include="Resources\Poke\79.png" />
-    <Content Include="Resources\Poke\790.png" />
-    <Content Include="Resources\Poke\791.png" />
-    <Content Include="Resources\Poke\792.png" />
-    <Content Include="Resources\Poke\793.png" />
-    <Content Include="Resources\Poke\794.png" />
-    <Content Include="Resources\Poke\795.png" />
-    <Content Include="Resources\Poke\796.png" />
-    <Content Include="Resources\Poke\797.png" />
-    <Content Include="Resources\Poke\798.png" />
-    <Content Include="Resources\Poke\799.png" />
-    <Content Include="Resources\Poke\8.png" />
-    <Content Include="Resources\Poke\80-1.png" />
-    <Content Include="Resources\Poke\80.png" />
-    <Content Include="Resources\Poke\800.png" />
-    <Content Include="Resources\Poke\801-1.png" />
-    <Content Include="Resources\Poke\801.png" />
-    <Content Include="Resources\Poke\802.png" />
-    <Content Include="Resources\Poke\81.png" />
-    <Content Include="Resources\Poke\82.png" />
-    <Content Include="Resources\Poke\83.png" />
-    <Content Include="Resources\Poke\84.png" />
-    <Content Include="Resources\Poke\85.png" />
-    <Content Include="Resources\Poke\86.png" />
-    <Content Include="Resources\Poke\87.png" />
-    <Content Include="Resources\Poke\88-1.png" />
-    <Content Include="Resources\Poke\88.png" />
-    <Content Include="Resources\Poke\89-1.png" />
-    <Content Include="Resources\Poke\89.png" />
-    <Content Include="Resources\Poke\9-1.png" />
-    <Content Include="Resources\Poke\9.png" />
-    <Content Include="Resources\Poke\90.png" />
-    <Content Include="Resources\Poke\91.png" />
-    <Content Include="Resources\Poke\92.png" />
-    <Content Include="Resources\Poke\93.png" />
-    <Content Include="Resources\Poke\94-1.png" />
-    <Content Include="Resources\Poke\94.png" />
-    <Content Include="Resources\Poke\95.png" />
-    <Content Include="Resources\Poke\96.png" />
-    <Content Include="Resources\Poke\97.png" />
-    <Content Include="Resources\Poke\98.png" />
-    <Content Include="Resources\Poke\99.png" />
-    <Content Include="Resources\Poke\egg.png" />
-    <Content Include="Resources\Poke\unknown.png" />
-    <Content Include="Resources\Poke\_.png" />
+    <None Include="Resources\slotDel.png" />
+    <None Include="Resources\slotTrans.png" />
+    <None Include="Resources\slotSet.png" />
+    <None Include="Resources\valid.png" />
+    <None Include="Resources\warn.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\PKHeX\PKHeX\PKHeX.Core.csproj">
+      <Project>{B4EFF030-C75A-49F9-A4BC-738D1B61C4AF}</Project>
+      <Name>PKHeX.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <UsingTask TaskName="CosturaCleanup" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
     <ParameterGroup>

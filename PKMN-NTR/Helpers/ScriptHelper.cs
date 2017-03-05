@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ntrbase
+namespace ntrbase.Helpers
 {
     public class ScriptHelper
     {
