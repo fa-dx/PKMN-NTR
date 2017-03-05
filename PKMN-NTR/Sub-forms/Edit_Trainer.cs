@@ -28,13 +28,22 @@ namespace ntrbase.Sub_forms
 
         private void Edit_Trainer_Load(object sender, EventArgs e)
         {
-            if (Program.gCmdWindow.SAV.Generation == 6)
-            {
-                Fill6();
+            // Show earning
+            DialogResult dr = MessageBox.Show("Editing any value in this window may result in a temporal BAN from online services or a PERMANENT BAN from all features that uses Pokémon Global Link (PGL) like Game Sync, Rated Battles and Global Missions. Do you want to continue?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            { // Download data from game
+                if (Program.gCmdWindow.SAV.Generation == 6)
+                {
+                    Fill6();
+                }
+                else
+                {
+                    Fill7();
+                }
             }
             else
-            {
-                Fill7();
+            { // Close the window
+                Close();
             }
         }
 
