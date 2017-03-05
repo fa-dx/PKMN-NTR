@@ -102,7 +102,7 @@
             this.filterReset.Location = new System.Drawing.Point(355, 160);
             this.filterReset.Name = "filterReset";
             this.filterReset.Size = new System.Drawing.Size(209, 23);
-            this.filterReset.TabIndex = 60;
+            this.filterReset.TabIndex = 22;
             this.filterReset.Text = "Reset constructor";
             this.filterReset.UseVisualStyleBackColor = true;
             this.filterReset.Click += new System.EventHandler(this.filterReset_Click);
@@ -113,7 +113,7 @@
             this.filterRead.Location = new System.Drawing.Point(15, 191);
             this.filterRead.Name = "filterRead";
             this.filterRead.Size = new System.Drawing.Size(132, 23);
-            this.filterRead.TabIndex = 59;
+            this.filterRead.TabIndex = 21;
             this.filterRead.Text = "Read Filter";
             this.filterRead.UseVisualStyleBackColor = true;
             this.filterRead.Click += new System.EventHandler(this.filterRead_Click);
@@ -123,7 +123,7 @@
             this.filterLoad.Location = new System.Drawing.Point(464, 189);
             this.filterLoad.Name = "filterLoad";
             this.filterLoad.Size = new System.Drawing.Size(100, 23);
-            this.filterLoad.TabIndex = 62;
+            this.filterLoad.TabIndex = 24;
             this.filterLoad.Text = "Load filter set...";
             this.filterLoad.UseVisualStyleBackColor = true;
             this.filterLoad.Click += new System.EventHandler(this.filterLoad_Click);
@@ -133,7 +133,7 @@
             this.filterSave.Location = new System.Drawing.Point(355, 189);
             this.filterSave.Name = "filterSave";
             this.filterSave.Size = new System.Drawing.Size(100, 23);
-            this.filterSave.TabIndex = 61;
+            this.filterSave.TabIndex = 23;
             this.filterSave.Text = "Save filter set...";
             this.filterSave.UseVisualStyleBackColor = true;
             this.filterSave.Click += new System.EventHandler(this.filterSave_Click);
@@ -144,7 +144,7 @@
             this.filterRemove.Location = new System.Drawing.Point(15, 162);
             this.filterRemove.Name = "filterRemove";
             this.filterRemove.Size = new System.Drawing.Size(132, 23);
-            this.filterRemove.TabIndex = 58;
+            this.filterRemove.TabIndex = 20;
             this.filterRemove.Text = "Remove Filter";
             this.filterRemove.UseVisualStyleBackColor = true;
             this.filterRemove.Click += new System.EventHandler(this.filterRemove_Click);
@@ -154,7 +154,7 @@
             this.filterAdd.Location = new System.Drawing.Point(15, 134);
             this.filterAdd.Name = "filterAdd";
             this.filterAdd.Size = new System.Drawing.Size(132, 23);
-            this.filterAdd.TabIndex = 57;
+            this.filterAdd.TabIndex = 19;
             this.filterAdd.Text = "Add Filter";
             this.filterAdd.UseVisualStyleBackColor = true;
             this.filterAdd.Click += new System.EventHandler(this.filterAdd_Click);
@@ -191,7 +191,7 @@
             this.filterList.ReadOnly = true;
             this.filterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.filterList.Size = new System.Drawing.Size(549, 145);
-            this.filterList.TabIndex = 63;
+            this.filterList.TabIndex = 25;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -340,7 +340,7 @@
             this.filterPerIVlogic.Location = new System.Drawing.Point(250, 191);
             this.filterPerIVlogic.Name = "filterPerIVlogic";
             this.filterPerIVlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterPerIVlogic.TabIndex = 55;
+            this.filterPerIVlogic.TabIndex = 17;
             // 
             // filterSPElogic
             // 
@@ -358,7 +358,7 @@
             this.filterSPElogic.Location = new System.Drawing.Point(250, 164);
             this.filterSPElogic.Name = "filterSPElogic";
             this.filterSPElogic.Size = new System.Drawing.Size(60, 21);
-            this.filterSPElogic.TabIndex = 53;
+            this.filterSPElogic.TabIndex = 15;
             // 
             // filterSPDlogic
             // 
@@ -376,7 +376,7 @@
             this.filterSPDlogic.Location = new System.Drawing.Point(250, 137);
             this.filterSPDlogic.Name = "filterSPDlogic";
             this.filterSPDlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterSPDlogic.TabIndex = 51;
+            this.filterSPDlogic.TabIndex = 13;
             // 
             // filterSPAlogic
             // 
@@ -394,7 +394,7 @@
             this.filterSPAlogic.Location = new System.Drawing.Point(250, 110);
             this.filterSPAlogic.Name = "filterSPAlogic";
             this.filterSPAlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterSPAlogic.TabIndex = 49;
+            this.filterSPAlogic.TabIndex = 11;
             // 
             // filterDEFlogic
             // 
@@ -412,7 +412,7 @@
             this.filterDEFlogic.Location = new System.Drawing.Point(250, 83);
             this.filterDEFlogic.Name = "filterDEFlogic";
             this.filterDEFlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterDEFlogic.TabIndex = 47;
+            this.filterDEFlogic.TabIndex = 9;
             // 
             // filterATKlogic
             // 
@@ -430,7 +430,7 @@
             this.filterATKlogic.Location = new System.Drawing.Point(250, 56);
             this.filterATKlogic.Name = "filterATKlogic";
             this.filterATKlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterATKlogic.TabIndex = 45;
+            this.filterATKlogic.TabIndex = 7;
             // 
             // filterHPlogic
             // 
@@ -448,7 +448,7 @@
             this.filterHPlogic.Location = new System.Drawing.Point(250, 29);
             this.filterHPlogic.Name = "filterHPlogic";
             this.filterHPlogic.Size = new System.Drawing.Size(60, 21);
-            this.filterHPlogic.TabIndex = 43;
+            this.filterHPlogic.TabIndex = 5;
             // 
             // filterPerIVvalue
             // 
@@ -460,7 +460,7 @@
             0});
             this.filterPerIVvalue.Name = "filterPerIVvalue";
             this.filterPerIVvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterPerIVvalue.TabIndex = 56;
+            this.filterPerIVvalue.TabIndex = 18;
             // 
             // label101
             // 
@@ -478,7 +478,7 @@
             this.filterShiny.Location = new System.Drawing.Point(70, 6);
             this.filterShiny.Name = "filterShiny";
             this.filterShiny.Size = new System.Drawing.Size(15, 14);
-            this.filterShiny.TabIndex = 38;
+            this.filterShiny.TabIndex = 0;
             this.filterShiny.UseVisualStyleBackColor = true;
             // 
             // filterGender
@@ -492,7 +492,7 @@
             this.filterGender.Location = new System.Drawing.Point(70, 107);
             this.filterGender.Name = "filterGender";
             this.filterGender.Size = new System.Drawing.Size(77, 21);
-            this.filterGender.TabIndex = 42;
+            this.filterGender.TabIndex = 4;
             // 
             // label102
             // 
@@ -522,7 +522,7 @@
             0});
             this.filterSPEvalue.Name = "filterSPEvalue";
             this.filterSPEvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterSPEvalue.TabIndex = 54;
+            this.filterSPEvalue.TabIndex = 16;
             // 
             // filterSPDvalue
             // 
@@ -534,7 +534,7 @@
             0});
             this.filterSPDvalue.Name = "filterSPDvalue";
             this.filterSPDvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterSPDvalue.TabIndex = 52;
+            this.filterSPDvalue.TabIndex = 14;
             // 
             // label104
             // 
@@ -571,7 +571,7 @@
             this.filterAbility.Location = new System.Drawing.Point(70, 53);
             this.filterAbility.Name = "filterAbility";
             this.filterAbility.Size = new System.Drawing.Size(77, 21);
-            this.filterAbility.TabIndex = 40;
+            this.filterAbility.TabIndex = 2;
             // 
             // filterDEFvalue
             // 
@@ -583,7 +583,7 @@
             0});
             this.filterDEFvalue.Name = "filterDEFvalue";
             this.filterDEFvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterDEFvalue.TabIndex = 48;
+            this.filterDEFvalue.TabIndex = 10;
             // 
             // label107
             // 
@@ -637,7 +637,7 @@
             this.filterNature.Location = new System.Drawing.Point(70, 26);
             this.filterNature.Name = "filterNature";
             this.filterNature.Size = new System.Drawing.Size(77, 21);
-            this.filterNature.TabIndex = 39;
+            this.filterNature.TabIndex = 1;
             // 
             // filterSPAvalue
             // 
@@ -649,7 +649,7 @@
             0});
             this.filterSPAvalue.Name = "filterSPAvalue";
             this.filterSPAvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterSPAvalue.TabIndex = 50;
+            this.filterSPAvalue.TabIndex = 12;
             // 
             // filterHPtype
             // 
@@ -676,7 +676,7 @@
             this.filterHPtype.Location = new System.Drawing.Point(70, 80);
             this.filterHPtype.Name = "filterHPtype";
             this.filterHPtype.Size = new System.Drawing.Size(77, 21);
-            this.filterHPtype.TabIndex = 41;
+            this.filterHPtype.TabIndex = 3;
             // 
             // filterHPvalue
             // 
@@ -688,7 +688,7 @@
             0});
             this.filterHPvalue.Name = "filterHPvalue";
             this.filterHPvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterHPvalue.TabIndex = 44;
+            this.filterHPvalue.TabIndex = 6;
             // 
             // label109
             // 
@@ -727,7 +727,7 @@
             0});
             this.filterATKvalue.Name = "filterATKvalue";
             this.filterATKvalue.Size = new System.Drawing.Size(33, 20);
-            this.filterATKvalue.TabIndex = 46;
+            this.filterATKvalue.TabIndex = 8;
             // 
             // label112
             // 

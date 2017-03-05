@@ -66,7 +66,7 @@
             this.DoItBtn.Location = new System.Drawing.Point(123, 59);
             this.DoItBtn.Name = "DoItBtn";
             this.DoItBtn.Size = new System.Drawing.Size(92, 23);
-            this.DoItBtn.TabIndex = 0;
+            this.DoItBtn.TabIndex = 4;
             this.DoItBtn.Text = "Can you dig it?";
             this.toolTip1.SetToolTip(this.DoItBtn, "Dump memory from console and process it");
             this.DoItBtn.UseVisualStyleBackColor = true;
@@ -78,7 +78,7 @@
             this.InfoLabel.Location = new System.Drawing.Point(12, 9);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(370, 13);
-            this.InfoLabel.TabIndex = 1;
+            this.InfoLabel.TabIndex = 14;
             this.InfoLabel.Text = "Experimental tool for extracting any valid-looking Pokemon data from memory.";
             // 
             // ResultsGrid
@@ -96,7 +96,7 @@
             this.ResultsGrid.Location = new System.Drawing.Point(15, 118);
             this.ResultsGrid.Name = "ResultsGrid";
             this.ResultsGrid.Size = new System.Drawing.Size(457, 162);
-            this.ResultsGrid.TabIndex = 2;
+            this.ResultsGrid.TabIndex = 8;
             // 
             // ColIcon
             // 
@@ -146,7 +146,7 @@
             this.DumpBtn.Location = new System.Drawing.Point(12, 286);
             this.DumpBtn.Name = "DumpBtn";
             this.DumpBtn.Size = new System.Drawing.Size(96, 23);
-            this.DumpBtn.TabIndex = 3;
+            this.DumpBtn.TabIndex = 9;
             this.DumpBtn.Text = "Dump to file(s)";
             this.toolTip1.SetToolTip(this.DumpBtn, "Save selected Pokemon to .pk7 files");
             this.DumpBtn.UseVisualStyleBackColor = true;
@@ -157,7 +157,7 @@
             this.StartAddrText.Location = new System.Drawing.Point(77, 33);
             this.StartAddrText.Name = "StartAddrText";
             this.StartAddrText.Size = new System.Drawing.Size(100, 20);
-            this.StartAddrText.TabIndex = 4;
+            this.StartAddrText.TabIndex = 0;
             this.StartAddrText.Text = "0x32500000";
             this.toolTip1.SetToolTip(this.StartAddrText, "Memory address (in hexadecimal, in bytes) to start dumping from.\r\nDefault is 0x32" +
         "500000, just because I like it.");
@@ -168,7 +168,7 @@
             this.StartLabel.Location = new System.Drawing.Point(12, 36);
             this.StartLabel.Name = "StartLabel";
             this.StartLabel.Size = new System.Drawing.Size(59, 13);
-            this.StartLabel.TabIndex = 5;
+            this.StartLabel.TabIndex = 16;
             this.StartLabel.Text = "Start addr.:";
             // 
             // SizeLabel
@@ -185,7 +185,7 @@
             this.SizeText.Location = new System.Drawing.Point(219, 33);
             this.SizeText.Name = "SizeText";
             this.SizeText.Size = new System.Drawing.Size(100, 20);
-            this.SizeText.TabIndex = 7;
+            this.SizeText.TabIndex = 1;
             this.SizeText.Text = "0x00100000";
             this.toolTip1.SetToolTip(this.SizeText, "Amount of memory (in hexadecimal, in bytes) to dump.\r\nDefault is 0x00100000 (1 MB" +
         ").\r\nLarge amounts of memory may take a lot of time to transfer.");
@@ -195,7 +195,7 @@
             this.progressBar.Location = new System.Drawing.Point(15, 89);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(457, 23);
-            this.progressBar.TabIndex = 8;
+            this.progressBar.TabIndex = 18;
             // 
             // StatusLabel
             // 
@@ -203,7 +203,7 @@
             this.StatusLabel.Location = new System.Drawing.Point(325, 36);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(43, 13);
-            this.StatusLabel.TabIndex = 9;
+            this.StatusLabel.TabIndex = 17;
             this.StatusLabel.Text = "Status: ";
             // 
             // DigWorker
@@ -219,7 +219,7 @@
             this.FromFileBtn.Location = new System.Drawing.Point(397, 59);
             this.FromFileBtn.Name = "FromFileBtn";
             this.FromFileBtn.Size = new System.Drawing.Size(75, 23);
-            this.FromFileBtn.TabIndex = 10;
+            this.FromFileBtn.TabIndex = 7;
             this.FromFileBtn.Text = "From file...";
             this.toolTip1.SetToolTip(this.FromFileBtn, "Read memory dump from file");
             this.FromFileBtn.UseVisualStyleBackColor = true;
@@ -265,7 +265,7 @@
             this.StepPlusBtn.Location = new System.Drawing.Point(15, 59);
             this.StepPlusBtn.Name = "StepPlusBtn";
             this.StepPlusBtn.Size = new System.Drawing.Size(48, 23);
-            this.StepPlusBtn.TabIndex = 14;
+            this.StepPlusBtn.TabIndex = 2;
             this.StepPlusBtn.Text = "Step +";
             this.toolTip1.SetToolTip(this.StepPlusBtn, "Increase start address by size value");
             this.StepPlusBtn.UseVisualStyleBackColor = true;
@@ -276,7 +276,7 @@
             this.StepMinusBtn.Location = new System.Drawing.Point(69, 59);
             this.StepMinusBtn.Name = "StepMinusBtn";
             this.StepMinusBtn.Size = new System.Drawing.Size(48, 23);
-            this.StepMinusBtn.TabIndex = 15;
+            this.StepMinusBtn.TabIndex = 3;
             this.StepMinusBtn.Text = "Step -";
             this.toolTip1.SetToolTip(this.StepMinusBtn, "Decrease start address by size value");
             this.StepMinusBtn.UseVisualStyleBackColor = true;
@@ -288,7 +288,7 @@
             this.FastModeCB.Location = new System.Drawing.Point(221, 63);
             this.FastModeCB.Name = "FastModeCB";
             this.FastModeCB.Size = new System.Drawing.Size(75, 17);
-            this.FastModeCB.TabIndex = 16;
+            this.FastModeCB.TabIndex = 5;
             this.FastModeCB.Text = "Fast mode";
             this.toolTip1.SetToolTip(this.FastModeCB, "Click it to learn more");
             this.FastModeCB.UseVisualStyleBackColor = true;
@@ -299,7 +299,7 @@
             this.InvertBtn.Location = new System.Drawing.Point(114, 286);
             this.InvertBtn.Name = "InvertBtn";
             this.InvertBtn.Size = new System.Drawing.Size(90, 23);
-            this.InvertBtn.TabIndex = 17;
+            this.InvertBtn.TabIndex = 10;
             this.InvertBtn.Text = "Invert checked";
             this.toolTip1.SetToolTip(this.InvertBtn, "Pokemon checked in \"Dump it?\" column will become unchecked\r\nand vice versa");
             this.InvertBtn.UseVisualStyleBackColor = true;
@@ -311,7 +311,7 @@
             this.DumpSaveCB.Location = new System.Drawing.Point(302, 63);
             this.DumpSaveCB.Name = "DumpSaveCB";
             this.DumpSaveCB.Size = new System.Drawing.Size(96, 17);
-            this.DumpSaveCB.TabIndex = 18;
+            this.DumpSaveCB.TabIndex = 6;
             this.DumpSaveCB.Text = "Save dump file";
             this.toolTip1.SetToolTip(this.DumpSaveCB, "If checked, the entire memory dump will be saved to .bin file");
             this.DumpSaveCB.UseVisualStyleBackColor = true;
@@ -322,7 +322,7 @@
             this.HelpBtn.Location = new System.Drawing.Point(449, 12);
             this.HelpBtn.Name = "HelpBtn";
             this.HelpBtn.Size = new System.Drawing.Size(23, 23);
-            this.HelpBtn.TabIndex = 19;
+            this.HelpBtn.TabIndex = 15;
             this.HelpBtn.Text = "?";
             this.toolTip1.SetToolTip(this.HelpBtn, "What do I do now???");
             this.HelpBtn.UseVisualStyleBackColor = true;

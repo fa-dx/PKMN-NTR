@@ -80,7 +80,7 @@
             this.Remote_Stick.Location = new System.Drawing.Point(290, 12);
             this.Remote_Stick.Name = "Remote_Stick";
             this.Remote_Stick.Size = new System.Drawing.Size(268, 154);
-            this.Remote_Stick.TabIndex = 32;
+            this.Remote_Stick.TabIndex = 2;
             this.Remote_Stick.TabStop = false;
             this.Remote_Stick.Text = "Control Stick";
             // 
@@ -91,7 +91,7 @@
             this.StickX.Minimum = -100;
             this.StickX.Name = "StickX";
             this.StickX.Size = new System.Drawing.Size(205, 45);
-            this.StickX.TabIndex = 17;
+            this.StickX.TabIndex = 1;
             this.StickX.TickFrequency = 25;
             this.StickX.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.StickX.Scroll += new System.EventHandler(this.StickX_Scroll);
@@ -104,7 +104,7 @@
             this.StickY.Name = "StickY";
             this.StickY.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.StickY.Size = new System.Drawing.Size(45, 129);
-            this.StickY.TabIndex = 16;
+            this.StickY.TabIndex = 0;
             this.StickY.TickFrequency = 25;
             this.StickY.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.StickY.Scroll += new System.EventHandler(this.StickY_Scroll);
@@ -119,7 +119,7 @@
             -2147483648});
             this.StickNumY.Name = "StickNumY";
             this.StickNumY.Size = new System.Drawing.Size(100, 20);
-            this.StickNumY.TabIndex = 18;
+            this.StickNumY.TabIndex = 2;
             this.StickNumY.ValueChanged += new System.EventHandler(this.StickNumY_ValueChanged);
             // 
             // StickSend
@@ -127,7 +127,7 @@
             this.StickSend.Location = new System.Drawing.Point(57, 63);
             this.StickSend.Name = "StickSend";
             this.StickSend.Size = new System.Drawing.Size(205, 23);
-            this.StickSend.TabIndex = 20;
+            this.StickSend.TabIndex = 4;
             this.StickSend.Text = "Send Command";
             this.StickSend.UseVisualStyleBackColor = true;
             this.StickSend.Click += new System.EventHandler(this.StickSend_Click);
@@ -142,7 +142,7 @@
             -2147483648});
             this.StickNumX.Name = "StickNumX";
             this.StickNumX.Size = new System.Drawing.Size(99, 20);
-            this.StickNumX.TabIndex = 19;
+            this.StickNumX.TabIndex = 3;
             this.StickNumX.ValueChanged += new System.EventHandler(this.StickNumX_ValueChanged);
             // 
             // label62
@@ -175,7 +175,7 @@
             this.Remote_touch.Location = new System.Drawing.Point(12, 127);
             this.Remote_touch.Name = "Remote_touch";
             this.Remote_touch.Size = new System.Drawing.Size(272, 71);
-            this.Remote_touch.TabIndex = 31;
+            this.Remote_touch.TabIndex = 1;
             this.Remote_touch.TabStop = false;
             this.Remote_touch.Text = "Touchscreen";
             // 
@@ -207,7 +207,7 @@
             0});
             this.touchX.Name = "touchX";
             this.touchX.Size = new System.Drawing.Size(60, 20);
-            this.touchX.TabIndex = 12;
+            this.touchX.TabIndex = 0;
             // 
             // touchY
             // 
@@ -219,14 +219,14 @@
             0});
             this.touchY.Name = "touchY";
             this.touchY.Size = new System.Drawing.Size(60, 20);
-            this.touchY.TabIndex = 13;
+            this.touchY.TabIndex = 1;
             // 
             // manualTouch
             // 
             this.manualTouch.Location = new System.Drawing.Point(138, 16);
             this.manualTouch.Name = "manualTouch";
             this.manualTouch.Size = new System.Drawing.Size(128, 23);
-            this.manualTouch.TabIndex = 14;
+            this.manualTouch.TabIndex = 2;
             this.manualTouch.Text = "Touch";
             this.manualTouch.UseVisualStyleBackColor = true;
             this.manualTouch.Click += new System.EventHandler(this.manualTouch_Click);
@@ -249,7 +249,7 @@
             this.Remote_buttons.Location = new System.Drawing.Point(12, 12);
             this.Remote_buttons.Name = "Remote_buttons";
             this.Remote_buttons.Size = new System.Drawing.Size(272, 109);
-            this.Remote_buttons.TabIndex = 30;
+            this.Remote_buttons.TabIndex = 0;
             this.Remote_buttons.TabStop = false;
             this.Remote_buttons.Text = "Buttons";
             // 
@@ -259,7 +259,7 @@
             this.manualDUp.Name = "manualDUp";
             this.manualDUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.manualDUp.Size = new System.Drawing.Size(23, 23);
-            this.manualDUp.TabIndex = 0;
+            this.manualDUp.TabIndex = 4;
             this.manualDUp.Text = "↑";
             this.manualDUp.UseVisualStyleBackColor = true;
             this.manualDUp.Click += new System.EventHandler(this.manualDUp_Click);
@@ -269,7 +269,7 @@
             this.manualA.Location = new System.Drawing.Point(243, 46);
             this.manualA.Name = "manualA";
             this.manualA.Size = new System.Drawing.Size(23, 23);
-            this.manualA.TabIndex = 4;
+            this.manualA.TabIndex = 0;
             this.manualA.Text = "A";
             this.manualA.UseVisualStyleBackColor = true;
             this.manualA.Click += new System.EventHandler(this.manualA_Click);
@@ -289,7 +289,7 @@
             this.manualB.Location = new System.Drawing.Point(214, 74);
             this.manualB.Name = "manualB";
             this.manualB.Size = new System.Drawing.Size(23, 23);
-            this.manualB.TabIndex = 5;
+            this.manualB.TabIndex = 1;
             this.manualB.Text = "B";
             this.manualB.UseVisualStyleBackColor = true;
             this.manualB.Click += new System.EventHandler(this.manualB_Click);
@@ -319,7 +319,7 @@
             this.manualDRight.Location = new System.Drawing.Point(64, 46);
             this.manualDRight.Name = "manualDRight";
             this.manualDRight.Size = new System.Drawing.Size(23, 23);
-            this.manualDRight.TabIndex = 3;
+            this.manualDRight.TabIndex = 7;
             this.manualDRight.Text = "→";
             this.manualDRight.UseVisualStyleBackColor = true;
             this.manualDRight.Click += new System.EventHandler(this.manualDRight_Click);
@@ -329,7 +329,7 @@
             this.ManualDDown.Location = new System.Drawing.Point(35, 74);
             this.ManualDDown.Name = "ManualDDown";
             this.ManualDDown.Size = new System.Drawing.Size(23, 23);
-            this.ManualDDown.TabIndex = 1;
+            this.ManualDDown.TabIndex = 5;
             this.ManualDDown.Text = "↓";
             this.ManualDDown.UseVisualStyleBackColor = true;
             this.ManualDDown.Click += new System.EventHandler(this.ManualDDown_Click);
@@ -339,7 +339,7 @@
             this.manualY.Location = new System.Drawing.Point(185, 46);
             this.manualY.Name = "manualY";
             this.manualY.Size = new System.Drawing.Size(23, 23);
-            this.manualY.TabIndex = 7;
+            this.manualY.TabIndex = 3;
             this.manualY.Text = "Y";
             this.manualY.UseVisualStyleBackColor = true;
             this.manualY.Click += new System.EventHandler(this.manualY_Click);
@@ -359,7 +359,7 @@
             this.manualX.Location = new System.Drawing.Point(214, 19);
             this.manualX.Name = "manualX";
             this.manualX.Size = new System.Drawing.Size(23, 23);
-            this.manualX.TabIndex = 6;
+            this.manualX.TabIndex = 2;
             this.manualX.Text = "X";
             this.manualX.UseVisualStyleBackColor = true;
             this.manualX.Click += new System.EventHandler(this.manualX_Click);
@@ -369,7 +369,7 @@
             this.manualDLeft.Location = new System.Drawing.Point(6, 46);
             this.manualDLeft.Name = "manualDLeft";
             this.manualDLeft.Size = new System.Drawing.Size(23, 23);
-            this.manualDLeft.TabIndex = 2;
+            this.manualDLeft.TabIndex = 6;
             this.manualDLeft.Text = "←";
             this.manualDLeft.UseVisualStyleBackColor = true;
             this.manualDLeft.Click += new System.EventHandler(this.manualDLeft_Click);
@@ -379,7 +379,7 @@
             this.manualSR.Location = new System.Drawing.Point(290, 175);
             this.manualSR.Name = "manualSR";
             this.manualSR.Size = new System.Drawing.Size(268, 23);
-            this.manualSR.TabIndex = 29;
+            this.manualSR.TabIndex = 3;
             this.manualSR.Text = "Soft-Reset";
             this.manualSR.UseVisualStyleBackColor = true;
             this.manualSR.Click += new System.EventHandler(this.manualSR_Click);

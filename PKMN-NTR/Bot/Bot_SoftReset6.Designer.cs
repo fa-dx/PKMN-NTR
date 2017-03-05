@@ -91,7 +91,7 @@
             this.Resume.Location = new System.Drawing.Point(241, 14);
             this.Resume.Name = "Resume";
             this.Resume.Size = new System.Drawing.Size(83, 17);
-            this.Resume.TabIndex = 3;
+            this.Resume.TabIndex = 1;
             this.Resume.Text = "Resume bot";
             this.Resume.UseVisualStyleBackColor = true;
             // 
@@ -100,7 +100,7 @@
             this.ClearAll.Location = new System.Drawing.Point(458, 193);
             this.ClearAll.Name = "ClearAll";
             this.ClearAll.Size = new System.Drawing.Size(100, 23);
-            this.ClearAll.TabIndex = 12;
+            this.ClearAll.TabIndex = 5;
             this.ClearAll.Text = "Reset all fields";
             this.ClearAll.UseVisualStyleBackColor = true;
             this.ClearAll.Click += new System.EventHandler(this.ClearAll_Click);
@@ -137,7 +137,7 @@
             this.filterList.ReadOnly = true;
             this.filterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.filterList.Size = new System.Drawing.Size(546, 146);
-            this.filterList.TabIndex = 14;
+            this.filterList.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn32
             // 
@@ -277,7 +277,7 @@
             this.LoadFilters.Location = new System.Drawing.Point(352, 193);
             this.LoadFilters.Name = "LoadFilters";
             this.LoadFilters.Size = new System.Drawing.Size(100, 23);
-            this.LoadFilters.TabIndex = 13;
+            this.LoadFilters.TabIndex = 4;
             this.LoadFilters.Text = "Load filter set...";
             this.LoadFilters.UseVisualStyleBackColor = true;
             this.LoadFilters.Click += new System.EventHandler(this.LoadFilters_Click);
@@ -287,7 +287,7 @@
             this.RunStop.Location = new System.Drawing.Point(330, 10);
             this.RunStop.Name = "RunStop";
             this.RunStop.Size = new System.Drawing.Size(228, 23);
-            this.RunStop.TabIndex = 11;
+            this.RunStop.TabIndex = 2;
             this.RunStop.Text = "Start Bot";
             this.RunStop.UseVisualStyleBackColor = true;
             this.RunStop.Click += new System.EventHandler(this.RunStop_Click);

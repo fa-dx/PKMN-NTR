@@ -61,13 +61,13 @@
             this.Num_Miles = new System.Windows.Forms.NumericUpDown();
             this.Num_BP = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.CB_Language = new System.Windows.Forms.ComboBox();
             this.Write_FestivalCoins = new System.Windows.Forms.Button();
             this.Num_FestivalCoins = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.ReloadFields = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.CB_Language = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.Num_TotalFC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Hour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Min)).BeginInit();
@@ -102,7 +102,7 @@
             this.Write_TotalFC.Location = new System.Drawing.Point(176, 177);
             this.Write_TotalFC.Name = "Write_TotalFC";
             this.Write_TotalFC.Size = new System.Drawing.Size(42, 23);
-            this.Write_TotalFC.TabIndex = 42;
+            this.Write_TotalFC.TabIndex = 13;
             this.Write_TotalFC.Text = "Write";
             this.Write_TotalFC.UseVisualStyleBackColor = true;
             this.Write_TotalFC.Click += new System.EventHandler(this.Write_TotalFC_Click);
@@ -119,7 +119,7 @@
             0});
             this.Num_TotalFC.Name = "Num_TotalFC";
             this.Num_TotalFC.Size = new System.Drawing.Size(83, 20);
-            this.Num_TotalFC.TabIndex = 41;
+            this.Num_TotalFC.TabIndex = 12;
             this.Num_TotalFC.ThousandsSeparator = true;
             // 
             // label10
@@ -162,7 +162,7 @@
             this.Write_Name.Location = new System.Drawing.Point(176, 3);
             this.Write_Name.Name = "Write_Name";
             this.Write_Name.Size = new System.Drawing.Size(42, 23);
-            this.Write_Name.TabIndex = 32;
+            this.Write_Name.TabIndex = 1;
             this.Write_Name.Text = "Write";
             this.Write_Name.UseVisualStyleBackColor = true;
             this.Write_Name.Click += new System.EventHandler(this.Write_Name_Click);
@@ -190,7 +190,7 @@
             0});
             this.Num_Hour.Name = "Num_Hour";
             this.Num_Hour.Size = new System.Drawing.Size(47, 20);
-            this.Num_Hour.TabIndex = 47;
+            this.Num_Hour.TabIndex = 0;
             // 
             // label15
             // 
@@ -211,7 +211,7 @@
             this.Write_TID.Location = new System.Drawing.Point(176, 32);
             this.Write_TID.Name = "Write_TID";
             this.Write_TID.Size = new System.Drawing.Size(42, 23);
-            this.Write_TID.TabIndex = 34;
+            this.Write_TID.TabIndex = 3;
             this.Write_TID.Text = "Write";
             this.Write_TID.UseVisualStyleBackColor = true;
             this.Write_TID.Click += new System.EventHandler(this.Write_TID_Click);
@@ -224,7 +224,7 @@
             this.Write_Time.Location = new System.Drawing.Point(164, 16);
             this.Write_Time.Name = "Write_Time";
             this.Write_Time.Size = new System.Drawing.Size(43, 23);
-            this.Write_Time.TabIndex = 50;
+            this.Write_Time.TabIndex = 3;
             this.Write_Time.Text = "Write";
             this.Write_Time.UseVisualStyleBackColor = true;
             this.Write_Time.Click += new System.EventHandler(this.Write_Time_Click);
@@ -252,7 +252,7 @@
             0});
             this.Num_Min.Name = "Num_Min";
             this.Num_Min.Size = new System.Drawing.Size(48, 20);
-            this.Num_Min.TabIndex = 48;
+            this.Num_Min.TabIndex = 1;
             // 
             // label28
             // 
@@ -277,7 +277,7 @@
             0});
             this.Num_Sec.Name = "Num_Sec";
             this.Num_Sec.Size = new System.Drawing.Size(48, 20);
-            this.Num_Sec.TabIndex = 49;
+            this.Num_Sec.TabIndex = 2;
             // 
             // label14
             // 
@@ -297,7 +297,7 @@
             this.Write_BP.Location = new System.Drawing.Point(176, 206);
             this.Write_BP.Name = "Write_BP";
             this.Write_BP.Size = new System.Drawing.Size(42, 23);
-            this.Write_BP.TabIndex = 44;
+            this.Write_BP.TabIndex = 15;
             this.Write_BP.Text = "Write";
             this.Write_BP.UseVisualStyleBackColor = true;
             this.Write_BP.Click += new System.EventHandler(this.Write_BP_Click);
@@ -310,7 +310,7 @@
             this.Write_SID.Location = new System.Drawing.Point(176, 61);
             this.Write_SID.Name = "Write_SID";
             this.Write_SID.Size = new System.Drawing.Size(42, 23);
-            this.Write_SID.TabIndex = 36;
+            this.Write_SID.TabIndex = 5;
             this.Write_SID.Text = "Write";
             this.Write_SID.UseVisualStyleBackColor = true;
             this.Write_SID.Click += new System.EventHandler(this.Write_SID_Click);
@@ -327,7 +327,7 @@
             0});
             this.Num_TID.Name = "Num_TID";
             this.Num_TID.Size = new System.Drawing.Size(83, 20);
-            this.Num_TID.TabIndex = 33;
+            this.Num_TID.TabIndex = 2;
             this.Num_TID.ValueChanged += new System.EventHandler(this.setTSV);
             // 
             // TB_Name
@@ -337,7 +337,7 @@
             this.TB_Name.MaxLength = 13;
             this.TB_Name.Name = "TB_Name";
             this.TB_Name.Size = new System.Drawing.Size(83, 20);
-            this.TB_Name.TabIndex = 31;
+            this.TB_Name.TabIndex = 0;
             // 
             // Num_SID
             // 
@@ -350,7 +350,7 @@
             0});
             this.Num_SID.Name = "Num_SID";
             this.Num_SID.Size = new System.Drawing.Size(83, 20);
-            this.Num_SID.TabIndex = 35;
+            this.Num_SID.TabIndex = 4;
             this.Num_SID.ValueChanged += new System.EventHandler(this.setTSV);
             // 
             // label13
@@ -371,7 +371,7 @@
             this.Write_Lang.Location = new System.Drawing.Point(176, 235);
             this.Write_Lang.Name = "Write_Lang";
             this.Write_Lang.Size = new System.Drawing.Size(42, 23);
-            this.Write_Lang.TabIndex = 46;
+            this.Write_Lang.TabIndex = 17;
             this.Write_Lang.Text = "Write";
             this.Write_Lang.UseVisualStyleBackColor = true;
             this.Write_Lang.Click += new System.EventHandler(this.Write_Lang_Click);
@@ -387,7 +387,7 @@
             0});
             this.Num_Money.Name = "Num_Money";
             this.Num_Money.Size = new System.Drawing.Size(83, 20);
-            this.Num_Money.TabIndex = 37;
+            this.Num_Money.TabIndex = 6;
             this.Num_Money.ThousandsSeparator = true;
             // 
             // label3
@@ -409,7 +409,7 @@
             this.Write_Money.Location = new System.Drawing.Point(176, 90);
             this.Write_Money.Name = "Write_Money";
             this.Write_Money.Size = new System.Drawing.Size(42, 23);
-            this.Write_Money.TabIndex = 38;
+            this.Write_Money.TabIndex = 7;
             this.Write_Money.Text = "Write";
             this.Write_Money.UseVisualStyleBackColor = true;
             this.Write_Money.Click += new System.EventHandler(this.Write_Money_Click);
@@ -422,7 +422,7 @@
             this.Write_Miles.Location = new System.Drawing.Point(176, 119);
             this.Write_Miles.Name = "Write_Miles";
             this.Write_Miles.Size = new System.Drawing.Size(42, 23);
-            this.Write_Miles.TabIndex = 40;
+            this.Write_Miles.TabIndex = 9;
             this.Write_Miles.Text = "Write";
             this.Write_Miles.UseVisualStyleBackColor = true;
             this.Write_Miles.Click += new System.EventHandler(this.Write_Miles_Click);
@@ -439,7 +439,7 @@
             0});
             this.Num_Miles.Name = "Num_Miles";
             this.Num_Miles.Size = new System.Drawing.Size(83, 20);
-            this.Num_Miles.TabIndex = 39;
+            this.Num_Miles.TabIndex = 8;
             this.Num_Miles.ThousandsSeparator = true;
             // 
             // Num_BP
@@ -454,7 +454,7 @@
             0});
             this.Num_BP.Name = "Num_BP";
             this.Num_BP.Size = new System.Drawing.Size(83, 20);
-            this.Num_BP.TabIndex = 43;
+            this.Num_BP.TabIndex = 14;
             // 
             // tableLayoutPanel1
             // 
@@ -503,7 +503,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(221, 261);
-            this.tableLayoutPanel1.TabIndex = 62;
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // CB_Language
+            // 
+            this.CB_Language.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.CB_Language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_Language.FormattingEnabled = true;
+            this.CB_Language.Location = new System.Drawing.Point(84, 236);
+            this.CB_Language.Margin = new System.Windows.Forms.Padding(0);
+            this.CB_Language.Name = "CB_Language";
+            this.CB_Language.Size = new System.Drawing.Size(89, 21);
+            this.CB_Language.TabIndex = 16;
             // 
             // Write_FestivalCoins
             // 
@@ -513,7 +524,7 @@
             this.Write_FestivalCoins.Location = new System.Drawing.Point(176, 148);
             this.Write_FestivalCoins.Name = "Write_FestivalCoins";
             this.Write_FestivalCoins.Size = new System.Drawing.Size(42, 23);
-            this.Write_FestivalCoins.TabIndex = 42;
+            this.Write_FestivalCoins.TabIndex = 11;
             this.Write_FestivalCoins.Text = "Write";
             this.Write_FestivalCoins.UseVisualStyleBackColor = true;
             this.Write_FestivalCoins.Click += new System.EventHandler(this.Write_FestivalCoins_Click);
@@ -530,7 +541,7 @@
             0});
             this.Num_FestivalCoins.Name = "Num_FestivalCoins";
             this.Num_FestivalCoins.Size = new System.Drawing.Size(83, 20);
-            this.Num_FestivalCoins.TabIndex = 41;
+            this.Num_FestivalCoins.TabIndex = 10;
             this.Num_FestivalCoins.ThousandsSeparator = true;
             // 
             // label1
@@ -566,28 +577,17 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.Size = new System.Drawing.Size(210, 42);
-            this.tableLayoutPanel2.TabIndex = 63;
+            this.tableLayoutPanel2.TabIndex = 1;
             // 
             // ReloadFields
             // 
             this.ReloadFields.Location = new System.Drawing.Point(239, 60);
             this.ReloadFields.Name = "ReloadFields";
             this.ReloadFields.Size = new System.Drawing.Size(207, 23);
-            this.ReloadFields.TabIndex = 69;
+            this.ReloadFields.TabIndex = 2;
             this.ReloadFields.Text = "Reload Fields";
             this.ReloadFields.UseVisualStyleBackColor = true;
             this.ReloadFields.Click += new System.EventHandler(this.ReloadFields_Click);
-            // 
-            // CB_Language
-            // 
-            this.CB_Language.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.CB_Language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CB_Language.FormattingEnabled = true;
-            this.CB_Language.Location = new System.Drawing.Point(84, 236);
-            this.CB_Language.Margin = new System.Windows.Forms.Padding(0);
-            this.CB_Language.Name = "CB_Language";
-            this.CB_Language.Size = new System.Drawing.Size(89, 21);
-            this.CB_Language.TabIndex = 70;
             // 
             // Edit_Trainer
             // 

@@ -553,7 +553,7 @@
             this.DumpInstructionsBtn.Location = new System.Drawing.Point(211, 235);
             this.DumpInstructionsBtn.Name = "DumpInstructionsBtn";
             this.DumpInstructionsBtn.Size = new System.Drawing.Size(75, 23);
-            this.DumpInstructionsBtn.TabIndex = 15;
+            this.DumpInstructionsBtn.TabIndex = 7;
             this.DumpInstructionsBtn.Text = "How to use";
             this.DumpInstructionsBtn.UseVisualStyleBackColor = true;
             this.DumpInstructionsBtn.Visible = false;
@@ -586,7 +586,7 @@
             this.backupPKM.Location = new System.Drawing.Point(219, 27);
             this.backupPKM.Name = "backupPKM";
             this.backupPKM.Size = new System.Drawing.Size(63, 17);
-            this.backupPKM.TabIndex = 11;
+            this.backupPKM.TabIndex = 3;
             this.backupPKM.Text = "Backup";
             this.toolTip1.SetToolTip(this.backupPKM, "When activated, it saves a copy of the dumped data in the \"Pokemon\" folder.");
             this.backupPKM.UseVisualStyleBackColor = true;
@@ -616,7 +616,7 @@
             this.radioBoxes.Location = new System.Drawing.Point(3, 5);
             this.radioBoxes.Name = "radioBoxes";
             this.radioBoxes.Size = new System.Drawing.Size(87, 17);
-            this.radioBoxes.TabIndex = 5;
+            this.radioBoxes.TabIndex = 0;
             this.radioBoxes.TabStop = true;
             this.radioBoxes.Text = "Boxes";
             this.radioBoxes.UseVisualStyleBackColor = true;
@@ -629,7 +629,7 @@
             this.radioDaycare.Location = new System.Drawing.Point(96, 5);
             this.radioDaycare.Name = "radioDaycare";
             this.radioDaycare.Size = new System.Drawing.Size(87, 17);
-            this.radioDaycare.TabIndex = 6;
+            this.radioDaycare.TabIndex = 1;
             this.radioDaycare.Text = "Daycare";
             this.radioDaycare.UseVisualStyleBackColor = true;
             this.radioDaycare.CheckedChanged += new System.EventHandler(this.radioDaycare_CheckedChanged);
@@ -641,7 +641,7 @@
             this.dumpBoxes.Location = new System.Drawing.Point(195, 140);
             this.dumpBoxes.Name = "dumpBoxes";
             this.dumpBoxes.Size = new System.Drawing.Size(91, 23);
-            this.dumpBoxes.TabIndex = 4;
+            this.dumpBoxes.TabIndex = 6;
             this.dumpBoxes.Text = "Dump All Boxes";
             this.dumpBoxes.UseVisualStyleBackColor = true;
             this.dumpBoxes.Click += new System.EventHandler(this.dumpBoxes_Click);
@@ -700,7 +700,7 @@
             this.radioOpponent.Location = new System.Drawing.Point(96, 32);
             this.radioOpponent.Name = "radioOpponent";
             this.radioOpponent.Size = new System.Drawing.Size(87, 17);
-            this.radioOpponent.TabIndex = 9;
+            this.radioOpponent.TabIndex = 4;
             this.radioOpponent.TabStop = true;
             this.radioOpponent.Text = "Opponent";
             this.radioOpponent.UseVisualStyleBackColor = true;
@@ -713,7 +713,7 @@
             this.radioTrade.Location = new System.Drawing.Point(3, 32);
             this.radioTrade.Name = "radioTrade";
             this.radioTrade.Size = new System.Drawing.Size(87, 17);
-            this.radioTrade.TabIndex = 8;
+            this.radioTrade.TabIndex = 3;
             this.radioTrade.TabStop = true;
             this.radioTrade.Text = "Trade";
             this.radioTrade.UseVisualStyleBackColor = true;
@@ -736,7 +736,7 @@
             this.radioParty.Location = new System.Drawing.Point(189, 32);
             this.radioParty.Name = "radioParty";
             this.radioParty.Size = new System.Drawing.Size(88, 17);
-            this.radioParty.TabIndex = 10;
+            this.radioParty.TabIndex = 5;
             this.radioParty.Text = "Party";
             this.radioParty.UseVisualStyleBackColor = true;
             this.radioParty.CheckedChanged += new System.EventHandler(this.radioParty_CheckedChanged_1);
@@ -748,7 +748,7 @@
             this.dumpPokemon.Location = new System.Drawing.Point(98, 22);
             this.dumpPokemon.Name = "dumpPokemon";
             this.dumpPokemon.Size = new System.Drawing.Size(115, 23);
-            this.dumpPokemon.TabIndex = 3;
+            this.dumpPokemon.TabIndex = 2;
             this.dumpPokemon.Text = "Read Pokémon";
             this.dumpPokemon.UseVisualStyleBackColor = true;
             this.dumpPokemon.Click += new System.EventHandler(this.dumpPokemon_Click);
@@ -760,7 +760,7 @@
             this.radioBattleBox.Location = new System.Drawing.Point(189, 5);
             this.radioBattleBox.Name = "radioBattleBox";
             this.radioBattleBox.Size = new System.Drawing.Size(88, 17);
-            this.radioBattleBox.TabIndex = 7;
+            this.radioBattleBox.TabIndex = 2;
             this.radioBattleBox.Text = "Battle Box";
             this.radioBattleBox.UseVisualStyleBackColor = true;
             this.radioBattleBox.CheckedChanged += new System.EventHandler(this.radioBattleBox_CheckedChanged);
@@ -787,7 +787,7 @@
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(280, 328);
-            this.tabMain.TabIndex = 20;
+            this.tabMain.TabIndex = 2;
             // 
             // Tab_Main
             // 
@@ -3717,7 +3717,7 @@
             this.Tabs_General.Name = "Tabs_General";
             this.Tabs_General.SelectedIndex = 0;
             this.Tabs_General.Size = new System.Drawing.Size(300, 290);
-            this.Tabs_General.TabIndex = 103;
+            this.Tabs_General.TabIndex = 1;
             // 
             // Tab_Dump
             // 
@@ -3745,7 +3745,7 @@
             this.Write_PKM.Location = new System.Drawing.Point(6, 111);
             this.Write_PKM.Name = "Write_PKM";
             this.Write_PKM.Size = new System.Drawing.Size(280, 23);
-            this.Write_PKM.TabIndex = 16;
+            this.Write_PKM.TabIndex = 5;
             this.Write_PKM.Text = "Write Pokémon";
             this.Write_PKM.UseVisualStyleBackColor = true;
             this.Write_PKM.Click += new System.EventHandler(this.Write_PKM_Click);
@@ -3768,7 +3768,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(280, 54);
-            this.tableLayoutPanel1.TabIndex = 15;
+            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // Tab_Clone
             // 
@@ -3794,7 +3794,7 @@
             this.Btn_CDstart.Location = new System.Drawing.Point(157, 71);
             this.Btn_CDstart.Name = "Btn_CDstart";
             this.Btn_CDstart.Size = new System.Drawing.Size(129, 23);
-            this.Btn_CDstart.TabIndex = 14;
+            this.Btn_CDstart.TabIndex = 4;
             this.Btn_CDstart.Text = "Go!";
             this.toolTip1.SetToolTip(this.Btn_CDstart, "Pokémon will be cloned or deleted starting at the specified position.");
             this.Btn_CDstart.UseVisualStyleBackColor = true;
@@ -3806,7 +3806,7 @@
             this.CB_CDBackup.Location = new System.Drawing.Point(157, 26);
             this.CB_CDBackup.Name = "CB_CDBackup";
             this.CB_CDBackup.Size = new System.Drawing.Size(90, 17);
-            this.CB_CDBackup.TabIndex = 1;
+            this.CB_CDBackup.TabIndex = 0;
             this.CB_CDBackup.Text = "Keep backup";
             this.CB_CDBackup.UseVisualStyleBackColor = true;
             // 
@@ -3827,7 +3827,7 @@
             this.DeleteMode.Location = new System.Drawing.Point(83, 19);
             this.DeleteMode.Name = "DeleteMode";
             this.DeleteMode.Size = new System.Drawing.Size(56, 17);
-            this.DeleteMode.TabIndex = 0;
+            this.DeleteMode.TabIndex = 1;
             this.DeleteMode.Text = "Delete";
             this.DeleteMode.UseVisualStyleBackColor = true;
             // 
@@ -3860,7 +3860,7 @@
             0});
             this.Num_CDBox.Name = "Num_CDBox";
             this.Num_CDBox.Size = new System.Drawing.Size(40, 20);
-            this.Num_CDBox.TabIndex = 0;
+            this.Num_CDBox.TabIndex = 1;
             this.Num_CDBox.Value = new decimal(new int[] {
             1,
             0,
@@ -3915,7 +3915,7 @@
             0});
             this.Num_CDAmount.Name = "Num_CDAmount";
             this.Num_CDAmount.Size = new System.Drawing.Size(50, 20);
-            this.Num_CDAmount.TabIndex = 1;
+            this.Num_CDAmount.TabIndex = 3;
             this.Num_CDAmount.Value = new decimal(new int[] {
             1,
             0,
@@ -3939,7 +3939,7 @@
             0});
             this.Num_CDSlot.Name = "Num_CDSlot";
             this.Num_CDSlot.Size = new System.Drawing.Size(40, 20);
-            this.Num_CDSlot.TabIndex = 1;
+            this.Num_CDSlot.TabIndex = 2;
             this.Num_CDSlot.Value = new decimal(new int[] {
             1,
             0,
@@ -3988,7 +3988,7 @@
             this.Seed_Egg.Name = "Seed_Egg";
             this.Seed_Egg.ReadOnly = true;
             this.Seed_Egg.Size = new System.Drawing.Size(279, 20);
-            this.Seed_Egg.TabIndex = 2;
+            this.Seed_Egg.TabIndex = 1;
             // 
             // label19
             // 
@@ -4040,7 +4040,7 @@
             this.Tool_Controls.Location = new System.Drawing.Point(193, 3);
             this.Tool_Controls.Name = "Tool_Controls";
             this.Tool_Controls.Size = new System.Drawing.Size(89, 23);
-            this.Tool_Controls.TabIndex = 1;
+            this.Tool_Controls.TabIndex = 2;
             this.Tool_Controls.Text = "Remote Control";
             this.Tool_Controls.UseVisualStyleBackColor = true;
             this.Tool_Controls.Click += new System.EventHandler(this.Tool_Controls_Click);
@@ -4080,7 +4080,7 @@
             this.Tools_Filter.Location = new System.Drawing.Point(3, 61);
             this.Tools_Filter.Name = "Tools_Filter";
             this.Tools_Filter.Size = new System.Drawing.Size(89, 23);
-            this.Tools_Filter.TabIndex = 2;
+            this.Tools_Filter.TabIndex = 6;
             this.Tools_Filter.Text = "Filters";
             this.Tools_Filter.UseVisualStyleBackColor = true;
             this.Tools_Filter.Click += new System.EventHandler(this.Tools_Filter_Click);
@@ -4090,7 +4090,7 @@
             this.Tools_PokeDigger.Location = new System.Drawing.Point(98, 61);
             this.Tools_PokeDigger.Name = "Tools_PokeDigger";
             this.Tools_PokeDigger.Size = new System.Drawing.Size(89, 23);
-            this.Tools_PokeDigger.TabIndex = 6;
+            this.Tools_PokeDigger.TabIndex = 7;
             this.Tools_PokeDigger.Text = "PokéDigger";
             this.Tools_PokeDigger.UseVisualStyleBackColor = true;
             this.Tools_PokeDigger.Click += new System.EventHandler(this.Tools_PokeDigger_Click);
@@ -4114,7 +4114,7 @@
             this.Log_Export.Location = new System.Drawing.Point(194, 236);
             this.Log_Export.Name = "Log_Export";
             this.Log_Export.Size = new System.Drawing.Size(92, 23);
-            this.Log_Export.TabIndex = 3;
+            this.Log_Export.TabIndex = 2;
             this.Log_Export.Text = "Export Log";
             this.Log_Export.UseVisualStyleBackColor = true;
             this.Log_Export.Click += new System.EventHandler(this.Log_Export_Click);

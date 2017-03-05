@@ -107,7 +107,7 @@
             this.Breed_esvtsv.Location = new System.Drawing.Point(278, 12);
             this.Breed_esvtsv.Name = "Breed_esvtsv";
             this.Breed_esvtsv.Size = new System.Drawing.Size(280, 177);
-            this.Breed_esvtsv.TabIndex = 34;
+            this.Breed_esvtsv.TabIndex = 1;
             this.Breed_esvtsv.TabStop = false;
             this.Breed_esvtsv.Text = "ESV/TSV";
             // 
@@ -117,7 +117,7 @@
             this.label50.Location = new System.Drawing.Point(218, 16);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(31, 13);
-            this.label50.TabIndex = 16;
+            this.label50.TabIndex = 8;
             this.label50.Text = "TSV:";
             // 
             // esvList
@@ -139,7 +139,7 @@
             this.esvList.RowHeadersWidth = 21;
             this.esvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.esvList.Size = new System.Drawing.Size(150, 125);
-            this.esvList.TabIndex = 8;
+            this.esvList.TabIndex = 0;
             // 
             // ESVlistBox
             // 
@@ -166,7 +166,7 @@
             this.esvSave.Location = new System.Drawing.Point(6, 148);
             this.esvSave.Name = "esvSave";
             this.esvSave.Size = new System.Drawing.Size(150, 23);
-            this.esvSave.TabIndex = 9;
+            this.esvSave.TabIndex = 1;
             this.esvSave.Text = "Save ESV List";
             this.esvSave.UseVisualStyleBackColor = true;
             this.esvSave.Click += new System.EventHandler(this.esvSave_Click);
@@ -177,7 +177,7 @@
             this.TSVlist.Location = new System.Drawing.Point(162, 17);
             this.TSVlist.Name = "TSVlist";
             this.TSVlist.Size = new System.Drawing.Size(50, 147);
-            this.TSVlist.TabIndex = 10;
+            this.TSVlist.TabIndex = 2;
             // 
             // TSVlistNum
             // 
@@ -189,14 +189,14 @@
             0});
             this.TSVlistNum.Name = "TSVlistNum";
             this.TSVlistNum.Size = new System.Drawing.Size(56, 20);
-            this.TSVlistNum.TabIndex = 11;
+            this.TSVlistNum.TabIndex = 3;
             // 
             // tsvAdd
             // 
             this.tsvAdd.Location = new System.Drawing.Point(218, 58);
             this.tsvAdd.Name = "tsvAdd";
             this.tsvAdd.Size = new System.Drawing.Size(56, 23);
-            this.tsvAdd.TabIndex = 12;
+            this.tsvAdd.TabIndex = 4;
             this.tsvAdd.Text = "Add";
             this.tsvAdd.UseVisualStyleBackColor = true;
             this.tsvAdd.Click += new System.EventHandler(this.tsvAdd_Click);
@@ -206,7 +206,7 @@
             this.tsvLoad.Location = new System.Drawing.Point(218, 145);
             this.tsvLoad.Name = "tsvLoad";
             this.tsvLoad.Size = new System.Drawing.Size(56, 23);
-            this.tsvLoad.TabIndex = 15;
+            this.tsvLoad.TabIndex = 7;
             this.tsvLoad.Text = "Load";
             this.tsvLoad.UseVisualStyleBackColor = true;
             this.tsvLoad.Click += new System.EventHandler(this.tsvLoad_Click);
@@ -217,7 +217,7 @@
             this.tsvRemove.Location = new System.Drawing.Point(218, 87);
             this.tsvRemove.Name = "tsvRemove";
             this.tsvRemove.Size = new System.Drawing.Size(56, 23);
-            this.tsvRemove.TabIndex = 13;
+            this.tsvRemove.TabIndex = 5;
             this.tsvRemove.Text = "Remove";
             this.tsvRemove.UseVisualStyleBackColor = true;
             this.tsvRemove.Click += new System.EventHandler(this.tsvRemove_Click);
@@ -227,7 +227,7 @@
             this.tsvSave.Location = new System.Drawing.Point(218, 116);
             this.tsvSave.Name = "tsvSave";
             this.tsvSave.Size = new System.Drawing.Size(56, 23);
-            this.tsvSave.TabIndex = 14;
+            this.tsvSave.TabIndex = 6;
             this.tsvSave.Text = "Save";
             this.tsvSave.UseVisualStyleBackColor = true;
             this.tsvSave.Click += new System.EventHandler(this.tsvSave_Click);
@@ -252,7 +252,7 @@
             this.Breed_options.Location = new System.Drawing.Point(12, 12);
             this.Breed_options.Name = "Breed_options";
             this.Breed_options.Size = new System.Drawing.Size(260, 177);
-            this.Breed_options.TabIndex = 33;
+            this.Breed_options.TabIndex = 0;
             this.Breed_options.TabStop = false;
             this.Breed_options.Text = "Options";
             // 
@@ -262,7 +262,7 @@
             this.label3.Location = new System.Drawing.Point(119, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
-            this.label3.TabIndex = 26;
+            this.label3.TabIndex = 13;
             this.label3.Text = "Rejcect:";
             // 
             // label2
@@ -271,7 +271,7 @@
             this.label2.Location = new System.Drawing.Point(3, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 26;
+            this.label2.TabIndex = 12;
             this.label2.Text = "Accept:";
             // 
             // EggSeed
@@ -280,7 +280,7 @@
             this.EggSeed.Name = "EggSeed";
             this.EggSeed.ReadOnly = true;
             this.EggSeed.Size = new System.Drawing.Size(248, 20);
-            this.EggSeed.TabIndex = 25;
+            this.EggSeed.TabIndex = 6;
             // 
             // label1
             // 
@@ -288,7 +288,7 @@
             this.label1.Location = new System.Drawing.Point(6, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 24;
+            this.label1.TabIndex = 14;
             this.label1.Text = "Egg Seed:";
             // 
             // Mode
@@ -312,7 +312,7 @@
             this.ReadESV.Location = new System.Drawing.Point(6, 148);
             this.ReadESV.Name = "ReadESV";
             this.ReadESV.Size = new System.Drawing.Size(137, 17);
-            this.ReadESV.TabIndex = 6;
+            this.ReadESV.TabIndex = 7;
             this.ReadESV.Text = "Read ESV after deposit";
             this.ReadESV.UseVisualStyleBackColor = true;
             // 
@@ -322,7 +322,7 @@
             this.Breed_labelBox.Location = new System.Drawing.Point(3, 48);
             this.Breed_labelBox.Name = "Breed_labelBox";
             this.Breed_labelBox.Size = new System.Drawing.Size(28, 13);
-            this.Breed_labelBox.TabIndex = 21;
+            this.Breed_labelBox.TabIndex = 9;
             this.Breed_labelBox.Text = "Box:";
             // 
             // label75
@@ -331,7 +331,7 @@
             this.label75.Location = new System.Drawing.Point(165, 48);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(43, 13);
-            this.label75.TabIndex = 23;
+            this.label75.TabIndex = 11;
             this.label75.Text = "# eggs:";
             // 
             // Slot
@@ -363,7 +363,7 @@
             this.label84.Location = new System.Drawing.Point(6, 20);
             this.label84.Name = "label84";
             this.label84.Size = new System.Drawing.Size(37, 13);
-            this.label84.TabIndex = 20;
+            this.label84.TabIndex = 8;
             this.label84.Text = "Mode:";
             // 
             // Reject
@@ -376,7 +376,7 @@
             0});
             this.Reject.Name = "Reject";
             this.Reject.Size = new System.Drawing.Size(60, 20);
-            this.Reject.TabIndex = 1;
+            this.Reject.TabIndex = 5;
             // 
             // Accept
             // 
@@ -388,7 +388,7 @@
             0});
             this.Accept.Name = "Accept";
             this.Accept.Size = new System.Drawing.Size(60, 20);
-            this.Accept.TabIndex = 1;
+            this.Accept.TabIndex = 4;
             // 
             // Box
             // 
@@ -419,7 +419,7 @@
             this.Breed_labelSlot.Location = new System.Drawing.Point(84, 48);
             this.Breed_labelSlot.Name = "Breed_labelSlot";
             this.Breed_labelSlot.Size = new System.Drawing.Size(28, 13);
-            this.Breed_labelSlot.TabIndex = 22;
+            this.Breed_labelSlot.TabIndex = 10;
             this.Breed_labelSlot.Text = "Slot:";
             // 
             // Eggs
@@ -444,7 +444,7 @@
             this.clearAll.Location = new System.Drawing.Point(284, 195);
             this.clearAll.Name = "clearAll";
             this.clearAll.Size = new System.Drawing.Size(150, 23);
-            this.clearAll.TabIndex = 29;
+            this.clearAll.TabIndex = 3;
             this.clearAll.Text = "Reset all fields";
             this.clearAll.UseVisualStyleBackColor = true;
             this.clearAll.Click += new System.EventHandler(this.clearAll_Click);
@@ -481,7 +481,7 @@
             this.filterList.ReadOnly = true;
             this.filterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.filterList.Size = new System.Drawing.Size(546, 146);
-            this.filterList.TabIndex = 31;
+            this.filterList.TabIndex = 5;
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -621,7 +621,7 @@
             this.filterLoad.Location = new System.Drawing.Point(445, 195);
             this.filterLoad.Name = "filterLoad";
             this.filterLoad.Size = new System.Drawing.Size(113, 23);
-            this.filterLoad.TabIndex = 30;
+            this.filterLoad.TabIndex = 4;
             this.filterLoad.Text = "Load filter set...";
             this.filterLoad.UseVisualStyleBackColor = true;
             this.filterLoad.Click += new System.EventHandler(this.filterLoad_Click);
@@ -631,7 +631,7 @@
             this.RunStop.Location = new System.Drawing.Point(12, 195);
             this.RunStop.Name = "RunStop";
             this.RunStop.Size = new System.Drawing.Size(260, 23);
-            this.RunStop.TabIndex = 32;
+            this.RunStop.TabIndex = 2;
             this.RunStop.Text = "Start Bot";
             this.RunStop.UseVisualStyleBackColor = true;
             this.RunStop.Click += new System.EventHandler(this.RunStop_Click);

@@ -65,7 +65,7 @@
             this.label72.Location = new System.Drawing.Point(12, 15);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(37, 13);
-            this.label72.TabIndex = 17;
+            this.label72.TabIndex = 6;
             this.label72.Text = "Mode:";
             // 
             // ClearAll
@@ -73,7 +73,7 @@
             this.ClearAll.Location = new System.Drawing.Point(458, 193);
             this.ClearAll.Name = "ClearAll";
             this.ClearAll.Size = new System.Drawing.Size(100, 23);
-            this.ClearAll.TabIndex = 19;
+            this.ClearAll.TabIndex = 5;
             this.ClearAll.Text = "Reset all fields";
             this.ClearAll.UseVisualStyleBackColor = true;
             this.ClearAll.Click += new System.EventHandler(this.ClearAll_Click);
@@ -93,7 +93,7 @@
             this.Mode.Location = new System.Drawing.Point(55, 12);
             this.Mode.Name = "Mode";
             this.Mode.Size = new System.Drawing.Size(180, 21);
-            this.Mode.TabIndex = 15;
+            this.Mode.TabIndex = 0;
             // 
             // filterList
             // 
@@ -127,7 +127,7 @@
             this.filterList.ReadOnly = true;
             this.filterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.filterList.Size = new System.Drawing.Size(546, 146);
-            this.filterList.TabIndex = 21;
+            this.filterList.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn32
             // 
@@ -267,7 +267,7 @@
             this.LoadFilters.Location = new System.Drawing.Point(352, 193);
             this.LoadFilters.Name = "LoadFilters";
             this.LoadFilters.Size = new System.Drawing.Size(100, 23);
-            this.LoadFilters.TabIndex = 20;
+            this.LoadFilters.TabIndex = 4;
             this.LoadFilters.Text = "Load filter set...";
             this.LoadFilters.UseVisualStyleBackColor = true;
             this.LoadFilters.Click += new System.EventHandler(this.LoadFilters_Click);
@@ -277,7 +277,7 @@
             this.RunStop.Location = new System.Drawing.Point(421, 10);
             this.RunStop.Name = "RunStop";
             this.RunStop.Size = new System.Drawing.Size(137, 23);
-            this.RunStop.TabIndex = 18;
+            this.RunStop.TabIndex = 2;
             this.RunStop.Text = "Start Bot";
             this.RunStop.UseVisualStyleBackColor = true;
             this.RunStop.Click += new System.EventHandler(this.RunStop_Click);
@@ -298,7 +298,7 @@
             this.Species.Location = new System.Drawing.Point(295, 12);
             this.Species.Name = "Species";
             this.Species.Size = new System.Drawing.Size(120, 21);
-            this.Species.TabIndex = 15;
+            this.Species.TabIndex = 1;
             // 
             // label1
             // 
@@ -306,7 +306,7 @@
             this.label1.Location = new System.Drawing.Point(241, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
-            this.label1.TabIndex = 17;
+            this.label1.TabIndex = 7;
             this.label1.Text = "Species:";
             // 
             // Bot_SoftReset7

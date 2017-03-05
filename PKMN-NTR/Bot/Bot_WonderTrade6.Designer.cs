@@ -59,7 +59,7 @@
             this.label58.Location = new System.Drawing.Point(12, 9);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(28, 13);
-            this.label58.TabIndex = 4;
+            this.label58.TabIndex = 7;
             this.label58.Text = "Box:";
             // 
             // WTAfter
@@ -72,7 +72,7 @@
             this.WTAfter.Location = new System.Drawing.Point(156, 12);
             this.WTAfter.Name = "WTAfter";
             this.WTAfter.Size = new System.Drawing.Size(148, 143);
-            this.WTAfter.TabIndex = 10;
+            this.WTAfter.TabIndex = 4;
             this.WTAfter.TabStop = false;
             this.WTAfter.Text = "After trading";
             // 
@@ -82,7 +82,7 @@
             this.afterDelete.Location = new System.Drawing.Point(6, 88);
             this.afterDelete.Name = "afterDelete";
             this.afterDelete.Size = new System.Drawing.Size(136, 17);
-            this.afterDelete.TabIndex = 1;
+            this.afterDelete.TabIndex = 3;
             this.afterDelete.Text = "Delete traded pokémon";
             this.afterDelete.UseVisualStyleBackColor = true;
             // 
@@ -92,7 +92,7 @@
             this.afterRestore.Location = new System.Drawing.Point(6, 65);
             this.afterRestore.Name = "afterRestore";
             this.afterRestore.Size = new System.Drawing.Size(101, 17);
-            this.afterRestore.TabIndex = 1;
+            this.afterRestore.TabIndex = 2;
             this.afterRestore.Text = "Restore backup";
             this.afterRestore.UseVisualStyleBackColor = true;
             // 
@@ -124,7 +124,7 @@
             this.label57.Location = new System.Drawing.Point(55, 9);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(28, 13);
-            this.label57.TabIndex = 5;
+            this.label57.TabIndex = 8;
             this.label57.Text = "Slot:";
             // 
             // Box
@@ -160,7 +160,7 @@
             this.WTSource.Location = new System.Drawing.Point(12, 54);
             this.WTSource.Name = "WTSource";
             this.WTSource.Size = new System.Drawing.Size(138, 101);
-            this.WTSource.TabIndex = 8;
+            this.WTSource.TabIndex = 3;
             this.WTSource.TabStop = false;
             this.WTSource.Text = "Pokémon Source";
             // 
@@ -242,7 +242,7 @@
             this.label59.Location = new System.Drawing.Point(101, 9);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(49, 13);
-            this.label59.TabIndex = 6;
+            this.label59.TabIndex = 9;
             this.label59.Text = "# trades:";
             // 
             // runEndless
@@ -251,7 +251,7 @@
             this.runEndless.Location = new System.Drawing.Point(214, 165);
             this.runEndless.Name = "runEndless";
             this.runEndless.Size = new System.Drawing.Size(90, 17);
-            this.runEndless.TabIndex = 13;
+            this.runEndless.TabIndex = 6;
             this.runEndless.Text = "Run endessly";
             this.runEndless.UseVisualStyleBackColor = true;
             // 
@@ -260,7 +260,7 @@
             this.RunStop.Location = new System.Drawing.Point(12, 161);
             this.RunStop.Name = "RunStop";
             this.RunStop.Size = new System.Drawing.Size(196, 23);
-            this.RunStop.TabIndex = 12;
+            this.RunStop.TabIndex = 5;
             this.RunStop.Text = "Start Bot";
             this.RunStop.UseVisualStyleBackColor = true;
             this.RunStop.Click += new System.EventHandler(this.RunStop_Click);
