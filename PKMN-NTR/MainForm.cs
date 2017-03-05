@@ -31,7 +31,10 @@ namespace ntrbase
         public static Dictionary<uint, DataReadyWaiting> waitingForData = new Dictionary<uint, DataReadyWaiting>();
 
         // Set this boolean to true to enable the write feature for the party pokémon.
-        public const bool enablepartywrite = false;
+        public readonly bool enablepartywrite = false;
+
+        // Set this boolean to true to enable the write feature for illegal pokémon
+        public readonly bool enableillegal = false;
 
         // Structure for box/slot last position
         struct LastBoxSlot
@@ -1785,8 +1788,16 @@ namespace ntrbase
             pkm = preparePKM();
             updateLegality();
 
-            if (Legality.Valid || PB_Legal.Visible == false)
+            if (Legality.Valid || PB_Legal.Visible == false || enableillegal)
             { // Write only legal and Gen 5 or eariler pokemon
+                if (enableillegal)
+                {
+                    DialogResult dr = MessageBox.Show("This pokémon is illegal. Do you still want to inject it to the game?", "Illegal pokémon", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
                 byte[] pkmEdited = PKX.encryptArray(pkm.DecryptedBoxData);
                 if (radioBoxes.Checked)
                 {

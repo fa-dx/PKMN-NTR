@@ -127,6 +127,10 @@ namespace ntrbase.Bot
                 DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + Trades.Value + " pokémon, starting from the slot " + Slot.Value + " of box " + Box.Value + ". Remember to read the wiki for this bot in GitHub before starting.\r\n\r\nDo you want to continue?", "Wonder Trade Bot", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes && Trades.Value > 0)
                 {
+                    if (Program.gCmdWindow.enableillegal)
+                    {
+                        MessageBox.Show("Illegal mode enabled. If using a WT folder mode, it will write any pokémon to the game, regardless of legality. It will also attempt to Wonder Trade illegal pokémon it finds.", "Illegal mode", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     // Configure GUI
                     Delg.SetText(RunStop, "Stop Bot");
                     // Initialize variables
@@ -246,8 +250,12 @@ namespace ntrbase.Bot
                             else
                             { // Valid pkm, check legality
                                 attempts = 0;
-                                if (isLegal(WTpoke))
+                                if (isLegal(WTpoke) || Program.gCmdWindow.enableillegal)
                                 {
+                                    if (Program.gCmdWindow.enableillegal)
+                                    {
+                                        Report("Bot: Illegal pokémon, will trade it anyways");
+                                    }
                                     currentCHK = WTpoke.Checksum;
                                     Report("Bot: Pokémon found - 0x" + currentCHK.ToString("X4"));
                                     botstate = botstates.pressWTbutton;
@@ -271,8 +279,9 @@ namespace ntrbase.Bot
                                     if (temp.Length == 232)
                                     {
                                         PK6 pkmn = new PK6(temp);
-                                        if (isLegal(pkmn))
+                                        if (isLegal(pkmn) || Program.gCmdWindow.enableillegal)
                                         { // Legal pkm
+                                            Report("Bot: Illegal pokémon, will write it anyways");
                                             pklist.Add(pkmn);
                                         }
                                         else
