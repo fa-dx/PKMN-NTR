@@ -9,7 +9,7 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using PKHeX.Core.Properties;
 
-namespace ntrbase.Helpers
+namespace pkmn_ntr.Helpers
 {
     public static class FontUtil
     {

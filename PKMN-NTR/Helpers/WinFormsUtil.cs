@@ -3,7 +3,7 @@
 /// All code within this class is taken from PKHeX https://github.com/kwsch/PKHeX
 /// with minor modifications
 
-using ntrbase.Sub_forms;
+using pkmn_ntr.Sub_forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ntrbase.Helpers
+namespace pkmn_ntr.Helpers
 {
     public static class WinFormsUtil
     {

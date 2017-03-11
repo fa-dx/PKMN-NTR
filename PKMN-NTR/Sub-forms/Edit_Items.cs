@@ -4,10 +4,10 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ntrbase.Helpers;
+using pkmn_ntr.Helpers;
 using PKHeX.Core;
 
-namespace ntrbase.Sub_forms
+namespace pkmn_ntr.Sub_forms
 {
     public partial class Edit_Items : Form
     {

@@ -7,9 +7,9 @@ using System;
 using System.Linq;
 using System.Windows.Forms;
 using PKHeX.Core;
-using ntrbase.Helpers;
+using pkmn_ntr.Helpers;
 
-namespace ntrbase.Sub_forms
+namespace pkmn_ntr.Sub_forms
 {
     public partial class MemoryAmie : Form
     {

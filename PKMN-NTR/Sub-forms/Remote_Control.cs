@@ -1,9 +1,9 @@
-﻿using ntrbase.Helpers;
+﻿using pkmn_ntr.Helpers;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ntrbase.Sub_forms
+namespace pkmn_ntr.Sub_forms
 {
     public partial class Remote_Control : Form
     {

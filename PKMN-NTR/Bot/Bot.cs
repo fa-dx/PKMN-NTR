@@ -1,7 +1,7 @@
 ﻿using PKHeX.Core;
 using System.Windows.Forms;
 
-namespace ntrbase.Bot
+namespace pkmn_ntr.Bot
 {
     public static class Bot
     {

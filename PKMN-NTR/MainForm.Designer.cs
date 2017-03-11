@@ -1,4 +1,4 @@
-﻿namespace ntrbase
+﻿namespace pkmn_ntr
 {
     partial class MainForm
     {

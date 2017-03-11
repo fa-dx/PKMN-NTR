@@ -1,13 +1,13 @@
-﻿using ntrbase.Helpers;
+﻿using pkmn_ntr.Helpers;
 using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ntrbase.Bot.Bot;
+using static pkmn_ntr.Bot.Bot;
 
-namespace ntrbase.Bot
+namespace pkmn_ntr.Bot
 {
     public partial class Bot_WonderTrade7 : Form
     {

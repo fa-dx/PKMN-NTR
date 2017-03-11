@@ -3,10 +3,10 @@
 /// Code was taken from PKHeX https://github.com/kwsch/PKHeX with minor modifications
 /// 
 
-using ntrbase.Bot;
-using ntrbase.Helpers;
-using ntrbase.Properties;
-using ntrbase.Sub_forms;
+using pkmn_ntr.Bot;
+using pkmn_ntr.Helpers;
+using pkmn_ntr.Properties;
+using pkmn_ntr.Sub_forms;
 using Octokit;
 using PKHeX.Core;
 using System;
@@ -21,7 +21,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ntrbase
+namespace pkmn_ntr
 {
     public partial class MainForm : Form
     {

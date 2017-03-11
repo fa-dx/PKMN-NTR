@@ -3,12 +3,12 @@
 /// All code within this class is taken from PKHeX https://github.com/kwsch/PKHeX
 /// with minor modifications 
 
-using ntrbase.Helpers;
+using pkmn_ntr.Helpers;
 using System;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ntrbase.Sub_forms
+namespace pkmn_ntr.Sub_forms
 {
     public partial class ErrorWindow : Form
     {

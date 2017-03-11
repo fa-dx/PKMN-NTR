@@ -7,7 +7,7 @@ using System.Drawing;
 using PKHeX.Core;
 using PKHeX.Core.Properties;
 
-namespace ntrbase.Helpers
+namespace pkmn_ntr.Helpers
 {
     public static class PKMUtil
     {

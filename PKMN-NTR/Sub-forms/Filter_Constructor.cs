@@ -4,10 +4,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ntrbase.Helpers;
+using pkmn_ntr.Helpers;
 using System.IO;
 
-namespace ntrbase.Sub_forms
+namespace pkmn_ntr.Sub_forms
 {
     public partial class Filter_Constructor : Form
     {

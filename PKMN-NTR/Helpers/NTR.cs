@@ -7,7 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 
-namespace ntrbase.Helpers
+namespace pkmn_ntr.Helpers
 {
     public class readMemRequest
     {

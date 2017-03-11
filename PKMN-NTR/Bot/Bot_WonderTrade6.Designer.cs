@@ -1,4 +1,4 @@
-﻿namespace ntrbase.Bot
+﻿namespace pkmn_ntr.Bot
 {
     partial class Bot_WonderTrade6
     {

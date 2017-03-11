@@ -1,8 +1,8 @@
-﻿using ntrbase.Helpers;
+﻿using pkmn_ntr.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace ntrbase
+namespace pkmn_ntr
 {
     static class Program
     {

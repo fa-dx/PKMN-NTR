@@ -3,10 +3,10 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using PKHeX.Core;
-using ntrbase.Helpers;
+using pkmn_ntr.Helpers;
 using System.Linq;
 
-namespace ntrbase.Sub_forms
+namespace pkmn_ntr.Sub_forms
 {
     public partial class Edit_Trainer : Form
     {

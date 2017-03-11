@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ntrbase.Helpers
+namespace pkmn_ntr.Helpers
 {
     public class ScriptHelper
     {

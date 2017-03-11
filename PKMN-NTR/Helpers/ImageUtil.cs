@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace ntrbase.Helpers
+namespace pkmn_ntr.Helpers
 {
     public static class ImageUtil
     {

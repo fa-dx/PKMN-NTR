@@ -1,7 +1,7 @@
 ﻿using PKHeX.Core;
 using System.Linq;
 
-namespace ntrbase.Helpers
+namespace pkmn_ntr.Helpers
 {
     public static class LookupTable
     {

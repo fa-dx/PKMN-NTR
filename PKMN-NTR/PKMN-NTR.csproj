@@ -7,7 +7,7 @@
     <ProjectGuid>{63762FEB-D7ED-44B7-BAC7-BDB3E14214C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ntrbase</RootNamespace>
+    <RootNamespace>pkmn_ntr</RootNamespace>
     <AssemblyName>PKMN-NTR</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -53,7 +53,8 @@
     <ApplicationIcon>Pkmn NTR.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ntrbase.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">

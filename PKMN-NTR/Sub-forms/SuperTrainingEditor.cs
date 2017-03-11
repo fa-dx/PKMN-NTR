@@ -3,14 +3,14 @@
 /// All code within this class is taken from PKHeX https://github.com/kwsch/PKHeX
 /// with minor modifications
 
-using ntrbase.Helpers;
+using pkmn_ntr.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using PKHeX.Core;
 
-namespace ntrbase.Sub_forms
+namespace pkmn_ntr.Sub_forms
 {
     public partial class SuperTrainingEditor : Form
     {

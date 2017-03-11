@@ -1,4 +1,4 @@
-﻿namespace ntrbase.Sub_forms
+﻿namespace pkmn_ntr.Sub_forms
 {
     partial class Edit_Items
     {
