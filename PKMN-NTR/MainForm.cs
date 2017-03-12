@@ -2300,7 +2300,7 @@ namespace pkmn_ntr
             {
                 var index = WinFormsUtil.getIndex(c);
                 c.DataSource = new BindingSource(moveList, null);
-                c.SelectedValue = index;
+                c.SelectionLength = 0; // flicker hack
             }
             fieldsLoaded |= tmp;
         }
@@ -2455,7 +2455,6 @@ namespace pkmn_ntr
             if (cb == null)
                 return;
 
-            cb.SelectionLength = 0;
             if (cb.Text == "")
             { cb.SelectedIndex = 0; return; }
             if (cb.SelectedValue == null)
@@ -2491,6 +2490,8 @@ namespace pkmn_ntr
                     pkm.Nature = CB_Nature.SelectedIndex;
                     updateRandomPID(sender, e);
                 }
+                if (sender == CB_HeldItem && SAV.Generation == 7)
+                    updateLegality();
             }
             updateNatureModification(sender, null);
             updateIVs(null, null); // updating Nature will trigger stats to update as well
@@ -2574,7 +2575,7 @@ namespace pkmn_ntr
 
         private void updateGender()
         {
-            int cg = Array.IndexOf(gendersymbols, Label_Gender.Text);
+            int cg = PKX.getGender(Label_Gender.Text);
             int gt = SAV.Personal.getFormeEntry(WinFormsUtil.getIndex(CB_Species), CB_Form.SelectedIndex).Gender;
 
             int Gender;
@@ -2595,6 +2596,8 @@ namespace pkmn_ntr
 
         private void updateRandomPID(object sender, EventArgs e)
         {
+            if (pkm.Format < 3)
+                return;
             if (fieldsLoaded)
                 pkm.PID = Util.getHEXval(TB_PID.Text);
 
@@ -2753,6 +2756,14 @@ namespace pkmn_ntr
             updateLegality();
         }
 
+        private void clickLevel(object sender, EventArgs e)
+        {
+            if (ModifierKeys == Keys.Control)
+            {
+                ((MaskedTextBox)sender).Text = "100";
+            }
+        }
+
         private void updateNatureModification(object sender, EventArgs e)
         {
             if (sender != CB_Nature) return;
@@ -2833,7 +2844,10 @@ namespace pkmn_ntr
                 }
             }
             else if (PKX.getGender(CB_Form.Text) < 2)
-                Label_Gender.Text = CB_Form.Text;
+            {
+                if (CB_Form.Items.Count == 2) // actually M/F; Pumpkaboo formes in German are S,M,L,XL
+                    Label_Gender.Text = gendersymbols[PKX.getGender(CB_Form.Text)];
+            }
 
             if (changingFields)
                 return;
@@ -3127,7 +3141,7 @@ namespace pkmn_ntr
                 TB_Level.Text = minlvl.ToString();
 
             pkm = preparePKM();
-            updateLegality();
+            updateLegality(skipMoveRepop: true);
         }
 
         private void validateLocation(object sender, EventArgs e)
@@ -3449,7 +3463,7 @@ namespace pkmn_ntr
 
         private void clickMoves(object sender, EventArgs e)
         {
-            updateLegality();
+            updateLegality(skipMoveRepop: true);
             if (sender == GB_CurrentMoves)
             {
                 bool random = ModifierKeys == Keys.Control;
@@ -3730,6 +3744,8 @@ namespace pkmn_ntr
 
         private void updateRandomEC(object sender, EventArgs e)
         {
+            if (pkm.Format < 6)
+                return;
             pkm.Version = WinFormsUtil.getIndex(CB_GameOrigin);
             if (pkm.GenNumber < 6)
             {
