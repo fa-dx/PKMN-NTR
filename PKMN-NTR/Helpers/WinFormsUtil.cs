@@ -168,6 +168,8 @@ namespace pkmn_ntr.Helpers
         public static void PanelScroll(object sender, ScrollEventArgs e)
         {
             var p = sender as Panel;
+            if (e.NewValue < 0)
+                return;
             switch (e.ScrollOrientation)
             {
                 case ScrollOrientation.HorizontalScroll:
