@@ -597,7 +597,7 @@ namespace pkmn_ntr.Bot
                         case botstates.testtradefinish:
                             Report("Bot: Test if the trade is finished");
                             waitTaskbool = Program.helper.memoryinrange(trademenuOff, trademenuOUT, 0x1000000);
-                             if (await waitTaskbool)
+                            if (await waitTaskbool)
                             {
                                 attempts = 0;
                                 if (collectFC.Checked && !notradepartner)
@@ -614,10 +614,10 @@ namespace pkmn_ntr.Bot
                                 attempts++;
                                 botresult = ErrorMessage.GeneralError;
                                 botstate = botstates.tryfinish;
-                                if (Program.helper.lastRead == 0xBF800000)
+                                if (Program.helper.lastRead == 0xBF800000 && !tradeevo)
                                 {
                                     tradeevo = true;
-                                    attempts = -40;
+                                    attempts = -50; // Try 60 button presses.
                                 }
                             }
                             break;
@@ -634,7 +634,9 @@ namespace pkmn_ntr.Bot
                                 waitTaskbool = Program.helper.waitbutton(LookupTable.keyA);
                             }
                             if (await waitTaskbool)
+                            {
                                 botstate = botstates.testtradefinish;
+                            }
                             else
                             {
                                 attempts++;
