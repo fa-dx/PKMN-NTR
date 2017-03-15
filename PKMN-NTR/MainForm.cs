@@ -2300,6 +2300,7 @@ namespace pkmn_ntr
             {
                 var index = WinFormsUtil.getIndex(c);
                 c.DataSource = new BindingSource(moveList, null);
+                c.SelectedValue = index;
                 c.SelectionLength = 0; // flicker hack
             }
             fieldsLoaded |= tmp;
@@ -3091,7 +3092,7 @@ namespace pkmn_ntr
         private void clickMetLocation(object sender, EventArgs e)
         {
             pkm = preparePKM();
-            updateLegality();
+            updateLegality(skipMoveRepop: true);
             if (Legality.Valid)
                 return;
 
