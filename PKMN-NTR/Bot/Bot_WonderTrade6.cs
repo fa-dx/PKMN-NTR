@@ -234,7 +234,7 @@ namespace pkmn_ntr.Bot
                         case botstates.readpoke:
                             Report("Bot: Look for pokemon to trade");
                             waitTaskPKM = Program.helper.waitPokeRead(Box, Slot);
-                            WTpoke = (await waitTaskPKM).Clone();
+                            WTpoke = await waitTaskPKM;
                             if (WTpoke == null)
                             { // No data or invalid
                                 attempts++;

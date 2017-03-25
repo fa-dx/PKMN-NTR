@@ -176,7 +176,7 @@ namespace pkmn_ntr.Bot
                         case breedbotstates.readslot:
                             Report("Bot: Search for empty slot");
                             waitTaskPKM = Program.helper.waitPokeRead(Box, Slot);
-                            breedPoke = (await waitTaskPKM).Clone();
+                            breedPoke = await waitTaskPKM;
                             if (breedPoke == null)
                             { // No data or invalid
                                 attempts++;
@@ -402,7 +402,7 @@ namespace pkmn_ntr.Bot
                             bool testsok = false;
                             Report("Bot: Read recevied egg");
                             waitTaskPKM = Program.helper.waitPokeRead(Box, Slot);
-                            breedPoke = (await waitTaskPKM).Clone();
+                            breedPoke = await waitTaskPKM;
                             if (breedPoke == null)
                             { // No data or invalid
                                 attempts++;

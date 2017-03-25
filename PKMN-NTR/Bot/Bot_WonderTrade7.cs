@@ -250,7 +250,7 @@ namespace pkmn_ntr.Bot
                         case botstates.readpoke:
                             Report("Bot: Look for pokemon to trade");
                             waitTaskPKM = Program.helper.waitPokeRead(Box, Slot);
-                            WTpoke = (await waitTaskPKM).Clone();
+                            WTpoke = await waitTaskPKM;
                             if (WTpoke == null)
                             { // No data or invalid
                                 attempts++;
@@ -481,7 +481,7 @@ namespace pkmn_ntr.Bot
                         case botstates.testpoke:
                             Report("Bot: Test if pokemon is selected");
                             waitTaskPKM = Program.helper.waitPokeRead(toppkmOff);
-                            validator = (await waitTaskPKM).Clone();
+                            validator = await waitTaskPKM;
                             if (validator == null)
                             { // No data or invalid
                                 Report("Bot: Error detected or slot is empty");
@@ -506,7 +506,7 @@ namespace pkmn_ntr.Bot
                         case botstates.canceltouch:
                             Report("Bot: Cancel selection and check again");
                             waitTaskPKM = Program.helper.waitPokeRead(Box, Slot);
-                            WTpoke = (await waitTaskPKM).Clone();
+                            WTpoke = await waitTaskPKM;
                             if (WTpoke != null)
                             {
                                 currentCHK = WTpoke.Checksum;
