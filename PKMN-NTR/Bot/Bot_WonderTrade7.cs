@@ -266,19 +266,22 @@ namespace pkmn_ntr.Bot
                             else
                             { // Valid pkm, check legality
                                 attempts = 0;
-                                if (IsLegal(WTpoke) || Program.gCmdWindow.enableillegal)
+                                if (IsTradeable(WTpoke))
                                 {
-                                    if (Program.gCmdWindow.enableillegal)
-                                    {
-                                        Report("Bot: Illegal pokémon, will trade it anyways");
-                                    }
                                     currentCHK = WTpoke.Checksum;
                                     Report("Bot: Pokémon found - 0x" + currentCHK.ToString("X4"));
                                     botstate = botstates.writelastbox;
                                 }
                                 else
                                 {
-                                    Report("Bot: Illegal pokémon");
+                                    if (Program.gCmdWindow.enableillegal)
+                                    {
+                                        Report("Bot: Pokémon cannot be traded, is an egg or have special ribbons.");
+                                    }
+                                    else
+                                    {
+                                        Report("Bot: Pokémon cannot be traded, is illegal or is an egg or have special ribbons.");
+                                    }
                                     getNextSlot();
                                 }
                             }
@@ -295,14 +298,14 @@ namespace pkmn_ntr.Bot
                                     if (temp.Length == 232)
                                     {
                                         PK7 pkmn = new PK7(temp);
-                                        if (IsLegal(pkmn))
+                                        if (IsTradeable(pkmn))
                                         { // Legal pkm
-                                            Report("Bot: Illegal pokémon, will write it anyways");
+                                            Report("Bot: Valid PK7 ifle");
                                             pklist.Add(pkmn);
                                         }
                                         else
                                         { // Illegal pkm
-                                            Report("Bot: File " + pkf + " is illegal, will not be traded");
+                                            Report("Bot: File " + pkf + " cannot be traded");
                                         }
                                     }
                                     else

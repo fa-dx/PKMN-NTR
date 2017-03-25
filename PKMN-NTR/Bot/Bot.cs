@@ -16,15 +16,52 @@ namespace pkmn_ntr.Bot
 
         public static bool IsLegal(PKM poke)
         {
-            if (poke.GenNumber >= 6)
+            if (Program.gCmdWindow.enableillegal)
             {
-                LegalityAnalysis Legal = new LegalityAnalysis(poke);
+                Report("Bot: Illegal mode enabled, skip check");
+                return true;
+            }
+
+            LegalityAnalysis Legal = new LegalityAnalysis(poke);
+            if (Legal.Parsed)
+            {
                 return Legal.Valid;
             }
             else
             {
                 return true;
             }
+        }
+
+        public static bool IsTradeable(PKM poke)
+        {
+            if (!IsLegal(poke))
+            { // Don't trade illegal pokemon
+                return false;
+            }
+
+            if (poke.IsEgg)
+            { // Don't trade eggs
+                return false;
+            }
+
+            if (poke.Format == 6)
+            {
+                var poke6 = new PK6(poke.Data);
+                if (poke6.RibbonCountry || poke6.RibbonWorld ||  poke6.RibbonClassic || poke6.RibbonPremier || poke6.RibbonEvent || poke6.RibbonBirthday || poke6.RibbonSpecial || poke6.RibbonSouvenir || poke6.RibbonWishing || poke6.RibbonChampionBattle || poke6.RibbonChampionRegional || poke6.RibbonChampionNational || poke6.RibbonChampionWorld)
+                { // Check for Special Ribbons
+                    return false;
+                }
+            }
+            if (poke.Format == 7)
+            {
+                var poke7 = new PK7(poke.Data);
+                if (poke7.RibbonCountry || poke7.RibbonWorld || poke7.RibbonClassic || poke7.RibbonPremier || poke7.RibbonEvent || poke7.RibbonBirthday || poke7.RibbonSpecial || poke7.RibbonSouvenir || poke7.RibbonWishing || poke7.RibbonChampionBattle || poke7.RibbonChampionRegional || poke7.RibbonChampionNational || poke7.RibbonChampionWorld)
+                { // Check for Special Ribbons
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static uint GetBoxOff(uint startOff, NumericUpDown boxSource, NumericUpDown slotSource)
