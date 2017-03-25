@@ -266,7 +266,7 @@ namespace pkmn_ntr.Bot
                             else
                             { // Valid pkm, check legality
                                 attempts = 0;
-                                if (isLegal(WTpoke) || Program.gCmdWindow.enableillegal)
+                                if (IsLegal(WTpoke) || Program.gCmdWindow.enableillegal)
                                 {
                                     if (Program.gCmdWindow.enableillegal)
                                     {
@@ -295,7 +295,7 @@ namespace pkmn_ntr.Bot
                                     if (temp.Length == 232)
                                     {
                                         PK7 pkmn = new PK7(temp);
-                                        if (isLegal(pkmn))
+                                        if (IsLegal(pkmn))
                                         { // Legal pkm
                                             Report("Bot: Illegal pokémon, will write it anyways");
                                             pklist.Add(pkmn);
@@ -329,7 +329,7 @@ namespace pkmn_ntr.Bot
                             { // Select a random file
                                 currentfile = RNG.Next() % pklist.Count;
                             }
-                            waitTaskbool = Program.helper.waitNTRwrite(getBoxOff(pcpkmOff, Box, Slot), pklist[currentfile].EncryptedBoxData, Program.gCmdWindow.pid);
+                            waitTaskbool = Program.helper.waitNTRwrite(GetBoxOff(pcpkmOff, Box, Slot), pklist[currentfile].EncryptedBoxData, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
                                 Program.gCmdWindow.updateDumpBoxes(Box, Slot);
@@ -358,7 +358,7 @@ namespace pkmn_ntr.Bot
                             if (boxchange)
                             {
                                 Report("Bot: Set current box");
-                                waitTaskbool = Program.helper.waitNTRwrite(currentboxOff, (uint)getIndex(Box), Program.gCmdWindow.pid);
+                                waitTaskbool = Program.helper.waitNTRwrite(currentboxOff, (uint)GetIndex(Box), Program.gCmdWindow.pid);
                                 if (await waitTaskbool)
                                 {
                                     attempts = 0;
@@ -465,7 +465,7 @@ namespace pkmn_ntr.Bot
                         case botstates.touchpoke:
                             Report("Bot: Touch pokémon");
                             await Task.Delay(4 * delaytime);
-                            waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[getIndex(Slot)], LookupTable.pokeposY7[getIndex(Slot)]);
+                            waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX7[GetIndex(Slot)], LookupTable.pokeposY7[GetIndex(Slot)]);
                             if (await waitTaskbool)
                             {
                                 botstate = botstates.testpoke;
@@ -824,7 +824,7 @@ namespace pkmn_ntr.Bot
                             {
                                 Program.gCmdWindow.SAV.BlankPKM.EncryptedBoxData.CopyTo(deletearray, i * 232);
                             }
-                            waitTaskbool = Program.helper.waitNTRwrite(getBoxOff(pcpkmOff, Box, Slot), deletearray, Program.gCmdWindow.pid);
+                            waitTaskbool = Program.helper.waitNTRwrite(GetBoxOff(pcpkmOff, Box, Slot), deletearray, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -897,7 +897,7 @@ namespace pkmn_ntr.Bot
             {
                 botresult = ErrorMessage.Disconnect;
             }
-            showResult("Wonder Trade bot", botresult);
+            ShowResult("Wonder Trade bot", botresult);
             Delg.SetText(RunStop, "Start Bot");
             Program.gCmdWindow.botMode(false);
             EnableControls();

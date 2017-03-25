@@ -250,7 +250,7 @@ namespace pkmn_ntr.Bot
                             else
                             { // Valid pkm, check legality
                                 attempts = 0;
-                                if (isLegal(WTpoke) || Program.gCmdWindow.enableillegal)
+                                if (IsLegal(WTpoke) || Program.gCmdWindow.enableillegal)
                                 {
                                     if (Program.gCmdWindow.enableillegal)
                                     {
@@ -279,7 +279,7 @@ namespace pkmn_ntr.Bot
                                     if (temp.Length == 232)
                                     {
                                         PK6 pkmn = new PK6(temp);
-                                        if (isLegal(pkmn) || Program.gCmdWindow.enableillegal)
+                                        if (IsLegal(pkmn) || Program.gCmdWindow.enableillegal)
                                         { // Legal pkm
                                             Report("Bot: Illegal pokémon, will write it anyways");
                                             pklist.Add(pkmn);
@@ -313,7 +313,7 @@ namespace pkmn_ntr.Bot
                             { // Select a random file
                                 currentfile = RNG.Next() % pklist.Count;
                             }
-                            waitTaskbool = Program.helper.waitNTRwrite(getBoxOff(pcpkmOff, Box, Slot), pklist[currentfile].EncryptedBoxData, Program.gCmdWindow.pid);
+                            waitTaskbool = Program.helper.waitNTRwrite(GetBoxOff(pcpkmOff, Box, Slot), pklist[currentfile].EncryptedBoxData, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
                                 Program.gCmdWindow.updateDumpBoxes(Box, Slot);
@@ -479,7 +479,7 @@ namespace pkmn_ntr.Bot
                         case botstates.touchnewbox:
                             Report("Bot: Touch New Box");
                             await Task.Delay(delaytime);
-                            waitTaskbool = Program.helper.waittouch(LookupTable.boxposX6[getIndex(Box)], LookupTable.boxposY6[getIndex(Box)]);
+                            waitTaskbool = Program.helper.waittouch(LookupTable.boxposX6[GetIndex(Box)], LookupTable.boxposY6[GetIndex(Box)]);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -528,7 +528,7 @@ namespace pkmn_ntr.Bot
                         case botstates.touchpoke:
                             Report("Bot: Touch Pokémon");
                             await Task.Delay(delaytime);
-                            waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX6[getIndex(Slot)], LookupTable.pokeposY6[getIndex(Slot)]);
+                            waitTaskbool = Program.helper.waittouch(LookupTable.pokeposX6[GetIndex(Slot)], LookupTable.pokeposY6[GetIndex(Slot)]);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -738,7 +738,7 @@ namespace pkmn_ntr.Bot
                             {
                                 Program.gCmdWindow.SAV.BlankPKM.EncryptedBoxData.CopyTo(deletearray, i * 232);
                             }
-                            waitTaskbool = Program.helper.waitNTRwrite(getBoxOff(pcpkmOff, Box, Slot), deletearray, Program.gCmdWindow.pid);
+                            waitTaskbool = Program.helper.waitNTRwrite(GetBoxOff(pcpkmOff, Box, Slot), deletearray, Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -809,7 +809,7 @@ namespace pkmn_ntr.Bot
             {
                 botresult = ErrorMessage.Disconnect;
             }
-            showResult("Wonder Trade bot", botresult);
+            ShowResult("Wonder Trade bot", botresult);
             Delg.SetText(RunStop, "Start Bot");
             Program.gCmdWindow.botMode(false);
             EnableControls();

@@ -977,7 +977,7 @@ namespace pkmn_ntr.Bot
             {
                 botresult = ErrorMessage.Disconnect;
             }
-            showResult("Soft-reset bot", botresult, finishmessage);
+            ShowResult("Soft-reset bot", botresult, finishmessage);
             Delg.SetText(RunStop, "Start Bot");
             Program.gCmdWindow.botMode(false);
             EnableControls();

@@ -159,7 +159,7 @@ namespace pkmn_ntr.Bot
 
                         case breedbotstates.selectbox:
                             Report("Bot: Set start box");
-                            waitTaskbool = Program.helper.waitNTRwrite(currentboxOff, (uint)getIndex(Box), Program.gCmdWindow.pid);
+                            waitTaskbool = Program.helper.waitNTRwrite(currentboxOff, (uint)GetIndex(Box), Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -536,7 +536,7 @@ namespace pkmn_ntr.Bot
             {
                 botresult = ErrorMessage.Disconnect;
             }
-            showResult("Breeding bot", botresult, finishmessage);
+            ShowResult("Breeding bot", botresult, finishmessage);
             Delg.SetText(RunStop, "Start Bot");
             Program.gCmdWindow.botMode(false);
             EnableControls();

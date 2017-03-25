@@ -795,7 +795,7 @@ namespace pkmn_ntr.Bot
                         case breedbotstates.touchnewbox:
                             Report("Bot: Touch New Box");
                             await Task.Delay(commanddelay);
-                            waitTaskbool = Program.helper.waittouch(LookupTable.boxposX6[getIndex(Box)], LookupTable.boxposY6[getIndex(Box)]);
+                            waitTaskbool = Program.helper.waittouch(LookupTable.boxposX6[GetIndex(Box)], LookupTable.boxposY6[GetIndex(Box)]);
                             if (await waitTaskbool)
                             {
                                 attempts = 0;
@@ -861,7 +861,7 @@ namespace pkmn_ntr.Bot
                         case breedbotstates.moveegg:
                             Report("Move Egg");
                             await Task.Delay(commanddelay);
-                            waitTaskbool = Program.helper.waitholdtouch(LookupTable.pokeposX6[getIndex(Slot)], LookupTable.pokeposY6[getIndex(Slot)]);
+                            waitTaskbool = Program.helper.waitholdtouch(LookupTable.pokeposX6[GetIndex(Slot)], LookupTable.pokeposY6[GetIndex(Slot)]);
                             if (await waitTaskbool)
                             {
                                 botState = breedbotstates.releaseegg;
@@ -1257,7 +1257,7 @@ namespace pkmn_ntr.Bot
             {
                 botresult = ErrorMessage.Disconnect;
             }
-            showResult("Breeding bot", botresult, finishmessage);
+            ShowResult("Breeding bot", botresult, finishmessage);
             Delg.SetText(RunStop, "Start Bot");
             Program.gCmdWindow.botMode(false);
             EnableControls();

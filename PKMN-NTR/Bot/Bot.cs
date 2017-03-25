@@ -14,7 +14,7 @@ namespace pkmn_ntr.Bot
             Program.gCmdWindow.addtoLog(message);
         }
 
-        public static bool isLegal(PKM poke)
+        public static bool IsLegal(PKM poke)
         {
             if (poke.GenNumber >= 6)
             {
@@ -27,12 +27,12 @@ namespace pkmn_ntr.Bot
             }
         }
 
-        public static uint getBoxOff(uint startOff, NumericUpDown boxSource, NumericUpDown slotSource)
+        public static uint GetBoxOff(uint startOff, NumericUpDown boxSource, NumericUpDown slotSource)
         {
             return startOff + (uint)(boxSource.Value - 1) * 30 * 232 + (uint)(slotSource.Value - 1) * 232;
         }
 
-        public static int getIndex(NumericUpDown ctrl)
+        public static int GetIndex(NumericUpDown ctrl)
         {
             return (int)ctrl.Value - 1;
         }
@@ -251,7 +251,7 @@ namespace pkmn_ntr.Bot
             }
         }
 
-        public static void showResult(string source, ErrorMessage message, int[] info = null)
+        public static void ShowResult(string source, ErrorMessage message, int[] info = null)
         {
             switch (message)
             {
