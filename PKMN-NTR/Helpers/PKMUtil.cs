@@ -103,7 +103,7 @@ namespace pkmn_ntr.Helpers
             if (!pkm.Valid)
                 return null;
 
-            bool inBox = slot > 0 && slot < 30;
+            bool inBox = slot >= 0 && slot < 30;
             var sprite = pkm.Species != 0 ? pkm.Sprite(isBoxBGRed: inBox && BoxWallpaper.getWallpaperRed(SAV, box)) : null;
 
             if (slot <= -1) // from tabs

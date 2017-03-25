@@ -2324,7 +2324,7 @@ namespace pkmn_ntr
         public PKM preparePKM(bool click = true)
         {
             if (click)
-                tabMain.Select(); // hack to make sure comboboxes are set (users scrolling through and immediately setting causes this)
+                ValidateChildren();
 
             PKM pk = getPKMfromFields();
             return pk?.Clone();
