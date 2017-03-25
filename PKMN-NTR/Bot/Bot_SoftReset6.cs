@@ -573,7 +573,7 @@ namespace pkmn_ntr.Bot
                             srpoke = null;
                             await Task.Delay(2 * commanddelay); // Wait for pokémon data
                             waitTaskPKM = Program.gCmdWindow.ReadOpponent();
-                            srpoke = (await waitTaskPKM).Clone();
+                            srpoke = await waitTaskPKM;
                             if (srpoke == null)
                             { // No data received
                                 attempts++;
@@ -740,7 +740,7 @@ namespace pkmn_ntr.Bot
                         case srbotstates.tev_check:
                             Report("Bot: Try to read party");
                             waitTaskPKM = Program.helper.waitPartyRead(2);
-                            srpoke = (await waitTaskPKM).Clone();
+                            srpoke = await waitTaskPKM;
                             if (srpoke == null)
                             {
                                 attempts++;
@@ -851,7 +851,7 @@ namespace pkmn_ntr.Bot
                             srpoke = null;
                             await Task.Delay(2 * commanddelay); // Wait for pokémon data
                             waitTaskPKM = Program.gCmdWindow.ReadOpponent();
-                            srpoke = (await waitTaskPKM).Clone();
+                            srpoke = await waitTaskPKM;
                             if (srpoke == null)
                             {
                                 attempts++;

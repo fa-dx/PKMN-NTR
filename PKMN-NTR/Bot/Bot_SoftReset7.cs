@@ -279,7 +279,7 @@ namespace pkmn_ntr.Bot
                         case srbotStates.readparty:
                             Report("Bot: Try to read party");
                             waitTaskPKM = Program.helper.waitPartyRead(2);
-                            srPoke = (await waitTaskPKM).Clone();
+                            srPoke = await waitTaskPKM;
                             if (srPoke == null)
                             {
                                 attempts++;
@@ -479,7 +479,7 @@ namespace pkmn_ntr.Bot
                             Report("Bot: Try to read opponent");
                             srPoke = null;
                             waitTaskPKM = Program.helper.waitPokeRead(opponentOff);
-                            srPoke = (await waitTaskPKM).Clone();
+                            srPoke = await waitTaskPKM;
                             if (srPoke == null)
                             {
                                 attempts++;
@@ -565,7 +565,7 @@ namespace pkmn_ntr.Bot
                             Report("Bot: Try to read opponent");
                             srPoke = null;
                             waitTaskPKM = Program.helper.waitPokeRead(opponentOff);
-                            srPoke = (await waitTaskPKM).Clone();
+                            srPoke = await waitTaskPKM;
                             if (srPoke == null)
                             {
                                 attempts++;
@@ -800,7 +800,7 @@ namespace pkmn_ntr.Bot
                             Report("Bot: Try to read opponent");
                             srPoke = null;
                             waitTaskPKM = Program.helper.waitPokeRead(opponentOff);
-                            srPoke = (await waitTaskPKM).Clone();
+                            srPoke = await waitTaskPKM;
                             if (srPoke == null)
                             {
                                 attempts++;
