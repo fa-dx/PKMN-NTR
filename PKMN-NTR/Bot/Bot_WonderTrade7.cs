@@ -300,7 +300,7 @@ namespace pkmn_ntr.Bot
                                         PK7 pkmn = new PK7(temp);
                                         if (IsTradeable(pkmn))
                                         { // Legal pkm
-                                            Report("Bot: Valid PK7 ifle");
+                                            Report("Bot: Valid PK7 file");
                                             pklist.Add(pkmn);
                                         }
                                         else
