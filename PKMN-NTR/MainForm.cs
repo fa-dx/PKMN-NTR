@@ -20,6 +20,7 @@ using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pkmn_ntr.Sub_forms.Scripting;
 
 namespace pkmn_ntr
 {
@@ -387,6 +388,13 @@ namespace pkmn_ntr
             {
                 Delg.SetEnabled(tab, true);
             }
+            Delg.SetEnabled(Tool_Trainer, true);
+            Delg.SetEnabled(Tool_Items, true);
+            Delg.SetEnabled(Tool_Controls, true);
+            Delg.SetEnabled(Tools_Breeding, true);
+            Delg.SetEnabled(Tools_SoftReset, true);
+            Delg.SetEnabled(Tools_WonderTrade, true);
+            Delg.SetEnabled(Tools_PokeDigger, true);
             foreach (TabPage tab in tabMain.TabPages)
             {
                 Delg.SetEnabled(tab, true);
@@ -397,11 +405,18 @@ namespace pkmn_ntr
         {
             foreach (TabPage tab in Tabs_General.TabPages)
             {
-                if (!(tab.Name == "Tab_Log" || tab.Name == "Tab_About"))
+                if (!(tab.Name == "Tab_Log" || tab.Name == "Tab_About" || tab.Name == "Tab_Tools"))
                 {
                     Delg.SetEnabled(tab, false);
                 }
             }
+            Delg.SetEnabled(Tool_Trainer, false);
+            Delg.SetEnabled(Tool_Items, false);
+            Delg.SetEnabled(Tool_Controls, false);
+            Delg.SetEnabled(Tools_Breeding, false);
+            Delg.SetEnabled(Tools_SoftReset, false);
+            Delg.SetEnabled(Tools_WonderTrade, false);
+            Delg.SetEnabled(Tools_PokeDigger, false);
             foreach (TabPage tab in tabMain.TabPages)
             {
                 Delg.SetEnabled(tab, false);
@@ -3921,6 +3936,13 @@ namespace pkmn_ntr
             new PokeDigger(pid, isConnected).ShowDialog();
         }
 
+        // Script Builder
+        private void Tool_Script_Click(object sender, EventArgs e)
+        {
+            Tool_Start();
+            new ScriptBuilder().Show();
+        }
+
         private void DumpInstructionsBtn_Click(object sender, EventArgs e)
         {
             if (radioOpponent.Checked)
@@ -3939,6 +3961,19 @@ namespace pkmn_ntr
             if (state)
             {
                 timer1.Interval = 500;
+            }
+            else
+            {
+                timer1.Interval = 1000;
+            }
+        }
+
+        public void ScriptMode(bool state)
+        {
+            botWorking = state;
+            if (state)
+            {
+                timer1.Interval = 100;
             }
             else
             {

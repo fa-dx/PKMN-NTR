@@ -159,6 +159,44 @@ namespace pkmn_ntr.Helpers
             }
         }
 
+        public async Task ScriptButton(uint key)
+        {
+            Report($"Script: Send button command 0x{key.ToString("X3")}");
+            byte[] buttonByte = BitConverter.GetBytes(key);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            await Task.Delay(200);
+            buttonByte = BitConverter.GetBytes(LookupTable.nokey);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptButtonTimed(uint key, int time)
+        {
+            Report($"Script: Send button command 0x{key.ToString("X3")} during {time} ms");
+            byte[] buttonByte = BitConverter.GetBytes(key);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            await Task.Delay(time);
+            buttonByte = BitConverter.GetBytes(LookupTable.nokey);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptButtonHold(uint key)
+        {
+            Report($"Script: Send and hold button command 0x{key.ToString("X3")}");
+            byte[] buttonByte = BitConverter.GetBytes(key);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptButtonRelease()
+        {
+            Report($"Script: Release all buttons");
+            byte[] buttonByte = BitConverter.GetBytes(LookupTable.nokey);
+            Program.scriptHelper.write(buttonsOff, buttonByte, hid_pid);
+            await Task.Delay(500);
+        }
+
         // Touch Screen Handler
         public async Task<bool> waittouch(decimal Xcoord, decimal Ycoord)
         {

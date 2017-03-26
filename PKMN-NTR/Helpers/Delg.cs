@@ -194,6 +194,12 @@ namespace pkmn_ntr.Helpers
 
         #endregion NumericUpDown
 
+        #region ListBox
+
+
+
+        #endregion ListBox
+
         #region RadioButton
 
         delegate void SetCheckedRadioDelegate(RadioButton ctrl, bool en);

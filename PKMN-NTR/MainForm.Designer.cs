@@ -344,6 +344,7 @@
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.dragout = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.Tool_Script = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
@@ -4018,8 +4019,9 @@
             this.flowLayoutPanel2.Controls.Add(this.Tools_Breeding);
             this.flowLayoutPanel2.Controls.Add(this.Tools_SoftReset);
             this.flowLayoutPanel2.Controls.Add(this.Tools_WonderTrade);
-            this.flowLayoutPanel2.Controls.Add(this.Tools_Filter);
+            this.flowLayoutPanel2.Controls.Add(this.Tool_Script);
             this.flowLayoutPanel2.Controls.Add(this.Tools_PokeDigger);
+            this.flowLayoutPanel2.Controls.Add(this.Tools_Filter);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -4078,7 +4080,7 @@
             // 
             // Tools_Filter
             // 
-            this.Tools_Filter.Location = new System.Drawing.Point(3, 61);
+            this.Tools_Filter.Location = new System.Drawing.Point(193, 61);
             this.Tools_Filter.Name = "Tools_Filter";
             this.Tools_Filter.Size = new System.Drawing.Size(89, 23);
             this.Tools_Filter.TabIndex = 6;
@@ -4398,6 +4400,16 @@
             this.dragout.DragOver += new System.Windows.Forms.DragEventHandler(this.dragout_DragOver);
             this.dragout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragout_MouseDown);
             this.dragout.MouseHover += new System.EventHandler(this.dragoutHover);
+            // 
+            // Tool_Script
+            // 
+            this.Tool_Script.Location = new System.Drawing.Point(3, 61);
+            this.Tool_Script.Name = "Tool_Script";
+            this.Tool_Script.Size = new System.Drawing.Size(89, 23);
+            this.Tool_Script.TabIndex = 7;
+            this.Tool_Script.Text = "Script Builder";
+            this.Tool_Script.UseVisualStyleBackColor = true;
+            this.Tool_Script.Click += new System.EventHandler(this.Tool_Script_Click);
             // 
             // MainForm
             // 
@@ -4901,6 +4913,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button Btn_ReloadFields;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button Tool_Script;
     }
 }
 

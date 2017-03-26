@@ -159,6 +159,15 @@
     <Compile Include="Sub-forms\MemoryAmie.Designer.cs">
       <DependentUpon>MemoryAmie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sub-forms\Scripting\ButtonAction.cs" />
+    <Compile Include="Sub-forms\Scripting\DelayAction.cs" />
+    <Compile Include="Sub-forms\Scripting\ScriptAction.cs" />
+    <Compile Include="Sub-forms\Scripting\ScriptBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub-forms\Scripting\ScriptBuilder.Designer.cs">
+      <DependentUpon>ScriptBuilder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sub-forms\SuperTrainingEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +243,9 @@
     <EmbeddedResource Include="Sub-forms\MemoryAmie.resx">
       <DependentUpon>MemoryAmie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sub-forms\Scripting\ScriptBuilder.resx">
+      <DependentUpon>ScriptBuilder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sub-forms\SuperTrainingEditor.resx">
       <DependentUpon>SuperTrainingEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -306,6 +318,7 @@
       <Name>PKHeX.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <UsingTask TaskName="CosturaCleanup" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
     <ParameterGroup>
