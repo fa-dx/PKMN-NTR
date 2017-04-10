@@ -1,110 +1,119 @@
 ﻿using ntrbase.Properties;
+using ntrbase.Bot;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Data;
+using ntrbase.Helpers;
+using Octokit;
 
 namespace ntrbase
 {
-
-
-
     public partial class MainForm : Form
     {
+        struct LastBoxSlot
+        {
+            public Decimal box { get; set; }
+            public Decimal slot { get; set; }
+        }
+        #region Class variables
 
-        PKHeX PKHeX = new PKHeX();
+        //A "waiting room", where functions wait for data to be acquired. Entries are indexed by their sequence number. Once a request with a given sequence number is fulfilled, handleDataReady() uses information in DataReadyWaiting object to process the data.
+        public static Dictionary<uint, DataReadyWaiting> waitingForData = new Dictionary<uint, DataReadyWaiting>();
 
-        public string dumpBattleBox;
-        public string dumpEK6;
-        public string dumpDay1;
-        public string dumpParty;
-        public int bboff;
-        public bool isEncryptedFF { get; set; }
-        public bool isEncryptedFFD { get; set; }
-        public string selectedclone { get; set; }
-        public int clonemax { get; set; }
-        public string emptyData = "0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6";
-        public byte[] emptyDatab = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x83, 0x07, 0x00, 0x00, 0x7E, 0xE9, 0x71, 0x52, 0xB0, 0x31, 0x42, 0x8E, 0xCC, 0xE2, 0xC5, 0xAF, 0xDB, 0x67, 0x33, 0xFC, 0x2C, 0xEF, 0x5E, 0xFC, 0xC5, 0xCA, 0xD6, 0xEB, 0x3D, 0x99, 0xBC, 0x7A, 0xA7, 0xCB, 0xD6, 0x5D, 0x78, 0x91, 0xA6, 0x27, 0x8D, 0x61, 0x92, 0x16, 0xB8, 0xCF, 0x5D, 0x37, 0x80, 0x30, 0x7C, 0x40, 0xFB, 0x48, 0x13, 0x32, 0xE7, 0xFE, 0xE6, 0xDF, 0x0E, 0x3D, 0xF9, 0x63, 0x29, 0x1D, 0x8D, 0xEA, 0x96, 0x62, 0x68, 0x92, 0x97, 0xA3, 0x49, 0x1C, 0x03, 0x6E, 0xAA, 0x31, 0x89, 0xAA, 0xC5, 0xD3, 0xEA, 0xC3, 0xD9, 0x82, 0xC6, 0xE0, 0x5C, 0x94, 0x3B, 0x4E, 0x5F, 0x5A, 0x28, 0x24, 0xB3, 0xFB, 0xE1, 0xBF, 0x8E, 0x7B, 0x7F, 0x00, 0xC4, 0x40, 0x48, 0xC8, 0xD1, 0xBF, 0xB6, 0x38, 0x3B, 0x90, 0x23, 0xFB, 0x23, 0x7D, 0x34, 0xBE, 0x00, 0xDA, 0x6A, 0x70, 0xC5, 0xDF, 0x84, 0xBA, 0x14, 0xE4, 0xA1, 0x60, 0x2B, 0x2B, 0x38, 0x8F, 0xA0, 0xB6, 0x60, 0x41, 0x36, 0x16, 0x09, 0xF0, 0x4B, 0xB5, 0x0E, 0x26, 0xA8, 0xB6, 0x43, 0x7B, 0xCB, 0xF9, 0xEF, 0x68, 0xD4, 0xAF, 0x5F, 0x74, 0xBE, 0xC3, 0x61, 0xE0, 0x95, 0x98, 0xF1, 0x84, 0xBA, 0x11, 0x62, 0x24, 0x80, 0xCC, 0xC4, 0xA7, 0xA2, 0xB7, 0x55, 0xA8, 0x5C, 0x1C, 0x42, 0xA2, 0x3A, 0x86, 0x05, 0xAD, 0xD2, 0x11, 0x19, 0xB0, 0xFD, 0x57, 0xE9, 0x4E, 0x60, 0xBA, 0x1B, 0x45, 0x2E, 0x17, 0xA9, 0x34, 0x93, 0x2D, 0x66, 0x09, 0x2D, 0x11, 0xE0, 0xA1, 0x74, 0x42, 0xC4, 0x73, 0x65, 0x2F, 0x21, 0xF0, 0x43, 0x28, 0x54, 0xA6 };
-        public int tradedumpcount = 0;
-        public string realoppoffset { get; set; }
-        public string realtradeoffset { get; set; }
-        public string tradeoffrg;
-        public string moneyoff;
-        public string milesoff;
-        public string bpoff;
-        public int partyoff;
-        public static int boff;
-        public string boffs;
-        public static string pid;
-        public string lang;
-        public int hpb;
-        public int atkb;
-        public int defb;
-        public int speb;
-        public int spab;
-        public int spdb;
-        public string pname { get; set; }
-        public string game;
-        public string d1off;
-        public string d2off;
-        public string itemsoff;
-        public string medsoff;
-        public string keysoff;
-        public string tmsoff;
-        public string bersoff;
-        public bool firstcheck = false;
-        public byte[] ek6;
-        public byte[] ek6b { get; set; }
-        public int additem = 0;
-        public byte[] items { get; set; }
+        // Set this boolean to true to enable the write feature for the party pokémon.
+        public static readonly bool enablepartywrite = false;
+
+        // Program-wide variables
+        public enum GameType { None, X, Y, OR, AS, SM };
+        public bool gen7;
+        public uint BOXES;
+        public const int BOXSIZE = 30;
+        public const int POKEBYTES = 232;
+        public const string FOLDERPOKE = "Pokemon";
+        public const string FOLDERDELETE = "Deleted";
+        public const string FOLDERBOT = "Bot";
+        public string PKXEXT;
+        public string BOXEXT;
+        public PKHeX dumpedPKHeX = new PKHeX();
+        private static string numberPattern = " ({0})";
+
+
+        // Variables for update checking
+        internal GitHubClient Github;
+        public string updateURL = null;
+
+        // Variables for cloning
+        public byte[] selectedCloneData = new byte[POKEBYTES];
+        public bool selectedCloneValid = false;
+
+        // Variables for bots
+        public bool botWorking = false;
+        public bool botStop = false;
+        public int botnumber = -1;
+        public int botState = 0;
+        public static readonly int timeout = 10;
+        public uint lastmemoryread;
+        public string lastlog;
+        public int currentfilter = 0;
+        public static readonly string readerror = "An error has ocurred while reading data from your 3DS RAM, please check connection and try again.";
+        public static readonly string toucherror = "An error has ocurred while sending a Touch Screen command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
+        public static readonly string buttonerror = "An error has ocurred while sending a button command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
+        public static readonly string stickerror = "An error has ocurred while sending a Control Stick command, please check connection and try again.\r\n\r\nIf the buttons / touch screen / control stick of your 3DS system doesn't work, send any comand from the Remote Control tab to fix them";
+        public static readonly string writeerror = "An error has ocurred while writting data to your 3DS RAM, please check connection and try again.";
+        private WonderTradeBot6 WTBot6;
+        private WonderTradeBot7 WTBot7;
+        private BreedingBot6 BreedBot6;
+        private BreedingBot7 BreedBot7;
+        private SoftResetbot6 SRBot6;
+        private SoftResetbot7 SRBot7;
+
+        //Game information
+        public int pid;
+        public byte lang;
+        public string pname;
+        public GameType game = GameType.None;
+        //Offsets for basic data
+        public uint nameoff;
+        public uint tidoff;
+        public uint sidoff;
+        public uint timeoff;
+        public uint langoff;
+        public uint moneyoff;
+        public uint milesoff;
+        public uint currentFCoff;
+        public uint totalFCoff;
+        public uint bpoff;
+        //Offsets for items data
+        public uint itemsoff;
+        public uint medsoff;
+        public uint keysoff;
+        public uint tmsoff;
+        public uint bersoff;
+        //Offsets for Pokemon sources
+        public uint tradeOff;
+        public uint opponentOff;
+        public uint partyOff;
+        public uint boxOff;
+        public uint daycare1Off;
+        public uint daycare2Off;
+        public uint daycare3Off; // Battle Resort Daycare
+        public uint daycare4Off; // Battle Resort Daycare
+        public uint battleBoxOff;
+
+        // Variables for inventory (Gen 6)
         private byte[] itemData = new byte[1600];
         private byte[] keyData = new byte[384];
         private byte[] tmData = new byte[432];
         private byte[] medData = new byte[256];
         private byte[] berryData = new byte[288];
-        private byte[] pkmEncrypted { get; set; }
-        public byte[] data;
-        public byte[] keys;
-        public byte[] tms;
-        public byte[] meds;
-        public byte[] bers;
-        public byte[] writeitems;
-        public string selectedek6;
-        public int numofItems { get; set; }
-        public int numofKeys;
-        public int numofTMs;
-        public int numofMeds;
-        public int numofBers;
-        public string nameoff;
-        public string tidoff;
-        public string sidoff;
-        public string hroff;
-        public string minoff;
-        public string secoff;
-        public string langoff;
-
-        public uint itemsfinal;
-        public uint amountfinal;
-        public uint keysfinal;
-        public uint keysamountfinal;
-        public uint tmsfinal;
-        public uint tmsamountfinal;
-        public uint medsfinal;
-        public uint medsamountfinal;
-        public uint bersfinal;
-        public uint bersamountfinal;
-
-        public string[] itemList = { "[None]", "Master Ball", "Ultra Ball", "Great Ball", "Poke Ball", "Safari Ball", "Net Ball", "Dive Ball", "Nest Ball", "Repeat Ball", "Timer Ball", "Luxury Ball", "Premier Ball", "Dusk Ball", "Heal Ball", "Quick Ball", "Cherish Ball", "Potion", "Antidote", "Burn Heal", "Ice Heal", "Awakening", "Paralyze Heal", "Full Restore", "Max Potion", "Hyper Potion", "Super Potion", "Full Heal", "Revive", "Max Revive", "Fresh Water", "Soda Pop", "Lemonade", "Moomoo Milk", "Energy Powder", "Energy Root", "Heal Powder", "Revival Herb", "Ether", "Max Ether", "Elixir", "Max Elixir", "Lava Cookie", "Berry Juice", "Sacred Ash", "HP Up", "Protein", "Iron", "Carbos", "Calcium", "Rare Candy", "PP Up", "Zinc", "PP Max", "Old Gateau", "Guard Spec.", "Dire Hit", "X Attack", "X Defense", "X Speed", "X Accuracy", "X Sp. Atk", "X Sp. Def", "Poke Doll", "Fluffy Tail", "Blue Flute", "Yellow Flute", "Red Flute", "Black Flute", "White Flute", "Shoal Salt", "Shoal Shell", "Red Shard", "Blue Shard", "Yellow Shard", "Green Shard", "Super Repel", "Max Repel", "Escape Rope", "Repel", "Sun Stone", "Moon Stone", "Fire Stone", "Thunder Stone", "Water Stone", "Leaf Stone", "Tiny Mushroom", "Big Mushroom", "Pearl", "Big Pearl", "Stardust", "Star Piece", "Nugget", "Heart Scale", "Honey", "Growth Mulch", "Damp Mulch", "Stable Mulch", "Gooey Mulch", "Root Fossil", "Claw Fossil", "Helix Fossil", "Dome Fossil", "Old Amber", "Armor Fossil", "Skull Fossil", "Rare Bone", "Shiny Stone", "Dusk Stone", "Dawn Stone", "Oval Stone", "Odd Keystone", "Griseous Orb", "???", "???", "???", "Douse Drive", "Shock Drive", "Burn Drive", "Chill Drive", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "???", "Sweet Heart", "Adamant Orb", "Lustrous Orb", "Greet Mail", "Favored Mail", "RSVP Mail", "Thanks Mail", "Inquiry Mail", "Like Mail", "Reply Mail", "Bridge Mail S", "Bridge Mail D", "Bridge Mail T", "Bridge Mail V", "Bridge Mail M", "Cheri Berry", "Chesto Berry", "Pecha Berry", "Rawst Berry", "Aspear Berry", "Leppa Berry", "Oran Berry", "Persim Berry", "Lum Berry", "Sitrus Berry", "Figy Berry", "Wiki Berry", "Mago Berry", "Aguav Berry", "Iapapa Berry", "Razz Berry", "Bluk Berry", "Nanab Berry", "Wepear Berry", "Pinap Berry", "Pomeg Berry", "Kelpsy Berry", "Qualot Berry", "Hondew Berry", "Grepa Berry", "Tamato Berry", "Cornn Berry", "Magost Berry", "Rabuta Berry", "Nomel Berry", "Spelon Berry", "Pamtre Berry", "Watmel Berry", "Durin Berry", "Belue Berry", "Occa Berry", "Passho Berry", "Wacan Berry", "Rindo Berry", "Yache Berry", "Chople Berry", "Kebai Berry", "Shuca Berry", "Coba Berry", "Payapa Berry", "Tanga Berry", "Charti Berry", "Kasib Berry", "Haban Berry", "Colbur Berry", "Babiri Berry", "Chilan Berry", "Liechi Berry", "Ganlon Berry", "Salac Berry", "Petaya Berry", "Apicot Berry", "Lansat Berry", "Starf Berry", "Enigma Berry", "Micle Berry", "Custap Berry", "Jaboca Berry", "Rowap Berry", "Bright Powder", "White Herb", "Macho Brace", "Exp. Share", "Quick Claw", "Soothe Bell", "Mental Herb", "Choice Band", "King's Rock", "Silver Powder", "Amulet Coin", "Cleanse Tag", "Soul Dew", "Deep Sea Tooth", "Deep Sea Scale", "Smoke Ball", "Everstone", "Focus Band", "Lucky Egg", "Scope Lens", "Metal Coat", "Leftovers", "Dragon Scale", "Light Ball", "Soft Sand", "Hard Stone", "Miracle Seed", "Black Glasses", "Black Belt", "Magnet", "Mystic Water", "Sharp Beak", "Poison Barb", "Never-Melt Ice", "Spell Tag", "Twisted Spoon", "Charcoal", "Dragon Fang", "Silk Scarf", "Up-Grade", "Shell Bell", "Sea Incense", "Lax Incense", "Lucky Punch", "Metal Powder", "Thick Club", "Stick", "Red Scarf", "Blue Scarf", "Pink Scarf", "Green Scarf", "Yellow Scarf", "Wide Lens", "Muscle Band", "Wise Glasses", "Expert Belt", "Light Clay", "Life Orb", "Power Herb", "Toxic Orb", "Flame Orb", "Quick Powder", "Focus Sash", "Zoom Lens", "Metronome", "Iron Ball", "Lagging Tail", "Destiny Knot", "Black Sludge", "Icy Rock", "Smooth Rock", "Heat Rock", "Damp Rock", "Grip Claw", "Choice Scarf", "Sticky Barb", "Power Bracer", "Power Belt", "Power Lens", "Power Band", "Power Anklet", "Power Weight", "Shed Shell", "Big Root", "Choice Specs", "Flame Plate", "Splash Plate", "Zap Plate", "Meadow Plate", "Icicle Plate", "Fist Plate", "Toxic Plate", "Earth Plate", "Sky Plate", "Mind Plate", "Insect Plate", "Stone Plate", "Spooky Plate", "Draco Plate", "Dread Plate", "Iron Plate", "Odd Incense", "Rock Incense", "Full Incense", "Wave Incense", "Rose Incense", "Luck Incense", "Pure Incense", "Protector", "Electrizer", "Magmarizer", "Dubious Disc", "Reaper Cloth", "Razor Claw", "Razor Fang", "Hone Claws", "Dragon Claw", "Psyshock", "Calm Mind", "Roar", "Toxic", "Hail", "Bulk Up", "Venoshock", "Hidden Power", "Sunny Day", "Taunt", "Ice Beam", "Blizzard", "Hyper Beam", "Light Screen", "Protect", "Rain Dance", "Roost", "Safeguard", "Frustration", "Solar Beam", "Smack Down", "Thunderbolt", "Thunder", "Earthquake", "Return", "Dig", "Psychic", "Shadow Ball", "Brick Break", "Double Team", "Reflect", "Sludge Wave", "Flamethrower", "Sludge Bomb", "Sandstorm", "Fire Blast", "Rock Tomb", "Aerial Ace", "Torment", "Facade", "Flame Charge", "Rest", "Attract", "Thief", "Low Sweep", "Round", "Echoed Voice", "Overheat", "Steel Wing", "Focus Blast", "Energy Ball", "False Swipe", "Scald", "Fling", "Charge Beam", "Sky Drop", "Incinerate", "Quash", "Will-O-Wisp", "Acrobatics", "Embargo", "Explosion", "Shadow Claw", "Payback", "Retaliate", "Giga Impact", "Rock Polish", "Flash", "Stone Edge", "Volt Switch", "Thunder Wave", "Gyro Ball", "Swords Dance", "Struggle Bug", "Psych Up", "Bulldoze", "Frost Breath", "Rock Slide", "X-Scissor", "Dragon Tail", "Infestation", "Poison Jab", "Dream Eater", "Grass Knot", "Swagger", "Sleep Talk", "U-turn", "Substitute", "Flash Cannon", "Trick Room", "Cut", "Fly", "Surf", "Strength", "Waterfall", "Rock Smash", "???", "???", "Explorer Kit", "Loot Sack", "Rule Book", "Poke Radar", "Point Card", "Journal", "Seal Case", "Fashion Case", "Seal Bag", "Pal Pad", "Works key", "Old Charm", "Galactic Key", "Red Chain", "Town Map", "Vs. Seeker", "Coin Case", "Old Rod", "Good Rod", "Super Rod", "Sprayduck", "Poffin Case", "Bike", "Suite Key", "Oak's Letter", "Lunar Wing", "Member Card", "Azure Flute", "S.S. Ticket", "Contest Pass", "Magma Stone", "Parcel", "Coupon 1", "Coupon 2", "Coupon 3", "Storage Key", "Secret Potion", "Vs. Recorder", "Gracidea", "Secret Key", "Apricorn Box", "Unown Report", "Berry Pots", "Dowsing Machine", "Blue Card", "Slowpoke Tail", "Clear Bell", "Card Key", "Basement Key", "Squirt Bottle", "Red Scale", "Lost Item", "Pass", "Machine Part", "Silver Wing", "Rainbow Wing", "Mystery Egg", "Red Apricorn", "Blue Apricorn", "Yellow Apricorn", "Green Apricorn", "Pink Apricorn", "White Apricorn", "Black Apricorn", "Fast Ball", "Level Ball", "Lure Ball", "Heavy Ball", "Love Ball", "Friend Ball", "Moon Ball", "Sport Ball", "Park Ball", "Photo Album", "GB Sounds", "Tidal Bell", "Rage Candy Bar", "Data Card 01", "Data Card 02", "Data Card 03", "Data Card 04", "Data Card 05", "Data Card 06", "Data Card 07", "Data Card 08", "Data Card 09", "Data Card 10", "Data Card 11", "Data Card 12", "Data Card 13", "Data Card 14", "Data Card 15", "Data Card 16", "Data Card 17", "Data Card 18", "Data Card 19", "Data Card 20", "Data Card 21", "Data Card 22", "Data Card 23", "Data Card 24", "Data Card 25", "Data Card 26", "Data Card 27", "Jade Orb", "Lock Capsule", "Red Orb", "Blue Orb", "Enigma Stone", "Prism Scale", "Eviolite", "Float Stone", "Rocky Helmet", "Air Balloon", "Red Card", "Ring Target", "Binding Band", "Absorb Bulb", "Cell Battery", "Eject Button", "Fire Gem", "Water Gem", "Electric Gem", "Grass Gem", "Ice Gem", "Fighting Gem", "Poison Gem", "Ground Gem", "Flying Gem", "Psychic Gem", "Bug Gem", "Rock Gem", "Ghost Gem", "Dragon Gem", "Dark Gem", "Steel Gem", "Normal Gem", "Health Wing", "Muscle Wing", "Resist Wing", "Genius Wing", "Clever Wing", "Swift Wing", "Pretty Wing", "Cover Fossil", "Plume Fossil", "Libery Pass", "Pass Orb", "Dream Ball", "Poke Toy", "Prop Case", "Dragon Skull", "Balm Mushroom", "Big Nugget", "Pearl String", "Comet Shard", "Relic Copper", "Relic Silver", "Relic Gold", "Relic Vase", "Relic Band", "Relic Statue", "Relic Crown", "Casteliacone", "Dire Hit 2", "X Speed 2", "X Sp. Atk 2", "X Sp. Def 2", "X Defense 2", "X Attack 2", "X Accuracy 2", "X Speed 3", "X Sp. Atk 3", "X Sp. Def 3", "X Defense 3", "X Attack 3", "X Accuracy 3", "X Speed 6", "X Sp. Atk 6", "X Sp. Def 6", "X Defense 6", "X Attack 6", "X Accuracy 6", "Ability Urge", "Item Drop", "Item Urge", "Reset Urge", "Dire Hit 3", "Light Stone", "Dark Stone", "Wild Charge", "Secret Power", "Snarl", "Xtransceiver(Male)", "???", "Gram 1", "Gram 2", "Gram 3", "Xtransceiver(Female)", "Medal Box", "DNA Splicers(Fuses)", "DNA Splicers(Seperates)", "Permit", "Oval Charm", "Shiny Charm", "Plasma Card", "Grubby Hanky", "Colress Machine", "Dropped Item (Xtransceiver Male)", "Dropped Item (Xtransceiver Female)", "Reveal Glass", "Weakness Policy", "Assault Vest", "Holo Caster", "Prof's Letter", "Roller Skates", "Pixie Plate", "Ability Capsule", "Whipped Dream", "Sachet", "Luminous Moss", "Snowball", "Safety Goggles", "Poke Flute", "Rich Mulch", "Surprise Mulch", "Boost Mulch", "Amaze Mulch", "Gengarite", "Gardevoirite", "Ampharosite", "Venusaurite", "Charizardite X", "Blastoisinite", "Mewtwonite X", "Mewtwonite Y", "Blazikenite", "Medichamite", "Houndoominite", "Aggronite", "Banettite", "Tyranitarite", "Scizorite", "Pinsirite", "Aerodactylite", "Lucarionite", "Abomasite", "Kangaskhanite", "Gyaradosite", "Absolite", "Charizardite Y", "Alakazite", "Heracronite", "Mawilite", "Manectite", "Garchompite", "Latiasite", "Latiosite", "Roseli Berry", "Kee Berry", "Maranga Berry", "Sprinklotad", "Nature Power", "Dark Pulse", "Power-Up Punch", "Dazzling Gleam", "Confide", "Power Plant Pass", "Mega Ring", "Intruiging Stone", "Common Stone", "Discount Coupon", "Elevator Key", "TMV Pass", "Honor of Kalos", "Adventure Rules", "Strange Souvenir", "Lens Case", "Travel Trunk (Silver)", "Travel Trunk (Gold)", "Lumiose Galette", "Shalour Sable", "Jaw Fossil", "Sail Fossil", "Looker Ticket", "Bike", "Holo Caster", "Fairy Gem", "Mega Charm", "Mega Glove", "Mach Bike", "Acro Bike", "Wailmer Pail", "Devon Parts", "Soot Sack", "Basement Key", "Pokeblock Kit", "Letter", "Eon Ticket", "Scanner", "Go-Goggles", "Meteorite (originally found)", "Key to Room 1", "Key to Room 2", "Key to Room 4", "Key to Room 6", "Storage Key", "Devon Scope", "S.S. Ticket", "Dive", "Devon Scuba Gear", "Contest Costume (Male)", "Contest Costume (Female)", "Magma Suit", "Aqua Suit", "Pair of Tickets", "Mega Bracelet", "Mega Pendant", "Mega Glasses", "Mega Anchor", "Mega Stickpin", "Mega Tiara", "Mega Anklet", "Meteorite (faint glow)", "Swampertite", "Sceptilite", "Sablenite", "Altarianite", "Galladite", "Audinite", "Metagrossite", "Sharpedonite", "Slowbronite", "Steelixite", "Pidgeotite", "Glalitite", "Diancite", "Prison Bottle", "Mega Cuff", "Cameruptite", "Lopunnite", "Salamencite", "Beedrillite", "Meteorite (1)", "Meteorite (2)", "Key Stone", "Meteorite Shard", "Eon Flute" };
-        public string[] abilityList = { "Stench", "Drizzle", "Speed Boost", "Battle Armor", "Sturdy", "Damp", "Limber", "Sand Veil", "Static", "Volt Absorb", "Water Absorb", "Oblivious", "Cloud Nine", "Compound Eyes", "Insomnia", "Color Change", "Immunity", "Flash Fire", "Shield Dust", "Own Tempo", "Suction Cups", "Intimidate", "Shadow Tag", "Rough Skin", "Wonder Guard", "Levitate", "Effect Spore", "Synchronize", "Clear Body", "Natural Cure", "Lightning Rod", "Serene Grace", "Swift Swim", "Chlorophyll", "Illuminate", "Trace", "Huge Power", "Poison Point", "Inner Focus", "Magma Armor", "Water Veil", "Magnet Pull", "Soundproof", "Rain Dish", "Sand Stream", "Pressure", "Thick Fat", "Early Bird", "Flame Body", "Run Away", "Keen Eye", "Hyper Cutter", "Pickup", "Truant", "Hustle", "Cute Charm", "Plus", "Minus", "Forecast", "Sticky Hold", "Shed Skin", "Guts", "Marvel Scale", "Liquid Ooze", "Overgrow", "Blaze", "Torrent", "Swarm", "Rock Head", "Drought", "Arena Trap", "Vital Spirit", "White Smoke", "Pure Power", "Shell Armor", "Air Lock", "Tangled Feet", "Motor Drive", "Rivalry", "Steadfast", "Snow Cloak", "Gluttony", "Anger Point", "Unburden", "Heatproof", "Simple", "Dry Skin", "Download", "Iron Fist", "Poison Heal", "Adaptability", "Skill Link", "Hydration", "Solar Power", "Quick Feet", "Normalize", "Sniper", "Magic Guard", "No Guard", "Stall", "Technician", "Leaf Guard", "Klutz", "Mold Breaker", "Super Luck", "Aftermath", "Anticipation", "Forewarn", "Unaware", "Tinted Lens", "Filter", "Slow Start", "Scrappy", "Storm Drain", "Ice Body", "Solid Rock", "Snow Warning", "Honey Gather", "Frisk", "Reckless", "Multitype", "Flower Gift", "Bad Dreams", "Pickpocket", "Sheer Force", "Contrary", "Unnerve", "Defiant", "Defeatist", "Cursed Body", "Healer", "Friend Guard", "Weak Armor", "Heavy Metal", "Light Metal", "Multiscale", "Toxic Boost", "Flare Boost", "Harvest", "Telepathy", "Moody", "Overcoat", "Poison Touch", "Regenerator", "Big Pecks", "Sand Rush", "Wonder Skin", "Analytic", "Illusion", "Imposter", "Infiltrator", "Mummy", "Moxie", "Justified", "Rattled", "Magic Bounce", "Sap Sipper", "Prankster", "Sand Force", "Iron Barbs", "Zen Mode", "Victory Star", "Turboblaze", "Teravolt", "Aroma Veil", "Flower Veil", "Cheek Pouch", "Protean", "Fur Coat", "Magician", "Bulletproof", "Competitive", "Strong Jaw", "Refrigerate", "Sweet Veil", "Stance Change", "Gale Wings", "Mega Launcher", "Grass Pelt", "Symbiosis", "Tough Claws", "Pixilate", "Gooey", "Aerilate", "Parental Bond", "Dark Aura", "Fairy Aura", "Aura Break", "Primordial Sea", "Desolate Land", "Delta Stream" };
-        public string[] speciesList = { "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoran♀", "Nidorina", "Nidoqueen", "Nidoran♂", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebel", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetch’d", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "Mr-Mime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew", "Chikorita", "Bayleef", "Meganium", "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr", "Sentret", "Furret", "Hoothoot", "Noctowl", "Ledyba", "Ledian", "Spinarak", "Ariados", "Crobat", "Chinchou", "Lanturn", "Pichu", "Cleffa", "Igglybuff", "Togepi", "Togetic", "Natu", "Xatu", "Mareep", "Flaaffy", "Ampharos", "Bellossom", "Marill", "Azumarill", "Sudowoodo", "Politoed", "Hoppip", "Skiploom", "Jumpluff", "Aipom", "Sunkern", "Sunflora", "Yanma", "Wooper", "Quagsire", "Espeon", "Umbreon", "Murkrow", "Slowking", "Misdreavus", "Unown", "Wobbuffet", "Girafarig", "Pineco", "Forretress", "Dunsparce", "Gligar", "Steelix", "Snubbull", "Granbull", "Qwilfish", "Scizor", "Shuckle", "Heracross", "Sneasel", "Teddiursa", "Ursaring", "Slugma", "Magcargo", "Swinub", "Piloswine", "Corsola", "Remoraid", "Octillery", "Delibird", "Mantine", "Skarmory", "Houndour", "Houndoom", "Kingdra", "Phanpy", "Donphan", "Porygon2", "Stantler", "Smeargle", "Tyrogue", "Hitmontop", "Smoochum", "Elekid", "Magby", "Miltank", "Blissey", "Raikou", "Entei", "Suicune", "Larvitar", "Pupitar", "Tyranitar", "Lugia", "Ho-Oh", "Celebi", "Treecko", "Grovyle", "Sceptile", "Torchic", "Combusken", "Blaziken", "Mudkip", "Marshtomp", "Swampert", "Poochyena", "Mightyena", "Zigzagoon", "Linoone", "Wurmple", "Silcoon", "Beautifly", "Cascoon", "Dustox", "Lotad", "Lombre", "Ludicolo", "Seedot", "Nuzleaf", "Shiftry", "Taillow", "Swellow", "Wingull", "Pelipper", "Ralts", "Kirlia", "Gardevoir", "Surskit", "Masquerain", "Shroomish", "Breloom", "Slakoth", "Vigoroth", "Slaking", "Nincada", "Ninjask", "Shedinja", "Whismur", "Loudred", "Exploud", "Makuhita", "Hariyama", "Azurill", "Nosepass", "Skitty", "Delcatty", "Sableye", "Mawile", "Aron", "Lairon", "Aggron", "Meditite", "Medicham", "Electrike", "Manectric", "Plusle", "Minun", "Volbeat", "Illumise", "Roselia", "Gulpin", "Swalot", "Carvanha", "Sharpedo", "Wailmer", "Wailord", "Numel", "Camerupt", "Torkoal", "Spoink", "Grumpig", "Spinda", "Trapinch", "Vibrava", "Flygon", "Cacnea", "Cacturne", "Swablu", "Altaria", "Zangoose", "Seviper", "Lunatone", "Solrock", "Barboach", "Whiscash", "Corphish", "Crawdaunt", "Baltoy", "Claydol", "Lileep", "Cradily", "Anorith", "Armaldo", "Feebas", "Milotic", "Castform", "Kecleon", "Shuppet", "Banette", "Duskull", "Dusclops", "Tropius", "Chimecho", "Absol", "Wynaut", "Snorunt", "Glalie", "Spheal", "Sealeo", "Walrein", "Clamperl", "Huntail", "Gorebyss", "Relicanth", "Luvdisc", "Bagon", "Shelgon", "Salamence", "Beldum", "Metang", "Metagross", "Regirock", "Regice", "Registeel", "Latias", "Latios", "Kyogre", "Groudon", "Rayquaza", "Jirachi", "Deoxys", "Turtwig", "Grotle", "Torterra", "Chimchar", "Monferno", "Infernape", "Piplup", "Prinplup", "Empoleon", "Starly", "Staravia", "Staraptor", "Bidoof", "Bibarel", "Kricketot", "Kricketune", "Shinx", "Luxio", "Luxray", "Budew", "Roserade", "Cranidos", "Rampardos", "Shieldon", "Bastiodon", "Burmy", "Wormadam", "Mothim", "Combee", "Vespiquen", "Pachirisu", "Buizel", "Floatzel", "Cherubi", "Cherrim", "Shellos", "Gastrodon", "Ambipom", "Drifloon", "Drifblim", "Buneary", "Lopunny", "Mismagius", "Honchkrow", "Glameow", "Purugly", "Chingling", "Stunky", "Skuntank", "Bronzor", "Bronzong", "Bonsly", "Mime-Jr.", "Happiny", "Chatot", "Spiritomb", "Gible", "Gabite", "Garchomp", "Munchlax", "Riolu", "Lucario", "Hippopotas", "Hippowdon", "Skorupi", "Drapion", "Croagunk", "Toxicroak", "Carnivine", "Finneon", "Lumineon", "Mantyke", "Snover", "Abomasnow", "Weavile", "Magnezone", "Lickilicky", "Rhyperior", "Tangrowth", "Electivire", "Magmortar", "Togekiss", "Yanmega", "Leafeon", "Glaceon", "Gliscor", "Mamoswine", "Porygon-Z", "Gallade", "Probopass", "Dusknoir", "Froslass", "Rotom", "Uxie", "Mesprit", "Azelf", "Dialga", "Palkia", "Heatran", "Regigigas", "Giratina", "Cresselia", "Phione", "Manaphy", "Darkrai", "Shaymin", "Arceus", "Victini", "Snivy", "Servine", "Serperior", "Tepig", "Pignite", "Emboar", "Oshawott", "Dewott", "Samurott", "Patrat", "Watchog", "Lillipup", "Herdier", "Stoutland", "Purrloin", "Liepard", "Pansage", "Simisage", "Pansear", "Simisear", "Panpour", "Simipour", "Munna", "Musharna", "Pidove", "Tranquill", "Unfezant", "Blitzle", "Zebstrika", "Roggenrola", "Boldore", "Gigalith", "Woobat", "Swoobat", "Drilbur", "Excadrill", "Audino", "Timburr", "Gurdurr", "Conkeldurr", "Tympole", "Palpitoad", "Seismitoad", "Throh", "Sawk", "Sewaddle", "Swadloon", "Leavanny", "Venipede", "Whirlipede", "Scolipede", "Cottonee", "Whimsicott", "Petilil", "Lilligant", "Basculin", "Sandile", "Krokorok", "Krookodile", "Darumaka", "Darmanitan", "Maractus", "Dwebble", "Crustle", "Scraggy", "Scrafty", "Sigilyph", "Yamask", "Cofagrigus", "Tirtouga", "Carracosta", "Archen", "Archeops", "Trubbish", "Garbodor", "Zorua", "Zoroark", "Minccino", "Cinccino", "Gothita", "Gothorita", "Gothitelle", "Solosis", "Duosion", "Reuniclus", "Ducklett", "Swanna", "Vanillite", "Vanillish", "Vanilluxe", "Deerling", "Sawsbuck", "Emolga", "Karrablast", "Escavalier", "Foongus", "Amoonguss", "Frillish", "Jellicent", "Alomomola", "Joltik", "Galvantula", "Ferroseed", "Ferrothorn", "Klink", "Klang", "Klinklang", "Tynamo", "Eelektrik", "Eelektross", "Elgyem", "Beheeyem", "Litwick", "Lampent", "Chandelure", "Axew", "Fraxure", "Haxorus", "Cubchoo", "Beartic", "Cryogonal", "Shelmet", "Accelgor", "Stunfisk", "Mienfoo", "Mienshao", "Druddigon", "Golett", "Golurk", "Pawniard", "Bisharp", "Bouffalant", "Rufflet", "Braviary", "Vullaby", "Mandibuzz", "Heatmor", "Durant", "Deino", "Zweilous", "Hydreigon", "Larvesta", "Volcarona", "Cobalion", "Terrakion", "Virizion", "Tornadus", "Thundurus", "Reshiram", "Zekrom", "Landorus", "Kyurem", "Keldeo", "Meloetta", "Genesect", "Chespin", "Quilladin", "Chesnaught", "Fennekin", "Braixen", "Delphox", "Froakie", "Frogadier", "Greninja", "Bunnelby", "Diggersby", "Fletchling", "Fletchinder", "Talonflame", "Scatterbug", "Spewpa", "Vivillon", "Litleo", "Pyroar", "Flabebe", "Floette", "Florges", "Skiddo", "Gogoat", "Pancham", "Pangoro", "Furfrou", "Espurr", "Meowstic", "Honedge", "Doublade", "Aegislash", "Spritzee", "Aromatisse", "Swirlix", "Slurpuff", "Inkay", "Malamar", "Binacle", "Barbaracle", "Skrelp", "Dragalge", "Clauncher", "Clawitzer", "Helioptile", "Heliolisk", "Tyrunt", "Tyrantrum", "Amaura", "Aurorus", "Sylveon", "Hawlucha", "Dedenne", "Carbink", "Goomy", "Sliggoo", "Goodra", "Klefki", "Phantump", "Trevenant", "Pumpkaboo", "Gourgeist", "Bergmite", "Avalugg", "Noibat", "Noivern", "Xerneas", "Yveltal", "Zygarde", "Diancie", "Hoopa", "Volcanion", "Egg" };
-        public string[] moveList = { "[None]", "Pound", "Karate Chop", "Double Slap", "Comet Punch", "Mega Punch", "Pay Day", "Fire Punch", "Ice Punch", "Thunder Punch", "Scratch", "Vice Grip", "Guillotine", "Razor Wind", "Swords Dance", "Cut", "Gust", "Wing Attack", "Whirlwind", "Fly", "Bind", "Slam", "Vine Whip", "Stomp", "Double Kick", "Mega Kick", "Jump Kick", "Rolling Kick", "Sand Attack", "Headbutt", "Horn Attack", "Fury Attack", "Horn Drill", "Tackle", "Body Slam", "Wrap", "Take Down", "Thrash", "Double-Edge", "Tail Whip", "Poison Sting", "Twineedle", "Pin Missile", "Leer", "Bite", "Growl", "Roar", "Sing", "Supersonic", "Sonic Boom", "Disable", "Acid", "Ember", "Flamethrower", "Mist", "Water Gun", "Hydro Pump", "Surf", "Ice Beam", "Blizzard", "Psybeam", "Bubble Beam", "Aurora Beam", "Hyper Beam", "Peck", "Drill Peck", "Submission", "Low Kick", "Counter", "Seismic Toss", "Strength", "Absorb", "Mega Drain", "Leech Seed", "Growth", "Razor Leaf", "Solar Beam", "Poison Powder", "Stun Spore", "Sleep Powder", "Petal Dance", "String Shot", "Dragon Rage", "Fire Spin", "Thunder Shock", "Thunderbolt", "Thunder Wave", "Thunder", "Rock Throw", "Earthquake", "Fissure", "Dig", "Toxic", "Confusion", "Psychic", "Hypnosis", "Meditate", "Agility", "Quick Attack", "Rage", "Teleport", "Night Shade", "Mimic", "Screech", "Double Team", "Recover", "Harden", "Minimize", "Smokescreen", "Confuse Ray", "Withdraw", "Defense Curl", "Barrier", "Light Screen", "Haze", "Reflect", "Focus Energy", "Bide", "Metronome", "Mirror Move", "Self-Destruct", "Egg Bomb", "Lick", "Smog", "Sludge", "Bone Club", "Fire Blast", "Waterfall", "Clamp", "Swift", "Skull Bash", "Spike Cannon", "Constrict", "Amnesia", "Kinesis", "Soft-Boiled", "High Jump Kick", "Glare", "Dream Eater", "Poison Gas", "Barrage", "Leech Life", "Lovely Kiss", "Sky Attack", "Transform", "Bubble", "Dizzy Punch", "Spore", "Flash", "Psywave", "Splash", "Acid Armor", "Crabhammer", "Explosion", "Fury Swipes", "Bonemerang", "Rest", "Rock Slide", "Hyper Fang", "Sharpen", "Conversion", "Tri Attack", "Super Fang", "Slash", "Substitute", "Struggle", "Sketch", "Triple Kick", "Thief", "Spider Web", "Mind Reader", "Nightmare", "Flame Wheel", "Snore", "Curse", "Flail", "Conversion 2", "Aeroblast", "Cotton Spore", "Reversal", "Spite", "Powder Snow", "Protect", "Mach Punch", "Scary Face", "Feint Attack", "Sweet Kiss", "Belly Drum", "Sludge Bomb", "Mud-Slap", "Octazooka", "Spikes", "Zap Cannon", "Foresight", "Destiny Bond", "Perish Song", "Icy Wind", "Detect", "Bone Rush", "Lock-On", "Outrage", "Sandstorm", "Giga Drain", "Endure", "Charm", "Rollout", "False Swipe", "Swagger", "Milk Drink", "Spark", "Fury Cutter", "Steel Wing", "Mean Look", "Attract", "Sleep Talk", "Heal Bell", "Return", "Present", "Frustration", "Safeguard", "Pain Split", "Sacred Fire", "Magnitude", "Dynamic Punch", "Megahorn", "Dragon Breath", "Baton Pass", "Encore", "Pursuit", "Rapid Spin", "Sweet Scent", "Iron Tail", "Metal Claw", "Vital Throw", "Morning Sun", "Synthesis", "Moonlight", "Hidden Power", "Cross Chop", "Twister", "Rain Dance", "Sunny Day", "Crunch", "Mirror Coat", "Psych Up", "Extreme Speed", "Ancient Power", "Shadow Ball", "Future Sight", "Rock Smash", "Whirlpool", "Beat Up", "Fake Out", "Uproar", "Stockpile", "Spit Up", "Swallow", "Heat Wave", "Hail", "Torment", "Flatter", "Will-O-Wisp", "Memento", "Facade", "Focus Punch", "Smelling Salts", "Follow Me", "Nature Power", "Charge", "Taunt", "Helping Hand", "Trick", "Role Play", "Wish", "Assist", "Ingrain", "Superpower", "Magic Coat", "Recycle", "Revenge", "Brick Break", "Yawn", "Knock Off", "Endeavor", "Eruption", "Skill Swap", "Imprison", "Refresh", "Grudge", "Snatch", "Secret Power", "Dive", "Arm Thrust", "Camouflage", "Tail Glow", "Luster Purge", "Mist Ball", "Feather Dance", "Teeter Dance", "Blaze Kick", "Mud Sport", "Ice Ball", "Needle Arm", "Slack Off", "Hyper Voice", "Poison Fang", "Crush Claw", "Blast Burn", "Hydro Cannon", "Meteor Mash", "Astonish", "Weather Ball", "Aromatherapy", "Fake Tears", "Air Cutter", "Overheat", "Odor Sleuth", "Rock Tomb", "Silver Wind", "Metal Sound", "Grass Whistle", "Tickle", "Cosmic Power", "Water Spout", "Signal Beam", "Shadow Punch", "Extrasensory", "Sky Uppercut", "Sand Tomb", "Sheer Cold", "Muddy Water", "Bullet Seed", "Aerial Ace", "Icicle Spear", "Iron Defense", "Block", "Howl", "Dragon Claw", "Frenzy Plant", "Bulk Up", "Bounce", "Mud Shot", "Poison Tail", "Covet", "Volt Tackle", "Magical Leaf", "Water Sport", "Calm Mind", "Leaf Blade", "Dragon Dance", "Rock Blast", "Shock Wave", "Water Pulse", "Doom Desire", "Psycho Boost", "Roost", "Gravity", "Miracle Eye", "Wake-Up Slap", "Hammer Arm", "Gyro Ball", "Healing Wish", "Brine", "Natural Gift", "Feint", "Pluck", "Tailwind", "Acupressure", "Metal Burst", "U-turn", "Close Combat", "Payback", "Assurance", "Embargo", "Fling", "Psycho Shift", "Trump Card", "Heal Block", "Wring Out", "Power Trick", "Gastro Acid", "Lucky Chant", "Me First", "Copycat", "Power Swap", "Guard Swap", "Punishment", "Last Resort", "Worry Seed", "Sucker Punch", "Toxic Spikes", "Heart Swap", "Aqua Ring", "Magnet Rise", "Flare Blitz", "Force Palm", "Aura Sphere", "Rock Polish", "Poison Jab", "Dark Pulse", "Night Slash", "Aqua Tail", "Seed Bomb", "Air Slash", "X-Scissor", "Bug Buzz", "Dragon Pulse", "Dragon Rush", "Power Gem", "Drain Punch", "Vacuum Wave", "Focus Blast", "Energy Ball", "Brave Bird", "Earth Power", "Switcheroo", "Giga Impact", "Nasty Plot", "Bullet Punch", "Avalanche", "Ice Shard", "Shadow Claw", "Thunder Fang", "Ice Fang", "Fire Fang", "Shadow Sneak", "Mud Bomb", "Psycho Cut", "Zen Headbutt", "Mirror Shot", "Flash Cannon", "Rock Climb", "Defog", "Trick Room", "Draco Meteor", "Discharge", "Lava Plume", "Leaf Storm", "Power Whip", "Rock Wrecker", "Cross Poison", "Gunk Shot", "Iron Head", "Magnet Bomb", "Stone Edge", "Captivate", "Stealth Rock", "Grass Knot", "Chatter", "Judgment", "Bug Bite", "Charge Beam", "Wood Hammer", "Aqua Jet", "Attack Order", "Defend Order", "Heal Order", "Head Smash", "Double Hit", "Roar of Time", "Spacial Rend", "Lunar Dance", "Crush Grip", "Magma Storm", "Dark Void", "Seed Flare", "Ominous Wind", "Shadow Force", "Hone Claws", "Wide Guard", "Guard Split", "Power Split", "Wonder Room", "Psyshock", "Venoshock", "Autotomize", "Rage Powder", "Telekinesis", "Magic Room", "Smack Down", "Storm Throw", "Flame Burst", "Sludge Wave", "Quiver Dance", "Heavy Slam", "Synchronoise", "Electro Ball", "Soak", "Flame Charge", "Coil", "Low Sweep", "Acid Spray", "Foul Play", "Simple Beam", "Entrainment", "After You", "Round", "Echoed Voice", "Chip Away", "Clear Smog", "Stored Power", "Quick Guard", "Ally Switch", "Scald", "Shell Smash", "Heal Pulse", "Hex", "Sky Drop", "Shift Gear", "Circle Throw", "Incinerate", "Quash", "Acrobatics", "Reflect Type", "Retaliate", "Final Gambit", "Bestow", "Inferno", "Water Pledge", "Fire Pledge", "Grass Pledge", "Volt Switch", "Struggle Bug", "Bulldoze", "Frost Breath", "Dragon Tail", "Work Up", "Electroweb", "Wild Charge", "Drill Run", "Dual Chop", "Heart Stamp", "Horn Leech", "Sacred Sword", "Razor Shell", "Heat Crash", "Leaf Tornado", "Steamroller", "Cotton Guard", "Night Daze", "Psystrike", "Tail Slap", "Hurricane", "Head Charge", "Gear Grind", "Searing Shot", "Techno Blast", "Relic Song", "Secret Sword", "Glaciate", "Bolt Strike", "Blue Flare", "Fiery Dance", "Freeze Shock", "Ice Burn", "Snarl", "Icicle Crash", "V-create", "Fusion Flare", "Fusion Bolt", "Flying Press", "Mat Block", "Belch", "Rototiller", "Sticky Web", "Fell Stinger", "Phantom Force", "Trick-or-Treat", "Noble Roar", "Ion Deluge", "Parabolic Charge", "Forest’s Curse", "Petal Blizzard", "Freeze-Dry", "Disarming Voice", "Parting Shot", "Topsy-Turvy", "Draining Kiss", "Crafty Shield", "Flower Shield", "Grassy Terrain", "Misty Terrain", "Electrify", "Play Rough", "Fairy Wind", "Moonblast", "Boomburst", "Fairy Lock", "King’s Shield", "Play Nice", "Confide", "Diamond Storm", "Steam Eruption", "Hyperspace Hole", "Water Shuriken", "Mystical Fire", "Spiky Shield", "Aromatic Mist", "Eerie Impulse", "Venom Drench", "Powder", "Geomancy", "Magnetic Flux", "Happy Hour", "Electric Terrain", "Dazzling Gleam", "Celebrate", "Hold Hands", "Baby-Doll Eyes", "Nuzzle", "Hold Back", "Infestation", "Power-Up Punch", "Oblivion Wing", "Thousand Arrows", "Thousand Waves", "Land’s Wrath", "Light of Ruin", "Origin Pulse", "Precipice Blades", "Dragon Ascent", "Hyperspace Fury" };
+        public byte[] items;
 
         public DataGridViewComboBoxColumn itemItem;
         public DataGridViewColumn itemAmount;
@@ -116,87 +125,48 @@ namespace ntrbase
         public DataGridViewColumn medAmount;
         public DataGridViewComboBoxColumn berItem;
         public DataGridViewColumn berAmount;
-        public System.Windows.Forms.ToolTip ToolTipTSVtt = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipTSVss = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipTSVt = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipTSVs = new System.Windows.Forms.ToolTip();
-        public System.Windows.Forms.ToolTip ToolTipPSV = new System.Windows.Forms.ToolTip();
 
+        // Variables for inventory (Gen 7)
+        private int currentpouch = 0;
+        private int medcount7 = 53;
+        private byte[] medData7 = new byte[53 * 4];
+        private int[,] meds7 = new int[53, 2];
+        private int itemcount7 = 336;
+        private byte[] itemData7 = new byte[336 * 4];
+        private int[,] items7 = new int[336, 2];
+        private int tmscount7 = 100;
+        private byte[] tmsData7 = new byte[100 * 4];
+        private int[,] tms7 = new int[100, 2];
+        private int berscount7 = 67;
+        private byte[] bersData7 = new byte[67 * 4];
+        private int[,] bers7 = new int[67, 2];
+        private int keyscount7 = 24;
+        private byte[] keysData7 = new byte[24 * 4];
+        private int[,] keys7 = new int[24, 2];
+
+        // Variables for ability change
+        int[] absno;
+        string[] abstr = new string[3];
+
+        //This array will contain controls that should be enabled when connected and disabled when disconnected.
+        Control[] enableWhenConnected = new Control[] { };
+        Control[] enableWhenConnected7 = new Control[] { };
+
+        // Tooltips for TSV and ESV
+        public ToolTip ToolTipTSVpoke = new ToolTip();
+        public ToolTip ToolTipPSV = new ToolTip();
+
+        // Log handling
+        public delegate void LogDelegate(string l);
+        public LogDelegate delAddLog;
+
+        #endregion Class variables
+
+        #region Main window
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            groupBox1.Size = new System.Drawing.Size(154, 74);
-            groupBox1.Location = new System.Drawing.Point(744, 339);
-
-            if (PingHost("fadx.co.uk") == true)
-            {
-                string downloadURL = "";
-                Version newVersion = null;
-                string aboutUpdate = "";
-                string xmlUrl = "http://fadx.co.uk/PKMN-NTR/update.xml";
-                XmlTextReader reader = null;
-                try
-                {
-                    reader = new XmlTextReader(xmlUrl);
-                    reader.MoveToContent();
-                    string elementName = "";
-                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "appinfo"))
-                    {
-                        while (reader.Read())
-                        {
-                            if (reader.NodeType == XmlNodeType.Element)
-                            {
-                                elementName = reader.Name;
-                            }
-                            else
-                            {
-                                if ((reader.NodeType == XmlNodeType.Text) && (reader.HasValue))
-                                    switch (elementName)
-                                    {
-                                        case "version":
-                                            newVersion = new Version(reader.Value);
-                                            break;
-                                        case "url":
-                                            downloadURL = reader.Value;
-                                            break;
-                                        case "about":
-                                            aboutUpdate = reader.Value;
-                                            break;
-
-                                    }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    Environment.Exit(1);
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
-                Version applicationVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                if (applicationVersion.CompareTo(newVersion) < 0)
-                {
-                    groupBox1.Size = new System.Drawing.Size(154, 97);
-                    groupBox1.Location = new System.Drawing.Point(744, 316);
-                    versionCheck.Visible = true;
-                }
-                else
-                {
-                }
-            }
-
-            species.Items.AddRange(speciesList);
-            ability.Items.AddRange(abilityList);
-            heldItem.Items.AddRange(itemList);
-            move1.Items.AddRange(moveList);
-            move2.Items.AddRange(moveList);
-            move3.Items.AddRange(moveList);
-            move4.Items.AddRange(moveList);
+            label69.Text = "Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
             DataGridViewComboBoxColumn itemItem = new DataGridViewComboBoxColumn
             {
@@ -278,17 +248,18 @@ namespace ntrbase
                 Width = 51,
             };
 
-            dataGridView1.Columns.Add(itemItem);
-            dataGridView1.Columns.Add(itemAmount);
-            dataGridView2.Columns.Add(keyItem);
-            dataGridView2.Columns.Add(keyAmount);
-            dataGridView3.Columns.Add(tmItem);
-            dataGridView3.Columns.Add(tmAmount);
-            dataGridView4.Columns.Add(medItem);
-            dataGridView4.Columns.Add(medAmount);
-            dataGridView5.Columns.Add(berItem);
-            dataGridView5.Columns.Add(berAmount);
-            foreach (string t in itemList)
+            itemsGridView.Columns.Add(itemItem);
+            itemsGridView.Columns.Add(itemAmount);
+            keysGridView.Columns.Add(keyItem);
+            keysGridView.Columns.Add(keyAmount);
+            tmsGridView.Columns.Add(tmItem);
+            tmsGridView.Columns.Add(tmAmount);
+            medsGridView.Columns.Add(medItem);
+            medsGridView.Columns.Add(medAmount);
+            bersGridView.Columns.Add(berItem);
+            bersGridView.Columns.Add(berAmount);
+
+            foreach (string t in LookupTable.Item6)
             {
                 itemItem.Items.Add(t);
                 keyItem.Items.Add(t);
@@ -296,339 +267,150 @@ namespace ntrbase
                 medItem.Items.Add(t);
                 berItem.Items.Add(t);
             }
+
+            foreach (string t in LookupTable.Item7)
+            {
+                nameItem7.Items.Add(t);
+            }
+
+            nameItem7.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
+            nameItem7.DisplayIndex = 0;
+            nameItem7.FlatStyle = FlatStyle.Flat;
+            countItem7.DisplayIndex = 1;
+
+            buttonWTStartEndless.Enabled = false;
+
+            checkUpdate();
+
             host.Text = Settings.Default.IP;
-            runCmd("import sys;sys.path.append('.\\python\\Lib')");
-            runCmd("for n in [n for n in dir(nc) if not n.startswith('_')]: globals()[n] = getattr(nc,n)    ");
-            runCmd("repr([n for n in dir(nc) if not n.startswith('_')])");
+            host.Focus();
         }
-
-        public static bool PingHost(string nameOrAddress)
-        {
-            bool pingable = false;
-            Ping pinger = new Ping();
-            try
-            {
-                PingReply reply = pinger.Send(nameOrAddress);
-                pingable = reply.Status == IPStatus.Success;
-            }
-            catch (PingException)
-            {
-
-            }
-            return pingable;
-        }
-
-        public void UpdateCheck()
-        {
-
-            if (PingHost("fadx.co.uk") == true)
-            {
-                string downloadURL = "";
-                Version newVersion = null;
-                string aboutUpdate = "";
-                string xmlUrl = "http://fadx.co.uk/PKMN-NTR/update.xml";
-                XmlTextReader reader = null;
-                try
-                {
-                    reader = new XmlTextReader(xmlUrl);
-                    reader.MoveToContent();
-                    string elementName = "";
-                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "appinfo"))
-                    {
-                        while (reader.Read())
-                        {
-                            if (reader.NodeType == XmlNodeType.Element)
-                            {
-                                elementName = reader.Name;
-                            }
-                            else
-                            {
-                                if ((reader.NodeType == XmlNodeType.Text) && (reader.HasValue))
-                                    switch (elementName)
-                                    {
-                                        case "version":
-                                            newVersion = new Version(reader.Value);
-                                            break;
-                                        case "url":
-                                            downloadURL = reader.Value;
-                                            break;
-                                        case "about":
-                                            aboutUpdate = reader.Value;
-                                            break;
-
-                                    }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    Environment.Exit(1);
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
-                Version applicationVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                if (applicationVersion.CompareTo(newVersion) < 0)
-                {
-                    string str = String.Format("Current Version: {0}.\nLatest Vesion: {1}. \n\nWhat's new: {2} ", applicationVersion, newVersion, aboutUpdate);
-                    if (DialogResult.No != MessageBox.Show(str + "\n\nDownload now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                    {
-                        try
-                        {
-                            Process.Start(downloadURL);
-                        }
-                        catch { }
-                        return;
-                    }
-                    else
-                    {
-                    }
-                }
-                else
-                {
-                }
-            }
-        }
-
-        public static byte[] ReadToEnd(System.IO.Stream stream)
-        {
-            long originalPosition = 0;
-
-            if (stream.CanSeek)
-            {
-                originalPosition = stream.Position;
-                stream.Position = 0;
-            }
-
-            try
-            {
-                byte[] readBuffer = new byte[4096];
-
-                int totalBytesRead = 0;
-                int bytesRead;
-
-                while ((bytesRead = stream.Read(readBuffer, totalBytesRead, readBuffer.Length - totalBytesRead)) > 0)
-                {
-                    totalBytesRead += bytesRead;
-
-                    if (totalBytesRead == readBuffer.Length)
-                    {
-                        int nextByte = stream.ReadByte();
-                        if (nextByte != -1)
-                        {
-                            byte[] temp = new byte[readBuffer.Length * 2];
-                            Buffer.BlockCopy(readBuffer, 0, temp, 0, readBuffer.Length);
-                            Buffer.SetByte(temp, totalBytesRead, (byte)nextByte);
-                            readBuffer = temp;
-                            totalBytesRead++;
-                        }
-                    }
-                }
-
-                byte[] buffer = readBuffer;
-                if (readBuffer.Length != totalBytesRead)
-                {
-                    buffer = new byte[totalBytesRead];
-                    Buffer.BlockCopy(readBuffer, 0, buffer, 0, totalBytesRead);
-                }
-                return buffer;
-            }
-            finally
-            {
-                if (stream.CanSeek)
-                {
-                    stream.Position = originalPosition;
-                }
-            }
-        }
-
-        public void isCloneDumped()
-        {
-            if (txtLog.Text.Contains("clone.temp successfully"))
-            {
-                afterCloneDump();
-            }
-        }
-
-        public static class Delay
-        {
-
-            static System.Windows.Forms.Timer runDelegates;
-            static Dictionary<MethodInvoker, DateTime> delayedDelegates = new Dictionary<MethodInvoker, DateTime>();
-
-            static Delay()
-            {
-
-                runDelegates = new System.Windows.Forms.Timer();
-                runDelegates.Interval = 250;
-                runDelegates.Tick += RunDelegates;
-                runDelegates.Enabled = true;
-
-            }
-
-            public static void Add(MethodInvoker method, int delay)
-            {
-
-                delayedDelegates.Add(method, DateTime.Now + TimeSpan.FromSeconds(delay));
-
-            }
-
-            static void RunDelegates(object sender, EventArgs e)
-            {
-
-                List<MethodInvoker> removeDelegates = new List<MethodInvoker>();
-
-                foreach (MethodInvoker method in delayedDelegates.Keys)
-                {
-
-                    if (DateTime.Now >= delayedDelegates[method])
-                    {
-                        method();
-                        removeDelegates.Add(method);
-                    }
-
-                }
-
-                foreach (MethodInvoker method in removeDelegates)
-                {
-
-                    delayedDelegates.Remove(method);
-
-                }
-
-
-            }
-
-        }
-
-
-        public delegate void LogDelegate(string l);
-        public LogDelegate delAddLog;
 
         public MainForm()
         {
+            Program.ntrClient.DataReady += handleDataReady;
+            Program.ntrClient.Connected += connectCheck;
+            Program.ntrClient.InfoReady += getGame;
             delAddLog = new LogDelegate(Addlog);
             InitializeComponent();
 
-            clonePkm.AllowDrop = true;
-            clonePkm.DragEnter += new DragEventHandler(clonePkm_DragEnter);
-            clonePkm.DragDrop += new DragEventHandler(clonePkm_DragDrop);
+
+            enableWhenConnected = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioBattleBox, radioTrade, radioOpponent, radioParty, onlyView, WriteBtn, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, itemsGridView, medsGridView, tmsGridView, bersGridView, keysGridView, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, itemAdd, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, slotBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, OrganizeMiddle, OrganizeTop, radioDayCare1, radioDayCare2, readESV, quickBreed, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, resumeLSR, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless};
+            enableWhenConnected7 = new Control[] { boxDump, slotDump, nameek6, dumpPokemon, dumpBoxes, radioBoxes, radioDaycare, radioParty, radioTrade, radioOpponent, onlyView, WriteBtn, species, nickname, nature, ability, heldItem, ball, dPID, shinyBox, randomPID, genderBox, isEgg, ExpPoints, level, friendship, ivHPNum, ivATKNum, ivDEFNum, ivSPANum, ivSPDNum, ivSPENum, evHPNum, evATKNum, evDEFNum, evSPANum, evSPDNum, evSPENum, HypT_HP, HypT_Atk, HypT_Def, HypT_SpA, HypT_SpD, HypT_Spe, move1, move2, move3, move4, relearnmove1, relearnmove2, relearnmove3, relearnmove4, otName, dTIDNum, dSIDNum, pkLang, showItems, showMedicine, showTMs, showBerries, showKeys, itemWrite, ReloadFields, playerName, pokeName, TIDNum, pokeTID, SIDNum, pokeSID, moneyNum, pokeMoney, milesNum, pokeMiles, totalFCNum, pokeTotalFC, bpNum, pokeBP, Lang, pokeLang, hourNum, minNum, secNum, pokeTime, cloneBoxTo, cloneSlotTo, cloneCopiesNo, cloneBoxFrom, cloneSlotFrom, cloneDoIt, writeBoxTo, writeSlotTo, writeCopiesNo, writeAutoInc, writeBrowse, writeDoIt, deleteBox, deleteSlot, deleteAmount, deleteKeepBackup, delPkm, manualDUp, ManualDDown, manualDLeft, manualDRight, manualA, manualB, manualX, manualY, manualL, manualR, manualStart, manualSelect, touchX, touchY, manualTouch, StickY, StickX, StickNumY, StickNumX, StickSend, manualSR, modeBreed, boxBreed, eggsNoBreed, bFilterLoad, filterBreeding, ESVlistSave, TSVlistNum, TSVlistAdd, TSVlistRemove, TSVlistSave, TSVlistLoad, readESV, runBreedingBot, typeLSR, srFilterLoad, filtersSoftReset, RunLSRbot, WTBox, WTSlot, WTtradesNo, RunWTbot, buttonWTStartEndless, WTcollectFC };
+
+            disableControls();
+            SetSelectedIndex(filterHPlogic, 0);
+            SetSelectedIndex(filterATKlogic, 0);
+            SetSelectedIndex(filterDEFlogic, 0);
+            SetSelectedIndex(filterSPAlogic, 0);
+            SetSelectedIndex(filterSPDlogic, 0);
+            SetSelectedIndex(filterSPElogic, 0);
+            SetSelectedIndex(filterPerIVlogic, 0);
         }
 
-        public static byte[] ObjectToByteArray(Object obj)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
-
-
-
-        void clonePkm_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
-        }
-
-        void clonePkm_DragDrop(object sender, DragEventArgs e)
-        {
-            if (fromBoxes.Checked == true)
-            {
-                MessageBox.Show("Check \"From File\" to use drag and dropping!", "Error");
-            }
-            if (fromFile.Checked == true)
-            {
-                int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
-                int ssOff = boff + (ss * 232);
-                string ssH = ssOff.ToString("X");
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files.Length <= 0)
-                    return;
-                string file = files[0];
-                byte[] ek6b = File.ReadAllBytes(file);
-                string ek6s = BitConverter.ToString(ek6b).Replace("-", ", 0x");
-                string extension = Path.GetExtension(file);
-                if (extension == ".pk6" || extension == ".pkx")
-                {
-                    byte[] cloneshort = PKHeX.encryptArray(ek6b.Take(232).ToArray());
-                    if (ek6s.Length == 1556 || ek6s.Length == 1388)
-                    {
-                        int icloneAmount = (int)cloneAmountFF.Value * 232;
-                        byte[] clone = new byte[icloneAmount];
-                        for (int i = 0; i < cloneAmountFF.Value; i++)
-                        {
-                            cloneshort.CopyTo(clone, (i) * 232);
-                        }
-                        string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                        string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-                        runCmd(pokeek6);
-                        txtLog.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please make sure you are using a valid PKX file.", "Incorrect File Size");
-                        txtLog.Clear();
-                    }
-                }
-                if (extension == ".ek6" || extension == ".ekx")
-                {
-                    byte[] cloneshort = ek6b.Take(232).ToArray();
-                    if (ek6s.Length == 1556 || ek6s.Length == 1388)
-                    {
-                        int icloneAmount = (int)cloneAmountFF.Value * 232;
-                        byte[] clone = new byte[icloneAmount];
-                        for (int i = 0; i < cloneAmountFF.Value; i++)
-                        {
-                            cloneshort.CopyTo(clone, (i) * 232);
-                        }
-                        string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                        string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-                        runCmd(pokeek6);
-                        txtLog.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
-                        txtLog.Clear();
-                    }
-                }
-            }
-
-        }
-
-
-
-
-        public void Addlog(string l)
-        {
-            if (!l.Contains("\r\n"))
-            {
-                l = l.Replace("\n", "\r\n");
-            }
-            if (!l.EndsWith("\n"))
-            {
-                l += "\r\n";
-            }
-            txtLog.AppendText(l);
-        }
-
-        public void runCmd(String cmd)
+        private async void checkUpdate()
         {
             try
             {
-                object ret = Program.pyEngine.CreateScriptSourceFromString(cmd).Execute(Program.globalScope);
+                Addlog("Look for updates");
+                // Get current
+                int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
+                int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
+                int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+                int revision = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
+                Addlog("Current version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+
+                // Get latest stable
+                Github = new GitHubClient(new ProductHeaderValue("PKMN-NTR-UpdateCheck"));
+                Release lateststable = await Github.Repository.Release.GetLatest("drgoku282", "PKMN-NTR");
+                int[] verlatest = Array.ConvertAll(lateststable.TagName.Split('.'), int.Parse);
+                Addlog("Last stable: " + lateststable.TagName);
+
+                // Look for latest stable
+                if (verlatest[0] > major || verlatest[1] > minor || verlatest[2] > build)
+                {
+                    Addlog("Update found!");
+                    SetText(updateLabel, "Version " + lateststable.TagName + " is available.");
+                    updateURL = lateststable.HtmlUrl;
+                    DialogResult result = MessageBox.Show("Version " + lateststable.TagName + " is available.\r\nDo you want to go to GitHub and download it?", "Update Available", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                        System.Diagnostics.Process.Start(updateURL);
+                }
+                else
+                { // Look for beta
+                    IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("drgoku282", "PKMN-NTR");
+                    Release latestbeta = releases.FirstOrDefault(rel => rel.Prerelease);
+                    Addlog("Last preview: " + latestbeta.TagName);
+                    if (latestbeta != null)
+                    {
+                        int[] verbeta = Array.ConvertAll(latestbeta.TagName.Split('.'), int.Parse);
+                        if (verbeta[0] > major || verbeta[1] > minor || verbeta[2] > build || verbeta[3] > revision)
+                        {
+                            Addlog("New preview version found");
+                            SetText(updateLabel, "Preview version " + latestbeta.TagName + " is available.");
+                            updateURL = latestbeta.HtmlUrl;
+                        }
+                        else
+                        {
+                            Addlog("PKMN-NTR is up to date");
+                            SetText(updateLabel, "PKMN-NTR is up to date.");
+                            updateURL = null;
+                        }
+                    }
+                    else
+                    {
+                        Addlog("PKMN-NTR is up to date");
+                        SetText(updateLabel, "PKMN-NTR is up to date.");
+                        updateURL = null;
+                    }
+                }
             }
             catch (Exception ex)
             {
+                updateURL = null;
+                Addlog("An error has ocurred while checking for updates:");
                 Addlog(ex.Message);
-                Addlog(ex.StackTrace);
+                MessageBox.Show(ex.Message);
+                SetText(updateLabel, "Update not found.");
             }
+        }
+
+        private void updateLabel_Click(object sender, EventArgs e)
+        {
+            if (updateURL != null)
+                System.Diagnostics.Process.Start(updateURL);
+        }
+
+        private void enableControls()
+        {
+            if (gen7)
+                foreach (Control c in enableWhenConnected7)
+                    SetEnabled(c, true);
+            else
+                foreach (Control c in enableWhenConnected)
+                    SetEnabled(c, true);
+        }
+
+        private void disableControls()
+        {
+            if (gen7)
+                foreach (Control c in enableWhenConnected7)
+                    SetEnabled(c, false);
+            else
+                foreach (Control c in enableWhenConnected)
+                    SetEnabled(c, false);
+        }
+
+        public void Addlog(string l)
+        {
+            lastlog = l;
+            if (l.Contains("Server disconnected") && !botWorking && game != GameType.None)
+                PerformDisconnect();
+            if (!l.Contains("\r\n"))
+                l = l.Replace("\n", "\r\n");
+            if (!l.EndsWith("\n"))
+                l += "\r\n";
+            txtLog.AppendText(l);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -636,528 +418,1216 @@ namespace ntrbase
             try
             {
                 Program.ntrClient.sendHeartbeatPacket();
-
             }
             catch (Exception)
             {
+
             }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RMTempEK6();
             Program.ntrClient.disconnect();
         }
-
 
         public void startAutoDisconnect()
         {
             disconnectTimer.Enabled = true;
-
         }
-
 
         private void disconnectTimer_Tick(object sender, EventArgs e)
         {
             disconnectTimer.Enabled = false;
-            runCmd("disconnect()");
+            Program.ntrClient.disconnect();
+            game = GameType.None;
         }
 
-        public void listprocesses()
-        {
-            runCmd("listprocess()");
-        }
+        #endregion window
 
+        #region Functions
 
-
-        public void connectCheck()
-        {
-
-            if (txtLog.Text.Contains("Server connected"))
+        static void handleDataReady(object sender, DataReadyEventArgs e)
+        { // We move data processing to a separate thread. This way even if processing takes a long time, the netcode doesn't hang.
+            DataReadyWaiting args;
+            if (waitingForData.TryGetValue(e.seq, out args))
             {
-                buttonConnect.Text = "Connected";
-                listprocesses();
-                buttonConnect.Enabled = false;
-                buttonDisconnect.Enabled = true;
-                pokeMoney.Enabled = true;
-                pokeMiles.Enabled = true;
-                pokeBP.Enabled = true;
-                moneyNum.Enabled = true;
-                milesNum.Enabled = true;
-                bpNum.Enabled = true;
-                slotDump.Enabled = true;
-                boxDump.Enabled = true;
-                nameek6.Enabled = true;
-                dumpek6.Enabled = true;
-                dumpBoxes.Enabled = true;
-                radioBoxes.Enabled = true;
-                radioDaycare.Enabled = true;
-                radioOpponent.Enabled = true;
-                radioTrade.Enabled = true;
-                pokeName.Enabled = true;
-                playerName.Enabled = true;
-                pokeTID.Enabled = true;
-                pokeSID.Enabled = true;
-                SIDNum.Enabled = true;
-                TIDNum.Enabled = true;
-                hourNum.Enabled = true;
-                minNum.Enabled = true;
-                secNum.Enabled = true;
-                pokeTime.Enabled = true;
-                dataGridView1.Enabled = true;
-                dataGridView2.Enabled = true;
-                dataGridView3.Enabled = true;
-                dataGridView4.Enabled = true;
-                dataGridView5.Enabled = true;
-                showItems.Enabled = true;
-                showMedicine.Enabled = true;
-                showTMs.Enabled = true;
-                showBerries.Enabled = true;
-                showKeys.Enabled = true;
-                itemAdd.Enabled = true;
-                itemWrite.Enabled = true;
-                dataGridView1.Enabled = true;
-                dataGridView2.Enabled = true;
-                dataGridView3.Enabled = true;
-                dataGridView4.Enabled = true;
-                dataGridView5.Enabled = true;
-                delPkm.Enabled = true;
-                deleteBox.Enabled = true;
-                deleteSlot.Enabled = true;
-                Lang.Enabled = true;
-                pokeLang.Enabled = true;
-                ivHPNum.Enabled = true;
-                ivATKNum.Enabled = true;
-                ivDEFNum.Enabled = true;
-                ivSPENum.Enabled = true;
-                ivSPANum.Enabled = true;
-                ivSPDNum.Enabled = true;
-                evHPNum.Enabled = true;
-                evATKNum.Enabled = true;
-                evDEFNum.Enabled = true;
-                evSPENum.Enabled = true;
-                evSPANum.Enabled = true;
-                evSPDNum.Enabled = true;
-                isEgg.Enabled = true;
-                nickname.Enabled = true;
-                nature.Enabled = true;
-                button1.Enabled = true;
-                heldItem.Enabled = true;
-                species.Enabled = true;
-                clonefromBoxFB.Enabled = true;
-                clonefromSlotFB.Enabled = true;
-                clonetoBoxFB.Enabled = true;
-                clonetoSlotFB.Enabled = true;
-                cloneAmountFB.Enabled = true;
-                cloneFB.Enabled = true;
-                cloneAmountFF.Enabled = true;
-                cloneFF.Enabled = true;
-                clonetoBoxFF.Enabled = true;
-                clonetoSlotFF.Enabled = true;
-                chooseCloneFF.Enabled = true;
-                fromBoxes.Enabled = true;
-                fromFile.Enabled = true;
-                deleteAmount.Enabled = true;
-                ability.Enabled = true;
-                move1.Enabled = true;
-                move2.Enabled = true;
-                move3.Enabled = true;
-                move4.Enabled = true;
-                ball.Enabled = true;
-                radioParty.Enabled = true;
-                dTIDNum.Enabled = true;
-                dSIDNum.Enabled = true;
-                otName.Enabled = true;
-                dPID.Enabled = true;
-                setShiny.Enabled = true;
-                onlyView.Enabled = true;
-                gender.Enabled = true;
-                friendship.Enabled = true;
-                randomPID.Enabled = true;
-                setShiny.Enabled = true;
-                radioBattleBox.Enabled = true;
-                Settings.Default.IP = host.Text;
-                Settings.Default.Save();
+                Array.Copy(e.data, args.data, Math.Min(e.data.Length, args.data.Length));
+                Thread t = new Thread(new ParameterizedThreadStart(args.handler));
+                t.Start(args);
+                waitingForData.Remove(e.seq);
             }
         }
 
-        public void getGame()
+        public int getHiddenPower()
         {
+            int hp = (15 * ((dumpedPKHeX.IV_HP & 1) + 2 * (dumpedPKHeX.IV_ATK & 1) + 4 * (dumpedPKHeX.IV_DEF & 1) + 8 * (dumpedPKHeX.IV_SPE & 1) + 16 * (dumpedPKHeX.IV_SPA & 1) + 32 * (dumpedPKHeX.IV_SPD & 1)) / 63);
+            return hp;
+        }
 
-            if (txtLog.Text.Contains("kujira-1"))
+        public int getTSV(decimal TID, decimal SID)
+        {
+            return ((int)TID ^ (int)SID) >> 4;
+        }
+
+        public int getGen7ID(decimal TID, decimal SID)
+        {
+            return (int)((uint)((int)TID | ((int)SID << 16)) % 1000000);
+        }
+
+        public uint getPSV(uint PID)
+        {
+            return ((PID >> 16 ^ PID & 0xFFFF) >> 4);
+        }
+
+        public void updateAbility(int speciesno, int formeno, int abnumber)
+        {
+            if (gen7)
             {
-                string log = txtLog.Text;
+                absno = LookupTable.getAbilities7(speciesno, formeno);
+                abstr[0] = LookupTable.Ability7[absno[0] - 1] + " (1)";
+                abstr[1] = LookupTable.Ability7[absno[1] - 1] + " (2)";
+                abstr[2] = LookupTable.Ability7[absno[2] - 1] + " (H)";
+                ComboboxFill(ability, abstr);
+            }
+            else
+            {
+                absno = LookupTable.getAbilities(speciesno, formeno);
+                abstr[0] = LookupTable.Ability6[absno[0] - 1] + " (1)";
+                abstr[1] = LookupTable.Ability6[absno[1] - 1] + " (2)";
+                abstr[2] = LookupTable.Ability6[absno[2] - 1] + " (H)";
+                ComboboxFill(ability, abstr);
+            }
+
+            if (ability.Items.Count == 3)
+                switch (abnumber)
+                {
+                    case 1:
+                        SetSelectedIndex(ability, 0);
+                        break;
+                    case 2:
+                        SetSelectedIndex(ability, 1);
+                        break;
+                    case 4:
+                        SetSelectedIndex(ability, 2);
+                        break;
+                    default:
+                        SetSelectedIndex(ability, 0);
+                        break;
+                }
+        }
+
+        #endregion Functions
+
+        #region Connection
+
+        private void buttonConnect_Click(object sender, EventArgs e)
+        {
+            //Some people leave the default IP address, hoping it would work...
+            if (host.Text == "0.0.0.0")
+            {
+                MessageBox.Show("Please input your console's local IP address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            txtLog.Clear();
+            Program.scriptHelper.connect(host.Text, 8000);
+        }
+
+        private void buttonDisconnect_Click(object sender, EventArgs e)
+        {
+            PerformDisconnect();
+        }
+
+        private void PerformDisconnect()
+        {
+            Program.scriptHelper.disconnect();
+            game = GameType.None;
+            buttonConnect.Text = "Connect";
+            buttonConnect.Enabled = true;
+            buttonDisconnect.Enabled = false;
+            disableControls();
+            itemsGridView.Rows.Clear();
+            keysGridView.Rows.Clear();
+            tmsGridView.Rows.Clear();
+            medsGridView.Rows.Clear();
+            bersGridView.Rows.Clear();
+            itemsView7.Rows.Clear();
+        }
+
+        public void connectCheck(object sender, EventArgs e)
+        {
+            Program.scriptHelper.listprocess();
+            buttonConnect.Text = "Connected";
+            buttonConnect.Enabled = false;
+            buttonDisconnect.Enabled = true;
+            Settings.Default.IP = host.Text;
+            Settings.Default.Save();
+        }
+
+        //This functions handles additional information events from NTR netcode. We are only interested in them if they are a process list, containing our game's PID and game type.
+        public void getGame(object sender, EventArgs e)
+        {
+            InfoReadyEventArgs args = (InfoReadyEventArgs)e;
+            if (args.info.Contains("kujira-1")) // X
+            {
+                game = GameType.X;
+                gen7 = false;
+                string log = args.info;
                 pname = ", pname: kujira-1";
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C6A6AC";
-                milesoff = "0x8C82BA0";
-                bpoff = "0x8C6A6E0";
-                boff = 147349960;
-                boffs = "0x8C861C8";
-                d1off = "0x8C7FF4C";
-                d2off = "0x8C8003C";
-                itemsoff = "0x8C67564";
-                medsoff = "0x8C67ECC";
-                keysoff = "0x8C67BA4";
-                tmsoff = "0x8C67D24";
-                bersoff = "0x8C67FCC";
-                nameoff = "0x8C79C84";
-                tidoff = "0x8C79C3C";
-                sidoff = "0x8C79C3E";
-                hroff = "0x8CE2814";
-                minoff = "0x8CE2816";
-                secoff = "0x8CE2817";
-                langoff = "0x8C79C69";
-                tradeoffrg = "0x8500000";
-                bboff = 147237932;
-                dumpMoney();
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
+                moneyoff = 0x8C6A6AC;
+                milesoff = 0x8C82BA0;
+                bpoff = 0x8C6A6E0;
+                boxOff = 0x8C861C8;
+                daycare1Off = 0x8C7FF4C;
+                daycare2Off = 0x8C8003C;
+                itemsoff = 0x8C67564;
+                medsoff = 0x8C67ECC;
+                keysoff = 0x8C67BA4;
+                tmsoff = 0x8C67D24;
+                bersoff = 0x8C67FCC;
+                nameoff = 0x8C79C84;
+                tidoff = 0x8C79C3C;
+                sidoff = 0x8C79C3E;
+                timeoff = 0x8CE2814;
+                langoff = 0x8C79C69;
+                tradeOff = 0x8500000;
+                battleBoxOff = 0x8C6AC2C;
+                partyOff = 0x8CE1CF8;
+                opponentOff = 0x8800000;
             }
-
-            if (txtLog.Text.Contains("kujira-2"))
+            else if (args.info.Contains("kujira-2")) // Y
             {
-                string log = txtLog.Text;
+                game = GameType.Y;
+                gen7 = false;
+                string log = args.info;
                 pname = ", pname: kujira-2";
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C6A6AC";
-                milesoff = "0x8C82BA0";
-                bpoff = "0x8C6A6E0";
-                boff = 147349960;
-                boffs = "0x8C861C8";
-                d1off = "0x8C7FF4C";
-                d2off = "0x8C8003C";
-                itemsoff = "0x8C67564";
-                medsoff = "0x8C67ECC";
-                keysoff = "0x8C67BA4";
-                tmsoff = "0x8C67D24";
-                bersoff = "0x8C67FCC";
-                nameoff = "0x8C79C84";
-                tidoff = "0x8C79C3C";
-                sidoff = "0x8C79C3E";
-                hroff = "0x8CE2814";
-                minoff = "0x8CE2816";
-                secoff = "0x8CE2817";
-                langoff = "0x8C79C69";
-                tradeoffrg = "0x8500000";
-                bboff = 147237932;
-                dumpMoney();
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
+                moneyoff = 0x8C6A6AC;
+                milesoff = 0x8C82BA0;
+                bpoff = 0x8C6A6E0;
+                boxOff = 0x8C861C8;
+                daycare1Off = 0x8C7FF4C;
+                daycare2Off = 0x8C8003C;
+                itemsoff = 0x8C67564;
+                medsoff = 0x8C67ECC;
+                keysoff = 0x8C67BA4;
+                tmsoff = 0x8C67D24;
+                bersoff = 0x8C67FCC;
+                nameoff = 0x8C79C84;
+                tidoff = 0x8C79C3C;
+                sidoff = 0x8C79C3E;
+                timeoff = 0x8CE2814;
+                langoff = 0x8C79C69;
+                tradeOff = 0x8500000;
+                battleBoxOff = 0x8C6AC2C;
+                partyOff = 0x8CE1CF8;
+                opponentOff = 0x8800000;
             }
-
-            if (txtLog.Text.Contains("sango-1"))
+            else if (args.info.Contains("sango-1")) // Omega Ruby
             {
-                string log = txtLog.Text;
+                game = GameType.OR;
+                gen7 = false;
+                string log = args.info;
                 pname = ", pname:  sango-1";
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C71DC0";
-                milesoff = "0x8C8B36C";
-                bpoff = "0x8C71DE8";
-                boff = 147448116;
-                boffs = "0x8C9E134";
-                d1off = "0x8C88370";
-                d2off = "0x8C88460";
-                itemsoff = "0x8C6EC70";
-                medsoff = "0x8C6F5E0";
-                keysoff = "0x8C6F2B0";
-                tmsoff = "0x8C6F430";
-                bersoff = "0x8C6F6E0";
-                nameoff = "0x8C81388";
-                tidoff = "0x8C81340";
-                sidoff = "0x8C81342";
-                hroff = "0x8CFBD88";
-                minoff = "0x8CFBD8A";
-                secoff = "0x8CFBD8B";
-                langoff = "0x8C8136D";
-                tradeoffrg = "0x8520000";
-                bboff = 147268400;
-                dumpMoney();
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
+                moneyoff = 0x8C71DC0;
+                milesoff = 0x8C8B36C;
+                bpoff = 0x8C71DE8;
+                boxOff = 0x8C9E134;
+                daycare1Off = 0x8C88180;
+                daycare2Off = 0x8C88270;
+                daycare3Off = 0x8C88370;
+                daycare4Off = 0x8C88460;
+                itemsoff = 0x8C6EC70;
+                medsoff = 0x8C6F5E0;
+                keysoff = 0x8C6F2B0;
+                tmsoff = 0x8C6F430;
+                bersoff = 0x8C6F6E0;
+                nameoff = 0x8C81388;
+                tidoff = 0x8C81340;
+                sidoff = 0x8C81342;
+                timeoff = 0x8CFBD88;
+                langoff = 0x8C8136D;
+                tradeOff = 0x8520000;
+                battleBoxOff = 0x8C72330;
+                partyOff = 0x8CFB26C;
+                opponentOff = 0x8800000;
             }
-
-            if (txtLog.Text.Contains("sango-2"))
+            else if (args.info.Contains("sango-2")) // Alpha Sapphire
             {
-                string log = txtLog.Text;
+                game = GameType.AS;
+                gen7 = false;
+                string log = args.info;
                 pname = ", pname:  sango-2";
-                string splitlog = log.Substring(log.IndexOf(pname) - 2, log.Length - log.IndexOf(pname));
-                pid = "0x" + splitlog.Substring(0, 2);
-                moneyoff = "0x8C71DC0";
-                milesoff = "0x8C8B36C";
-                bpoff = "0x8C71DE8";
-                boff = 147448116;
-                boffs = "0x8C9E134";
-                d1off = "0x8C88370";
-                d2off = "0x8C88460";
-                itemsoff = "0x8C6EC70";
-                medsoff = "0x8C6F5E0";
-                keysoff = "0x8C6F2B0";
-                tmsoff = "0x8C6F430";
-                bersoff = "0x8C6F6E0";
-                nameoff = "0x8C81388";
-                tidoff = "0x8C81340";
-                sidoff = "0x8C81342";
-                hroff = "0x8CFBD88";
-                minoff = "0x8CFBD8A";
-                secoff = "0x8CFBD8B";
-                langoff = "0x8C8136D";
-                tradeoffrg = "0x8520000";
-                bboff = 147268400;
-                dumpMoney();
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
+                moneyoff = 0x8C71DC0;
+                milesoff = 0x8C8B36C;
+                bpoff = 0x8C71DE8;
+                boxOff = 0x8C9E134;
+                daycare1Off = 0x8C88180;
+                daycare2Off = 0x8C88270;
+                daycare3Off = 0x8C88370;
+                daycare4Off = 0x8C88460;
+                itemsoff = 0x8C6EC70;
+                medsoff = 0x8C6F5E0;
+                keysoff = 0x8C6F2B0;
+                tmsoff = 0x8C6F430;
+                bersoff = 0x8C6F6E0;
+                nameoff = 0x8C81388;
+                tidoff = 0x8C81340;
+                sidoff = 0x8C81342;
+                timeoff = 0x8CFBD88;
+                langoff = 0x8C8136D;
+                tradeOff = 0x8520000;
+                battleBoxOff = 0x8C72330;
+                partyOff = 0x8CFB26C;
+                opponentOff = 0x8800000;
+            }
+            else if (args.info.Contains("niji_loc")) // Sun/Moon
+            {
+                game = GameType.SM;
+                gen7 = true;
+                string log = args.info;
+                pname = ", pname: niji_loc";
+                string splitlog = log.Substring(log.IndexOf(pname) - 8, log.Length - log.IndexOf(pname));
+                pid = Convert.ToInt32("0x" + splitlog.Substring(0, 8), 16);
+                moneyoff = 0x330D8FC0;
+                currentFCoff = 0x33124D58;
+                totalFCoff = 0x33124D5C;
+                bpoff = 0x330D90D8;
+                boxOff = 0x330D9838;
+                daycare1Off = 0x3313EC01;
+                daycare2Off = 0x3313ECEA;
+                itemsoff = 0x330D5934;
+                medsoff = 0x330D647C;
+                keysoff = 0x330D5FEC;
+                tmsoff = 0x330D62CC;
+                bersoff = 0x330D657C;
+                nameoff = 0x330D6808;
+                tidoff = 0x330D67D0;
+                sidoff = 0x330D67D2;
+                timeoff = 0x34197648;
+                langoff = 0x330D6805;
+                tradeOff = 0x32A870C8;
+                opponentOff = 0x3254F4AC;
+                partyOff = 0x34195E10;
+            }
+            else // not a process list or game not found - ignore packet
+                return;
+
+            // Fill fields in the form according to gen
+            Program.helper.pid = pid;
+            if (game != GameType.None && gen7 && !botWorking)
+            {
+                PKXEXT = ".pk7";
+                BOXEXT = "_boxes.ek7";
+                BOXES = 32;
+                fillGen7();
+                dumpAllData7();
+                enableControls();
+                SetCheckedRadio(radioBoxes, true);
+            }
+            else if (game != GameType.None && !gen7 && !botWorking)
+            {
+                PKXEXT = ".pk6";
+                BOXEXT = "_boxes.ek6";
+                BOXES = 31;
+                fillGen6();
+                dumpAllData();
+                enableControls();
+                SetCheckedRadio(radioBoxes, true);
             }
         }
 
-        public void dumprealoppOff()
+        private void fillGen6()
         {
-            string dumpRealoppoff = "data(0x8800000, 0x1FFFF, filename='getoppoff.temp', pid=" + pid + ")";
-            runCmd(dumpRealoppoff);
+            ComboboxFill(Lang, LookupTable.Lang6);
+            ComboboxFill(pkLang, LookupTable.Lang6);
+            ComboboxFill(species, LookupTable.Species6);
+            ComboboxFill(ability, LookupTable.Ability6);
+            ComboboxFill(filterAbility, LookupTable.Ability6);
+            ComboboxFill(heldItem, LookupTable.Item6);
+            ComboboxFill(ball, LookupTable.Balls6);
+            ComboboxFill(move1, LookupTable.Moves6);
+            ComboboxFill(move2, LookupTable.Moves6);
+            ComboboxFill(move3, LookupTable.Moves6);
+            ComboboxFill(move4, LookupTable.Moves6);
+            ComboboxFill(relearnmove1, LookupTable.Moves6);
+            ComboboxFill(relearnmove2, LookupTable.Moves6);
+            ComboboxFill(relearnmove3, LookupTable.Moves6);
+            ComboboxFill(relearnmove4, LookupTable.Moves6);
+            ComboboxFill(typeLSR, LookupTable.SoftResetModes6);
+            SetVisible(itemsView7, false);
+            SetVisible(itemsGridView, true);
+            SetVisible(keysGridView, false);
+            SetVisible(tmsGridView, false);
+            SetVisible(medsGridView, false);
+            SetVisible(bersGridView, false);
+            SetSelectedIndex(modeBreed, -1);
+            SetSelectedIndex(typeLSR, -1);
+            if (radioBoxes.Checked)
+                SetMaximum(boxDump, BOXES);
+            SetMaximum(cloneBoxTo, BOXES);
+            SetMaximum(cloneBoxFrom, BOXES);
+            SetMaximum(writeBoxTo, BOXES);
+            SetMaximum(boxBreed, BOXES);
+            SetMaximum(WTBox, BOXES);
+            SetText(label3, "Poké Miles:");
+            SetText(radioDaycare, "Daycare");
         }
 
-        public void dumprealtradeOff()
+        private async void fillGen7()
         {
-            string dumpRealtradeoff = "data(" + tradeoffrg + ", 0x1FFFF, filename='gettradeoff.temp', pid=" + pid + ")";
-            runCmd(dumpRealtradeoff);
+            ComboboxFill(Lang, LookupTable.Lang7);
+            ComboboxFill(pkLang, LookupTable.Lang7);
+            ComboboxFill(species, LookupTable.Species7);
+            ComboboxFill(ability, LookupTable.Ability7);
+            ComboboxFill(filterAbility, LookupTable.Ability7);
+            ComboboxFill(heldItem, LookupTable.Item7);
+            ComboboxFill(ball, LookupTable.Balls7);
+            ComboboxFill(move1, LookupTable.Moves7);
+            ComboboxFill(move2, LookupTable.Moves7);
+            ComboboxFill(move3, LookupTable.Moves7);
+            ComboboxFill(move4, LookupTable.Moves7);
+            ComboboxFill(relearnmove1, LookupTable.Moves7);
+            ComboboxFill(relearnmove2, LookupTable.Moves7);
+            ComboboxFill(relearnmove3, LookupTable.Moves7);
+            ComboboxFill(relearnmove4, LookupTable.Moves7);
+            ComboboxFill(typeLSR, LookupTable.SoftResetModes7);
+            SetVisible(itemsView7, true);
+            SetVisible(itemsGridView, false);
+            SetVisible(keysGridView, false);
+            SetVisible(tmsGridView, false);
+            SetVisible(medsGridView, false);
+            SetVisible(bersGridView, false);
+            SetSelectedIndex(modeBreed, -1);
+            SetSelectedIndex(typeLSR, -1);
+            if (radioBoxes.Checked)
+                SetMaximum(boxDump, BOXES);
+            SetMaximum(cloneBoxTo, BOXES);
+            SetMaximum(cloneBoxFrom, BOXES);
+            SetMaximum(writeBoxTo, BOXES);
+            SetMaximum(boxBreed, BOXES);
+            SetMaximum(WTBox, BOXES);
+            SetText(label3, "Current FC:");
+            SetText(radioDaycare, "Nursery");
+
+            // Apply connection patch
+            Task<bool> Patch = Program.helper.waitNTRwrite(0x3DFFD0, 0xE3A01000, pid);
+            if (!(await Patch))
+                MessageBox.Show("An error has ocurred while applying the connection patch.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public void dumpItems()
+        #endregion Connection
+
+        #region R/W trainer data
+
+        // Dump data according to generation
+        public void dumpAllData()
         {
-            string dumpItems = "data(" + itemsoff + ", 0x640, filename='items.temp', pid=" + pid + ")";
-            runCmd(dumpItems);
+            dumpName();
+            dumpTID();
+            dumpSID();
+            dumpMoney();
+            dumpMiles();
+            dumpBP();
+            dumpLang();
+            dumpTime();
+            dumpItems();
         }
 
-        public void dumpKeys()
+        public void dumpAllData7()
         {
-            string dumpKeys = "data(" + keysoff + ", 0x180, filename='keys.temp', pid=" + pid + ")";
-            runCmd(dumpKeys);
+            dumpName();
+            dumpTID();
+            dumpSID();
+            dumpMoney();
+            dumpBP();
+            dumpFC();
+            dumpLang();
+            dumpTime();
+            dumpItems7();
         }
 
-        public void dumpTMs()
+        private void ReloadFields_Click(object sender, EventArgs e)
         {
-            string dumpTMs = "data(" + tmsoff + ", 0x1A8, filename='tms.temp', pid=" + pid + ")";
-            runCmd(dumpTMs);
+            if (gen7)
+            {
+                dumpAllData7();
+                showItems.ForeColor = Color.Green;
+                showMedicine.ForeColor = Color.Black;
+                showTMs.ForeColor = Color.Black;
+                showBerries.ForeColor = Color.Black;
+                showKeys.ForeColor = Color.Black;
+            }
+            else
+                dumpAllData();
         }
 
-        public void dumpMeds()
-        {
-            string dumpMeds = "data(" + medsoff + ", 0x100, filename='meds.temp', pid=" + pid + ")";
-            runCmd(dumpMeds);
-        }
-
-        public void dumpBers()
-        {
-            string dumpBers = "data(" + bersoff + ", 0x120, filename='bers.temp', pid=" + pid + ")";
-            runCmd(dumpBers);
-        }
-
+        // Name handling
         public void dumpName()
         {
-            string dumpName = "data(" + nameoff + ", 0x18, filename='name.temp', pid=" + pid + ")";
-            runCmd(dumpName);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x18], handleNameData, null);
+            waitingForData.Add(Program.scriptHelper.data(nameoff, 0x18, pid), myArgs);
         }
 
+        public void handleNameData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetText(playerName, Encoding.Unicode.GetString(args.data));
+        }
+
+        private void pokeName_Click(object sender, EventArgs e)
+        {
+            if (playerName.Text.Length <= 12)
+            {
+                string nameS = playerName.Text.PadRight(12, '\0');
+                byte[] nameBytes = Encoding.Unicode.GetBytes(nameS);
+                Program.scriptHelper.write(nameoff, nameBytes, pid);
+            }
+            else
+                MessageBox.Show("That name is too long, please choose a trainer name of 12 character or less.", "Name too long!");
+        }
+
+        // TID handling
         public void dumpTID()
         {
-            string dumpTID = "data(" + tidoff + ", 0x02, filename='tid.temp', pid=" + pid + ")";
-            runCmd(dumpTID);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x02], handleTIDData, null);
+            waitingForData.Add(Program.scriptHelper.data(tidoff, 0x02, pid), myArgs);
         }
 
+        public void handleTIDData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(TIDNum, BitConverter.ToUInt16(args.data, 0));
+        }
+
+        private void pokeTID_Click(object sender, EventArgs e)
+        {
+            byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16(TIDNum.Value));
+            Program.scriptHelper.write(tidoff, tidbyte, pid);
+        }
+
+        // SID handling
         public void dumpSID()
         {
-            string dumpSID = "data(" + sidoff + ", 0x02, filename='sid.temp', pid=" + pid + ")";
-            runCmd(dumpSID);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x02], handleSIDData, null);
+            waitingForData.Add(Program.scriptHelper.data(sidoff, 0x02, pid), myArgs);
         }
 
-        public void dumpHr()
+        public void handleSIDData(object args_obj)
         {
-            string dumpHr = "data(" + hroff + ", 0x02, filename='hour.temp', pid=" + pid + ")";
-            runCmd(dumpHr);
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(SIDNum, BitConverter.ToUInt16(args.data, 0));
         }
 
-        public void dumpMin()
+        private void pokeSID_Click(object sender, EventArgs e)
         {
-            string dumpMin = "data(" + minoff + ", 0x01, filename='min.temp', pid=" + pid + ")";
-            runCmd(dumpMin);
+            byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16(SIDNum.Value));
+            Program.scriptHelper.write(sidoff, sidbyte, pid);
         }
 
-        public void dumpSec()
-        {
-            string dumpSec = "data(" + secoff + ", 0x01, filename='sec.temp', pid=" + pid + ")";
-            runCmd(dumpSec);
-        }
-
-        public void dumpLang()
-        {
-            string dumpLang = "data(" + langoff + ", 0x01, filename='lang.temp', pid=" + pid + ")";
-            runCmd(dumpLang);
-        }
-
+        // Money handling
         public void dumpMoney()
         {
-            string dumpMoney = "data(" + moneyoff + ", 0x04, filename='money.temp', pid=" + pid + ")";
-            runCmd(dumpMoney);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMoneyData, null);
+            waitingForData.Add(Program.scriptHelper.data(moneyoff, 0x04, pid), myArgs);
         }
 
-        public void dumpMiles()
+        public void handleMoneyData(object args_obj)
         {
-            string dumpMiles = "data(" + milesoff + ", 0x04, filename='miles.temp', pid=" + pid + ")";
-            runCmd(dumpMiles);
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(moneyNum, BitConverter.ToInt32(args.data, 0));
         }
 
+        private void pokeMoney_Click(object sender, EventArgs e)
+        {
+            byte[] moneybyte = BitConverter.GetBytes(Convert.ToInt32(moneyNum.Value));
+            Program.scriptHelper.write(moneyoff, moneybyte, pid);
+        }
+
+        // Battle Points Handling
         public void dumpBP()
         {
-            string dumpBP = "data(" + bpoff + ", 0x04, filename='bp.temp', pid=" + pid + ")";
-            runCmd(dumpBP);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleBPData, null);
+            waitingForData.Add(Program.scriptHelper.data(bpoff, 0x04, pid), myArgs);
         }
 
-        public static byte[] StringToByteArray(String hex)
+        public void handleBPData(object args_obj)
         {
-            int NumberChars = hex.Length;
-            byte[] bytes = new byte[NumberChars / 2];
-            for (int i = 0; i < NumberChars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            return bytes;
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(bpNum, BitConverter.ToInt32(args.data, 0));
         }
 
+        private void pokeBP_Click(object sender, EventArgs e)
+        {
+            byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
+            Program.scriptHelper.write(bpoff, bpbyte, pid);
+        }
 
+        // Poké Miles and Current FC handling
+        public void dumpMiles()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
+            waitingForData.Add(Program.scriptHelper.data(milesoff, 0x04, pid), myArgs);
+        }
+
+        public void handleMilesData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(milesNum, BitConverter.ToInt32(args.data, 0));
+        }
+
+        private void pokeMiles_Click(object sender, EventArgs e)
+        {
+            if (gen7)
+            { // Current Festival Coins
+                byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
+                Program.scriptHelper.write(currentFCoff, FCbyte, pid);
+            }
+            else
+            { // Poké Miles
+                byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
+                Program.scriptHelper.write(milesoff, milesbyte, pid);
+            }
+        }
+
+        // Total Festival Coins handling
+        public void dumpFC()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleMilesData, null);
+            waitingForData.Add(Program.scriptHelper.data(currentFCoff, 0x04, pid), myArgs);
+            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[0x04], handleFC, null);
+            waitingForData.Add(Program.scriptHelper.data(totalFCoff, 0x04, pid), myArgs2);
+        }
+
+        public void handleFC(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(totalFCNum, BitConverter.ToInt32(args.data, 0));
+        }
+
+        private void pokeTotalFC_Click(object sender, EventArgs e)
+        {
+            byte[] FCbyte = BitConverter.GetBytes(Convert.ToInt32(totalFCNum.Value));
+            Program.scriptHelper.write(totalFCoff, FCbyte, pid);
+        }
+
+        // Language handling
+        public void dumpLang()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x01], handleLangData, null);
+            waitingForData.Add(Program.scriptHelper.data(langoff, 0x01, pid), myArgs);
+        }
+
+        public void handleLangData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+
+            byte langbyte = args.data[0];
+            int i = 0;
+            switch (langbyte)
+            {
+                case 1: i = 0; break;
+                case 2: i = 1; break;
+                case 3: i = 2; break;
+                case 4: i = 3; break;
+                case 5: i = 4; break;
+                case 7: i = 5; break;
+                case 8: i = 6; break;
+                case 9: i = 7; break;
+                case 10: i = 8; break;
+                default: i = -1; break;
+            }
+            SetSelectedIndex(Lang, i);
+        }
+
+        private void pokeLang_Click(object sender, EventArgs e)
+        {
+            switch (Lang.SelectedIndex)
+            {
+                case 0: lang = 0x01; break;
+                case 1: lang = 0x02; break;
+                case 2: lang = 0x03; break;
+                case 3: lang = 0x04; break;
+                case 4: lang = 0x05; break;
+                case 5: lang = 0x07; break;
+                case 6: lang = 0x08; break;
+                case 7: lang = 0x09; break;
+                case 8: lang = 0x0A; break;
+            }
+            Program.scriptHelper.writebyte(langoff, lang, pid);
+        }
+
+        // Time handling
+        public void dumpTime()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x04], handleTimeData, null);
+            waitingForData.Add(Program.scriptHelper.data(timeoff, 0x04, pid), myArgs);
+        }
+
+        public void handleTimeData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            SetValue(hourNum, BitConverter.ToUInt16(args.data, 0));
+            SetValue(minNum, args.data[2]);
+            SetValue(secNum, args.data[3]);
+        }
+
+        private void pokeTime_Click(object sender, EventArgs e)
+        {
+            byte[] timeData = new byte[4];
+            BitConverter.GetBytes(Convert.ToUInt16(hourNum.Value)).CopyTo(timeData, 0);
+            timeData[2] = Convert.ToByte(minNum.Value);
+            timeData[3] = Convert.ToByte(secNum.Value);
+            Program.scriptHelper.write(timeoff, timeData, pid);
+        }
+
+        // Item handling
+        public void dumpItems()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0xB90], handleItemData, null);
+            waitingForData.Add(Program.scriptHelper.data(itemsoff, 0xB90, pid), myArgs);
+        }
+
+        public void handleItemData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            items = new byte[args.data.Length];
+            Array.Copy(args.data, items, args.data.Length);
+            //Final data processing will be done in GUI thread
+            ItemDumpFinished();
+        }
+
+        private void ItemDumpFinished()
+        {
+            if (itemsGridView.InvokeRequired)
+                itemsGridView.Invoke((MethodInvoker)delegate { readItems(); });
+            else
+                readItems();
+        }
 
         public void readItems()
         {
-            const string dumpedItems = "items.temp";
-            const string dumpedKeys = "keys.temp";
-            const string dumpedTMs = "tms.temp";
-            const string dumpedMeds = "meds.temp";
-            const string dumpedBers = "bers.temp";
+            const int itemsLength = 1600;
+            const int keysLength = 384;
+            const int tmsLength = 432;
+            const int medsLength = 256;
+            const int bersLength = 288;
+            const int totalLength = itemsLength + keysLength + tmsLength + medsLength + bersLength;
 
-            if (File.Exists(dumpedItems))
+            if (items == null || items.Length != totalLength)
+                throw new ArgumentOutOfRangeException("Item data array is of wrong length");
+
+            itemData = items.Skip(0).Take(itemsLength).ToArray();
+            keyData = items.Skip((int)(keysoff - itemsoff)).Take(keysLength).ToArray();
+            tmData = items.Skip((int)(tmsoff - itemsoff)).Take(tmsLength).ToArray();
+            medData = items.Skip((int)(medsoff - itemsoff)).Take(medsLength).ToArray();
+            berryData = items.Skip((int)(bersoff - itemsoff)).Take(bersLength).ToArray();
+
+            addItemsToGridView(itemData, itemsGridView);
+            addItemsToGridView(keyData, keysGridView);
+            addItemsToGridView(tmData, tmsGridView);
+            addItemsToGridView(medData, medsGridView);
+            addItemsToGridView(berryData, bersGridView);
+        }
+
+        private void addItemsToGridView(byte[] data, DataGridView gv)
+        {
+            int numOfItems = countItems(data);
+            if (numOfItems > 0)
             {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedItems, FileMode.Open)))
+                gv.Rows.Add(numOfItems);
+                for (int i = 0; i < numOfItems; i++)
                 {
-                    const int itemsLength = 1600;
-                    items = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(items).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    numofItems = Convert.ToInt32(numofItemsRounded);
-                    if (numofItems == 0)
-                    {
-
-                    }
-                    if (numofItems != 0)
-                    {
-                        dataGridView1.Rows.Add(numofItems);
-                    }
-                    for (int i = 0; i < numofItems; i++)
-                    {
-                        uint itemsfinal = BitConverter.ToUInt16(items, i * 4);
-                        uint amountfinal = BitConverter.ToUInt16(items, (i * 4) + 2);
-                        dataGridView1.Rows[i].Cells[0].Value = itemList[itemsfinal];
-                        dataGridView1.Rows[i].Cells[1].Value = amountfinal;
-                    }
-                }
-            }
-
-            if (File.Exists(dumpedKeys))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedKeys, FileMode.Open)))
-                {
-                    const int itemsLength = 384;
-                    byte[] keys = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(keys).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofKeys = Convert.ToInt32(numofItemsRounded);
-                    dataGridView2.Rows.Add(numofKeys);
-                    for (int i = 0; i < numofKeys; i++)
-                    {
-                        uint keysfinal = BitConverter.ToUInt16(keys, i * 4);
-                        uint keysamountfinal = BitConverter.ToUInt16(keys, (i * 4) + 2);
-                        dataGridView2.Rows[i].Cells[0].Value = itemList[keysfinal];
-                        dataGridView2.Rows[i].Cells[1].Value = keysamountfinal;
-
-                    }
-                }
-            }
-
-            if (File.Exists(dumpedTMs))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedTMs, FileMode.Open)))
-                {
-                    const int itemsLength = 432;
-                    byte[] tms = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(tms).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofTMs = Convert.ToInt32(numofItemsRounded);
-                    dataGridView3.Rows.Add(numofTMs);
-                    for (int i = 0; i < numofTMs; i++)
-                    {
-                        uint tmsfinal = BitConverter.ToUInt16(tms, i * 4);
-                        uint tmsamountfinal = BitConverter.ToUInt16(tms, (i * 4) + 2);
-                        dataGridView3.Rows[i].Cells[0].Value = itemList[tmsfinal];
-                        dataGridView3.Rows[i].Cells[1].Value = tmsamountfinal;
-
-                    }
-                }
-            }
-
-            if (File.Exists(dumpedMeds))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedMeds, FileMode.Open)))
-                {
-                    const int itemsLength = 256;
-                    byte[] meds = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(meds).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofMeds = Convert.ToInt32(numofItemsRounded);
-                    dataGridView4.Rows.Add(numofMeds);
-                    for (int i = 0; i < numofMeds; i++)
-                    {
-                        uint medsfinal = BitConverter.ToUInt16(meds, i * 4);
-                        uint medsamountfinal = BitConverter.ToUInt16(meds, (i * 4) + 2);
-                        dataGridView4.Rows[i].Cells[0].Value = itemList[medsfinal];
-                        dataGridView4.Rows[i].Cells[1].Value = medsamountfinal;
-
-                    }
-                }
-            }
-
-            if (File.Exists(dumpedBers))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedBers, FileMode.Open)))
-                {
-                    const int itemsLength = 288;
-                    byte[] bers = reader.ReadBytes(itemsLength);
-                    string itemsstring = BitConverter.ToString(bers).Replace("-", "");
-                    string[] itemssplit = itemsstring.Split(new[] { "00000000" }, StringSplitOptions.None);
-                    decimal numofItemsdec = itemssplit[0].Length / (Decimal)8;
-                    decimal numofItemsRounded = Math.Ceiling(numofItemsdec);
-                    int numofBers = Convert.ToInt32(numofItemsRounded);
-                    dataGridView5.Rows.Add(numofBers);
-                    for (int i = 0; i < numofBers; i++)
-                    {
-                        uint bersfinal = BitConverter.ToUInt16(bers, i * 4);
-                        uint bersamountfinal = BitConverter.ToUInt16(bers, (i * 4) + 2);
-                        dataGridView5.Rows[i].Cells[0].Value = itemList[bersfinal];
-                        dataGridView5.Rows[i].Cells[1].Value = bersamountfinal;
-
-                    }
+                    int itemsfinal = BitConverter.ToUInt16(data, i * 4);
+                    int amountfinal = BitConverter.ToUInt16(data, (i * 4) + 2);
+                    gv.Rows[i].Cells[0].Value = LookupTable.Item6[itemsfinal];
+                    gv.Rows[i].Cells[1].Value = amountfinal;
                 }
             }
         }
 
-        static List<int> findOccurences(byte[] haystack, byte[] needle)
+        private int countItems(byte[] data)
         {
-            List<int> occurences = new List<int>();
+            int i = 0;
+            for (i = 0; i < data.Length; i += 4)
+            {
+                uint type = BitConverter.ToUInt16(data, i);
+                uint amount = BitConverter.ToUInt16(data, i + 2);
+                if (type == 0 && amount == 0)
+                    break;
+            }
+            return i / 4;
+        }
 
-            for (int i = 0; i < haystack.Length; i++)
+        private void itemAdd_Click(object sender, EventArgs e)
+        {
+            if (itemsGridView.Visible == true)
+            {
+                if (itemsGridView.RowCount >= 400)
+                    MessageBox.Show("You already have the max amount of items!", "Too many items");
+                else
+                    itemsGridView.Rows.Add("[None]", 0);
+            }
+
+            if (keysGridView.Visible == true)
+            {
+                if (keysGridView.RowCount >= 96)
+                    MessageBox.Show("You already have the max amount of key items!", "Too many items");
+                else
+                    keysGridView.Rows.Add("[None]", 0);
+            }
+
+            if (tmsGridView.Visible == true)
+            {
+                if (tmsGridView.RowCount >= 96)
+                    MessageBox.Show("You already have the max amount of medicine items!", "Too many items");
+                else
+                    tmsGridView.Rows.Add("[None]", 0);
+            }
+
+            if (medsGridView.Visible == true)
+            {
+                if (medsGridView.RowCount >= 108)
+                    MessageBox.Show("You already have the max amount of TMs & HMs!", "Too many items");
+                else
+                    medsGridView.Rows.Add("[None]", 0);
+            }
+
+            if (bersGridView.Visible == true)
+            {
+                if (bersGridView.RowCount >= 72)
+                    MessageBox.Show("You already have the max amount of berries!", "Too many items");
+                else
+                    bersGridView.Rows.Add("[None]", 0);
+            }
+        }
+
+        public void itemWrite_Click(object sender, EventArgs e)
+        {
+            byte[] dataToWrite = new byte[0] { };
+            uint offsetToWrite = 0;
+            if (gen7)
+            {
+                itemData = new byte[itemsView7.Rows.Count * 4];
+                for (int i = 0; i < itemsView7.Rows.Count; i++)
+                {
+                    // Build Item Value
+                    uint val = 0;
+                    string datastring = itemsView7.Rows[i].Cells[0].Value.ToString();
+                    int itemIndex = Array.IndexOf(LookupTable.Item7, datastring);
+                    int itemcnt;
+                    itemcnt = Convert.ToInt32(itemsView7.Rows[i].Cells[1].Value.ToString());
+                    val |= (uint)(itemIndex & 0x3FF);
+                    val |= (uint)(itemcnt & 0x3FF) << 10;
+                    BitConverter.GetBytes(val).CopyTo(itemData, i * 4);
+                }
+                dataToWrite = itemData;
+                switch (currentpouch)
+                {
+                    case 0:
+                        offsetToWrite = medsoff;
+                        break;
+                    case 1:
+                        offsetToWrite = itemsoff;
+                        break;
+                    case 2:
+                        offsetToWrite = tmsoff;
+                        break;
+                    case 3:
+                        offsetToWrite = bersoff;
+                        break;
+                    case 4:
+                        offsetToWrite = keysoff;
+                        break;
+                }
+            }
+            else
+            {
+                if (itemsGridView.Visible == true)
+                {
+                    itemData = new byte[1600];
+                    for (int i = 0; i < itemsGridView.RowCount; i++)
+                    {
+                        string datastring = itemsGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(itemsGridView.Rows[i].Cells[1].Value.ToString());
+
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
+                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
+                    }
+                    dataToWrite = itemData;
+                    offsetToWrite = itemsoff;
+                }
+
+                if (keysGridView.Visible == true)
+                {
+                    keyData = new byte[384];
+                    for (int i = 0; i < keysGridView.RowCount; i++)
+                    {
+                        string datastring = keysGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(keysGridView.Rows[i].Cells[1].Value.ToString());
+
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
+                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
+                    }
+                    dataToWrite = keyData;
+                    offsetToWrite = keysoff;
+                }
+
+                if (tmsGridView.Visible == true)
+                {
+                    tmData = new byte[432];
+                    for (int i = 0; i < tmsGridView.RowCount; i++)
+                    {
+                        string datastring = tmsGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(tmsGridView.Rows[i].Cells[1].Value.ToString());
+
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
+                        BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
+                    }
+                    dataToWrite = tmData;
+                    offsetToWrite = tmsoff;
+                }
+
+                if (medsGridView.Visible == true)
+                {
+                    medData = new byte[256];
+                    for (int i = 0; i < medsGridView.RowCount; i++)
+                    {
+                        string datastring = medsGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(medsGridView.Rows[i].Cells[1].Value.ToString());
+
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
+                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
+                    }
+                    dataToWrite = medData;
+                    offsetToWrite = medsoff;
+                }
+
+                if (bersGridView.Visible == true)
+                {
+                    berryData = new byte[288];
+                    for (int i = 0; i < bersGridView.RowCount; i++)
+                    {
+                        string datastring = bersGridView.Rows[i].Cells[0].Value.ToString();
+                        int itemIndex = Array.IndexOf(LookupTable.Item6, datastring);
+                        int itemcnt;
+                        itemcnt = Convert.ToUInt16(bersGridView.Rows[i].Cells[1].Value.ToString());
+
+                        BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
+                        BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
+                    }
+                    dataToWrite = berryData;
+                    offsetToWrite = bersoff;
+                }
+            }
+            Program.scriptHelper.write(offsetToWrite, dataToWrite, pid);
+        }
+
+        // Item handling Gen 7
+        public void dumpItems7()
+        {
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[53 * 4], handleMeds7, null);
+            waitingForData.Add(Program.scriptHelper.data(medsoff, 53 * 4, pid), myArgs);
+            DataReadyWaiting myArgs2 = new DataReadyWaiting(new byte[336 * 4], handleItems7, null);
+            waitingForData.Add(Program.scriptHelper.data(itemsoff, 336 * 4, pid), myArgs2);
+            DataReadyWaiting myArgs3 = new DataReadyWaiting(new byte[100 * 4], handleTMs7, null);
+            waitingForData.Add(Program.scriptHelper.data(tmsoff, 100 * 4, pid), myArgs3);
+            DataReadyWaiting myArgs4 = new DataReadyWaiting(new byte[67 * 4], handleBerries7, null);
+            waitingForData.Add(Program.scriptHelper.data(bersoff, 67 * 4, pid), myArgs4);
+            DataReadyWaiting myArgs5 = new DataReadyWaiting(new byte[24 * 4], handleKeyItems7, null);
+            waitingForData.Add(Program.scriptHelper.data(keysoff, 24 * 4, pid), myArgs5);
+        }
+
+        public void handleMeds7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, medData7, args.data.Length);
+            for (int i = 0; i < medcount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(medData7, i * 4);
+                meds7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                meds7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+            }
+        }
+
+        public void handleItems7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, itemData7, args.data.Length);
+            for (int i = 0; i < itemcount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(itemData7, i * 4);
+                items7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                items7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+            }
+            ItemDumpFinished7(items7);
+            currentpouch = 1;
+        }
+
+        public void handleTMs7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, tmsData7, args.data.Length);
+            for (int i = 0; i < tmscount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(tmsData7, i * 4);
+                tms7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                tms7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+            }
+        }
+
+        public void handleBerries7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, bersData7, args.data.Length);
+            for (int i = 0; i < berscount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(bersData7, i * 4);
+                bers7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                bers7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+            }
+        }
+
+        public void handleKeyItems7(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            Array.Copy(args.data, keysData7, args.data.Length);
+            for (int i = 0; i < keyscount7; i++)
+            {
+                uint val = BitConverter.ToUInt32(keysData7, i * 4);
+                keys7[i, 0] = (int)(val & 0x3FF); // 10bit itemID
+                keys7[i, 1] = (int)(val >> 10 & 0x3FF); // 10bit count
+            }
+        }
+
+        private void ItemDumpFinished7(int[,] itemdata)
+        {
+            if (itemsView7.InvokeRequired)
+                itemsView7.Invoke((MethodInvoker)delegate { readItems7(itemdata); });
+            else
+                readItems7(itemdata);
+        }
+
+        private void readItems7(int[,] itemdata)
+        {
+            itemsView7.Rows.Clear();
+            for (int i = 0; i < itemdata.GetLength(0); i++)
+            {
+                itemsView7.Rows.Add();
+                itemsView7.Rows[i].Cells[0].Value = LookupTable.Item7[itemdata[i, 0]];
+                itemsView7.Rows[i].Cells[1].Value = itemdata[i, 1];
+            }
+        }
+
+        #endregion R/W trainer data
+
+        #region R/W pokémon data
+
+        // Dump single pokémon
+        private void dumpPokemon_Click(object sender, EventArgs e)
+        {
+            // Obtain offset
+            uint dumpOff = 0;
+            if (radioBoxes.Checked)
+            {
+                uint ssd = ((Decimal.ToUInt32(boxDump.Value) - 1) * BOXSIZE) + Decimal.ToUInt32(slotDump.Value) - 1;
+                dumpOff = boxOff + (ssd * POKEBYTES);
+            }
+            else if (radioDaycare.Checked)
+            {
+                switch ((int)slotDump.Value)
+                {
+                    case 1: dumpOff = daycare1Off; break;
+                    case 2: dumpOff = daycare2Off; break;
+                    case 3: dumpOff = daycare3Off; break;
+                    case 4: dumpOff = daycare4Off; break;
+                    default: dumpOff = daycare1Off; break;
+                }
+            }
+            else if (radioBattleBox.Checked)
+                dumpOff = battleBoxOff + ((Decimal.ToUInt32(slotDump.Value) - 1) * POKEBYTES);
+            else if (radioTrade.Checked)
+            {
+                if (!gen7)
+                {
+                    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleTradeData, null);
+                    waitingForData.Add(Program.scriptHelper.data(tradeOff, 0x1FFFF, pid), myArgs);
+                }
+                else
+                {
+                    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePkmData, null);
+                    uint mySeq = Program.scriptHelper.data(tradeOff, POKEBYTES, pid);
+                    waitingForData.Add(mySeq, myArgs);
+                }
+            }
+            else if (radioOpponent.Checked)
+            {
+                if (!gen7)
+                { 
+                    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
+                    waitingForData.Add(Program.scriptHelper.data(opponentOff, 0x1FFFF, pid), myArgs);
+                }
+                else
+                {
+                    DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePkmData, null);
+                    uint offset = 0;
+                    switch ((int)boxDump.Value)
+                    {
+                        //Opponent 1 / wild Pokemon
+                        case 1: offset = opponentOff + (uint)(slotDump.Value - 1) * 260;
+                            break;
+                        //Opponent 2 (in dual battle)
+                        case 2: offset = opponentOff + 0xC98 + (uint)(slotDump.Value - 1) * 260 ;
+                            break;
+                        //Last called helper in SOS battle.
+                        case 3: offset = 0x3003969C;
+                            break;
+                        //Last 4 Pokemon in SOS battle
+                        case 4: offset = 0x3002F7B8 + (uint)(slotDump.Value - 1) * 0x1E4;
+                            break;
+                    }
+                    uint mySeq = Program.scriptHelper.data(offset, POKEBYTES, pid);
+                    waitingForData.Add(mySeq, myArgs);
+                }
+            }
+            else if (radioParty.Checked)
+                dumpOff = partyOff + (Decimal.ToUInt32(slotDump.Value) - 1) * 484;
+
+            // Read at offset
+            if (radioParty.Checked)
+            {
+                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[260], handlePkmData, null);
+                uint mySeq = Program.scriptHelper.data(dumpOff, 260, pid);
+                waitingForData.Add(mySeq, myArgs);
+            }
+            else if (radioBoxes.Checked || radioDaycare.Checked || radioBattleBox.Checked)
+            {
+                DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handlePkmData, null);
+                uint mySeq = Program.scriptHelper.data(dumpOff, POKEBYTES, pid);
+                waitingForData.Add(mySeq, myArgs);
+            }
+        }
+
+        public void handlePkmData(object args_obj)
+        {
+            try
+            { //TODO: TEMPORARY HACK, DO PROPER ERROR HANDLING
+                DataReadyWaiting args = (DataReadyWaiting)args_obj;
+                PKHeX validator = new PKHeX();
+                validator.Data = PKHeX.decryptArray(args.data);
+                bool dataCorrect = validator.Species != 0;
+                if (!onlyView.Checked && !botWorking)
+                {
+                    DialogResult res = DialogResult.Cancel;
+                    if (!dataCorrect)
+                    {
+                        res = MessageBox.Show("This Pokemon's data seems to be empty.\r\nPress OK if you want to save it, Cancel if you don't.",
+                           "Empty data", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    }
+                    if (dataCorrect || res == DialogResult.OK)
+                    {
+                        string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+                        (new FileInfo(folderPath)).Directory.Create();
+                        string fileName = nameek6.Text + PKXEXT;
+                        writePokemonToFile(validator.Data, folderPath + fileName);
+                    }
+                }
+                else if (!dataCorrect && !botWorking)
+                    MessageBox.Show("This Pokemon's data seems to be empty.", "Empty data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (!dataCorrect)
+                    return;
+
+                dumpedPKHeX.Data = validator.Data;
+                updateTabs();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        public void handleTradeData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+
+            byte[] relativePattern = null;
+            uint offsetAfter = 0;
+
+            if (game == GameType.X || game == GameType.Y)
+            {
+                relativePattern = new byte[] { 0x08, 0x1C, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD8, 0xBE, 0x59 };
+                offsetAfter += 98;
+            }
+
+            if (game == GameType.OR || game == GameType.AS)
+            {
+                relativePattern = new byte[] { 0x08, 0x1E, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9C, 0xE8, 0x5D };
+                offsetAfter += 98;
+            }
+
+            List<uint> occurences = findOccurences(args.data, relativePattern);
+            int count = 0;
+            foreach (uint occurence in occurences)
+            {
+                count++;
+                if (count != 2) continue;
+                int dataOffset = (int)(occurence + offsetAfter);
+                DataReadyWaiting args_pkm = new DataReadyWaiting(args.data.Skip(dataOffset).Take(POKEBYTES).ToArray(), handlePkmData, null);
+                handlePkmData(args_pkm);
+            }
+        }
+
+        public void handleOpponentData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+
+            byte[] relativePattern = null;
+            uint offsetAfter = 0;
+
+            if (game == GameType.X || game == GameType.Y)
+            {
+                relativePattern = new byte[] { 0x60, 0x75, 0xC6, 0x08, 0xDC, 0xA8, 0xC7, 0x08, 0xD0, 0xB6, 0xC7, 0x08 };
+                offsetAfter = 637;
+            }
+            if (game == GameType.OR || game == GameType.AS)
+            {
+                relativePattern = new byte[] { 0x60, 0xE7, 0xC6, 0x08, 0x6C, 0xEC, 0xC6, 0x08, 0xE0, 0x1F, 0xC8, 0x08, 0x00, 0x39, 0xC8, 0x08 };
+                offsetAfter = 673;
+            }
+
+            List<uint> occurences = findOccurences(args.data, relativePattern);
+            int count = 0;
+            foreach (uint occurence in occurences)
+            {
+                count++;
+                int dataOffset = (int)(occurence + offsetAfter);
+                DataReadyWaiting args_pkm = new DataReadyWaiting(args.data.Skip(dataOffset).Take(POKEBYTES).ToArray(), handlePkmData, null);
+                handlePkmData(args_pkm);
+            }
+        }
+
+        static List<uint> findOccurences(byte[] haystack, byte[] needle)
+        {
+            List<uint> occurences = new List<uint>();
+
+            for (uint i = 0; i < haystack.Length; i++)
             {
                 if (needle[0] == haystack[i])
                 {
                     bool found = true;
-                    int j, k;
+                    uint j, k;
                     for (j = 0, k = i; j < needle.Length; j++, k++)
                     {
                         if (k >= haystack.Length || needle[j] != haystack[k])
@@ -1176,263 +1646,28 @@ namespace ntrbase
             return occurences;
         }
 
-        public void getoppOff()
+        // Save single pokémon
+        private void onlyView_CheckedChanged(object sender, EventArgs e)
         {
-            const string dumpedoppOff = "getoppoff.temp";
-            if (File.Exists(dumpedoppOff))
+            nameek6.Enabled = !onlyView.Checked;
+        }
+
+        private void writePokemonToFile(byte[] data, string fileName, bool overwrite = false)
+        {
+            try
             {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedoppOff, FileMode.Open)))
-                {
+                if (!overwrite) // If current filename is available, it won't be changed
+                    fileName = NextAvailableFilename(fileName);
 
-                    if (moneyoff == "0x8C6A6AC")
-                    {
-                        byte[] relativePattern = { 0x60, 0x75, 0xC6, 0x08, 0xDC, 0xA8, 0xC7, 0x08, 0xD0, 0xB6, 0xC7, 0x08 };
-                        byte[] dumpoppBytes = reader.ReadBytes(131070);
-                        List<int> occurences = findOccurences(dumpoppBytes, relativePattern);
-
-                        foreach (int occurence in occurences)
-                        {
-                            int realoffsetint = 142606336 + occurence + 637;
-                            realoppoffset = "0x" + realoffsetint.ToString("X");
-                            string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpOpp);
-                        }
-                    }
-
-                    if (moneyoff == "0x8C71DC0")
-                    {
-                        byte[] relativePattern = { 0x60, 0xE7, 0xC6, 0x08, 0x6C, 0xEC, 0xC6, 0x08, 0xE0, 0x1F, 0xC8, 0x08, 0x00, 0x39, 0xC8, 0x08 };
-                        byte[] dumpoppBytes = reader.ReadBytes(131070);
-                        List<int> occurences = findOccurences(dumpoppBytes, relativePattern);
-
-                        foreach (int occurence in occurences)
-                        {
-                            int realoffsetint = 142606336 + occurence + 673;
-                            string realoppoffset = "0x" + realoffsetint.ToString("X");
-                            string dumpOpp = "data(" + realoppoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpOpp);
-                        }
-                    }
-                }
+                FileStream fs = File.OpenWrite(fileName);
+                fs.Write(data, 0, data.Length);
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-
-        private void gettradeOff()
-        {
-            const string dumpedtradeOff = "gettradeoff.temp";
-            if (File.Exists(dumpedtradeOff))
-            {
-                if (moneyoff == "0x8C6A6AC")
-                {
-                    using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
-                    {
-                        byte[] relativePattern = { 0x08, 0x1C, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD8, 0xBE, 0x59 };
-                        byte[] dumptradeBytes = reader.ReadBytes(131070);
-                        List<int> occurences = findOccurences(dumptradeBytes, relativePattern);
-
-
-                        foreach (int occurence in occurences)
-                        {
-                            int realtradeoffsetint = 139460608 + occurence + 98;
-                            realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpTrade);
-                        }
-
-                    }
-                }
-
-                if (moneyoff == "0x8C71DC0")
-                {
-                    using (BinaryReader reader = new BinaryReader(File.Open(dumpedtradeOff, FileMode.Open)))
-                    {
-                        byte[] relativePattern = { 0x08, 0x1E, 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9C, 0xE8, 0x5D };
-                        byte[] dumptradeBytes = reader.ReadBytes(131070);
-                        List<int> occurences = findOccurences(dumptradeBytes, relativePattern);
-
-
-                        foreach (int occurence in occurences)
-                        {
-                            int realtradeoffsetint = 139591680 + occurence + 98;
-                            string realtradeoffset = "0x" + realtradeoffsetint.ToString("X");
-                            string dumpTrade = "data(" + realtradeoffset + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                            runCmd(dumpTrade);
-                        }
-
-                    }
-                }
-
-
-            }
-        }
-
-
-        public void readName()
-        {
-            const string dumpedName = "name.temp";
-            if (File.Exists(dumpedName))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedName, FileMode.Open)))
-                {
-                    byte[] nameBytes = reader.ReadBytes(24);
-                    playerName.Text = Encoding.Unicode.GetString(nameBytes);
-                }
-            }
-        }
-
-        public void readTID()
-        {
-            const string dumpedTID = "tid.temp";
-            if (File.Exists(dumpedTID))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedTID, FileMode.Open)))
-                {
-                    byte[] tidarray = reader.ReadBytes(2);
-                    TIDNum.Value = 256 * tidarray[1] + tidarray[0];
-                }
-            }
-        }
-
-        public void readSID()
-        {
-            const string dumpedSID = "sid.temp";
-            if (File.Exists(dumpedSID))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedSID, FileMode.Open)))
-                {
-                    byte[] sidarray = reader.ReadBytes(2);
-                    SIDNum.Value = 256 * sidarray[1] + sidarray[0];
-                }
-            }
-        }
-
-        public void readHr()
-        {
-            const string dumpedHr = "hour.temp";
-            if (File.Exists(dumpedHr))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedHr, FileMode.Open)))
-                {
-                    byte[] hrarray = reader.ReadBytes(2);
-                    hourNum.Value = 256 * hrarray[1] + hrarray[0];
-                }
-            }
-        }
-
-        public void readMin()
-        {
-            const string dumpedMin = "min.temp";
-            if (File.Exists(dumpedMin))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedMin, FileMode.Open)))
-                {
-                    byte minbyte = reader.ReadByte();
-                    minNum.Value = minbyte;
-                }
-            }
-        }
-
-        public void readSec()
-        {
-            const string dumpedSec = "sec.temp";
-            if (File.Exists(dumpedSec))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedSec, FileMode.Open)))
-                {
-                    byte secbyte = reader.ReadByte();
-                    secNum.Value = secbyte;
-                }
-            }
-        }
-
-        public void readLang()
-        {
-            const string dumpedLang = "lang.temp";
-            if (File.Exists(dumpedLang))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedLang, FileMode.Open)))
-                {
-                    byte langbyte = reader.ReadByte();
-                    if (langbyte == 1) { Lang.SelectedIndex = 0; }
-                    if (langbyte == 2) { Lang.SelectedIndex = 1; }
-                    if (langbyte == 3) { Lang.SelectedIndex = 2; }
-                    if (langbyte == 4) { Lang.SelectedIndex = 3; }
-                    if (langbyte == 5) { Lang.SelectedIndex = 4; }
-                    if (langbyte == 7) { Lang.SelectedIndex = 5; }
-                    if (langbyte == 8) { Lang.SelectedIndex = 6; }
-                }
-            }
-        }
-
-        public void readMoney()
-        {
-            const string dumpedMoney = "money.temp";
-            if (File.Exists(dumpedMoney))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedMoney, FileMode.Open)))
-                {
-                    moneyNum.Value = reader.ReadInt32();
-                }
-            }
-        }
-
-        public void readMiles()
-        {
-            const string dumpedMiles = "miles.temp";
-            if (File.Exists(dumpedMiles))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedMiles, FileMode.Open)))
-                {
-                    milesNum.Value = reader.ReadInt32();
-                }
-            }
-        }
-
-        public void readBP()
-        {
-            const string dumpedBP = "bp.temp";
-            if (File.Exists(dumpedBP))
-            {
-                using (BinaryReader reader = new BinaryReader(File.Open(dumpedBP, FileMode.Open)))
-                {
-                    bpNum.Value = reader.ReadInt32();
-                }
-            }
-        }
-
-        public void RMTemp()
-        {
-            DirectoryInfo di = new DirectoryInfo(@Application.StartupPath);
-            FileInfo[] files = di.GetFiles("*.temp")
-                                 .Where(p => p.Extension == ".temp").ToArray();
-            foreach (FileInfo file in files)
-                try
-                {
-                    file.Attributes = FileAttributes.Normal;
-                    File.Delete(file.FullName);
-                }
-                catch
-                {
-                }
-        }
-
-        public void RMTempEK6()
-        {
-            DirectoryInfo di = new DirectoryInfo(@Application.StartupPath);
-            FileInfo[] files = di.GetFiles("*.tempek6")
-                                 .Where(p => p.Extension == ".tempek6").ToArray();
-            foreach (FileInfo file in files)
-                try
-                {
-                    file.Attributes = FileAttributes.Normal;
-                    File.Delete(file.FullName);
-                }
-                catch
-                {
-                }
-        }
-
-        private static string numberPattern = " ({0})";
 
         public static string NextAvailableFilename(string path)
         {
@@ -1441,17 +1676,6 @@ namespace ntrbase
 
             if (Path.HasExtension(path))
                 return GetNextFilename(path.Insert(path.LastIndexOf(Path.GetExtension(path)), numberPattern));
-
-            return GetNextFilename(path + numberPattern);
-        }
-
-        public static string NextAvailableBakFilename(string path)
-        {
-            if (!File.Exists(path))
-                return path;
-
-            if (Path.HasExtension(path))
-                return GetNextFilename(path.Insert(path.LastIndexOf(".bak"), numberPattern));
 
             return GetNextFilename(path + numberPattern);
         }
@@ -1485,1951 +1709,2351 @@ namespace ntrbase
             return string.Format(pattern, max);
         }
 
-
-        public void movebak()
-        {
-            if (txtLog.Text.Contains(".bak.ek6 successfully"))
-            {
-                string pkmfrom = @Application.StartupPath + "\\boxes.bak.ek6";
-                string pkmto = @Application.StartupPath + "\\Pokemon\\Deleted\\boxes.bak.ek6";
-                System.IO.FileInfo folder = new System.IO.FileInfo(@Application.StartupPath + "\\Pokemon\\Deleted\\");
-                folder.Directory.Create();
-                if (File.Exists(pkmto))
-                {
-                    File.Move(pkmfrom, NextAvailableBakFilename(pkmto));
-                    pkmIsBackedUp();
-                }
-                else
-                if (!File.Exists(pkmto))
-                {
-                    File.Move(pkmfrom, pkmto);
-                    pkmIsBackedUp();
-                }
-            }
-        }
-
-        public void moveek6()
-        {
-            if (!txtLog.Text.Contains(nameek6.Text + ".bak.ek6 successfully"))
-            {
-                if (txtLog.Text.Contains(nameek6.Text + ".ek6 successfully"))
-                {
-                    txtLog.Clear();
-                    string pkmfrom = @Application.StartupPath + "\\" + nameek6.Text + ".ek6";
-                    string pkmto = @Application.StartupPath + "\\Pokemon\\" + nameek6.Text + ".ek6";
-                    System.IO.FileInfo folder = new System.IO.FileInfo(@Application.StartupPath + "\\Pokemon\\");
-                    folder.Directory.Create();
-                    if (File.Exists(pkmto))
-                    {
-                        File.Move(pkmfrom, NextAvailableFilename(pkmto));
-                    }
-                    else
-                    if (!File.Exists(pkmto))
-                    {
-                        File.Move(pkmfrom, pkmto);
-                    }
-                }
-            }
-        }
-
-
-
-        public void isMoneyDumped()
-        {
-            if (txtLog.Text.Contains("money.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readMoney();
-                    dumpMiles();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readMoney();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isMilesDumped()
-        {
-            if (txtLog.Text.Contains("miles.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readMiles();
-                    dumpBP();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readMiles();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isBPDumped()
-        {
-            if (txtLog.Text.Contains("bp.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readBP();
-                    dumpTID();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readBP();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isTIDDumped()
-        {
-            if (txtLog.Text.Contains("tid.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readTID();
-                    dumpSID();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readTID();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isSIDDumped()
-        {
-            if (txtLog.Text.Contains("sid.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readSID();
-                    dumpHr();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readSID();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isHrDumped()
-        {
-            if (txtLog.Text.Contains("hour.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readHr();
-                    dumpMin();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readHr();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isMinDumped()
-        {
-            if (txtLog.Text.Contains("min.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readMin();
-                    dumpSec();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readMin();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isSecDumped()
-        {
-            if (txtLog.Text.Contains("sec.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readSec();
-                    dumpLang();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readSec();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isLangDumped()
-        {
-            if (txtLog.Text.Contains("lang.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readLang();
-                    dumpName();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readLang();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isNameDumped()
-        {
-            if (txtLog.Text.Contains("name.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readName();
-                    dumpKeys();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readName();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isKeysDumped()
-        {
-            if (txtLog.Text.Contains("keys.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    dumpTMs();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readItems();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isTMsDumped()
-        {
-            if (txtLog.Text.Contains("tms.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    dumpMeds();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readItems();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isMedsDumped()
-        {
-            if (txtLog.Text.Contains("meds.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    dumpBers();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readItems();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void isBersDumped()
-        {
-            if (txtLog.Text.Contains("bers.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    dumpItems();
-                    txtLog.Clear();
-                }
-                else
-                if (firstcheck == true)
-                {
-                    readItems();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-
-
-        public void isItemsDumped()
-        {
-            if (txtLog.Text.Contains("items.temp successfully"))
-            {
-                if (firstcheck == false)
-                {
-                    readItems();
-                    firstcheck = true;
-                    txtLog.Clear();
-                    RMTemp();
-                }
-                else
-               if (firstcheck == true)
-                {
-                    readItems();
-                    RMTemp();
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        public void istradeDumped()
-        {
-            if (txtLog.Text.Contains("gettradeoff.temp successfully"))
-            {
-                gettradeOff();
-                RMTemp();
-                txtLog.Clear();
-            }
-        }
-
-        public void isoppDumped()
-        {
-            if (txtLog.Text.Contains("getoppoff.temp successfully"))
-            {
-                getoppOff();
-                RMTemp();
-                txtLog.Clear();
-            }
-        }
-
-        public void pkmIsBackedUp()
-        {
-            int ideleteAmount = (int)deleteAmount.Value * 232;
-            byte[] delete = new byte[ideleteAmount];
-            for (int i = 0; i < deleteAmount.Value; i++)
-            {
-                emptyDatab.CopyTo(delete, (i) * 232);
-            }
-            string ek6 = BitConverter.ToString(delete).Replace("-", ", 0x");
-            int ss = (Decimal.ToInt32(deleteBox.Value) * 30 - 30) + Decimal.ToInt32(deleteSlot.Value) - 1;
-            int ssOff = boff + (ss * 232);
-            string ssH = ssOff.ToString("X");
-            string delPkm = "write(0x" + ssH + ", (" + ek6 + "), pid=" + pid + ")";
-            runCmd(delPkm);
-            txtLog.Clear();
-        }
-
-        public void getHP()
-        {
-            uint hp = (uint)(15 * ((PKHeX.IV_HP & 1) + 2 * (PKHeX.IV_ATK & 1) + 4 * (PKHeX.IV_DEF & 1) + 8 * (PKHeX.IV_SPE & 1) + 16 * (PKHeX.IV_SPA & 1) + 32 * (PKHeX.IV_SPD & 1)) / 63);
-
-            if (hp == 0) { hiddenPower.Text = "Fighting"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(48)))), ((int)(((byte)(40))))); }
-            if (hp == 1) { hiddenPower.Text = "Flying"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(144)))), ((int)(((byte)(240))))); }
-            if (hp == 2) { hiddenPower.Text = "Poison"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(64)))), ((int)(((byte)(160))))); }
-            if (hp == 3) { hiddenPower.Text = "Ground"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(192)))), ((int)(((byte)(104))))); }
-            if (hp == 4) { hiddenPower.Text = "Rock"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(160)))), ((int)(((byte)(56))))); }
-            if (hp == 5) { hiddenPower.Text = "Bug"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(184)))), ((int)(((byte)(32))))); }
-            if (hp == 6) { hiddenPower.Text = "Ghost"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(88)))), ((int)(((byte)(152))))); }
-            if (hp == 7) { hiddenPower.Text = "Steel"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(208))))); }
-            if (hp == 8) { hiddenPower.Text = "Fire"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(128)))), ((int)(((byte)(48))))); }
-            if (hp == 9) { hiddenPower.Text = "Water"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(144)))), ((int)(((byte)(240))))); }
-            if (hp == 10) { hiddenPower.Text = "Grass"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(200)))), ((int)(((byte)(80))))); }
-            if (hp == 11) { hiddenPower.Text = "Electric"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(208)))), ((int)(((byte)(48))))); }
-            if (hp == 12) { hiddenPower.Text = "Psychic"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(88)))), ((int)(((byte)(136))))); }
-            if (hp == 13) { hiddenPower.Text = "Ice"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(216)))), ((int)(((byte)(216))))); }
-            if (hp == 14) { hiddenPower.Text = "Dragon"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(56)))), ((int)(((byte)(248))))); }
-            if (hp == 15) { hiddenPower.Text = "Dark"; hiddenPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(88)))), ((int)(((byte)(72))))); }
-        }
-
-        public void isPkmDumped()
-        {
-            if (!txtLog.Text.Contains(nameek6.Text + ".bak.ek6 successfully"))
-            {
-                if (txtLog.Text.Contains("dump.tempek6 successfully"))
-                {
-                    string dumpedek6 = @Application.StartupPath + "\\dump.tempek6";
-                    pkmEncrypted = System.IO.File.ReadAllBytes(dumpedek6);
-                    PKHeX.Data = PKHeX.decryptArray(pkmEncrypted);
-                    ivHPNum.Value = PKHeX.IV_HP;
-                    ivATKNum.Value = PKHeX.IV_ATK;
-                    ivDEFNum.Value = PKHeX.IV_DEF;
-                    ivSPANum.Value = PKHeX.IV_SPA;
-                    ivSPDNum.Value = PKHeX.IV_SPD;
-                    ivSPENum.Value = PKHeX.IV_SPE;
-                    evHPNum.Value = PKHeX.EV_HP;
-                    evATKNum.Value = PKHeX.EV_ATK;
-                    evDEFNum.Value = PKHeX.EV_DEF;
-                    evSPANum.Value = PKHeX.EV_SPA;
-                    evSPDNum.Value = PKHeX.EV_SPD;
-                    evSPENum.Value = PKHeX.EV_SPE;
-                    ball.SelectedIndex = PKHeX.Ball - 1;
-                    friendship.Value = PKHeX.HT_Friendship;
-
-                    xp.Value = PKHeX.EXP;
-
-                    if (PKHeX.Gender == 0)
-                    {
-                        gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                        gender.ForeColor = Color.Blue;
-                        gender.Text = "♂";
-                    }
-                    else
-                    if (PKHeX.Gender == 1)
-                    {
-                        gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                        gender.ForeColor = Color.Red;
-                        gender.Text = "♀";
-                    }
-                    else
-                    if (PKHeX.Gender == 2)
-                    {
-                        gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                        gender.ForeColor = Color.Gray;
-                        gender.Text = "-";
-                    }
-
-                    dTIDNum.Value = PKHeX.TID;
-                    dSIDNum.Value = PKHeX.SID;
-                    dPID.Text = PKHeX.PID.ToString("X");
-
-                    nickname.Text = Encoding.BigEndianUnicode.GetString(PKHeX.Data.Skip(63).Take(24).ToArray());
-                    otName.Text = Encoding.Unicode.GetString(PKHeX.Data.Skip(176).Take(24).ToArray());
-
-                    getHP();
-
-                    if (PKHeX.IsEgg == true)
-                    {
-                        isEgg.Checked = true;
-                    }
-                    if (PKHeX.IsEgg == false)
-                    {
-                        isEgg.Checked = false;
-                    }
-
-                    species.SelectedIndex = PKHeX.Species - 1;
-
-                    heldItem.SelectedIndex = PKHeX.HeldItem;
-
-                    ability.SelectedIndex = PKHeX.Ability - 1;
-
-                    nature.SelectedIndex = (int)PKHeX.Nature;
-
-                    move1.SelectedIndex = (int)PKHeX.Move1;
-                    move2.SelectedIndex = (int)PKHeX.Move2;
-                    move3.SelectedIndex = (int)PKHeX.Move3;
-                    move4.SelectedIndex = (int)PKHeX.Move4;
-
-                    ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
-                    ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
-                    ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
-
-                    if (PKHeX.isShiny == true)
-                    {
-                        setShiny.Enabled = false;
-                        setShiny.Text = "★";
-                    }
-                    if (PKHeX.isShiny == false)
-                    {
-                        setShiny.Enabled = true;
-                        setShiny.Text = "☆";
-                    }
-                }
-                if (txtLog.Text.Contains(nameek6.Text + ".ek6 successfully"))
-                {
-                    string dumpedek6 = @Application.StartupPath + "\\" + nameek6.Text + ".ek6";
-                    pkmEncrypted = System.IO.File.ReadAllBytes(dumpedek6);
-                    PKHeX.Data = PKHeX.decryptArray(pkmEncrypted);
-                    ivHPNum.Value = PKHeX.IV_HP;
-                    ivATKNum.Value = PKHeX.IV_ATK;
-                    ivDEFNum.Value = PKHeX.IV_DEF;
-                    ivSPANum.Value = PKHeX.IV_SPA;
-                    ivSPDNum.Value = PKHeX.IV_SPD;
-                    ivSPENum.Value = PKHeX.IV_SPE;
-                    evHPNum.Value = PKHeX.EV_HP;
-                    evATKNum.Value = PKHeX.EV_ATK;
-                    evDEFNum.Value = PKHeX.EV_DEF;
-                    evSPANum.Value = PKHeX.EV_SPA;
-                    evSPDNum.Value = PKHeX.EV_SPD;
-                    evSPENum.Value = PKHeX.EV_SPE;
-                    ball.SelectedIndex = PKHeX.Ball - 1;
-                    friendship.Value = PKHeX.HT_Friendship;
-
-                    xp.Value = PKHeX.EXP;
-
-                    if (PKHeX.Gender == 0)
-                    {
-                        gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                        gender.ForeColor = Color.Blue;
-                        gender.Text = "♂";
-                    }
-                    else
-                    if (PKHeX.Gender == 1)
-                    {
-                        gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                        gender.ForeColor = Color.Red;
-                        gender.Text = "♀";
-                    }
-                    else
-                    if (PKHeX.Gender == 2)
-                    {
-                        gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                        gender.ForeColor = Color.Gray;
-                        gender.Text = "-";
-                    }
-
-                    dTIDNum.Value = PKHeX.TID;
-                    dSIDNum.Value = PKHeX.SID;
-                    dPID.Text = PKHeX.PID.ToString("X");
-
-                    nickname.Text = Encoding.BigEndianUnicode.GetString(PKHeX.Data.Skip(63).Take(24).ToArray());
-                    otName.Text = Encoding.Unicode.GetString(PKHeX.Data.Skip(176).Take(24).ToArray());
-
-                    getHP();
-
-                    if (PKHeX.IsEgg == false)
-                    {
-                        isEgg.Checked = false;
-                    }
-                    if (PKHeX.IsEgg == true)
-                    {
-                        isEgg.Checked = true;
-                    }
-
-                    species.SelectedIndex = PKHeX.Species - 1;
-
-                    heldItem.SelectedIndex = PKHeX.HeldItem;
-
-                    ability.SelectedIndex = PKHeX.Ability - 1;
-
-                    nature.SelectedIndex = (int)PKHeX.Nature;
-
-                    move1.SelectedIndex = (int)PKHeX.Move1;
-                    move2.SelectedIndex = (int)PKHeX.Move2;
-                    move3.SelectedIndex = (int)PKHeX.Move3;
-                    move4.SelectedIndex = (int)PKHeX.Move4;
-
-                    ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
-                    ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
-                    ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
-
-                    if (PKHeX.isShiny == true)
-                    {
-                        setShiny.Enabled = false;
-                        setShiny.Text = "★";
-                    }
-                    if (PKHeX.isShiny == false)
-                    {
-                        setShiny.Enabled = true;
-                        setShiny.Text = "☆";
-                    }
-                }
-            }
-        }
-
-        private void buttonConnect_Click(object sender, EventArgs e)
-        {
-            txtLog.Clear();
-            runCmd("connect('" + host.Text + "',8000)");
-            Delay.Add(connectCheck, 2);
-            Delay.Add(getGame, 3);
-        }
-
-
-        private void buttonDisconnect_Click(object sender, EventArgs e)
-        {
-            txtLog.Clear();
-            runCmd("disconnect()");
-            buttonConnect.Text = "Connect";
-            firstcheck = false;
-            buttonConnect.Enabled = true;
-            buttonDisconnect.Enabled = false;
-            pokeMoney.Enabled = false;
-            pokeMiles.Enabled = false;
-            pokeBP.Enabled = false;
-            moneyNum.Enabled = false;
-            milesNum.Enabled = false;
-            bpNum.Enabled = false;
-            slotDump.Enabled = false;
-            boxDump.Enabled = false;
-            nameek6.Enabled = false;
-            dumpek6.Enabled = false;
-            dumpBoxes.Enabled = false;
-            radioBoxes.Enabled = false;
-            radioDaycare.Enabled = false;
-            radioOpponent.Enabled = false;
-            radioTrade.Enabled = false;
-            pokeName.Enabled = false;
-            playerName.Enabled = false;
-            pokeTID.Enabled = false;
-            TIDNum.Enabled = false;
-            pokeSID.Enabled = false;
-            SIDNum.Enabled = false;
-            hourNum.Enabled = false;
-            minNum.Enabled = false;
-            secNum.Enabled = false;
-            pokeTime.Enabled = false;
-            dataGridView1.Enabled = false;
-            dataGridView2.Enabled = false;
-            dataGridView3.Enabled = false;
-            dataGridView4.Enabled = false;
-            dataGridView5.Enabled = false;
-            showItems.Enabled = false;
-            showMedicine.Enabled = false;
-            showTMs.Enabled = false;
-            showBerries.Enabled = false;
-            showKeys.Enabled = false;
-            itemAdd.Enabled = false;
-            itemWrite.Enabled = false;
-            dataGridView1.Enabled = false;
-            dataGridView2.Enabled = false;
-            dataGridView3.Enabled = false;
-            dataGridView4.Enabled = false;
-            dataGridView5.Enabled = false;
-            dataGridView1.Rows.Clear();
-            dataGridView2.Rows.Clear();
-            dataGridView3.Rows.Clear();
-            dataGridView4.Rows.Clear();
-            dataGridView5.Rows.Clear();
-            delPkm.Enabled = false;
-            deleteBox.Enabled = false;
-            deleteSlot.Enabled = false;
-            Lang.Enabled = false;
-            pokeLang.Enabled = false;
-            ivHPNum.Enabled = false;
-            ivATKNum.Enabled = false;
-            ivDEFNum.Enabled = false;
-            ivSPENum.Enabled = false;
-            ivSPANum.Enabled = false;
-            ivSPDNum.Enabled = false;
-            evHPNum.Enabled = false;
-            evATKNum.Enabled = false;
-            evDEFNum.Enabled = false;
-            evSPENum.Enabled = false;
-            evSPANum.Enabled = false;
-            evSPDNum.Enabled = false;
-            isEgg.Enabled = false;
-            nickname.Enabled = false;
-            nature.Enabled = false;
-            button1.Enabled = false;
-            heldItem.Enabled = false;
-            species.Enabled = false;
-            clonefromBoxFB.Enabled = false;
-            clonefromSlotFB.Enabled = false;
-            clonetoBoxFB.Enabled = false;
-            clonetoSlotFB.Enabled = false;
-            cloneAmountFB.Enabled = false;
-            cloneFB.Enabled = false;
-            cloneAmountFF.Enabled = false;
-            cloneFF.Enabled = false;
-            clonetoBoxFF.Enabled = false;
-            clonetoSlotFF.Enabled = false;
-            chooseCloneFF.Enabled = false;
-            fromBoxes.Enabled = false;
-            fromFile.Enabled = false;
-            deleteAmount.Enabled = false;
-            ability.Enabled = false;
-            move1.Enabled = false;
-            move2.Enabled = false;
-            move3.Enabled = false;
-            move4.Enabled = false;
-            ball.Enabled = false;
-            radioParty.Enabled = false;
-            dTIDNum.Enabled = false;
-            dSIDNum.Enabled = false;
-            otName.Enabled = false;
-            dPID.Enabled = false;
-            setShiny.Enabled = false;
-            onlyView.Enabled = false;
-            gender.Enabled = false;
-            friendship.Enabled = false;
-            randomPID.Enabled = false;
-            setShiny.Enabled = false;
-            radioBattleBox.Enabled = false;
-        }
-
-        public void txtLog_TextChanged(object sender, EventArgs e)
-        {
-            isMoneyDumped();
-            isMilesDumped();
-            isBPDumped();
-            isTIDDumped();
-            isSIDDumped();
-            isHrDumped();
-            isMinDumped();
-            isSecDumped();
-            isLangDumped();
-            isNameDumped();
-            isKeysDumped();
-            isTMsDumped();
-            isMedsDumped();
-            isBersDumped();
-            istradeDumped();
-            isoppDumped();
-            isPkmDumped();
-            isItemsDumped();
-            isCloneDumped();
-            moveek6();
-            movebak();
-        }
-
-        private void pokeMoney_Click(object sender, EventArgs e)
-        {
-            byte[] moneybyte = BitConverter.GetBytes(Convert.ToInt32(moneyNum.Value));
-            string moneyr = ", 0x";
-            string money = BitConverter.ToString(moneybyte).Replace("-", moneyr);
-            string pokeMoney = "write(" + moneyoff + ", (0x" + money + "), pid=" + pid + ")";
-            runCmd(pokeMoney);
-        }
-
-        private void pokeMiles_Click(object sender, EventArgs e)
-        {
-            byte[] milesbyte = BitConverter.GetBytes(Convert.ToInt32(milesNum.Value));
-            string milesr = ", 0x";
-            string miles = BitConverter.ToString(milesbyte).Replace("-", milesr);
-            string pokeMiles = "write(" + milesoff + ", (0x" + miles + "), pid=" + pid + ")";
-            runCmd(pokeMiles);
-        }
-
-        private void pokeBP_Click(object sender, EventArgs e)
-        {
-            byte[] bpbyte = BitConverter.GetBytes(Convert.ToInt32(bpNum.Value));
-            string bpr = ", 0x";
-            string bp = BitConverter.ToString(bpbyte).Replace("-", bpr);
-            string pokeBP = "write(" + bpoff + ", (0x" + bp + "), pid=" + pid + ")";
-            runCmd(pokeBP);
-        }
-
-
-        private void dumpek6_Click(object sender, EventArgs e)
-        {
-            if (onlyView.Checked == false)
-            {
-                int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
-                int ssdOff = boff + (ssd * 232);
-                string ssdH = ssdOff.ToString("X");
-
-                int pOff = partyoff + ((Decimal.ToInt32(boxDump.Value) - 1) * 484);
-                string pfOff = pOff.ToString("X");
-
-                int bbOff = bboff + ((Decimal.ToInt32(boxDump.Value) - 1) * 232);
-                string bbfOff = bbOff.ToString("X");
-
-                dumpEK6 = "data(0x" + ssdH + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                dumpDay1 = "data(" + d1off + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                dumpParty = "data(0x" + pfOff + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-                dumpBattleBox = "data(0x" + bbfOff + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-
-
-                if (radioBattleBox.Checked == true)
-                {
-                    runCmd(dumpBattleBox);
-                }
-
-                if (radioBoxes.Checked == true)
-                {
-                    runCmd(dumpEK6);
-                }
-                if (radioDaycare.Checked == true)
-                {
-                    runCmd(dumpDay1);
-                }
-                if (radioOpponent.Checked == true)
-                {
-                    dumprealoppOff();
-                }
-                if (radioTrade.Checked == true)
-                {
-                    dumprealtradeOff();
-                }
-                if (radioParty.Checked == true)
-                {
-                    runCmd(dumpParty);
-                }
-
-                txtLog.Clear();
-            }
-
-            if (onlyView.Checked == true)
-            {
-                int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
-                int ssdOff = boff + (ssd * 232);
-                string ssdH = ssdOff.ToString("X");
-
-                int pOff = partyoff + ((Decimal.ToInt32(boxDump.Value) - 1) * 484);
-                string pfOff = pOff.ToString("X");
-
-                int bbOff = bboff + ((Decimal.ToInt32(boxDump.Value) - 1) * 232);
-                string bbfOff = bbOff.ToString("X");
-
-                dumpEK6 = "data(0x" + ssdH + ", 0xE8, filename='dump.tempek6', pid=" + pid + ")";
-                dumpDay1 = "data(" + d1off + ", 0xE8, filename='dump.tempek6', pid=" + pid + ")";
-                dumpParty = "data(0x" + pfOff + ", 0xE8, filename='dump.tempek6', pid=" + pid + ")";
-                dumpBattleBox = "data(0x" + bbfOff + ", 0xE8, filename='dump.tempek6', pid=" + pid + ")";
-
-
-                if (radioBattleBox.Checked == true)
-                {
-                    runCmd(dumpBattleBox);
-                }
-
-                if (radioBoxes.Checked == true)
-                {
-                    runCmd(dumpEK6);
-                }
-                if (radioDaycare.Checked == true)
-                {
-                    runCmd(dumpDay1);
-                }
-                if (radioOpponent.Checked == true)
-                {
-                    dumprealoppOff();
-                }
-                if (radioTrade.Checked == true)
-                {
-                    dumprealtradeOff();
-                }
-                if (radioParty.Checked == true)
-                {
-                    runCmd(dumpParty);
-                }
-                txtLog.Clear();
-            }
-        }
-
+        // Save all boxes
         private void dumpBoxes_Click(object sender, EventArgs e)
         {
-            string dumpBoxes = "data(" + boffs + ", 0x34AD0, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-
-            string dumpDay2 = "data(" + d2off + ", 0xE8, filename='" + nameek6.Text + ".ek6', pid=" + pid + ")";
-
-            if (radioBoxes.Checked == true)
-            {
-                runCmd(dumpBoxes);
-            }
-            if (radioDaycare.Checked == true)
-            {
-                runCmd(dumpDay2);
-            }
-            txtLog.Clear();
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[BOXES * BOXSIZE * POKEBYTES], handleAllBoxesData, null);
+            waitingForData.Add(Program.scriptHelper.data(boxOff, BOXES * BOXSIZE * POKEBYTES, pid), myArgs);
         }
 
-        private void radioBoxes_CheckedChanged(object sender, EventArgs e)
+        public void handleAllBoxesData(object args_obj)
         {
-            boxDump.Minimum = 1;
-            boxDump.Maximum = 31;
-            label8.Text = "Box:";
-            label7.Text = "Slot:";
-            label9.Text = "Filename:";
-            boxDump.Visible = true;
-            slotDump.Visible = true;
-            dumpBoxes.Visible = true;
-            nameek6.Visible = true;
-            label7.Visible = true;
-            label8.Visible = true;
-            label9.Visible = true;
-            label9.Location = new System.Drawing.Point(97, 20);
-            nameek6.Location = new System.Drawing.Point(100, 39);
-            nameek6.Size = new System.Drawing.Size(103, 20);
-            dumpek6.Size = new System.Drawing.Size(86, 23);
-            dumpBoxes.Size = new System.Drawing.Size(105, 23);
-            dumpBoxes.Location = new System.Drawing.Point(98, 61);
-            dumpek6.Location = new System.Drawing.Point(6, 61);
-            dumpek6.Text = "Dump";
-            dumpBoxes.Text = "Dump All Boxes";
-            onlyView.Visible = true;
-            label50.Visible = true;
-            onlyView.Checked = false;
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\";
+            (new FileInfo(folderPath)).Directory.Create();
+            string fileName = nameek6.Text + BOXEXT;
+            writePokemonToFile(args.data, folderPath + fileName);
         }
 
-        private void radioDaycare_CheckedChanged(object sender, EventArgs e)
-        {
-            label7.Visible = false;
-            label8.Visible = false;
-            label9.Visible = true;
-            boxDump.Visible = false;
-            slotDump.Visible = false;
-            nameek6.Visible = true;
-            dumpBoxes.Visible = true;
-            dumpek6.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 39);
-            label9.Location = new System.Drawing.Point(6, 20);
-            dumpek6.Size = new System.Drawing.Size(95, 23);
-            dumpBoxes.Size = new System.Drawing.Size(95, 23);
-            dumpBoxes.Location = new System.Drawing.Point(108, 61);
-            nameek6.Size = new System.Drawing.Size(197, 23);
-            dumpek6.Text = "Dump Slot 1";
-            dumpBoxes.Text = "Dump Slot 2";
-            dumpBoxes.Enabled = true;
-            nameek6.Enabled = true;
-            onlyView.Visible = false;
-            label50.Visible = false;
-        }
-
-        private void radioOpponent_CheckedChanged(object sender, EventArgs e)
-        {
-            label7.Visible = false;
-            label8.Visible = false;
-            label9.Visible = true;
-            boxDump.Visible = false;
-            slotDump.Visible = false;
-            nameek6.Visible = true;
-            dumpBoxes.Visible = false;
-            dumpek6.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 39);
-            label9.Location = new System.Drawing.Point(6, 20);
-            dumpek6.Size = new System.Drawing.Size(197, 23);
-            nameek6.Size = new System.Drawing.Size(197, 23);
-            dumpek6.Text = "Dump";
-            dumpBoxes.Enabled = true;
-            nameek6.Enabled = true;
-            onlyView.Visible = false;
-            label50.Visible = false;
-        }
-
-
-        private void pokeBoxName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pokeName_Click(object sender, EventArgs e)
-        {
-            if (playerName.Text.Length < 12)
-            {
-                string nameS = playerName.Text.PadRight(12, '\0');
-                byte[] namebyte = Encoding.Unicode.GetBytes(nameS);
-                string namer = ", 0x";
-                string name = BitConverter.ToString(namebyte).Replace("-", namer);
-                string pokeName = "write(" + nameoff + ", (0x" + name + "), pid=" + pid + ")";
-                runCmd(pokeName);
-            }
-
-            if (playerName.Text.Length == 12)
-            {
-                string nameS = playerName.Text;
-                byte[] namebyte = Encoding.Unicode.GetBytes(nameS);
-                string namer = ", 0x";
-                string name = BitConverter.ToString(namebyte).Replace("-", namer);
-                string pokeName = "write(" + nameoff + ", (0x" + name + "), pid=" + pid + ")";
-                runCmd(pokeName);
-            }
-
-            if (playerName.Text.Length > 12)
-            {
-                MessageBox.Show("That name is too long, please choose a trainer name of 12 character or less.", "Name too long!");
-            }
-        }
-
-
-        private void pokeTID_Click(object sender, EventArgs e)
-        {
-            byte[] tidbyte = BitConverter.GetBytes(Convert.ToUInt16((double)TIDNum.Value));
-            string tidr = ", 0x";
-            string tid = BitConverter.ToString(tidbyte).Replace("-", tidr);
-            string pokeTID = "write(" + tidoff + ", (0x" + tid + "), pid=" + pid + ")";
-            runCmd(pokeTID);
-        }
-
-        private void pokeTime_Click(object sender, EventArgs e)
-        {
-            byte[] hrbyte = BitConverter.GetBytes(Convert.ToUInt16((double)hourNum.Value));
-            string hrr = ", 0x";
-            string hr = BitConverter.ToString(hrbyte).Replace("-", hrr);
-            string pokeHr = "write(" + hroff + ", (0x" + hr + "), pid=" + pid + ")";
-            runCmd(pokeHr);
-
-            byte[] minbyte = BitConverter.GetBytes(Convert.ToInt32(minNum.Value));
-            string min = BitConverter.ToString(minbyte);
-            string pokeMin = "writebyte(" + minoff + ", 0x" + min + ", pid=" + pid + ")";
-            runCmd(pokeMin);
-
-            byte[] secbyte = BitConverter.GetBytes(Convert.ToInt32(secNum.Value));
-            string sec = BitConverter.ToString(secbyte);
-            string pokeSec = "writebyte(" + secoff + ", 0x" + sec + ", pid=" + pid + ")";
-            runCmd(pokeSec);
-        }
-
-        private void showItems_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Visible = true;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = false;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = false;
-            showItems.ForeColor = System.Drawing.Color.Green;
-            showMedicine.ForeColor = System.Drawing.Color.Black;
-            showTMs.ForeColor = System.Drawing.Color.Black;
-            showBerries.ForeColor = System.Drawing.Color.Black;
-            showKeys.ForeColor = System.Drawing.Color.Black;
-        }
-
-        private void showMedicine_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = false;
-            dataGridView4.Visible = true;
-            dataGridView5.Visible = false;
-            showItems.ForeColor = System.Drawing.Color.Black;
-            showMedicine.ForeColor = System.Drawing.Color.Green;
-            showTMs.ForeColor = System.Drawing.Color.Black;
-            showBerries.ForeColor = System.Drawing.Color.Black;
-            showKeys.ForeColor = System.Drawing.Color.Black;
-        }
-
-        private void showTMs_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = true;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = false;
-            showItems.ForeColor = System.Drawing.Color.Black;
-            showMedicine.ForeColor = System.Drawing.Color.Black;
-            showTMs.ForeColor = System.Drawing.Color.Green;
-            showBerries.ForeColor = System.Drawing.Color.Black;
-            showKeys.ForeColor = System.Drawing.Color.Black;
-        }
-
-        private void showBerries_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = false;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = true;
-            showItems.ForeColor = System.Drawing.Color.Black;
-            showMedicine.ForeColor = System.Drawing.Color.Black;
-            showTMs.ForeColor = System.Drawing.Color.Black;
-            showBerries.ForeColor = System.Drawing.Color.Green;
-            showKeys.ForeColor = System.Drawing.Color.Black;
-        }
-
-        private void showKeys_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = true;
-            dataGridView3.Visible = false;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = false;
-            showItems.ForeColor = System.Drawing.Color.Black;
-            showMedicine.ForeColor = System.Drawing.Color.Black;
-            showTMs.ForeColor = System.Drawing.Color.Black;
-            showBerries.ForeColor = System.Drawing.Color.Black;
-            showKeys.ForeColor = System.Drawing.Color.Green;
-        }
-
-
-        public void itemWrite_Click(object sender, EventArgs e)
-        {
-            itemData = new byte[1600];
-            keyData = new byte[384];
-            tmData = new byte[432];
-            medData = new byte[256];
-            berryData = new byte[288];
-            if (dataGridView1.Visible == true)
-            {
-                for (int i = 0; i < dataGridView1.RowCount; i++)
-                {
-                    string datastring = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(itemList, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView1.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(itemData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(itemData, i * 4 + 2);
-                }
-                string moneyr = ", 0x";
-                string money = BitConverter.ToString(itemData).Replace("-", moneyr);
-                string pokeItems = "write(" + itemsoff + ", (0x" + money + "), pid=" + pid + ")";
-                runCmd(pokeItems);
-            }
-
-            if (dataGridView2.Visible == true)
-            {
-                for (int i = 0; i < dataGridView2.RowCount; i++)
-                {
-                    string datastring = dataGridView2.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(itemList, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView2.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(keyData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(keyData, i * 4 + 2);
-                }
-                string keyr = ", 0x";
-                string key = BitConverter.ToString(keyData).Replace("-", keyr);
-                string pokeKey = "write(" + keysoff + ", (0x" + key + "), pid=" + pid + ")";
-                runCmd(pokeKey);
-            }
-
-            if (dataGridView3.Visible == true)
-            {
-                for (int i = 0; i < dataGridView3.RowCount; i++)
-                {
-                    string datastring = dataGridView3.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(itemList, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView3.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(tmData, i * 4);
-                    BitConverter.GetBytes((ushort)1).CopyTo(tmData, i * 4 + 2);
-                }
-                string tmr = ", 0x";
-                string tm = BitConverter.ToString(tmData).Replace("-", tmr);
-                string pokeTM = "write(" + tmsoff + ", (0x" + tm + "), pid=" + pid + ")";
-                runCmd(pokeTM);
-            }
-
-            if (dataGridView4.Visible == true)
-            {
-                for (int i = 0; i < dataGridView4.RowCount; i++)
-                {
-                    string datastring = dataGridView4.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(itemList, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView4.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(medData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(medData, i * 4 + 2);
-                }
-                string medr = ", 0x";
-                string med = BitConverter.ToString(medData).Replace("-", medr);
-                string pokeMeds = "write(" + medsoff + ", (0x" + med + "), pid=" + pid + ")";
-                runCmd(pokeMeds);
-            }
-
-            if (dataGridView5.Visible == true)
-            {
-                for (int i = 0; i < dataGridView5.RowCount; i++)
-                {
-                    string datastring = dataGridView5.Rows[i].Cells[0].Value.ToString();
-                    int itemIndex = Array.IndexOf(itemList, datastring);
-                    int itemcnt;
-                    itemcnt = Convert.ToUInt16(dataGridView5.Rows[i].Cells[1].Value.ToString());
-
-                    BitConverter.GetBytes((ushort)itemIndex).CopyTo(berryData, i * 4);
-                    BitConverter.GetBytes((ushort)itemcnt).CopyTo(berryData, i * 4 + 2);
-                }
-                string berryr = ", 0x";
-                string berry = BitConverter.ToString(berryData).Replace("-", berryr);
-                string pokeBerry = "write(" + bersoff + ", (0x" + berry + "), pid=" + pid + ")";
-                runCmd(pokeBerry);
-            }
-
-        }
-
-        private void itemAdd_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.Visible == true)
-            {
-                if (dataGridView1.RowCount >= 400)
-                {
-                    MessageBox.Show("You already have the max amount of items!", "Too many items");
-                }
-                else
-                {
-                    dataGridView1.Rows.Add("[None]", 0);
-                }
-            }
-
-            if (dataGridView2.Visible == true)
-            {
-                if (dataGridView2.RowCount >= 96)
-                {
-                    MessageBox.Show("You already have the max amount of key items!", "Too many items");
-                }
-                else
-                {
-                    dataGridView2.Rows.Add("[None]", 0);
-                }
-            }
-
-            if (dataGridView3.Visible == true)
-            {
-                if (dataGridView3.RowCount >= 96)
-                {
-                    MessageBox.Show("You already have the max amount of medicine items!", "Too many items");
-                }
-                else
-                {
-                    dataGridView3.Rows.Add("[None]", 0);
-                }
-            }
-
-            if (dataGridView4.Visible == true)
-            {
-                if (dataGridView4.RowCount >= 108)
-                {
-                    MessageBox.Show("You already have the max amount of TMs & HMs!", "Too many items");
-                }
-                else
-                {
-                    dataGridView4.Rows.Add("[None]", 0);
-                }
-            }
-
-            if (dataGridView5.Visible == true)
-            {
-                if (dataGridView5.RowCount >= 72)
-                {
-                    MessageBox.Show("You already have the max amount of berries!", "Too many items");
-                }
-                else
-                {
-                    dataGridView5.Rows.Add("[None]", 0);
-                }
-            }
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            label7.Visible = false;
-            label8.Visible = false;
-            label9.Visible = true;
-            boxDump.Visible = false;
-            slotDump.Visible = false;
-            nameek6.Visible = true;
-            dumpBoxes.Visible = false;
-            dumpek6.Location = new System.Drawing.Point(6, 61);
-            nameek6.Location = new System.Drawing.Point(6, 39);
-            label9.Location = new System.Drawing.Point(6, 20);
-            dumpek6.Size = new System.Drawing.Size(197, 23);
-            nameek6.Size = new System.Drawing.Size(197, 23);
-            dumpek6.Text = "Dump";
-            dumpBoxes.Enabled = true;
-            nameek6.Enabled = true;
-            onlyView.Visible = false;
-            label50.Visible = false;
-        }
-
-        private void pokeSID_Click(object sender, EventArgs e)
-        {
-            byte[] sidbyte = BitConverter.GetBytes(Convert.ToUInt16((double)SIDNum.Value));
-            string sidr = ", 0x";
-            string sid = BitConverter.ToString(sidbyte).Replace("-", sidr);
-            string pokeSID = "write(" + sidoff + ", (0x" + sid + "), pid=" + pid + ")";
-            runCmd(pokeSID);
-        }
-
-
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            OpenFileDialog selectek6Dialog = new OpenFileDialog();
-            selectek6Dialog.Title = "Select an EKX file";
-            selectek6Dialog.Filter = "EKX files|*.ek6;*.ekx|All Files (*.*)|*.*";
-            string path = @Application.StartupPath + "\\Pokemon";
-            selectek6Dialog.InitialDirectory = path;
-            if (selectek6Dialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedek6 = selectek6Dialog.FileName;
-
-
-
-            }
-        }
-
-        private void delPkm_Click(object sender, EventArgs e)
-        {
-            string ssH = boff.ToString("X");
-            string bakPkm = "data(0x" + ssH + ", 0x34AD0, filename='boxes.bak.ek6', pid=" + pid + ")";
-            runCmd(bakPkm);
-        }
-
-        private void pokeLang_Click(object sender, EventArgs e)
-        {
-            if (Lang.SelectedIndex == 0) { lang = "01"; }
-            if (Lang.SelectedIndex == 1) { lang = "02"; }
-            if (Lang.SelectedIndex == 2) { lang = "03"; }
-            if (Lang.SelectedIndex == 3) { lang = "04"; }
-            if (Lang.SelectedIndex == 4) { lang = "05"; }
-            if (Lang.SelectedIndex == 5) { lang = "07"; }
-            if (Lang.SelectedIndex == 6) { lang = "08"; }
-            string pokeLang = "writebyte(" + langoff + ", 0x" + lang + ", pid=" + pid + ")";
-            runCmd(pokeLang);
-        }
-
-
-
+        // Write single pokémon from tabs
         private void pokeEkx_Click(object sender, EventArgs e)
-        {
-            if (PKHeX.Data == null)
-            {
+        { //TODO: are all these Array.Copy() really necessary? Shouldn't PKHeX just handle everything?
+            if (dumpedPKHeX.Data == null)
                 MessageBox.Show("No Pokemon data found, please dump a Pokemon first to edit!", "No data to edit");
-            }
-            if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value >= 511)
-            {
+            else if (dumpedPKHeX.Data.Length != POKEBYTES)
+                MessageBox.Show("The data size of this pokémon data is invalid. If you dumped it from the party, please deposit it in a box before editing and try again.", "Invalid data size");
+            else if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value >= 511)
                 MessageBox.Show("Pokemon EV count is too high, the sum of all EVs should be 510 or less!", "EVs too high");
-            }
-            if (nickname.Text.Length > 12)
-            {
+            else if (nickname.Text.Length > 12)
                 MessageBox.Show("Pokemon name length too long! Please use a name with a length of 12 or less.", "Name too long");
-            }
-
-            if (PKHeX.Data != null)
+            else if (otName.Text.Length > 12)
+                MessageBox.Show("OT name length too long! Please use a name with a length of 12 or less.", "Name too long");
+            else
             {
-                if (evHPNum.Value + evATKNum.Value + evDEFNum.Value + evSPENum.Value + evSPANum.Value + evSPDNum.Value <= 510)
+                dumpedPKHeX.Nickname = nickname.Text.PadRight(12, '\0');
+                dumpedPKHeX.OT_Name = otName.Text.PadRight(12, '\0');
+                byte[] pkmToEdit = dumpedPKHeX.Data;
+                Array.Copy(Encoding.Unicode.GetBytes(dumpedPKHeX.Nickname), 0, pkmToEdit, 64, 24);
+                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.Nature), 0, pkmToEdit, 28, 1);
+                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.HeldItem), 0, pkmToEdit, 10, 2);
+
+                dumpedPKHeX.IV_HP = (int)ivHPNum.Value;
+                dumpedPKHeX.IV_ATK = (int)ivATKNum.Value;
+                dumpedPKHeX.IV_DEF = (int)ivDEFNum.Value;
+                dumpedPKHeX.IV_SPE = (int)ivSPENum.Value;
+                dumpedPKHeX.IV_SPA = (int)ivSPANum.Value;
+                dumpedPKHeX.IV_SPD = (int)ivSPDNum.Value;
+
+                dumpedPKHeX.EV_HP = (int)evHPNum.Value;
+                dumpedPKHeX.EV_ATK = (int)evATKNum.Value;
+                dumpedPKHeX.EV_DEF = (int)evDEFNum.Value;
+                dumpedPKHeX.EV_SPE = (int)evSPENum.Value;
+                dumpedPKHeX.EV_SPA = (int)evSPANum.Value;
+                dumpedPKHeX.EV_SPD = (int)evSPDNum.Value;
+
+                if (gen7 && level.Value == 100)
                 {
-                    if (nickname.Text.Length <= 12)
-                    {
-                        PKHeX.Nickname = nickname.Text.PadRight(12, '\0');
-                        PKHeX.OT_Name = otName.Text.PadRight(12, '\0');
-                        byte[] pkmToEdit = PKHeX.Data;
-                        Array.Copy(Encoding.Unicode.GetBytes(PKHeX.Nickname), 0, pkmToEdit, 64, 24);
-                        Array.Copy(BitConverter.GetBytes(PKHeX.Nature), 0, pkmToEdit, 28, 1);
-                        Array.Copy(BitConverter.GetBytes(PKHeX.HeldItem), 0, pkmToEdit, 10, 2);
-                        PKHeX.IV_HP = (int)ivHPNum.Value;
-                        PKHeX.IV_ATK = (int)ivATKNum.Value;
-                        PKHeX.IV_DEF = (int)ivDEFNum.Value;
-                        PKHeX.IV_SPE = (int)ivSPENum.Value;
-                        PKHeX.IV_SPA = (int)ivSPANum.Value;
-                        PKHeX.IV_SPD = (int)ivSPDNum.Value;
-
-                        PKHeX.EV_HP = (int)evHPNum.Value;
-                        PKHeX.EV_ATK = (int)evATKNum.Value;
-                        PKHeX.EV_DEF = (int)evDEFNum.Value;
-                        PKHeX.EV_SPE = (int)evSPENum.Value;
-                        PKHeX.EV_SPA = (int)evSPANum.Value;
-                        PKHeX.EV_SPD = (int)evSPDNum.Value;
-
-                        PKHeX.EXP = (uint)xp.Value;
-
-                        PKHeX.Ball = ball.SelectedIndex + 1;
-
-                        PKHeX.SID = (int)dSIDNum.Value;
-                        PKHeX.TID = (int)dTIDNum.Value;
-
-                        PKHeX.PID = PKHeX.getHEXval(dPID.Text);
-
-                        if (isEgg.Checked == true) { PKHeX.IsEgg = true; }
-                        if (isEgg.Checked == false) { PKHeX.IsEgg = false; }
-                        PKHeX.Species = (int)species.SelectedIndex + 1;
-                        PKHeX.Nature = nature.SelectedIndex;
-                        PKHeX.Ability = ability.SelectedIndex + 1;
-                        PKHeX.HeldItem = heldItem.SelectedIndex;
-                        PKHeX.Move1 = move1.SelectedIndex;
-                        PKHeX.Move2 = move2.SelectedIndex;
-                        PKHeX.Move3 = move3.SelectedIndex;
-                        PKHeX.Move4 = move4.SelectedIndex;
-
-                        Array.Copy(BitConverter.GetBytes(PKHeX.IV32), 0, pkmToEdit, 116, 4);
-                        byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);
-                        byte[] chkSum = BitConverter.GetBytes(PKHeX.getCHK(pkmToEdit));
-                        Array.Copy(chkSum, 0, pkmEdited, 6, 2);
-
-                        if (radioBoxes.Checked == true)
-                        {
-                            int ssd = (Decimal.ToInt32(boxDump.Value) * 30 - 30) + Decimal.ToInt32(slotDump.Value) - 1;
-                            int ssdOff = boff + (ssd * 232);
-                            string ssdH = ssdOff.ToString("X");
-                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
-                            string pokeEkx = "write(0x" + ssdH + ", (0x" + ekx + "), pid=" + pid + ")";
-                            runCmd(pokeEkx);
-                            getHP();
-                        }
-
-                        if (radioBattleBox.Checked == true)
-                        {
-                            int bbOff = bboff + ((Decimal.ToInt32(boxDump.Value) - 1) * 232);
-                            string bbfOff = bbOff.ToString("X");
-                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
-                            string pokeEkx = "write(0x" + bbfOff + ", (0x" + ekx + "), pid=" + pid + ")";
-                            runCmd(pokeEkx);
-                            getHP();
-                        }
-
-                        if (radioParty.Checked == true)
-                        {
-                            int pOff = partyoff + ((Decimal.ToInt32(boxDump.Value) - 1) * 484);
-                            string pfOff = pOff.ToString("X");
-                            string ekx = BitConverter.ToString(pkmEdited).Replace("-", ", 0x");
-                            string pokeEkx = "write(0x" + pfOff + ", (0x" + ekx + "), pid=" + pid + ")";
-                            runCmd(pokeEkx);
-                            getHP();
-                        }
-
-                        if (radioOpponent.Checked == true)
-                        {
-                            MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
-                        }
-
-                        if (radioDaycare.Checked == true)
-                        {
-                            MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
-                        }
-
-                        if (radioTrade.Checked == true)
-                        {
-                            MessageBox.Show("You can only edit Pokemon in your Boxes (for now)!", "Editing Unavailable");
-                        }
-                    }
+                    dumpedPKHeX.HT_HP = HypT_HP.Checked;
+                    dumpedPKHeX.HT_ATK = HypT_Atk.Checked;
+                    dumpedPKHeX.HT_DEF = HypT_Def.Checked;
+                    dumpedPKHeX.HT_SPA = HypT_SpA.Checked;
+                    dumpedPKHeX.HT_SPD = HypT_SpD.Checked;
+                    dumpedPKHeX.HT_SPE = HypT_Spe.Checked;
                 }
-            }
-        }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioOpponent.Checked == true)
-            {
-                dumprealoppOff();
-            }
-        }
+                dumpedPKHeX.EXP = (uint)ExpPoints.Value;
+                dumpedPKHeX.Ball = ball.SelectedIndex + 1;
+                dumpedPKHeX.SID = (int)dSIDNum.Value;
+                dumpedPKHeX.TID = (int)dTIDNum.Value;
+                dumpedPKHeX.PID = PKHeX.getHEXval(dPID.Text);
+                if (isEgg.Checked == true) { dumpedPKHeX.IsEgg = true; }
+                if (isEgg.Checked == false) { dumpedPKHeX.IsEgg = false; }
+                dumpedPKHeX.Species = species.SelectedIndex + 1;
+                dumpedPKHeX.Nature = nature.SelectedIndex;
+                dumpedPKHeX.Gender = genderBox.SelectedIndex;
 
-
-        private void radioParty_CheckedChanged(object sender, EventArgs e)
-        {
-            boxDump.Minimum = 1;
-            boxDump.Maximum = 6;
-            label8.Text = "Slot:";
-            label9.Text = "Filename:";
-            boxDump.Visible = true;
-            slotDump.Visible = true;
-            dumpBoxes.Visible = true;
-            nameek6.Visible = true;
-            slotDump.Visible = false;
-            label7.Visible = false;
-            label8.Visible = true;
-            label9.Visible = true;
-            label9.Location = new System.Drawing.Point(50, 20);
-            nameek6.Location = new System.Drawing.Point(54, 39);
-            nameek6.Size = new System.Drawing.Size(149, 20);
-            dumpek6.Size = new System.Drawing.Size(86, 23);
-            dumpBoxes.Size = new System.Drawing.Size(105, 23);
-            dumpBoxes.Location = new System.Drawing.Point(98, 61);
-            dumpek6.Location = new System.Drawing.Point(6, 61);
-            dumpek6.Text = "Dump";
-            dumpBoxes.Text = "Dump All Boxes";
-        }
-
-
-
-        private void chooseCloneFF_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog selectcloneDialog = new OpenFileDialog();
-            selectcloneDialog.Title = "Select an EKX/PKX file";
-            selectcloneDialog.Filter = "EKX/PKX files|*.ek6;*.ekx;*.pk6;*.pkx";
-            string path = @Application.StartupPath + "\\Pokemon";
-            selectcloneDialog.InitialDirectory = path;
-            if (selectcloneDialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedclone = selectcloneDialog.FileName;
-                string extension = Path.GetExtension(selectcloneDialog.FileName);
-                if (extension == ".pk6" || extension == ".pkx")
+                switch (ability.SelectedIndex)
                 {
-                    isEncryptedFF = false;
+                    case 0:
+                        dumpedPKHeX.AbilityNumber = 1;
+                        dumpedPKHeX.Ability = absno[0];
+                        break;
+                    case 1:
+                        dumpedPKHeX.AbilityNumber = 2;
+                        dumpedPKHeX.Ability = absno[1];
+                        break;
+                    case 2:
+                        dumpedPKHeX.AbilityNumber = 4;
+                        dumpedPKHeX.Ability = absno[2];
+                        break;
+                    default:
+                        dumpedPKHeX.AbilityNumber = 1;
+                        dumpedPKHeX.Ability = absno[0];
+                        break;
                 }
-                if (extension == ".ek6" || extension == ".ekx")
+
+                dumpedPKHeX.HeldItem = heldItem.SelectedIndex;
+
+                dumpedPKHeX.Move1 = move1.SelectedIndex;
+                dumpedPKHeX.Move2 = move2.SelectedIndex;
+                dumpedPKHeX.Move3 = move3.SelectedIndex;
+                dumpedPKHeX.Move4 = move4.SelectedIndex;
+                dumpedPKHeX.RelearnMove1 = relearnmove1.SelectedIndex;
+                dumpedPKHeX.RelearnMove2 = relearnmove2.SelectedIndex;
+                dumpedPKHeX.RelearnMove3 = relearnmove3.SelectedIndex;
+                dumpedPKHeX.RelearnMove4 = relearnmove4.SelectedIndex;
+
+                switch (pkLang.SelectedIndex)
                 {
-                    isEncryptedFF = true;
+                    case 0: dumpedPKHeX.Language = 0x01; break;
+                    case 1: dumpedPKHeX.Language = 0x02; break;
+                    case 2: dumpedPKHeX.Language = 0x03; break;
+                    case 3: dumpedPKHeX.Language = 0x04; break;
+                    case 4: dumpedPKHeX.Language = 0x05; break;
+                    case 5: dumpedPKHeX.Language = 0x07; break;
+                    case 6: dumpedPKHeX.Language = 0x08; break;
+                    case 7: dumpedPKHeX.Language = 0x09; break;
+                    case 8: dumpedPKHeX.Language = 0x0A; break;
                 }
-                byte[] ek6b = File.ReadAllBytes(selectedclone);
-                string ek6 = BitConverter.ToString(ek6b).Replace("-", ", 0x");
-                int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
-                int ssOff = MainForm.boff + (ss * 232);
-                string ssH = ssOff.ToString("X");
-                if (ek6.Length == 1556 || ek6.Length == 1388)
+
+                Array.Copy(BitConverter.GetBytes(dumpedPKHeX.IV32), 0, pkmToEdit, 116, 4);
+                byte[] pkmEdited = PKHeX.encryptArray(pkmToEdit);
+                byte[] chkSum = BitConverter.GetBytes(PKHeX.getCHK(pkmToEdit));
+                Array.Copy(chkSum, 0, pkmEdited, 6, 2);
+
+                if (radioBoxes.Checked)
                 {
-                    chooseCloneFF.Enabled = true;
+                    uint index = ((uint)boxDump.Value - 1) * BOXSIZE + (uint)slotDump.Value - 1;
+                    uint offset = boxOff + (index * POKEBYTES);
+                    Program.scriptHelper.write(offset, pkmEdited, pid);
+                }
+                else if (radioBattleBox.Checked)
+                {
+                    uint offset = battleBoxOff + ((uint)slotDump.Value - 1) * POKEBYTES;
+                    Program.scriptHelper.write(offset, pkmEdited, pid);
+                }
+
+                else if (radioParty.Checked)
+                {
+                    uint offset = partyOff + ((uint)slotDump.Value - 1) * 484;
+                    Program.scriptHelper.write(offset, pkmEdited, pid);
                 }
                 else
                 {
-                    MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
-                    txtLog.Clear();
+                    MessageBox.Show("No editing support for this source.", "Editing Unavailable");
                 }
             }
-        }
-
-        public static string ByteArrayToString(byte[] ba)
-        {
-            string hex = BitConverter.ToString(ba);
-            return hex.Replace("-", "");
-        }
-
-
-        private void cloneFF_Click(object sender, EventArgs e)
-        {
-            int ss = (Decimal.ToInt32(clonetoBoxFF.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFF.Value) - 1;
-            int ssOff = boff + (ss * 232);
-            string ssH = ssOff.ToString("X");
-            byte[] ek6b = File.ReadAllBytes(selectedclone);
-            string ek6s = BitConverter.ToString(ek6b).Replace("-", ", 0x");
-
-            if (isEncryptedFF == true)
-            {
-                byte[] cloneshort = ek6b.Take(232).ToArray();
-                if (ek6s.Length == 1556 || ek6s.Length == 1388)
-                {
-                    int icloneAmount = (int)cloneAmountFF.Value * 232;
-                    byte[] clone = new byte[icloneAmount];
-                    for (int i = 0; i < cloneAmountFF.Value; i++)
-                    {
-                        cloneshort.CopyTo(clone, (i) * 232);
-                    }
-                    string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                    string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-                    runCmd(pokeek6);
-                    txtLog.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Please make sure you are using a valid EKX file.", "Incorrect File Size");
-                    txtLog.Clear();
-                }
-            }
-
-            if (isEncryptedFF == false)
-            {
-                byte[] cloneshort = PKHeX.encryptArray(ek6b.Take(232).ToArray());
-                if (ek6s.Length == 1556 || ek6s.Length == 1388)
-                {
-                    int icloneAmount = (int)cloneAmountFF.Value * 232;
-                    byte[] clone = new byte[icloneAmount];
-                    for (int i = 0; i < cloneAmountFF.Value; i++)
-                    {
-                        cloneshort.CopyTo(clone, (i) * 232);
-                    }
-                    string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-                    string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-                    runCmd(pokeek6);
-                    txtLog.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Please make sure you are using a valid PKX file.", "Incorrect File Size");
-                    txtLog.Clear();
-                }
-            }
-        }
-
-        private void clonetoBoxFF_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
-        }
-
-        private void clonetoSlotFF_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
-        }
-
-        private void cloneAmountFF_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFF.Maximum = 930 - ((clonetoBoxFF.Value * 30 - 30) + (clonetoSlotFF.Value - 1));
-        }
-
-        public void afterCloneDump()
-        {
-            byte[] selectedclonebytes = File.ReadAllBytes(@Application.StartupPath + "\\clone.temp");
-            int ss = (Decimal.ToInt32(clonetoBoxFB.Value) * 30 - 30) + Decimal.ToInt32(clonetoSlotFB.Value) - 1;
-            int ssOff = boff + (ss * 232);
-            string ssH = ssOff.ToString("X");
-            int icloneAmount = (int)cloneAmountFB.Value * 232;
-            byte[] clone = new byte[icloneAmount];
-            for (int i = 0; i < cloneAmountFB.Value; i++)
-            {
-                selectedclonebytes.CopyTo(clone, (i) * 232);
-            }
-            string ek6 = BitConverter.ToString(clone).Replace("-", ", 0x");
-            string ssr = "0x";
-            string ssS = ssr + ssH;
-            string pokeek6 = "write(0x" + ssH + ", (0x" + ek6 + "), pid=" + pid + ")";
-            runCmd(pokeek6);
-            txtLog.Clear();
-            RMTemp();
-        }
-
-        private void cloneFB_Click(object sender, EventArgs e)
-        {
-            int ssd = (Decimal.ToInt32(clonefromBoxFB.Value) * 30 - 30) + Decimal.ToInt32(clonefromSlotFB.Value) - 1;
-            int ssdOff = boff + (ssd * 232);
-            string ssdH = ssdOff.ToString("X");
-            string dumpek6 = "data(0x" + ssdH + ", 0xE8, filename='clone.temp', pid=" + pid + ")";
-            runCmd(dumpek6);
-        }
-
-        private void clonetoBoxFB_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
-        }
-
-        private void clonetoSlotFB_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
-        }
-
-        private void cloneAmountFB_ValueChanged(object sender, EventArgs e)
-        {
-            cloneAmountFB.Maximum = 930 - ((clonetoBoxFB.Value * 30 - 30) + (clonetoSlotFB.Value - 1));
-        }
-
-        private void fromBoxes_CheckedChanged(object sender, EventArgs e)
-        {
-            label39.Visible = true;
-            label40.Visible = true;
-            clonefromBoxFB.Visible = true;
-            clonefromSlotFB.Visible = true;
-            clonetoBoxFB.Visible = true;
-            clonetoSlotFB.Visible = true;
-            cloneAmountFB.Visible = true;
-            cloneFB.Visible = true;
-
-            cloneAmountFF.Visible = false;
-            cloneFF.Visible = false;
-            clonetoBoxFF.Visible = false;
-            clonetoSlotFF.Visible = false;
-            chooseCloneFF.Visible = false;
-        }
-
-        private void fromFile_CheckedChanged(object sender, EventArgs e)
-        {
-            cloneAmountFF.Visible = true;
-            cloneFF.Visible = true;
-            clonetoBoxFF.Visible = true;
-            clonetoSlotFF.Visible = true;
-            chooseCloneFF.Visible = true;
-
-            label39.Visible = false;
-            label40.Visible = false;
-            clonefromBoxFB.Visible = false;
-            clonefromSlotFB.Visible = false;
-            clonetoBoxFB.Visible = false;
-            clonetoSlotFB.Visible = false;
-            cloneAmountFB.Visible = false;
-            cloneFB.Visible = false;
-        }
-
-        private void deleteBox_ValueChanged(object sender, EventArgs e)
-        {
-            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
-        }
-
-        private void deleteSlot_ValueChanged(object sender, EventArgs e)
-        {
-            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
-        }
-
-        private void deleteAmount_ValueChanged(object sender, EventArgs e)
-        {
-            deleteAmount.Maximum = 930 - ((deleteBox.Value * 30 - 30) + (deleteSlot.Value - 1));
-        }
-
-        private void ball_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ball.SelectedIndex == 0)
-            {
-                pictureBox1.Image = Properties.Resources._0;
-            }
-            if (ball.SelectedIndex == 1)
-            {
-                pictureBox1.Image = Properties.Resources._1;
-            }
-            if (ball.SelectedIndex == 2)
-            {
-                pictureBox1.Image = Properties.Resources._2;
-            }
-            if (ball.SelectedIndex == 3)
-            {
-                pictureBox1.Image = Properties.Resources._3;
-            }
-            if (ball.SelectedIndex == 4)
-            {
-                pictureBox1.Image = Properties.Resources._4;
-            }
-            if (ball.SelectedIndex == 5)
-            {
-                pictureBox1.Image = Properties.Resources._5;
-            }
-            if (ball.SelectedIndex == 6)
-            {
-                pictureBox1.Image = Properties.Resources._6;
-            }
-            if (ball.SelectedIndex == 7)
-            {
-                pictureBox1.Image = Properties.Resources._7;
-            }
-            if (ball.SelectedIndex == 8)
-            {
-                pictureBox1.Image = Properties.Resources._8;
-            }
-            if (ball.SelectedIndex == 9)
-            {
-                pictureBox1.Image = Properties.Resources._9;
-            }
-            if (ball.SelectedIndex == 10)
-            {
-                pictureBox1.Image = Properties.Resources._10;
-            }
-            if (ball.SelectedIndex == 11)
-            {
-                pictureBox1.Image = Properties.Resources._11;
-            }
-            if (ball.SelectedIndex == 12)
-            {
-                pictureBox1.Image = Properties.Resources._12;
-            }
-            if (ball.SelectedIndex == 13)
-            {
-                pictureBox1.Image = Properties.Resources._13;
-            }
-            if (ball.SelectedIndex == 14)
-            {
-                pictureBox1.Image = Properties.Resources._14;
-            }
-            if (ball.SelectedIndex == 15)
-            {
-                pictureBox1.Image = Properties.Resources._15;
-            }
-            if (ball.SelectedIndex == 16)
-            {
-                pictureBox1.Image = Properties.Resources._16;
-            }
-            if (ball.SelectedIndex == 17)
-            {
-                pictureBox1.Image = Properties.Resources._17;
-            }
-            if (ball.SelectedIndex == 18)
-            {
-                pictureBox1.Image = Properties.Resources._18;
-            }
-            if (ball.SelectedIndex == 19)
-            {
-                pictureBox1.Image = Properties.Resources._19;
-            }
-            if (ball.SelectedIndex == 20)
-            {
-                pictureBox1.Image = Properties.Resources._20;
-            }
-            if (ball.SelectedIndex == 21)
-            {
-                pictureBox1.Image = Properties.Resources._21;
-            }
-            if (ball.SelectedIndex == 22)
-            {
-                pictureBox1.Image = Properties.Resources._22;
-            }
-            if (ball.SelectedIndex == 23)
-            {
-                pictureBox1.Image = Properties.Resources._23;
-            }
-            if (ball.SelectedIndex == 24)
-            {
-                pictureBox1.Image = Properties.Resources._24;
-            }
-        }
-
-        private void versionCheck_Click(object sender, EventArgs e)
-        {
-            UpdateCheck();
-        }
-
-        private void radioParty_CheckedChanged_1(object sender, EventArgs e)
-        {
-            boxDump.Minimum = 1;
-            boxDump.Maximum = 6;
-            label8.Text = "Slot:";
-            label9.Text = "Filename:";
-            boxDump.Visible = true;
-            slotDump.Visible = false;
-            dumpBoxes.Visible = false;
-            nameek6.Visible = true;
-            label7.Visible = false;
-            label8.Visible = true;
-            label9.Visible = true;
-            label9.Location = new System.Drawing.Point(50, 20);
-            nameek6.Location = new System.Drawing.Point(53, 39);
-            nameek6.Size = new System.Drawing.Size(150, 20);
-            dumpek6.Size = new System.Drawing.Size(197, 23);
-            dumpek6.Location = new System.Drawing.Point(6, 61);
-            dumpek6.Text = "Dump";
-        }
-
-
-        private void dTIDNum_ValueChanged(object sender, EventArgs e)
-        {
-            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + (((int)dTIDNum.Value ^ (int)dSIDNum.Value) >> 4).ToString());
-            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + (((int)dTIDNum.Value ^ (int)dSIDNum.Value) >> 4).ToString());
-            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
-        }
-
-        private void dSIDNum_ValueChanged(object sender, EventArgs e)
-        {
-            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
-            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
-            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
-        }
-
-        private void dPID_TextChanged(object sender, EventArgs e)
-        {
-            ToolTipTSVt.SetToolTip(dTIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
-            ToolTipTSVs.SetToolTip(dSIDNum, "TSV: " + ((PKHeX.TID ^ PKHeX.SID) >> 4).ToString());
-            ToolTipPSV.SetToolTip(dPID, "PSV: " + ((int)((PKHeX.PID >> 16 ^ PKHeX.PID & 0xFFFF) >> 4)).ToString());
-        }
-
-        private void setShiny_Click(object sender, EventArgs e)
-        {
-            PKHeX.setShinyPID();
-            dPID.Text = PKHeX.PID.ToString("X");
-            if (PKHeX.isShiny == true)
-            {
-                setShiny.Text = "★";
-            }
-            if (PKHeX.isShiny == false)
-            {
-                setShiny.Text = "☆";
-            }
-        }
-
-        private void TIDNum_ValueChanged(object sender, EventArgs e)
-        {
-            ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
-            ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
-        }
-
-        private void SIDNum_ValueChanged(object sender, EventArgs e)
-        {
-            ToolTipTSVtt.SetToolTip(TIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
-            ToolTipTSVss.SetToolTip(SIDNum, "TSV: " + (((int)TIDNum.Value ^ (int)SIDNum.Value) >> 4).ToString());
         }
 
         private void randomPID_Click(object sender, EventArgs e)
         {
-            Random theRandom = new Random();
-            byte[] theBytes = new byte[4];
-            theRandom.NextBytes(theBytes);
-            StringBuilder buffer = new StringBuilder(8);
-            for (int i = 0; i < 4; i++)
+            dumpedPKHeX.setRandomPID();
+            dPID.Text = dumpedPKHeX.PID.ToString("X8");
+            setShinyMark();
+        }
+
+        // Clone pokémon
+        private void cloneDoIt_Click(object sender, EventArgs e)
+        {
+            uint offset = boxOff + cloneGetBoxIndexFrom() * POKEBYTES;
+            uint mySeq = Program.scriptHelper.data(offset, POKEBYTES, pid);
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[POKEBYTES], handleCloneData, null);
+            waitingForData.Add(mySeq, myArgs);
+        }
+
+        private void handleCloneData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+            writePokemonToBox(args.data, cloneGetBoxIndexTo(), cloneGetCopies());
+        }
+
+        private uint cloneGetCopies()
+        {
+            return decimal.ToUInt32(cloneCopiesNo.Value);
+        }
+
+        private uint cloneGetBoxIndexTo()
+        {
+            return decimal.ToUInt32((cloneBoxTo.Value - 1) * BOXSIZE + cloneSlotTo.Value - 1);
+        }
+
+        private uint cloneGetBoxIndexFrom()
+        {
+            return decimal.ToUInt32((cloneBoxFrom.Value - 1) * BOXSIZE + cloneSlotFrom.Value - 1);
+        }
+
+        private void cloneBoxTo_ValueChanged(object sender, EventArgs e)
+        {
+            cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
+        }
+
+        private void cloneSlotTo_ValueChanged(object sender, EventArgs e)
+        {
+            cloneCopiesNo.Maximum = BOXES * BOXSIZE - cloneGetBoxIndexTo();
+        }
+
+        // Write pokémon from file
+        private void writeBrowse_Click(object sender, EventArgs e)
+        {
+            try
             {
-                buffer.Append(theBytes[i].ToString("X").PadLeft(2));
+                OpenFileDialog selectWriteDialog = new OpenFileDialog();
+                selectWriteDialog.Title = "Select an EKX/PKX file";
+                if (gen7)
+                {
+                    selectWriteDialog.Filter = "Gen 7 pokémon files|*.ek7;*.pk7";
+                }
+                else
+                {
+                    selectWriteDialog.Filter = "Gen 6 pokémon files|*.ek6;*.pk6";
+                }
+                string path = System.Windows.Forms.@Application.StartupPath + "\\Pokemon";
+                selectWriteDialog.InitialDirectory = path;
+                if (selectWriteDialog.ShowDialog() == DialogResult.OK)
+                {
+                    selectedCloneValid = (readPokemonFromFile(selectWriteDialog.FileName, out selectedCloneData) == 0);
+                }
             }
-
-            dPID.Text = buffer.ToString().Replace(" ", "0");
-
-            PKHeX.PID = PKHeX.getHEXval(dPID.Text);
-
-            if (PKHeX.isShiny == true)
+            catch (Exception ex)
             {
-                setShiny.Enabled = false;
-                setShiny.Text = "★";
-            }
-            if (PKHeX.isShiny == false)
-            {
-                setShiny.Enabled = true;
-                setShiny.Text = "☆";
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void onlyView_CheckedChanged(object sender, EventArgs e)
-        {
-            if (onlyView.Checked == true)
+        private int readPokemonFromFile(string filename, out byte[] result)
+        { //Returns 0 on success, other values on failure
+            string extension = Path.GetExtension(filename);
+            result = new byte[POKEBYTES];
+
+            // Test if correct generation format
+            if ((gen7 && (extension == ".pk7" || extension == ".ek7")) || (!gen7 && (extension == ".pk6" || extension == ".ek6")))
             {
-                dumpBoxes.Enabled = false;
-                nameek6.Enabled = false;
+                bool isEncrypted = false;
+                if (extension == ".pk6" || extension == ".pk7")
+                    isEncrypted = false;
+                else if (extension == ".ek6" || extension == ".ek7")
+                    isEncrypted = true;
+                else
+                {
+                    MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
+                    return 1;
+                }
+
+                byte[] tmpBytes = File.ReadAllBytes(filename);
+                if (tmpBytes.Length == 260 || tmpBytes.Length == 232)
+                { // All OK, commit
+                    if (isEncrypted)
+                        tmpBytes.CopyTo(result, 0);
+                    else
+                        PKHeX.encryptArray(tmpBytes.Take(POKEBYTES).ToArray()).CopyTo(result, 0);
+                }
+                else
+                {
+                    MessageBox.Show("Please make sure you are using a valid PKX/EKX file.", "Incorrect File Size");
+                    return 2;
+                }
+                return 0;
             }
             else
-            if (onlyView.Checked == false)
             {
+                MessageBox.Show("This program does not support conversion of pokémon files between generations.", "Incorrect Generation Number");
+                return 3;
+            }
+        }
+
+        private void writeDoIt_Click(object sender, EventArgs e)
+        {
+            if (!selectedCloneValid)
+            {
+                MessageBox.Show("No Pokemon selected!", "Error");
+                return;
+            }
+            int ret = writePokemonToBox(selectedCloneData, writeGetBoxIndex(), writeGetCopies());
+            if (ret > 0)
+                MessageBox.Show(ret + " write(s) failed because the end of boxes was reached.", "Error");
+            else if (ret <= 0)
+                if (writeAutoInc.Checked)
+                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+        }
+
+        private int writePokemonToBox(byte[] data, uint boxFrom, uint count)
+        { //Returns 0 on success, positive value represents how many copies could not be written.
+            if (data.Length != POKEBYTES)
+                return -1;
+
+            int ret = 0;
+            if (boxFrom + count > BOXES * BOXSIZE)
+            {
+                uint newCount = BOXES * BOXSIZE - boxFrom;
+                ret = (int)(count - newCount);
+                count = newCount;
+            }
+
+            byte[] dataToWrite = new byte[count * POKEBYTES];
+            for (int i = 0; i < count; i++)
+                data.CopyTo(dataToWrite, i * POKEBYTES);
+            uint offset = boxOff + boxFrom * POKEBYTES;
+            Program.scriptHelper.write(offset, dataToWrite, pid);
+            return ret;
+        }
+
+        void writeTab_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+        }
+
+        void writeTab_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length <= 0)
+                return;
+            int fails = 0;
+            foreach (string filename in files)
+            {
+                byte[] data = new byte[POKEBYTES];
+                if (readPokemonFromFile(filename, out data) == 0)
+                {
+                    int ret = writePokemonToBox(data, writeGetBoxIndex(), writeGetCopies());
+                    if (ret > 0)
+                        fails += ret;
+                    else if (ret < 0)
+                        return;
+                }
+
+                if (writeAutoInc.Checked)
+                    writeSetBoxIndex(writeGetBoxIndex() + writeGetCopies());
+            }
+            if (fails > 0)
+                MessageBox.Show(fails + " write(s) failed because end of boxes was reached.", "Error");
+        }
+
+        private uint writeGetCopies()
+        {
+            return decimal.ToUInt32(writeCopiesNo.Value);
+        }
+
+        private uint writeGetBoxIndex()
+        {
+            return decimal.ToUInt32((writeBoxTo.Value - 1) * BOXSIZE + writeSlotTo.Value - 1);
+        }
+
+        private void writeSetBoxIndex(uint index)
+        {
+            if (index >= BOXES * BOXSIZE)
+                index = BOXES * BOXSIZE - 1;
+            uint box = index / BOXSIZE;
+            uint slot = index % BOXSIZE;
+            SetValue(writeBoxTo, box + 1);
+            SetValue(writeSlotTo, slot + 1);
+        }
+
+        private void writeBoxTo_ValueChanged(object sender, EventArgs e)
+        {
+            writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
+        }
+
+        private void writeSlotTo_ValueChanged(object sender, EventArgs e)
+        {
+            writeCopiesNo.Maximum = BOXES * BOXSIZE - writeGetBoxIndex();
+        }
+
+        // Delete pokémon
+        private void delPkm_Click(object sender, EventArgs e)
+        {
+            uint offset = boxOff + deleteGetIndex() * POKEBYTES;
+            uint size = POKEBYTES * deleteGetAmount();
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[size], handleDeleteData, null);
+            uint mySeq = Program.scriptHelper.data(offset, size, pid);
+            waitingForData.Add(mySeq, myArgs);
+        }
+
+        private void handleDeleteData(object args_obj)
+        {
+            DataReadyWaiting args = (DataReadyWaiting)args_obj;
+
+            if (deleteKeepBackup.Checked)
+            {
+                try
+                {
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERPOKE + "\\" + FOLDERDELETE + "\\";
+                    FileInfo folder = new FileInfo(folderPath);
+                    folder.Directory.Create();
+                    PKHeX validator = new PKHeX();
+                    for (int i = 0; i < args.data.Length; i += POKEBYTES)
+                    {
+                        validator.Data = PKHeX.decryptArray(args.data.Skip(i).Take(POKEBYTES).ToArray());
+                        if (validator.Species == 0)
+                            continue;
+                        string fileName;
+                        if (gen7)
+                            fileName = folderPath + "backup.pk7";
+                        else
+                            fileName = folderPath + "backup.pk6";
+                        writePokemonToFile(validator.Data, fileName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            if (gen7)
+                writePokemonToBox(LookupTable.EmptyPoke7, deleteGetIndex(), deleteGetAmount());
+            else
+                writePokemonToBox(LookupTable.EmptyPoke6, deleteGetIndex(), deleteGetAmount());
+        }
+
+        private uint deleteGetAmount()
+        {
+            return decimal.ToUInt32(deleteAmount.Value);
+        }
+
+        private uint deleteGetIndex()
+        {
+            return decimal.ToUInt32((deleteBox.Value - 1) * BOXSIZE + deleteSlot.Value - 1);
+        }
+
+        private void deleteBox_ValueChanged(object sender, EventArgs e)
+        {
+            deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
+        }
+
+        private void deleteSlot_ValueChanged(object sender, EventArgs e)
+        {
+            deleteAmount.Maximum = BOXES * BOXSIZE - deleteGetIndex();
+        }
+
+        #endregion R/W pokémon data
+
+        #region GUI handling
+
+        // Radio boxes for pokémon source
+        private void radioBoxes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioBoxes.Tag == null)
+            {
+                radioBoxes.Tag = new LastBoxSlot { box = 1, slot = 1 };
+            }
+
+            if (radioBoxes.Checked)
+            { 
+                boxDump.Minimum = 1;
+                boxDump.Maximum = BOXES;
+                slotDump.Minimum = 1;
+                slotDump.Maximum = BOXSIZE;
+                boxDump.Enabled = true;
+                slotDump.Enabled = true;
                 dumpBoxes.Enabled = true;
-                nameek6.Enabled = true;
+                onlyView.Enabled = true;
+                boxDump.Value = ((LastBoxSlot)radioBoxes.Tag).box;
+                slotDump.Value = ((LastBoxSlot)radioBoxes.Tag).slot;
             }
+            else
+            {
+                radioBoxes.Tag = new LastBoxSlot { box = boxDump.Value, slot = slotDump.Value };
+            }
+            
         }
 
-        private void gender_Click(object sender, EventArgs e)
+        private void radioDaycare_CheckedChanged(object sender, EventArgs e)
         {
-            if (PKHeX.Gender == 0)
+            if (radioDaycare.Tag == null)
             {
-                gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                gender.ForeColor = Color.Red;
-                gender.Text = "♀";
-                PKHeX.Gender = 1;
+                radioDaycare.Tag = new LastBoxSlot { box = 1, slot = 1 };
+            }
+            if (radioDaycare.Checked)
+            {
+                boxDump.Minimum = 1;
+                boxDump.Maximum = 2;
+                slotDump.Minimum = 1;
+                if (game == GameType.OR || game == GameType.AS) // Handle ORAS Battle Resort Daycare
+                    slotDump.Maximum = 4;
+                else
+                    slotDump.Maximum = 2;
+                boxDump.Enabled = false;
+                slotDump.Enabled = true;
+                dumpBoxes.Enabled = false;
+                onlyView.Enabled = true;
+                boxDump.Value = ((LastBoxSlot)radioDaycare.Tag).box;
+                slotDump.Value = ((LastBoxSlot)radioDaycare.Tag).slot;   
             }
             else
-            if (PKHeX.Gender == 1)
             {
-                gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                gender.ForeColor = Color.Gray;
-                gender.Text = "-";
-                PKHeX.Gender = 2;
-            }
-            else
-            if (PKHeX.Gender == 2)
-            {
-                gender.Font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size, FontStyle.Bold);
-                gender.ForeColor = Color.Blue;
-                gender.Text = "♂";
-                PKHeX.Gender = 0;
+                radioDaycare.Tag = new LastBoxSlot { box = boxDump.Value, slot = slotDump.Value };
             }
         }
 
         private void radioBattleBox_CheckedChanged(object sender, EventArgs e)
         {
-            boxDump.Minimum = 1;
-            boxDump.Maximum = 6;
-            label8.Text = "Slot:";
-            label9.Text = "Filename:";
-            boxDump.Visible = true;
-            slotDump.Visible = false;
-            dumpBoxes.Visible = false;
-            nameek6.Visible = true;
-            label7.Visible = false;
-            label8.Visible = true;
-            label9.Visible = true;
-            label9.Location = new System.Drawing.Point(50, 20);
-            nameek6.Location = new System.Drawing.Point(53, 39);
-            nameek6.Size = new System.Drawing.Size(150, 20);
-            dumpek6.Size = new System.Drawing.Size(197, 23);
-            dumpek6.Location = new System.Drawing.Point(6, 61);
-            dumpek6.Text = "Dump";
+            if (radioBattleBox.Tag == null)
+            {
+                radioBattleBox.Tag = new LastBoxSlot { box = 1, slot = 1 };
+            }
+            if (radioBattleBox.Checked)
+            {
+                boxDump.Minimum = 1;
+                boxDump.Maximum = 1;
+                slotDump.Minimum = 1;
+                slotDump.Maximum = 6;
+                boxDump.Enabled = false;
+                slotDump.Enabled = true;
+                dumpBoxes.Enabled = false;
+                onlyView.Enabled = true;
+                boxDump.Value = ((LastBoxSlot)radioBattleBox.Tag).box;
+                slotDump.Value = ((LastBoxSlot)radioBattleBox.Tag).slot;
+            }
+            else
+            {
+                radioBattleBox.Tag = new LastBoxSlot { box = boxDump.Value, slot = slotDump.Value };
+            }
+        }
+
+        private void radioTrade_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioTrade.Tag == null)
+            {
+                radioTrade.Tag = new LastBoxSlot { box = 1, slot = 1 };
+            }
+            if (radioTrade.Checked)
+            {
+                boxDump.Minimum = 1;
+                boxDump.Maximum = 1;
+                slotDump.Minimum = 1;
+                slotDump.Maximum = 1;
+                boxDump.Enabled = false;
+                slotDump.Enabled = false;
+                dumpBoxes.Enabled = false;
+                onlyView.Enabled = false;
+                boxDump.Value = ((LastBoxSlot)radioTrade.Tag).box;
+                slotDump.Value = ((LastBoxSlot)radioTrade.Tag).slot;
+            }
+            else
+            {
+                radioTrade.Tag = new LastBoxSlot { box = boxDump.Value, slot = slotDump.Value };
+            }
+        }
+
+        private void radioOpponent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioOpponent.Tag == null)
+            {
+                radioOpponent.Tag = new LastBoxSlot { box = 1, slot = 1 };
+            }
+            if (radioOpponent.Checked)
+            { 
+                boxDump.Minimum = 1;
+                boxDump.Maximum = 4;
+                slotDump.Minimum = 1;
+                slotDump.Maximum = 6;
+                boxDump.Enabled = true;
+                slotDump.Enabled = true;
+                dumpBoxes.Enabled = false;
+                onlyView.Enabled = false;
+                BoxLabel.Text = "Opp.:";
+                boxDump.Value = ((LastBoxSlot)radioOpponent.Tag).box;
+                slotDump.Value = ((LastBoxSlot)radioOpponent.Tag).slot;
+                if (gen7)
+                {
+                    DumpInstructionsBtn.Visible = true;
+                }
+            }
+            else
+            {
+                radioOpponent.Tag = new LastBoxSlot { box = boxDump.Value, slot = slotDump.Value };
+                BoxLabel.Text = "Box:";
+                if (gen7)
+                {
+                    DumpInstructionsBtn.Visible = false;
+                }
+            }
+        }
+
+        private void radioParty_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (radioParty.Tag == null)
+            {
+                radioParty.Tag = new LastBoxSlot { box = 1, slot = 1 };
+            }
+            if (radioParty.Checked)
+            {
+                if (!botWorking && !enablepartywrite)
+                {
+                    MessageBox.Show("Important:\r\n\r\nThis feature is experimental, the slots that is selected in this application might not be the same slots that are shown in your party. Due the unkonown mechanics of this, the write feature has been disabled.\r\n\r\nIf you wish to edit a pokémon in your party, deposit it the PC.", "PKMN-NTR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    WriteBtn.Enabled = false;
+                    boxDump.Minimum = 1;
+                    boxDump.Maximum = 1;
+                    slotDump.Minimum = 1;
+                    slotDump.Maximum = 6;
+                    boxDump.Enabled = false;
+                    slotDump.Enabled = true;
+                    dumpBoxes.Enabled = false;
+                    onlyView.Enabled = false;
+                    boxDump.Value = ((LastBoxSlot)radioParty.Tag).box;
+                    slotDump.Value = ((LastBoxSlot)radioParty.Tag).slot;
+                }
+                else if (!botWorking)
+                {
+                    WriteBtn.Enabled = true;
+                }
+            }
+            else
+            {
+                radioParty.Tag = new LastBoxSlot { box = boxDump.Value, slot = slotDump.Value };
+            }
+        }
+
+        // Item buttons
+        private void showItems_Click(object sender, EventArgs e)
+        {
+            if (gen7)
+            {
+                readItems7(items7);
+                currentpouch = 1;
+            }
+            else
+            {
+                itemsGridView.Visible = true;
+                keysGridView.Visible = false;
+                tmsGridView.Visible = false;
+                medsGridView.Visible = false;
+                bersGridView.Visible = false;
+            }
+            showItems.ForeColor = Color.Green;
+            showMedicine.ForeColor = Color.Black;
+            showTMs.ForeColor = Color.Black;
+            showBerries.ForeColor = Color.Black;
+            showKeys.ForeColor = Color.Black;
+        }
+
+        private void showMedicine_Click(object sender, EventArgs e)
+        {
+            if (gen7)
+            {
+                readItems7(meds7);
+                currentpouch = 0;
+            }
+            else
+            {
+                itemsGridView.Visible = false;
+                keysGridView.Visible = false;
+                tmsGridView.Visible = false;
+                medsGridView.Visible = true;
+                bersGridView.Visible = false;
+            }
+            showItems.ForeColor = Color.Black;
+            showMedicine.ForeColor = Color.Green;
+            showTMs.ForeColor = Color.Black;
+            showBerries.ForeColor = Color.Black;
+            showKeys.ForeColor = Color.Black;
+        }
+
+        private void showTMs_Click(object sender, EventArgs e)
+        {
+            if (gen7)
+            {
+                readItems7(tms7);
+                currentpouch = 2;
+            }
+            else
+            {
+                itemsGridView.Visible = false;
+                keysGridView.Visible = false;
+                tmsGridView.Visible = true;
+                medsGridView.Visible = false;
+                bersGridView.Visible = false;
+            }
+            showItems.ForeColor = Color.Black;
+            showMedicine.ForeColor = Color.Black;
+            showTMs.ForeColor = Color.Green;
+            showBerries.ForeColor = Color.Black;
+            showKeys.ForeColor = Color.Black;
+        }
+
+        private void showBerries_Click(object sender, EventArgs e)
+        {
+            if (gen7)
+            {
+                readItems7(bers7);
+                currentpouch = 3;
+            }
+            else
+            {
+                itemsGridView.Visible = false;
+                keysGridView.Visible = false;
+                tmsGridView.Visible = false;
+                medsGridView.Visible = false;
+                bersGridView.Visible = true;
+            }
+            showItems.ForeColor = Color.Black;
+            showMedicine.ForeColor = Color.Black;
+            showTMs.ForeColor = Color.Black;
+            showBerries.ForeColor = Color.Green;
+            showKeys.ForeColor = Color.Black;
+        }
+
+        private void showKeys_Click(object sender, EventArgs e)
+        {
+            if (gen7)
+            {
+                readItems7(keys7);
+                currentpouch = 4;
+            }
+            else
+            {
+                itemsGridView.Visible = false;
+                keysGridView.Visible = true;
+                tmsGridView.Visible = false;
+                medsGridView.Visible = false;
+                bersGridView.Visible = false;
+            }
+            showItems.ForeColor = Color.Black;
+            showMedicine.ForeColor = Color.Black;
+            showTMs.ForeColor = Color.Black;
+            showBerries.ForeColor = Color.Black;
+            showKeys.ForeColor = Color.Green;
+        }
+
+        // Tooltips for TSV / ESV / G7ID
+        private void setTSVToolTip(NumericUpDown TID, NumericUpDown SID)
+        {
+            int TSV = getTSV(TID.Value, SID.Value);
+            if (gen7)
+            {
+                int G7ID = getGen7ID(TID.Value, SIDNum.Value);
+                SetTooltip(ToolTipTSVpoke, TID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+                SetTooltip(ToolTipTSVpoke, SID, "G7ID: " + G7ID.ToString("D6") + "\r\nTSV: " + TSV.ToString("D4"));
+            }
+            else
+            {
+                SetTooltip(ToolTipTSVpoke, TID, "TSV: " + TSV.ToString("D4"));
+                SetTooltip(ToolTipTSVpoke, SID, "TSV: " + TSV.ToString("D4"));
+            }
+        }
+
+        private void dTIDNum_ValueChanged(object sender, EventArgs e)
+        { // Handles pokémon OT's TID/SID fields
+            setTSVToolTip(dTIDNum, dSIDNum);
+        }
+
+        private void TIDNum_ValueChanged(object sender, EventArgs e)
+        { // Handles Trainer's TID/SID fields
+            setTSVToolTip(TIDNum, SIDNum);
+        }
+
+        private void dPID_TextChanged(object sender, EventArgs e)
+        {
+            SetTooltip(ToolTipPSV, dPID, "PSV: " + getPSV(PKHeX.getHEXval(dPID.Text)).ToString("D4"));
+        }
+
+        // Ability, Exp and sprite update on species change
+        private void species_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updateAbility(species.SelectedIndex + 1, 0, 1);
+            uint newexp = LookupTable.getExp(species.SelectedIndex + 1, (int)level.Value);
+            SetValue(ExpPoints, newexp);
+            ExpPoints.Maximum = LookupTable.getExp(species.SelectedIndex + 1, 100);
+            if (dumpedPKHeX.Data != null)
+            {
+                dumpedPKHeX.Species = species.SelectedIndex + 1;
+                dumpedPKHeX.AltForm = 0;
+                dumpedPKHeX.AbilityNumber = 1;
+                dumpedPKHeX.Ability = absno[0];
+                dumpedPKHeX.EXP = newexp;
+            }
+            setSprite(species.SelectedIndex + 1, 0, false);
+        }
+
+        private void setSprite(int speciesindex, int formindex, bool isegg)
+        {
+            string resname;
+            if (isegg)
+                resname = "egg";
+            else if (formindex == 0 || speciesindex == 493 || speciesindex == 773) // All Arceus / Silvally formes have same sprite
+                resname = "_" + speciesindex;
+            else
+                resname = "_" + speciesindex + "_" + formindex;
+            Bitmap data;
+            data = (Bitmap)Resources.ResourceManager.GetObject(resname);
+            if (data == null)
+                data = (Bitmap)Resources.ResourceManager.GetObject("unknown");
+            pictureBox2.Image = data;
+        }
+
+        private void ExpPoints_ValueChanged(object sender, EventArgs e)
+        {
+            level.ValueChanged -= level_ValueChanged;
+            int speciesno = 0;
+            Invoke(new MethodInvoker(delegate () { speciesno = species.SelectedIndex; }));
+            int newlevel = LookupTable.getLevel(speciesno + 1, (int)ExpPoints.Value);
+            SetValue(level, newlevel);
+            HyperTrainBoxes();
+            level.ValueChanged += level_ValueChanged;
+        }
+
+        private void level_ValueChanged(object sender, EventArgs e)
+        {
+            ExpPoints.ValueChanged -= ExpPoints_ValueChanged;
+            uint newexp = LookupTable.getExp(species.SelectedIndex + 1, (int)level.Value);
+            SetValue(ExpPoints, newexp);
+            HyperTrainBoxes();
+            ExpPoints.ValueChanged += ExpPoints_ValueChanged;
+        }
+
+        // Poké ball image
+        private void ball_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ball.SelectedIndex >= 0)
+                pictureBox1.Image = (Bitmap)Resources.ResourceManager.GetObject("ball" + ball.SelectedIndex);
+            else
+                pictureBox1.Image = null;
+        }
+
+        // Shiny pokémon mark
+        private void setShinyMark()
+        {
+            shinyBox.CheckedChanged -= shinyBox_CheckedChanged;
+            SetChecked(shinyBox, dumpedPKHeX.isShiny);
+            shinyBox.CheckedChanged += shinyBox_CheckedChanged;
+            if (dumpedPKHeX.isShiny)
+                shinypic.Image = Resources.shiny;
+            else
+                shinypic.Image = null;
+        }
+
+        private void setShinySprite()
+        {
+            if (dumpedPKHeX.isShiny)
+                shinypic.Image = Resources.shiny;
+            else
+                shinypic.Image = null;
+        }
+
+        private void shinyBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (shinyBox.Checked == true)
+                dumpedPKHeX.setShinyPID();
+            else
+                while (dumpedPKHeX.isShiny)
+                    dumpedPKHeX.setRandomPID();
+            dPID.Text = dumpedPKHeX.PID.ToString("X8");
+            setShinySprite();
+        }
+
+        // Automatic Hidden Power Calculation and Hyper Training Boxes
+        private void ivChanged(object sender, EventArgs e)
+        {
+            int hp = (15 * (((int)ivHPNum.Value & 1) + 2 * ((int)ivATKNum.Value & 1) + 4 * ((int)ivDEFNum.Value & 1) + 8 * ((int)ivSPENum.Value & 1) + 16 * ((int)ivSPANum.Value & 1) + 32 * ((int)ivSPDNum.Value & 1)) / 63);
+            SetText(hiddenPower, LookupTable.HPName[hp]);
+            SetColor(hiddenPower, LookupTable.HPColor[hp], true);
+            HyperTrainBoxes();
+        }
+
+        private void HyperTrainBoxes()
+        {
+            if (gen7 && level.Value == 100 && !botWorking)
+            {
+                if (ivHPNum.Value == 31)
+                {
+                    HypT_HP.Checked = false;
+                    HypT_HP.Enabled = false;
+                }
+                else
+                    HypT_HP.Enabled = true;
+                if (ivATKNum.Value == 31)
+                {
+                    HypT_Atk.Checked = false;
+                    HypT_Atk.Enabled = false;
+                }
+                else
+                    HypT_Atk.Enabled = true;
+                if (ivDEFNum.Value == 31)
+                {
+                    HypT_Def.Checked = false;
+                    HypT_Def.Enabled = false;
+                }
+                else
+                    HypT_Def.Enabled = true;
+                if (ivSPANum.Value == 31)
+                {
+                    HypT_SpA.Checked = false;
+                    HypT_SpA.Enabled = false;
+                }
+                else
+                    HypT_SpA.Enabled = true;
+                if (ivSPDNum.Value == 31)
+                {
+                    HypT_SpD.Checked = false;
+                    HypT_SpD.Enabled = false;
+                }
+                else
+                    HypT_SpD.Enabled = true;
+                if (ivSPENum.Value == 31)
+                {
+                    HypT_Spe.Checked = false;
+                    HypT_Spe.Enabled = false;
+                }
+                else
+                    HypT_Spe.Enabled = true;
+            }
+            else
+            {
+                HypT_HP.Checked = false;
+                HypT_Atk.Checked = false;
+                HypT_Def.Checked = false;
+                HypT_SpA.Checked = false;
+                HypT_SpD.Checked = false;
+                HypT_Spe.Checked = false;
+                HypT_HP.Enabled = false;
+                HypT_Atk.Enabled = false;
+                HypT_Def.Enabled = false;
+                HypT_SpA.Enabled = false;
+                HypT_SpD.Enabled = false;
+                HypT_Spe.Enabled = false;
+            }
+        }
+
+        // Control Stick controls
+        private void StickY_Scroll(object sender, EventArgs e)
+        {
+            StickNumY.Value = StickY.Value;
+        }
+
+        private void StickX_Scroll(object sender, EventArgs e)
+        {
+            StickNumX.Value = StickX.Value;
+        }
+
+        private void StickNumY_ValueChanged(object sender, EventArgs e)
+        {
+            StickY.Value = (int)StickNumY.Value;
+        }
+
+        private void StickNumX_ValueChanged(object sender, EventArgs e)
+        {
+            StickX.Value = (int)StickNumX.Value;
+        }
+
+        // Update pokémon editing tabs 
+        public void updateTabs()
+        {
+            species.SelectedIndexChanged -= species_SelectedIndexChanged;
+            level.ValueChanged -= level_ValueChanged;
+
+            SetSelectedIndex(species, dumpedPKHeX.Species - 1);
+            setSprite(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.IsEgg);
+            SetText(nickname, dumpedPKHeX.Nickname);
+            SetSelectedIndex(nature, dumpedPKHeX.Nature);
+            updateAbility(dumpedPKHeX.Species, dumpedPKHeX.AltForm, dumpedPKHeX.AbilityNumber);
+            SetSelectedIndex(heldItem, dumpedPKHeX.HeldItem);
+            SetSelectedIndex(ball, dumpedPKHeX.Ball - 1);
+
+            SetText(dPID, dumpedPKHeX.PID.ToString("X8"));
+            setShinyMark();
+            SetSelectedIndex(genderBox, dumpedPKHeX.Gender);
+            SetChecked(isEgg, dumpedPKHeX.IsEgg);
+            SetMaximum(ExpPoints, LookupTable.getExp(dumpedPKHeX.Species, 100));
+            SetValue(ExpPoints, dumpedPKHeX.EXP);
+            if (dumpedPKHeX.CurrentHandler == 0)
+            {
+                SetValue(friendship, dumpedPKHeX.OT_Friendship);
+                SetColor(friendship, Color.Cornsilk, true);
+            }
+            else
+            {
+                SetValue(friendship, dumpedPKHeX.HT_Friendship);
+                SetColor(friendship, Color.White, true);
+            }
+
+            SetValue(ivHPNum, dumpedPKHeX.IV_HP);
+            SetValue(ivATKNum, dumpedPKHeX.IV_ATK);
+            SetValue(ivDEFNum, dumpedPKHeX.IV_DEF);
+            SetValue(ivSPANum, dumpedPKHeX.IV_SPA);
+            SetValue(ivSPDNum, dumpedPKHeX.IV_SPD);
+            SetValue(ivSPENum, dumpedPKHeX.IV_SPE);
+            SetValue(evHPNum, dumpedPKHeX.EV_HP);
+            SetValue(evATKNum, dumpedPKHeX.EV_ATK);
+            SetValue(evDEFNum, dumpedPKHeX.EV_DEF);
+            SetValue(evSPANum, dumpedPKHeX.EV_SPA);
+            SetValue(evSPDNum, dumpedPKHeX.EV_SPD);
+            SetValue(evSPENum, dumpedPKHeX.EV_SPE);
+            if (gen7)
+            {
+                SetChecked(HypT_HP, dumpedPKHeX.HT_HP);
+                SetChecked(HypT_Atk, dumpedPKHeX.HT_ATK);
+                SetChecked(HypT_Def, dumpedPKHeX.HT_DEF);
+                SetChecked(HypT_SpA, dumpedPKHeX.HT_SPA);
+                SetChecked(HypT_SpD, dumpedPKHeX.HT_SPD);
+                SetChecked(HypT_Spe, dumpedPKHeX.HT_SPE);
+            }
+
+            SetSelectedIndex(move1, dumpedPKHeX.Move1);
+            SetSelectedIndex(move2, dumpedPKHeX.Move2);
+            SetSelectedIndex(move3, dumpedPKHeX.Move3);
+            SetSelectedIndex(move4, dumpedPKHeX.Move4);
+            SetSelectedIndex(relearnmove1, dumpedPKHeX.RelearnMove1);
+            SetSelectedIndex(relearnmove2, dumpedPKHeX.RelearnMove2);
+            SetSelectedIndex(relearnmove3, dumpedPKHeX.RelearnMove3);
+            SetSelectedIndex(relearnmove4, dumpedPKHeX.RelearnMove4);
+
+            SetText(otName, dumpedPKHeX.OT_Name);
+            SetValue(dTIDNum, dumpedPKHeX.TID);
+            SetValue(dSIDNum, dumpedPKHeX.SID);
+
+            int i;
+            switch (dumpedPKHeX.Language)
+            {
+                case 1: i = 0; break;
+                case 2: i = 1; break;
+                case 3: i = 2; break;
+                case 4: i = 3; break;
+                case 5: i = 4; break;
+                case 7: i = 5; break;
+                case 8: i = 6; break;
+                case 9: i = 7; break;
+                case 10: i = 8; break;
+                default: i = -1; break;
+            }
+            SetSelectedIndex(pkLang, i);
+
+            species.SelectedIndexChanged += species_SelectedIndexChanged;
+            level.ValueChanged += level_ValueChanged;
+        }
+
+        private void PokeDiggerBtn_Click(object sender, EventArgs e)
+        {
+            new PokeDigger(pid, game != GameType.None).Show();
+        }
+
+        private void DumpInstructionsBtn_Click(object sender, EventArgs e)
+        {
+            if (radioOpponent.Checked)
+            {
+                new DumpOpponentHelp().Show();
+            }
+        }
+
+        #endregion GUI handling
+
+        #region Thread Safety
+
+        delegate void SetTextDelegate(Control ctrl, string text);
+
+        public static void SetText(Control ctrl, string text)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetTextDelegate del = new SetTextDelegate(SetText);
+                ctrl.Invoke(del, ctrl, text);
+            }
+            else
+                ctrl.Text = text;
+        }
+
+        delegate void SetTooltipDelegate(ToolTip source, Control ctrl, string text);
+
+        public static void SetTooltip(ToolTip source, Control ctrl, string text)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetTooltipDelegate del = new SetTooltipDelegate(SetTooltip);
+                ctrl.Invoke(del, source, ctrl, text);
+            }
+            else
+                source.SetToolTip(ctrl, text);
+        }
+
+        delegate void RemoveTooltipDelegate(ToolTip source, Control ctrl);
+
+        public static void RemoveTooltip(ToolTip source, Control ctrl)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                RemoveTooltipDelegate del = new RemoveTooltipDelegate(RemoveTooltip);
+                ctrl.Invoke(del, source, ctrl);
+            }
+            else
+                source.RemoveAll();
+        }
+
+        delegate void SetEnabledDelegate(Control ctrl, bool en);
+
+        public static void SetEnabled(Control ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetEnabledDelegate del = new SetEnabledDelegate(SetEnabled);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.Enabled = en;
+        }
+
+        delegate void SeVisibleDelegate(Control ctrl, bool en);
+
+        public static void SetVisible(Control ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SeVisibleDelegate del = new SeVisibleDelegate(SetVisible);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.Visible = en;
+        }
+
+        delegate void SetCheckedDelegate(CheckBox ctrl, bool en);
+
+        public static void SetChecked(CheckBox ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetCheckedDelegate del = new SetCheckedDelegate(SetChecked);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.Checked = en;
+        }
+
+        delegate void SetCheckedRadioDelegate(RadioButton ctrl, bool en);
+
+        public static void SetCheckedRadio(RadioButton ctrl, bool en)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetCheckedRadioDelegate del = new SetCheckedRadioDelegate(SetCheckedRadio);
+                ctrl.Invoke(del, ctrl, en);
+            }
+            else
+                ctrl.Checked = en;
+        }
+
+        delegate void SetValueDelegate(NumericUpDown ctrl, decimal val);
+
+        public static void SetValue(NumericUpDown ctrl, decimal val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetValueDelegate del = new SetValueDelegate(SetValue);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+                ctrl.Value = val;
+        }
+
+        delegate void SetMaximumDelegate(NumericUpDown ctrl, decimal val);
+
+        public static void SetMaximum(NumericUpDown ctrl, decimal val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetMaximumDelegate del = new SetMaximumDelegate(SetMaximum);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+                ctrl.Maximum = val;
+        }
+
+        delegate void SetSelectedIndexDelegate(ComboBox ctrl, int i);
+
+        public static void SetSelectedIndex(ComboBox ctrl, int i)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetSelectedIndexDelegate del = new SetSelectedIndexDelegate(SetSelectedIndex);
+                ctrl.Invoke(del, ctrl, i);
+            }
+            else
+                ctrl.SelectedIndex = i;
+        }
+
+        delegate void ComboboxFillDelegate(ComboBox ctrl, string[] val);
+
+        public static void ComboboxFill(ComboBox ctrl, string[] val)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                ComboboxFillDelegate del = new ComboboxFillDelegate(ComboboxFill);
+                ctrl.Invoke(del, ctrl, val);
+            }
+            else
+            {
+                ctrl.Items.Clear();
+                ctrl.Items.AddRange(val);
+            }
+        }
+
+        delegate void DataGridViewAddRowDelegate(DataGridView ctrl, params object[] args);
+
+        public static void DataGridViewAddRow(DataGridView ctrl, params object[] args)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                DataGridViewAddRowDelegate del = new DataGridViewAddRowDelegate(DataGridViewAddRow);
+                ctrl.Invoke(del, args);
+            }
+            else
+            {
+                ctrl.Rows.Add(args);
+            }
+        }
+
+        delegate void SetColorDelegate(Control ctrl, Color c, bool back);
+
+        public static void SetColor(Control ctrl, Color c, bool back)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                SetColorDelegate del = new SetColorDelegate(SetColor);
+                ctrl.Invoke(del, ctrl, c, back);
+            }
+            else
+            {
+                if (back)
+                    ctrl.BackColor = c;
+                else
+                    ctrl.ForeColor = c;
+            }
+        }
+
+        #endregion Thread Safety
+
+        #region Remote control
+
+        // Manual button presses
+        private void sendButton(uint command)
+        {
+            Program.helper.quickbuton(command, 200);
+        }
+
+        private void manualA_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.keyA);
+        }
+
+        private void manualB_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.keyB);
+        }
+
+        private void manualX_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.keyX);
+        }
+
+        private void manualY_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.keyY);
+        }
+
+        private void manualDUp_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.DpadUP);
+        }
+
+        private void ManualDDown_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.DpadDOWN);
+        }
+
+        private void manualDLeft_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.DpadLEFT);
+        }
+
+        private void manualDRight_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.DpadRIGHT);
+        }
+
+        private void manualStart_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.keySTART);
+        }
+
+        private void manualSelect_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.keySELECT);
+        }
+
+        private void manualL_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.keyL);
+        }
+
+        private void manualR_Click(object sender, EventArgs e)
+        {
+            sendButton(LookupTable.keyR);
+        }
+
+        private async void manualSR_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogr = MessageBox.Show("Are you sure that you want to send a soft-reset command? The application will automatically disconnect from the game afterwards.", "Remote Control", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogr == DialogResult.Yes)
+            {
+                sendButton(LookupTable.softReset);
+                await Task.Delay(1000);
+                PerformDisconnect();
+            }
+        }
+
+        // Send manual touch command
+        private void manualTouch_Click(object sender, EventArgs e)
+        {
+            Program.helper.quicktouch(touchX.Value, touchY.Value, 200);
+        }
+
+        // Send Control Stick command
+        private void StickSend_Click(object sender, EventArgs e)
+        {
+            Program.helper.quickstick(StickX.Value, StickY.Value, 500);
+        }
+
+        #endregion Remote control
+
+        #region Bots
+
+        // General Bot functions
+        private void stopBotButton_Click(object sender, EventArgs e)
+        {
+            switch (botnumber)
+            {
+                case 1: // Breeding bot
+                    if (gen7)
+                        BreedBot7.botstop = true;
+                    else
+                        BreedBot6.botstop = true;
+                    break;
+                case 2: // Soft-reset bot
+                    if (gen7)
+                        SRBot7.botstop = true;
+                    else
+                        SRBot6.botstop = true;
+                    break;
+                case 3: // Wonder Trade bot
+                    if (gen7)
+                        WTBot7.botstop = true;
+                    else
+                        WTBot6.botstop = true;
+                    break;
+            }
+            stopBotButton.Enabled = false;
+            botStop = true;
+        }
+
+        public void HandleRAMread(uint value)
+        {
+            SetText(readResult, "0x" + value.ToString("X8"));
+        }
+
+        public void addwaitingForData(uint newkey, DataReadyWaiting newvalue)
+        {
+            waitingForData.Add(newkey, newvalue);
+        }
+
+        public void updateDumpBoxes(int box, int slot)
+        {
+            SetValue(boxDump, box + 1);
+            SetValue(slotDump, slot + 1);
+        }
+
+        private void startBot()
+        {
+            botWorking = true;
+            botStop = false;
+            txtLog.Clear();
+            disableControls();
+            timer1.Interval = 500;
+            SetEnabled(stopBotButton, true);
+        }
+
+        private void finishBot()
+        {
+            botWorking = false;
+            botnumber = -1;
+            enableControls();
+            timer1.Interval = 1000;
+            SetEnabled(stopBotButton, false);
+        }
+
+        // Filter handlers
+        public bool FilterCheck(DataGridView filters)
+        {
+            if (filters.Rows.Count > 0)
+            {
+                currentfilter = 0;
+                int failedtests = 0;
+                int perfectIVs = 0;
+                foreach (DataGridViewRow row in filters.Rows)
+                {
+                    currentfilter++;
+                    Addlog("Analyze pokémon using filter # " + currentfilter);
+                    failedtests = 0;
+                    // Test shiny
+                    if ((int)row.Cells[0].Value == 1)
+                    {
+                        if (dumpedPKHeX.isShiny)
+                            Addlog("Shiny: PASS");
+                        else
+                        {
+                            Addlog("Shiny: FAIL");
+                            failedtests++;
+                        }
+                    }
+                    else
+                        Addlog("Shiny: Don't care");
+                    // Test nature
+                    if ((int)row.Cells[1].Value < 0 || dumpedPKHeX.Nature == (int)row.Cells[1].Value)
+                        Addlog("Nature: PASS");
+                    else
+                    {
+                        Addlog("Nature: FAIL");
+                        failedtests++;
+                    }
+                    // Test Ability
+                    if ((int)row.Cells[2].Value < 0 || (dumpedPKHeX.Ability - 1) == (int)row.Cells[2].Value)
+                        Addlog("Ability: PASS");
+                    else
+                    {
+                        Addlog("Ability: FAIL");
+                        failedtests++;
+                    }
+                    // Test Hidden Power
+                    if ((int)row.Cells[3].Value < 0 || getHiddenPower() == (int)row.Cells[3].Value)
+                        Addlog("Hidden Power: PASS");
+                    else
+                    {
+                        Addlog("Hidden Power: FAIL");
+                        failedtests++;
+                    }
+                    // Test Gender
+                    if ((int)row.Cells[4].Value < 0 || (int)row.Cells[4].Value == dumpedPKHeX.Gender)
+                        Addlog("Gender: PASS");
+                    else
+                    {
+                        Addlog("Gender: FAIL");
+                        failedtests++;
+                    }
+                    // Test HP
+                    if (IVCheck((int)row.Cells[5].Value, dumpedPKHeX.IV_HP, (int)row.Cells[6].Value))
+                        Addlog("Hit Points IV: PASS");
+                    else
+                    {
+                        Addlog("Hit Points IV: FAIL");
+                        failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_HP == 31)
+                        perfectIVs++;
+                    // Test Atk
+                    if (IVCheck((int)row.Cells[7].Value, dumpedPKHeX.IV_ATK, (int)row.Cells[8].Value))
+                        Addlog("Attack IV: PASS");
+                    else
+                    {
+                        Addlog("Attack IV: FAIL");
+                        failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_ATK == 31)
+                        perfectIVs++;
+                    // Test Def
+                    if (IVCheck((int)row.Cells[9].Value, dumpedPKHeX.IV_DEF, (int)row.Cells[10].Value))
+                        Addlog("Defense IV: PASS");
+                    else
+                    {
+                        Addlog("Defense IV: FAIL");
+                        failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_DEF == 31)
+                        perfectIVs++;
+                    // Test SpA
+                    if (IVCheck((int)row.Cells[11].Value, dumpedPKHeX.IV_SPA, (int)row.Cells[12].Value))
+                        Addlog("Special Attack IV: PASS");
+                    else
+                    {
+                        Addlog("Special Attack IV: FAIL");
+                        failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_SPA == 31)
+                        perfectIVs++;
+                    // Test SpD
+                    if (IVCheck((int)row.Cells[13].Value, dumpedPKHeX.IV_SPD, (int)row.Cells[14].Value))
+                        Addlog("Special Defense IV: PASS");
+                    else
+                    {
+                        Addlog("Special Defense IV: FAIL");
+                        failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_SPD == 31)
+                        perfectIVs++;
+                    // Test Spe
+                    if (IVCheck((int)row.Cells[15].Value, dumpedPKHeX.IV_SPE, (int)row.Cells[16].Value))
+                        Addlog("Speed IV: PASS");
+                    else
+                    {
+                        Addlog("Speed IV: FAIL");
+                        failedtests++;
+                    }
+                    if (dumpedPKHeX.IV_SPE == 31)
+                        perfectIVs++;
+                    // Test Perfect IVs
+                    if (IVCheck((int)row.Cells[17].Value, perfectIVs, (int)row.Cells[18].Value))
+                        Addlog("Perfect IVs: PASS");
+                    else
+                    {
+                        Addlog("Perfect IVs: FAIL");
+                        failedtests++;
+                    }
+                    if (failedtests == 0)
+                        return true;
+                }
+                return false;
+            }
+            else
+                return true;
+        }
+
+        public bool IVCheck(int refiv, int actualiv, int logic)
+        {
+            switch (logic)
+            {
+                case 0: // Greater or equal
+                    if (actualiv >= refiv)
+                        return true;
+                    else
+                        return false;
+                case 1: // Greater
+                    if (actualiv > refiv)
+                        return true;
+                    else
+                        return false;
+                case 2: // Equal
+                    if (actualiv == refiv)
+                        return true;
+                    else
+                        return false;
+                case 3: // Less
+                    if (actualiv < refiv)
+                        return true;
+                    else
+                        return false;
+                case 4: // Less or equal
+                    if (actualiv <= refiv)
+                        return true;
+                    else
+                        return false;
+                case 5: // Different
+                    if (actualiv != refiv)
+                        return true;
+                    else
+                        return false;
+                case 6: // Even
+                    if (actualiv % 2 == 0)
+                        return true;
+                    else
+                        return false;
+                case 7: // Odd
+                    if (actualiv % 2 == 1)
+                        return true;
+                    else
+                        return false;
+                default:
+                    return true;
+            }
+        }
+
+        private void filterAdd_Click(object sender, EventArgs e)
+        {
+            filterList.Rows.Add(filterShiny.Checked ? 1 : 0, Convert.ToInt32(filterNature.SelectedIndex), Convert.ToInt32(filterAbility.SelectedIndex), Convert.ToInt32(filterHPtype.SelectedIndex), Convert.ToInt32(filterGender.SelectedIndex), Convert.ToInt32(filterHPvalue.Value), Convert.ToInt32(filterHPlogic.SelectedIndex), Convert.ToInt32(filterATKvalue.Value), Convert.ToInt32(filterATKlogic.SelectedIndex), Convert.ToInt32(filterDEFvalue.Value), Convert.ToInt32(filterDEFlogic.SelectedIndex), Convert.ToInt32(filterSPAvalue.Value), Convert.ToInt32(filterSPAlogic.SelectedIndex), Convert.ToInt32(filterSPDvalue.Value), Convert.ToInt32(filterSPDlogic.SelectedIndex), Convert.ToInt32(filterSPEvalue.Value), Convert.ToInt32(filterSPElogic.SelectedIndex), Convert.ToInt32(filterPerIVvalue.Value), Convert.ToInt32(filterPerIVlogic.SelectedIndex));
+        }
+
+        private void filterRemove_Click(object sender, EventArgs e)
+        {
+            if (filterList.SelectedRows.Count > 0 && filterList.Rows.Count > 0)
+                filterList.Rows.RemoveAt(filterList.SelectedRows[0].Index);
+            else
+                MessageBox.Show("There is no filter selected.");
+        }
+
+        private void filterRead_Click(object sender, EventArgs e)
+        {
+            if (filterList.SelectedRows.Count > 0)
+            {
+                if ((int)filterList.SelectedRows[0].Cells[0].Value == 1)
+                    SetChecked(filterShiny, true);
+                else
+                    SetChecked(filterShiny, false);
+                SetSelectedIndex(filterNature, (int)filterList.SelectedRows[0].Cells[1].Value);
+                SetSelectedIndex(filterAbility, (int)filterList.SelectedRows[0].Cells[2].Value);
+                SetSelectedIndex(filterHPtype, (int)filterList.SelectedRows[0].Cells[3].Value);
+                SetSelectedIndex(filterGender, (int)filterList.SelectedRows[0].Cells[4].Value);
+                SetValue(filterHPvalue, (int)filterList.SelectedRows[0].Cells[5].Value);
+                SetSelectedIndex(filterHPlogic, (int)filterList.SelectedRows[0].Cells[6].Value);
+                SetValue(filterATKvalue, (int)filterList.SelectedRows[0].Cells[7].Value);
+                SetSelectedIndex(filterATKlogic, (int)filterList.SelectedRows[0].Cells[8].Value);
+                SetValue(filterDEFvalue, (int)filterList.SelectedRows[0].Cells[9].Value);
+                SetSelectedIndex(filterDEFlogic, (int)filterList.SelectedRows[0].Cells[10].Value);
+                SetValue(filterSPAvalue, (int)filterList.SelectedRows[0].Cells[11].Value);
+                SetSelectedIndex(filterSPAlogic, (int)filterList.SelectedRows[0].Cells[12].Value);
+                SetValue(filterSPDvalue, (int)filterList.SelectedRows[0].Cells[13].Value);
+                SetSelectedIndex(filterSPDlogic, (int)filterList.SelectedRows[0].Cells[14].Value);
+                SetValue(filterSPEvalue, (int)filterList.SelectedRows[0].Cells[15].Value);
+                SetSelectedIndex(filterSPElogic, (int)filterList.SelectedRows[0].Cells[16].Value);
+                SetValue(filterPerIVvalue, (int)filterList.SelectedRows[0].Cells[17].Value);
+                SetSelectedIndex(filterPerIVlogic, (int)filterList.SelectedRows[0].Cells[18].Value);
+            }
+            else
+            {
+                MessageBox.Show("There is no filter selected.");
+            }
+        }
+
+        private void filterSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                saveFileDialog1.Title = "Save a filter set";
+                saveFileDialog1.InitialDirectory = folderPath;
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != "")
+                {
+                    var filters = new StringBuilder();
+                    foreach (DataGridViewRow row in filterList.Rows)
+                    {
+                        var cells = row.Cells.Cast<DataGridViewCell>();
+                        filters.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    }
+                    File.WriteAllText(saveFileDialog1.FileName, filters.ToString());
+                    MessageBox.Show("Filter set saved");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void filterLoad_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
+                {
+                    filterList.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filterList.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter set loaded");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void filterReset_Click(object sender, EventArgs e)
+        {
+            SetChecked(filterShiny, false);
+            SetSelectedIndex(filterNature, -1);
+            SetSelectedIndex(filterAbility, -1);
+            SetSelectedIndex(filterHPtype, -1);
+            SetSelectedIndex(filterGender, -1);
+            SetSelectedIndex(filterHPlogic, 0);
+            SetSelectedIndex(filterATKlogic, 0);
+            SetSelectedIndex(filterDEFlogic, 0);
+            SetSelectedIndex(filterSPAlogic, 0);
+            SetSelectedIndex(filterSPDlogic, 0);
+            SetSelectedIndex(filterSPElogic, 0);
+            SetSelectedIndex(filterPerIVlogic, 0);
+            SetValue(filterHPvalue, 0);
+            SetValue(filterATKvalue, 0);
+            SetValue(filterDEFvalue, 0);
+            SetValue(filterSPAvalue, 0);
+            SetValue(filterSPDvalue, 0);
+            SetValue(filterSPEvalue, 0);
+        }
+
+        private void bFilterLoad_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
+                {
+                    filterBreeding.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filterBreeding.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter Set loaded correctly.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void srFilterLoad_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new System.IO.FileInfo(folderPath)).Directory.Create();
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "PKMN-NTR Filter|*.pftr";
+                openFileDialog1.Title = "Select a filter set";
+                openFileDialog1.InitialDirectory = folderPath;
+                openFileDialog1.ShowDialog();
+                if (openFileDialog1.FileName != "")
+                {
+                    filtersSoftReset.Rows.Clear();
+                    List<int[]> rows = File.ReadAllLines(openFileDialog1.FileName).Select(s => s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToList();
+                    foreach (int[] row in rows)
+                    {
+                        filtersSoftReset.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]);
+                    }
+                    MessageBox.Show("Filter set loaded correctly");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // Wonder Trade bot
+        private async void RunWTbot_Click_1(object sender, EventArgs e)
+        {
+            // Show warning
+            DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + WTtradesNo.Value + " pokémon, starting from the slot " + WTSlot.Value + " of box " + WTBox.Value + ". Remember to read the wiki for this bot in GitHub before starting.\r\n\r\nDo you want to continue?", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.OK && WTtradesNo.Value > 0)
+                {
+                    startBot();
+                    botnumber = 3;
+                    radioBoxes.Checked = true;
+                    Task<int> Bot;
+                    if (gen7)
+                    {
+                        WTBot7 = new WonderTradeBot7((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, WTcollectFC.Checked);
+                        Bot = WTBot7.RunBot();
+                    }
+                    else
+                    {
+                        bool oras;
+                        if (game == GameType.X || game == GameType.Y)
+                            oras = false;
+                        else
+                            oras = true;
+                        WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras);
+                        Bot = WTBot6.RunBot();
+                    }
+                    int result = await Bot;
+                    if (botStop)
+                        result = 8;
+                    switch (result)
+                    {
+                        case 0: // General finish message
+                            MessageBox.Show("Bot finished sucessfully", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            break;
+                        case 1: // PSS error
+                            MessageBox.Show("Please go to the PSS menu and try again.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            break;
+                        case 2: // Read error
+                            MessageBox.Show(readerror, "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        case 3: // Festival plaza level-up
+                            MessageBox.Show("Bot finished due level up in Festival Plaza", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            break;
+                        case 4: // Communication error
+                            MessageBox.Show("A communication error has ocurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        case 6: // Touch screen error
+                            MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        case 7: // Button error
+                            MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        case 8: // User stop
+                            MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            break;
+                        default: // General error message
+                            MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                    }
+                    finishBot();
+                }
+            }
+
+
+        // when the start button is pressed the endless wondertrade will start
+        private async void buttonWTStartEndless_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("This scirpt will try to Wonder Trade " + WTtradesNo.Value + " pokémon, starting from the slot " + WTSlot.Value + " of box " + WTBox.Value + ".\r\n" +
+                "Caution: This bot will trade endlessly. When all Pokemon you selected are traded, the bot will return to its initial values and all Pokemon will be traded again.", "Wonder Trade Bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Cancel && WTtradesNo.Value > 0)
+            {
+                return;
+            }
+
+            // get standard value
+            int standardBox = (int)WTBox.Value;
+            int standardSlot = (int)WTSlot.Value;
+            int standardTradeNO = (int)WTtradesNo.Value;
+
+            RunWTbot.Enabled = false;
+            buttonWTStartEndless.Enabled = false;
+
+            bool EndlessBotRunning = true;
+
+            while (EndlessBotRunning)
+            {
+                startBot();
+                botnumber = 3;
+                radioBoxes.Checked = true;
+                Task<int> Bot;
+                if (gen7)
+                {
+                    WTBot7 = new WonderTradeBot7((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, WTcollectFC.Checked);
+                    Bot = WTBot7.RunBot();
+                }
+                else
+                {
+                    bool oras;
+                    if (game == GameType.X || game == GameType.Y)
+                        oras = false;
+                    else
+                        oras = true;
+                    WTBot6 = new WonderTradeBot6((int)WTBox.Value, (int)WTSlot.Value, (int)WTtradesNo.Value, oras);
+                    Bot = WTBot6.RunBot();
+                }
+                int result = await Bot;
+                if (botStop)
+                    result = 8;
+                switch (result)
+                {
+                    case 0: // General finish message
+                        //MessageBox.Show("Bot finished sucessfully", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 1: // PSS error
+                        MessageBox.Show("Please go to the PSS menu and try again.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 2: // Read error
+                        MessageBox.Show(readerror, "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 3: // Festival plaza level-up
+                        MessageBox.Show("Bot finished due level up in Festival Plaza", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 4: // Communication error
+                        MessageBox.Show("A communication error has ocurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 6: // Touch screen error
+                        MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 7: // Button error
+                        MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 8: // User stop
+                        MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        EndlessBotRunning = false;
+                        break;
+                    default: // General error message
+                        MessageBox.Show("An error has occurred.", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+                WTBox.Value = standardBox;
+                WTSlot.Value = standardSlot;
+                WTtradesNo.Value = standardTradeNO;
+            }
+            buttonWTStartEndless.Enabled = true;
+            finishBot();
+        }
+
+        public void updateWTslots(int box, int slot, int quantity)
+        {
+            SetValue(WTBox, box + 1);
+            SetValue(WTSlot, slot + 1);
+            SetValue(WTtradesNo, quantity);
+        }
+
+        public void updateFCfields(uint totalFC, uint currentFC)
+        {
+            SetValue(milesNum, currentFC);
+            SetValue(totalFCNum, totalFC);
+        }
+
+        // Soft-reset bot
+        private async void RunLSRbot_Click_1(object sender, EventArgs e)
+        {
+            string typemessage;
+            string resumemessage;
+            botWorking = true; // Supress warning messages
+            if (gen7)
+            {
+                resumemessage = "No resume support for Gen 7";
+                switch (typeLSR.SelectedIndex)
+                {
+                    case 0:
+                        typemessage = "Event - Make sure you are in front of the man in the Pokémon Center. Also, you must only have one pokémon in your party.";
+                        radioParty.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 2);
+                        break;
+                    default:
+                        typemessage = "No type - Select one type of soft-reset and try again.";
+                        resumemessage = "";
+                        break;
+                }
+            }
+            else
+            {
+                switch (typeLSR.SelectedIndex)
+                {
+                    case 0:
+                        typemessage = "Regular - Make sure you are in front of the pokémon.";
+                        resumemessage = "In front of pokémon, will press A to trigger start the battle";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 1:
+                        typemessage = "Mirage Spot - Make sure you are in front of the hole.";
+                        resumemessage = "In front of hole, will press A to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 2:
+                        typemessage = "Event - Make sure you are in front of the lady in the Pokémon Center. Also, you must only have one pokémon in your party.";
+                        resumemessage = "In front of the lady, will press A to trigger dialog";
+                        radioParty.Checked = true;
+                        SetValue(boxDump, 1);
+                        SetValue(slotDump, 2);
+                        break;
+                    case 3:
+                        typemessage = "Groudon/Kyogre - You must disable the PSS communications manually due PokéNav malfunction. Go in front of Groudon/Kyogre and save game before starting the battle.";
+                        resumemessage = "In front of Groudon/Kyogre, will press A to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    case 4:
+                        typemessage = "Walk - Make sure you are one step south of the pokémon.";
+                        resumemessage = "One step south of the pokémon, will press up to trigger dialog";
+                        radioOpponent.Checked = true;
+                        break;
+                    default:
+                        typemessage = "No type - Select one type of soft-reset and try again.";
+                        resumemessage = "";
+                        break;
+                }
+            }
+            botWorking = false;
+            DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.OK && typeLSR.SelectedIndex >= 0)
+            {
+                startBot();
+                botnumber = 2;
+                Task<int> Bot;
+                if (gen7)
+                {
+                    SRBot7 = new SoftResetbot7(typeLSR.SelectedIndex);
+                    Bot = SRBot7.RunBot();
+                }
+                else
+                {
+                    bool oras;
+                    if (game == GameType.X || game == GameType.Y)
+                        oras = false;
+                    else
+                        oras = true;
+                    SRBot6 = new SoftResetbot6(typeLSR.SelectedIndex, resumeLSR.Checked, oras);
+                    Bot = SRBot6.RunBot();
+                }
+                int result = await Bot;
+                if (botStop)
+                    result = 8;
+                int totalresets;
+                if (gen7)
+                    totalresets = SRBot7.resetNo;
+                else
+                    totalresets = SRBot6.resetNo;
+                switch (result)
+                {
+                    case 0: // General finish message
+                        MessageBox.Show("Bot finished sucessfully", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 1: // PSS error
+                        MessageBox.Show("Please go to the PSS menu and try again.", "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 2: // Write error
+                        MessageBox.Show(writeerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 3: // Read error
+                        MessageBox.Show(readerror, "Soft-reset Bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case 4: // Finish
+                        MessageBox.Show("Finished, number of resets: " + totalresets, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 6: // Touch screen error
+                        MessageBox.Show(toucherror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 7: // Button error
+                        MessageBox.Show(buttonerror, "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 8: // User stop
+                        MessageBox.Show("Bot stopped by user", "Wonder Trade Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                }
+                finishBot();
+            }
+        }
+
+        public async Task<long> ReadOpponent()
+        {
+            SetText(dPID, "");
+            DataReadyWaiting myArgs = new DataReadyWaiting(new byte[0x1FFFF], handleOpponentData, null);
+            waitingForData.Add(Program.scriptHelper.data(0x8800000, 0x1FFFF, pid), myArgs);
+            int readcount = 0;
+            for (readcount = 0; readcount < timeout * 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (lastlog.Contains("finished"))
+                    break;
+            }
+            if (readcount == timeout * 10)
+                return -2; // No data received
+            for (readcount = 0; readcount < 10; readcount++)
+            {
+                await Task.Delay(100);
+                if (dPID.Text.Length > 1)
+                    break;
+            }
+            if (readcount == 10)
+                return -2; // No data received
+            else if (dumpedPKHeX.Species != 0)
+            {
+                return dumpedPKHeX.PID;
+            }
+            else // Empty slot
+                return -1;
+        }
+
+        public async Task<bool> Reconnect()
+        {
+            Addlog("Reconnect");
+            Program.scriptHelper.connect(host.Text, 8000);
+            int waittimeout;
+            for (waittimeout = 0; waittimeout < timeout * 10; waittimeout++)
+            {
+                await Task.Delay(500);
+                if (lastlog.Contains("end of process list"))
+                    break;
+            }
+            if (waittimeout < timeout * 10)
+                return true;
+            else
+                return false;
+        }
+
+        public bool CheckSoftResetFilters()
+        {
+            return FilterCheck(filtersSoftReset);
+        }
+
+        private void srClear_Click(object sender, EventArgs e)
+        {
+            SetSelectedIndex(typeLSR, -1);
+            SetChecked(resumeLSR, false);
+            filtersSoftReset.Rows.Clear();
+        }
+
+        // Breeding bot
+        private async void runBreedingBot_Click_1(object sender, EventArgs e)
+        {
+            string modemessage;
+            if (gen7)
+                SetValue(slotBreed, 1);
+            switch (modeBreed.SelectedIndex)
+            {
+                case 0:
+                    modemessage = "Simple: This bot will produce " + eggsNoBreed.Value.ToString() + " eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ".\r\n\r\n";
+                    break;
+                case 1:
+                    modemessage = "Filter: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check against the selected filters and if it finds a match the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
+                    break;
+                case 2:
+                    modemessage = "ESV/TSV: This bot will produce eggs and deposit them in the pc, starting at box " + boxBreed.Value.ToString() + " slot " + slotBreed.Value.ToString() + ". Then it will check the egg's ESV and if it finds a match with the values in the TSV list, the bot will stop. The bot will also stop if it produces " + eggsNoBreed.Value.ToString() + " eggs before finding a match.\r\n\r\n";
+                    break;
+                default:
+                    modemessage = "No mode selected. Select one and try again.\r\n\r\n";
+                    break;
+            }
+
+            DialogResult dialogResult;
+            if (gen7)
+            {
+                dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that your party is full. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                dialogResult = MessageBox.Show("This bot will start producing eggs from the day care using the following rules:\r\n\r\n" + modemessage + "Make sure that you only have one pokémon in your party. Please read the Wiki at Github before starting. Do you want to continue?", "Breeding bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            }
+
+            if (dialogResult == DialogResult.OK && eggsNoBreed.Value > 0 && modeBreed.SelectedIndex >= 0)
+            {
+                startBot();
+                botnumber = 1;
+                radioBoxes.Checked = true;
+                Task<int> Bot;
+                if (gen7)
+                {
+                    BreedBot7 = new BreedingBot7(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)eggsNoBreed.Value, readESV.Checked);
+                    Bot = BreedBot7.RunBot();
+                }
+                else
+                {
+                    bool oras;
+                    if (game == GameType.X || game == GameType.Y)
+                        oras = false;
+                    else
+                        oras = true;
+                    BreedBot6 = new BreedingBot6(modeBreed.SelectedIndex, (int)boxBreed.Value, (int)slotBreed.Value, (int)eggsNoBreed.Value, OrganizeTop.Checked, radioDayCare1.Checked, readESV.Checked, quickBreed.Checked, oras);
+                    Bot = BreedBot6.RunBot();
+                }
+                int result = await Bot;
+                if (botStop)
+                    result = 8;
+                switch (await Bot)
+                {
+                    case 0: // Finished
+                        MessageBox.Show("Bot finished sucessfully", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 1: // Write error
+                        MessageBox.Show(writeerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 2: // Read error
+                        MessageBox.Show(readerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 3: // Finish with no matches
+                        MessageBox.Show("Finished. Maximum number of eggs reached without a match.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 4: // Filter mode sucessful
+                        if (gen7)
+                            MessageBox.Show(BreedBot7.finishmessage + currentfilter, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show(BreedBot6.finishmessage + currentfilter, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 5: // ESV/TSV mode sucessful
+                        if (gen7)
+                            MessageBox.Show(BreedBot7.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show(BreedBot6.finishmessage, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case 6: // Touch screen error
+                        MessageBox.Show(toucherror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 7: // Button error
+                        MessageBox.Show(buttonerror, "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 8: // User stop
+                        MessageBox.Show("Bot stopped by user", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    default: // General error
+                        MessageBox.Show("An error has occurred.", "Breeding Bot", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+                finishBot();
+            }
+        }
+
+        public void updateBreedingslots(int box, int slot, int quantity)
+        {
+            SetValue(boxBreed, box + 1);
+            SetValue(slotBreed, slot + 1);
+            SetValue(eggsNoBreed, quantity);
+        }
+
+        public void AddESVrow(int row, int slot, int tsv)
+        {
+            DataGridViewAddRow(ESVlist, row + 1, slot + 1, tsv.ToString("D4"));
+        }
+
+        public bool CheckBreedingFilters()
+        {
+            return FilterCheck(filterBreeding);
+        }
+
+        private void ESVlistSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ESVlist.Rows.Count > 0)
+                {
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                    (new FileInfo(folderPath)).Directory.Create();
+                    string fileName = "ESVlist.csv";
+                    var esvlst = new StringBuilder();
+                    var headers = ESVlist.Columns.Cast<DataGridViewColumn>();
+                    esvlst.AppendLine(string.Join(",", headers.Select(column => column.HeaderText).ToArray()));
+                    foreach (DataGridViewRow row in ESVlist.Rows)
+                    {
+                        var cells = row.Cells.Cast<DataGridViewCell>();
+                        esvlst.AppendLine(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                    }
+                    File.WriteAllText(folderPath + fileName, esvlst.ToString());
+                    MessageBox.Show("ESV list saved");
+                }
+                else
+                    MessageBox.Show("There are no eggs on the ESV list");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TSVlistAdd_Click(object sender, EventArgs e)
+        {
+            TSVlist.Items.Add(((int)TSVlistNum.Value).ToString("D4"));
+        }
+
+        private void TSVlistRemove_Click(object sender, EventArgs e)
+        {
+            if (TSVlist.SelectedIndices.Count > 0)
+                TSVlist.Items.RemoveAt(TSVlist.SelectedIndices[0]);
+            else
+                MessageBox.Show("No TSV selected for remove");
+        }
+
+        private void TSVlistSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (TSVlist.Items.Count > 0)
+                {
+                    string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                    (new FileInfo(folderPath)).Directory.Create();
+                    string fileName;
+                    if (gen7)
+                        fileName = "TSVlist.csv";
+                    else
+                        fileName = "TSVlist7.csv";
+                    var tsvlst = new StringBuilder();
+                    foreach (var value in TSVlist.Items)
+                    {
+                        tsvlst.AppendLine(value.ToString());
+                    }
+                    File.WriteAllText(folderPath + fileName, tsvlst.ToString());
+                    MessageBox.Show("TSV list saved");
+                }
+                else
+                    MessageBox.Show("There are no numbers on the TSV list");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TSVlistLoad_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string folderPath = System.Windows.Forms.@Application.StartupPath + "\\" + FOLDERBOT + "\\";
+                (new FileInfo(folderPath)).Directory.Create();
+                string fileName;
+                if (gen7)
+                    fileName = "TSVlist.csv";
+                else
+                    fileName = "TSVlist7.csv";
+                if (File.Exists(folderPath + fileName))
+                {
+                    string[] values = File.ReadAllLines(folderPath + fileName);
+                    TSVlist.Items.Clear();
+                    TSVlist.Items.AddRange(values);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public bool ESV_TSV_check(int esv)
+        {
+            if (TSVlist.Items.Count > 0)
+            {
+                Addlog("Checking egg with ESV: " + esv);
+                foreach (var tsv in TSVlist.Items)
+                {
+                    if (Convert.ToInt32(tsv) == esv)
+                        return true;
+                }
+                return false;
+            }
+            else
+                return true;
+        }
+
+        private void breedingClear_Click(object sender, EventArgs e)
+        {
+            SetSelectedIndex(modeBreed, -1);
+            SetValue(boxBreed, 1);
+            SetValue(slotBreed, 1);
+            SetValue(eggsNoBreed, 1);
+            OrganizeMiddle.Checked = true;
+            radioDayCare1.Checked = true;
+            SetChecked(readESV, false);
+            SetChecked(quickBreed, false);
+            ESVlist.Rows.Clear();
+            TSVlist.Items.Clear();
+            filterBreeding.Rows.Clear();
+        }
+
+        #endregion Bots
+    }
+
+    //Objects of this class contains an array for data that have been acquired, a delegate function 
+    //to handle them and any additional arguments it might require.
+    public class DataReadyWaiting
+    {
+        public byte[] data;
+        public object arguments;
+        public delegate void DataHandler(object data_arguments);
+        public DataHandler handler;
+
+        public DataReadyWaiting(byte[] data_, DataHandler handler_, object arguments_)
+        {
+            this.data = data_;
+            this.handler = handler_;
+            this.arguments = arguments_;
         }
     }
 }

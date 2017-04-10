@@ -1,34 +1,27 @@
-﻿using System;
+﻿using ntrbase.Helpers;
+using System;
 using System.Windows.Forms;
-using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
 
 
 namespace ntrbase
 {
     static class Program
     {
-
-        public static ScriptEngine pyEngine;
         public static NTR ntrClient;
-		public static ScriptHelper scriptHelper;
-		public static ScriptScope globalScope;
-		public static MainForm gCmdWindow;
+        public static ScriptHelper scriptHelper;
+        public static MainForm gCmdWindow;
+        public static RemoteControl helper;
 
         [STAThread]
         static void Main()
         {
-            pyEngine = Python.CreateEngine();
             ntrClient = new NTR();
-			scriptHelper = new ScriptHelper();
-
-			globalScope = pyEngine.CreateScope();
-			globalScope.SetVariable("nc", scriptHelper);
-			
+            scriptHelper = new ScriptHelper();
+            helper = new RemoteControl();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-			gCmdWindow = new MainForm();
+            gCmdWindow = new MainForm();
             Application.Run(gCmdWindow);
         }
     }
