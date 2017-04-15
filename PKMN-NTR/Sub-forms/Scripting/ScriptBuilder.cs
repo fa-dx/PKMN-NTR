@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace pkmn_ntr.Sub_forms.Scripting
@@ -207,6 +209,7 @@ namespace pkmn_ntr.Sub_forms.Scripting
                     }
                     ScriptAction.Report($"Script: End of Loop");
                     index = ((EndFor)actions[index]).StartInstruction;
+                    continue;
                 }
                 if (stopScript || !Program.gCmdWindow.isConnected)
                 {
@@ -347,6 +350,10 @@ namespace pkmn_ntr.Sub_forms.Scripting
 
         private void ClickStickButton(object sender, EventArgs e)
         {
+            if (numStickX.Value == 0 && numStickY.Value == 0)
+            {
+                AddActionToList(new StickAction(0, 0, 0));
+            }
             if (ModifierKeys == Keys.Shift)
             {
                 AddActionToList(new StickAction((int)numStickX.Value, (int)numStickY.Value, (int)numTime.Value));
@@ -370,6 +377,105 @@ namespace pkmn_ntr.Sub_forms.Scripting
         {
             AddActionToList(new StartFor((int)numFor.Value));
             AddActionToList(new EndFor());
+        }
+
+        // Script save/load
+        private void SaveScript(object sender, EventArgs e)
+        {
+            if (actions.Count > 0)
+            {
+                try
+                {
+                    var builder = new StringBuilder();
+                    foreach (ScriptAction act in actions)
+                    {
+                        string ins = "";
+                        foreach (int param in act.Instruction)
+                        {
+                            ins += ",";
+                            ins += param.ToString();
+                        }
+                        builder.AppendLine((int)act.Type + ins);
+                    }
+                    var scriptpath = Path.Combine(Application.StartupPath, "Scripts");
+                    Directory.CreateDirectory(scriptpath);
+                    var dialog = new SaveFileDialog()
+                    {
+                        Filter = "PKM-NTR script | *.pkscript",
+                        InitialDirectory = scriptpath
+                    };
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllText(dialog.FileName, builder.ToString());
+                    }
+                    MessageBox.Show("Script saved correctly", "Script Builder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("A error has ocurred while saving the script:\r\n\r\n" + ex.Message, "Script Builder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("There are no instructions in the script, nothing to save.", "Script builder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void LoadScript(object sender, EventArgs e)
+        {
+            try
+            {
+                var scriptpath = Path.Combine(Application.StartupPath, "Scripts");
+                Directory.CreateDirectory(scriptpath);
+                var dialog = new OpenFileDialog()
+                {
+                    Filter = "PKM-NTR script | *.pkscript",
+                    InitialDirectory = scriptpath
+                };
+                string[] lines;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    lines = File.ReadAllLines(dialog.FileName);
+                }
+                else
+                {
+                    return;
+                }
+                actions.Clear();
+                lstActions.Items.Clear();
+                foreach (string str in lines)
+                {
+                    int[] instruction = Array.ConvertAll(str.Split(','), int.Parse);
+                    switch ((ScriptAction.ActionType)instruction[0])
+                    {
+                        case ScriptAction.ActionType.Button:
+                            AddActionToList(new ButtonAction((ButtonAction.ConsoleButton)instruction[1], instruction[2]));
+                            break;
+                        case ScriptAction.ActionType.Touch:
+                            AddActionToList(new TouchAction(instruction[1], instruction[2], instruction[3]));
+                            break;
+                        case ScriptAction.ActionType.Stick:
+                            AddActionToList(new StickAction(instruction[1], instruction[2], instruction[3]));
+                            break;
+                        case ScriptAction.ActionType.Delay:
+                            AddActionToList(new DelayAction(instruction[1]));
+                            break;
+                        case ScriptAction.ActionType.StartFor:
+                            AddActionToList(new StartFor(instruction[1]));
+                            break;
+                        case ScriptAction.ActionType.EndFor:
+                            AddActionToList(new EndFor());
+                            break;
+                        default:
+                            ScriptAction.Report($"Script: Invalid line - {str}");
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A error has ocurred while loading the script:\r\n\r\n" + ex.Message, "Script builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

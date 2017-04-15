@@ -80,7 +80,7 @@ namespace pkmn_ntr.Sub_forms.Scripting
         {
             get
             {
-                return ActionType.Touch;
+                return ActionType.Stick;
             }
         }
 

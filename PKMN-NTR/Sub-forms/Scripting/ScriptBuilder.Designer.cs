@@ -74,6 +74,8 @@
             this.numFor = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.btnAddFor = new System.Windows.Forms.Button();
+            this.btnSaveScript = new System.Windows.Forms.Button();
+            this.btnLoadScript = new System.Windows.Forms.Button();
             this.Remote_Stick.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sdrX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sdrY)).BeginInit();
@@ -576,6 +578,26 @@
             this.btnAddFor.UseVisualStyleBackColor = true;
             this.btnAddFor.Click += new System.EventHandler(this.AddLoop);
             // 
+            // btnSaveScript
+            // 
+            this.btnSaveScript.Location = new System.Drawing.Point(374, 262);
+            this.btnSaveScript.Name = "btnSaveScript";
+            this.btnSaveScript.Size = new System.Drawing.Size(89, 23);
+            this.btnSaveScript.TabIndex = 9;
+            this.btnSaveScript.Text = "Save Script...";
+            this.btnSaveScript.UseVisualStyleBackColor = true;
+            this.btnSaveScript.Click += new System.EventHandler(this.SaveScript);
+            // 
+            // btnLoadScript
+            // 
+            this.btnLoadScript.Location = new System.Drawing.Point(469, 262);
+            this.btnLoadScript.Name = "btnLoadScript";
+            this.btnLoadScript.Size = new System.Drawing.Size(89, 23);
+            this.btnLoadScript.TabIndex = 9;
+            this.btnLoadScript.Text = "Load Script...";
+            this.btnLoadScript.UseVisualStyleBackColor = true;
+            this.btnLoadScript.Click += new System.EventHandler(this.LoadScript);
+            // 
             // ScriptBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -592,6 +614,8 @@
             this.Controls.Add(this.btnActionDown);
             this.Controls.Add(this.btnAddFor);
             this.Controls.Add(this.btnDelay);
+            this.Controls.Add(this.btnLoadScript);
+            this.Controls.Add(this.btnSaveScript);
             this.Controls.Add(this.btnActionUp);
             this.Controls.Add(this.bthActionClear);
             this.Controls.Add(this.btnActionRemove);
@@ -669,5 +693,7 @@
         private System.Windows.Forms.NumericUpDown numFor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAddFor;
+        private System.Windows.Forms.Button btnSaveScript;
+        private System.Windows.Forms.Button btnLoadScript;
     }
 }
