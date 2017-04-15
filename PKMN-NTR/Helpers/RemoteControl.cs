@@ -338,6 +338,44 @@ namespace pkmn_ntr.Helpers
             return 0x01000000 + hexY * 0x1000 + hexX;
         }
 
+        public async Task ScriptTouch(int Xvalue, int Yvalue)
+        {
+            Report($"Script: Touch screen at {Xvalue}, {Yvalue}");
+            byte[] touchByte = BitConverter.GetBytes(gethexcoord(Xvalue, Yvalue));
+            Program.scriptHelper.write(touchscrOff, touchByte, hid_pid);
+            await Task.Delay(200);
+            touchByte = BitConverter.GetBytes(LookupTable.notouch);
+            Program.scriptHelper.write(touchscrOff, touchByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptTouchTimed(int Xvalue, int Yvalue, int time)
+        {
+            Report($"Script: Touch screen at {Xvalue}, {Yvalue} during {time} ms");
+            byte[] touchByte = BitConverter.GetBytes(gethexcoord(Xvalue, Yvalue));
+            Program.scriptHelper.write(touchscrOff, touchByte, hid_pid);
+            await Task.Delay(time);
+            touchByte = BitConverter.GetBytes(LookupTable.notouch);
+            Program.scriptHelper.write(touchscrOff, touchByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptTouchHold(int Xvalue, int Yvalue)
+        {
+            Report($"Script: Touch screen and hold at {Xvalue}, {Yvalue}");
+            byte[] touchByte = BitConverter.GetBytes(gethexcoord(Xvalue, Yvalue));
+            Program.scriptHelper.write(touchscrOff, touchByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptTouchRelease()
+        {
+            Report($"Script: Release touch screen");
+            byte[] touchByte = BitConverter.GetBytes(LookupTable.notouch);
+            Program.scriptHelper.write(touchscrOff, touchByte, hid_pid);
+            await Task.Delay(500);
+        }
+
         // Control Stick Handler
         public async Task<bool> waitsitck(int Xvalue, int Yvalue)
         {

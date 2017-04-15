@@ -250,6 +250,7 @@
             this.btnReleaseTouch.TabIndex = 2;
             this.btnReleaseTouch.Text = "Release";
             this.btnReleaseTouch.UseVisualStyleBackColor = true;
+            this.btnReleaseTouch.Click += new System.EventHandler(this.ClickReleaseTouch);
             // 
             // btnTouch
             // 
@@ -259,6 +260,7 @@
             this.btnTouch.TabIndex = 2;
             this.btnTouch.Text = "Touch";
             this.btnTouch.UseVisualStyleBackColor = true;
+            this.btnTouch.Click += new System.EventHandler(this.ClickTouchButton);
             // 
             // Remote_buttons
             // 
@@ -382,7 +384,7 @@
             this.btnReleaseButton.TabIndex = 10;
             this.btnReleaseButton.Text = "Release";
             this.btnReleaseButton.UseVisualStyleBackColor = true;
-            this.btnReleaseButton.Click += new System.EventHandler(this.BtnReleaseButton_Click);
+            this.btnReleaseButton.Click += new System.EventHandler(this.ClickReleaseButtons);
             // 
             // btnStart
             // 
@@ -510,7 +512,7 @@
             this.btnDelay.TabIndex = 9;
             this.btnDelay.Text = "Delay";
             this.btnDelay.UseVisualStyleBackColor = true;
-            this.btnDelay.Click += new System.EventHandler(this.btnDelay_Click);
+            this.btnDelay.Click += new System.EventHandler(this.ClickDelay);
             // 
             // btnStartStop
             // 

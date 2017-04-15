@@ -168,6 +168,7 @@
     <Compile Include="Sub-forms\Scripting\ScriptBuilder.Designer.cs">
       <DependentUpon>ScriptBuilder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sub-forms\Scripting\TouchAction.cs" />
     <Compile Include="Sub-forms\SuperTrainingEditor.cs">
       <SubType>Form</SubType>
     </Compile>

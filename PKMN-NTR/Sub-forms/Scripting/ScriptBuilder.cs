@@ -27,7 +27,7 @@ namespace pkmn_ntr.Sub_forms.Scripting
             actions = new List<ScriptAction>();
             numTime.Maximum = Int32.MaxValue;
             string buttonMsg = "Click for a simple action.\r\nShift + Click for a timed action using the Time value.\r\nControl + Click for hold the action until another or a release command.";
-            Control[] tooltTpButtons = new Control[] { btnA, btnB, btnX, btnY, btnL, btnR, btnStart, btnSelect, btnUp, btnDown, btnLeft, btnRight, btnStick, btnTouch };
+            Control[] tooltTpButtons = new Control[] { btnA, btnB, btnX, btnY, btnL, btnR, btnStart, btnSelect, btnUp, btnDown, btnLeft, btnRight, btnStick, btnTouch, btnTouch };
             foreach (Control ctrl in tooltTpButtons)
             {
                 toolTip1.SetToolTip(ctrl, buttonMsg);
@@ -191,7 +191,7 @@ namespace pkmn_ntr.Sub_forms.Scripting
         }
 
         // Delays
-        private void btnDelay_Click(object sender, EventArgs e)
+        private void ClickDelay(object sender, EventArgs e)
         {
             AddActionToList(new DelayAction((int)numTime.Value));
         }
@@ -226,10 +226,31 @@ namespace pkmn_ntr.Sub_forms.Scripting
             }
         }
 
-        private void BtnReleaseButton_Click(object sender, EventArgs e)
+        private void ClickReleaseButtons(object sender, EventArgs e)
         {
             AddActionToList(new ButtonAction(ButtonAction.ConsoleButton.None, 0));
-            UpdateActionList();
+        }
+
+        // Touch Screen
+        private void ClickTouchButton(object sender, EventArgs e)
+        {
+            if (ModifierKeys == Keys.Shift)
+            {
+                AddActionToList(new TouchAction((int)numTouchX.Value, (int)numTouchY.Value, (int)numTime.Value));
+            }
+            else if (ModifierKeys == Keys.Control)
+            {
+                AddActionToList(new TouchAction((int)numTouchX.Value, (int)numTouchY.Value, -1));
+            }
+            else
+            {
+                AddActionToList(new TouchAction((int)numTouchX.Value, (int)numTouchY.Value, 0));
+            }
+        }
+
+        private void ClickReleaseTouch(object sender, EventArgs e)
+        {
+            AddActionToList(new TouchAction(-1, -1, 0));
         }
     }
 }

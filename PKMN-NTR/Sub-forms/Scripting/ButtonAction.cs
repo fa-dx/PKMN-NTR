@@ -60,7 +60,12 @@ namespace pkmn_ntr.Sub_forms.Scripting
             }
             set
             {
-                if (value.Length == 0)
+                if (value == null)
+                {
+                    button = ConsoleButton.None;
+                    time = 0;
+                }
+                else if (value.Length == 0)
                 {
                     button = ConsoleButton.None;
                     time = 0;
@@ -85,7 +90,7 @@ namespace pkmn_ntr.Sub_forms.Scripting
                     }
                     else
                     {
-                        Button = ConsoleButton.None;
+                        button = ConsoleButton.None;
                     }
                     time = value[1];
                 }
