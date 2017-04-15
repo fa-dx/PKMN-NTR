@@ -446,6 +446,44 @@ namespace pkmn_ntr.Helpers
             return 0x01000000 + hexY * 0x1000 + hexX;
         }
 
+        public async Task ScriptStick(int Xvalue, int Yvalue)
+        {
+            Report($"Script: Move and release the control stick to {Xvalue}, {Yvalue}");
+            byte[] stickByte = BitConverter.GetBytes(getstickhex(Xvalue, Yvalue));
+            Program.scriptHelper.write(stickOff, stickByte, hid_pid);
+            await Task.Delay(200);
+            stickByte = BitConverter.GetBytes(LookupTable.notouch);
+            Program.scriptHelper.write(stickOff, stickByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptStickTimed(int Xvalue, int Yvalue, int time)
+        {
+            Report($"Script: Move the control stick to {Xvalue}, {Yvalue} during {time} ms");
+            byte[] stickByte = BitConverter.GetBytes(getstickhex(Xvalue, Yvalue));
+            Program.scriptHelper.write(stickOff, stickByte, hid_pid);
+            await Task.Delay(time);
+            stickByte = BitConverter.GetBytes(LookupTable.notouch);
+            Program.scriptHelper.write(stickOff, stickByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptStickHold(int Xvalue, int Yvalue)
+        {
+            Report($"Script: Move and hold the control stick to {Xvalue}, {Yvalue}");
+            byte[] stickByte = BitConverter.GetBytes(getstickhex(Xvalue, Yvalue));
+            Program.scriptHelper.write(stickOff, stickByte, hid_pid);
+            await Task.Delay(500);
+        }
+
+        public async Task ScriptStickRelease()
+        {
+            Report($"Script: Release the control stick");
+            byte[] stickByte = BitConverter.GetBytes(LookupTable.nostick);
+            Program.scriptHelper.write(stickOff, stickByte, hid_pid);
+            await Task.Delay(500);
+        }
+
         // Memory Read Handler
         private void handleMemoryRead(object args_obj)
         {

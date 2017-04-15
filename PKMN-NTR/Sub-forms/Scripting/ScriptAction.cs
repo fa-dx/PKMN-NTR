@@ -8,7 +8,7 @@ namespace pkmn_ntr.Sub_forms.Scripting
 {
     public abstract class ScriptAction
     {
-        public enum ActionType { Button, Touch, Stick, Delay }
+        public enum ActionType { Button, Touch, Stick, Delay, StartFor, EndFor }
 
         public abstract ActionType Type { get; }
         public abstract int[] Instruction { get; set; }

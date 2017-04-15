@@ -162,6 +162,52 @@ namespace pkmn_ntr.Sub_forms.Scripting
             for (int index = 0; index < actions.Count; index++)
             {
                 lstActions.SelectedIndex = index;
+                if (actions[index] is StartFor)
+                {
+                    // Search for EndFor
+                    if (((StartFor)actions[index]).EndInstruction < 0)
+                    {
+                        int endins = SearchEndFor(index);
+                        if (endins > 0)
+                        {
+                            ((StartFor)actions[index]).EndInstruction = endins;
+                        }
+                        else
+                        {
+                            ScriptAction.Report("Script: End of loop not found");
+                            break;
+                        }
+                    }
+                    // Check if finished, and restart
+                    if (((StartFor)actions[index]).IsFinished)
+                    {
+                        ScriptAction.Report("Script: For loop finished");
+                        index = ((StartFor)actions[index]).EndInstruction + 1;
+                        ((EndFor)actions[index - 1]).StartInstruction = -1;
+                        ((StartFor)actions[index]).EndInstruction = -1;
+                        ((StartFor)actions[index]).Loops = 0;
+                        continue;
+                    }
+                }
+                else if (actions[index] is EndFor)
+                {
+                    // Search for StartFor
+                    if (((EndFor)actions[index]).StartInstruction < 0)
+                    {
+                        int startins = SearchStartFor(index);
+                        if (startins > 0)
+                        {
+                            ((EndFor)actions[index]).StartInstruction = startins;
+                        }
+                        else
+                        {
+                            ScriptAction.Report("Script: Start of loop not found");
+                            break;
+                        }
+                    }
+                    ScriptAction.Report($"Script: End of Loop");
+                    index = ((EndFor)actions[index]).StartInstruction;
+                }
                 if (stopScript || !Program.gCmdWindow.isConnected)
                 {
                     break;
@@ -182,6 +228,37 @@ namespace pkmn_ntr.Sub_forms.Scripting
                 btnStartStop.Text = "Not connected";
                 btnStartStop.Enabled = false;
             }
+        }
+
+        // Searching
+        private int SearchEndFor(int startindex)
+        {
+            int idx;
+            bool found = false;
+            for (idx = startindex; idx < actions.Count; idx++)
+            {
+                found = actions[idx] is EndFor;
+                if (found)
+                {
+                    break;
+                }
+            }
+            return found ? idx : -1;
+        }
+
+        private int SearchStartFor(int startindex)
+        {
+            int idx;
+            bool found = false;
+            for (idx = startindex; idx >= 0; idx--)
+            {
+                found = actions[idx] is StartFor;
+                if (found)
+                {
+                    break;
+                }
+            }
+            return found ? idx : -1;
         }
 
         // Delays
@@ -245,6 +322,54 @@ namespace pkmn_ntr.Sub_forms.Scripting
         private void ClickReleaseTouch(object sender, EventArgs e)
         {
             AddActionToList(new TouchAction(-1, -1, 0));
+        }
+
+        // Control Stick controls
+        private void StickY_Scroll(object sender, EventArgs e)
+        {
+            numStickY.Value = sdrY.Value;
+        }
+
+        private void StickX_Scroll(object sender, EventArgs e)
+        {
+            numStickX.Value = sdrX.Value;
+        }
+
+        private void StickNumY_ValueChanged(object sender, EventArgs e)
+        {
+            sdrY.Value = (int)numStickY.Value;
+        }
+
+        private void StickNumX_ValueChanged(object sender, EventArgs e)
+        {
+            sdrX.Value = (int)numStickX.Value;
+        }
+
+        private void ClickStickButton(object sender, EventArgs e)
+        {
+            if (ModifierKeys == Keys.Shift)
+            {
+                AddActionToList(new StickAction((int)numStickX.Value, (int)numStickY.Value, (int)numTime.Value));
+            }
+            else if (ModifierKeys == Keys.Control)
+            {
+                AddActionToList(new StickAction((int)numStickX.Value, (int)numStickY.Value, -1));
+            }
+            else
+            {
+                AddActionToList(new StickAction((int)numStickX.Value, (int)numStickY.Value, 0));
+            }
+        }
+
+        private void ClickReleaseStick(object sender, EventArgs e)
+        {
+            AddActionToList(new StickAction(0, 0, 0));
+        }
+
+        private void AddLoop(object sender, EventArgs e)
+        {
+            AddActionToList(new StartFor((int)numFor.Value));
+            AddActionToList(new EndFor());
         }
     }
 }

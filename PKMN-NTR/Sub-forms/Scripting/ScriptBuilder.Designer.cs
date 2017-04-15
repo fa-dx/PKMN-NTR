@@ -71,6 +71,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnDelay = new System.Windows.Forms.Button();
             this.btnStartStop = new System.Windows.Forms.Button();
+            this.numFor = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnAddFor = new System.Windows.Forms.Button();
             this.Remote_Stick.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sdrX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sdrY)).BeginInit();
@@ -81,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numTouchY)).BeginInit();
             this.Remote_buttons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numFor)).BeginInit();
             this.SuspendLayout();
             // 
             // Remote_Stick
@@ -110,6 +114,7 @@
             this.sdrX.TabIndex = 1;
             this.sdrX.TickFrequency = 25;
             this.sdrX.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.sdrX.Scroll += new System.EventHandler(this.StickX_Scroll);
             // 
             // sdrY
             // 
@@ -122,6 +127,7 @@
             this.sdrY.TabIndex = 0;
             this.sdrY.TickFrequency = 25;
             this.sdrY.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.sdrY.Scroll += new System.EventHandler(this.StickY_Scroll);
             // 
             // numStickY
             // 
@@ -134,6 +140,7 @@
             this.numStickY.Name = "numStickY";
             this.numStickY.Size = new System.Drawing.Size(100, 20);
             this.numStickY.TabIndex = 2;
+            this.numStickY.ValueChanged += new System.EventHandler(this.StickNumY_ValueChanged);
             // 
             // btnReleaseStick
             // 
@@ -143,6 +150,7 @@
             this.btnReleaseStick.TabIndex = 4;
             this.btnReleaseStick.Text = "Release";
             this.btnReleaseStick.UseVisualStyleBackColor = true;
+            this.btnReleaseStick.Click += new System.EventHandler(this.ClickReleaseStick);
             // 
             // btnStick
             // 
@@ -152,6 +160,7 @@
             this.btnStick.TabIndex = 4;
             this.btnStick.Text = "Control Stick";
             this.btnStick.UseVisualStyleBackColor = true;
+            this.btnStick.Click += new System.EventHandler(this.ClickStickButton);
             // 
             // numStickX
             // 
@@ -164,6 +173,7 @@
             this.numStickX.Name = "numStickX";
             this.numStickX.Size = new System.Drawing.Size(99, 20);
             this.numStickX.TabIndex = 3;
+            this.numStickX.ValueChanged += new System.EventHandler(this.StickNumX_ValueChanged);
             // 
             // label62
             // 
@@ -525,6 +535,47 @@
             this.btnStartStop.UseVisualStyleBackColor = true;
             this.btnStartStop.Click += new System.EventHandler(this.StartStopScript);
             // 
+            // numFor
+            // 
+            this.numFor.Location = new System.Drawing.Point(416, 236);
+            this.numFor.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numFor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numFor.Name = "numFor";
+            this.numFor.Size = new System.Drawing.Size(60, 20);
+            this.numFor.TabIndex = 10;
+            this.numFor.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(371, 238);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Loops:";
+            // 
+            // btnAddFor
+            // 
+            this.btnAddFor.Location = new System.Drawing.Point(482, 233);
+            this.btnAddFor.Name = "btnAddFor";
+            this.btnAddFor.Size = new System.Drawing.Size(76, 23);
+            this.btnAddFor.TabIndex = 9;
+            this.btnAddFor.Text = "Add For";
+            this.btnAddFor.UseVisualStyleBackColor = true;
+            this.btnAddFor.Click += new System.EventHandler(this.AddLoop);
+            // 
             // ScriptBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,9 +585,12 @@
             this.ClientSize = new System.Drawing.Size(566, 325);
             this.Controls.Add(this.btnStartStop);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.numFor);
             this.Controls.Add(this.numTime);
             this.Controls.Add(this.btnActionDown);
+            this.Controls.Add(this.btnAddFor);
             this.Controls.Add(this.btnDelay);
             this.Controls.Add(this.btnActionUp);
             this.Controls.Add(this.bthActionClear);
@@ -563,6 +617,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numTouchY)).EndInit();
             this.Remote_buttons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numFor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -611,5 +666,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDelay;
         private System.Windows.Forms.Button btnStartStop;
+        private System.Windows.Forms.NumericUpDown numFor;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnAddFor;
     }
 }

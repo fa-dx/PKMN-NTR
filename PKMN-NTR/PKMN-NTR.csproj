@@ -161,6 +161,8 @@
     </Compile>
     <Compile Include="Sub-forms\Scripting\ButtonAction.cs" />
     <Compile Include="Sub-forms\Scripting\DelayAction.cs" />
+    <Compile Include="Sub-forms\Scripting\EndFor.cs" />
+    <Compile Include="Sub-forms\Scripting\StartFor.cs" />
     <Compile Include="Sub-forms\Scripting\ScriptAction.cs" />
     <Compile Include="Sub-forms\Scripting\ScriptBuilder.cs">
       <SubType>Form</SubType>
@@ -168,6 +170,7 @@
     <Compile Include="Sub-forms\Scripting\ScriptBuilder.Designer.cs">
       <DependentUpon>ScriptBuilder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sub-forms\Scripting\StickAction.cs" />
     <Compile Include="Sub-forms\Scripting\TouchAction.cs" />
     <Compile Include="Sub-forms\SuperTrainingEditor.cs">
       <SubType>Form</SubType>
