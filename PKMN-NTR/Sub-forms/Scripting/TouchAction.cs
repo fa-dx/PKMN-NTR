@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace pkmn_ntr.Sub_forms.Scripting
 {
@@ -148,7 +144,7 @@ namespace pkmn_ntr.Sub_forms.Scripting
             {
                 xCoord = 319;
             }
-            else if (_xCoord > 0)
+            else if (_xCoord >= 0)
             {
                 xCoord = _xCoord;
             }
@@ -161,7 +157,7 @@ namespace pkmn_ntr.Sub_forms.Scripting
             {
                 yCoord = 239;
             }
-            else if (_yCoord > 0)
+            else if (_yCoord >= 0)
             {
                 yCoord = _yCoord;
             }
