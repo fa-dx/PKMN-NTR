@@ -288,6 +288,8 @@ namespace ntrbase
 
         public MainForm()
         {
+            if (System.AppDomain.CurrentDomain.FriendlyName == "PKMN-NTR-ILLEGAL.exe") { enableillegal = true; WinFormsUtil.Alert("You have enabled writing of illegal Pokemon!"); }
+                    
             Program.ntrClient.DataReady += handleDataReady;
             Program.ntrClient.Connected += connectCheck;
             Program.ntrClient.InfoReady += getGame;
