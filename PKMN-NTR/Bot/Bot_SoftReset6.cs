@@ -179,7 +179,7 @@ namespace pkmn_ntr.Bot
                 Program.gCmdWindow.resetNoBox.Visible = true;
                 if (Program.gCmdWindow.resetNoBox.Text != "")
                 {
-                    resetNo = Convert.ToInt32(Program.gCmdWindow.resetNoBox.Text);
+                    resetNo = Convert.ToInt32(resetNoBox.Text);
                 }
                 else
                 {

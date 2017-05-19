@@ -361,8 +361,10 @@ namespace pkmn_ntr
         private bool checkversions(int[] tag)
         {
             int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
-            int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
+            int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;   
             int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+            int date = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
+            Console.WriteLine(date);
 
             if (tag[0] > major)
             {
@@ -375,6 +377,10 @@ namespace pkmn_ntr
             }
 
             if (tag[0] == major && tag[1] == minor && tag[2] > build)
+            {
+                return true;
+            }
+            if (tag[0] == major && tag[1] == minor && tag[2] > build && tag[3] > date)
             {
                 return true;
             }

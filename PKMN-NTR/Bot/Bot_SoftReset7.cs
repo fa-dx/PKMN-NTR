@@ -118,7 +118,7 @@ namespace pkmn_ntr.Bot
                 }
                 if(Program.gCmdWindow.resetNoBox.Text != "")
                 {
-                    resetNo = Convert.ToInt32(Program.gCmdWindow.resetNoBox.Text);
+                    resetNo = Convert.ToInt32(resetNoBox.Text);
                 }
                 else
                 {

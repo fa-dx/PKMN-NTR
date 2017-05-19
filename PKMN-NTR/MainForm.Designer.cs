@@ -4427,6 +4427,7 @@
             // 
             this.resetNoBox.Location = new System.Drawing.Point(428, 9);
             this.resetNoBox.Name = "resetNoBox";
+            this.resetNoBox.ReadOnly = true;
             this.resetNoBox.Size = new System.Drawing.Size(47, 20);
             this.resetNoBox.TabIndex = 104;
             this.resetNoBox.Text = "0";
