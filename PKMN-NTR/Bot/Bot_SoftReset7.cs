@@ -116,14 +116,7 @@ namespace pkmn_ntr.Bot
                         typemessage = "No type - Select one type of soft-reset and try again.";
                         break;
                 }
-                if(Program.gCmdWindow.resetNoBox.Text != "")
-                {
-                    resetNo = Convert.ToInt32(resetNoBox.Text);
-                }
-                else
-                {
-                    resetNo = 0;
-                }
+                
                 DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.OK && Mode.SelectedIndex >= 0)
                 {
@@ -135,7 +128,15 @@ namespace pkmn_ntr.Bot
                     botState = srbotStates.botstart;
                     attempts = 0;
                     maxreconnect = 10;
-                    resetNo = 0;
+                    if (Program.gCmdWindow.resetNoBox.Text != "")
+                    {
+                        resetNo = Convert.ToInt32(resetNoBox.Text);
+                    }
+                    else
+                    {
+                        resetNo = 0;
+                    }
+                    Program.gCmdWindow.resetNoBox.Text = resetNo.ToString();
                     isub = false;
                     honeynum = 0;
                     finishmessage = null;

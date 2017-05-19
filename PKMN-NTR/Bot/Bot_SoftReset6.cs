@@ -175,16 +175,8 @@ namespace pkmn_ntr.Bot
                         resumemessage = "";
                         break;
                 }
-                Program.gCmdWindow.labelreset.Visible = true;
-                Program.gCmdWindow.resetNoBox.Visible = true;
-                if (Program.gCmdWindow.resetNoBox.Text != "")
-                {
-                    resetNo = Convert.ToInt32(resetNoBox.Text);
-                }
-                else
-                {
-                    resetNo = 0;
-                }
+                
+               
                 DialogResult dialogResult = MessageBox.Show("This bot will trigger an encounter with a pokémon, and soft-reset if it doesn't match with the loaded filters.\r\n\r\nType: " + typemessage + "\r\nResume: " + resumemessage + "\r\n\r\nPlease read the wiki at GitHub before using this bot. Do you want to continue?", "Soft-reset bot", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.OK && Mode.SelectedIndex >= 0)
                 {
@@ -196,7 +188,18 @@ namespace pkmn_ntr.Bot
                     botState = srbotstates.botstart;
                     attempts = 0;
                     maxreconnect = 10;
-                    resetNo = Mode.SelectedIndex == 2 ? -1 : 0;
+                    if (resetNoBox.Text != "")
+                    {
+                        resetNo = Convert.ToInt32(resetNoBox.Text);
+                        Console.WriteLine(resetNo);
+                    }
+                    else
+                    {
+                        resetNo = 0;
+                    }
+                    Program.gCmdWindow.labelreset.Visible = true;
+                    Program.gCmdWindow.resetNoBox.Visible = true;
+                    Program.gCmdWindow.resetNoBox.Text = resetNo.ToString();
                     walk = false;
                     steps = 0;
                     finishmessage = null;
@@ -645,7 +648,7 @@ namespace pkmn_ntr.Bot
 
                         case srbotstates.softreset:
                             resetNo++;
-                            Report("Bot: Sof-reset #" + resetNo.ToString());
+                            Report("Bot: Soft-reset #" + resetNo.ToString());
                             Program.gCmdWindow.resetNoBox.Text = resetNo.ToString();
                             waitTaskbool = Program.helper.waitSoftReset();
                             if (await waitTaskbool)
