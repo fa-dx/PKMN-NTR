@@ -296,7 +296,7 @@ namespace pkmn_ntr
 
                 // Get latest stable
                 Github = new GitHubClient(new ProductHeaderValue("PKMN-NTR-UpdateCheck"));
-                Release lateststable = await Github.Repository.Release.GetLatest("drgoku282", "PKMN-NTR");
+                Release lateststable = await Github.Repository.Release.GetLatest("MichiS97", "PKMN-NTR");
                 int[] verlatest = Array.ConvertAll(lateststable.TagName.Split('.'), int.Parse);
                 addtoLog("GUI: Last stable: " + lateststable.TagName);
 
@@ -314,7 +314,7 @@ namespace pkmn_ntr
                 }
                 else
                 { // Look for beta
-                    IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("drgoku282", "PKMN-NTR");
+                    IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("MichiS97", "PKMN-NTR");
                     Release latestbeta = releases.FirstOrDefault(rel => rel.Prerelease);
                     if (latestbeta != null)
                     {
