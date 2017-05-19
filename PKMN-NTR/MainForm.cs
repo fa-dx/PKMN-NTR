@@ -364,8 +364,7 @@ namespace pkmn_ntr
             int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;   
             int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
             int date = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
-            Console.WriteLine(date);
-            
+
             if (tag[0] > major)
             {
                 return true;
@@ -383,8 +382,9 @@ namespace pkmn_ntr
             if(tag.Length == 4)
             {
                 Console.WriteLine(tag[3]);
-                if (tag[0] == major && tag[1] == minor && tag[2] > build && tag[3] > date)
+                if (tag[0] == major && tag[1] == minor && tag[2] == build && tag[3] > date)
                 {
+                    Console.WriteLine("Test");
                     return true;
                 }
 
