@@ -4418,17 +4418,19 @@
             this.labelreset.AutoSize = true;
             this.labelreset.Location = new System.Drawing.Point(322, 12);
             this.labelreset.Name = "labelreset";
-            this.labelreset.Size = new System.Drawing.Size(93, 13);
+            this.labelreset.Size = new System.Drawing.Size(65, 13);
             this.labelreset.TabIndex = 103;
-            this.labelreset.Text = "Number of resets: ";
+            this.labelreset.Text = "Total resets:";
+            this.labelreset.Visible = false;
             // 
             // resetNoBox
             // 
-            this.resetNoBox.Location = new System.Drawing.Point(421, 9);
+            this.resetNoBox.Location = new System.Drawing.Point(428, 9);
             this.resetNoBox.Name = "resetNoBox";
-            this.resetNoBox.ReadOnly = true;
             this.resetNoBox.Size = new System.Drawing.Size(47, 20);
             this.resetNoBox.TabIndex = 104;
+            this.resetNoBox.Text = "0";
+            this.resetNoBox.Visible = false;
             // 
             // MainForm
             // 
@@ -4936,8 +4938,8 @@
         private System.Windows.Forms.Button Btn_ReloadFields;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button Tool_Script;
-        private System.Windows.Forms.Label labelreset;
         public System.Windows.Forms.TextBox resetNoBox;
+        public System.Windows.Forms.Label labelreset;
     }
 }
 
