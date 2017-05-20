@@ -55,6 +55,8 @@
             this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoadFilters = new System.Windows.Forms.Button();
             this.RunStop = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.resetNoBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.filterList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -292,6 +294,23 @@
             this.RunStop.UseVisualStyleBackColor = true;
             this.RunStop.Click += new System.EventHandler(this.RunStop_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(37, 198);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Starting number:";
+            // 
+            // resetNoBox
+            // 
+            this.resetNoBox.Location = new System.Drawing.Point(127, 194);
+            this.resetNoBox.Name = "resetNoBox";
+            this.resetNoBox.Size = new System.Drawing.Size(76, 20);
+            this.resetNoBox.TabIndex = 10;
+            this.resetNoBox.Text = "0";
+            // 
             // Bot_SoftReset6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,6 +318,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(574, 229);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.resetNoBox);
             this.Controls.Add(this.Resume);
             this.Controls.Add(this.label72);
             this.Controls.Add(this.ClearAll);
@@ -348,5 +369,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
         private System.Windows.Forms.Button LoadFilters;
         private System.Windows.Forms.Button RunStop;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox resetNoBox;
     }
 }

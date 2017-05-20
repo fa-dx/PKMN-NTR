@@ -316,8 +316,9 @@
             this.Tools_Breeding = new System.Windows.Forms.Button();
             this.Tools_SoftReset = new System.Windows.Forms.Button();
             this.Tools_WonderTrade = new System.Windows.Forms.Button();
-            this.Tools_Filter = new System.Windows.Forms.Button();
+            this.Tool_Script = new System.Windows.Forms.Button();
             this.Tools_PokeDigger = new System.Windows.Forms.Button();
+            this.Tools_Filter = new System.Windows.Forms.Button();
             this.Tab_Log = new System.Windows.Forms.TabPage();
             this.Log_Export = new System.Windows.Forms.Button();
             this.Tab_About = new System.Windows.Forms.TabPage();
@@ -344,7 +345,8 @@
             this.PB_Legal = new System.Windows.Forms.PictureBox();
             this.dragout = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.Tool_Script = new System.Windows.Forms.Button();
+            this.labelreset = new System.Windows.Forms.Label();
+            this.resetNoBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slotDump)).BeginInit();
@@ -4078,15 +4080,15 @@
             this.Tools_WonderTrade.UseVisualStyleBackColor = true;
             this.Tools_WonderTrade.Click += new System.EventHandler(this.Tools_WonderTrade_Click);
             // 
-            // Tools_Filter
+            // Tool_Script
             // 
-            this.Tools_Filter.Location = new System.Drawing.Point(193, 61);
-            this.Tools_Filter.Name = "Tools_Filter";
-            this.Tools_Filter.Size = new System.Drawing.Size(89, 23);
-            this.Tools_Filter.TabIndex = 6;
-            this.Tools_Filter.Text = "Filters";
-            this.Tools_Filter.UseVisualStyleBackColor = true;
-            this.Tools_Filter.Click += new System.EventHandler(this.Tools_Filter_Click);
+            this.Tool_Script.Location = new System.Drawing.Point(3, 61);
+            this.Tool_Script.Name = "Tool_Script";
+            this.Tool_Script.Size = new System.Drawing.Size(89, 23);
+            this.Tool_Script.TabIndex = 7;
+            this.Tool_Script.Text = "Script Builder";
+            this.Tool_Script.UseVisualStyleBackColor = true;
+            this.Tool_Script.Click += new System.EventHandler(this.Tool_Script_Click);
             // 
             // Tools_PokeDigger
             // 
@@ -4097,6 +4099,16 @@
             this.Tools_PokeDigger.Text = "PokéDigger";
             this.Tools_PokeDigger.UseVisualStyleBackColor = true;
             this.Tools_PokeDigger.Click += new System.EventHandler(this.Tools_PokeDigger_Click);
+            // 
+            // Tools_Filter
+            // 
+            this.Tools_Filter.Location = new System.Drawing.Point(193, 61);
+            this.Tools_Filter.Name = "Tools_Filter";
+            this.Tools_Filter.Size = new System.Drawing.Size(89, 23);
+            this.Tools_Filter.TabIndex = 6;
+            this.Tools_Filter.Text = "Filters";
+            this.Tools_Filter.UseVisualStyleBackColor = true;
+            this.Tools_Filter.Click += new System.EventHandler(this.Tools_Filter_Click);
             // 
             // Tab_Log
             // 
@@ -4401,15 +4413,25 @@
             this.dragout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragout_MouseDown);
             this.dragout.MouseHover += new System.EventHandler(this.dragoutHover);
             // 
-            // Tool_Script
+            // labelreset
             // 
-            this.Tool_Script.Location = new System.Drawing.Point(3, 61);
-            this.Tool_Script.Name = "Tool_Script";
-            this.Tool_Script.Size = new System.Drawing.Size(89, 23);
-            this.Tool_Script.TabIndex = 7;
-            this.Tool_Script.Text = "Script Builder";
-            this.Tool_Script.UseVisualStyleBackColor = true;
-            this.Tool_Script.Click += new System.EventHandler(this.Tool_Script_Click);
+            this.labelreset.AutoSize = true;
+            this.labelreset.Location = new System.Drawing.Point(322, 12);
+            this.labelreset.Name = "labelreset";
+            this.labelreset.Size = new System.Drawing.Size(65, 13);
+            this.labelreset.TabIndex = 103;
+            this.labelreset.Text = "Total resets:";
+            this.labelreset.Visible = false;
+            // 
+            // resetNoBox
+            // 
+            this.resetNoBox.Location = new System.Drawing.Point(428, 9);
+            this.resetNoBox.Name = "resetNoBox";
+            this.resetNoBox.ReadOnly = true;
+            this.resetNoBox.Size = new System.Drawing.Size(47, 20);
+            this.resetNoBox.TabIndex = 104;
+            this.resetNoBox.Text = "0";
+            this.resetNoBox.Visible = false;
             // 
             // MainForm
             // 
@@ -4418,6 +4440,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(613, 368);
+            this.Controls.Add(this.resetNoBox);
+            this.Controls.Add(this.labelreset);
             this.Controls.Add(this.Tabs_General);
             this.Controls.Add(this.PB_Legal);
             this.Controls.Add(this.groupBox1);
@@ -4582,6 +4606,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_Legal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dragout)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -4914,6 +4939,8 @@
         private System.Windows.Forms.Button Btn_ReloadFields;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button Tool_Script;
+        public System.Windows.Forms.TextBox resetNoBox;
+        public System.Windows.Forms.Label labelreset;
     }
 }
 

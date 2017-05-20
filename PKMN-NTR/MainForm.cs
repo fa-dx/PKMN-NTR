@@ -296,7 +296,7 @@ namespace pkmn_ntr
 
                 // Get latest stable
                 Github = new GitHubClient(new ProductHeaderValue("PKMN-NTR-UpdateCheck"));
-                Release lateststable = await Github.Repository.Release.GetLatest("drgoku282", "PKMN-NTR");
+                Release lateststable = await Github.Repository.Release.GetLatest("MichiS97", "PKMN-NTR");
                 int[] verlatest = Array.ConvertAll(lateststable.TagName.Split('.'), int.Parse);
                 addtoLog("GUI: Last stable: " + lateststable.TagName);
 
@@ -314,7 +314,7 @@ namespace pkmn_ntr
                 }
                 else
                 { // Look for beta
-                    IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("drgoku282", "PKMN-NTR");
+                    IReadOnlyList<Release> releases = await Github.Repository.Release.GetAll("MichiS97", "PKMN-NTR");
                     Release latestbeta = releases.FirstOrDefault(rel => rel.Prerelease);
                     if (latestbeta != null)
                     {
@@ -361,8 +361,9 @@ namespace pkmn_ntr
         private bool checkversions(int[] tag)
         {
             int major = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
-            int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
+            int minor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;   
             int build = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+            int date = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
 
             if (tag[0] > major)
             {
@@ -377,6 +378,20 @@ namespace pkmn_ntr
             if (tag[0] == major && tag[1] == minor && tag[2] > build)
             {
                 return true;
+            }
+            if(tag.Length == 4)
+            {
+                Console.WriteLine(tag[3]);
+                if (tag[0] == major && tag[1] == minor && tag[2] == build && tag[3] > date)
+                {
+                    Console.WriteLine("Test");
+                    return true;
+                }
+
+            }
+            else
+            {
+                return false;
             }
 
             return false;
